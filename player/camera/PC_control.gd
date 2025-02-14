@@ -12,7 +12,6 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		print(event.relative)
 		body.rotate_y(-event.relative.x * real_sens)
 		self.rotate_x(-event.relative.y * real_sens)
 		self.rotation.x = clamp(self.rotation.x, deg_to_rad(-90), deg_to_rad(90))

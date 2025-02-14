@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://fylhrdumofx7"]
+[gd_scene load_steps=7 format=3 uid="uid://fylhrdumofx7"]
 
 [ext_resource type="PackedScene" uid="uid://cmpcqmaf25qcu" path="res://prefabs/player.tscn" id="1_a76ur"]
+[ext_resource type="Script" path="res://debug/display_fps.gd" id="2_2dlva"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_01x5c"]
 size = Vector3(50, 1, 50)
@@ -39,3 +40,8 @@ mesh = SubResource("BoxMesh_6gsii")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_krmca")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("2_2dlva")
