@@ -15,7 +15,3 @@ func _unhandled_input(event: InputEvent) -> void:
 		body.rotate_y(-event.relative.x * real_sens)
 		self.rotate_x(-event.relative.y * real_sens)
 		self.rotation.x = clamp(self.rotation.x, deg_to_rad(-90), deg_to_rad(90))
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
