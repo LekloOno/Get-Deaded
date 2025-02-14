@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://fylhrdumofx7"]
+[gd_scene load_steps=6 format=3 uid="uid://fylhrdumofx7"]
 
 [ext_resource type="PackedScene" uid="uid://cmpcqmaf25qcu" path="res://prefabs/player.tscn" id="1_a76ur"]
 
@@ -7,6 +7,12 @@ size = Vector3(50, 1, 50)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kwg7p"]
 size = Vector3(50, 1, 50)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6gsii"]
+size = Vector3(20, 3, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_krmca"]
+size = Vector3(20, 3, 1)
 
 [node name="Node3D" type="Node3D"]
 
@@ -24,3 +30,12 @@ shape = SubResource("BoxShape3D_kwg7p")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.572318, 0.820032, 0, -0.820032, -0.572318, 0, 31.0764, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.29273, -8.50519)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_6gsii")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_krmca")

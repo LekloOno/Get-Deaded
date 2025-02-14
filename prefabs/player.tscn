@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmpcqmaf25qcu"]
+[gd_scene load_steps=6 format=3 uid="uid://cmpcqmaf25qcu"]
 
-[ext_resource type="Script" path="res://player/controller/main_controller.gd" id="1_mpk2c"]
+[ext_resource type="Script" path="res://player/movement/PM_main_controller.gd" id="1_mpk2c"]
+[ext_resource type="Script" path="res://player/camera/PC_control.gd" id="2_qptbm"]
+[ext_resource type="Script" path="res://addons/smoothing/smoothing.gd" id="3_1jieh"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ptiww"]
 radius = 0.25
@@ -16,8 +18,14 @@ script = ExtResource("1_mpk2c")
 
 [node name="Head" type="Node3D" parent="."]
 
-[node name="Camera3D" type="Camera3D" parent="Head"]
+[node name="Smoothing" type="Node3D" parent="Head"]
+script = ExtResource("3_1jieh")
+target = NodePath("../..")
+
+[node name="Camera3D" type="Camera3D" parent="Head/Smoothing" node_paths=PackedStringArray("body")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.59585, 0)
+script = ExtResource("2_qptbm")
+body = NodePath("../../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
