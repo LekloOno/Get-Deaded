@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://fylhrdumofx7"]
+
+[ext_resource type="PackedScene" uid="uid://cmpcqmaf25qcu" path="res://prefabs/player.tscn" id="1_a76ur"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_01x5c"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kwg7p"]
+size = Vector3(50, 1, 50)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Node3D2" parent="." instance=ExtResource("1_a76ur")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.630309, 0)
+
+[node name="floor" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="floor"]
+mesh = SubResource("BoxMesh_01x5c")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor"]
+shape = SubResource("BoxShape3D_kwg7p")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.572318, 0.820032, 0, -0.820032, -0.572318, 0, 31.0764, 0)
