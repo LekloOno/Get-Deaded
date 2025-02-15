@@ -25,7 +25,6 @@ public partial class PC_Control : Camera3D
             Vector3 rotation = Rotation;
             rotation.X = Mathf.Clamp(rotation.X, Mathf.DegToRad(-90), Mathf.DegToRad(90));
             Rotation = rotation;
-			GD.Print("caca");
         }
     }
 }

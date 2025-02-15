@@ -31,7 +31,7 @@ public partial class PI_WalkProcess : Node
 
     public override void _Ready()
     {
-        GD.Print("MyNode is ready!");
+        SetProcessPriority(-10);
     }
 
     public override void _Process(double delta)

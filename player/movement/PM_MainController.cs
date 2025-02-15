@@ -3,7 +3,9 @@ using System;
 
 public partial class PM_MainController : CharacterBody3D
 {
-	[Export] public PI_WalkProcess WalkProcess;
+	[Export] public PI_WalkProcess WalkProcess {get; private set;}
+	[Export] public PI_JumpProcess JumpProcess {get; private set;}
+	
 	public const float Speed = 5.0f;
 	public const float JumpVelocity = 4.5f;
 
@@ -18,7 +20,7 @@ public partial class PM_MainController : CharacterBody3D
 		}
 
 		// Handle Jump.
-		if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
+		if (IsOnFloor() && JumpProcess.UseBuffer())
 		{
 			velocity.Y = JumpVelocity;
 		}
