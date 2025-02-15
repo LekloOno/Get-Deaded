@@ -30,7 +30,7 @@ skeleton = NodePath("../CollisionShape3D")
 shape = SubResource("BoxShape3D_kwg7p")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.572318, 0.820032, 0, -0.820032, -0.572318, 0, 31.0764, 0)
+transform = Transform3D(1, 0, 0, 0, 0.66046, 0.750861, 0, -0.750861, 0.66046, 0, 31.0764, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.29273, -8.50519)

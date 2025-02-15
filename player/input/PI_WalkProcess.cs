@@ -1,0 +1,75 @@
+using System;
+using Godot;
+
+public class KeyPressedArgs : EventArgs
+{
+    private Vector3 _wishDir;
+    private Vector2 _walkAxis;
+
+    public KeyPressedArgs(Vector3 wishDir, Vector2 walkAxis)
+    {
+        _wishDir = wishDir;
+        _walkAxis = walkAxis;
+    }
+
+    public Vector3 WishDir {get => _wishDir;}
+    public Vector2 WalkAxis {get => _walkAxis;}
+}
+
+public partial class PI_WalkProcess : Node
+{
+    [Export] public Node3D FlatDirNode;
+    [Export] public Node3D SightPositionNode;
+
+    public EventHandler OnStopOrBackward;
+    public EventHandler<KeyPressedArgs> KeyPressed;
+    public Vector3 SpaceWishDir {get; private set;}
+    public Vector3 WishDir {get; private set;}
+    public Vector2 WalkAxis {get; private set;}
+    private Vector2 _nextWalkAxis;
+
+
+    public override void _Ready()
+    {
+        GD.Print("MyNode is ready!");
+    }
+
+    public override void _Process(double delta)
+    {
+        WalkAxis = ComputeWalkAxis();
+        WishDir = ComputeWishDir();
+
+        if (Input.IsActionPressed("move_forward") || 
+            Input.IsActionPressed("move_backward") || 
+            Input.IsActionPressed("move_left") || 
+            Input.IsActionPressed("move_right"))
+        {
+            KeyPressed?.Invoke(this, new KeyPressedArgs(WishDir, WalkAxis));
+        }
+
+        if(StopOrLess())
+        {
+            OnStopOrBackward?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
+    public static Vector2 ComputeWalkAxis()
+    {
+        return Input.GetVector("move_left", "move_right", "move_forward", "move_backward");
+    }
+
+    public bool StopOrLess()
+    {
+        return WalkAxis.Y < 0 || (WalkAxis.X == 0 && WalkAxis.Y == 0);
+    }
+
+    public Vector3 FreeWishDir(Vector2 input)
+    {
+        return FlatDirNode.Transform.Basis.Z * input.Y + FlatDirNode.Transform.Basis.X * input.X;
+    }
+
+    public Vector3 ComputeWishDir()
+    {
+        return FlatDirNode.Transform.Basis.Z * WalkAxis.Y + FlatDirNode.Transform.Basis.X * WalkAxis.X;
+    }
+}

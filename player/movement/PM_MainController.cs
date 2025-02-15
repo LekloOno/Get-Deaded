@@ -3,6 +3,7 @@ using System;
 
 public partial class PM_MainController : CharacterBody3D
 {
+	[Export] public PI_WalkProcess WalkProcess;
 	public const float Speed = 5.0f;
 	public const float JumpVelocity = 4.5f;
 
@@ -24,8 +25,7 @@ public partial class PM_MainController : CharacterBody3D
 
 		// Get the input direction and handle the movement/deceleration.
 		// As good practice, you should replace UI actions with custom gameplay actions.
-		Vector2 inputDir = Input.GetVector("move_left", "move_right", "move_forward", "move_backward");
-		Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
+		Vector3 direction = WalkProcess.WishDir;
 		if (direction != Vector3.Zero)
 		{
 			velocity.X = direction.X * Speed;

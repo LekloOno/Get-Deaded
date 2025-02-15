@@ -1,20 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://cmpcqmaf25qcu"]
+[gd_scene load_steps=7 format=3 uid="uid://cmpcqmaf25qcu"]
 
 [ext_resource type="Script" path="res://player/movement/PM_MainController.cs" id="1_pjqmy"]
 [ext_resource type="Script" path="res://addons/smoothing/smoothing.gd" id="3_1jieh"]
 [ext_resource type="Script" path="res://player/camera/PC_Control.cs" id="3_duaqo"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ptiww"]
-radius = 0.25
-height = 1.8
+[ext_resource type="Script" path="res://player/input/PI_WalkProcess.cs" id="4_24uc8"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_qcifk"]
 radius = 0.25
 height = 1.8
 
-[node name="PlayerController" type="CharacterBody3D"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ptiww"]
+radius = 0.25
+height = 1.8
+
+[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("WalkProcess")]
 floor_constant_speed = true
 script = ExtResource("1_pjqmy")
+WalkProcess = NodePath("Inputs")
 
 [node name="Head" type="Node3D" parent="."]
 
@@ -22,8 +24,14 @@ script = ExtResource("1_pjqmy")
 script = ExtResource("3_1jieh")
 target = NodePath("../..")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Head/Smoothing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+mesh = SubResource("CapsuleMesh_qcifk")
+skeleton = NodePath("../../..")
+
 [node name="Camera3D" type="Camera3D" parent="Head/Smoothing" node_paths=PackedStringArray("Body")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.59585, 0)
+fov = 103.0
 script = ExtResource("3_duaqo")
 Body = NodePath("../../..")
 
@@ -31,8 +39,7 @@ Body = NodePath("../../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_ptiww")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
-mesh = SubResource("CapsuleMesh_qcifk")
-
-[node name="PlayerController" type="Node3D" parent="."]
+[node name="Inputs" type="Node3D" parent="." node_paths=PackedStringArray("FlatDirNode", "SightPositionNode")]
+script = ExtResource("4_24uc8")
+FlatDirNode = NodePath("..")
+SightPositionNode = NodePath("../Head/Smoothing/Camera3D")
