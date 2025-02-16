@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+[GlobalClass]
 public partial class PS_Grounded : Node
 {
     [Export] public CharacterBody3D CharacterBody3D {get; private set;}

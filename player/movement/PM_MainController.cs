@@ -3,8 +3,8 @@ using System;
 
 public partial class PM_MainController : CharacterBody3D
 {
-	[Export] public PI_WalkProcess WalkProcess {get; private set;}
-	[Export] public PI_JumpProcess JumpProcess {get; private set;}
+	[Export] public PI_Walk WalkProcess {get; private set;}
+	[Export] public PI_Jump JumpProcess {get; private set;}
 	[Export] public PS_Grounded groundState {get; private set;}
 	
 	public const float Speed = 5.0f;
