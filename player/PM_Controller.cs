@@ -19,10 +19,6 @@ public partial class PM_Controller : CharacterBody3D
         // Reduces "input lag" by one frame.
         CameraControl.SetProcessUnhandledInput(false);
         WalkProcess.SetProcessUnhandledKeyInput(false);
-        // SurfaceControl has logic inside PhysicsProcess so we can debug it independantly from other nodes.
-        // However, we want to control the exact execution flow of it in real context.
-        SurfaceControl.SetPhysicsProcess(false);
-        Jump.SetPhysicsProcess(false);
 	}
 
     public override void _UnhandledInput(InputEvent @event)

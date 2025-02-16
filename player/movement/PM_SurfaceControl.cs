@@ -44,16 +44,10 @@ public partial class PM_SurfaceControl : PM_Action
     private PM_SurfaceState _currentSurface;
     public override void _Ready()
     {
-        _currentSurface = CharacterBody.IsOnFloor() ? Ground : Air;
-
+        _currentSurface = Air;
+        
         GroundState.OnLanding += SetGroundState;
         GroundState.OnLeaving += SetAirState;
-    }
-
-    public override void _PhysicsProcess(double delta)
-    {
-        CharacterBody.Velocity += Accelerate(CharacterBody.Velocity, (float)delta);
-        CharacterBody.Velocity = ApplyDrag(CharacterBody.Velocity, delta);
     }
 
     public Vector3 Accelerate(Vector3 velocity, float delta)
