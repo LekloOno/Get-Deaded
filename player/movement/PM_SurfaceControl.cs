@@ -45,7 +45,7 @@ public partial class PM_SurfaceControl : PM_Action
     public override void _Ready()
     {
         _currentSurface = Air;
-        
+
         GroundState.OnLanding += SetGroundState;
         GroundState.OnLeaving += SetAirState;
     }
@@ -63,7 +63,7 @@ public partial class PM_SurfaceControl : PM_Action
         // Linear Drag:
         float dragFactor = _currentSurface.CurrentData.Drag;
 
-        dragFactor = 1f/(1f+.1f*dragFactor);    // Transform the drag
+        dragFactor = 1f/(1f+(float)deltaTime*dragFactor);    // Transform the drag
 
         return velocity * dragFactor;
     }
