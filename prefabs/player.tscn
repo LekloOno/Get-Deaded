@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://player/movement/PM_MainController.cs" id="1_pjqmy"]
 [ext_resource type="Script" path="res://addons/smoothing/smoothing.gd" id="3_1jieh"]
 [ext_resource type="Script" path="res://player/camera/PC_Control.cs" id="3_duaqo"]
-[ext_resource type="Script" path="res://addons/internal/player/input/walk-process/PI_Walk.cs" id="4_eagaj"]
-[ext_resource type="Script" path="res://addons/internal/player/input/jump-process/PI_Jump.cs" id="5_s3nmn"]
-[ext_resource type="Script" path="res://addons/internal/player/state/grounded/PS_Grounded.cs" id="6_m42tf"]
+[ext_resource type="Script" path="res://player/input/PI_Walk.cs" id="4_ob50j"]
+[ext_resource type="Script" path="res://player/input/PI_Jump.cs" id="5_kj45h"]
+[ext_resource type="Script" path="res://player/state/PS_Grounded.cs" id="6_mexc6"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_qcifk"]
 radius = 0.25
@@ -53,16 +53,16 @@ target_position = Vector3(0, -20, 0)
 [node name="Input" type="Node" parent="."]
 
 [node name="PI_Walk" type="Node" parent="Input" node_paths=PackedStringArray("FlatDirNode", "SightPositionNode")]
-script = ExtResource("4_eagaj")
+script = ExtResource("4_ob50j")
 FlatDirNode = NodePath("../..")
 SightPositionNode = NodePath("../../Head/Smoothing/Camera3D")
 
 [node name="PI_Jump" type="Node" parent="Input"]
-script = ExtResource("5_s3nmn")
+script = ExtResource("5_kj45h")
 
 [node name="State" type="Node" parent="."]
 
 [node name="PS_Grounded" type="Node" parent="State" node_paths=PackedStringArray("CharacterBody3D", "GroundCast")]
-script = ExtResource("6_m42tf")
+script = ExtResource("6_mexc6")
 CharacterBody3D = NodePath("../..")
 GroundCast = NodePath("../../GroundCast")
