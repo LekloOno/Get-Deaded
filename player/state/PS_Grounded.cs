@@ -43,8 +43,9 @@ public partial class PS_Grounded : Node
         
     }
 
-    private void UpdateGrounded() {
-        bool realNextGrounded = RealGrounded();
+    public void UpdateGrounded(bool grounded)
+    {
+        bool realNextGrounded = grounded;
         if(realNextGrounded != _prevGrounded)
         {
             _prevGrounded = realNextGrounded;
@@ -59,6 +60,10 @@ public partial class PS_Grounded : Node
                 _lastGrounded = Time.GetTicksMsec();
             }
         }
+    }
+
+    private void UpdateGrounded() {
+        UpdateGrounded(RealGrounded());
     }
 
     public float MsecSinceLastGrounded() {

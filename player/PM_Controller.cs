@@ -4,7 +4,7 @@ using System;
 public partial class PM_Controller : CharacterBody3D
 {
 	[Export] public PI_Walk WalkProcess {get; private set;}
-	[Export] public PI_Jump JumpProcess {get; private set;}
+	[Export] public PM_Jump Jump {get; private set;}
 	[Export] public PS_Grounded GroundState {get; private set;}
     [Export] public PC_Control CameraControl {get; private set;}
     [Export] public PM_SurfaceControl SurfaceControl {get; private set;}
@@ -22,6 +22,7 @@ public partial class PM_Controller : CharacterBody3D
         // SurfaceControl has logic inside PhysicsProcess so we can debug it independantly from other nodes.
         // However, we want to control the exact execution flow of it in real context.
         SurfaceControl.SetPhysicsProcess(false);
+        Jump.SetPhysicsProcess(false);
 	}
 
     public override void _UnhandledInput(InputEvent @event)
@@ -54,10 +55,7 @@ public partial class PM_Controller : CharacterBody3D
 		}
 
 		// Handle Jump.
-		if (GroundState.IsGrounded() && JumpProcess.UseBuffer())
-		{
-			velocity.Y = JumpVelocity;
-		}
+		velocity = Jump.Jump(velocity);
 
 		velocity += SurfaceControl.Accelerate(velocity, (float)delta);
         velocity = SurfaceControl.ApplyDrag(velocity, delta);

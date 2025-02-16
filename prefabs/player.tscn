@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cmpcqmaf25qcu"]
+[gd_scene load_steps=15 format=3 uid="uid://cmpcqmaf25qcu"]
 
 [ext_resource type="Script" path="res://player/PM_Controller.cs" id="1_7ruml"]
 [ext_resource type="Script" path="res://addons/smoothing/smoothing.gd" id="3_1jieh"]
@@ -6,10 +6,11 @@
 [ext_resource type="Script" path="res://player/input/PI_Walk.cs" id="4_ob50j"]
 [ext_resource type="Script" path="res://player/input/PI_Jump.cs" id="5_kj45h"]
 [ext_resource type="Script" path="res://player/state/PS_Grounded.cs" id="6_mexc6"]
-[ext_resource type="Script" path="res://player/movement/surface-control/PM_SurfaceControl.cs" id="7_hk5wd"]
+[ext_resource type="Script" path="res://player/movement/PM_SurfaceControl.cs" id="7_msb5j"]
 [ext_resource type="Script" path="res://player/movement/surface-control/PM_SurfaceState.cs" id="8_fhtxi"]
 [ext_resource type="Resource" uid="uid://dn58omqab4s1u" path="res://player/movement/surface-control/data/ground.tres" id="9_ikaaj"]
 [ext_resource type="Resource" uid="uid://ca5w3yr3ia7ao" path="res://player/movement/surface-control/data/air.tres" id="10_53m5n"]
+[ext_resource type="Script" path="res://player/movement/PM_Jump.cs" id="11_edsm7"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_qcifk"]
 radius = 0.25
@@ -22,14 +23,14 @@ height = 1.8
 [sub_resource type="SphereShape3D" id="SphereShape3D_4jpmy"]
 radius = 0.25
 
-[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("WalkProcess", "JumpProcess", "GroundState", "CameraControl", "SurfaceControl")]
+[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("WalkProcess", "Jump", "GroundState", "CameraControl", "SurfaceControl")]
 floor_constant_speed = true
 script = ExtResource("1_7ruml")
 WalkProcess = NodePath("Input/PI_Walk")
-JumpProcess = NodePath("Input/PI_Jump")
+Jump = NodePath("Movement/PM_Jump")
 GroundState = NodePath("State/PS_Grounded")
 CameraControl = NodePath("Head/Smoothing/Camera3D")
-SurfaceControl = NodePath("Movement/PM_SurfaceControl")
+SurfaceControl = NodePath("Movement/PM_SurfaceControl2")
 
 [node name="Head" type="Node3D" parent="."]
 
@@ -76,18 +77,26 @@ GroundCast = NodePath("../../GroundCast")
 
 [node name="Movement" type="Node" parent="."]
 
-[node name="PM_SurfaceControl" type="Node" parent="Movement" node_paths=PackedStringArray("Ground", "Air", "CharacterBody", "WalkProcess", "GroundState")]
-script = ExtResource("7_hk5wd")
+[node name="PM_SurfaceControl2" type="Node" parent="Movement" node_paths=PackedStringArray("Ground", "Air", "CharacterBody", "WalkProcess", "GroundState")]
+script = ExtResource("7_msb5j")
 Ground = NodePath("GroundState")
 Air = NodePath("AirState")
 CharacterBody = NodePath("../..")
 WalkProcess = NodePath("../../Input/PI_Walk")
 GroundState = NodePath("../../State/PS_Grounded")
 
-[node name="GroundState" type="Node" parent="Movement/PM_SurfaceControl"]
+[node name="GroundState" type="Node" parent="Movement/PM_SurfaceControl2"]
 script = ExtResource("8_fhtxi")
 StateData = ExtResource("9_ikaaj")
 
-[node name="AirState" type="Node" parent="Movement/PM_SurfaceControl"]
+[node name="AirState" type="Node" parent="Movement/PM_SurfaceControl2"]
 script = ExtResource("8_fhtxi")
 StateData = ExtResource("10_53m5n")
+
+[node name="PM_Jump" type="Node" parent="Movement" node_paths=PackedStringArray("JumpProcess", "CharacterBody", "WalkProcess", "GroundState")]
+script = ExtResource("11_edsm7")
+JumpProcess = NodePath("../../Input/PI_Jump")
+JumpVelocity = 4.5
+CharacterBody = NodePath("../..")
+WalkProcess = NodePath("../../Input/PI_Walk")
+GroundState = NodePath("../../State/PS_Grounded")
