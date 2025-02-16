@@ -10,14 +10,9 @@ public partial class PI_Jump : Node
     private ulong _lastJumpInput = 0;
     public bool JumpBuffered {get; private set;}
 
-    public override void _Ready()
+    public override void _UnhandledKeyInput(InputEvent @event)
     {
-        SetProcessPriority(-9);
-    }
-
-    public override void _Process(double delta)
-    {
-        if (Input.IsActionPressed("jump"))
+        if (@event.IsActionPressed("jump"))
         {
             _lastJumpInput = Time.GetTicksMsec();
         }

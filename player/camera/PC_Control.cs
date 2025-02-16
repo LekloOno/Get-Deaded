@@ -17,7 +17,7 @@ public partial class PC_Control : Camera3D
 
 	public override void _UnhandledInput(InputEvent @event)
     {
-        if (@event is InputEventMouseMotion mouseMotion && Body != null)
+        if (@event is InputEventMouseMotion mouseMotion)
         {
             Body.RotateY(-mouseMotion.Relative.X * _realSens);
             RotateX(-mouseMotion.Relative.Y * _realSens);

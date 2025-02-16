@@ -14,21 +14,18 @@ public partial class PI_Walk : Node
     public Vector2 WalkAxis {get; private set;}
     private Vector2 _nextWalkAxis;
 
-
-    public override void _Ready()
-    {
-        SetProcessPriority(-10);
-    }
-
-    public override void _Process(double delta)
+    public override void _UnhandledKeyInput(InputEvent @event)
     {
         WalkAxis = ComputeWalkAxis();
         WishDir = ComputeWishDir();
 
-        if (Input.IsActionPressed("move_forward") || 
-            Input.IsActionPressed("move_backward") || 
-            Input.IsActionPressed("move_left") || 
-            Input.IsActionPressed("move_right"))
+        if (!@event.IsPressed())
+            return;
+
+        if (@event.IsActionPressed("move_forward")
+            || @event.IsActionPressed("move_backward")
+            || @event.IsActionPressed("move_left")
+            || @event.IsActionPressed("move_right"))
         {
             KeyPressed?.Invoke(this, new KeyPressedArgs(WishDir, WalkAxis));
         }
