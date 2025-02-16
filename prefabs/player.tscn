@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cmpcqmaf25qcu"]
+[gd_scene load_steps=10 format=3 uid="uid://cmpcqmaf25qcu"]
 
 [ext_resource type="Script" path="res://player/movement/PM_MainController.cs" id="1_pjqmy"]
 [ext_resource type="Script" path="res://addons/smoothing/smoothing.gd" id="3_1jieh"]
 [ext_resource type="Script" path="res://player/camera/PC_Control.cs" id="3_duaqo"]
 [ext_resource type="Script" path="res://player/input/PI_WalkProcess.cs" id="4_24uc8"]
 [ext_resource type="Script" path="res://player/input/PI_JumpProcess.cs" id="4_cdefd"]
+[ext_resource type="Script" path="res://player/state/PS_Grounded.cs" id="6_77dnx"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_qcifk"]
 radius = 0.25
@@ -14,11 +15,15 @@ height = 1.8
 radius = 0.25
 height = 1.8
 
-[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("WalkProcess", "JumpProcess")]
+[sub_resource type="SphereShape3D" id="SphereShape3D_4jpmy"]
+radius = 0.25
+
+[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("WalkProcess", "JumpProcess", "groundState")]
 floor_constant_speed = true
 script = ExtResource("1_pjqmy")
-WalkProcess = NodePath("Node/Walk")
-JumpProcess = NodePath("Node/Jump")
+WalkProcess = NodePath("Input/Walk")
+JumpProcess = NodePath("Input/Jump")
+groundState = NodePath("State/Ground")
 
 [node name="Head" type="Node3D" parent="."]
 
@@ -41,12 +46,23 @@ Body = NodePath("../../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_ptiww")
 
-[node name="Node" type="Node" parent="."]
+[node name="GroundCast" type="ShapeCast3D" parent="."]
+shape = SubResource("SphereShape3D_4jpmy")
+target_position = Vector3(0, -20, 0)
 
-[node name="Jump" type="Node" parent="Node"]
+[node name="Input" type="Node" parent="."]
+
+[node name="Jump" type="Node" parent="Input"]
 script = ExtResource("4_cdefd")
 
-[node name="Walk" type="Node" parent="Node" node_paths=PackedStringArray("FlatDirNode", "SightPositionNode")]
+[node name="Walk" type="Node" parent="Input" node_paths=PackedStringArray("FlatDirNode", "SightPositionNode")]
 script = ExtResource("4_24uc8")
 FlatDirNode = NodePath("../..")
 SightPositionNode = NodePath("../../Head/Smoothing/Camera3D")
+
+[node name="State" type="Node" parent="."]
+
+[node name="Ground" type="Node" parent="State" node_paths=PackedStringArray("CharacterBody3D", "GroundCast")]
+script = ExtResource("6_77dnx")
+CharacterBody3D = NodePath("../..")
+GroundCast = NodePath("../../GroundCast")

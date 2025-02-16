@@ -5,6 +5,7 @@ public partial class PM_MainController : CharacterBody3D
 {
 	[Export] public PI_WalkProcess WalkProcess {get; private set;}
 	[Export] public PI_JumpProcess JumpProcess {get; private set;}
+	[Export] public PS_Grounded groundState {get; private set;}
 	
 	public const float Speed = 5.0f;
 	public const float JumpVelocity = 4.5f;
@@ -14,13 +15,13 @@ public partial class PM_MainController : CharacterBody3D
 		Vector3 velocity = Velocity;
 
 		// Add the gravity.
-		if (!IsOnFloor())
+		if (!groundState.IsGrounded())
 		{
 			velocity += GetGravity() * (float)delta;
 		}
 
 		// Handle Jump.
-		if (IsOnFloor() && JumpProcess.UseBuffer())
+		if (groundState.IsGrounded() && JumpProcess.UseBuffer())
 		{
 			velocity.Y = JumpVelocity;
 		}

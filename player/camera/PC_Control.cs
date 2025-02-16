@@ -4,7 +4,7 @@ using System;
 public partial class PC_Control : Camera3D
 {
 	[Export] public float Sensitivity {get;set;} = 2.8f;
-	[Export] public Node3D Body {get;set;} = null;
+	[Export] public Node3D Body {get; private set;}
 
 	private float _realSens;
 
