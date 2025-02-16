@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://cmpcqmaf25qcu"]
 
-[ext_resource type="Script" path="res://player/movement/PM_MainController.cs" id="1_pjqmy"]
+[ext_resource type="Script" path="res://player/PM_Controller.cs" id="1_7ruml"]
 [ext_resource type="Script" path="res://addons/smoothing/smoothing.gd" id="3_1jieh"]
 [ext_resource type="Script" path="res://player/camera/PC_Control.cs" id="3_duaqo"]
 [ext_resource type="Script" path="res://player/input/PI_Walk.cs" id="4_ob50j"]
@@ -18,12 +18,13 @@ height = 1.8
 [sub_resource type="SphereShape3D" id="SphereShape3D_4jpmy"]
 radius = 0.25
 
-[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("WalkProcess", "JumpProcess", "groundState")]
+[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("WalkProcess", "JumpProcess", "GroundState", "CameraControl")]
 floor_constant_speed = true
-script = ExtResource("1_pjqmy")
+script = ExtResource("1_7ruml")
 WalkProcess = NodePath("Input/PI_Walk")
 JumpProcess = NodePath("Input/PI_Jump")
-groundState = NodePath("State/PS_Grounded")
+GroundState = NodePath("State/PS_Grounded")
+CameraControl = NodePath("Head/Smoothing/Camera3D")
 
 [node name="Head" type="Node3D" parent="."]
 
@@ -59,6 +60,7 @@ SightPositionNode = NodePath("../../Head/Smoothing/Camera3D")
 
 [node name="PI_Jump" type="Node" parent="Input"]
 script = ExtResource("5_kj45h")
+BufferWindow = 50
 
 [node name="State" type="Node" parent="."]
 

@@ -8,7 +8,6 @@ public partial class PC_Control : Camera3D
 
 	private float _realSens;
 
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		_realSens = Sensitivity / 6500f;

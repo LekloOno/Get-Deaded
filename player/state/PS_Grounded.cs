@@ -21,7 +21,7 @@ public partial class PS_Grounded : Node
     
     public override void _Ready()
     {
-        SetProcessPriority(-11);
+        SetProcessPriority(-1);
     }
     public override void _PhysicsProcess(double delta)
     {
