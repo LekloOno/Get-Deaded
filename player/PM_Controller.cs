@@ -8,6 +8,8 @@ public partial class PM_Controller : CharacterBody3D
 	[Export] public PS_Grounded GroundState {get; private set;}
     [Export] public PC_Control CameraControl {get; private set;}
     [Export] public PM_SurfaceControl SurfaceControl {get; private set;}
+    [Export] public PM_VelocityCache VelocityCache {get; private set;}
+    [Export] public float DashStrength = 10f;
 
     public Vector3 RealVelocity {get; private set;}
 	
@@ -43,10 +45,14 @@ public partial class PM_Controller : CharacterBody3D
 
         // Collide and slide OR Step climber
 
-		Vector3 velocity = Velocity;
-
         Vector3 pos = GlobalPosition;
+		
+        Vector3 velocity = VelocityCache.IsCached() ? VelocityCache.UseCache() : Velocity;
 
+        if (Input.IsActionJustPressed("click"))
+        {
+            velocity += CameraControl.GlobalBasis.Z * -DashStrength;
+        }
 
 		// Add the gravity.
 		if (!GroundState.IsGrounded())
@@ -62,7 +68,16 @@ public partial class PM_Controller : CharacterBody3D
         velocity = SurfaceControl.ApplyDrag(velocity, delta);
 
 		Velocity = velocity;
-		MoveAndSlide();
+
+        KinematicCollision3D collision = MoveAndCollide(velocity * (float)delta, true, SafeMargin, true);
+        if (collision?.GetCollisionCount() > 0)
+        {
+            if(collision.GetAngle(0, UpDirection) > FloorMaxAngle)
+            {
+                VelocityCache.Cache(velocity);
+            }
+        }
+        MoveAndSlide();
 
         Velocity = (GlobalPosition - pos)/(float)delta;
         //GD.Print((GlobalPosition - pos)/(float)delta, Velocity);

@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://cmpcqmaf25qcu"]
+[gd_scene load_steps=17 format=3 uid="uid://cmpcqmaf25qcu"]
 
 [ext_resource type="Script" path="res://player/PM_Controller.cs" id="1_7ruml"]
+[ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_seqbe"]
 [ext_resource type="Script" path="res://addons/smoothing/smoothing.gd" id="3_1jieh"]
 [ext_resource type="Script" path="res://player/camera/PC_Control.cs" id="3_duaqo"]
 [ext_resource type="Script" path="res://player/input/PI_Walk.cs" id="4_ob50j"]
@@ -34,6 +35,7 @@ Jump = NodePath("Movement/PM_Jump")
 GroundState = NodePath("State/PS_Grounded")
 CameraControl = NodePath("Head/Smoothing/Camera3D")
 SurfaceControl = NodePath("Movement/PM_SurfaceControl2")
+VelocityCache = ExtResource("2_seqbe")
 
 [node name="Head" type="Node3D" parent="."]
 

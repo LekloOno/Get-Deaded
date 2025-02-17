@@ -75,8 +75,6 @@ public partial class PS_Grounded : Node
     }
 
     private bool RealGrounded() {
-        if(Mathf.Abs(CharacterBody3D.Velocity.Y) >= MaxVerticalSpeed)
-            GD.Print("C possib");
         return CharacterBody3D.IsOnFloor()
             && Mathf.Abs(CharacterBody3D.Velocity.Y) < MaxVerticalSpeed;
     }
