@@ -40,6 +40,7 @@ public partial class PM_SurfaceControl : PM_Action
     // OnCrouching     -> Crouch
     [Export] public PM_SurfaceState Ground {get; private set;}
     [Export] public PM_SurfaceState Air {get; private set;}
+    [Export] public PI_Sprint SprintInput {get; private set;}
     [Export] public ulong LandGroundDelayMsec {get; private set;} = 0;  // The delay after landing before the surface data is updated to ground.
     private SceneTreeTimer _delayedGroundTimer;
 
@@ -52,6 +53,9 @@ public partial class PM_SurfaceControl : PM_Action
 
         GroundState.OnLanding += SetGroundState;
         GroundState.OnLeaving += SetAirState;
+        
+        SprintInput.OnStartSprinting += (Object o, EventArgs e) => GD.Print("started sprinting");
+        SprintInput.OnStopSprinting += (Object o, EventArgs e) => GD.Print("stopped sprinting");
     }
 
     public Vector3 Accelerate(Vector3 velocity, float delta)
@@ -90,7 +94,6 @@ public partial class PM_SurfaceControl : PM_Action
 
     private void SetGroundState()
     {
-        GD.Print("oui");
         _currentSurface = Ground;
     }
 

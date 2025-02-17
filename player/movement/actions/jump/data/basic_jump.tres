@@ -6,5 +6,5 @@
 script = ExtResource("1_knt1g")
 Force = 4.0
 FatigueForce = 2.0
-FatigueMsec = 1500
-FatigueFloorMsec = 1125
+FatigueMsec = 1300
+FatigueFloorMsec = 950
