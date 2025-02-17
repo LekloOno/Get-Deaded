@@ -54,7 +54,8 @@ public partial class PM_Controller : CharacterBody3D
         //Vector3 velocity = VelocityCache.IsCached() ? VelocityCache.UseCache() : Velocity;
 
         Vector3 velocity = GroundState.IsGrounded() ? Velocity : RealVelocity;
-        velocity = VelocityCache.GetVelocity(this, velocity, delta);
+        //Vector3 velocity = Velocity;
+        velocity = VelocityCache.GetVelocity(this, velocity, Velocity, delta);
 
         if (Input.IsActionJustPressed("click"))
         {

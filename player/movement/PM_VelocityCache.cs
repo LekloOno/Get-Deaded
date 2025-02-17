@@ -3,6 +3,7 @@ using Godot;
 public partial class PM_VelocityCache : Resource
 {
     [Export] public ulong CacheFrameMsec {get; private set;} = 200;
+    //[Export] public PM_StepClimb StepClimb {get; private set;}
     private Vector3 _cachedVelocity = Vector3.Zero;
     private ulong _cachedTime = 0;
 
@@ -27,14 +28,14 @@ public partial class PM_VelocityCache : Resource
         return Time.GetTicksMsec() - _cachedTime < CacheFrameMsec;
     }
 
-    public Vector3 GetVelocity(PM_Controller controller, Vector3 velocity, double delta)
+    public Vector3 GetVelocity(PM_Controller controller, Vector3 velocity, Vector3 pureVelocity, double delta)
     {
         Transform3D currentTransform = controller.GlobalTransform;
         KinematicCollision3D collision = new();
 
         if (controller.TestMove(
                 currentTransform,
-                velocity * (float)delta,
+                pureVelocity * (float)delta,
                 collision,
                 controller.SafeMargin,
                 true)
@@ -42,8 +43,12 @@ public partial class PM_VelocityCache : Resource
         {
             if(collision.GetAngle(0, controller.UpDirection) > controller.FloorMaxAngle)
             {
-                if (!IsCached()) Cache(velocity);
+                if (!IsCached()) Cache(pureVelocity);
 
+                //Vector3 nextVel = (velocity.Y == 0) ? new Vector3(controller.RealVelocity.X, 0, controller.RealVelocity.Z) : controller.RealVelocity;
+                //return StepClimb.DoClimb(currentTransform, nextVel, wishDir, collision, controller.GetWorld3D().DirectSpaceState, delta);
+                //return nextVel;
+                
                 if(velocity.Y == 0)
                     return new Vector3(controller.RealVelocity.X, 0, controller.RealVelocity.Z);
                 return controller.RealVelocity;
