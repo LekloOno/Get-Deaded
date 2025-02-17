@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="PM_SurfaceData" load_steps=2 format=3 uid="uid://bld6y2cv0hps1"]
 
-[ext_resource type="Script" path="res://player/movement/surface-control/PM_SurfaceData.cs" id="1_tjepp"]
+[ext_resource type="Script" path="res://player/movement/actions/surface-control/PM_SurfaceData.cs" id="1_tjepp"]
 
 [resource]
 script = ExtResource("1_tjepp")

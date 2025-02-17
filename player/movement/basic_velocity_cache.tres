@@ -5,5 +5,5 @@
 
 [resource]
 script = ExtResource("1_dhpsq")
-CacheFrameMsec = 500
+CacheFrameMsec = 200
 StepClimb = ExtResource("1_3ixsp")

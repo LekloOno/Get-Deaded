@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="PM_SurfaceStateData" load_steps=3 format=3 uid="uid://ca5w3yr3ia7ao"]
-
-[ext_resource type="Script" path="res://player/movement/surface-control/PM_SurfaceStateData.cs" id="1_71loh"]
-[ext_resource type="Resource" uid="uid://4y6cmq77nyfx" path="res://player/movement/surface-control/data/air/air-normal.tres" id="1_a3sna"]
-
-[resource]
-script = ExtResource("1_71loh")
-Normal = ExtResource("1_a3sna")

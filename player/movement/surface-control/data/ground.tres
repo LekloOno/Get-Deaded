@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="PM_SurfaceStateData" load_steps=3 format=3 uid="uid://dn58omqab4s1u"]
-
-[ext_resource type="Resource" uid="uid://bld6y2cv0hps1" path="res://player/movement/surface-control/data/ground/ground-normal.tres" id="1_purse"]
-[ext_resource type="Script" path="res://player/movement/surface-control/PM_SurfaceStateData.cs" id="1_wkgub"]
-
-[resource]
-script = ExtResource("1_wkgub")
-Normal = ExtResource("1_purse")
