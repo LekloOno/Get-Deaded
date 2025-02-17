@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cmpcqmaf25qcu"]
+[gd_scene load_steps=18 format=3 uid="uid://cmpcqmaf25qcu"]
 
 [ext_resource type="Script" path="res://player/PM_Controller.cs" id="1_7ruml"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_seqbe"]
@@ -13,6 +13,7 @@
 [ext_resource type="Resource" uid="uid://ca5w3yr3ia7ao" path="res://player/movement/surface-control/data/air.tres" id="10_53m5n"]
 [ext_resource type="Script" path="res://player/movement/PM_Jump.cs" id="11_edsm7"]
 [ext_resource type="Script" path="res://debug/Speedometer.cs" id="14_chh26"]
+[ext_resource type="Script" path="res://debug/Grounded.cs" id="14_ih16p"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_qcifk"]
 radius = 0.25
@@ -29,7 +30,6 @@ radius = 0.25
 floor_constant_speed = true
 floor_block_on_wall = false
 floor_max_angle = 0.872665
-floor_snap_length = 0.2
 script = ExtResource("1_7ruml")
 WalkProcess = NodePath("Input/PI_Walk")
 Jump = NodePath("Movement/PM_Jump")
@@ -121,3 +121,20 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("14_chh26")
 Controller = NodePath("..")
+
+[node name="Label2" type="Label" parent="." node_paths=PackedStringArray("GroundState")]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = 74.0
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("14_ih16p")
+GroundState = NodePath("../State/PS_Grounded")

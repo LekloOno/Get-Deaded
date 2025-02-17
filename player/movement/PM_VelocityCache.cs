@@ -27,10 +27,8 @@ public partial class PM_VelocityCache : Resource
         return Time.GetTicksMsec() - _cachedTime < CacheFrameMsec;
     }
 
-    public Vector3 GetVelocity(PM_Controller controller, double delta)
+    public Vector3 GetVelocity(PM_Controller controller, Vector3 velocity, double delta)
     {
-        Vector3 velocity = controller.Velocity;
-
         Transform3D currentTransform = controller.GlobalTransform;
         KinematicCollision3D collision = new();
 

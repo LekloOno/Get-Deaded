@@ -12,6 +12,6 @@ public partial class Grounded : Label
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		SetText((GroundState.IsGrounded() ? "GROUNDED" : "AIRBORNE") + new RandomNumberGenerator().RandiRange(0, 10));
+		SetText(GroundState.IsGrounded() ? "GROUNDED" : "AIRBORNE");
 	}
 }
