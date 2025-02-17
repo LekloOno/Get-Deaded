@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PM_JumpData" load_steps=2 format=3 uid="uid://chd67e10gx4rm"]
+
+[ext_resource type="Script" path="res://player/movement/actions/jump/PM_JumpData.cs" id="1_knt1g"]
+
+[resource]
+script = ExtResource("1_knt1g")
+Force = 4.0
+FatigueForce = 2.0
+FatigueMsec = 1500
+FatigueFloorMsec = 1125
