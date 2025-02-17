@@ -76,8 +76,9 @@ SightPositionNode = NodePath("../../Head/Smoothing/Camera3D")
 script = ExtResource("5_kj45h")
 BufferWindow = 50
 
-[node name="PI_Sprint" type="Node" parent="Input"]
+[node name="PI_Sprint" type="Node" parent="Input" node_paths=PackedStringArray("Jump")]
 script = ExtResource("7_owt71")
+Jump = NodePath("../../Movement/PM_Jump")
 
 [node name="State" type="Node" parent="."]
 

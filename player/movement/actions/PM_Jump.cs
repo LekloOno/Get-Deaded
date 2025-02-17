@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 [GlobalClass]
@@ -5,6 +6,7 @@ public partial class PM_Jump : PM_Action
 {
     [Export] public PI_Jump JumpProcess {get; private set;}
     [Export] public PM_JumpData Data {get; private set;}
+    public EventHandler<float> OnJump;      // EventArgs is the % of jump force. 1 is full jump force, 0 is no jump force. 
 
     private float tracker_jumpFatigueRecover;
 
@@ -18,10 +20,12 @@ public partial class PM_Jump : PM_Action
 
     private Vector3 DoJump(Vector3 velocity)
     {
-        velocity.Y = ComputeForce();
+        float force = ComputeForce();
+        velocity.Y = force;
         JumpProcess.SetLastJumped();
         GroundState.UpdateGrounded(false);
-
+        
+        OnJump?.Invoke(this, force/Data.Force);
         return velocity;
     }
 
