@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 
 public partial class PM_Controller : CharacterBody3D
 {
@@ -10,6 +11,7 @@ public partial class PM_Controller : CharacterBody3D
     [Export] public PM_SurfaceControl SurfaceControl {get; private set;}
     [Export] public PM_VelocityCache VelocityCache {get; private set;}
     [Export] public float DashStrength = 10f;
+    //[Export] public PM_StepClimb StepClimb {get; private set;}
 
     public Vector3 RealVelocity {get; private set;}
 	
@@ -46,8 +48,12 @@ public partial class PM_Controller : CharacterBody3D
         // Collide and slide OR Step climber
 
         Vector3 pos = GlobalPosition;
+
+        
 		
-        Vector3 velocity = VelocityCache.IsCached() ? VelocityCache.UseCache() : Velocity;
+        //Vector3 velocity = VelocityCache.IsCached() ? VelocityCache.UseCache() : Velocity;
+
+        Vector3 velocity = VelocityCache.GetVelocity(this, delta);
 
         if (Input.IsActionJustPressed("click"))
         {
@@ -55,31 +61,55 @@ public partial class PM_Controller : CharacterBody3D
         }
 
 		// Add the gravity.
-		if (!GroundState.IsGrounded())
-		{
-			velocity += GetGravity() * (float)delta;
-		}
+		
 
 		// Handle Jump.
 		velocity = Jump.Jump(velocity);
-
 		velocity += SurfaceControl.Accelerate(velocity, (float)delta);
-        GD.Print(SurfaceControl.Accelerate(velocity, (float)delta));
         velocity = SurfaceControl.ApplyDrag(velocity, delta);
 
-		Velocity = velocity;
-
-        KinematicCollision3D collision = MoveAndCollide(velocity * (float)delta, true, SafeMargin, true);
-        if (collision?.GetCollisionCount() > 0)
+    /*
+        if (!StepClimb.Climb(this, velocity, WalkProcess.WishDir, VelocityCache, GetWorld3D().DirectSpaceState, delta))
         {
-            if(collision.GetAngle(0, UpDirection) > FloorMaxAngle)
+            if (!GroundState.IsGrounded())
             {
-                VelocityCache.Cache(velocity);
+                velocity += GetGravity() * (float)delta;
             }
-        }
-        MoveAndSlide();
 
-        Velocity = (GlobalPosition - pos)/(float)delta;
-        //GD.Print((GlobalPosition - pos)/(float)delta, Velocity);
+            Velocity = velocity;
+            MoveAndSlide();
+        }*/
+
+        if (!GroundState.IsGrounded())
+        {
+            velocity += GetGravity() * (float)delta;
+        }
+
+        Velocity = velocity;
+        MoveAndSlide();
+        RealVelocity = (GlobalPosition - pos)/(float)delta;
+
+        
+/*
+        if (IsOnWall())
+        {
+            if(!VelocityCache.IsCached()) VelocityCache.Cache(velocity);
+            
+            if(velocity.Y == 0)
+            {
+                Velocity = new Vector3(RealVelocity.X, 0, RealVelocity.Z);
+            }
+            else
+            {
+                Velocity = RealVelocity;
+            }
+        }*/
+
+        //velocity = StepClimb.Climb(this, velocity, WalkProcess.WishDir, VelocityCache, GetWorld3D().DirectSpaceState, delta);
+        //velocity = StepClimb.ProcessClimbAndSlides(this, velocity, WalkProcess.WishDir, VelocityCache, GetWorld3D().DirectSpaceState, delta);
+        //Velocity = velocity;
+        //MoveAndSlide();
+
+        
 	}
 }

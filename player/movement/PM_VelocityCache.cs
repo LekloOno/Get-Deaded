@@ -23,6 +23,37 @@ public partial class PM_VelocityCache : Resource
 
     public bool IsCached()
     {
+        //return false;
         return Time.GetTicksMsec() - _cachedTime < CacheFrameMsec;
+    }
+
+    public Vector3 GetVelocity(PM_Controller controller, double delta)
+    {
+        Vector3 velocity = controller.Velocity;
+
+        Transform3D currentTransform = controller.GlobalTransform;
+        KinematicCollision3D collision = new();
+
+        if (controller.TestMove(
+                currentTransform,
+                velocity * (float)delta,
+                collision,
+                controller.SafeMargin,
+                true)
+            )
+        {
+            if(collision.GetAngle(0, controller.UpDirection) > controller.FloorMaxAngle)
+            {
+                if (!IsCached()) Cache(velocity);
+
+                if(velocity.Y == 0)
+                    return new Vector3(controller.RealVelocity.X, 0, controller.RealVelocity.Z);
+                return controller.RealVelocity;
+            }
+        }
+        if (IsCached())
+            return UseCache();
+
+        return velocity;
     }
 }
