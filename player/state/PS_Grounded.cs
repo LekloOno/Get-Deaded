@@ -4,7 +4,7 @@ using System;
 [GlobalClass]
 public partial class PS_Grounded : Node
 {
-    [Export] public CharacterBody3D CharacterBody3D {get; private set;}
+    [Export] public PM_Controller CharacterBody3D {get; private set;}
     [Export] public ShapeCast3D GroundCast {get; private set;}
     [Export] public float MaxVerticalSpeed {get; private set;} = 4.76f;
 
@@ -75,6 +75,8 @@ public partial class PS_Grounded : Node
     }
 
     private bool RealGrounded() {
+        if(Mathf.Abs(CharacterBody3D.Velocity.Y) >= MaxVerticalSpeed)
+            GD.Print("C possib");
         return CharacterBody3D.IsOnFloor()
             && Mathf.Abs(CharacterBody3D.Velocity.Y) < MaxVerticalSpeed;
     }

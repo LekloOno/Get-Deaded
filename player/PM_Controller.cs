@@ -8,6 +8,8 @@ public partial class PM_Controller : CharacterBody3D
 	[Export] public PS_Grounded GroundState {get; private set;}
     [Export] public PC_Control CameraControl {get; private set;}
     [Export] public PM_SurfaceControl SurfaceControl {get; private set;}
+
+    public Vector3 RealVelocity {get; private set;}
 	
 	public const float Speed = 5.0f;
 	public const float JumpVelocity = 4.5f;
@@ -43,6 +45,8 @@ public partial class PM_Controller : CharacterBody3D
 
 		Vector3 velocity = Velocity;
 
+        Vector3 pos = GlobalPosition;
+
 
 		// Add the gravity.
 		if (!GroundState.IsGrounded())
@@ -54,9 +58,13 @@ public partial class PM_Controller : CharacterBody3D
 		velocity = Jump.Jump(velocity);
 
 		velocity += SurfaceControl.Accelerate(velocity, (float)delta);
+        GD.Print(SurfaceControl.Accelerate(velocity, (float)delta));
         velocity = SurfaceControl.ApplyDrag(velocity, delta);
 
 		Velocity = velocity;
 		MoveAndSlide();
+
+        Velocity = (GlobalPosition - pos)/(float)delta;
+        //GD.Print((GlobalPosition - pos)/(float)delta, Velocity);
 	}
 }
