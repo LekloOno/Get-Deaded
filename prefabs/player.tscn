@@ -88,6 +88,8 @@ GroundCast = NodePath("../../GroundCast")
 script = ExtResource("7_msb5j")
 Ground = NodePath("GroundState")
 Air = NodePath("AirState")
+LandFullDragMsec = 100
+LandGroundDelayMsec = 50
 WalkProcess = NodePath("../../Input/PI_Walk")
 GroundState = NodePath("../../State/PS_Grounded")
 

@@ -11,9 +11,7 @@ public partial class PM_Jump : PM_Action
     public Vector3 Jump(Vector3 velocity)
     {
         if (GroundState.IsGrounded() && JumpProcess.UseBuffer())
-		{
 			return DoJump(velocity);
-		}
 
         return velocity;
     }
@@ -31,10 +29,10 @@ public partial class PM_Jump : PM_Action
     {
         ulong fatigueTime = Time.GetTicksMsec() - JumpProcess.LastJumped;
 
-        if (Data.FatigueMsec == 0)
+        if (Data.FatigueMsec == 0)      // Avoid 0 division
             return Data.Force;
 
-        if (Data.FatigueFloorMsec == Data.FatigueMsec)
+        if (Data.FatigueFloorMsec == Data.FatigueMsec)  // Avoid 0 division
         {
             if (fatigueTime >= Data.FatigueMsec)
                 return Data.Force;
