@@ -18,6 +18,11 @@ public partial class PI_Sprint : Node
             HandleSimple(@event);
     }
 
+    public void ResetState()
+    {
+        _active = false;
+    }
+
     private void HandleHold(InputEvent @event)
     {
         if (@event.IsActionPressed("sprint") && !@event.IsEcho())

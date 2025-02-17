@@ -88,22 +88,23 @@ GroundCast = NodePath("../../GroundCast")
 
 [node name="Movement" type="Node" parent="."]
 
-[node name="PM_SurfaceControl2" type="Node" parent="Movement" node_paths=PackedStringArray("Ground", "Air", "SprintInput", "WalkProcess", "GroundState")]
+[node name="PM_SurfaceControl2" type="Node" parent="Movement" node_paths=PackedStringArray("Ground", "Air", "WalkProcess", "GroundState")]
 script = ExtResource("7_msb5j")
 Ground = NodePath("GroundState")
 Air = NodePath("AirState")
-SprintInput = NodePath("../../Input/PI_Sprint")
 LandGroundDelayMsec = 50
 WalkProcess = NodePath("../../Input/PI_Walk")
 GroundState = NodePath("../../State/PS_Grounded")
 
-[node name="GroundState" type="Node" parent="Movement/PM_SurfaceControl2"]
+[node name="GroundState" type="Node" parent="Movement/PM_SurfaceControl2" node_paths=PackedStringArray("SprintInput")]
 script = ExtResource("8_fhtxi")
 StateData = ExtResource("9_ikaaj")
+SprintInput = NodePath("../../../Input/PI_Sprint")
 
-[node name="AirState" type="Node" parent="Movement/PM_SurfaceControl2"]
+[node name="AirState" type="Node" parent="Movement/PM_SurfaceControl2" node_paths=PackedStringArray("SprintInput")]
 script = ExtResource("8_fhtxi")
 StateData = ExtResource("10_53m5n")
+SprintInput = NodePath("../../../Input/PI_Sprint")
 
 [node name="PM_Jump" type="Node" parent="Movement" node_paths=PackedStringArray("JumpProcess", "WalkProcess", "GroundState")]
 script = ExtResource("11_edsm7")
