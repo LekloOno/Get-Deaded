@@ -19,9 +19,6 @@ public partial class PI_Walk : Node
         WalkAxis = ComputeWalkAxis();
         WishDir = ComputeWishDir();
 
-        if (!@event.IsPressed())
-            return;
-
         if (@event.IsActionPressed("move_forward")
             || @event.IsActionPressed("move_backward")
             || @event.IsActionPressed("move_left")
@@ -43,7 +40,8 @@ public partial class PI_Walk : Node
 
     public bool StopOrLess()
     {
-        return WalkAxis.Y < 0 || (WalkAxis.X == 0 && WalkAxis.Y == 0);
+        GD.Print(WalkAxis);
+        return WalkAxis.Y > 0 || (WalkAxis.X == 0 && WalkAxis.Y == 0);
     }
 
     public Vector3 FreeWishDir(Vector2 input)
