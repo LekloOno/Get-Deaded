@@ -112,6 +112,7 @@ CrouchInput = NodePath("PI_Crouch")
 SprintInput = NodePath("../../PI_Sprint")
 Hold = true
 SlideMinSpeed = 6.0
+HoldSlideMinSpeed = 3.0
 
 [node name="PI_Crouch" type="Node" parent="Input/PI_CrouchDispatcher/PI_Slide" node_paths=PackedStringArray("SprintInput")]
 script = ExtResource("7_56r3e")

@@ -7,4 +7,7 @@ Handle properly the velocity cache.
 
 Prevent Crouch clipping
 
-Implement Slide
+~~Implement Slide~~
+
+Add Slide force
+Make so velocity is not projected on floor plane when sliding (slides faster downward, slower upward)

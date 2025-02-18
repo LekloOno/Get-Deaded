@@ -11,6 +11,7 @@ public partial class PI_Slide : Node, PI_CrouchDerived
 
     [Export] public bool Hold {get; private set;}
     [Export] public float SlideMinSpeed {get; private set;}
+    [Export] public float HoldSlideMinSpeed {get; private set;}
 
     public EventHandler OnStartInput {get; set;}   // Called when slide is initiated
     public EventHandler OnStopInput {get; set;}    // Called when slide is cancelled through inputs
@@ -27,7 +28,7 @@ public partial class PI_Slide : Node, PI_CrouchDerived
         // Otherwise, propagate to crouch
 
 
-        if (!IsActive && (FastEnough() || !GroundState.IsGrounded()))
+        if (!IsActive && (StartFastEnough() || !GroundState.IsGrounded()))
         {
             // Consume - start
             StartSlide();
@@ -41,7 +42,8 @@ public partial class PI_Slide : Node, PI_CrouchDerived
         }
     }
 
-    private bool FastEnough() { return Controller.RealVelocity.Length() >= SlideMinSpeed; }
+    private bool StartFastEnough() { return Controller.RealVelocity.Length() >= SlideMinSpeed; }
+    private bool HoldFastEnough() { return Controller.RealVelocity.Length() >= HoldSlideMinSpeed; }
     public void KeyUp()
     {
         // Can consume if
@@ -67,7 +69,7 @@ public partial class PI_Slide : Node, PI_CrouchDerived
     private void CheckSpeed(object sender, EventArgs e)
     {
         // Virtually propagate to crouch if sliding and not fast enough
-        if (GroundState.IsGrounded() && !FastEnough())
+        if (GroundState.IsGrounded() && !HoldFastEnough())
         {
             // Notify crouch to start
             IsActive = false;
