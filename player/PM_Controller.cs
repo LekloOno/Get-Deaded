@@ -67,8 +67,8 @@ public partial class PM_Controller : CharacterBody3D
 
 		// Handle Jump.
 		velocity = Jump.Jump(velocity);
-		velocity += SurfaceControl.Accelerate(velocity, (float)delta);
         velocity = SurfaceControl.ApplyDrag(velocity, delta);
+		velocity += SurfaceControl.Accelerate(velocity, (float)delta);
 
     /*
         if (!StepClimb.Climb(this, velocity, WalkProcess.WishDir, VelocityCache, GetWorld3D().DirectSpaceState, delta))

@@ -1,8 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://cmpcqmaf25qcu"]
+[gd_scene load_steps=19 format=3 uid="uid://cmpcqmaf25qcu"]
 
 [ext_resource type="Script" path="res://player/PM_Controller.cs" id="1_7ruml"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_seqbe"]
-[ext_resource type="Script" path="res://addons/smoothing/smoothing.gd" id="3_1jieh"]
 [ext_resource type="Script" path="res://player/camera/PC_Control.cs" id="3_duaqo"]
 [ext_resource type="Script" path="res://player/input/PI_Walk.cs" id="4_ob50j"]
 [ext_resource type="Script" path="res://player/input/PI_Jump.cs" id="5_kj45h"]
@@ -36,26 +35,24 @@ script = ExtResource("1_7ruml")
 WalkProcess = NodePath("Input/PI_Walk")
 Jump = NodePath("Movement/PM_Jump")
 GroundState = NodePath("State/PS_Grounded")
-CameraControl = NodePath("Head/Smoothing/Camera3D")
+CameraControl = NodePath("Head/MidleAnchor/Camera3D")
 SurfaceControl = NodePath("Movement/PM_SurfaceControl")
 VelocityCache = ExtResource("2_seqbe")
 
 [node name="Head" type="Node3D" parent="."]
 
-[node name="Smoothing" type="Node3D" parent="Head"]
-script = ExtResource("3_1jieh")
-target = NodePath("../..")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Head/Smoothing"]
+[node name="MidleAnchor" type="Node3D" parent="Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
-mesh = SubResource("CapsuleMesh_qcifk")
-skeleton = NodePath("../../..")
 
-[node name="Camera3D" type="Camera3D" parent="Head/Smoothing" node_paths=PackedStringArray("Body")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.59585, 0)
+[node name="Camera3D" type="Camera3D" parent="Head/MidleAnchor" node_paths=PackedStringArray("Body")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.690224, 0)
 fov = 103.0
 script = ExtResource("3_duaqo")
 Body = NodePath("../../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Head/MidleAnchor"]
+mesh = SubResource("CapsuleMesh_qcifk")
+skeleton = NodePath("../../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
@@ -70,7 +67,7 @@ target_position = Vector3(0, -20, 0)
 [node name="PI_Walk" type="Node" parent="Input" node_paths=PackedStringArray("FlatDirNode", "SightPositionNode")]
 script = ExtResource("4_ob50j")
 FlatDirNode = NodePath("../..")
-SightPositionNode = NodePath("../../Head/Smoothing/Camera3D")
+SightPositionNode = NodePath("../../Head/MidleAnchor/Camera3D")
 
 [node name="PI_Jump" type="Node" parent="Input"]
 script = ExtResource("5_kj45h")
