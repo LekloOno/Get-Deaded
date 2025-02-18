@@ -2,9 +2,9 @@ using System;
 using Godot;
 
 [GlobalClass]
-public partial class PM_Crouch : PM_Action
+public partial class PM_Slide : PM_Action
 {
-    [Export] public PI_Crouch CrouchInput {get; private set;}
+    [Export] public PI_Slide SlideInput {get; private set;}
     [Export] public PB_Scale BodyScalor {get; private set;}
     [Export(PropertyHint.Range, "0.0, 10.0")] public float ScaleSpeed;
     [Export(PropertyHint.Range, "0.0, 10.0")] public float ResetScaleSpeed;
@@ -12,42 +12,33 @@ public partial class PM_Crouch : PM_Action
 
     public EventHandler OnStart;
     public EventHandler OnStop;
+    public EventHandler OnSlowStop;
 
     public override void _Ready()
     {
-        CrouchInput.OnStartInput += (o, e) => StartCrouch();
-        CrouchInput.OnStopInput += (o, e) => StopCrouch();
+        SlideInput.OnStartInput += (o, e) => StartSlide();
+        SlideInput.OnStopInput += (o, e) => StopSlide();
+        SlideInput.OnSlowSlide += (o, e) => SlowStop();
+    }
+    public override void _PhysicsProcess(double delta)
+    {
+        // To implement
     }
 
-    public void StartCrouch()
+    public void StartSlide()
     {
         BodyScalor.SetTargetScale(TargetScaleRatio, ScaleSpeed);
         OnStart?.Invoke(this, EventArgs.Empty);
     }
 
-    public void StopCrouch()
+    public void StopSlide()
     {
         BodyScalor.ResetScale(ResetScaleSpeed);
         OnStop?.Invoke(this, EventArgs.Empty);
     }
+
+    public void SlowStop()
+    {
+        OnSlowStop?.Invoke(this, EventArgs.Empty);
+    }
 }
-
-// OnStartCrouch
-//      grounded
-//          no speed - start crouch
-//          speed - start slide
-//      airborne
-//          start slide with no boost
-//          _canDash - start dash
-
-// OnStopCrouch
-//      grounded
-//          start normal
-//      airborne
-//          stop slide
-
-// OnLanding
-//      dashing - stop dashing
-//
-// SpeedTooLow and grounded
-//      stop sliding

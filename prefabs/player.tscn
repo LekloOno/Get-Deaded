@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cmpcqmaf25qcu"]
+[gd_scene load_steps=26 format=3 uid="uid://cmpcqmaf25qcu"]
 
 [ext_resource type="Script" path="res://player/PM_Controller.cs" id="1_7ruml"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_seqbe"]
@@ -21,6 +21,7 @@
 [ext_resource type="Script" path="res://debug/Speedometer.cs" id="14_chh26"]
 [ext_resource type="Script" path="res://debug/Grounded.cs" id="14_ih16p"]
 [ext_resource type="Script" path="res://player/movement/actions/PM_Crouch.cs" id="15_vd3v3"]
+[ext_resource type="Script" path="res://player/movement/actions/PM_Slide.cs" id="20_5y6qm"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o274a"]
 radius = 0.25
@@ -133,17 +134,19 @@ LandGroundDelayMsec = 50
 WalkProcess = NodePath("../../Input/PI_Walk")
 GroundState = NodePath("../../State/PS_Grounded")
 
-[node name="GroundState" type="Node" parent="Movement/PM_SurfaceControl" node_paths=PackedStringArray("SprintInput", "Crouch")]
+[node name="GroundState" type="Node" parent="Movement/PM_SurfaceControl" node_paths=PackedStringArray("SprintInput", "Crouch", "Slide")]
 script = ExtResource("8_fhtxi")
 StateData = ExtResource("9_ikaaj")
 SprintInput = NodePath("../../../Input/PI_Sprint")
 Crouch = NodePath("../../PM_Crouch")
+Slide = NodePath("../../PM_Slide")
 
-[node name="AirState" type="Node" parent="Movement/PM_SurfaceControl" node_paths=PackedStringArray("SprintInput", "Crouch")]
+[node name="AirState" type="Node" parent="Movement/PM_SurfaceControl" node_paths=PackedStringArray("SprintInput", "Crouch", "Slide")]
 script = ExtResource("8_fhtxi")
 StateData = ExtResource("10_53m5n")
 SprintInput = NodePath("../../../Input/PI_Sprint")
 Crouch = NodePath("../../PM_Crouch")
+Slide = NodePath("../../PM_Slide")
 
 [node name="PM_Jump" type="Node" parent="Movement" node_paths=PackedStringArray("JumpProcess", "WalkProcess", "GroundState")]
 script = ExtResource("11_edsm7")
@@ -157,6 +160,17 @@ script = ExtResource("15_vd3v3")
 CrouchInput = NodePath("../../Input/PI_CrouchDispatcher/PI_Slide/PI_Crouch")
 BodyScalor = NodePath("../../Body")
 ScaleSpeed = 10.0
+ResetScaleSpeed = 10.0
+TargetScaleRatio = 0.6
+WalkProcess = NodePath("../../Input/PI_Walk")
+GroundState = NodePath("../../State/PS_Grounded")
+
+[node name="PM_Slide" type="Node" parent="Movement" node_paths=PackedStringArray("SlideInput", "BodyScalor", "WalkProcess", "GroundState")]
+script = ExtResource("20_5y6qm")
+SlideInput = NodePath("../../Input/PI_CrouchDispatcher/PI_Slide")
+BodyScalor = NodePath("../../Body")
+ScaleSpeed = 10.0
+ResetScaleSpeed = 10.0
 TargetScaleRatio = 0.6
 WalkProcess = NodePath("../../Input/PI_Walk")
 GroundState = NodePath("../../State/PS_Grounded")
