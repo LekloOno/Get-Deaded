@@ -100,13 +100,14 @@ GroundState = NodePath("../../State/PS_Grounded")
 [node name="PI_Dash" type="Node" parent="Input/PI_CrouchDispatcher"]
 script = ExtResource("8_34n6f")
 
-[node name="PI_Slide" type="Node" parent="Input/PI_CrouchDispatcher" node_paths=PackedStringArray("Controller", "GroundState", "CrouchInput")]
+[node name="PI_Slide" type="Node" parent="Input/PI_CrouchDispatcher" node_paths=PackedStringArray("Controller", "GroundState", "CrouchInput", "SprintInput")]
 script = ExtResource("9_px05h")
 Controller = NodePath("../../..")
 GroundState = NodePath("../../../State/PS_Grounded")
 CrouchInput = NodePath("PI_Crouch")
+SprintInput = NodePath("../../PI_Sprint")
 Hold = true
-SlideMinSpeed = 50.0
+SlideMinSpeed = 23.0
 
 [node name="PI_Crouch" type="Node" parent="Input/PI_CrouchDispatcher/PI_Slide" node_paths=PackedStringArray("SprintInput")]
 script = ExtResource("7_56r3e")

@@ -84,7 +84,6 @@ public partial class PM_Crouch : PM_Action
         _modelTargetScale = _modelCrouchScale;
         _colliderTargetScale = _colliderCrouchScale;
         OnStartCrouch?.Invoke(this, EventArgs.Empty);
-        GD.Print("caca");
     }
 
     public void StopCrouch()
@@ -92,7 +91,6 @@ public partial class PM_Crouch : PM_Action
         _modelTargetScale = _modelInitScale;
         _colliderTargetScale = _colliderInitScale;
         OnStopCrouch?.Invoke(this, EventArgs.Empty);
-        GD.Print("prout");
     }
 
     public void OnInputStart(object sender, EventArgs e)
