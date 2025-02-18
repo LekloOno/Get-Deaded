@@ -26,6 +26,11 @@ public partial class PI_Sprint : Node
             HandleSimple(@event);
     }
 
+    public void Reset()
+    {
+        _active = false;
+    }
+
     private void HandleHold(InputEvent @event)
     {
         if (@event.IsActionPressed("sprint") && !@event.IsEcho())
@@ -47,8 +52,11 @@ public partial class PI_Sprint : Node
 
     private void StopSprinting()
     {
-        _active = false;
-        OnStopSprinting?.Invoke(this, EventArgs.Empty);
+        if (_active)
+        {
+            _active = false;
+            OnStopSprinting?.Invoke(this, EventArgs.Empty);
+        }
     }
 
     private void StartSprinting()

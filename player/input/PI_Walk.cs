@@ -40,7 +40,6 @@ public partial class PI_Walk : Node
 
     public bool StopOrLess()
     {
-        GD.Print(WalkAxis);
         return WalkAxis.Y > 0 || (WalkAxis.X == 0 && WalkAxis.Y == 0);
     }
 

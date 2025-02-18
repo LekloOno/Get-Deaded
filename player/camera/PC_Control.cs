@@ -4,6 +4,7 @@ using System;
 public partial class PC_Control : Camera3D
 {
 	[Export] public float Sensitivity {get;set;} = 2.8f;
+    [Export] public Node3D CameraY {get; private set;}
 	[Export] public Node3D Body {get; private set;}
 
 	private float _realSens;
@@ -19,10 +20,13 @@ public partial class PC_Control : Camera3D
         if (@event is InputEventMouseMotion mouseMotion)
         {
             Body.RotateY(-mouseMotion.Relative.X * _realSens);
+            CameraY.RotateY(-mouseMotion.Relative.X * _realSens);
+
             RotateX(-mouseMotion.Relative.Y * _realSens);
-            
+
             Vector3 rotation = Rotation;
             rotation.X = Mathf.Clamp(rotation.X, Mathf.DegToRad(-90), Mathf.DegToRad(90));
+
             Rotation = rotation;
         }
     }

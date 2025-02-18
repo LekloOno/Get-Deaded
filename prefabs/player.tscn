@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cmpcqmaf25qcu"]
+[gd_scene load_steps=24 format=3 uid="uid://cmpcqmaf25qcu"]
 
 [ext_resource type="Script" path="res://player/PM_Controller.cs" id="1_7ruml"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_seqbe"]
@@ -6,21 +6,26 @@
 [ext_resource type="Script" path="res://player/input/PI_Walk.cs" id="4_ob50j"]
 [ext_resource type="Script" path="res://player/input/PI_Jump.cs" id="5_kj45h"]
 [ext_resource type="Script" path="res://player/state/PS_Grounded.cs" id="6_mexc6"]
+[ext_resource type="Script" path="res://player/input/PI_CrouchDispatcher.cs" id="7_2sxgr"]
+[ext_resource type="Script" path="res://player/input/PI_Crouch.cs" id="7_56r3e"]
 [ext_resource type="Script" path="res://player/movement/actions/PM_SurfaceControl.cs" id="7_msb5j"]
 [ext_resource type="Script" path="res://player/input/PI_Sprint.cs" id="7_owt71"]
+[ext_resource type="Script" path="res://player/input/PI_Dash.cs" id="8_34n6f"]
 [ext_resource type="Script" path="res://player/movement/actions/surface-control/PM_SurfaceState.cs" id="8_fhtxi"]
 [ext_resource type="Resource" uid="uid://dn58omqab4s1u" path="res://player/movement/actions/surface-control/data/ground.tres" id="9_ikaaj"]
+[ext_resource type="Script" path="res://player/input/PI_Slide.cs" id="9_px05h"]
 [ext_resource type="Resource" uid="uid://ca5w3yr3ia7ao" path="res://player/movement/actions/surface-control/data/air.tres" id="10_53m5n"]
 [ext_resource type="Script" path="res://player/movement/actions/PM_Jump.cs" id="11_edsm7"]
 [ext_resource type="Resource" uid="uid://chd67e10gx4rm" path="res://player/movement/actions/jump/data/basic_jump.tres" id="13_e1cl2"]
 [ext_resource type="Script" path="res://debug/Speedometer.cs" id="14_chh26"]
 [ext_resource type="Script" path="res://debug/Grounded.cs" id="14_ih16p"]
+[ext_resource type="Script" path="res://player/movement/actions/PM_Crouch.cs" id="15_vd3v3"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_qcifk"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o274a"]
 radius = 0.25
 height = 1.8
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o274a"]
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_qcifk"]
 radius = 0.25
 height = 1.8
 
@@ -35,28 +40,36 @@ script = ExtResource("1_7ruml")
 WalkProcess = NodePath("Input/PI_Walk")
 Jump = NodePath("Movement/PM_Jump")
 GroundState = NodePath("State/PS_Grounded")
-CameraControl = NodePath("Head/MidleAnchor/Camera3D")
+CameraControl = NodePath("CameraY/Camera3D")
 SurfaceControl = NodePath("Movement/PM_SurfaceControl")
 VelocityCache = ExtResource("2_seqbe")
 
-[node name="Head" type="Node3D" parent="."]
+[node name="CameraY" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0)
+top_level = true
 
-[node name="MidleAnchor" type="Node3D" parent="Head"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
-
-[node name="Camera3D" type="Camera3D" parent="Head/MidleAnchor" node_paths=PackedStringArray("Body")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.690224, 0)
+[node name="Camera3D" type="Camera3D" parent="CameraY" node_paths=PackedStringArray("CameraY", "Body")]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0)
 fov = 103.0
 script = ExtResource("3_duaqo")
-Body = NodePath("../../..")
+CameraY = NodePath("..")
+Body = NodePath("../..")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Head/MidleAnchor"]
-mesh = SubResource("CapsuleMesh_qcifk")
-skeleton = NodePath("../../..")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="Body" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_o274a")
+
+[node name="SpatialAnchor" type="Node3D" parent="Body"]
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Body/SpatialAnchor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
+remote_path = NodePath("../../../CameraY")
+update_rotation = false
+update_scale = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Body/SpatialAnchor"]
+mesh = SubResource("CapsuleMesh_qcifk")
+skeleton = NodePath("../../..")
 
 [node name="GroundCast" type="ShapeCast3D" parent="."]
 shape = SubResource("SphereShape3D_4jpmy")
@@ -67,7 +80,7 @@ target_position = Vector3(0, -20, 0)
 [node name="PI_Walk" type="Node" parent="Input" node_paths=PackedStringArray("FlatDirNode", "SightPositionNode")]
 script = ExtResource("4_ob50j")
 FlatDirNode = NodePath("../..")
-SightPositionNode = NodePath("../../Head/MidleAnchor/Camera3D")
+SightPositionNode = NodePath("../../CameraY/Camera3D")
 
 [node name="PI_Jump" type="Node" parent="Input"]
 script = ExtResource("5_kj45h")
@@ -77,6 +90,27 @@ BufferWindow = 50
 script = ExtResource("7_owt71")
 Jump = NodePath("../../Movement/PM_Jump")
 WalkInput = NodePath("../PI_Walk")
+
+[node name="PI_CrouchDispatcher" type="Node" parent="Input" node_paths=PackedStringArray("SlideInput", "DashInput", "GroundState")]
+script = ExtResource("7_2sxgr")
+SlideInput = NodePath("PI_Slide")
+DashInput = NodePath("PI_Dash")
+GroundState = NodePath("../../State/PS_Grounded")
+
+[node name="PI_Dash" type="Node" parent="Input/PI_CrouchDispatcher"]
+script = ExtResource("8_34n6f")
+
+[node name="PI_Slide" type="Node" parent="Input/PI_CrouchDispatcher" node_paths=PackedStringArray("Controller", "GroundState", "CrouchInput")]
+script = ExtResource("9_px05h")
+Controller = NodePath("../../..")
+GroundState = NodePath("../../../State/PS_Grounded")
+CrouchInput = NodePath("PI_Crouch")
+Hold = true
+SlideMinSpeed = 50.0
+
+[node name="PI_Crouch" type="Node" parent="Input/PI_CrouchDispatcher/PI_Slide" node_paths=PackedStringArray("SprintInput")]
+script = ExtResource("7_56r3e")
+SprintInput = NodePath("../../../PI_Sprint")
 
 [node name="State" type="Node" parent="."]
 
@@ -95,15 +129,17 @@ LandGroundDelayMsec = 50
 WalkProcess = NodePath("../../Input/PI_Walk")
 GroundState = NodePath("../../State/PS_Grounded")
 
-[node name="GroundState" type="Node" parent="Movement/PM_SurfaceControl" node_paths=PackedStringArray("SprintInput")]
+[node name="GroundState" type="Node" parent="Movement/PM_SurfaceControl" node_paths=PackedStringArray("SprintInput", "Crouch")]
 script = ExtResource("8_fhtxi")
 StateData = ExtResource("9_ikaaj")
 SprintInput = NodePath("../../../Input/PI_Sprint")
+Crouch = NodePath("../../PM_Crouch")
 
-[node name="AirState" type="Node" parent="Movement/PM_SurfaceControl" node_paths=PackedStringArray("SprintInput")]
+[node name="AirState" type="Node" parent="Movement/PM_SurfaceControl" node_paths=PackedStringArray("SprintInput", "Crouch")]
 script = ExtResource("8_fhtxi")
 StateData = ExtResource("10_53m5n")
 SprintInput = NodePath("../../../Input/PI_Sprint")
+Crouch = NodePath("../../PM_Crouch")
 
 [node name="PM_Jump" type="Node" parent="Movement" node_paths=PackedStringArray("JumpProcess", "WalkProcess", "GroundState")]
 script = ExtResource("11_edsm7")
@@ -111,6 +147,16 @@ JumpProcess = NodePath("../../Input/PI_Jump")
 Data = ExtResource("13_e1cl2")
 WalkProcess = NodePath("../../Input/PI_Walk")
 GroundState = NodePath("../../State/PS_Grounded")
+
+[node name="PM_Crouch" type="Node" parent="Movement" node_paths=PackedStringArray("CrouchInput", "Jump", "Controller", "CollisionShape", "ModelAnchor")]
+script = ExtResource("15_vd3v3")
+CrouchInput = NodePath("../../Input/PI_CrouchDispatcher/PI_Slide/PI_Crouch")
+Jump = NodePath("../PM_Jump")
+Controller = NodePath("../..")
+CollisionShape = NodePath("../../Body")
+ModelAnchor = NodePath("../../Body/SpatialAnchor")
+ScaleSpeed = 10.0
+TargetScaleRatio = 0.6
 
 [node name="Label" type="Label" parent="." node_paths=PackedStringArray("Controller")]
 anchors_preset = 8
