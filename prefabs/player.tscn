@@ -1,8 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://cmpcqmaf25qcu"]
+[gd_scene load_steps=25 format=3 uid="uid://cmpcqmaf25qcu"]
 
 [ext_resource type="Script" path="res://player/PM_Controller.cs" id="1_7ruml"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_seqbe"]
 [ext_resource type="Script" path="res://player/camera/PC_Control.cs" id="3_duaqo"]
+[ext_resource type="Script" path="res://player/body/PB_Scale.cs" id="4_ldkbw"]
 [ext_resource type="Script" path="res://player/input/PI_Walk.cs" id="4_ob50j"]
 [ext_resource type="Script" path="res://player/input/PI_Jump.cs" id="5_kj45h"]
 [ext_resource type="Script" path="res://player/state/PS_Grounded.cs" id="6_mexc6"]
@@ -55,9 +56,11 @@ script = ExtResource("3_duaqo")
 CameraY = NodePath("..")
 Body = NodePath("../..")
 
-[node name="Body" type="CollisionShape3D" parent="."]
+[node name="Body" type="CollisionShape3D" parent="." node_paths=PackedStringArray("ModelAnchor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_o274a")
+script = ExtResource("4_ldkbw")
+ModelAnchor = NodePath("SpatialAnchor")
 
 [node name="SpatialAnchor" type="Node3D" parent="Body"]
 
@@ -107,7 +110,7 @@ GroundState = NodePath("../../../State/PS_Grounded")
 CrouchInput = NodePath("PI_Crouch")
 SprintInput = NodePath("../../PI_Sprint")
 Hold = true
-SlideMinSpeed = 23.0
+SlideMinSpeed = 6.0
 
 [node name="PI_Crouch" type="Node" parent="Input/PI_CrouchDispatcher/PI_Slide" node_paths=PackedStringArray("SprintInput")]
 script = ExtResource("7_56r3e")
@@ -149,15 +152,14 @@ Data = ExtResource("13_e1cl2")
 WalkProcess = NodePath("../../Input/PI_Walk")
 GroundState = NodePath("../../State/PS_Grounded")
 
-[node name="PM_Crouch" type="Node" parent="Movement" node_paths=PackedStringArray("CrouchInput", "Jump", "Controller", "CollisionShape", "ModelAnchor")]
+[node name="PM_Crouch" type="Node" parent="Movement" node_paths=PackedStringArray("CrouchInput", "BodyScalor", "WalkProcess", "GroundState")]
 script = ExtResource("15_vd3v3")
 CrouchInput = NodePath("../../Input/PI_CrouchDispatcher/PI_Slide/PI_Crouch")
-Jump = NodePath("../PM_Jump")
-Controller = NodePath("../..")
-CollisionShape = NodePath("../../Body")
-ModelAnchor = NodePath("../../Body/SpatialAnchor")
+BodyScalor = NodePath("../../Body")
 ScaleSpeed = 10.0
 TargetScaleRatio = 0.6
+WalkProcess = NodePath("../../Input/PI_Walk")
+GroundState = NodePath("../../State/PS_Grounded")
 
 [node name="Label" type="Label" parent="." node_paths=PackedStringArray("Controller")]
 anchors_preset = 8
