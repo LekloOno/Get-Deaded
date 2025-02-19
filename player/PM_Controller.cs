@@ -10,6 +10,7 @@ public partial class PM_Controller : CharacterBody3D
     [Export] public PC_Control CameraControl {get; private set;}
     [Export] public PM_SurfaceControl SurfaceControl {get; private set;}
     [Export] public PM_VelocityCache VelocityCache {get; private set;}
+    [Export] public PM_StraffeSnap StraffeSnap {get; private set;}
     [Export] public float DashStrength = 10f;
     //[Export] public PM_StepClimb StepClimb {get; private set;}
 
@@ -65,15 +66,19 @@ public partial class PM_Controller : CharacterBody3D
             //Vector3 velocity = Velocity;
             velocity = VelocityCache.GetVelocity(this, velocity, Velocity, delta);
 
+            Vector3 prevVelocity = velocity;
+            
             if (Input.IsActionJustPressed("click"))
             {
                 velocity += CameraControl.GlobalBasis.Z * -DashStrength;
             }
 
+
             velocity = Jump.Jump(velocity);
             velocity = SurfaceControl.ApplyDrag(velocity, delta);
             velocity += SurfaceControl.Accelerate(velocity, (float)delta);
             velocity += AdditionalForces.Consume();
+            velocity = StraffeSnap.Snap(velocity, prevVelocity);
 
             if (!GroundState.IsGrounded())
                 velocity += GetGravity() * (float)delta;

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cmpcqmaf25qcu"]
+[gd_scene load_steps=28 format=3 uid="uid://cmpcqmaf25qcu"]
 
 [ext_resource type="Script" path="res://player/PM_Controller.cs" id="1_7ruml"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_seqbe"]
@@ -23,6 +23,7 @@
 [ext_resource type="Script" path="res://player/movement/actions/PM_Crouch.cs" id="15_vd3v3"]
 [ext_resource type="Script" path="res://player/movement/actions/PM_Slide.cs" id="20_5y6qm"]
 [ext_resource type="Script" path="res://player/movement/actions/PM_Dash.cs" id="21_kvosw"]
+[ext_resource type="Script" path="res://player/movement/PM_StraffeSnap.cs" id="22_cp0qq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o274a"]
 radius = 0.25
@@ -35,7 +36,7 @@ height = 1.8
 [sub_resource type="SphereShape3D" id="SphereShape3D_4jpmy"]
 radius = 0.25
 
-[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("WalkProcess", "Jump", "GroundState", "CameraControl", "SurfaceControl")]
+[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("WalkProcess", "Jump", "GroundState", "CameraControl", "SurfaceControl", "StraffeSnap")]
 floor_constant_speed = true
 floor_block_on_wall = false
 floor_max_angle = 0.872665
@@ -46,6 +47,7 @@ GroundState = NodePath("State/PS_Grounded")
 CameraControl = NodePath("CameraY/Camera3D")
 SurfaceControl = NodePath("Movement/PM_SurfaceControl")
 VelocityCache = ExtResource("2_seqbe")
+StraffeSnap = NodePath("Movement/PM_StraffeSnap")
 
 [node name="CameraY" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0)
@@ -180,8 +182,13 @@ DashInput = NodePath("../../Input/PI_CrouchDispatcher/PI_Dash")
 CameraControl = NodePath("../../CameraY/Camera3D")
 Controller = NodePath("../..")
 GroundState = NodePath("../../State/PS_Grounded")
-Strength = 20.0
-DashDuration = 0.2
+Strength = 30.0
+DashDuration = 0.15
+
+[node name="PM_StraffeSnap" type="Node" parent="Movement" node_paths=PackedStringArray("GroundState")]
+script = ExtResource("22_cp0qq")
+GroundState = NodePath("../../State/PS_Grounded")
+SnapThreshold = 2.0
 
 [node name="Label" type="Label" parent="." node_paths=PackedStringArray("Controller")]
 anchors_preset = 8

@@ -16,4 +16,9 @@ Prevent Crouch clipping
 
 Lerping is now frame rate independant, maybe use a similar method for the drag ?
 
-Slide Force Decay
+~~Slide Force Decay~~
+
+~~Dash~~
+
+Can get a lot of height with the dash, should maybe nerf that.
+
