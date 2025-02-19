@@ -205,17 +205,21 @@ script = ExtResource("22_cp0qq")
 GroundState = NodePath("../../State/PS_Grounded")
 SnapThreshold = 2.0
 
-[node name="PM_LedgeClimb" type="Node" parent="Movement" node_paths=PackedStringArray("JumpInput", "Controller", "Dash", "WalkInput", "HeadCast", "ChestCast", "FootCast")]
+[node name="PM_LedgeClimb" type="Node" parent="Movement" node_paths=PackedStringArray("JumpInput", "CrouchInput", "WalkInput", "Controller", "Dash", "HeadCast", "ChestCast", "FootCast")]
 script = ExtResource("23_w6mlc")
 JumpInput = NodePath("../../Input/PI_Jump")
+CrouchInput = NodePath("../../Input/PI_CrouchDispatcher")
+WalkInput = NodePath("../../Input/PI_Walk")
 Controller = NodePath("../..")
 Dash = NodePath("../PM_Dash")
-WalkInput = NodePath("../../Input/PI_Walk")
 HeadCast = NodePath("../../Body/LedgeCastHead")
 ChestCast = NodePath("../../Body/LedgeCastChest")
 FootCast = NodePath("../../Body/LedgeCastFoot")
 MaxClimbTime = 2.0
 ClimbSpeed = 5.0
+SuperGlideWindow = 100
+SuperGlideYStrength = 4.0
+SuperGlideXStrength = 8.0
 
 [node name="Label" type="Label" parent="." node_paths=PackedStringArray("Controller")]
 anchors_preset = 8

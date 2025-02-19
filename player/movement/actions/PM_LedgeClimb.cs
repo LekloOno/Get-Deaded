@@ -5,15 +5,19 @@ using Godot;
 public partial class PM_LedgeClimb : Node
 {
     [Export] public PI_Jump JumpInput {get; private set;}
+    [Export] public PI_CrouchDispatcher CrouchInput {get; private set;}
+    [Export] public PI_Walk WalkInput {get; private set;}
     [Export] public PM_Controller Controller {get; private set;}
     [Export] public PM_Dash Dash {get; private set;}
-    [Export] public PI_Walk WalkInput {get; private set;}
     [Export] public RayCast3D HeadCast {get; private set;}
     [Export] public RayCast3D ChestCast {get; private set;}
     [Export] public RayCast3D FootCast {get; private set;}
 
     [Export(PropertyHint.Range, "0.0, 2.0")] public float MaxClimbTime {get; private set;}
     [Export(PropertyHint.Range, "1.0,20.0")] public float ClimbSpeed {get; private set;}
+    [Export(PropertyHint.Range, "  0,1000")] public ulong SuperGlideWindow {get; private set;}
+    [Export(PropertyHint.Range, "0.0,10.0")] public float SuperGlideYStrength {get; private set;}
+    [Export(PropertyHint.Range, "0.0,10.0")] public float SuperGlideXStrength {get; private set;}
     private ulong _startTime = 0;
     private bool _isClimbing = false;
     public bool IsClimbing => _isClimbing;
@@ -56,8 +60,17 @@ public partial class PM_LedgeClimb : Node
     {
         _startTime = 0;
         Controller.TakeOverForces.RemovePersistent(_force);
-        Controller.Velocity = _prevVelocity;
-        Controller.RealVelocity = _prevVelocity;
+
+        Vector3 outVelocity = _prevVelocity;
+        if (Time.GetTicksMsec() - CrouchInput.LastCrouchDown < SuperGlideWindow)
+        {
+            GD.Print("Superglide !");
+            outVelocity += _direction.Normalized() * SuperGlideXStrength;
+            outVelocity.Y = SuperGlideYStrength;
+        }
+
+        Controller.Velocity = outVelocity;
+        Controller.RealVelocity = outVelocity;
         SetPhysicsProcess(false);
         _isClimbing = false;
     }
