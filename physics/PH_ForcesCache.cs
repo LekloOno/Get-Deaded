@@ -1,12 +1,17 @@
-// Use to store additional external forces that should be applied somewhere in a physics body movement logic.
+// Use to store external forces that should be applied somewhere in a physics body movement logic.
 using Godot;
 using System.Collections.Generic;
 using System.Linq;
 
-public class PH_AdditionalForces
+public class PH_ForcesCache
 {
-    private List<Vector3> impulseForces = new List<Vector3>();
-    private List<Vector3> persistentForces = new List<Vector3>();
+    private List<Vector3> impulseForces = new List<Vector3>();      // Are automatically consumed by using them.
+    private List<Vector3> persistentForces = new List<Vector3>();   // Can be used without consumming them, should be removed explicitly.
+    
+    public bool IsEmpty()
+    {
+        return !impulseForces.Any() && !persistentForces.Any();
+    }
 
     public Vector3 Consume()
     {

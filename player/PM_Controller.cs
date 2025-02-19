@@ -13,8 +13,9 @@ public partial class PM_Controller : CharacterBody3D
     [Export] public float DashStrength = 10f;
     //[Export] public PM_StepClimb StepClimb {get; private set;}
 
-    public PH_AdditionalForces AdditionalForces {get; private set;} = new PH_AdditionalForces(); 
-    public Vector3 RealVelocity {get; private set;}
+    public PH_ForcesCache AdditionalForces {get; private set;} = new PH_ForcesCache();  // To allow external entities to apply additional forces.
+    public PH_ForcesCache TakeOverForces {get; private set;} = new PH_ForcesCache();    // To allow external entities to take over the movement behavior.
+    public Vector3 RealVelocity {get; set;}
 	
 	public const float Speed = 5.0f;
 	public const float JumpVelocity = 4.5f;
@@ -54,23 +55,34 @@ public partial class PM_Controller : CharacterBody3D
 		
         //Vector3 velocity = VelocityCache.IsCached() ? VelocityCache.UseCache() : Velocity;
 
-        Vector3 velocity = GroundState.IsGrounded() ? Velocity : RealVelocity;
-        //Vector3 velocity = Velocity;
-        velocity = VelocityCache.GetVelocity(this, velocity, Velocity, delta);
-
-        if (Input.IsActionJustPressed("click"))
-        {
-            velocity += CameraControl.GlobalBasis.Z * -DashStrength;
-        }
-
 		// Add the gravity.
 		
 
 		// Handle Jump.
-		velocity = Jump.Jump(velocity);
-        velocity = SurfaceControl.ApplyDrag(velocity, delta);
-		velocity += SurfaceControl.Accelerate(velocity, (float)delta);
-        velocity += AdditionalForces.Consume();
+        if (TakeOverForces.IsEmpty())
+        {
+            Vector3 velocity = GroundState.IsGrounded() ? Velocity : RealVelocity;
+            //Vector3 velocity = Velocity;
+            velocity = VelocityCache.GetVelocity(this, velocity, Velocity, delta);
+
+            if (Input.IsActionJustPressed("click"))
+            {
+                velocity += CameraControl.GlobalBasis.Z * -DashStrength;
+            }
+
+            velocity = Jump.Jump(velocity);
+            velocity = SurfaceControl.ApplyDrag(velocity, delta);
+            velocity += SurfaceControl.Accelerate(velocity, (float)delta);
+            velocity += AdditionalForces.Consume();
+
+            if (!GroundState.IsGrounded())
+                velocity += GetGravity() * (float)delta;
+
+            Velocity = velocity;
+        } else 
+        {
+            Velocity = TakeOverForces.Consume();
+        }
 
     /*
         if (!StepClimb.Climb(this, velocity, WalkProcess.WishDir, VelocityCache, GetWorld3D().DirectSpaceState, delta))
@@ -84,12 +96,6 @@ public partial class PM_Controller : CharacterBody3D
             MoveAndSlide();
         }*/
 
-        if (!GroundState.IsGrounded())
-        {
-            velocity += GetGravity() * (float)delta;
-        }
-
-        Velocity = velocity;
         MoveAndSlide();
         RealVelocity = (GlobalPosition - pos)/(float)delta;
 

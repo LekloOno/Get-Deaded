@@ -8,7 +8,6 @@ public partial class PI_CrouchDispatcher : Node
 {
     [Export] public PI_Slide SlideInput {get; private set;}
     [Export] public PI_Dash DashInput {get; private set;}
-    [Export] public PS_Grounded GroundState;
     public EventHandler OnStartCrouching;
     public EventHandler OnStopCrouching;
 
@@ -24,10 +23,7 @@ public partial class PI_CrouchDispatcher : Node
     {
         if (@event.IsActionPressed("crouch") && !@event.IsEcho())
         {
-            if (!GroundState.IsGrounded())
-            {
-                DashInput.KeyDown();
-            }
+            DashInput.KeyDown();
             SlideInput.KeyDown();
         }
         else if(@event.IsActionReleased("crouch"))

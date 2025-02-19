@@ -1,28 +1,13 @@
+using System;
 using Godot;
 
 [GlobalClass]
 public partial class PI_Dash : Node
 {
-    public override void _Ready()
-    {
-        // To implement
-    }
-    public override void _PhysicsProcess(double delta)
-    {
-        // To implement
-    }
-    public override void _Process(double delta)
-    {
-        // To implement
-    }
+    public EventHandler OnStartInput {get; set;}   // Called when slide is initiated
 
     public void KeyDown()
     {
-        // Dash if available
-    }
-
-    public void KeyUp()
-    {
-        // Nothing ..
+        OnStartInput?.Invoke(this, EventArgs.Empty);
     }
 }

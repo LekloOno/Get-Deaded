@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cmpcqmaf25qcu"]
+[gd_scene load_steps=27 format=3 uid="uid://cmpcqmaf25qcu"]
 
 [ext_resource type="Script" path="res://player/PM_Controller.cs" id="1_7ruml"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_seqbe"]
@@ -22,6 +22,7 @@
 [ext_resource type="Script" path="res://debug/Grounded.cs" id="14_ih16p"]
 [ext_resource type="Script" path="res://player/movement/actions/PM_Crouch.cs" id="15_vd3v3"]
 [ext_resource type="Script" path="res://player/movement/actions/PM_Slide.cs" id="20_5y6qm"]
+[ext_resource type="Script" path="res://player/movement/actions/PM_Dash.cs" id="21_kvosw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o274a"]
 radius = 0.25
@@ -95,11 +96,10 @@ script = ExtResource("7_owt71")
 Jump = NodePath("../../Movement/PM_Jump")
 WalkInput = NodePath("../PI_Walk")
 
-[node name="PI_CrouchDispatcher" type="Node" parent="Input" node_paths=PackedStringArray("SlideInput", "DashInput", "GroundState")]
+[node name="PI_CrouchDispatcher" type="Node" parent="Input" node_paths=PackedStringArray("SlideInput", "DashInput")]
 script = ExtResource("7_2sxgr")
 SlideInput = NodePath("PI_Slide")
 DashInput = NodePath("PI_Dash")
-GroundState = NodePath("../../State/PS_Grounded")
 
 [node name="PI_Dash" type="Node" parent="Input/PI_CrouchDispatcher"]
 script = ExtResource("8_34n6f")
@@ -173,6 +173,15 @@ SlideInput = NodePath("../../Input/PI_CrouchDispatcher/PI_Slide")
 BodyScalor = NodePath("../../Body")
 WalkProcess = NodePath("../../Input/PI_Walk")
 GroundState = NodePath("../../State/PS_Grounded")
+
+[node name="PM_Dash" type="Node" parent="Movement" node_paths=PackedStringArray("DashInput", "CameraControl", "Controller", "GroundState")]
+script = ExtResource("21_kvosw")
+DashInput = NodePath("../../Input/PI_CrouchDispatcher/PI_Dash")
+CameraControl = NodePath("../../CameraY/Camera3D")
+Controller = NodePath("../..")
+GroundState = NodePath("../../State/PS_Grounded")
+Strength = 20.0
+DashDuration = 0.2
 
 [node name="Label" type="Label" parent="." node_paths=PackedStringArray("Controller")]
 anchors_preset = 8
