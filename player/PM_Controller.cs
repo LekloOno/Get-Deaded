@@ -13,6 +13,7 @@ public partial class PM_Controller : CharacterBody3D
     [Export] public float DashStrength = 10f;
     //[Export] public PM_StepClimb StepClimb {get; private set;}
 
+    public PH_AdditionalForces AdditionalForces {get; private set;} = new PH_AdditionalForces(); 
     public Vector3 RealVelocity {get; private set;}
 	
 	public const float Speed = 5.0f;
@@ -69,6 +70,7 @@ public partial class PM_Controller : CharacterBody3D
 		velocity = Jump.Jump(velocity);
         velocity = SurfaceControl.ApplyDrag(velocity, delta);
 		velocity += SurfaceControl.Accelerate(velocity, (float)delta);
+        velocity += AdditionalForces.Consume();
 
     /*
         if (!StepClimb.Climb(this, velocity, WalkProcess.WishDir, VelocityCache, GetWorld3D().DirectSpaceState, delta))

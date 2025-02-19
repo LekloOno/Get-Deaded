@@ -9,11 +9,16 @@ public partial class PM_Slide : PM_Action
     [Export] public PB_Scale BodyScalor {get; private set;}
     [Export(PropertyHint.Range, "0.0, 10.0")] public float ScaleSpeed;
     [Export(PropertyHint.Range, "0.0, 10.0")] public float ResetScaleSpeed;
-    [Export(PropertyHint.Range, "0.2,1.0")] public float TargetScaleRatio {get; private set;}
+    [Export(PropertyHint.Range, "0.2,  1.0")] public float TargetScaleRatio {get; private set;}
+    [Export(PropertyHint.Range, "0.0,  1.0")] public float ForceDelay {get; private set;} 
+    [Export(PropertyHint.Range, "0.0, 15.0")] public float Force {get; private set;}
 
     public EventHandler OnStart;
     public EventHandler OnStop;
     public EventHandler OnSlowStop;
+
+    private SceneTreeTimer _delayedForceTimer;
+
 
     public override void _Ready()
     {
@@ -21,13 +26,21 @@ public partial class PM_Slide : PM_Action
         SlideInput.OnStopInput += (o, e) => StopSlide();
         SlideInput.OnSlowSlide += (o, e) => SlowStop();
     }
-    public override void _PhysicsProcess(double delta)
+
+    public void AddForce()
     {
-        // To implement
+        if (GroundState.IsGrounded())
+            Controller.AdditionalForces.AddImpulse(Controller.Velocity.Normalized() * Force);
     }
 
     public void StartSlide()
     {
+        if (GroundState.IsGrounded())
+        {
+            _delayedForceTimer = GetTree().CreateTimer(ForceDelay);
+            _delayedForceTimer.Timeout += AddForce;
+        }
+
         Controller.FloorConstantSpeed = false;
         BodyScalor.SetTargetScale(TargetScaleRatio, ScaleSpeed);
         OnStart?.Invoke(this, EventArgs.Empty);
@@ -35,6 +48,12 @@ public partial class PM_Slide : PM_Action
 
     public void StopSlide()
     {
+        if(_delayedForceTimer != null)
+        {
+            _delayedForceTimer.Timeout -= AddForce;
+            _delayedForceTimer = null;
+        }
+
         Controller.FloorConstantSpeed = true;
         BodyScalor.ResetScale(ResetScaleSpeed);
         OnStop?.Invoke(this, EventArgs.Empty);
