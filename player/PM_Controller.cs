@@ -51,7 +51,7 @@ public partial class PM_Controller : CharacterBody3D
         Vector3 pos = GlobalPosition;
         if (TakeOverForces.IsEmpty())
         {
-            Vector3 velocity = VelocityCache.GetVelocity(this, Velocity, GroundState.IsGrounded(), delta);
+            Vector3 velocity = VelocityCache.GetVelocity(this, Velocity, WalkProcess.WishDir, GroundState.IsGrounded(), delta);
 
             Vector3 prevVelocity = velocity;
             

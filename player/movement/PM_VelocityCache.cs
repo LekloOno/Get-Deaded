@@ -10,18 +10,15 @@ public partial class PM_VelocityCache : Resource
     public Vector3 UseCache()
     {
         Vector3 outputVel = IsCached() ? _cachedVelocity : Vector3.Zero;
-        _cachedVelocity = Vector3.Zero;
-        _cachedTime = 0;
+        DiscardCache();
         
         return outputVel;
     }
 
     private Vector3 UseCacheOr(Vector3 velocity)
     {
-        GD.Print("caca");
         Vector3 outputVel = TestVelocity(velocity);
-        _cachedVelocity = Vector3.Zero;
-        _cachedTime = 0;
+        DiscardCache();
         
         return outputVel;
     }
@@ -37,6 +34,12 @@ public partial class PM_VelocityCache : Resource
         return Time.GetTicksMsec() - _cachedTime < CacheFrameMsec;
     }
 
+    public void DiscardCache()
+    {
+        _cachedVelocity = Vector3.Zero;
+        _cachedTime = 0;
+    }
+
     public Vector3 TestVelocity(Vector3 velocity)
     {
         if (IsCached())
@@ -48,7 +51,7 @@ public partial class PM_VelocityCache : Resource
         return velocity;
     }
 
-    public Vector3 GetVelocity(PM_Controller controller, Vector3 velocity, bool grounded, double delta)
+    public Vector3 GetVelocity(PM_Controller controller, Vector3 velocity, Vector3 WishDir, bool grounded, double delta)
     {
         Transform3D currentTransform = controller.GlobalTransform;
         KinematicCollision3D collision = new();
@@ -68,7 +71,13 @@ public partial class PM_VelocityCache : Resource
             _inWall = collision.GetAngle(0, controller.UpDirection) > controller.FloorMaxAngle;
             if(_inWall)
             {
-                if (!wasInWall) Cache(velocity);
+                
+                if(collision.GetNormal().Dot(WishDir) > 0) // If inputs outward the wall, discard
+                    DiscardCache();
+                else if (!wasInWall) Cache(velocity);
+
+                // if (!wasInWall) Cache(velocity); It seems like doing if instead of else if results in fun behavior .. to further test out
+
                 return grounded ? controller.Velocity : controller.RealVelocity;
             }
         }
