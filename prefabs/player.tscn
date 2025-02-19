@@ -171,11 +171,6 @@ script = ExtResource("20_5y6qm")
 Controller = NodePath("../..")
 SlideInput = NodePath("../../Input/PI_CrouchDispatcher/PI_Slide")
 BodyScalor = NodePath("../../Body")
-ScaleSpeed = 10.0
-ResetScaleSpeed = 10.0
-TargetScaleRatio = 0.6
-ForceDelay = 0.12
-Force = 3.6
 WalkProcess = NodePath("../../Input/PI_Walk")
 GroundState = NodePath("../../State/PS_Grounded")
 
