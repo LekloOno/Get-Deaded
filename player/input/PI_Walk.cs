@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using static PI_Direction;
 
 [GlobalClass]
 public partial class PI_Walk : Node
@@ -17,12 +18,13 @@ public partial class PI_Walk : Node
     public override void _UnhandledKeyInput(InputEvent @event)
     {
         WalkAxis = ComputeWalkAxis();
+        GD.Print(WalkAxis);
         WishDir = ComputeWishDir();
 
-        if (@event.IsActionPressed("move_forward")
-            || @event.IsActionPressed("move_backward")
-            || @event.IsActionPressed("move_left")
-            || @event.IsActionPressed("move_right"))
+        if (@event.IsActionPressed(FORWARD)
+            || @event.IsActionPressed(BACKWARD)
+            || @event.IsActionPressed(LEFT)
+            || @event.IsActionPressed(RIGHT))
         {
             KeyPressed?.Invoke(this, new KeyPressedArgs(WishDir, WalkAxis));
         }
@@ -33,15 +35,9 @@ public partial class PI_Walk : Node
         }
     }
 
-    public static Vector2 ComputeWalkAxis()
-    {
-        return Input.GetVector("move_left", "move_right", "move_forward", "move_backward");
-    }
+    public static Vector2 ComputeWalkAxis() => Input.GetVector(LEFT, RIGHT, FORWARD, BACKWARD);
 
-    public bool StopOrLess()
-    {
-        return WalkAxis.Y > 0 || (WalkAxis.X == 0 && WalkAxis.Y == 0);
-    }
+    public bool StopOrLess() => WalkAxis.Y > 0 || (WalkAxis.X == 0 && WalkAxis.Y == 0);
 
     public Vector3 FreeWishDir(Vector2 input)
     {
@@ -52,4 +48,9 @@ public partial class PI_Walk : Node
     {
         return FlatDirNode.Transform.Basis.Z * WalkAxis.Y + FlatDirNode.Transform.Basis.X * WalkAxis.X;
     }
+
+    public bool FowardDown() => Input.IsActionPressed(FORWARD);
+    public bool BackwardDown() => Input.IsActionPressed(BACKWARD);
+    public bool RightDown() => Input.IsActionPressed(RIGHT);
+    public bool LeftDown() => Input.IsActionPressed(LEFT);
 }

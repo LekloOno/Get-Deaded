@@ -5,6 +5,7 @@ using Godot;
 public partial class PM_Dash : Node
 {
     [Export] public PI_Dash DashInput {get; private set;}
+    [Export] public PI_Walk WalkInput {get; private set;}
     [Export] public PC_Control CameraControl {get; private set;}
     [Export] public PM_Controller Controller {get; private set;}
     [Export] public PS_Grounded GroundState {get; private set;}
@@ -39,7 +40,10 @@ public partial class PM_Dash : Node
         if (!_available || GroundState.IsGrounded())
             return;
         
-        _direction = -CameraControl.GlobalBasis.Z;
+        if (WalkInput.WalkAxis != Vector2.Zero)
+            _direction = WalkInput.WishDir;
+        else
+            _direction = -CameraControl.GlobalBasis.Z;
 
         _prevRealVelocity = Controller.RealVelocity;
         Vector3 velocity = _prevRealVelocity;

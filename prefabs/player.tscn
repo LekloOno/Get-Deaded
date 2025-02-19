@@ -176,9 +176,10 @@ BodyScalor = NodePath("../../Body")
 WalkProcess = NodePath("../../Input/PI_Walk")
 GroundState = NodePath("../../State/PS_Grounded")
 
-[node name="PM_Dash" type="Node" parent="Movement" node_paths=PackedStringArray("DashInput", "CameraControl", "Controller", "GroundState")]
+[node name="PM_Dash" type="Node" parent="Movement" node_paths=PackedStringArray("DashInput", "WalkInput", "CameraControl", "Controller", "GroundState")]
 script = ExtResource("21_kvosw")
 DashInput = NodePath("../../Input/PI_CrouchDispatcher/PI_Dash")
+WalkInput = NodePath("../../Input/PI_Walk")
 CameraControl = NodePath("../../CameraY/Camera3D")
 Controller = NodePath("../..")
 GroundState = NodePath("../../State/PS_Grounded")
