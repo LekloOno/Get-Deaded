@@ -5,3 +5,4 @@
 [resource]
 script = ExtResource("1_dhpsq")
 CacheFrameMsec = 200
+CacheMinSpeed = 4.0

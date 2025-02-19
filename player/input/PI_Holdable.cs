@@ -20,7 +20,7 @@ public interface PI_Holdable
 
     protected void HandleHold(InputEvent @event)
     {
-        if (@event.IsActionPressed(Action) && !@event.IsEcho())
+        if (@event.IsActionPressed(Action))
             StartAction();
         else if(@event.IsActionReleased(Action))
             StopAction();
@@ -28,7 +28,7 @@ public interface PI_Holdable
 
     protected void HandleSimple(InputEvent @event)
     {
-        if (@event.IsActionPressed(Action) && !@event.IsEcho())
+        if (@event.IsActionPressed(Action))
         {
             if (IsActive)
                 StopAction();

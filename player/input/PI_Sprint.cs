@@ -30,7 +30,7 @@ public partial class PI_Sprint : Node
 
     private void HandleHold(InputEvent @event)
     {
-        if (@event.IsActionPressed("sprint") && !@event.IsEcho())
+        if (@event.IsActionPressed("sprint"))
             StartSprinting();
         else if(@event.IsActionReleased("sprint"))
             StopSprinting();
@@ -38,7 +38,7 @@ public partial class PI_Sprint : Node
 
     private void HandleSimple(InputEvent @event)
     {
-        if (@event.IsActionPressed("sprint") && !@event.IsEcho())
+        if (@event.IsActionPressed("sprint"))
         {
             if (_active)
                 StopSprinting();

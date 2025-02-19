@@ -13,7 +13,7 @@ public partial class PI_CrouchDispatcher : Node
 
     public override void _UnhandledKeyInput(InputEvent @event)
     {
-        if (@event.IsActionPressed("crouch") && !@event.IsEcho())
+        if (@event.IsActionPressed("crouch"))
         {
             DashInput.KeyDown();
             SlideInput.KeyDown();

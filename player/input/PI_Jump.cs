@@ -10,10 +10,15 @@ public partial class PI_Jump : Node
     private ulong _lastJumpInput = 0;
     public bool JumpBuffered {get; private set;}
 
+    public EventHandler OnStartInput;
+
     public override void _UnhandledKeyInput(InputEvent @event)
     {
         if (@event.IsActionPressed("jump"))
+        {
             _lastJumpInput = Time.GetTicksMsec();
+            OnStartInput?.Invoke(this, EventArgs.Empty);
+        }
     }
     
     public bool UseBuffer()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cmpcqmaf25qcu"]
+[gd_scene load_steps=29 format=3 uid="uid://cmpcqmaf25qcu"]
 
 [ext_resource type="Script" path="res://player/PM_Controller.cs" id="1_7ruml"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_seqbe"]
@@ -24,6 +24,7 @@
 [ext_resource type="Script" path="res://player/movement/actions/crouch/PM_Slide.cs" id="20_5y6qm"]
 [ext_resource type="Script" path="res://player/movement/actions/crouch/PM_Dash.cs" id="21_kvosw"]
 [ext_resource type="Script" path="res://player/movement/PM_StraffeSnap.cs" id="22_cp0qq"]
+[ext_resource type="Script" path="res://player/movement/actions/PM_LedgeClimb.cs" id="23_w6mlc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o274a"]
 radius = 0.25
@@ -77,6 +78,18 @@ update_scale = false
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Body/SpatialAnchor"]
 mesh = SubResource("CapsuleMesh_qcifk")
 skeleton = NodePath("../../..")
+
+[node name="LedgeCastFoot" type="RayCast3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0)
+target_position = Vector3(0, 0, -0.8)
+
+[node name="LedgeCastHead" type="RayCast3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.780448, 0)
+target_position = Vector3(0, 0, -1.2)
+
+[node name="LedgeCastChest" type="RayCast3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+target_position = Vector3(0, 0, -0.8)
 
 [node name="GroundCast" type="ShapeCast3D" parent="."]
 shape = SubResource("SphereShape3D_4jpmy")
@@ -190,6 +203,17 @@ DashDuration = 0.15
 script = ExtResource("22_cp0qq")
 GroundState = NodePath("../../State/PS_Grounded")
 SnapThreshold = 2.0
+
+[node name="PM_LedgeClimb" type="Node" parent="Movement" node_paths=PackedStringArray("JumpInput", "Controller", "WalkInput", "HeadCast", "ChestCast", "FootCast")]
+script = ExtResource("23_w6mlc")
+JumpInput = NodePath("../../Input/PI_Jump")
+Controller = NodePath("../..")
+WalkInput = NodePath("../../Input/PI_Walk")
+HeadCast = NodePath("../../Body/LedgeCastHead")
+ChestCast = NodePath("../../Body/LedgeCastChest")
+FootCast = NodePath("../../Body/LedgeCastFoot")
+MaxClimbTime = 2.0
+ClimbSpeed = 5.0
 
 [node name="Label" type="Label" parent="." node_paths=PackedStringArray("Controller")]
 anchors_preset = 8

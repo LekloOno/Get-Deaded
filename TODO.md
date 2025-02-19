@@ -27,3 +27,6 @@ Can get a lot of height with the dash, should maybe nerf that.
 ~~Directionnal horizontal dash when pressing walk keys~~
 
 Clean actions code with dedicated class holding static instances - see PI_Direction
+
+Still one missing bug on velocity cache -
+RealVelocity is sometimes very off. When moving straight against a wall, then jumping, the very first tick of the jump has a force of ~8, where it should be ~3. The Capsule must be moved up some way by the physics engine, resulting in our physics to think the player was moving much faster than he was.
