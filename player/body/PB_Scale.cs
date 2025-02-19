@@ -21,11 +21,10 @@ public partial class PB_Scale : CollisionShape3D
     }
     public override void _PhysicsProcess(double delta)
     {
-        float speed = _scaleSpeed*(float)delta;
-        _capsule.Height = Mathf.Lerp(_capsule.Height, _colliderTargetScale, speed);
+        _capsule.Height = Mathf.Lerp(_capsule.Height, _colliderTargetScale, _scaleSpeed);
 
         Vector3 modelScale = ModelAnchor.Scale;
-        modelScale.Y = Mathf.Lerp(modelScale.Y, _modelTargetScale, speed);
+        modelScale.Y = Mathf.Lerp(modelScale.Y, _modelTargetScale, _scaleSpeed);
         ModelAnchor.Scale = modelScale;
     }
 
@@ -33,13 +32,13 @@ public partial class PB_Scale : CollisionShape3D
     {
         _modelTargetScale = _modelInitScale * targetScaleRatio;
         _colliderTargetScale = _colliderInitScale * targetScaleRatio;
-        _scaleSpeed = scaleSpeed;
+        _scaleSpeed = 1f - Mathf.Exp(-scaleSpeed*(float)GetPhysicsProcessDeltaTime()); // Magic trick to get frame rate independant lerping
     }
 
     public void ResetScale(float scaleSpeed)
     {
         _modelTargetScale = _modelInitScale;
         _colliderTargetScale = _colliderInitScale;
-        _scaleSpeed = scaleSpeed;
+        _scaleSpeed = 1f - Mathf.Exp(-scaleSpeed*(float)GetPhysicsProcessDeltaTime()); // Magic trick to get frame rate independant lerping
     }
 }

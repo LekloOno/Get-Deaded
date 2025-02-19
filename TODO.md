@@ -11,3 +11,5 @@ Prevent Crouch clipping
 
 Add Slide force
 ~~Make so velocity is not projected on floor plane when sliding (slides faster downward, slower upward)~~
+
+Lerping is now frame rate independant, maybe use a similar method for the drag ?
