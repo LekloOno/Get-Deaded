@@ -18,6 +18,7 @@ public partial class PM_VelocityCache : Resource
 
     private Vector3 UseCacheOr(Vector3 velocity)
     {
+        GD.Print("caca");
         Vector3 outputVel = TestVelocity(velocity);
         _cachedVelocity = Vector3.Zero;
         _cachedTime = 0;
@@ -77,6 +78,6 @@ public partial class PM_VelocityCache : Resource
         if (wasInWall)
             return UseCacheOr(velocity);
 
-        return velocity;
+        return grounded ? controller.Velocity : controller.RealVelocity;
     }
 }
