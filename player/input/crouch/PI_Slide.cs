@@ -42,8 +42,9 @@ public partial class PI_Slide : Node, PI_CrouchDerived
         }
     }
 
-    private bool StartFastEnough() { return Controller.RealVelocity.Length() >= SlideMinSpeed; }
-    private bool HoldFastEnough() { return Controller.RealVelocity.Length() >= HoldSlideMinSpeed; }
+    private bool StartFastEnough() => Controller.RealVelocity.Length() >= SlideMinSpeed;
+    private bool HoldFastEnough() => Controller.RealVelocity.Length() >= HoldSlideMinSpeed;
+
     public void KeyUp()
     {
         // Can consume if
@@ -59,12 +60,7 @@ public partial class PI_Slide : Node, PI_CrouchDerived
         }
     }
 
-    public override void _PhysicsProcess(double delta)
-    {
-        OnPhysics?.Invoke(this, EventArgs.Empty);
-        // Virtually propagate to crouch if sliding and not fast enough
-        
-    }
+    public override void _PhysicsProcess(double delta) => OnPhysics?.Invoke(this, EventArgs.Empty);
 
     private void CheckSpeed(object sender, EventArgs e)
     {

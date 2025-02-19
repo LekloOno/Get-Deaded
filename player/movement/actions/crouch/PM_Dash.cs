@@ -26,14 +26,6 @@ public partial class PM_Dash : Node
         DashInput.OnStartInput += StartDash;
         GroundState.OnLanding += Reset;
     }
-    public override void _PhysicsProcess(double delta)
-    {
-        // To implement
-    }
-    public override void _Process(double delta)
-    {
-        // To implement
-    }
 
     public void StartDash(object sender, EventArgs e)
     {

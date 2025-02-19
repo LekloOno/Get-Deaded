@@ -26,10 +26,7 @@ public partial class PI_Sprint : Node
             HandleSimple(@event);
     }
 
-    public void Reset()
-    {
-        _active = false;
-    }
+    public void Reset() => _active = false;
 
     private void HandleHold(InputEvent @event)
     {

@@ -4,7 +4,6 @@ using Godot;
 [GlobalClass]
 public partial class PM_SurfaceState : Node
 {
-    // [Export] public PM_Crouch CrouchHandler {get; private set;}
     [Export] public PM_SurfaceStateData StateData {get; private set;}
     [Export] public PI_Sprint SprintInput {get; private set;}
     [Export] public PM_Crouch Crouch {get; private set;}
@@ -24,8 +23,5 @@ public partial class PM_SurfaceState : Node
         Slide.OnStop += (o, e) => CurrentData = StateData.Normal;
     }
 
-    public void SetCrouch(object sender, EventArgs e)
-    {
-        CurrentData = StateData.Crouch;
-    }
+    public void SetCrouch(object sender, EventArgs e) => CurrentData = StateData.Crouch;
 }

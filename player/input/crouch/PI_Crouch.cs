@@ -26,12 +26,6 @@ public partial class PI_Crouch : Node, PI_CrouchDerived
             StopCrouching();
     }
 
-    public override void _Ready()
-    {
-        //Jump.OnJump += (o, f) => StopSprinting();
-        //WalkInput.OnStopOrBackward += (o, f) => StopSprinting();
-    }
-
     public void Reset()
     {
         IsActive = false;

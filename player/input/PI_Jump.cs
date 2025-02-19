@@ -13,20 +13,15 @@ public partial class PI_Jump : Node
     public override void _UnhandledKeyInput(InputEvent @event)
     {
         if (@event.IsActionPressed("jump"))
-        {
             _lastJumpInput = Time.GetTicksMsec();
-        }
     }
-
-    public void SetLastJumped()
-    {
-        LastJumped = Time.GetTicksMsec();
-    }
-
+    
     public bool UseBuffer()
     {
         bool wasBuffered = Time.GetTicksMsec() - _lastJumpInput < BufferWindow;
         _lastJumpInput = 0;
         return wasBuffered;
     }
+
+    public void SetLastJumped() => LastJumped = Time.GetTicksMsec();
 }

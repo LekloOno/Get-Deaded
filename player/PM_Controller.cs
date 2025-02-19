@@ -12,8 +12,8 @@ public partial class PM_Controller : CharacterBody3D
     [Export] public float DashStrength = 10f;
     //[Export] public PM_StepClimb StepClimb {get; private set;}
 
-    public PH_ForcesCache AdditionalForces {get; private set;} = new PH_ForcesCache();  // To allow external entities to apply additional forces.
-    public PH_ForcesCache TakeOverForces {get; private set;} = new PH_ForcesCache();    // To allow external entities to take over the movement behavior.
+    public PHX_ForcesCache AdditionalForces {get; private set;} = new PHX_ForcesCache();  // To allow external entities to apply additional forces.
+    public PHX_ForcesCache TakeOverForces {get; private set;} = new PHX_ForcesCache();    // To allow external entities to take over the movement behavior.
     public Vector3 RealVelocity {get; set;}
     
     public const float Speed = 5.0f;

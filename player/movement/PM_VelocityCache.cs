@@ -29,10 +29,7 @@ public partial class PM_VelocityCache : Resource
         _cachedTime = Time.GetTicksMsec();
     }
 
-    public bool IsCached()
-    {
-        return Time.GetTicksMsec() - _cachedTime < CacheFrameMsec;
-    }
+    public bool IsCached() => Time.GetTicksMsec() - _cachedTime < CacheFrameMsec;
 
     public void DiscardCache()
     {

@@ -8,16 +8,8 @@ public partial class PI_CrouchDispatcher : Node
 {
     [Export] public PI_Slide SlideInput {get; private set;}
     [Export] public PI_Dash DashInput {get; private set;}
-    public EventHandler OnStartCrouching;
-    public EventHandler OnStopCrouching;
 
     private bool _active = false;
-
-    public override void _Ready()
-    {
-        //Jump.OnJump += (o, f) => StopSprinting();
-        //WalkInput.OnStopOrBackward += (o, f) => StopSprinting();
-    }
 
     public override void _UnhandledKeyInput(InputEvent @event)
     {

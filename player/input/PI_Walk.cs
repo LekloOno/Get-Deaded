@@ -18,7 +18,6 @@ public partial class PI_Walk : Node
     public override void _UnhandledKeyInput(InputEvent @event)
     {
         WalkAxis = ComputeWalkAxis();
-        GD.Print(WalkAxis);
         WishDir = ComputeWishDir();
 
         if (@event.IsActionPressed(FORWARD)
