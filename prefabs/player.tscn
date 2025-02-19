@@ -189,13 +189,14 @@ BodyScalor = NodePath("../../Body")
 WalkProcess = NodePath("../../Input/PI_Walk")
 GroundState = NodePath("../../State/PS_Grounded")
 
-[node name="PM_Dash" type="Node" parent="Movement" node_paths=PackedStringArray("DashInput", "WalkInput", "CameraControl", "Controller", "GroundState")]
+[node name="PM_Dash" type="Node" parent="Movement" node_paths=PackedStringArray("DashInput", "WalkInput", "CameraControl", "Controller", "GroundState", "LedgeClimb")]
 script = ExtResource("21_kvosw")
 DashInput = NodePath("../../Input/PI_CrouchDispatcher/PI_Dash")
 WalkInput = NodePath("../../Input/PI_Walk")
 CameraControl = NodePath("../../CameraY/Camera3D")
 Controller = NodePath("../..")
 GroundState = NodePath("../../State/PS_Grounded")
+LedgeClimb = NodePath("../PM_LedgeClimb")
 Strength = 30.0
 DashDuration = 0.15
 
@@ -204,10 +205,11 @@ script = ExtResource("22_cp0qq")
 GroundState = NodePath("../../State/PS_Grounded")
 SnapThreshold = 2.0
 
-[node name="PM_LedgeClimb" type="Node" parent="Movement" node_paths=PackedStringArray("JumpInput", "Controller", "WalkInput", "HeadCast", "ChestCast", "FootCast")]
+[node name="PM_LedgeClimb" type="Node" parent="Movement" node_paths=PackedStringArray("JumpInput", "Controller", "Dash", "WalkInput", "HeadCast", "ChestCast", "FootCast")]
 script = ExtResource("23_w6mlc")
 JumpInput = NodePath("../../Input/PI_Jump")
 Controller = NodePath("../..")
+Dash = NodePath("../PM_Dash")
 WalkInput = NodePath("../../Input/PI_Walk")
 HeadCast = NodePath("../../Body/LedgeCastHead")
 ChestCast = NodePath("../../Body/LedgeCastChest")

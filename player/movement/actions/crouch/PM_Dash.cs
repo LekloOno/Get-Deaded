@@ -9,6 +9,7 @@ public partial class PM_Dash : Node
     [Export] public PC_Control CameraControl {get; private set;}
     [Export] public PM_Controller Controller {get; private set;}
     [Export] public PS_Grounded GroundState {get; private set;}
+    [Export] public PM_LedgeClimb LedgeClimb {get; private set;}
 
     [Export(PropertyHint.Range, "0.0, 40.0")] public float Strength {get; private set;}
     [Export(PropertyHint.Range, "0.0, 1.0")] public float DashDuration {get; private set;}
@@ -29,7 +30,7 @@ public partial class PM_Dash : Node
 
     public void StartDash(object sender, EventArgs e)
     {
-        if (!_available || GroundState.IsGrounded())
+        if (!_available || GroundState.IsGrounded() || LedgeClimb.IsClimbing)
             return;
         
         if (WalkInput.WalkAxis != Vector2.Zero)
@@ -60,17 +61,22 @@ public partial class PM_Dash : Node
         _available = true;
     }
 
-    public void EndDash()
+    public void AbortDash()
     {
         Controller.TakeOverForces.RemovePersistent(_dashForce);
         _isDashing = false;
-        Controller.Velocity = _direction * _prevRealVelocity.Length();
-        Controller.RealVelocity = _direction * _prevRealVelocity.Length();
-
         if (_endDashTimer != null)
         {
             _endDashTimer.Timeout -= EndDash;
             _endDashTimer = null;
         }
+    }
+
+    private void EndDash()
+    {
+        Controller.Velocity = _direction * _prevRealVelocity.Length();
+        Controller.RealVelocity = _direction * _prevRealVelocity.Length();
+
+        AbortDash();
     }
 }

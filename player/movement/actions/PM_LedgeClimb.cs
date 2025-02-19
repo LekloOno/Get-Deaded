@@ -6,6 +6,7 @@ public partial class PM_LedgeClimb : Node
 {
     [Export] public PI_Jump JumpInput {get; private set;}
     [Export] public PM_Controller Controller {get; private set;}
+    [Export] public PM_Dash Dash {get; private set;}
     [Export] public PI_Walk WalkInput {get; private set;}
     [Export] public RayCast3D HeadCast {get; private set;}
     [Export] public RayCast3D ChestCast {get; private set;}
@@ -15,6 +16,7 @@ public partial class PM_LedgeClimb : Node
     [Export(PropertyHint.Range, "1.0,20.0")] public float ClimbSpeed {get; private set;}
     private ulong _startTime = 0;
     private bool _isClimbing = false;
+    public bool IsClimbing => _isClimbing;
     private Vector3 _force = Vector3.Zero;
     private Vector3 _prevVelocity = Vector3.Zero;
     private Vector3 _direction = Vector3.Zero;
@@ -29,6 +31,7 @@ public partial class PM_LedgeClimb : Node
     {
         if (!_isClimbing && ChestCast.IsColliding() && !HeadCast.IsColliding())
         {
+            Dash.AbortDash();
             _direction = -ChestCast.GetCollisionNormal() * 5f;
             _prevVelocity = Controller.Velocity;
             JumpInput.UseBuffer();
