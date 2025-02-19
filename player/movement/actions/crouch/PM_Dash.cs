@@ -13,6 +13,7 @@ public partial class PM_Dash : Node
 
     [Export(PropertyHint.Range, "0.0, 40.0")] public float Strength {get; private set;}
     [Export(PropertyHint.Range, "0.0, 1.0")] public float DashDuration {get; private set;}
+    [Export(PropertyHint.Range, "0.0, 1.0")] public float MinDashRatio {get; private set;}
 
     private bool _available = true;
     private bool _isDashing = false;
@@ -74,8 +75,18 @@ public partial class PM_Dash : Node
 
     private void EndDash()
     {
-        Controller.Velocity = _direction * _prevRealVelocity.Length();
-        Controller.RealVelocity = _direction * _prevRealVelocity.Length();
+        // Angle ratio -
+        // The more the dash is performed upward, the more speed you lose
+        float angleRatio = _direction.Normalized().Dot(Vector3.Up);
+        GD.Print(angleRatio);
+        angleRatio = Mathf.Max(0, angleRatio);
+
+        angleRatio = 1 + angleRatio * MinDashRatio - angleRatio;
+        
+        Vector3 outVelocity = _prevRealVelocity.Length() * angleRatio * _direction;
+
+        Controller.Velocity = outVelocity;
+        Controller.RealVelocity = outVelocity;
 
         AbortDash();
     }
