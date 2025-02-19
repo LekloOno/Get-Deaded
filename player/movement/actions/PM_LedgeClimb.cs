@@ -27,46 +27,37 @@ public partial class PM_LedgeClimb : Node
     private Vector3 _prevVelocity = Vector3.Zero;
     private Vector3 _direction = Vector3.Zero;
 
-    public override void _Ready()
-    {
-        SetPhysicsProcess(false);
-        //JumpInput.OnStartInput += TryLedgeClimb;
-    }
-
-    private void TryLedgeClimb(object sender, EventArgs e)
-    {
-        if (!_isClimbing && ChestCast.IsColliding() && !HeadCast.IsColliding())
-        {
-            Dash.AbortDash();
-            _direction = -ChestCast.GetCollisionNormal() * 5f;
-            _prevVelocity = Controller.Velocity;
-            JumpInput.UseBuffer();
-            _startTime = Time.GetTicksMsec();
-            _force = new Vector3(_direction.X, ClimbSpeed, _direction.Z);
-            Controller.TakeOverForces.AddPersistent(_force);
-            SetPhysicsProcess(true);
-            _isClimbing = true;
-        }
-    }
+    public override void _Ready() => SetPhysicsProcess(false);
+    public override void _PhysicsProcess(double delta) => Climb();
 
     public Vector3 LedgeClimb(Vector3 velocity)
     {
-        if (!_isClimbing && ChestCast.IsColliding() && !HeadCast.IsColliding() && JumpInput.UseBuffer())
-        {
-            Dash.AbortDash();
-            _direction = -ChestCast.GetCollisionNormal();
-            _prevVelocity = Controller.Velocity;
-            JumpInput.UseBuffer();
-            _startTime = Time.GetTicksMsec();
-            _force = new Vector3(_direction.X, ClimbSpeed, _direction.Z);
-            Controller.TakeOverForces.AddPersistent(_force);
-            SetPhysicsProcess(true);
-            _isClimbing = true;
-        }
-        return Jump.Jump(velocity);
+        if (_isClimbing)        // Shouldn't happen ? to verify - might not neeed is climbing anymore
+            return velocity;
+
+        if (!ChestCast.IsColliding() || HeadCast.IsColliding())
+            return Jump.Jump(velocity); // Propagate to Jump
+
+        if (JumpInput.UseBuffer())
+            DoLedgeClimb();             // Do it !
+
+        return velocity;
     }
 
-    public override void _PhysicsProcess(double delta) => Climb();
+    private void DoLedgeClimb()
+    {
+            _startTime = Time.GetTicksMsec();
+            _prevVelocity = Controller.Velocity;
+            Dash.AbortDash();
+
+            _direction = -ChestCast.GetCollisionNormal();
+            _force = new Vector3(_direction.X*1.5f, ClimbSpeed, _direction.Z*1.5f);
+            
+            Controller.TakeOverForces.AddPersistent(_force);
+            _isClimbing = true;
+            SetPhysicsProcess(true);
+    }
+
 
     private void Climb()
     {
@@ -83,11 +74,11 @@ public partial class PM_LedgeClimb : Node
         Vector3 minOut = new(_direction.X, 1f, _direction.Z);
 
         Vector3 outVelocity = _prevVelocity;
-        outVelocity = outVelocity.Max(minOut);
+        outVelocity = outVelocity.Max(minOut.Abs());
+        outVelocity *= minOut.Sign();
         
         if (Time.GetTicksMsec() - CrouchInput.LastCrouchDown < SuperGlideWindow)
         {
-            GD.Print("Superglide !");
             outVelocity += _direction * SuperGlideXStrength;
             outVelocity.Y = SuperGlideYStrength;
         }

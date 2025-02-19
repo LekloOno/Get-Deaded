@@ -202,7 +202,7 @@ Controller = NodePath("../..")
 GroundState = NodePath("../../State/PS_Grounded")
 LedgeClimb = NodePath("../PM_LedgeClimb")
 Strength = 30.0
-DashDuration = 0.15
+DashDuration = 0.1
 
 [node name="PM_StraffeSnap" type="Node" parent="Movement" node_paths=PackedStringArray("GroundState")]
 script = ExtResource("22_cp0qq")
