@@ -4,6 +4,7 @@ using Godot;
 [GlobalClass]
 public partial class PM_Slide : PM_Action
 {
+    [Export] public PM_Controller Controller {get; private set;}
     [Export] public PI_Slide SlideInput {get; private set;}
     [Export] public PB_Scale BodyScalor {get; private set;}
     [Export(PropertyHint.Range, "0.0, 10.0")] public float ScaleSpeed;
@@ -27,18 +28,21 @@ public partial class PM_Slide : PM_Action
 
     public void StartSlide()
     {
+        Controller.FloorConstantSpeed = false;
         BodyScalor.SetTargetScale(TargetScaleRatio, ScaleSpeed);
         OnStart?.Invoke(this, EventArgs.Empty);
     }
 
     public void StopSlide()
     {
+        Controller.FloorConstantSpeed = true;
         BodyScalor.ResetScale(ResetScaleSpeed);
         OnStop?.Invoke(this, EventArgs.Empty);
     }
 
     public void SlowStop()
     {
+        Controller.FloorConstantSpeed = true;
         OnSlowStop?.Invoke(this, EventArgs.Empty);
     }
 }

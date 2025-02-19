@@ -166,8 +166,9 @@ TargetScaleRatio = 0.6
 WalkProcess = NodePath("../../Input/PI_Walk")
 GroundState = NodePath("../../State/PS_Grounded")
 
-[node name="PM_Slide" type="Node" parent="Movement" node_paths=PackedStringArray("SlideInput", "BodyScalor", "WalkProcess", "GroundState")]
+[node name="PM_Slide" type="Node" parent="Movement" node_paths=PackedStringArray("Controller", "SlideInput", "BodyScalor", "WalkProcess", "GroundState")]
 script = ExtResource("20_5y6qm")
+Controller = NodePath("../..")
 SlideInput = NodePath("../../Input/PI_CrouchDispatcher/PI_Slide")
 BodyScalor = NodePath("../../Body")
 ScaleSpeed = 10.0

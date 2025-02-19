@@ -10,4 +10,4 @@ Prevent Crouch clipping
 ~~Implement Slide~~
 
 Add Slide force
-Make so velocity is not projected on floor plane when sliding (slides faster downward, slower upward)
+~~Make so velocity is not projected on floor plane when sliding (slides faster downward, slower upward)~~
