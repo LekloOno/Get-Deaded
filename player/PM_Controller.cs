@@ -3,7 +3,7 @@ using Godot;
 public partial class PM_Controller : CharacterBody3D
 {
     [Export] public PI_Walk WalkProcess {get; private set;}
-    [Export] public PM_Jump Jump {get; private set;}
+    [Export] public PM_WallJump WallJump {get; private set;}
     [Export] public PS_Grounded GroundState {get; private set;}
     [Export] public PC_Control CameraControl {get; private set;}
     [Export] public PM_SurfaceControl SurfaceControl {get; private set;}
@@ -61,7 +61,7 @@ public partial class PM_Controller : CharacterBody3D
             }
 
 
-            velocity = Jump.Jump(velocity);
+            velocity = WallJump.WallJump(velocity);
             velocity = SurfaceControl.ApplyDrag(velocity, delta);
             velocity += SurfaceControl.Accelerate(velocity, (float)delta);
             velocity += AdditionalForces.Consume();

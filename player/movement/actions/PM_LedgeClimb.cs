@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using Godot;
 
 [GlobalClass]
@@ -9,6 +10,7 @@ public partial class PM_LedgeClimb : Node
     [Export] public PI_Walk WalkInput {get; private set;}
     [Export] public PM_Controller Controller {get; private set;}
     [Export] public PM_Dash Dash {get; private set;}
+    [Export] public PM_Jump Jump {get; private set;}
     [Export] public RayCast3D HeadCast {get; private set;}
     [Export] public RayCast3D ChestCast {get; private set;}
     [Export] public RayCast3D FootCast {get; private set;}
@@ -28,7 +30,7 @@ public partial class PM_LedgeClimb : Node
     public override void _Ready()
     {
         SetPhysicsProcess(false);
-        JumpInput.OnStartInput += TryLedgeClimb;
+        //JumpInput.OnStartInput += TryLedgeClimb;
     }
 
     private void TryLedgeClimb(object sender, EventArgs e)
@@ -47,6 +49,23 @@ public partial class PM_LedgeClimb : Node
         }
     }
 
+    public Vector3 LedgeClimb(Vector3 velocity)
+    {
+        if (!_isClimbing && ChestCast.IsColliding() && !HeadCast.IsColliding() && JumpInput.UseBuffer())
+        {
+            Dash.AbortDash();
+            _direction = -ChestCast.GetCollisionNormal();
+            _prevVelocity = Controller.Velocity;
+            JumpInput.UseBuffer();
+            _startTime = Time.GetTicksMsec();
+            _force = new Vector3(_direction.X, ClimbSpeed, _direction.Z);
+            Controller.TakeOverForces.AddPersistent(_force);
+            SetPhysicsProcess(true);
+            _isClimbing = true;
+        }
+        return Jump.Jump(velocity);
+    }
+
     public override void _PhysicsProcess(double delta) => Climb();
 
     private void Climb()
@@ -61,11 +80,15 @@ public partial class PM_LedgeClimb : Node
         _startTime = 0;
         Controller.TakeOverForces.RemovePersistent(_force);
 
+        Vector3 minOut = new(_direction.X, 1f, _direction.Z);
+
         Vector3 outVelocity = _prevVelocity;
+        outVelocity = outVelocity.Max(minOut);
+        
         if (Time.GetTicksMsec() - CrouchInput.LastCrouchDown < SuperGlideWindow)
         {
             GD.Print("Superglide !");
-            outVelocity += _direction.Normalized() * SuperGlideXStrength;
+            outVelocity += _direction * SuperGlideXStrength;
             outVelocity.Y = SuperGlideYStrength;
         }
 
