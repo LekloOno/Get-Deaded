@@ -48,13 +48,6 @@ public partial class PM_VelocityCache : Resource
                 Vector3 nextVel = (velocity.Y == 0)
                                         ? new Vector3(controller.RealVelocity.X, 0, controller.RealVelocity.Z)
                                         : controller.RealVelocity;
-
-                //return StepClimb.DoClimb(controller, currentTransform, nextVel, pureVelocity, wishDir, collision, controller.GetWorld3D().DirectSpaceState, delta);
-                return nextVel;
-                
-                if(velocity.Y == 0)
-                    return new Vector3(controller.RealVelocity.X, 0, controller.RealVelocity.Z);
-                return controller.RealVelocity;
             }
         }
         if (IsCached())

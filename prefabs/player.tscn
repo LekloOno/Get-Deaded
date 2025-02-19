@@ -20,9 +20,9 @@
 [ext_resource type="Resource" uid="uid://chd67e10gx4rm" path="res://player/movement/actions/jump/data/basic_jump.tres" id="13_e1cl2"]
 [ext_resource type="Script" path="res://debug/Speedometer.cs" id="14_chh26"]
 [ext_resource type="Script" path="res://debug/Grounded.cs" id="14_ih16p"]
-[ext_resource type="Script" path="res://player/movement/actions/PM_Crouch.cs" id="15_vd3v3"]
-[ext_resource type="Script" path="res://player/movement/actions/PM_Slide.cs" id="20_5y6qm"]
-[ext_resource type="Script" path="res://player/movement/actions/PM_Dash.cs" id="21_kvosw"]
+[ext_resource type="Script" path="res://player/movement/actions/crouch/PM_Crouch.cs" id="15_vd3v3"]
+[ext_resource type="Script" path="res://player/movement/actions/crouch/PM_Slide.cs" id="20_5y6qm"]
+[ext_resource type="Script" path="res://player/movement/actions/crouch/PM_Dash.cs" id="21_kvosw"]
 [ext_resource type="Script" path="res://player/movement/PM_StraffeSnap.cs" id="22_cp0qq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o274a"]

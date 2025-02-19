@@ -68,7 +68,6 @@ public partial class PM_Dash : Node
     {
         Controller.TakeOverForces.RemovePersistent(_dashForce);
         _isDashing = false;
-        GD.Print(_prevVelocity);
         Controller.Velocity = _direction * _prevRealVelocity.Length();
         Controller.RealVelocity = _direction * _prevRealVelocity.Length();
 
