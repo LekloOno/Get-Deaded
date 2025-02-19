@@ -14,6 +14,7 @@ public partial class PM_Dash : Node
     [Export(PropertyHint.Range, "0.0, 40.0")] public float Strength {get; private set;}
     [Export(PropertyHint.Range, "0.0, 1.0")] public float DashDuration {get; private set;}
     [Export(PropertyHint.Range, "0.0, 1.0")] public float MinDashRatio {get; private set;}
+    // The velocity coefficient when dashing upward. The more upward you dash, the less speed you will keep.
 
     private bool _available = true;
     private bool _isDashing = false;

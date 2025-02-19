@@ -12,6 +12,7 @@ public partial class PM_WallJump : PM_Action
     [Export(PropertyHint.Range, "0.0, 10.0")] public float Boost {get; private set;} = 1f;
     [Export(PropertyHint.Range, "0.0, 10.0")] public float MinSpeedInWall {get; private set;} = 5f;
     [Export(PropertyHint.Range, "0.0,  1.0")] public float MinBounceRatio {get; private set;} = 0.5f;
+    // The velocity coefficient when straight facing the wall. The more you're facing the wall, the less speed you will keep.
     
 
 
