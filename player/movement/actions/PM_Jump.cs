@@ -13,7 +13,7 @@ public partial class PM_Jump : PM_Action
     public Vector3 Jump(Vector3 velocity)
     {
         if (GroundState.IsGrounded() && JumpProcess.UseBuffer())
-			return DoJump(velocity);
+            return DoJump(velocity);
 
         return velocity;
     }

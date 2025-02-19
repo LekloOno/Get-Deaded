@@ -22,3 +22,4 @@ Lerping is now frame rate independant, maybe use a similar method for the drag ?
 
 Can get a lot of height with the dash, should maybe nerf that.
 
+Velocity cache still has a small bug - Since we set the velocity to real velocity, if you move backward, you're out of collision, trigger the cache so enter collision, backward, out of collision etc.. A fix is to only return the real velocity when you get out of the wall, but since the body is a capsule, it's possible that the first move collides into the wall, but move and slide manages to go past the wall ..

@@ -3,19 +3,19 @@ using System;
 
 public partial class PC_Control : Camera3D
 {
-	[Export] public float Sensitivity {get;set;} = 2.8f;
+    [Export] public float Sensitivity {get;set;} = 2.8f;
     [Export] public Node3D CameraY {get; private set;}
-	[Export] public Node3D Body {get; private set;}
+    [Export] public Node3D Body {get; private set;}
 
-	private float _realSens;
+    private float _realSens;
 
-	public override void _Ready()
-	{
-		_realSens = Sensitivity / 6500f;
-		Input.MouseMode = Input.MouseModeEnum.Captured;
-	}
+    public override void _Ready()
+    {
+        _realSens = Sensitivity / 6500f;
+        Input.MouseMode = Input.MouseModeEnum.Captured;
+    }
 
-	public override void _UnhandledInput(InputEvent @event)
+    public override void _UnhandledInput(InputEvent @event)
     {
         if (@event is InputEventMouseMotion mouseMotion)
         {

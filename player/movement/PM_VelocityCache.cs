@@ -8,8 +8,7 @@ public partial class PM_VelocityCache : Resource
     private bool _inWall = false;
 
     public Vector3 UseCache()
-    {   
-        
+    {
         Vector3 outputVel = IsCached() ? _cachedVelocity : Vector3.Zero;
         _cachedVelocity = Vector3.Zero;
         _cachedTime = 0;
