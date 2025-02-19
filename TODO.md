@@ -3,7 +3,7 @@
 
 ~~Jump should override grounded state to prevent friction to apply~~
 
-Handle properly the velocity cache.
+~~Handle properly the velocity cache.~~
 
 Prevent Crouch clipping
 

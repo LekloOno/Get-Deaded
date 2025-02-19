@@ -49,20 +49,9 @@ public partial class PM_Controller : CharacterBody3D
         // Collide and slide OR Step climber
 
         Vector3 pos = GlobalPosition;
-
-        
-        
-        //Vector3 velocity = VelocityCache.IsCached() ? VelocityCache.UseCache() : Velocity;
-
-        // Add the gravity.
-        
-
-        // Handle Jump.
         if (TakeOverForces.IsEmpty())
         {
-            Vector3 velocity = GroundState.IsGrounded() ? Velocity : RealVelocity;
-            //Vector3 velocity = Velocity;
-            velocity = VelocityCache.GetVelocity(this, velocity, Velocity, delta);
+            Vector3 velocity = VelocityCache.GetVelocity(this, Velocity, GroundState.IsGrounded(), delta);
 
             Vector3 prevVelocity = velocity;
             
@@ -87,42 +76,7 @@ public partial class PM_Controller : CharacterBody3D
             Velocity = TakeOverForces.Consume();
         }
 
-    /*
-        if (!StepClimb.Climb(this, velocity, WalkProcess.WishDir, VelocityCache, GetWorld3D().DirectSpaceState, delta))
-        {
-            if (!GroundState.IsGrounded())
-            {
-                velocity += GetGravity() * (float)delta;
-            }
-
-            Velocity = velocity;
-            MoveAndSlide();
-        }*/
-
         MoveAndSlide();
         RealVelocity = (GlobalPosition - pos)/(float)delta;
-
-        
-/*
-        if (IsOnWall())
-        {
-            if(!VelocityCache.IsCached()) VelocityCache.Cache(velocity);
-            
-            if(velocity.Y == 0)
-            {
-                Velocity = new Vector3(RealVelocity.X, 0, RealVelocity.Z);
-            }
-            else
-            {
-                Velocity = RealVelocity;
-            }
-        }*/
-
-        //velocity = StepClimb.Climb(this, velocity, WalkProcess.WishDir, VelocityCache, GetWorld3D().DirectSpaceState, delta);
-        //velocity = StepClimb.ProcessClimbAndSlides(this, velocity, WalkProcess.WishDir, VelocityCache, GetWorld3D().DirectSpaceState, delta);
-        //Velocity = velocity;
-        //MoveAndSlide();
-
-        
     }
 }

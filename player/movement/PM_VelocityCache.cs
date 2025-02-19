@@ -3,13 +3,23 @@ using Godot;
 public partial class PM_VelocityCache : Resource
 {
     [Export] public ulong CacheFrameMsec {get; private set;} = 200;
-    //[Export] public PM_StepClimb StepClimb {get; private set;}
     private Vector3 _cachedVelocity = Vector3.Zero;
     private ulong _cachedTime = 0;
+    private bool _inWall = false;
 
     public Vector3 UseCache()
     {   
+        
         Vector3 outputVel = IsCached() ? _cachedVelocity : Vector3.Zero;
+        _cachedVelocity = Vector3.Zero;
+        _cachedTime = 0;
+        
+        return outputVel;
+    }
+
+    private Vector3 UseCacheOr(Vector3 velocity)
+    {
+        Vector3 outputVel = TestVelocity(velocity);
         _cachedVelocity = Vector3.Zero;
         _cachedTime = 0;
         
@@ -24,34 +34,49 @@ public partial class PM_VelocityCache : Resource
 
     public bool IsCached()
     {
-        //return false;
         return Time.GetTicksMsec() - _cachedTime < CacheFrameMsec;
     }
 
-    public Vector3 GetVelocity(PM_Controller controller, Vector3 velocity, Vector3 pureVelocity, double delta)
+    public Vector3 TestVelocity(Vector3 velocity)
+    {
+        if (IsCached())
+        {
+            Vector3 output = _cachedVelocity;
+            output.Y = velocity.Y;
+            return output;
+        }
+        return velocity;
+    }
+
+    public Vector3 GetVelocity(PM_Controller controller, Vector3 velocity, bool grounded, double delta)
     {
         Transform3D currentTransform = controller.GlobalTransform;
         KinematicCollision3D collision = new();
 
-        if (controller.TestMove(
-                currentTransform,
-                pureVelocity * (float)delta,
-                collision,
-                controller.SafeMargin,
-                true)
-            )
-        {
-            if(collision.GetAngle(0, controller.UpDirection) > controller.FloorMaxAngle)
-            {
-                if (!IsCached()) Cache(pureVelocity);
+        Vector3 testVelocity = TestVelocity(velocity);
 
-                Vector3 nextVel = (velocity.Y == 0)
-                                        ? new Vector3(controller.RealVelocity.X, 0, controller.RealVelocity.Z)
-                                        : controller.RealVelocity;
+        bool wasInWall = _inWall;
+        bool collideNext = controller.TestMove(
+                                currentTransform,
+                                testVelocity * (float)delta,
+                                collision,
+                                controller.SafeMargin,
+                                true);
+
+        if (collideNext)
+        {
+            _inWall = collision.GetAngle(0, controller.UpDirection) > controller.FloorMaxAngle;
+            if(_inWall)
+            {
+                if (!wasInWall) Cache(velocity);
+                return grounded ? controller.Velocity : controller.RealVelocity;
             }
         }
-        if (IsCached())
-            return UseCache();
+
+        _inWall = false;
+
+        if (wasInWall)
+            return UseCacheOr(velocity);
 
         return velocity;
     }
