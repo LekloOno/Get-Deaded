@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cmpcqmaf25qcu"]
+[gd_scene load_steps=30 format=3 uid="uid://cmpcqmaf25qcu"]
 
 [ext_resource type="Script" path="res://player/PM_Controller.cs" id="1_7ruml"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_seqbe"]
@@ -25,6 +25,7 @@
 [ext_resource type="Script" path="res://player/movement/actions/crouch/PM_Dash.cs" id="21_kvosw"]
 [ext_resource type="Script" path="res://player/movement/PM_StraffeSnap.cs" id="22_cp0qq"]
 [ext_resource type="Script" path="res://player/movement/actions/PM_LedgeClimb.cs" id="23_w6mlc"]
+[ext_resource type="Script" path="res://player/movement/actions/PM_WallJump.cs" id="24_gjg6k"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o274a"]
 radius = 0.25
@@ -79,16 +80,19 @@ update_scale = false
 mesh = SubResource("CapsuleMesh_qcifk")
 skeleton = NodePath("../../..")
 
-[node name="LedgeCastFoot" type="RayCast3D" parent="Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0)
+[node name="WallJumpCast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+target_position = Vector3(0, 0, -0.6)
+
+[node name="LedgeCastFoot" type="RayCast3D" parent="."]
 target_position = Vector3(0, 0, -0.8)
 
-[node name="LedgeCastHead" type="RayCast3D" parent="Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.780448, 0)
+[node name="LedgeCastHead" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68045, 0)
 target_position = Vector3(0, 0, -1.2)
 
-[node name="LedgeCastChest" type="RayCast3D" parent="Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+[node name="LedgeCastChest" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 target_position = Vector3(0, 0, -0.8)
 
 [node name="GroundCast" type="ShapeCast3D" parent="."]
@@ -164,10 +168,11 @@ SprintInput = NodePath("../../../Input/PI_Sprint")
 Crouch = NodePath("../../PM_Crouch")
 Slide = NodePath("../../PM_Slide")
 
-[node name="PM_Jump" type="Node" parent="Movement" node_paths=PackedStringArray("JumpProcess", "WalkProcess", "GroundState")]
+[node name="PM_Jump" type="Node" parent="Movement" node_paths=PackedStringArray("JumpProcess", "WallJump", "WalkProcess", "GroundState")]
 script = ExtResource("11_edsm7")
 JumpProcess = NodePath("../../Input/PI_Jump")
 Data = ExtResource("13_e1cl2")
+WallJump = NodePath("../PM_WallJump")
 WalkProcess = NodePath("../../Input/PI_Walk")
 GroundState = NodePath("../../State/PS_Grounded")
 
@@ -212,14 +217,24 @@ CrouchInput = NodePath("../../Input/PI_CrouchDispatcher")
 WalkInput = NodePath("../../Input/PI_Walk")
 Controller = NodePath("../..")
 Dash = NodePath("../PM_Dash")
-HeadCast = NodePath("../../Body/LedgeCastHead")
-ChestCast = NodePath("../../Body/LedgeCastChest")
-FootCast = NodePath("../../Body/LedgeCastFoot")
+HeadCast = NodePath("../../LedgeCastHead")
+ChestCast = NodePath("../../LedgeCastChest")
+FootCast = NodePath("../../LedgeCastFoot")
 MaxClimbTime = 2.0
 ClimbSpeed = 5.0
-SuperGlideWindow = 100
+SuperGlideWindow = 50
 SuperGlideYStrength = 4.0
 SuperGlideXStrength = 8.0
+
+[node name="PM_WallJump" type="Node" parent="Movement" node_paths=PackedStringArray("JumpInput", "Controller", "WallCast", "WalkProcess", "GroundState")]
+script = ExtResource("24_gjg6k")
+JumpInput = NodePath("../../Input/PI_Jump")
+Controller = NodePath("../..")
+WallCast = NodePath("../../WallJumpCast")
+MinSpeedInWall = 2.0
+MinBounceRatio = 0.7
+WalkProcess = NodePath("../../Input/PI_Walk")
+GroundState = NodePath("../../State/PS_Grounded")
 
 [node name="Label" type="Label" parent="." node_paths=PackedStringArray("Controller")]
 anchors_preset = 8
