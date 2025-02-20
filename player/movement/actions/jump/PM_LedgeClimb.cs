@@ -48,16 +48,19 @@ public partial class PM_LedgeClimb : PM_Action
 
     private void DoLedgeClimb()
     {
-            _startTime = Time.GetTicksMsec();
-            _prevVelocity = _controller.Velocity;
-            _dash.AbortDash();
+        _startTime = Time.GetTicksMsec();
+        _prevVelocity = _controller.Velocity;
+        _dash.AbortDash();
 
-            _direction = -_chestCast.GetCollisionNormal();
-            _force = new Vector3(_direction.X*1.5f, _climbSpeed, _direction.Z*1.5f);
-            
-            _controller.TakeOverForces.AddPersistent(_force);
-            _isClimbing = true;
-            SetPhysicsProcess(true);
+        _direction = -_chestCast.GetCollisionNormal();
+        _force = new Vector3(_direction.X*1.5f, _climbSpeed, _direction.Z*1.5f);
+        
+        _controller.TakeOverForces.AddPersistent(_force);
+        _isClimbing = true;
+
+        OnStart?.Invoke(this, EventArgs.Empty);
+
+        SetPhysicsProcess(true);
     }
 
 

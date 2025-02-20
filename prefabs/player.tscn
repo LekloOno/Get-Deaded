@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cmpcqmaf25qcu"]
+[gd_scene load_steps=37 format=3 uid="uid://cmpcqmaf25qcu"]
 
 [ext_resource type="Script" path="res://player/PM_Controller.cs" id="1_7ruml"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_seqbe"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" path="res://player/input/crouch/PI_Dash.cs" id="8_34n6f"]
 [ext_resource type="Script" path="res://player/movement/actions/surface-control/PM_SurfaceState.cs" id="8_fhtxi"]
 [ext_resource type="Script" path="res://player/camera/PC_SlideTilt.cs" id="8_s0wjl"]
+[ext_resource type="Script" path="res://player/camera/PC_SlideLedgeAnim.cs" id="9_4qub8"]
 [ext_resource type="Resource" uid="uid://dn58omqab4s1u" path="res://player/movement/actions/surface-control/data/ground.tres" id="9_ikaaj"]
 [ext_resource type="Script" path="res://player/input/crouch/PI_Slide.cs" id="9_px05h"]
 [ext_resource type="Resource" uid="uid://ca5w3yr3ia7ao" path="res://player/movement/actions/surface-control/data/air.tres" id="10_53m5n"]
@@ -31,6 +32,11 @@
 [ext_resource type="Script" path="res://player/movement/PM_StraffeSnap.cs" id="22_cp0qq"]
 [ext_resource type="Script" path="res://player/movement/actions/jump/PM_LedgeClimb.cs" id="23_w6mlc"]
 [ext_resource type="Script" path="res://player/movement/actions/jump/PM_WallJump.cs" id="24_gjg6k"]
+
+[sub_resource type="Curve" id="Curve_ux8de"]
+min_value = -0.5
+_data = [Vector2(0, 0.15), 0.0, 0.105575, 0, 0, Vector2(0.2, 0.7), 2.83587, 2.83587, 0, 0, Vector2(0.623762, 0.571429), -4.19677, -4.19677, 0, 0, Vector2(0.856, -0.15), 0.0, 0.0, 0, 0, Vector2(1, 0), 1.04167, 0.0, 1, 0]
+point_count = 5
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o274a"]
 radius = 0.25
@@ -84,14 +90,25 @@ _controller = NodePath("../../../../..")
 
 [node name="PC_SlideTilt" type="Node3D" parent="CameraPivot/PC_SprintLean/PC_Spring/PC_Lean/PC_Bobbing" node_paths=PackedStringArray("_cameraControl", "_controller", "_surfaceGroundState")]
 script = ExtResource("8_s0wjl")
-_slideTiltingAngle = 0.01
-_slideTiltingSpeed = 5.0
-_slideTiltingResetSpeed = 5.0
 _cameraControl = NodePath("../../../../..")
 _controller = NodePath("../../../../../..")
 _surfaceGroundState = NodePath("../../../../../../Movement/PM_SurfaceControl/GroundState")
 
-[node name="Camera3D" type="Camera3D" parent="CameraPivot/PC_SprintLean/PC_Spring/PC_Lean/PC_Bobbing/PC_SlideTilt"]
+[node name="PC_SlideLedgeAnim" type="Node3D" parent="CameraPivot/PC_SprintLean/PC_Spring/PC_Lean/PC_Bobbing/PC_SlideTilt" node_paths=PackedStringArray("_groundState", "_cameraControl", "_controller", "_groundSurfaceState", "_ledgeClimb")]
+script = ExtResource("9_4qub8")
+_curve = SubResource("Curve_ux8de")
+_slideStrengthX = 3.0
+_slideStrengthZ = 1.5
+_ledgeStrengthX = 8.0
+_ledgeStrengthZ = 4.0
+_duration = 0.8
+_groundState = NodePath("../../../../../../../State/PS_Grounded")
+_cameraControl = NodePath("../../../../../..")
+_controller = NodePath("../../../../../../..")
+_groundSurfaceState = NodePath("../../../../../../../Movement/PM_SurfaceControl/GroundState")
+_ledgeClimb = NodePath("../../../../../../../Movement/Actions/Jump/PM_LedgeClimb")
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot/PC_SprintLean/PC_Spring/PC_Lean/PC_Bobbing/PC_SlideTilt/PC_SlideLedgeAnim"]
 fov = 103.0
 
 [node name="Body" type="CollisionShape3D" parent="." node_paths=PackedStringArray("_modelAnchor")]
@@ -228,11 +245,13 @@ _jump = NodePath("../PM_Jump")
 _headCast = NodePath("../../../../LedgeCastHead")
 _chestCast = NodePath("../../../../LedgeCastChest")
 _footCast = NodePath("../../../../LedgeCastFoot")
+_climbSpeed = 4.0
 
-[node name="PM_WallJump" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_jumpInput", "_controller", "_ledgeClimb", "_wallCastLow", "_wallCastHigh")]
+[node name="PM_WallJump" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_jumpInput", "_controller", "_groundState", "_ledgeClimb", "_wallCastLow", "_wallCastHigh")]
 script = ExtResource("24_gjg6k")
 _jumpInput = NodePath("../../../../Input/PI_Jump")
 _controller = NodePath("../../../..")
+_groundState = NodePath("../../../../State/PS_Grounded")
 _ledgeClimb = NodePath("../PM_LedgeClimb")
 _wallCastLow = NodePath("../../../../WallJumpCastLow")
 _wallCastHigh = NodePath("../../../../WallJumpCastHigh")

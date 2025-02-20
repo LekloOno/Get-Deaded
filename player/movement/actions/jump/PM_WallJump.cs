@@ -7,6 +7,7 @@ public partial class PM_WallJump : PM_Action
     
     [Export] private PI_Jump _jumpInput;
     [Export] private PM_Controller _controller;
+    [Export] private PS_Grounded _groundState;
     [Export] private PM_LedgeClimb _ledgeClimb;
     [Export] private RayCast3D _wallCastLow;
     [Export] private RayCast3D _wallCastHigh;
@@ -20,6 +21,9 @@ public partial class PM_WallJump : PM_Action
     {
         if (!_jumpInput.IsBuffered())
             return velocity;            // Nothing to do
+
+        if(_groundState.IsGrounded())
+            return _ledgeClimb.LedgeClimb(velocity); // Propagate to Ledge
 
         Vector3 normal = new();
         if (!IsCollidingWall(ref normal))
@@ -63,7 +67,6 @@ public partial class PM_WallJump : PM_Action
 
         if(_wallCastHigh.IsColliding())
         {
-            GD.Print("high");
             normal = _wallCastHigh.GetCollisionNormal();
             return true;
         }
