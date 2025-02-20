@@ -165,12 +165,12 @@ _groundCast = NodePath("../../GroundCast")
 
 [node name="Movement" type="Node" parent="."]
 
-[node name="PM_SurfaceControl" type="Node" parent="Movement" node_paths=PackedStringArray("_ground", "_air", "_walkProcess", "_groundState")]
+[node name="PM_SurfaceControl" type="Node" parent="Movement" node_paths=PackedStringArray("_walkInput", "_groundState", "_ground", "_air")]
 script = ExtResource("7_msb5j")
+_walkInput = NodePath("../../Input/PI_Walk")
+_groundState = NodePath("../../State/PS_Grounded")
 _ground = NodePath("GroundState")
 _air = NodePath("AirState")
-_walkProcess = NodePath("../../Input/PI_Walk")
-_groundState = NodePath("../../State/PS_Grounded")
 
 [node name="GroundState" type="Node" parent="Movement/PM_SurfaceControl" node_paths=PackedStringArray("_sprintInput", "_crouch", "_slide")]
 script = ExtResource("8_fhtxi")
@@ -195,11 +195,10 @@ SnapThreshold = 2.0
 
 [node name="Jump" type="Node" parent="Movement/Actions"]
 
-[node name="PM_Jump" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_jumpInput", "_walkProcess", "_groundState")]
+[node name="PM_Jump" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_jumpInput", "_groundState")]
 script = ExtResource("11_edsm7")
 _jumpInput = NodePath("../../../../Input/PI_Jump")
 _data = ExtResource("13_e1cl2")
-_walkProcess = NodePath("../../../../Input/PI_Walk")
 _groundState = NodePath("../../../../State/PS_Grounded")
 
 [node name="PM_LedgeClimb" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_jumpInput", "_crouchInput", "_walkInput", "_controller", "_dash", "_jump", "_headCast", "_chestCast", "_footCast")]
@@ -214,32 +213,27 @@ _headCast = NodePath("../../../../LedgeCastHead")
 _chestCast = NodePath("../../../../LedgeCastChest")
 _footCast = NodePath("../../../../LedgeCastFoot")
 
-[node name="PM_WallJump" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_jumpInput", "_controller", "_ledgeClimb", "_wallCastLow", "_wallCastHigh", "_walkProcess", "_groundState")]
+[node name="PM_WallJump" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_jumpInput", "_controller", "_ledgeClimb", "_wallCastLow", "_wallCastHigh")]
 script = ExtResource("24_gjg6k")
 _jumpInput = NodePath("../../../../Input/PI_Jump")
 _controller = NodePath("../../../..")
 _ledgeClimb = NodePath("../PM_LedgeClimb")
 _wallCastLow = NodePath("../../../../WallJumpCastLow")
 _wallCastHigh = NodePath("../../../../WallJumpCastHigh")
-_walkProcess = NodePath("../../../../Input/PI_Walk")
-_groundState = NodePath("../../../../State/PS_Grounded")
 
 [node name="Crouch" type="Node" parent="Movement/Actions"]
 
-[node name="PM_Crouch" type="Node" parent="Movement/Actions/Crouch" node_paths=PackedStringArray("_crouchInput", "_codyScalor", "_walkProcess", "_groundState")]
+[node name="PM_Crouch" type="Node" parent="Movement/Actions/Crouch" node_paths=PackedStringArray("_crouchInput", "_codyScalor")]
 script = ExtResource("15_vd3v3")
 _crouchInput = NodePath("../../../../Input/PI_CrouchDispatcher/PI_Slide/PI_Crouch")
 _codyScalor = NodePath("../../../../Body")
-_walkProcess = NodePath("../../../../Input/PI_Walk")
-_groundState = NodePath("../../../../State/PS_Grounded")
 
-[node name="PM_Slide" type="Node" parent="Movement/Actions/Crouch" node_paths=PackedStringArray("_controller", "_slideInput", "_bodyScalor", "_walkProcess", "_groundState")]
+[node name="PM_Slide" type="Node" parent="Movement/Actions/Crouch" node_paths=PackedStringArray("_slideInput", "_controller", "_groundState", "_bodyScalor")]
 script = ExtResource("20_5y6qm")
-_controller = NodePath("../../../..")
 _slideInput = NodePath("../../../../Input/PI_CrouchDispatcher/PI_Slide")
-_bodyScalor = NodePath("../../../../Body")
-_walkProcess = NodePath("../../../../Input/PI_Walk")
+_controller = NodePath("../../../..")
 _groundState = NodePath("../../../../State/PS_Grounded")
+_bodyScalor = NodePath("../../../../Body")
 
 [node name="PM_Dash" type="Node" parent="Movement/Actions/Crouch" node_paths=PackedStringArray("_dashInput", "_walkInput", "_cameraControl", "_controller", "_groundState", "_ledgeClimb", "_wallJump")]
 script = ExtResource("21_kvosw")
