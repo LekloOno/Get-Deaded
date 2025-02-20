@@ -62,7 +62,6 @@ _body = NodePath("..")
 
 [node name="PC_Spring" type="Node3D" parent="CameraPivot" node_paths=PackedStringArray("_cameraTarget")]
 script = ExtResource("3_iyr31")
-AngularDisplacement = 6.0
 _cameraTarget = NodePath("../../Body/SpatialAnchor/RemoteTransform3D")
 
 [node name="PC_Lean" type="Node3D" parent="CameraPivot/PC_Spring" node_paths=PackedStringArray("_camera", "_controller")]
@@ -142,17 +141,19 @@ _dashInput = NodePath("PI_Dash")
 [node name="PI_Dash" type="Node" parent="Input/PI_CrouchDispatcher"]
 script = ExtResource("8_34n6f")
 
-[node name="PI_Slide" type="Node" parent="Input/PI_CrouchDispatcher" node_paths=PackedStringArray("_controller", "_groundState", "_crouchInput", "_sprintInput")]
+[node name="PI_Slide" type="Node" parent="Input/PI_CrouchDispatcher" node_paths=PackedStringArray("_crouchDispatcher", "_controller", "_groundState", "_crouchInput", "_sprintInput")]
 script = ExtResource("9_px05h")
+_slideMinSpeed = 6.0
+_holdSlideMinSpeed = 3.0
+_crouchDispatcher = NodePath("..")
 _controller = NodePath("../../..")
 _groundState = NodePath("../../../State/PS_Grounded")
 _crouchInput = NodePath("PI_Crouch")
 _sprintInput = NodePath("../../PI_Sprint")
-_slideMinSpeed = 6.0
-_holdSlideMinSpeed = 3.0
 
-[node name="PI_Crouch" type="Node" parent="Input/PI_CrouchDispatcher/PI_Slide" node_paths=PackedStringArray("_sprintInput")]
+[node name="PI_Crouch" type="Node" parent="Input/PI_CrouchDispatcher/PI_Slide" node_paths=PackedStringArray("_crouchDispatcher", "_sprintInput")]
 script = ExtResource("7_56r3e")
+_crouchDispatcher = NodePath("../..")
 _sprintInput = NodePath("../../../PI_Sprint")
 
 [node name="State" type="Node" parent="."]

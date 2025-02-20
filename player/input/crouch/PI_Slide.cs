@@ -8,10 +8,8 @@ public partial class PI_Slide : Node, PI_CrouchDerived
     [Export] private float _slideMinSpeed;
     [Export] private float _holdSlideMinSpeed;
 
-    [ExportCategory("User Settings")]
-    [Export] public bool Hold = true;
-
     [ExportCategory("Setup")]
+    [Export] private PI_CrouchDispatcher _crouchDispatcher;
     [Export] private PM_Controller _controller;
     [Export] private PS_Grounded _groundState;
     [Export] private PI_Crouch _crouchInput;
@@ -37,7 +35,7 @@ public partial class PI_Slide : Node, PI_CrouchDerived
         {
             // Consume - start
             StartSlide();
-        } else if (IsActive && !Hold)
+        } else if (IsActive && !_crouchDispatcher.Hold)
         {
             // Consume - stop
             StopSlide();
@@ -55,7 +53,7 @@ public partial class PI_Slide : Node, PI_CrouchDerived
         // Can consume if
         //      On Hold mode and can stop slide
         // Otherwise, propagate to crouch
-        if (IsActive && Hold)
+        if (IsActive && _crouchDispatcher.Hold)
         {
             // Consume - stop
             StopSlide();

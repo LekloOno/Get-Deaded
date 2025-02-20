@@ -6,6 +6,10 @@ using Godot;
 [GlobalClass]
 public partial class PI_CrouchDispatcher : Node
 {
+    [ExportCategory("User Settings")]
+    [Export] public bool Hold = true;
+
+    [ExportCategory("Setup")]
     [Export] private PI_Slide _slideInput;
     [Export] private PI_Dash _dashInput;
 
