@@ -23,10 +23,12 @@ public partial class PI_Jump : Node
     
     public bool UseBuffer()
     {
-        bool wasBuffered = Time.GetTicksMsec() - _lastJumpInput < BufferWindow;
+        bool wasBuffered = IsBuffered();
         _lastJumpInput = 0;
         return wasBuffered;
     }
+
+    public bool IsBuffered() => Time.GetTicksMsec() - _lastJumpInput < BufferWindow;
 
     public void SetLastJumped() => LastJumped = Time.GetTicksMsec();
 }

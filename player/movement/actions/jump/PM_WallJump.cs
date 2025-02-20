@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 [GlobalClass]
@@ -7,21 +8,25 @@ public partial class PM_WallJump : PM_Action
     [Export] public PI_Jump JumpInput {get; private set;}
     [Export] public PM_Controller Controller {get; private set;}
     [Export] public PM_LedgeClimb LedgeClimb {get; private set;}
-    [Export] public RayCast3D WallCast {get; private set;}
+    [Export] public RayCast3D WallCastLow {get; private set;}
+    [Export] public RayCast3D WallCastHigh {get; private set;}
     [Export(PropertyHint.Range, "0.0, 10.0")] public float Strength {get; private set;} = 5f;
     [Export(PropertyHint.Range, "0.0, 10.0")] public float Boost {get; private set;} = 1f;
     [Export(PropertyHint.Range, "0.0, 10.0")] public float MinSpeedInWall {get; private set;} = 5f;
     [Export(PropertyHint.Range, "0.0,  1.0")] public float MinBounceRatio {get; private set;} = 0.5f;
     // The velocity coefficient when straight facing the wall. The more you're facing the wall, the less speed you will keep.
-    
 
+    public EventHandler OnWallJump;
 
     public Vector3 WallJump(Vector3 velocity)
     {
-        if (!WallCast.IsColliding())
+        if (!JumpInput.IsBuffered())
+            return velocity;            // Nothing to do
+
+        Vector3 normal = new();
+        if (!IsCollidingWall(ref normal))
             return LedgeClimb.LedgeClimb(velocity); // Propagate to Ledge
 
-        Vector3 normal = WallCast.GetCollisionNormal();
         if (!IsWall(normal))
             return LedgeClimb.LedgeClimb(velocity); // Propagate to Ledge
 
@@ -29,10 +34,8 @@ public partial class PM_WallJump : PM_Action
         if (TooSlow(flatVel, normal))
             return LedgeClimb.LedgeClimb(velocity); // Propagate to Ledge
 
-        if (JumpInput.UseBuffer())
-            return DoWallJump(velocity, WallCast.GetCollisionNormal()); // Do it !
-
-        return velocity; // Nothing to do
+        JumpInput.UseBuffer(); 
+        return DoWallJump(velocity, WallCastLow.GetCollisionNormal()); // Do it !
     }
 
     private Vector3 DoWallJump(Vector3 velocity, Vector3 normal)
@@ -48,7 +51,26 @@ public partial class PM_WallJump : PM_Action
         velocity *= angleRatio;
 
         velocity.Y = Strength;
+        OnWallJump?.Invoke(this, EventArgs.Empty);
         return velocity;
+    }
+
+    private bool IsCollidingWall(ref Vector3 normal)
+    {
+        if(WallCastLow.IsColliding())
+        {
+            normal = WallCastLow.GetCollisionNormal();
+            return true;
+        }
+
+        if(WallCastHigh.IsColliding())
+        {
+            GD.Print("high");
+            normal = WallCastHigh.GetCollisionNormal();
+            return true;
+        }
+
+        return false;
     }
 
     private bool TooSlow(Vector3 velocity, Vector3 normal) => velocity.Dot(-normal) < MinSpeedInWall;

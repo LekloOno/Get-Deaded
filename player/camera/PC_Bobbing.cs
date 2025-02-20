@@ -40,8 +40,6 @@ public partial class PC_Bobbing : Node3D
         float time = Time.GetTicksMsec()/1000f;
         pos.Y += Mathf.Sin(time/_waveLength * Mathf.Pi) * _amplitude;
         pos.X += Mathf.Sin(time/_waveLength * Mathf.Pi/2) * _amplitude * 2;
-        GD.Print(pos);
-        GD.Print(_amplitude);
         return pos;
     }
 

@@ -10,6 +10,7 @@ public partial class PM_Dash : Node
     [Export] public PM_Controller Controller {get; private set;}
     [Export] public PS_Grounded GroundState {get; private set;}
     [Export] public PM_LedgeClimb LedgeClimb {get; private set;}
+    [Export] public PM_WallJump WallJump {get; private set;}
 
     [Export(PropertyHint.Range, "0.0, 40.0")] public float Strength {get; private set;}
     [Export(PropertyHint.Range, "0.0, 1.0")] public float DashDuration {get; private set;}
@@ -28,6 +29,7 @@ public partial class PM_Dash : Node
     {
         DashInput.OnStartInput += StartDash;
         GroundState.OnLanding += Reset;
+        WallJump.OnWallJump += Reset;
     }
 
     public void StartDash(object sender, EventArgs e)
@@ -76,18 +78,23 @@ public partial class PM_Dash : Node
 
     private void EndDash()
     {
+        Vector3 outVelocity = OutVelocity();
+
+        Controller.Velocity = outVelocity;
+        Controller.RealVelocity = outVelocity;
+
+        AbortDash();
+    }
+
+    private Vector3 OutVelocity()
+    {
         // Angle ratio -
         // The more the dash is performed upward, the more speed you lose
         float angleRatio = _direction.Normalized().Dot(Vector3.Up);
         angleRatio = Mathf.Max(0, angleRatio);
 
         angleRatio = 1 + angleRatio * MinDashRatio - angleRatio;
-        
-        Vector3 outVelocity = _prevRealVelocity.Length() * angleRatio * _direction;
 
-        Controller.Velocity = outVelocity;
-        Controller.RealVelocity = outVelocity;
-
-        AbortDash();
+        return _prevRealVelocity.Length() * angleRatio * _direction;
     }
 }

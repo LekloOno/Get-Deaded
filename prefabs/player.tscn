@@ -103,8 +103,12 @@ update_scale = false
 mesh = SubResource("CapsuleMesh_qcifk")
 skeleton = NodePath("../../..")
 
-[node name="WallJumpCast" type="RayCast3D" parent="."]
+[node name="WallJumpCastLow" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+target_position = Vector3(0, 0, -0.6)
+
+[node name="WallJumpCastHigh" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 target_position = Vector3(0, 0, -0.6)
 
 [node name="LedgeCastFoot" type="RayCast3D" parent="."]
@@ -216,7 +220,7 @@ BodyScalor = NodePath("../../Body")
 WalkProcess = NodePath("../../Input/PI_Walk")
 GroundState = NodePath("../../State/PS_Grounded")
 
-[node name="PM_Dash" type="Node" parent="Movement" node_paths=PackedStringArray("DashInput", "WalkInput", "CameraControl", "Controller", "GroundState", "LedgeClimb")]
+[node name="PM_Dash" type="Node" parent="Movement" node_paths=PackedStringArray("DashInput", "WalkInput", "CameraControl", "Controller", "GroundState", "LedgeClimb", "WallJump")]
 script = ExtResource("21_kvosw")
 DashInput = NodePath("../../Input/PI_CrouchDispatcher/PI_Dash")
 WalkInput = NodePath("../../Input/PI_Walk")
@@ -224,6 +228,7 @@ CameraControl = NodePath("../../CameraPivot")
 Controller = NodePath("../..")
 GroundState = NodePath("../../State/PS_Grounded")
 LedgeClimb = NodePath("../PM_LedgeClimb")
+WallJump = NodePath("../PM_WallJump")
 Strength = 30.0
 DashDuration = 0.1
 MinDashRatio = 0.5
@@ -250,13 +255,14 @@ SuperGlideWindow = 50
 SuperGlideYStrength = 4.0
 SuperGlideXStrength = 8.0
 
-[node name="PM_WallJump" type="Node" parent="Movement" node_paths=PackedStringArray("JumpInput", "Controller", "LedgeClimb", "WallCast", "WalkProcess", "GroundState")]
+[node name="PM_WallJump" type="Node" parent="Movement" node_paths=PackedStringArray("JumpInput", "Controller", "LedgeClimb", "WallCastLow", "WallCastHigh", "WalkProcess", "GroundState")]
 script = ExtResource("24_gjg6k")
 JumpInput = NodePath("../../Input/PI_Jump")
 Controller = NodePath("../..")
 LedgeClimb = NodePath("../PM_LedgeClimb")
-WallCast = NodePath("../../WallJumpCast")
-MinSpeedInWall = 2.0
+WallCastLow = NodePath("../../WallJumpCastLow")
+WallCastHigh = NodePath("../../WallJumpCastHigh")
+MinSpeedInWall = 1.5
 MinBounceRatio = 0.7
 WalkProcess = NodePath("../../Input/PI_Walk")
 GroundState = NodePath("../../State/PS_Grounded")
