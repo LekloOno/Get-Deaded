@@ -4,24 +4,25 @@ using Godot;
 [GlobalClass]
 public partial class PM_SurfaceState : Node
 {
-    [Export] public PM_SurfaceStateData StateData {get; private set;}
-    [Export] public PI_Sprint SprintInput {get; private set;}
-    [Export] public PM_Crouch Crouch {get; private set;}
-    [Export] public PM_Slide Slide {get; private set;}
-    public PM_SurfaceData CurrentData {get; protected set;}
+    [Export] private PM_SurfaceStateData _stateData;
+    [Export] private PI_Sprint _sprintInput;
+    [Export] private PM_Crouch _crouch;
+    [Export] private PM_Slide _slide;
+    private PM_SurfaceData _currentData;
+    public PM_SurfaceData CurrentData => _currentData;
 
     public override void _Ready()
     {
-        CurrentData = StateData.Normal;
-        SprintInput.OnStartSprinting += (o, e) => CurrentData = StateData.Sprint;
-        SprintInput.OnStopSprinting += (o, e) => CurrentData = StateData.Normal;
+        _currentData = _stateData.Normal;
+        _sprintInput.OnStartSprinting += (o, e) => _currentData = _stateData.Sprint;
+        _sprintInput.OnStopSprinting += (o, e) => _currentData = _stateData.Normal;
         
-        Crouch.OnStart += SetCrouch;
-        Crouch.OnStop += (o, e) => CurrentData = StateData.Normal;
+        _crouch.OnStart += SetCrouch;
+        _crouch.OnStop += (o, e) => _currentData = _stateData.Normal;
 
-        Slide.OnStart += (o, e) => CurrentData = StateData.Slide;
-        Slide.OnStop += (o, e) => CurrentData = StateData.Normal;
+        _slide.OnStart += (o, e) => _currentData = _stateData.Slide;
+        _slide.OnStop += (o, e) => _currentData = _stateData.Normal;
     }
 
-    public void SetCrouch(object sender, EventArgs e) => CurrentData = StateData.Crouch;
+    public void SetCrouch(object sender, EventArgs e) => _currentData = _stateData.Crouch;
 }

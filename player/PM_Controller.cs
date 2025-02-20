@@ -2,37 +2,33 @@ using Godot;
 
 public partial class PM_Controller : CharacterBody3D
 {
-    [Export] public PI_Walk WalkProcess {get; private set;}
-    [Export] public PM_WallJump WallJump {get; private set;}
-    [Export] public PS_Grounded GroundState {get; private set;}
-    [Export] public PC_Control CameraControl {get; private set;}
-    [Export] public PM_SurfaceControl SurfaceControl {get; private set;}
-    [Export] public PM_VelocityCache VelocityCache {get; private set;}
-    [Export] public PM_StraffeSnap StraffeSnap {get; private set;}
-    [Export] public float DashStrength = 10f;
-    //[Export] public PM_StepClimb StepClimb {get; private set;}
+    [Export] private PI_Walk _walkProcess;
+    [Export] private PM_WallJump _wallJump;
+    [Export] private PS_Grounded _groundState;
+    [Export] private PC_Control _cameraControl;
+    [Export] private PM_SurfaceControl _surfaceControl;
+    [Export] private PM_VelocityCache _velocityCache;
+    [Export] private PM_StraffeSnap _straffeSnap;
+    [Export] private float _debugDashStrength = 10f;
 
     public PHX_ForcesCache AdditionalForces {get; private set;} = new PHX_ForcesCache();  // To allow external entities to apply additional forces.
     public PHX_ForcesCache TakeOverForces {get; private set;} = new PHX_ForcesCache();    // To allow external entities to take over the movement behavior.
     public Vector3 RealVelocity {get; set;}
     public Vector3 Acceleration {get; private set;}
-    
-    public const float Speed = 5.0f;
-    public const float JumpVelocity = 4.5f;
 
     public override void _Ready()
     {
         // UnhandledKeyInput is usually called _before_ UnhandledInput
         // We want to make sure player's rotation is updated before handling movement input as wishDir depends on it.
         // Reduces "input lag" by one frame.
-        CameraControl.SetProcessUnhandledInput(false);
-        WalkProcess.SetProcessUnhandledKeyInput(false);
+        _cameraControl.SetProcessUnhandledInput(false);
+        _walkProcess.SetProcessUnhandledKeyInput(false);
     }
 
     public override void _UnhandledInput(InputEvent @event)
     {
-        CameraControl._UnhandledInput(@event);
-        WalkProcess._UnhandledKeyInput(@event);
+        _cameraControl._UnhandledInput(@event);
+        _walkProcess._UnhandledKeyInput(@event);
     }
 
     public override void _PhysicsProcess(double delta)
@@ -55,23 +51,23 @@ public partial class PM_Controller : CharacterBody3D
         Vector3 pos = GlobalPosition;
         if (TakeOverForces.IsEmpty())
         {
-            Vector3 velocity = VelocityCache.GetVelocity(this, Velocity, WalkProcess.WishDir, GroundState.IsGrounded(), delta);
+            Vector3 velocity = _velocityCache.GetVelocity(this, Velocity, _walkProcess.WishDir, _groundState.IsGrounded(), delta);
 
             Vector3 prevVelocity = velocity;
             
             if (Input.IsActionJustPressed("click"))
             {
-                velocity += CameraControl.GlobalBasis.Z * -DashStrength;
+                velocity += _cameraControl.GlobalBasis.Z * -_debugDashStrength;
             }
 
 
-            velocity = WallJump.WallJump(velocity);
-            velocity = SurfaceControl.ApplyDrag(velocity, delta);
-            velocity += SurfaceControl.Accelerate(velocity, (float)delta);
+            velocity = _wallJump.WallJump(velocity);
+            velocity = _surfaceControl.ApplyDrag(velocity, delta);
+            velocity += _surfaceControl.Accelerate(velocity, (float)delta);
             velocity += AdditionalForces.Consume();
-            velocity = StraffeSnap.Snap(velocity, prevVelocity);
+            velocity = _straffeSnap.Snap(velocity, prevVelocity);
 
-            if (!GroundState.IsGrounded())
+            if (!_groundState.IsGrounded())
                 velocity += GetGravity() * (float)delta;
 
             Velocity = velocity;

@@ -4,9 +4,9 @@ using Godot;
 [GlobalClass]
 public partial class PC_Bobbing : Node3D
 {
-    [Export] public PI_Sprint SprintInput {get; private set;}
-    [Export] public PS_Grounded GroundState {get; private set;}
-    [Export] public PM_Controller Controller {get; private set;}
+    [Export] private PI_Sprint _sprintInput;
+    [Export] private PS_Grounded _groundState;
+    [Export] private PM_Controller _controller;
     [Export(PropertyHint.Range, "0.0,0.01")] private float _sprintAmplitude = 0.0007f;
     [Export(PropertyHint.Range, "0.0, 1.0")] private float _sprintWaveLength = 0.15f;
     [Export(PropertyHint.Range, "0.0,0.01")] private float _walkAmplitude = 0.0004f;
@@ -22,8 +22,8 @@ public partial class PC_Bobbing : Node3D
         _amplitude = _walkAmplitude;
         _waveLength = _walkWaveLength;
 
-        SprintInput.OnStartSprinting += OnStartSprint;
-        SprintInput.OnStopSprinting += OnStopSprint;
+        _sprintInput.OnStartSprinting += OnStartSprint;
+        _sprintInput.OnStopSprinting += OnStopSprint;
     }
     public override void _Process(double delta)
     {
@@ -45,8 +45,8 @@ public partial class PC_Bobbing : Node3D
 
     private void CheckMotion()
     {
-        if (PHX_Vector3Ext.Flat(Controller.RealVelocity).Length() < _toggleSpeed) return;
-        if (!GroundState.IsGrounded()) return;
+        if (PHX_Vector3Ext.Flat(_controller.RealVelocity).Length() < _toggleSpeed) return;
+        if (!_groundState.IsGrounded()) return;
 
         PlayMotion(FootStepMotion());
     }

@@ -3,7 +3,7 @@ using System;
 
 public partial class Grounded : Label
 {
-    [Export] public PS_Grounded GroundState;
+    [Export] private PS_Grounded _groundState;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -12,6 +12,6 @@ public partial class Grounded : Label
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
-        SetText(GroundState.IsGrounded() ? "GROUNDED" : "AIRBORNE");
+        SetText(_groundState.IsGrounded() ? "GROUNDED" : "AIRBORNE");
     }
 }

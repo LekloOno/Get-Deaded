@@ -4,14 +4,16 @@ using Godot;
 [GlobalClass]
 public partial class PI_Slide : Node, PI_CrouchDerived
 {
-    [Export] public PM_Controller Controller {get; private set;}
-    [Export] public PS_Grounded GroundState {get; private set;}
-    [Export] public PI_Crouch CrouchInput {get; private set;}
-    [Export] public PI_Sprint SprintInput {get; private set;}
+    [Export] private PM_Controller _controller;
+    [Export] private PS_Grounded _groundState;
+    [Export] private PI_Crouch _crouchInput;
+    [Export] private PI_Sprint _sprintInput;
+    public PI_Sprint SprintInput => _sprintInput;
 
-    [Export] public bool Hold {get; private set;}
-    [Export] public float SlideMinSpeed {get; private set;}
-    [Export] public float HoldSlideMinSpeed {get; private set;}
+    [Export] public bool Hold = true;
+
+    [Export] private float _slideMinSpeed;
+    [Export] private float _holdSlideMinSpeed;
 
     public EventHandler OnStartInput {get; set;}   // Called when slide is initiated
     public EventHandler OnStopInput {get; set;}    // Called when slide is cancelled through inputs
@@ -28,7 +30,7 @@ public partial class PI_Slide : Node, PI_CrouchDerived
         // Otherwise, propagate to crouch
 
 
-        if (!IsActive && (StartFastEnough() || !GroundState.IsGrounded()))
+        if (!IsActive && (StartFastEnough() || !_groundState.IsGrounded()))
         {
             // Consume - start
             StartSlide();
@@ -38,12 +40,12 @@ public partial class PI_Slide : Node, PI_CrouchDerived
             StopSlide();
         } else
         {
-            CrouchInput.KeyDown();
+            _crouchInput.KeyDown();
         }
     }
 
-    private bool StartFastEnough() => Controller.RealVelocity.Length() >= SlideMinSpeed;
-    private bool HoldFastEnough() => Controller.RealVelocity.Length() >= HoldSlideMinSpeed;
+    private bool StartFastEnough() => _controller.RealVelocity.Length() >= _slideMinSpeed;
+    private bool HoldFastEnough() => _controller.RealVelocity.Length() >= _holdSlideMinSpeed;
 
     public void KeyUp()
     {
@@ -56,7 +58,7 @@ public partial class PI_Slide : Node, PI_CrouchDerived
             StopSlide();
         } else 
         {
-            CrouchInput.KeyUp();
+            _crouchInput.KeyUp();
         }
     }
 
@@ -65,16 +67,16 @@ public partial class PI_Slide : Node, PI_CrouchDerived
     private void CheckSpeed(object sender, EventArgs e)
     {
         // Virtually propagate to crouch if sliding and not fast enough
-        if (GroundState.IsGrounded() && !HoldFastEnough())
+        if (_groundState.IsGrounded() && !HoldFastEnough())
         {
             // Notify crouch to start
             IsActive = false;
             OnSlowSlide?.Invoke(this, EventArgs.Empty);
-            SprintInput.Reset();
+            _sprintInput.Reset();
 
             OnPhysics -= CheckSpeed;
 
-            CrouchInput.StartCrouching();
+            _crouchInput.StartCrouching();
         }
     }
 

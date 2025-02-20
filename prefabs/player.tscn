@@ -41,55 +41,55 @@ height = 1.8
 [sub_resource type="SphereShape3D" id="SphereShape3D_4jpmy"]
 radius = 0.25
 
-[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("WalkProcess", "WallJump", "GroundState", "CameraControl", "SurfaceControl", "StraffeSnap")]
+[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("_walkProcess", "_wallJump", "_groundState", "_cameraControl", "_surfaceControl", "_straffeSnap")]
 floor_constant_speed = true
 floor_block_on_wall = false
 floor_max_angle = 0.872665
 script = ExtResource("1_7ruml")
-WalkProcess = NodePath("Input/PI_Walk")
-WallJump = NodePath("Movement/PM_WallJump")
-GroundState = NodePath("State/PS_Grounded")
-CameraControl = NodePath("CameraPivot")
-SurfaceControl = NodePath("Movement/PM_SurfaceControl")
-VelocityCache = ExtResource("2_seqbe")
-StraffeSnap = NodePath("Movement/PM_StraffeSnap")
+_walkProcess = NodePath("Input/PI_Walk")
+_wallJump = NodePath("Movement/PM_WallJump")
+_groundState = NodePath("State/PS_Grounded")
+_cameraControl = NodePath("CameraPivot")
+_surfaceControl = NodePath("Movement/PM_SurfaceControl")
+_velocityCache = ExtResource("2_seqbe")
+_straffeSnap = NodePath("Movement/PM_StraffeSnap")
 
-[node name="CameraPivot" type="Node3D" parent="." node_paths=PackedStringArray("Body")]
+[node name="CameraPivot" type="Node3D" parent="." node_paths=PackedStringArray("_body")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0)
 top_level = true
 script = ExtResource("3_duaqo")
-Body = NodePath("..")
+_body = NodePath("..")
 
-[node name="PC_Spring" type="Node3D" parent="CameraPivot" node_paths=PackedStringArray("CameraTarget")]
+[node name="PC_Spring" type="Node3D" parent="CameraPivot" node_paths=PackedStringArray("_cameraTarget")]
 script = ExtResource("3_iyr31")
-CameraTarget = NodePath("../../Body/SpatialAnchor/RemoteTransform3D")
+_cameraTarget = NodePath("../../Body/SpatialAnchor/RemoteTransform3D")
 HalfLife = 0.08
 Frequency = 14.0
 AngularDisplacement = 5.0
 
-[node name="PC_Lean" type="Node3D" parent="CameraPivot/PC_Spring" node_paths=PackedStringArray("Camera", "Controller")]
+[node name="PC_Lean" type="Node3D" parent="CameraPivot/PC_Spring" node_paths=PackedStringArray("_camera", "_controller")]
 script = ExtResource("3_45b6k")
-Camera = NodePath("../..")
-Controller = NodePath("../../..")
+_camera = NodePath("../..")
+_controller = NodePath("../../..")
 AttackDamping = 0.7
 Strength = 0.03
 
-[node name="PC_Bobbing" type="Node3D" parent="CameraPivot/PC_Spring/PC_Lean" node_paths=PackedStringArray("SprintInput", "GroundState", "Controller")]
+[node name="PC_Bobbing" type="Node3D" parent="CameraPivot/PC_Spring/PC_Lean" node_paths=PackedStringArray("_sprintInput", "_groundState", "_controller")]
 script = ExtResource("6_a1iy8")
-SprintInput = NodePath("../../../../Input/PI_Sprint")
-GroundState = NodePath("../../../../State/PS_Grounded")
-Controller = NodePath("../../../..")
+_sprintInput = NodePath("../../../../Input/PI_Sprint")
+_groundState = NodePath("../../../../State/PS_Grounded")
+_controller = NodePath("../../../..")
 _sprintAmplitude = 0.002
 _walkWaveLength = 0.15
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot/PC_Spring/PC_Lean/PC_Bobbing"]
 fov = 103.0
 
-[node name="Body" type="CollisionShape3D" parent="." node_paths=PackedStringArray("ModelAnchor")]
+[node name="Body" type="CollisionShape3D" parent="." node_paths=PackedStringArray("_modelAnchor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_o274a")
 script = ExtResource("4_ldkbw")
-ModelAnchor = NodePath("SpatialAnchor")
+_modelAnchor = NodePath("SpatialAnchor")
 
 [node name="SpatialAnchor" type="Node3D" parent="Body"]
 
@@ -128,146 +128,132 @@ target_position = Vector3(0, -20, 0)
 
 [node name="Input" type="Node" parent="."]
 
-[node name="PI_Walk" type="Node" parent="Input" node_paths=PackedStringArray("FlatDirNode", "SightPositionNode")]
+[node name="PI_Walk" type="Node" parent="Input" node_paths=PackedStringArray("_flatDirNode")]
 script = ExtResource("4_ob50j")
-FlatDirNode = NodePath("../..")
-SightPositionNode = NodePath("../../CameraPivot")
+_flatDirNode = NodePath("../..")
 
 [node name="PI_Jump" type="Node" parent="Input"]
 script = ExtResource("5_kj45h")
-BufferWindow = 50
 
-[node name="PI_Sprint" type="Node" parent="Input" node_paths=PackedStringArray("Jump", "WalkInput")]
+[node name="PI_Sprint" type="Node" parent="Input" node_paths=PackedStringArray("_jump", "_walkInput")]
 script = ExtResource("7_owt71")
-Jump = NodePath("../../Movement/PM_Jump")
-WalkInput = NodePath("../PI_Walk")
+_jump = NodePath("../../Movement/PM_Jump")
+_walkInput = NodePath("../PI_Walk")
 
-[node name="PI_CrouchDispatcher" type="Node" parent="Input" node_paths=PackedStringArray("SlideInput", "DashInput")]
+[node name="PI_CrouchDispatcher" type="Node" parent="Input" node_paths=PackedStringArray("_slideInput", "_dashInput")]
 script = ExtResource("7_2sxgr")
-SlideInput = NodePath("PI_Slide")
-DashInput = NodePath("PI_Dash")
+_slideInput = NodePath("PI_Slide")
+_dashInput = NodePath("PI_Dash")
 
 [node name="PI_Dash" type="Node" parent="Input/PI_CrouchDispatcher"]
 script = ExtResource("8_34n6f")
 
-[node name="PI_Slide" type="Node" parent="Input/PI_CrouchDispatcher" node_paths=PackedStringArray("Controller", "GroundState", "CrouchInput", "SprintInput")]
+[node name="PI_Slide" type="Node" parent="Input/PI_CrouchDispatcher" node_paths=PackedStringArray("_controller", "_groundState", "_crouchInput", "_sprintInput")]
 script = ExtResource("9_px05h")
-Controller = NodePath("../../..")
-GroundState = NodePath("../../../State/PS_Grounded")
-CrouchInput = NodePath("PI_Crouch")
-SprintInput = NodePath("../../PI_Sprint")
-Hold = true
-SlideMinSpeed = 6.0
-HoldSlideMinSpeed = 3.0
+_controller = NodePath("../../..")
+_groundState = NodePath("../../../State/PS_Grounded")
+_crouchInput = NodePath("PI_Crouch")
+_sprintInput = NodePath("../../PI_Sprint")
+_slideMinSpeed = 6.0
+_holdSlideMinSpeed = 3.0
 
-[node name="PI_Crouch" type="Node" parent="Input/PI_CrouchDispatcher/PI_Slide" node_paths=PackedStringArray("SprintInput")]
+[node name="PI_Crouch" type="Node" parent="Input/PI_CrouchDispatcher/PI_Slide" node_paths=PackedStringArray("_sprintInput")]
 script = ExtResource("7_56r3e")
-SprintInput = NodePath("../../../PI_Sprint")
+_sprintInput = NodePath("../../../PI_Sprint")
 
 [node name="State" type="Node" parent="."]
 
-[node name="PS_Grounded" type="Node" parent="State" node_paths=PackedStringArray("CharacterBody3D", "GroundCast")]
+[node name="PS_Grounded" type="Node" parent="State" node_paths=PackedStringArray("_characterBody3D", "_groundCast")]
 script = ExtResource("6_mexc6")
-CharacterBody3D = NodePath("../..")
-GroundCast = NodePath("../../GroundCast")
+_characterBody3D = NodePath("../..")
+_groundCast = NodePath("../../GroundCast")
 
 [node name="Movement" type="Node" parent="."]
 
-[node name="PM_SurfaceControl" type="Node" parent="Movement" node_paths=PackedStringArray("Ground", "Air", "WalkProcess", "GroundState")]
+[node name="PM_SurfaceControl" type="Node" parent="Movement" node_paths=PackedStringArray("_ground", "_air", "_walkProcess", "_groundState")]
 script = ExtResource("7_msb5j")
-Ground = NodePath("GroundState")
-Air = NodePath("AirState")
-LandGroundDelayMsec = 50
-WalkProcess = NodePath("../../Input/PI_Walk")
-GroundState = NodePath("../../State/PS_Grounded")
+_ground = NodePath("GroundState")
+_air = NodePath("AirState")
+_walkProcess = NodePath("../../Input/PI_Walk")
+_groundState = NodePath("../../State/PS_Grounded")
 
-[node name="GroundState" type="Node" parent="Movement/PM_SurfaceControl" node_paths=PackedStringArray("SprintInput", "Crouch", "Slide")]
+[node name="GroundState" type="Node" parent="Movement/PM_SurfaceControl" node_paths=PackedStringArray("_sprintInput", "_crouch", "_slide")]
 script = ExtResource("8_fhtxi")
-StateData = ExtResource("9_ikaaj")
-SprintInput = NodePath("../../../Input/PI_Sprint")
-Crouch = NodePath("../../PM_Crouch")
-Slide = NodePath("../../PM_Slide")
+_stateData = ExtResource("9_ikaaj")
+_sprintInput = NodePath("../../../Input/PI_Sprint")
+_crouch = NodePath("../../PM_Crouch")
+_slide = NodePath("../../PM_Slide")
 
-[node name="AirState" type="Node" parent="Movement/PM_SurfaceControl" node_paths=PackedStringArray("SprintInput", "Crouch", "Slide")]
+[node name="AirState" type="Node" parent="Movement/PM_SurfaceControl" node_paths=PackedStringArray("_sprintInput", "_crouch", "_slide")]
 script = ExtResource("8_fhtxi")
-StateData = ExtResource("10_53m5n")
-SprintInput = NodePath("../../../Input/PI_Sprint")
-Crouch = NodePath("../../PM_Crouch")
-Slide = NodePath("../../PM_Slide")
+_stateData = ExtResource("10_53m5n")
+_sprintInput = NodePath("../../../Input/PI_Sprint")
+_crouch = NodePath("../../PM_Crouch")
+_slide = NodePath("../../PM_Slide")
 
-[node name="PM_Jump" type="Node" parent="Movement" node_paths=PackedStringArray("JumpProcess", "WalkProcess", "GroundState")]
+[node name="PM_Jump" type="Node" parent="Movement" node_paths=PackedStringArray("_jumpInput", "_walkProcess", "_groundState")]
 script = ExtResource("11_edsm7")
-JumpProcess = NodePath("../../Input/PI_Jump")
-Data = ExtResource("13_e1cl2")
-WalkProcess = NodePath("../../Input/PI_Walk")
-GroundState = NodePath("../../State/PS_Grounded")
+_jumpInput = NodePath("../../Input/PI_Jump")
+_data = ExtResource("13_e1cl2")
+_walkProcess = NodePath("../../Input/PI_Walk")
+_groundState = NodePath("../../State/PS_Grounded")
 
-[node name="PM_Crouch" type="Node" parent="Movement" node_paths=PackedStringArray("CrouchInput", "BodyScalor", "WalkProcess", "GroundState")]
+[node name="PM_Crouch" type="Node" parent="Movement" node_paths=PackedStringArray("_crouchInput", "_codyScalor", "_walkProcess", "_groundState")]
 script = ExtResource("15_vd3v3")
-CrouchInput = NodePath("../../Input/PI_CrouchDispatcher/PI_Slide/PI_Crouch")
-BodyScalor = NodePath("../../Body")
-ScaleSpeed = 10.0
-ResetScaleSpeed = 10.0
-TargetScaleRatio = 0.6
-WalkProcess = NodePath("../../Input/PI_Walk")
-GroundState = NodePath("../../State/PS_Grounded")
+_crouchInput = NodePath("../../Input/PI_CrouchDispatcher/PI_Slide/PI_Crouch")
+_codyScalor = NodePath("../../Body")
+_walkProcess = NodePath("../../Input/PI_Walk")
+_groundState = NodePath("../../State/PS_Grounded")
 
-[node name="PM_Slide" type="Node" parent="Movement" node_paths=PackedStringArray("Controller", "SlideInput", "BodyScalor", "WalkProcess", "GroundState")]
+[node name="PM_Slide" type="Node" parent="Movement" node_paths=PackedStringArray("_controller", "_slideInput", "_bodyScalor", "_walkProcess", "_groundState")]
 script = ExtResource("20_5y6qm")
-Controller = NodePath("../..")
-SlideInput = NodePath("../../Input/PI_CrouchDispatcher/PI_Slide")
-BodyScalor = NodePath("../../Body")
-WalkProcess = NodePath("../../Input/PI_Walk")
-GroundState = NodePath("../../State/PS_Grounded")
+_controller = NodePath("../..")
+_slideInput = NodePath("../../Input/PI_CrouchDispatcher/PI_Slide")
+_bodyScalor = NodePath("../../Body")
+_walkProcess = NodePath("../../Input/PI_Walk")
+_groundState = NodePath("../../State/PS_Grounded")
 
-[node name="PM_Dash" type="Node" parent="Movement" node_paths=PackedStringArray("DashInput", "WalkInput", "CameraControl", "Controller", "GroundState", "LedgeClimb", "WallJump")]
+[node name="PM_Dash" type="Node" parent="Movement" node_paths=PackedStringArray("_dashInput", "_walkInput", "_cameraControl", "_controller", "_groundState", "_ledgeClimb", "_wallJump")]
 script = ExtResource("21_kvosw")
-DashInput = NodePath("../../Input/PI_CrouchDispatcher/PI_Dash")
-WalkInput = NodePath("../../Input/PI_Walk")
-CameraControl = NodePath("../../CameraPivot")
-Controller = NodePath("../..")
-GroundState = NodePath("../../State/PS_Grounded")
-LedgeClimb = NodePath("../PM_LedgeClimb")
-WallJump = NodePath("../PM_WallJump")
-Strength = 30.0
-DashDuration = 0.1
-MinDashRatio = 0.5
+_dashInput = NodePath("../../Input/PI_CrouchDispatcher/PI_Dash")
+_walkInput = NodePath("../../Input/PI_Walk")
+_cameraControl = NodePath("../../CameraPivot")
+_controller = NodePath("../..")
+_groundState = NodePath("../../State/PS_Grounded")
+_ledgeClimb = NodePath("../PM_LedgeClimb")
+_wallJump = NodePath("../PM_WallJump")
+_strength = 30.0
+_dashDuration = 0.1
+_minDashRatio = 0.5
 
-[node name="PM_StraffeSnap" type="Node" parent="Movement" node_paths=PackedStringArray("GroundState")]
+[node name="PM_StraffeSnap" type="Node" parent="Movement" node_paths=PackedStringArray("_groundState")]
 script = ExtResource("22_cp0qq")
-GroundState = NodePath("../../State/PS_Grounded")
+_groundState = NodePath("../../State/PS_Grounded")
 SnapThreshold = 2.0
 
-[node name="PM_LedgeClimb" type="Node" parent="Movement" node_paths=PackedStringArray("JumpInput", "CrouchInput", "WalkInput", "Controller", "Dash", "Jump", "HeadCast", "ChestCast", "FootCast")]
+[node name="PM_LedgeClimb" type="Node" parent="Movement" node_paths=PackedStringArray("_jumpInput", "_crouchInput", "_walkInput", "_controller", "_dash", "_jump", "_headCast", "_chestCast", "_footCast")]
 script = ExtResource("23_w6mlc")
-JumpInput = NodePath("../../Input/PI_Jump")
-CrouchInput = NodePath("../../Input/PI_CrouchDispatcher")
-WalkInput = NodePath("../../Input/PI_Walk")
-Controller = NodePath("../..")
-Dash = NodePath("../PM_Dash")
-Jump = NodePath("../PM_Jump")
-HeadCast = NodePath("../../LedgeCastHead")
-ChestCast = NodePath("../../LedgeCastChest")
-FootCast = NodePath("../../LedgeCastFoot")
-MaxClimbTime = 2.0
-ClimbSpeed = 5.0
-SuperGlideWindow = 50
-SuperGlideYStrength = 4.0
-SuperGlideXStrength = 8.0
+_jumpInput = NodePath("../../Input/PI_Jump")
+_crouchInput = NodePath("../../Input/PI_CrouchDispatcher")
+_walkInput = NodePath("../../Input/PI_Walk")
+_controller = NodePath("../..")
+_dash = NodePath("../PM_Dash")
+_jump = NodePath("../PM_Jump")
+_headCast = NodePath("../../LedgeCastHead")
+_chestCast = NodePath("../../LedgeCastChest")
+_footCast = NodePath("../../LedgeCastFoot")
 
-[node name="PM_WallJump" type="Node" parent="Movement" node_paths=PackedStringArray("JumpInput", "Controller", "LedgeClimb", "WallCastLow", "WallCastHigh", "WalkProcess", "GroundState")]
+[node name="PM_WallJump" type="Node" parent="Movement" node_paths=PackedStringArray("_jumpInput", "_controller", "_ledgeClimb", "_wallCastLow", "_wallCastHigh", "_walkProcess", "_groundState")]
 script = ExtResource("24_gjg6k")
-JumpInput = NodePath("../../Input/PI_Jump")
-Controller = NodePath("../..")
-LedgeClimb = NodePath("../PM_LedgeClimb")
-WallCastLow = NodePath("../../WallJumpCastLow")
-WallCastHigh = NodePath("../../WallJumpCastHigh")
-MinSpeedInWall = 1.5
-MinBounceRatio = 0.7
-WalkProcess = NodePath("../../Input/PI_Walk")
-GroundState = NodePath("../../State/PS_Grounded")
+_jumpInput = NodePath("../../Input/PI_Jump")
+_controller = NodePath("../..")
+_ledgeClimb = NodePath("../PM_LedgeClimb")
+_wallCastLow = NodePath("../../WallJumpCastLow")
+_wallCastHigh = NodePath("../../WallJumpCastHigh")
+_walkProcess = NodePath("../../Input/PI_Walk")
+_groundState = NodePath("../../State/PS_Grounded")
 
-[node name="Label" type="Label" parent="." node_paths=PackedStringArray("Controller")]
+[node name="Label" type="Label" parent="." node_paths=PackedStringArray("_controller")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -282,9 +268,9 @@ grow_vertical = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("14_chh26")
-Controller = NodePath("..")
+_controller = NodePath("..")
 
-[node name="Label2" type="Label" parent="." node_paths=PackedStringArray("GroundState")]
+[node name="Label2" type="Label" parent="." node_paths=PackedStringArray("_groundState")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -299,4 +285,4 @@ grow_vertical = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("14_ih16p")
-GroundState = NodePath("../State/PS_Grounded")
+_groundState = NodePath("../State/PS_Grounded")

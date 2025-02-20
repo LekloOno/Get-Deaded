@@ -4,9 +4,9 @@ using Godot;
 [GlobalClass]
 public partial class PI_Sprint : Node
 {
-    [Export] public PM_Jump Jump {get; private set;}
-    [Export] public PI_Walk WalkInput {get; private set;}
-    [Export] public bool Hold {get; private set;} = false;
+    [Export] private PM_Jump _jump;
+    [Export] private PI_Walk _walkInput;
+    [Export] public bool Hold = false;
     public EventHandler OnStartSprinting;
     public EventHandler OnStopSprinting;
 
@@ -14,8 +14,8 @@ public partial class PI_Sprint : Node
 
     public override void _Ready()
     {
-        Jump.OnJump += (o, f) => StopSprinting();
-        WalkInput.OnStopOrBackward += (o, f) => StopSprinting();
+        _jump.OnJump += (o, f) => StopSprinting();
+        _walkInput.OnStopOrBackward += (o, f) => StopSprinting();
     }
 
     public override void _UnhandledKeyInput(InputEvent @event)

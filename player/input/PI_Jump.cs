@@ -4,7 +4,7 @@ using Godot;
 [GlobalClass]
 public partial class PI_Jump : Node
 {
-    [Export] public ulong BufferWindow {get; private set;} = 30;
+    [Export] private ulong _bufferWindow = 50;
 
     public ulong LastJumped {get; private set;} = 0;
     private ulong _lastJumpInput = 0;
@@ -28,7 +28,7 @@ public partial class PI_Jump : Node
         return wasBuffered;
     }
 
-    public bool IsBuffered() => Time.GetTicksMsec() - _lastJumpInput < BufferWindow;
+    public bool IsBuffered() => Time.GetTicksMsec() - _lastJumpInput < _bufferWindow;
 
     public void SetLastJumped() => LastJumped = Time.GetTicksMsec();
 }

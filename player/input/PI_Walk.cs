@@ -5,8 +5,7 @@ using static PI_Direction;
 [GlobalClass]
 public partial class PI_Walk : Node
 {
-    [Export] public Node3D FlatDirNode;
-    [Export] public Node3D SightPositionNode;
+    [Export] private Node3D _flatDirNode;
 
     public EventHandler OnStopOrBackward;
     public EventHandler<KeyPressedArgs> KeyPressed;
@@ -40,12 +39,12 @@ public partial class PI_Walk : Node
 
     public Vector3 FreeWishDir(Vector2 input)
     {
-        return FlatDirNode.Transform.Basis.Z * input.Y + FlatDirNode.Transform.Basis.X * input.X;
+        return _flatDirNode.Transform.Basis.Z * input.Y + _flatDirNode.Transform.Basis.X * input.X;
     }
 
     public Vector3 ComputeWishDir()
     {
-        return FlatDirNode.Transform.Basis.Z * WalkAxis.Y + FlatDirNode.Transform.Basis.X * WalkAxis.X;
+        return _flatDirNode.Transform.Basis.Z * WalkAxis.Y + _flatDirNode.Transform.Basis.X * WalkAxis.X;
     }
 
     public bool FowardDown() => Input.IsActionPressed(FORWARD);

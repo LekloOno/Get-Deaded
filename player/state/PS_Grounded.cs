@@ -4,14 +4,14 @@ using System;
 [GlobalClass]
 public partial class PS_Grounded : Node
 {
-    [Export] public PM_Controller CharacterBody3D {get; private set;}
-    [Export] public ShapeCast3D GroundCast {get; private set;}
-    [Export] public float MaxVerticalSpeed {get; private set;} = 4.76f;
+    [Export] private PM_Controller _characterBody3D;
+    [Export] private ShapeCast3D _groundCast;
+    [Export] private float _maxVerticalSpeed = 4.76f;
 
     public event EventHandler<LandingEventArgs> OnLanding;
     public event EventHandler OnLeaving;
 
-    public float DistanceToGround { get; private set; } // Capped to abs(GroundCast.TargetPosition.Y)
+    public float DistanceToGround { get; private set; } // Capped to abs(_groundCast.TargetPosition.Y)
 
     private ulong _lastGrounded = 0; // Only relevant when airborne. Won't be updated while actively grounded.
 
@@ -25,20 +25,20 @@ public partial class PS_Grounded : Node
     }
     public override void _PhysicsProcess(double delta)
     {
-        if (GroundCast.IsColliding())
+        if (_groundCast.IsColliding())
         {
-            Vector3 collisionPoint = GroundCast.GetCollisionPoint(0);
-            DistanceToGround = GroundCast.GlobalPosition.DistanceTo(collisionPoint);
+            Vector3 collisionPoint = _groundCast.GetCollisionPoint(0);
+            DistanceToGround = _groundCast.GlobalPosition.DistanceTo(collisionPoint);
         }
         else
-            DistanceToGround = Math.Abs(GroundCast.TargetPosition.Y);
+            DistanceToGround = Math.Abs(_groundCast.TargetPosition.Y);
         
         UpdateGrounded();
     }
     public override void _Process(double delta)
     {
-        if (CharacterBody3D.Velocity.Y < _prevDownardSpeed)
-            _prevDownardSpeed = CharacterBody3D.Velocity.Y;
+        if (_characterBody3D.Velocity.Y < _prevDownardSpeed)
+            _prevDownardSpeed = _characterBody3D.Velocity.Y;
 
         
     }
@@ -52,7 +52,7 @@ public partial class PS_Grounded : Node
             if(realNextGrounded)
             {
                 OnLanding?.Invoke(this, new LandingEventArgs(_prevDownardSpeed));
-                _prevDownardSpeed = CharacterBody3D.Velocity.Y;
+                _prevDownardSpeed = _characterBody3D.Velocity.Y;
             }
             else
             {
@@ -75,8 +75,8 @@ public partial class PS_Grounded : Node
     }
 
     private bool RealGrounded() {
-        return CharacterBody3D.IsOnFloor()
-            && Mathf.Abs(CharacterBody3D.RealVelocity.Y) < MaxVerticalSpeed;
+        return _characterBody3D.IsOnFloor()
+            && Mathf.Abs(_characterBody3D.RealVelocity.Y) < _maxVerticalSpeed;
     }
 
 }

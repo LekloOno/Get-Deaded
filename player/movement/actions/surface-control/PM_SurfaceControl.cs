@@ -38,9 +38,9 @@ public partial class PM_SurfaceControl : PM_Action
 
     // OnSlowSliding   -> Crouch
     // OnCrouching     -> Crouch
-    [Export] public PM_SurfaceState Ground {get; private set;}
-    [Export] public PM_SurfaceState Air {get; private set;}
-    [Export] public ulong LandGroundDelayMsec {get; private set;} = 0;  // The delay after landing before the surface data is updated to ground.
+    [Export] private PM_SurfaceState _ground;
+    [Export] private PM_SurfaceState _air;
+    [Export] private ulong LandGroundDelayMsec = 50;  // The delay after landing before the surface data is updated to ground.
     private SceneTreeTimer _delayedGroundTimer;
 
     private PM_SurfaceState _currentSurface;
@@ -48,15 +48,15 @@ public partial class PM_SurfaceControl : PM_Action
 
     public override void _Ready()
     {
-        _currentSurface = Air;
+        _currentSurface = _groundState.IsGrounded() ? _ground : _air;
 
-        GroundState.OnLanding += SetGroundState;
-        GroundState.OnLeaving += SetAirState;
+        _groundState.OnLanding += SetGroundState;
+        _groundState.OnLeaving += SetAirState;
     }
 
     public Vector3 Accelerate(Vector3 velocity, float delta)
     {
-        Vector3 direction = WalkProcess.WishDir;
+        Vector3 direction = _walkProcess.WishDir;
         float speed = _currentSurface.CurrentData.MaxSpeed;
         float accel = _currentSurface.CurrentData.MaxAccel;
         return PHX_MovementPhysics.Acceleration(speed, accel, velocity, direction, delta);
@@ -79,7 +79,7 @@ public partial class PM_SurfaceControl : PM_Action
             _delayedGroundTimer = null;
         }
 
-        _currentSurface = Air;
+        _currentSurface = _air;
     }
 
     private void SetGroundState(object sender, LandingEventArgs e)
@@ -90,6 +90,6 @@ public partial class PM_SurfaceControl : PM_Action
 
     private void SetGroundState()
     {
-        _currentSurface = Ground;
+        _currentSurface = _ground;
     }
 }

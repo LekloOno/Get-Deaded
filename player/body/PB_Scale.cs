@@ -3,7 +3,7 @@ using Godot;
 [GlobalClass]
 public partial class PB_Scale : CollisionShape3D
 {
-    [Export] public Node3D ModelAnchor {get; private set;}
+    [Export] private Node3D _modelAnchor;
     private CapsuleShape3D _capsule;
 
     private float _colliderInitScale;
@@ -17,15 +17,15 @@ public partial class PB_Scale : CollisionShape3D
     {
         _capsule = Shape as CapsuleShape3D;
         _colliderInitScale = _capsule.Height;
-        _modelInitScale = ModelAnchor.Scale.Y;
+        _modelInitScale = _modelAnchor.Scale.Y;
     }
     public override void _PhysicsProcess(double delta)
     {
         _capsule.Height = Mathf.Lerp(_capsule.Height, _colliderTargetScale, _scaleSpeed);
 
-        Vector3 modelScale = ModelAnchor.Scale;
+        Vector3 modelScale = _modelAnchor.Scale;
         modelScale.Y = Mathf.Lerp(modelScale.Y, _modelTargetScale, _scaleSpeed);
-        ModelAnchor.Scale = modelScale;
+        _modelAnchor.Scale = modelScale;
     }
 
     public void SetTargetScale(float targetScaleRatio, float scaleSpeed)

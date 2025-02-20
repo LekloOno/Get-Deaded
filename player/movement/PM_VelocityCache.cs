@@ -1,8 +1,9 @@
 using Godot;
 
+[GlobalClass]
 public partial class PM_VelocityCache : Resource
 {
-    [Export] public ulong CacheFrameMsec {get; private set;} = 200;
+    [Export] private ulong _cacheFrameMsec = 200;
     private Vector3 _cachedVelocity = Vector3.Zero;
     private ulong _cachedTime = 0;
     private bool _inWall = false;
@@ -29,7 +30,7 @@ public partial class PM_VelocityCache : Resource
         _cachedTime = Time.GetTicksMsec();
     }
 
-    public bool IsCached() => Time.GetTicksMsec() - _cachedTime < CacheFrameMsec;
+    public bool IsCached() => Time.GetTicksMsec() - _cachedTime < _cacheFrameMsec;
 
     public void DiscardCache()
     {

@@ -3,7 +3,7 @@ using Godot;
 [GlobalClass]
 public partial class PC_Spring : Node3D
 {
-    [Export] public RemoteTransform3D CameraTarget {get; private set;}
+    [Export] private RemoteTransform3D _cameraTarget;
     [Export(PropertyHint.Range, "0.01, 0.2")] public float HalfLife {get; private set;} = 0.075f;
     [Export(PropertyHint.Range, "0.01,30.0")] public float Frequency {get; private set;} = 18f;
     [Export(PropertyHint.Range, "0.01, 10.0")] public float AngularDisplacement {get; private set;} = 2f;
@@ -23,7 +23,7 @@ public partial class PC_Spring : Node3D
         Spring((float)delta);
         
         Vector3 localSpringPosition = _springPosition - GlobalPosition;
-        float springHeight = localSpringPosition.Dot(CameraTarget.Basis.Y);
+        float springHeight = localSpringPosition.Dot(_cameraTarget.Basis.Y);
         RotationDegrees = new Vector3(-springHeight * AngularDisplacement, 0f, 0f);
         Position = localSpringPosition * LinearDisplacement;
     }

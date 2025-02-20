@@ -4,30 +4,31 @@ using Godot;
 [GlobalClass]
 public partial class PM_Crouch : PM_Action
 {
-    [Export] public PI_Crouch CrouchInput {get; private set;}
-    [Export] public PB_Scale BodyScalor {get; private set;}
-    [Export(PropertyHint.Range, "0.0, 10.0")] public float ScaleSpeed;
-    [Export(PropertyHint.Range, "0.0, 10.0")] public float ResetScaleSpeed;
-    [Export(PropertyHint.Range, "0.2,1.0")] public float TargetScaleRatio {get; private set;}
+    [Export] private PI_Crouch _crouchInput;
+    [Export] private PB_Scale _codyScalor;
+    
+    [Export(PropertyHint.Range, "0.0, 10.0")] private float _scaleSpeed = 10f;
+    [Export(PropertyHint.Range, "0.0, 10.0")] private float _resetScaleSpeed = 10f;
+    [Export(PropertyHint.Range, "0.2,1.0")] private float _targetScaleRatio = 0.6f;
 
     public EventHandler OnStart;
     public EventHandler OnStop;
 
     public override void _Ready()
     {
-        CrouchInput.OnStartInput += (o, e) => StartCrouch();
-        CrouchInput.OnStopInput += (o, e) => StopCrouch();
+        _crouchInput.OnStartInput += (o, e) => StartCrouch();
+        _crouchInput.OnStopInput += (o, e) => StopCrouch();
     }
 
     public void StartCrouch()
     {
-        BodyScalor.SetTargetScale(TargetScaleRatio, ScaleSpeed);
+        _codyScalor.SetTargetScale(_targetScaleRatio, _scaleSpeed);
         OnStart?.Invoke(this, EventArgs.Empty);
     }
 
     public void StopCrouch()
     {
-        BodyScalor.ResetScale(ResetScaleSpeed);
+        _codyScalor.ResetScale(_resetScaleSpeed);
         OnStop?.Invoke(this, EventArgs.Empty);
     }
 }

@@ -4,17 +4,17 @@ using Godot;
 [GlobalClass]
 public partial class PM_Dash : Node
 {
-    [Export] public PI_Dash DashInput {get; private set;}
-    [Export] public PI_Walk WalkInput {get; private set;}
-    [Export] public PC_Control CameraControl {get; private set;}
-    [Export] public PM_Controller Controller {get; private set;}
-    [Export] public PS_Grounded GroundState {get; private set;}
-    [Export] public PM_LedgeClimb LedgeClimb {get; private set;}
-    [Export] public PM_WallJump WallJump {get; private set;}
+    [Export] private PI_Dash _dashInput;
+    [Export] private PI_Walk _walkInput;
+    [Export] private PC_Control _cameraControl;
+    [Export] private PM_Controller _controller;
+    [Export] private PS_Grounded _groundState;
+    [Export] private PM_LedgeClimb _ledgeClimb;
+    [Export] private PM_WallJump _wallJump;
 
-    [Export(PropertyHint.Range, "0.0, 40.0")] public float Strength {get; private set;}
-    [Export(PropertyHint.Range, "0.0, 1.0")] public float DashDuration {get; private set;}
-    [Export(PropertyHint.Range, "0.0, 1.0")] public float MinDashRatio {get; private set;}
+    [Export(PropertyHint.Range, "0.0, 40.0")] private float _strength;
+    [Export(PropertyHint.Range, "0.0, 1.0")] private float _dashDuration;
+    [Export(PropertyHint.Range, "0.0, 1.0")] private float _minDashRatio;
     // The velocity coefficient when dashing upward. The more upward you dash, the less speed you will keep.
 
     private bool _available = true;
@@ -27,31 +27,31 @@ public partial class PM_Dash : Node
 
     public override void _Ready()
     {
-        DashInput.OnStartInput += StartDash;
-        GroundState.OnLanding += Reset;
-        WallJump.OnWallJump += Reset;
+        _dashInput.OnStartInput += StartDash;
+        _groundState.OnLanding += Reset;
+        _wallJump.OnWallJump += Reset;
     }
 
     public void StartDash(object sender, EventArgs e)
     {
-        if (!_available || GroundState.IsGrounded() || LedgeClimb.IsClimbing)
+        if (!_available || _groundState.IsGrounded() || _ledgeClimb.IsClimbing)
             return;
         
-        if (WalkInput.WalkAxis != Vector2.Zero)
-            _direction = WalkInput.WishDir;
+        if (_walkInput.WalkAxis != Vector2.Zero)
+            _direction = _walkInput.WishDir;
         else
-            _direction = -CameraControl.GlobalBasis.Z;
+            _direction = -_cameraControl.GlobalBasis.Z;
 
-        _prevRealVelocity = Controller.RealVelocity;
+        _prevRealVelocity = _controller.RealVelocity;
         Vector3 velocity = _prevRealVelocity;
         //velocity = direction * velocity.Length();
-        //Controller.RealVelocity = velocity;
+        //_controller.RealVelocity = velocity;
 
-        float appliedStrength = Mathf.Max(Strength, velocity.Length());
+        float appliedStrength = Mathf.Max(_strength, velocity.Length());
         _dashForce = appliedStrength * _direction;
 
-        Controller.TakeOverForces.AddPersistent(_dashForce);
-        _endDashTimer = GetTree().CreateTimer(DashDuration);
+        _controller.TakeOverForces.AddPersistent(_dashForce);
+        _endDashTimer = GetTree().CreateTimer(_dashDuration);
         _endDashTimer.Timeout += EndDash;
         _isDashing = true;
         _available = false;
@@ -67,7 +67,7 @@ public partial class PM_Dash : Node
 
     public void AbortDash()
     {
-        Controller.TakeOverForces.RemovePersistent(_dashForce);
+        _controller.TakeOverForces.RemovePersistent(_dashForce);
         _isDashing = false;
         if (_endDashTimer != null)
         {
@@ -80,8 +80,8 @@ public partial class PM_Dash : Node
     {
         Vector3 outVelocity = OutVelocity();
 
-        Controller.Velocity = outVelocity;
-        Controller.RealVelocity = outVelocity;
+        _controller.Velocity = outVelocity;
+        _controller.RealVelocity = outVelocity;
 
         AbortDash();
     }
@@ -93,7 +93,7 @@ public partial class PM_Dash : Node
         float angleRatio = _direction.Normalized().Dot(Vector3.Up);
         angleRatio = Mathf.Max(0, angleRatio);
 
-        angleRatio = 1 + angleRatio * MinDashRatio - angleRatio;
+        angleRatio = 1 + angleRatio * _minDashRatio - angleRatio;
 
         return _prevRealVelocity.Length() * angleRatio * _direction;
     }

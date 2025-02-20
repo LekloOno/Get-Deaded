@@ -4,15 +4,15 @@ using Godot;
 [GlobalClass]
 public partial class PM_Jump : PM_Action
 {
-    [Export] public PI_Jump JumpProcess {get; private set;}
-    [Export] public PM_JumpData Data {get; private set;}
+    [Export] private PI_Jump _jumpInput;
+    [Export] private PM_JumpData _data;
     public EventHandler<float> OnJump;      // EventArgs is the % of jump force. 1 is full jump force, 0 is no jump force. 
 
     private float tracker_jumpFatigueRecover;
 
     public Vector3 Jump(Vector3 velocity)
     {
-        if (GroundState.IsGrounded() && JumpProcess.UseBuffer())
+        if (_groundState.IsGrounded() && _jumpInput.UseBuffer())
             return DoJump(velocity);
 
         return velocity;
@@ -22,33 +22,33 @@ public partial class PM_Jump : PM_Action
     {
         float force = ComputeForce();
         velocity.Y = force;
-        JumpProcess.SetLastJumped();
-        GroundState.UpdateGrounded(false);
+        _jumpInput.SetLastJumped();
+        _groundState.UpdateGrounded(false);
         
-        OnJump?.Invoke(this, force/Data.Force);
+        OnJump?.Invoke(this, force/_data.Force);
         return velocity;
     }
 
     private float ComputeForce()
     {
-        ulong fatigueTime = Time.GetTicksMsec() - JumpProcess.LastJumped;
+        ulong fatigueTime = Time.GetTicksMsec() - _jumpInput.LastJumped;
 
-        if (Data.FatigueMsec == 0)      // Avoid 0 division
-            return Data.Force;
+        if (_data.FatigueMsec == 0)      // Avoid 0 division
+            return _data.Force;
 
-        if (Data.FatigueFloorMsec == Data.FatigueMsec)  // Avoid 0 division
+        if (_data.FatigueFloorMsec == _data.FatigueMsec)  // Avoid 0 division
         {
-            if (fatigueTime >= Data.FatigueMsec)
-                return Data.Force;
-            return Data.FatigueForce;
+            if (fatigueTime >= _data.FatigueMsec)
+                return _data.Force;
+            return _data.FatigueForce;
         }
 
-        ulong scaledFatigueTime = fatigueTime/Data.FatigueMsec;
-        float scaledFloor = (float)Data.FatigueFloorMsec/Data.FatigueFloorMsec;
+        ulong scaledFatigueTime = fatigueTime/_data.FatigueMsec;
+        float scaledFloor = (float)_data.FatigueFloorMsec/_data.FatigueFloorMsec;
         
         float unclampedRatio = scaledFloor * scaledFatigueTime - scaledFloor + 1f;
         float ratio = Mathf.Clamp(unclampedRatio, 0, 1);
 
-        return ratio * (Data.Force - Data.FatigueForce) + Data.FatigueForce;
+        return ratio * (_data.Force - _data.FatigueForce) + _data.FatigueForce;
     }
 }

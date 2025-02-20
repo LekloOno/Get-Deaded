@@ -3,8 +3,8 @@ using Godot;
 [GlobalClass]
 public partial class PC_Lean : Node3D
 {
-    [Export] public PC_Control Camera {get; private set;}
-    [Export] public PM_Controller Controller {get; private set;}
+    [Export] private PC_Control _camera;
+    [Export] private PM_Controller _controller;
     [Export(PropertyHint.Range, "0.0, 2.0")] public float AttackDamping {get; private set;} = 0.5f;
     [Export(PropertyHint.Range, "0.0, 2.0")] public float DecayDamping {get; private set;} = 0.3f;
     [Export(PropertyHint.Range, "0.0, 2.0")] public float Strength {get; private set;} = 0.075f;
@@ -15,7 +15,7 @@ public partial class PC_Lean : Node3D
 
     public override void _Process(double delta)
     {
-        Vector3 planeAccel = PHX_Vector3Ext.Flat(Controller.Acceleration);
+        Vector3 planeAccel = PHX_Vector3Ext.Flat(_controller.Acceleration);
         float damping = planeAccel.Length() > _dampedAcceleration.Length()
             ? AttackDamping
             : DecayDamping;
@@ -29,7 +29,7 @@ public partial class PC_Lean : Node3D
             deltaTime: (float)delta
         );
 
-        Vector3 leanAxis = _dampedAcceleration.Cross(Camera.Basis.Y).Normalized();
+        Vector3 leanAxis = _dampedAcceleration.Cross(_camera.Basis.Y).Normalized();
         Rotation = Vector3.Zero;
 
         if (!leanAxis.IsNormalized()) // Couldn't normalize axis
