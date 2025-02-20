@@ -18,7 +18,7 @@ public partial class PI_Sprint : Node
 
     public override void _Ready()
     {
-        _jump.OnJump += (o, f) => StopSprinting();
+        _jump.OnStart += (o, f) => StopSprinting();
         _walkInput.OnStopOrBackward += (o, f) => StopSprinting();
     }
 

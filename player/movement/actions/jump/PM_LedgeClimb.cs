@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Godot;
 
 [GlobalClass]
-public partial class PM_LedgeClimb : Node
+public partial class PM_LedgeClimb : PM_Action
 {
     [Export] private PI_Jump _jumpInput;
     [Export] private PI_CrouchDispatcher _crouchInput;

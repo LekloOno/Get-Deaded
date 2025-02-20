@@ -11,9 +11,6 @@ public partial class PM_Crouch : PM_Action
     [Export(PropertyHint.Range, "0.0, 10.0")] private float _resetScaleSpeed = 10f;
     [Export(PropertyHint.Range, "0.2,1.0")] private float _targetScaleRatio = 0.6f;
 
-    public EventHandler OnStart;
-    public EventHandler OnStop;
-
     public override void _Ready()
     {
         _crouchInput.OnStartInput += (o, e) => StartCrouch();

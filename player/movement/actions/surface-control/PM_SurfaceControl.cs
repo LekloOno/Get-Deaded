@@ -42,6 +42,8 @@ public partial class PM_SurfaceControl : PM_Action
     [Export] private ulong LandGroundDelayMsec = 50;  // The delay after landing before the surface data is updated to ground.
     
     [ExportCategory("Setup")]
+    [Export] private PI_Walk _walkInput;
+    [Export] private PS_Grounded _groundState;
     [Export] private PM_SurfaceState _ground;
     [Export] private PM_SurfaceState _air;
     private SceneTreeTimer _delayedGroundTimer;
@@ -59,7 +61,7 @@ public partial class PM_SurfaceControl : PM_Action
 
     public Vector3 Accelerate(Vector3 velocity, float delta)
     {
-        Vector3 direction = _walkProcess.WishDir;
+        Vector3 direction = _walkInput.WishDir;
         float speed = _currentSurface.CurrentData.MaxSpeed;
         float accel = _currentSurface.CurrentData.MaxAccel;
         return PHX_MovementPhysics.Acceleration(speed, accel, velocity, direction, delta);

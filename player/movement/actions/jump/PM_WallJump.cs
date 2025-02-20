@@ -16,8 +16,6 @@ public partial class PM_WallJump : PM_Action
     [Export(PropertyHint.Range, "0.0,  1.0")] private float _minBounceRatio = 0.6f;
     // The velocity coefficient when straight facing the wall. The more you're facing the wall, the less speed you will keep.
 
-    public EventHandler OnWallJump;
-
     public Vector3 WallJump(Vector3 velocity)
     {
         if (!_jumpInput.IsBuffered())
@@ -51,7 +49,7 @@ public partial class PM_WallJump : PM_Action
         velocity *= angleRatio;
 
         velocity.Y = _strength;
-        OnWallJump?.Invoke(this, EventArgs.Empty);
+        OnStart?.Invoke(this, EventArgs.Empty);
         return velocity;
     }
 

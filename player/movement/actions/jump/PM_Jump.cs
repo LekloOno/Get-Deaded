@@ -6,7 +6,7 @@ public partial class PM_Jump : PM_Action
 {
     [Export] private PI_Jump _jumpInput;
     [Export] private PM_JumpData _data;
-    public EventHandler<float> OnJump;      // EventArgs is the % of jump force. 1 is full jump force, 0 is no jump force. 
+    [Export] private PS_Grounded _groundState;
 
     private float tracker_jumpFatigueRecover;
 
@@ -25,7 +25,7 @@ public partial class PM_Jump : PM_Action
         _jumpInput.SetLastJumped();
         _groundState.UpdateGrounded(false);
         
-        OnJump?.Invoke(this, force/_data.Force);
+        OnStart?.Invoke(this, EventArgs.Empty);
         return velocity;
     }
 

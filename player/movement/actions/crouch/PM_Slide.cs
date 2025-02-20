@@ -4,8 +4,9 @@ using Godot;
 [GlobalClass]
 public partial class PM_Slide : PM_Action
 {
-    [Export] private PM_Controller _controller;
     [Export] private PI_Slide _slideInput;
+    [Export] private PM_Controller _controller;
+    [Export] private PS_Grounded _groundState;
     [Export] private PB_Scale _bodyScalor;
     [Export(PropertyHint.Range, "0.0, 20.0")] private float _scaleSpeed = 10f;
     [Export(PropertyHint.Range, "0.0, 20.0")] private float _resetScaleSpeed = 10f;
@@ -17,9 +18,6 @@ public partial class PM_Slide : PM_Action
     [Export(PropertyHint.Range, "0.0,  1.0")] private float _slideDecayStrength = 0.8f;
 
     private ulong _lastForceTime = 0;
-
-    public EventHandler OnStart;
-    public EventHandler OnStop;
     public EventHandler OnSlowStop;
 
     private SceneTreeTimer _delayedForceTimer;

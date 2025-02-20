@@ -2,7 +2,7 @@ using System;
 using Godot;
 
 [GlobalClass]
-public partial class PM_Dash : Node
+public partial class PM_Dash : PM_Action
 {
     [Export] private PI_Dash _dashInput;
     [Export] private PI_Walk _walkInput;
@@ -29,7 +29,7 @@ public partial class PM_Dash : Node
     {
         _dashInput.OnStartInput += StartDash;
         _groundState.OnLanding += Reset;
-        _wallJump.OnWallJump += Reset;
+        _wallJump.OnStart += Reset;
     }
 
     public void StartDash(object sender, EventArgs e)
