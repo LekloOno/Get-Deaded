@@ -4,9 +4,12 @@ using System;
 [GlobalClass]
 public partial class PS_Grounded : Node
 {
+    [ExportCategory("Settings")]
+    [Export] private float _maxVerticalSpeed = 4.76f;
+    
+    [ExportCategory("Setup")]
     [Export] private PM_Controller _characterBody3D;
     [Export] private ShapeCast3D _groundCast;
-    [Export] private float _maxVerticalSpeed = 4.76f;
 
     public event EventHandler<LandingEventArgs> OnLanding;
     public event EventHandler OnLeaving;

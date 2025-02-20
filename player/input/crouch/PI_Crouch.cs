@@ -4,10 +4,13 @@ using Godot;
 [GlobalClass]
 public partial class PI_Crouch : Node, PI_CrouchDerived
 {
+    [ExportCategory("User Settings")]
     [Export] public bool Hold = true;
+
+    [ExportCategory("Setup")]
     [Export] private PI_Sprint _sprintInput;
     public PI_Sprint SprintInput => _sprintInput;
-    
+
     public EventHandler OnStartInput {get; set;}
     public EventHandler OnStopInput {get; set;}
 

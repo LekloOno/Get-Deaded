@@ -4,13 +4,13 @@ using Godot;
 [GlobalClass]
 public partial class PI_Sprint : Node
 {
-    [ExportCategory("Settings")]
+    [ExportCategory("User Settings")]
     [Export] public bool Hold = false;
 
     [ExportCategory("Setup")]
     [Export] private PM_Jump _jump;
     [Export] private PI_Walk _walkInput;
-    
+
     public EventHandler OnStartSprinting;
     public EventHandler OnStopSprinting;
 

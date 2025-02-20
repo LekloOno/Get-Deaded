@@ -38,9 +38,12 @@ public partial class PM_SurfaceControl : PM_Action
 
     // OnSlowSliding   -> Crouch
     // OnCrouching     -> Crouch
+    [ExportCategory("Settings")]
+    [Export] private ulong LandGroundDelayMsec = 50;  // The delay after landing before the surface data is updated to ground.
+    
+    [ExportCategory("Setup")]
     [Export] private PM_SurfaceState _ground;
     [Export] private PM_SurfaceState _air;
-    [Export] private ulong LandGroundDelayMsec = 50;  // The delay after landing before the surface data is updated to ground.
     private SceneTreeTimer _delayedGroundTimer;
 
     private PM_SurfaceState _currentSurface;

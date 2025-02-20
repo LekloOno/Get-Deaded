@@ -4,16 +4,19 @@ using Godot;
 [GlobalClass]
 public partial class PI_Slide : Node, PI_CrouchDerived
 {
+    [ExportCategory("Settings")]
+    [Export] private float _slideMinSpeed;
+    [Export] private float _holdSlideMinSpeed;
+
+    [ExportCategory("User Settings")]
+    [Export] public bool Hold = true;
+
+    [ExportCategory("Setup")]
     [Export] private PM_Controller _controller;
     [Export] private PS_Grounded _groundState;
     [Export] private PI_Crouch _crouchInput;
     [Export] private PI_Sprint _sprintInput;
     public PI_Sprint SprintInput => _sprintInput;
-
-    [Export] public bool Hold = true;
-
-    [Export] private float _slideMinSpeed;
-    [Export] private float _holdSlideMinSpeed;
 
     public EventHandler OnStartInput {get; set;}   // Called when slide is initiated
     public EventHandler OnStopInput {get; set;}    // Called when slide is cancelled through inputs
