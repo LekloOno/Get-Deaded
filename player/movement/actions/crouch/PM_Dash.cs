@@ -79,7 +79,6 @@ public partial class PM_Dash : Node
         // Angle ratio -
         // The more the dash is performed upward, the more speed you lose
         float angleRatio = _direction.Normalized().Dot(Vector3.Up);
-        GD.Print(angleRatio);
         angleRatio = Mathf.Max(0, angleRatio);
 
         angleRatio = 1 + angleRatio * MinDashRatio - angleRatio;
