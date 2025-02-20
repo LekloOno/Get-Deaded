@@ -4,16 +4,29 @@ using Godot;
 [GlobalClass]
 public partial class PC_Bobbing : Node3D
 {
-    [Export] private PI_Sprint _sprintInput;
+    [ExportCategory("Settings")]
+    [Export(PropertyHint.Range, "0,0.004,0.0001")]
+    private float _sprintAmplitude = 0.002f;
+
+    [Export(PropertyHint.Range, "0,0.3,0.01")]
+    private float _sprintWaveLength = 0.15f;
+    
+    [Export(PropertyHint.Range, "0,0.004,0.0001")]
+    private float _walkAmplitude = 0.0006f;
+    
+    [Export(PropertyHint.Range, "0,0.3,0.01")]
+    private float _walkWaveLength = 0.16f;
+
+    [Export(PropertyHint.Range, "0,5,0.1")]
+    private float _resetSpeed = 1.5f;
+    
+    [ExportCategory("Setup")]
+    [Export] private PM_SurfaceState _groundSurfaceState;
     [Export] private PS_Grounded _groundState;
     [Export] private PM_Controller _controller;
-    [Export(PropertyHint.Range, "0.0,0.01")] private float _sprintAmplitude = 0.0007f;
-    [Export(PropertyHint.Range, "0.0, 1.0")] private float _sprintWaveLength = 0.15f;
-    [Export(PropertyHint.Range, "0.0,0.01")] private float _walkAmplitude = 0.0004f;
-    [Export(PropertyHint.Range, "0.0, 1.0")] private float _walkWaveLength = 0.25f;
 
     private float _toggleSpeed = 3.0f;
-    private bool _enable = true;
+    private bool _active = true;
     private float _amplitude;
     private float _waveLength;
 
@@ -22,16 +35,22 @@ public partial class PC_Bobbing : Node3D
         _amplitude = _walkAmplitude;
         _waveLength = _walkWaveLength;
 
-        _sprintInput.OnStartSprinting += OnStartSprint;
-        _sprintInput.OnStopSprinting += OnStopSprint;
+        _groundSurfaceState.Sprint.OnStart += OnStartSprint;
+        _groundSurfaceState.Sprint.OnStop += OnStopSprint;
+
+        _groundSurfaceState.Normal.OnStart += OnStartWalk;
+        _groundSurfaceState.Normal.OnStop += OnStopWalk;
     }
     public override void _Process(double delta)
     {
-        if (!_enable) ResetPosition(delta);
-        else {
-            CheckMotion();
-            ResetPosition(delta);
+        if(TooSlow() || !_active || !_groundState.IsGrounded())
+        {
+            ResetPosition(delta * _resetSpeed);
+            return;
         }
+
+        Position += FootStepMotion();
+        ResetPosition(delta);
     }
 
     private Vector3 FootStepMotion()
@@ -43,16 +62,6 @@ public partial class PC_Bobbing : Node3D
         return pos;
     }
 
-    private void CheckMotion()
-    {
-        if (PHX_Vector3Ext.Flat(_controller.RealVelocity).Length() < _toggleSpeed) return;
-        if (!_groundState.IsGrounded()) return;
-
-        PlayMotion(FootStepMotion());
-    }
-
-    private void PlayMotion(Vector3 motion) => Position += motion;
-
     private void ResetPosition(double deltaTime)
     {
         if (Position == Vector3.Zero) return;
@@ -63,13 +72,18 @@ public partial class PC_Bobbing : Node3D
     {
         _amplitude = _sprintAmplitude;
         _waveLength = _sprintWaveLength;
-        //_enable = true;
+        _active = true;
     }
-
-    public void OnStopSprint(object sender, EventArgs e)
+    public void OnStartWalk(object sender, EventArgs e)
     {
         _amplitude = _walkAmplitude;
         _waveLength = _walkWaveLength;
-        //_enable = false;
+        _active = true;
     }
+
+    public void OnStopSprint(object sender, EventArgs e) => _active = false;
+    public void OnStopWalk(object sender, EventArgs e) => _active = false;
+
+    private bool TooSlow() => PHX_Vector3Ext.Flat(_controller.RealVelocity).Length() < _toggleSpeed;
+
 }

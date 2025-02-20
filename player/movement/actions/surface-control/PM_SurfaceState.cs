@@ -11,17 +11,38 @@ public partial class PM_SurfaceState : Node
     private PM_SurfaceData _currentData;
     public PM_SurfaceData CurrentData => _currentData;
 
+    public PM_SurfaceData Normal => _stateData.Normal;
+    public PM_SurfaceData Sprint => _stateData.Sprint;
+    public PM_SurfaceData Slide => _stateData.Slide;
+    public PM_SurfaceData Crouch => _stateData.Crouch;
+/*
+    public EventHandler OnStartWalk => StateData.Normal.OnStart;
+    public EventHandler OnStartSprint => StateData.Sprint.OnStart;
+    public EventHandler OnStartSlide => StateData.Slide.OnStart;
+    public EventHandler OnStartCrouch => StateData.Crouch.OnStart;
+    public EventHandler OnStopWalk => StateData.Normal.OnStop;
+    public EventHandler OnStopSprint => StateData.Sprint.OnStop;
+    public EventHandler OnStopSlide => StateData.Slide.OnStop;
+    public EventHandler OnStopCrouch => StateData.Crouch.OnStop;*/
+
     public override void _Ready()
     {
         _currentData = _stateData.Normal;
-        _sprintInput.OnStartSprinting += (o, e) => _currentData = _stateData.Sprint;
-        _sprintInput.OnStopSprinting += (o, e) => _currentData = _stateData.Normal;
+        _sprintInput.OnStartSprinting += (o, e) => SetData(_stateData.Sprint);
+        _sprintInput.OnStopSprinting += (o, e) => SetData(_stateData.Normal);
         
-        _crouch.OnStart += SetCrouch;
-        _crouch.OnStop += (o, e) => _currentData = _stateData.Normal;
+        _crouch.OnStart += (o, e) => SetData(_stateData.Crouch);
+        _crouch.OnStop += (o, e) => SetData(_stateData.Normal);
 
-        _slide.OnStart += (o, e) => _currentData = _stateData.Slide;
-        _slide.OnStop += (o, e) => _currentData = _stateData.Normal;
+        _slide.OnStart += (o, e) => SetData(_currentData = _stateData.Slide);
+        _slide.OnStop += (o, e) => SetData(_currentData = _stateData.Normal);
+    }
+
+    public void SetData(PM_SurfaceData data)
+    {
+        _currentData.OnStop?.Invoke(this, EventArgs.Empty);
+        _currentData = data;
+        data.OnStart?.Invoke(this, EventArgs.Empty);
     }
 
     public void SetCrouch(object sender, EventArgs e) => _currentData = _stateData.Crouch;

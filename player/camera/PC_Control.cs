@@ -4,7 +4,11 @@ using System;
 [GlobalClass]
 public partial class PC_Control : Node3D
 {
-    [Export] private float _sensitivity = 2.8f;
+    [ExportCategory("Settings")]
+    [Export(PropertyHint.Range, "0,100,0.05")]
+    private float _sensitivity = 2.8f;
+    
+    [ExportCategory("Setup")]
     [Export] private Node3D _body;
     private Vector3 _eulerAngles;
 

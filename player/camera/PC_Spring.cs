@@ -3,11 +3,14 @@ using Godot;
 [GlobalClass]
 public partial class PC_Spring : Node3D
 {
-    [Export] private RemoteTransform3D _cameraTarget;
-    [Export(PropertyHint.Range, "0.01, 0.2")] public float HalfLife {get; private set;} = 0.075f;
-    [Export(PropertyHint.Range, "0.01,30.0")] public float Frequency {get; private set;} = 18f;
-    [Export(PropertyHint.Range, "0.01, 10.0")] public float AngularDisplacement {get; private set;} = 2f;
+    [ExportCategory("Settings")]
+    [Export(PropertyHint.Range, "0.01, 0.2")] public float HalfLife {get; private set;} = 0.08f;
+    [Export(PropertyHint.Range, "0.01,30.0")] public float Frequency {get; private set;} = 14f;
+    [Export(PropertyHint.Range, "0.01, 10.0")] public float AngularDisplacement {get; private set;} = 5f;
     [Export(PropertyHint.Range, "0.01, 0.2")] public float LinearDisplacement {get; private set;} = 0.05f;
+    
+    [ExportCategory("Setup")]
+    [Export] private RemoteTransform3D _cameraTarget;
     
     private Vector3 _springPosition;
     private Vector3 _springVelocity;

@@ -3,12 +3,14 @@ using Godot;
 [GlobalClass]
 public partial class PC_Lean : Node3D
 {
+    [ExportCategory("Settings")]
+    [Export(PropertyHint.Range, "0.0, 2.0")] public float AttackDamping {get; private set;} = 0.7f;
+    [Export(PropertyHint.Range, "0.0, 2.0")] public float DecayDamping {get; private set;} = 0.3f;
+    [Export(PropertyHint.Range, "0.0, 2.0")] public float Strength {get; private set;} = 0.03f;
+    
+    [ExportCategory("Setup")]
     [Export] private PC_Control _camera;
     [Export] private PM_Controller _controller;
-    [Export(PropertyHint.Range, "0.0, 2.0")] public float AttackDamping {get; private set;} = 0.5f;
-    [Export(PropertyHint.Range, "0.0, 2.0")] public float DecayDamping {get; private set;} = 0.3f;
-    [Export(PropertyHint.Range, "0.0, 2.0")] public float Strength {get; private set;} = 0.075f;
-    
 
     private Vector3 _dampedAcceleration;
     private Vector3 _dampedAccelerationVel;
