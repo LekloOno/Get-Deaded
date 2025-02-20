@@ -4,9 +4,14 @@ using Godot;
 public partial class PC_Lean : Node3D
 {
     [ExportCategory("Settings")]
-    [Export(PropertyHint.Range, "0.0, 2.0")] public float AttackDamping {get; private set;} = 0.7f;
-    [Export(PropertyHint.Range, "0.0, 2.0")] public float DecayDamping {get; private set;} = 0.3f;
-    [Export(PropertyHint.Range, "0.0, 2.0")] public float Strength {get; private set;} = 0.03f;
+    [Export(PropertyHint.Range, "0.0,2.0,0.1")]
+    public float AttackDamping {get; private set;} = 0.7f;
+
+    [Export(PropertyHint.Range, "0.0,2.0,0.1")]
+    public float DecayDamping {get; private set;} = 0.3f;
+
+    [Export(PropertyHint.Range, "0.0,0.5,0.005")]
+    public float Strength {get; private set;} = 0.03f;
     
     [ExportCategory("Setup")]
     [Export] private PC_Control _camera;
