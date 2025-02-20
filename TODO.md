@@ -12,7 +12,7 @@ Prevent Crouch clipping
 ~~Add Slide force~~
 ~~Make so velocity is not projected on floor plane when sliding (slides faster downward, slower upward)~~
 
-"Hold" Property on crouch should be bound to slide's.
+~~"Hold" Property on crouch should be bound to slide's.~~
 
 Lerping is now frame rate independant, maybe use a similar method for the drag ?
 

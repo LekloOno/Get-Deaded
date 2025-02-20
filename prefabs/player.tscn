@@ -47,7 +47,7 @@ floor_block_on_wall = false
 floor_max_angle = 0.872665
 script = ExtResource("1_7ruml")
 _walkProcess = NodePath("Input/PI_Walk")
-_wallJump = NodePath("Movement/PM_WallJump")
+_wallJump = NodePath("Movement/Actions/Jump/PM_WallJump")
 _groundState = NodePath("State/PS_Grounded")
 _cameraControl = NodePath("CameraPivot")
 _surfaceControl = NodePath("Movement/PM_SurfaceControl")
@@ -130,7 +130,7 @@ script = ExtResource("5_kj45h")
 
 [node name="PI_Sprint" type="Node" parent="Input" node_paths=PackedStringArray("_jump", "_walkInput")]
 script = ExtResource("7_owt71")
-_jump = NodePath("../../Movement/PM_Jump")
+_jump = NodePath("../../Movement/Actions/Jump/PM_Jump")
 _walkInput = NodePath("../PI_Walk")
 
 [node name="PI_CrouchDispatcher" type="Node" parent="Input" node_paths=PackedStringArray("_slideInput", "_dashInput")]
@@ -176,77 +176,83 @@ _groundState = NodePath("../../State/PS_Grounded")
 script = ExtResource("8_fhtxi")
 _stateData = ExtResource("9_ikaaj")
 _sprintInput = NodePath("../../../Input/PI_Sprint")
-_crouch = NodePath("../../PM_Crouch")
-_slide = NodePath("../../PM_Slide")
+_crouch = NodePath("../../Actions/Crouch/PM_Crouch")
+_slide = NodePath("../../Actions/Crouch/PM_Slide")
 
 [node name="AirState" type="Node" parent="Movement/PM_SurfaceControl" node_paths=PackedStringArray("_sprintInput", "_crouch", "_slide")]
 script = ExtResource("8_fhtxi")
 _stateData = ExtResource("10_53m5n")
 _sprintInput = NodePath("../../../Input/PI_Sprint")
-_crouch = NodePath("../../PM_Crouch")
-_slide = NodePath("../../PM_Slide")
-
-[node name="PM_Jump" type="Node" parent="Movement" node_paths=PackedStringArray("_jumpInput", "_walkProcess", "_groundState")]
-script = ExtResource("11_edsm7")
-_jumpInput = NodePath("../../Input/PI_Jump")
-_data = ExtResource("13_e1cl2")
-_walkProcess = NodePath("../../Input/PI_Walk")
-_groundState = NodePath("../../State/PS_Grounded")
-
-[node name="PM_Crouch" type="Node" parent="Movement" node_paths=PackedStringArray("_crouchInput", "_codyScalor", "_walkProcess", "_groundState")]
-script = ExtResource("15_vd3v3")
-_crouchInput = NodePath("../../Input/PI_CrouchDispatcher/PI_Slide/PI_Crouch")
-_codyScalor = NodePath("../../Body")
-_walkProcess = NodePath("../../Input/PI_Walk")
-_groundState = NodePath("../../State/PS_Grounded")
-
-[node name="PM_Slide" type="Node" parent="Movement" node_paths=PackedStringArray("_controller", "_slideInput", "_bodyScalor", "_walkProcess", "_groundState")]
-script = ExtResource("20_5y6qm")
-_controller = NodePath("../..")
-_slideInput = NodePath("../../Input/PI_CrouchDispatcher/PI_Slide")
-_bodyScalor = NodePath("../../Body")
-_walkProcess = NodePath("../../Input/PI_Walk")
-_groundState = NodePath("../../State/PS_Grounded")
-
-[node name="PM_Dash" type="Node" parent="Movement" node_paths=PackedStringArray("_dashInput", "_walkInput", "_cameraControl", "_controller", "_groundState", "_ledgeClimb", "_wallJump")]
-script = ExtResource("21_kvosw")
-_dashInput = NodePath("../../Input/PI_CrouchDispatcher/PI_Dash")
-_walkInput = NodePath("../../Input/PI_Walk")
-_cameraControl = NodePath("../../CameraPivot")
-_controller = NodePath("../..")
-_groundState = NodePath("../../State/PS_Grounded")
-_ledgeClimb = NodePath("../PM_LedgeClimb")
-_wallJump = NodePath("../PM_WallJump")
-_strength = 30.0
-_dashDuration = 0.1
-_minDashRatio = 0.5
+_crouch = NodePath("../../Actions/Crouch/PM_Crouch")
+_slide = NodePath("../../Actions/Crouch/PM_Slide")
 
 [node name="PM_StraffeSnap" type="Node" parent="Movement" node_paths=PackedStringArray("_groundState")]
 script = ExtResource("22_cp0qq")
 _groundState = NodePath("../../State/PS_Grounded")
 SnapThreshold = 2.0
 
-[node name="PM_LedgeClimb" type="Node" parent="Movement" node_paths=PackedStringArray("_jumpInput", "_crouchInput", "_walkInput", "_controller", "_dash", "_jump", "_headCast", "_chestCast", "_footCast")]
-script = ExtResource("23_w6mlc")
-_jumpInput = NodePath("../../Input/PI_Jump")
-_crouchInput = NodePath("../../Input/PI_CrouchDispatcher")
-_walkInput = NodePath("../../Input/PI_Walk")
-_controller = NodePath("../..")
-_dash = NodePath("../PM_Dash")
-_jump = NodePath("../PM_Jump")
-_headCast = NodePath("../../LedgeCastHead")
-_chestCast = NodePath("../../LedgeCastChest")
-_footCast = NodePath("../../LedgeCastFoot")
+[node name="Actions" type="Node" parent="Movement"]
 
-[node name="PM_WallJump" type="Node" parent="Movement" node_paths=PackedStringArray("_jumpInput", "_controller", "_ledgeClimb", "_wallCastLow", "_wallCastHigh", "_walkProcess", "_groundState")]
+[node name="Jump" type="Node" parent="Movement/Actions"]
+
+[node name="PM_Jump" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_jumpInput", "_walkProcess", "_groundState")]
+script = ExtResource("11_edsm7")
+_jumpInput = NodePath("../../../../Input/PI_Jump")
+_data = ExtResource("13_e1cl2")
+_walkProcess = NodePath("../../../../Input/PI_Walk")
+_groundState = NodePath("../../../../State/PS_Grounded")
+
+[node name="PM_LedgeClimb" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_jumpInput", "_crouchInput", "_walkInput", "_controller", "_dash", "_jump", "_headCast", "_chestCast", "_footCast")]
+script = ExtResource("23_w6mlc")
+_jumpInput = NodePath("../../../../Input/PI_Jump")
+_crouchInput = NodePath("../../../../Input/PI_CrouchDispatcher")
+_walkInput = NodePath("../../../../Input/PI_Walk")
+_controller = NodePath("../../../..")
+_dash = NodePath("../../Crouch/PM_Dash")
+_jump = NodePath("../PM_Jump")
+_headCast = NodePath("../../../../LedgeCastHead")
+_chestCast = NodePath("../../../../LedgeCastChest")
+_footCast = NodePath("../../../../LedgeCastFoot")
+
+[node name="PM_WallJump" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_jumpInput", "_controller", "_ledgeClimb", "_wallCastLow", "_wallCastHigh", "_walkProcess", "_groundState")]
 script = ExtResource("24_gjg6k")
-_jumpInput = NodePath("../../Input/PI_Jump")
-_controller = NodePath("../..")
+_jumpInput = NodePath("../../../../Input/PI_Jump")
+_controller = NodePath("../../../..")
 _ledgeClimb = NodePath("../PM_LedgeClimb")
-_wallCastLow = NodePath("../../WallJumpCastLow")
-_wallCastHigh = NodePath("../../WallJumpCastHigh")
-_walkProcess = NodePath("../../Input/PI_Walk")
-_groundState = NodePath("../../State/PS_Grounded")
+_wallCastLow = NodePath("../../../../WallJumpCastLow")
+_wallCastHigh = NodePath("../../../../WallJumpCastHigh")
+_walkProcess = NodePath("../../../../Input/PI_Walk")
+_groundState = NodePath("../../../../State/PS_Grounded")
+
+[node name="Crouch" type="Node" parent="Movement/Actions"]
+
+[node name="PM_Crouch" type="Node" parent="Movement/Actions/Crouch" node_paths=PackedStringArray("_crouchInput", "_codyScalor", "_walkProcess", "_groundState")]
+script = ExtResource("15_vd3v3")
+_crouchInput = NodePath("../../../../Input/PI_CrouchDispatcher/PI_Slide/PI_Crouch")
+_codyScalor = NodePath("../../../../Body")
+_walkProcess = NodePath("../../../../Input/PI_Walk")
+_groundState = NodePath("../../../../State/PS_Grounded")
+
+[node name="PM_Slide" type="Node" parent="Movement/Actions/Crouch" node_paths=PackedStringArray("_controller", "_slideInput", "_bodyScalor", "_walkProcess", "_groundState")]
+script = ExtResource("20_5y6qm")
+_controller = NodePath("../../../..")
+_slideInput = NodePath("../../../../Input/PI_CrouchDispatcher/PI_Slide")
+_bodyScalor = NodePath("../../../../Body")
+_walkProcess = NodePath("../../../../Input/PI_Walk")
+_groundState = NodePath("../../../../State/PS_Grounded")
+
+[node name="PM_Dash" type="Node" parent="Movement/Actions/Crouch" node_paths=PackedStringArray("_dashInput", "_walkInput", "_cameraControl", "_controller", "_groundState", "_ledgeClimb", "_wallJump")]
+script = ExtResource("21_kvosw")
+_dashInput = NodePath("../../../../Input/PI_CrouchDispatcher/PI_Dash")
+_walkInput = NodePath("../../../../Input/PI_Walk")
+_cameraControl = NodePath("../../../../CameraPivot")
+_controller = NodePath("../../../..")
+_groundState = NodePath("../../../../State/PS_Grounded")
+_ledgeClimb = NodePath("../../Jump/PM_LedgeClimb")
+_wallJump = NodePath("../../Jump/PM_WallJump")
+_strength = 30.0
+_dashDuration = 0.1
+_minDashRatio = 0.5
 
 [node name="Label" type="Label" parent="." node_paths=PackedStringArray("_controller")]
 anchors_preset = 8
