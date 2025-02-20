@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cmpcqmaf25qcu"]
+[gd_scene load_steps=33 format=3 uid="uid://cmpcqmaf25qcu"]
 
 [ext_resource type="Script" path="res://player/PM_Controller.cs" id="1_7ruml"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_seqbe"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://player/body/PB_Scale.cs" id="4_ldkbw"]
 [ext_resource type="Script" path="res://player/input/PI_Walk.cs" id="4_ob50j"]
 [ext_resource type="Script" path="res://player/input/PI_Jump.cs" id="5_kj45h"]
+[ext_resource type="Script" path="res://player/camera/PC_Bobbing.cs" id="6_a1iy8"]
 [ext_resource type="Script" path="res://player/state/PS_Grounded.cs" id="6_mexc6"]
 [ext_resource type="Script" path="res://player/input/PI_CrouchDispatcher.cs" id="7_2sxgr"]
 [ext_resource type="Script" path="res://player/input/crouch/PI_Crouch.cs" id="7_56r3e"]
@@ -70,10 +71,18 @@ AngularDisplacement = 5.0
 script = ExtResource("3_45b6k")
 Camera = NodePath("../..")
 Controller = NodePath("../../..")
-DecayDamping = 0.2
-Strength = 0.07
+AttackDamping = 0.7
+Strength = 0.03
 
-[node name="Camera3D" type="Camera3D" parent="CameraPivot/PC_Spring/PC_Lean"]
+[node name="PC_Bobbing" type="Node3D" parent="CameraPivot/PC_Spring/PC_Lean" node_paths=PackedStringArray("SprintInput", "GroundState", "Controller")]
+script = ExtResource("6_a1iy8")
+SprintInput = NodePath("../../../../Input/PI_Sprint")
+GroundState = NodePath("../../../../State/PS_Grounded")
+Controller = NodePath("../../../..")
+_sprintAmplitude = 0.002
+_walkWaveLength = 0.15
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot/PC_Spring/PC_Lean/PC_Bobbing"]
 fov = 103.0
 
 [node name="Body" type="CollisionShape3D" parent="." node_paths=PackedStringArray("ModelAnchor")]
