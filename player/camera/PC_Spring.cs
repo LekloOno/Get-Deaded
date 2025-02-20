@@ -28,6 +28,7 @@ public partial class PC_Spring : Node3D
         Position = localSpringPosition * LinearDisplacement;
     }
 
+    //https://gist.github.com/keenanwoodall/951134976ad26a39e75b8b7643d026d6
     //https://github.com/TheAllenChou/numeric-springing
     private void Spring(float timeStep)
     {

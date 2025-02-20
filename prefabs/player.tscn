@@ -1,7 +1,8 @@
-[gd_scene load_steps=31 format=3 uid="uid://cmpcqmaf25qcu"]
+[gd_scene load_steps=32 format=3 uid="uid://cmpcqmaf25qcu"]
 
 [ext_resource type="Script" path="res://player/PM_Controller.cs" id="1_7ruml"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_seqbe"]
+[ext_resource type="Script" path="res://player/camera/PC_Lean.cs" id="3_45b6k"]
 [ext_resource type="Script" path="res://player/camera/PC_Control.cs" id="3_duaqo"]
 [ext_resource type="Script" path="res://player/camera/PC_Spring.cs" id="3_iyr31"]
 [ext_resource type="Script" path="res://player/body/PB_Scale.cs" id="4_ldkbw"]
@@ -47,7 +48,7 @@ script = ExtResource("1_7ruml")
 WalkProcess = NodePath("Input/PI_Walk")
 WallJump = NodePath("Movement/PM_WallJump")
 GroundState = NodePath("State/PS_Grounded")
-CameraControl = NodePath("CameraPivot/PC_Spring/Camera3D")
+CameraControl = NodePath("CameraPivot/PC_Spring/PC_Lean/Camera3D")
 SurfaceControl = NodePath("Movement/PM_SurfaceControl")
 VelocityCache = ExtResource("2_seqbe")
 StraffeSnap = NodePath("Movement/PM_StraffeSnap")
@@ -58,17 +59,25 @@ top_level = true
 
 [node name="PC_Spring" type="Node3D" parent="CameraPivot" node_paths=PackedStringArray("Camera")]
 script = ExtResource("3_iyr31")
-Camera = NodePath("Camera3D")
+Camera = NodePath("PC_Lean/Camera3D")
 HalfLife = 0.08
 Frequency = 14.0
 AngularDisplacement = 5.0
 
-[node name="Camera3D" type="Camera3D" parent="CameraPivot/PC_Spring" node_paths=PackedStringArray("CameraY", "Body")]
+[node name="PC_Lean" type="Node3D" parent="CameraPivot/PC_Spring" node_paths=PackedStringArray("Camera", "Controller")]
+script = ExtResource("3_45b6k")
+Camera = NodePath("Camera3D")
+Controller = NodePath("../../..")
+AttackDamping = 0.4
+DecayDamping = 0.15
+Strength = 0.05
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot/PC_Spring/PC_Lean" node_paths=PackedStringArray("CameraY", "Body")]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0)
 fov = 103.0
 script = ExtResource("3_duaqo")
-CameraY = NodePath("../..")
-Body = NodePath("../../..")
+CameraY = NodePath("../../..")
+Body = NodePath("../../../..")
 
 [node name="Body" type="CollisionShape3D" parent="." node_paths=PackedStringArray("ModelAnchor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
@@ -112,7 +121,7 @@ target_position = Vector3(0, -20, 0)
 [node name="PI_Walk" type="Node" parent="Input" node_paths=PackedStringArray("FlatDirNode", "SightPositionNode")]
 script = ExtResource("4_ob50j")
 FlatDirNode = NodePath("../..")
-SightPositionNode = NodePath("../../CameraPivot/PC_Spring/Camera3D")
+SightPositionNode = NodePath("../../CameraPivot/PC_Spring/PC_Lean/Camera3D")
 
 [node name="PI_Jump" type="Node" parent="Input"]
 script = ExtResource("5_kj45h")
@@ -205,7 +214,7 @@ GroundState = NodePath("../../State/PS_Grounded")
 script = ExtResource("21_kvosw")
 DashInput = NodePath("../../Input/PI_CrouchDispatcher/PI_Dash")
 WalkInput = NodePath("../../Input/PI_Walk")
-CameraControl = NodePath("../../CameraPivot/PC_Spring/Camera3D")
+CameraControl = NodePath("../../CameraPivot/PC_Spring/PC_Lean/Camera3D")
 Controller = NodePath("../..")
 GroundState = NodePath("../../State/PS_Grounded")
 LedgeClimb = NodePath("../PM_LedgeClimb")

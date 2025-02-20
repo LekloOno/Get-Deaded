@@ -15,6 +15,7 @@ public partial class PM_Controller : CharacterBody3D
     public PHX_ForcesCache AdditionalForces {get; private set;} = new PHX_ForcesCache();  // To allow external entities to apply additional forces.
     public PHX_ForcesCache TakeOverForces {get; private set;} = new PHX_ForcesCache();    // To allow external entities to take over the movement behavior.
     public Vector3 RealVelocity {get; set;}
+    public Vector3 Acceleration {get; private set;}
     
     public const float Speed = 5.0f;
     public const float JumpVelocity = 4.5f;
@@ -47,6 +48,9 @@ public partial class PM_Controller : CharacterBody3D
         // Handle Surface Control
 
         // Collide and slide OR Step climber
+        Acceleration = Vector3.Zero;
+
+        Vector3 startVelocity = Velocity;
 
         Vector3 pos = GlobalPosition;
         if (TakeOverForces.IsEmpty())
@@ -75,6 +79,8 @@ public partial class PM_Controller : CharacterBody3D
         {
             Velocity = TakeOverForces.Consume();
         }
+
+        Acceleration = (Velocity - startVelocity)/(float)delta;
 
         MoveAndSlide();
         RealVelocity = (GlobalPosition - pos)/(float)delta;
