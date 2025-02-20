@@ -35,3 +35,5 @@ Externalize data of recently implemented actions in ressources, just like the pr
 
 Lower camera when sprinting ?
 Slide tilt
+
+Maybe SurfaceState should only cast event when enabled by SurfaceControl ? and add an event for disabling/enabling

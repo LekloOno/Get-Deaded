@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cmpcqmaf25qcu"]
+[gd_scene load_steps=35 format=3 uid="uid://cmpcqmaf25qcu"]
 
 [ext_resource type="Script" path="res://player/PM_Controller.cs" id="1_7ruml"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_seqbe"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://player/input/PI_Sprint.cs" id="7_owt71"]
 [ext_resource type="Script" path="res://player/input/crouch/PI_Dash.cs" id="8_34n6f"]
 [ext_resource type="Script" path="res://player/movement/actions/surface-control/PM_SurfaceState.cs" id="8_fhtxi"]
+[ext_resource type="Script" path="res://player/camera/PC_SlideTilt.cs" id="8_s0wjl"]
 [ext_resource type="Resource" uid="uid://dn58omqab4s1u" path="res://player/movement/actions/surface-control/data/ground.tres" id="9_ikaaj"]
 [ext_resource type="Script" path="res://player/input/crouch/PI_Slide.cs" id="9_px05h"]
 [ext_resource type="Resource" uid="uid://ca5w3yr3ia7ao" path="res://player/movement/actions/surface-control/data/air.tres" id="10_53m5n"]
@@ -63,9 +64,7 @@ _body = NodePath("..")
 
 [node name="PC_SprintLean" type="Node3D" parent="CameraPivot" node_paths=PackedStringArray("_groundSurfaceState")]
 script = ExtResource("4_ckxhl")
-_heightDisplacement = -0.2
-_inSpeed = 6.0
-_outSpeed = 10.0
+_heightDisplacement = -0.15
 _groundSurfaceState = NodePath("../../Movement/PM_SurfaceControl/GroundState")
 
 [node name="PC_Spring" type="Node3D" parent="CameraPivot/PC_SprintLean" node_paths=PackedStringArray("_cameraTarget")]
@@ -83,7 +82,16 @@ _groundSurfaceState = NodePath("../../../../../Movement/PM_SurfaceControl/Ground
 _groundState = NodePath("../../../../../State/PS_Grounded")
 _controller = NodePath("../../../../..")
 
-[node name="Camera3D" type="Camera3D" parent="CameraPivot/PC_SprintLean/PC_Spring/PC_Lean/PC_Bobbing"]
+[node name="PC_SlideTilt" type="Node3D" parent="CameraPivot/PC_SprintLean/PC_Spring/PC_Lean/PC_Bobbing" node_paths=PackedStringArray("_cameraControl", "_controller", "_surfaceGroundState")]
+script = ExtResource("8_s0wjl")
+_slideTiltingAngle = 0.01
+_slideTiltingSpeed = 5.0
+_slideTiltingResetSpeed = 5.0
+_cameraControl = NodePath("../../../../..")
+_controller = NodePath("../../../../../..")
+_surfaceGroundState = NodePath("../../../../../../Movement/PM_SurfaceControl/GroundState")
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot/PC_SprintLean/PC_Spring/PC_Lean/PC_Bobbing/PC_SlideTilt"]
 fov = 103.0
 
 [node name="Body" type="CollisionShape3D" parent="." node_paths=PackedStringArray("_modelAnchor")]

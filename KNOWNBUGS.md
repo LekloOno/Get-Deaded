@@ -11,3 +11,5 @@ When timing a jump at the right moment while uncrouching, you can get significan
 It's not that easy to do, and kind of intuitive, so it might be kept as a feature. Need to check if it is not too unpredictable, tick rate independant, etc.
 
 LedgeClimb stops right when the foot ray does not collide anymore. However, there might be small holes on the obstacles to climb right at foot level, which blocks the ledgeclimb.
+
+Sliding of an edge makes you fall down super fast. Maybe something is wrong with the way gravity is applied ?
