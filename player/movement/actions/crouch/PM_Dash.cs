@@ -55,6 +55,8 @@ public partial class PM_Dash : PM_Action
         _endDashTimer.Timeout += EndDash;
         _isDashing = true;
         _available = false;
+
+        OnStart?.Invoke(this, EventArgs.Empty);
     }
 
     public void Reset(object sender, EventArgs e)
@@ -74,6 +76,8 @@ public partial class PM_Dash : PM_Action
             _endDashTimer.Timeout -= EndDash;
             _endDashTimer = null;
         }
+
+        OnStop?.Invoke(this, EventArgs.Empty);
     }
 
     private void EndDash()

@@ -17,6 +17,7 @@ public partial class PM_Slide : PM_Action
     [Export(PropertyHint.Range, "0.0, 10.0")] private float _slideDecayMinRecover = 1f;
     [Export(PropertyHint.Range, "0.0,  1.0")] private float _slideDecayStrength = 0.8f;
 
+    public bool IsActive {get; private set;} = false;
     private ulong _lastForceTime = 0;
     public EventHandler OnSlowStop;
 
@@ -57,6 +58,8 @@ public partial class PM_Slide : PM_Action
 
         _controller.FloorConstantSpeed = false;
         _bodyScalor.SetTargetScale(_targetScaleRatio, _scaleSpeed);
+
+        IsActive = true;
         OnStart?.Invoke(this, EventArgs.Empty);
     }
 
@@ -79,12 +82,16 @@ public partial class PM_Slide : PM_Action
 
         _controller.FloorConstantSpeed = true;
         _bodyScalor.ResetScale(_resetScaleSpeed);
+
+        IsActive = false;
         OnStop?.Invoke(this, EventArgs.Empty);
     }
 
     public void SlowStop()
     {
         _controller.FloorConstantSpeed = true;
+
+        IsActive = false;
         OnSlowStop?.Invoke(this, EventArgs.Empty);
     }
 }
