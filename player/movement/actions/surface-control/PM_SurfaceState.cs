@@ -37,5 +37,8 @@ public partial class PM_SurfaceState : Node
         data.OnStart?.Invoke(this, EventArgs.Empty);
     }
 
-    public void SetCrouch(object sender, EventArgs e) => _currentData = _stateData.Crouch;
+    public bool IsNormal() => _currentData == _stateData.Normal;
+    public bool IsSprint() => _currentData == _stateData.Sprint;
+    public bool IsSlide() => _currentData == _stateData.Slide;
+    public bool IsCrouch() => _currentData == _stateData.Crouch;
 }

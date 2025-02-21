@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=46 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" path="res://player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -12,12 +12,19 @@
 [ext_resource type="Script" path="res://ui/UI_SpeedoMeter.cs" id="10_kvg1p"]
 [ext_resource type="Script" path="res://player/body/PB_Scale.cs" id="11_6ifu1"]
 [ext_resource type="Script" path="res://player/input/PI_Walk.cs" id="12_pwafq"]
+[ext_resource type="Script" path="res://player/audio/PA_FootSteps.cs" id="12_ttbg8"]
+[ext_resource type="AudioStream" uid="uid://dv8ggovmlfylf" path="res://assets/sounds/footsteps/footsteps.wav" id="12_x0vwp"]
 [ext_resource type="Script" path="res://player/input/PI_Jump.cs" id="13_ua84m"]
+[ext_resource type="AudioStream" uid="uid://c202uar3rg40l" path="res://assets/sounds/footsteps/concrete-step1.wav" id="14_6x03f"]
 [ext_resource type="Script" path="res://player/input/PI_Sprint.cs" id="14_puula"]
 [ext_resource type="Script" path="res://player/input/PI_CrouchDispatcher.cs" id="15_03g52"]
+[ext_resource type="AudioStream" uid="uid://dw0ipfbd7lxkv" path="res://assets/sounds/footsteps/concrete-step2.wav" id="15_53h66"]
 [ext_resource type="Script" path="res://player/input/crouch/PI_Dash.cs" id="16_t2wfm"]
+[ext_resource type="AudioStream" uid="uid://dnjywl4vsbygw" path="res://assets/sounds/footsteps/concrete-step3.wav" id="16_ul8s5"]
 [ext_resource type="Script" path="res://player/input/crouch/PI_Slide.cs" id="17_d5kvj"]
+[ext_resource type="AudioStream" uid="uid://c51litrqlhdk8" path="res://assets/sounds/footsteps/concrete-step5.wav" id="18_1gs0t"]
 [ext_resource type="Script" path="res://player/input/crouch/PI_Crouch.cs" id="18_wrcsk"]
+[ext_resource type="AudioStream" uid="uid://8we7lgvkmauv" path="res://assets/sounds/footsteps/concrete-step.wav" id="19_10w05"]
 [ext_resource type="Script" path="res://player/state/PS_Grounded.cs" id="19_vpdv2"]
 [ext_resource type="Script" path="res://player/movement/actions/surface-control/PM_SurfaceControl.cs" id="20_ncxc1"]
 [ext_resource type="Script" path="res://player/movement/actions/surface-control/PM_SurfaceState.cs" id="21_fhiml"]
@@ -79,6 +86,8 @@ _groundSurfaceState = NodePath("../../Movement/PM_SurfaceControl/GroundState")
 
 [node name="PC_Bobbing" type="Node3D" parent="CameraPivot/PC_SprintLean" node_paths=PackedStringArray("_groundSurfaceState", "_groundState", "_controller")]
 script = ExtResource("5_1gcwp")
+_sprintWaveLength = 0.14
+_walkWaveLength = 0.15
 _groundSurfaceState = NodePath("../../../Movement/PM_SurfaceControl/GroundState")
 _groundState = NodePath("../../../State/PS_Grounded")
 _controller = NodePath("../../..")
@@ -145,6 +154,23 @@ update_scale = false
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Body/SpatialAnchor"]
 mesh = SubResource("CapsuleMesh_qcifk")
 skeleton = NodePath("../../..")
+
+[node name="Sound" type="Node3D" parent="Body"]
+
+[node name="PA_FootSteps" type="AudioStreamPlayer3D" parent="Body/Sound" node_paths=PackedStringArray("_walkInput", "_groundSurfaceState", "_groundState", "_stepLoop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+stream = ExtResource("12_x0vwp")
+volume_db = -20.0
+script = ExtResource("12_ttbg8")
+_normalPitchBase = 0.7
+_stepSounds = [ExtResource("14_6x03f"), ExtResource("15_53h66"), ExtResource("16_ul8s5"), ExtResource("18_1gs0t"), ExtResource("19_10w05")]
+_walkInput = NodePath("../../../Input/PI_Walk")
+_groundSurfaceState = NodePath("../../../Movement/PM_SurfaceControl/GroundState")
+_groundState = NodePath("../../../State/PS_Grounded")
+_stepLoop = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="Body/Sound/PA_FootSteps"]
+process_callback = 0
 
 [node name="WallJumpCastLow" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)

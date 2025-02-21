@@ -1,0 +1,114 @@
+using System;
+using Godot;
+using Godot.Collections;
+
+[GlobalClass]
+public partial class PA_FootSteps : AudioStreamPlayer3D
+{
+    [ExportCategory("Settings")]
+    [Export] private double _minPitch = .85;
+    [Export] private double _maxPitch = 1.05;
+    [Export] private float _normalInterval = 0.35f;
+    [Export] private float _normalPitchBase = 0.8f;
+    [Export] private float _normalVolume = -40f;
+
+    [Export] private float _sprintInterval = 0.3f;
+    [Export] private float _sprintPitchBase = 1f;
+    [Export] private float _sprintVolume = -25f;
+
+    [Export] private Array<AudioStream> _stepSounds = new();
+
+    [ExportCategory("Setup")]
+    [Export] private PI_Walk _walkInput;
+    [Export] private PM_SurfaceState _groundSurfaceState;
+    [Export] private PS_Grounded _groundState;
+    
+
+
+    [Export] private Timer _stepLoop;
+    private float _currentInterval;
+    private float _pitchBaseDelta;
+    
+    public override void _Ready()
+    {
+        _stepLoop.Timeout += PlayStep;
+
+        _walkInput.OnStop += StopPlay;
+        _groundState.OnLeaving += StopPlay;
+        _groundSurfaceState.Sprint.OnStop += StopPlay;
+        _groundSurfaceState.Normal.OnStop += StopPlay;
+
+        _walkInput.OnStart += TryInputPlay;
+        _groundState.OnLanding += TryLandPlay;
+        _groundSurfaceState.Sprint.OnStart += TryPlaySprint;
+        _groundSurfaceState.Normal.OnStart += TryPlayNormal;
+    }
+
+    public void TryInputPlay(object sender, EventArgs e)
+    {
+        // Grounded check is already done by TryPlayNormal/Sprint
+        // So we just dispatch to the right listener.
+
+        if (_groundSurfaceState.IsNormal())
+            TryPlayNormal(sender, e);
+
+        if (_groundSurfaceState.IsSprint())
+            TryPlaySprint(sender, e);
+    }
+
+    public void TryLandPlay(object sender, EventArgs e)
+    {
+        // Just landed, no need to check for grounded state.
+
+        if (_walkInput.IsStopped())
+            return;
+
+        if (_groundSurfaceState.IsNormal())
+            StartPlayNormal();
+        
+        if (_groundSurfaceState.IsSprint())
+            StartPlaySprint();
+    }
+
+    public void TryPlaySprint(object sender, EventArgs e)
+    {
+        if (!_groundState.IsGrounded())
+            return;
+
+
+        StartPlaySprint();
+    }
+
+    public void TryPlayNormal(object sender, EventArgs e)
+    {
+        if (!_groundState.IsGrounded() || _walkInput.IsStopped())
+            return;
+
+        StartPlayNormal();
+    }
+
+    private void PlayStep()
+    {
+        Stream = _stepSounds.PickRandom();
+        PitchScale = (float)GD.RandRange(_minPitch, _maxPitch) + _pitchBaseDelta;
+        Play();
+    }
+
+    private void StartPlayNormal()
+    {
+        _pitchBaseDelta = _normalPitchBase - 1f;
+        VolumeDb = _normalVolume;
+        _stepLoop.Start(_normalInterval);
+    }
+    private void StartPlaySprint()
+    {
+        _pitchBaseDelta = _sprintPitchBase - 1f;
+        VolumeDb = _sprintVolume;
+        _stepLoop.Start(_sprintInterval);
+    }   
+
+    public void StopPlay(object sender, EventArgs e)
+    {
+        _stepLoop.Stop();
+    }
+}

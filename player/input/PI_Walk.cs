@@ -8,11 +8,14 @@ public partial class PI_Walk : Node
     [Export] private Node3D _flatDirNode;
 
     public EventHandler OnStopOrBackward;
+    public EventHandler OnStop;
+    public EventHandler OnStart;
     public EventHandler<KeyPressedArgs> KeyPressed;
     public Vector3 SpaceWishDir {get; private set;}
     public Vector3 WishDir {get; private set;}
     public Vector2 WalkAxis {get; private set;}
     private Vector2 _nextWalkAxis;
+    private bool _lastStopped = true;
 
     public override void _UnhandledKeyInput(InputEvent @event)
     {
@@ -27,15 +30,23 @@ public partial class PI_Walk : Node
             KeyPressed?.Invoke(this, new KeyPressedArgs(WishDir, WalkAxis));
         }
 
-        if(StopOrLess())
+        if(IsStopped())
         {
+            SetStop(); 
             OnStopOrBackward?.Invoke(this, EventArgs.Empty);
-        }
+            return;
+        } else
+            SetStart();
+
+        if(IsBacking())
+            OnStopOrBackward?.Invoke(this, EventArgs.Empty);
+
     }
 
     public static Vector2 ComputeWalkAxis() => Input.GetVector(LEFT, RIGHT, FORWARD, BACKWARD);
 
-    public bool StopOrLess() => WalkAxis.Y > 0 || (WalkAxis.X == 0 && WalkAxis.Y == 0);
+    public bool IsStopped() => WalkAxis.X == 0 && WalkAxis.Y == 0;
+    public bool IsBacking() => WalkAxis.Y > 0;
 
     public Vector3 FreeWishDir(Vector2 input)
     {
@@ -51,4 +62,22 @@ public partial class PI_Walk : Node
     public bool BackwardDown() => Input.IsActionPressed(BACKWARD);
     public bool RightDown() => Input.IsActionPressed(RIGHT);
     public bool LeftDown() => Input.IsActionPressed(LEFT);
+
+    private void SetStop()
+    {
+        if(_lastStopped)
+            return;
+        
+        _lastStopped = true;
+        OnStop?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void SetStart()
+    {
+        if(!_lastStopped)
+            return;
+    
+        _lastStopped = false;
+        OnStart?.Invoke(this, EventArgs.Empty);
+    }
 }
