@@ -37,9 +37,7 @@ public partial class UI_Crosshair : Node3D
         {
             Vector3 hitPosition = (Vector3)result["position"];
             float distance = _sightPosition.GlobalPosition.DistanceTo(hitPosition);
-
-            if(_camera.IsPositionBehind(hitPosition)) GD.Print("oui");
-
+            
             if (distance > _minRange)
             {
                 _targetPosition = _camera.UnprojectPosition(hitPosition)  - _imageOffset;

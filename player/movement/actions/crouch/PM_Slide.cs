@@ -40,7 +40,8 @@ public partial class PM_Slide : PM_Action
             float elapsedTime = (currentTime/1000f) - (_lastForceTime/1000f);
             float decayCoefficient = Mathf.Pow(Mathf.Min(_slideDecayRecover, elapsedTime)/_slideDecayRecover, _slideDecayStrength);
 
-            _controller.AdditionalForces.AddImpulse(_controller.Velocity.Normalized() * _strength * decayCoefficient);
+            Vector3 direction = _controller.Velocity.Normalized();
+            _controller.AdditionalForces.AddImpulse(direction * _strength * decayCoefficient);
 
             _lastForceTime = currentTime;
         }
