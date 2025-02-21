@@ -1,14 +1,14 @@
 using Godot;
 
 [GlobalClass]
-public partial class UI_Crosshair : Node3D
+public partial class UI_Crosshair : Control
 {
     [Export] private Node3D _sightPosition;
     [Export] private Camera3D _camera;
     [Export] private Control image;
     [Export] float _maxRange = 30;
-    [Export] float _minRange = 5;
-    [Export] float _resetSpeed = 5;
+    [Export] float _minRange = 2;
+    [Export] float _resetSpeed = 30;
 
     private Vector2 _imageOffset;
     private Vector2 _initPosition;
@@ -24,7 +24,7 @@ public partial class UI_Crosshair : Node3D
 
     public override void _Process(double delta)
     {
-        var spaceState = GetWorld3D().DirectSpaceState;
+        var spaceState = _camera.GetWorld3D().DirectSpaceState;
 
         PhysicsRayQueryParameters3D query = PhysicsRayQueryParameters3D.Create(
             _sightPosition.GlobalPosition, 

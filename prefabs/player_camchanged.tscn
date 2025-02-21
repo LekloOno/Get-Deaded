@@ -302,15 +302,7 @@ _minDashRatio = 0.5
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="UI_Crosshair" type="Node3D" parent="CanvasLayer" node_paths=PackedStringArray("_sightPosition", "_camera", "image")]
-script = ExtResource("32_jex4o")
-_sightPosition = NodePath("../../CameraPivot/PC_SprintLean")
-_camera = NodePath("../../CameraPivot/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/Camera3D")
-image = NodePath("../Crosshair/TextureRect")
-_minRange = 2.0
-_resetSpeed = 30.0
-
-[node name="Crosshair" type="Control" parent="CanvasLayer"]
+[node name="UI_Crosshair" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("_sightPosition", "_camera", "image")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -318,8 +310,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("32_jex4o")
+_sightPosition = NodePath("../../CameraPivot")
+_camera = NodePath("../../CameraPivot/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/Camera3D")
+image = NodePath("TextureRect")
+_resetSpeed = 20.0
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Crosshair"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UI_Crosshair"]
 modulate = Color(1, 1, 1, 0.619608)
 layout_mode = 1
 anchors_preset = 8
