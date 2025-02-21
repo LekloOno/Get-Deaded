@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=39 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" path="res://player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -38,6 +38,9 @@
 min_value = -0.5
 _data = [Vector2(0, 0.15), 0.0, 0.105575, 0, 0, Vector2(0.2, 0.7), 2.83587, 2.83587, 0, 0, Vector2(0.623762, 0.571429), -4.19677, -4.19677, 0, 0, Vector2(0.856, -0.15), 0.0, 0.0, 0, 0, Vector2(1, 0), 1.04167, 0.0, 1, 0]
 point_count = 5
+
+[sub_resource type="Gradient" id="Gradient_k51pg"]
+colors = PackedColorArray(0, 0.4, 0.894118, 0.764706, 0, 1, 0.537255, 0.784314)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o274a"]
 radius = 0.25
@@ -120,6 +123,9 @@ modulate = Color(0.0196078, 0.498039, 1, 0.764706)
 outline_modulate = Color(0, 0, 0, 0.101961)
 text = "poo"
 script = ExtResource("10_kvg1p")
+_gradient = SubResource("Gradient_k51pg")
+_minSpeed = 10.0
+_maxSpeed = 60.0
 _controller = NodePath("../../../..")
 
 [node name="Body" type="CollisionShape3D" parent="." node_paths=PackedStringArray("_modelAnchor")]

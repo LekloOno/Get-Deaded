@@ -2,12 +2,22 @@ using Godot;
 
 public partial class UI_SpeedoMeter : Label3D
 {
+    [ExportCategory("Settings")]
+    [Export] private Gradient _gradient;
+    [Export] private float _minSpeed = 60f;
+    [Export] private float _maxSpeed = 10f;
+
+    [ExportCategory("Setup")]
     [Export] private PM_Controller _controller;
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
-        Vector3 faltVel = _controller.RealVelocity * new Vector3(1, 0, 1);
-        SetText((int)(faltVel.Length() * 3.6) + " km/h");
+        Vector3 faltVel = PHX_Vector3Ext.Flat(_controller.RealVelocity);
+        float speed = faltVel.Length() * 3.6f;
+        float scaledSpeed = (speed - _minSpeed)/(_maxSpeed-_minSpeed);
+        scaledSpeed = Mathf.Clamp(scaledSpeed, 0, 1);
+
+        SetText((int)speed + " km/h");
+        SetModulate(_gradient.Sample(scaledSpeed));
     }
 }
