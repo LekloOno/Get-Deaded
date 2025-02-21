@@ -332,12 +332,12 @@ _stepSounds = [ExtResource("20_o38yh"), ExtResource("21_ux4x4"), ExtResource("16
 _minPitch = 2.0
 _maxPitch = 2.0
 
-[node name="PA_LedgeClimn" type="Node3D" parent="Body/Sound" node_paths=PackedStringArray("_LedgeClimb", "_slideInLayers")]
+[node name="PA_LedgeClimb" type="Node3D" parent="Body/Sound" node_paths=PackedStringArray("_LedgeClimb", "_slideInLayers")]
 script = ExtResource("42_xvvq2")
 _LedgeClimb = NodePath("../../../Movement/Actions/Jump/PM_LedgeClimb")
 _slideInLayers = [NodePath("PA_Sound")]
 
-[node name="PA_Sound" type="AudioStreamPlayer3D" parent="Body/Sound/PA_LedgeClimn"]
+[node name="PA_Sound" type="AudioStreamPlayer3D" parent="Body/Sound/PA_LedgeClimb"]
 volume_db = -30.0
 attenuation_filter_cutoff_hz = 15000.0
 script = ExtResource("13_uyiqg")
