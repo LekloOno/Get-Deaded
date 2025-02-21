@@ -3,11 +3,9 @@ using Godot;
 using Godot.Collections;
 
 [GlobalClass]
-public partial class PA_FootSteps : AudioStreamPlayer3D
+public partial class PA_FootSteps : PA_Sound
 {
     [ExportCategory("Settings")]
-    [Export] private double _minPitch = .85;
-    [Export] private double _maxPitch = 1.05;
     [Export] private float _normalInterval = 0.35f;
     [Export] private float _normalPitchBase = 0.8f;
     [Export] private float _normalVolume = -40f;
@@ -16,22 +14,16 @@ public partial class PA_FootSteps : AudioStreamPlayer3D
     [Export] private float _sprintPitchBase = 1f;
     [Export] private float _sprintVolume = -25f;
 
-    [Export] private Array<AudioStream> _stepSounds = new();
-
     [ExportCategory("Setup")]
     [Export] private PI_Walk _walkInput;
     [Export] private PM_SurfaceState _groundSurfaceState;
     [Export] private PS_Grounded _groundState;
-    
-
-
     [Export] private Timer _stepLoop;
     private float _currentInterval;
-    private float _pitchBaseDelta;
     
     public override void _Ready()
     {
-        _stepLoop.Timeout += PlayStep;
+        _stepLoop.Timeout += PlaySound;
 
         _walkInput.OnStop += StopPlay;
         _groundState.OnLeaving += StopPlay;
@@ -85,13 +77,6 @@ public partial class PA_FootSteps : AudioStreamPlayer3D
             return;
 
         StartPlayNormal();
-    }
-
-    private void PlayStep()
-    {
-        Stream = _stepSounds.PickRandom();
-        PitchScale = (float)GD.RandRange(_minPitch, _maxPitch) + _pitchBaseDelta;
-        Play();
     }
 
     private void StartPlayNormal()
