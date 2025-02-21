@@ -1,38 +1,38 @@
-[gd_scene load_steps=38 format=3 uid="uid://cmpcqmaf25qcu"]
+[gd_scene load_steps=38 format=3 uid="uid://b5w3ok85lmxgf"]
 
-[ext_resource type="Script" path="res://player/PM_Controller.cs" id="1_7ruml"]
-[ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_seqbe"]
-[ext_resource type="Script" path="res://player/camera/PC_Lean.cs" id="3_45b6k"]
-[ext_resource type="Script" path="res://player/camera/PC_Control.cs" id="3_duaqo"]
-[ext_resource type="Script" path="res://player/camera/PC_Spring.cs" id="3_iyr31"]
-[ext_resource type="Script" path="res://player/camera/PC_SprintLean.cs" id="4_ckxhl"]
-[ext_resource type="Script" path="res://player/body/PB_Scale.cs" id="4_ldkbw"]
-[ext_resource type="Script" path="res://player/input/PI_Walk.cs" id="4_ob50j"]
-[ext_resource type="Script" path="res://player/input/PI_Jump.cs" id="5_kj45h"]
-[ext_resource type="Script" path="res://player/camera/PC_Bobbing.cs" id="6_a1iy8"]
-[ext_resource type="Script" path="res://player/state/PS_Grounded.cs" id="6_mexc6"]
-[ext_resource type="Script" path="res://player/input/PI_CrouchDispatcher.cs" id="7_2sxgr"]
-[ext_resource type="Script" path="res://player/input/crouch/PI_Crouch.cs" id="7_56r3e"]
-[ext_resource type="Script" path="res://player/movement/actions/surface-control/PM_SurfaceControl.cs" id="7_msb5j"]
-[ext_resource type="Script" path="res://player/input/PI_Sprint.cs" id="7_owt71"]
-[ext_resource type="Script" path="res://player/input/crouch/PI_Dash.cs" id="8_34n6f"]
-[ext_resource type="Script" path="res://player/movement/actions/surface-control/PM_SurfaceState.cs" id="8_fhtxi"]
-[ext_resource type="Script" path="res://player/camera/PC_SlideTilt.cs" id="8_s0wjl"]
-[ext_resource type="Script" path="res://player/camera/PC_SlideLedgeAnim.cs" id="9_4qub8"]
-[ext_resource type="Resource" uid="uid://dn58omqab4s1u" path="res://player/movement/actions/surface-control/data/ground.tres" id="9_ikaaj"]
-[ext_resource type="Script" path="res://player/input/crouch/PI_Slide.cs" id="9_px05h"]
-[ext_resource type="Resource" uid="uid://ca5w3yr3ia7ao" path="res://player/movement/actions/surface-control/data/air.tres" id="10_53m5n"]
-[ext_resource type="Script" path="res://player/movement/actions/jump/PM_Jump.cs" id="11_edsm7"]
-[ext_resource type="Resource" uid="uid://chd67e10gx4rm" path="res://player/movement/actions/jump/data/basic_jump.tres" id="13_e1cl2"]
-[ext_resource type="Script" path="res://debug/Speedometer.cs" id="14_chh26"]
-[ext_resource type="Script" path="res://player/movement/actions/crouch/PM_Crouch.cs" id="15_vd3v3"]
-[ext_resource type="Script" path="res://player/movement/actions/crouch/PM_Slide.cs" id="20_5y6qm"]
-[ext_resource type="Script" path="res://player/movement/actions/crouch/PM_Dash.cs" id="21_kvosw"]
-[ext_resource type="Script" path="res://player/movement/PM_StraffeSnap.cs" id="22_cp0qq"]
-[ext_resource type="Script" path="res://player/movement/actions/jump/PM_LedgeClimb.cs" id="23_w6mlc"]
-[ext_resource type="Script" path="res://player/movement/actions/jump/PM_WallJump.cs" id="24_gjg6k"]
-[ext_resource type="Script" path="res://ui/UI_SpeedoMeter.cs" id="31_jxc7o"]
-[ext_resource type="Texture2D" uid="uid://lv4srmi6i827" path="res://assets/crosshairs/PNG/Outline/crosshair001.png" id="32_64eld"]
+[ext_resource type="Script" path="res://player/PM_Controller.cs" id="1_vw06q"]
+[ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_7wk04"]
+[ext_resource type="Script" path="res://player/camera/PC_Control.cs" id="3_xv583"]
+[ext_resource type="Script" path="res://player/camera/PC_SprintLean.cs" id="4_s37k1"]
+[ext_resource type="Script" path="res://player/camera/PC_Bobbing.cs" id="5_1gcwp"]
+[ext_resource type="Script" path="res://player/camera/PC_Spring.cs" id="6_v2bpg"]
+[ext_resource type="Script" path="res://player/camera/PC_Lean.cs" id="7_64lfg"]
+[ext_resource type="Script" path="res://player/camera/PC_SlideTilt.cs" id="8_ey8l8"]
+[ext_resource type="Script" path="res://player/camera/PC_SlideLedgeAnim.cs" id="9_727yx"]
+[ext_resource type="Script" path="res://ui/UI_SpeedoMeter.cs" id="10_kvg1p"]
+[ext_resource type="Script" path="res://player/body/PB_Scale.cs" id="11_6ifu1"]
+[ext_resource type="Script" path="res://player/input/PI_Walk.cs" id="12_pwafq"]
+[ext_resource type="Script" path="res://player/input/PI_Jump.cs" id="13_ua84m"]
+[ext_resource type="Script" path="res://player/input/PI_Sprint.cs" id="14_puula"]
+[ext_resource type="Script" path="res://player/input/PI_CrouchDispatcher.cs" id="15_03g52"]
+[ext_resource type="Script" path="res://player/input/crouch/PI_Dash.cs" id="16_t2wfm"]
+[ext_resource type="Script" path="res://player/input/crouch/PI_Slide.cs" id="17_d5kvj"]
+[ext_resource type="Script" path="res://player/input/crouch/PI_Crouch.cs" id="18_wrcsk"]
+[ext_resource type="Script" path="res://player/state/PS_Grounded.cs" id="19_vpdv2"]
+[ext_resource type="Script" path="res://player/movement/actions/surface-control/PM_SurfaceControl.cs" id="20_ncxc1"]
+[ext_resource type="Script" path="res://player/movement/actions/surface-control/PM_SurfaceState.cs" id="21_fhiml"]
+[ext_resource type="Resource" uid="uid://dn58omqab4s1u" path="res://player/movement/actions/surface-control/data/ground.tres" id="22_fklbr"]
+[ext_resource type="Resource" uid="uid://ca5w3yr3ia7ao" path="res://player/movement/actions/surface-control/data/air.tres" id="23_jl0xl"]
+[ext_resource type="Script" path="res://player/movement/PM_StraffeSnap.cs" id="24_4bvsd"]
+[ext_resource type="Script" path="res://player/movement/actions/jump/PM_Jump.cs" id="25_qc7ep"]
+[ext_resource type="Resource" uid="uid://chd67e10gx4rm" path="res://player/movement/actions/jump/data/basic_jump.tres" id="26_kdvrh"]
+[ext_resource type="Script" path="res://player/movement/actions/jump/PM_LedgeClimb.cs" id="27_shnri"]
+[ext_resource type="Script" path="res://player/movement/actions/jump/PM_WallJump.cs" id="28_x5ps3"]
+[ext_resource type="Script" path="res://player/movement/actions/crouch/PM_Crouch.cs" id="29_ykpqc"]
+[ext_resource type="Script" path="res://player/movement/actions/crouch/PM_Slide.cs" id="30_q6qhf"]
+[ext_resource type="Script" path="res://player/movement/actions/crouch/PM_Dash.cs" id="31_5px2t"]
+[ext_resource type="Script" path="res://ui/UI_Crosshair.cs" id="32_jex4o"]
+[ext_resource type="Texture2D" uid="uid://lv4srmi6i827" path="res://assets/crosshairs/PNG/Outline/crosshair001.png" id="33_ck35o"]
 
 [sub_resource type="Curve" id="Curve_ux8de"]
 min_value = -0.5
@@ -54,49 +54,50 @@ radius = 0.25
 floor_constant_speed = true
 floor_block_on_wall = false
 floor_max_angle = 0.872665
-script = ExtResource("1_7ruml")
+script = ExtResource("1_vw06q")
 _walkProcess = NodePath("Input/PI_Walk")
 _wallJump = NodePath("Movement/Actions/Jump/PM_WallJump")
 _groundState = NodePath("State/PS_Grounded")
 _cameraControl = NodePath("CameraPivot")
 _surfaceControl = NodePath("Movement/PM_SurfaceControl")
-_velocityCache = ExtResource("2_seqbe")
+_velocityCache = ExtResource("2_7wk04")
 _straffeSnap = NodePath("Movement/PM_StraffeSnap")
 
 [node name="CameraPivot" type="Node3D" parent="." node_paths=PackedStringArray("_body")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0)
 top_level = true
-script = ExtResource("3_duaqo")
+script = ExtResource("3_xv583")
 _body = NodePath("..")
 
 [node name="PC_SprintLean" type="Node3D" parent="CameraPivot" node_paths=PackedStringArray("_groundSurfaceState")]
-script = ExtResource("4_ckxhl")
+script = ExtResource("4_s37k1")
 _heightDisplacement = -0.15
 _groundSurfaceState = NodePath("../../Movement/PM_SurfaceControl/GroundState")
 
-[node name="PC_Spring" type="Node3D" parent="CameraPivot/PC_SprintLean" node_paths=PackedStringArray("_cameraTarget")]
-script = ExtResource("3_iyr31")
-_cameraTarget = NodePath("../../../Body/SpatialAnchor/RemoteTransform3D")
+[node name="PC_Bobbing" type="Node3D" parent="CameraPivot/PC_SprintLean" node_paths=PackedStringArray("_groundSurfaceState", "_groundState", "_controller")]
+script = ExtResource("5_1gcwp")
+_groundSurfaceState = NodePath("../../../Movement/PM_SurfaceControl/GroundState")
+_groundState = NodePath("../../../State/PS_Grounded")
+_controller = NodePath("../../..")
 
-[node name="PC_Lean" type="Node3D" parent="CameraPivot/PC_SprintLean/PC_Spring" node_paths=PackedStringArray("_camera", "_controller")]
-script = ExtResource("3_45b6k")
-_camera = NodePath("../../..")
-_controller = NodePath("../../../..")
+[node name="PC_Spring" type="Node3D" parent="CameraPivot/PC_SprintLean/PC_Bobbing" node_paths=PackedStringArray("_cameraTarget")]
+script = ExtResource("6_v2bpg")
+LinearDisplacement = 0.02
+_cameraTarget = NodePath("../../../../Body/SpatialAnchor/RemoteTransform3D")
 
-[node name="PC_Bobbing" type="Node3D" parent="CameraPivot/PC_SprintLean/PC_Spring/PC_Lean" node_paths=PackedStringArray("_groundSurfaceState", "_groundState", "_controller")]
-script = ExtResource("6_a1iy8")
-_groundSurfaceState = NodePath("../../../../../Movement/PM_SurfaceControl/GroundState")
-_groundState = NodePath("../../../../../State/PS_Grounded")
+[node name="PC_Lean" type="Node3D" parent="CameraPivot/PC_SprintLean/PC_Bobbing/PC_Spring" node_paths=PackedStringArray("_camera", "_controller")]
+script = ExtResource("7_64lfg")
+_camera = NodePath("../../../..")
 _controller = NodePath("../../../../..")
 
-[node name="PC_SlideTilt" type="Node3D" parent="CameraPivot/PC_SprintLean/PC_Spring/PC_Lean/PC_Bobbing" node_paths=PackedStringArray("_cameraControl", "_controller", "_surfaceGroundState")]
-script = ExtResource("8_s0wjl")
+[node name="PC_SlideTilt" type="Node3D" parent="CameraPivot/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean" node_paths=PackedStringArray("_cameraControl", "_controller", "_surfaceGroundState")]
+script = ExtResource("8_ey8l8")
 _cameraControl = NodePath("../../../../..")
 _controller = NodePath("../../../../../..")
 _surfaceGroundState = NodePath("../../../../../../Movement/PM_SurfaceControl/GroundState")
 
-[node name="PC_SlideLedgeAnim" type="Node3D" parent="CameraPivot/PC_SprintLean/PC_Spring/PC_Lean/PC_Bobbing/PC_SlideTilt" node_paths=PackedStringArray("_groundState", "_cameraControl", "_controller", "_groundSurfaceState", "_ledgeClimb")]
-script = ExtResource("9_4qub8")
+[node name="PC_SlideLedgeAnim" type="Node3D" parent="CameraPivot/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt" node_paths=PackedStringArray("_groundState", "_cameraControl", "_controller", "_groundSurfaceState", "_ledgeClimb")]
+script = ExtResource("9_727yx")
 _curve = SubResource("Curve_ux8de")
 _slideStrengthX = 3.0
 _slideStrengthZ = 1.5
@@ -109,23 +110,22 @@ _controller = NodePath("../../../../../../..")
 _groundSurfaceState = NodePath("../../../../../../../Movement/PM_SurfaceControl/GroundState")
 _ledgeClimb = NodePath("../../../../../../../Movement/Actions/Jump/PM_LedgeClimb")
 
-[node name="Camera3D" type="Camera3D" parent="CameraPivot/PC_SprintLean/PC_Spring/PC_Lean/PC_Bobbing/PC_SlideTilt/PC_SlideLedgeAnim"]
+[node name="Camera3D" type="Camera3D" parent="CameraPivot/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim"]
 fov = 103.0
 
-[node name="Label3D" type="Label3D" parent="CameraPivot/PC_SprintLean/PC_Spring" node_paths=PackedStringArray("_controller")]
-transform = Transform3D(0.965926, 0.0360207, -0.2563, 0, 0.990268, 0.139173, 0.258819, -0.134431, 0.956525, 0.26, -0.245, -0.47)
-visible = false
-pixel_size = 0.002
-modulate = Color(0.856107, 0.993532, 0.941118, 1)
-outline_modulate = Color(0, 0, 0, 0.196078)
+[node name="Label3D" type="Label3D" parent="CameraPivot/PC_SprintLean/PC_Bobbing" node_paths=PackedStringArray("_controller")]
+transform = Transform3D(0.956305, 0.0406903, -0.289526, 0, 0.990268, 0.139173, 0.292372, -0.133092, 0.946998, 0.409688, -0.328343, -0.415548)
+pixel_size = 0.001
+modulate = Color(0.0196078, 0.498039, 1, 0.764706)
+outline_modulate = Color(0, 0, 0, 0.101961)
 text = "poo"
-script = ExtResource("31_jxc7o")
+script = ExtResource("10_kvg1p")
 _controller = NodePath("../../../..")
 
 [node name="Body" type="CollisionShape3D" parent="." node_paths=PackedStringArray("_modelAnchor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_o274a")
-script = ExtResource("4_ldkbw")
+script = ExtResource("11_6ifu1")
 _modelAnchor = NodePath("SpatialAnchor")
 
 [node name="SpatialAnchor" type="Node3D" parent="Body"]
@@ -166,27 +166,27 @@ target_position = Vector3(0, -20, 0)
 [node name="Input" type="Node" parent="."]
 
 [node name="PI_Walk" type="Node" parent="Input" node_paths=PackedStringArray("_flatDirNode")]
-script = ExtResource("4_ob50j")
+script = ExtResource("12_pwafq")
 _flatDirNode = NodePath("../..")
 
 [node name="PI_Jump" type="Node" parent="Input"]
-script = ExtResource("5_kj45h")
+script = ExtResource("13_ua84m")
 
 [node name="PI_Sprint" type="Node" parent="Input" node_paths=PackedStringArray("_jump", "_walkInput")]
-script = ExtResource("7_owt71")
+script = ExtResource("14_puula")
 _jump = NodePath("../../Movement/Actions/Jump/PM_Jump")
 _walkInput = NodePath("../PI_Walk")
 
 [node name="PI_CrouchDispatcher" type="Node" parent="Input" node_paths=PackedStringArray("_slideInput", "_dashInput")]
-script = ExtResource("7_2sxgr")
+script = ExtResource("15_03g52")
 _slideInput = NodePath("PI_Slide")
 _dashInput = NodePath("PI_Dash")
 
 [node name="PI_Dash" type="Node" parent="Input/PI_CrouchDispatcher"]
-script = ExtResource("8_34n6f")
+script = ExtResource("16_t2wfm")
 
 [node name="PI_Slide" type="Node" parent="Input/PI_CrouchDispatcher" node_paths=PackedStringArray("_crouchDispatcher", "_controller", "_groundState", "_crouchInput", "_sprintInput")]
-script = ExtResource("9_px05h")
+script = ExtResource("17_d5kvj")
 _slideMinSpeed = 6.0
 _holdSlideMinSpeed = 3.0
 _crouchDispatcher = NodePath("..")
@@ -196,42 +196,42 @@ _crouchInput = NodePath("PI_Crouch")
 _sprintInput = NodePath("../../PI_Sprint")
 
 [node name="PI_Crouch" type="Node" parent="Input/PI_CrouchDispatcher/PI_Slide" node_paths=PackedStringArray("_crouchDispatcher", "_sprintInput")]
-script = ExtResource("7_56r3e")
+script = ExtResource("18_wrcsk")
 _crouchDispatcher = NodePath("../..")
 _sprintInput = NodePath("../../../PI_Sprint")
 
 [node name="State" type="Node" parent="."]
 
 [node name="PS_Grounded" type="Node" parent="State" node_paths=PackedStringArray("_characterBody3D", "_groundCast")]
-script = ExtResource("6_mexc6")
+script = ExtResource("19_vpdv2")
 _characterBody3D = NodePath("../..")
 _groundCast = NodePath("../../GroundCast")
 
 [node name="Movement" type="Node" parent="."]
 
 [node name="PM_SurfaceControl" type="Node" parent="Movement" node_paths=PackedStringArray("_walkInput", "_groundState", "_ground", "_air")]
-script = ExtResource("7_msb5j")
+script = ExtResource("20_ncxc1")
 _walkInput = NodePath("../../Input/PI_Walk")
 _groundState = NodePath("../../State/PS_Grounded")
 _ground = NodePath("GroundState")
 _air = NodePath("AirState")
 
 [node name="GroundState" type="Node" parent="Movement/PM_SurfaceControl" node_paths=PackedStringArray("_sprintInput", "_crouch", "_slide")]
-script = ExtResource("8_fhtxi")
-_stateData = ExtResource("9_ikaaj")
+script = ExtResource("21_fhiml")
+_stateData = ExtResource("22_fklbr")
 _sprintInput = NodePath("../../../Input/PI_Sprint")
 _crouch = NodePath("../../Actions/Crouch/PM_Crouch")
 _slide = NodePath("../../Actions/Crouch/PM_Slide")
 
 [node name="AirState" type="Node" parent="Movement/PM_SurfaceControl" node_paths=PackedStringArray("_sprintInput", "_crouch", "_slide")]
-script = ExtResource("8_fhtxi")
-_stateData = ExtResource("10_53m5n")
+script = ExtResource("21_fhiml")
+_stateData = ExtResource("23_jl0xl")
 _sprintInput = NodePath("../../../Input/PI_Sprint")
 _crouch = NodePath("../../Actions/Crouch/PM_Crouch")
 _slide = NodePath("../../Actions/Crouch/PM_Slide")
 
 [node name="PM_StraffeSnap" type="Node" parent="Movement" node_paths=PackedStringArray("_groundState")]
-script = ExtResource("22_cp0qq")
+script = ExtResource("24_4bvsd")
 _groundState = NodePath("../../State/PS_Grounded")
 SnapThreshold = 2.0
 
@@ -240,13 +240,13 @@ SnapThreshold = 2.0
 [node name="Jump" type="Node" parent="Movement/Actions"]
 
 [node name="PM_Jump" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_jumpInput", "_groundState")]
-script = ExtResource("11_edsm7")
+script = ExtResource("25_qc7ep")
 _jumpInput = NodePath("../../../../Input/PI_Jump")
-_data = ExtResource("13_e1cl2")
+_data = ExtResource("26_kdvrh")
 _groundState = NodePath("../../../../State/PS_Grounded")
 
 [node name="PM_LedgeClimb" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_jumpInput", "_crouchInput", "_walkInput", "_controller", "_dash", "_jump", "_headCast", "_chestCast", "_footCast")]
-script = ExtResource("23_w6mlc")
+script = ExtResource("27_shnri")
 _jumpInput = NodePath("../../../../Input/PI_Jump")
 _crouchInput = NodePath("../../../../Input/PI_CrouchDispatcher")
 _walkInput = NodePath("../../../../Input/PI_Walk")
@@ -259,7 +259,7 @@ _footCast = NodePath("../../../../LedgeCastFoot")
 _climbSpeed = 4.0
 
 [node name="PM_WallJump" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_jumpInput", "_controller", "_groundState", "_ledgeClimb", "_wallCastLow", "_wallCastHigh")]
-script = ExtResource("24_gjg6k")
+script = ExtResource("28_x5ps3")
 _jumpInput = NodePath("../../../../Input/PI_Jump")
 _controller = NodePath("../../../..")
 _groundState = NodePath("../../../../State/PS_Grounded")
@@ -270,19 +270,19 @@ _wallCastHigh = NodePath("../../../../WallJumpCastHigh")
 [node name="Crouch" type="Node" parent="Movement/Actions"]
 
 [node name="PM_Crouch" type="Node" parent="Movement/Actions/Crouch" node_paths=PackedStringArray("_crouchInput", "_codyScalor")]
-script = ExtResource("15_vd3v3")
+script = ExtResource("29_ykpqc")
 _crouchInput = NodePath("../../../../Input/PI_CrouchDispatcher/PI_Slide/PI_Crouch")
 _codyScalor = NodePath("../../../../Body")
 
 [node name="PM_Slide" type="Node" parent="Movement/Actions/Crouch" node_paths=PackedStringArray("_slideInput", "_controller", "_groundState", "_bodyScalor")]
-script = ExtResource("20_5y6qm")
+script = ExtResource("30_q6qhf")
 _slideInput = NodePath("../../../../Input/PI_CrouchDispatcher/PI_Slide")
 _controller = NodePath("../../../..")
 _groundState = NodePath("../../../../State/PS_Grounded")
 _bodyScalor = NodePath("../../../../Body")
 
 [node name="PM_Dash" type="Node" parent="Movement/Actions/Crouch" node_paths=PackedStringArray("_dashInput", "_walkInput", "_cameraControl", "_controller", "_groundState", "_ledgeClimb", "_wallJump")]
-script = ExtResource("21_kvosw")
+script = ExtResource("31_5px2t")
 _dashInput = NodePath("../../../../Input/PI_CrouchDispatcher/PI_Dash")
 _walkInput = NodePath("../../../../Input/PI_Walk")
 _cameraControl = NodePath("../../../../CameraPivot")
@@ -296,31 +296,35 @@ _minDashRatio = 0.5
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Speedometer" type="Label" parent="CanvasLayer" node_paths=PackedStringArray("_controller")]
+[node name="UI_Crosshair" type="Node3D" parent="CanvasLayer" node_paths=PackedStringArray("_sightPosition", "_camera", "image")]
+script = ExtResource("32_jex4o")
+_sightPosition = NodePath("../../CameraPivot/PC_SprintLean")
+_camera = NodePath("../../CameraPivot/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/Camera3D")
+image = NodePath("../Crosshair/TextureRect")
+_minRange = 2.0
+_resetSpeed = 30.0
+
+[node name="Crosshair" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Crosshair"]
+modulate = Color(1, 1, 1, 0.619608)
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 300.0
-offset_top = 168.5
-offset_right = 340.0
-offset_bottom = 191.5
+offset_left = -36.0
+offset_top = -36.0
+offset_right = 36.0
+offset_bottom = 36.0
 grow_horizontal = 2
 grow_vertical = 2
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("14_chh26")
-_controller = NodePath("../..")
-
-[node name="Crosshair" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Crosshair"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("32_64eld")
+texture = ExtResource("33_ck35o")

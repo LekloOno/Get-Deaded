@@ -46,8 +46,6 @@ public partial class PC_SlideLedgeAnim : Node3D
             float dot = flatVel.Dot(flatDirAxis);
             _zDirection = (1-Mathf.Abs(dot)) * Mathf.Sign(dot);
 
-            GD.Print(_zDirection);
-
             _strengthX = _slideStrengthX;
             _strengthZ = _slideStrengthZ;
 
@@ -59,7 +57,7 @@ public partial class PC_SlideLedgeAnim : Node3D
     {
         _xDirection = -1f;
         _zDirection = (rng.Next(2) * 2f) - 1f;
-        
+
         _strengthX = _ledgeStrengthX;
         _strengthZ = _ledgeStrengthZ;
 
