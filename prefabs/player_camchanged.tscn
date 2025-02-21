@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=55 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" path="res://player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -26,12 +26,17 @@
 [ext_resource type="Script" path="res://player/input/crouch/PI_Dash.cs" id="16_t2wfm"]
 [ext_resource type="AudioStream" uid="uid://dnjywl4vsbygw" path="res://assets/sounds/footsteps/concrete-step3.wav" id="16_ul8s5"]
 [ext_resource type="Script" path="res://player/input/crouch/PI_Slide.cs" id="17_d5kvj"]
+[ext_resource type="AudioStream" uid="uid://byvkie35nxxfe" path="res://assets/sounds/clothes/clothes_6.wav" id="17_yke2y"]
 [ext_resource type="AudioStream" uid="uid://c51litrqlhdk8" path="res://assets/sounds/footsteps/concrete-step5.wav" id="18_1gs0t"]
 [ext_resource type="Script" path="res://player/input/crouch/PI_Crouch.cs" id="18_wrcsk"]
+[ext_resource type="Script" path="res://player/audio/PA_Slide.cs" id="18_yrtf3"]
 [ext_resource type="AudioStream" uid="uid://8we7lgvkmauv" path="res://assets/sounds/footsteps/concrete-step.wav" id="19_10w05"]
 [ext_resource type="Script" path="res://player/state/PS_Grounded.cs" id="19_vpdv2"]
 [ext_resource type="Script" path="res://player/movement/actions/surface-control/PM_SurfaceControl.cs" id="20_ncxc1"]
+[ext_resource type="AudioStream" uid="uid://bfoha2oj2ts6j" path="res://assets/sounds/clothes/clothes.wav" id="20_o38yh"]
 [ext_resource type="Script" path="res://player/movement/actions/surface-control/PM_SurfaceState.cs" id="21_fhiml"]
+[ext_resource type="AudioStream" uid="uid://cbgjk066ugfoy" path="res://assets/sounds/clothes/clothes_2.wav" id="21_ux4x4"]
+[ext_resource type="AudioStream" uid="uid://dqjv7glvctdav" path="res://assets/sounds/clothes/clothes_3.wav" id="22_dbo1v"]
 [ext_resource type="Resource" uid="uid://dn58omqab4s1u" path="res://player/movement/actions/surface-control/data/ground.tres" id="22_fklbr"]
 [ext_resource type="Resource" uid="uid://ca5w3yr3ia7ao" path="res://player/movement/actions/surface-control/data/air.tres" id="23_jl0xl"]
 [ext_resource type="Script" path="res://player/movement/PM_StraffeSnap.cs" id="24_4bvsd"]
@@ -161,30 +166,6 @@ skeleton = NodePath("../../..")
 
 [node name="Sound" type="Node3D" parent="Body"]
 
-[node name="PA_Jump" type="AudioStreamPlayer3D" parent="Body/Sound" node_paths=PackedStringArray("_jump", "_wooshes", "_clothes", "_steps")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
-volume_db = -35.0
-script = ExtResource("12_nveww")
-_jump = NodePath("../../../Movement/Actions/Jump/PM_Jump")
-_wooshes = NodePath("woosh")
-_clothes = NodePath("clothes")
-_steps = NodePath("../PA_FootSteps")
-
-[node name="woosh" type="AudioStreamPlayer3D" parent="Body/Sound/PA_Jump"]
-volume_db = -35.0
-script = ExtResource("13_uyiqg")
-_stepSounds = [ExtResource("13_ruv8u")]
-_minPitch = 0.95
-_maxPitch = 1.2
-
-[node name="clothes" type="AudioStreamPlayer3D" parent="Body/Sound/PA_Jump"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.801717, 0)
-volume_db = -50.0
-script = ExtResource("13_uyiqg")
-_stepSounds = [ExtResource("15_yrqyn"), ExtResource("16_71snu")]
-_minPitch = 1.2
-_maxPitch = 1.4
-
 [node name="PA_FootSteps" type="AudioStreamPlayer3D" parent="Body/Sound" node_paths=PackedStringArray("_walkInput", "_groundSurfaceState", "_groundState", "_stepLoop")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
 volume_db = -20.0
@@ -202,6 +183,43 @@ _maxPitch = 1.05
 
 [node name="Timer" type="Timer" parent="Body/Sound/PA_FootSteps"]
 process_callback = 0
+
+[node name="PA_Slide" type="Node3D" parent="Body/Sound" node_paths=PackedStringArray("_slideInLayers", "_slide")]
+script = ExtResource("18_yrtf3")
+_slideInLayers = [NodePath("clothes")]
+_slide = NodePath("../../../Movement/Actions/Crouch/PM_Slide")
+
+[node name="noise" type="AudioStreamPlayer3D" parent="Body/Sound/PA_Slide"]
+script = ExtResource("13_uyiqg")
+
+[node name="clothes" type="AudioStreamPlayer3D" parent="Body/Sound/PA_Slide"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62663, 0)
+volume_db = -40.0
+script = ExtResource("13_uyiqg")
+_stepSounds = [ExtResource("20_o38yh"), ExtResource("21_ux4x4"), ExtResource("22_dbo1v"), ExtResource("16_71snu"), ExtResource("17_yke2y")]
+
+[node name="PA_Jump" type="Node3D" parent="Body/Sound" node_paths=PackedStringArray("_wooshes", "_clothes", "_steps", "_jump")]
+script = ExtResource("12_nveww")
+_wooshes = NodePath("woosh")
+_clothes = NodePath("clothes")
+_steps = NodePath("../PA_FootSteps")
+_jump = NodePath("../../../Movement/Actions/Jump/PM_Jump")
+
+[node name="woosh" type="AudioStreamPlayer3D" parent="Body/Sound/PA_Jump"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+volume_db = -35.0
+script = ExtResource("13_uyiqg")
+_stepSounds = [ExtResource("13_ruv8u")]
+_minPitch = 0.95
+_maxPitch = 1.2
+
+[node name="clothes" type="AudioStreamPlayer3D" parent="Body/Sound/PA_Jump"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.601717, 0)
+volume_db = -60.0
+script = ExtResource("13_uyiqg")
+_stepSounds = [ExtResource("15_yrqyn"), ExtResource("16_71snu")]
+_minPitch = 1.2
+_maxPitch = 1.4
 
 [node name="WallJumpCastLow" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
