@@ -4,6 +4,9 @@ using Godot;
 public partial class PB_Scale : CollisionShape3D
 {
     [Export] private Node3D _modelAnchor;
+
+    public float ScaleDelta => _colliderInitScale - _capsule.Height;
+
     private CapsuleShape3D _capsule;
 
     private float _colliderInitScale;

@@ -5,7 +5,7 @@
 
 ~~Handle properly the velocity cache.~~
 
-Prevent Crouch clipping
+~~Prevent Crouch clipping~~
 
 ~~Implement Slide~~
 

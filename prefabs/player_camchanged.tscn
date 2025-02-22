@@ -387,8 +387,9 @@ script = ExtResource("14_puula")
 _jump = NodePath("../../Movement/Actions/Jump/PM_Jump")
 _walkInput = NodePath("../PI_Walk")
 
-[node name="PI_CrouchDispatcher" type="Node" parent="Input" node_paths=PackedStringArray("_body", "_slideInput", "_dashInput")]
+[node name="PI_CrouchDispatcher" type="Node" parent="Input" node_paths=PackedStringArray("_controller", "_body", "_slideInput", "_dashInput")]
 script = ExtResource("15_03g52")
+_controller = NodePath("../..")
 _body = NodePath("../../Body")
 _slideInput = NodePath("PI_Slide")
 _dashInput = NodePath("PI_Dash")

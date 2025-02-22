@@ -10,20 +10,33 @@ public partial class PI_CrouchDispatcher : Node
     [Export] public bool Hold = true;
 
     [ExportCategory("Setup")]
+    [Export] private PM_Controller _controller;
     [Export] private PB_Scale _body;
     [Export] private PI_Slide _slideInput;
     [Export] private PI_Dash _dashInput;
 
     public ulong LastCrouchDown {get; private set;} = 0; 
     private bool _active = false;
-    private CapsuleShape3D _originalScale;
+    private bool _tryingUncrouch = false;
+    private CapsuleShape3D _orignalShape;
 
     public override void _Ready()
     {
-        _originalScale = new CapsuleShape3D();
+        _orignalShape = new CapsuleShape3D();
         CapsuleShape3D capsuleShape = (CapsuleShape3D)_body.Shape;
-        _originalScale.Height = capsuleShape.Height;
-        _originalScale.Radius = capsuleShape.Radius;
+        _orignalShape.Height = capsuleShape.Height;
+        _orignalShape.Radius = capsuleShape.Radius;
+        SetPhysicsProcess(false);
+    }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        if(PHX_Checks.CanUncrouch(_controller, _body))
+        {
+            _slideInput.InputStop();
+            _tryingUncrouch = false;
+            SetPhysicsProcess(false);
+        }
     }
 
     public override void _UnhandledKeyInput(InputEvent @event)
@@ -34,23 +47,35 @@ public partial class PI_CrouchDispatcher : Node
             _dashInput.KeyDown();
 
             if (_active && !Hold)
-            {
-                _active = false;
-                _slideInput.InputStop();
-            } else 
+                TryStop();
+            else 
             {
                 _active = true;
-                _slideInput.InputStart();
+                if (_tryingUncrouch)
+                {
+                    _tryingUncrouch = false;
+                    SetPhysicsProcess(false);
+                }
+                else
+                    _slideInput.InputStart();
             }
         }
 
-        else if(@event.IsActionReleased("crouch"))
+        else if(@event.IsActionReleased("crouch") && Hold)
+            TryStop();
+    }
+
+    private void TryStop()
+    {
+        _active = false;
+        if(PHX_Checks.CanUncrouch(_controller, _body))
         {
-            if(Hold)
-            {
-                _active = false;
-                _slideInput.InputStop();
-            }
+            _slideInput.InputStop();
+        }
+        else
+        {
+            _tryingUncrouch = true;
+            SetPhysicsProcess(true);
         }
     }
 }

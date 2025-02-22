@@ -1,22 +1,18 @@
 using Godot;
+using Godot.Collections;
 
 /// Provides methods to avoid physics conflicts
 public static class PHX_Checks
 {
-    private const float GROUND_MARGIN = 0.01f;
-    public static bool CanUncrouch(PhysicsDirectSpaceState3D spaceState, CollisionObject3D current, CapsuleShape3D originalShape)
+    public static bool CanUncrouch(PhysicsBody3D current, PB_Scale bodyScale, float upSafeMargin = 0.05f)
     {
-        PhysicsShapeQueryParameters3D query = new();
-        
-        query.SetShape(originalShape);
+        float halfDeltaScale = bodyScale.ScaleDelta/2f;
 
         Transform3D transform = current.Transform;
-        transform.Origin += Vector3.Up * GROUND_MARGIN;
-        query.Transform = transform;
+        transform.Origin += Vector3.Up * halfDeltaScale;
 
-        query.CollisionMask = current.CollisionLayer;
+        Vector3 motion = Vector3.Up * (halfDeltaScale + upSafeMargin);
 
-        var result = spaceState.IntersectShape(query, 1);
-        return result.Count == 0;
+        return !current.TestMove(transform, motion);
     }
 }
