@@ -4,7 +4,6 @@ using Godot;
 [GlobalClass]
 public partial class PI_Crouch : Node, PI_CrouchDerived
 {
-    [Export] private PI_CrouchDispatcher _crouchDispatcher;
     [Export] private PI_Sprint _sprintInput;
     public PI_Sprint SprintInput => _sprintInput;
 
@@ -13,20 +12,8 @@ public partial class PI_Crouch : Node, PI_CrouchDerived
 
     public bool IsActive {get; set;} = false;
 
-    public void KeyDown()
-    {
-        // Always consumes it
-        //      either start or stop crouch (if non hold mode)
-        if (IsActive)
-            StopCrouching();
-        else
-            StartCrouching();
-    }
-    public void KeyUp()
-    {
-        if (_crouchDispatcher.Hold)
-            StopCrouching();
-    }
+    public void InputStart() => StartCrouching();
+    public void InputStop() => StopCrouching();
 
     public void Reset()
     {

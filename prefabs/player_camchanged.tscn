@@ -188,7 +188,7 @@ script = ExtResource("12_ttbg8")
 _normalInterval = 0.32
 _normalPitchBase = 0.7
 _normalVolume = -32.0
-_sprintVolume = -28.0
+_sprintVolume = -26.0
 _walkInput = NodePath("../../../Input/PI_Walk")
 _groundSurfaceState = NodePath("../../../Movement/PM_SurfaceControl/GroundState")
 _groundState = NodePath("../../../State/PS_Grounded")
@@ -387,27 +387,26 @@ script = ExtResource("14_puula")
 _jump = NodePath("../../Movement/Actions/Jump/PM_Jump")
 _walkInput = NodePath("../PI_Walk")
 
-[node name="PI_CrouchDispatcher" type="Node" parent="Input" node_paths=PackedStringArray("_slideInput", "_dashInput")]
+[node name="PI_CrouchDispatcher" type="Node" parent="Input" node_paths=PackedStringArray("_body", "_slideInput", "_dashInput")]
 script = ExtResource("15_03g52")
+_body = NodePath("../../Body")
 _slideInput = NodePath("PI_Slide")
 _dashInput = NodePath("PI_Dash")
 
 [node name="PI_Dash" type="Node" parent="Input/PI_CrouchDispatcher"]
 script = ExtResource("16_t2wfm")
 
-[node name="PI_Slide" type="Node" parent="Input/PI_CrouchDispatcher" node_paths=PackedStringArray("_crouchDispatcher", "_controller", "_groundState", "_crouchInput", "_sprintInput")]
+[node name="PI_Slide" type="Node" parent="Input/PI_CrouchDispatcher" node_paths=PackedStringArray("_controller", "_groundState", "_crouchInput", "_sprintInput")]
 script = ExtResource("17_d5kvj")
 _slideMinSpeed = 6.0
 _holdSlideMinSpeed = 3.0
-_crouchDispatcher = NodePath("..")
 _controller = NodePath("../../..")
 _groundState = NodePath("../../../State/PS_Grounded")
 _crouchInput = NodePath("PI_Crouch")
 _sprintInput = NodePath("../../PI_Sprint")
 
-[node name="PI_Crouch" type="Node" parent="Input/PI_CrouchDispatcher/PI_Slide" node_paths=PackedStringArray("_crouchDispatcher", "_sprintInput")]
+[node name="PI_Crouch" type="Node" parent="Input/PI_CrouchDispatcher/PI_Slide" node_paths=PackedStringArray("_sprintInput")]
 script = ExtResource("18_wrcsk")
-_crouchDispatcher = NodePath("../..")
 _sprintInput = NodePath("../../../PI_Sprint")
 
 [node name="State" type="Node" parent="."]

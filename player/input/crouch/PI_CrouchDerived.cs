@@ -7,8 +7,8 @@ public interface PI_CrouchDerived
     public EventHandler OnStartInput {get;}
     public EventHandler OnStopInput {get;}
 
-    public abstract void KeyDown();
-    public abstract void KeyUp();
+    public abstract void InputStart();
+    public abstract void InputStop();
 
     public void StartAction()
     {

@@ -9,7 +9,6 @@ public partial class PI_Slide : Node, PI_CrouchDerived
     [Export] private float _holdSlideMinSpeed;
 
     [ExportCategory("Setup")]
-    [Export] private PI_CrouchDispatcher _crouchDispatcher;
     [Export] private PM_Controller _controller;
     [Export] private PS_Grounded _groundState;
     [Export] private PI_Crouch _crouchInput;
@@ -23,45 +22,24 @@ public partial class PI_Slide : Node, PI_CrouchDerived
 
     public bool IsActive {get; set;} = false;
 
-    public void KeyDown()
+    public void InputStart()
     {
-        // Can consume if
-        //      Can start slide - fast enough or mid air
-        //      Is on non hold mode and can stop slide
-        // Otherwise, propagate to crouch
+        if (StartFastEnough() || !_groundState.IsGrounded())
+            StartSlide();               // Consume - start
+        else
+            _crouchInput.InputStart();  // Propagate to crouch
+    }
 
-
-        if (!IsActive && (StartFastEnough() || !_groundState.IsGrounded()))
-        {
-            // Consume - start
-            StartSlide();
-        } else if (IsActive && !_crouchDispatcher.Hold)
-        {
-            // Consume - stop
-            StopSlide();
-        } else
-        {
-            _crouchInput.KeyDown();
-        }
+    public void InputStop()
+    {
+        if (IsActive)
+            StopSlide();                // Consume - stop
+        else
+            _crouchInput.InputStop();   // Propagate to crouch
     }
 
     private bool StartFastEnough() => _controller.RealVelocity.Length() >= _slideMinSpeed;
     private bool HoldFastEnough() => _controller.RealVelocity.Length() >= _holdSlideMinSpeed;
-
-    public void KeyUp()
-    {
-        // Can consume if
-        //      On Hold mode and can stop slide
-        // Otherwise, propagate to crouch
-        if (IsActive && _crouchDispatcher.Hold)
-        {
-            // Consume - stop
-            StopSlide();
-        } else 
-        {
-            _crouchInput.KeyUp();
-        }
-    }
 
     public override void _PhysicsProcess(double delta) => OnPhysics?.Invoke(this, EventArgs.Empty);
 
