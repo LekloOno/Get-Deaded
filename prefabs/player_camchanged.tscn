@@ -44,11 +44,9 @@
 [ext_resource type="Resource" uid="uid://ca5w3yr3ia7ao" path="res://player/movement/actions/surface-control/data/air.tres" id="23_jl0xl"]
 [ext_resource type="Script" path="res://player/movement/PM_StraffeSnap.cs" id="24_4bvsd"]
 [ext_resource type="Script" path="res://player/movement/actions/jump/PM_Jump.cs" id="25_qc7ep"]
-[ext_resource type="AudioStream" uid="uid://dnethgk76hyyi" path="res://assets/sounds/slides/slide_5.wav" id="26_83jfn"]
 [ext_resource type="Resource" uid="uid://chd67e10gx4rm" path="res://player/movement/actions/jump/data/basic_jump.tres" id="26_kdvrh"]
-[ext_resource type="AudioStream" uid="uid://b0qutx6ofsxv6" path="res://assets/sounds/slides/slide_6.wav" id="27_lh8aq"]
+[ext_resource type="AudioStream" uid="uid://hg0p05fsc5nk" path="res://assets/sounds/slideloop/slideloop.wav" id="26_o5goj"]
 [ext_resource type="Script" path="res://player/movement/actions/jump/PM_LedgeClimb.cs" id="27_shnri"]
-[ext_resource type="AudioStream" uid="uid://cri7j2vypx6sv" path="res://assets/sounds/slides/slide_7.wav" id="28_4t847"]
 [ext_resource type="Script" path="res://player/movement/actions/jump/PM_WallJump.cs" id="28_x5ps3"]
 [ext_resource type="Script" path="res://player/audio/PA_Land.cs" id="28_y3yod"]
 [ext_resource type="AudioStream" uid="uid://cdhw3f001dd4s" path="res://assets/sounds/slides/slide_2.wav" id="29_xlx50"]
@@ -64,6 +62,8 @@
 [ext_resource type="AudioStream" uid="uid://suxvntk8hrh" path="res://assets/sounds/slides/slide_3.wav" id="38_wshvc"]
 [ext_resource type="AudioStream" uid="uid://cdo61fljcs0xo" path="res://assets/sounds/slides/slide_4.wav" id="40_vm03q"]
 [ext_resource type="Script" path="res://player/audio/PA_LedgeClimb.cs" id="42_xvvq2"]
+[ext_resource type="Script" path="res://player/audio/PA_SpeedWind.cs" id="43_wtkgi"]
+[ext_resource type="AudioStream" uid="uid://d1ot41x8qebwj" path="res://assets/sounds/wind/wind.wav" id="44_vhlgj"]
 
 [sub_resource type="Curve" id="Curve_ux8de"]
 min_value = -0.5
@@ -199,11 +199,13 @@ _maxPitch = 1.05
 [node name="Timer" type="Timer" parent="Body/Sound/PA_FootSteps"]
 process_callback = 0
 
-[node name="PA_Slide" type="Node3D" parent="Body/Sound" node_paths=PackedStringArray("_slideIn", "_slideHold", "_noiseLoop", "_slide", "_groundState")]
+[node name="PA_Slide" type="Node3D" parent="Body/Sound" node_paths=PackedStringArray("_slideIn", "_slideHold", "_slide", "_groundState")]
 script = ExtResource("18_yrtf3")
 _slideIn = NodePath("Slide in")
-_slideHold = NodePath("Slide hold")
-_noiseLoop = NodePath("Timer")
+_slideHold = NodePath("Hold")
+_holdVolume = -10.0
+_holdFadeInTime = 0.5
+_holdFadeOutTime = 0.2
 _slide = NodePath("../../../Movement/Actions/Crouch/PM_Slide")
 _groundState = NodePath("../../../State/PS_Grounded")
 
@@ -222,20 +224,9 @@ attenuation_filter_cutoff_hz = 20500.0
 script = ExtResource("13_uyiqg")
 _stepSounds = [ExtResource("20_o38yh"), ExtResource("21_ux4x4"), ExtResource("22_dbo1v"), ExtResource("16_71snu"), ExtResource("17_yke2y")]
 
-[node name="Slide hold" type="Node3D" parent="Body/Sound/PA_Slide" node_paths=PackedStringArray("_slideInLayers")]
-script = ExtResource("19_wuy3o")
-_slideInLayers = [NodePath("noise")]
-
-[node name="noise" type="AudioStreamPlayer3D" parent="Body/Sound/PA_Slide/Slide hold"]
-volume_db = -15.0
-script = ExtResource("13_uyiqg")
-_stepSounds = [ExtResource("26_83jfn"), ExtResource("27_lh8aq"), ExtResource("28_4t847")]
-_minPitch = 0.9
-_maxPitch = 1.1
-
-[node name="Timer" type="Timer" parent="Body/Sound/PA_Slide"]
-process_callback = 0
-wait_time = 0.3
+[node name="Hold" type="AudioStreamPlayer2D" parent="Body/Sound/PA_Slide"]
+stream = ExtResource("26_o5goj")
+autoplay = true
 
 [node name="PA_Jump" type="Node3D" parent="Body/Sound" node_paths=PackedStringArray("_wooshes", "_clothes", "_steps", "_wallJumpClothes", "_wallJumpWoosh", "_jump", "_wallJump")]
 script = ExtResource("12_nveww")
@@ -344,6 +335,19 @@ script = ExtResource("13_uyiqg")
 _stepSounds = [ExtResource("22_dbo1v"), ExtResource("15_yrqyn")]
 _minPitch = 1.2
 _maxPitch = 1.5
+
+[node name="PA_SpeedWind" type="Node" parent="Body/Sound" node_paths=PackedStringArray("_controller", "_wind")]
+script = ExtResource("43_wtkgi")
+_maxVolume = 10.0
+_triggerSpeed = 22.0
+_fullSpeed = 60.0
+_lerpSpeed = 10.0
+_controller = NodePath("../../..")
+_wind = NodePath("Wind")
+
+[node name="Wind" type="AudioStreamPlayer2D" parent="Body/Sound/PA_SpeedWind"]
+stream = ExtResource("44_vhlgj")
+autoplay = true
 
 [node name="WallJumpCastLow" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
