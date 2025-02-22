@@ -204,9 +204,9 @@ process_callback = 0
 script = ExtResource("18_yrtf3")
 _slideIn = NodePath("Slide in")
 _slideHold = NodePath("Hold")
-_holdVolume = -10.0
+_holdVolume = -5.0
 _holdFadeInTime = 0.5
-_holdFadeOutTime = 0.2
+_holdFadeOutTime = 0.3
 _slide = NodePath("../../../Movement/Actions/Crouch/PM_Slide")
 _groundState = NodePath("../../../State/PS_Grounded")
 
@@ -382,10 +382,11 @@ _flatDirNode = NodePath("../..")
 [node name="PI_Jump" type="Node" parent="Input"]
 script = ExtResource("13_ua84m")
 
-[node name="PI_Sprint" type="Node" parent="Input" node_paths=PackedStringArray("_jump", "_walkInput")]
+[node name="PI_Sprint" type="Node" parent="Input" node_paths=PackedStringArray("_jump", "_walkInput", "_crouchDispatcher")]
 script = ExtResource("14_puula")
 _jump = NodePath("../../Movement/Actions/Jump/PM_Jump")
 _walkInput = NodePath("../PI_Walk")
+_crouchDispatcher = NodePath("../PI_CrouchDispatcher")
 
 [node name="PI_CrouchDispatcher" type="Node" parent="Input" node_paths=PackedStringArray("_controller", "_body", "_slideInput", "_dashInput")]
 script = ExtResource("15_03g52")

@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_4j3kr")
-MaxSpeed = 3.0
-MaxAccel = 0.5
+MaxSpeed = 2.0
+MaxAccel = 1.0
 Drag = 0.45
