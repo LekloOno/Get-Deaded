@@ -28,6 +28,7 @@ public partial class PA_Slide : Node3D
 
         _slide.OnStart += StartPlaySound;
         _slide.OnStop += (o, e) => StopHold();
+        _slide.OnSlowStop += (o, e) => StopHold();
 
         _groundState.OnLeaving += StopPlaySound;
         _groundState.OnLanding += TryLandStartHold;
@@ -64,14 +65,12 @@ public partial class PA_Slide : Node3D
 
     private void StartHold()
     {
-        GD.Print("start");
         InitFade();
         OnUpdate += FadeIn;
     }
 
     private void StopHold()
     {
-        GD.Print("stop");
         InitFade();
         OnUpdate += FadeOut;
     }

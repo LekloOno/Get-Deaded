@@ -188,6 +188,7 @@ script = ExtResource("12_ttbg8")
 _normalInterval = 0.32
 _normalPitchBase = 0.7
 _normalVolume = -32.0
+_sprintVolume = -28.0
 _walkInput = NodePath("../../../Input/PI_Walk")
 _groundSurfaceState = NodePath("../../../Movement/PM_SurfaceControl/GroundState")
 _groundState = NodePath("../../../State/PS_Grounded")
