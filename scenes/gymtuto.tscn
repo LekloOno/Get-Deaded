@@ -1,0 +1,160 @@
+[gd_scene load_steps=11 format=3 uid="uid://bvdr25u2nxbeg"]
+
+[ext_resource type="PackedScene" uid="uid://b5w3ok85lmxgf" path="res://prefabs/player_camchanged.tscn" id="1_uvb2d"]
+[ext_resource type="Material" uid="uid://c7p68evacni7v" path="res://assets/materials/darkGrid.tres" id="2_7amo5"]
+[ext_resource type="Texture2D" uid="uid://c6o8mw13kagni" path="res://assets/skyboxes/Sky_trainyard_01_1b2.png" id="2_c2a84"]
+[ext_resource type="Texture2D" uid="uid://baprfhtph0bwl" path="res://assets/mess/jumpdude.png" id="4_jtr1w"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_biv5p"]
+panorama = ExtResource("2_c2a84")
+
+[sub_resource type="Sky" id="Sky_2t34p"]
+sky_material = SubResource("PanoramaSkyMaterial_biv5p")
+
+[sub_resource type="Environment" id="Environment_mnrih"]
+background_mode = 2
+background_energy_multiplier = 1.4
+sky = SubResource("Sky_2t34p")
+
+[sub_resource type="SphereMesh" id="SphereMesh_b47qf"]
+flip_faces = true
+radius = 100.0
+height = 100.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_csh5o"]
+albedo_color = Color(0.372549, 0.372549, 0.423529, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_chs20"]
+material = SubResource("StandardMaterial3D_csh5o")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.99956, -0.0243604, 0.0169309, 0, 0.570714, 0.821149, -0.0296663, 0.820788, -0.570462, 0, 0, 0)
+shadow_enabled = true
+
+[node name="PlayerController" parent="." instance=ExtResource("1_uvb2d")]
+
+[node name="WorldEnvironment2" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mnrih")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 1, 3)
+omni_range = 1.508
+omni_attenuation = -0.42
+
+[node name="Map" type="Node" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+use_collision = true
+size = Vector3(15, 1, 10)
+material = ExtResource("2_7amo5")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.5)
+use_collision = true
+size = Vector3(17, 5, 11)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Map/CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+operation = 2
+size = Vector3(15, 5, 10)
+
+[node name="Pillar1" type="Node3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 10)
+
+[node name="Platform" type="CSGBox3D" parent="Map/Pillar1"]
+use_collision = true
+size = Vector3(10, 1, 5)
+material = ExtResource("2_7amo5")
+
+[node name="PillarSolid" type="CSGBox3D" parent="Map/Pillar1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11, 0)
+use_collision = true
+size = Vector3(8, 21, 4)
+
+[node name="PillarVisual" type="CSGBox3D" parent="Map/Pillar1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -47, 0)
+size = Vector3(8, 51, 4)
+
+[node name="Pillar3" type="Node3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 18.5)
+
+[node name="Platform" type="CSGBox3D" parent="Map/Pillar3"]
+use_collision = true
+size = Vector3(10, 1, 5)
+material = ExtResource("2_7amo5")
+
+[node name="PillarSolid" type="CSGBox3D" parent="Map/Pillar3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11, 0)
+use_collision = true
+size = Vector3(8, 21, 4)
+
+[node name="PillarVisual" type="CSGBox3D" parent="Map/Pillar3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -47, 0)
+size = Vector3(8, 51, 4)
+
+[node name="Pillar4" type="Node3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 24.5)
+
+[node name="Platform" type="CSGBox3D" parent="Map/Pillar4"]
+use_collision = true
+size = Vector3(10, 1, 1.5)
+material = ExtResource("2_7amo5")
+
+[node name="PillarSolid" type="CSGBox3D" parent="Map/Pillar4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11, 0)
+use_collision = true
+size = Vector3(8, 21, 1)
+
+[node name="PillarVisual" type="CSGBox3D" parent="Map/Pillar4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -47, 0)
+size = Vector3(8, 51, 1.5)
+
+[node name="Pillar5" type="Node3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 27.3)
+
+[node name="Platform" type="CSGBox3D" parent="Map/Pillar5"]
+use_collision = true
+size = Vector3(10, 1, 1.5)
+material = ExtResource("2_7amo5")
+
+[node name="PillarSolid" type="CSGBox3D" parent="Map/Pillar5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11, 0)
+use_collision = true
+size = Vector3(8, 21, 1)
+
+[node name="PillarVisual" type="CSGBox3D" parent="Map/Pillar5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -47, 0)
+size = Vector3(8, 51, 1.5)
+
+[node name="Pillar6" type="Node3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 30.1)
+
+[node name="Platform" type="CSGBox3D" parent="Map/Pillar6"]
+use_collision = true
+size = Vector3(10, 1, 1.5)
+material = ExtResource("2_7amo5")
+
+[node name="PillarSolid" type="CSGBox3D" parent="Map/Pillar6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11, 0)
+use_collision = true
+size = Vector3(8, 21, 1)
+
+[node name="PillarVisual" type="CSGBox3D" parent="Map/Pillar6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -47, 0)
+size = Vector3(8, 51, 1.5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("SphereMesh_b47qf")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.9, 1, 3)
+mesh = SubResource("BoxMesh_chs20")
+
+[node name="Sprite3D" type="Sprite3D" parent="MeshInstance3D2"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.51, 0, 0)
+pixel_size = 0.001
+texture = ExtResource("4_jtr1w")
