@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=71 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" path="res://player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -64,6 +64,7 @@
 [ext_resource type="Script" path="res://player/audio/PA_LedgeClimb.cs" id="42_xvvq2"]
 [ext_resource type="Script" path="res://player/audio/PA_SpeedWind.cs" id="43_wtkgi"]
 [ext_resource type="AudioStream" uid="uid://d1ot41x8qebwj" path="res://assets/sounds/wind/wind.wav" id="44_vhlgj"]
+[ext_resource type="Script" path="res://debug/display_fps.gd" id="65_wohr1"]
 
 [sub_resource type="Curve" id="Curve_ux8de"]
 min_value = -0.5
@@ -73,9 +74,8 @@ point_count = 5
 [sub_resource type="Gradient" id="Gradient_k51pg"]
 colors = PackedColorArray(0, 0.4, 0.894118, 0.764706, 0, 1, 0.537255, 0.784314)
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o274a"]
-radius = 0.25
-height = 1.8
+[sub_resource type="BoxShape3D" id="BoxShape3D_2am5o"]
+size = Vector3(0.5, 1.8, 0.5)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_qcifk"]
 radius = 0.25
@@ -163,7 +163,7 @@ _controller = NodePath("../../../..")
 
 [node name="Body" type="CollisionShape3D" parent="." node_paths=PackedStringArray("_modelAnchor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
-shape = SubResource("CapsuleShape3D_o274a")
+shape = SubResource("BoxShape3D_2am5o")
 script = ExtResource("11_6ifu1")
 _modelAnchor = NodePath("SpatialAnchor")
 
@@ -366,7 +366,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68045, 0)
 target_position = Vector3(0, 0, -1.2)
 
 [node name="LedgeCastChest" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 target_position = Vector3(0, 0, -0.8)
 
 [node name="GroundCast" type="ShapeCast3D" parent="."]
@@ -516,7 +516,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("32_jex4o")
-_sightPosition = NodePath("../../CameraPivot")
+_sightPosition = NodePath("../../CameraPivot/PC_SprintLean")
 _camera = NodePath("../../CameraPivot/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/Camera3D")
 image = NodePath("TextureRect")
 _resetSpeed = 20.0
@@ -536,3 +536,8 @@ offset_bottom = 36.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("33_ck35o")
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("65_wohr1")

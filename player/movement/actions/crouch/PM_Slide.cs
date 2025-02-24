@@ -60,6 +60,8 @@ public partial class PM_Slide : PM_Action
         _bodyScalor.SetTargetScale(_targetScaleRatio, _scaleSpeed);
 
         IsActive = true;
+        _controller.FloorConstantSpeed = false;
+        _controller.FloorStopOnSlope = false;
         OnStart?.Invoke(this, EventArgs.Empty);
     }
 
@@ -84,6 +86,8 @@ public partial class PM_Slide : PM_Action
         _bodyScalor.ResetScale(_resetScaleSpeed);
 
         IsActive = false;
+        _controller.FloorConstantSpeed = true;
+        _controller.FloorStopOnSlope = true;
         OnStop?.Invoke(this, EventArgs.Empty);
     }
 

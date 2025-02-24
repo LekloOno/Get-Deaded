@@ -44,3 +44,14 @@ This jump DOES NOT corresponds to the velocity it would have if gravity kept bei
 Maybe the velocity is projected on the edge of the obstacle, leading in high vertical speed. The next tick, player is not considered grounded because of it, the base velocity is now RealVelocity, so move and slide does not update velocity anymore. - But why would that only happen when climbing against the wall and with specifics sprinting data ?
 
 **Highest probability** : Same cause that for the front wall jump bug. RealVelocity would be unstable.
+
+
+
+
+
+the slide snapping is about the collide and slide algorithm. at max angle 0, the bug doesn't happen.
+It's not floor snap, it might be but its height doesn't affect how strong the bug is.
+
+
+The sprint snap bug occurs with just drag and surface control enabled, even with no air control. But it doesn't give any non flat normal.
+However, when snapping down it doesn't count as a collision (printing collisions when moving down a slope, although snapped, does not give any collsiion)

@@ -5,9 +5,9 @@ public partial class PB_Scale : CollisionShape3D
 {
     [Export] private Node3D _modelAnchor;
 
-    public float ScaleDelta => _colliderInitScale - _capsule.Height;
+    public float ScaleDelta => _colliderInitScale - _capsule.Size.Y;
 
-    private CapsuleShape3D _capsule;
+    private BoxShape3D _capsule;
 
     private float _colliderInitScale;
     private float _modelInitScale;
@@ -18,13 +18,15 @@ public partial class PB_Scale : CollisionShape3D
 
     public override void _Ready()
     {
-        _capsule = Shape as CapsuleShape3D;
-        _colliderInitScale = _capsule.Height;
+        _capsule = Shape as BoxShape3D;
+        _colliderInitScale = _capsule.Size.Y;
         _modelInitScale = _modelAnchor.Scale.Y;
     }
     public override void _PhysicsProcess(double delta)
     {
-        _capsule.Height = Mathf.Lerp(_capsule.Height, _colliderTargetScale, _scaleSpeed);
+        Vector3 size = _capsule.Size;
+        size.Y = Mathf.Lerp(_capsule.Size.Y, _colliderTargetScale, _scaleSpeed);
+        _capsule.Size = size;
 
         Vector3 modelScale = _modelAnchor.Scale;
         modelScale.Y = Mathf.Lerp(modelScale.Y, _modelTargetScale, _scaleSpeed);

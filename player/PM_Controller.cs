@@ -77,7 +77,6 @@ public partial class PM_Controller : CharacterBody3D
         }
 
         Acceleration = (Velocity - startVelocity)/(float)delta;
-
         MoveAndSlide();
         RealVelocity = (GlobalPosition - pos)/(float)delta;
     }

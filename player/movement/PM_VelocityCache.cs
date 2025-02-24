@@ -54,7 +54,7 @@ public partial class PM_VelocityCache : Resource
         Transform3D currentTransform = controller.GlobalTransform;
         KinematicCollision3D collision = new();
 
-        Vector3 testVelocity = TestVelocity(velocity);
+        Vector3 testVelocity = TestVelocity(velocity) + WishDir * 2f;
 
         bool wasInWall = _inWall;
         bool collideNext = controller.TestMove(
@@ -72,8 +72,8 @@ public partial class PM_VelocityCache : Resource
                 
                 if(collision.GetNormal().Dot(WishDir) > 0) // If inputs outward the wall, discard
                     DiscardCache();
-                else if (!wasInWall) Cache(velocity);
-
+                else if (!wasInWall)
+                    Cache(velocity);
                 // if (!wasInWall) Cache(velocity); It seems like doing if instead of else if results in fun behavior .. to further test out
 
                 return grounded ? controller.Velocity : controller.RealVelocity;

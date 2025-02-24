@@ -19,14 +19,13 @@ public partial class PI_CrouchDispatcher : Node
     public ulong LastCrouchDown {get; private set;} = 0; 
     private bool _active = false;
     private bool _tryingUncrouch = false;
-    private CapsuleShape3D _orignalShape;
+    private BoxShape3D _orignalShape;
 
     public override void _Ready()
     {
-        _orignalShape = new CapsuleShape3D();
-        CapsuleShape3D capsuleShape = (CapsuleShape3D)_body.Shape;
-        _orignalShape.Height = capsuleShape.Height;
-        _orignalShape.Radius = capsuleShape.Radius;
+        _orignalShape = new BoxShape3D();
+        BoxShape3D capsuleShape = (BoxShape3D)_body.Shape;
+        _orignalShape.Size = capsuleShape.Size;
         SetPhysicsProcess(false);
     }
 
