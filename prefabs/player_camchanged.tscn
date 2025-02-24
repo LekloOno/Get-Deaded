@@ -1,7 +1,8 @@
-[gd_scene load_steps=71 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=72 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" path="res://player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_7wk04"]
+[ext_resource type="Script" path="res://player/camera/PC_FlatDir.cs" id="3_31qv1"]
 [ext_resource type="Script" path="res://player/camera/PC_Control.cs" id="3_xv583"]
 [ext_resource type="Script" path="res://player/camera/PC_SprintLean.cs" id="4_s37k1"]
 [ext_resource type="Script" path="res://player/camera/PC_Bobbing.cs" id="5_1gcwp"]
@@ -74,6 +75,9 @@ point_count = 5
 [sub_resource type="Gradient" id="Gradient_k51pg"]
 colors = PackedColorArray(0, 0.4, 0.894118, 0.764706, 0, 1, 0.537255, 0.784314)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_4jpmy"]
+radius = 0.25
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_2am5o"]
 size = Vector3(0.5, 1.8, 0.5)
 
@@ -81,10 +85,8 @@ size = Vector3(0.5, 1.8, 0.5)
 radius = 0.25
 height = 1.8
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_4jpmy"]
-radius = 0.25
-
 [node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("_walkProcess", "_wallJump", "_groundState", "_cameraControl", "_surfaceControl", "_straffeSnap")]
+axis_lock_angular_y = true
 floor_constant_speed = true
 floor_block_on_wall = false
 floor_max_angle = 0.872665
@@ -92,47 +94,72 @@ script = ExtResource("1_vw06q")
 _walkProcess = NodePath("Input/PI_Walk")
 _wallJump = NodePath("Movement/Actions/Jump/PM_WallJump")
 _groundState = NodePath("State/PS_Grounded")
-_cameraControl = NodePath("CameraPivot")
+_cameraControl = NodePath("Camera Pivot/Camera Control")
 _surfaceControl = NodePath("Movement/PM_SurfaceControl")
 _velocityCache = ExtResource("2_7wk04")
 _straffeSnap = NodePath("Movement/PM_StraffeSnap")
 
-[node name="CameraPivot" type="Node3D" parent="." node_paths=PackedStringArray("_body")]
+[node name="Camera Pivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0)
 top_level = true
-script = ExtResource("3_xv583")
-_body = NodePath("..")
+script = ExtResource("3_31qv1")
 
-[node name="PC_SprintLean" type="Node3D" parent="CameraPivot" node_paths=PackedStringArray("_groundSurfaceState")]
+[node name="Casts" type="Node3D" parent="Camera Pivot"]
+
+[node name="WallJumpCastLow" type="RayCast3D" parent="Camera Pivot/Casts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
+target_position = Vector3(0, 0, -0.6)
+
+[node name="WallJumpCastHigh" type="RayCast3D" parent="Camera Pivot/Casts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+target_position = Vector3(0, 0, -0.6)
+
+[node name="LedgeCastFoot" type="RayCast3D" parent="Camera Pivot/Casts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.55, 0)
+target_position = Vector3(0, 0, -0.8)
+
+[node name="LedgeCastHead" type="RayCast3D" parent="Camera Pivot/Casts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+target_position = Vector3(0, 0, -1.2)
+
+[node name="LedgeCastChest" type="RayCast3D" parent="Camera Pivot/Casts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.05, 0)
+target_position = Vector3(0, 0, -0.8)
+
+[node name="Camera Control" type="Node3D" parent="Camera Pivot" node_paths=PackedStringArray("_flatDir")]
+script = ExtResource("3_xv583")
+_flatDir = NodePath("..")
+
+[node name="PC_SprintLean" type="Node3D" parent="Camera Pivot/Camera Control" node_paths=PackedStringArray("_groundSurfaceState")]
 script = ExtResource("4_s37k1")
 _heightDisplacement = -0.15
-_groundSurfaceState = NodePath("../../Movement/PM_SurfaceControl/GroundState")
+_groundSurfaceState = NodePath("../../../Movement/PM_SurfaceControl/GroundState")
 
-[node name="PC_Bobbing" type="Node3D" parent="CameraPivot/PC_SprintLean" node_paths=PackedStringArray("_groundSurfaceState", "_groundState", "_controller")]
+[node name="PC_Bobbing" type="Node3D" parent="Camera Pivot/Camera Control/PC_SprintLean" node_paths=PackedStringArray("_groundSurfaceState", "_groundState", "_controller")]
 script = ExtResource("5_1gcwp")
 _sprintWaveLength = 0.14
 _walkWaveLength = 0.15
-_groundSurfaceState = NodePath("../../../Movement/PM_SurfaceControl/GroundState")
-_groundState = NodePath("../../../State/PS_Grounded")
-_controller = NodePath("../../..")
+_groundSurfaceState = NodePath("../../../../Movement/PM_SurfaceControl/GroundState")
+_groundState = NodePath("../../../../State/PS_Grounded")
+_controller = NodePath("../../../..")
 
-[node name="PC_Spring" type="Node3D" parent="CameraPivot/PC_SprintLean/PC_Bobbing" node_paths=PackedStringArray("_cameraTarget")]
+[node name="PC_Spring" type="Node3D" parent="Camera Pivot/Camera Control/PC_SprintLean/PC_Bobbing" node_paths=PackedStringArray("_cameraTarget")]
 script = ExtResource("6_v2bpg")
 LinearDisplacement = 0.02
-_cameraTarget = NodePath("../../../../Body/SpatialAnchor/RemoteTransform3D")
+_cameraTarget = NodePath("../../../../../Body/SpatialAnchor/RemoteTransform3D")
 
-[node name="PC_Lean" type="Node3D" parent="CameraPivot/PC_SprintLean/PC_Bobbing/PC_Spring" node_paths=PackedStringArray("_camera", "_controller")]
+[node name="PC_Lean" type="Node3D" parent="Camera Pivot/Camera Control/PC_SprintLean/PC_Bobbing/PC_Spring" node_paths=PackedStringArray("_camera", "_controller")]
 script = ExtResource("7_64lfg")
 _camera = NodePath("../../../..")
-_controller = NodePath("../../../../..")
+_controller = NodePath("../../../../../..")
 
-[node name="PC_SlideTilt" type="Node3D" parent="CameraPivot/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean" node_paths=PackedStringArray("_cameraControl", "_controller", "_surfaceGroundState")]
+[node name="PC_SlideTilt" type="Node3D" parent="Camera Pivot/Camera Control/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean" node_paths=PackedStringArray("_cameraControl", "_controller", "_surfaceGroundState")]
 script = ExtResource("8_ey8l8")
 _cameraControl = NodePath("../../../../..")
-_controller = NodePath("../../../../../..")
-_surfaceGroundState = NodePath("../../../../../../Movement/PM_SurfaceControl/GroundState")
+_controller = NodePath("../../../../../../..")
+_surfaceGroundState = NodePath("../../../../../../../Movement/PM_SurfaceControl/GroundState")
 
-[node name="PC_SlideLedgeAnim" type="Node3D" parent="CameraPivot/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt" node_paths=PackedStringArray("_groundState", "_cameraControl", "_controller", "_groundSurfaceState", "_ledgeClimb")]
+[node name="PC_SlideLedgeAnim" type="Node3D" parent="Camera Pivot/Camera Control/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt" node_paths=PackedStringArray("_groundState", "_cameraControl", "_controller", "_groundSurfaceState", "_ledgeClimb")]
 script = ExtResource("9_727yx")
 _curve = SubResource("Curve_ux8de")
 _slideStrengthX = 3.0
@@ -140,16 +167,16 @@ _slideStrengthZ = 1.5
 _ledgeStrengthX = 8.0
 _ledgeStrengthZ = 4.0
 _duration = 0.8
-_groundState = NodePath("../../../../../../../State/PS_Grounded")
+_groundState = NodePath("../../../../../../../../State/PS_Grounded")
 _cameraControl = NodePath("../../../../../..")
-_controller = NodePath("../../../../../../..")
-_groundSurfaceState = NodePath("../../../../../../../Movement/PM_SurfaceControl/GroundState")
-_ledgeClimb = NodePath("../../../../../../../Movement/Actions/Jump/PM_LedgeClimb")
+_controller = NodePath("../../../../../../../..")
+_groundSurfaceState = NodePath("../../../../../../../../Movement/PM_SurfaceControl/GroundState")
+_ledgeClimb = NodePath("../../../../../../../../Movement/Actions/Jump/PM_LedgeClimb")
 
-[node name="Camera3D" type="Camera3D" parent="CameraPivot/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim"]
+[node name="Camera3D" type="Camera3D" parent="Camera Pivot/Camera Control/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim"]
 fov = 103.0
 
-[node name="Label3D" type="Label3D" parent="CameraPivot/PC_SprintLean/PC_Bobbing" node_paths=PackedStringArray("_controller")]
+[node name="Label3D" type="Label3D" parent="Camera Pivot/Camera Control/PC_SprintLean/PC_Bobbing" node_paths=PackedStringArray("_controller")]
 transform = Transform3D(0.956305, 0.0406903, -0.289526, 0, 0.990268, 0.139173, 0.292372, -0.133092, 0.946998, 0.409688, -0.328343, -0.415548)
 pixel_size = 0.001
 modulate = Color(0.0196078, 0.498039, 1, 0.764706)
@@ -159,7 +186,11 @@ script = ExtResource("10_kvg1p")
 _gradient = SubResource("Gradient_k51pg")
 _minSpeed = 10.0
 _maxSpeed = 60.0
-_controller = NodePath("../../../..")
+_controller = NodePath("../../../../..")
+
+[node name="GroundCast" type="ShapeCast3D" parent="."]
+shape = SubResource("SphereShape3D_4jpmy")
+target_position = Vector3(0, -20, 0)
 
 [node name="Body" type="CollisionShape3D" parent="." node_paths=PackedStringArray("_modelAnchor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
@@ -171,7 +202,7 @@ _modelAnchor = NodePath("SpatialAnchor")
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Body/SpatialAnchor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
-remote_path = NodePath("../../../CameraPivot")
+remote_path = NodePath("../../../Camera Pivot")
 update_rotation = false
 update_scale = false
 
@@ -350,34 +381,11 @@ _wind = NodePath("Wind")
 stream = ExtResource("44_vhlgj")
 autoplay = true
 
-[node name="WallJumpCastLow" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
-target_position = Vector3(0, 0, -0.6)
-
-[node name="WallJumpCastHigh" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-target_position = Vector3(0, 0, -0.6)
-
-[node name="LedgeCastFoot" type="RayCast3D" parent="."]
-target_position = Vector3(0, 0, -0.8)
-
-[node name="LedgeCastHead" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68045, 0)
-target_position = Vector3(0, 0, -1.2)
-
-[node name="LedgeCastChest" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-target_position = Vector3(0, 0, -0.8)
-
-[node name="GroundCast" type="ShapeCast3D" parent="."]
-shape = SubResource("SphereShape3D_4jpmy")
-target_position = Vector3(0, -20, 0)
-
 [node name="Input" type="Node" parent="."]
 
 [node name="PI_Walk" type="Node" parent="Input" node_paths=PackedStringArray("_flatDirNode")]
 script = ExtResource("12_pwafq")
-_flatDirNode = NodePath("../..")
+_flatDirNode = NodePath("../../Camera Pivot")
 
 [node name="PI_Jump" type="Node" parent="Input"]
 script = ExtResource("13_ua84m")
@@ -464,9 +472,9 @@ _walkInput = NodePath("../../../../Input/PI_Walk")
 _controller = NodePath("../../../..")
 _dash = NodePath("../../Crouch/PM_Dash")
 _jump = NodePath("../PM_Jump")
-_headCast = NodePath("../../../../LedgeCastHead")
-_chestCast = NodePath("../../../../LedgeCastChest")
-_footCast = NodePath("../../../../LedgeCastFoot")
+_headCast = NodePath("../../../../Camera Pivot/Casts/LedgeCastHead")
+_chestCast = NodePath("../../../../Camera Pivot/Casts/LedgeCastChest")
+_footCast = NodePath("../../../../Camera Pivot/Casts/LedgeCastFoot")
 _climbSpeed = 4.0
 
 [node name="PM_WallJump" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_jumpInput", "_controller", "_groundState", "_ledgeClimb", "_wallCastLow", "_wallCastHigh")]
@@ -475,8 +483,8 @@ _jumpInput = NodePath("../../../../Input/PI_Jump")
 _controller = NodePath("../../../..")
 _groundState = NodePath("../../../../State/PS_Grounded")
 _ledgeClimb = NodePath("../PM_LedgeClimb")
-_wallCastLow = NodePath("../../../../WallJumpCastLow")
-_wallCastHigh = NodePath("../../../../WallJumpCastHigh")
+_wallCastLow = NodePath("../../../../Camera Pivot/Casts/WallJumpCastLow")
+_wallCastHigh = NodePath("../../../../Camera Pivot/Casts/WallJumpCastHigh")
 
 [node name="Crouch" type="Node" parent="Movement/Actions"]
 
@@ -496,7 +504,7 @@ _bodyScalor = NodePath("../../../../Body")
 script = ExtResource("31_5px2t")
 _dashInput = NodePath("../../../../Input/PI_CrouchDispatcher/PI_Dash")
 _walkInput = NodePath("../../../../Input/PI_Walk")
-_cameraControl = NodePath("../../../../CameraPivot")
+_cameraControl = NodePath("../../../../Camera Pivot/Camera Control")
 _controller = NodePath("../../../..")
 _groundState = NodePath("../../../../State/PS_Grounded")
 _ledgeClimb = NodePath("../../Jump/PM_LedgeClimb")
@@ -516,8 +524,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("32_jex4o")
-_sightPosition = NodePath("../../CameraPivot/PC_SprintLean")
-_camera = NodePath("../../CameraPivot/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/Camera3D")
+_sightPosition = NodePath("../../Camera Pivot/Camera Control/PC_SprintLean")
+_camera = NodePath("../../Camera Pivot/Camera Control/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/Camera3D")
 image = NodePath("TextureRect")
 _resetSpeed = 20.0
 

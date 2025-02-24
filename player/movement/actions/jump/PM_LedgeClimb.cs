@@ -34,6 +34,7 @@ public partial class PM_LedgeClimb : PM_Action
 
     public Vector3 LedgeClimb(Vector3 velocity)
     {
+        GD.Print(_chestCast.IsColliding());
         if (_isClimbing)        // Shouldn't happen ? to verify - might not neeed is climbing anymore
             return velocity;
 

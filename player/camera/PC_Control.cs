@@ -9,7 +9,7 @@ public partial class PC_Control : Node3D
     private float _sensitivity = 2.8f;
     
     [ExportCategory("Setup")]
-    [Export] private Node3D _body;
+    [Export] private Node3D _flatDir;
     private Vector3 _eulerAngles;
 
     private float _realSens;
@@ -25,11 +25,16 @@ public partial class PC_Control : Node3D
     {
         if (@event is InputEventMouseMotion mouseMotion)
         {
-            _body.RotateY(-mouseMotion.Relative.X * _realSens);
+            //_flatDir.RotateY(-mouseMotion.Relative.X * _realSens);
             
-            _eulerAngles += new Vector3(-mouseMotion.Relative.Y * _realSens, -mouseMotion.Relative.X * _realSens, 0f);
-            _eulerAngles.X = Mathf.Clamp(_eulerAngles.X, Mathf.DegToRad(-90), Mathf.DegToRad(90));
-            Rotation = _eulerAngles;
+            //_eulerAngles += new Vector3(-mouseMotion.Relative.Y * _realSens, -mouseMotion.Relative.X * _realSens, 0f);
+            //_eulerAngles.X = Mathf.Clamp(_eulerAngles.X, Mathf.DegToRad(-90), Mathf.DegToRad(90));
+            //Rotation = _eulerAngles;
+            _flatDir.RotateY(-mouseMotion.Relative.X * _realSens);
+            RotateX(-mouseMotion.Relative.Y * _realSens);
+            Vector3 rotation = Rotation;
+            rotation.X = Mathf.Clamp(rotation.X, Mathf.DegToRad(-90), Mathf.DegToRad(90));
+            Rotation = rotation;
         }
     }
 

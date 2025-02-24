@@ -36,7 +36,7 @@ public partial class PC_Lean : Node3D
             deltaTime: (float)delta
         );
 
-        Vector3 leanAxis = _dampedAcceleration.Cross(_camera.Basis.Y).Normalized();
+        Vector3 leanAxis = _dampedAcceleration.Cross(_camera.GlobalBasis.Y).Normalized();
         Rotation = Vector3.Zero;
 
         if (!leanAxis.IsNormalized()) // Couldn't normalize axis

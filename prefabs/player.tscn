@@ -63,11 +63,10 @@ _surfaceControl = NodePath("Movement/PM_SurfaceControl")
 _velocityCache = ExtResource("2_seqbe")
 _straffeSnap = NodePath("Movement/PM_StraffeSnap")
 
-[node name="CameraPivot" type="Node3D" parent="." node_paths=PackedStringArray("_body")]
+[node name="CameraPivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0)
 top_level = true
 script = ExtResource("3_duaqo")
-_body = NodePath("..")
 
 [node name="PC_SprintLean" type="Node3D" parent="CameraPivot" node_paths=PackedStringArray("_groundSurfaceState")]
 script = ExtResource("4_ckxhl")
