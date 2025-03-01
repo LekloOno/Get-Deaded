@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgxay2q63b8m8"]
+
+[ext_resource type="PackedScene" uid="uid://b8yrodu7ix03r" path="res://assets/models/bot.tscn" id="1_bdtk5"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vupcu"]
+height = 1.8
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+
+[node name="AuxScene" parent="." instance=ExtResource("1_bdtk5")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_vupcu")
