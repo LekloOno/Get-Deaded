@@ -145,7 +145,7 @@ _controller = NodePath("../../../..")
 
 [node name="PC_Spring" type="Node3D" parent="Camera Pivot/Camera Control/PC_SprintLean/PC_Bobbing" node_paths=PackedStringArray("_cameraTarget")]
 script = ExtResource("6_v2bpg")
-LinearDisplacement = 0.02
+LinearDisplacement = 0.0
 _cameraTarget = NodePath("../../../../../Body/SpatialAnchor/RemoteTransform3D")
 
 [node name="PC_Lean" type="Node3D" parent="Camera Pivot/Camera Control/PC_SprintLean/PC_Bobbing/PC_Spring" node_paths=PackedStringArray("_camera", "_controller")]
@@ -476,6 +476,7 @@ _headCast = NodePath("../../../../Camera Pivot/Casts/LedgeCastHead")
 _chestCast = NodePath("../../../../Camera Pivot/Casts/LedgeCastChest")
 _footCast = NodePath("../../../../Camera Pivot/Casts/LedgeCastFoot")
 _climbSpeed = 4.0
+_superGlideWindow = 80
 
 [node name="PM_WallJump" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_jumpInput", "_controller", "_groundState", "_ledgeClimb", "_wallCastLow", "_wallCastHigh")]
 script = ExtResource("28_x5ps3")

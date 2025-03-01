@@ -13,7 +13,7 @@ public partial class PC_Spring : Node3D
     [Export(PropertyHint.Range, "0.01,15.0,0.1")]
     public float AngularDisplacement {get; private set;} = 6f;
 
-    [Export(PropertyHint.Range, "0.01,0.3,0.01")]
+    [Export(PropertyHint.Range, "0.0,0.3,0.01")]
     public float LinearDisplacement {get; private set;} = 0.05f;
     
     [ExportCategory("Setup")]

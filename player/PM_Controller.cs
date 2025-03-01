@@ -13,6 +13,7 @@ public partial class PM_Controller : CharacterBody3D
 
     public PHX_ForcesCache AdditionalForces {get; private set;} = new PHX_ForcesCache();  // To allow external entities to apply additional forces.
     public PHX_ForcesCache TakeOverForces {get; private set;} = new PHX_ForcesCache();    // To allow external entities to take over the movement behavior.
+    public PM_VelocityCache VelocityCache => _velocityCache;
     public Vector3 RealVelocity {get; set;}
     public Vector3 Acceleration {get; private set;}
 

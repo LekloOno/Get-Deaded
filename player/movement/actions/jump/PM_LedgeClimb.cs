@@ -34,7 +34,6 @@ public partial class PM_LedgeClimb : PM_Action
 
     public Vector3 LedgeClimb(Vector3 velocity)
     {
-        GD.Print(_chestCast.IsColliding());
         if (_isClimbing)        // Shouldn't happen ? to verify - might not neeed is climbing anymore
             return velocity;
 
@@ -50,7 +49,7 @@ public partial class PM_LedgeClimb : PM_Action
     private void DoLedgeClimb()
     {
         _startTime = Time.GetTicksMsec();
-        _prevVelocity = _controller.Velocity;
+        _prevVelocity = _controller.VelocityCache.UseCacheOr(_controller.RealVelocity);
         _dash.AbortDash();
 
         _direction = -_chestCast.GetCollisionNormal();
@@ -80,8 +79,8 @@ public partial class PM_LedgeClimb : PM_Action
         Vector3 minOut = new(_direction.X, 1f, _direction.Z);
 
         Vector3 outVelocity = _prevVelocity;
-        outVelocity = outVelocity.Max(minOut.Abs());
-        outVelocity *= minOut.Sign();
+        if(minOut > outVelocity)
+            outVelocity = minOut;
         
         if (Time.GetTicksMsec() - _crouchInput.LastCrouchDown < _superGlideWindow)
         {

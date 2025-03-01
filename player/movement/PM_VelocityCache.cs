@@ -16,7 +16,7 @@ public partial class PM_VelocityCache : Resource
         return outputVel;
     }
 
-    private Vector3 UseCacheOr(Vector3 velocity)
+    public Vector3 UseCacheOr(Vector3 velocity)
     {
         Vector3 outputVel = TestVelocity(velocity);
         DiscardCache();
