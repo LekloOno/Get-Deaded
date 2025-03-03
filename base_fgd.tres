@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="FuncGodotFGDFile" load_steps=3 format=3 uid="uid://hmclet7brx4d"]
 
-[ext_resource type="Script" path="res://addons/func_godot/src/fgd/func_godot_fgd_file.gd" id="1_hlb1p"]
+[ext_resource type="Script" uid="uid://boaxuiggckco2" path="res://addons/func_godot/src/fgd/func_godot_fgd_file.gd" id="1_hlb1p"]
 [ext_resource type="Resource" uid="uid://crgpdahjaj" path="res://addons/func_godot/fgd/func_godot_fgd.tres" id="1_re7ji"]
 
 [resource]

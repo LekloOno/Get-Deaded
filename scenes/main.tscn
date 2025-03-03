@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://fylhrdumofx7"]
 
 [ext_resource type="PackedScene" uid="uid://b5w3ok85lmxgf" path="res://prefabs/player_camchanged.tscn" id="1_ke6ed"]
-[ext_resource type="Script" path="res://debug/display_fps.gd" id="2_2dlva"]
+[ext_resource type="Script" uid="uid://byy7tiy37y47h" path="res://debug/display_fps.gd" id="2_2dlva"]
 [ext_resource type="Material" uid="uid://c7p68evacni7v" path="res://assets/materials/darkGrid.tres" id="3_mjydo"]
 [ext_resource type="Texture2D" uid="uid://cqhod3kxlagse" path="res://assets/textures/grid/texture_01.png" id="3_psibm"]
 [ext_resource type="Material" uid="uid://t2nvujbehqp3" path="res://assets/materials/greenGrid.tres" id="4_h8tvw"]

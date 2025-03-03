@@ -1,8 +1,7 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://b4nfitu4xc6mj"]
+[gd_resource type="Resource" script_class="PM_VelocityCache" load_steps=2 format=3 uid="uid://b4nfitu4xc6mj"]
 
-[ext_resource type="Script" path="res://player/movement/PM_VelocityCache.cs" id="1_dhpsq"]
+[ext_resource type="Script" uid="uid://dfcqghyon87wq" path="res://player/movement/PM_VelocityCache.cs" id="1_dhpsq"]
 
 [resource]
 script = ExtResource("1_dhpsq")
-CacheFrameMsec = 200
-CacheMinSpeed = 4.0
+_cacheFrameMsec = 200

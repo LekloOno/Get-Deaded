@@ -3,7 +3,7 @@
 [ext_resource type="Resource" uid="uid://ckn2mamfc6m4" path="res://player/movement/actions/surface-control/data/ground/ground-crouch.tres" id="1_b5oxn"]
 [ext_resource type="Resource" uid="uid://bld6y2cv0hps1" path="res://player/movement/actions/surface-control/data/ground/ground-normal.tres" id="1_evbar"]
 [ext_resource type="Resource" uid="uid://ble5l38lurk8s" path="res://player/movement/actions/surface-control/data/ground/ground-sprint.tres" id="2_hd1xj"]
-[ext_resource type="Script" path="res://player/movement/actions/surface-control/PM_SurfaceStateData.cs" id="2_pg1er"]
+[ext_resource type="Script" uid="uid://dfnqfwvioyx3u" path="res://player/movement/actions/surface-control/PM_SurfaceStateData.cs" id="2_pg1er"]
 [ext_resource type="Resource" uid="uid://tj45pkrpo3f" path="res://player/movement/actions/surface-control/data/ground/ground-slide.tres" id="3_jxu35"]
 
 [resource]
