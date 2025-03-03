@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://bamfyra88bf52"
+path="res://.godot/imported/oui.5.map-51690b28067c5b4d1a52dd5df788692b.tres"
+
+[deps]
+
+source_file="res://trenchbroom/maps/autosave/oui.5.map"
+dest_files=["res://.godot/imported/oui.5.map-51690b28067c5b4d1a52dd5df788692b.tres"]
+
+[params]
+

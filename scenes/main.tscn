@@ -3,9 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://b5w3ok85lmxgf" path="res://prefabs/player_camchanged.tscn" id="1_ke6ed"]
 [ext_resource type="Script" path="res://debug/display_fps.gd" id="2_2dlva"]
 [ext_resource type="Material" uid="uid://c7p68evacni7v" path="res://assets/materials/darkGrid.tres" id="3_mjydo"]
-[ext_resource type="Texture2D" uid="uid://cqhod3kxlagse" path="res://assets/PNG/Dark/texture_01.png" id="3_psibm"]
+[ext_resource type="Texture2D" uid="uid://cqhod3kxlagse" path="res://assets/textures/grid/texture_01.png" id="3_psibm"]
 [ext_resource type="Material" uid="uid://t2nvujbehqp3" path="res://assets/materials/greenGrid.tres" id="4_h8tvw"]
-[ext_resource type="Texture2D" uid="uid://x1yueclhxki8" path="res://assets/PNG/Green/texture_01.png" id="4_mot4u"]
+[ext_resource type="Texture2D" uid="uid://x1yueclhxki8" path="res://assets/textures/grid/grid_green_01.png" id="4_mot4u"]
 [ext_resource type="Material" uid="uid://tu7ne3521eed" path="res://assets/materials/orangeGrid.tres" id="7_uvtc8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bt1f8"]

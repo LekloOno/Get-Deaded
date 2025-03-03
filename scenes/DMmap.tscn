@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cdhv0btvpdu5a"]
+[gd_scene load_steps=12 format=3 uid="uid://cdhv0btvpdu5a"]
 
 [ext_resource type="PackedScene" uid="uid://b5w3ok85lmxgf" path="res://prefabs/player_camchanged.tscn" id="1_ag22l"]
 [ext_resource type="Material" uid="uid://c7p68evacni7v" path="res://assets/materials/darkGrid.tres" id="2_cemff"]
@@ -7,6 +7,7 @@
 [ext_resource type="Material" uid="uid://t2nvujbehqp3" path="res://assets/materials/greenGrid.tres" id="4_di6lj"]
 [ext_resource type="PackedScene" uid="uid://cgxay2q63b8m8" path="res://assets/models/simplebot.tscn" id="5_m6jvf"]
 [ext_resource type="Material" uid="uid://bc8petulu1x6h" path="res://assets/materials/lightGrid.tres" id="5_o0loy"]
+[ext_resource type="Material" uid="uid://bn43ebup84oy3" path="res://assets/materials/factory/factorywall.tres" id="8_k3vvs"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ccufn"]
 panorama = ExtResource("2_k74wy")
@@ -386,6 +387,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 2, 8)
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="FP"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0, -4.76837e-07)
+material_override = ExtResource("8_k3vvs")
 use_collision = true
 size = Vector3(11.5, 3, 0.6)
 

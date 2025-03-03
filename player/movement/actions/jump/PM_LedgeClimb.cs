@@ -79,7 +79,7 @@ public partial class PM_LedgeClimb : PM_Action
         Vector3 minOut = new(_direction.X, 1f, _direction.Z);
 
         Vector3 outVelocity = _prevVelocity;
-        if(minOut > outVelocity)
+        if(minOut.Length() > outVelocity.Length())
             outVelocity = minOut;
         
         if (Time.GetTicksMsec() - _crouchInput.LastCrouchDown < _superGlideWindow)
