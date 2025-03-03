@@ -126,12 +126,13 @@ target_position = Vector3(0, 0, -1.2)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.05, 0)
 target_position = Vector3(0, 0, -0.8)
 
-[node name="Camera Control" type="Node3D" parent="Camera Pivot" node_paths=PackedStringArray("_flatDir")]
+[node name="Camera Control" type="Node3D" parent="Camera Pivot" node_paths=PackedStringArray("_flatDir", "_target")]
+physics_interpolation_mode = 2
 script = ExtResource("3_xv583")
 _flatDir = NodePath("..")
+_target = NodePath("../../Body/SpatialAnchor/RemoteTransform3D")
 
 [node name="PC_SprintLean" type="Node3D" parent="Camera Pivot/Camera Control" node_paths=PackedStringArray("_groundSurfaceState")]
-physics_interpolation_mode = 2
 script = ExtResource("4_s37k1")
 _heightDisplacement = -0.15
 _groundSurfaceState = NodePath("../../../Movement/PM_SurfaceControl/GroundState")

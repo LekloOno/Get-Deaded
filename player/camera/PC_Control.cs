@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Runtime;
 
 [GlobalClass]
 public partial class PC_Control : Node3D
@@ -10,6 +11,7 @@ public partial class PC_Control : Node3D
     
     [ExportCategory("Setup")]
     [Export] private Node3D _flatDir;
+    [Export] private Node3D _target;
     private Vector3 _eulerAngles;
 
     private float _realSens;
@@ -36,6 +38,11 @@ public partial class PC_Control : Node3D
             rotation.X = Mathf.Clamp(rotation.X, Mathf.DegToRad(-90), Mathf.DegToRad(90));
             Rotation = rotation;
         }
+    }
+
+    public override void _Process(double delta)
+    {
+        GlobalPosition = _target.GetGlobalTransformInterpolated().Origin;
     }
 
     // Classic method .. if the manual euler method ever breaks
