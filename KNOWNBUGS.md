@@ -56,8 +56,8 @@ It's not floor snap, it might be but its height doesn't affect how strong the bu
 The sprint snap bug occurs with just drag and surface control enabled, even with no air control. But it doesn't give any non flat normal.
 However, when snapping down it doesn't count as a collision (printing collisions when moving down a slope, although snapped, does not give any collsiion)
 
-Sometimes, you can get a wall jump, but the jump direction will be along the wall, which seems counter intuitive as if the velocity is along the wall, wall jumping shouldn't be possible. It is especially noticeable at lower tickrate. It seems it would happen when landing on the wall on the exact tick you try jumping ?
-We might want to use cached velocity anyway to be a little more forgiving.
+~~Sometimes, you can get a wall jump, but the jump direction will be along the wall, which seems counter intuitive as if the velocity is along the wall, wall jumping shouldn't be possible. It is especially noticeable at lower tickrate. It seems it would happen when landing on the wall on the exact tick you try jumping ?~~
+~~We might want to use cached velocity anyway to be a little more forgiving.~~
 
 Crouch scale speed is weird at very low tick rate. This might be ignored as it only happens on very low tick rate, and doesn't seem to affect at all higher tick rate, there's probably a threshold at which this happens.
 

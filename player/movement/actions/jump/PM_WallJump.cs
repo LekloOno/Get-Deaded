@@ -32,12 +32,19 @@ public partial class PM_WallJump : PM_Action
         if (!IsWall(normal))
             return _ledgeClimb.LedgeClimb(velocity); // Propagate to Ledge
 
-        Vector3 flatVel = new Vector3(velocity.X, 0, velocity.Z);
-        if (TooSlow(flatVel, normal))
+
+        Vector3 flatVel = PHX_Vector3Ext.Flat(velocity);
+        if (_ledgeClimb.CanLedgeClimb() && TooSlow(flatVel, normal))
+            return _ledgeClimb.LazyLedgeClimb(velocity); // Force Ledge
+        
+        Vector3 wallJumpVel = _controller.VelocityCache.UseCacheOr(velocity);
+        Vector3 wallFlatVel = PHX_Vector3Ext.Flat(wallJumpVel);
+
+        if (TooSlow(wallFlatVel, normal))
             return _ledgeClimb.LedgeClimb(velocity); // Propagate to Ledge
 
         _jumpInput.UseBuffer(); 
-        return DoWallJump(velocity, _wallCastLow.GetCollisionNormal()); // Do it !
+        return DoWallJump(wallJumpVel, _wallCastLow.GetCollisionNormal()); // Do it !
     }
 
     private Vector3 DoWallJump(Vector3 velocity, Vector3 normal)
