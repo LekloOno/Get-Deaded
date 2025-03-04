@@ -88,13 +88,12 @@ _groundSurfaceState = NodePath("../../../../../Movement/PM_SurfaceControl/Ground
 _groundState = NodePath("../../../../../State/PS_Grounded")
 _controller = NodePath("../../../../..")
 
-[node name="PC_SlideTilt" type="Node3D" parent="CameraPivot/PC_SprintLean/PC_Spring/PC_Lean/PC_Bobbing" node_paths=PackedStringArray("_cameraControl", "_controller", "_surfaceGroundState")]
+[node name="PC_SlideTilt" type="Node3D" parent="CameraPivot/PC_SprintLean/PC_Spring/PC_Lean/PC_Bobbing" node_paths=PackedStringArray("_controller", "_surfaceGroundState")]
 script = ExtResource("8_s0wjl")
-_cameraControl = NodePath("../../../../..")
 _controller = NodePath("../../../../../..")
 _surfaceGroundState = NodePath("../../../../../../Movement/PM_SurfaceControl/GroundState")
 
-[node name="PC_SlideLedgeAnim" type="Node3D" parent="CameraPivot/PC_SprintLean/PC_Spring/PC_Lean/PC_Bobbing/PC_SlideTilt" node_paths=PackedStringArray("_groundState", "_cameraControl", "_controller", "_groundSurfaceState", "_ledgeClimb")]
+[node name="PC_SlideLedgeAnim" type="Node3D" parent="CameraPivot/PC_SprintLean/PC_Spring/PC_Lean/PC_Bobbing/PC_SlideTilt" node_paths=PackedStringArray("_groundState", "_controller", "_groundSurfaceState", "_ledgeClimb")]
 script = ExtResource("9_4qub8")
 _curve = SubResource("Curve_ux8de")
 _slideStrengthX = 3.0
@@ -103,7 +102,6 @@ _ledgeStrengthX = 8.0
 _ledgeStrengthZ = 4.0
 _duration = 0.8
 _groundState = NodePath("../../../../../../../State/PS_Grounded")
-_cameraControl = NodePath("../../../../../..")
 _controller = NodePath("../../../../../../..")
 _groundSurfaceState = NodePath("../../../../../../../Movement/PM_SurfaceControl/GroundState")
 _ledgeClimb = NodePath("../../../../../../../Movement/Actions/Jump/PM_LedgeClimb")

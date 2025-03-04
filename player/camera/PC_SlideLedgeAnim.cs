@@ -14,12 +14,12 @@ public partial class PC_SlideLedgeAnim : Node3D
 
     [ExportCategory("Setup")]
     [Export] private PS_Grounded _groundState;
-    [Export] private PC_Control _cameraControl;
+    [Export] private PC_FlatDir _flatDir;
     [Export] private PM_Controller _controller;
     [Export] private PM_SurfaceState _groundSurfaceState;
     [Export] private PM_LedgeClimb _ledgeClimb;
 
-    static private Random rng = new Random();
+    private static readonly Random _rng = new();
     private float _xDirection;
     private float _zDirection;
     private float _strengthX;
@@ -36,11 +36,12 @@ public partial class PC_SlideLedgeAnim : Node3D
 
     private void OnStartSlide(object sender, EventArgs e)
     {
+       
         if (_groundState.IsGrounded())
         {
             _xDirection = 1f;
             
-            Vector3 flatDirAxis = _cameraControl.Basis.X.Normalized();
+            Vector3 flatDirAxis = _flatDir.Basis.X.Normalized();
             Vector3 flatVel = PHX_Vector3Ext.Flat(_controller.RealVelocity.Normalized());
             
             float dot = flatVel.Dot(flatDirAxis);
@@ -56,7 +57,7 @@ public partial class PC_SlideLedgeAnim : Node3D
     private void OnStartLedge(object sender, EventArgs e)
     {
         _xDirection = -1f;
-        _zDirection = (rng.Next(2) * 2f) - 1f;
+        _zDirection = (_rng.Next(2) * 2f) - 1f;
 
         _strengthX = _ledgeStrengthX;
         _strengthZ = _ledgeStrengthZ;

@@ -15,7 +15,7 @@ public partial class PC_SlideTilt : Node3D
     private float _resetSpeed = 5f;
 
     [ExportCategory("Setup")]
-    [Export] private PC_Control _cameraControl;
+    [Export] private PC_FlatDir _flatDir;
     [Export] private PM_Controller _controller;
     [Export] private PM_SurfaceState _surfaceGroundState;
 
@@ -39,7 +39,7 @@ public partial class PC_SlideTilt : Node3D
 
     public void SlideTilt(double delta)
     {
-        Vector3 flatDirAxis = _cameraControl.GlobalBasis.X;
+        Vector3 flatDirAxis = _flatDir.Basis.X;
         float velDirScalar = _controller.RealVelocity.Dot(flatDirAxis);
 
         float angle = (_strength * velDirScalar - Rotation.Z) * (float)delta * _resetSpeed;
