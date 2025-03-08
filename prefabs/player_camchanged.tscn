@@ -492,11 +492,12 @@ SnapThreshold = 2.0
 
 [node name="Jump" type="Node" parent="Movement/Actions"]
 
-[node name="PM_Jump" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_jumpInput", "_groundState")]
+[node name="PM_Jump" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_jumpInput", "_groundState", "_controller")]
 script = ExtResource("25_qc7ep")
 _jumpInput = NodePath("../../../../Input/PI_Jump")
 _data = ExtResource("26_kdvrh")
 _groundState = NodePath("../../../../State/PS_Grounded")
+_controller = NodePath("../../../..")
 
 [node name="PM_LedgeClimb" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_jumpInput", "_crouchInput", "_walkInput", "_controller", "_dash", "_jump", "_headCast", "_chestCast", "_footCast")]
 script = ExtResource("27_shnri")

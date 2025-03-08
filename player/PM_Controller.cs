@@ -1,3 +1,4 @@
+using System.Dynamic;
 using Godot;
 
 public partial class PM_Controller : CharacterBody3D
@@ -17,6 +18,22 @@ public partial class PM_Controller : CharacterBody3D
     public PM_VelocityCache VelocityCache => _velocityCache;
     public Vector3 RealVelocity {get; set;}
     public Vector3 Acceleration {get; private set;}
+    private float _specialGravity = 0;
+    private bool _hasSpecialGravity = false;
+
+    public float SpecialGravity
+    {
+        set
+        {
+            _specialGravity = value;
+            _hasSpecialGravity = true;
+        }
+    }
+
+    public void ResetGravity()
+    {
+        _hasSpecialGravity = false;
+    }
 
     public override void _Ready()
     {
@@ -70,7 +87,11 @@ public partial class PM_Controller : CharacterBody3D
             velocity = _straffeSnap.Snap(velocity, prevVelocity);
 
             if (!_groundState.IsGrounded())
-                velocity += GetGravity() * (float)delta;
+            {
+                if (velocity.Y <= 0) ResetGravity();
+                Vector3 gravity = _hasSpecialGravity ? (_specialGravity * Vector3.Up) : GetGravity();
+                velocity += gravity * (float)delta;
+            }
 
             Velocity = velocity;
         } else 
