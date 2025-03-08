@@ -12,5 +12,5 @@ JumpHeight = 1.3
 JumpPeakTime = 0.5
 JumpFallTime = 0.5
 FatigueJumpHeight = 0.3
-FatigueJumpPeakTime = 0.18
+FatigueJumpPeakTime = 0.2
 FatigueJumpFallTime = 0.3
