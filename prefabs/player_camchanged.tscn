@@ -523,7 +523,7 @@ _wallCastHigh = NodePath("../../../../Camera Pivot/Casts/WallJumpCastHigh")
 
 [node name="PM_WallClimb" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_startHopTimer", "_jumpInput", "_walkInput", "_controller", "_wallJump", "_jump", "_ledgeClimb", "_headCast")]
 script = ExtResource("61_x3a7t")
-_minInWallSpeed = 5.2
+_minInWallSpeed = 4.0
 _speedDebuff = 0.05
 _jumpMinStrength = 0.0
 _jumpSpeedCoef = 0.3
