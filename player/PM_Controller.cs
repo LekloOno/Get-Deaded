@@ -4,6 +4,7 @@ public partial class PM_Controller : CharacterBody3D
 {
     [Export] private PI_Walk _walkProcess;
     [Export] private PM_WallJump _wallJump;
+    [Export] private PM_WallClimb _wallClimb;
     [Export] private PS_Grounded _groundState;
     [Export] private PC_Control _cameraControl;
     [Export] private PM_SurfaceControl _surfaceControl;
@@ -62,7 +63,7 @@ public partial class PM_Controller : CharacterBody3D
             }
 
 
-            velocity = _wallJump.WallJump(velocity);
+            velocity = _wallClimb.WallClimb(velocity);
             velocity = _surfaceControl.ApplyDrag(velocity, delta);
             velocity += _surfaceControl.Accelerate(velocity, (float)delta);
             velocity += AdditionalForces.Consume();

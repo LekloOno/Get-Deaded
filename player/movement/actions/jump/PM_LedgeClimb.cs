@@ -56,7 +56,7 @@ public partial class PM_LedgeClimb : PM_Action
 
     public bool CanLedgeClimb() => _chestCast.IsColliding() && !_headCast.IsColliding();
 
-    private void DoLedgeClimb()
+    public void DoLedgeClimb()
     {
         _startTime = Time.GetTicksMsec();
         _prevVelocity = _controller.VelocityCache.UseCacheOr(_controller.RealVelocity);

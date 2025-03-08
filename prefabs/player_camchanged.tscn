@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=73 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -65,6 +65,7 @@
 [ext_resource type="Script" uid="uid://drst58njg40lu" path="res://player/audio/PA_LedgeClimb.cs" id="42_xvvq2"]
 [ext_resource type="Script" uid="uid://bygoet2cggu0b" path="res://player/audio/PA_SpeedWind.cs" id="43_wtkgi"]
 [ext_resource type="AudioStream" uid="uid://d1ot41x8qebwj" path="res://assets/sounds/wind/wind.wav" id="44_vhlgj"]
+[ext_resource type="Script" uid="uid://mds7cr6i4noc" path="res://player/movement/actions/jump/PM_WallClimb.cs" id="61_x3a7t"]
 [ext_resource type="Script" uid="uid://byy7tiy37y47h" path="res://debug/display_fps.gd" id="65_wohr1"]
 
 [sub_resource type="Curve" id="Curve_ux8de"]
@@ -85,7 +86,7 @@ size = Vector3(0.5, 1.8, 0.5)
 radius = 0.25
 height = 1.8
 
-[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("_walkProcess", "_wallJump", "_groundState", "_cameraControl", "_surfaceControl", "_straffeSnap")]
+[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("_walkProcess", "_wallJump", "_wallClimb", "_groundState", "_cameraControl", "_surfaceControl", "_straffeSnap")]
 axis_lock_angular_y = true
 floor_constant_speed = true
 floor_block_on_wall = false
@@ -93,6 +94,7 @@ floor_max_angle = 0.872665
 script = ExtResource("1_vw06q")
 _walkProcess = NodePath("Input/PI_Walk")
 _wallJump = NodePath("Movement/Actions/Jump/PM_WallJump")
+_wallClimb = NodePath("Movement/Actions/Jump/PM_WallClimb")
 _groundState = NodePath("State/PS_Grounded")
 _cameraControl = NodePath("Camera Pivot/Camera Control")
 _surfaceControl = NodePath("Movement/PM_SurfaceControl")
@@ -488,6 +490,21 @@ _groundState = NodePath("../../../../State/PS_Grounded")
 _ledgeClimb = NodePath("../PM_LedgeClimb")
 _wallCastLow = NodePath("../../../../Camera Pivot/Casts/WallJumpCastLow")
 _wallCastHigh = NodePath("../../../../Camera Pivot/Casts/WallJumpCastHigh")
+
+[node name="PM_WallClimb" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_endClimbTimer", "_jumpInput", "_walkInput", "_controller", "_wallJump", "_ledgeClimb", "_headCast")]
+script = ExtResource("61_x3a7t")
+_jumpMinForce = 0.5
+_endClimbTimer = NodePath("Timer")
+_jumpInput = NodePath("../../../../Input/PI_Jump")
+_walkInput = NodePath("../../../../Input/PI_Walk")
+_controller = NodePath("../../../..")
+_wallJump = NodePath("../PM_WallJump")
+_ledgeClimb = NodePath("../PM_LedgeClimb")
+_headCast = NodePath("../../../../Camera Pivot/Casts/LedgeCastHead")
+metadata/_custom_type_script = "uid://mds7cr6i4noc"
+
+[node name="Timer" type="Timer" parent="Movement/Actions/Jump/PM_WallClimb"]
+wait_time = 0.4
 
 [node name="Crouch" type="Node" parent="Movement/Actions"]
 

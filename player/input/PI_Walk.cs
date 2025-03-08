@@ -47,6 +47,7 @@ public partial class PI_Walk : Node
 
     public bool IsStopped() => WalkAxis.X == 0 && WalkAxis.Y == 0;
     public bool IsBacking() => WalkAxis.Y > 0;
+    public bool IsForwarding() => WalkAxis.Y < 0; // Not just !IsBacking, walk axis can't be 0
 
     public Vector3 FreeWishDir(Vector2 input)
     {
