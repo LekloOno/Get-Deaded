@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 using Godot;
 
 [GlobalClass]
@@ -15,6 +16,8 @@ public partial class PM_WallClimb : PM_Action
     [Export] private int _maxClimbHops = 2;
     [Export] private float _betweenHopsTime = .4f;
     [Export] private float _hopDuration = .2f;
+    [Export] private float _kickStrength = 1f;
+    [Export] private float _kickDebuf = .1f;
 
     [ExportCategory("Setup")]
     [Export] private Timer _startHopTimer;
@@ -35,6 +38,7 @@ public partial class PM_WallClimb : PM_Action
     public override void _Ready()
     {
         _startHopTimer.Timeout += WallHop;
+        _jumpInput.OnStopInput += Kick;
         SetPhysicsProcess(false);
     }
 
@@ -101,9 +105,6 @@ public partial class PM_WallClimb : PM_Action
         _isHopping = true;
         _hopEndTimer = GetTree().CreateTimer(_hopDuration);
         _hopEndTimer.Timeout += ResetWallClimbStep;
-
-        Vector3 velFactor = new(_controller.Velocity.X, Math.Max(0, _controller.Velocity.Y), _controller.Velocity.Z);
-        _controller.Velocity = velFactor;
         _currentHop += 1;
     }
 
@@ -118,9 +119,17 @@ public partial class PM_WallClimb : PM_Action
         }
     }
 
-    private void EndWallClimbStep()
+    private void Kick(object sender, EventArgs e)
     {
+        if (!_isWallClimbing)
+            return;
 
+        EndWallClimb();
+        if (!IsCollidingWall(out Vector3 normal))
+            return;
+
+        _controller.AdditionalForces.AddImpulse(normal*_kickStrength);
+        _controller.AdditionalForces.AddImpulse(-PHX_Vector3Ext.Flat(_controller.Velocity)*_kickDebuf);
     }
 
     private void EndWallClimb()
