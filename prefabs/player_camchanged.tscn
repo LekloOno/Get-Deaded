@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=74 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -56,6 +56,7 @@
 [ext_resource type="Script" uid="uid://cnfmompqp4io5" path="res://player/movement/actions/crouch/PM_Slide.cs" id="30_q6qhf"]
 [ext_resource type="Script" uid="uid://3e041jkrr8vt" path="res://player/movement/actions/crouch/PM_Dash.cs" id="31_5px2t"]
 [ext_resource type="AudioStream" uid="uid://e3bucuoxk0i5" path="res://assets/sounds/land/land2.wav" id="31_py5mp"]
+[ext_resource type="AudioStream" uid="uid://e4vkndcsojck" path="res://assets/sounds/slides/slide.wav" id="32_aav2a"]
 [ext_resource type="Script" uid="uid://ce1eayuhmgg3m" path="res://ui/UI_Crosshair.cs" id="32_jex4o"]
 [ext_resource type="AudioStream" uid="uid://b58o4cj4n22u8" path="res://assets/sounds/land/land3.wav" id="32_qiq18"]
 [ext_resource type="Texture2D" uid="uid://lv4srmi6i827" path="res://assets/crosshairs/PNG/Outline/crosshair001.png" id="33_ck35o"]
@@ -264,15 +265,19 @@ _stepSounds = Array[AudioStream]([ExtResource("20_o38yh"), ExtResource("21_ux4x4
 stream = ExtResource("26_o5goj")
 autoplay = true
 
-[node name="PA_Jump" type="Node3D" parent="Body/Sound" node_paths=PackedStringArray("_wooshes", "_clothes", "_steps", "_wallJumpClothes", "_wallJumpWoosh", "_jump", "_wallJump")]
+[node name="PA_Jump" type="Node3D" parent="Body/Sound" node_paths=PackedStringArray("_wooshes", "_clothes", "_steps", "_wallJumpClothes", "_wallJumpWoosh", "_wallClimbClothes", "_wallClimbLow", "_wallClimbNoise", "_jump", "_wallJump", "_wallClimb")]
 script = ExtResource("12_nveww")
 _wooshes = NodePath("woosh")
 _clothes = NodePath("clothes")
 _steps = NodePath("../PA_FootSteps")
 _wallJumpClothes = NodePath("walljump")
 _wallJumpWoosh = NodePath("walljumpwoosh")
+_wallClimbClothes = NodePath("wallClimb")
+_wallClimbLow = NodePath("wallClimbLow")
+_wallClimbNoise = NodePath("wallClimbnoise")
 _jump = NodePath("../../../Movement/Actions/Jump/PM_Jump")
 _wallJump = NodePath("../../../Movement/Actions/Jump/PM_WallJump")
+_wallClimb = NodePath("../../../Movement/Actions/Jump/PM_WallClimb")
 
 [node name="woosh" type="AudioStreamPlayer3D" parent="Body/Sound/PA_Jump"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
@@ -305,6 +310,31 @@ attenuation_filter_cutoff_hz = 20500.0
 script = ExtResource("13_uyiqg")
 _stepSounds = Array[AudioStream]([ExtResource("15_vrr6v")])
 _maxPitch = 1.5
+
+[node name="wallClimb" type="AudioStreamPlayer3D" parent="Body/Sound/PA_Jump"]
+volume_db = -34.872
+script = ExtResource("13_uyiqg")
+_stepSounds = Array[AudioStream]([ExtResource("29_xlx50"), ExtResource("38_wshvc")])
+_minPitch = 1.2
+_maxPitch = 1.8
+metadata/_custom_type_script = "uid://d3uwl2heay8uf"
+
+[node name="wallClimbLow" type="AudioStreamPlayer3D" parent="Body/Sound/PA_Jump"]
+volume_db = -32.0
+attenuation_filter_cutoff_hz = 400.0
+script = ExtResource("13_uyiqg")
+_stepSounds = Array[AudioStream]([ExtResource("30_hyy4x"), ExtResource("31_py5mp")])
+_minPitch = 0.6
+_maxPitch = 0.7
+metadata/_custom_type_script = "uid://d3uwl2heay8uf"
+
+[node name="wallClimbnoise" type="AudioStreamPlayer3D" parent="Body/Sound/PA_Jump"]
+volume_db = -35.0
+script = ExtResource("13_uyiqg")
+_stepSounds = Array[AudioStream]([ExtResource("32_aav2a")])
+_minPitch = 1.2
+_maxPitch = 1.6
+metadata/_custom_type_script = "uid://d3uwl2heay8uf"
 
 [node name="PA_Land" type="Node3D" parent="Body/Sound" node_paths=PackedStringArray("_groundState", "_slideInLayers")]
 script = ExtResource("28_y3yod")
@@ -494,12 +524,13 @@ _wallCastHigh = NodePath("../../../../Camera Pivot/Casts/WallJumpCastHigh")
 [node name="PM_WallClimb" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_startHopTimer", "_jumpInput", "_walkInput", "_controller", "_wallJump", "_jump", "_ledgeClimb", "_headCast")]
 script = ExtResource("61_x3a7t")
 _minInWallSpeed = 5.2
+_speedDebuff = 0.05
 _jumpMinStrength = 0.0
-_jumpSpeedCoef = 0.0
-_hopMaxSpeed = 2.0
-_hopAccel = 0.5
-_hopDuration = 0.3
-_kickStrength = 2.0
+_jumpSpeedCoef = 0.3
+_hopMaxSpeed = 3.0
+_betweenHopsTime = 0.36
+_hopDuration = 0.15
+_kickStrength = 3.0
 _kickDebuf = 0.2
 _startHopTimer = NodePath("Timer")
 _jumpInput = NodePath("../../../../Input/PI_Jump")

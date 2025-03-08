@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
 using Godot;
 
 [GlobalClass]
@@ -29,6 +28,10 @@ public partial class PM_WallClimb : PM_Action
     [Export] private PM_Jump _jump;
     [Export] private PM_LedgeClimb _ledgeClimb;
     [Export] private RayCast3D _headCast;
+
+    public EventHandler OnHopStart;
+    public EventHandler OnHopStop;
+    public EventHandler OnKick;
 
     private SceneTreeTimer _hopEndTimer;
     private bool _isWallClimbing = false;
@@ -101,21 +104,21 @@ public partial class PM_WallClimb : PM_Action
 
     private void DoWallHop()
     {
-        GD.Print("hop");
+        OnHopStart?.Invoke(this, EventArgs.Empty);
         _isHopping = true;
         _hopEndTimer = GetTree().CreateTimer(_hopDuration);
-        _hopEndTimer.Timeout += ResetWallClimbStep;
+        _hopEndTimer.Timeout += ResetWallHop;
         _currentHop += 1;
     }
 
-    private void ResetWallClimbStep()
+    private void ResetWallHop()
     {
         if (_hopEndTimer != null)
         {
             _isHopping = false;
-            GD.Print("stop");
-            _hopEndTimer.Timeout -= ResetWallClimbStep;
+            _hopEndTimer.Timeout -= ResetWallHop;
             _hopEndTimer = null;
+            OnHopStop?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -130,12 +133,13 @@ public partial class PM_WallClimb : PM_Action
 
         _controller.AdditionalForces.AddImpulse(normal*_kickStrength);
         _controller.AdditionalForces.AddImpulse(-PHX_Vector3Ext.Flat(_controller.Velocity)*_kickDebuf);
+        OnKick?.Invoke(this, EventArgs.Empty);
     }
 
     private void EndWallClimb()
     {
         _startHopTimer.Stop();
-        ResetWallClimbStep();
+        ResetWallHop();
 
         SetPhysicsProcess(false);
 
@@ -147,19 +151,20 @@ public partial class PM_WallClimb : PM_Action
     {
         if (!_ledgeClimb.CanLedgeClimb())
         {
-            if(_isHopping)
+            if (_isHopping)
             {
                 float accel = Math.Clamp(_hopMaxSpeed - _controller.Velocity.Y, 0, _hopMaxSpeed*_hopAccel);
                 _controller.AdditionalForces.AddImpulse(Vector3.Up * accel);
             }
-            return;
         }
-        
-        EndWallClimb();
-        
-        Vector3 velCoef = new(1, 0, 1);
-        _controller.Velocity *= velCoef;
-        _controller.RealVelocity *= velCoef;
-        _ledgeClimb.DoLedgeClimb();
+        else
+        {
+            EndWallClimb();
+            
+            Vector3 velCoef = new(1, 0, 1);
+            _controller.Velocity *= velCoef;
+            _controller.RealVelocity *= velCoef;
+            _ledgeClimb.DoLedgeClimb();
+        }
     }
 }
