@@ -491,14 +491,21 @@ _ledgeClimb = NodePath("../PM_LedgeClimb")
 _wallCastLow = NodePath("../../../../Camera Pivot/Casts/WallJumpCastLow")
 _wallCastHigh = NodePath("../../../../Camera Pivot/Casts/WallJumpCastHigh")
 
-[node name="PM_WallClimb" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_endClimbTimer", "_jumpInput", "_walkInput", "_controller", "_wallJump", "_ledgeClimb", "_headCast")]
+[node name="PM_WallClimb" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_startHopTimer", "_jumpInput", "_walkInput", "_controller", "_wallJump", "_jump", "_ledgeClimb", "_headCast")]
 script = ExtResource("61_x3a7t")
-_jumpMinForce = 0.5
-_endClimbTimer = NodePath("Timer")
+_minInWallSpeed = 5.2
+_jumpMinStrength = 0.8
+_jumpSpeedCoef = 0.5
+_hopMaxSpeed = 4.0
+_hopAccel = 0.5
+_betweenHopsTime = 0.3
+_hopDuration = 0.15
+_startHopTimer = NodePath("Timer")
 _jumpInput = NodePath("../../../../Input/PI_Jump")
 _walkInput = NodePath("../../../../Input/PI_Walk")
 _controller = NodePath("../../../..")
 _wallJump = NodePath("../PM_WallJump")
+_jump = NodePath("../PM_Jump")
 _ledgeClimb = NodePath("../PM_LedgeClimb")
 _headCast = NodePath("../../../../Camera Pivot/Casts/LedgeCastHead")
 metadata/_custom_type_script = "uid://mds7cr6i4noc"
