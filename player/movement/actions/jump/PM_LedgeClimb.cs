@@ -5,22 +5,27 @@ using Godot;
 [GlobalClass]
 public partial class PM_LedgeClimb : PM_Action
 {
+    [ExportCategory("Settings")]
+    [Export(PropertyHint.Range, "0.0, 2.0")] private float _maxClimbTime = 0.5f;
+    [Export(PropertyHint.Range, "1.0,20.0")] private float _climbSpeed = 4f;
+    [Export(PropertyHint.Range, "  0,1000")] private ulong _superGlideWindow = 80;
+    [Export(PropertyHint.Range, "0.0,10.0")] private float _superGlideYStrength = 4f;
+    [Export(PropertyHint.Range, "0.0,10.0")] private float _superGlideXStrength = 8f;
+    [Export] private float _minSpace = 0.3f;    // The minimum space considered as a valid platform to climb to.
+    [Export] private float _minHeight = 0.4f;  // Obstacles lower than this can't be ledgeclimbed.
+    
+    [ExportCategory("Setup")]
     [Export] private PI_Jump _jumpInput;
     [Export] private PI_CrouchDispatcher _crouchInput;
     [Export] private PI_Walk _walkInput;
     [Export] private PM_Controller _controller;
     [Export] private PM_Dash _dash;
     [Export] private PM_Jump _jump;
+    [Export] private PB_Scale _bodyScale;
     [Export] private Node3D _pivot;
-    [Export] private RayCast3D _headCast;
-    [Export] private RayCast3D _footCast;
-
-    [Export(PropertyHint.Range, "0.0, 2.0")] private float _maxClimbTime = 1.5f;
-    [Export(PropertyHint.Range, "1.0,20.0")] private float _climbSpeed = 5f;
-    [Export(PropertyHint.Range, "  0,1000")] private ulong _superGlideWindow = 50;
-    [Export(PropertyHint.Range, "0.0,10.0")] private float _superGlideYStrength = 4f;
-    [Export(PropertyHint.Range, "0.0,10.0")] private float _superGlideXStrength = 8f;
-    [Export] private float _minSpace = 0.3f; // The minimum space considered as a valid platform to climb to.
+    
+    [Export] private ShapeCast3D _ledgeCast; 
+    // The direction of the cast is computed for each try. This determines the size and origin of the cast only.
 
     private bool _isClimbing = false;
     public bool IsClimbing => _isClimbing;
@@ -56,7 +61,7 @@ public partial class PM_LedgeClimb : PM_Action
         return velocity;
     }
 
-    public bool CanLedgeClimb() => !PHX_Checks.CanMoveForward(_controller, _pivot, _minSpace, out _lastCollision) && !_headCast.IsColliding() && _footCast.IsColliding();
+    public bool CanLedgeClimb() => PHX_Checks.CanLedgeClimb(_controller, _bodyScale.Collider, _pivot, _minSpace, _minHeight, _ledgeCast, out _lastCollision);
 
     public void DoLedgeClimb()
     {
@@ -79,7 +84,7 @@ public partial class PM_LedgeClimb : PM_Action
     private void Climb()
     {
         float timeElapsed = (Time.GetTicksMsec() - _startTime)/1000f;
-        if (timeElapsed > _maxClimbTime || PHX_Checks.CanMoveForward(_controller, _pivot, 0.5f, out _lastCollision))
+        if (timeElapsed > _maxClimbTime || PHX_Checks.CanMoveForward(_controller, _bodyScale.Collider, _pivot, 0.5f, out _lastCollision))
             StopClimb();
     }
 

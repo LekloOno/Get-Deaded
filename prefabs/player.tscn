@@ -240,7 +240,7 @@ _jumpInput = NodePath("../../../../Input/PI_Jump")
 _data = ExtResource("13_e1cl2")
 _groundState = NodePath("../../../../State/PS_Grounded")
 
-[node name="PM_LedgeClimb" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_jumpInput", "_crouchInput", "_walkInput", "_controller", "_dash", "_jump", "_headCast")]
+[node name="PM_LedgeClimb" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_jumpInput", "_crouchInput", "_walkInput", "_controller", "_dash", "_jump")]
 script = ExtResource("23_w6mlc")
 _jumpInput = NodePath("../../../../Input/PI_Jump")
 _crouchInput = NodePath("../../../../Input/PI_CrouchDispatcher")
@@ -248,8 +248,6 @@ _walkInput = NodePath("../../../../Input/PI_Walk")
 _controller = NodePath("../../../..")
 _dash = NodePath("../../Crouch/PM_Dash")
 _jump = NodePath("../PM_Jump")
-_headCast = NodePath("../../../../LedgeCastHead")
-_climbSpeed = 4.0
 
 [node name="PM_WallJump" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_jumpInput", "_controller", "_groundState", "_ledgeClimb", "_wallCastLow", "_wallCastHigh")]
 script = ExtResource("24_gjg6k")

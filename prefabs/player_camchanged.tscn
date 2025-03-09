@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=75 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -86,6 +86,9 @@ size = Vector3(0.5, 1.8, 0.5)
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_qcifk"]
 radius = 0.25
 height = 1.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_aav2a"]
+size = Vector3(0.5, 0.15, 0.5)
 
 [node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("_walkProcess", "_wallJump", "_wallClimb", "_groundState", "_cameraControl", "_surfaceControl", "_straffeSnap")]
 axis_lock_angular_y = true
@@ -214,6 +217,11 @@ update_scale = false
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Body/SpatialAnchor"]
 mesh = SubResource("CapsuleMesh_qcifk")
 skeleton = NodePath("../../..")
+
+[node name="LedgeCast" type="ShapeCast3D" parent="Body/SpatialAnchor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+shape = SubResource("BoxShape3D_aav2a")
+target_position = Vector3(0, 0, 0)
 
 [node name="Sound" type="Node3D" parent="Body"]
 
@@ -500,21 +508,18 @@ _data = ExtResource("26_kdvrh")
 _groundState = NodePath("../../../../State/PS_Grounded")
 _controller = NodePath("../../../..")
 
-[node name="PM_LedgeClimb" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_jumpInput", "_crouchInput", "_walkInput", "_controller", "_dash", "_jump", "_pivot", "_headCast", "_footCast")]
+[node name="PM_LedgeClimb" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_jumpInput", "_crouchInput", "_walkInput", "_controller", "_dash", "_jump", "_bodyScale", "_pivot", "_ledgeCast")]
 script = ExtResource("27_shnri")
+_minSpace = 0.2
 _jumpInput = NodePath("../../../../Input/PI_Jump")
 _crouchInput = NodePath("../../../../Input/PI_CrouchDispatcher")
 _walkInput = NodePath("../../../../Input/PI_Walk")
 _controller = NodePath("../../../..")
 _dash = NodePath("../../Crouch/PM_Dash")
 _jump = NodePath("../PM_Jump")
+_bodyScale = NodePath("../../../../Body")
 _pivot = NodePath("../../../../Camera Pivot")
-_headCast = NodePath("../../../../Camera Pivot/Casts/LedgeCastHead")
-_footCast = NodePath("../../../../Camera Pivot/Casts/LedgeCastFoot")
-_maxClimbTime = 0.5
-_climbSpeed = 4.0
-_superGlideWindow = 80
-_minSpace = 0.2
+_ledgeCast = NodePath("../../../../Body/SpatialAnchor/LedgeCast")
 
 [node name="PM_WallJump" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_jumpInput", "_controller", "_groundState", "_ledgeClimb", "_wallCastLow", "_wallCastHigh")]
 script = ExtResource("28_x5ps3")

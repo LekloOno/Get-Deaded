@@ -6,6 +6,7 @@ public partial class PB_Scale : CollisionShape3D
     [Export] private Node3D _modelAnchor;
 
     public float ScaleDelta => _colliderInitScale - _capsule.Size.Y;
+    public BoxShape3D Collider => _capsule; 
 
     private BoxShape3D _capsule;
 
