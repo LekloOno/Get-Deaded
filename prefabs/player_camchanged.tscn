@@ -457,6 +457,7 @@ _sprintInput = NodePath("../../../PI_Sprint")
 
 [node name="PS_Grounded" type="Node" parent="State" node_paths=PackedStringArray("_characterBody3D", "_groundCast")]
 script = ExtResource("19_vpdv2")
+_maxVerticalSpeed = 100.0
 _characterBody3D = NodePath("../..")
 _groundCast = NodePath("../../GroundCast")
 

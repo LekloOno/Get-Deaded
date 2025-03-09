@@ -51,7 +51,13 @@ public partial class PM_WallClimb : PM_Action
             return _wallJump.WallJump(velocity);
 
         if (!IsCollidingWall(out Vector3 normal))
-            return _ledgeClimb.LedgeClimb(velocity);
+        {
+            if(!_ledgeClimb.CanLedgeClimb())
+                return _jump.Jump(velocity);
+                
+            _ledgeClimb.DoLedgeClimb();
+            return velocity;
+        }
 
         if (_isWallClimbing)
             return velocity;
