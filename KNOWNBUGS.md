@@ -10,7 +10,7 @@ Mathf.Lerp(current, target, _independantLerpSpeed);
 When timing a jump at the right moment while uncrouching, you can get significantly increased jump height.
 It's not that easy to do, and kind of intuitive, so it might be kept as a feature. Need to check if it is not too unpredictable, tick rate independant, etc.
 
-LedgeClimb stops right when the foot ray does not collide anymore. However, there might be small holes on the obstacles to climb right at foot level, which blocks the ledgeclimb.
+~~LedgeClimb stops right when the foot ray does not collide anymore. However, there might be small holes on the obstacles to climb right at foot level, which blocks the ledgeclimb.~~
 
 
 ## Edge fall Bug
@@ -61,6 +61,6 @@ However, when snapping down it doesn't count as a collision (printing collisions
 
 Crouch scale speed is weird at very low tick rate. This might be ignored as it only happens on very low tick rate, and doesn't seem to affect at all higher tick rate, there's probably a threshold at which this happens.
 
-The physics check on crouch scaling back to normal scale is sometimes off. It is possible to uncrouch when you would enter in collision with the very edge of a colliding object.
+~~The physics check on crouch scaling back to normal scale is sometimes off. It is possible to uncrouch when you would enter in collision with the very edge of a colliding object.~~
 
 The physics check on crouch can be off if the player slides into a low obstacle, as it could indeed uncrouch when releasing the crouch key, but couldn't uncrouch a few meters after that, when the player has still not completely uncrouched.

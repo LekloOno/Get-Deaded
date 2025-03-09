@@ -200,11 +200,12 @@ _controller = NodePath("../../../../..")
 shape = SubResource("SphereShape3D_4jpmy")
 target_position = Vector3(0, -20, 0)
 
-[node name="Body" type="CollisionShape3D" parent="." node_paths=PackedStringArray("_modelAnchor")]
+[node name="Body" type="CollisionShape3D" parent="." node_paths=PackedStringArray("_modelAnchor", "_controller")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("BoxShape3D_2am5o")
 script = ExtResource("11_6ifu1")
 _modelAnchor = NodePath("SpatialAnchor")
+_controller = NodePath("..")
 
 [node name="SpatialAnchor" type="Node3D" parent="Body"]
 
