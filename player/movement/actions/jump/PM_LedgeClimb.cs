@@ -11,8 +11,8 @@ public partial class PM_LedgeClimb : PM_Action
     [Export] private PM_Controller _controller;
     [Export] private PM_Dash _dash;
     [Export] private PM_Jump _jump;
+    [Export] private Node3D _pivot;
     [Export] private RayCast3D _headCast;
-    [Export] private RayCast3D _chestCast;
     [Export] private RayCast3D _footCast;
 
     [Export(PropertyHint.Range, "0.0, 2.0")] private float _maxClimbTime = 1.5f;
@@ -20,6 +20,7 @@ public partial class PM_LedgeClimb : PM_Action
     [Export(PropertyHint.Range, "  0,1000")] private ulong _superGlideWindow = 50;
     [Export(PropertyHint.Range, "0.0,10.0")] private float _superGlideYStrength = 4f;
     [Export(PropertyHint.Range, "0.0,10.0")] private float _superGlideXStrength = 8f;
+    [Export] private float _minSpace = 0.3f; // The minimum space considered as a valid platform to climb to.
 
     private bool _isClimbing = false;
     public bool IsClimbing => _isClimbing;
@@ -28,6 +29,7 @@ public partial class PM_LedgeClimb : PM_Action
     private Vector3 _force = Vector3.Zero;
     private Vector3 _prevVelocity = Vector3.Zero;
     private Vector3 _direction = Vector3.Zero;
+    private KinematicCollision3D _lastCollision;
 
     public override void _Ready() => SetPhysicsProcess(false);
     public override void _PhysicsProcess(double delta) => Climb();
@@ -54,7 +56,7 @@ public partial class PM_LedgeClimb : PM_Action
         return velocity;
     }
 
-    public bool CanLedgeClimb() => _chestCast.IsColliding() && !_headCast.IsColliding();
+    public bool CanLedgeClimb() => !PHX_Checks.CanMoveForward(_controller, _pivot, _minSpace, out _lastCollision) && !_headCast.IsColliding() && _footCast.IsColliding();
 
     public void DoLedgeClimb()
     {
@@ -62,7 +64,7 @@ public partial class PM_LedgeClimb : PM_Action
         _prevVelocity = _controller.VelocityCache.UseCacheOr(_controller.RealVelocity);
         _dash.AbortDash();
 
-        _direction = -_chestCast.GetCollisionNormal();
+        _direction = -_lastCollision.GetNormal();
         _force = new Vector3(_direction.X*1.5f, _climbSpeed, _direction.Z*1.5f);
         
         _controller.TakeOverForces.AddPersistent(_force);
@@ -77,7 +79,7 @@ public partial class PM_LedgeClimb : PM_Action
     private void Climb()
     {
         float timeElapsed = (Time.GetTicksMsec() - _startTime)/1000f;
-        if (timeElapsed > _maxClimbTime || !_footCast.IsColliding())
+        if (timeElapsed > _maxClimbTime || PHX_Checks.CanMoveForward(_controller, _pivot, 0.5f, out _lastCollision))
             StopClimb();
     }
 

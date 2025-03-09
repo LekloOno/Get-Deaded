@@ -118,12 +118,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
 target_position = Vector3(0, 0, -0.6)
 
 [node name="LedgeCastFoot" type="RayCast3D" parent="Camera Pivot/Casts"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.55, 0)
-target_position = Vector3(0, 0, -0.8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.4, 0)
+target_position = Vector3(0, 0, -0.5)
 
 [node name="LedgeCastHead" type="RayCast3D" parent="Camera Pivot/Casts"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
-target_position = Vector3(0, 0, -1.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28, 0)
+target_position = Vector3(0, 0, -0.5)
 
 [node name="LedgeCastChest" type="RayCast3D" parent="Camera Pivot/Casts"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.05, 0)
@@ -500,7 +500,7 @@ _data = ExtResource("26_kdvrh")
 _groundState = NodePath("../../../../State/PS_Grounded")
 _controller = NodePath("../../../..")
 
-[node name="PM_LedgeClimb" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_jumpInput", "_crouchInput", "_walkInput", "_controller", "_dash", "_jump", "_headCast", "_chestCast", "_footCast")]
+[node name="PM_LedgeClimb" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_jumpInput", "_crouchInput", "_walkInput", "_controller", "_dash", "_jump", "_pivot", "_headCast", "_footCast")]
 script = ExtResource("27_shnri")
 _jumpInput = NodePath("../../../../Input/PI_Jump")
 _crouchInput = NodePath("../../../../Input/PI_CrouchDispatcher")
@@ -508,11 +508,13 @@ _walkInput = NodePath("../../../../Input/PI_Walk")
 _controller = NodePath("../../../..")
 _dash = NodePath("../../Crouch/PM_Dash")
 _jump = NodePath("../PM_Jump")
+_pivot = NodePath("../../../../Camera Pivot")
 _headCast = NodePath("../../../../Camera Pivot/Casts/LedgeCastHead")
-_chestCast = NodePath("../../../../Camera Pivot/Casts/LedgeCastChest")
 _footCast = NodePath("../../../../Camera Pivot/Casts/LedgeCastFoot")
+_maxClimbTime = 0.5
 _climbSpeed = 4.0
 _superGlideWindow = 80
+_minSpace = 0.2
 
 [node name="PM_WallJump" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_jumpInput", "_controller", "_groundState", "_ledgeClimb", "_wallCastLow", "_wallCastHigh")]
 script = ExtResource("28_x5ps3")
