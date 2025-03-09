@@ -13,7 +13,6 @@ public partial class PI_CrouchDispatcher : Node
     [Export] private PM_Controller _controller;
     [Export] private PB_Scale _body;
     [Export] private PI_Slide _slideInput;
-    [Export] private PI_Dash _dashInput;
 
     public bool IsCrouched => _active || _tryingUncrouch;
     public ulong LastCrouchDown {get; private set;} = 0; 
@@ -44,8 +43,6 @@ public partial class PI_CrouchDispatcher : Node
         if (@event.IsActionPressed("crouch"))
         {
             LastCrouchDown = Time.GetTicksMsec();
-            _dashInput.KeyDown();
-
             if (_active && !Hold)
                 TryStop();
             else 
