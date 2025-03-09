@@ -38,6 +38,7 @@ public partial class PB_Scale : CollisionShape3D
         _colliderTargetScale = _colliderInitScale * targetScaleRatio;
         _scaleSpeed = 1f - Mathf.Exp(-scaleSpeed*(float)GetPhysicsProcessDeltaTime()); // Magic trick to get frame rate independant lerping
         OnPhysicsProcess -= ProcessResetScale;
+        OnPhysicsProcess -= ProcessScale;
         OnPhysicsProcess += ProcessScale;
     }
 
@@ -47,6 +48,7 @@ public partial class PB_Scale : CollisionShape3D
         _colliderTargetScale = _colliderInitScale;
         _scaleSpeed = 1f - Mathf.Exp(-scaleSpeed*(float)GetPhysicsProcessDeltaTime()); // Magic trick to get frame rate independant lerping
         OnPhysicsProcess -= ProcessScale;
+        OnPhysicsProcess -= ProcessResetScale;
         OnPhysicsProcess += ProcessResetScale;
     }
 
