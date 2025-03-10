@@ -16,13 +16,14 @@ public partial class PM_Dash : PM_Action
     [Export(PropertyHint.Range, "0.0, 1.0")] private float _dashDuration;
     [Export(PropertyHint.Range, "0.0, 1.0")] private float _minDashRatio;
     // The velocity coefficient when dashing upward. The more upward you dash, the less speed you will keep.
-    [Export(PropertyHint.Range, "0.0, 2.0")] private float _cooldown;       // Only triggered when reseting from the same surface twice in a row (ground/wall)
+    [Export(PropertyHint.Range, "0.0, 10.0")] private float _cooldown;       // Only triggered when reseting from the same surface twice in a row (ground/wall)
 
     public EventHandler<float> OnTryReset;
+    public EventHandler OnUnavailable;
 
     private bool _available = true;
     private bool _isDashing = false;
-    private bool _lastResetGround = true; // Determine wether the last direct dash reset was due to landing or wall jumping
+    private bool _lastGround = true;    // True if the last surface is a wall or ground. Wall is specifically a wall jump, ground is simply landing.
     private ulong _lastDash = 0;
     private Vector3 _prevVelocity = Vector3.Zero;
     private Vector3 _prevRealVelocity = Vector3.Zero;
@@ -41,8 +42,18 @@ public partial class PM_Dash : PM_Action
 
     public void StartDash(object sender, EventArgs e)
     {
-        if (!_available || _groundState.IsGrounded() || _ledgeClimb.IsClimbing)
+        
+
+        if (_groundState.IsGrounded() || _ledgeClimb.IsClimbing)
+        {
             return;
+        }
+
+        if (!_available)
+        {
+            OnUnavailable?.Invoke(this, EventArgs.Empty);
+            return;
+        }
         
         if (_walkInput.WalkAxis != Vector2.Zero)
             _direction = _walkInput.WishDir;
@@ -70,39 +81,41 @@ public partial class PM_Dash : PM_Action
     public void TryReset(bool ground)
     {
 
-        bool realLastResetGround = _lastResetGround;
-        _lastResetGround = ground;
+        bool realLastGround = _lastGround;
+        _lastGround = ground;
         
         if(_available)
             return;
 
-        if(realLastResetGround ^ ground)
+        if(realLastGround ^ ground)
         {
             Reset();
             OnTryReset?.Invoke(this, 0f);
-            //GD.Print("direct reset");
         }
         else
         {
             float sinceLastDash = (Time.GetTicksMsec() - _lastDash)/1000f;
             float remaining = _cooldown - sinceLastDash;
 
-            if (remaining < 0)
+            if (remaining <= 0)
             {
                 Reset();
                 OnTryReset?.Invoke(this, 0f);
             }
-            else
+            else if (_delayedResetTimer == null)
             {
                 _delayedResetTimer = GetTree().CreateTimer(remaining);
                 _delayedResetTimer.Timeout += Reset;
                 OnTryReset?.Invoke(this, remaining);
-                //GD.Print("delayed reset - " + remaining);
             }
         }
     }
 
-    public void WallReset(object sender, EventArgs e) => TryReset(false);
+    public void WallReset(object sender, EventArgs e)
+    {
+        TryReset(false);
+        GD.Print("alo");
+    }
     public void LandReset(object sender, EventArgs e) => TryReset(true);
 
     private void Reset()

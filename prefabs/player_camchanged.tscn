@@ -590,7 +590,7 @@ _wallJump = NodePath("../../Jump/PM_WallJump")
 _strength = 30.0
 _dashDuration = 0.1
 _minDashRatio = 0.5
-_cooldown = 2.0
+_cooldown = 8.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -609,7 +609,7 @@ image = NodePath("TextureRect")
 _resetSpeed = 20.0
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/UI_Crosshair"]
-modulate = Color(1, 1, 1, 0.619608)
+self_modulate = Color(1, 1, 1, 0.619608)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -646,11 +646,15 @@ step = 0.01
 fill_mode = 4
 texture_under = ExtResource("69_arr85")
 texture_progress = ExtResource("70_ee4um")
-tint_progress = Color(0.945098, 0.215686, 0.160784, 1)
+tint_progress = Color(1, 0.211765, 0.105882, 1)
 script = ExtResource("71_j12ti")
 _dash = NodePath("../../../../Movement/Actions/Crouch/PM_Dash")
 _timeToShow = 0.2
-_timeToHide = 0.5
+_timeToHide = 0.2
+_timeToBlinkIn = 0.2
+_timeToBlinkOut = 0.5
+_baseOpacity = 0.4
+_underBaseOpacity = 0.2
 
 [node name="Label" type="Label" parent="CanvasLayer"]
 offset_right = 40.0
