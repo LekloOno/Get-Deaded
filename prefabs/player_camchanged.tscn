@@ -139,11 +139,10 @@ script = ExtResource("4_wobo6")
 _target = NodePath("../../Body/SpatialAnchor/RemoteTransform3D")
 metadata/_custom_type_script = "uid://kabi8i2dqa4f"
 
-[node name="Camera Control" type="Node3D" parent="Camera Pivot/PC_Anchor" node_paths=PackedStringArray("_flatDir", "_target")]
+[node name="Camera Control" type="Node3D" parent="Camera Pivot/PC_Anchor" node_paths=PackedStringArray("_flatDir")]
 physics_interpolation_mode = 2
 script = ExtResource("3_xv583")
 _flatDir = NodePath("../..")
-_target = NodePath("../../../Body/SpatialAnchor/RemoteTransform3D")
 
 [node name="PC_SprintLean" type="Node3D" parent="Camera Pivot/PC_Anchor/Camera Control" node_paths=PackedStringArray("_groundSurfaceState")]
 script = ExtResource("4_s37k1")
@@ -160,6 +159,7 @@ _controller = NodePath("../../../../..")
 
 [node name="PC_Spring" type="Node3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing" node_paths=PackedStringArray("_cameraTarget")]
 script = ExtResource("6_v2bpg")
+AngularDisplacement = 7.01
 LinearDisplacement = 0.0
 _cameraTarget = NodePath("../../../../../../Body/SpatialAnchor/RemoteTransform3D")
 
@@ -472,7 +472,7 @@ _sprintInput = NodePath("../../../PI_Sprint")
 
 [node name="PS_Grounded" type="Node" parent="State" node_paths=PackedStringArray("_characterBody3D", "_groundCast")]
 script = ExtResource("19_vpdv2")
-_maxVerticalSpeed = 100.0
+_maxVerticalSpeed = 5.0
 _characterBody3D = NodePath("../..")
 _groundCast = NodePath("../../GroundCast")
 
