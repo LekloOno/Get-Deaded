@@ -590,7 +590,7 @@ _wallJump = NodePath("../../Jump/PM_WallJump")
 _strength = 30.0
 _dashDuration = 0.1
 _minDashRatio = 0.5
-_cooldown = 8.0
+_cooldown = 3.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

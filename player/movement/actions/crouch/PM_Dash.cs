@@ -62,8 +62,6 @@ public partial class PM_Dash : PM_Action
 
         _prevRealVelocity = _controller.RealVelocity;
         Vector3 velocity = _prevRealVelocity;
-        //velocity = direction * velocity.Length();
-        //_controller.RealVelocity = velocity;
 
         float appliedStrength = Mathf.Max(_strength, velocity.Length());
         _dashForce = appliedStrength * _direction;
@@ -111,11 +109,7 @@ public partial class PM_Dash : PM_Action
         }
     }
 
-    public void WallReset(object sender, EventArgs e)
-    {
-        TryReset(false);
-        GD.Print("alo");
-    }
+    public void WallReset(object sender, EventArgs e) => TryReset(false);
     public void LandReset(object sender, EventArgs e) => TryReset(true);
 
     private void Reset()
