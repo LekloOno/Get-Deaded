@@ -9,6 +9,7 @@ public partial class UI_DashReset : TextureProgressBar
     [Export] private float _timeToHide;
     [Export] private float _timeToBlinkIn;
     [Export] private float _timeToBlinkOut;
+    [Export] private Color _blinkColor;
 
     [Export(PropertyHint.Range, "0.0, 1.0")]
     private float _baseOpacity;
@@ -21,17 +22,26 @@ public partial class UI_DashReset : TextureProgressBar
     private float _timeSpent;
     private Tween _progressTween;
     private Tween _underTween;
+    private Color _baseColor;
+    private Color _clear;
+    private Color _targetColor;
 
     public override void _Ready()
     {
         _dash.OnTryReset += StartReset;
         _dash.OnUnavailable += Unavailable;
 
+        _baseColor = TintProgress;
+        _baseColor.A = _baseOpacity;
+        
+        _clear = TintProgress;
+        _clear.A = 0f;
+
         HideAlpha();
 
         SetPhysicsProcess(false);
     }
-    
+
     public override void _PhysicsProcess(double delta)
     {
         float progress = _timeSpent/_remainingTime;
@@ -56,13 +66,16 @@ public partial class UI_DashReset : TextureProgressBar
         if(_active)
             return;
 
+        _active = true;
+        _targetColor = _baseColor;
         _timeSpent = 0f;
         _remainingTime = remainingTime;
 
-        _active = true;
+        _progressTween?.Kill();
         _progressTween = CreateTween();
-        _progressTween.TweenProperty(this, "tint_progress:a", _baseOpacity, _timeToShow).SetTrans(Tween.TransitionType.Linear).SetEase(Tween.EaseType.InOut);
+        _progressTween.TweenProperty(this, "tint_progress", _baseColor, _timeToShow).SetTrans(Tween.TransitionType.Linear).SetEase(Tween.EaseType.InOut);
 
+        _underTween?.Kill();
         _underTween = CreateTween();
         _underTween.TweenProperty(this, "tint_under:a", _underBaseOpacity, _timeToShow).SetTrans(Tween.TransitionType.Linear).SetEase(Tween.EaseType.InOut);
         SetPhysicsProcess(true);
@@ -71,29 +84,26 @@ public partial class UI_DashReset : TextureProgressBar
     public void Unavailable(object sender, EventArgs e)
     {
         _progressTween?.Kill();
-
         _progressTween = CreateTween();
-        _progressTween.TweenProperty(this, "tint_progress:a", 1f, _timeToBlinkIn).SetTrans(Tween.TransitionType.Linear);
-        _progressTween.TweenProperty(this, "tint_progress:a", _baseOpacity, _timeToBlinkOut).SetTrans(Tween.TransitionType.Linear);
+        _progressTween.TweenProperty(this, "tint_progress", _blinkColor, _timeToBlinkIn).SetTrans(Tween.TransitionType.Linear);
+        _progressTween.TweenProperty(this, "tint_progress", _targetColor, _timeToBlinkOut).SetTrans(Tween.TransitionType.Linear);
     }
 
     private void EndAnimation()
     {
-        _active = false;
         SetPhysicsProcess(false);
-
-        Value = 1f;
 
         ResetAlpha();
 
+        _active = false;
+        _targetColor = _clear;
+        Value = 1f;
         
         _progressTween?.Kill();
-       
         _progressTween = CreateTween();
-        _progressTween.TweenProperty(this, "tint_progress:a", 0f, _timeToHide).SetTrans(Tween.TransitionType.Linear).SetEase(Tween.EaseType.InOut);
+        _progressTween.TweenProperty(this, "tint_progress", _clear, _timeToHide).SetTrans(Tween.TransitionType.Linear).SetEase(Tween.EaseType.InOut);
 
         _underTween?.Kill();
-
         _underTween = CreateTween();
         _underTween.TweenProperty(this, "tint_under:a", 0f, _timeToHide).SetTrans(Tween.TransitionType.Linear).SetEase(Tween.EaseType.InOut);
 

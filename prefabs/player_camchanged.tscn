@@ -649,10 +649,11 @@ texture_progress = ExtResource("70_ee4um")
 tint_progress = Color(1, 0.211765, 0.105882, 1)
 script = ExtResource("71_j12ti")
 _dash = NodePath("../../../../Movement/Actions/Crouch/PM_Dash")
-_timeToShow = 0.2
+_timeToShow = 0.15
 _timeToHide = 0.2
-_timeToBlinkIn = 0.2
-_timeToBlinkOut = 0.5
+_timeToBlinkIn = 0.18
+_timeToBlinkOut = 0.18
+_blinkColor = Color(1, 0.79788, 0.757501, 0.713726)
 _baseOpacity = 0.4
 _underBaseOpacity = 0.2
 
