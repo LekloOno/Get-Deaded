@@ -18,6 +18,8 @@ public partial class PM_Dash : PM_Action
     // The velocity coefficient when dashing upward. The more upward you dash, the less speed you will keep.
     [Export(PropertyHint.Range, "0.0, 2.0")] private float _cooldown;       // Only triggered when reseting from the same surface twice in a row (ground/wall)
 
+    public EventHandler<float> OnTryReset;
+
     private bool _available = true;
     private bool _isDashing = false;
     private bool _lastResetGround = true; // Determine wether the last direct dash reset was due to landing or wall jumping
@@ -28,6 +30,7 @@ public partial class PM_Dash : PM_Action
     private Vector3 _direction = Vector3.Zero;
     private SceneTreeTimer _endDashTimer;
     private SceneTreeTimer _delayedResetTimer;
+
 
     public override void _Ready()
     {
@@ -66,13 +69,17 @@ public partial class PM_Dash : PM_Action
 
     public void TryReset(bool ground)
     {
+
+        bool realLastResetGround = _lastResetGround;
+        _lastResetGround = ground;
+        
         if(_available)
             return;
 
-        if(_lastResetGround ^ ground)
+        if(realLastResetGround ^ ground)
         {
             Reset();
-            _lastResetGround = ground;
+            OnTryReset?.Invoke(this, 0f);
             //GD.Print("direct reset");
         }
         else
@@ -81,11 +88,15 @@ public partial class PM_Dash : PM_Action
             float remaining = _cooldown - sinceLastDash;
 
             if (remaining < 0)
+            {
                 Reset();
+                OnTryReset?.Invoke(this, 0f);
+            }
             else
             {
                 _delayedResetTimer = GetTree().CreateTimer(remaining);
                 _delayedResetTimer.Timeout += Reset;
+                OnTryReset?.Invoke(this, remaining);
                 //GD.Print("delayed reset - " + remaining);
             }
         }

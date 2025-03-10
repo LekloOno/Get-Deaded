@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=79 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -69,6 +69,9 @@
 [ext_resource type="AudioStream" uid="uid://d1ot41x8qebwj" path="res://assets/sounds/wind/wind.wav" id="44_vhlgj"]
 [ext_resource type="Script" uid="uid://mds7cr6i4noc" path="res://player/movement/actions/jump/PM_WallClimb.cs" id="61_x3a7t"]
 [ext_resource type="Script" uid="uid://byy7tiy37y47h" path="res://debug/display_fps.gd" id="65_wohr1"]
+[ext_resource type="Texture2D" uid="uid://dsma1lip7bvch" path="res://assets/sprites/dash/dash_cd_mid_shadow.png" id="69_arr85"]
+[ext_resource type="Texture2D" uid="uid://cbh1opskekaqn" path="res://assets/sprites/dash/dash_cd_mid_fill.png" id="70_ee4um"]
+[ext_resource type="Script" uid="uid://bd37jsqipcwxc" path="res://ui/UI_DashReset.cs" id="71_j12ti"]
 
 [sub_resource type="Curve" id="Curve_ux8de"]
 _limits = [-0.5, 1.0, 0.0, 1.0]
@@ -619,7 +622,35 @@ offset_right = 36.0
 offset_bottom = 36.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("33_ck35o")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/UI_Crosshair/TextureRect" node_paths=PackedStringArray("_dash")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.1, 0.1)
+pivot_offset = Vector2(128, 128)
+mouse_filter = 2
+max_value = 1.0
+step = 0.01
+fill_mode = 4
+texture_under = ExtResource("69_arr85")
+texture_progress = ExtResource("70_ee4um")
+tint_progress = Color(0.945098, 0.215686, 0.160784, 1)
+script = ExtResource("71_j12ti")
+_dash = NodePath("../../../../Movement/Actions/Crouch/PM_Dash")
+_timeToShow = 0.2
+_timeToHide = 0.5
 
 [node name="Label" type="Label" parent="CanvasLayer"]
 offset_right = 40.0
