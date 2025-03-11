@@ -71,13 +71,21 @@ Each layer of health could have
   </tr>
 </table>
 
-We could have two health bar to display, the basic health, and then a bar for all the special layers, each layer stacking on the lower one. We could also add a small icon on top of this bar to indicate which layers this entity has left.  
+We could have two health bar to display, the lower layer, and then a bar for all the higher special layers, each layer stacking on the lower one. We could also add a small icon on top of this bar to indicate which layers this entity has left.  
 
 ![alt text](image.png)
 
 The carapace would take the entire bar space, until it is broken.
 
 ![alt text](image-1.png)
+
+## An other approach
+
+Many health bars like this might not be so intuitive. Another approach than having colored health bar would be to display it with a simple icon + on hit.
+
+Change the color of the hitmarker or the damage indicator when the damage pool is resisting to the type of damage you are inflicting.
+
+For example, if you shoot with a burst weapon on a barrier pool, the damage indicator would turn purple.
 
 # Basic Health pool
 
@@ -98,11 +106,11 @@ There might be healers ennemies, which heals their allies, which could be some p
 
 # Armor
 
-## Algorithm
-how it works, variable parameters ..
-
 ## Game Design
 possible in game modification, influence ..
+
+## Algorithm
+how it works, variable parameters ..
 
 ## Game Feel
 discuss sounds, ui ..
