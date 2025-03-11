@@ -7,7 +7,7 @@ The different health pools are as follows. The lower in the list is the highest 
 - **Basic Health pool** - Simple health.
 - **Armor** - Weak against burst damage, strong against sustained damage.
 - **Barrier** - Weak against sustained damage, strong against burst damage.
-- **Shield** - Simple health that can regenerate over time.
+- **Shield** - Simple health that can regenerate over time. (or maybe more, read the [shield](#shield) section)
 - **Overshield** - A temporary pool of simple health that cannot be restored, and comes from pick ups or abilities.
 - **Shell** - A simple health pool that can't be peirced through, and makes its owner immune to any negative effect, such as slow, weakening, etc.
 
@@ -18,6 +18,8 @@ If an entity has no starting basic health, yet has Armor, then only this layer w
 It decreases the overall damage intakes, but can be reduced or broken with special abilities or weapons.  
 
 **Player** has Basic **Health** and a little pool of **Shield**. Through pickups or abilities, he can also obtain ***Overshield**.
+
+It could be interesting to make Shield specific to the player instead, making it clearer, and the shield would be the player's equivalent of the ennemie's barrier, in a diegetic approach.
 
 # General game feel
 
@@ -139,6 +141,11 @@ Run time -
 - `reduction = damage * reduction`
 - `final_damage = damage - reduction`
 
+## Game feel
+
+Diegetically, armor are hard magnetic reactant, like translucid metal plates. Its rigidity allows to isolate its owner from moderate impacts. However, it can be pierced through with a violent and precise impact.
+
+material ref - metal and glass
 
 # Barrier
 
@@ -169,18 +176,27 @@ In a more linear way, we could define it the same way we did for the Armor, but 
 
 
 ## Game Feel
-discuss sounds, ui ..
+Diegetically, barrier acts like a wide magnetic field which cushions shock, just like a pillow. It excells at absorbing violent shocks, but can get overflowed by overwhelming signals, the magnetic field can't resets to its initial state fast enough.
+
+material ref - magnets
 
 # Shield
 
-## Algorithm
-how it works, variable parameters ..
+There are two possible approach with shield.
 
-## Game Design
-possible in game modification, influence ..
+The one discussed above, the simple one, is for the shield to be a simple health pool that can regenerate.
+However, another approach might be intersting.
 
-## Game Feel
-discuss sounds, ui ..
+## Active Shield
+
+When it comes to the player's shield, we might use the shield as an ACTIVE shield instead of a PASSIVE one.  
+Something similar to *Super Smash Bros* Shielding. The shield is unactive, unless the player press a specific input. While the shield is active, it slowly decays, but can absorb damages.
+
+We might includes timing mechanics, for example, if the player start shielding right as he receives damages he can deflect the incoming damage. If he stops shielding right as he receives damages, the shield gets regenerated partially.
+
+It sounds like a very cool idea but needs to be tested, it might be some uncessary additionnal inputs.
+
+> More about absorbing on stop - we could set a time window, let's say 100 ms, and all the damages taken in the last 80 ms before releasing shield are restored to it, including overflowing damages. Should overflowing damages overflow on the health of the player ? It could be a nice reward to cancel any overflow.. Maybe, on shield break, the player would have a quick timing to release shield and get the absorption, or overflow cancel, or both..
 
 # Overshield
 
