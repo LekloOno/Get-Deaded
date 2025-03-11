@@ -107,13 +107,49 @@ There might be healers ennemies, which heals their allies, which could be some p
 # Armor
 
 ## Game Design
-possible in game modification, influence ..
+Armor incentivize the player to use burst weapon, toward the use of his dynamic clicking technique.  
+It could be interesting to have it vary, simply keep the core principle of making it stronger against sustained damage, but allow the specifics about it to vary from one ennemy type to another.
+
+We could set how strong and what threshold the armor has. Meaning how much it can reduce the damages, and what is the burst threshold.
 
 ## Algorithm
-how it works, variable parameters ..
+There are mutliple solution to this idea.
 
-## Game Feel
-discuss sounds, ui ..
+
+### Linear reduction
+
+[Desmos Visualization](https://www.desmos.com/calculator/p9je6b1tga?lang=fr)  
+The simplest solution is to define reduction as a `resistance` % which is capped by a `max_reduction`.  
+- `resistance` is the intended % of resistance.
+- `max_reduction` is the maximum damage reduction that can be applied.
+
+It means once the max reduction is passed, the higher the damage, the lower the **effective** resistance %.
+
+The computation would be :
+- `reduction = min(damage * (resistance), max_reduction)`
+- `final_damage = damage - reduction`.
+
+
+### Gradual reduction
+
+[Desmos Visualization](https://www.desmos.com/calculator/orecuaomyh?lang=fr)  
+A more complex idea, is to set a `maximum_resistance` %, a `minimum_threshold` and a `maximum_threshold`.
+- `maximum_resistance` is the % of reduction at the best effectiveness of the armor.
+- `minimum_threshold` is the minimum amount of damage for the **effective** resistance to start decaying below `maximum_resistance`.
+- `maximum_threshold` is the mimimum amount of damage for the **effective** resistance to be 0.
+
+Now, the reduction % gradually decreases from `minimum_threshold` to `maximum_threshold`, which might be more flexible and easier to balance, but it might also be a little less intuitive.
+
+The computation would be :  
+
+Compile time -
+- `a = maximum_resistance/(minimum_threshold-maximum_resistance)`
+- `b = `  
+
+Run time -
+- `resistance = clamp(damage * a + b, 0, maximum_resistance)`
+- `reduction = damage * reduction`
+- `final_damage = damage - reduction`
 
 
 # Barrier
