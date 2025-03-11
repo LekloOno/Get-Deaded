@@ -116,8 +116,8 @@ Now, the reduction linearly decreases from `minimum_threshold` to `maximum_thres
 
 The computation would be :  
 Compile time -
-- `a = maximum_resistance/(minimum_threshold-maximum_resistance)`
-- `b = `  
+- `a = (maximum_resistance * maximum_threshold) / (minimum_threshold - maximum_resistance)`
+- `b = -a * minimum_threshold`  
 
 Run time -
 - `reduction = clamp(a * damage + b, 0, maximum_resistance * damage)`
@@ -131,8 +131,8 @@ Based on the previous idea, but here, we are not linearly decreasing the reducti
 The computation would be :  
 
 Compile time -
-- `a = maximum_resistance/(minimum_threshold-maximum_resistance)`
-- `b = `  
+- `a = maximum_resistance / (minimum_threshold - maximum_resistance)`
+- `b = -a * maximum_threshold`  
 
 Run time -
 - `resistance = clamp(damage * a + b, 0, maximum_resistance)`
