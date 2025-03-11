@@ -9,6 +9,7 @@ The different health pools are as follows. The lower in the list is the highest 
 - **Barrier** - Weak against sustained damage, strong against burst damage.
 - **Shield** - Simple health that can regenerate over time.
 - **Overshield** - A temporary pool of simple health that cannot be restored, and comes from pick ups or abilities.
+- **Shell** - A simple health pool that can't be peirced through, and makes its owner immune to any negative effect, such as slow, weakening, etc.
 
 An **Entity** is dead when its lower layer of health is 0. In most cases, it would be the **Basic Health pool** but it isn't necessary the case.  
 If an entity has no starting basic health, yet has Armor, then only this layer would determine if the entity is dead or alive.
@@ -17,6 +18,66 @@ If an entity has no starting basic health, yet has Armor, then only this layer w
 It decreases the overall damage intakes, but can be reduced or broken with special abilities or weapons.  
 
 **Player** has Basic **Health** and a little pool of **Shield**. Through pickups or abilities, he can also obtain ***Overshield**.
+
+# General game feel
+
+Each layer of health could have
+- a slight variant of the hitmarker sound
+- a sound on layer breaking
+- a specific health bar color
+
+<table>
+  <tr>
+    <th>Layer</th>
+    <th>Body Color</th>
+    <th>Tail Color</th>
+    <th>Heal Color</th>
+  </tr>
+  <tr>
+    <td>Health</td>
+    <td style="background-color: white;">_</td>
+    <td style="background-color: red;">_</td>
+    <td style="background-color: rgb(170, 255, 170);">_</td>
+  </tr>
+  <tr>
+    <td>Armor</td>
+    <td style="background-color: rgba(255, 191, 71, 1);">_</td>
+    <td style="background-color: lightgrey;">_</td>
+    <td style="background-color: rgb(170, 255, 170);">_</td>
+  </tr>
+  <tr>
+    <td>Barrier</td>
+    <td style="background-color: rgb(90, 19, 255)">_</td>
+    <td style="background-color: lightgrey;">_</td>
+    <td style="background-color: rgb(170, 255, 170);">_</td>
+  </tr>
+  <tr>
+    <td>Shield</td>
+    <td style="background-color: rgb(0, 102, 255);">_</td>
+    <td style="background-color: lightgrey;">_</td>
+    <td style="background-color: rgb(170, 255, 170);">_</td>
+  </tr>
+  <tr>
+    <td>OverShield</td>
+    <td style="background-color: rgb(0, 240, 0);">_</td>
+    <td style="background-color: lightgrey;">_</td>
+    <td>None</td>
+  </tr>
+  <tr>
+    <td>Shell</td>
+    <td style="background-color: rgb(80, 80, 80);;">_</td>
+    <td style="background-color: lightgrey;">_</td>
+    <td>None</td>
+  </tr>
+</table>
+
+We could have two health bar to display, the basic health, and then a bar for all the special layers, each layer stacking on the lower one. We could also add a small icon on top of this bar to indicate which layers this entity has left.  
+
+![alt text](image.png)
+
+The carapace would take the entire bar space, until it is broken.
+
+![alt text](image-1.png)
 
 # Basic Health pool
 
@@ -34,8 +95,6 @@ Some abilities would also heal the player.
 ### Ennemies
 
 There might be healers ennemies, which heals their allies, which could be some priority targets.
-
-## Game Feel
 
 # Armor
 
