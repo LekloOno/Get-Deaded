@@ -143,14 +143,14 @@ Run time -
 # Barrier
 
 ## Game Design
-Armor incentivize the player to use sustained damage weapons, towards the use of his tracking technique.  
+Barrier incentivize the player to use sustained damage weapons, towards the use of his tracking technique.  
 
 Just as for the armor, we could set a strength to it, and a threshold, at which damages are considered burst damage.
 
 ## Algorithm
 
 ### Cooldown based barrier
-[Desmos Vizualisation](https://www.desmos.com/calculator/ruvsgwb5vx?lang=fr)  
+[Desmos Vizualisation - x axis is the number of shots per seconds](https://www.desmos.com/calculator/ruvsgwb5vx?lang=fr)  
 One first idea is a time-based barrier. We have a minimum amount of time between two damage reduction, and a reduction amount, either % or flat, or both.
 We keep track of the last time we did reduce the damage using the barrier, and if it is too soon, the damages are inflicted directly.
 
