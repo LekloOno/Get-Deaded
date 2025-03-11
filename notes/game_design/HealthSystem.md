@@ -1,5 +1,39 @@
-# Health System
 A quick discussion on how health will be implemented in the game.
+
+
+**Table of Content**
+- [Health pools](#health-pools)
+- [General game feel](#general-game-feel)
+  - [Simple layout approach](#simple-layout-approach)
+  - [Two other approaches](#two-other-approaches)
+- [Basic Health pool](#basic-health-pool)
+  - [Healing](#healing)
+    - [Player](#player)
+    - [Ennemies](#ennemies)
+- [Armor](#armor)
+  - [Game Design](#game-design)
+  - [Algorithm](#algorithm)
+    - [Constant Reduction](#constant-reduction)
+    - [Linear Reduction](#linear-reduction)
+    - [Linear Resistance](#linear-resistance)
+  - [Game feel](#game-feel)
+- [Barrier](#barrier)
+  - [Game Design](#game-design-1)
+  - [Algorithm](#algorithm-1)
+    - [Cooldown based barrier](#cooldown-based-barrier)
+    - [Linear Reduction and Linear Resistance](#linear-reduction-and-linear-resistance)
+  - [Game Feel](#game-feel-1)
+- [Shield](#shield)
+  - [Active Shield](#active-shield)
+- [Overshield](#overshield)
+  - [Algorithm](#algorithm-2)
+  - [Game Design](#game-design-2)
+  - [Game Feel](#game-feel-2)
+- [Plating](#plating)
+  - [Algorithm](#algorithm-3)
+  - [Game Design](#game-design-3)
+  - [Game Feel](#game-feel-3)
+
 
 # Health pools
 
@@ -36,6 +70,8 @@ Each layer of health could have
 | Barrier | ![#006aff](https://placehold.co/15x15/006aff/006aff.png) | ![#b0b0b0](https://placehold.co/15x15/b0b0b0/b0b0b0.png) | ![#88ff78](https://placehold.co/15x15/88ff78/88ff78.png) |
 | Over Shield | ![#00c421](https://placehold.co/15x15/00c421/00c421.png) | ![#b0b0b0](https://placehold.co/15x15/b0b0b0/b0b0b0.png) | None |
 | Shell | ![#4a4a4a](https://placehold.co/15x15/4a4a4a/4a4a4a.png) | None | None |
+
+## Simple layout approach
 
 We could have two health bar to display, the lower layer, and then a bar for all the higher special layers, each layer stacking on the lower one. We could also add a small icon on top of this bar to indicate which layers this entity has left.  
 
