@@ -67,7 +67,7 @@ Each layer of health could have
 | Health | ![#f0f0f0](https://placehold.co/15x15/f0f0f0/f0f0f0.png) | ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) | ![#88ff78](https://placehold.co/15x15/88ff78/88ff78.png) |
 | Armor | ![#ebb434](https://placehold.co/15x15/ebb434/ebb434.png) | ![#b0b0b0](https://placehold.co/15x15/b0b0b0/b0b0b0.png) | ![#88ff78](https://placehold.co/15x15/88ff78/88ff78.png) |
 | Barrier | ![#6200ff](https://placehold.co/15x15/6200ff/6200ff.png) | ![#b0b0b0](https://placehold.co/15x15/b0b0b0/b0b0b0.png) | ![#88ff78](https://placehold.co/15x15/88ff78/88ff78.png) |
-| Barrier | ![#006aff](https://placehold.co/15x15/006aff/006aff.png) | ![#b0b0b0](https://placehold.co/15x15/b0b0b0/b0b0b0.png) | ![#88ff78](https://placehold.co/15x15/88ff78/88ff78.png) |
+| Shield | ![#006aff](https://placehold.co/15x15/006aff/006aff.png) | ![#b0b0b0](https://placehold.co/15x15/b0b0b0/b0b0b0.png) | ![#88ff78](https://placehold.co/15x15/88ff78/88ff78.png) |
 | Over Shield | ![#00c421](https://placehold.co/15x15/00c421/00c421.png) | ![#b0b0b0](https://placehold.co/15x15/b0b0b0/b0b0b0.png) | None |
 | Shell | ![#4a4a4a](https://placehold.co/15x15/4a4a4a/4a4a4a.png) | None | None |
 
