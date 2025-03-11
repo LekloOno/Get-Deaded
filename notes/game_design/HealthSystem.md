@@ -43,13 +43,20 @@ The carapace would take the entire bar space, until it is broken.
 
 ![alt text](image-1.png)
 
-## An other approach
+## Two other approaches
 
-Many health bars like this might not be so intuitive. Another approach than having colored health bar would be to display it with a simple icon + on hit.
+Many health bar layers like this might not be so intuitive.
 
-Change the color of the hitmarker or the damage indicator when the damage pool is resisting to the type of damage you are inflicting.
+One first other approach is to still have two health bars, one for the lower layer of health, and one for the others. But instead of stacking layers on on to the other, it would be one unique layer, which change colors depending on the currently exposed layer.
+
+![alt text](image-2.png)
+
+One last approach would be to display it with a simple icon and on hit.
+
+The color of the hitmarker, or the damage indicator, would change when the damage pool is *resisting* to the type of damage you are inflicting.
 
 For example, if you shoot with a burst weapon on a barrier pool, the damage indicator would turn purple.
+
 
 # Basic Health pool
 
