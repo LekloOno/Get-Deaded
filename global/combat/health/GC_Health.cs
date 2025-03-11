@@ -4,9 +4,9 @@ using Godot;
 [GlobalClass]
 public partial class GC_Health : Resource
 {
-    [Export] private float _maxHealth;
-    private float _currentHealth;
-    [Export] private GC_Health _child;
+    [Export] protected float _maxHealth;
+    protected float _currentHealth;
+    [Export] protected GC_Health _child;
     public EventHandler<float> OnDamage;
     public EventHandler<float> OnHeal;
     public EventHandler OnBreak;
@@ -25,7 +25,7 @@ public partial class GC_Health : Resource
 
     protected virtual float ModifiedDamage(float damage) => damage;
 
-    public bool TakeDamage(float damage)
+    public virtual bool TakeDamage(float damage)
     {
         float damageTaken = ModifiedDamage(damage);
         _currentHealth -= damageTaken;
@@ -53,7 +53,7 @@ public partial class GC_Health : Resource
         return _child.TakeDamage(remaingDamage);
     }
 
-    public float Heal(float healing)
+    public virtual float Heal(float healing)
     {
         float heal = _child.Heal(healing);
         _currentHealth += heal;
