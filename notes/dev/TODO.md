@@ -33,7 +33,7 @@ RealVelocity is sometimes very off. When moving straight against a wall, then ju
 
 Externalize data of recently implemented actions in ressources, just like the previous ones.
 
-Lower camera when sprinting ?
-Slide tilt
+~~Lower camera when sprinting ?~~
+~~Slide tilt~~
 
 Maybe SurfaceState should only cast event when enabled by SurfaceControl ? and add an event for disabling/enabling
