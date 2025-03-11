@@ -57,6 +57,8 @@ The color of the hitmarker, or the damage indicator, would change when the damag
 
 For example, if you shoot with a burst weapon on a barrier pool, the damage indicator would turn purple.
 
+</br>
+</br>
 
 # Basic Health pool
 
@@ -75,10 +77,13 @@ Some abilities would also heal the player.
 
 There might be healers ennemies, which heals their allies, which could be some priority targets.
 
+</br>
+</br>
+
 # Armor
 
 ## Game Design
-Armor incentivize the player to use burst weapon, toward the use of his dynamic clicking technique.  
+Armor incentivize the player to use burst weapons, towards the use of his dynamic clicking technique.  
 It could be interesting to have it vary, simply keep the core principle of making it stronger against sustained damage, but allow the specifics about it to vary from one ennemy type to another.
 
 We could set how strong and what threshold the armor has. Meaning how much it can reduce the damages, and what is the burst threshold.
@@ -87,7 +92,7 @@ We could set how strong and what threshold the armor has. Meaning how much it ca
 There are mutliple solution to this idea.
 
 
-### Linear reduction
+### Constant Reduction
 
 [Desmos Visualization](https://www.desmos.com/calculator/p9je6b1tga?lang=fr)  
 The simplest solution is to define reduction as a `resistance` % which is capped by a `max_reduction`.  
@@ -100,16 +105,28 @@ The computation would be :
 - `reduction = min(damage * (resistance), max_reduction)`
 - `final_damage = damage - reduction`.
 
-
-### Gradual reduction
-
-[Desmos Visualization](https://www.desmos.com/calculator/orecuaomyh?lang=fr)  
+### Linear Reduction
+[Desmos Visualization](https://www.desmos.com/calculator/02osee5hea?lang=fr)
 A more complex idea, is to set a `maximum_resistance` %, a `minimum_threshold` and a `maximum_threshold`.
 - `maximum_resistance` is the % of reduction at the best effectiveness of the armor.
 - `minimum_threshold` is the minimum amount of damage for the **effective** resistance to start decaying below `maximum_resistance`.
 - `maximum_threshold` is the mimimum amount of damage for the **effective** resistance to be 0.
 
-Now, the reduction % gradually decreases from `minimum_threshold` to `maximum_threshold`, which might be more flexible and easier to balance, but it might also be a little less intuitive.
+Now, the reduction linearly decreases from `minimum_threshold` to `maximum_threshold`, from 0 to `maximum_resistance`, which might be more flexible and easier to balance, but it might also be a little less intuitive.
+
+The computation would be :  
+Compile time -
+- `a = maximum_resistance/(minimum_threshold-maximum_resistance)`
+- `b = `  
+
+Run time -
+- `reduction = clamp(a * damage + b, 0, maximum_resistance * damage)`
+- `final_damage = damage - reduction`
+
+### Linear Resistance
+
+[Desmos Visualization](https://www.desmos.com/calculator/orecuaomyh?lang=fr)  
+Based on the previous idea, but here, we are not linearly decreasing the reduction, but the resistance.
 
 The computation would be :  
 
@@ -125,11 +142,31 @@ Run time -
 
 # Barrier
 
-## Algorithm
-how it works, variable parameters ..
-
 ## Game Design
-possible in game modification, influence ..
+Armor incentivize the player to use sustained damage weapons, towards the use of his tracking technique.  
+
+Just as for the armor, we could set a strength to it, and a threshold, at which damages are considered burst damage.
+
+## Algorithm
+
+### Cooldown based barrier
+[Desmos Vizualisation](https://www.desmos.com/calculator/ruvsgwb5vx?lang=fr)  
+One first idea is a time-based barrier. We have a minimum amount of time between two damage reduction, and a reduction amount, either % or flat, or both.
+We keep track of the last time we did reduce the damage using the barrier, and if it is too soon, the damages are inflicted directly.
+
+**Example**  
+If the barrier has a cooldown of 1 second, and 100% resistence, a weapon which shoots 100 shots/seconds for 1 dmg each will deal 99 damage.  
+The first tick is reduced to 0 damage, the 99 others are not reduced at all.  
+
+However, a weapon which deals 1 shot/seconds for 100 dmg each will deal 0 damage.  
+The first shot is reduced to 0, and before the next shot is available, the barrier will be ready again.
+
+### Linear Reduction and Linear Resistance
+In a more linear way, we could define it the same way we did for the Armor, but inverted.
+- [Linear Reduction](https://www.desmos.com/calculator/5bqqsx4pka?lang=fr)
+- [Linear Resistance](https://www.desmos.com/calculator/apfrfzjjvv?lang=fr)
+
+
 
 ## Game Feel
 discuss sounds, ui ..
