@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=80 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -67,6 +67,7 @@
 [ext_resource type="Script" uid="uid://drst58njg40lu" path="res://player/audio/PA_LedgeClimb.cs" id="42_xvvq2"]
 [ext_resource type="Script" uid="uid://bygoet2cggu0b" path="res://player/audio/PA_SpeedWind.cs" id="43_wtkgi"]
 [ext_resource type="AudioStream" uid="uid://d1ot41x8qebwj" path="res://assets/sounds/wind/wind.wav" id="44_vhlgj"]
+[ext_resource type="Script" uid="uid://bbc8us8vvouq0" path="res://global/combat/health/GC_HealthManager.cs" id="46_ee4um"]
 [ext_resource type="Script" uid="uid://mds7cr6i4noc" path="res://player/movement/actions/jump/PM_WallClimb.cs" id="61_x3a7t"]
 [ext_resource type="Script" uid="uid://byy7tiy37y47h" path="res://debug/display_fps.gd" id="65_wohr1"]
 [ext_resource type="Texture2D" uid="uid://dsma1lip7bvch" path="res://assets/sprites/dash/dash_cd_mid_shadow.png" id="69_arr85"]
@@ -433,6 +434,10 @@ _wind = NodePath("Wind")
 [node name="Wind" type="AudioStreamPlayer2D" parent="Body/Sound/PA_SpeedWind"]
 stream = ExtResource("44_vhlgj")
 autoplay = true
+
+[node name="GC_HealthManager" type="Node" parent="Body"]
+script = ExtResource("46_ee4um")
+metadata/_custom_type_script = "uid://bbc8us8vvouq0"
 
 [node name="Input" type="Node" parent="."]
 

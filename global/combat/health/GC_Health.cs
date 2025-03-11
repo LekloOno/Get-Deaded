@@ -1,11 +1,12 @@
 using System;
 using Godot;
 
-public abstract class GC_Health
+[GlobalClass]
+public partial class GC_Health : Resource
 {
-    private float _maxHealth;
+    [Export] private float _maxHealth;
     private float _currentHealth;
-    private GC_Health _child;
+    [Export] private GC_Health _child;
     public EventHandler<float> OnDamage;
     public EventHandler<float> OnHeal;
     public EventHandler OnBreak;
@@ -22,11 +23,11 @@ public abstract class GC_Health
     public GC_Health(float maxHealth, GC_Health child) : this(maxHealth, maxHealth, child) {}
     public GC_Health(float maxHealth) : this(maxHealth, maxHealth, null) {}
 
-    protected abstract float ModifyDamage(float damage);
+    protected virtual float ModifiedDamage(float damage) => damage;
 
     public bool TakeDamage(float damage)
     {
-        float damageTaken = ModifyDamage(damage);
+        float damageTaken = ModifiedDamage(damage);
         _currentHealth -= damageTaken;
         OnDamage?.Invoke(this, damageTaken);
 
@@ -63,7 +64,7 @@ public abstract class GC_Health
             float remainingHeal = _currentHealth - _maxHealth;
             _currentHealth = _maxHealth;
             OnFull?.Invoke(this, EventArgs.Empty);
-            
+
             return remainingHeal;
         }
 
