@@ -1,7 +1,7 @@
 # Health System
 A quick discussion on how health will be implemented in the game.
 
-## Health pools
+# Health pools
 
 The different health pools are as follows. The lower in the list is the highest priority in damage intake.
 - **Basic Health pool** - Simple health.
@@ -18,23 +18,78 @@ It decreases the overall damage intakes, but can be reduced or broken with speci
 
 **Player** has Basic **Health** and a little pool of **Shield**. Through pickups or abilities, he can also obtain ***Overshield**.
 
-## Basic Health pool
+# Basic Health pool
 
 It is the last possible layer of health.
 
-### Healing
+## Healing
 
-#### Player
+### Player
 
 To heal its health pool, the player must pick up some health packs, and use them.  
 The healing process would take a few seconds, and doing so, the player's move speed would be slightly reduced plus he might not be able to sprint.
 
 Some abilities would also heal the player.
 
-#### Ennemies
+### Ennemies
 
 There might be healers ennemies, which heals their allies, which could be some priority targets.
 
-## Armor
+## Game Feel
+
+# Armor
+
+## Algorithm
+how it works, variable parameters ..
+
+## Game Design
+possible in game modification, influence ..
+
+## Game Feel
+discuss sounds, ui ..
 
 
+# Barrier
+
+## Algorithm
+how it works, variable parameters ..
+
+## Game Design
+possible in game modification, influence ..
+
+## Game Feel
+discuss sounds, ui ..
+
+# Shield
+
+## Algorithm
+how it works, variable parameters ..
+
+## Game Design
+possible in game modification, influence ..
+
+## Game Feel
+discuss sounds, ui ..
+
+# Overshield
+
+## Algorithm
+how it works, variable parameters ..
+
+## Game Design
+possible in game modification, influence ..
+
+## Game Feel
+discuss sounds, ui ..
+
+
+# Plating
+
+## Algorithm
+how it works, variable parameters ..
+
+## Game Design
+possible in game modification, influence ..
+
+## Game Feel
+discuss sounds, ui ..
