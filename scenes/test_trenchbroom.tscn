@@ -1,4 +1,4 @@
-[gd_scene load_steps=284 format=4 uid="uid://co0vxcbu5hxvc"]
+[gd_scene load_steps=290 format=4 uid="uid://co0vxcbu5hxvc"]
 
 [ext_resource type="Script" uid="uid://b8ob8d1uxja85" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_kt2k2"]
 [ext_resource type="Texture2D" uid="uid://c6o8mw13kagni" path="res://assets/skyboxes/Sky_trainyard_01_1b2.png" id="1_niaf1"]
@@ -19,6 +19,8 @@
 [ext_resource type="PackedScene" uid="uid://cgxay2q63b8m8" path="res://assets/models/simplebot.tscn" id="16_716do"]
 [ext_resource type="Material" uid="uid://c7p68evacni7v" path="res://assets/materials/darkGrid.tres" id="18_322tx"]
 [ext_resource type="Material" uid="uid://daxwgciv66e17" path="res://assets/materials/whiteGrid.tres" id="19_pcerp"]
+[ext_resource type="Script" uid="uid://d4a4vftx6y17" path="res://global/combat/hit/hit/GC_Hitbox.cs" id="20_50c6l"]
+[ext_resource type="Script" uid="uid://cjmiash71uc7b" path="res://global/combat/hit/hit/GC_Hit.cs" id="21_y2alo"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_6v6fv"]
 panorama = ExtResource("1_niaf1")
@@ -962,6 +964,21 @@ points = PackedVector3Array(13.9375, 3.75, 10.9375, 13.9375, 0.5, 10.9375, 14.56
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ce1nh"]
 points = PackedVector3Array(13.9375, 3.75, -0.5625, 13.9375, 0.5, -0.5625, 14.5625, 0.5, -0.5625, 14.5625, 3.75, -0.5625, 13.9375, 3.75, 0.0625, 13.9375, 0.5, 0.0625, 14.5625, 0.5, 0.0625, 14.5625, 3.75, 0.0625)
 
+[sub_resource type="Resource" id="Resource_583vm"]
+script = ExtResource("21_y2alo")
+_damage = 10.0
+_inspectorModifiers = null
+metadata/_custom_type_script = "uid://cjmiash71uc7b"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qy2j6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_efpjk"]
+transparency = 1
+albedo_color = Color(0.780392, 0.113725, 0.0823529, 0.92549)
+
+[sub_resource type="SphereMesh" id="SphereMesh_o3j50"]
+material = SubResource("StandardMaterial3D_efpjk")
+
 [node name="Node3D" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -1810,3 +1827,15 @@ material = ExtResource("19_pcerp")
 [node name="CSGBox3D6" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 2.8, 30)
 use_collision = true
+
+[node name="GC_Hitbox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, 16)
+script = ExtResource("20_50c6l")
+_hit = SubResource("Resource_583vm")
+metadata/_custom_type_script = "uid://d4a4vftx6y17"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GC_Hitbox"]
+shape = SubResource("SphereShape3D_qy2j6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GC_Hitbox"]
+mesh = SubResource("SphereMesh_o3j50")

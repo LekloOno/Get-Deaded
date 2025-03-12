@@ -28,6 +28,7 @@ public partial class GC_Health : Resource
     {
         float damageTaken = ModifiedDamage(damage);
         CurrentHealth -= damageTaken;
+        GD.Print(CurrentHealth);
         OnDamage?.Invoke(this, damageTaken);
 
         if (CurrentHealth > 0)

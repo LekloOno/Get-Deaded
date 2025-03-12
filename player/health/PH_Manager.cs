@@ -42,8 +42,5 @@ public partial class PH_Manager : GC_HealthManager
     public void Regen(object sender, double delta) => _shield.Regen((float)delta * _regenPerSecond);
     public void Decay(object sender, double delta) => _shield.Decay((float)delta * _decayPerSecond);
 
-    public override void _PhysicsProcess(double delta)
-    {
-        OnProcess?.Invoke(this, delta);
-    }
+    public override void _PhysicsProcess(double delta) => OnProcess?.Invoke(this, delta);
 }

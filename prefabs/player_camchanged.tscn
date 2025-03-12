@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=87 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -24,6 +24,7 @@
 [ext_resource type="AudioStream" uid="uid://bnck0lo2ewye5" path="res://assets/sounds/woosh/woosh2.wav" id="14_qlcgr"]
 [ext_resource type="Script" uid="uid://cxlnavyewfmhb" path="res://player/input/PI_CrouchDispatcher.cs" id="15_03g52"]
 [ext_resource type="AudioStream" uid="uid://dw0ipfbd7lxkv" path="res://assets/sounds/footsteps/concrete-step2.wav" id="15_53h66"]
+[ext_resource type="Script" uid="uid://ce82euclamj77" path="res://global/combat/hit/hurt/GC_HurtBox.cs" id="15_h1ove"]
 [ext_resource type="AudioStream" uid="uid://b7y6fn7u2t61j" path="res://assets/sounds/woosh/woosh3.wav" id="15_vrr6v"]
 [ext_resource type="AudioStream" uid="uid://c3yn8oxpxhvy0" path="res://assets/sounds/clothes/clothes_4.wav" id="15_yrqyn"]
 [ext_resource type="AudioStream" uid="uid://cv7hf0tm8n6mw" path="res://assets/sounds/clothes/clothes_5.wav" id="16_71snu"]
@@ -97,16 +98,23 @@ height = 1.8
 [sub_resource type="BoxShape3D" id="BoxShape3D_aav2a"]
 size = Vector3(0.5, 0.15, 0.5)
 
-[sub_resource type="Resource" id="Resource_3qmec"]
+[sub_resource type="Resource" id="Resource_rvgf0"]
 script = ExtResource("47_rvgf0")
-_maxHealth = 200.0
+_maxHealth = 100.0
 metadata/_custom_type_script = "uid://dqcp38rr3u5gx"
 
-[sub_resource type="Resource" id="Resource_elf0p"]
+[sub_resource type="Resource" id="Resource_h1ove"]
 script = ExtResource("48_h1ove")
-_maxHealth = 100.0
-Child = SubResource("Resource_3qmec")
+_maxHealth = 10.0
+Child = SubResource("Resource_rvgf0")
 metadata/_custom_type_script = "uid://be02fh6y0vldv"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_yi2ds"]
+radius = 0.25
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jlgrh"]
+radius = 0.25
+height = 1.6
 
 [node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("_walkProcess", "_wallJump", "_wallClimb", "_groundState", "_cameraControl", "_surfaceControl", "_straffeSnap")]
 axis_lock_angular_y = true
@@ -247,6 +255,33 @@ skeleton = NodePath("../../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
 shape = SubResource("BoxShape3D_aav2a")
 target_position = Vector3(0, 0, 0)
+
+[node name="PH_Manager" type="Node" parent="Body/SpatialAnchor"]
+script = ExtResource("46_eanik")
+_shield = SubResource("Resource_h1ove")
+_decayPerSecond = 25.0
+_regenPerSecond = 10.0
+TopHealthLayer = SubResource("Resource_h1ove")
+metadata/_custom_type_script = "uid://dettpmrm6albd"
+
+[node name="HeadBox" type="Area3D" parent="Body/SpatialAnchor" node_paths=PackedStringArray("_healthManager")]
+script = ExtResource("15_h1ove")
+BodyPart = 0
+_healthManager = NodePath("../PH_Manager")
+metadata/_custom_type_script = "uid://ce82euclamj77"
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Body/SpatialAnchor/HeadBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
+shape = SubResource("SphereShape3D_yi2ds")
+
+[node name="BodyBox" type="Area3D" parent="Body/SpatialAnchor" node_paths=PackedStringArray("_healthManager")]
+script = ExtResource("15_h1ove")
+_healthManager = NodePath("../PH_Manager")
+metadata/_custom_type_script = "uid://ce82euclamj77"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/SpatialAnchor/BodyBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+shape = SubResource("CapsuleShape3D_jlgrh")
 
 [node name="Sound" type="Node3D" parent="Body"]
 
@@ -447,14 +482,6 @@ _wind = NodePath("Wind")
 [node name="Wind" type="AudioStreamPlayer2D" parent="Body/Sound/PA_SpeedWind"]
 stream = ExtResource("44_vhlgj")
 autoplay = true
-
-[node name="PH_Manager" type="Node" parent="Body"]
-script = ExtResource("46_eanik")
-_shield = SubResource("Resource_elf0p")
-_decayPerSecond = 1.0
-_regenPerSecond = 1.0
-TopHealthLayer = SubResource("Resource_elf0p")
-metadata/_custom_type_script = "uid://dettpmrm6albd"
 
 [node name="Input" type="Node" parent="."]
 

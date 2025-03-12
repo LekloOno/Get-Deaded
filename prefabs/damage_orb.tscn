@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://dnl67amu62sbw"]
+
+[node name="DamageOrb" type="Node3D"]
