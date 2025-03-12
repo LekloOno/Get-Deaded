@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=84 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -67,7 +67,9 @@
 [ext_resource type="Script" uid="uid://drst58njg40lu" path="res://player/audio/PA_LedgeClimb.cs" id="42_xvvq2"]
 [ext_resource type="Script" uid="uid://bygoet2cggu0b" path="res://player/audio/PA_SpeedWind.cs" id="43_wtkgi"]
 [ext_resource type="AudioStream" uid="uid://d1ot41x8qebwj" path="res://assets/sounds/wind/wind.wav" id="44_vhlgj"]
-[ext_resource type="Script" uid="uid://bbc8us8vvouq0" path="res://global/combat/health/GC_HealthManager.cs" id="46_ee4um"]
+[ext_resource type="Script" uid="uid://dettpmrm6albd" path="res://player/health/PH_Manager.cs" id="46_eanik"]
+[ext_resource type="Script" uid="uid://dqcp38rr3u5gx" path="res://global/combat/health/GC_Health.cs" id="47_rvgf0"]
+[ext_resource type="Script" uid="uid://be02fh6y0vldv" path="res://global/combat/health/GC_Shield.cs" id="48_h1ove"]
 [ext_resource type="Script" uid="uid://mds7cr6i4noc" path="res://player/movement/actions/jump/PM_WallClimb.cs" id="61_x3a7t"]
 [ext_resource type="Script" uid="uid://byy7tiy37y47h" path="res://debug/display_fps.gd" id="65_wohr1"]
 [ext_resource type="Texture2D" uid="uid://dsma1lip7bvch" path="res://assets/sprites/dash/dash_cd_mid_shadow.png" id="69_arr85"]
@@ -94,6 +96,17 @@ height = 1.8
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_aav2a"]
 size = Vector3(0.5, 0.15, 0.5)
+
+[sub_resource type="Resource" id="Resource_3qmec"]
+script = ExtResource("47_rvgf0")
+_maxHealth = 200.0
+metadata/_custom_type_script = "uid://dqcp38rr3u5gx"
+
+[sub_resource type="Resource" id="Resource_elf0p"]
+script = ExtResource("48_h1ove")
+_maxHealth = 100.0
+Child = SubResource("Resource_3qmec")
+metadata/_custom_type_script = "uid://be02fh6y0vldv"
 
 [node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("_walkProcess", "_wallJump", "_wallClimb", "_groundState", "_cameraControl", "_surfaceControl", "_straffeSnap")]
 axis_lock_angular_y = true
@@ -435,9 +448,13 @@ _wind = NodePath("Wind")
 stream = ExtResource("44_vhlgj")
 autoplay = true
 
-[node name="GC_HealthManager" type="Node" parent="Body"]
-script = ExtResource("46_ee4um")
-metadata/_custom_type_script = "uid://bbc8us8vvouq0"
+[node name="PH_Manager" type="Node" parent="Body"]
+script = ExtResource("46_eanik")
+_shield = SubResource("Resource_elf0p")
+_decayPerSecond = 1.0
+_regenPerSecond = 1.0
+TopHealthLayer = SubResource("Resource_elf0p")
+metadata/_custom_type_script = "uid://dettpmrm6albd"
 
 [node name="Input" type="Node" parent="."]
 

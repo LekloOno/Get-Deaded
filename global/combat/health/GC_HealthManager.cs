@@ -3,7 +3,7 @@ using Godot;
 [GlobalClass]
 public partial class GC_HealthManager : Node
 {
-    [Export] GC_Health _topHealthLayer;
+    [Export] public GC_Health TopHealthLayer {get; private set;}
     public override void _Ready()
     {
         // To implement

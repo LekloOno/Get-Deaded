@@ -5,64 +5,63 @@ using Godot;
 public partial class GC_Health : Resource
 {
     [Export] protected float _maxHealth;
-    protected float _currentHealth;
-    [Export] protected GC_Health _child;
+    [Export] public GC_Health Child {get; private set;}
+    public float CurrentHealth {get; protected set;}
     public EventHandler<float> OnDamage;
     public EventHandler<float> OnHeal;
     public EventHandler OnBreak;
     public EventHandler OnDie;
     public EventHandler OnFull;
 
-    public GC_Health(float maxHealth, float initialHealth, GC_Health child)
+    public GC_Health() : this(100, null) {}
+    public GC_Health(float maxHealth, GC_Health child) : this(maxHealth, maxHealth, child) {}
+    public GC_Health(float maxHealth, float initHealth, GC_Health child)
     {
         _maxHealth = maxHealth;
-        _currentHealth = initialHealth;
-        _child = child;
+        CurrentHealth = initHealth;
+        Child = child;
     }
 
-    public GC_Health(float maxHealth, GC_Health child) : this(maxHealth, maxHealth, child) {}
-    public GC_Health(float maxHealth) : this(maxHealth, maxHealth, null) {}
 
     protected virtual float ModifiedDamage(float damage) => damage;
-
     public virtual bool TakeDamage(float damage)
     {
         float damageTaken = ModifiedDamage(damage);
-        _currentHealth -= damageTaken;
+        CurrentHealth -= damageTaken;
         OnDamage?.Invoke(this, damageTaken);
 
-        if (_currentHealth > 0)
+        if (CurrentHealth > 0)
             return false;
 
-        if (Propagate(Mathf.Abs(_currentHealth)))
+        if (Propagate(Mathf.Abs(CurrentHealth)))
             return true;
         
-        _currentHealth = 0;
+        CurrentHealth = 0;
         OnBreak?.Invoke(this, EventArgs.Empty);
         return false;
     }
 
     private bool Propagate(float remaingDamage)
     {
-        if (_child == null)
+        if (Child == null)
         {
             OnDie?.Invoke(this, EventArgs.Empty);
             return true;
         }
 
-        return _child.TakeDamage(remaingDamage);
+        return Child.TakeDamage(remaingDamage);
     }
 
     public virtual float Heal(float healing)
     {
-        float heal = _child.Heal(healing);
-        _currentHealth += heal;
+        float heal = Child.Heal(healing);
+        CurrentHealth += heal;
         OnHeal?.Invoke(this, heal);
         
-        if (_currentHealth > _maxHealth)
+        if (CurrentHealth > _maxHealth)
         {
-            float remainingHeal = _currentHealth - _maxHealth;
-            _currentHealth = _maxHealth;
+            float remainingHeal = CurrentHealth - _maxHealth;
+            CurrentHealth = _maxHealth;
             OnFull?.Invoke(this, EventArgs.Empty);
 
             return remainingHeal;
@@ -73,29 +72,29 @@ public partial class GC_Health : Resource
 
     public float LowerMax()
     {
-        if (_child == null)
+        if (Child == null)
             return _maxHealth;
-        return _child.LowerMax();
+        return Child.LowerMax();
     }
 
     public float LowerCurrent()
     {
-        if (_child == null)
-            return _currentHealth;
-        return _child.LowerCurrent();
+        if (Child == null)
+            return CurrentHealth;
+        return Child.LowerCurrent();
     }
 
     public float HigherMax()
     {
-        if (_child == null)
+        if (Child == null)
             return 0;
-        return _maxHealth + _child.HigherMax();
+        return _maxHealth + Child.HigherMax();
     }
 
     public float HigherCurrent()
     {
-        if (_child == null)
+        if (Child == null)
             return 0;
-        return _currentHealth + _child.HigherCurrent();
+        return CurrentHealth + Child.HigherCurrent();
     }
 }
