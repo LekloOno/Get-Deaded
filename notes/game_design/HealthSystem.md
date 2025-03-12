@@ -144,7 +144,7 @@ The computation would be :
 - `final_damage = damage - reduction`.
 
 ### Linear Reduction
-[Desmos Visualization](https://www.desmos.com/calculator/02osee5hea?lang=fr)
+[Desmos Visualization](https://www.desmos.com/calculator/9zipgr6vby?lang=fr)
 A more complex idea, is to set a `maximum_resistance` %, a `minimum_threshold` and a `maximum_threshold`.
 - `maximum_resistance` is the % of reduction at the best effectiveness of the armor.
 - `minimum_threshold` is the minimum amount of damage for the **effective** resistance to start decaying below `maximum_resistance`.
