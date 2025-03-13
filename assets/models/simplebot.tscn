@@ -1,9 +1,63 @@
-[gd_scene load_steps=3 format=3 uid="uid://cgxay2q63b8m8"]
+[gd_scene load_steps=22 format=3 uid="uid://cgxay2q63b8m8"]
 
 [ext_resource type="PackedScene" uid="uid://b8yrodu7ix03r" path="res://assets/models/bot.tscn" id="1_bdtk5"]
+[ext_resource type="Script" uid="uid://bbc8us8vvouq0" path="res://global/combat/health/GC_HealthManager.cs" id="2_cm3tr"]
+[ext_resource type="Script" uid="uid://dqcp38rr3u5gx" path="res://global/combat/health/GC_Health.cs" id="3_ymo8g"]
+[ext_resource type="Script" uid="uid://bclkw4o7merkb" path="res://global/combat/health/GC_Armor.cs" id="4_8icvm"]
+[ext_resource type="Script" uid="uid://ce82euclamj77" path="res://global/combat/hit/hurt/GC_HurtBox.cs" id="5_lfk02"]
+[ext_resource type="Script" uid="uid://d01sb0k1e87yt" path="res://ui/combat/health/UI_EntityHealth.cs" id="6_uwwkh"]
+[ext_resource type="Script" uid="uid://db8e5l76dsikn" path="res://ui/combat/health/UI_HealthBar.cs" id="7_dg3f6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vupcu"]
 height = 1.8
+
+[sub_resource type="Resource" id="Resource_es1ld"]
+script = ExtResource("3_ymo8g")
+_maxHealth = 100.0
+metadata/_custom_type_script = "uid://dqcp38rr3u5gx"
+
+[sub_resource type="Resource" id="Resource_h31q0"]
+script = ExtResource("4_8icvm")
+_resistance = 0.8
+_maxReduction = 15.0
+_maxHealth = 50.0
+Child = SubResource("Resource_es1ld")
+metadata/_custom_type_script = "uid://bclkw4o7merkb"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8fjt1"]
+radius = 0.15
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_26w0a"]
+radius = 0.22
+height = 0.65
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_egto0"]
+radius = 0.359337
+height = 1.02139
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_5mo8a"]
+viewport_path = NodePath("Sprite3D/SubViewport")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tujlf"]
+bg_color = Color(0, 0, 0, 0.505882)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5oo0i"]
+bg_color = Color(0.883632, 0.842725, 0.825069, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iwqyq"]
+bg_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0kw87"]
+bg_color = Color(0, 0.49066, 0.829606, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y3kqx"]
+bg_color = Color(0, 0, 0, 0.505882)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6opq1"]
+bg_color = Color(0.784314, 0.141176, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvlm"]
+bg_color = Color(1, 1, 1, 1)
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
 
@@ -12,3 +66,166 @@ height = 1.8
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_vupcu")
+
+[node name="GC_HealthManager" type="Node" parent="."]
+script = ExtResource("2_cm3tr")
+TopHealthLayer = SubResource("Resource_h31q0")
+metadata/_custom_type_script = "uid://bbc8us8vvouq0"
+
+[node name="Head" type="Area3D" parent="." node_paths=PackedStringArray("_healthManager")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 1.55457, 0.0319857)
+script = ExtResource("5_lfk02")
+BodyPart = 0
+_healthManager = NodePath("../GC_HealthManager")
+metadata/_custom_type_script = "uid://ce82euclamj77"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Head"]
+shape = SubResource("SphereShape3D_8fjt1")
+debug_color = Color(1, 0, 0, 1)
+
+[node name="Chest" type="Area3D" parent="." node_paths=PackedStringArray("_healthManager")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.785877, 0)
+script = ExtResource("5_lfk02")
+_healthManager = NodePath("../GC_HealthManager")
+metadata/_custom_type_script = "uid://ce82euclamj77"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Chest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.345365, 0)
+shape = SubResource("CapsuleShape3D_26w0a")
+debug_color = Color(0, 1, 0, 0.388235)
+
+[node name="Legs" type="Area3D" parent="." node_paths=PackedStringArray("_healthManager")]
+script = ExtResource("5_lfk02")
+_healthManager = NodePath("../GC_HealthManager")
+metadata/_custom_type_script = "uid://ce82euclamj77"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Legs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.500222, 0)
+shape = SubResource("CapsuleShape3D_egto0")
+debug_color = Color(0, 1, 0, 0.243137)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.495, 0, 0, 0, 0.305, 0, 0, 0, 0.305, 0, 1.92362, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_5mo8a")
+
+[node name="SubViewport" type="SubViewport" parent="Sprite3D"]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="UI_EntityHealth" type="VBoxContainer" parent="Sprite3D/SubViewport" node_paths=PackedStringArray("_healthManager", "_higherBar", "_lowerBar")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+script = ExtResource("6_uwwkh")
+_healthManager = NodePath("../../../GC_HealthManager")
+_higherBar = NodePath("HigherLayer")
+_lowerBar = NodePath("LowerLayer")
+metadata/_custom_type_script = "uid://d01sb0k1e87yt"
+
+[node name="HigherLayer" type="Control" parent="Sprite3D/SubViewport/UI_EntityHealth" node_paths=PackedStringArray("_body", "_tail")]
+layout_mode = 2
+script = ExtResource("7_dg3f6")
+_body = NodePath("Body")
+_tail = NodePath("Tail")
+_tailSpeed = 0.4
+metadata/_custom_type_script = "uid://db8e5l76dsikn"
+
+[node name="Tail" type="ProgressBar" parent="Sprite3D/SubViewport/UI_EntityHealth/HigherLayer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -8.0
+offset_right = 64.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_tujlf")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5oo0i")
+value = 40.43
+show_percentage = false
+
+[node name="Body" type="ProgressBar" parent="Sprite3D/SubViewport/UI_EntityHealth/HigherLayer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -8.0
+offset_right = 64.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_iwqyq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0kw87")
+value = 27.46
+show_percentage = false
+
+[node name="LowerLayer" type="Control" parent="Sprite3D/SubViewport/UI_EntityHealth" node_paths=PackedStringArray("_body", "_tail")]
+layout_mode = 2
+script = ExtResource("7_dg3f6")
+_body = NodePath("Body")
+_tail = NodePath("Tail")
+_tailSpeed = 0.4
+metadata/_custom_type_script = "uid://db8e5l76dsikn"
+
+[node name="Tail" type="ProgressBar" parent="Sprite3D/SubViewport/UI_EntityHealth/LowerLayer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -8.0
+offset_right = 64.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_y3kqx")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6opq1")
+value = 40.43
+show_percentage = false
+
+[node name="Body" type="ProgressBar" parent="Sprite3D/SubViewport/UI_EntityHealth/LowerLayer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -8.0
+offset_right = 64.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_iwqyq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1bvlm")
+value = 27.46
+show_percentage = false
