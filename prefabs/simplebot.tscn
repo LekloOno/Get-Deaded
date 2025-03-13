@@ -12,11 +12,13 @@
 height = 1.8
 
 [sub_resource type="Resource" id="Resource_j8cyt"]
+resource_local_to_scene = true
 script = ExtResource("3_ymo8g")
 _maxHealth = 100.0
 metadata/_custom_type_script = "uid://dqcp38rr3u5gx"
 
 [sub_resource type="Resource" id="Resource_ygkka"]
+resource_local_to_scene = true
 script = ExtResource("4_8icvm")
 _resistance = 0.8
 _maxReduction = 15.0

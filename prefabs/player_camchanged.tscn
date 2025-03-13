@@ -121,11 +121,13 @@ radius = 0.25
 size = Vector3(0.5, 1.8, 0.5)
 
 [sub_resource type="Resource" id="Resource_jlgrh"]
+resource_local_to_scene = true
 script = ExtResource("47_rvgf0")
 _maxHealth = 100.0
 metadata/_custom_type_script = "uid://dqcp38rr3u5gx"
 
 [sub_resource type="Resource" id="Resource_ufgmq"]
+resource_local_to_scene = true
 script = ExtResource("48_h1ove")
 _maxHealth = 50.0
 Child = SubResource("Resource_jlgrh")
