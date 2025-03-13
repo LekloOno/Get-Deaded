@@ -32,21 +32,39 @@ public partial class GC_Health : Resource
         }
     }
 
-    protected virtual float ModifiedDamage(float damage) => damage;
+    protected virtual float ReductionFromDamage(float damage) => 0f;                // How much reduction fo "damage" damage
+    protected virtual float DamageFromReduction(float reduction) => CurrentHealth;  // How much handled damage if the reduction was "reduction"
+
+    private float ModifiedDamage(float damage, out float remainingDamage)
+    {
+        float reduction = ReductionFromDamage(damage);
+        float damageReduced = damage - reduction;
+
+        if (CurrentHealth >= damageReduced)
+            remainingDamage = 0f;
+        else
+        {
+            damageReduced = CurrentHealth + ReductionFromDamage(CurrentHealth);
+            remainingDamage = damage - damageReduced;
+        }
+
+        return damageReduced;
+    }
     public virtual bool TakeDamage(float damage)
     {
-        float damageTaken = ModifiedDamage(damage);
+        float damageTaken = ModifiedDamage(damage, out float remainingDamage);
         CurrentHealth -= damageTaken;
+
         GD.Print(CurrentHealth);
+
         OnDamage?.Invoke(this, damageTaken);
 
         if (CurrentHealth > 0)
             return false;
 
-        if (Propagate(Mathf.Abs(CurrentHealth)))
+        if (Propagate(remainingDamage))
             return true;
         
-        CurrentHealth = 0;
         OnBreak?.Invoke(this, Child);
         return false;
     }

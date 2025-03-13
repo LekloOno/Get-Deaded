@@ -8,12 +8,16 @@ public partial class GC_Armor : GC_Health
     private float _resistance;
     [Export(PropertyHint.Range, "0.0,500.0")]
     private float _maxReduction;
-    
-    protected override float ModifiedDamage(float damage) => ConstantReduction(damage, _resistance, _maxReduction);
 
-    private static float ConstantReduction(float damage, float resistance, float maxReduction)
+    protected override float ReductionFromDamage(float damage) => Mathf.Min(damage * _resistance, _maxReduction);
+    protected override float DamageFromReduction(float reduction)
     {
-        float reduction = Mathf.Min(damage * resistance, maxReduction);
-        return damage - reduction;
+        /*
+        if (reduction == _maxReduction)
+            return _maxReduction / _resistance;
+
+        The strict method should include this, but reduction should never be higher than maxReduction anyway
+        */
+        return reduction / _resistance;
     }
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=97 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=99 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -38,6 +38,7 @@
 [ext_resource type="Script" uid="uid://llwmjg24ml7x" path="res://player/input/crouch/PI_Crouch.cs" id="18_wrcsk"]
 [ext_resource type="Script" uid="uid://b2jn2nortl4pm" path="res://player/audio/PA_Slide.cs" id="18_yrtf3"]
 [ext_resource type="AudioStream" uid="uid://8we7lgvkmauv" path="res://assets/sounds/footsteps/concrete-step.wav" id="19_10w05"]
+[ext_resource type="Script" uid="uid://bclkw4o7merkb" path="res://global/combat/health/GC_Armor.cs" id="19_elf0p"]
 [ext_resource type="Script" uid="uid://bd4xcqwtky47u" path="res://player/state/PS_Grounded.cs" id="19_vpdv2"]
 [ext_resource type="Script" uid="uid://ca4sbvyfspdlk" path="res://player/audio/PA_LayeredSound.cs" id="19_wuy3o"]
 [ext_resource type="Script" uid="uid://bh2x2qbdyp8do" path="res://player/movement/actions/surface-control/PM_SurfaceControl.cs" id="20_ncxc1"]
@@ -117,15 +118,23 @@ radius = 0.25
 [sub_resource type="BoxShape3D" id="BoxShape3D_2am5o"]
 size = Vector3(0.5, 1.8, 0.5)
 
-[sub_resource type="Resource" id="Resource_rvgf0"]
+[sub_resource type="Resource" id="Resource_elf0p"]
 script = ExtResource("47_rvgf0")
 _maxHealth = 100.0
 metadata/_custom_type_script = "uid://dqcp38rr3u5gx"
 
-[sub_resource type="Resource" id="Resource_h1ove"]
+[sub_resource type="Resource" id="Resource_7bleo"]
+script = ExtResource("19_elf0p")
+_resistance = 0.5
+_maxReduction = 50.0
+_maxHealth = 15.0
+Child = SubResource("Resource_elf0p")
+metadata/_custom_type_script = "uid://bclkw4o7merkb"
+
+[sub_resource type="Resource" id="Resource_yi2ds"]
 script = ExtResource("48_h1ove")
-_maxHealth = 10.0
-Child = SubResource("Resource_rvgf0")
+_maxHealth = 50.0
+Child = SubResource("Resource_7bleo")
 metadata/_custom_type_script = "uid://be02fh6y0vldv"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_yi2ds"]
@@ -392,10 +401,10 @@ _controller = NodePath("..")
 
 [node name="PH_Manager" type="Node" parent="Body"]
 script = ExtResource("46_eanik")
-_shield = SubResource("Resource_h1ove")
+_shield = SubResource("Resource_yi2ds")
 _decayPerSecond = 25.0
 _regenPerSecond = 10.0
-TopHealthLayer = SubResource("Resource_h1ove")
+TopHealthLayer = SubResource("Resource_yi2ds")
 metadata/_custom_type_script = "uid://dettpmrm6albd"
 
 [node name="HeadBox" type="Area3D" parent="Body" node_paths=PackedStringArray("_healthManager")]
