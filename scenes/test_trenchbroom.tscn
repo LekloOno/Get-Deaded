@@ -16,7 +16,7 @@
 [ext_resource type="Material" uid="uid://qaiv0bg125qu" path="res://assets/textures/factory/factory_pillar1.tres" id="12_j6kmx"]
 [ext_resource type="Material" uid="uid://c8uqlqfsypx8y" path="res://assets/textures/factory/factory_wall_dark.tres" id="13_m2at4"]
 [ext_resource type="Material" uid="uid://h2ivyy4upgyr" path="res://assets/textures/factory/factory_pillar1_gloss.tres" id="14_oihfr"]
-[ext_resource type="PackedScene" uid="uid://cgxay2q63b8m8" path="res://assets/models/simplebot.tscn" id="16_716do"]
+[ext_resource type="PackedScene" uid="uid://cgxay2q63b8m8" path="res://prefabs/simplebot.tscn" id="16_716do"]
 [ext_resource type="Material" uid="uid://c7p68evacni7v" path="res://assets/materials/darkGrid.tres" id="18_322tx"]
 [ext_resource type="Material" uid="uid://daxwgciv66e17" path="res://assets/materials/whiteGrid.tres" id="19_pcerp"]
 [ext_resource type="Script" uid="uid://d4a4vftx6y17" path="res://global/combat/hit/hit/GC_Hitbox.cs" id="20_50c6l"]
@@ -1017,6 +1017,7 @@ local_map_file = "res://trenchbroom/maps/basetest/oui.map"
 map_settings = ExtResource("2_7lvev")
 
 [node name="entity_0_worldspawn" type="StaticBody3D" parent="FuncGodotMap"]
+collision_layer = 3
 collision_mask = 0
 
 [node name="entity_0_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_0_worldspawn"]
@@ -1853,6 +1854,8 @@ use_collision = true
 
 [node name="GC_Hitbox" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, 16)
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("20_50c6l")
 _hit = SubResource("Resource_583vm")
 _cd = 0.5
@@ -1866,6 +1869,8 @@ mesh = SubResource("SphereMesh_o3j50")
 
 [node name="GC_HealBox" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2.6, 20)
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("22_583vm")
 _hit = SubResource("Resource_o3j50")
 _cd = 0.5
@@ -1879,6 +1884,8 @@ mesh = SubResource("SphereMesh_xqord")
 
 [node name="GC_Hitbox2" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2.6, 18)
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("20_50c6l")
 _hit = SubResource("Resource_583vm")
 _cd = 0.5
@@ -1889,3 +1896,6 @@ shape = SubResource("SphereShape3D_qy2j6")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="GC_Hitbox2"]
 mesh = SubResource("SphereMesh_o3j50")
+
+[node name="CharacterBody3D2" parent="." instance=ExtResource("16_716do")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 8)

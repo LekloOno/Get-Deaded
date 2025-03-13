@@ -73,11 +73,11 @@ public partial class PM_Controller : CharacterBody3D
             Vector3 velocity = _velocityCache.GetVelocity(this, Velocity, _walkProcess.WishDir, _groundState.IsGrounded(), delta);
 
             Vector3 prevVelocity = velocity;
-            
+            /*
             if (Input.IsActionJustPressed("click"))
             {
                 velocity += _cameraControl.GlobalBasis.Z * -_debugDashStrength;
-            }
+            }*/
 
 
             velocity = _wallClimb.WallClimb(velocity);

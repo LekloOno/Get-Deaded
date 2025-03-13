@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=101 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -38,7 +38,6 @@
 [ext_resource type="Script" uid="uid://llwmjg24ml7x" path="res://player/input/crouch/PI_Crouch.cs" id="18_wrcsk"]
 [ext_resource type="Script" uid="uid://b2jn2nortl4pm" path="res://player/audio/PA_Slide.cs" id="18_yrtf3"]
 [ext_resource type="AudioStream" uid="uid://8we7lgvkmauv" path="res://assets/sounds/footsteps/concrete-step.wav" id="19_10w05"]
-[ext_resource type="Script" uid="uid://bclkw4o7merkb" path="res://global/combat/health/GC_Armor.cs" id="19_elf0p"]
 [ext_resource type="Script" uid="uid://bd4xcqwtky47u" path="res://player/state/PS_Grounded.cs" id="19_vpdv2"]
 [ext_resource type="Script" uid="uid://ca4sbvyfspdlk" path="res://player/audio/PA_LayeredSound.cs" id="19_wuy3o"]
 [ext_resource type="Script" uid="uid://bh2x2qbdyp8do" path="res://player/movement/actions/surface-control/PM_SurfaceControl.cs" id="20_ncxc1"]
@@ -74,11 +73,14 @@
 [ext_resource type="Script" uid="uid://dettpmrm6albd" path="res://player/health/PH_Manager.cs" id="46_eanik"]
 [ext_resource type="Script" uid="uid://dqcp38rr3u5gx" path="res://global/combat/health/GC_Health.cs" id="47_rvgf0"]
 [ext_resource type="Script" uid="uid://be02fh6y0vldv" path="res://global/combat/health/GC_Shield.cs" id="48_h1ove"]
+[ext_resource type="Script" uid="uid://diuvohbhr003k" path="res://player/input/combat/PI_Weapons.cs" id="60_jlgrh"]
 [ext_resource type="Script" uid="uid://mds7cr6i4noc" path="res://player/movement/actions/jump/PM_WallClimb.cs" id="61_x3a7t"]
 [ext_resource type="Script" uid="uid://byy7tiy37y47h" path="res://debug/display_fps.gd" id="65_wohr1"]
 [ext_resource type="Texture2D" uid="uid://dsma1lip7bvch" path="res://assets/sprites/dash/dash_cd_mid_shadow.png" id="69_arr85"]
 [ext_resource type="Texture2D" uid="uid://cbh1opskekaqn" path="res://assets/sprites/dash/dash_cd_mid_fill.png" id="70_ee4um"]
 [ext_resource type="Script" uid="uid://bd37jsqipcwxc" path="res://ui/UI_DashReset.cs" id="71_j12ti"]
+[ext_resource type="Script" uid="uid://b4hdeuwma0ma8" path="res://player/combat/weapons/PW_WeaponsHandler.cs" id="81_stdu8"]
+[ext_resource type="Script" uid="uid://b1pmsrdhynvhv" path="res://player/combat/weapons/weapon/PW_SimpleClick.cs" id="82_jlgrh"]
 
 [sub_resource type="Curve" id="Curve_ux8de"]
 _limits = [-0.5, 1.0, 0.0, 1.0]
@@ -118,30 +120,16 @@ radius = 0.25
 [sub_resource type="BoxShape3D" id="BoxShape3D_2am5o"]
 size = Vector3(0.5, 1.8, 0.5)
 
-[sub_resource type="Resource" id="Resource_elf0p"]
-script = ExtResource("47_rvgf0")
-_maxHealth = 50.0
-metadata/_custom_type_script = "uid://dqcp38rr3u5gx"
-
-[sub_resource type="Resource" id="Resource_yi2ds"]
-script = ExtResource("48_h1ove")
-_maxHealth = 20.0
-Child = SubResource("Resource_elf0p")
-metadata/_custom_type_script = "uid://be02fh6y0vldv"
-
 [sub_resource type="Resource" id="Resource_jlgrh"]
 script = ExtResource("47_rvgf0")
-_maxHealth = 28.0
-Child = SubResource("Resource_yi2ds")
+_maxHealth = 100.0
 metadata/_custom_type_script = "uid://dqcp38rr3u5gx"
 
-[sub_resource type="Resource" id="Resource_7bleo"]
-script = ExtResource("19_elf0p")
-_resistance = 0.8
-_maxReduction = 10.0
-_maxHealth = 28.0
+[sub_resource type="Resource" id="Resource_ufgmq"]
+script = ExtResource("48_h1ove")
+_maxHealth = 50.0
 Child = SubResource("Resource_jlgrh")
-metadata/_custom_type_script = "uid://bclkw4o7merkb"
+metadata/_custom_type_script = "uid://be02fh6y0vldv"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jlgrh"]
 radius = 0.25
@@ -156,6 +144,12 @@ height = 1.8
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_aav2a"]
 size = Vector3(0.5, 0.15, 0.5)
+
+[sub_resource type="Resource" id="Resource_stdu8"]
+script = ExtResource("82_jlgrh")
+_maxDistance = 100.0
+_damage = 20.0
+metadata/_custom_type_script = "uid://b1pmsrdhynvhv"
 
 [node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("_walkProcess", "_wallJump", "_wallClimb", "_groundState", "_cameraControl", "_surfaceControl", "_straffeSnap")]
 axis_lock_angular_y = true
@@ -408,25 +402,30 @@ _bodyHitBox = NodePath("BodyBox/CollisionShape3D")
 
 [node name="PH_Manager" type="Node" parent="Body"]
 script = ExtResource("46_eanik")
-_shield = SubResource("Resource_yi2ds")
+_shield = SubResource("Resource_ufgmq")
 _decayPerSecond = 25.0
 _regenPerSecond = 10.0
-TopHealthLayer = SubResource("Resource_7bleo")
+TopHealthLayer = SubResource("Resource_ufgmq")
 metadata/_custom_type_script = "uid://dettpmrm6albd"
 
 [node name="BodyBox" type="Area3D" parent="Body" node_paths=PackedStringArray("_healthManager")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 top_level = true
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("15_h1ove")
 _healthManager = NodePath("../PH_Manager")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body/BodyBox"]
 shape = SubResource("CapsuleShape3D_jlgrh")
+debug_color = Color(0, 1, 0, 0.654902)
 
 [node name="HeadBox" type="Area3D" parent="Body" node_paths=PackedStringArray("_healthManager")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0)
 top_level = true
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("15_h1ove")
 BodyPart = 0
 _healthManager = NodePath("../PH_Manager")
@@ -434,6 +433,7 @@ metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body/HeadBox"]
 shape = SubResource("SphereShape3D_yi2ds")
+debug_color = Color(1, 0, 0, 0.713726)
 
 [node name="SpatialAnchor" type="Node3D" parent="Body"]
 
@@ -699,6 +699,10 @@ _sprintInput = NodePath("../../PI_Sprint")
 script = ExtResource("18_wrcsk")
 _sprintInput = NodePath("../../../PI_Sprint")
 
+[node name="PI_Weapons" type="Node" parent="Input"]
+script = ExtResource("60_jlgrh")
+metadata/_custom_type_script = "uid://diuvohbhr003k"
+
 [node name="State" type="Node" parent="."]
 
 [node name="PS_Grounded" type="Node" parent="State" node_paths=PackedStringArray("_characterBody3D", "_groundCast")]
@@ -889,3 +893,10 @@ _underBaseOpacity = 0.2
 offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("65_wohr1")
+
+[node name="PW_WeaponsHandler" type="Node" parent="." node_paths=PackedStringArray("_sight", "_weaponsInput")]
+script = ExtResource("81_stdu8")
+_sight = NodePath("../Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean")
+_weaponsInput = NodePath("../Input/PI_Weapons")
+_weapons = Array[Object]([SubResource("Resource_stdu8")])
+metadata/_custom_type_script = "uid://b4hdeuwma0ma8"
