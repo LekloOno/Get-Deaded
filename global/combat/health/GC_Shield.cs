@@ -38,25 +38,24 @@ public partial class GC_Shield : GC_Health
 
     public void Regen(float amount)
     {
-        CurrentHealth += amount;
+        float realHeal = Mathf.Min(amount, _maxHealth - CurrentHealth);
+        CurrentHealth += realHeal;
 
-        OnHeal?.Invoke(this, amount);
-        if (CurrentHealth > _maxHealth)
-        {
-            CurrentHealth = _maxHealth;
+        OnHeal?.Invoke(this, realHeal);
+
+        if (CurrentHealth == _maxHealth)
             OnFull?.Invoke(this, null);
-        }
     }
 
     public void Decay(float amount)
     {
-        CurrentHealth -= amount;
+        float realDamage = Mathf.Min(amount, CurrentHealth);
+        CurrentHealth -= realDamage;
 
-        OnDamage?.Invoke(this, amount);
-        if (CurrentHealth <= 0f)
-        {
-            CurrentHealth = 0f;
+        GD.Print(CurrentHealth);
+
+        OnDamage?.Invoke(this, realDamage);
+        if (CurrentHealth == 0f)
             OnBreak?.Invoke(this, Child);
-        }
     }
 }

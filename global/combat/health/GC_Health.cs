@@ -32,23 +32,44 @@ public partial class GC_Health : Resource
         }
     }
 
-    protected virtual float ReductionFromDamage(float damage) => 0f;                // How much reduction fo "damage" damage
-    protected virtual float DamageFromReduction(float reduction) => CurrentHealth;  // How much handled damage if the reduction was "reduction"
+    protected virtual float ReductionFromDamage(float damage) => 0f;        // How much reduction for `damage` damage
+    protected virtual float DamageFromReduction(float reduction) => 0f;     // How much damage were handled if the reduction was `reduction`
+    
+    /// <summary>
+    /// Allows to set custom Overflow Behaviors.
+    /// This base method only handles the damage its remaining health allows to handle.
+    /// The overflowing damage will not be affected by this layer's modification.
+    /// Example -
+    ///     An armor with 50% resistance and 20 hps and child layer.
+    ///     The entity receives 80 damages. Should we - 
+    ///         - Handle 20*2 (20 / 50%) damage thus leaving the remaining 40 damages to the next layer ?
+    ///         - Reduce the 80 damages to 40 and leave the remaining 20 damages to the next layer ?
+    ///         - Don't even overflow, handle the whole damages ?
+    ///     
+    ///     The base default behavior described below corresponds to the first case.
+    /// </summary>
+    /// <param name="damage"></param>
+    /// <returns>How much damage this layer will handle at its current state before overflowing onto its child.</returns>
+    protected virtual float HandledDamage(float damage)
+    {
+        float effectiveReduction = ReductionFromDamage(CurrentHealth);
+        return CurrentHealth + DamageFromReduction(effectiveReduction);
+    }
 
     private float ModifiedDamage(float damage, out float remainingDamage)
     {
         float reduction = ReductionFromDamage(damage);
-        float damageReduced = damage - reduction;
+        float reducedDamage = damage - reduction;
 
-        if (CurrentHealth >= damageReduced)
+        if (CurrentHealth >= reducedDamage)
             remainingDamage = 0f;
         else
         {
-            damageReduced = CurrentHealth + ReductionFromDamage(CurrentHealth);
-            remainingDamage = damage - damageReduced;
+            remainingDamage = damage - HandledDamage(damage);
+            reducedDamage = CurrentHealth;
         }
 
-        return damageReduced;
+        return reducedDamage;
     }
     public virtual bool TakeDamage(float damage)
     {

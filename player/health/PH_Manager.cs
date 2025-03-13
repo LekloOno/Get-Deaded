@@ -12,12 +12,15 @@ public partial class PH_Manager : GC_HealthManager
 
     public override void _Ready()
     {
-        _shield.OnBreak += (o, e) => _shield.Deactivate();
-        _shield.OnActivate += OnActivate;
-        _shield.OnDeactivate += OnDeactivate;
-        _shield.OnFull += (o, e) => OnProcess -= Regen;
+        if (_shield != null)
+        {
+            _shield.OnBreak += (o, e) => _shield.Deactivate();
+            _shield.OnActivate += OnActivate;
+            _shield.OnDeactivate += OnDeactivate;
+            _shield.OnFull += (o, e) => OnProcess -= Regen;
+            OnProcess += Regen;
+        }
 
-        OnProcess += Regen;
 
         base._Ready();
     }
