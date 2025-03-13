@@ -1,8 +1,10 @@
-using System.Dynamic;
+using System;
 using Godot;
 
+[GlobalClass]
 public partial class PM_Controller : CharacterBody3D
 {
+    [Export] private PH_Manager _healthManager;
     [Export] private PI_Walk _walkProcess;
     [Export] private PM_WallJump _wallJump;
     [Export] private PM_WallClimb _wallClimb;
@@ -12,6 +14,8 @@ public partial class PM_Controller : CharacterBody3D
     [Export] private PM_VelocityCache _velocityCache;
     [Export] private PM_StraffeSnap _straffeSnap;
     [Export] private float _debugDashStrength = 10f;
+    
+    public EventHandler OnDie;
 
     public PHX_ForcesCache AdditionalForces {get; private set;} = new PHX_ForcesCache();  // To allow external entities to apply additional forces.
     public PHX_ForcesCache TakeOverForces {get; private set;} = new PHX_ForcesCache();    // To allow external entities to take over the movement behavior.
@@ -20,6 +24,8 @@ public partial class PM_Controller : CharacterBody3D
     public Vector3 Acceleration {get; private set;}
     private float _specialGravity = 0;
     private bool _hasSpecialGravity = false;
+
+    private EventHandler<double> _onPhysicsProcess;
 
     public float SpecialGravity
     {
@@ -35,6 +41,13 @@ public partial class PM_Controller : CharacterBody3D
         _hasSpecialGravity = false;
     }
 
+    public void Revive()
+    {
+        _healthManager.Init(true);
+        _onPhysicsProcess -= DeadBehavior;
+        _onPhysicsProcess += NormalBehavior;
+    }
+
     public override void _Ready()
     {
         // UnhandledKeyInput is usually called _before_ UnhandledInput
@@ -42,6 +55,8 @@ public partial class PM_Controller : CharacterBody3D
         // Reduces "input lag" by one frame.
         _cameraControl.SetProcessUnhandledInput(false);
         _walkProcess.SetProcessUnhandledKeyInput(false);
+        _onPhysicsProcess += NormalBehavior;
+        _healthManager.TopHealthLayer.OnDie += Die;
     }
 
     public override void _UnhandledInput(InputEvent @event)
@@ -50,35 +65,13 @@ public partial class PM_Controller : CharacterBody3D
         _walkProcess._UnhandledKeyInput(@event);
     }
 
-    public override void _PhysicsProcess(double delta)
+    private void NormalBehavior(object sender, double delta)
     {
-        // Grounded, state is updated before automatically, it has a set priority
-
-        // Handle Jump
-        
-        // Handle Slide
-
-        // Handle Friction
-
-        // Handle Surface Control
-
-        // Collide and slide OR Step climber
-        Acceleration = Vector3.Zero;
-
-        Vector3 startVelocity = Velocity;
-
-        Vector3 pos = GlobalPosition;
         if (TakeOverForces.IsEmpty())
         {
             Vector3 velocity = _velocityCache.GetVelocity(this, Velocity, _walkProcess.WishDir, _groundState.IsGrounded(), delta);
 
             Vector3 prevVelocity = velocity;
-            /*
-            if (Input.IsActionJustPressed("click"))
-            {
-                velocity += _cameraControl.GlobalBasis.Z * -_debugDashStrength;
-            }*/
-
 
             velocity = _wallClimb.WallClimb(velocity);
             velocity = _surfaceControl.ApplyDrag(velocity, delta);
@@ -98,6 +91,38 @@ public partial class PM_Controller : CharacterBody3D
         {
             Velocity = TakeOverForces.Consume();
         }
+    }
+
+    private void Die(GC_Health sender)
+    {
+        ResetGravity();
+        _onPhysicsProcess -= NormalBehavior;
+        _onPhysicsProcess += DeadBehavior;
+        OnDie?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void DeadBehavior(object sender, double delta)
+    {
+        Vector3 velocity = RealVelocity;
+        velocity = _surfaceControl.ApplyDrag(velocity, delta);
+
+        if (!_groundState.IsGrounded())
+        {
+            Vector3 gravity = _hasSpecialGravity ? (_specialGravity * Vector3.Up) : GetGravity();
+            velocity += gravity * (float)delta;
+        }
+
+        Velocity = velocity;
+    }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        Acceleration = Vector3.Zero;
+
+        Vector3 startVelocity = Velocity;
+
+        Vector3 pos = GlobalPosition;
+        _onPhysicsProcess?.Invoke(this, delta);
 
         Acceleration = (Velocity - startVelocity)/(float)delta;
         MoveAndSlide();

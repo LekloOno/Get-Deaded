@@ -16,17 +16,20 @@ public partial class GC_Health : Resource
     public HealthEventHandler<GC_Health> OnFull;  // Passes the parent layer of the full one as event arg
     public HealthEventHandler OnDie;
 
-    public void Initialize(out float totalInit, out float lowerInit, out float totalMax, out float lowerMax)
+    public void Initialize(out float totalInit, out float lowerInit, out float totalMax, out float lowerMax, bool reInit = false)
     {
         CurrentHealth = _maxHealth;
 
         if (Child != null)
         {
-            Child.OnDamage += (o, damage) => OnDamage?.Invoke(o, damage.Stack(CurrentHealth) );
-            Child.OnHeal += (o, heal) => OnHeal?.Invoke(o, heal.Stack(CurrentHealth));
-            Child.OnBreak += (o, childLayer) => OnBreak?.Invoke(o, childLayer);
-            Child.OnFull += (o, parentLayer) => OnBreak?.Invoke(o, parentLayer);
-            Child.OnDie += (o) => OnDie?.Invoke(o);
+            if (!reInit)
+            {
+                Child.OnDamage += (o, damage) => OnDamage?.Invoke(o, damage.Stack(CurrentHealth) );
+                Child.OnHeal += (o, heal) => OnHeal?.Invoke(o, heal.Stack(CurrentHealth));
+                Child.OnBreak += (o, childLayer) => OnBreak?.Invoke(o, childLayer);
+                Child.OnFull += (o, parentLayer) => OnBreak?.Invoke(o, parentLayer);
+                Child.OnDie += (o) => OnDie?.Invoke(o);
+            }
 
             Child.Initialize(out totalInit, out lowerInit, out totalMax, out lowerMax);
             totalInit += _maxHealth;

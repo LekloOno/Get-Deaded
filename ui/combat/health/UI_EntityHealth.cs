@@ -35,10 +35,13 @@ public partial class UI_EntityHealth : VBoxContainer
         if (_healthManager.TopHealthLayer.IsLowerLayer())
             _higherBar.Visible = false;
 
-        _healthManager.TopHealthLayer.OnDamage += Damage;
-        _healthManager.TopHealthLayer.OnHeal += Heal;
-        _healthManager.TopHealthLayer.OnBreak += Break;
-        _healthManager.TopHealthLayer.OnFull += Full;
+        if (!initState.ReInit)
+        {
+            _healthManager.TopHealthLayer.OnDamage += Damage;
+            _healthManager.TopHealthLayer.OnHeal += Heal;
+            _healthManager.TopHealthLayer.OnBreak += Break;
+            _healthManager.TopHealthLayer.OnFull += Full;
+        }
     }
 
     private void Full(GC_Health senderLayer, GC_Health nextLayer)
