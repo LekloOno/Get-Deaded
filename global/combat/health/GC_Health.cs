@@ -10,8 +10,8 @@ public partial class GC_Health : Resource
     public delegate void HealthEventHandler<T>(GC_Health senderLayer, T e);
     public delegate void HealthEventHandler(GC_Health senderLayer);
 
-    public HealthEventHandler<float> OnDamage;
-    public HealthEventHandler<float> OnHeal;
+    public HealthEventHandler<DamageEventArgs> OnDamage;
+    public HealthEventHandler<DamageEventArgs> OnHeal;
     public HealthEventHandler<GC_Health> OnBreak; // Passes the child layer of the broken one as event arg
     public HealthEventHandler<GC_Health> OnFull;  // Passes the parent layer of the full one as event arg
     public HealthEventHandler OnDie;
@@ -31,6 +31,8 @@ public partial class GC_Health : Resource
             Child.Initialize();
         }
     }
+
+    protected DamageEventArgs DamageArgs(float amount) => new(amount, CurrentHealth);
 
     protected virtual float ReductionFromDamage(float damage) => 0f;        // How much reduction for `damage` damage
     protected virtual float DamageFromReduction(float reduction) => 0f;     // How much damage were handled if the reduction was `reduction`
@@ -78,7 +80,7 @@ public partial class GC_Health : Resource
 
         GD.Print(CurrentHealth);
 
-        OnDamage?.Invoke(this, damageTaken);
+        OnDamage?.Invoke(this, DamageArgs(damageTaken));
 
         if (CurrentHealth > 0)
             return false;
@@ -105,7 +107,7 @@ public partial class GC_Health : Resource
     {
         float heal = Child.Heal(healing, this);
         CurrentHealth += heal;
-        OnHeal?.Invoke(this, heal);
+        OnHeal?.Invoke(this, DamageArgs(heal));
         
         if (CurrentHealth > _maxHealth)
         {

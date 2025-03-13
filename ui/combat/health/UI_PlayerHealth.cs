@@ -19,8 +19,6 @@ public partial class UI_PlayerHealth : VBoxContainer
         float lowerMax = _healthManager.TopHealthLayer.LowerMax();
         //float lowerCurrent = _healthManager.TopHealthLayer.LowerCurrent();
 
-        //GD.Print(higherMax + " | " + higherCurrent);
-
         _higherBar.InitBar(higherMax, higherMax);
         _lowerBar.InitBar(lowerMax, lowerMax);
         
@@ -28,28 +26,19 @@ public partial class UI_PlayerHealth : VBoxContainer
         _healthManager.TopHealthLayer.OnHeal += Heal;
     }
 
-    public void Damage(GC_Health senderLayer, float damage)
+    public void Damage(GC_Health senderLayer, DamageEventArgs damageArgs)
     {
         if (senderLayer.IsLowerLayer())
-            _lowerBar.Damage(damage);
+            _lowerBar.Damage(damageArgs);
         else
-            _higherBar.Damage(damage);
+            _higherBar.Damage(damageArgs);
     }
 
-    public void Heal(GC_Health senderLayer, float heal)
+    public void Heal(GC_Health senderLayer, DamageEventArgs damageArgs)
     {
         if (senderLayer.IsLowerLayer())
-            _lowerBar.Heal(heal);
+            _lowerBar.Heal(damageArgs);
         else
-            _higherBar.Heal(heal);
-    }
-
-    public override void _PhysicsProcess(double delta)
-    {
-        // To implement
-    }
-    public override void _Process(double delta)
-    {
-        // To implement
+            _higherBar.Heal(damageArgs);
     }
 }

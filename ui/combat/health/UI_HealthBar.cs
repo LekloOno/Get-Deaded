@@ -16,18 +16,18 @@ public partial class UI_HealthBar : Control
         _health.Value = _tail.Value = _initHealth;
     }
 
-    public void Damage(float damage)
+    public void Damage(DamageEventArgs damageArgs)
     {
-        _health.Value -= damage;
+        _health.Value = damageArgs.CurrentHealth;
 
         _tailTween?.Kill();
         _tailTween = CreateTween();
         _tailTween.TweenProperty(_tail, "value", _health.Value, _tailSpeed).SetTrans(Tween.TransitionType.Linear).SetEase(Tween.EaseType.InOut);
     }
 
-    public void Heal(float heal)
+    public void Heal(DamageEventArgs damageArgs)
     {
-        _health.Value += heal;
+        _health.Value = damageArgs.CurrentHealth;
 
         _tailTween?.Kill();
 

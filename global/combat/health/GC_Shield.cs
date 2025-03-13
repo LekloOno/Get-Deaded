@@ -41,7 +41,7 @@ public partial class GC_Shield : GC_Health
         float realHeal = Mathf.Min(amount, _maxHealth - CurrentHealth);
         CurrentHealth += realHeal;
 
-        OnHeal?.Invoke(this, realHeal);
+        OnHeal?.Invoke(this, DamageArgs(realHeal));
 
         if (CurrentHealth == _maxHealth)
             OnFull?.Invoke(this, null);
@@ -54,7 +54,7 @@ public partial class GC_Shield : GC_Health
 
         GD.Print(CurrentHealth);
 
-        OnDamage?.Invoke(this, realDamage);
+        OnDamage?.Invoke(this, DamageArgs(realDamage));
         if (CurrentHealth == 0f)
             OnBreak?.Invoke(this, Child);
     }
