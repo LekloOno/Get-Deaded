@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://c37umalpt1ts6"]
 
-[ext_resource type="Script" uid="uid://d01sb0k1e87yt" path="res://ui/combat/health/UI_PlayerHealth.cs" id="1_y3kqx"]
+[ext_resource type="Script" uid="uid://d01sb0k1e87yt" path="res://ui/combat/health/UI_EntityHealth.cs" id="1_y3kqx"]
 [ext_resource type="Script" uid="uid://db8e5l76dsikn" path="res://ui/combat/health/UI_HealthBar.cs" id="2_6opq1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tujlf"]
@@ -34,7 +34,7 @@ transparent_bg = true
 handle_input_locally = false
 render_target_update_mode = 4
 
-[node name="UI_PlayerHealth" type="VBoxContainer" parent="SubViewport" node_paths=PackedStringArray("_higherBar", "_lowerBar")]
+[node name="UI_EntityHealth" type="VBoxContainer" parent="SubViewport" node_paths=PackedStringArray("_higherBar", "_lowerBar")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -53,12 +53,15 @@ _higherBar = NodePath("HigherLayer")
 _lowerBar = NodePath("LowerLayer")
 metadata/_custom_type_script = "uid://d01sb0k1e87yt"
 
-[node name="HigherLayer" type="Control" parent="SubViewport/UI_PlayerHealth"]
+[node name="HigherLayer" type="Control" parent="SubViewport/UI_EntityHealth" node_paths=PackedStringArray("_body", "_tail")]
 layout_mode = 2
 script = ExtResource("2_6opq1")
+_body = NodePath("Body")
+_tail = NodePath("Tail")
+_tailSpeed = 0.4
 metadata/_custom_type_script = "uid://db8e5l76dsikn"
 
-[node name="ProgressBarTail" type="ProgressBar" parent="SubViewport/UI_PlayerHealth/HigherLayer"]
+[node name="Tail" type="ProgressBar" parent="SubViewport/UI_EntityHealth/HigherLayer"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -78,7 +81,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_5oo0i")
 value = 40.43
 show_percentage = false
 
-[node name="ProgressBar" type="ProgressBar" parent="SubViewport/UI_PlayerHealth/HigherLayer"]
+[node name="Body" type="ProgressBar" parent="SubViewport/UI_EntityHealth/HigherLayer"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -98,12 +101,15 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_0kw87")
 value = 27.46
 show_percentage = false
 
-[node name="LowerLayer" type="Control" parent="SubViewport/UI_PlayerHealth"]
+[node name="LowerLayer" type="Control" parent="SubViewport/UI_EntityHealth" node_paths=PackedStringArray("_body", "_tail")]
 layout_mode = 2
 script = ExtResource("2_6opq1")
+_body = NodePath("Body")
+_tail = NodePath("Tail")
+_tailSpeed = 0.4
 metadata/_custom_type_script = "uid://db8e5l76dsikn"
 
-[node name="ProgressBarTail" type="ProgressBar" parent="SubViewport/UI_PlayerHealth/LowerLayer"]
+[node name="Tail" type="ProgressBar" parent="SubViewport/UI_EntityHealth/LowerLayer"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -123,7 +129,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_6opq1")
 value = 40.43
 show_percentage = false
 
-[node name="ProgressBar" type="ProgressBar" parent="SubViewport/UI_PlayerHealth/LowerLayer"]
+[node name="Body" type="ProgressBar" parent="SubViewport/UI_EntityHealth/LowerLayer"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

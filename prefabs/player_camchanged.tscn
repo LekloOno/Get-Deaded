@@ -16,7 +16,7 @@
 [ext_resource type="Script" uid="uid://38i6kejmo2hs" path="res://player/audio/PA_Jump.cs" id="12_nveww"]
 [ext_resource type="Script" uid="uid://c6mut48npwi4w" path="res://player/input/PI_Walk.cs" id="12_pwafq"]
 [ext_resource type="Script" uid="uid://e4bcjkfxrbxl" path="res://player/audio/PA_FootSteps.cs" id="12_ttbg8"]
-[ext_resource type="Script" uid="uid://d01sb0k1e87yt" path="res://ui/combat/health/UI_PlayerHealth.cs" id="13_3qmec"]
+[ext_resource type="Script" uid="uid://d01sb0k1e87yt" path="res://ui/combat/health/UI_EntityHealth.cs" id="13_3qmec"]
 [ext_resource type="AudioStream" uid="uid://dk7e4dghcdv1" path="res://assets/sounds/woosh/woosh1.wav" id="13_ruv8u"]
 [ext_resource type="Script" uid="uid://bgi6chbsxv7hc" path="res://player/input/PI_Jump.cs" id="13_ua84m"]
 [ext_resource type="Script" uid="uid://d3uwl2heay8uf" path="res://player/audio/PA_Sound.cs" id="13_uyiqg"]

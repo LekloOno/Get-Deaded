@@ -1,7 +1,7 @@
 using Godot;
 
 [GlobalClass]
-public partial class UI_PlayerHealth : VBoxContainer
+public partial class UI_EntityHealth : VBoxContainer
 {
     [Export] private GC_HealthManager _healthManager;
     [Export] private UI_HealthBar _higherBar;
