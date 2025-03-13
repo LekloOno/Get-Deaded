@@ -18,6 +18,8 @@ public partial class PH_Manager : GC_HealthManager
         _shield.OnFull += (o, e) => OnProcess -= Regen;
 
         OnProcess += Regen;
+
+        base._Ready();
     }
     public override void _UnhandledInput(InputEvent @event)
     {

@@ -1,0 +1,144 @@
+[gd_scene load_steps=10 format=3 uid="uid://c37umalpt1ts6"]
+
+[ext_resource type="Script" uid="uid://d01sb0k1e87yt" path="res://ui/combat/health/UI_PlayerHealth.cs" id="1_y3kqx"]
+[ext_resource type="Script" uid="uid://db8e5l76dsikn" path="res://ui/combat/health/UI_HealthBar.cs" id="2_6opq1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tujlf"]
+bg_color = Color(0, 0, 0, 0.505882)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5oo0i"]
+bg_color = Color(0.883632, 0.842725, 0.825069, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iwqyq"]
+bg_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0kw87"]
+bg_color = Color(0, 0.49066, 0.829606, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y3kqx"]
+bg_color = Color(0, 0, 0, 0.505882)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6opq1"]
+bg_color = Color(0.784314, 0.141176, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvlm"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="SubViewportContainer" type="SubViewportContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="UI_PlayerHealth" type="VBoxContainer" parent="SubViewport" node_paths=PackedStringArray("_higherBar", "_lowerBar")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+script = ExtResource("1_y3kqx")
+_higherBar = NodePath("HigherLayer")
+_lowerBar = NodePath("LowerLayer")
+metadata/_custom_type_script = "uid://d01sb0k1e87yt"
+
+[node name="HigherLayer" type="Control" parent="SubViewport/UI_PlayerHealth"]
+layout_mode = 2
+script = ExtResource("2_6opq1")
+metadata/_custom_type_script = "uid://db8e5l76dsikn"
+
+[node name="ProgressBarTail" type="ProgressBar" parent="SubViewport/UI_PlayerHealth/HigherLayer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -8.0
+offset_right = 64.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_tujlf")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5oo0i")
+value = 40.43
+show_percentage = false
+
+[node name="ProgressBar" type="ProgressBar" parent="SubViewport/UI_PlayerHealth/HigherLayer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -8.0
+offset_right = 64.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_iwqyq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0kw87")
+value = 27.46
+show_percentage = false
+
+[node name="LowerLayer" type="Control" parent="SubViewport/UI_PlayerHealth"]
+layout_mode = 2
+script = ExtResource("2_6opq1")
+metadata/_custom_type_script = "uid://db8e5l76dsikn"
+
+[node name="ProgressBarTail" type="ProgressBar" parent="SubViewport/UI_PlayerHealth/LowerLayer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -8.0
+offset_right = 64.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_y3kqx")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6opq1")
+value = 40.43
+show_percentage = false
+
+[node name="ProgressBar" type="ProgressBar" parent="SubViewport/UI_PlayerHealth/LowerLayer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -8.0
+offset_right = 64.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_iwqyq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1bvlm")
+value = 27.46
+show_percentage = false

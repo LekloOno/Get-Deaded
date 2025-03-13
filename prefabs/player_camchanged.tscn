@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=97 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -16,10 +16,12 @@
 [ext_resource type="Script" uid="uid://38i6kejmo2hs" path="res://player/audio/PA_Jump.cs" id="12_nveww"]
 [ext_resource type="Script" uid="uid://c6mut48npwi4w" path="res://player/input/PI_Walk.cs" id="12_pwafq"]
 [ext_resource type="Script" uid="uid://e4bcjkfxrbxl" path="res://player/audio/PA_FootSteps.cs" id="12_ttbg8"]
+[ext_resource type="Script" uid="uid://d01sb0k1e87yt" path="res://ui/combat/health/UI_PlayerHealth.cs" id="13_3qmec"]
 [ext_resource type="AudioStream" uid="uid://dk7e4dghcdv1" path="res://assets/sounds/woosh/woosh1.wav" id="13_ruv8u"]
 [ext_resource type="Script" uid="uid://bgi6chbsxv7hc" path="res://player/input/PI_Jump.cs" id="13_ua84m"]
 [ext_resource type="Script" uid="uid://d3uwl2heay8uf" path="res://player/audio/PA_Sound.cs" id="13_uyiqg"]
 [ext_resource type="AudioStream" uid="uid://c202uar3rg40l" path="res://assets/sounds/footsteps/concrete-step1.wav" id="14_6x03f"]
+[ext_resource type="Script" uid="uid://db8e5l76dsikn" path="res://ui/combat/health/UI_HealthBar.cs" id="14_elf0p"]
 [ext_resource type="Script" uid="uid://cn5ymkg0qsvpn" path="res://player/input/PI_Sprint.cs" id="14_puula"]
 [ext_resource type="AudioStream" uid="uid://bnck0lo2ewye5" path="res://assets/sounds/woosh/woosh2.wav" id="14_qlcgr"]
 [ext_resource type="Script" uid="uid://cxlnavyewfmhb" path="res://player/input/PI_CrouchDispatcher.cs" id="15_03g52"]
@@ -85,18 +87,35 @@ point_count = 5
 [sub_resource type="Gradient" id="Gradient_k51pg"]
 colors = PackedColorArray(0, 0.4, 0.894118, 0.764706, 0, 1, 0.537255, 0.784314)
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_7bleo"]
+viewport_path = NodePath("Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing/SubViewport")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tujlf"]
+bg_color = Color(0, 0, 0, 0.505882)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5oo0i"]
+bg_color = Color(0.883632, 0.842725, 0.825069, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iwqyq"]
+bg_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0kw87"]
+bg_color = Color(0, 0.49066, 0.829606, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y3kqx"]
+bg_color = Color(0, 0, 0, 0.505882)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6opq1"]
+bg_color = Color(0.784314, 0.141176, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvlm"]
+bg_color = Color(1, 1, 1, 1)
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_4jpmy"]
 radius = 0.25
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2am5o"]
 size = Vector3(0.5, 1.8, 0.5)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_qcifk"]
-radius = 0.25
-height = 1.8
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_aav2a"]
-size = Vector3(0.5, 0.15, 0.5)
 
 [sub_resource type="Resource" id="Resource_rvgf0"]
 script = ExtResource("47_rvgf0")
@@ -115,6 +134,13 @@ radius = 0.25
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jlgrh"]
 radius = 0.25
 height = 1.6
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_qcifk"]
+radius = 0.25
+height = 1.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_aav2a"]
+size = Vector3(0.5, 0.15, 0.5)
 
 [node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("_walkProcess", "_wallJump", "_wallClimb", "_groundState", "_cameraControl", "_surfaceControl", "_straffeSnap")]
 axis_lock_angular_y = true
@@ -217,7 +243,7 @@ _ledgeClimb = NodePath("../../../../../../../../../Movement/Actions/Jump/PM_Ledg
 fov = 103.0
 
 [node name="Label3D" type="Label3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing" node_paths=PackedStringArray("_controller")]
-transform = Transform3D(0.956305, 0.0406903, -0.289526, 0, 0.990268, 0.139173, 0.292372, -0.133092, 0.946998, 0.409688, -0.328343, -0.415548)
+transform = Transform3D(0.956305, 0.0406903, -0.289526, 0, 0.990268, 0.139173, 0.292372, -0.133092, 0.946998, 0.535, -0.353, -0.361)
 pixel_size = 0.001
 modulate = Color(0.0196078, 0.498039, 1, 0.764706)
 outline_modulate = Color(0, 0, 0, 0.101961)
@@ -227,6 +253,131 @@ _gradient = SubResource("Gradient_k51pg")
 _minSpeed = 10.0
 _maxSpeed = 60.0
 _controller = NodePath("../../../../../..")
+
+[node name="Sprite3D" type="Sprite3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing"]
+transform = Transform3D(0.154622, -0.000283032, 0.0108085, 0, 0.154947, 0.00405743, -0.0108123, -0.00404754, 0.154569, -0.485, -0.28, -0.3)
+texture = SubResource("ViewportTexture_7bleo")
+
+[node name="SubViewport" type="SubViewport" parent="Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing"]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="UI_PlayerHealth" type="VBoxContainer" parent="Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing/SubViewport" node_paths=PackedStringArray("_healthManager", "_higherBar", "_lowerBar")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+script = ExtResource("13_3qmec")
+_healthManager = NodePath("../../../../../../../Body/PH_Manager")
+_higherBar = NodePath("HigherLayer")
+_lowerBar = NodePath("LowerLayer")
+metadata/_custom_type_script = "uid://d01sb0k1e87yt"
+
+[node name="HigherLayer" type="Control" parent="Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing/SubViewport/UI_PlayerHealth" node_paths=PackedStringArray("_health", "_tail")]
+layout_mode = 2
+script = ExtResource("14_elf0p")
+_health = NodePath("ProgressBar")
+_tail = NodePath("ProgressBarTail")
+_tailSpeed = 0.5
+metadata/_custom_type_script = "uid://db8e5l76dsikn"
+
+[node name="ProgressBarTail" type="ProgressBar" parent="Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing/SubViewport/UI_PlayerHealth/HigherLayer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -8.0
+offset_right = 64.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_tujlf")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5oo0i")
+value = 40.43
+show_percentage = false
+
+[node name="ProgressBar" type="ProgressBar" parent="Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing/SubViewport/UI_PlayerHealth/HigherLayer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -8.0
+offset_right = 64.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_iwqyq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0kw87")
+value = 27.46
+show_percentage = false
+
+[node name="LowerLayer" type="Control" parent="Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing/SubViewport/UI_PlayerHealth" node_paths=PackedStringArray("_health", "_tail")]
+layout_mode = 2
+script = ExtResource("14_elf0p")
+_health = NodePath("ProgressBar")
+_tail = NodePath("ProgressBarTail")
+_tailSpeed = 0.5
+metadata/_custom_type_script = "uid://db8e5l76dsikn"
+
+[node name="ProgressBarTail" type="ProgressBar" parent="Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing/SubViewport/UI_PlayerHealth/LowerLayer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -8.0
+offset_right = 64.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_y3kqx")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6opq1")
+value = 40.43
+show_percentage = false
+
+[node name="ProgressBar" type="ProgressBar" parent="Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing/SubViewport/UI_PlayerHealth/LowerLayer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -8.0
+offset_right = 64.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_iwqyq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1bvlm")
+value = 27.46
+show_percentage = false
 
 [node name="GroundCast" type="ShapeCast3D" parent="."]
 shape = SubResource("SphereShape3D_4jpmy")
@@ -238,6 +389,33 @@ shape = SubResource("BoxShape3D_2am5o")
 script = ExtResource("11_6ifu1")
 _modelAnchor = NodePath("SpatialAnchor")
 _controller = NodePath("..")
+
+[node name="PH_Manager" type="Node" parent="Body"]
+script = ExtResource("46_eanik")
+_shield = SubResource("Resource_h1ove")
+_decayPerSecond = 25.0
+_regenPerSecond = 10.0
+TopHealthLayer = SubResource("Resource_h1ove")
+metadata/_custom_type_script = "uid://dettpmrm6albd"
+
+[node name="HeadBox" type="Area3D" parent="Body" node_paths=PackedStringArray("_healthManager")]
+script = ExtResource("15_h1ove")
+BodyPart = 0
+_healthManager = NodePath("../PH_Manager")
+metadata/_custom_type_script = "uid://ce82euclamj77"
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Body/HeadBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
+shape = SubResource("SphereShape3D_yi2ds")
+
+[node name="BodyBox" type="Area3D" parent="Body" node_paths=PackedStringArray("_healthManager")]
+script = ExtResource("15_h1ove")
+_healthManager = NodePath("../PH_Manager")
+metadata/_custom_type_script = "uid://ce82euclamj77"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/BodyBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+shape = SubResource("CapsuleShape3D_jlgrh")
 
 [node name="SpatialAnchor" type="Node3D" parent="Body"]
 
@@ -255,33 +433,6 @@ skeleton = NodePath("../../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
 shape = SubResource("BoxShape3D_aav2a")
 target_position = Vector3(0, 0, 0)
-
-[node name="PH_Manager" type="Node" parent="Body/SpatialAnchor"]
-script = ExtResource("46_eanik")
-_shield = SubResource("Resource_h1ove")
-_decayPerSecond = 25.0
-_regenPerSecond = 10.0
-TopHealthLayer = SubResource("Resource_h1ove")
-metadata/_custom_type_script = "uid://dettpmrm6albd"
-
-[node name="HeadBox" type="Area3D" parent="Body/SpatialAnchor" node_paths=PackedStringArray("_healthManager")]
-script = ExtResource("15_h1ove")
-BodyPart = 0
-_healthManager = NodePath("../PH_Manager")
-metadata/_custom_type_script = "uid://ce82euclamj77"
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Body/SpatialAnchor/HeadBox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
-shape = SubResource("SphereShape3D_yi2ds")
-
-[node name="BodyBox" type="Area3D" parent="Body/SpatialAnchor" node_paths=PackedStringArray("_healthManager")]
-script = ExtResource("15_h1ove")
-_healthManager = NodePath("../PH_Manager")
-metadata/_custom_type_script = "uid://ce82euclamj77"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/SpatialAnchor/BodyBox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
-shape = SubResource("CapsuleShape3D_jlgrh")
 
 [node name="Sound" type="Node3D" parent="Body"]
 

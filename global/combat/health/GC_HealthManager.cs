@@ -6,10 +6,11 @@ public partial class GC_HealthManager : Node
     [Export] public GC_Health TopHealthLayer {get; private set;}
 
     public bool Damage(float damage) => TopHealthLayer.TakeDamage(damage);
-    
+    public float Heal(float heal) => TopHealthLayer.Heal(heal, null);
+
     public override void _Ready()
     {
-        // To implement
+        TopHealthLayer.Initialize();
     }
     public override void _PhysicsProcess(double delta)
     {

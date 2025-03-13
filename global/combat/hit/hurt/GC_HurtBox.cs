@@ -27,7 +27,8 @@ public partial class GC_HurtBox : Area3D
     }
 
     public bool Damage(float damage) => _healthManager.Damage(damage * _modifier);
-
+    
+    public static float RealHitModifier(GC_DamageModifier damageModifier) => damageModifier/Default(damageModifier.BodyPart);
     public static float Default(GC_BodyPart bodyPart)
     {
         return bodyPart switch {
@@ -37,5 +38,4 @@ public partial class GC_HurtBox : Area3D
         };
     }
 
-    public static float RealHitModifier(GC_DamageModifier damageModifier) => damageModifier/Default(damageModifier.BodyPart);
 }

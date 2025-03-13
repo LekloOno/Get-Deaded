@@ -1832,6 +1832,7 @@ use_collision = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, 16)
 script = ExtResource("20_50c6l")
 _hit = SubResource("Resource_583vm")
+_cd = 0.5
 metadata/_custom_type_script = "uid://d4a4vftx6y17"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GC_Hitbox"]

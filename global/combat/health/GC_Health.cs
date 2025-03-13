@@ -7,21 +7,30 @@ public partial class GC_Health : Resource
     [Export] protected float _maxHealth;
     [Export] public GC_Health Child {get; private set;}
     public float CurrentHealth {get; protected set;}
-    public EventHandler<float> OnDamage;
-    public EventHandler<float> OnHeal;
-    public EventHandler OnBreak;
-    public EventHandler OnDie;
-    public EventHandler OnFull;
+    public delegate void HealthEventHandler<T>(GC_Health senderLayer, T e);
+    public delegate void HealthEventHandler(GC_Health senderLayer);
 
-    public GC_Health() : this(100, null) {}
-    public GC_Health(float maxHealth, GC_Health child) : this(maxHealth, maxHealth, child) {}
-    public GC_Health(float maxHealth, float initHealth, GC_Health child)
+    public HealthEventHandler<float> OnDamage;
+    public HealthEventHandler<float> OnHeal;
+    public HealthEventHandler<GC_Health> OnBreak; // Passes the child layer of the broken one as event arg
+    public HealthEventHandler<GC_Health> OnFull;  // Passes the parent layer of the full one as event arg
+    public HealthEventHandler OnDie;
+
+    public void Initialize()
     {
-        _maxHealth = maxHealth;
-        CurrentHealth = initHealth;
-        Child = child;
-    }
+        CurrentHealth = _maxHealth;
 
+        if (Child != null)
+        {
+            Child.OnDamage += (o, damage) => OnDamage?.Invoke(o, damage);
+            Child.OnHeal += (o, heal) => OnHeal?.Invoke(o, heal);
+            Child.OnBreak += (o, childLayer) => OnBreak?.Invoke(o, childLayer);
+            Child.OnFull += (o, parentLayer) => OnBreak?.Invoke(o, parentLayer);
+            Child.OnDie += (o) => OnDie?.Invoke(o);
+
+            Child.Initialize();
+        }
+    }
 
     protected virtual float ModifiedDamage(float damage) => damage;
     public virtual bool TakeDamage(float damage)
@@ -38,7 +47,7 @@ public partial class GC_Health : Resource
             return true;
         
         CurrentHealth = 0;
-        OnBreak?.Invoke(this, EventArgs.Empty);
+        OnBreak?.Invoke(this, Child);
         return false;
     }
 
@@ -46,16 +55,16 @@ public partial class GC_Health : Resource
     {
         if (Child == null)
         {
-            OnDie?.Invoke(this, EventArgs.Empty);
+            OnDie?.Invoke(this);
             return true;
         }
 
         return Child.TakeDamage(remaingDamage);
     }
 
-    public virtual float Heal(float healing)
+    public virtual float Heal(float healing, GC_Health parent)
     {
-        float heal = Child.Heal(healing);
+        float heal = Child.Heal(healing, this);
         CurrentHealth += heal;
         OnHeal?.Invoke(this, heal);
         
@@ -63,7 +72,7 @@ public partial class GC_Health : Resource
         {
             float remainingHeal = CurrentHealth - _maxHealth;
             CurrentHealth = _maxHealth;
-            OnFull?.Invoke(this, EventArgs.Empty);
+            OnFull?.Invoke(this, parent);
 
             return remainingHeal;
         }
@@ -98,4 +107,21 @@ public partial class GC_Health : Resource
             return 0;
         return CurrentHealth + Child.HigherCurrent();
     }
+
+    public GC_Health Exposed()
+    {
+        if (CurrentHealth > 0f)
+            return this;
+
+        return Child.Exposed();
+    }
+
+    public GC_Health GetLowerLayer()
+    {
+        if (Child == null)
+            return this;
+        return Child.GetLowerLayer();
+    }
+
+    public bool IsLowerLayer() => Child == null;
 }

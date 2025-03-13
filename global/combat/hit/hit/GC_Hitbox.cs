@@ -4,6 +4,7 @@ using Godot;
 public partial class GC_Hitbox : Area3D
 {
     [Export] private GC_Hit _hit;
+    [Export] private float _cd;
     private bool _active = true;
     private SceneTreeTimer _reset;
 
@@ -20,7 +21,7 @@ public partial class GC_Hitbox : Area3D
         {
             hurtBox.Damage(_hit.GetDamage(hurtBox.BodyPart));
             _active = false;
-            _reset = GetTree().CreateTimer(5f);
+            _reset = GetTree().CreateTimer(_cd);
             _reset.Timeout += Reset;
         }
     }

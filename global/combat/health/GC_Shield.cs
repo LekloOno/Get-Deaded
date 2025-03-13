@@ -34,19 +34,17 @@ public partial class GC_Shield : GC_Health
         return Child.TakeDamage(damage);
     }
 
-    public override float Heal(float healing)
-    {
-        return Child.Heal(healing);
-    }
+    public override float Heal(float healing, GC_Health parent) => Child.Heal(healing, this);
 
     public void Regen(float amount)
     {
         CurrentHealth += amount;
 
+        OnHeal?.Invoke(this, amount);
         if (CurrentHealth > _maxHealth)
         {
             CurrentHealth = _maxHealth;
-            OnFull?.Invoke(this, EventArgs.Empty);
+            OnFull?.Invoke(this, null);
         }
     }
 
@@ -54,10 +52,11 @@ public partial class GC_Shield : GC_Health
     {
         CurrentHealth -= amount;
 
+        OnDamage?.Invoke(this, amount);
         if (CurrentHealth <= 0f)
         {
             CurrentHealth = 0f;
-            OnBreak?.Invoke(this, EventArgs.Empty);
+            OnBreak?.Invoke(this, Child);
         }
     }
 }
