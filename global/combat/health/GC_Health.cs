@@ -78,8 +78,6 @@ public partial class GC_Health : Resource
         float damageTaken = ModifiedDamage(damage, out float remainingDamage);
         CurrentHealth -= damageTaken;
 
-        GD.Print(CurrentHealth);
-
         OnDamage?.Invoke(this, DamageArgs(damageTaken));
 
         if (CurrentHealth > 0)

@@ -52,8 +52,6 @@ public partial class GC_Shield : GC_Health
         float realDamage = Mathf.Min(amount, CurrentHealth);
         CurrentHealth -= realDamage;
 
-        GD.Print(CurrentHealth);
-
         OnDamage?.Invoke(this, DamageArgs(realDamage));
         if (CurrentHealth == 0f)
             OnBreak?.Invoke(this, Child);

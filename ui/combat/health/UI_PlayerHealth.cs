@@ -29,16 +29,16 @@ public partial class UI_PlayerHealth : VBoxContainer
     public void Damage(GC_Health senderLayer, DamageEventArgs damageArgs)
     {
         if (senderLayer.IsLowerLayer())
-            _lowerBar.Damage(damageArgs);
+            _lowerBar.Damage(_healthManager.TopHealthLayer.LowerCurrent());
         else
-            _higherBar.Damage(damageArgs);
+            _higherBar.Damage(_healthManager.TopHealthLayer.HigherCurrent());
     }
 
     public void Heal(GC_Health senderLayer, DamageEventArgs damageArgs)
     {
         if (senderLayer.IsLowerLayer())
-            _lowerBar.Heal(damageArgs);
+            _lowerBar.Heal(_healthManager.TopHealthLayer.LowerCurrent());
         else
-            _higherBar.Heal(damageArgs);
+            _higherBar.Heal(_healthManager.TopHealthLayer.HigherCurrent());
     }
 }
