@@ -15,6 +15,11 @@ public class DamageEventArgs : EventArgs
         LowerCurrentHealth = lowerCurrent;
     }
 
+    /// <summary>
+    /// Used when propagating up a Damage/Heal event. This allows to compute the total health.
+    /// </summary>
+    /// <param name="layerHealth"></param>
+    /// <returns></returns>
     public DamageEventArgs Stack(float layerHealth)
     {
         TotalCurrentHealth += layerHealth;

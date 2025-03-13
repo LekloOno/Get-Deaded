@@ -16,10 +16,15 @@ config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 run/max_fps=165
 config/icon="res://icon.svg"
 
+[autoload]
+
+ConfHealthColors="*res://config/health/health_colors/CONF_HealthColors.cs"
+
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/mode=3
 window/vsync/vsync_mode=0
 
 [dotnet]

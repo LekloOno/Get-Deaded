@@ -138,6 +138,21 @@ public partial class GC_Health : Resource
 
     public bool IsLowerLayer() => Child == null;
 
+    public GC_Health GetLowerLayer()
+    {
+        if (Child == null)
+            return this;
+        return Child.GetLowerLayer();
+    }
+
+    public GC_Health GetExposedLayer()
+    {
+        if (CurrentHealth > 0f)
+            return this;
+
+        return Child.GetExposedLayer();
+    }
+
 /*
     public float LowerMax()
     {
@@ -167,13 +182,7 @@ public partial class GC_Health : Resource
         return CurrentHealth + Child.HigherCurrent();
     }
 
-    public GC_Health Exposed()
-    {
-        if (CurrentHealth > 0f)
-            return this;
-
-        return Child.Exposed();
-    }
+    
 
     public GC_Health GetLowerLayer()
     {

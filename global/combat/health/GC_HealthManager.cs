@@ -18,12 +18,6 @@ public partial class GC_HealthManager : Node
         InitState = new(totalInit, lowerInit, totalMax, lowerMax);
         OnLayerInit?.Invoke(this, InitState);
     }
-    public override void _PhysicsProcess(double delta)
-    {
-        // To implement
-    }
-    public override void _Process(double delta)
-    {
-        // To implement
-    }
+    public GC_Health GetLowerLayer() => TopHealthLayer.GetLowerLayer();
+    public GC_Health GetExposedLayer() => TopHealthLayer.GetExposedLayer();
 }

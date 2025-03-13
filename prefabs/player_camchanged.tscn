@@ -1,4 +1,4 @@
-[gd_scene load_steps=99 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=100 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -120,22 +120,28 @@ size = Vector3(0.5, 1.8, 0.5)
 
 [sub_resource type="Resource" id="Resource_elf0p"]
 script = ExtResource("47_rvgf0")
+_maxHealth = 50.0
+metadata/_custom_type_script = "uid://dqcp38rr3u5gx"
+
+[sub_resource type="Resource" id="Resource_yi2ds"]
+script = ExtResource("48_h1ove")
+_maxHealth = 20.0
+Child = SubResource("Resource_elf0p")
+metadata/_custom_type_script = "uid://be02fh6y0vldv"
+
+[sub_resource type="Resource" id="Resource_jlgrh"]
+script = ExtResource("47_rvgf0")
 _maxHealth = 28.0
+Child = SubResource("Resource_yi2ds")
 metadata/_custom_type_script = "uid://dqcp38rr3u5gx"
 
 [sub_resource type="Resource" id="Resource_7bleo"]
 script = ExtResource("19_elf0p")
-_resistance = 0.8
+_resistance = 0.5
 _maxReduction = 10.0
 _maxHealth = 28.0
-Child = SubResource("Resource_elf0p")
+Child = SubResource("Resource_jlgrh")
 metadata/_custom_type_script = "uid://bclkw4o7merkb"
-
-[sub_resource type="Resource" id="Resource_jlgrh"]
-script = ExtResource("48_h1ove")
-_maxHealth = 28.0
-Child = SubResource("Resource_7bleo")
-metadata/_custom_type_script = "uid://be02fh6y0vldv"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_yi2ds"]
 radius = 0.25
@@ -401,10 +407,10 @@ _controller = NodePath("..")
 
 [node name="PH_Manager" type="Node" parent="Body"]
 script = ExtResource("46_eanik")
-_shield = SubResource("Resource_jlgrh")
+_shield = SubResource("Resource_yi2ds")
 _decayPerSecond = 25.0
 _regenPerSecond = 10.0
-TopHealthLayer = SubResource("Resource_jlgrh")
+TopHealthLayer = SubResource("Resource_7bleo")
 metadata/_custom_type_script = "uid://dettpmrm6albd"
 
 [node name="HeadBox" type="Area3D" parent="Body" node_paths=PackedStringArray("_healthManager")]
