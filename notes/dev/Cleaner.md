@@ -1,0 +1,1 @@
+Store general configuration for different collisions Layer/Masks, like global definition of a "Projectile","Ennemy" etc layers, and make so specific node automatically set their layers/masks accordingly.
