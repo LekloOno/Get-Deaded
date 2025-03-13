@@ -1829,7 +1829,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 2.8, 30)
 use_collision = true
 
 [node name="GC_Hitbox" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, 16)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, 16)
 script = ExtResource("20_50c6l")
 _hit = SubResource("Resource_583vm")
 _cd = 0.5
@@ -1839,4 +1839,17 @@ metadata/_custom_type_script = "uid://d4a4vftx6y17"
 shape = SubResource("SphereShape3D_qy2j6")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="GC_Hitbox"]
+mesh = SubResource("SphereMesh_o3j50")
+
+[node name="GC_Hitbox2" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2.6, 18)
+script = ExtResource("20_50c6l")
+_hit = SubResource("Resource_583vm")
+_cd = 0.5
+metadata/_custom_type_script = "uid://d4a4vftx6y17"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GC_Hitbox2"]
+shape = SubResource("SphereShape3D_qy2j6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GC_Hitbox2"]
 mesh = SubResource("SphereMesh_o3j50")

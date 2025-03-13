@@ -14,28 +14,11 @@ public partial class GC_HurtBox : Area3D
     
     public override void _Ready()
     {
-        if (!_useSpecialModifier) _modifier = Default(BodyPart);
-    }
-
-    public override void _PhysicsProcess(double delta)
-    {
-        // To implement
-    }
-    public override void _Process(double delta)
-    {
-        // To implement
+        if (!_useSpecialModifier) _modifier = CONF_BodyModifiers.GetDefaultModifier(BodyPart);
     }
 
     public bool Damage(float damage) => _healthManager.Damage(damage * _modifier);
     
-    public static float RealHitModifier(GC_DamageModifier damageModifier) => damageModifier/Default(damageModifier.BodyPart);
-    public static float Default(GC_BodyPart bodyPart)
-    {
-        return bodyPart switch {
-            GC_BodyPart.Head => 1f,
-            GC_BodyPart.Chest => 2f,
-            _ => 1f,
-        };
-    }
+    public static float RealHitModifier(GC_DamageModifier damageModifier) => damageModifier/CONF_BodyModifiers.GetDefaultModifier(damageModifier.BodyPart);
 
 }

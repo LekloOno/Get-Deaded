@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CONFD_DefaultModifiers" load_steps=2 format=3 uid="uid://neciks06h4oy"]
+
+[ext_resource type="Script" uid="uid://cq5uc7hsw2nmx" path="res://config/combat/body_modifiers/CONFD_DefaultModifiers.cs" id="1_ct637"]
+
+[resource]
+script = ExtResource("1_ct637")
+Head = 2.0
+Chest = 1.0
+Default = 0.0
+metadata/_custom_type_script = "uid://cq5uc7hsw2nmx"

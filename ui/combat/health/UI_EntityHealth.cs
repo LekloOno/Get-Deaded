@@ -26,8 +26,8 @@ public partial class UI_EntityHealth : VBoxContainer
         float higherMax = initState.TotalMaxHealth - lowerMax;
         float higherInit = initState.TotalInitHealth - lowerInit;
 
-        DATA_BarColors higherInitColor = CONF_HealthColors.GetBarColors(_healthManager.GetExposedLayer());
-        DATA_BarColors lowerInitColor = CONF_HealthColors.GetBarColors(_healthManager.GetLowerLayer());
+        CONFD_BarColors higherInitColor = CONF_HealthColors.GetBarColors(_healthManager.GetExposedLayer());
+        CONFD_BarColors lowerInitColor = CONF_HealthColors.GetBarColors(_healthManager.GetLowerLayer());
 
         _higherBar.InitBar(higherMax, higherInit, higherInitColor);
         _lowerBar.InitBar(lowerMax, lowerInit, lowerInitColor);
@@ -49,7 +49,7 @@ public partial class UI_EntityHealth : VBoxContainer
         if (senderLayer.IsLowerLayer())
             return;
 
-        DATA_BarColors barColors = CONF_HealthColors.GetBarColors(nextLayer);
+        CONFD_BarColors barColors = CONF_HealthColors.GetBarColors(nextLayer);
         _higherBar.Break(barColors);
     }
 
@@ -58,7 +58,7 @@ public partial class UI_EntityHealth : VBoxContainer
         if (nextLayer == null || nextLayer.IsLowerLayer())
             return;
 
-        DATA_BarColors barColors = CONF_HealthColors.GetBarColors(_healthManager.GetExposedLayer());
+        CONFD_BarColors barColors = CONF_HealthColors.GetBarColors(_healthManager.GetExposedLayer());
         _higherBar.Break(barColors);
     }
 
