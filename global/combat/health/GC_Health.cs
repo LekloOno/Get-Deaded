@@ -16,23 +16,29 @@ public partial class GC_Health : Resource
     public HealthEventHandler<GC_Health> OnFull;  // Passes the parent layer of the full one as event arg
     public HealthEventHandler OnDie;
 
-    public void Initialize()
+    public void Initialize(out float totalInit, out float lowerInit, out float totalMax, out float lowerMax)
     {
         CurrentHealth = _maxHealth;
 
         if (Child != null)
         {
-            Child.OnDamage += (o, damage) => OnDamage?.Invoke(o, damage);
-            Child.OnHeal += (o, heal) => OnHeal?.Invoke(o, heal);
+            Child.OnDamage += (o, damage) => OnDamage?.Invoke(o, damage.Stack(CurrentHealth) );
+            Child.OnHeal += (o, heal) => OnHeal?.Invoke(o, heal.Stack(CurrentHealth));
             Child.OnBreak += (o, childLayer) => OnBreak?.Invoke(o, childLayer);
             Child.OnFull += (o, parentLayer) => OnBreak?.Invoke(o, parentLayer);
             Child.OnDie += (o) => OnDie?.Invoke(o);
 
-            Child.Initialize();
+            Child.Initialize(out totalInit, out lowerInit, out totalMax, out lowerMax);
+            totalInit += _maxHealth;
+            totalMax += _maxHealth;
+        }
+        else
+        {
+            lowerInit = totalInit = lowerMax = totalMax = _maxHealth;
         }
     }
 
-    protected DamageEventArgs DamageArgs(float amount) => new(amount, CurrentHealth);
+    protected DamageEventArgs DamageArgs(float amount) => new(amount, this);
 
     protected virtual float ReductionFromDamage(float damage) => 0f;        // How much reduction for `damage` damage
     protected virtual float DamageFromReduction(float reduction) => 0f;     // How much damage were handled if the reduction was `reduction`
@@ -119,6 +125,20 @@ public partial class GC_Health : Resource
         return 0;
     }
 
+    public float TotalCurrent(out float lowerCurrent)
+    {
+        if (Child == null)
+        {
+            lowerCurrent = CurrentHealth;
+            return CurrentHealth;
+        }
+
+        return CurrentHealth + Child.TotalCurrent(out lowerCurrent);
+    }
+
+    public bool IsLowerLayer() => Child == null;
+
+/*
     public float LowerMax()
     {
         if (Child == null)
@@ -160,7 +180,5 @@ public partial class GC_Health : Resource
         if (Child == null)
             return this;
         return Child.GetLowerLayer();
-    }
-
-    public bool IsLowerLayer() => Child == null;
+    }*/
 }
