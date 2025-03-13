@@ -109,7 +109,7 @@ public partial class GC_Health : Resource
 
     public virtual float Heal(float healing, GC_Health parent)
     {
-        float heal = Child.Heal(healing, this);
+        float heal = (Child == null) ? healing : Child.Heal(healing, this);
         CurrentHealth += heal;
         OnHeal?.Invoke(this, DamageArgs(heal));
         

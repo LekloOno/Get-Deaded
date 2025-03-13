@@ -1,4 +1,4 @@
-[gd_scene load_steps=290 format=4 uid="uid://co0vxcbu5hxvc"]
+[gd_scene load_steps=297 format=4 uid="uid://co0vxcbu5hxvc"]
 
 [ext_resource type="Script" uid="uid://b8ob8d1uxja85" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_kt2k2"]
 [ext_resource type="Texture2D" uid="uid://c6o8mw13kagni" path="res://assets/skyboxes/Sky_trainyard_01_1b2.png" id="1_niaf1"]
@@ -21,6 +21,8 @@
 [ext_resource type="Material" uid="uid://daxwgciv66e17" path="res://assets/materials/whiteGrid.tres" id="19_pcerp"]
 [ext_resource type="Script" uid="uid://d4a4vftx6y17" path="res://global/combat/hit/hit/GC_Hitbox.cs" id="20_50c6l"]
 [ext_resource type="Script" uid="uid://cjmiash71uc7b" path="res://global/combat/hit/hit/GC_Hit.cs" id="21_y2alo"]
+[ext_resource type="Script" uid="uid://mgqkiomvv11i" path="res://global/combat/hit/hit/GC_HealBox.cs" id="22_583vm"]
+[ext_resource type="Script" uid="uid://sujdlokcwnd6" path="res://global/combat/hit/GC_DamageModifier.cs" id="23_qy2j6"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_6v6fv"]
 panorama = ExtResource("1_niaf1")
@@ -979,6 +981,27 @@ albedo_color = Color(0.780392, 0.113725, 0.0823529, 0.92549)
 [sub_resource type="SphereMesh" id="SphereMesh_o3j50"]
 material = SubResource("StandardMaterial3D_efpjk")
 
+[sub_resource type="Resource" id="Resource_efpjk"]
+script = ExtResource("23_qy2j6")
+BodyPart = 0
+Modifier = 1.0
+metadata/_custom_type_script = "uid://sujdlokcwnd6"
+
+[sub_resource type="Resource" id="Resource_o3j50"]
+script = ExtResource("21_y2alo")
+_damage = 10.0
+_inspectorModifiers = Array[Object]([SubResource("Resource_efpjk")])
+metadata/_custom_type_script = "uid://cjmiash71uc7b"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vqbvp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wk1by"]
+transparency = 1
+albedo_color = Color(0.317647, 0.847059, 0, 0.839216)
+
+[sub_resource type="SphereMesh" id="SphereMesh_xqord"]
+material = SubResource("StandardMaterial3D_wk1by")
+
 [node name="Node3D" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -1840,6 +1863,19 @@ shape = SubResource("SphereShape3D_qy2j6")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="GC_Hitbox"]
 mesh = SubResource("SphereMesh_o3j50")
+
+[node name="GC_HealBox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2.6, 20)
+script = ExtResource("22_583vm")
+_hit = SubResource("Resource_o3j50")
+_cd = 0.5
+metadata/_custom_type_script = "uid://mgqkiomvv11i"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GC_HealBox"]
+shape = SubResource("SphereShape3D_vqbvp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GC_HealBox"]
+mesh = SubResource("SphereMesh_xqord")
 
 [node name="GC_Hitbox2" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2.6, 18)
