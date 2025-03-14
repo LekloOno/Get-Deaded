@@ -21,7 +21,7 @@ metadata/_custom_type_script = "uid://dqcp38rr3u5gx"
 resource_local_to_scene = true
 script = ExtResource("4_8icvm")
 _resistance = 0.8
-_maxReduction = 15.0
+_maxReduction = 10.0
 _maxHealth = 50.0
 Child = SubResource("Resource_j8cyt")
 metadata/_custom_type_script = "uid://bclkw4o7merkb"
@@ -44,21 +44,25 @@ viewport_path = NodePath("Sprite3D/SubViewport")
 bg_color = Color(0, 0, 0, 0.505882)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5oo0i"]
+resource_local_to_scene = true
 bg_color = Color(0.883632, 0.842725, 0.825069, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iwqyq"]
 bg_color = Color(0, 0, 0, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0kw87"]
+resource_local_to_scene = true
 bg_color = Color(0, 0.49066, 0.829606, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y3kqx"]
 bg_color = Color(0, 0, 0, 0.505882)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6opq1"]
+resource_local_to_scene = true
 bg_color = Color(0.784314, 0.141176, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvlm"]
+resource_local_to_scene = true
 bg_color = Color(1, 1, 1, 1)
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
