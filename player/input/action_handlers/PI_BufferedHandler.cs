@@ -1,6 +1,6 @@
 using Godot;
 
-public abstract partial class PI_BufferedHandler : PI_PressHandler<float>
+public abstract partial class PI_BufferedHandler<T> : PI_PressHandler<T>
 {
     [Export] private ulong _bufferWindow;
     private ulong _lastInput = 0;
@@ -14,16 +14,16 @@ public abstract partial class PI_BufferedHandler : PI_PressHandler<float>
 
     public bool IsBuffered() => Time.GetTicksMsec() - _lastInput < _bufferWindow;
 
-    public override PI_ActionState InputDown(InputEvent @event, out float value)
+    protected override PI_ActionState InputDown(InputEvent @event, out T value)
     {
         _lastInput = Time.GetTicksMsec();
-        value = 1f;
+        value = GetInputValue(@event);
         return PI_ActionState.STARTED;
     }
 
-    public override PI_ActionState InputUp(InputEvent @event, out float value)
+    protected override PI_ActionState InputUp(InputEvent @event, out T value)
     {
-        value = 1f;
+        value = GetInputValue(@event);
         return PI_ActionState.STOPPED;
     }
 }

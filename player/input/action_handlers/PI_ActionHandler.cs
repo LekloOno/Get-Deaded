@@ -10,7 +10,7 @@ public abstract partial class PI_ActionHandler<T> : Node
     public ActionInputEvent<T> Stop;
     public ActionInputEvent<T> Perform;
 
-    public abstract void HandleInput(InputEvent @event);
+    protected abstract void HandleInput(InputEvent @event);
 
     protected void Send(PI_ActionState actionState, T value)
     {
