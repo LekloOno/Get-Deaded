@@ -2,14 +2,14 @@ using System;
 using Godot;
 
 [GlobalClass]
-public partial class PI_Jump : PI_ActionInput<float>
+public partial class PI_Jump : PI_Action<float>
 {
     [Export] private ulong _bufferWindow = 50;
 
     public ulong LastJumped {get; private set;} = 0;
     public bool JumpBuffered {get; private set;}
     private ulong _lastJumpInput = 0;
-    protected override PI_Action Action => ACTIONS_Movement.JUMP;
+    protected override ACTIONS_Action Action => ACTIONS_Movement.JUMP;
 
     public bool UseBuffer()
     {
