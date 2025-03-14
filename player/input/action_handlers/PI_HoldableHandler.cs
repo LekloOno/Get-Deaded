@@ -25,4 +25,25 @@ public abstract partial class PI_HoldableHandler<T> : PI_PressHandler<T>
             return PI_ActionState.STOPPED;
         return PI_ActionState.NONE;
     }
+
+    protected override void HandleExternal(PI_ActionState actionState, T value)
+    {
+        switch (actionState)
+        {
+            case PI_ActionState.STARTED:
+                if (_active)
+                    return;
+                _active = true;
+                Start?.Invoke(this, value);
+                break;
+            case PI_ActionState.STOPPED:
+                if (!_active)
+                    return;
+                _active = false;
+                Stop?.Invoke(this, value);
+                break;
+            default:
+                break;
+        }
+    }
 }
