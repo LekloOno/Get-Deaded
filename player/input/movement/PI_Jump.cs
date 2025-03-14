@@ -9,4 +9,7 @@ public partial class PI_Jump : PI_BufferedHandler<float>
     public override void _UnhandledKeyInput(InputEvent @event) => HandleInput(@event);
     protected override float GetInputValue(InputEvent @event) => 1f;
     public void SetLastJumped() => LastJumped = Time.GetTicksMsec();
+
+    public override void EnableAction() => SetProcessUnhandledKeyInput(true);
+    public override void DisableAction() => SetProcessUnhandledKeyInput(false);
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=298 format=4 uid="uid://co0vxcbu5hxvc"]
+[gd_scene load_steps=297 format=4 uid="uid://co0vxcbu5hxvc"]
 
 [ext_resource type="Script" uid="uid://b8ob8d1uxja85" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_kt2k2"]
 [ext_resource type="Texture2D" uid="uid://c6o8mw13kagni" path="res://assets/skyboxes/Sky_trainyard_01_1b2.png" id="1_niaf1"]
@@ -23,7 +23,6 @@
 [ext_resource type="Script" uid="uid://cjmiash71uc7b" path="res://global/combat/hit/hit/GC_Hit.cs" id="21_y2alo"]
 [ext_resource type="Script" uid="uid://mgqkiomvv11i" path="res://global/combat/hit/hit/GC_HealBox.cs" id="22_583vm"]
 [ext_resource type="Script" uid="uid://sujdlokcwnd6" path="res://global/combat/hit/GC_DamageModifier.cs" id="23_qy2j6"]
-[ext_resource type="Script" uid="uid://c75jd7cx2qi6l" path="res://world/events/WE_Death.cs" id="24_qy2j6"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_6v6fv"]
 panorama = ExtResource("1_niaf1")
@@ -1903,8 +1902,3 @@ shape = SubResource("SphereShape3D_qy2j6")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Entities/GC_Hitbox2"]
 mesh = SubResource("SphereMesh_o3j50")
-
-[node name="WE_Death" type="Node" parent="." node_paths=PackedStringArray("_playerController")]
-script = ExtResource("24_qy2j6")
-_playerController = NodePath("../Entities/PlayerController")
-metadata/_custom_type_script = "uid://c75jd7cx2qi6l"

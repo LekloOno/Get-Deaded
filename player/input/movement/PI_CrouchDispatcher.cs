@@ -4,7 +4,7 @@
 using Godot;
 
 [GlobalClass]
-public partial class PI_CrouchDispatcher : Node
+public partial class PI_CrouchDispatcher : PI_InputKeyAction
 {
     [ExportCategory("User Settings")]
     [Export] public bool Hold = true;

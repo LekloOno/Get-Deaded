@@ -1,4 +1,4 @@
-[gd_scene load_steps=101 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=103 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -73,6 +73,8 @@
 [ext_resource type="Script" uid="uid://dettpmrm6albd" path="res://player/health/PH_Manager.cs" id="46_eanik"]
 [ext_resource type="Script" uid="uid://dqcp38rr3u5gx" path="res://global/combat/health/GC_Health.cs" id="47_rvgf0"]
 [ext_resource type="Script" uid="uid://be02fh6y0vldv" path="res://global/combat/health/GC_Shield.cs" id="48_h1ove"]
+[ext_resource type="Script" uid="uid://bwxjledgrnbsb" path="res://player/input/maps/PIM_Arena.cs" id="49_stdu8"]
+[ext_resource type="Script" uid="uid://fevuhhr2vg16" path="res://player/input/combat/PI_Revive.cs" id="58_ufgmq"]
 [ext_resource type="Script" uid="uid://diuvohbhr003k" path="res://player/input/combat/PI_Weapons.cs" id="60_jlgrh"]
 [ext_resource type="Script" uid="uid://mds7cr6i4noc" path="res://player/movement/actions/jump/PM_WallClimb.cs" id="61_x3a7t"]
 [ext_resource type="Script" uid="uid://byy7tiy37y47h" path="res://debug/display_fps.gd" id="65_wohr1"]
@@ -160,7 +162,7 @@ floor_block_on_wall = false
 floor_max_angle = 0.872665
 script = ExtResource("1_vw06q")
 _healthManager = NodePath("PH_Manager")
-_walkProcess = NodePath("Input/PI_Walk")
+_walkProcess = NodePath("PIM_Arena/PI_Walk")
 _wallJump = NodePath("Movement/Actions/Jump/PM_WallJump")
 _wallClimb = NodePath("Movement/Actions/Jump/PM_WallClimb")
 _groundState = NodePath("State/PS_Grounded")
@@ -467,7 +469,7 @@ _normalInterval = 0.32
 _normalPitchBase = 0.7
 _normalVolume = -32.0
 _sprintVolume = -26.0
-_walkInput = NodePath("../../../Input/PI_Walk")
+_walkInput = NodePath("../../../PIM_Arena/PI_Walk")
 _groundSurfaceState = NodePath("../../../Movement/PM_SurfaceControl/GroundState")
 _groundState = NodePath("../../../State/PS_Grounded")
 _stepLoop = NodePath("Timer")
@@ -657,32 +659,40 @@ _wind = NodePath("Wind")
 stream = ExtResource("44_vhlgj")
 autoplay = true
 
-[node name="Input" type="Node" parent="."]
+[node name="PIM_Arena" type="Node" parent="." node_paths=PackedStringArray("_controller", "_walkInput", "_sprintInput", "_crouchDispatcherInput", "_weaponsInput", "_reviveInput")]
+script = ExtResource("49_stdu8")
+_controller = NodePath("..")
+_walkInput = NodePath("PI_Walk")
+_sprintInput = NodePath("PI_Sprint")
+_crouchDispatcherInput = NodePath("PI_CrouchDispatcher")
+_weaponsInput = NodePath("PI_Weapons")
+_reviveInput = NodePath("PI_Revive")
+metadata/_custom_type_script = "uid://bwxjledgrnbsb"
 
-[node name="PI_Walk" type="Node" parent="Input" node_paths=PackedStringArray("_flatDirNode")]
+[node name="PI_Walk" type="Node" parent="PIM_Arena" node_paths=PackedStringArray("_flatDirNode")]
 script = ExtResource("12_pwafq")
 _flatDirNode = NodePath("../../Camera Pivot")
 
-[node name="PI_Jump" type="Node" parent="Input"]
+[node name="PI_Jump" type="Node" parent="PIM_Arena"]
 script = ExtResource("13_ua84m")
 _bufferWindow = 50
 
-[node name="PI_Sprint" type="Node" parent="Input" node_paths=PackedStringArray("_jump", "_walkInput", "_crouchDispatcher")]
+[node name="PI_Sprint" type="Node" parent="PIM_Arena" node_paths=PackedStringArray("_jump", "_walkInput", "_crouchDispatcher")]
 script = ExtResource("14_puula")
 _jump = NodePath("../../Movement/Actions/Jump/PM_Jump")
 _walkInput = NodePath("../PI_Walk")
 _crouchDispatcher = NodePath("../PI_CrouchDispatcher")
 
-[node name="PI_CrouchDispatcher" type="Node" parent="Input" node_paths=PackedStringArray("_controller", "_body", "_slideInput")]
+[node name="PI_CrouchDispatcher" type="Node" parent="PIM_Arena" node_paths=PackedStringArray("_controller", "_body", "_slideInput")]
 script = ExtResource("15_03g52")
 _controller = NodePath("../..")
 _body = NodePath("../../Body")
 _slideInput = NodePath("PI_Slide")
 
-[node name="PI_Dash" type="Node" parent="Input/PI_CrouchDispatcher"]
+[node name="PI_Dash" type="Node" parent="PIM_Arena/PI_CrouchDispatcher"]
 script = ExtResource("16_t2wfm")
 
-[node name="PI_Slide" type="Node" parent="Input/PI_CrouchDispatcher" node_paths=PackedStringArray("_controller", "_groundState", "_crouchInput", "_sprintInput")]
+[node name="PI_Slide" type="Node" parent="PIM_Arena/PI_CrouchDispatcher" node_paths=PackedStringArray("_controller", "_groundState", "_crouchInput", "_sprintInput")]
 script = ExtResource("17_d5kvj")
 _slideMinSpeed = 6.0
 _holdSlideMinSpeed = 3.0
@@ -691,13 +701,17 @@ _groundState = NodePath("../../../State/PS_Grounded")
 _crouchInput = NodePath("PI_Crouch")
 _sprintInput = NodePath("../../PI_Sprint")
 
-[node name="PI_Crouch" type="Node" parent="Input/PI_CrouchDispatcher/PI_Slide" node_paths=PackedStringArray("_sprintInput")]
+[node name="PI_Crouch" type="Node" parent="PIM_Arena/PI_CrouchDispatcher/PI_Slide" node_paths=PackedStringArray("_sprintInput")]
 script = ExtResource("18_wrcsk")
 _sprintInput = NodePath("../../../PI_Sprint")
 
-[node name="PI_Weapons" type="Node" parent="Input"]
+[node name="PI_Weapons" type="Node" parent="PIM_Arena"]
 script = ExtResource("60_jlgrh")
 metadata/_custom_type_script = "uid://diuvohbhr003k"
+
+[node name="PI_Revive" type="Node" parent="PIM_Arena"]
+script = ExtResource("58_ufgmq")
+metadata/_custom_type_script = "uid://fevuhhr2vg16"
 
 [node name="State" type="Node" parent="."]
 
@@ -711,7 +725,7 @@ _groundCast = NodePath("../../GroundCast")
 
 [node name="PM_SurfaceControl" type="Node" parent="Movement" node_paths=PackedStringArray("_walkInput", "_groundState", "_ground", "_air")]
 script = ExtResource("20_ncxc1")
-_walkInput = NodePath("../../Input/PI_Walk")
+_walkInput = NodePath("../../PIM_Arena/PI_Walk")
 _groundState = NodePath("../../State/PS_Grounded")
 _ground = NodePath("GroundState")
 _air = NodePath("AirState")
@@ -719,14 +733,14 @@ _air = NodePath("AirState")
 [node name="GroundState" type="Node" parent="Movement/PM_SurfaceControl" node_paths=PackedStringArray("_sprintInput", "_crouch", "_slide")]
 script = ExtResource("21_fhiml")
 _stateData = ExtResource("22_fklbr")
-_sprintInput = NodePath("../../../Input/PI_Sprint")
+_sprintInput = NodePath("../../../PIM_Arena/PI_Sprint")
 _crouch = NodePath("../../Actions/Crouch/PM_Crouch")
 _slide = NodePath("../../Actions/Crouch/PM_Slide")
 
 [node name="AirState" type="Node" parent="Movement/PM_SurfaceControl" node_paths=PackedStringArray("_sprintInput", "_crouch", "_slide")]
 script = ExtResource("21_fhiml")
 _stateData = ExtResource("23_jl0xl")
-_sprintInput = NodePath("../../../Input/PI_Sprint")
+_sprintInput = NodePath("../../../PIM_Arena/PI_Sprint")
 _crouch = NodePath("../../Actions/Crouch/PM_Crouch")
 _slide = NodePath("../../Actions/Crouch/PM_Slide")
 
@@ -741,7 +755,7 @@ SnapThreshold = 2.0
 
 [node name="PM_Jump" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_jumpInput", "_groundState", "_controller")]
 script = ExtResource("25_qc7ep")
-_jumpInput = NodePath("../../../../Input/PI_Jump")
+_jumpInput = NodePath("../../../../PIM_Arena/PI_Jump")
 _data = ExtResource("26_kdvrh")
 _groundState = NodePath("../../../../State/PS_Grounded")
 _controller = NodePath("../../../..")
@@ -749,9 +763,9 @@ _controller = NodePath("../../../..")
 [node name="PM_LedgeClimb" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_jumpInput", "_crouchInput", "_walkInput", "_controller", "_dash", "_jump", "_bodyScale", "_pivot", "_ledgeCast")]
 script = ExtResource("27_shnri")
 _minSpace = 0.2
-_jumpInput = NodePath("../../../../Input/PI_Jump")
-_crouchInput = NodePath("../../../../Input/PI_CrouchDispatcher")
-_walkInput = NodePath("../../../../Input/PI_Walk")
+_jumpInput = NodePath("../../../../PIM_Arena/PI_Jump")
+_crouchInput = NodePath("../../../../PIM_Arena/PI_CrouchDispatcher")
+_walkInput = NodePath("../../../../PIM_Arena/PI_Walk")
 _controller = NodePath("../../../..")
 _dash = NodePath("../../Crouch/PM_Dash")
 _jump = NodePath("../PM_Jump")
@@ -761,7 +775,7 @@ _ledgeCast = NodePath("../../../../Body/SpatialAnchor/LedgeCast")
 
 [node name="PM_WallJump" type="Node" parent="Movement/Actions/Jump" node_paths=PackedStringArray("_jumpInput", "_controller", "_groundState", "_ledgeClimb", "_wallCastLow", "_wallCastHigh")]
 script = ExtResource("28_x5ps3")
-_jumpInput = NodePath("../../../../Input/PI_Jump")
+_jumpInput = NodePath("../../../../PIM_Arena/PI_Jump")
 _controller = NodePath("../../../..")
 _groundState = NodePath("../../../../State/PS_Grounded")
 _ledgeClimb = NodePath("../PM_LedgeClimb")
@@ -780,8 +794,8 @@ _hopDuration = 0.15
 _kickStrength = 3.0
 _kickDebuf = 0.2
 _startHopTimer = NodePath("Timer")
-_jumpInput = NodePath("../../../../Input/PI_Jump")
-_walkInput = NodePath("../../../../Input/PI_Walk")
+_jumpInput = NodePath("../../../../PIM_Arena/PI_Jump")
+_walkInput = NodePath("../../../../PIM_Arena/PI_Walk")
 _controller = NodePath("../../../..")
 _wallJump = NodePath("../PM_WallJump")
 _jump = NodePath("../PM_Jump")
@@ -796,20 +810,20 @@ wait_time = 0.4
 
 [node name="PM_Crouch" type="Node" parent="Movement/Actions/Crouch" node_paths=PackedStringArray("_crouchInput", "_codyScalor")]
 script = ExtResource("29_ykpqc")
-_crouchInput = NodePath("../../../../Input/PI_CrouchDispatcher/PI_Slide/PI_Crouch")
+_crouchInput = NodePath("../../../../PIM_Arena/PI_CrouchDispatcher/PI_Slide/PI_Crouch")
 _codyScalor = NodePath("../../../../Body")
 
 [node name="PM_Slide" type="Node" parent="Movement/Actions/Crouch" node_paths=PackedStringArray("_slideInput", "_controller", "_groundState", "_bodyScalor")]
 script = ExtResource("30_q6qhf")
-_slideInput = NodePath("../../../../Input/PI_CrouchDispatcher/PI_Slide")
+_slideInput = NodePath("../../../../PIM_Arena/PI_CrouchDispatcher/PI_Slide")
 _controller = NodePath("../../../..")
 _groundState = NodePath("../../../../State/PS_Grounded")
 _bodyScalor = NodePath("../../../../Body")
 
 [node name="PM_Dash" type="Node" parent="Movement/Actions/Crouch" node_paths=PackedStringArray("_dashInput", "_walkInput", "_cameraControl", "_controller", "_groundState", "_ledgeClimb", "_wallJump")]
 script = ExtResource("31_5px2t")
-_dashInput = NodePath("../../../../Input/PI_CrouchDispatcher/PI_Dash")
-_walkInput = NodePath("../../../../Input/PI_Walk")
+_dashInput = NodePath("../../../../PIM_Arena/PI_CrouchDispatcher/PI_Dash")
+_walkInput = NodePath("../../../../PIM_Arena/PI_Walk")
 _cameraControl = NodePath("../../../../Camera Pivot/PC_Anchor/Camera Control")
 _controller = NodePath("../../../..")
 _groundState = NodePath("../../../../State/PS_Grounded")
@@ -893,7 +907,7 @@ script = ExtResource("65_wohr1")
 [node name="PW_WeaponsHandler" type="Node" parent="." node_paths=PackedStringArray("_sight", "_weaponsInput")]
 script = ExtResource("81_stdu8")
 _sight = NodePath("../Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean")
-_weaponsInput = NodePath("../Input/PI_Weapons")
+_weaponsInput = NodePath("../PIM_Arena/PI_Weapons")
 _weapons = Array[Object]([SubResource("Resource_stdu8")])
 metadata/_custom_type_script = "uid://b4hdeuwma0ma8"
 

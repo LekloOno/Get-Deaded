@@ -3,7 +3,7 @@ using Godot;
 using static PI_Direction;
 
 [GlobalClass]
-public partial class PI_Walk : Node
+public partial class PI_Walk : PI_InputKeyAction
 {
     [Export] private Node3D _flatDirNode;
 
@@ -17,18 +17,9 @@ public partial class PI_Walk : Node
     private Vector2 _nextWalkAxis;
     private bool _lastStopped = true;
 
-    public override void _UnhandledKeyInput(InputEvent @event)
+    public override void _UnhandledInput(InputEvent @event)
     {
-        WalkAxis = ComputeWalkAxis();
         WishDir = ComputeWishDir();
-
-        if (@event.IsActionPressed(FORWARD)
-            || @event.IsActionPressed(BACKWARD)
-            || @event.IsActionPressed(LEFT)
-            || @event.IsActionPressed(RIGHT))
-        {
-            KeyPressed?.Invoke(this, new KeyPressedArgs(WishDir, WalkAxis));
-        }
 
         if(IsStopped())
         {
@@ -40,7 +31,19 @@ public partial class PI_Walk : Node
 
         if(IsBacking())
             OnStopOrBackward?.Invoke(this, EventArgs.Empty);
+    }
 
+    public override void _UnhandledKeyInput(InputEvent @event)
+    {
+        WalkAxis = ComputeWalkAxis();
+        
+        if (@event.IsActionPressed(FORWARD)
+            || @event.IsActionPressed(BACKWARD)
+            || @event.IsActionPressed(LEFT)
+            || @event.IsActionPressed(RIGHT))
+        {
+            KeyPressed?.Invoke(this, new KeyPressedArgs(WishDir, WalkAxis));
+        }
     }
 
     public static Vector2 ComputeWalkAxis() => Input.GetVector(LEFT, RIGHT, FORWARD, BACKWARD);

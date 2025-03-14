@@ -50,19 +50,7 @@ public partial class PM_Controller : CharacterBody3D
 
     public override void _Ready()
     {
-        // UnhandledKeyInput is usually called _before_ UnhandledInput
-        // We want to make sure player's rotation is updated before handling movement input as wishDir depends on it.
-        // Reduces "input lag" by one frame.
-        _cameraControl.SetProcessUnhandledInput(false);
-        _walkProcess.SetProcessUnhandledKeyInput(false);
-        _onPhysicsProcess += NormalBehavior;
         _healthManager.TopHealthLayer.OnDie += Die;
-    }
-
-    public override void _UnhandledInput(InputEvent @event)
-    {
-        _cameraControl._UnhandledInput(@event);
-        _walkProcess._UnhandledKeyInput(@event);
     }
 
     private void NormalBehavior(object sender, double delta)

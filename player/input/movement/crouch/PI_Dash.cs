@@ -2,7 +2,7 @@ using System;
 using Godot;
 
 [GlobalClass]
-public partial class PI_Dash : Node
+public partial class PI_Dash : PI_InputKeyAction
 {
     public EventHandler OnStartInput {get; set;}   // Called when slide is initiated
 

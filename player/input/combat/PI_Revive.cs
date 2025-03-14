@@ -1,30 +1,28 @@
 using Godot;
 
 [GlobalClass]
-public partial class WE_Death : Node
+public partial class PI_Revive : PI_InputKeyAction
 {
-    [Export] private PM_Controller _playerController;
     [Export] private float _holdTime = 1.5f;
     [Export] private float _releaseTime = .8f;
     private float _chargeTracker = 0f;
     private float _chargeTime = 0f;
     private bool _reviveDown;
 
-    public override void _Ready()
-    {
-        SetProcessUnhandledInput(false);
-        SetPhysicsProcess(false);
-        _playerController.OnDie += (o, e) => SetProcessUnhandledInput(true);
-    }
+    public ActionInputEvent<float> Revive;
+
+    public override void _Ready() => SetPhysicsProcess(false);
 
     public override void _UnhandledKeyInput(InputEvent @event)
     {
-        if (@event.IsActionPressed("revive"))
+        //GD.Print("alo");
+
+        if (@event.IsActionPressed(ACTIONS_Combat.REVIVE))
         {
             SetPhysicsProcess(true);
             _chargeTime = _holdTime;
         }
-        else if (@event.IsActionReleased("revive"))
+        else if (@event.IsActionReleased(ACTIONS_Combat.REVIVE))
             _chargeTime = -_releaseTime;
     }
 
@@ -33,8 +31,7 @@ public partial class WE_Death : Node
         _chargeTracker += (float)delta/_chargeTime;
         if (_chargeTracker >= 1f)
         {
-            SetProcessUnhandledInput(false);
-            _playerController.Revive();
+            Revive?.Invoke(this, 1f);
             _chargeTracker = 0f;
         }
         else if (_chargeTracker > 0f)

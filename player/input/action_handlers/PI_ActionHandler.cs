@@ -2,7 +2,7 @@ using Godot;
 
 public delegate void ActionInputEvent<T>(object sender, T args);
 
-public abstract partial class PI_ActionHandler<T> : Node
+public abstract partial class PI_ActionHandler<T> : Node, PI_InputAction
 {
     protected abstract ACTIONS_Action Action {get;}
 
@@ -23,6 +23,8 @@ public abstract partial class PI_ActionHandler<T> : Node
     //  -   The implementing class could use some of its own internal state, or anything else.
     //      e.g. the strength of a jump depending on how the input was performed.
     protected abstract T GetInputValue(InputEvent @event);
+    public abstract void EnableAction();
+    public abstract void DisableAction();
 
     protected void Send(PI_ActionState actionState, T value)
     {
