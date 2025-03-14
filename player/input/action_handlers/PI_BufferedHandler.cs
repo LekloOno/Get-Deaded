@@ -14,16 +14,16 @@ public abstract partial class PI_BufferedHandler<T> : PI_PressHandler<T>
 
     public bool IsBuffered() => Time.GetTicksMsec() - _lastInput < _bufferWindow;
 
-    protected override PI_ActionState InputDown(InputEvent @event, out T value)
+    protected override void InputDown(InputEvent @event)
     {
         _lastInput = Time.GetTicksMsec();
-        value = GetInputValue(@event);
-        return PI_ActionState.STARTED;
+        T value = GetInputValue(@event);
+        Start?.Invoke(this, value);
     }
 
-    protected override PI_ActionState InputUp(InputEvent @event, out T value)
+    protected override void InputUp(InputEvent @event)
     {
-        value = GetInputValue(@event);
-        return PI_ActionState.STOPPED;
+        T value = GetInputValue(@event);
+        Stop?.Invoke(this, value);
     }
 }

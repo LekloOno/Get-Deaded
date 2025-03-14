@@ -19,8 +19,8 @@ public partial class PM_SurfaceState : Node
     public override void _Ready()
     {
         _currentData = _stateData.Normal;
-        _sprintInput.OnStartSprinting += (o, e) => SetData(_stateData.Sprint);
-        _sprintInput.OnStopSprinting += (o, e) => SetData(_stateData.Normal);
+        _sprintInput.Start += (o, e) => SetData(_stateData.Sprint);
+        _sprintInput.Stop += (o, e) => SetData(_stateData.Normal);
         
         _crouch.OnStart += (o, e) => SetData(_stateData.Crouch);
         _crouch.OnStop += (o, e) => SetData(_stateData.Normal);

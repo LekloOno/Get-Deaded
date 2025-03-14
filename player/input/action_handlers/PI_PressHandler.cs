@@ -6,8 +6,8 @@ public abstract partial class PI_PressHandler<T> : PI_ActionHandler<T>
 
     // The ActionState resulting of a given pressed down/up InputEvent and value.
     //  -   STARTED, STOPPED, PERFORMED or NONE.
-    protected abstract PI_ActionState InputDown(InputEvent @event, out T value);
-    protected abstract PI_ActionState InputUp(InputEvent @event, out T value);
+    protected abstract void InputDown(InputEvent @event);
+    protected abstract void InputUp(InputEvent @event);
 
     protected override void HandleExternal(PI_ActionState actionState, T value) => Send(actionState, value);
     protected override void HandleInput(InputEvent @event)
@@ -15,12 +15,12 @@ public abstract partial class PI_PressHandler<T> : PI_ActionHandler<T>
         if (@event.IsActionPressed(Action))
         {
             IsDown = true;
-            Send(InputDown(@event, out T value), value);
+            InputDown(@event);
         }
         else if (@event.IsActionReleased(Action))
         {
             IsDown = false;
-            Send(InputUp(@event, out T value), value);
+            InputUp(@event);
         }
     }
 }
