@@ -665,6 +665,7 @@ _flatDirNode = NodePath("../../Camera Pivot")
 
 [node name="PI_Jump" type="Node" parent="Input"]
 script = ExtResource("13_ua84m")
+_bufferWindow = 50
 
 [node name="PI_Sprint" type="Node" parent="Input" node_paths=PackedStringArray("_jump", "_walkInput", "_crouchDispatcher")]
 script = ExtResource("14_puula")

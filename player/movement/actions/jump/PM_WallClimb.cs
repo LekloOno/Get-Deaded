@@ -41,7 +41,7 @@ public partial class PM_WallClimb : PM_Action
     public override void _Ready()
     {
         _startHopTimer.Timeout += WallHop;
-        _jumpInput.OnStopInput += Kick;
+        _jumpInput.Stop += Kick;
         SetPhysicsProcess(false);
     }
 
