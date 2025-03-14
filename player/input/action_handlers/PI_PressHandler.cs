@@ -2,6 +2,7 @@ using Godot;
 
 public abstract partial class PI_PressHandler<T> : PI_ActionHandler<T>
 {
+    protected abstract ACTIONS_Action Action {get;}
     public bool IsDown {get; protected set;}
 
     // The ActionState resulting of a given pressed down/up InputEvent and value.

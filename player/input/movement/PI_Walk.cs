@@ -3,13 +3,11 @@ using Godot;
 using static PI_Direction;
 
 [GlobalClass]
-public partial class PI_Walk : PI_InputKeyAction
+public partial class PI_Walk : PI_ActionHandler<Vector2>
 {
     [Export] private Node3D _flatDirNode;
 
     public EventHandler OnStopOrBackward;
-    public EventHandler OnStop;
-    public EventHandler OnStart;
     public EventHandler<KeyPressedArgs> KeyPressed;
     public Vector3 SpaceWishDir {get; private set;}
     public Vector3 WishDir {get; private set;}
@@ -73,7 +71,7 @@ public partial class PI_Walk : PI_InputKeyAction
             return;
         
         _lastStopped = true;
-        OnStop?.Invoke(this, EventArgs.Empty);
+        Stop?.Invoke(this, WalkAxis);
     }
 
     private void SetStart()
@@ -82,6 +80,32 @@ public partial class PI_Walk : PI_InputKeyAction
             return;
     
         _lastStopped = false;
-        OnStart?.Invoke(this, EventArgs.Empty);
+        Start?.Invoke(this, WalkAxis);
     }
+
+    protected override void HandleInput(InputEvent @event)
+    {
+        WalkAxis = ComputeWalkAxis();
+        
+        if (@event.IsActionPressed(FORWARD)
+            || @event.IsActionPressed(BACKWARD)
+            || @event.IsActionPressed(LEFT)
+            || @event.IsActionPressed(RIGHT))
+        {
+            KeyPressed?.Invoke(this, new KeyPressedArgs(WishDir, WalkAxis));
+        }
+    }
+
+    protected override void HandleExternal(PI_ActionState actionState, Vector2 value)
+    {
+        throw new NotImplementedException();
+    }
+
+    protected override Vector2 GetInputValue(InputEvent @event)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override void EnableAction() => SetProcessUnhandledKeyInput(true);
+    public override void DisableAction() => SetProcessUnhandledKeyInput(false);
 }

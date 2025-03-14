@@ -4,8 +4,6 @@ public delegate void ActionInputEvent<T>(object sender, T args);
 
 public abstract partial class PI_ActionHandler<T> : Node, PI_InputAction
 {
-    protected abstract ACTIONS_Action Action {get;}
-
     public ActionInputEvent<T> Start;
     public ActionInputEvent<T> Stop;
     public ActionInputEvent<T> Perform;

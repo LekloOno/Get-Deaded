@@ -25,27 +25,27 @@ public partial class PA_FootSteps : PA_Sound
     {
         _stepLoop.Timeout += PlaySound;
 
-        _walkInput.OnStop += StopPlay;
+        _walkInput.Stop += DirectStopPlay;
         _groundState.OnLeaving += StopPlay;
         _groundSurfaceState.Sprint.OnStop += StopPlay;
         _groundSurfaceState.Normal.OnStop += StopPlay;
 
-        _walkInput.OnStart += TryInputPlay;
+        _walkInput.Start += TryInputPlay;
         _groundState.OnLanding += TryLandPlay;
         _groundSurfaceState.Sprint.OnStart += TryPlaySprint;
         _groundSurfaceState.Normal.OnStart += TryPlayNormal;
     }
 
-    public void TryInputPlay(object sender, EventArgs e)
+    public void TryInputPlay(object sender, Vector2 axis)
     {
         // Grounded check is already done by TryPlayNormal/Sprint
         // So we just dispatch to the right listener.
 
         if (_groundSurfaceState.IsNormal())
-            TryPlayNormal(sender, e);
+            TryPlayNormal(sender, EventArgs.Empty);
 
         if (_groundSurfaceState.IsSprint())
-            TryPlaySprint(sender, e);
+            TryPlaySprint(sender, EventArgs.Empty);
     }
 
     public void TryLandPlay(object sender, EventArgs e)
@@ -92,8 +92,6 @@ public partial class PA_FootSteps : PA_Sound
         _stepLoop.Start(_sprintInterval);
     }   
 
-    public void StopPlay(object sender, EventArgs e)
-    {
-        _stepLoop.Stop();
-    }
+    public void StopPlay(object sender, EventArgs e) => _stepLoop.Stop();
+    public void DirectStopPlay(object sender, Vector2 axis) => _stepLoop.Stop();
 }
