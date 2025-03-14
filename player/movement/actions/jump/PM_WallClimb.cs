@@ -47,7 +47,7 @@ public partial class PM_WallClimb : PM_Action
 
     public Vector3 WallClimb(Vector3 velocity)
     {
-        if (!_jumpInput.JumpDown || !_walkInput.IsForwarding())
+        if (!_jumpInput.IsDown || !_walkInput.IsForwarding())
             return _wallJump.WallJump(velocity);
 
         if (!IsCollidingWall(out Vector3 normal))
