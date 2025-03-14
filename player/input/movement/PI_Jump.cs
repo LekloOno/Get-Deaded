@@ -2,7 +2,7 @@ using System;
 using Godot;
 
 [GlobalClass]
-public partial class PI_Jump : PI_ActionInput
+public partial class PI_Jump : PI_ActionInput<float>
 {
     [Export] private ulong _bufferWindow = 50;
 
@@ -22,6 +22,16 @@ public partial class PI_Jump : PI_ActionInput
 
     public void SetLastJumped() => LastJumped = Time.GetTicksMsec();
 
-    public override void InputDown(InputEvent @event) => _lastJumpInput = Time.GetTicksMsec();
-    public override void InputUp(InputEvent @event) {}
+    public override PI_ActionState InputDown(InputEvent @event, out float value)
+    {
+        _lastJumpInput = Time.GetTicksMsec();
+        value = 1f;
+        return PI_ActionState.STARTED;
+    }
+
+    public override PI_ActionState InputUp(InputEvent @event, out float value)
+    {
+        value = 1f;
+        return PI_ActionState.STOPPED;
+    }
 }

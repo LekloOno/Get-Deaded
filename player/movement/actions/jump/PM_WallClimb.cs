@@ -128,7 +128,7 @@ public partial class PM_WallClimb : PM_Action
         }
     }
 
-    private void Kick(object sender, EventArgs e)
+    private void Kick(object sender, float inputStrength)
     {
         if (!_isWallClimbing)
             return;
