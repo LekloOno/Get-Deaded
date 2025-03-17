@@ -18,17 +18,6 @@ public partial class PI_Walk : PI_ActionHandler<Vector2>
     public override void _UnhandledInput(InputEvent @event)
     {
         WishDir = ComputeWishDir();
-
-        if(IsStopped())
-        {
-            SetStop(); 
-            OnStopOrBackward?.Invoke(this, EventArgs.Empty);
-            return;
-        } else
-            SetStart();
-
-        if(IsBacking())
-            OnStopOrBackward?.Invoke(this, EventArgs.Empty);
     }
 
     public override void _UnhandledKeyInput(InputEvent @event)
@@ -42,6 +31,16 @@ public partial class PI_Walk : PI_ActionHandler<Vector2>
         {
             KeyPressed?.Invoke(this, new KeyPressedArgs(WishDir, WalkAxis));
         }
+
+        if(IsStopped())
+        {
+            SetStop();
+            return;
+        } else
+            SetStart();
+
+        if(IsBacking())
+            OnStopOrBackward?.Invoke(this, EventArgs.Empty);
     }
 
     public static Vector2 ComputeWalkAxis() => Input.GetVector(LEFT, RIGHT, FORWARD, BACKWARD);
@@ -67,11 +66,13 @@ public partial class PI_Walk : PI_ActionHandler<Vector2>
 
     private void SetStop()
     {
-        if(_lastStopped)
-            return;
-        
-        _lastStopped = true;
-        Stop?.Invoke(this, WalkAxis);
+        if(!_lastStopped)
+        {
+            _lastStopped = true;
+            Stop?.Invoke(this, WalkAxis);
+        }
+
+        OnStopOrBackward?.Invoke(this, EventArgs.Empty);
     }
 
     private void SetStart()
@@ -98,7 +99,21 @@ public partial class PI_Walk : PI_ActionHandler<Vector2>
 
     protected override void HandleExternal(PI_ActionState actionState, Vector2 value)
     {
-        throw new NotImplementedException();
+        switch (actionState)
+        {
+            case PI_ActionState.STOPPED :
+                WalkAxis = Vector2.Zero;
+                WishDir = Vector3.Zero;
+                SetStop();
+                break;
+            case PI_ActionState.STARTED :
+                WalkAxis = value;
+                WishDir = ComputeWishDir();
+                SetStart();
+                break;
+            default :
+                break;
+        }
     }
 
     protected override Vector2 GetInputValue(InputEvent @event)
@@ -106,6 +121,15 @@ public partial class PI_Walk : PI_ActionHandler<Vector2>
         throw new NotImplementedException();
     }
 
-    public override void EnableAction() => SetProcessUnhandledKeyInput(true);
-    public override void DisableAction() => SetProcessUnhandledKeyInput(false);
+    public override void EnableAction()
+    {
+        SetProcessUnhandledKeyInput(true);
+        SetProcessUnhandledInput(true);
+    }
+    public override void DisableAction()
+    {
+        SetProcessUnhandledKeyInput(false);
+        SetProcessUnhandledInput(false);
+        HandleExternal(PI_ActionState.STOPPED, Vector2.Zero);
+    }
 }
