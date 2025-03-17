@@ -415,8 +415,8 @@ _bodyHitBox = NodePath("BodyBox/CollisionShape3D")
 [node name="BodyBox" type="Area3D" parent="Body" node_paths=PackedStringArray("_healthManager")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 top_level = true
-collision_layer = 2
-collision_mask = 2
+collision_layer = 4
+collision_mask = 0
 script = ExtResource("15_h1ove")
 _healthManager = NodePath("../../PH_Manager")
 metadata/_custom_type_script = "uid://ce82euclamj77"
@@ -428,8 +428,8 @@ debug_color = Color(0, 1, 0, 0.654902)
 [node name="HeadBox" type="Area3D" parent="Body" node_paths=PackedStringArray("_healthManager")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0)
 top_level = true
-collision_layer = 2
-collision_mask = 2
+collision_layer = 4
+collision_mask = 0
 script = ExtResource("15_h1ove")
 BodyPart = 0
 _healthManager = NodePath("../../PH_Manager")
