@@ -5,16 +5,16 @@ using Godot.Collections;
 [GlobalClass]
 public abstract partial class PW_Fire : Resource
 {
-    [Export] private float _spread;
-    [Export] private ulong _fireRate;
-    [Export] private PW_Recoil _recoil;
     [Export] private Array<PW_Shot> _shots;
+    [Export] protected float _spread;
+    [Export] protected ulong _fireRate;
+    [Export] protected PW_Recoil _recoil;
     public float SpreadMultiplier = 1f;
     public float RecoilMultiplier = 1f;
     private Camera3D _camera;
     private Node3D _sight;
 
-    private ulong _lastShot = 0;
+    protected ulong _lastShot = 0;
 
     public void Initialize(Camera3D camera, Node3D sight)
     {
@@ -22,21 +22,17 @@ public abstract partial class PW_Fire : Resource
         _sight = sight;
     }
 
-    protected bool TryShoot()
+    protected void Shoot()
     {
-        bool canShoot = Time.GetTicksMsec() - _lastShot > _fireRate;
-        if (!canShoot)
-            return false;
-
         _lastShot = Time.GetTicksMsec();
 
         SightTo(out Vector3 origin, out Vector3 direction);
         
         foreach (PW_Shot shot in _shots)
             shot.Shoot(origin, direction);
-        
-        return true;
     }
+
+    protected bool CanShoot() => Time.GetTicksMsec() - _lastShot > _fireRate;
 
     private void SightTo(out Vector3 origin, out Vector3 direction)
     {
