@@ -107,13 +107,13 @@ public partial class PM_Controller : CharacterBody3D
     {
         Acceleration = Vector3.Zero;
 
-        Vector3 startVelocity = Velocity;
+        Vector3 startVelocity = RealVelocity;
 
         Vector3 pos = GlobalPosition;
         _onPhysicsProcess?.Invoke(this, delta);
 
-        Acceleration = (Velocity - startVelocity)/(float)delta;
         MoveAndSlide();
         RealVelocity = (GlobalPosition - pos)/(float)delta;
+        Acceleration = (RealVelocity - startVelocity)/(float)delta;
     }
 }

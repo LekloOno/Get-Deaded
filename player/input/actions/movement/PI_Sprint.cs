@@ -1,4 +1,5 @@
 using System;
+using System.Reflection.Metadata;
 using Godot;
 
 [GlobalClass]
@@ -29,5 +30,9 @@ public partial class PI_Sprint : PI_HoldableHandler<EmptyInput>
     }
 
     public override void EnableAction() => SetProcessUnhandledKeyInput(true);
-    public override void DisableAction() => SetProcessUnhandledKeyInput(false);
+    public override void DisableAction()
+    {
+        SetProcessUnhandledKeyInput(false);
+        HandleExternal(PI_ActionState.STOPPED, new());
+    }
 }
