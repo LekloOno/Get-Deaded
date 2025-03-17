@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=113 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -82,8 +82,11 @@
 [ext_resource type="Texture2D" uid="uid://cbh1opskekaqn" path="res://assets/sprites/dash/dash_cd_mid_fill.png" id="70_ee4um"]
 [ext_resource type="Script" uid="uid://bd37jsqipcwxc" path="res://ui/UI_DashReset.cs" id="71_j12ti"]
 [ext_resource type="Script" uid="uid://cjmiash71uc7b" path="res://global/combat/hit/hit/GC_Hit.cs" id="80_ufgmq"]
+[ext_resource type="Script" uid="uid://fc7gkofu3df7" path="res://player/combat/weapons/core/shot/PWS_Hitscan.cs" id="81_f31u3"]
 [ext_resource type="Script" uid="uid://b4hdeuwma0ma8" path="res://player/combat/weapons/PW_WeaponsHandler.cs" id="81_stdu8"]
-[ext_resource type="Script" uid="uid://b1pmsrdhynvhv" path="res://player/combat/weapons/weapon/PW_SimpleClick.cs" id="82_jlgrh"]
+[ext_resource type="Script" uid="uid://dmsklefspdvlw" path="res://player/combat/weapons/core/fire/PWF_Ponctual.cs" id="82_fuwq2"]
+[ext_resource type="Script" uid="uid://cu3n4oi1x76dl" path="res://player/combat/weapons/core/fire/PWF_Continuous.cs" id="83_fuwq2"]
+[ext_resource type="Script" uid="uid://1woqjjvt2bxc" path="res://player/combat/weapons/core/weapon/PW_Alternate.cs" id="84_8j20c"]
 
 [sub_resource type="Curve" id="Curve_ux8de"]
 _limits = [-0.5, 1.0, 0.0, 1.0]
@@ -137,17 +140,54 @@ height = 1.8
 [sub_resource type="BoxShape3D" id="BoxShape3D_aav2a"]
 size = Vector3(0.5, 0.15, 0.5)
 
-[sub_resource type="Resource" id="Resource_kn1mb"]
+[sub_resource type="Resource" id="Resource_5dw8r"]
 script = ExtResource("80_ufgmq")
-_damage = 20.0
-_inspectorModifiers = Array[Object]([])
+_damage = 40.0
+_inspectorModifiers = null
 metadata/_custom_type_script = "uid://cjmiash71uc7b"
 
-[sub_resource type="Resource" id="Resource_stdu8"]
-script = ExtResource("82_jlgrh")
+[sub_resource type="Resource" id="Resource_ewcnl"]
+script = ExtResource("81_f31u3")
 _maxDistance = 100.0
-_hit = SubResource("Resource_kn1mb")
-metadata/_custom_type_script = "uid://b1pmsrdhynvhv"
+_hitData = SubResource("Resource_5dw8r")
+_originOffset = Vector3(0, 0, 0)
+_directionOffset = Vector3(0, 0, 0)
+metadata/_custom_type_script = "uid://fc7gkofu3df7"
+
+[sub_resource type="Resource" id="Resource_fdvd6"]
+script = ExtResource("82_fuwq2")
+_shots = Array[Object]([SubResource("Resource_ewcnl")])
+_spread = 0.0
+_fireRate = 400
+metadata/_custom_type_script = "uid://dmsklefspdvlw"
+
+[sub_resource type="Resource" id="Resource_fvk8i"]
+script = ExtResource("80_ufgmq")
+_damage = 5.0
+_inspectorModifiers = null
+metadata/_custom_type_script = "uid://cjmiash71uc7b"
+
+[sub_resource type="Resource" id="Resource_4vhab"]
+script = ExtResource("81_f31u3")
+_maxDistance = 100.0
+_hitData = SubResource("Resource_fvk8i")
+_originOffset = Vector3(0, 0, 0)
+_directionOffset = Vector3(0, 0, 0)
+metadata/_custom_type_script = "uid://fc7gkofu3df7"
+
+[sub_resource type="Resource" id="Resource_lk6x0"]
+script = ExtResource("83_fuwq2")
+_shots = Array[Object]([SubResource("Resource_4vhab")])
+_spread = 0.0
+_fireRate = 100
+metadata/_custom_type_script = "uid://cu3n4oi1x76dl"
+
+[sub_resource type="Resource" id="Resource_fuwq2"]
+resource_local_to_scene = true
+script = ExtResource("84_8j20c")
+_primaryFire = SubResource("Resource_fdvd6")
+_secondaryFire = SubResource("Resource_lk6x0")
+metadata/_custom_type_script = "uid://1woqjjvt2bxc"
 
 [sub_resource type="Resource" id="Resource_jlgrh"]
 resource_local_to_scene = true
@@ -412,27 +452,27 @@ _modelAnchor = NodePath("SpatialAnchor")
 _controller = NodePath("..")
 _bodyHitBox = NodePath("BodyBox/CollisionShape3D")
 
-[node name="BodyBox" type="Area3D" parent="Body" node_paths=PackedStringArray("_healthManager")]
+[node name="BodyBox" type="Area3D" parent="Body" node_paths=PackedStringArray("HealthManager")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 top_level = true
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("15_h1ove")
-_healthManager = NodePath("../../PH_Manager")
+HealthManager = NodePath("../../PH_Manager")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body/BodyBox"]
 shape = SubResource("CapsuleShape3D_jlgrh")
 debug_color = Color(0, 1, 0, 0.654902)
 
-[node name="HeadBox" type="Area3D" parent="Body" node_paths=PackedStringArray("_healthManager")]
+[node name="HeadBox" type="Area3D" parent="Body" node_paths=PackedStringArray("HealthManager")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0)
 top_level = true
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("15_h1ove")
 BodyPart = 0
-_healthManager = NodePath("../../PH_Manager")
+HealthManager = NodePath("../../PH_Manager")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body/HeadBox"]
@@ -912,11 +952,12 @@ offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("65_wohr1")
 
-[node name="PW_WeaponsHandler" type="Node" parent="." node_paths=PackedStringArray("_sight", "_weaponsInput")]
+[node name="PW_WeaponsHandler" type="Node" parent="." node_paths=PackedStringArray("_camera", "_sight", "_weaponsInput")]
 script = ExtResource("81_stdu8")
+_camera = NodePath("../Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/Camera3D")
 _sight = NodePath("../Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean")
 _weaponsInput = NodePath("../PIM_Arena/PI_Weapons")
-_weapons = Array[Object]([SubResource("Resource_stdu8")])
+_weapons = Array[Object]([SubResource("Resource_fuwq2")])
 metadata/_custom_type_script = "uid://b4hdeuwma0ma8"
 
 [node name="PH_Manager" type="Node" parent="."]

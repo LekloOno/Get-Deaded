@@ -22,15 +22,8 @@ public partial class GC_Hit : Resource
     // If the game designer indicates a headshot multiplier of 2 for this weapon, but the base hurt headshot multiplier is already 2, then hitModifier will contain 1 for the head (2/2).
     private GC_HitModifier _hitModifier;
 
+    public void InitializeModifiers() => _hitModifier = new(_inspectorModifiers);
 
-    public GC_Hit() : this(0, new Array<GC_DamageModifier>()) {}
-    public GC_Hit(float damage, Array<GC_DamageModifier> inspectorModifiers)
-    {
-        _damage = damage;
-        _inspectorModifiers = null;
-        _hitModifier = new(inspectorModifiers);
-    }
-
-    public float GetDamage(GC_BodyPart bodyPart) => _hitModifier.GetDamage(bodyPart, _damage);
-    public void SendHit(GC_HurtBox hurtBox) => hurtBox.Damage(GetDamage(hurtBox.BodyPart));
+    public float GetDamage(GC_BodyPart bodyPart) =>  _hitModifier.GetDamage(bodyPart, _damage);
+    public bool SendHit(GC_HurtBox hurtBox, out float takenDamage) => hurtBox.Damage(GetDamage(hurtBox.BodyPart), out takenDamage);
 }

@@ -9,7 +9,7 @@ public partial class GC_HealthManager : Node
 
     public EventHandler<HealthInitEventArgs> OnLayerInit;
 
-    public bool Damage(float damage) => TopHealthLayer.TakeDamage(damage);
+    public bool Damage(float damage, out float takenDamage) => TopHealthLayer.TakeDamage(damage, out takenDamage);
     public float Heal(float heal) => TopHealthLayer.Heal(heal, null);
     public override void _Ready() => Init();
 

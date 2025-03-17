@@ -101,27 +101,27 @@ script = ExtResource("2_cm3tr")
 TopHealthLayer = SubResource("Resource_ygkka")
 metadata/_custom_type_script = "uid://bbc8us8vvouq0"
 
-[node name="Head" type="Area3D" parent="." node_paths=PackedStringArray("_healthManager")]
+[node name="Head" type="Area3D" parent="." node_paths=PackedStringArray("HealthManager")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 1.55457, 0.0319857)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_lfk02")
 BodyPart = 0
-_healthManager = NodePath("../GC_HealthManager")
+HealthManager = NodePath("../GC_HealthManager")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Head"]
 shape = SubResource("SphereShape3D_8fjt1")
 debug_color = Color(1, 0, 0, 1)
 
-[node name="Chest" type="Area3D" parent="." node_paths=PackedStringArray("_healthManager")]
+[node name="Chest" type="Area3D" parent="." node_paths=PackedStringArray("HealthManager")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0201192, 1.27496, -0.0162432)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_lfk02")
 _useSpecialModifier = true
 _modifier = 1.2
-_healthManager = NodePath("../GC_HealthManager")
+HealthManager = NodePath("../GC_HealthManager")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Chest"]
@@ -129,12 +129,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0280221, 0, 0)
 shape = SubResource("SphereShape3D_j8cyt")
 debug_color = Color(0, 1, 0, 0.388235)
 
-[node name="Waist" type="Area3D" parent="." node_paths=PackedStringArray("_healthManager")]
+[node name="Waist" type="Area3D" parent="." node_paths=PackedStringArray("HealthManager")]
 transform = Transform3D(-2.17995e-08, -0.498715, -0.866766, 1, -4.37114e-08, 0, -3.78876e-08, -0.866766, 0.498715, -0.0116693, 1.05221, 0.130753)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_lfk02")
-_healthManager = NodePath("../GC_HealthManager")
+HealthManager = NodePath("../GC_HealthManager")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Waist"]
@@ -142,12 +142,12 @@ transform = Transform3D(1, 0, -1.77636e-15, 0, 1, -1.19209e-07, 0, 1.19209e-07, 
 shape = SubResource("SphereShape3D_ygkka")
 debug_color = Color(0, 1, 0, 0.388235)
 
-[node name="UpperArm1" type="Area3D" parent="." node_paths=PackedStringArray("_healthManager")]
+[node name="UpperArm1" type="Area3D" parent="." node_paths=PackedStringArray("HealthManager")]
 transform = Transform3D(0.940715, 0.339198, 0, -0.339198, 0.940715, 0, 0, 0, 1, -0.155156, 1.16249, -0.199104)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_lfk02")
-_healthManager = NodePath("../GC_HealthManager")
+HealthManager = NodePath("../GC_HealthManager")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="UpperArm1"]
@@ -155,12 +155,12 @@ transform = Transform3D(0.963961, 0.262833, -0.0412378, -0.262858, 0.964823, 0.0
 shape = SubResource("CapsuleShape3D_lnly3")
 debug_color = Color(0, 1, 0, 0.388235)
 
-[node name="LowerArm1" type="Area3D" parent="." node_paths=PackedStringArray("_healthManager")]
+[node name="LowerArm1" type="Area3D" parent="." node_paths=PackedStringArray("HealthManager")]
 transform = Transform3D(0.968457, -0.00854641, -0.249034, -0.201767, 0.559572, -0.803847, 0.146223, 0.828738, 0.540197, -0.182727, 1.16249, -0.120731)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_lfk02")
-_healthManager = NodePath("../GC_HealthManager")
+HealthManager = NodePath("../GC_HealthManager")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LowerArm1"]
@@ -168,12 +168,12 @@ transform = Transform3D(0.951247, 0.308339, 0.00766217, -0.308223, 0.949385, 0.0
 shape = SubResource("CapsuleShape3D_mxe6x")
 debug_color = Color(0, 1, 0, 0.388235)
 
-[node name="Hand1" type="Area3D" parent="." node_paths=PackedStringArray("_healthManager")]
+[node name="Hand1" type="Area3D" parent="." node_paths=PackedStringArray("HealthManager")]
 transform = Transform3D(0.946932, 0.238951, -0.214993, -0.246586, 0.110973, -0.962746, -0.206191, 0.96467, 0.164006, -0.180771, 1.27598, 0.129645)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_lfk02")
-_healthManager = NodePath("../GC_HealthManager")
+HealthManager = NodePath("../GC_HealthManager")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hand1"]
@@ -181,12 +181,12 @@ transform = Transform3D(0.999939, -0.00731842, -0.00840747, 0.00759043, 0.999434
 shape = SubResource("CapsuleShape3D_j8cyt")
 debug_color = Color(0, 1, 0, 0.388235)
 
-[node name="Hand2" type="Area3D" parent="." node_paths=PackedStringArray("_healthManager")]
+[node name="Hand2" type="Area3D" parent="." node_paths=PackedStringArray("HealthManager")]
 transform = Transform3D(0.428648, -0.852687, -0.298639, -0.189634, 0.238269, -0.952506, 0.883346, 0.464922, -0.0595652, -0.163751, 1.3161, 0.385991)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_lfk02")
-_healthManager = NodePath("../GC_HealthManager")
+HealthManager = NodePath("../GC_HealthManager")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hand2"]
@@ -194,12 +194,12 @@ transform = Transform3D(0.999939, -0.00731842, -0.00840747, 0.00759043, 0.999434
 shape = SubResource("CapsuleShape3D_j8cyt")
 debug_color = Color(0, 1, 0, 0.388235)
 
-[node name="UpperArm2" type="Area3D" parent="." node_paths=PackedStringArray("_healthManager")]
+[node name="UpperArm2" type="Area3D" parent="." node_paths=PackedStringArray("HealthManager")]
 transform = Transform3D(-0.575935, -0.207667, 0.790679, -0.339198, 0.940715, 0, -0.743804, -0.268196, -0.612231, 0.107187, 1.19297, 0.176241)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_lfk02")
-_healthManager = NodePath("../GC_HealthManager")
+HealthManager = NodePath("../GC_HealthManager")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="UpperArm2"]
@@ -207,12 +207,12 @@ transform = Transform3D(0.963961, 0.262833, -0.0412378, -0.262858, 0.964823, 0.0
 shape = SubResource("CapsuleShape3D_lnly3")
 debug_color = Color(0, 1, 0, 0.388235)
 
-[node name="LowerArm2" type="Area3D" parent="." node_paths=PackedStringArray("_healthManager")]
+[node name="LowerArm2" type="Area3D" parent="." node_paths=PackedStringArray("HealthManager")]
 transform = Transform3D(-0.262252, -0.821624, -0.506121, -0.201767, 0.559572, -0.803847, 0.94367, -0.108692, -0.312526, 0.0909524, 1.19128, 0.365936)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_lfk02")
-_healthManager = NodePath("../GC_HealthManager")
+HealthManager = NodePath("../GC_HealthManager")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LowerArm2"]
@@ -220,12 +220,12 @@ transform = Transform3D(0.951247, 0.308339, 0.00766217, -0.308223, 0.949385, 0.0
 shape = SubResource("CapsuleShape3D_mxe6x")
 debug_color = Color(0, 1, 0, 0.388235)
 
-[node name="UpperLeg1" type="Area3D" parent="." node_paths=PackedStringArray("_healthManager")]
+[node name="UpperLeg1" type="Area3D" parent="." node_paths=PackedStringArray("HealthManager")]
 transform = Transform3D(0.940715, 0.339198, 0, -0.339198, 0.940715, 0, 0, 0, 1, -0.249438, 0.39587, -0.102023)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_lfk02")
-_healthManager = NodePath("../GC_HealthManager")
+HealthManager = NodePath("../GC_HealthManager")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="UpperLeg1"]
@@ -233,12 +233,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.345365, 0)
 shape = SubResource("CapsuleShape3D_26w0a")
 debug_color = Color(0, 1, 0, 0.388235)
 
-[node name="UpperLeg2" type="Area3D" parent="." node_paths=PackedStringArray("_healthManager")]
+[node name="UpperLeg2" type="Area3D" parent="." node_paths=PackedStringArray("HealthManager")]
 transform = Transform3D(0.254653, 0.0918212, 0.962663, -0.385602, 0.922559, 0.014007, -0.886828, -0.374772, 0.270339, -0.0129211, 0.39587, 0.305418)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_lfk02")
-_healthManager = NodePath("../GC_HealthManager")
+HealthManager = NodePath("../GC_HealthManager")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="UpperLeg2"]
@@ -246,12 +246,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.345365, 0)
 shape = SubResource("CapsuleShape3D_26w0a")
 debug_color = Color(0, 1, 0, 0.388235)
 
-[node name="LowerLeg1" type="Area3D" parent="." node_paths=PackedStringArray("_healthManager")]
+[node name="LowerLeg1" type="Area3D" parent="." node_paths=PackedStringArray("HealthManager")]
 transform = Transform3D(0.268001, -0.20682, 0.940958, 0.16988, 0.971527, 0.165154, -0.948323, 0.115589, 0.295505, -0.0805098, -0.0670397, -0.18282)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_lfk02")
-_healthManager = NodePath("../GC_HealthManager")
+HealthManager = NodePath("../GC_HealthManager")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LowerLeg1"]
@@ -259,12 +259,12 @@ transform = Transform3D(0.999989, -0.00430764, 0.00165084, 0.00428449, 0.999896,
 shape = SubResource("CapsuleShape3D_0c88m")
 debug_color = Color(0, 1, 0, 0.388235)
 
-[node name="LowerLeg2" type="Area3D" parent="." node_paths=PackedStringArray("_healthManager")]
+[node name="LowerLeg2" type="Area3D" parent="." node_paths=PackedStringArray("HealthManager")]
 transform = Transform3D(-0.251274, -0.119347, 0.96053, -0.00257757, 0.992448, 0.122639, -0.967912, 0.0283403, -0.249685, 0.100657, -0.0695244, 0.279325)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_lfk02")
-_healthManager = NodePath("../GC_HealthManager")
+HealthManager = NodePath("../GC_HealthManager")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LowerLeg2"]
@@ -272,14 +272,14 @@ transform = Transform3D(0.999989, -0.00430764, 0.00165084, 0.00428449, 0.999896,
 shape = SubResource("CapsuleShape3D_0c88m")
 debug_color = Color(0, 1, 0, 0.388235)
 
-[node name="Foot1" type="Area3D" parent="." node_paths=PackedStringArray("_healthManager")]
+[node name="Foot1" type="Area3D" parent="." node_paths=PackedStringArray("HealthManager")]
 transform = Transform3D(0.268001, -0.20682, 0.940958, 0.16988, 0.971527, 0.165154, -0.948323, 0.115589, 0.295505, -0.0805098, -0.0670397, -0.18282)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_lfk02")
 _useSpecialModifier = true
 _modifier = 0.8
-_healthManager = NodePath("../GC_HealthManager")
+HealthManager = NodePath("../GC_HealthManager")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Foot1"]
@@ -287,14 +287,14 @@ transform = Transform3D(0.830656, 0.377717, -0.409074, -0.374682, -0.164257, -0.
 shape = SubResource("CapsuleShape3D_c66wn")
 debug_color = Color(0, 1, 0, 0.388235)
 
-[node name="Foot2" type="Area3D" parent="." node_paths=PackedStringArray("_healthManager")]
+[node name="Foot2" type="Area3D" parent="." node_paths=PackedStringArray("HealthManager")]
 transform = Transform3D(-0.770755, 0.0265588, 0.636577, 0.16988, 0.971527, 0.165154, -0.614066, 0.235436, -0.753322, 0.101802, -0.0670397, 0.259969)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_lfk02")
 _useSpecialModifier = true
 _modifier = 0.8
-_healthManager = NodePath("../GC_HealthManager")
+HealthManager = NodePath("../GC_HealthManager")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Foot2"]

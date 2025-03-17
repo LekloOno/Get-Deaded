@@ -11,8 +11,8 @@ public abstract partial class PW_Fire : Resource
     [Export] protected PW_Recoil _recoil;
     public float SpreadMultiplier = 1f;
     public float RecoilMultiplier = 1f;
-    private Camera3D _camera;
-    private Node3D _sight;
+    protected Node3D _sight;
+    protected Camera3D _camera;
 
     protected ulong _lastShot = 0;
 
@@ -20,6 +20,8 @@ public abstract partial class PW_Fire : Resource
     {
         _camera = camera;
         _sight = sight;
+        foreach (PW_Shot shot in _shots)
+            shot.Initialize();
     }
 
     protected void Shoot()
@@ -29,7 +31,7 @@ public abstract partial class PW_Fire : Resource
         SightTo(out Vector3 origin, out Vector3 direction);
         
         foreach (PW_Shot shot in _shots)
-            shot.Shoot(origin, direction);
+            shot.Shoot(_sight.GetWorld3D(), origin, direction);
     }
 
     protected bool CanShoot() => Time.GetTicksMsec() - _lastShot > _fireRate;

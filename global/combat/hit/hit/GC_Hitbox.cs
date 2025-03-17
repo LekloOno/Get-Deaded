@@ -11,6 +11,7 @@ public partial class GC_Hitbox : Area3D
     public override void _Ready()
     {
         AreaEntered += ProcessCollision;
+        _hit.InitializeModifiers();
     }
 
     private void ProcessCollision(Area3D area3D)
@@ -19,7 +20,7 @@ public partial class GC_Hitbox : Area3D
 
         if (area3D is GC_HurtBox hurtBox)
         {
-            hurtBox.Damage(_hit.GetDamage(hurtBox.BodyPart));
+            hurtBox.Damage(_hit.GetDamage(hurtBox.BodyPart), out _);
             _active = false;
             _reset = GetTree().CreateTimer(_cd);
             _reset.Timeout += Reset;

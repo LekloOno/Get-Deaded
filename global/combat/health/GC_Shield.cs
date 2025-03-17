@@ -26,12 +26,12 @@ public partial class GC_Shield : GC_Health
         OnDeactivate?.Invoke(this, EventArgs.Empty);
     }
 
-    public override bool TakeDamage(float damage)
+    public override bool TakeDamage(float damage, out float takenDamage)
     {
         if (_active)
-            return base.TakeDamage(damage);
+            return base.TakeDamage(damage, out takenDamage);
 
-        return Child.TakeDamage(damage);
+        return Child.TakeDamage(damage, out takenDamage);
     }
 
     public override float Heal(float healing, GC_Health parent) => Child.Heal(healing, this);

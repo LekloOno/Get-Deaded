@@ -1,13 +1,14 @@
 using Godot;
 
-public abstract partial class PW_Simple : PW_Weapon
+[GlobalClass]
+public partial class PW_Simple : PW_Weapon
 {
     [Export] private PW_Fire _fire;
     [Export] private PW_SimpleADS _ads;
 
     public override void WeaponInitialize()
     {
-        _ads.Initialize(_camera);
+        _ads?.Initialize(_camera);
         _fire.Initialize(_camera, _sight);
     }
 
@@ -16,6 +17,8 @@ public abstract partial class PW_Simple : PW_Weapon
     {
         _fire.Press();
     }
+
+    public override void PrimaryUp() {}
 
     public override void SecondaryDown()
     {

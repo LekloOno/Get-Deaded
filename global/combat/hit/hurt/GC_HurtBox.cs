@@ -10,15 +10,15 @@ public partial class GC_HurtBox : Area3D
     [Export] public GC_BodyPart BodyPart {get; private set;} = GC_BodyPart.Chest;
     [Export] private bool _useSpecialModifier = false;
     [Export] private float _modifier = 1f;
-    [Export] private GC_HealthManager _healthManager;
+    [Export] public GC_HealthManager HealthManager {get; private set;}
     
     public override void _Ready()
     {
         if (!_useSpecialModifier) _modifier = CONF_BodyModifiers.GetDefaultModifier(BodyPart);
     }
 
-    public bool Damage(float damage) => _healthManager.Damage(damage * _modifier);
-    public float Heal(float heal) => _healthManager.Heal(heal);
+    public bool Damage(float damage, out float takenDamage) => HealthManager.Damage(damage * _modifier, out takenDamage);
+    public float Heal(float heal) => HealthManager.Heal(heal);
     
     public static float RealHitModifier(GC_DamageModifier damageModifier) => damageModifier/CONF_BodyModifiers.GetDefaultModifier(damageModifier.BodyPart);
 

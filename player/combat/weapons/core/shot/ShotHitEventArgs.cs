@@ -2,14 +2,15 @@ using System;
 
 public class ShotHitEventArgs : EventArgs
 {
+    public static readonly ShotHitEventArgs MISS = new(null, null, 0f, false);
     public GC_HealthManager Target {get ;}
-    public GC_Hitbox Hitbox {get ;}
+    public GC_HurtBox HurtBox {get ;}
     public float Damage {get;}
     public bool Kill {get;}
-    public ShotHitEventArgs(GC_HealthManager target, GC_Hitbox hitbox, float damage, bool kill)
+    public ShotHitEventArgs(GC_HealthManager target, GC_HurtBox hurtBox, float damage, bool kill)
     {
         Target = target;
-        Hitbox = hitbox;
+        HurtBox = hurtBox;
         Damage = damage;
         Kill = kill;    
     }

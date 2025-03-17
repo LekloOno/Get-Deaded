@@ -1,6 +1,7 @@
 using Godot;
 
-public abstract partial class PW_Alternate : PW_Weapon
+[GlobalClass]
+public partial class PW_Alternate : PW_Weapon
 {
     [Export] private PW_Fire _primaryFire;
     [Export] private PW_Fire _secondaryFire;
@@ -13,8 +14,12 @@ public abstract partial class PW_Alternate : PW_Weapon
         _currentFire = _primaryFire;
         _primaryFire.Initialize(_camera, _sight);
         _secondaryFire.Initialize(_camera, _sight);
-        _ads.Initialize(_camera);
-        _ads.AlternateInitialize(_primaryFire, _secondaryFire);
+
+        if (_ads != null)
+        {
+            _ads?.Initialize(_camera);
+            _ads?.AlternateInitialize(_primaryFire, _secondaryFire);
+        }
     }
 
     public override void PrimaryDown() => _currentFire.Press();

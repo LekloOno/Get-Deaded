@@ -15,8 +15,6 @@ public partial class PI_Revive : PI_InputKeyAction
 
     public override void _UnhandledKeyInput(InputEvent @event)
     {
-        //GD.Print("alo");
-
         if (@event.IsActionPressed(ACTIONS_Combat.REVIVE))
         {
             SetPhysicsProcess(true);
