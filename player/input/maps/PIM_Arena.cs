@@ -10,37 +10,29 @@ public partial class PIM_Arena : Node
     [Export] private PI_CrouchDispatcher _crouchDispatcherInput;
     [Export] private PI_Weapons _weaponsInput;
     [Export] private PI_Revive _reviveInput;
+
+    private PI_Map _alive;
+    private PI_Map _dead;
     
     public override void _Ready()
     {
-        SetAlive();
+        _alive = [_walkInput, _sprintInput, _jumpInput, _crouchDispatcherInput, _weaponsInput ];
+        _dead = [_reviveInput];
+        Alive();
 
-        _controller.OnDie += (o, e) => SetDead();
-        _reviveInput.Revive += (o, e) => SetAlive();
+        _controller.OnDie += (o, e) => Dead();
+        _reviveInput.Revive += (o, e) => Alive();
     }
-    public void SetAlive()
+    public void Alive()
     {
         _controller.Revive();
-
-        //_controller.SetProcessUnhandledInput(true);
-        _walkInput.EnableAction();
-        _sprintInput.EnableAction();
-        _crouchDispatcherInput.EnableAction();
-        _jumpInput.EnableAction();
-        _weaponsInput.EnableAction();
-
-        _reviveInput.DisableAction();
+        _dead.Disable();
+        _alive.Enable();
     }
 
-    public void SetDead()
+    public void Dead()
     {
-        //_controller.SetProcessUnhandledInput(false);
-        _walkInput.DisableAction();
-        _sprintInput.DisableAction();
-        _crouchDispatcherInput.DisableAction();
-        _jumpInput.DisableAction();
-        _weaponsInput.DisableAction();
-
-        _reviveInput.EnableAction();
+        _alive.Disable();
+        _dead.Enable();
     }
 }
