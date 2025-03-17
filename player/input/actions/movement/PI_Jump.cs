@@ -1,6 +1,11 @@
 using System;
 using Godot;
 
+/// <summary>
+/// Handles buffer input for the jump.
+/// 
+/// The Input values corresponds to the jump strength. We could later use the input strength for analog jump inputs.
+/// </summary>
 [GlobalClass]
 public partial class PI_Jump : PI_BufferedHandler<float>
 {
@@ -11,5 +16,5 @@ public partial class PI_Jump : PI_BufferedHandler<float>
     public void SetLastJumped() => LastJumped = Time.GetTicksMsec();
 
     public override void EnableAction() => SetProcessUnhandledKeyInput(true);
-    public override void DisableAction() => SetProcessUnhandledKeyInput(false);
+    protected override void DisableBufferAction() => SetProcessUnhandledKeyInput(false);
 }

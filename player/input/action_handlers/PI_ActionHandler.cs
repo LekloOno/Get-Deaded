@@ -22,7 +22,7 @@ public abstract partial class PI_ActionHandler<T> : Node, PI_InputAction
     }
 
     /// <summary>
-    /// For consistency reasons, Action Handler should override CustomReady instead of _Ready when implemnting new initialization operations.
+    /// For consistency reasons, Action Handler should override HandlerReady instead of _Ready when implemnting new initialization operations.
     /// </summary>
     protected virtual void HandlerReady() {}
 

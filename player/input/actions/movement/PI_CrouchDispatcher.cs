@@ -1,10 +1,15 @@
-// Handles virtual inputs for crouch, slide, and dash.
-// Dispatches to slide and dash. Slide then dispatch to crouch if necessary.
-// Processes the real input into a Hold/Tap mode input, and checks for Shrinkability.
 using Godot;
 
+
+/// <summary>
+/// Handles virtual inputs for crouch and slide.
+/// Dispatches to slide. Slide then dispatches to crouch if necessary.
+/// Processes the real input into a Hold/Tap mode input, and checks for Shrinkability.
+/// 
+/// The input value holds the crouch strength, which could be used for analog scaling.
+/// </summary>
 [GlobalClass]
-public partial class PI_CrouchDispatcher : PI_InputKeyAction
+public partial class PI_CrouchDispatcher : PI_ActionHandler<float>
 {
     [ExportCategory("User Settings")]
     [Export] public bool Hold = true;
@@ -18,13 +23,9 @@ public partial class PI_CrouchDispatcher : PI_InputKeyAction
     public ulong LastCrouchDown {get; private set;} = 0; 
     private bool _active = false;
     private bool _tryingUncrouch = false;
-    private BoxShape3D _orignalShape;
 
-    public override void _Ready()
+    protected override void HandlerReady()
     {
-        _orignalShape = new BoxShape3D();
-        BoxShape3D capsuleShape = (BoxShape3D)_body.Shape;
-        _orignalShape.Size = capsuleShape.Size;
         SetPhysicsProcess(false);
     }
 
@@ -38,29 +39,7 @@ public partial class PI_CrouchDispatcher : PI_InputKeyAction
         }
     }
 
-    public override void _UnhandledKeyInput(InputEvent @event)
-    {
-        if (@event.IsActionPressed("crouch"))
-        {
-            LastCrouchDown = Time.GetTicksMsec();
-            if (_active && !Hold)
-                TryStop();
-            else 
-            {
-                _active = true;
-                if (_tryingUncrouch)
-                {
-                    _tryingUncrouch = false;
-                    SetPhysicsProcess(false);
-                }
-                else
-                    _slideInput.InputStart();
-            }
-        }
-
-        else if(@event.IsActionReleased("crouch") && Hold)
-            TryStop();
-    }
+    public override void _UnhandledKeyInput(InputEvent @event) => HandleInput(@event);
 
     private void TryStop()
     {
@@ -75,4 +54,58 @@ public partial class PI_CrouchDispatcher : PI_InputKeyAction
             SetPhysicsProcess(true);
         }
     }
+
+    private void TryStart()
+    {
+        LastCrouchDown = Time.GetTicksMsec();
+        if (_active && !Hold)
+            TryStop();
+        else 
+        {
+            _active = true;
+            if (_tryingUncrouch)
+            {
+                _tryingUncrouch = false;
+                SetPhysicsProcess(false);
+            }
+            else
+                _slideInput.InputStart();
+        }
+    }
+
+    protected override void HandleInput(InputEvent @event)
+    {
+        if (@event.IsActionPressed("crouch"))
+            TryStart();
+
+        else if(@event.IsActionReleased("crouch") && Hold)
+            TryStop();
+    }
+
+
+    protected override void HandleExternal(PI_ActionState actionState, float value)
+    {
+        switch (actionState)
+        {
+            case PI_ActionState.STARTED :
+                TryStart();
+                break;
+            case PI_ActionState.STOPPED :
+                TryStop();
+                break;
+            default :
+                break;
+        }
+    }
+
+    protected override float GetInputValue(InputEvent @event) => 1f;
+
+    public override void EnableAction() => SetProcessUnhandledKeyInput(true);
+
+    public override void DisableAction()
+    {
+        TryStop();
+        SetProcessUnhandledKeyInput(false);
+    }
+
 }

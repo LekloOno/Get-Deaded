@@ -20,6 +20,21 @@ public abstract partial class PI_BufferedHandler<T> : PI_PressHandler<T>
 
     public bool IsBuffered() => Time.GetTicksMsec() - _lastInput < _bufferWindow;
 
+    /// <summary>
+    /// Automatically empties the buffer on disabling.
+    /// For further disabling operations, see PI_BufferedHandler.DisableBufferAction().
+    /// </summary>
+    public sealed override void DisableAction()
+    {
+        _lastInput = 0;
+        DisableBufferAction();
+    }
+
+    /// <summary>
+    /// For consistency reasons, Buffer Action Handlers should override DisableBufferAction instead of DisableAction when implementing new disabling operations.
+    /// </summary>
+    protected abstract void DisableBufferAction();
+    
     protected override void InputDown(InputEvent @event)
     {
         _lastInput = Time.GetTicksMsec();
@@ -32,4 +47,5 @@ public abstract partial class PI_BufferedHandler<T> : PI_PressHandler<T>
         T value = GetInputValue(@event);
         Stop?.Invoke(this, value);
     }
+
 }
