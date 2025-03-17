@@ -9,6 +9,6 @@ public partial class PW_SimpleClick : PW_Hitscan
         if (hurtBox == null)
             return;
             
-        hurtBox.Damage(_damage);
+        hurtBox.Damage(_hit.GetDamage(hurtBox.BodyPart));
     }
 }

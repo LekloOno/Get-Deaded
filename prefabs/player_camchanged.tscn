@@ -1,4 +1,4 @@
-[gd_scene load_steps=103 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=105 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -81,6 +81,7 @@
 [ext_resource type="Texture2D" uid="uid://dsma1lip7bvch" path="res://assets/sprites/dash/dash_cd_mid_shadow.png" id="69_arr85"]
 [ext_resource type="Texture2D" uid="uid://cbh1opskekaqn" path="res://assets/sprites/dash/dash_cd_mid_fill.png" id="70_ee4um"]
 [ext_resource type="Script" uid="uid://bd37jsqipcwxc" path="res://ui/UI_DashReset.cs" id="71_j12ti"]
+[ext_resource type="Script" uid="uid://cjmiash71uc7b" path="res://global/combat/hit/hit/GC_Hit.cs" id="80_ufgmq"]
 [ext_resource type="Script" uid="uid://b4hdeuwma0ma8" path="res://player/combat/weapons/PW_WeaponsHandler.cs" id="81_stdu8"]
 [ext_resource type="Script" uid="uid://b1pmsrdhynvhv" path="res://player/combat/weapons/weapon/PW_SimpleClick.cs" id="82_jlgrh"]
 
@@ -136,10 +137,16 @@ height = 1.8
 [sub_resource type="BoxShape3D" id="BoxShape3D_aav2a"]
 size = Vector3(0.5, 0.15, 0.5)
 
+[sub_resource type="Resource" id="Resource_kn1mb"]
+script = ExtResource("80_ufgmq")
+_damage = 20.0
+_inspectorModifiers = Array[Object]([])
+metadata/_custom_type_script = "uid://cjmiash71uc7b"
+
 [sub_resource type="Resource" id="Resource_stdu8"]
 script = ExtResource("82_jlgrh")
 _maxDistance = 100.0
-_damage = 20.0
+_hit = SubResource("Resource_kn1mb")
 metadata/_custom_type_script = "uid://b1pmsrdhynvhv"
 
 [sub_resource type="Resource" id="Resource_jlgrh"]

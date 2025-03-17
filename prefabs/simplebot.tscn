@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cgxay2q63b8m8"]
+[gd_scene load_steps=28 format=3 uid="uid://cgxay2q63b8m8"]
 
 [ext_resource type="PackedScene" uid="uid://b8yrodu7ix03r" path="res://assets/models/bot.tscn" id="1_bdtk5"]
 [ext_resource type="Script" uid="uid://bbc8us8vvouq0" path="res://global/combat/health/GC_HealthManager.cs" id="2_cm3tr"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://db8e5l76dsikn" path="res://ui/combat/health/UI_HealthBar.cs" id="7_dg3f6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vupcu"]
+radius = 0.3
 height = 1.8
 
 [sub_resource type="Resource" id="Resource_j8cyt"]
@@ -29,13 +30,35 @@ metadata/_custom_type_script = "uid://bclkw4o7merkb"
 [sub_resource type="SphereShape3D" id="SphereShape3D_8fjt1"]
 radius = 0.15
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_26w0a"]
-radius = 0.22
-height = 0.65
+[sub_resource type="SphereShape3D" id="SphereShape3D_j8cyt"]
+radius = 0.198331
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_egto0"]
-radius = 0.359337
-height = 1.02139
+[sub_resource type="SphereShape3D" id="SphereShape3D_ygkka"]
+radius = 0.16
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lnly3"]
+radius = 0.061298
+height = 0.393664
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mxe6x"]
+radius = 0.058
+height = 0.285766
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j8cyt"]
+radius = 0.0484518
+height = 0.205139
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_26w0a"]
+radius = 0.11
+height = 0.6
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0c88m"]
+radius = 0.1
+height = 0.5
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c66wn"]
+radius = 0.06
+height = 0.33
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_j8cyt"]
 viewport_path = NodePath("Sprite3D/SubViewport")
@@ -92,29 +115,192 @@ shape = SubResource("SphereShape3D_8fjt1")
 debug_color = Color(1, 0, 0, 1)
 
 [node name="Chest" type="Area3D" parent="." node_paths=PackedStringArray("_healthManager")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.785877, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0201192, 1.27496, -0.0162432)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("5_lfk02")
+_useSpecialModifier = true
+_modifier = 1.2
 _healthManager = NodePath("../GC_HealthManager")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Chest"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.345365, 0)
-shape = SubResource("CapsuleShape3D_26w0a")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0280221, 0, 0)
+shape = SubResource("SphereShape3D_j8cyt")
 debug_color = Color(0, 1, 0, 0.388235)
 
-[node name="Legs" type="Area3D" parent="." node_paths=PackedStringArray("_healthManager")]
+[node name="Waist" type="Area3D" parent="." node_paths=PackedStringArray("_healthManager")]
+transform = Transform3D(-2.17995e-08, -0.498715, -0.866766, 1, -4.37114e-08, 0, -3.78876e-08, -0.866766, 0.498715, -0.0116693, 1.05221, 0.130753)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("5_lfk02")
 _healthManager = NodePath("../GC_HealthManager")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Legs"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.500222, 0)
-shape = SubResource("CapsuleShape3D_egto0")
-debug_color = Color(0, 1, 0, 0.243137)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Waist"]
+transform = Transform3D(1, 0, -1.77636e-15, 0, 1, -1.19209e-07, 0, 1.19209e-07, 1, -0.0642599, 0.124661, -0.114493)
+shape = SubResource("SphereShape3D_ygkka")
+debug_color = Color(0, 1, 0, 0.388235)
+
+[node name="UpperArm1" type="Area3D" parent="." node_paths=PackedStringArray("_healthManager")]
+transform = Transform3D(0.940715, 0.339198, 0, -0.339198, 0.940715, 0, 0, 0, 1, -0.155156, 1.16249, -0.199104)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("5_lfk02")
+_healthManager = NodePath("../GC_HealthManager")
+metadata/_custom_type_script = "uid://ce82euclamj77"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="UpperArm1"]
+transform = Transform3D(0.963961, 0.262833, -0.0412378, -0.262858, 0.964823, 0.00491805, 0.0410799, 0.00609881, 0.999137, -0.0687029, 0.0626388, 0.00969137)
+shape = SubResource("CapsuleShape3D_lnly3")
+debug_color = Color(0, 1, 0, 0.388235)
+
+[node name="LowerArm1" type="Area3D" parent="." node_paths=PackedStringArray("_healthManager")]
+transform = Transform3D(0.968457, -0.00854641, -0.249034, -0.201767, 0.559572, -0.803847, 0.146223, 0.828738, 0.540197, -0.182727, 1.16249, -0.120731)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("5_lfk02")
+_healthManager = NodePath("../GC_HealthManager")
+metadata/_custom_type_script = "uid://ce82euclamj77"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LowerArm1"]
+transform = Transform3D(0.951247, 0.308339, 0.00766217, -0.308223, 0.949385, 0.060568, 0.011401, -0.0599771, 0.998135, -0.053719, 0.0374376, 0.0155517)
+shape = SubResource("CapsuleShape3D_mxe6x")
+debug_color = Color(0, 1, 0, 0.388235)
+
+[node name="Hand1" type="Area3D" parent="." node_paths=PackedStringArray("_healthManager")]
+transform = Transform3D(0.946932, 0.238951, -0.214993, -0.246586, 0.110973, -0.962746, -0.206191, 0.96467, 0.164006, -0.180771, 1.27598, 0.129645)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("5_lfk02")
+_healthManager = NodePath("../GC_HealthManager")
+metadata/_custom_type_script = "uid://ce82euclamj77"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hand1"]
+transform = Transform3D(0.999939, -0.00731842, -0.00840747, 0.00759043, 0.999434, 0.0328019, 0.00816268, -0.0328636, 0.999427, 0.0121018, -0.0293092, -0.00647795)
+shape = SubResource("CapsuleShape3D_j8cyt")
+debug_color = Color(0, 1, 0, 0.388235)
+
+[node name="Hand2" type="Area3D" parent="." node_paths=PackedStringArray("_healthManager")]
+transform = Transform3D(0.428648, -0.852687, -0.298639, -0.189634, 0.238269, -0.952506, 0.883346, 0.464922, -0.0595652, -0.163751, 1.3161, 0.385991)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("5_lfk02")
+_healthManager = NodePath("../GC_HealthManager")
+metadata/_custom_type_script = "uid://ce82euclamj77"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hand2"]
+transform = Transform3D(0.999939, -0.00731842, -0.00840747, 0.00759043, 0.999434, 0.0328019, 0.00816268, -0.0328636, 0.999427, 0.0121018, -0.0293092, -0.00647795)
+shape = SubResource("CapsuleShape3D_j8cyt")
+debug_color = Color(0, 1, 0, 0.388235)
+
+[node name="UpperArm2" type="Area3D" parent="." node_paths=PackedStringArray("_healthManager")]
+transform = Transform3D(-0.575935, -0.207667, 0.790679, -0.339198, 0.940715, 0, -0.743804, -0.268196, -0.612231, 0.107187, 1.19297, 0.176241)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("5_lfk02")
+_healthManager = NodePath("../GC_HealthManager")
+metadata/_custom_type_script = "uid://ce82euclamj77"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="UpperArm2"]
+transform = Transform3D(0.963961, 0.262833, -0.0412378, -0.262858, 0.964823, 0.00491805, 0.0410799, 0.00609881, 0.999137, -0.0687029, 0.0626388, 0.00969137)
+shape = SubResource("CapsuleShape3D_lnly3")
+debug_color = Color(0, 1, 0, 0.388235)
+
+[node name="LowerArm2" type="Area3D" parent="." node_paths=PackedStringArray("_healthManager")]
+transform = Transform3D(-0.262252, -0.821624, -0.506121, -0.201767, 0.559572, -0.803847, 0.94367, -0.108692, -0.312526, 0.0909524, 1.19128, 0.365936)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("5_lfk02")
+_healthManager = NodePath("../GC_HealthManager")
+metadata/_custom_type_script = "uid://ce82euclamj77"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LowerArm2"]
+transform = Transform3D(0.951247, 0.308339, 0.00766217, -0.308223, 0.949385, 0.060568, 0.011401, -0.0599771, 0.998135, -0.053719, 0.0374376, 0.0155517)
+shape = SubResource("CapsuleShape3D_mxe6x")
+debug_color = Color(0, 1, 0, 0.388235)
+
+[node name="UpperLeg1" type="Area3D" parent="." node_paths=PackedStringArray("_healthManager")]
+transform = Transform3D(0.940715, 0.339198, 0, -0.339198, 0.940715, 0, 0, 0, 1, -0.249438, 0.39587, -0.102023)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("5_lfk02")
+_healthManager = NodePath("../GC_HealthManager")
+metadata/_custom_type_script = "uid://ce82euclamj77"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="UpperLeg1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.345365, 0)
+shape = SubResource("CapsuleShape3D_26w0a")
+debug_color = Color(0, 1, 0, 0.388235)
+
+[node name="UpperLeg2" type="Area3D" parent="." node_paths=PackedStringArray("_healthManager")]
+transform = Transform3D(0.254653, 0.0918212, 0.962663, -0.385602, 0.922559, 0.014007, -0.886828, -0.374772, 0.270339, -0.0129211, 0.39587, 0.305418)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("5_lfk02")
+_healthManager = NodePath("../GC_HealthManager")
+metadata/_custom_type_script = "uid://ce82euclamj77"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="UpperLeg2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.345365, 0)
+shape = SubResource("CapsuleShape3D_26w0a")
+debug_color = Color(0, 1, 0, 0.388235)
+
+[node name="LowerLeg1" type="Area3D" parent="." node_paths=PackedStringArray("_healthManager")]
+transform = Transform3D(0.268001, -0.20682, 0.940958, 0.16988, 0.971527, 0.165154, -0.948323, 0.115589, 0.295505, -0.0805098, -0.0670397, -0.18282)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("5_lfk02")
+_healthManager = NodePath("../GC_HealthManager")
+metadata/_custom_type_script = "uid://ce82euclamj77"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LowerLeg1"]
+transform = Transform3D(0.999989, -0.00430764, 0.00165084, 0.00428449, 0.999896, 0.0137904, -0.00170988, -0.0137832, 0.999904, 0.0159358, 0.355675, -0.0146096)
+shape = SubResource("CapsuleShape3D_0c88m")
+debug_color = Color(0, 1, 0, 0.388235)
+
+[node name="LowerLeg2" type="Area3D" parent="." node_paths=PackedStringArray("_healthManager")]
+transform = Transform3D(-0.251274, -0.119347, 0.96053, -0.00257757, 0.992448, 0.122639, -0.967912, 0.0283403, -0.249685, 0.100657, -0.0695244, 0.279325)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("5_lfk02")
+_healthManager = NodePath("../GC_HealthManager")
+metadata/_custom_type_script = "uid://ce82euclamj77"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LowerLeg2"]
+transform = Transform3D(0.999989, -0.00430764, 0.00165084, 0.00428449, 0.999896, 0.0137904, -0.00170988, -0.0137832, 0.999904, 0.0159358, 0.355675, -0.0146096)
+shape = SubResource("CapsuleShape3D_0c88m")
+debug_color = Color(0, 1, 0, 0.388235)
+
+[node name="Foot1" type="Area3D" parent="." node_paths=PackedStringArray("_healthManager")]
+transform = Transform3D(0.268001, -0.20682, 0.940958, 0.16988, 0.971527, 0.165154, -0.948323, 0.115589, 0.295505, -0.0805098, -0.0670397, -0.18282)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("5_lfk02")
+_useSpecialModifier = true
+_modifier = 0.8
+_healthManager = NodePath("../GC_HealthManager")
+metadata/_custom_type_script = "uid://ce82euclamj77"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Foot1"]
+transform = Transform3D(0.830656, 0.377717, -0.409074, -0.374682, -0.164257, -0.912488, -0.411855, 0.911235, 0.00508237, 0.0109333, 0.132441, -0.10949)
+shape = SubResource("CapsuleShape3D_c66wn")
+debug_color = Color(0, 1, 0, 0.388235)
+
+[node name="Foot2" type="Area3D" parent="." node_paths=PackedStringArray("_healthManager")]
+transform = Transform3D(-0.770755, 0.0265588, 0.636577, 0.16988, 0.971527, 0.165154, -0.614066, 0.235436, -0.753322, 0.101802, -0.0670397, 0.259969)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("5_lfk02")
+_useSpecialModifier = true
+_modifier = 0.8
+_healthManager = NodePath("../GC_HealthManager")
+metadata/_custom_type_script = "uid://ce82euclamj77"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Foot2"]
+transform = Transform3D(0.830656, 0.377717, -0.409074, -0.374682, -0.164257, -0.912488, -0.411855, 0.911235, 0.00508237, 0.0109333, 0.132441, -0.10949)
+shape = SubResource("CapsuleShape3D_c66wn")
+debug_color = Color(0, 1, 0, 0.388235)
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.495, 0, 0, 0, 0.305, 0, 0, 0, 0.305, 0, 1.92362, 0)
