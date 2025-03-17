@@ -1,5 +1,11 @@
 using Godot;
 
+/// <summary>
+/// A simple Buffered Press input implementation.
+/// Whenever the input is pressed down, it is stored in buffer.
+/// The UseBuffer() method allows to check if any input is stored, and consume it if so.
+/// </summary>
+/// <typeparam name="T">The input value type.</typeparam>
 public abstract partial class PI_BufferedHandler<T> : PI_PressHandler<T>
 {
     [Export] private ulong _bufferWindow;

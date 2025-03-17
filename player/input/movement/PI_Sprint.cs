@@ -2,7 +2,7 @@ using System;
 using Godot;
 
 [GlobalClass]
-public partial class PI_Sprint : PI_HoldableHandler<float>
+public partial class PI_Sprint : PI_HoldableHandler<EmptyInput>
 {
 
     [ExportCategory("Setup")]
@@ -14,12 +14,12 @@ public partial class PI_Sprint : PI_HoldableHandler<float>
     public EventHandler OnStopSprinting;
 
     protected override ACTIONS_Action Action => ACTIONS_Movement.SPRINT;
-    protected override float GetInputValue(InputEvent @event) => 1f;
+    protected override EmptyInput GetInputValue(InputEvent @event) => new();
 
-    public override void _Ready()
+    protected override void HandlerReady()
     {
-        _jump.OnStart += (o, f) => HandleExternal(PI_ActionState.STOPPED, 1f);
-        _walkInput.OnStopOrBackward += (o, f) => HandleExternal(PI_ActionState.STOPPED, 1f);
+        _jump.OnStart += (o, f) => HandleExternal(PI_ActionState.STOPPED, new());
+        _walkInput.OnStopOrBackward += (o, f) => HandleExternal(PI_ActionState.STOPPED, new());
     }
 
     public override void _UnhandledKeyInput(InputEvent @event)
