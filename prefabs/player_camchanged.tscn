@@ -666,11 +666,12 @@ _wind = NodePath("Wind")
 stream = ExtResource("44_vhlgj")
 autoplay = true
 
-[node name="PIM_Arena" type="Node" parent="." node_paths=PackedStringArray("_controller", "_walkInput", "_sprintInput", "_crouchDispatcherInput", "_weaponsInput", "_reviveInput")]
+[node name="PIM_Arena" type="Node" parent="." node_paths=PackedStringArray("_controller", "_walkInput", "_sprintInput", "_jumpInput", "_crouchDispatcherInput", "_weaponsInput", "_reviveInput")]
 script = ExtResource("49_stdu8")
 _controller = NodePath("..")
 _walkInput = NodePath("PI_Walk")
 _sprintInput = NodePath("PI_Sprint")
+_jumpInput = NodePath("PI_Jump")
 _crouchDispatcherInput = NodePath("PI_CrouchDispatcher")
 _weaponsInput = NodePath("PI_Weapons")
 _reviveInput = NodePath("PI_Revive")

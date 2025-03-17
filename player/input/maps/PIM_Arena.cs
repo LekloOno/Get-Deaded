@@ -6,6 +6,7 @@ public partial class PIM_Arena : Node
     [Export] private PM_Controller _controller;
     [Export] private PI_Walk _walkInput;
     [Export] private PI_Sprint _sprintInput;
+    [Export] private PI_Jump _jumpInput;
     [Export] private PI_CrouchDispatcher _crouchDispatcherInput;
     [Export] private PI_Weapons _weaponsInput;
     [Export] private PI_Revive _reviveInput;
@@ -21,10 +22,11 @@ public partial class PIM_Arena : Node
     {
         _controller.Revive();
 
-        _controller.SetProcessUnhandledInput(true);
+        //_controller.SetProcessUnhandledInput(true);
         _walkInput.EnableAction();
         _sprintInput.EnableAction();
         _crouchDispatcherInput.EnableAction();
+        _jumpInput.EnableAction();
         _weaponsInput.EnableAction();
 
         _reviveInput.DisableAction();
@@ -32,10 +34,11 @@ public partial class PIM_Arena : Node
 
     public void SetDead()
     {
-        _controller.SetProcessUnhandledInput(false);
+        //_controller.SetProcessUnhandledInput(false);
         _walkInput.DisableAction();
         _sprintInput.DisableAction();
         _crouchDispatcherInput.DisableAction();
+        _jumpInput.DisableAction();
         _weaponsInput.DisableAction();
 
         _reviveInput.EnableAction();
