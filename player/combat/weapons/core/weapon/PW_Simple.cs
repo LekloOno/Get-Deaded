@@ -10,6 +10,7 @@ public partial class PW_Simple : PW_Weapon
     {
         _ads?.Initialize(_camera);
         _fire.Initialize(_camera, _sight);
+        _fire.Hit += (o, e) => Hit?.Invoke(o, e);
     }
 
 

@@ -14,6 +14,8 @@ public partial class PW_Alternate : PW_Weapon
         _currentFire = _primaryFire;
         _primaryFire.Initialize(_camera, _sight);
         _secondaryFire.Initialize(_camera, _sight);
+        _primaryFire.Hit += (o, e) => Hit?.Invoke(o, e);
+        _secondaryFire.Hit += (o, e) => Hit?.Invoke(o, e);
 
         if (_ads != null)
         {

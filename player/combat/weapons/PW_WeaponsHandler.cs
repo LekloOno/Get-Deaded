@@ -10,11 +10,16 @@ public partial class PW_WeaponsHandler : Node
     [Export] private Node3D _sight;
     [Export] private PI_Weapons _weaponsInput;
     [Export] private Array<PW_Weapon> _weapons;
+    public EventHandler<ShotHitEventArgs> Hit;
     private PW_Weapon _activeWeapon;
+
     public override void _Ready()
     {
         foreach(PW_Weapon weapon in _weapons)
+        {
             weapon.Initialize(_camera, _sight);
+            weapon.Hit += (o, e) => Hit?.Invoke(o, e);
+        }
 
         if (_weapons.Count > 0)
             _activeWeapon = _weapons[0];

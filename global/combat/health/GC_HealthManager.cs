@@ -2,7 +2,7 @@ using System;
 using Godot;
 
 [GlobalClass]
-public partial class GC_HealthManager : Node
+public partial class GC_HealthManager : Node3D
 {
     [Export] public GC_Health TopHealthLayer {get; private set;}
     public HealthInitEventArgs InitState {get; private set;} = null;

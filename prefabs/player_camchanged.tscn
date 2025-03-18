@@ -1,4 +1,4 @@
-[gd_scene load_steps=113 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=116 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -84,7 +84,9 @@
 [ext_resource type="Script" uid="uid://cjmiash71uc7b" path="res://global/combat/hit/hit/GC_Hit.cs" id="80_ufgmq"]
 [ext_resource type="Script" uid="uid://fc7gkofu3df7" path="res://player/combat/weapons/core/shot/PWS_Hitscan.cs" id="81_f31u3"]
 [ext_resource type="Script" uid="uid://b4hdeuwma0ma8" path="res://player/combat/weapons/PW_WeaponsHandler.cs" id="81_stdu8"]
+[ext_resource type="Script" uid="uid://c7tdbt357bj80" path="res://ui/combat/weapon/UI_DamageIndicatorManager.cs" id="82_5dw8r"]
 [ext_resource type="Script" uid="uid://dmsklefspdvlw" path="res://player/combat/weapons/core/fire/PWF_Ponctual.cs" id="82_fuwq2"]
+[ext_resource type="PackedScene" uid="uid://bj3ck4u2xa8hu" path="res://prefabs/damage_indicator.tscn" id="83_ewcnl"]
 [ext_resource type="Script" uid="uid://cu3n4oi1x76dl" path="res://player/combat/weapons/core/fire/PWF_Continuous.cs" id="83_fuwq2"]
 [ext_resource type="Script" uid="uid://1woqjjvt2bxc" path="res://player/combat/weapons/core/weapon/PW_Alternate.cs" id="84_8j20c"]
 
@@ -140,10 +142,26 @@ height = 1.8
 [sub_resource type="BoxShape3D" id="BoxShape3D_aav2a"]
 size = Vector3(0.5, 0.15, 0.5)
 
+[sub_resource type="Resource" id="Resource_8j20c"]
+script = ExtResource("48_h1ove")
+_maxHealth = 0.0
+metadata/_custom_type_script = "uid://be02fh6y0vldv"
+
+[sub_resource type="Resource" id="Resource_htv2j"]
+script = ExtResource("47_rvgf0")
+_maxHealth = 100.0
+metadata/_custom_type_script = "uid://dqcp38rr3u5gx"
+
+[sub_resource type="Resource" id="Resource_gcum8"]
+script = ExtResource("48_h1ove")
+_maxHealth = 50.0
+Child = SubResource("Resource_htv2j")
+metadata/_custom_type_script = "uid://be02fh6y0vldv"
+
 [sub_resource type="Resource" id="Resource_5dw8r"]
 script = ExtResource("80_ufgmq")
 _damage = 40.0
-_inspectorModifiers = null
+_inspectorModifiers = Array[Object]([])
 metadata/_custom_type_script = "uid://cjmiash71uc7b"
 
 [sub_resource type="Resource" id="Resource_ewcnl"]
@@ -182,25 +200,12 @@ _spread = 0.0
 _fireRate = 100
 metadata/_custom_type_script = "uid://cu3n4oi1x76dl"
 
-[sub_resource type="Resource" id="Resource_fuwq2"]
+[sub_resource type="Resource" id="Resource_3bwxm"]
 resource_local_to_scene = true
 script = ExtResource("84_8j20c")
 _primaryFire = SubResource("Resource_fdvd6")
 _secondaryFire = SubResource("Resource_lk6x0")
 metadata/_custom_type_script = "uid://1woqjjvt2bxc"
-
-[sub_resource type="Resource" id="Resource_jlgrh"]
-resource_local_to_scene = true
-script = ExtResource("47_rvgf0")
-_maxHealth = 100.0
-metadata/_custom_type_script = "uid://dqcp38rr3u5gx"
-
-[sub_resource type="Resource" id="Resource_ufgmq"]
-resource_local_to_scene = true
-script = ExtResource("48_h1ove")
-_maxHealth = 50.0
-Child = SubResource("Resource_jlgrh")
-metadata/_custom_type_script = "uid://be02fh6y0vldv"
 
 [node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("_healthManager", "_walkProcess", "_wallJump", "_wallClimb", "_groundState", "_cameraControl", "_surfaceControl", "_straffeSnap")]
 axis_lock_angular_y = true
@@ -208,7 +213,7 @@ floor_constant_speed = true
 floor_block_on_wall = false
 floor_max_angle = 0.872665
 script = ExtResource("1_vw06q")
-_healthManager = NodePath("PH_Manager")
+_healthManager = NodePath("Body/PH_Manager")
 _walkProcess = NodePath("PIM_Arena/PI_Walk")
 _wallJump = NodePath("Movement/Actions/Jump/PM_WallJump")
 _wallClimb = NodePath("Movement/Actions/Jump/PM_WallClimb")
@@ -339,7 +344,7 @@ grow_vertical = 2
 theme_override_constants/separation = 20
 alignment = 1
 script = ExtResource("13_3qmec")
-_healthManager = NodePath("../../../../../../../../PH_Manager")
+_healthManager = NodePath("../../../../../../../../Body/PH_Manager")
 _higherBar = NodePath("HigherLayer")
 _lowerBar = NodePath("LowerLayer")
 metadata/_custom_type_script = "uid://d01sb0k1e87yt"
@@ -458,7 +463,7 @@ top_level = true
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("15_h1ove")
-HealthManager = NodePath("../../PH_Manager")
+HealthManager = NodePath("../PH_Manager")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body/BodyBox"]
@@ -472,7 +477,7 @@ collision_layer = 4
 collision_mask = 0
 script = ExtResource("15_h1ove")
 BodyPart = 0
-HealthManager = NodePath("../../PH_Manager")
+HealthManager = NodePath("../PH_Manager")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body/HeadBox"]
@@ -705,6 +710,14 @@ _wind = NodePath("Wind")
 [node name="Wind" type="AudioStreamPlayer2D" parent="Body/Sound/PA_SpeedWind"]
 stream = ExtResource("44_vhlgj")
 autoplay = true
+
+[node name="PH_Manager" type="Node3D" parent="Body"]
+script = ExtResource("46_eanik")
+_shield = SubResource("Resource_8j20c")
+_decayPerSecond = 25.0
+_regenPerSecond = 10.0
+TopHealthLayer = SubResource("Resource_gcum8")
+metadata/_custom_type_script = "uid://dettpmrm6albd"
 
 [node name="PIM_Arena" type="Node" parent="." node_paths=PackedStringArray("_controller", "_walkInput", "_sprintInput", "_jumpInput", "_crouchDispatcherInput", "_weaponsInput", "_reviveInput")]
 script = ExtResource("49_stdu8")
@@ -952,18 +965,26 @@ offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("65_wohr1")
 
+[node name="UI_DamageIndicatorManager" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("_camera", "_weaponsHandler", "_bufferTimer")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("82_5dw8r")
+_camera = NodePath("../../Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/Camera3D")
+_indicatorScene = ExtResource("83_ewcnl")
+_weaponsHandler = NodePath("../../PW_WeaponsHandler")
+_bufferTimer = NodePath("Timer")
+metadata/_custom_type_script = "uid://c7tdbt357bj80"
+
+[node name="Timer" type="Timer" parent="CanvasLayer/UI_DamageIndicatorManager"]
+wait_time = 0.3
+one_shot = true
+
 [node name="PW_WeaponsHandler" type="Node" parent="." node_paths=PackedStringArray("_camera", "_sight", "_weaponsInput")]
 script = ExtResource("81_stdu8")
 _camera = NodePath("../Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/Camera3D")
 _sight = NodePath("../Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean")
 _weaponsInput = NodePath("../PIM_Arena/PI_Weapons")
-_weapons = Array[Object]([SubResource("Resource_fuwq2")])
+_weapons = Array[Object]([SubResource("Resource_3bwxm")])
 metadata/_custom_type_script = "uid://b4hdeuwma0ma8"
-
-[node name="PH_Manager" type="Node" parent="."]
-script = ExtResource("46_eanik")
-_shield = SubResource("Resource_ufgmq")
-_decayPerSecond = 25.0
-_regenPerSecond = 10.0
-TopHealthLayer = SubResource("Resource_ufgmq")
-metadata/_custom_type_script = "uid://dettpmrm6albd"

@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://bj3ck4u2xa8hu"]
+
+[ext_resource type="Script" uid="uid://cx80c77bqsp8x" path="res://ui/combat/weapon/UI_DamageIndicator.cs" id="1_5mgnj"]
+
+[node name="UI_DamageIndicator" type="Label"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "69"
+script = ExtResource("1_5mgnj")
+_maxHeightOffset = 0.5
+_fadeTime = 1.5
+metadata/_custom_type_script = "uid://cx80c77bqsp8x"

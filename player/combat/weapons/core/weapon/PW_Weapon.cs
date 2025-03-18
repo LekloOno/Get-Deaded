@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 [GlobalClass]
@@ -5,6 +6,7 @@ public abstract partial class PW_Weapon : Resource
 {
     protected Camera3D _camera;
     protected Node3D _sight;
+    public EventHandler<ShotHitEventArgs> Hit;
 
     public void Initialize(Camera3D camera, Node3D sight)
     {
