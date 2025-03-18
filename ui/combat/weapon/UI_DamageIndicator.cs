@@ -14,19 +14,21 @@ public partial class UI_DamageIndicator : Label
     private Tween opacityTween;
     private Tween offsetTween;
     
-    public void Initialize(Camera3D camera, Node3D target, float damage)
+    public void Initialize(Camera3D camera, Node3D target, float damage, Color color)
     {
         _camera = camera;
         _target = target;
         _damage = damage;
         Text = (int)_damage + "";
+        AddThemeColorOverride("font_shadow_color", color);
         StartAnim();
     } 
 
-    public void Stack(float damage)
+    public void Stack(float damage, Color color)
     {
         _damage += damage;
         Text = (int)_damage + "";
+        AddThemeColorOverride("font_shadow_color", color);
         opacityTween?.Kill();
         offsetTween?.Kill();
         StartAnim();

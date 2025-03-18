@@ -8,6 +8,7 @@ public partial class UI_DamageIndicatorManager : Control
     [Export] private PW_WeaponsHandler _weaponsHandler;
     [Export] private Timer _bufferTimer;
     private UI_DamageIndicator _currentIndicator;
+    private GC_HealthManager _currentTarget;
 
     public override void _Ready()
     {
@@ -21,18 +22,23 @@ public partial class UI_DamageIndicatorManager : Control
         if (e.HurtBox == null || e.Target == null)
             return;
 
-        if (_currentIndicator != null)
+        Color color = CONF_HealthColors.GetDamageColors(e.SenderLayer);
+
+        if (_currentIndicator != null && e.Target == _currentTarget)
         {
-            _currentIndicator.Stack(e.Damage);
+            _currentIndicator.Stack(e.Damage, color);
             _bufferTimer.Start();
         } else
         {
+            _currentTarget = e.Target;
+            
             Node indicatorNode = _indicatorScene.Instantiate();
 
             if(indicatorNode is UI_DamageIndicator indicator)
             {
                 _currentIndicator = indicator;
-                _currentIndicator.Initialize(_camera, e.Target, e.Damage);
+                GD.Print(color);
+                _currentIndicator.Initialize(_camera, e.Target, e.Damage, color);
                 AddChild(_currentIndicator);
                 _bufferTimer.Start();
             }

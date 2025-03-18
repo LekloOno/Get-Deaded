@@ -156,7 +156,7 @@ public partial class GC_Health : Resource
 
     public GC_Health GetExposedLayer()
     {
-        if (CurrentHealth > 0f)
+        if (CurrentHealth > 0f || Child == null)
             return this;
 
         return Child.GetExposedLayer();

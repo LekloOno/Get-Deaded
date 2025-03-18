@@ -20,7 +20,7 @@ public partial class PWS_Hitscan : PW_Shot
             if (collider is GC_HurtBox hurtBox)
             {
                 bool killed = _hitData.SendHit(hurtBox, out float takenDamage);
-                Hit?.Invoke(this, new(hurtBox.HealthManager, hurtBox, takenDamage, killed));
+                Hit?.Invoke(this, new(hurtBox.HealthManager, hurtBox.HealthManager.GetExposedLayer(), hurtBox, takenDamage, killed));
             }
             else
             {

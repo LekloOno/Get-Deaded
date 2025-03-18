@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DATA_HealthColors" load_steps=7 format=3 uid="uid://f062rhepk3"]
+[gd_resource type="Resource" script_class="CONFD_HealthColors" load_steps=7 format=3 uid="uid://f062rhepk3"]
 
 [ext_resource type="Script" uid="uid://o0xwdckg83g2" path="res://config/combat/health_colors/CONFD_BarColors.cs" id="1_bqvr6"]
 [ext_resource type="Script" uid="uid://qk855mtrhnvg" path="res://config/combat/health_colors/CONFD_HealthColors.cs" id="1_dp6h2"]
