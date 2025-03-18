@@ -13,7 +13,26 @@ public partial class UI_HitMarker : Control
     [Export] private float _expandTime;
     [Export] private float _baseStartOffset = 12f;
     [Export] private float _basePeakOffset = 15f;
-    
+    [Export] private Vector2 _baseSize = new Vector2(18, 4);
+
+    private Vector2 _sticksSize;
+    public Vector2 SticksSize
+    {
+        get => _sticksSize;
+        set {
+            Vector2 scale = value;
+            Vector2 position = _markerSticks.ElementAt(0).Position;
+            position.Y = -scale.Y/2;
+            foreach (Panel stick in _markerSticks)
+            {
+                stick.Size = scale;
+                stick.Position = position;
+            }
+            
+            _sticksSize = value;
+        }
+    }
+
     private float _offset;
     public float Offset
     {
@@ -31,6 +50,7 @@ public partial class UI_HitMarker : Control
     private StyleBoxFlat _hitStyle;
     private Tween opacityTween;
     private Tween offsetTween;
+    private Tween sizeTween;
 
     public override void _Ready()
     {
@@ -53,6 +73,10 @@ public partial class UI_HitMarker : Control
 
         opacityTween?.Kill();
         offsetTween?.Kill();
+
+        float sizeRatio = (Mathf.Tanh(e.Damage/300f)*2f + 1f)/2f;
+        Vector2 targetSize = new((int)(_baseSize.X * sizeRatio), (int)(_baseSize.Y * sizeRatio));
+        SticksSize = targetSize * 2f;
 
         if (e.HurtBox.BodyPart == GC_BodyPart.Head)
             _hitStyle.BgColor = _headShotColor;

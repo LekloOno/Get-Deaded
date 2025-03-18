@@ -9,6 +9,7 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
+anti_aliasing_size = 10.0
 
 [node name="UI_HitMarker" type="Control" node_paths=PackedStringArray("_markerSticks")]
 layout_mode = 3
