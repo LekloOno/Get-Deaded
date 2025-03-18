@@ -37,7 +37,6 @@ public partial class UI_DamageIndicatorManager : Control
             if(indicatorNode is UI_DamageIndicator indicator)
             {
                 _currentIndicator = indicator;
-                GD.Print(color);
                 _currentIndicator.Initialize(_camera, e.Target, e.Damage, color);
                 AddChild(_currentIndicator);
                 _bufferTimer.Start();
