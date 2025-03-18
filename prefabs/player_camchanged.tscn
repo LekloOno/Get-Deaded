@@ -909,7 +909,7 @@ script = ExtResource("32_jex4o")
 _sightPosition = NodePath("../../Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean")
 _camera = NodePath("../../Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/Camera3D")
 image = NodePath("TextureRect")
-_resetSpeed = 20.0
+_smoothSpeed = 4.0
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/UI_Crosshair"]
 self_modulate = Color(1, 1, 1, 0.619608)
