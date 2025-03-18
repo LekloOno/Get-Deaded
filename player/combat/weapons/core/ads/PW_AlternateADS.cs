@@ -1,5 +1,6 @@
 using Godot;
 
+[GlobalClass]
 public partial class PW_AlternateADS : PW_ADS<PW_Fire>
 {
     private PW_Fire _primaryFire;

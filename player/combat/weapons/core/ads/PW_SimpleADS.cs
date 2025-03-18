@@ -8,6 +8,7 @@ public class SimpleADSModifiers(float moveSpeed, float spread, float recoil)
     public float Recoil {get;} = recoil;
 }
 
+[GlobalClass]
 public partial class PW_SimpleADS : PW_ADS<SimpleADSModifiers>
 {
     [Export] public float SpreadMultiplier {get; private set;} = 1f;
