@@ -31,7 +31,7 @@
 [ext_resource type="Script" uid="uid://djvwdvj81b0ph" path="res://player/movement/PM_StraffeSnap.cs" id="22_cp0qq"]
 [ext_resource type="Script" uid="uid://8jhqgihiplt1" path="res://player/movement/actions/jump/PM_LedgeClimb.cs" id="23_w6mlc"]
 [ext_resource type="Script" uid="uid://bfy40slnxcea4" path="res://player/movement/actions/jump/PM_WallJump.cs" id="24_gjg6k"]
-[ext_resource type="Script" uid="uid://nat0vtl7jqqp" path="res://ui/UI_SpeedoMeter.cs" id="31_jxc7o"]
+[ext_resource type="Script" uid="uid://nat0vtl7jqqp" path="res://ui/movement/UI_SpeedoMeter.cs" id="31_jxc7o"]
 [ext_resource type="Texture2D" uid="uid://lv4srmi6i827" path="res://assets/crosshairs/PNG/Outline/crosshair001.png" id="32_64eld"]
 
 [sub_resource type="Curve" id="Curve_ux8de"]

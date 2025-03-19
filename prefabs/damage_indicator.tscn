@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bj3ck4u2xa8hu"]
 
-[ext_resource type="Script" uid="uid://cx80c77bqsp8x" path="res://ui/combat/weapon/UI_DamageIndicator.cs" id="1_5mgnj"]
+[ext_resource type="Script" uid="uid://cx80c77bqsp8x" path="res://ui/combat/weapon/hit/number/UI_DamageIndicator.cs" id="1_5mgnj"]
 
 [node name="UI_DamageIndicator" type="Label"]
 anchors_preset = 8
