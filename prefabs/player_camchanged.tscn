@@ -91,8 +91,8 @@
 [ext_resource type="Script" uid="uid://cu3n4oi1x76dl" path="res://player/combat/weapons/core/fire/PWF_Continuous.cs" id="83_fuwq2"]
 [ext_resource type="Script" uid="uid://1woqjjvt2bxc" path="res://player/combat/weapons/core/weapon/PW_Alternate.cs" id="84_8j20c"]
 [ext_resource type="Script" uid="uid://sujdlokcwnd6" path="res://global/combat/hit/GC_DamageModifier.cs" id="86_fvk8i"]
-[ext_resource type="Resource" uid="uid://cjtp57wq3gj2b" path="res://assets/vfx/trails/heavy_line_trail.tres" id="88_4vhab"]
-[ext_resource type="Resource" uid="uid://gybmpon1qqb8" path="res://assets/vfx/trails/basic_line_trail.tres" id="88_fvk8i"]
+[ext_resource type="Resource" uid="uid://y3jeidgf2oba" path="res://assets/vfx/trails/heavy_moving_trail.tres" id="88_4vhab"]
+[ext_resource type="Resource" uid="uid://mcobvwmhuq3a" path="res://assets/vfx/trails/simple_moving_trail.tres" id="91_4vhab"]
 
 [sub_resource type="Curve" id="Curve_ux8de"]
 _limits = [-0.5, 1.0, 0.0, 1.0]
@@ -199,7 +199,7 @@ metadata/_custom_type_script = "uid://cjmiash71uc7b"
 [sub_resource type="Resource" id="Resource_4vhab"]
 script = ExtResource("81_f31u3")
 _maxDistance = 100.0
-_trail = ExtResource("88_fvk8i")
+_trail = ExtResource("91_4vhab")
 _hitData = SubResource("Resource_fvk8i")
 _originOffset = Vector3(0, 0, 0)
 _directionOffset = Vector3(0, 0, 0)

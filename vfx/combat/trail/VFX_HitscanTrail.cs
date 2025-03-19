@@ -1,12 +1,12 @@
 using Godot;
 
 [GlobalClass]
-public abstract partial class VFX_HitscanTrail : Resource
+public abstract partial class VFX_HitscanTrail : VFX_Trail
 {
     [Export] protected Material _material;
     protected VFX_TrailMesh _mesh;
     
-    public void Shoot(Node manager, Vector3 origin, Vector3 hit)
+    public override sealed void Shoot(Node manager, Vector3 origin, Vector3 hit)
     {
         _mesh = CreateTrail(origin, hit, (Material)_material.Duplicate());
         _mesh.TopLevel = true;
