@@ -1,4 +1,4 @@
-[gd_scene load_steps=329 format=4 uid="uid://co0vxcbu5hxvc"]
+[gd_scene load_steps=330 format=4 uid="uid://co0vxcbu5hxvc"]
 
 [ext_resource type="Script" uid="uid://b8ob8d1uxja85" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_kt2k2"]
 [ext_resource type="Texture2D" uid="uid://c6o8mw13kagni" path="res://assets/skyboxes/Sky_trainyard_01_1b2.png" id="1_niaf1"]
@@ -31,6 +31,7 @@
 [ext_resource type="Script" uid="uid://d01sb0k1e87yt" path="res://ui/combat/health/UI_EntityHealth.cs" id="25_ux68e"]
 [ext_resource type="Script" uid="uid://db8e5l76dsikn" path="res://ui/combat/health/UI_HealthBar.cs" id="26_5y3lt"]
 [ext_resource type="Material" uid="uid://c0boa35qtrcpj" path="res://assets/shaders/blood_material.tres" id="27_pxgqc"]
+[ext_resource type="PackedScene" uid="uid://5xqfm2mmkdsg" path="res://prefabs/simplebot_barrier.tscn" id="32_50g17"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_6v6fv"]
 panorama = ExtResource("1_niaf1")
@@ -1964,7 +1965,13 @@ physics_interpolation_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.5, 7)
 
 [node name="Sebastien" parent="Entities" instance=ExtResource("16_716do")]
+transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, 3, 0.5, 14)
+
+[node name="Bertrand" parent="Entities" instance=ExtResource("32_50g17")]
 transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 0, 0.5, 9)
+
+[node name="Michel" parent="Entities" instance=ExtResource("32_50g17")]
+transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, -10, 4, 19)
 
 [node name="Albert" type="CharacterBody3D" parent="Entities"]
 transform = Transform3D(0.625, 0, 1.08253, 0, 1.25, 0, -1.08253, 0, 0.625, -6.2, 0.5, 8.3)

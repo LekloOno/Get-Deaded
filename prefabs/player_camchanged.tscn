@@ -1,4 +1,4 @@
-[gd_scene load_steps=121 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=119 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -90,7 +90,6 @@
 [ext_resource type="PackedScene" uid="uid://bj3ck4u2xa8hu" path="res://prefabs/damage_indicator.tscn" id="83_ewcnl"]
 [ext_resource type="Script" uid="uid://cu3n4oi1x76dl" path="res://player/combat/weapons/core/fire/PWF_Continuous.cs" id="83_fuwq2"]
 [ext_resource type="Script" uid="uid://1woqjjvt2bxc" path="res://player/combat/weapons/core/weapon/PW_Alternate.cs" id="84_8j20c"]
-[ext_resource type="Script" uid="uid://sujdlokcwnd6" path="res://global/combat/hit/GC_DamageModifier.cs" id="86_fvk8i"]
 [ext_resource type="Resource" uid="uid://y3jeidgf2oba" path="res://assets/vfx/trails/heavy_moving_trail.tres" id="88_4vhab"]
 [ext_resource type="Resource" uid="uid://mcobvwmhuq3a" path="res://assets/vfx/trails/simple_moving_trail.tres" id="91_4vhab"]
 
@@ -162,16 +161,10 @@ _maxHealth = 50.0
 Child = SubResource("Resource_htv2j")
 metadata/_custom_type_script = "uid://be02fh6y0vldv"
 
-[sub_resource type="Resource" id="Resource_u3xwg"]
-script = ExtResource("86_fvk8i")
-BodyPart = 0
-Modifier = 2.5
-metadata/_custom_type_script = "uid://sujdlokcwnd6"
-
 [sub_resource type="Resource" id="Resource_5dw8r"]
 script = ExtResource("80_ufgmq")
 _damage = 40.0
-_inspectorModifiers = Array[Object]([SubResource("Resource_u3xwg")])
+_inspectorModifiers = null
 metadata/_custom_type_script = "uid://cjmiash71uc7b"
 
 [sub_resource type="Resource" id="Resource_ewcnl"]

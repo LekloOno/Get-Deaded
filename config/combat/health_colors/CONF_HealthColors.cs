@@ -20,6 +20,7 @@ public partial class CONF_HealthColors : Node
         {
             GC_Armor _ =>   Instance.Bars.Armor,
             GC_Shield _ =>  Instance.Bars.Shield,
+            GC_Barrier _ => Instance.Bars.Barrier,
             GC_Health _ =>  Instance.Bars.Health,
             _ => Instance.Bars.Default,
         };
@@ -31,6 +32,7 @@ public partial class CONF_HealthColors : Node
         {
             GC_Armor _ =>   Instance.Damages.Armor,
             GC_Shield _ =>  Instance.Damages.Shield,
+            GC_Barrier _ => Instance.Damages.Barrier,
             GC_Health _ =>  Instance.Damages.Health,
             _ => Instance.Damages.Default,
         };
