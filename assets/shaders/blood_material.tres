@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c0boa35qtrcpj"]
+
+[ext_resource type="Shader" uid="uid://o56g4tr3o6cr" path="res://assets/shaders/blood_shader.tres" id="1_by6g2"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_by6g2")

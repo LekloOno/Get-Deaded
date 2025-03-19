@@ -1,4 +1,4 @@
-[gd_scene load_steps=324 format=4 uid="uid://co0vxcbu5hxvc"]
+[gd_scene load_steps=329 format=4 uid="uid://co0vxcbu5hxvc"]
 
 [ext_resource type="Script" uid="uid://b8ob8d1uxja85" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_kt2k2"]
 [ext_resource type="Texture2D" uid="uid://c6o8mw13kagni" path="res://assets/skyboxes/Sky_trainyard_01_1b2.png" id="1_niaf1"]
@@ -30,6 +30,7 @@
 [ext_resource type="Script" uid="uid://ce82euclamj77" path="res://global/combat/hit/hurt/GC_HurtBox.cs" id="24_f60qe"]
 [ext_resource type="Script" uid="uid://d01sb0k1e87yt" path="res://ui/combat/health/UI_EntityHealth.cs" id="25_ux68e"]
 [ext_resource type="Script" uid="uid://db8e5l76dsikn" path="res://ui/combat/health/UI_HealthBar.cs" id="26_5y3lt"]
+[ext_resource type="Material" uid="uid://c0boa35qtrcpj" path="res://assets/shaders/blood_material.tres" id="27_pxgqc"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_6v6fv"]
 panorama = ExtResource("1_niaf1")
@@ -977,19 +978,19 @@ points = PackedVector3Array(13.9375, 3.75, -0.5625, 13.9375, 0.5, -0.5625, 14.56
 radius = 0.3
 height = 1.8
 
-[sub_resource type="Resource" id="Resource_81hwy"]
+[sub_resource type="Resource" id="Resource_50g17"]
 resource_local_to_scene = true
 script = ExtResource("22_50g17")
-_maxHealth = 2000.0
+_maxHealth = 1000.0
 metadata/_custom_type_script = "uid://dqcp38rr3u5gx"
 
-[sub_resource type="Resource" id="Resource_ousnk"]
+[sub_resource type="Resource" id="Resource_qlgsc"]
 resource_local_to_scene = true
 script = ExtResource("23_qlgsc")
 _resistance = 0.8
 _maxReduction = 10.0
 _maxHealth = 200.0
-Child = SubResource("Resource_81hwy")
+Child = SubResource("Resource_50g17")
 metadata/_custom_type_script = "uid://bclkw4o7merkb"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8fjt1"]
@@ -1025,33 +1026,52 @@ height = 0.5
 radius = 0.06
 height = 0.33
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_0iwb2"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_pxgqc"]
 viewport_path = NodePath("Entities/Albert/Sprite3D/SubViewport")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tujlf"]
 bg_color = Color(0, 0, 0, 0.505882)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r601x"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ux68e"]
 resource_local_to_scene = true
 bg_color = Color(0.883632, 0.842725, 0.825069, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iwqyq"]
 bg_color = Color(0, 0, 0, 0)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q6gn3"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5y3lt"]
 resource_local_to_scene = true
 bg_color = Color(0, 0.49066, 0.829606, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y3kqx"]
 bg_color = Color(0, 0, 0, 0.505882)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qvbmw"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_81hwy"]
 resource_local_to_scene = true
 bg_color = Color(0.784314, 0.141176, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w6751"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ousnk"]
 resource_local_to_scene = true
 bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Curve" id="Curve_lnly3"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.199883), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_mxe6x"]
+curve = SubResource("Curve_lnly3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0c88m"]
+spread = 60.0
+initial_velocity_min = 3.0
+initial_velocity_max = 6.0
+linear_accel_min = 2.0
+linear_accel_max = 4.0
+scale_min = 0.5
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_mxe6x")
+
+[sub_resource type="QuadMesh" id="QuadMesh_c66wn"]
 
 [sub_resource type="Resource" id="Resource_efpjk"]
 script = ExtResource("23_qy2j6")
@@ -1947,7 +1967,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.5, 7)
 transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 0, 0.5, 9)
 
 [node name="Albert" type="CharacterBody3D" parent="Entities"]
-transform = Transform3D(0.957555, 0, 0.803485, 0, 1.25, 0, -0.803485, 0, 0.957555, -6, 0.5, 8)
+transform = Transform3D(0.625, 0, 1.08253, 0, 1.25, 0, -1.08253, 0, 0.625, -6.2, 0.5, 8.3)
 
 [node name="AuxScene" parent="Entities/Albert" instance=ExtResource("20_mmn4w")]
 
@@ -1958,23 +1978,24 @@ shape = SubResource("CapsuleShape3D_vupcu")
 [node name="GC_HealthManager" type="Node3D" parent="Entities/Albert"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.54684, 0)
 script = ExtResource("21_pxgqc")
-TopHealthLayer = SubResource("Resource_ousnk")
+TopHealthLayer = SubResource("Resource_qlgsc")
 metadata/_custom_type_script = "uid://bbc8us8vvouq0"
 
-[node name="Head" type="Area3D" parent="Entities/Albert" node_paths=PackedStringArray("HealthManager")]
+[node name="Head" type="Area3D" parent="Entities/Albert" node_paths=PackedStringArray("HealthManager", "_damageSplatter")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 1.55457, 0.0319857)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("24_f60qe")
 BodyPart = 0
 HealthManager = NodePath("../GC_HealthManager")
+_damageSplatter = NodePath("../GPUParticles3D")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/Albert/Head"]
 shape = SubResource("SphereShape3D_8fjt1")
 debug_color = Color(1, 0, 0, 1)
 
-[node name="Chest" type="Area3D" parent="Entities/Albert" node_paths=PackedStringArray("HealthManager")]
+[node name="Chest" type="Area3D" parent="Entities/Albert" node_paths=PackedStringArray("HealthManager", "_damageSplatter")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0201192, 1.27496, -0.0162432)
 collision_layer = 2
 collision_mask = 0
@@ -1982,6 +2003,7 @@ script = ExtResource("24_f60qe")
 _useSpecialModifier = true
 _modifier = 1.2
 HealthManager = NodePath("../GC_HealthManager")
+_damageSplatter = NodePath("../GPUParticles3D")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/Albert/Chest"]
@@ -1989,12 +2011,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0280221, 0, 0)
 shape = SubResource("SphereShape3D_j8cyt")
 debug_color = Color(0, 1, 0, 0.388235)
 
-[node name="Waist" type="Area3D" parent="Entities/Albert" node_paths=PackedStringArray("HealthManager")]
+[node name="Waist" type="Area3D" parent="Entities/Albert" node_paths=PackedStringArray("HealthManager", "_damageSplatter")]
 transform = Transform3D(-2.17995e-08, -0.498715, -0.866766, 1, -4.37114e-08, 0, -3.78876e-08, -0.866766, 0.498715, -0.0116693, 1.05221, 0.130753)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("24_f60qe")
 HealthManager = NodePath("../GC_HealthManager")
+_damageSplatter = NodePath("../GPUParticles3D")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/Albert/Waist"]
@@ -2002,12 +2025,13 @@ transform = Transform3D(1, 0, -1.77636e-15, 0, 1, -1.19209e-07, 0, 1.19209e-07, 
 shape = SubResource("SphereShape3D_ygkka")
 debug_color = Color(0, 1, 0, 0.388235)
 
-[node name="UpperArm1" type="Area3D" parent="Entities/Albert" node_paths=PackedStringArray("HealthManager")]
+[node name="UpperArm1" type="Area3D" parent="Entities/Albert" node_paths=PackedStringArray("HealthManager", "_damageSplatter")]
 transform = Transform3D(0.940715, 0.339198, 0, -0.339198, 0.940715, 0, 0, 0, 1, -0.155156, 1.16249, -0.199104)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("24_f60qe")
 HealthManager = NodePath("../GC_HealthManager")
+_damageSplatter = NodePath("../GPUParticles3D")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/Albert/UpperArm1"]
@@ -2015,12 +2039,13 @@ transform = Transform3D(0.963961, 0.262833, -0.0412378, -0.262858, 0.964823, 0.0
 shape = SubResource("CapsuleShape3D_lnly3")
 debug_color = Color(0, 1, 0, 0.388235)
 
-[node name="LowerArm1" type="Area3D" parent="Entities/Albert" node_paths=PackedStringArray("HealthManager")]
+[node name="LowerArm1" type="Area3D" parent="Entities/Albert" node_paths=PackedStringArray("HealthManager", "_damageSplatter")]
 transform = Transform3D(0.968457, -0.00854641, -0.249034, -0.201767, 0.559572, -0.803847, 0.146223, 0.828738, 0.540197, -0.182727, 1.16249, -0.120731)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("24_f60qe")
 HealthManager = NodePath("../GC_HealthManager")
+_damageSplatter = NodePath("../GPUParticles3D")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/Albert/LowerArm1"]
@@ -2028,12 +2053,13 @@ transform = Transform3D(0.951247, 0.308339, 0.00766217, -0.308223, 0.949385, 0.0
 shape = SubResource("CapsuleShape3D_mxe6x")
 debug_color = Color(0, 1, 0, 0.388235)
 
-[node name="Hand1" type="Area3D" parent="Entities/Albert" node_paths=PackedStringArray("HealthManager")]
+[node name="Hand1" type="Area3D" parent="Entities/Albert" node_paths=PackedStringArray("HealthManager", "_damageSplatter")]
 transform = Transform3D(0.946932, 0.238951, -0.214993, -0.246586, 0.110973, -0.962746, -0.206191, 0.96467, 0.164006, -0.180771, 1.27598, 0.129645)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("24_f60qe")
 HealthManager = NodePath("../GC_HealthManager")
+_damageSplatter = NodePath("../GPUParticles3D")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/Albert/Hand1"]
@@ -2041,12 +2067,13 @@ transform = Transform3D(0.999939, -0.00731842, -0.00840747, 0.00759043, 0.999434
 shape = SubResource("CapsuleShape3D_j8cyt")
 debug_color = Color(0, 1, 0, 0.388235)
 
-[node name="Hand2" type="Area3D" parent="Entities/Albert" node_paths=PackedStringArray("HealthManager")]
+[node name="Hand2" type="Area3D" parent="Entities/Albert" node_paths=PackedStringArray("HealthManager", "_damageSplatter")]
 transform = Transform3D(0.428648, -0.852687, -0.298639, -0.189634, 0.238269, -0.952506, 0.883346, 0.464922, -0.0595652, -0.163751, 1.3161, 0.385991)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("24_f60qe")
 HealthManager = NodePath("../GC_HealthManager")
+_damageSplatter = NodePath("../GPUParticles3D")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/Albert/Hand2"]
@@ -2054,12 +2081,13 @@ transform = Transform3D(0.999939, -0.00731842, -0.00840747, 0.00759043, 0.999434
 shape = SubResource("CapsuleShape3D_j8cyt")
 debug_color = Color(0, 1, 0, 0.388235)
 
-[node name="UpperArm2" type="Area3D" parent="Entities/Albert" node_paths=PackedStringArray("HealthManager")]
+[node name="UpperArm2" type="Area3D" parent="Entities/Albert" node_paths=PackedStringArray("HealthManager", "_damageSplatter")]
 transform = Transform3D(-0.575935, -0.207667, 0.790679, -0.339198, 0.940715, 0, -0.743804, -0.268196, -0.612231, 0.107187, 1.19297, 0.176241)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("24_f60qe")
 HealthManager = NodePath("../GC_HealthManager")
+_damageSplatter = NodePath("../GPUParticles3D")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/Albert/UpperArm2"]
@@ -2067,12 +2095,13 @@ transform = Transform3D(0.963961, 0.262833, -0.0412378, -0.262858, 0.964823, 0.0
 shape = SubResource("CapsuleShape3D_lnly3")
 debug_color = Color(0, 1, 0, 0.388235)
 
-[node name="LowerArm2" type="Area3D" parent="Entities/Albert" node_paths=PackedStringArray("HealthManager")]
+[node name="LowerArm2" type="Area3D" parent="Entities/Albert" node_paths=PackedStringArray("HealthManager", "_damageSplatter")]
 transform = Transform3D(-0.262252, -0.821624, -0.506121, -0.201767, 0.559572, -0.803847, 0.94367, -0.108692, -0.312526, 0.0909524, 1.19128, 0.365936)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("24_f60qe")
 HealthManager = NodePath("../GC_HealthManager")
+_damageSplatter = NodePath("../GPUParticles3D")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/Albert/LowerArm2"]
@@ -2080,12 +2109,13 @@ transform = Transform3D(0.951247, 0.308339, 0.00766217, -0.308223, 0.949385, 0.0
 shape = SubResource("CapsuleShape3D_mxe6x")
 debug_color = Color(0, 1, 0, 0.388235)
 
-[node name="UpperLeg1" type="Area3D" parent="Entities/Albert" node_paths=PackedStringArray("HealthManager")]
+[node name="UpperLeg1" type="Area3D" parent="Entities/Albert" node_paths=PackedStringArray("HealthManager", "_damageSplatter")]
 transform = Transform3D(0.940715, 0.339198, 0, -0.339198, 0.940715, 0, 0, 0, 1, -0.249438, 0.39587, -0.102023)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("24_f60qe")
 HealthManager = NodePath("../GC_HealthManager")
+_damageSplatter = NodePath("../GPUParticles3D")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/Albert/UpperLeg1"]
@@ -2093,12 +2123,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.345365, 0)
 shape = SubResource("CapsuleShape3D_26w0a")
 debug_color = Color(0, 1, 0, 0.388235)
 
-[node name="UpperLeg2" type="Area3D" parent="Entities/Albert" node_paths=PackedStringArray("HealthManager")]
+[node name="UpperLeg2" type="Area3D" parent="Entities/Albert" node_paths=PackedStringArray("HealthManager", "_damageSplatter")]
 transform = Transform3D(0.254653, 0.0918212, 0.962663, -0.385602, 0.922559, 0.014007, -0.886828, -0.374772, 0.270339, -0.0129211, 0.39587, 0.305418)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("24_f60qe")
 HealthManager = NodePath("../GC_HealthManager")
+_damageSplatter = NodePath("../GPUParticles3D")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/Albert/UpperLeg2"]
@@ -2106,12 +2137,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.345365, 0)
 shape = SubResource("CapsuleShape3D_26w0a")
 debug_color = Color(0, 1, 0, 0.388235)
 
-[node name="LowerLeg1" type="Area3D" parent="Entities/Albert" node_paths=PackedStringArray("HealthManager")]
+[node name="LowerLeg1" type="Area3D" parent="Entities/Albert" node_paths=PackedStringArray("HealthManager", "_damageSplatter")]
 transform = Transform3D(0.268001, -0.20682, 0.940958, 0.16988, 0.971527, 0.165154, -0.948323, 0.115589, 0.295505, -0.0805098, -0.0670397, -0.18282)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("24_f60qe")
 HealthManager = NodePath("../GC_HealthManager")
+_damageSplatter = NodePath("../GPUParticles3D")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/Albert/LowerLeg1"]
@@ -2119,12 +2151,13 @@ transform = Transform3D(0.999989, -0.00430764, 0.00165084, 0.00428449, 0.999896,
 shape = SubResource("CapsuleShape3D_0c88m")
 debug_color = Color(0, 1, 0, 0.388235)
 
-[node name="LowerLeg2" type="Area3D" parent="Entities/Albert" node_paths=PackedStringArray("HealthManager")]
+[node name="LowerLeg2" type="Area3D" parent="Entities/Albert" node_paths=PackedStringArray("HealthManager", "_damageSplatter")]
 transform = Transform3D(-0.251274, -0.119347, 0.96053, -0.00257757, 0.992448, 0.122639, -0.967912, 0.0283403, -0.249685, 0.100657, -0.0695244, 0.279325)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("24_f60qe")
 HealthManager = NodePath("../GC_HealthManager")
+_damageSplatter = NodePath("../GPUParticles3D")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/Albert/LowerLeg2"]
@@ -2132,7 +2165,7 @@ transform = Transform3D(0.999989, -0.00430764, 0.00165084, 0.00428449, 0.999896,
 shape = SubResource("CapsuleShape3D_0c88m")
 debug_color = Color(0, 1, 0, 0.388235)
 
-[node name="Foot1" type="Area3D" parent="Entities/Albert" node_paths=PackedStringArray("HealthManager")]
+[node name="Foot1" type="Area3D" parent="Entities/Albert" node_paths=PackedStringArray("HealthManager", "_damageSplatter")]
 transform = Transform3D(0.268001, -0.20682, 0.940958, 0.16988, 0.971527, 0.165154, -0.948323, 0.115589, 0.295505, -0.0805098, -0.0670397, -0.18282)
 collision_layer = 2
 collision_mask = 0
@@ -2140,6 +2173,7 @@ script = ExtResource("24_f60qe")
 _useSpecialModifier = true
 _modifier = 0.8
 HealthManager = NodePath("../GC_HealthManager")
+_damageSplatter = NodePath("../GPUParticles3D")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/Albert/Foot1"]
@@ -2147,7 +2181,7 @@ transform = Transform3D(0.830656, 0.377717, -0.409074, -0.374682, -0.164257, -0.
 shape = SubResource("CapsuleShape3D_c66wn")
 debug_color = Color(0, 1, 0, 0.388235)
 
-[node name="Foot2" type="Area3D" parent="Entities/Albert" node_paths=PackedStringArray("HealthManager")]
+[node name="Foot2" type="Area3D" parent="Entities/Albert" node_paths=PackedStringArray("HealthManager", "_damageSplatter")]
 transform = Transform3D(-0.770755, 0.0265588, 0.636577, 0.16988, 0.971527, 0.165154, -0.614066, 0.235436, -0.753322, 0.101802, -0.0670397, 0.259969)
 collision_layer = 2
 collision_mask = 0
@@ -2155,6 +2189,7 @@ script = ExtResource("24_f60qe")
 _useSpecialModifier = true
 _modifier = 0.8
 HealthManager = NodePath("../GC_HealthManager")
+_damageSplatter = NodePath("../GPUParticles3D")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/Albert/Foot2"]
@@ -2165,7 +2200,7 @@ debug_color = Color(0, 1, 0, 0.388235)
 [node name="Sprite3D" type="Sprite3D" parent="Entities/Albert"]
 transform = Transform3D(0.495, 0, 0, 0, 0.305, 0, 0, 0, 0.305, 0, 1.92362, 0)
 billboard = 1
-texture = SubResource("ViewportTexture_0iwb2")
+texture = SubResource("ViewportTexture_pxgqc")
 
 [node name="SubViewport" type="SubViewport" parent="Entities/Albert/Sprite3D"]
 transparent_bg = true
@@ -2216,7 +2251,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_tujlf")
-theme_override_styles/fill = SubResource("StyleBoxFlat_r601x")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ux68e")
 value = 40.43
 show_percentage = false
 
@@ -2236,7 +2271,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_iwqyq")
-theme_override_styles/fill = SubResource("StyleBoxFlat_q6gn3")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5y3lt")
 value = 27.46
 show_percentage = false
 
@@ -2264,7 +2299,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_y3kqx")
-theme_override_styles/fill = SubResource("StyleBoxFlat_qvbmw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_81hwy")
 value = 40.43
 show_percentage = false
 
@@ -2284,9 +2319,20 @@ grow_vertical = 2
 size_flags_horizontal = 4
 mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_iwqyq")
-theme_override_styles/fill = SubResource("StyleBoxFlat_w6751")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ousnk")
 value = 27.46
 show_percentage = false
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Entities/Albert"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29184, 0)
+top_level = true
+material_override = ExtResource("27_pxgqc")
+emitting = false
+amount = 10
+lifetime = 0.2
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_0c88m")
+draw_pass_1 = SubResource("QuadMesh_c66wn")
 
 [node name="GC_HealBox" type="Area3D" parent="Entities"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2.6, 20)

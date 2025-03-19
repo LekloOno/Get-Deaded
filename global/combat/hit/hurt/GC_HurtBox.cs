@@ -11,6 +11,7 @@ public partial class GC_HurtBox : Area3D
     [Export] private bool _useSpecialModifier = false;
     [Export] private float _modifier = 1f;
     [Export] public GC_HealthManager HealthManager {get; private set;}
+    [Export] public GpuParticles3D _damageSplatter;
     
     public override void _Ready()
     {
@@ -19,6 +20,16 @@ public partial class GC_HurtBox : Area3D
 
     public bool Damage(float damage, out float takenDamage) => HealthManager.Damage(damage * _modifier, out takenDamage);
     public float Heal(float heal) => HealthManager.Heal(heal);
+    public bool TriggerDamageParticles(Vector3 hitPosition, Vector3 from)
+    {
+        if (_damageSplatter == null)
+            return false;
+
+        _damageSplatter.Position = hitPosition;
+        _damageSplatter.LookAt(from);
+        _damageSplatter.Emitting = true;
+        return true;
+    }
     
     public static float RealHitModifier(GC_DamageModifier damageModifier) => damageModifier/CONF_BodyModifiers.GetDefaultModifier(damageModifier.BodyPart);
 

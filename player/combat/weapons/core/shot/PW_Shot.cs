@@ -21,4 +21,10 @@ public abstract partial class PW_Shot : Resource
         HandleShoot(manager, origin, direction);
 
     public abstract void HandleShoot(Node3D manager, Vector3 origin, Vector3 direction);
+
+    protected void DoHit(ShotHitEventArgs e, Vector3 hitPosition, Vector3 from)
+    {
+        Hit?.Invoke(this, e);
+        e.HurtBox?.TriggerDamageParticles(hitPosition, from);
+    }
 }
