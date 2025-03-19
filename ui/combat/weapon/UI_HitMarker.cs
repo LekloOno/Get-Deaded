@@ -6,6 +6,8 @@ using Godot.Collections;
 public partial class UI_HitMarker : Control
 {
     [Export] private Array<Panel> _markerSticks;
+    [Export] private UI_KillMarker _killMarker;
+    [Export] private Control _damageMarker;
     [Export] private PW_WeaponsHandler _weaponsHandler;
     [Export] private Color _headShotColor;
     [Export] private Color _normalColor;
@@ -56,9 +58,9 @@ public partial class UI_HitMarker : Control
     {
         _weaponsHandler.Hit += HandleHit;
         _hitStyle = (StyleBoxFlat) _markerSticks.ElementAt(0).GetThemeStylebox("panel");
-        Color mod = Modulate;
+        Color mod = _damageMarker.Modulate;
         mod.A = 0f;
-        Modulate = mod;
+        _damageMarker.Modulate = mod;
         Offset = _baseStartOffset;
     }
 
@@ -67,9 +69,15 @@ public partial class UI_HitMarker : Control
         if (e.HurtBox == null || e.Target == null)
             return;
         
-        Color mod = Modulate;
+        if (e.Kill)
+        {
+            _killMarker.StartAnim();
+            return;
+        }
+
+        Color mod = _damageMarker.Modulate;
         mod.A = 1f;
-        Modulate = mod;
+        _damageMarker.Modulate = mod;
 
         opacityTween?.Kill();
         offsetTween?.Kill();
@@ -84,12 +92,12 @@ public partial class UI_HitMarker : Control
             _hitStyle.BgColor = _normalColor;
         
         opacityTween = CreateTween();
-        opacityTween.TweenProperty(this, "modulate:a", 0.0f, _fadeTime);
+        opacityTween.TweenProperty(_damageMarker, "modulate:a", 0.0f, _fadeTime);
 
         offsetTween = CreateTween();
         float scaledDamage = Mathf.Tanh(e.Damage/20f) * 1.5f + 1;
 
-        offsetTween.TweenProperty(this, "Offset", _basePeakOffset * scaledDamage, _expandTime);
+        offsetTween.TweenProperty(this, "Offset", _basePeakOffset * scaledDamage, _expandTime).SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Sine);
         offsetTween.TweenProperty(this, "Offset", _baseStartOffset, _expandTime);
     }
 }

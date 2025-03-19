@@ -939,8 +939,8 @@ texture = ExtResource("33_ck35o")
 [node name="UI_HitMarker" parent="CanvasLayer/UI_Crosshair/TextureRect" node_paths=PackedStringArray("_weaponsHandler") instance=ExtResource("77_fdvd6")]
 layout_mode = 1
 _weaponsHandler = NodePath("../../../../PW_WeaponsHandler")
-_fadeTime = 0.2
-_expandTime = 0.12
+_fadeTime = 0.18
+_expandTime = 0.1
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/UI_Crosshair/TextureRect" node_paths=PackedStringArray("_dash")]
 layout_mode = 1
@@ -985,6 +985,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 script = ExtResource("82_5dw8r")
 _camera = NodePath("../../Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/Camera3D")
 _indicatorScene = ExtResource("83_ewcnl")
