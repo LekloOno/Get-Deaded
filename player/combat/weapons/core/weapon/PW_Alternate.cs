@@ -12,8 +12,8 @@ public partial class PW_Alternate : PW_Weapon
     public override void WeaponInitialize()
     {
         _currentFire = _primaryFire;
-        _primaryFire.Initialize(_camera, _sight);
-        _secondaryFire.Initialize(_camera, _sight);
+        _primaryFire.Initialize(_camera, _sight, _barel);
+        _secondaryFire.Initialize(_camera, _sight, _barel);
         _primaryFire.Hit += (o, e) => Hit?.Invoke(o, e);
         _secondaryFire.Hit += (o, e) => Hit?.Invoke(o, e);
 

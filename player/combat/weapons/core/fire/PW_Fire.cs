@@ -18,13 +18,13 @@ public abstract partial class PW_Fire : Resource
 
     protected ulong _lastShot = 0;
 
-    public void Initialize(Camera3D camera, Node3D sight)
+    public void Initialize(Camera3D camera, Node3D sight, Node3D _barel)
     {
         _camera = camera;
         _sight = sight;
         foreach (PW_Shot shot in _shots)
         {
-            shot.Initialize();
+            shot.Initialize(_barel);
             shot.Hit += (o, e) => Hit?.Invoke(o, e);
         }
     }

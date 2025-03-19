@@ -9,7 +9,7 @@ public partial class PW_Simple : PW_Weapon
     public override void WeaponInitialize()
     {
         _ads?.Initialize(_camera);
-        _fire.Initialize(_camera, _sight);
+        _fire.Initialize(_camera, _sight, _barel);
         _fire.Hit += (o, e) => Hit?.Invoke(o, e);
     }
 

@@ -8,6 +8,7 @@ public partial class PW_WeaponsHandler : Node
 {
     [Export] private Camera3D _camera;
     [Export] private Node3D _sight;
+    [Export] private Node3D _barel;
     [Export] private PI_Weapons _weaponsInput;
     [Export] private Array<PW_Weapon> _weapons;
     public EventHandler<ShotHitEventArgs> Hit;
@@ -17,7 +18,7 @@ public partial class PW_WeaponsHandler : Node
     {
         foreach(PW_Weapon weapon in _weapons)
         {
-            weapon.Initialize(_camera, _sight);
+            weapon.Initialize(_camera, _sight, _barel);
             weapon.Hit += (o, e) => Hit?.Invoke(o, e);
         }
 

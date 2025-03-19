@@ -480,6 +480,9 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_1bvlm")
 value = 27.46
 show_percentage = false
 
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing"]
+remote_path = NodePath("../../../../../../PW_WeaponsHandler/Node3D")
+
 [node name="GroundCast" type="ShapeCast3D" parent="."]
 shape = SubResource("SphereShape3D_4jpmy")
 target_position = Vector3(0, -20, 0)
@@ -1022,10 +1025,17 @@ metadata/_custom_type_script = "uid://c7tdbt357bj80"
 wait_time = 0.3
 one_shot = true
 
-[node name="PW_WeaponsHandler" type="Node" parent="." node_paths=PackedStringArray("_camera", "_sight", "_weaponsInput")]
+[node name="PW_WeaponsHandler" type="Node" parent="." node_paths=PackedStringArray("_camera", "_sight", "_barel", "_weaponsInput")]
 script = ExtResource("81_stdu8")
 _camera = NodePath("../Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/Camera3D")
 _sight = NodePath("../Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean")
+_barel = NodePath("Node3D/Barrel")
 _weaponsInput = NodePath("../PIM_Arena/PI_Weapons")
 _weapons = Array[Object]([SubResource("Resource_3bwxm")])
 metadata/_custom_type_script = "uid://b4hdeuwma0ma8"
+
+[node name="Node3D" type="Node3D" parent="PW_WeaponsHandler"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0)
+
+[node name="Barrel" type="Node3D" parent="PW_WeaponsHandler/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.145505, -0.250334, -0.491571)

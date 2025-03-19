@@ -7,11 +7,14 @@ public partial class PWS_Hitscan : PW_Shot
     [Export] protected VFX_HitscanTrail _trail;
     public override void HandleShoot(Node3D manager, Vector3 origin, Vector3 direction)
     {
-        Vector3 hit = origin + direction * _maxDistance;
+        Vector3 castOrigin = origin + _originOffset;
+        Vector3 castDirection = direction + _directionOffset;
+
+        Vector3 hit = castOrigin + castDirection * _maxDistance;
 
         World3D world = manager.GetWorld3D();
         PhysicsDirectSpaceState3D spaceState = world.DirectSpaceState;
-        PhysicsRayQueryParameters3D query = PhysicsRayQueryParameters3D.Create(origin, hit);
+        PhysicsRayQueryParameters3D query = PhysicsRayQueryParameters3D.Create(castOrigin, hit);
         query.CollideWithAreas = true;
         query.CollisionMask = 2;
 
@@ -32,6 +35,6 @@ public partial class PWS_Hitscan : PW_Shot
             }
         }
 
-        _trail?.Shoot(manager, origin, hit);
+        _trail?.Shoot(manager, _barel.GlobalPosition + _originOffset, hit);
     }
 }
