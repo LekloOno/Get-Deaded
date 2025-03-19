@@ -1,22 +1,13 @@
 using Godot;
 
-public partial class VFX_LineTrailMesh(Vector3 origin, Vector3 hit, Material material, float fadeTime) : VFX_TrailMesh(origin, hit, material)
+public partial class VFX_LineTrailMesh(Vector3 origin, Vector3 hit, Material material, float fadeTime, VFX_LineType _lineType) : VFX_TrailMesh(origin, hit, material)
 {
-    //private SceneTreeTimer _timer;
-
     public override void Shoot()
     {
-        ImmediateMesh drawMesh = new();
+        ImmediateMesh drawMesh = _lineType.GenerateMesh(_origin, _hit, GetViewport().GetCamera3D());
         Mesh = drawMesh;
-        drawMesh.SurfaceBegin(Mesh.PrimitiveType.Lines, MaterialOverride);
-        drawMesh.SurfaceAddVertex(_origin);
-        drawMesh.SurfaceAddVertex(_hit);
         drawMesh.SurfaceEnd();
-        //_timer = GetTree().CreateTimer(fadeTime);
-        //_timer.Timeout += QueueFree;
-        //GD.Print("alo");
         Anim();
-        //QueueFree();
     }
 
     public async void Anim()

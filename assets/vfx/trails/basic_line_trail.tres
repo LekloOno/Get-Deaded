@@ -1,10 +1,17 @@
-[gd_resource type="Resource" script_class="VFX_LineTrail" load_steps=3 format=3 uid="uid://gybmpon1qqb8"]
+[gd_resource type="Resource" script_class="VFX_LineTrail" load_steps=5 format=3 uid="uid://gybmpon1qqb8"]
 
 [ext_resource type="Script" uid="uid://ddcjrbuymtie4" path="res://vfx/combat/trail/line/VFX_LineTrail.cs" id="1_d73yo"]
 [ext_resource type="Material" uid="uid://bmwhbvhkyyqnm" path="res://assets/materials/vfx/basic_line_trail.tres" id="1_hxua3"]
+[ext_resource type="Script" uid="uid://btuswij6bk44u" path="res://vfx/combat/trail/line/types/VFX_RectangleLine.cs" id="1_vfuko"]
+
+[sub_resource type="Resource" id="Resource_ru1sb"]
+script = ExtResource("1_vfuko")
+_thickness = 0.01
+metadata/_custom_type_script = "uid://btuswij6bk44u"
 
 [resource]
 script = ExtResource("1_d73yo")
-_fadeTime = 0.2
+_fadeTime = 0.1
+_lineType = SubResource("Resource_ru1sb")
 _material = ExtResource("1_hxua3")
 metadata/_custom_type_script = "uid://ddcjrbuymtie4"
