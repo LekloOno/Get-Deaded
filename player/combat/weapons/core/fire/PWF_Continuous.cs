@@ -6,6 +6,8 @@ public partial class PWF_Continuous : PW_Fire
     private SceneTreeTimer _timer;
     public override void Press()
     {
+        StopShoot();
+        
         float nextShot = _fireRate;
         if (CanShoot())
             Shoot();
