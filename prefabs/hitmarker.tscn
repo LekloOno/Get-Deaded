@@ -1,15 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://d06ge8pykx8s1"]
+[gd_scene load_steps=6 format=3 uid="uid://d06ge8pykx8s1"]
 
 [ext_resource type="Script" uid="uid://ds1ebussoj6l7" path="res://ui/combat/weapon/UI_HitMarker.cs" id="1_lvplh"]
+[ext_resource type="Script" uid="uid://c5ie4xhq4n5p7" path="res://ui/combat/weapon/UI_DamageMarker.cs" id="2_tnwbf"]
 [ext_resource type="Script" uid="uid://brn5nu2bbuq5w" path="res://ui/combat/weapon/UI_KillMarker.cs" id="2_v7leq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wngje"]
 bg_color = Color(1, 1, 1, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
+shadow_size = 1
 anti_aliasing_size = 10.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tnwbf"]
@@ -18,7 +16,7 @@ border_color = Color(0, 0, 0, 0)
 shadow_size = 1
 anti_aliasing_size = 10.0
 
-[node name="UI_HitMarker" type="Control" node_paths=PackedStringArray("_markerSticks", "_killMarker", "_damageMarker")]
+[node name="UI_HitMarker" type="Control" node_paths=PackedStringArray("_killMarker", "_damageMarker")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -31,20 +29,22 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 script = ExtResource("1_lvplh")
-_markerSticks = [NodePath("Damage/Control/BotRight"), NodePath("Damage/Control2/BotLeft"), NodePath("Damage/Control3/TopRight"), NodePath("Damage/Control4/TopLeft")]
 _killMarker = NodePath("UI_KillMarker")
-_damageMarker = NodePath("Damage")
-_headShotColor = Color(1, 0.764706, 0, 1)
-_normalColor = Color(1, 1, 1, 1)
+_damageMarker = NodePath("UI_DamageMarker")
 metadata/_custom_type_script = "uid://ds1ebussoj6l7"
 
-[node name="Damage" type="Control" parent="."]
+[node name="UI_DamageMarker" type="Control" parent="." node_paths=PackedStringArray("_markerSticks")]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
+script = ExtResource("2_tnwbf")
+_markerSticks = [NodePath("Control/BotRight"), NodePath("Control2/BotLeft"), NodePath("Control3/TopRight"), NodePath("Control4/TopLeft")]
+_headShotColor = Color(1, 0.745098, 0, 0.862745)
+_normalColor = Color(1, 1, 1, 0.862745)
+metadata/_custom_type_script = "uid://c5ie4xhq4n5p7"
 
-[node name="Control" type="Control" parent="Damage"]
+[node name="Control" type="Control" parent="UI_DamageMarker"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -60,7 +60,7 @@ grow_vertical = 2
 rotation = 0.785398
 mouse_filter = 2
 
-[node name="BotRight" type="Panel" parent="Damage/Control"]
+[node name="BotRight" type="Panel" parent="UI_DamageMarker/Control"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -75,7 +75,7 @@ mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_wngje")
 metadata/_edit_use_anchors_ = true
 
-[node name="Control2" type="Control" parent="Damage"]
+[node name="Control2" type="Control" parent="UI_DamageMarker"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -91,7 +91,7 @@ grow_vertical = 2
 rotation = 2.35619
 mouse_filter = 2
 
-[node name="BotLeft" type="Panel" parent="Damage/Control2"]
+[node name="BotLeft" type="Panel" parent="UI_DamageMarker/Control2"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -106,7 +106,7 @@ mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_wngje")
 metadata/_edit_use_anchors_ = true
 
-[node name="Control3" type="Control" parent="Damage"]
+[node name="Control3" type="Control" parent="UI_DamageMarker"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -122,7 +122,7 @@ grow_vertical = 2
 rotation = -0.785398
 mouse_filter = 2
 
-[node name="TopRight" type="Panel" parent="Damage/Control3"]
+[node name="TopRight" type="Panel" parent="UI_DamageMarker/Control3"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -137,7 +137,7 @@ mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_wngje")
 metadata/_edit_use_anchors_ = true
 
-[node name="Control4" type="Control" parent="Damage"]
+[node name="Control4" type="Control" parent="UI_DamageMarker"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -153,7 +153,7 @@ grow_vertical = 2
 rotation = -2.35619
 mouse_filter = 2
 
-[node name="TopLeft" type="Panel" parent="Damage/Control4"]
+[node name="TopLeft" type="Panel" parent="UI_DamageMarker/Control4"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5

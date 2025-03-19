@@ -939,8 +939,6 @@ texture = ExtResource("33_ck35o")
 [node name="UI_HitMarker" parent="CanvasLayer/UI_Crosshair/TextureRect" node_paths=PackedStringArray("_weaponsHandler") instance=ExtResource("77_fdvd6")]
 layout_mode = 1
 _weaponsHandler = NodePath("../../../../PW_WeaponsHandler")
-_fadeTime = 0.18
-_expandTime = 0.1
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/UI_Crosshair/TextureRect" node_paths=PackedStringArray("_dash")]
 layout_mode = 1
