@@ -1,4 +1,4 @@
-[gd_scene load_steps=119 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=124 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -91,6 +91,7 @@
 [ext_resource type="Script" uid="uid://cu3n4oi1x76dl" path="res://player/combat/weapons/core/fire/PWF_Continuous.cs" id="83_fuwq2"]
 [ext_resource type="Script" uid="uid://1woqjjvt2bxc" path="res://player/combat/weapons/core/weapon/PW_Alternate.cs" id="84_8j20c"]
 [ext_resource type="Script" uid="uid://sujdlokcwnd6" path="res://global/combat/hit/GC_DamageModifier.cs" id="86_fvk8i"]
+[ext_resource type="Script" uid="uid://ddcjrbuymtie4" path="res://vfx/combat/trail/line/VFX_LineTrail.cs" id="88_fvk8i"]
 
 [sub_resource type="Curve" id="Curve_ux8de"]
 _limits = [-0.5, 1.0, 0.0, 1.0]
@@ -172,9 +173,22 @@ _damage = 40.0
 _inspectorModifiers = Array[Object]([SubResource("Resource_u3xwg")])
 metadata/_custom_type_script = "uid://cjmiash71uc7b"
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4vhab"]
+transparency = 1
+albedo_color = Color(1, 0.878431, 0, 1)
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+
+[sub_resource type="Resource" id="Resource_wow6d"]
+script = ExtResource("88_fvk8i")
+_fadeTime = 0.5
+_material = SubResource("StandardMaterial3D_4vhab")
+metadata/_custom_type_script = "uid://ddcjrbuymtie4"
+
 [sub_resource type="Resource" id="Resource_ewcnl"]
 script = ExtResource("81_f31u3")
 _maxDistance = 100.0
+_trail = SubResource("Resource_wow6d")
 _hitData = SubResource("Resource_5dw8r")
 _originOffset = Vector3(0, 0, 0)
 _directionOffset = Vector3(0, 0, 0)
@@ -193,9 +207,22 @@ _damage = 5.0
 _inspectorModifiers = null
 metadata/_custom_type_script = "uid://cjmiash71uc7b"
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fvk8i"]
+transparency = 1
+albedo_color = Color(1, 0.705882, 0, 1)
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+
+[sub_resource type="Resource" id="Resource_cqits"]
+script = ExtResource("88_fvk8i")
+_fadeTime = 0.5
+_material = SubResource("StandardMaterial3D_fvk8i")
+metadata/_custom_type_script = "uid://ddcjrbuymtie4"
+
 [sub_resource type="Resource" id="Resource_4vhab"]
 script = ExtResource("81_f31u3")
 _maxDistance = 100.0
+_trail = SubResource("Resource_cqits")
 _hitData = SubResource("Resource_fvk8i")
 _originOffset = Vector3(0, 0, 0)
 _directionOffset = Vector3(0, 0, 0)

@@ -4,18 +4,22 @@ using Godot;
 public partial class PWS_Hitscan : PW_Shot
 {
     [Export] protected float _maxDistance;
-    public override void HandleShoot(World3D world, Vector3 origin, Vector3 direction)
+    [Export] protected VFX_HitscanTrail _trail;
+    public override void HandleShoot(Node3D manager, Vector3 origin, Vector3 direction)
     {
+        Vector3 hit = origin + direction * _maxDistance;
+
+        World3D world = manager.GetWorld3D();
         PhysicsDirectSpaceState3D spaceState = world.DirectSpaceState;
-        PhysicsRayQueryParameters3D query = PhysicsRayQueryParameters3D.Create(origin, origin + direction * _maxDistance);
+        PhysicsRayQueryParameters3D query = PhysicsRayQueryParameters3D.Create(origin, hit);
         query.CollideWithAreas = true;
         query.CollisionMask = 2;
 
         var result = spaceState.IntersectRay(query);
 
-
         if (result.Count > 0)
         {
+            hit = (Vector3)result["position"];
             Node3D collider = result["collider"].AsGodotObject() as Node3D;
             if (collider is GC_HurtBox hurtBox)
             {
@@ -27,5 +31,7 @@ public partial class PWS_Hitscan : PW_Shot
                 Hit?.Invoke(this, ShotHitEventArgs.MISS);
             }
         }
+
+        _trail?.Shoot(manager, origin, hit);
     }
 }

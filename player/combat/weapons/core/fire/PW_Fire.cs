@@ -36,7 +36,7 @@ public abstract partial class PW_Fire : Resource
         SightTo(out Vector3 origin, out Vector3 direction);
         
         foreach (PW_Shot shot in _shots)
-            shot.Shoot(_sight.GetWorld3D(), origin, direction);
+            shot.Shoot(_sight, origin, direction);
     }
 
     protected bool CanShoot() => Time.GetTicksMsec() - _lastShot > _fireRate;
