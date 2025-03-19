@@ -7,6 +7,7 @@ public partial class UI_KillMarker : Control
 {
     [Export] private Array<Panel> _markerSticks;
     [Export] private float _fadeTime;
+    [Export] private float _fadeBackTime;
     [Export] private float _baseStartOffset;
     [Export] private float _basePeakOffset;
 
@@ -49,6 +50,6 @@ public partial class UI_KillMarker : Control
 
         offsetTween = CreateTween();
         offsetTween.TweenProperty(this, "Offset", _basePeakOffset, _fadeTime).SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Cubic);
-        offsetTween.TweenProperty(this, "Offset", _baseStartOffset, _fadeTime/2f);
+        offsetTween.TweenProperty(this, "Offset", _baseStartOffset, _fadeBackTime);
     }
 }

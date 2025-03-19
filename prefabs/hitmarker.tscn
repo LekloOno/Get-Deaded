@@ -176,6 +176,7 @@ mouse_filter = 2
 script = ExtResource("2_v7leq")
 _markerSticks = [NodePath("Control/BotRight"), NodePath("Control2/BotLeft"), NodePath("Control3/TopRight"), NodePath("Control4/TopLeft")]
 _fadeTime = 0.3
+_fadeBackTime = 0.05
 _baseStartOffset = 10.0
 _basePeakOffset = 300.0
 metadata/_custom_type_script = "uid://brn5nu2bbuq5w"
