@@ -11,6 +11,6 @@ public abstract partial class VFX_TrailMesh : MeshInstance3D
         _hit = hit;
         MaterialOverride = material;
     }
-    
+
     public abstract void Shoot();
 }

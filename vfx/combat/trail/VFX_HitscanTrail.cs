@@ -8,8 +8,7 @@ public abstract partial class VFX_HitscanTrail : Resource
     
     public void Shoot(Node manager, Vector3 origin, Vector3 hit)
     {
-        _mesh = CreateTrail(origin, hit, _material);
-        _mesh.MaterialOverride = _material;
+        _mesh = CreateTrail(origin, hit, (Material)_material.Duplicate());
         _mesh.TopLevel = true;
         manager.AddChild(_mesh);
         _mesh.Shoot();
