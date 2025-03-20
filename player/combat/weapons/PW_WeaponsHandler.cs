@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.NetworkInformation;
 using Godot;
 using Godot.Collections;
 
@@ -41,6 +42,8 @@ public partial class PW_WeaponsHandler : Node
     private SceneTreeTimer _switchTimer;
     private bool _switchingOut = false;
     private bool _switchingIn = false;
+    private bool _bufferedPrimary = false;
+    private bool _bufferedSecondary = false;
 
     public override void _Ready()
     {
@@ -56,13 +59,94 @@ public partial class PW_WeaponsHandler : Node
         _activeWeapon = _melee;
         _surfaceControl.AddSpeedModifier(_activeWeapon.MoveSpeedModifier);
 
-        _weaponsInput.OnStartPrimary += (o, e) => _activeWeapon?.PrimaryDown();
-        _weaponsInput.OnStopPrimary += (o, e) => _activeWeapon?.PrimaryUp();
-        _weaponsInput.OnStartSecondary += (o, e) => _activeWeapon?.SecondaryDown();
-        _weaponsInput.OnStopSecondary += (o, e) => _activeWeapon?.SecondaryUp();
+        _weaponsInput.OnStartPrimary += HandleStartPrimary;
+        _weaponsInput.OnStopPrimary += HandleStopPrimary;
+        _weaponsInput.OnStartSecondary += HandleStartSecondary;
+        _weaponsInput.OnStopSecondary += HandleStopSecondary;
         _weaponsInput.OnSwitch += Switch;
         _weaponsInput.OnHolster += Holster;
     }
+
+    // Very redondant way to define the buffers, could use a little rework !
+    private void BufferPrimary()
+    {
+        _bufferedPrimary = true;
+        SwitchEnded += SendPrimary;
+    }
+    private void ResetPrimaryBuffer()
+    {
+        _bufferedPrimary = false;
+        SwitchEnded -= SendPrimary;
+    }
+    private void SendPrimary(object sender, PW_Weapon e)
+    {
+        ResetPrimaryBuffer();
+        _activeWeapon.PrimaryDown();
+    }
+    private void HandleStartPrimary(object sender, EventArgs e)
+    {
+        if (_activeWeapon == null)
+        {
+            if (_bufferedPrimary)
+                return;
+
+            BufferPrimary();
+            return;
+        }
+
+        if (_bufferedPrimary)
+            ResetPrimaryBuffer();
+
+        _activeWeapon?.PrimaryDown();
+    }
+    private void HandleStopPrimary(object sender, EventArgs e)
+    {
+        if (_bufferedPrimary)
+            ResetPrimaryBuffer();
+        
+        _activeWeapon?.PrimaryUp();
+    }
+
+    private void BufferSecondary()
+    {
+        _bufferedSecondary = true;
+        SwitchEnded += SendSecondary;
+    }
+    private void ResetSecondaryBuffer()
+    {
+        _bufferedSecondary = false;
+        SwitchEnded -= SendSecondary;
+    }
+    private void SendSecondary(object sender, PW_Weapon e)
+    {
+        ResetSecondaryBuffer();
+        _activeWeapon.SecondaryDown();
+    }
+    private void HandleStartSecondary(object sender, EventArgs e)
+    {
+        if (_activeWeapon == null)
+        {
+            if (_bufferedSecondary)
+                return;
+
+            BufferSecondary();
+            return;
+        }
+
+        if (_bufferedSecondary)
+            ResetSecondaryBuffer();
+
+
+        _activeWeapon?.SecondaryDown();
+    }
+    private void HandleStopSecondary(object sender, EventArgs e)
+    {
+        if (_bufferedSecondary)
+            ResetSecondaryBuffer();
+
+        _activeWeapon?.SecondaryUp();
+    }
+
 
     public void Switch(object sender, EventArgs e)
     {
@@ -75,13 +159,9 @@ public partial class PW_WeaponsHandler : Node
     public void Holster(object sender, EventArgs e)
     {
         if (_activeWeapon == _melee)
-        {
             _nextWeapon = _weapons[_weaponIndex];
-        }
         else
-        {
             _nextWeapon = _melee;
-        }
 
         StartSwitch();
     }
@@ -118,8 +198,7 @@ public partial class PW_WeaponsHandler : Node
         _switchingOut = true;
 
         float time = _activeWeapon.SwitchOutTime;
-        _activeWeapon.PrimaryUp();
-        _activeWeapon.SecondaryUp();
+        _activeWeapon.Disable();
         _prevWeapon = _activeWeapon;
         _activeWeapon = null;
 

@@ -200,7 +200,7 @@ script = ExtResource("91_lk6x0")
 _material = SubResource("StandardMaterial3D_wow6d")
 _thickness = 1.5
 _bulletSpeed = 15.0
-_trailSpeed = 1.0
+_trailSpeed = 7.0
 _inclination = 85.0
 metadata/_custom_type_script = "uid://0w0m608ktkwu"
 

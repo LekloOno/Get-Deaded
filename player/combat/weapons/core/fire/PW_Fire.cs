@@ -7,7 +7,7 @@ using Godot.Collections;
 [GlobalClass]
 public abstract partial class PW_Fire : Resource
 {
-    private const double _bufferMargin = 0.0012;
+    private const double _bufferMargin = 0.0015;
     [Export] private Array<PW_Shot> _shots;
     [Export] protected float _spread;
     [Export] protected ulong _fireRate;
@@ -115,8 +115,16 @@ public abstract partial class PW_Fire : Resource
         _bufferTimer.Timeout += SendRelease;
     }
 
-    private void SendPress() => Press();
-    private void SendRelease() => Release();
+    private void SendPress()
+    {
+        _pressBuffered = false;
+        Press();
+    }
+    private void SendRelease()
+    {
+        _releaseBuffered = false;
+        Release();
+    }
 
     /// <summary>
     /// Handle a down input. It would typically use TryShoot or Shoot for finer behaviors. It can also do nothing, or more complex behaviors.
