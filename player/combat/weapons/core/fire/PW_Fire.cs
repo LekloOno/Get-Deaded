@@ -16,7 +16,7 @@ public abstract partial class PW_Fire : Resource
     public float RecoilMultiplier = 1f;
     public EventHandler<ShotHitEventArgs> Hit;
     protected Node3D _sight;
-    protected Camera3D _camera;
+    protected PC_DirectCamera _camera;
 
     protected ulong _lastShot = 0;
     
@@ -24,7 +24,7 @@ public abstract partial class PW_Fire : Resource
     private bool _pressBuffered = false;
     private bool _releaseBuffered = false;
 
-    public void Initialize(Camera3D camera, Node3D sight, Node3D _barel)
+    public void Initialize(PC_DirectCamera camera, Node3D sight, Node3D _barel)
     {
         _camera = camera;
         _sight = sight;

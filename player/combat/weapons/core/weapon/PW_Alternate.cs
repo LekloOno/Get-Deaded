@@ -31,7 +31,7 @@ public partial class PW_Alternate : PW_Weapon
     {
         if (_ads == null)
             _secondaryFire.HandlePress();
-        else if (_ads.ActivatedPress() is PW_Fire fire)
+        else if (_ads.Pressed() is PW_Fire fire)
         {
             _currentFire.Disable();
             _currentFire = fire;
@@ -42,9 +42,13 @@ public partial class PW_Alternate : PW_Weapon
     {
         if (_ads == null)
             _secondaryFire.HandleRelease();
-        else if (_ads.ActivatedPress() is PW_Fire fire)
+        else if (_ads.Released() is PW_Fire fire)
             _currentFire = fire;
     }
 
-    public override void Disable() => _currentFire.Disable();
+    public override void Disable()
+    {
+        _ads?.Disable();
+        _currentFire.Disable();
+    }
 }

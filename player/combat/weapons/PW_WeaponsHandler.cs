@@ -9,7 +9,7 @@ using Godot.Collections;
 [GlobalClass]
 public partial class PW_WeaponsHandler : Node
 {
-    [Export] private Camera3D _camera;
+    [Export] private PC_DirectCamera _camera;
     [Export] private Node3D _sight;
     [Export] private Node3D _barel;
     [Export] private PI_Weapons _weaponsInput;

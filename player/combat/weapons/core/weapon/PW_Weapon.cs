@@ -7,12 +7,12 @@ public abstract partial class PW_Weapon : Resource
     [Export] public float SwitchInTime {get; private set;}
     [Export] public float SwitchOutTime {get; private set;}
     [Export] public float MoveSpeedModifier {get; private set;} = 0f;        // An additive modifier to set. - is a malus + is a bonus
-    protected Camera3D _camera;
+    protected PC_DirectCamera _camera;
     protected Node3D _sight;
     protected Node3D _barel;
     public EventHandler<ShotHitEventArgs> Hit;
 
-    public void Initialize(Camera3D camera, Node3D sight, Node3D barel)
+    public void Initialize(PC_DirectCamera camera, Node3D sight, Node3D barel)
     {
         _camera = camera;
         _sight = sight;

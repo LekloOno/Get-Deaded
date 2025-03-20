@@ -22,7 +22,7 @@ public partial class PW_Simple : PW_Weapon
         if (_ads == null)
             return;
 
-        if (_ads.ActivatedPress() is SimpleADSModifiers modifiers)
+        if (_ads.Pressed() is SimpleADSModifiers modifiers)
         {
             _fire.SpreadMultiplier = modifiers.Spread;
             _fire.RecoilMultiplier = modifiers.Recoil;
@@ -34,12 +34,16 @@ public partial class PW_Simple : PW_Weapon
         if (_ads == null)
             return;
 
-        if (_ads.ActivatedPress() is SimpleADSModifiers modifiers)
+        if (_ads.Released() is SimpleADSModifiers modifiers)
         {
             _fire.SpreadMultiplier = modifiers.Spread;
             _fire.RecoilMultiplier = modifiers.Recoil;
         }
     }
 
-    public override void Disable() => _fire.Disable();
+    public override void Disable()
+    {
+        _ads?.Disable();
+        _fire.Disable();
+    }
 }

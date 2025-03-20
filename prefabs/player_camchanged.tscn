@@ -1,4 +1,4 @@
-[gd_scene load_steps=122 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=126 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://bpx1sfcw442s1" path="res://player/camera/PC_SlideLedgeAnim.cs" id="9_727yx"]
 [ext_resource type="Script" uid="uid://nat0vtl7jqqp" path="res://ui/movement/UI_SpeedoMeter.cs" id="10_kvg1p"]
 [ext_resource type="Script" uid="uid://bpp610usa4y00" path="res://player/body/PB_Scale.cs" id="11_6ifu1"]
+[ext_resource type="Script" uid="uid://di34syfygvow1" path="res://player/camera/PC_DirectCamera.cs" id="12_htv2j"]
 [ext_resource type="Script" uid="uid://38i6kejmo2hs" path="res://player/audio/PA_Jump.cs" id="12_nveww"]
 [ext_resource type="Script" uid="uid://c6mut48npwi4w" path="res://player/input/actions/movement/PI_Walk.cs" id="12_pwafq"]
 [ext_resource type="Script" uid="uid://e4bcjkfxrbxl" path="res://player/audio/PA_FootSteps.cs" id="12_ttbg8"]
@@ -90,6 +91,7 @@
 [ext_resource type="PackedScene" uid="uid://bj3ck4u2xa8hu" path="res://prefabs/damage_indicator.tscn" id="83_ewcnl"]
 [ext_resource type="Resource" uid="uid://ca7lrmxnc1hsm" path="res://player/combat/weapons/res/fire/pwf_simple_click.tres" id="86_8j20c"]
 [ext_resource type="Script" uid="uid://c3are182lodyx" path="res://player/combat/weapons/core/weapon/PW_Simple.cs" id="87_5dw8r"]
+[ext_resource type="Script" uid="uid://bxxmkegnq67qe" path="res://player/combat/weapons/core/ads/PW_SimpleADS.cs" id="87_gcum8"]
 [ext_resource type="Resource" uid="uid://dkeof2yotipev" path="res://player/combat/weapons/res/fire/pwf_simple_continuous.tres" id="88_ewcnl"]
 [ext_resource type="Script" uid="uid://sujdlokcwnd6" path="res://global/combat/hit/GC_DamageModifier.cs" id="89_4vhab"]
 [ext_resource type="Script" uid="uid://0w0m608ktkwu" path="res://vfx/combat/trail/moving_light/VFX_MovingLightTrail.cs" id="91_lk6x0"]
@@ -162,20 +164,44 @@ _maxHealth = 50.0
 Child = SubResource("Resource_htv2j")
 metadata/_custom_type_script = "uid://be02fh6y0vldv"
 
+[sub_resource type="Resource" id="Resource_wow6d"]
+script = ExtResource("87_gcum8")
+SpreadMultiplier = 1.0
+RecoilMultiplier = 1.0
+Hold = true
+ScopeInTime = 0.2
+ScopeOutTime = 0.2
+FovMultiplier = 0.9
+MoveSpeedMultiplier = 1.0
+metadata/_custom_type_script = "uid://bxxmkegnq67qe"
+
 [sub_resource type="Resource" id="Resource_fdvd6"]
 script = ExtResource("87_5dw8r")
 _fire = ExtResource("86_8j20c")
+_ads = SubResource("Resource_wow6d")
 SwitchInTime = 0.2
-SwitchOutTime = 0.3
-MoveSpeedModifier = -0.12
+SwitchOutTime = 0.25
+MoveSpeedModifier = -0.1
 metadata/_custom_type_script = "uid://c3are182lodyx"
+
+[sub_resource type="Resource" id="Resource_vj6q7"]
+script = ExtResource("87_gcum8")
+SpreadMultiplier = 1.0
+RecoilMultiplier = 1.0
+Hold = true
+ScopeInTime = 0.2
+ScopeOutTime = 0.2
+FovMultiplier = 0.9
+MoveSpeedMultiplier = 1.0
+metadata/_custom_type_script = "uid://bxxmkegnq67qe"
 
 [sub_resource type="Resource" id="Resource_fvk8i"]
 script = ExtResource("87_5dw8r")
 _fire = ExtResource("88_ewcnl")
+_ads = SubResource("Resource_vj6q7")
 SwitchInTime = 0.15
-SwitchOutTime = 0.3
-MoveSpeedModifier = -0.1
+SwitchOutTime = 0.25
+MoveSpeedModifier = -0.08
 metadata/_custom_type_script = "uid://c3are182lodyx"
 
 [sub_resource type="Resource" id="Resource_3bwxm"]
@@ -328,6 +354,7 @@ _ledgeClimb = NodePath("../../../../../../../../../Movement/Actions/Jump/PM_Ledg
 
 [node name="Camera3D" type="Camera3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim"]
 fov = 103.0
+script = ExtResource("12_htv2j")
 
 [node name="Label3D" type="Label3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing" node_paths=PackedStringArray("_controller")]
 transform = Transform3D(0.956305, 0.0406903, -0.289526, 0, 0.990268, 0.139173, 0.292372, -0.133092, 0.946998, 0.535, -0.353, -0.361)

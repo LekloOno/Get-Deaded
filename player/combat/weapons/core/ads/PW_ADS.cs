@@ -5,45 +5,63 @@ public abstract partial class PW_ADS<T> : Resource where T : class
     [Export] public bool Hold {get; private set;}
     [Export] public float ScopeInTime {get; private set;}
     [Export] public float ScopeOutTime {get; private set;}
-    [Export] public float FovMultiplier {get; private set;}
+    [Export] public float FovMultiplier {get; private set;} = 1f;
     [Export] public float MoveSpeedMultiplier {get; private set;} = 1f;
     private bool _active = false;
-    private Camera3D _camera;
+    private PC_DirectCamera _camera;
 
-    public void Initialize(Camera3D camera)
+    public void Initialize(PC_DirectCamera camera)
     {
         _camera = camera;
     }
 
     protected abstract T GetModifiers();
     protected abstract T GetInitValue();
+    
+    public void Disable()
+    {
+        if (_active)
+            Deactivate();
+    }
 
-    public T ActivatedPress()
+    public T Pressed()
     {
         if (Hold)
         {
-            _active = true;
+            Activate();
             return GetModifiers();
         }
         
         if (_active)
         {
-            _active = false;
+            Deactivate();
             return GetInitValue();
         }
 
-        _active = true;
+        Activate();
         return GetModifiers();
     }
 
-    public T ActivatedRelease()
+    public T Released()
     {
         if (Hold)
         {
-            _active = false;
+            Deactivate();
             return GetInitValue();
         }
 
         return null;
+    }
+
+    private void Activate()
+    {
+        _active = true;
+        _camera.ModifyFov(FovMultiplier, ScopeInTime);
+    }
+
+    private void Deactivate()
+    {
+        _active = false;
+        _camera.ResetFov(ScopeOutTime);
     }
 }
