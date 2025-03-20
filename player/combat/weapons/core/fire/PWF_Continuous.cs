@@ -4,21 +4,27 @@ using Godot;
 public partial class PWF_Continuous : PW_Fire
 {
     private SceneTreeTimer _timer;
-    public override void Press()
+
+    public override void Disable() => StopShoot();
+
+
+    protected override bool Press()
     {
         StopShoot();
         
         float nextShot = _fireRate;
-        
+
         if (!TryShoot())
-            nextShot = _fireRate + _lastShot - Time.GetTicksMsec();
+            nextShot = NextAvailableShot();
 
         _timer = _sight.GetTree().CreateTimer(nextShot/1000f);
         _timer.Timeout += ReShoot;
+        return true;
     }
-    public override void Release()
+    protected override bool Release()
     {
         StopShoot();
+        return true;
     }
 
     private void ReShoot()

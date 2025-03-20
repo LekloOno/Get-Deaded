@@ -22,9 +22,21 @@ public abstract partial class PW_Weapon : Resource
 
     public virtual void WeaponInitialize() {}
 
+    public void HandlePrimary(object sender, EventArgs e)
+    {
+
+    }
+
+    public void HandleSecondary(object sender, EventArgs e)
+    {
+
+    }
+
     public abstract void PrimaryDown();
     public abstract void PrimaryUp();
 
     public abstract void SecondaryDown();
     public abstract void SecondaryUp();
+
+    public abstract void Disable();
 }

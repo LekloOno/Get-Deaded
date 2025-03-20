@@ -14,8 +14,8 @@ public partial class PW_Simple : PW_Weapon
     }
 
 
-    public override void PrimaryDown() => _fire.Press();
-    public override void PrimaryUp() => _fire.Release();
+    public override void PrimaryDown() => _fire.HandlePress();
+    public override void PrimaryUp() => _fire.HandleRelease();
 
     public override void SecondaryDown()
     {
@@ -40,4 +40,6 @@ public partial class PW_Simple : PW_Weapon
             _fire.RecoilMultiplier = modifiers.Recoil;
         }
     }
+
+    public override void Disable() => _fire.Disable();
 }

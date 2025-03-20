@@ -24,22 +24,27 @@ public partial class PW_Alternate : PW_Weapon
         }
     }
 
-    public override void PrimaryDown() => _currentFire.Press();
-    public override void PrimaryUp() => _currentFire.Release();
+    public override void PrimaryDown() => _currentFire.HandlePress();
+    public override void PrimaryUp() => _currentFire.HandleRelease();
 
     public override void SecondaryDown()
     {
         if (_ads == null)
-            _secondaryFire.Press();
+            _secondaryFire.HandlePress();
         else if (_ads.ActivatedPress() is PW_Fire fire)
+        {
+            _currentFire.Disable();
             _currentFire = fire;
+        }
     }
 
     public override void SecondaryUp()
     {
         if (_ads == null)
-            _secondaryFire.Release();
+            _secondaryFire.HandleRelease();
         else if (_ads.ActivatedPress() is PW_Fire fire)
             _currentFire = fire;
     }
+
+    public override void Disable() => _currentFire.Disable();
 }
