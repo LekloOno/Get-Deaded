@@ -8,6 +8,8 @@ public partial class PI_Weapons : PI_InputGlobalAction
     public EventHandler OnStartSecondary;
     public EventHandler OnStopPrimary;
     public EventHandler OnStopSecondary;
+    public EventHandler OnSwitch;
+    public EventHandler OnHolster;
 
     public override void _UnhandledInput(InputEvent @event)
     {
@@ -19,5 +21,9 @@ public partial class PI_Weapons : PI_InputGlobalAction
             OnStopPrimary?.Invoke(this, EventArgs.Empty);
         else if (@event.IsActionReleased(ACTIONS_Combat.SECONDARY))
             OnStopSecondary?.Invoke(this, EventArgs.Empty);
+        else if (@event.IsActionPressed(ACTIONS_Combat.SWITCH))
+            OnSwitch?.Invoke(this, EventArgs.Empty);
+        else if (@event.IsActionReleased(ACTIONS_Combat.HOLSTER))
+            OnHolster?.Invoke(this, EventArgs.Empty);
     }
 }

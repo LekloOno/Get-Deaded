@@ -1,5 +1,7 @@
 //using System.Linq;
 using System;
+using System.Diagnostics;
+using System.Linq;
 using Godot;
 using Godot.Collections;
 
@@ -11,8 +13,14 @@ public partial class PW_WeaponsHandler : Node
     [Export] private Node3D _barel;
     [Export] private PI_Weapons _weaponsInput;
     [Export] private Array<PW_Weapon> _weapons;
+    [Export] private PW_Weapon _melee;
     public EventHandler<ShotHitEventArgs> Hit;
     private PW_Weapon _activeWeapon;
+    private int _weaponIndex = 0;
+    private PW_Weapon _nextWeapon;      // The weapon we are currently switching to, if it's _activeWeapon, no switch is happening
+    private SceneTreeTimer _switchTimer;
+    private bool _switchingOut = false;
+    private bool _switchingIn = false;
 
     public override void _Ready()
     {
@@ -22,12 +30,107 @@ public partial class PW_WeaponsHandler : Node
             weapon.Hit += (o, e) => Hit?.Invoke(o, e);
         }
 
-        if (_weapons.Count > 0)
-            _activeWeapon = _weapons[0];
+        _melee.Initialize(_camera, _sight, _barel);
+        _melee.Hit += (o, e) => Hit?.Invoke(o, e);
 
-        _weaponsInput.OnStartPrimary += (o, e) => _activeWeapon.PrimaryDown();
-        _weaponsInput.OnStopPrimary += (o, e) => _activeWeapon.PrimaryUp();
-        _weaponsInput.OnStartSecondary += (o, e) => _activeWeapon.SecondaryDown();
-        _weaponsInput.OnStopSecondary += (o, e) => _activeWeapon.SecondaryUp();
+        _activeWeapon = _melee;
+
+        _weaponsInput.OnStartPrimary += (o, e) => _activeWeapon?.PrimaryDown();
+        _weaponsInput.OnStopPrimary += (o, e) => _activeWeapon?.PrimaryUp();
+        _weaponsInput.OnStartSecondary += (o, e) => _activeWeapon?.SecondaryDown();
+        _weaponsInput.OnStopSecondary += (o, e) => _activeWeapon?.SecondaryUp();
+        _weaponsInput.OnSwitch += Switch;
+        _weaponsInput.OnHolster += Holster;
+    }
+
+    public void Switch(object sender, EventArgs e)
+    {
+        _weaponIndex = (_weaponIndex + 1) % _weapons.Count;
+        _nextWeapon = _weapons[_weaponIndex];
+
+        StartSwitch();
+    }
+
+    public void Holster(object sender, EventArgs e)
+    {
+        if (_activeWeapon == _melee)
+        {
+            _nextWeapon = _weapons[_weaponIndex];
+        }
+        else
+        {
+            _nextWeapon = _melee;
+        }
+
+        StartSwitch();
+    }
+
+    public void StartSwitch()
+    {
+        // Could be done with index instead, but having only one weapon and holster could cause bug if so
+        //   - Cancel will always happen, since the index will always be 0
+        if (_nextWeapon == _activeWeapon)   // The player is switching back to its initial weapon
+        {                                   // We can cancel the switch.
+            EndSwitch();
+            return;
+        }
+
+        if (_switchingOut)  // The player is switching out his initial weapon
+            return;         // We can just change the target weapon (nextWeapon) with no penalty, the new target switch in time will be used.   
+
+        if (_switchingIn)   // The player is switching in his target weapon
+        {                   // We want to restart the switch in process. Otherwize he could abuse the short switch in time of, typically, holster, to switch to other weapons.
+            float time = _nextWeapon.SwitchOutTime; // (Holster, then switch weapon : the holster switch in time will be used, but the target weapon will be the side weapon)
+            _switchTimer.Timeout -= EndSwitch;
+            _switchTimer = GetTree().CreateTimer(time);
+            _switchTimer.Timeout += EndSwitch;
+            return;
+        }
+
+        SwitchOut();
+    }
+
+    public void SwitchOut()
+    {
+        _switchingIn = false;
+        _switchingOut = true;
+
+        float time = _activeWeapon.SwitchOutTime;
+        _activeWeapon.PrimaryUp();
+        _activeWeapon.SecondaryUp();
+        _activeWeapon = null;
+
+        _switchTimer = GetTree().CreateTimer(time);
+        _switchTimer.Timeout += SwitchIn;
+    }
+
+    public void SwitchIn()
+    {
+        _switchingOut = false;
+        _switchingIn = true;
+
+        float time = _nextWeapon.SwitchOutTime;
+
+        _switchTimer = GetTree().CreateTimer(time);
+        _switchTimer.Timeout += EndSwitch;
+    }
+
+    public void EndSwitch()
+    {
+        if (_switchTimer != null)
+        {
+            if (_switchingOut)
+            {
+                _switchingOut = false;
+                _switchTimer.Timeout -= SwitchIn;
+            }
+            else if (_switchingIn)
+            {
+                _switchingIn = false;
+                _switchTimer.Timeout -= EndSwitch;
+            }
+        }
+
+        _activeWeapon = _nextWeapon;
     }
 }

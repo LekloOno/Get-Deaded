@@ -4,6 +4,9 @@ using Godot;
 [GlobalClass]
 public abstract partial class PW_Weapon : Resource
 {
+    public float SwitchInTime {get; private set;}
+    public float SwitchOutTime {get; private set;}
+    public float MoveSpeedModifier {get; private set;} = 1f;
     protected Camera3D _camera;
     protected Node3D _sight;
     protected Node3D _barel;

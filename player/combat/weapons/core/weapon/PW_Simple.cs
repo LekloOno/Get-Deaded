@@ -14,12 +14,8 @@ public partial class PW_Simple : PW_Weapon
     }
 
 
-    public override void PrimaryDown()
-    {
-        _fire.Press();
-    }
-
-    public override void PrimaryUp() {}
+    public override void PrimaryDown() => _fire.Press();
+    public override void PrimaryUp() => _fire.Release();
 
     public override void SecondaryDown()
     {
