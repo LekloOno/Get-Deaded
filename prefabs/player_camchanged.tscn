@@ -165,11 +165,17 @@ metadata/_custom_type_script = "uid://be02fh6y0vldv"
 [sub_resource type="Resource" id="Resource_fdvd6"]
 script = ExtResource("87_5dw8r")
 _fire = ExtResource("86_8j20c")
+SwitchInTime = 0.2
+SwitchOutTime = 0.3
+MoveSpeedModifier = -0.15
 metadata/_custom_type_script = "uid://c3are182lodyx"
 
 [sub_resource type="Resource" id="Resource_fvk8i"]
 script = ExtResource("87_5dw8r")
 _fire = ExtResource("88_ewcnl")
+SwitchInTime = 0.15
+SwitchOutTime = 0.3
+MoveSpeedModifier = -0.1
 metadata/_custom_type_script = "uid://c3are182lodyx"
 
 [sub_resource type="Resource" id="Resource_3bwxm"]
@@ -217,6 +223,9 @@ metadata/_custom_type_script = "uid://dmsklefspdvlw"
 [sub_resource type="Resource" id="Resource_5dw8r"]
 script = ExtResource("87_5dw8r")
 _fire = SubResource("Resource_jbksd")
+SwitchInTime = 0.12
+SwitchOutTime = 0.12
+MoveSpeedModifier = 0.0
 metadata/_custom_type_script = "uid://c3are182lodyx"
 
 [node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("_healthManager", "_walkProcess", "_wallJump", "_wallClimb", "_groundState", "_cameraControl", "_surfaceControl", "_straffeSnap")]
@@ -770,7 +779,7 @@ script = ExtResource("16_t2wfm")
 
 [node name="PI_Slide" type="Node" parent="PIM_Arena/PI_CrouchDispatcher" node_paths=PackedStringArray("_controller", "_groundState", "_crouchInput", "_sprintInput")]
 script = ExtResource("17_d5kvj")
-_slideMinSpeed = 6.0
+_slideMinSpeed = 5.5
 _holdSlideMinSpeed = 3.0
 _controller = NodePath("../../..")
 _groundState = NodePath("../../../State/PS_Grounded")
@@ -1002,7 +1011,7 @@ metadata/_custom_type_script = "uid://c7tdbt357bj80"
 wait_time = 0.3
 one_shot = true
 
-[node name="PW_WeaponsHandler" type="Node" parent="." node_paths=PackedStringArray("_camera", "_sight", "_barel", "_weaponsInput")]
+[node name="PW_WeaponsHandler" type="Node" parent="." node_paths=PackedStringArray("_camera", "_sight", "_barel", "_weaponsInput", "_surfaceControl")]
 script = ExtResource("81_stdu8")
 _camera = NodePath("../Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/Camera3D")
 _sight = NodePath("../Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean")
@@ -1010,6 +1019,7 @@ _barel = NodePath("Weapons/Barrel")
 _weaponsInput = NodePath("../PIM_Arena/PI_Weapons")
 _weapons = Array[Object]([SubResource("Resource_fdvd6"), SubResource("Resource_fvk8i")])
 _melee = SubResource("Resource_5dw8r")
+_surfaceControl = NodePath("../Movement/PM_SurfaceControl")
 metadata/_custom_type_script = "uid://b4hdeuwma0ma8"
 
 [node name="Weapons" type="Node3D" parent="PW_WeaponsHandler"]

@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Godot;
 
 [GlobalClass]
@@ -46,6 +48,7 @@ public partial class PM_SurfaceControl : PM_Action
     [Export] private PS_Grounded _groundState;
     [Export] private PM_SurfaceState _ground;
     [Export] private PM_SurfaceState _air;
+    private List<float> _speedModifiers = [];       // Modifiers are additive. Resulting speed is _speedModifiers.sum() * _speed
     private SceneTreeTimer _delayedGroundTimer;
 
     private PM_SurfaceState _currentSurface;
@@ -59,12 +62,16 @@ public partial class PM_SurfaceControl : PM_Action
         _groundState.OnLeaving += SetAirState;
     }
 
+    private float SpeedModifier() => _speedModifiers.Aggregate(1f, (acc, v) => acc + v);
+    public void AddSpeedModifier(float modifier) => _speedModifiers.Add(modifier);
+    public bool RemoveModifier(float modifier) => _speedModifiers.Remove(modifier);
+
     public Vector3 Accelerate(Vector3 velocity, float delta)
     {
         Vector3 direction = _walkInput.WishDir;
         float speed = _currentSurface.CurrentData.MaxSpeed;
         float accel = _currentSurface.CurrentData.MaxAccel;
-        return PHX_MovementPhysics.Acceleration(speed, accel, velocity, direction, delta);
+        return PHX_MovementPhysics.Acceleration(speed * SpeedModifier(), accel, velocity, direction, delta);
     }
 
     public Vector3 ApplyDrag(Vector3 velocity, double deltaTime)

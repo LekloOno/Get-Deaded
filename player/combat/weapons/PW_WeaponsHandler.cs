@@ -14,10 +14,12 @@ public partial class PW_WeaponsHandler : Node
     [Export] private PI_Weapons _weaponsInput;
     [Export] private Array<PW_Weapon> _weapons;
     [Export] private PW_Weapon _melee;
+    [Export] private PM_SurfaceControl _surfaceControl;
     public EventHandler<ShotHitEventArgs> Hit;
     private PW_Weapon _activeWeapon;
     private int _weaponIndex = 0;
     private PW_Weapon _nextWeapon;      // The weapon we are currently switching to, if it's _activeWeapon, no switch is happening
+    private PW_Weapon _prevWeapon;
     private SceneTreeTimer _switchTimer;
     private bool _switchingOut = false;
     private bool _switchingIn = false;
@@ -34,6 +36,7 @@ public partial class PW_WeaponsHandler : Node
         _melee.Hit += (o, e) => Hit?.Invoke(o, e);
 
         _activeWeapon = _melee;
+        _surfaceControl.AddSpeedModifier(_activeWeapon.MoveSpeedModifier);
 
         _weaponsInput.OnStartPrimary += (o, e) => _activeWeapon?.PrimaryDown();
         _weaponsInput.OnStopPrimary += (o, e) => _activeWeapon?.PrimaryUp();
@@ -98,6 +101,7 @@ public partial class PW_WeaponsHandler : Node
         float time = _activeWeapon.SwitchOutTime;
         _activeWeapon.PrimaryUp();
         _activeWeapon.SecondaryUp();
+        _prevWeapon = _activeWeapon;
         _activeWeapon = null;
 
         _switchTimer = GetTree().CreateTimer(time);
@@ -131,6 +135,8 @@ public partial class PW_WeaponsHandler : Node
             }
         }
 
+        _surfaceControl.RemoveModifier(_prevWeapon.MoveSpeedModifier);
+        _surfaceControl.AddSpeedModifier(_nextWeapon.MoveSpeedModifier);
         _activeWeapon = _nextWeapon;
     }
 }
