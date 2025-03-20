@@ -5,50 +5,33 @@ public partial class PW_Alternate : PW_Weapon
 {
     [Export] private PW_Fire _primaryFire;
     [Export] private PW_Fire _secondaryFire;
-    [Export] private PW_AlternateADS _ads;
     private PW_Fire _currentFire;
 
 
-    public override void WeaponInitialize()
+    protected override void WeaponInitialize()
     {
         _currentFire = _primaryFire;
         _primaryFire.Initialize(_camera, _sight, _barel);
         _secondaryFire.Initialize(_camera, _sight, _barel);
         _primaryFire.Hit += (o, e) => Hit?.Invoke(o, e);
         _secondaryFire.Hit += (o, e) => Hit?.Invoke(o, e);
-
-        if (_ads != null)
-        {
-            _ads?.Initialize(_camera);
-            _ads?.AlternateInitialize(_primaryFire, _secondaryFire);
-        }
     }
 
-    public override void PrimaryDown() => _currentFire.HandlePress();
-    public override void PrimaryUp() => _currentFire.HandleRelease();
+    protected override void Disable() => _currentFire.Disable();
+    protected override void PrimaryDown() => _currentFire.HandlePress();
+    protected override void PrimaryUp() => _currentFire.HandleRelease();
+    protected override void SecondaryDown() => _secondaryFire.HandlePress();
+    protected override void SecondaryUp() => _secondaryFire.HandleRelease();
 
-    public override void SecondaryDown()
+    protected override void StartADS()
     {
-        if (_ads == null)
-            _secondaryFire.HandlePress();
-        else if (_ads.Pressed() is PW_Fire fire)
-        {
-            _currentFire.Disable();
-            _currentFire = fire;
-        }
-    }
-
-    public override void SecondaryUp()
-    {
-        if (_ads == null)
-            _secondaryFire.HandleRelease();
-        else if (_ads.Released() is PW_Fire fire)
-            _currentFire = fire;
-    }
-
-    public override void Disable()
-    {
-        _ads?.Disable();
         _currentFire.Disable();
+        _currentFire = _secondaryFire;
+    }
+
+    protected override void StopADS()
+    {
+        _currentFire.Disable();
+        _currentFire = _primaryFire;
     }
 }

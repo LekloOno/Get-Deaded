@@ -1,6 +1,7 @@
 using Godot;
 
-public abstract partial class PW_ADS<T> : Resource where T : class
+[GlobalClass]
+public partial class PW_ADS : Resource
 {
     [Export] public bool Hold {get; private set;}
     [Export] public float ScopeInTime {get; private set;}
@@ -15,53 +16,50 @@ public abstract partial class PW_ADS<T> : Resource where T : class
         _camera = camera;
     }
 
-    protected abstract T GetModifiers();
-    protected abstract T GetInitValue();
-    
     public void Disable()
     {
         if (_active)
             Deactivate();
     }
 
-    public T Pressed()
+    /// <summary>
+    /// Handles pressed input.
+    /// </summary>
+    /// <returns>true if the following ADS state is active, false otherwise.</returns>
+    public bool Pressed()
     {
         if (Hold)
-        {
-            Activate();
-            return GetModifiers();
-        }
+            return Activate();
         
         if (_active)
-        {
-            Deactivate();
-            return GetInitValue();
-        }
+            return Deactivate();
 
-        Activate();
-        return GetModifiers();
+        return Activate();
     }
 
-    public T Released()
+    /// <summary>
+    /// Handle released input.
+    /// </summary>
+    /// <returns>true if the state of the ADS has changed, false otherwise.</returns>
+    public bool Released()
     {
         if (Hold)
-        {
-            Deactivate();
-            return GetInitValue();
-        }
+            return !Deactivate();
 
-        return null;
+        return false;
     }
 
-    private void Activate()
+    private bool Activate()
     {
         _active = true;
         _camera.ModifyFov(FovMultiplier, ScopeInTime);
+        return true;
     }
 
-    private void Deactivate()
+    private bool Deactivate()
     {
         _active = false;
         _camera.ResetFov(ScopeOutTime);
+        return false;
     }
 }

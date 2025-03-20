@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=125 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -91,7 +91,7 @@
 [ext_resource type="PackedScene" uid="uid://bj3ck4u2xa8hu" path="res://prefabs/damage_indicator.tscn" id="83_ewcnl"]
 [ext_resource type="Resource" uid="uid://ca7lrmxnc1hsm" path="res://player/combat/weapons/res/fire/pwf_simple_click.tres" id="86_8j20c"]
 [ext_resource type="Script" uid="uid://c3are182lodyx" path="res://player/combat/weapons/core/weapon/PW_Simple.cs" id="87_5dw8r"]
-[ext_resource type="Script" uid="uid://bxxmkegnq67qe" path="res://player/combat/weapons/core/ads/PW_SimpleADS.cs" id="87_gcum8"]
+[ext_resource type="Script" uid="uid://bxxmkegnq67qe" path="res://player/combat/weapons/core/ads/PW_SimpleADS.cs" id="87_htv2j"]
 [ext_resource type="Resource" uid="uid://dkeof2yotipev" path="res://player/combat/weapons/res/fire/pwf_simple_continuous.tres" id="88_ewcnl"]
 [ext_resource type="Script" uid="uid://sujdlokcwnd6" path="res://global/combat/hit/GC_DamageModifier.cs" id="89_4vhab"]
 [ext_resource type="Script" uid="uid://0w0m608ktkwu" path="res://vfx/combat/trail/moving_light/VFX_MovingLightTrail.cs" id="91_lk6x0"]
@@ -165,7 +165,7 @@ Child = SubResource("Resource_htv2j")
 metadata/_custom_type_script = "uid://be02fh6y0vldv"
 
 [sub_resource type="Resource" id="Resource_wow6d"]
-script = ExtResource("87_gcum8")
+script = ExtResource("87_htv2j")
 SpreadMultiplier = 1.0
 RecoilMultiplier = 1.0
 Hold = true
@@ -178,27 +178,15 @@ metadata/_custom_type_script = "uid://bxxmkegnq67qe"
 [sub_resource type="Resource" id="Resource_fdvd6"]
 script = ExtResource("87_5dw8r")
 _fire = ExtResource("86_8j20c")
-_ads = SubResource("Resource_wow6d")
 SwitchInTime = 0.2
 SwitchOutTime = 0.25
 MoveSpeedModifier = -0.1
+_ads = SubResource("Resource_wow6d")
 metadata/_custom_type_script = "uid://c3are182lodyx"
-
-[sub_resource type="Resource" id="Resource_vj6q7"]
-script = ExtResource("87_gcum8")
-SpreadMultiplier = 1.0
-RecoilMultiplier = 1.0
-Hold = true
-ScopeInTime = 0.2
-ScopeOutTime = 0.2
-FovMultiplier = 0.9
-MoveSpeedMultiplier = 1.0
-metadata/_custom_type_script = "uid://bxxmkegnq67qe"
 
 [sub_resource type="Resource" id="Resource_fvk8i"]
 script = ExtResource("87_5dw8r")
 _fire = ExtResource("88_ewcnl")
-_ads = SubResource("Resource_vj6q7")
 SwitchInTime = 0.15
 SwitchOutTime = 0.25
 MoveSpeedModifier = -0.08

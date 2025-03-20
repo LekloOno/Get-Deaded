@@ -81,7 +81,7 @@ public partial class PW_WeaponsHandler : Node
     private void SendPrimary(object sender, PW_Weapon e)
     {
         ResetPrimaryBuffer();
-        _activeWeapon.PrimaryDown();
+        _activeWeapon.HandlePrimaryDown();
     }
     private void HandleStartPrimary(object sender, EventArgs e)
     {
@@ -97,14 +97,14 @@ public partial class PW_WeaponsHandler : Node
         if (_bufferedPrimary)
             ResetPrimaryBuffer();
 
-        _activeWeapon?.PrimaryDown();
+        _activeWeapon?.HandlePrimaryDown();
     }
     private void HandleStopPrimary(object sender, EventArgs e)
     {
         if (_bufferedPrimary)
             ResetPrimaryBuffer();
         
-        _activeWeapon?.PrimaryUp();
+        _activeWeapon?.HandlePrimaryUp();
     }
 
     private void BufferSecondary()
@@ -120,7 +120,7 @@ public partial class PW_WeaponsHandler : Node
     private void SendSecondary(object sender, PW_Weapon e)
     {
         ResetSecondaryBuffer();
-        _activeWeapon.SecondaryDown();
+        _activeWeapon.HandleSecondaryDown();
     }
     private void HandleStartSecondary(object sender, EventArgs e)
     {
@@ -137,14 +137,14 @@ public partial class PW_WeaponsHandler : Node
             ResetSecondaryBuffer();
 
 
-        _activeWeapon?.SecondaryDown();
+        _activeWeapon?.HandleSecondaryDown();
     }
     private void HandleStopSecondary(object sender, EventArgs e)
     {
         if (_bufferedSecondary)
             ResetSecondaryBuffer();
 
-        _activeWeapon?.SecondaryUp();
+        _activeWeapon?.HandleSecondaryUp();
     }
 
 
@@ -198,7 +198,7 @@ public partial class PW_WeaponsHandler : Node
         _switchingOut = true;
 
         float time = _activeWeapon.SwitchOutTime;
-        _activeWeapon.Disable();
+        _activeWeapon.HandleDisable();
         _prevWeapon = _activeWeapon;
         _activeWeapon = null;
 

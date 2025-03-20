@@ -4,46 +4,31 @@ using Godot;
 public partial class PW_Simple : PW_Weapon
 {
     [Export] private PW_Fire _fire;
-    [Export] private PW_SimpleADS _ads;
+    private PW_SimpleADS _simpleADS;
 
-    public override void WeaponInitialize()
+    protected override void WeaponInitialize()
     {
-        _ads?.Initialize(_camera);
         _fire.Initialize(_camera, _sight, _barel);
         _fire.Hit += (o, e) => Hit?.Invoke(o, e);
+
+        if (_ads is PW_SimpleADS simpleADS)
+            _simpleADS = simpleADS;
     }
 
+    protected override void Disable() => _fire.Disable();
+    protected override void PrimaryDown() => _fire.HandlePress();
+    protected override void PrimaryUp() => _fire.HandleRelease();
+    protected override void SecondaryDown() {}
+    protected override void SecondaryUp() {}
 
-    public override void PrimaryDown() => _fire.HandlePress();
-    public override void PrimaryUp() => _fire.HandleRelease();
-
-    public override void SecondaryDown()
+    protected override void StartADS()
     {
-        if (_ads == null)
-            return;
-
-        if (_ads.Pressed() is SimpleADSModifiers modifiers)
-        {
-            _fire.SpreadMultiplier = modifiers.Spread;
-            _fire.RecoilMultiplier = modifiers.Recoil;
-        }
+        // Set modifiers
     }
 
-    public override void SecondaryUp()
+    protected override void StopADS()
     {
-        if (_ads == null)
-            return;
-
-        if (_ads.Released() is SimpleADSModifiers modifiers)
-        {
-            _fire.SpreadMultiplier = modifiers.Spread;
-            _fire.RecoilMultiplier = modifiers.Recoil;
-        }
+        // Reset modifiers
     }
 
-    public override void Disable()
-    {
-        _ads?.Disable();
-        _fire.Disable();
-    }
 }

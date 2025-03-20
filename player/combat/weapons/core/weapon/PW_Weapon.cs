@@ -7,6 +7,7 @@ public abstract partial class PW_Weapon : Resource
     [Export] public float SwitchInTime {get; private set;}
     [Export] public float SwitchOutTime {get; private set;}
     [Export] public float MoveSpeedModifier {get; private set;} = 0f;        // An additive modifier to set. - is a malus + is a bonus
+    [Export] protected PW_ADS _ads;
     protected PC_DirectCamera _camera;
     protected Node3D _sight;
     protected Node3D _barel;
@@ -17,16 +18,87 @@ public abstract partial class PW_Weapon : Resource
         _camera = camera;
         _sight = sight;
         _barel = barel;
+        _ads?.Initialize(_camera);
         WeaponInitialize();
     }   
 
-    public virtual void WeaponInitialize() {}
+    public void HandleSecondaryDown()
+    {
+        if (_ads == null)
+        {
+            SecondaryDown();
+            return;
+        }
 
-    public abstract void PrimaryDown();
-    public abstract void PrimaryUp();
+        if (_ads.Pressed())
+        {
+            // Set mobility modifier
+            StartADS();
+        }
+        else
+        {
+            // Reset mobility modifier
+            StopADS();
+        }
+    }
 
-    public abstract void SecondaryDown();
-    public abstract void SecondaryUp();
+    public void HandleSecondaryUp()
+    {
+        if (_ads == null)
+        {
+            SecondaryUp();
+            return;
+        }
 
-    public abstract void Disable();
+        if (_ads.Released())
+        {
+            // Reset mobility modifier
+            StopADS();
+        }
+    }
+
+    public void HandlePrimaryDown() => PrimaryDown();   // For naming consistency
+    public void HandlePrimaryUp() => PrimaryUp();       // For naming consistency
+
+    public void HandleDisable()
+    {
+        _ads?.Disable();
+        Disable();
+    }
+
+    /// <summary>
+    /// Allow for some specific initialization.
+    /// </summary>
+    protected virtual void WeaponInitialize() {}
+
+    /// <summary>
+    /// Called when the primary input is pressed down. Will typically handle shooting process.
+    /// </summary>
+    protected abstract void PrimaryDown();
+    /// <summary>
+    /// Called when the primary input is released up. Could handle some special behaviors, or shooting.
+    /// </summary>
+    protected abstract void PrimaryUp();
+
+    /// <summary>
+    /// Called if the ADS handler didn't consume the incoming secondary input pressed down.
+    /// </summary>
+    protected abstract void SecondaryDown();
+    /// <summary>
+    /// Called if the ADS handler didn't consume the incoming secondary input pressed up.
+    /// </summary>
+    protected abstract void SecondaryUp();
+    /// <summary>
+    /// Called right after handling a starting ADS input.
+    /// </summary>
+    protected abstract void StartADS();
+    /// <summary>
+    /// Called right after handling a stopping ADS input.
+    /// </summary>
+    protected abstract void StopADS();
+
+    /// <summary>
+    /// Allow for some specific disabling process.
+    /// </summary>
+    protected abstract void Disable();
 }
