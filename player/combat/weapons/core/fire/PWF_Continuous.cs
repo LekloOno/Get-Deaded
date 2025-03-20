@@ -9,9 +9,8 @@ public partial class PWF_Continuous : PW_Fire
         StopShoot();
         
         float nextShot = _fireRate;
-        if (CanShoot())
-            Shoot();
-        else
+        
+        if (!TryShoot())
             nextShot = _fireRate + _lastShot - Time.GetTicksMsec();
 
         _timer = _sight.GetTree().CreateTimer(nextShot/1000f);

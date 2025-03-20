@@ -29,6 +29,15 @@ public abstract partial class PW_Fire : Resource
         }
     }
 
+    protected bool TryShoot()
+    {
+        if(!CanShoot())
+            return false;
+
+        Shoot();
+        return true;
+    }
+
     protected void Shoot()
     {
         _lastShot = Time.GetTicksMsec();
