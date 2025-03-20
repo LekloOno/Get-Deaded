@@ -167,7 +167,7 @@ script = ExtResource("87_5dw8r")
 _fire = ExtResource("86_8j20c")
 SwitchInTime = 0.2
 SwitchOutTime = 0.3
-MoveSpeedModifier = -0.15
+MoveSpeedModifier = -0.12
 metadata/_custom_type_script = "uid://c3are182lodyx"
 
 [sub_resource type="Resource" id="Resource_fvk8i"]
@@ -829,9 +829,10 @@ _sprintInput = NodePath("../../../PIM_Arena/PI_Sprint")
 _crouch = NodePath("../../Actions/Crouch/PM_Crouch")
 _slide = NodePath("../../Actions/Crouch/PM_Slide")
 
-[node name="PM_StraffeSnap" type="Node" parent="Movement" node_paths=PackedStringArray("_groundState")]
+[node name="PM_StraffeSnap" type="Node" parent="Movement" node_paths=PackedStringArray("_groundState", "_crouchDispatcher")]
 script = ExtResource("24_4bvsd")
 _groundState = NodePath("../../State/PS_Grounded")
+_crouchDispatcher = NodePath("../../PIM_Arena/PI_CrouchDispatcher")
 SnapThreshold = 2.0
 
 [node name="Actions" type="Node" parent="Movement"]

@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_griox")
 MaxSpeed = 2.2
-MaxAccel = 15.0
-Drag = 10.0
+MaxAccel = 20.0
+Drag = 25.0

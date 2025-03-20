@@ -59,11 +59,13 @@ public partial class PM_Controller : CharacterBody3D
         {
             Vector3 velocity = _velocityCache.GetVelocity(this, Velocity, _walkProcess.WishDir, _groundState.IsGrounded(), delta);
 
-            Vector3 prevVelocity = velocity;
 
             velocity = _wallClimb.WallClimb(velocity);
             velocity = _surfaceControl.ApplyDrag(velocity, delta);
+
+            Vector3 prevVelocity = velocity;
             velocity += _surfaceControl.Accelerate(velocity, (float)delta);
+            
             velocity += AdditionalForces.Consume();
             velocity = _straffeSnap.Snap(velocity, prevVelocity);
 
