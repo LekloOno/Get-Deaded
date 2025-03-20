@@ -16,6 +16,24 @@ public partial class PW_WeaponsHandler : Node
     [Export] private PW_Weapon _melee;
     [Export] private PM_SurfaceControl _surfaceControl;
     public EventHandler<ShotHitEventArgs> Hit;
+
+    /// <summary>
+    /// Event Arg is the weapon the player is switching out from.
+    /// </summary>
+    public EventHandler<PW_Weapon> SwitchOut;
+    /// <summary>
+    /// Event Arg is the weapon the player is switching in to.
+    /// </summary>
+    public EventHandler<PW_Weapon> SwitchIn;
+    /// <summary>
+    /// Event Arg is the weapon the player canceled back to.
+    /// </summary>
+    public EventHandler<PW_Weapon> SwitchCanceled;
+    /// <summary>
+    /// Event Arg is the weapon the player has now active.
+    /// </summary>
+    public EventHandler<PW_Weapon> SwitchEnded;
+
     private PW_Weapon _activeWeapon;
     private int _weaponIndex = 0;
     private PW_Weapon _nextWeapon;      // The weapon we are currently switching to, if it's _activeWeapon, no switch is happening
@@ -75,6 +93,7 @@ public partial class PW_WeaponsHandler : Node
         if (_nextWeapon == _activeWeapon)   // The player is switching back to its initial weapon
         {                                   // We can cancel the switch.
             EndSwitch();
+            SwitchCanceled?.Invoke(this, _activeWeapon);
             return;
         }
 
@@ -90,10 +109,10 @@ public partial class PW_WeaponsHandler : Node
             return;
         }
 
-        SwitchOut();
+        OnSwitchOut();
     }
 
-    public void SwitchOut()
+    public void OnSwitchOut()
     {
         _switchingIn = false;
         _switchingOut = true;
@@ -105,10 +124,12 @@ public partial class PW_WeaponsHandler : Node
         _activeWeapon = null;
 
         _switchTimer = GetTree().CreateTimer(time);
-        _switchTimer.Timeout += SwitchIn;
+        _switchTimer.Timeout += OnSwitchIn;
+        
+        SwitchOut?.Invoke(this, _prevWeapon);
     }
 
-    public void SwitchIn()
+    public void OnSwitchIn()
     {
         _switchingOut = false;
         _switchingIn = true;
@@ -117,6 +138,8 @@ public partial class PW_WeaponsHandler : Node
 
         _switchTimer = GetTree().CreateTimer(time);
         _switchTimer.Timeout += EndSwitch;
+
+        SwitchIn?.Invoke(this, _nextWeapon);
     }
 
     public void EndSwitch()
@@ -126,7 +149,7 @@ public partial class PW_WeaponsHandler : Node
             if (_switchingOut)
             {
                 _switchingOut = false;
-                _switchTimer.Timeout -= SwitchIn;
+                _switchTimer.Timeout -= OnSwitchIn;
             }
             else if (_switchingIn)
             {
@@ -138,5 +161,7 @@ public partial class PW_WeaponsHandler : Node
         _surfaceControl.RemoveModifier(_prevWeapon.MoveSpeedModifier);
         _surfaceControl.AddSpeedModifier(_nextWeapon.MoveSpeedModifier);
         _activeWeapon = _nextWeapon;
+
+        SwitchEnded?.Invoke(this, _activeWeapon);
     }
 }
