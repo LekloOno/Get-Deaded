@@ -39,7 +39,7 @@ public partial class VFX_MovingLightObject : Node3D
         get => _edgesDistance;
         set
         {
-            if (value.X >= _distance - 1f)
+            if (value.X >= _distance - 0.2f)
                 QueueFree();
             
             float cappedY = Mathf.Min(_distance, value.Y);
