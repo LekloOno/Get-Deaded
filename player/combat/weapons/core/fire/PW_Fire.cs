@@ -17,6 +17,7 @@ public abstract partial class PW_Fire : Resource
     public EventHandler<ShotHitEventArgs> Hit;
     protected Node3D _sight;
     protected PC_DirectCamera _camera;
+    private PC_Recoil _recoilController;
 
     protected ulong _lastShot = 0;
     
@@ -25,10 +26,11 @@ public abstract partial class PW_Fire : Resource
     private bool _releaseBuffered = false;
     private static Random _random = new();
 
-    public void Initialize(PC_DirectCamera camera, Node3D sight, Node3D _barel)
+    public void Initialize(PC_DirectCamera camera, Node3D sight, Node3D _barel, PC_Recoil recoilController)
     {
         _camera = camera;
         _sight = sight;
+        _recoilController = recoilController;
         foreach (PW_Shot shot in _shots)
         {
             shot.Initialize(_barel);
@@ -66,6 +68,8 @@ public abstract partial class PW_Fire : Resource
         
         foreach (PW_Shot shot in _shots)
             shot.Shoot(_sight, origin, direction);
+
+        _recoilController.AddRecoil(new(0f, 1f));
     }
 
     protected bool CanShoot() => Time.GetTicksMsec() - _lastShot >= _fireRate;

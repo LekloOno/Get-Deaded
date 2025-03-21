@@ -32,11 +32,17 @@ public partial class PC_Control : Node3D
             //_eulerAngles.X = Mathf.Clamp(_eulerAngles.X, Mathf.DegToRad(-90), Mathf.DegToRad(90));
             //Rotation = _eulerAngles;
             _flatDir.RotateY(-mouseMotion.Relative.X * _realSens);
-            RotateX(-mouseMotion.Relative.Y * _realSens);
-            Vector3 rotation = Rotation;
-            rotation.X = Mathf.Clamp(rotation.X, Mathf.DegToRad(-90), Mathf.DegToRad(90));
-            Rotation = rotation;
+            RotateXClamped(-mouseMotion.Relative.Y * _realSens);
         }
+    }
+
+    // Might be clamping the value an unecessary amount of time ... to improve.
+    public void RotateXClamped(float theta)
+    {
+        RotateX(theta);
+        Vector3 rotation = Rotation;
+        rotation.X = Mathf.Clamp(rotation.X, Mathf.DegToRad(-90), Mathf.DegToRad(90));
+        Rotation = rotation;
     }
 
     // Classic method .. if the manual euler method ever breaks

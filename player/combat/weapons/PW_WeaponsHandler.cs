@@ -10,6 +10,7 @@ using Godot.Collections;
 public partial class PW_WeaponsHandler : Node
 {
     [Export] private PC_DirectCamera _camera;
+    [Export] private PC_Recoil _recoilController;
     [Export] private Node3D _sight;
     [Export] private Node3D _barel;
     [Export] private PI_Weapons _weaponsInput;
@@ -49,11 +50,11 @@ public partial class PW_WeaponsHandler : Node
     {
         foreach(PW_Weapon weapon in _weapons)
         {
-            weapon.Initialize(_camera, _sight, _barel, _surfaceControl);
+            weapon.Initialize(_camera, _sight, _barel, _surfaceControl, _recoilController);
             weapon.Hit += (o, e) => Hit?.Invoke(o, e);
         }
 
-        _melee.Initialize(_camera, _sight, _barel, _surfaceControl);
+        _melee.Initialize(_camera, _sight, _barel, _surfaceControl, _recoilController);
         _melee.Hit += (o, e) => Hit?.Invoke(o, e);
 
         _activeWeapon = _melee;

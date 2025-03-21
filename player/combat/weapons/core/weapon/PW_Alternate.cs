@@ -8,11 +8,11 @@ public partial class PW_Alternate : PW_Weapon
     private PW_Fire _currentFire;
 
 
-    protected override void WeaponInitialize()
+    protected override void WeaponInitialize(PC_Recoil recoilController)
     {
         _currentFire = _primaryFire;
-        _primaryFire.Initialize(_camera, _sight, _barel);
-        _secondaryFire.Initialize(_camera, _sight, _barel);
+        _primaryFire.Initialize(_camera, _sight, _barel, recoilController);
+        _secondaryFire.Initialize(_camera, _sight, _barel, recoilController);
         _primaryFire.Hit += (o, e) => Hit?.Invoke(o, e);
         _secondaryFire.Hit += (o, e) => Hit?.Invoke(o, e);
     }

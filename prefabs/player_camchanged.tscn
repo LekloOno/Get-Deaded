@@ -1,4 +1,4 @@
-[gd_scene load_steps=125 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=126 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://dw01565ra6d7q" path="res://player/camera/PC_SprintLean.cs" id="4_s37k1"]
 [ext_resource type="Script" uid="uid://kabi8i2dqa4f" path="res://player/camera/PC_Anchor.cs" id="4_wobo6"]
 [ext_resource type="Script" uid="uid://bvccexbb184to" path="res://player/camera/PC_Bobbing.cs" id="5_1gcwp"]
+[ext_resource type="Script" uid="uid://uw7inuec6sqb" path="res://player/camera/PC_Recoil.cs" id="6_gcum8"]
 [ext_resource type="Script" uid="uid://bakhc66d22q1p" path="res://player/camera/PC_Spring.cs" id="6_v2bpg"]
 [ext_resource type="Script" uid="uid://bcgujpbuc4umq" path="res://player/camera/PC_Lean.cs" id="7_64lfg"]
 [ext_resource type="Script" uid="uid://bj0x13p8w17v" path="res://player/camera/PC_SlideTilt.cs" id="8_ey8l8"]
@@ -105,7 +106,7 @@ point_count = 5
 colors = PackedColorArray(0, 0.4, 0.894118, 0.764706, 0, 1, 0.537255, 0.784314)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_7bleo"]
-viewport_path = NodePath("Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing/Sprite3D/SubViewport")
+viewport_path = NodePath("Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/Sprite3D/SubViewport")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tujlf"]
 bg_color = Color(0, 0, 0, 0.505882)
@@ -296,37 +297,44 @@ physics_interpolation_mode = 2
 script = ExtResource("3_xv583")
 _flatDir = NodePath("../..")
 
-[node name="PC_SprintLean" type="Node3D" parent="Camera Pivot/PC_Anchor/Camera Control" node_paths=PackedStringArray("_groundSurfaceState")]
+[node name="PC_Recoil" type="Node3D" parent="Camera Pivot/PC_Anchor/Camera Control" node_paths=PackedStringArray("_cameraControl")]
+script = ExtResource("6_gcum8")
+_resistance = Vector2(0.9, 0.9)
+_stopThreshold = 0.01
+_cameraControl = NodePath("..")
+metadata/_custom_type_script = "uid://uw7inuec6sqb"
+
+[node name="PC_SprintLean" type="Node3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil" node_paths=PackedStringArray("_groundSurfaceState")]
 script = ExtResource("4_s37k1")
 _heightDisplacement = -0.15
-_groundSurfaceState = NodePath("../../../../Movement/PM_SurfaceControl/GroundState")
+_groundSurfaceState = NodePath("../../../../../Movement/PM_SurfaceControl/GroundState")
 
-[node name="PC_Bobbing" type="Node3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean" node_paths=PackedStringArray("_groundSurfaceState", "_groundState", "_controller")]
+[node name="PC_Bobbing" type="Node3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean" node_paths=PackedStringArray("_groundSurfaceState", "_groundState", "_controller")]
 script = ExtResource("5_1gcwp")
 _sprintWaveLength = 0.14
 _walkWaveLength = 0.15
-_groundSurfaceState = NodePath("../../../../../Movement/PM_SurfaceControl/GroundState")
-_groundState = NodePath("../../../../../State/PS_Grounded")
-_controller = NodePath("../../../../..")
+_groundSurfaceState = NodePath("../../../../../../Movement/PM_SurfaceControl/GroundState")
+_groundState = NodePath("../../../../../../State/PS_Grounded")
+_controller = NodePath("../../../../../..")
 
-[node name="PC_Spring" type="Node3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing" node_paths=PackedStringArray("_cameraTarget")]
+[node name="PC_Spring" type="Node3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing" node_paths=PackedStringArray("_cameraTarget")]
 script = ExtResource("6_v2bpg")
 AngularDisplacement = 8.01
 LinearDisplacement = 0.0
-_cameraTarget = NodePath("../../../../../../Body/SpatialAnchor/RemoteTransform3D")
+_cameraTarget = NodePath("../../../../../../../Body/SpatialAnchor/RemoteTransform3D")
 
-[node name="PC_Lean" type="Node3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing/PC_Spring" node_paths=PackedStringArray("_camera", "_controller")]
+[node name="PC_Lean" type="Node3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring" node_paths=PackedStringArray("_camera", "_controller")]
 script = ExtResource("7_64lfg")
-_camera = NodePath("../../../..")
-_controller = NodePath("../../../../../../..")
-
-[node name="PC_SlideTilt" type="Node3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean" node_paths=PackedStringArray("_flatDir", "_controller", "_surfaceGroundState")]
-script = ExtResource("8_ey8l8")
-_flatDir = NodePath("../../../../../../..")
+_camera = NodePath("../../../../..")
 _controller = NodePath("../../../../../../../..")
-_surfaceGroundState = NodePath("../../../../../../../../Movement/PM_SurfaceControl/GroundState")
 
-[node name="PC_SlideLedgeAnim" type="Node3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt" node_paths=PackedStringArray("_groundState", "_flatDir", "_controller", "_groundSurfaceState", "_ledgeClimb")]
+[node name="PC_SlideTilt" type="Node3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean" node_paths=PackedStringArray("_flatDir", "_controller", "_surfaceGroundState")]
+script = ExtResource("8_ey8l8")
+_flatDir = NodePath("../../../../../../../..")
+_controller = NodePath("../../../../../../../../..")
+_surfaceGroundState = NodePath("../../../../../../../../../Movement/PM_SurfaceControl/GroundState")
+
+[node name="PC_SlideLedgeAnim" type="Node3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt" node_paths=PackedStringArray("_groundState", "_flatDir", "_controller", "_groundSurfaceState", "_ledgeClimb")]
 script = ExtResource("9_727yx")
 _curve = SubResource("Curve_ux8de")
 _slideStrengthX = 3.0
@@ -334,17 +342,17 @@ _slideStrengthZ = 1.5
 _ledgeStrengthX = 8.0
 _ledgeStrengthZ = 4.0
 _duration = 0.8
-_groundState = NodePath("../../../../../../../../../State/PS_Grounded")
-_flatDir = NodePath("../../../../../../../..")
-_controller = NodePath("../../../../../../../../..")
-_groundSurfaceState = NodePath("../../../../../../../../../Movement/PM_SurfaceControl/GroundState")
-_ledgeClimb = NodePath("../../../../../../../../../Movement/Actions/Jump/PM_LedgeClimb")
+_groundState = NodePath("../../../../../../../../../../State/PS_Grounded")
+_flatDir = NodePath("../../../../../../../../..")
+_controller = NodePath("../../../../../../../../../..")
+_groundSurfaceState = NodePath("../../../../../../../../../../Movement/PM_SurfaceControl/GroundState")
+_ledgeClimb = NodePath("../../../../../../../../../../Movement/Actions/Jump/PM_LedgeClimb")
 
-[node name="Camera3D" type="Camera3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim"]
+[node name="Camera3D" type="Camera3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim"]
 fov = 103.0
 script = ExtResource("12_htv2j")
 
-[node name="Label3D" type="Label3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing" node_paths=PackedStringArray("_controller")]
+[node name="Label3D" type="Label3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing" node_paths=PackedStringArray("_controller")]
 transform = Transform3D(0.956305, 0.0406903, -0.289526, 0, 0.990268, 0.139173, 0.292372, -0.133092, 0.946998, 0.535, -0.353, -0.361)
 pixel_size = 0.001
 modulate = Color(0.0196078, 0.498039, 1, 0.764706)
@@ -354,18 +362,18 @@ script = ExtResource("10_kvg1p")
 _gradient = SubResource("Gradient_k51pg")
 _minSpeed = 10.0
 _maxSpeed = 60.0
-_controller = NodePath("../../../../../..")
+_controller = NodePath("../../../../../../..")
 
-[node name="Sprite3D" type="Sprite3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing"]
+[node name="Sprite3D" type="Sprite3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing"]
 transform = Transform3D(0.154622, -0.000283032, 0.0108085, 0, 0.154947, 0.00405743, -0.0108123, -0.00404754, 0.154569, -0.485, -0.28, -0.3)
 texture = SubResource("ViewportTexture_7bleo")
 
-[node name="SubViewport" type="SubViewport" parent="Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing/Sprite3D"]
+[node name="SubViewport" type="SubViewport" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/Sprite3D"]
 transparent_bg = true
 handle_input_locally = false
 render_target_update_mode = 4
 
-[node name="UI_EntityHealth" type="VBoxContainer" parent="Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing/Sprite3D/SubViewport" node_paths=PackedStringArray("_healthManager", "_higherBar", "_lowerBar")]
+[node name="UI_EntityHealth" type="VBoxContainer" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/Sprite3D/SubViewport" node_paths=PackedStringArray("_healthManager", "_higherBar", "_lowerBar")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -380,12 +388,12 @@ grow_vertical = 2
 theme_override_constants/separation = 20
 alignment = 1
 script = ExtResource("13_3qmec")
-_healthManager = NodePath("../../../../../../../../Body/PH_Manager")
+_healthManager = NodePath("../../../../../../../../../Body/PH_Manager")
 _higherBar = NodePath("HigherLayer")
 _lowerBar = NodePath("LowerLayer")
 metadata/_custom_type_script = "uid://d01sb0k1e87yt"
 
-[node name="HigherLayer" type="Control" parent="Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing/Sprite3D/SubViewport/UI_EntityHealth" node_paths=PackedStringArray("_body", "_tail")]
+[node name="HigherLayer" type="Control" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/Sprite3D/SubViewport/UI_EntityHealth" node_paths=PackedStringArray("_body", "_tail")]
 layout_mode = 2
 script = ExtResource("14_elf0p")
 _body = NodePath("Body")
@@ -393,7 +401,7 @@ _tail = NodePath("Tail")
 _tailSpeed = 0.4
 metadata/_custom_type_script = "uid://db8e5l76dsikn"
 
-[node name="Tail" type="ProgressBar" parent="Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing/Sprite3D/SubViewport/UI_EntityHealth/HigherLayer"]
+[node name="Tail" type="ProgressBar" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/Sprite3D/SubViewport/UI_EntityHealth/HigherLayer"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -413,7 +421,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_5oo0i")
 value = 40.43
 show_percentage = false
 
-[node name="Body" type="ProgressBar" parent="Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing/Sprite3D/SubViewport/UI_EntityHealth/HigherLayer"]
+[node name="Body" type="ProgressBar" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/Sprite3D/SubViewport/UI_EntityHealth/HigherLayer"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -433,7 +441,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_0kw87")
 value = 27.46
 show_percentage = false
 
-[node name="LowerLayer" type="Control" parent="Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing/Sprite3D/SubViewport/UI_EntityHealth" node_paths=PackedStringArray("_body", "_tail")]
+[node name="LowerLayer" type="Control" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/Sprite3D/SubViewport/UI_EntityHealth" node_paths=PackedStringArray("_body", "_tail")]
 layout_mode = 2
 script = ExtResource("14_elf0p")
 _body = NodePath("Body")
@@ -441,7 +449,7 @@ _tail = NodePath("Tail")
 _tailSpeed = 0.4
 metadata/_custom_type_script = "uid://db8e5l76dsikn"
 
-[node name="Tail" type="ProgressBar" parent="Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing/Sprite3D/SubViewport/UI_EntityHealth/LowerLayer"]
+[node name="Tail" type="ProgressBar" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/Sprite3D/SubViewport/UI_EntityHealth/LowerLayer"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -461,7 +469,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_6opq1")
 value = 40.43
 show_percentage = false
 
-[node name="Body" type="ProgressBar" parent="Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing/Sprite3D/SubViewport/UI_EntityHealth/LowerLayer"]
+[node name="Body" type="ProgressBar" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/Sprite3D/SubViewport/UI_EntityHealth/LowerLayer"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -481,8 +489,8 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_1bvlm")
 value = 27.46
 show_percentage = false
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing"]
-remote_path = NodePath("../../../../../../PW_WeaponsHandler/Weapons")
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing"]
+remote_path = NodePath("../../../../../../../PW_WeaponsHandler/Weapons")
 
 [node name="GroundCast" type="ShapeCast3D" parent="."]
 shape = SubResource("SphereShape3D_4jpmy")
@@ -946,8 +954,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("32_jex4o")
-_sightPosition = NodePath("../../Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean")
-_camera = NodePath("../../Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/Camera3D")
+_sightPosition = NodePath("../../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean")
+_camera = NodePath("../../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/Camera3D")
 image = NodePath("TextureRect")
 _smoothSpeed = 4.0
 
@@ -1017,7 +1025,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
 script = ExtResource("82_5dw8r")
-_camera = NodePath("../../Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/Camera3D")
+_camera = NodePath("../../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/Camera3D")
 _indicatorScene = ExtResource("83_ewcnl")
 _weaponsHandler = NodePath("../../PW_WeaponsHandler")
 _bufferTimer = NodePath("Timer")
@@ -1027,10 +1035,11 @@ metadata/_custom_type_script = "uid://c7tdbt357bj80"
 wait_time = 0.3
 one_shot = true
 
-[node name="PW_WeaponsHandler" type="Node" parent="." node_paths=PackedStringArray("_camera", "_sight", "_barel", "_weaponsInput", "_surfaceControl")]
+[node name="PW_WeaponsHandler" type="Node" parent="." node_paths=PackedStringArray("_camera", "_recoilController", "_sight", "_barel", "_weaponsInput", "_surfaceControl")]
 script = ExtResource("81_stdu8")
-_camera = NodePath("../Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/Camera3D")
-_sight = NodePath("../Camera Pivot/PC_Anchor/Camera Control/PC_SprintLean")
+_camera = NodePath("../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/Camera3D")
+_recoilController = NodePath("../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil")
+_sight = NodePath("../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean")
 _barel = NodePath("Weapons/Barrel")
 _weaponsInput = NodePath("../PIM_Arena/PI_Weapons")
 _weapons = Array[Object]([SubResource("Resource_fdvd6"), SubResource("Resource_fvk8i")])

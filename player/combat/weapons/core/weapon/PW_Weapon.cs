@@ -15,14 +15,14 @@ public abstract partial class PW_Weapon : Resource
     public EventHandler<ShotHitEventArgs> Hit;
     private bool _adsActive = false;       // Not ideal, maybe make so ads return 3 state instead of true/false to know when nothing happened.
 
-    public void Initialize(PC_DirectCamera camera, Node3D sight, Node3D barel, PM_SurfaceControl surfaceControl)
+    public void Initialize(PC_DirectCamera camera, Node3D sight, Node3D barel, PM_SurfaceControl surfaceControl, PC_Recoil recoilController)
     {
         _camera = camera;
         _sight = sight;
         _barel = barel;
         _surfaceControl = surfaceControl;
         _ads?.Initialize(_camera);
-        WeaponInitialize();
+        WeaponInitialize(recoilController);
     }   
 
     public void HandleSecondaryDown()
@@ -65,7 +65,7 @@ public abstract partial class PW_Weapon : Resource
     /// <summary>
     /// Allow for some specific initialization.
     /// </summary>
-    protected virtual void WeaponInitialize() {}
+    protected virtual void WeaponInitialize(PC_Recoil recoilController) {}
 
     /// <summary>
     /// Called when the primary input is pressed down. Will typically handle shooting process.
