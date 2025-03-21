@@ -2,19 +2,19 @@
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://player/movement/basic_velocity_cache.tres" id="2_7wk04"]
-[ext_resource type="Script" uid="uid://u4chbwn5b4q1" path="res://player/camera/PC_FlatDir.cs" id="3_31qv1"]
-[ext_resource type="Script" uid="uid://b8papnphcevbc" path="res://player/camera/PC_Control.cs" id="3_xv583"]
-[ext_resource type="Script" uid="uid://dw01565ra6d7q" path="res://player/camera/PC_SprintLean.cs" id="4_s37k1"]
-[ext_resource type="Script" uid="uid://kabi8i2dqa4f" path="res://player/camera/PC_Anchor.cs" id="4_wobo6"]
-[ext_resource type="Script" uid="uid://bvccexbb184to" path="res://player/camera/PC_Bobbing.cs" id="5_1gcwp"]
-[ext_resource type="Script" uid="uid://uw7inuec6sqb" path="res://player/camera/PC_Recoil.cs" id="6_gcum8"]
-[ext_resource type="Script" uid="uid://bakhc66d22q1p" path="res://player/camera/PC_Spring.cs" id="6_v2bpg"]
-[ext_resource type="Script" uid="uid://bcgujpbuc4umq" path="res://player/camera/PC_Lean.cs" id="7_64lfg"]
-[ext_resource type="Script" uid="uid://bj0x13p8w17v" path="res://player/camera/PC_SlideTilt.cs" id="8_ey8l8"]
-[ext_resource type="Script" uid="uid://bpx1sfcw442s1" path="res://player/camera/PC_SlideLedgeAnim.cs" id="9_727yx"]
+[ext_resource type="Script" uid="uid://u4chbwn5b4q1" path="res://player/camera/setup/PC_FlatDir.cs" id="3_31qv1"]
+[ext_resource type="Script" uid="uid://b8papnphcevbc" path="res://player/camera/control/PC_Control.cs" id="3_xv583"]
+[ext_resource type="Script" uid="uid://dw01565ra6d7q" path="res://player/camera/annimation/PC_SprintLean.cs" id="4_s37k1"]
+[ext_resource type="Script" uid="uid://kabi8i2dqa4f" path="res://player/camera/setup/PC_Anchor.cs" id="4_wobo6"]
+[ext_resource type="Script" uid="uid://bvccexbb184to" path="res://player/camera/annimation/PC_Bobbing.cs" id="5_1gcwp"]
+[ext_resource type="Script" uid="uid://uw7inuec6sqb" path="res://player/camera/recoil/PC_Recoil.cs" id="6_gcum8"]
+[ext_resource type="Script" uid="uid://bakhc66d22q1p" path="res://player/camera/annimation/PC_Spring.cs" id="6_v2bpg"]
+[ext_resource type="Script" uid="uid://bcgujpbuc4umq" path="res://player/camera/annimation/PC_Lean.cs" id="7_64lfg"]
+[ext_resource type="Script" uid="uid://bj0x13p8w17v" path="res://player/camera/annimation/PC_SlideTilt.cs" id="8_ey8l8"]
+[ext_resource type="Script" uid="uid://bpx1sfcw442s1" path="res://player/camera/annimation/PC_SlideLedgeAnim.cs" id="9_727yx"]
 [ext_resource type="Script" uid="uid://nat0vtl7jqqp" path="res://ui/movement/UI_SpeedoMeter.cs" id="10_kvg1p"]
 [ext_resource type="Script" uid="uid://bpp610usa4y00" path="res://player/body/PB_Scale.cs" id="11_6ifu1"]
-[ext_resource type="Script" uid="uid://di34syfygvow1" path="res://player/camera/PC_DirectCamera.cs" id="12_htv2j"]
+[ext_resource type="Script" uid="uid://di34syfygvow1" path="res://player/camera/control/PC_DirectCamera.cs" id="12_htv2j"]
 [ext_resource type="Script" uid="uid://38i6kejmo2hs" path="res://player/audio/PA_Jump.cs" id="12_nveww"]
 [ext_resource type="Script" uid="uid://c6mut48npwi4w" path="res://player/input/actions/movement/PI_Walk.cs" id="12_pwafq"]
 [ext_resource type="Script" uid="uid://e4bcjkfxrbxl" path="res://player/audio/PA_FootSteps.cs" id="12_ttbg8"]
@@ -297,11 +297,11 @@ physics_interpolation_mode = 2
 script = ExtResource("3_xv583")
 _flatDir = NodePath("../..")
 
-[node name="PC_Recoil" type="Node3D" parent="Camera Pivot/PC_Anchor/Camera Control" node_paths=PackedStringArray("_cameraControl")]
+[node name="PC_Recoil" type="Node3D" parent="Camera Pivot/PC_Anchor/Camera Control" node_paths=PackedStringArray("CameraControl")]
 script = ExtResource("6_gcum8")
-_resistance = Vector2(0.9, 0.9)
-_stopThreshold = 0.01
-_cameraControl = NodePath("..")
+Resistance = Vector2(0.9, 0.9)
+StopThreshold = 0.005
+CameraControl = NodePath("..")
 metadata/_custom_type_script = "uid://uw7inuec6sqb"
 
 [node name="PC_SprintLean" type="Node3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil" node_paths=PackedStringArray("_groundSurfaceState")]
