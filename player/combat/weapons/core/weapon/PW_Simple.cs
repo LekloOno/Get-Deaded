@@ -23,12 +23,20 @@ public partial class PW_Simple : PW_Weapon
 
     protected override void StartADS()
     {
-        // Set modifiers
+        if(_simpleADS == null)
+            return;
+
+        _fire.SpreadMultiplier.AddModifier(_simpleADS.SpreadMultiplier);
+        _fire.RecoilMultiplier.AddModifier(_simpleADS.RecoilMultiplier);
     }
 
     protected override void StopADS()
     {
-        // Reset modifiers
+        if(_simpleADS == null)
+            return;
+
+        _fire.SpreadMultiplier.RemoveModifier(_simpleADS.SpreadMultiplier);
+        _fire.RecoilMultiplier.RemoveModifier(_simpleADS.RecoilMultiplier);
     }
 
 }

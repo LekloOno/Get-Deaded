@@ -12,8 +12,8 @@ public abstract partial class PW_Fire : Resource
     [Export] protected float _spread;
     [Export] protected ulong _fireRate;
     [Export] protected PW_Recoil _recoil;
-    public float SpreadMultiplier = 1f;
-    public float RecoilMultiplier = 1f;
+    public PHX_AdditiveModifiers SpreadMultiplier {get; private set;}
+    public PHX_AdditiveModifiers RecoilMultiplier {get; private set;}
     public EventHandler<ShotHitEventArgs> Hit;
     protected Node3D _sight;
     protected PC_DirectCamera _camera;

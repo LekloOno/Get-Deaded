@@ -13,7 +13,7 @@ public abstract partial class PW_Weapon : Resource
     protected Node3D _barel;
     private PM_SurfaceControl _surfaceControl;
     public EventHandler<ShotHitEventArgs> Hit;
-    private bool _speedModActive = false;       // Not ideal, maybe make so ads return 3 state instead of true/false to know when nothing happened.
+    private bool _adsActive = false;       // Not ideal, maybe make so ads return 3 state instead of true/false to know when nothing happened.
 
     public void Initialize(PC_DirectCamera camera, Node3D sight, Node3D barel, PM_SurfaceControl surfaceControl)
     {
@@ -34,21 +34,9 @@ public abstract partial class PW_Weapon : Resource
         }
 
         if (_ads.Pressed())
-        {
-            if (!_speedModActive)
-                _surfaceControl.SpeedModifiers.AddSpeedModifier(_ads.MoveSpeedMultiplier);
-            
-            _speedModActive = true;
-            StartADS();
-        }
+            ActivateADS();
         else
-        {
-            if (_speedModActive)
-                _surfaceControl.SpeedModifiers.RemoveModifier(_ads.MoveSpeedMultiplier);
-            
-            _speedModActive = false;
-            StopADS();
-        }
+            DeactivateADS();
     }
 
     public void HandleSecondaryUp()
@@ -60,13 +48,7 @@ public abstract partial class PW_Weapon : Resource
         }
 
         if (_ads.Released())
-        {
-            if (_speedModActive)
-                _surfaceControl.SpeedModifiers.RemoveModifier(_ads.MoveSpeedMultiplier);
-
-            _speedModActive = false;
-            StopADS();
-        }
+            DeactivateADS();
     }
 
     public void HandlePrimaryDown() => PrimaryDown();   // For naming consistency
@@ -115,4 +97,24 @@ public abstract partial class PW_Weapon : Resource
     /// Allow for some specific disabling process.
     /// </summary>
     protected abstract void Disable();
+
+    private void ActivateADS()
+    {
+        if (_adsActive)
+                return;
+
+        _adsActive = true;
+        _surfaceControl.SpeedModifiers.AddModifier(_ads.MoveSpeedMultiplier);
+        StartADS();
+    }
+
+    public void DeactivateADS()
+    {
+        if (!_adsActive)
+                return;
+            
+        _adsActive = false;
+        _surfaceControl.SpeedModifiers.RemoveModifier(_ads.MoveSpeedMultiplier);
+        StopADS();
+    }
 }
