@@ -36,7 +36,7 @@ public abstract partial class PW_Weapon : Resource
         if (_ads.Pressed())
         {
             if (!_speedModActive)
-                _surfaceControl.AddSpeedModifier(_ads.MoveSpeedMultiplier);
+                _surfaceControl.SpeedModifiers.AddSpeedModifier(_ads.MoveSpeedMultiplier);
             
             _speedModActive = true;
             StartADS();
@@ -44,7 +44,7 @@ public abstract partial class PW_Weapon : Resource
         else
         {
             if (_speedModActive)
-                _surfaceControl.RemoveModifier(_ads.MoveSpeedMultiplier);
+                _surfaceControl.SpeedModifiers.RemoveModifier(_ads.MoveSpeedMultiplier);
             
             _speedModActive = false;
             StopADS();
@@ -62,7 +62,7 @@ public abstract partial class PW_Weapon : Resource
         if (_ads.Released())
         {
             if (_speedModActive)
-                _surfaceControl.RemoveModifier(_ads.MoveSpeedMultiplier);
+                _surfaceControl.SpeedModifiers.RemoveModifier(_ads.MoveSpeedMultiplier);
 
             _speedModActive = false;
             StopADS();
@@ -75,7 +75,7 @@ public abstract partial class PW_Weapon : Resource
     public void HandleDisable()
     {
         if (_ads != null && _ads.Disable())
-            _surfaceControl.RemoveModifier(_ads.MoveSpeedMultiplier);
+            _surfaceControl.SpeedModifiers.RemoveModifier(_ads.MoveSpeedMultiplier);
 
         Disable();
     }

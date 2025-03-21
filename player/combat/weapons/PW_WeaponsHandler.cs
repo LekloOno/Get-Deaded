@@ -57,7 +57,7 @@ public partial class PW_WeaponsHandler : Node
         _melee.Hit += (o, e) => Hit?.Invoke(o, e);
 
         _activeWeapon = _melee;
-        _surfaceControl.AddSpeedModifier(_activeWeapon.MoveSpeedModifier);
+        _surfaceControl.SpeedModifiers.AddSpeedModifier(_activeWeapon.MoveSpeedModifier);
 
         _weaponsInput.OnStartPrimary += HandleStartPrimary;
         _weaponsInput.OnStopPrimary += HandleStopPrimary;
@@ -237,8 +237,8 @@ public partial class PW_WeaponsHandler : Node
             }
         }
 
-        _surfaceControl.RemoveModifier(_prevWeapon.MoveSpeedModifier);
-        _surfaceControl.AddSpeedModifier(_nextWeapon.MoveSpeedModifier);
+        _surfaceControl.SpeedModifiers.RemoveModifier(_prevWeapon.MoveSpeedModifier);
+        _surfaceControl.SpeedModifiers.AddSpeedModifier(_nextWeapon.MoveSpeedModifier);
         _activeWeapon = _nextWeapon;
 
         SwitchEnded?.Invoke(this, _activeWeapon);
