@@ -31,7 +31,7 @@ public partial class PC_Control : Node3D
             //_eulerAngles += new Vector3(-mouseMotion.Relative.Y * _realSens, -mouseMotion.Relative.X * _realSens, 0f);
             //_eulerAngles.X = Mathf.Clamp(_eulerAngles.X, Mathf.DegToRad(-90), Mathf.DegToRad(90));
             //Rotation = _eulerAngles;
-            _flatDir.RotateY(-mouseMotion.Relative.X * _realSens);
+            RotateFlatDir(-mouseMotion.Relative.X * _realSens);
             RotateXClamped(-mouseMotion.Relative.Y * _realSens);
         }
     }
@@ -44,6 +44,8 @@ public partial class PC_Control : Node3D
         rotation.X = Mathf.Clamp(rotation.X, Mathf.DegToRad(-90), Mathf.DegToRad(90));
         Rotation = rotation;
     }
+
+    public void RotateFlatDir(float theta) => _flatDir.RotateY(theta);
 
     // Classic method .. if the manual euler method ever breaks
 

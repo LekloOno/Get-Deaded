@@ -15,11 +15,7 @@ public partial class PC_Recoil : Node3D
     {
         Vector2 appliedVel = _velocity * (float)delta;
         _cameraControl.RotateXClamped(appliedVel.Y);
-        RotateY(appliedVel.X);
-
-        //rotation = GlobalRotation;
-        //rotation.X = Mathf.Clamp(rotation.X, Mathf.DegToRad(-90), Mathf.DegToRad(90));
-        //GlobalRotation = rotation;
+        _cameraControl.RotateFlatDir(appliedVel.X);
 
         _velocity *= _resistance;
         if (_velocity.Length() < _stopThreshold)
