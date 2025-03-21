@@ -7,7 +7,7 @@ using Godot.Collections;
 [GlobalClass]
 public abstract partial class PW_Fire : Resource
 {
-    private const double _bufferMargin = 0.0015;
+    private const double _bufferMargin = 0.008;
     [Export] private Array<PW_Shot> _shots;
     [Export] protected float _spread;
     [Export] protected ulong _fireRate;
