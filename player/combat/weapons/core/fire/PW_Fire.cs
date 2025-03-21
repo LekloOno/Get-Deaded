@@ -69,7 +69,7 @@ public abstract partial class PW_Fire : Resource
         foreach (PW_Shot shot in _shots)
             shot.Shoot(_sight, origin, direction);
 
-        _recoilController.AddRecoil(new(0.2f, 1f));
+        //_recoilController.AddRecoil(new(0.2f, 1f), true);
     }
 
     protected bool CanShoot() => Time.GetTicksMsec() - _lastShot >= _fireRate;

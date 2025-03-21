@@ -46,6 +46,7 @@ public partial class PC_Control : Node3D
     }
 
     public void RotateFlatDir(float theta) => _flatDir.RotateY(theta);
+    public Vector2 CurrentRotation() => new(Rotation.X, _flatDir.Rotation.Y);
 
     // Classic method .. if the manual euler method ever breaks
 
