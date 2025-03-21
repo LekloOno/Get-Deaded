@@ -7,7 +7,7 @@ public partial class PW_ADS : Resource
     [Export] public float ScopeInTime {get; private set;}
     [Export] public float ScopeOutTime {get; private set;}
     [Export] public float FovMultiplier {get; private set;} = 1f;
-    [Export] public float MoveSpeedMultiplier {get; private set;} = 1f;
+    [Export] public float MoveSpeedMultiplier {get; private set;} = 0f; // Additive percent modifier
     private bool _active = false;
     private PC_DirectCamera _camera;
 
@@ -16,10 +16,18 @@ public partial class PW_ADS : Resource
         _camera = camera;
     }
 
-    public void Disable()
+    /// <summary>
+    /// Disables the ADS.
+    /// </summary>
+    /// <returns>true if it was active, false otherwise.</returns>
+    public bool Disable()
     {
-        if (_active)
+        bool wasActive = _active;
+
+        if (wasActive)
             Deactivate();
+        
+        return wasActive;
     }
 
     /// <summary>

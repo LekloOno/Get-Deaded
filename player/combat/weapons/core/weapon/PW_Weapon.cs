@@ -11,13 +11,16 @@ public abstract partial class PW_Weapon : Resource
     protected PC_DirectCamera _camera;
     protected Node3D _sight;
     protected Node3D _barel;
+    private PM_SurfaceControl _surfaceControl;
     public EventHandler<ShotHitEventArgs> Hit;
+    private bool _speedModActive = false;       // Not ideal, maybe make so ads return 3 state instead of true/false to know when nothing happened.
 
-    public void Initialize(PC_DirectCamera camera, Node3D sight, Node3D barel)
+    public void Initialize(PC_DirectCamera camera, Node3D sight, Node3D barel, PM_SurfaceControl surfaceControl)
     {
         _camera = camera;
         _sight = sight;
         _barel = barel;
+        _surfaceControl = surfaceControl;
         _ads?.Initialize(_camera);
         WeaponInitialize();
     }   
@@ -32,12 +35,18 @@ public abstract partial class PW_Weapon : Resource
 
         if (_ads.Pressed())
         {
-            // Set mobility modifier
+            if (!_speedModActive)
+                _surfaceControl.AddSpeedModifier(_ads.MoveSpeedMultiplier);
+            
+            _speedModActive = true;
             StartADS();
         }
         else
         {
-            // Reset mobility modifier
+            if (_speedModActive)
+                _surfaceControl.RemoveModifier(_ads.MoveSpeedMultiplier);
+            
+            _speedModActive = false;
             StopADS();
         }
     }
@@ -52,7 +61,10 @@ public abstract partial class PW_Weapon : Resource
 
         if (_ads.Released())
         {
-            // Reset mobility modifier
+            if (_speedModActive)
+                _surfaceControl.RemoveModifier(_ads.MoveSpeedMultiplier);
+
+            _speedModActive = false;
             StopADS();
         }
     }
@@ -62,7 +74,9 @@ public abstract partial class PW_Weapon : Resource
 
     public void HandleDisable()
     {
-        _ads?.Disable();
+        if (_ads != null && _ads.Disable())
+            _surfaceControl.RemoveModifier(_ads.MoveSpeedMultiplier);
+
         Disable();
     }
 

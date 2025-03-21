@@ -49,11 +49,11 @@ public partial class PW_WeaponsHandler : Node
     {
         foreach(PW_Weapon weapon in _weapons)
         {
-            weapon.Initialize(_camera, _sight, _barel);
+            weapon.Initialize(_camera, _sight, _barel, _surfaceControl);
             weapon.Hit += (o, e) => Hit?.Invoke(o, e);
         }
 
-        _melee.Initialize(_camera, _sight, _barel);
+        _melee.Initialize(_camera, _sight, _barel, _surfaceControl);
         _melee.Hit += (o, e) => Hit?.Invoke(o, e);
 
         _activeWeapon = _melee;

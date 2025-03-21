@@ -164,6 +164,14 @@ _maxHealth = 50.0
 Child = SubResource("Resource_htv2j")
 metadata/_custom_type_script = "uid://be02fh6y0vldv"
 
+[sub_resource type="Resource" id="Resource_fdvd6"]
+script = ExtResource("87_5dw8r")
+_fire = ExtResource("86_8j20c")
+SwitchInTime = 0.2
+SwitchOutTime = 0.25
+MoveSpeedModifier = -0.1
+metadata/_custom_type_script = "uid://c3are182lodyx"
+
 [sub_resource type="Resource" id="Resource_wow6d"]
 script = ExtResource("87_htv2j")
 SpreadMultiplier = 1.0
@@ -172,17 +180,8 @@ Hold = true
 ScopeInTime = 0.2
 ScopeOutTime = 0.2
 FovMultiplier = 0.9
-MoveSpeedMultiplier = 1.0
+MoveSpeedMultiplier = -0.1
 metadata/_custom_type_script = "uid://bxxmkegnq67qe"
-
-[sub_resource type="Resource" id="Resource_fdvd6"]
-script = ExtResource("87_5dw8r")
-_fire = ExtResource("86_8j20c")
-SwitchInTime = 0.2
-SwitchOutTime = 0.25
-MoveSpeedModifier = -0.1
-_ads = SubResource("Resource_wow6d")
-metadata/_custom_type_script = "uid://c3are182lodyx"
 
 [sub_resource type="Resource" id="Resource_fvk8i"]
 script = ExtResource("87_5dw8r")
@@ -190,6 +189,7 @@ _fire = ExtResource("88_ewcnl")
 SwitchInTime = 0.15
 SwitchOutTime = 0.25
 MoveSpeedModifier = -0.08
+_ads = SubResource("Resource_wow6d")
 metadata/_custom_type_script = "uid://c3are182lodyx"
 
 [sub_resource type="Resource" id="Resource_3bwxm"]
