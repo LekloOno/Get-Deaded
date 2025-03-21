@@ -26,8 +26,8 @@ public partial class PW_Simple : PW_Weapon
         if(_simpleADS == null)
             return;
 
-        _fire.SpreadMultiplier.AddModifier(_simpleADS.SpreadMultiplier);
-        _fire.RecoilMultiplier.AddModifier(_simpleADS.RecoilMultiplier);
+        _fire.SpreadMultiplier.Add(_simpleADS.SpreadMultiplier);
+        _fire.RecoilMultiplier.Add(_simpleADS.RecoilMultiplier);
     }
 
     protected override void StopADS()
@@ -35,8 +35,8 @@ public partial class PW_Simple : PW_Weapon
         if(_simpleADS == null)
             return;
 
-        _fire.SpreadMultiplier.RemoveModifier(_simpleADS.SpreadMultiplier);
-        _fire.RecoilMultiplier.RemoveModifier(_simpleADS.RecoilMultiplier);
+        _fire.SpreadMultiplier.Remove(_simpleADS.SpreadMultiplier);
+        _fire.RecoilMultiplier.Remove(_simpleADS.RecoilMultiplier);
     }
 
 }
