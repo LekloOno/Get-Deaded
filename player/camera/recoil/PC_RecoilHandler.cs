@@ -1,55 +1,39 @@
 using Godot;
 
-public abstract partial class PC_RecoilHandler(PC_Recoil recoilController) : Node
+public class PC_RecoilHandler
 {
-    protected PC_Recoil _recoilController = recoilController;
-    protected Vector2 _velocity = Vector2.Zero;
+    private Vector2 _velocity = Vector2.Zero;
+    private Vector2 _resistance = Vector2.Zero;
+    private float _threshold;
 
-    public override void _Ready()
+    public PC_RecoilHandler(Vector2 angle, float time, float threshold)
     {
-        SetProcess(false);
-    }
-    public override void _Process(double delta)
-    {
-        ApplyVelocity(delta);
-        ApplyResistance(delta);
-        CheckThreshold();
+        _threshold = threshold;
 
-        CustomProcess();
-    }
+        float radAngleX = Mathf.DegToRad(angle.X);
+        float radAngleY = Mathf.DegToRad(angle.Y);
 
-    public void AddRecoil(Vector2 velocity)
-    {
-        _velocity += velocity;
-        CustomAdd(velocity);
+        float resX = 2f*radAngleX/Mathf.Pow(time, 2f);
+        float resY = 2f*radAngleY/Mathf.Pow(time, 2f);
+        _resistance = new(resX, resY);
+
+        _velocity = _resistance * time;
     }
-    public void AddCappedRecoil(Vector2 velocity, float max)
+    
+    public void AddVelocity(Vector2 velocity) => _velocity += velocity;
+    public void AddCappedVelocity(Vector2 velocity, float max)
     {
-        _velocity += velocity;
+        AddVelocity(velocity);
         if (_velocity.Length() > max)
             _velocity = _velocity.Normalized() * max;
-            
-        CustomAddCapped(velocity, max);
+    }
+    public bool Tick(double delta, out Vector2 tickVelocity)
+    {
+        tickVelocity = _velocity * (float) delta;
+        ApplyResistance(delta);
+        return BelowThreshold();
     }
 
-    protected void ApplyResistance(double delta) => _velocity -= _velocity * _recoilController.Resistance * (float)delta;
-    protected void ApplyVelocity(double delta)
-    {
-        Vector2 appliedVel = _velocity * (float)delta;
-        _recoilController.CameraControl.RotateXClamped(appliedVel.Y);
-        _recoilController.CameraControl.RotateFlatDir(appliedVel.X);
-    }
-    protected void CheckThreshold()
-    {
-        if (_velocity.Length() > _recoilController.StopThreshold)
-            return;
-            
-        _velocity = Vector2.Zero;
-        OnThresholdReached();
-    }
-
-    protected abstract void OnThresholdReached();
-    protected abstract void CustomProcess();
-    protected abstract void CustomAdd(Vector2 velocity);
-    protected abstract void CustomAddCapped(Vector2 velocity, float max);
+    protected void ApplyResistance(double delta) => _velocity -= _resistance * (float)delta;
+    protected bool BelowThreshold() => _velocity.Length() < _threshold;
 }

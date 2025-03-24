@@ -23,6 +23,6 @@ metadata/_custom_type_script = "uid://fc7gkofu3df7"
 [resource]
 script = ExtResource("4_fw8mr")
 _shots = Array[Object]([SubResource("Resource_4vhab")])
-_spread = 5.0
+_spread = 1.5
 _fireRate = 50
 metadata/_custom_type_script = "uid://cu3n4oi1x76dl"

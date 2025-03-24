@@ -1,48 +1,34 @@
+using System.Collections.Generic;
 using Godot;
 
 [GlobalClass]
 public partial class PC_Recoil : Node3D
 {
-    [Export] public Vector2 Resistance {get; private set;}
+    [Export] public Vector2 Resistance {get; set;}
     [Export] public float StopThreshold {get; private set;}
     [Export] public PC_Control CameraControl {get; private set;}
     [Export] private float _resetSpeed;
-    private PC_SimpleRecoil _simpleRecoil;
-    private PC_ResetRecoil _resetRecoil;
-    public override void _Ready()
+    private List<PC_RecoilHandler> _recoilHandlers = [];
+    public override void _Process(double delta)
     {
-        _simpleRecoil = new(this);
-        AddChild(_simpleRecoil);
+        Vector2 appliedVel = Vector2.Zero;
 
-        _resetRecoil = new(this, _resetSpeed);
-        AddChild(_resetRecoil);
+        for (int i = _recoilHandlers.Count - 1; i >= 0; i--)
+        {
+            if (_recoilHandlers[i].Tick(delta, out Vector2 velocity))
+                _recoilHandlers.RemoveAt(i);
+
+            appliedVel += velocity;
+        }
+
+        CameraControl.RotateXClamped(appliedVel.Y);
+        CameraControl.RotateFlatDir(appliedVel.X);
     }
 
-    public void AddRecoil(Vector2 velocity, bool reset)
+    public PC_RecoilHandler AddRecoil(Vector2 angle, float time, float threshold = .05f)
     {
-        if (reset)
-        {
-            _resetRecoil.AddRecoil(velocity);
-            _resetRecoil.SetProcess(true);
-        }
-        else
-        {
-            _simpleRecoil.AddRecoil(velocity);
-            _simpleRecoil.SetProcess(true);
-        }
-    }
-
-    public void AddCappedRecoil(Vector2 velocity, float max, bool reset)
-    {
-        if (reset)
-        {
-            _resetRecoil.AddCappedRecoil(velocity, max);
-            _resetRecoil.SetProcess(true);
-        }
-        else
-        {
-            _simpleRecoil.AddCappedRecoil(velocity, max);
-            _simpleRecoil.SetProcess(true);
-        }
+        PC_RecoilHandler recoilHandler = new(angle, time, threshold);
+        _recoilHandlers.Add(recoilHandler);
+        return recoilHandler;
     }
 }

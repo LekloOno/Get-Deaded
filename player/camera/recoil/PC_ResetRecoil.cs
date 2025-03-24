@@ -1,12 +1,12 @@
 using Godot;
 
-public partial class PC_ResetRecoil(PC_Recoil recoilController, float resetSpeed) : PC_RecoilHandler(recoilController)
+public partial class PC_ResetRecoil(float resetSpeed)
 {
     private Vector2 _initialRotation = Vector2.Zero;
     private Vector2 _initialVelocity = Vector2.Zero;
     private Vector2 _resetDir = Vector2.Zero;
     private float _resetSpeed = resetSpeed;
-    private bool _ascending = false;
+    private bool _ascending = false;/*
 
     public override void _Process(double delta)
     {
@@ -44,5 +44,5 @@ public partial class PC_ResetRecoil(PC_Recoil recoilController, float resetSpeed
         _initialRotation = _recoilController.CameraControl.CurrentRotation();
         _initialVelocity = velocity;
         _resetDir = velocity.Normalized() * _resetSpeed;
-    }
+    }*/
 }
