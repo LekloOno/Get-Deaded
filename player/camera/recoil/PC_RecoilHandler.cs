@@ -27,6 +27,18 @@ public class PC_RecoilHandler
         if (_velocity.Length() > max)
             _velocity = _velocity.Normalized() * max;
     }
+
+    public void AddAngle(Vector2 angle)
+    {
+        float radAngleX = Mathf.DegToRad(angle.X);
+        float radAngleY = Mathf.DegToRad(angle.Y);
+
+        float velocityX = Mathf.Sqrt(2f*_resistance.X*radAngleX);
+        float velocityY = Mathf.Sqrt(2f*_resistance.Y*radAngleY);
+
+        _velocity += new Vector2(velocityX, velocityY);
+    }
+
     public bool Tick(double delta, out Vector2 tickVelocity)
     {
         tickVelocity = _velocity * (float) delta;
