@@ -1,14 +1,15 @@
 using System;
 using Godot;
 
+public delegate void HealthEventHandler<T>(GC_Health senderLayer, T e);
+public delegate void HealthEventHandler(GC_Health senderLayer);
+
 [GlobalClass]
 public partial class GC_Health : Resource
 {
     [Export] protected float _maxHealth;
     [Export] public GC_Health Child {get; private set;}
     public float CurrentHealth {get; protected set;}
-    public delegate void HealthEventHandler<T>(GC_Health senderLayer, T e);
-    public delegate void HealthEventHandler(GC_Health senderLayer);
 
     public HealthEventHandler<DamageEventArgs> OnDamage;
     public HealthEventHandler<DamageEventArgs> OnHeal;

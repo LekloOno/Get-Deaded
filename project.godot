@@ -36,6 +36,14 @@ project/assembly_name="Pew"
 
 enabled=PackedStringArray("res://addons/func_godot/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://assets/": "orange",
+"res://assets/script/": "purple",
+"res://script/": "purple"
+}
+
 [input]
 
 move_left={

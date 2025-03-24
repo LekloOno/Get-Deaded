@@ -12,9 +12,8 @@ public partial class UI_EntityHealth : VBoxContainer
 
     public override void _Ready()
     {
-        if (_healthManager.InitState == null)
-            _healthManager.OnLayerInit += (o, initState) => InitState(initState);
-        else
+        _healthManager.OnLayerInit += (o, initState) => InitState(initState);
+        if (_healthManager.InitState != null)
             InitState(_healthManager.InitState);     
     }
 

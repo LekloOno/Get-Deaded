@@ -1,5 +1,6 @@
-[gd_scene load_steps=33 format=3 uid="uid://5xqfm2mmkdsg"]
+[gd_scene load_steps=34 format=3 uid="uid://5xqfm2mmkdsg"]
 
+[ext_resource type="Script" uid="uid://cqxvtx3hsvo71" path="res://script/ennemy/E_Ennemy.cs" id="1_1cyje"]
 [ext_resource type="PackedScene" uid="uid://b8yrodu7ix03r" path="res://assets/models/bot.tscn" id="1_fnosq"]
 [ext_resource type="Script" uid="uid://bbc8us8vvouq0" path="res://script/global/combat/health/GC_HealthManager.cs" id="2_1cyje"]
 [ext_resource type="Script" uid="uid://dqcp38rr3u5gx" path="res://script/global/combat/health/GC_Health.cs" id="3_ul5uk"]
@@ -108,7 +109,10 @@ scale_curve = SubResource("CurveTexture_mxe6x")
 
 [sub_resource type="QuadMesh" id="QuadMesh_c66wn"]
 
-[node name="CharacterBody3D" type="CharacterBody3D"]
+[node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("_healthManager", "_hurtBoxes")]
+script = ExtResource("1_1cyje")
+_healthManager = NodePath("GC_HealthManager")
+_hurtBoxes = [NodePath("Head"), NodePath("Chest"), NodePath("Waist"), NodePath("UpperArm1"), NodePath("LowerArm1"), NodePath("Hand1"), NodePath("Hand2"), NodePath("UpperArm2"), NodePath("LowerArm2"), NodePath("UpperLeg1"), NodePath("UpperLeg2"), NodePath("LowerLeg1"), NodePath("LowerLeg2"), NodePath("Foot1"), NodePath("Foot2")]
 
 [node name="AuxScene" parent="." instance=ExtResource("1_fnosq")]
 
