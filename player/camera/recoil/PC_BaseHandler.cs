@@ -5,9 +5,16 @@ public abstract class PC_BaseHandler
 {
     protected Vector2 _velocity = Vector2.Zero;
     protected Vector2 _resistance = Vector2.Zero;
+    public bool Sleep;
     public EventHandler Completed;
 
-    public PC_BaseHandler(Vector2 angle, float time)
+    public PC_BaseHandler(Vector2 angle, float time, bool sleep = false)
+    {
+        ComputeResistance(angle, time);
+        Sleep = sleep;
+    }
+
+    public void ComputeResistance(Vector2 angle, float time)
     {
         float resX = 2f*angle.X/Mathf.Pow(time, 2f);
         float resY = 2f*angle.Y/Mathf.Pow(time, 2f);
@@ -24,14 +31,27 @@ public abstract class PC_BaseHandler
 
     public void AddAngle(Vector2 angle)
     {
-        float radAngleX = Mathf.DegToRad(angle.X);
-        float radAngleY = Mathf.DegToRad(angle.Y);
-
-        float velocityX = Mathf.Sqrt(2f*_resistance.X*radAngleX);
-        float velocityY = Mathf.Sqrt(2f*_resistance.Y*radAngleY);
+        float velocityX = Mathf.Sqrt(2f*_resistance.X*angle.X);
+        float velocityY = Mathf.Sqrt(2f*_resistance.Y*angle.Y);
 
         _velocity += new Vector2(velocityX, velocityY);
     }
 
-    public abstract bool Tick(double delta, out Vector2 tickVelocity);
+    public void Reset()
+    {
+        _velocity = Vector2.Zero;
+        Sleep = true;
+    }
+
+    public bool Tick(double delta, out Vector2 tickVelocity)
+    {
+        if(Sleep)
+        {
+            tickVelocity = Vector2.Zero;
+            return false;
+        }
+        
+        return DoTick(delta, out tickVelocity);
+    }
+    protected abstract bool DoTick(double delta, out Vector2 tickVelocity);
 }

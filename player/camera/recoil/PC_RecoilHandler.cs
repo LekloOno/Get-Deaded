@@ -5,15 +5,24 @@ public class PC_RecoilHandler : PC_BaseHandler
 {
     public bool _autoRemove;
 
-    public PC_RecoilHandler(Vector2 angle, float time, bool autoRemove) : base(angle, time)
+    public PC_RecoilHandler(Vector2 angle, float time, bool autoRemove, bool sleep = false) : base(angle, time, sleep)
     {
         _autoRemove = autoRemove;
         _velocity = _resistance * time;
     }
-    public override bool Tick(double delta, out Vector2 tickVelocity)
+
+    public static PC_RecoilHandler InitRecoil(Vector2 angle, float time)
+    {
+        PC_RecoilHandler handler = new(angle, time, false);
+        handler.Reset();
+        return handler;
+    }
+
+    protected override bool DoTick(double delta, out Vector2 tickVelocity)
     {
         tickVelocity = _velocity * (float) delta;
-        return _autoRemove && ApplyResistance(delta);
+        bool stopped = ApplyResistance(delta);
+        return _autoRemove && stopped;
     }
 
     protected bool ApplyResistance(double delta)

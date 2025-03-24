@@ -1,9 +1,18 @@
-[gd_resource type="Resource" script_class="PWF_Ponctual" load_steps=7 format=3 uid="uid://ca7lrmxnc1hsm"]
+[gd_resource type="Resource" script_class="PWF_Ponctual" load_steps=9 format=3 uid="uid://ca7lrmxnc1hsm"]
 
 [ext_resource type="Script" uid="uid://cjmiash71uc7b" path="res://global/combat/hit/hit/GC_Hit.cs" id="1_1tkve"]
+[ext_resource type="Script" uid="uid://djecalg7cxlvg" path="res://player/combat/weapons/core/fire/recoil/PW_ConstantRecoil.cs" id="1_7yt7b"]
 [ext_resource type="Resource" uid="uid://y3jeidgf2oba" path="res://assets/vfx/trails/heavy_moving_trail.tres" id="2_7yt7b"]
 [ext_resource type="Script" uid="uid://fc7gkofu3df7" path="res://player/combat/weapons/core/shot/PWS_Hitscan.cs" id="3_86bjm"]
 [ext_resource type="Script" uid="uid://dmsklefspdvlw" path="res://player/combat/weapons/core/fire/PWF_Ponctual.cs" id="4_2sdg2"]
+
+[sub_resource type="Resource" id="Resource_86bjm"]
+script = ExtResource("1_7yt7b")
+_autoReset = true
+_angle = Vector2(0.6, 6)
+_time = 0.15
+_resetTime = 0.3
+metadata/_custom_type_script = "uid://djecalg7cxlvg"
 
 [sub_resource type="Resource" id="Resource_5dw8r"]
 script = ExtResource("1_1tkve")
@@ -25,4 +34,5 @@ script = ExtResource("4_2sdg2")
 _shots = Array[Object]([SubResource("Resource_ewcnl")])
 _spread = 0.0
 _fireRate = 460
+_recoil = SubResource("Resource_86bjm")
 metadata/_custom_type_script = "uid://dmsklefspdvlw"

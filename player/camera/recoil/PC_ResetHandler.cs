@@ -13,7 +13,7 @@ public class PC_ResetHandler : PC_BaseHandler
         _velocity = Vector2.Zero;
     }
 
-    public override bool Tick(double delta, out Vector2 tickVelocity)
+    protected override bool DoTick(double delta, out Vector2 tickVelocity)
     {
         _velocity -= _resistance * (float)delta;
         tickVelocity = _velocity * (float) delta;

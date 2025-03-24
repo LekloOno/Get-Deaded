@@ -7,11 +7,7 @@ public partial class PWF_Ponctual : PW_Fire
     {
         bool didShoot = TryShoot();
         if (didShoot)
-        {
-            _recoilController.ResetBuffer();
-            PC_RecoilHandler recoil = _recoilController.AddRecoil(new(0.6f, 5f), 0.15f);
-            recoil.Completed += (o, e) => _recoilController.ResetRecoil(0.3f);
-        }
+            _recoil?.Start();
 
         return didShoot;
     }
