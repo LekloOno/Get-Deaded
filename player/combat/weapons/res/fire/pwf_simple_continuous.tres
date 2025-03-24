@@ -9,7 +9,7 @@
 [sub_resource type="Resource" id="Resource_8p40u"]
 script = ExtResource("1_si0j0")
 _autoReset = false
-_angle = Vector2(0.05, 0.7)
+_angle = Vector2(0.05, 0.5)
 _time = 0.1
 _resetTime = 0.3
 metadata/_custom_type_script = "uid://djecalg7cxlvg"
@@ -32,7 +32,7 @@ metadata/_custom_type_script = "uid://fc7gkofu3df7"
 [resource]
 script = ExtResource("4_fw8mr")
 _shots = Array[Object]([SubResource("Resource_4vhab")])
-_spread = 1.5
+_spread = 1.2
 _fireRate = 50
 _recoil = SubResource("Resource_8p40u")
 metadata/_custom_type_script = "uid://cu3n4oi1x76dl"

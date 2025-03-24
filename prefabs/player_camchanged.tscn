@@ -171,7 +171,7 @@ metadata/_custom_type_script = "uid://c3are182lodyx"
 [sub_resource type="Resource" id="Resource_wow6d"]
 script = ExtResource("87_htv2j")
 SpreadMultiplier = -0.85
-RecoilMultiplier = -0.5
+RecoilMultiplier = -0.2
 Hold = true
 ScopeInTime = 0.2
 ScopeOutTime = 0.2

@@ -4,10 +4,10 @@ using Godot;
 [GlobalClass]
 public partial class PW_ConstantRecoil : PW_Recoil
 {
-    [Export] private bool _autoReset;
-    [Export] public Vector2 _angle;
-    [Export] private float _time;
-    [Export] private float _resetTime;
+    [Export] private bool _autoReset;   // Automatically resets recoil when it's completed. Otherwise, the Fire is responsible for calling Reset().
+    [Export] public Vector2 _angle;     // In degrees
+    [Export] private float _time;       // Time to reach the recoil angle, in seconds
+    [Export] private float _resetTime;  // Time to reset the recoil, in seconds
     private PC_Recoil _recoilController;
 
     public override void Initialize(PC_Recoil recoilController)
