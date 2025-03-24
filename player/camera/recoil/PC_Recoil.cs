@@ -12,7 +12,7 @@ public partial class PC_Recoil : Node3D
     private Vector2 _bufferedRecoil;
     private Vector2 _bufferedMovement;
 
-    private List<PC_BaseHandler> _recoilHandlers = [];
+    private List<PCR_BaseHandler> _recoilHandlers = [];
 
     public override void _Ready()
     {
@@ -54,17 +54,17 @@ public partial class PC_Recoil : Node3D
     /// <param name="threshold">The speed threshold below which the recoil will be reset. 0f by default</param>
     /// <param name="autoRemove">The recoil will be automatically freed when it passes its threshold. If set to false, the caller of this method is responsible for freeing it.</param>
     /// <returns>The created recoil handler layer.</returns>
-    public PC_RecoilHandler AddRecoil(Vector2 angle, float time, float threshold = 0f, bool autoRemove = true)
+    public PCR_RecoilHandler AddRecoil(Vector2 angle, float time, float threshold = 0f, bool autoRemove = true)
     {
         Vector2 radAngle = new(Mathf.DegToRad(angle.X), Mathf.DegToRad(angle.Y));
-        PC_RecoilHandler recoilHandler = new(radAngle, time, autoRemove);
+        PCR_RecoilHandler recoilHandler = new(radAngle, time, autoRemove);
         _recoilHandlers.Add(recoilHandler);
         return recoilHandler;
     }
 
-    public void AddRecoil(PC_RecoilHandler _recoil) => _recoilHandlers.Add(_recoil);
+    public void AddRecoil(PCR_RecoilHandler _recoil) => _recoilHandlers.Add(_recoil);
 
-    public void RemoveRecoil(PC_RecoilHandler _handler) => _recoilHandlers.Remove(_handler);
+    public void RemoveRecoil(PCR_RecoilHandler _handler) => _recoilHandlers.Remove(_handler);
 
     public void ResetBuffer()
     {
@@ -82,7 +82,7 @@ public partial class PC_Recoil : Node3D
         if (Mathf.Abs(_bufferedMovement.Y) > _mouseMovementThreshold.Y)
             _bufferedRecoil.Y = 0f;
             
-        _recoilHandlers.Add(new PC_ResetHandler(_bufferedRecoil, time));
+        _recoilHandlers.Add(new PCR_ResetHandler(_bufferedRecoil, time));
 
         ResetBuffer();
     }
