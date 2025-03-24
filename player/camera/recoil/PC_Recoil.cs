@@ -1,14 +1,17 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 
 [GlobalClass]
 public partial class PC_Recoil : Node3D
 {
-    [Export] public Vector2 Resistance {get; set;}
-    [Export] public float StopThreshold {get; private set;}
     [Export] public PC_Control CameraControl {get; private set;}
     [Export] private float _resetSpeed;
+    public Vector2 _initialRotation;
+    public Vector2 _bufferedRecoil;
+
     private List<PC_RecoilHandler> _recoilHandlers = [];
+    private List<PC_ResetHandler> _resetHandlers = [];
     public override void _Process(double delta)
     {
         Vector2 appliedVel = Vector2.Zero;
@@ -19,10 +22,23 @@ public partial class PC_Recoil : Node3D
                 _recoilHandlers.RemoveAt(i);
 
             appliedVel += velocity;
+            _bufferedRecoil += velocity;
+        }
+
+        for (int i = _resetHandlers.Count - 1; i >= 0; i--)
+        {
+            if (_resetHandlers[i].Tick(delta, out Vector2 velocity))
+                _resetHandlers.RemoveAt(i);
+
+            appliedVel += velocity;
         }
 
         CameraControl.RotateXClamped(appliedVel.Y);
         CameraControl.RotateFlatDir(appliedVel.X);
+
+        //float resetDiff = (CameraControl.CurrentRotation() - _initialRotation).Length();
+        //if (Mathf.Abs(resetDiff) <= 0.1f)
+        //    _resetHandlers = [];
     }
 
     /// <summary>
@@ -30,10 +46,10 @@ public partial class PC_Recoil : Node3D
     /// </summary>
     /// <param name="angle">The total recoil angle, where X is the horizontal recoil, and Y is the vertical recoil.</param>
     /// <param name="time">The time before this recoil angle is reached.</param>
-    /// <param name="threshold">The speed threshold below which the recoil will be reset. .05f by default</param>
+    /// <param name="threshold">The speed threshold below which the recoil will be reset. 0f by default</param>
     /// <param name="autoRemove">The recoil will be automatically freed when it passes its threshold. If set to false, the caller of this method is responsible for freeing it.</param>
     /// <returns>The created recoil handler layer.</returns>
-    public PC_RecoilHandler AddRecoil(Vector2 angle, float time, float threshold = .05f, bool autoRemove = true)
+    public PC_RecoilHandler AddRecoil(Vector2 angle, float time, float threshold = 0f, bool autoRemove = true)
     {
         PC_RecoilHandler recoilHandler = new(angle, time, threshold, autoRemove);
         _recoilHandlers.Add(recoilHandler);
@@ -41,4 +57,12 @@ public partial class PC_Recoil : Node3D
     }
 
     public void RemoveRecoil(PC_RecoilHandler _handler) => _recoilHandlers.Remove(_handler);
+
+    public void ResetBuffer() => _bufferedRecoil = Vector2.Zero;
+
+    /// <summary>
+    /// Resets the buffered recoil. Call ResetBuffer() accordingly.
+    /// </summary>
+    /// <param name="time"></param>
+    public void ResetRecoil(float time) => _resetHandlers.Add(new(_bufferedRecoil, time));
 }

@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public class PC_RecoilHandler
@@ -6,6 +7,8 @@ public class PC_RecoilHandler
     private Vector2 _resistance = Vector2.Zero;
     public bool _autoRemove;
     private float _threshold;
+
+    public EventHandler Completed;
 
     public PC_RecoilHandler(Vector2 angle, float time, float threshold, bool autoRemove)
     {
@@ -44,14 +47,27 @@ public class PC_RecoilHandler
     public bool Tick(double delta, out Vector2 tickVelocity)
     {
         tickVelocity = _velocity * (float) delta;
-        ApplyResistance(delta);
-        bool reset = BelowThreshold();
-        if (reset)
-            _velocity = Vector2.Zero;
-
-        return _autoRemove && reset;
+        return _autoRemove && ApplyResistance(delta);
     }
 
-    protected void ApplyResistance(double delta) => _velocity -= _resistance * (float)delta;
-    protected bool BelowThreshold() => _velocity.Length() < _threshold;
+    public void TickReset(double delta, out Vector2 tickVelocity)
+    {
+        tickVelocity = _velocity * (float) delta;
+        _velocity -= _resistance * (float)delta;
+    }
+
+    protected bool ApplyResistance(double delta)
+    {
+        Vector2 appliedRes = _resistance * (float)delta;
+        bool ended = appliedRes.Length() > _velocity.Length();
+        if (ended)
+        {
+            _velocity = Vector2.Zero;
+            Completed.Invoke(this, EventArgs.Empty);
+        }
+        else
+            _velocity -= appliedRes;
+
+        return ended;
+    }
 }
