@@ -16,7 +16,7 @@ public partial class PW_ConstantRecoil : PW_Recoil
     }
     public override void Add()
     {
-        PC_BaseHandler handler = _recoilController.AddRecoil(_angle, _time);
+        PC_BaseHandler handler = _recoilController.AddRecoil(_angle * Modifier.Result(), _time);
         if (_autoReset)
             handler.Completed += Complete;
     }

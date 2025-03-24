@@ -9,8 +9,8 @@
 [sub_resource type="Resource" id="Resource_86bjm"]
 script = ExtResource("1_7yt7b")
 _autoReset = true
-_angle = Vector2(0.6, 6)
-_time = 0.15
+_angle = Vector2(0.2, 3.5)
+_time = 0.05
 _resetTime = 0.3
 metadata/_custom_type_script = "uid://djecalg7cxlvg"
 
