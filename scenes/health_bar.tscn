@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://c37umalpt1ts6"]
 
-[ext_resource type="Script" uid="uid://d01sb0k1e87yt" path="res://ui/combat/health/UI_EntityHealth.cs" id="1_y3kqx"]
-[ext_resource type="Script" uid="uid://db8e5l76dsikn" path="res://ui/combat/health/UI_HealthBar.cs" id="2_6opq1"]
+[ext_resource type="Script" uid="uid://d01sb0k1e87yt" path="res://script/ui/combat/health/UI_EntityHealth.cs" id="1_y3kqx"]
+[ext_resource type="Script" uid="uid://db8e5l76dsikn" path="res://script/ui/combat/health/UI_HealthBar.cs" id="2_6opq1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tujlf"]
 bg_color = Color(0, 0, 0, 0.505882)

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b5w3ok85lmxgf" path="res://prefabs/player_camchanged.tscn" id="1_ag22l"]
 [ext_resource type="Material" uid="uid://c7p68evacni7v" path="res://assets/materials/darkGrid.tres" id="2_cemff"]
-[ext_resource type="Texture2D" uid="uid://c6o8mw13kagni" path="res://assets/skyboxes/Sky_trainyard_01_1b2.png" id="2_k74wy"]
+[ext_resource type="Texture2D" uid="uid://c6o8mw13kagni" path="res://assets/sprites/skyboxes/Sky_trainyard_01_1b2.png" id="2_k74wy"]
 [ext_resource type="Material" uid="uid://tu7ne3521eed" path="res://assets/materials/orangeGrid.tres" id="3_lcjrb"]
 [ext_resource type="Material" uid="uid://t2nvujbehqp3" path="res://assets/materials/greenGrid.tres" id="4_di6lj"]
 [ext_resource type="PackedScene" uid="uid://cgxay2q63b8m8" path="res://prefabs/simplebot.tscn" id="5_m6jvf"]

@@ -1,0 +1,57 @@
+[gd_resource type="Resource" script_class="PWF_Ponctual" load_steps=14 format=3 uid="uid://ca7lrmxnc1hsm"]
+
+[ext_resource type="Script" uid="uid://cjmiash71uc7b" path="res://script/global/combat/hit/hit/GC_Hit.cs" id="1_1tkve"]
+[ext_resource type="Script" uid="uid://djecalg7cxlvg" path="res://script/player/combat/weapons/fire/recoil/PW_ConstantRecoil.cs" id="1_7yt7b"]
+[ext_resource type="Resource" uid="uid://y3jeidgf2oba" path="res://assets/script/vfx/trails/heavy_moving_trail.tres" id="2_7yt7b"]
+[ext_resource type="Script" uid="uid://fc7gkofu3df7" path="res://script/player/combat/weapons/shot/PWS_Hitscan.cs" id="3_86bjm"]
+[ext_resource type="Script" uid="uid://dmsklefspdvlw" path="res://script/player/combat/weapons/fire/PWF_Ponctual.cs" id="4_2sdg2"]
+[ext_resource type="Script" uid="uid://btuswij6bk44u" path="res://script/vfx/combat/trail/line/types/VFX_RectangleLine.cs" id="4_h2md4"]
+[ext_resource type="Script" uid="uid://ddcjrbuymtie4" path="res://script/vfx/combat/trail/line/VFX_LineTrail.cs" id="5_8e4cj"]
+
+[sub_resource type="Resource" id="Resource_86bjm"]
+script = ExtResource("1_7yt7b")
+_autoReset = true
+_angle = Vector2(0.05, 4)
+_time = 0.04
+_resetTime = 0.4
+metadata/_custom_type_script = "uid://djecalg7cxlvg"
+
+[sub_resource type="Resource" id="Resource_5dw8r"]
+script = ExtResource("1_1tkve")
+_damage = 50.0
+_inspectorModifiers = null
+metadata/_custom_type_script = "uid://cjmiash71uc7b"
+
+[sub_resource type="Resource" id="Resource_bo6g0"]
+script = ExtResource("4_h2md4")
+_thickness = 0.02
+metadata/_custom_type_script = "uid://btuswij6bk44u"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lx4on"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(0.529412, 0.529412, 0.529412, 0.109804)
+
+[sub_resource type="Resource" id="Resource_00ofc"]
+script = ExtResource("5_8e4cj")
+_fadeTime = 1.0
+_lineType = SubResource("Resource_bo6g0")
+_material = SubResource("StandardMaterial3D_lx4on")
+metadata/_custom_type_script = "uid://ddcjrbuymtie4"
+
+[sub_resource type="Resource" id="Resource_ewcnl"]
+script = ExtResource("3_86bjm")
+_maxDistance = 100.0
+_hitData = SubResource("Resource_5dw8r")
+_originOffset = Vector3(0, 0, 0)
+_directionOffset = Vector3(0, 0, 0)
+_trails = Array[Object]([ExtResource("2_7yt7b"), SubResource("Resource_00ofc")])
+metadata/_custom_type_script = "uid://fc7gkofu3df7"
+
+[resource]
+script = ExtResource("4_2sdg2")
+_shots = Array[Object]([SubResource("Resource_ewcnl")])
+_spread = 0.0
+_fireRate = 460
+_recoil = SubResource("Resource_86bjm")
+metadata/_custom_type_script = "uid://dmsklefspdvlw"

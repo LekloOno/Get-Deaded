@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://d06ge8pykx8s1"]
 
-[ext_resource type="Script" uid="uid://ds1ebussoj6l7" path="res://ui/combat/weapon/hit/marker/UI_HitMarker.cs" id="1_lvplh"]
-[ext_resource type="Script" uid="uid://c5ie4xhq4n5p7" path="res://ui/combat/weapon/hit/marker/UI_DamageMarker.cs" id="2_tnwbf"]
-[ext_resource type="Script" uid="uid://brn5nu2bbuq5w" path="res://ui/combat/weapon/hit/marker/UI_KillMarker.cs" id="2_v7leq"]
+[ext_resource type="Script" uid="uid://ds1ebussoj6l7" path="res://script/ui/combat/weapon/hit/marker/UI_HitMarker.cs" id="1_lvplh"]
+[ext_resource type="Script" uid="uid://c5ie4xhq4n5p7" path="res://script/ui/combat/weapon/hit/marker/UI_DamageMarker.cs" id="2_tnwbf"]
+[ext_resource type="Script" uid="uid://brn5nu2bbuq5w" path="res://script/ui/combat/weapon/hit/marker/UI_KillMarker.cs" id="2_v7leq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wngje"]
 bg_color = Color(1, 1, 1, 1)

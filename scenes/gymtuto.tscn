@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://b5w3ok85lmxgf" path="res://prefabs/player_camchanged.tscn" id="1_uvb2d"]
 [ext_resource type="Material" uid="uid://c7p68evacni7v" path="res://assets/materials/darkGrid.tres" id="2_7amo5"]
-[ext_resource type="Texture2D" uid="uid://c6o8mw13kagni" path="res://assets/skyboxes/Sky_trainyard_01_1b2.png" id="2_c2a84"]
-[ext_resource type="Texture2D" uid="uid://baprfhtph0bwl" path="res://assets/mess/jumpdude.png" id="4_jtr1w"]
+[ext_resource type="Texture2D" uid="uid://c6o8mw13kagni" path="res://assets/sprites/skyboxes/Sky_trainyard_01_1b2.png" id="2_c2a84"]
+[ext_resource type="Texture2D" uid="uid://baprfhtph0bwl" path="res://assets/sprites/jumpdude.png" id="4_jtr1w"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_biv5p"]
 panorama = ExtResource("2_c2a84")

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="VFX_MovingLightTrail" load_steps=3 format=3 uid="uid://y3jeidgf2oba"]
+
+[ext_resource type="Material" uid="uid://sdeae7lb8rdp" path="res://assets/materials/vfx/heavy_line_trail.tres" id="1_u25os"]
+[ext_resource type="Script" uid="uid://0w0m608ktkwu" path="res://script/vfx/combat/trail/moving_light/VFX_MovingLightTrail.cs" id="2_ck655"]
+
+[resource]
+script = ExtResource("2_ck655")
+_material = ExtResource("1_u25os")
+_thickness = 0.1
+_bulletSpeed = 500.0
+_trailSpeed = 1.0
+_inclination = 30.0
+metadata/_custom_type_script = "uid://0w0m608ktkwu"

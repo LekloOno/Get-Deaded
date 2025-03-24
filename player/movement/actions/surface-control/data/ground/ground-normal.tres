@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="PM_SurfaceData" load_steps=2 format=3 uid="uid://bld6y2cv0hps1"]
-
-[ext_resource type="Script" uid="uid://dof3q1o6s68o3" path="res://player/movement/actions/surface-control/PM_SurfaceData.cs" id="1_tjepp"]
-
-[resource]
-script = ExtResource("1_tjepp")
-MaxSpeed = 5.0
-MaxAccel = 30.0
-Drag = 10.0

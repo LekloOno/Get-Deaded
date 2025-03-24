@@ -1,12 +1,12 @@
 [gd_scene load_steps=33 format=3 uid="uid://cgxay2q63b8m8"]
 
 [ext_resource type="PackedScene" uid="uid://b8yrodu7ix03r" path="res://assets/models/bot.tscn" id="1_bdtk5"]
-[ext_resource type="Script" uid="uid://bbc8us8vvouq0" path="res://global/combat/health/GC_HealthManager.cs" id="2_cm3tr"]
-[ext_resource type="Script" uid="uid://dqcp38rr3u5gx" path="res://global/combat/health/GC_Health.cs" id="3_ymo8g"]
-[ext_resource type="Script" uid="uid://bclkw4o7merkb" path="res://global/combat/health/GC_Armor.cs" id="4_8icvm"]
-[ext_resource type="Script" uid="uid://ce82euclamj77" path="res://global/combat/hit/hurt/GC_HurtBox.cs" id="5_lfk02"]
-[ext_resource type="Script" uid="uid://d01sb0k1e87yt" path="res://ui/combat/health/UI_EntityHealth.cs" id="6_uwwkh"]
-[ext_resource type="Script" uid="uid://db8e5l76dsikn" path="res://ui/combat/health/UI_HealthBar.cs" id="7_dg3f6"]
+[ext_resource type="Script" uid="uid://bbc8us8vvouq0" path="res://script/global/combat/health/GC_HealthManager.cs" id="2_cm3tr"]
+[ext_resource type="Script" uid="uid://dqcp38rr3u5gx" path="res://script/global/combat/health/GC_Health.cs" id="3_ymo8g"]
+[ext_resource type="Script" uid="uid://bclkw4o7merkb" path="res://script/global/combat/health/GC_Armor.cs" id="4_8icvm"]
+[ext_resource type="Script" uid="uid://ce82euclamj77" path="res://script/global/combat/hit/hurt/GC_HurtBox.cs" id="5_lfk02"]
+[ext_resource type="Script" uid="uid://d01sb0k1e87yt" path="res://script/ui/combat/health/UI_EntityHealth.cs" id="6_uwwkh"]
+[ext_resource type="Script" uid="uid://db8e5l76dsikn" path="res://script/ui/combat/health/UI_HealthBar.cs" id="7_dg3f6"]
 [ext_resource type="Material" uid="uid://c0boa35qtrcpj" path="res://assets/shaders/blood_material.tres" id="8_ygkka"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vupcu"]

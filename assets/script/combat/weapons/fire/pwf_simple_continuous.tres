@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="PWF_Continuous" load_steps=9 format=3 uid="uid://dkeof2yotipev"]
+
+[ext_resource type="Script" uid="uid://cjmiash71uc7b" path="res://script/global/combat/hit/hit/GC_Hit.cs" id="1_cl0r8"]
+[ext_resource type="Script" uid="uid://djecalg7cxlvg" path="res://script/player/combat/weapons/fire/recoil/PW_ConstantRecoil.cs" id="1_si0j0"]
+[ext_resource type="Resource" uid="uid://mcobvwmhuq3a" path="res://assets/script/vfx/trails/simple_moving_trail.tres" id="2_si0j0"]
+[ext_resource type="Script" uid="uid://fc7gkofu3df7" path="res://script/player/combat/weapons/shot/PWS_Hitscan.cs" id="3_8p40u"]
+[ext_resource type="Script" uid="uid://cu3n4oi1x76dl" path="res://script/player/combat/weapons/fire/PWF_Continuous.cs" id="4_fw8mr"]
+
+[sub_resource type="Resource" id="Resource_8p40u"]
+script = ExtResource("1_si0j0")
+_autoReset = false
+_angle = Vector2(0.05, 0.5)
+_time = 0.1
+_resetTime = 0.3
+metadata/_custom_type_script = "uid://djecalg7cxlvg"
+
+[sub_resource type="Resource" id="Resource_fvk8i"]
+script = ExtResource("1_cl0r8")
+_damage = 6.0
+_inspectorModifiers = null
+metadata/_custom_type_script = "uid://cjmiash71uc7b"
+
+[sub_resource type="Resource" id="Resource_4vhab"]
+script = ExtResource("3_8p40u")
+_maxDistance = 100.0
+_hitData = SubResource("Resource_fvk8i")
+_originOffset = Vector3(0, 0, 0)
+_directionOffset = Vector3(0, 0, 0)
+_trails = Array[Object]([ExtResource("2_si0j0")])
+metadata/_custom_type_script = "uid://fc7gkofu3df7"
+
+[resource]
+script = ExtResource("4_fw8mr")
+_shots = Array[Object]([SubResource("Resource_4vhab")])
+_spread = 1.2
+_fireRate = 50
+_recoil = SubResource("Resource_8p40u")
+metadata/_custom_type_script = "uid://cu3n4oi1x76dl"
