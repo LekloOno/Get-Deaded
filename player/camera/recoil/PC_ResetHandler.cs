@@ -18,7 +18,6 @@ public class PC_ResetHandler : PC_BaseHandler
         _velocity -= _resistance * (float)delta;
         tickVelocity = _velocity * (float) delta;
         _angle += tickVelocity;
-        GD.Print(_angle.Length() + " >= " + _targetAngle.Length());
         return _angle.Length() >= _targetAngle.Length();
     }
 }

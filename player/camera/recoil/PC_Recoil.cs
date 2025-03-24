@@ -6,11 +6,19 @@ using Godot;
 public partial class PC_Recoil : Node3D
 {
     [Export] public PC_Control CameraControl {get; private set;}
-    [Export] private float _resetSpeed;
+    [Export] private Vector2 _mouseThreshold;
+    [Export] private Vector2 _mouseMovementThreshold;
     public Vector2 _initialRotation;
-    public Vector2 _bufferedRecoil;
+    private Vector2 _bufferedRecoil;
+    private Vector2 _bufferedMovement;
 
     private List<PC_BaseHandler> _recoilHandlers = [];
+
+    public override void _Ready()
+    {
+        CameraControl.MouseMove += ResetBufferFromMouse;
+    }
+
     public override void _Process(double delta)
     {
         Vector2 appliedVel = Vector2.Zero;
@@ -26,10 +34,16 @@ public partial class PC_Recoil : Node3D
 
         CameraControl.RotateXClamped(appliedVel.Y);
         CameraControl.RotateFlatDir(appliedVel.X);
+    }
 
-        //float resetDiff = (CameraControl.CurrentRotation() - _initialRotation).Length();
-        //if (Mathf.Abs(resetDiff) <= 0.1f)
-        //    _resetHandlers = [];
+    public void ResetBufferFromMouse(object sender, Vector2 motion)
+    {
+        if (Mathf.Abs(motion.X) > _mouseThreshold.X)
+            _bufferedRecoil.X = 0;
+        if (Mathf.Abs(motion.Y) > _mouseThreshold.Y)
+            _bufferedRecoil.Y = 0;
+        
+        _bufferedMovement += motion;
     }
 
     /// <summary>
@@ -48,13 +62,28 @@ public partial class PC_Recoil : Node3D
         return recoilHandler;
     }
 
+    public void AddRecoil(PC_RecoilHandler _recoil) => _recoilHandlers.Add(_recoil);
+
     public void RemoveRecoil(PC_RecoilHandler _handler) => _recoilHandlers.Remove(_handler);
 
-    public void ResetBuffer() => _bufferedRecoil = Vector2.Zero;
-
+    public void ResetBuffer()
+    {
+        _bufferedRecoil = _bufferedMovement = Vector2.Zero;
+    }
     /// <summary>
     /// Resets the buffered recoil. Call ResetBuffer() accordingly.
     /// </summary>
     /// <param name="time">The time required to complete the reset.</param>
-    public void ResetRecoil(float time) => _recoilHandlers.Add(new PC_ResetHandler(_bufferedRecoil, time));
+    public void ResetRecoil(float time)
+    {
+        if (Mathf.Abs(_bufferedMovement.X) > _mouseMovementThreshold.X)
+            _bufferedRecoil.X = 0f;
+
+        if (Mathf.Abs(_bufferedMovement.Y) > _mouseMovementThreshold.Y)
+            _bufferedRecoil.Y = 0f;
+            
+        _recoilHandlers.Add(new PC_ResetHandler(_bufferedRecoil, time));
+
+        ResetBuffer();
+    }
 }

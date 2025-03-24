@@ -23,7 +23,7 @@ public class PC_RecoilHandler : PC_BaseHandler
         if (ended)
         {
             _velocity = Vector2.Zero;
-            Completed.Invoke(this, EventArgs.Empty);
+            Completed?.Invoke(this, EventArgs.Empty);
         }
         else
             _velocity -= appliedRes;

@@ -15,6 +15,8 @@ public partial class PC_Control : Node3D
 
     private float _realSens;
 
+    public EventHandler<Vector2> MouseMove;
+
     public override void _Ready()
     {
         _realSens = _sensitivity / 6500f;
@@ -31,8 +33,10 @@ public partial class PC_Control : Node3D
             //_eulerAngles += new Vector3(-mouseMotion.Relative.Y * _realSens, -mouseMotion.Relative.X * _realSens, 0f);
             //_eulerAngles.X = Mathf.Clamp(_eulerAngles.X, Mathf.DegToRad(-90), Mathf.DegToRad(90));
             //Rotation = _eulerAngles;
-            RotateFlatDir(-mouseMotion.Relative.X * _realSens);
-            RotateXClamped(-mouseMotion.Relative.Y * _realSens);
+            Vector2 sensMotion = -mouseMotion.Relative * _realSens;
+            RotateFlatDir(sensMotion.X);
+            RotateXClamped(sensMotion.Y);
+            MouseMove.Invoke(this, sensMotion);
         }
     }
 

@@ -295,7 +295,8 @@ _flatDir = NodePath("../..")
 [node name="PC_Recoil" type="Node3D" parent="Camera Pivot/PC_Anchor/Camera Control" node_paths=PackedStringArray("CameraControl")]
 script = ExtResource("6_gcum8")
 CameraControl = NodePath("..")
-_resetSpeed = 0.5
+_mouseThreshold = Vector2(0.002, 0.002)
+_mouseMovementThreshold = Vector2(0.01, 0.08)
 metadata/_custom_type_script = "uid://uw7inuec6sqb"
 
 [node name="PC_SprintLean" type="Node3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil" node_paths=PackedStringArray("_groundSurfaceState")]
