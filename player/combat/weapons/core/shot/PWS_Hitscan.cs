@@ -4,7 +4,6 @@ using Godot;
 public partial class PWS_Hitscan : PW_Shot
 {
     [Export] protected float _maxDistance;
-    [Export] protected VFX_Trail _trail;
     public override void HandleShoot(Node3D manager, Vector3 origin, Vector3 direction)
     {
         Vector3 castOrigin = origin + _originOffset;
@@ -35,6 +34,7 @@ public partial class PWS_Hitscan : PW_Shot
             }
         }
 
-        _trail?.Shoot(manager, _barel.GlobalPosition + _originOffset, hit);
+        foreach (VFX_Trail trail in _trails)
+            trail.Shoot(manager, _barel.GlobalPosition + _originOffset, hit);
     }
 }

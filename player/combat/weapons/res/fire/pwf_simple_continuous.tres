@@ -23,10 +23,10 @@ metadata/_custom_type_script = "uid://cjmiash71uc7b"
 [sub_resource type="Resource" id="Resource_4vhab"]
 script = ExtResource("3_8p40u")
 _maxDistance = 100.0
-_trail = ExtResource("2_si0j0")
 _hitData = SubResource("Resource_fvk8i")
 _originOffset = Vector3(0, 0, 0)
 _directionOffset = Vector3(0, 0, 0)
+_trails = Array[Object]([ExtResource("2_si0j0")])
 metadata/_custom_type_script = "uid://fc7gkofu3df7"
 
 [resource]

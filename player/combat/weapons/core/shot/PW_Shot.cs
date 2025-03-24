@@ -7,6 +7,7 @@ public abstract partial class PW_Shot : Resource
     [Export] protected GC_Hit _hitData;
     [Export] protected Vector3 _originOffset = Vector3.Zero;
     [Export] protected Vector3 _directionOffset = Vector3.Zero;
+    [Export] protected Godot.Collections.Array<VFX_Trail> _trails;
     protected Node3D _barel;
 
     public EventHandler<ShotHitEventArgs> Hit;

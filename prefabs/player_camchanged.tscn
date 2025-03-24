@@ -200,27 +200,27 @@ _damage = 25.0
 _inspectorModifiers = Array[Object]([SubResource("Resource_3bwxm")])
 metadata/_custom_type_script = "uid://cjmiash71uc7b"
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wow6d"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gcum8"]
 transparency = 1
 cull_mode = 2
-albedo_color = Color(0.490196, 0.490196, 0.490196, 0.113725)
+albedo_color = Color(0.945098, 0.945098, 0.945098, 0.133333)
 
 [sub_resource type="Resource" id="Resource_cqits"]
 script = ExtResource("91_lk6x0")
-_material = SubResource("StandardMaterial3D_wow6d")
-_thickness = 1.5
-_bulletSpeed = 15.0
-_trailSpeed = 7.0
-_inclination = 85.0
+_material = SubResource("StandardMaterial3D_gcum8")
+_thickness = 1.2
+_bulletSpeed = 12.0
+_trailSpeed = 5.0
+_inclination = 87.0
 metadata/_custom_type_script = "uid://0w0m608ktkwu"
 
 [sub_resource type="Resource" id="Resource_nkqrs"]
 script = ExtResource("81_f31u3")
 _maxDistance = 1.5
-_trail = SubResource("Resource_cqits")
 _hitData = SubResource("Resource_u3xwg")
 _originOffset = Vector3(0, 0, 0)
 _directionOffset = Vector3(0, 0, 0)
+_trails = Array[Object]([SubResource("Resource_cqits")])
 metadata/_custom_type_script = "uid://fc7gkofu3df7"
 
 [sub_resource type="Resource" id="Resource_jbksd"]
