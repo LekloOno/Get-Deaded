@@ -15,7 +15,6 @@ public partial class E_EnnemySpawner : Node3D
 
     public void Die(GC_Health senderLayer)
     {
-        _ennemy.Disable();
         _respawnTimer = GetTree().CreateTimer(_respawnDelay);
         _respawnTimer.Timeout += Respawn;
     }
