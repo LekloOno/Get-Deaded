@@ -25,10 +25,20 @@ public partial class PC_Recoil : Node3D
         CameraControl.RotateFlatDir(appliedVel.X);
     }
 
-    public PC_RecoilHandler AddRecoil(Vector2 angle, float time, float threshold = .05f)
+    /// <summary>
+    /// Add an horizontal (angle.X) and vertical (angle.Y) recoil in degrees to handle in the given time in seconds.
+    /// </summary>
+    /// <param name="angle">The total recoil angle, where X is the horizontal recoil, and Y is the vertical recoil.</param>
+    /// <param name="time">The time before this recoil angle is reached.</param>
+    /// <param name="threshold">The speed threshold below which the recoil will be reset. .05f by default</param>
+    /// <param name="autoRemove">The recoil will be automatically freed when it passes its threshold. If set to false, the caller of this method is responsible for freeing it.</param>
+    /// <returns>The created recoil handler layer.</returns>
+    public PC_RecoilHandler AddRecoil(Vector2 angle, float time, float threshold = .05f, bool autoRemove = true)
     {
-        PC_RecoilHandler recoilHandler = new(angle, time, threshold);
+        PC_RecoilHandler recoilHandler = new(angle, time, threshold, autoRemove);
         _recoilHandlers.Add(recoilHandler);
         return recoilHandler;
     }
+
+    public void RemoveRecoil(PC_RecoilHandler _handler) => _recoilHandlers.Remove(_handler);
 }

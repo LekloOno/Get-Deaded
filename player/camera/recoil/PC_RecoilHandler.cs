@@ -4,10 +4,12 @@ public class PC_RecoilHandler
 {
     private Vector2 _velocity = Vector2.Zero;
     private Vector2 _resistance = Vector2.Zero;
+    public bool _autoRemove;
     private float _threshold;
 
-    public PC_RecoilHandler(Vector2 angle, float time, float threshold)
+    public PC_RecoilHandler(Vector2 angle, float time, float threshold, bool autoRemove)
     {
+        _autoRemove = autoRemove;
         _threshold = threshold;
 
         float radAngleX = Mathf.DegToRad(angle.X);
@@ -43,7 +45,11 @@ public class PC_RecoilHandler
     {
         tickVelocity = _velocity * (float) delta;
         ApplyResistance(delta);
-        return BelowThreshold();
+        bool reset = BelowThreshold();
+        if (reset)
+            _velocity = Vector2.Zero;
+
+        return _autoRemove && reset;
     }
 
     protected void ApplyResistance(double delta) => _velocity -= _resistance * (float)delta;
