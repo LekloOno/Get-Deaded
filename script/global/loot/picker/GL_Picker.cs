@@ -6,12 +6,13 @@ public partial class GL_Picker : Area3D
     [Export] private PW_WeaponsHandler _weaponsHandler;
     public override void _Ready()
     {
-        AreaEntered += ProcessCollision;
+        BodyEntered += ProcessCollision;
+        Enable();
     }
 
-    private void ProcessCollision(Area3D area3D)
+    private void ProcessCollision(Node body)
     {
-        if (area3D is GL_IPickable pickable)
+        if (body is GL_IPickable pickable)
             pickable.GetPicked(this);
     }
 
@@ -22,7 +23,7 @@ public partial class GL_Picker : Area3D
 
     public void Enable()
     {
-        CollisionMask = 5;
+        CollisionMask = 0x10;
     }
 
     public bool PickAmmo()

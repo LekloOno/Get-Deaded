@@ -1,4 +1,4 @@
-[gd_scene load_steps=127 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=129 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://script/player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://assets/script/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -37,6 +37,7 @@
 [ext_resource type="Script" uid="uid://b37yb21n7qltn" path="res://script/player/input/actions/movement/crouch/PI_Slide.cs" id="17_d5kvj"]
 [ext_resource type="AudioStream" uid="uid://byvkie35nxxfe" path="res://assets/sounds/clothes/clothes_6.wav" id="17_yke2y"]
 [ext_resource type="AudioStream" uid="uid://c51litrqlhdk8" path="res://assets/sounds/footsteps/concrete-step5.wav" id="18_1gs0t"]
+[ext_resource type="Script" uid="uid://cvmm2apn1tg0v" path="res://script/global/loot/picker/GL_Picker.cs" id="18_u3xwg"]
 [ext_resource type="Script" uid="uid://llwmjg24ml7x" path="res://script/player/input/actions/movement/crouch/PI_Crouch.cs" id="18_wrcsk"]
 [ext_resource type="Script" uid="uid://b2jn2nortl4pm" path="res://script/player/audio/PA_Slide.cs" id="18_yrtf3"]
 [ext_resource type="AudioStream" uid="uid://8we7lgvkmauv" path="res://assets/sounds/footsteps/concrete-step.wav" id="19_10w05"]
@@ -135,6 +136,8 @@ radius = 0.25
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2am5o"]
 size = Vector3(0.5, 1.8, 0.5)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wow6d"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jlgrh"]
 radius = 0.25
@@ -510,6 +513,16 @@ script = ExtResource("11_6ifu1")
 _modelAnchor = NodePath("SpatialAnchor")
 _controller = NodePath("..")
 _bodyHitBox = NodePath("BodyBox/CollisionShape3D")
+
+[node name="GL_Picker" type="Area3D" parent="Body" node_paths=PackedStringArray("_weaponsHandler")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0315512, 0)
+collision_layer = 0
+script = ExtResource("18_u3xwg")
+_weaponsHandler = NodePath("../../PW_WeaponsHandler")
+metadata/_custom_type_script = "uid://cvmm2apn1tg0v"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/GL_Picker"]
+shape = SubResource("CapsuleShape3D_wow6d")
 
 [node name="BodyBox" type="Area3D" parent="Body" node_paths=PackedStringArray("HealthManager")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
