@@ -191,8 +191,10 @@ metadata/_custom_type_script = "uid://c3are182lodyx"
 
 [sub_resource type="Resource" id="Resource_vj6q7"]
 script = ExtResource("92_3bwxm")
-_magazineSize = 1
-_maxMagazines = 1
+_magazineSize = 0
+_maxMagazines = 0
+_reloadTime = 0.0
+_tacticalReloadTime = 0.0
 metadata/_custom_type_script = "uid://cxiwvat6vddlp"
 
 [sub_resource type="Resource" id="Resource_3bwxm"]
@@ -237,7 +239,7 @@ _spread = 0.0
 _fireRate = 600
 _ammos = SubResource("Resource_vj6q7")
 _ammosPerShot = 0
-_baseAmmos = 1
+_baseAmmos = 0
 metadata/_custom_type_script = "uid://dmsklefspdvlw"
 
 [sub_resource type="Resource" id="Resource_5dw8r"]

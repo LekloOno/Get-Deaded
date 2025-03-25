@@ -6,17 +6,22 @@ public partial class PW_Ammunition : Resource
 {
     [Export] private uint _magazineSize;
     [Export] private uint _maxMagazines;
+    [Export] private float _reloadTime;
+    [Export] private float _tacticalReloadTime;
     private uint _maxAmos;
     public uint UnloadedAmos {get; private set;}
     public uint LoadedAmos {get; private set;}
+    private SceneTree _sceneTree;
+    private SceneTreeTimer _reloadTimer;
 
     /// <summary>
     /// Initialize the ammutions.
     /// </summary>
     /// <param name="baseAmos">The starting amount of ammutions.</param>
     /// <param name="load">true if the maximum amount of amos possible should be preloaded. false otherwise.</param>
-    public void Initialize(uint baseAmos, bool load = true)
+    public void Initialize(SceneTree sceneTree, uint baseAmos, bool load = true)
     {
+        _sceneTree = sceneTree;
         _maxAmos = _maxMagazines * _magazineSize;
         uint ammos = Math.Min(baseAmos, _maxAmos);
         if (load)
@@ -36,19 +41,30 @@ public partial class PW_Ammunition : Resource
     {
         uint consumed = Math.Min(amos, LoadedAmos);
         LoadedAmos -= consumed;
-        Log();
         return consumed;
     }
 
-    private void Log() => GD.Print(LoadedAmos + " mag : " + UnloadedAmos/_magazineSize + " (" + UnloadedAmos + ")");
+    private void Log() => GD.Print(LoadedAmos + " mag : " + UnloadedAmos/Math.Max(_magazineSize,1) + " (" + UnloadedAmos + ")");
 
 
     /// <summary>
-    /// Consume the currently loaded amos and returns wether or not it did consume any.
+    /// Consume the currently loaded amos and returns wether or not it did consume any of the requested amount.
+    /// <para>A null amount to consumed is always considered successfull i.e. DidConsume(0) will always return true.</para>
     /// </summary>
     /// <param name="amos">The amount to consume.</param>
-    /// <returns>true if the operation did consume amos, false otherwise.</returns>
-    public bool DidConsume(uint amos) => Consume(amos) > 0;
+    /// <returns>true if the operation did consume some of the requested amos, false otherwise.</returns>
+    public bool DidConsume(uint amos)
+    {
+        Log();
+        if (amos == 0)
+            return true;
+        
+        if (LoadedAmos == 0)
+            return false;
+        
+        LoadedAmos -= amos;
+        return true;
+    }
 
     /// <summary>
     /// Only consumes the given amount if it does have enough loaded amos.
@@ -62,6 +78,21 @@ public partial class PW_Ammunition : Resource
         
         LoadedAmos -= amos;
         return true;
+    }
+
+    public void StartReload()
+    {
+        if (LoadedAmos == _magazineSize || UnloadedAmos == 0)
+            return;
+            
+        float time = LoadedAmos > 0 ? _tacticalReloadTime : _reloadTime;
+        _reloadTimer = _sceneTree.CreateTimer(time);
+        _reloadTimer.Timeout += DoReload;
+    }
+
+    public void DoReload()
+    {
+        Reload();
     }
 
     /// <summary>

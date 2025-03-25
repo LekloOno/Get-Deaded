@@ -13,6 +13,8 @@
 script = ExtResource("1_c3nw5")
 _magazineSize = 6
 _maxMagazines = 5
+_reloadTime = 1.2
+_tacticalReloadTime = 1.2
 metadata/_custom_type_script = "uid://cxiwvat6vddlp"
 
 [sub_resource type="Resource" id="Resource_86bjm"]

@@ -32,7 +32,7 @@ public abstract partial class PW_Fire : Resource
     {
         _camera = camera;
         _sight = sight;
-        _ammos.Initialize(_baseAmmos);
+        _ammos.Initialize(_sight.GetTree(), _baseAmmos);
 
         _recoil?.Initialize(recoilController);
         foreach (PW_Shot shot in _shots)
@@ -104,7 +104,7 @@ public abstract partial class PW_Fire : Resource
 
     public void Reload()
     {
-        _ammos.Reload();
+        _ammos.StartReload();
     }
 
     private void ResetBuffer()
