@@ -8,6 +8,7 @@ public partial class E_Ennemy : CharacterBody3D
     [Export] private float _hideDelay;
     [Export] private MeshInstance3D _surfaceMesh;
     [Export] private MeshInstance3D _jointMesh;
+    [Export] private GL_Dropper _lootDropper;
     private StandardMaterial3D _surfaceMeshMaterial;
     private StandardMaterial3D _jointMeshMaterial;
     private SceneTreeTimer _hideTimer;
@@ -23,7 +24,13 @@ public partial class E_Ennemy : CharacterBody3D
 
         Enable();
 
-        OnDie += (o) => Disable();
+        OnDie += PlayDeath;
+    }
+
+    public void PlayDeath(GC_Health health)
+    {
+        _lootDropper.Drop();
+        Disable();
     }
 
     public void Disable()
@@ -46,7 +53,7 @@ public partial class E_Ennemy : CharacterBody3D
 
         await ToSignal(opacityTween, "finished");
         
-        Hide();
+        //Hide();
     }
 
     public void DisablePhysics()

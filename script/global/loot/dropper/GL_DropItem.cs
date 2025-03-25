@@ -1,5 +1,6 @@
 using Godot;
 
+[GlobalClass]
 public partial class GL_DropItem : Resource
 {
     [Export] private float _dropRate;

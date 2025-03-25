@@ -1,5 +1,6 @@
 using Godot;
 
+[GlobalClass]
 public partial class GL_Picker : Area3D
 {
     [Export] private PW_WeaponsHandler _weaponsHandler;

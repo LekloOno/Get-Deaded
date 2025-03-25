@@ -1,6 +1,7 @@
 using System;
 using Godot;
 
+[GlobalClass]
 public partial class GL_Dropper : Node3D
 {
     [Export] private GL_DropTable _dropTable;
@@ -17,7 +18,7 @@ public partial class GL_Dropper : Node3D
             if (item.TryDrop(seed, out GL_PhysicsPickable pickable))
             {
                 AddChild(pickable);
-                pickable.Position = Position;
+                pickable.Position = GlobalPosition;
 
                 float seedImpulse = seed * 2f * Mathf.Pi;
                 float xImpulse = Mathf.Cos(seedImpulse) * _sideImpulseForce;

@@ -8,6 +8,8 @@ public abstract partial class GL_PickableInfos : Resource
     public GL_PhysicsPickable Generate()
     {
         GL_PhysicsPickable pickable = GeneratePhysicsPickable();
+        pickable.TopLevel = true;
+        pickable.CollisionLayer = 0x11;
         pickable.AddChild(Model.Instantiate());
 
         return pickable;
