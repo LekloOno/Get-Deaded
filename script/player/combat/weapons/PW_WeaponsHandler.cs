@@ -66,6 +66,7 @@ public partial class PW_WeaponsHandler : Node
         _weaponsInput.OnStopSecondary += HandleStopSecondary;
         _weaponsInput.OnSwitch += Switch;
         _weaponsInput.OnHolster += Holster;
+        _weaponsInput.OnReload += Reload;
     }
 
     // Very redondant way to define the buffers, could use a little rework !
@@ -165,6 +166,11 @@ public partial class PW_WeaponsHandler : Node
             _nextWeapon = _melee;
 
         StartSwitch();
+    }
+
+    public void Reload(object sender, EventArgs e)
+    {
+        _activeWeapon.HandleReload();
     }
 
     public void StartSwitch()

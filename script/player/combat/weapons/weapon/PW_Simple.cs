@@ -39,4 +39,8 @@ public partial class PW_Simple : PW_Weapon
         _fire?.RecoilMultiplier.Remove(_simpleADS.RecoilMultiplier);
     }
 
+    protected override void Reload()
+    {
+        _fire.Reload();
+    }
 }

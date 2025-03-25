@@ -10,6 +10,7 @@ public partial class PI_Weapons : PI_InputGlobalAction
     public EventHandler OnStopSecondary;
     public EventHandler OnSwitch;
     public EventHandler OnHolster;
+    public EventHandler OnReload;
 
     public override void _UnhandledInput(InputEvent @event)
     {
@@ -25,5 +26,7 @@ public partial class PI_Weapons : PI_InputGlobalAction
             OnSwitch?.Invoke(this, EventArgs.Empty);
         else if (@event.IsActionReleased(ACTIONS_Combat.HOLSTER))
             OnHolster?.Invoke(this, EventArgs.Empty);
+        else if (@event.IsActionPressed(ACTIONS_Combat.RELOAD))
+            OnReload?.Invoke(this, EventArgs.Empty);
     }
 }

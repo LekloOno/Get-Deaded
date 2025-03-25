@@ -34,4 +34,11 @@ public partial class PW_Alternate : PW_Weapon
         _currentFire.Disable();
         _currentFire = _primaryFire;
     }
+
+    protected override void Reload()
+    {
+        _primaryFire.Reload();
+        _secondaryFire.Reload();
+    }
+
 }

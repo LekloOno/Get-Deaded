@@ -102,6 +102,11 @@ public abstract partial class PW_Fire : Resource
         BufferRelease();
     }
 
+    public void Reload()
+    {
+        _ammos.Reload();
+    }
+
     private void ResetBuffer()
     {
         if(_bufferTimer != null)

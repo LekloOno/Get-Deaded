@@ -36,9 +36,11 @@ public partial class PW_Ammunition : Resource
     {
         uint consumed = Math.Min(amos, LoadedAmos);
         LoadedAmos -= consumed;
-        GD.Print(LoadedAmos + " mag : " + UnloadedAmos/_magazineSize);
+        Log();
         return consumed;
     }
+
+    private void Log() => GD.Print(LoadedAmos + " mag : " + UnloadedAmos/_magazineSize + " (" + UnloadedAmos + ")");
 
 
     /// <summary>
@@ -71,6 +73,7 @@ public partial class PW_Ammunition : Resource
         uint reloaded = Math.Min(_magazineSize - LoadedAmos, UnloadedAmos);
         UnloadedAmos -= reloaded;
         LoadedAmos += reloaded;
+        Log();
         return reloaded;
     }
 

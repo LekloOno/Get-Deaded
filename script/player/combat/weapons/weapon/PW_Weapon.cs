@@ -53,6 +53,7 @@ public abstract partial class PW_Weapon : Resource
 
     public void HandlePrimaryDown() => PrimaryDown();   // For naming consistency
     public void HandlePrimaryUp() => PrimaryUp();       // For naming consistency
+    public void HandleReload() => Reload();             // For naming consistency
 
     public void HandleDisable()
     {
@@ -67,6 +68,10 @@ public abstract partial class PW_Weapon : Resource
     /// </summary>
     protected virtual void WeaponInitialize(PC_Recoil recoilController) {}
 
+    /// <summary>
+    /// Called when the reload input is pressed down.
+    /// </summary>
+    protected abstract void Reload();
     /// <summary>
     /// Called when the primary input is pressed down. Will typically handle shooting process.
     /// </summary>
