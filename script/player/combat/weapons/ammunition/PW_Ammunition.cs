@@ -8,11 +8,14 @@ public partial class PW_Ammunition : Resource
     [Export] private uint _maxMagazines;
     [Export] private float _reloadTime;
     [Export] private float _tacticalReloadTime;
+    public bool IsReloading {get; private set;} = false;
     private uint _maxAmos;
     public uint UnloadedAmos {get; private set;}
     public uint LoadedAmos {get; private set;}
     private SceneTree _sceneTree;
     private SceneTreeTimer _reloadTimer;
+
+    public EventHandler ReloadCompleted;
 
     /// <summary>
     /// Initialize the ammutions.
@@ -56,6 +59,9 @@ public partial class PW_Ammunition : Resource
     public bool DidConsume(uint amos)
     {
         Log();
+        if (IsReloading)
+            return false;
+
         if (amos == 0)
             return true;
         
@@ -73,6 +79,10 @@ public partial class PW_Ammunition : Resource
     /// <returns>true if it did consume, false otherwise.</returns>
     public bool TryConsume(uint amos)
     {
+        Log();
+        if (IsReloading)
+            return false;
+
         if (amos > LoadedAmos)
             return false;
         
@@ -84,7 +94,8 @@ public partial class PW_Ammunition : Resource
     {
         if (LoadedAmos == _magazineSize || UnloadedAmos == 0)
             return;
-            
+
+        IsReloading = true;
         float time = LoadedAmos > 0 ? _tacticalReloadTime : _reloadTime;
         _reloadTimer = _sceneTree.CreateTimer(time);
         _reloadTimer.Timeout += DoReload;
@@ -104,6 +115,8 @@ public partial class PW_Ammunition : Resource
         uint reloaded = Math.Min(_magazineSize - LoadedAmos, UnloadedAmos);
         UnloadedAmos -= reloaded;
         LoadedAmos += reloaded;
+        IsReloading = false;
+        ReloadCompleted?.Invoke(this, EventArgs.Empty);
         Log();
         return reloaded;
     }

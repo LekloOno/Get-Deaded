@@ -10,17 +10,15 @@ public partial class PWF_Continuous : PW_Fire
     protected override bool Press()
     {
         StopShoot();
-        _recoil.ResetBuffer();        
-        float nextShot = _fireRate;
+        _recoil.ResetBuffer();
 
-        if (TryShoot())
-        {
-            _recoil?.Start();
-        }
-        else
-            nextShot = NextAvailableShot();
+        if (!CanShoot())
+            return false;
+        
+        Shoot();
+        _recoil?.Start();
 
-        _timer = _sight.GetTree().CreateTimer(nextShot/1000f);
+        _timer = _sight.GetTree().CreateTimer(_fireRate/1000f);
         _timer.Timeout += ReShoot;
         return true;
     }
@@ -52,6 +50,5 @@ public partial class PWF_Continuous : PW_Fire
             _timer = null;
             _recoil?.Reset();
         }
-
     }
 }

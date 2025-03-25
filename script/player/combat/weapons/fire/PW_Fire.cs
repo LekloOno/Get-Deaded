@@ -109,26 +109,34 @@ public abstract partial class PW_Fire : Resource
 
     private void ResetBuffer()
     {
-        if(_bufferTimer != null)
+        if (_pressBuffered)
         {
-            if (_pressBuffered)
-            {
+            if (_bufferTimer == null)
+                _ammos.ReloadCompleted -= ReloadSendPress;
+            else
                 _bufferTimer.Timeout -= SendPress;
-                _pressBuffered = false;
-            }
-            else if (_releaseBuffered)
-            {
-                _bufferTimer.Timeout -= SendRelease;
-                _releaseBuffered = false;
-            }
+            
+            _pressBuffered = false;
+        }
+        else if (_releaseBuffered && _bufferTimer != null)
+        {
+            _bufferTimer.Timeout -= SendRelease;
+            _releaseBuffered = false;
         }
     }
 
     private void BufferPress()
     {
         _pressBuffered = true;
-        _bufferTimer = _sight.GetTree().CreateTimer(NextAvailableShot()/1000.0 + _bufferMargin);
-        _bufferTimer.Timeout += SendPress;
+        if (_ammos.IsReloading)
+        {
+            _ammos.ReloadCompleted += ReloadSendPress;
+        }
+        else
+        {
+            _bufferTimer = _sight.GetTree().CreateTimer(NextAvailableShot()/1000.0 + _bufferMargin);
+            _bufferTimer.Timeout += SendPress;
+        }
     }
     
     private void BufferRelease()
@@ -138,6 +146,7 @@ public abstract partial class PW_Fire : Resource
         _bufferTimer.Timeout += SendRelease;
     }
 
+    private void ReloadSendPress(object sender, EventArgs e) => SendPress();
     private void SendPress()
     {
         _pressBuffered = false;
