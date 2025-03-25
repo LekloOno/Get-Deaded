@@ -1,6 +1,7 @@
 using System;
 using Godot;
 
+[GlobalClass]
 public partial class PW_Ammunition : Resource
 {
     [Export] private uint _magazineSize;
@@ -17,12 +18,13 @@ public partial class PW_Ammunition : Resource
     public void Initialize(uint baseAmos, bool load = true)
     {
         _maxAmos = _maxMagazines * _magazineSize;
+        uint ammos = Math.Min(baseAmos, _maxAmos);
         if (load)
-            LoadedAmos = Math.Min(_magazineSize, _maxAmos);
+            LoadedAmos = Math.Min(_magazineSize, ammos);
         else
             LoadedAmos = 0;
 
-        UnloadedAmos = _maxAmos - LoadedAmos;
+        UnloadedAmos = ammos - LoadedAmos;
     }
 
     /// <summary>
@@ -34,7 +36,30 @@ public partial class PW_Ammunition : Resource
     {
         uint consumed = Math.Min(amos, LoadedAmos);
         LoadedAmos -= consumed;
+        GD.Print(LoadedAmos + " mag : " + UnloadedAmos/_magazineSize);
         return consumed;
+    }
+
+
+    /// <summary>
+    /// Consume the currently loaded amos and returns wether or not it did consume any.
+    /// </summary>
+    /// <param name="amos">The amount to consume.</param>
+    /// <returns>true if the operation did consume amos, false otherwise.</returns>
+    public bool DidConsume(uint amos) => Consume(amos) > 0;
+
+    /// <summary>
+    /// Only consumes the given amount if it does have enough loaded amos.
+    /// </summary>
+    /// <param name="amos">The amount to consume.</param>
+    /// <returns>true if it did consume, false otherwise.</returns>
+    public bool TryConsume(uint amos)
+    {
+        if (amos > LoadedAmos)
+            return false;
+        
+        LoadedAmos -= amos;
+        return true;
     }
 
     /// <summary>

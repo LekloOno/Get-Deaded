@@ -12,6 +12,9 @@ public abstract partial class PW_Fire : Resource
     [Export] protected float _spread = 0;
     [Export] protected ulong _fireRate;
     [Export] protected PW_Recoil _recoil;
+    [Export] protected PW_Ammunition _ammos;
+    [Export] protected uint _ammosPerShot = 1;
+    [Export] protected uint _baseAmmos;
     public PHX_AdditiveModifiers SpreadMultiplier {get; private set;} = new();
     public PHX_AdditiveModifiers RecoilMultiplier {get => _recoil.Modifier;}
     public EventHandler<ShotHitEventArgs> Hit;
@@ -29,6 +32,7 @@ public abstract partial class PW_Fire : Resource
     {
         _camera = camera;
         _sight = sight;
+        _ammos.Initialize(_baseAmmos);
 
         _recoil?.Initialize(recoilController);
         foreach (PW_Shot shot in _shots)
@@ -70,7 +74,7 @@ public abstract partial class PW_Fire : Resource
             shot.Shoot(_sight, origin, direction);
     }
 
-    protected bool CanShoot() => Time.GetTicksMsec() - _lastShot >= _fireRate;
+    protected bool CanShoot() => Time.GetTicksMsec() - _lastShot >= _fireRate && _ammos.DidConsume(_ammosPerShot);
 
     private void SightTo(out Vector3 origin, out Vector3 direction)
     {

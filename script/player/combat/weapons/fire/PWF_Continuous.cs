@@ -27,12 +27,17 @@ public partial class PWF_Continuous : PW_Fire
     protected override bool Release()
     {
         StopShoot();
-        _recoil?.Reset();
         return true;
     }
 
     private void ReShoot()
     {
+        if (!_ammos.DidConsume(_ammosPerShot))
+        {
+            StopShoot();
+            return;
+        }
+
         Shoot();
         _recoil?.Add();
         _timer = _sight.GetTree().CreateTimer(_fireRate/1000f);
@@ -45,6 +50,8 @@ public partial class PWF_Continuous : PW_Fire
         {
             _timer.Timeout -= ReShoot;
             _timer = null;
+            _recoil?.Reset();
         }
+
     }
 }
