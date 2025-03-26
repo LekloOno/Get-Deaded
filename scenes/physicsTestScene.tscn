@@ -1,0 +1,87 @@
+[gd_scene load_steps=12 format=3 uid="uid://dpcvynlmpga4e"]
+
+[ext_resource type="Script" uid="uid://cly25k5keg1ft" path="res://script/physics/bodies/PHX_RepulsionField3D.cs" id="1_8fdsp"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_34mur"]
+sky_top_color = Color(0.395325, 0.782353, 0.992188, 1)
+sky_horizon_color = Color(0.909322, 0.991191, 1.03472, 1)
+ground_bottom_color = Color(0.236101, 0.176547, 0.140815, 1)
+ground_horizon_color = Color(0.909322, 0.991191, 1.03472, 1)
+
+[sub_resource type="Sky" id="Sky_8fdsp"]
+sky_material = SubResource("ProceduralSkyMaterial_34mur")
+
+[sub_resource type="Environment" id="Environment_movqw"]
+background_mode = 2
+sky = SubResource("Sky_8fdsp")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8fdsp"]
+radius = 1.0
+
+[sub_resource type="Curve" id="Curve_8fdsp"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.815385, 0.703667), 2.70565, 2.70565, 0, 0, Vector2(1, 1), -0.12562, 1.13463, 0, 0]
+point_count = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1yuhj"]
+transparency = 1
+albedo_color = Color(0.387, 0.598, 1, 0.265)
+
+[sub_resource type="SphereMesh" id="SphereMesh_iylj5"]
+material = SubResource("StandardMaterial3D_1yuhj")
+radius = 1.0
+height = 2.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6seoc"]
+radius = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7arll"]
+albedo_color = Color(0.367188, 0.367188, 0.367188, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_bxa4l"]
+material = SubResource("StandardMaterial3D_7arll")
+radius = 0.2
+height = 0.4
+
+[node name="PhysicsTestScene" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_movqw")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.99956, -0.024362, 0.016932, 0, 0.570713, 0.821149, -0.0296682, 0.820788, -0.570462, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 2.3, 1)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -5.5)
+use_collision = true
+size = Vector3(14, 1, 12)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3.225, -7)
+
+[node name="PHX_BounceBody3D" type="ShapeCast3D" parent="RigidBody3D"]
+shape = SubResource("SphereShape3D_8fdsp")
+target_position = Vector3(0, 0, 0)
+script = ExtResource("1_8fdsp")
+_repulsingStrength = 100.0
+_repulsingCurve = SubResource("Curve_8fdsp")
+metadata/_custom_type_script = "uid://cly25k5keg1ft"
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="RigidBody3D/PHX_BounceBody3D"]
+mesh = SubResource("SphereMesh_iylj5")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("SphereShape3D_6seoc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("SphereMesh_bxa4l")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 1.61787, -9)
+use_collision = true
