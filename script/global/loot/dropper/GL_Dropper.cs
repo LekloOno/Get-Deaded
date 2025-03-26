@@ -21,7 +21,7 @@ public partial class GL_Dropper : Node3D
                 GetTree().Root.AddChild(pickable);
                 pickable.GlobalPosition = GlobalPosition;
 
-                float seedImpulse = seed * 2f * Mathf.Pi;
+                float seedImpulse = seed * 2f * Mathf.Pi * 3f;
                 float xImpulse = Mathf.Cos(seedImpulse) * _sideImpulseForce;
                 float zImpulse = Mathf.Sin(seedImpulse) * _sideImpulseForce;
                 pickable.ApplyImpulse(new Vector3(xImpulse, _upImpulseForce, zImpulse));

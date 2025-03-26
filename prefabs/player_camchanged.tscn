@@ -554,7 +554,7 @@ shape = SubResource("CapsuleShape3D_wow6d")
 [node name="BodyBox" type="Area3D" parent="Body" node_paths=PackedStringArray("HealthManager")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 top_level = true
-collision_layer = 4
+collision_layer = 8
 collision_mask = 0
 script = ExtResource("15_h1ove")
 HealthManager = NodePath("../PH_Manager")
@@ -567,7 +567,7 @@ debug_color = Color(0, 1, 0, 0.654902)
 [node name="HeadBox" type="Area3D" parent="Body" node_paths=PackedStringArray("HealthManager")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0)
 top_level = true
-collision_layer = 4
+collision_layer = 8
 collision_mask = 0
 script = ExtResource("15_h1ove")
 BodyPart = 0
