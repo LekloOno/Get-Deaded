@@ -3,22 +3,26 @@ using Godot;
 [GlobalClass]
 public partial class PHX_RepulsionField3D : ShapeCast3D
 {
-    [Export] private float _repulsingStrength;
-    [Export] private Curve _repulsingCurve;
+    [Export] private PHX_RepulsionField3DData _data;
     private RigidBody3D _bounceBody;
-    private PhysicsShapeQueryParameters3D _query;
-    private float _maxDistance;
+
+    public PHX_RepulsionField3D(){}
+    public PHX_RepulsionField3D(PHX_RepulsionField3DData data)
+    {
+        _data = data;
+    }
 
     public override void _Ready()
     {
+        GD.Print("oi");
         if (GetParent() is RigidBody3D body)
         {
             _bounceBody = body;
-            if (Shape is SphereShape3D sphere)
-                _maxDistance = sphere.Radius;
+            Shape = _data.SphereShape;
         }
         else
             SetPhysicsProcess(false);
+        
     }
     public override void _PhysicsProcess(double delta)
     {
@@ -28,9 +32,9 @@ public partial class PHX_RepulsionField3D : ShapeCast3D
         for (int i = 0; i < GetCollisionCount(); i++)
         {
             Vector3 direction = GlobalPosition - GetCollisionPoint(i);
-            float forceRatio = (_maxDistance - direction.Length()) / _maxDistance;
-            float force = _repulsingCurve.Sample(forceRatio);
-            _bounceBody.ApplyForce(force * direction.Normalized() * _repulsingStrength);
+            float forceRatio = (_data.SphereShape.Radius - direction.Length()) / _data.SphereShape.Radius;
+            float force = _data.RepulsingCurve.Sample(forceRatio);
+            _bounceBody.ApplyForce(force * direction.Normalized() * _data.RepulsingStrength);
         }
     }
 }

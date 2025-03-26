@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://dpcvynlmpga4e"]
+[gd_scene load_steps=14 format=3 uid="uid://dpcvynlmpga4e"]
 
 [ext_resource type="Script" uid="uid://cly25k5keg1ft" path="res://script/physics/bodies/PHX_RepulsionField3D.cs" id="1_8fdsp"]
+[ext_resource type="Script" uid="uid://c3akiwtfovofa" path="res://script/physics/bodies/PHX_RepulsionField3DData.cs" id="2_movqw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_34mur"]
 sky_top_color = Color(0.395325, 0.782353, 0.992188, 1)
@@ -17,12 +18,19 @@ sky = SubResource("Sky_8fdsp")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_8fdsp"]
+[sub_resource type="Curve" id="Curve_1yuhj"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.628272, 0.267513), 1.33918, 1.33918, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_iylj5"]
 radius = 1.0
 
-[sub_resource type="Curve" id="Curve_8fdsp"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.815385, 0.703667), 2.70565, 2.70565, 0, 0, Vector2(1, 1), -0.12562, 1.13463, 0, 0]
-point_count = 3
+[sub_resource type="Resource" id="Resource_6seoc"]
+script = ExtResource("2_movqw")
+RepulsingStrength = 100.0
+RepulsingCurve = SubResource("Curve_1yuhj")
+SphereShape = SubResource("SphereShape3D_iylj5")
+metadata/_custom_type_script = "uid://c3akiwtfovofa"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1yuhj"]
 transparency = 1
@@ -65,11 +73,9 @@ size = Vector3(14, 1, 12)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3.225, -7)
 
 [node name="PHX_BounceBody3D" type="ShapeCast3D" parent="RigidBody3D"]
-shape = SubResource("SphereShape3D_8fdsp")
 target_position = Vector3(0, 0, 0)
 script = ExtResource("1_8fdsp")
-_repulsingStrength = 100.0
-_repulsingCurve = SubResource("Curve_8fdsp")
+_data = SubResource("Resource_6seoc")
 metadata/_custom_type_script = "uid://cly25k5keg1ft"
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="RigidBody3D/PHX_BounceBody3D"]
