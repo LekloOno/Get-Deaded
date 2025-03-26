@@ -53,7 +53,7 @@ public partial class E_Ennemy : CharacterBody3D
 
         await ToSignal(opacityTween, "finished");
         
-        //Hide();
+        Hide();
     }
 
     public void DisablePhysics()

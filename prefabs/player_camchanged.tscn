@@ -139,7 +139,7 @@ radius = 0.25
 size = Vector3(0.5, 1.8, 0.5)
 
 [sub_resource type="Curve" id="Curve_wow6d"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 1.47129, 0, 0, Vector2(1, 1), 0.527356, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_cqits"]

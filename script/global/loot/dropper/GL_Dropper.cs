@@ -17,8 +17,8 @@ public partial class GL_Dropper : Node3D
             float seed = (float)_rng.NextDouble();
             if (item.TryDrop(seed, out GL_PhysicsPickable pickable))
             {
-                AddChild(pickable);
-                pickable.Position = GlobalPosition;
+                GetTree().Root.AddChild(pickable);
+                pickable.GlobalPosition = GlobalPosition;
 
                 float seedImpulse = seed * 2f * Mathf.Pi;
                 float xImpulse = Mathf.Cos(seedImpulse) * _sideImpulseForce;
