@@ -35,12 +35,14 @@ public partial class E_Ennemy : CharacterBody3D
 
     public void Disable()
     {
+        CollisionLayer = 0;
         SetPhysicsProcess(false);
         foreach (GC_HurtBox hurtBox in _hurtBoxes)
             hurtBox.CollisionLayer = 0;
 
         //_hideTimer = GetTree().CreateTimer(_hideDelay);
         //_hideTimer.Timeout += Hide;
+        
         HideMesh();
     }
 
@@ -65,6 +67,7 @@ public partial class E_Ennemy : CharacterBody3D
 
     public void Enable()
     {
+        CollisionLayer = 1;
         Tween surfaceTween = CreateTween();
         surfaceTween.TweenProperty(_surfaceMeshMaterial, "albedo_color:a", 1f, 0.2f);
         Tween jointTween = CreateTween();

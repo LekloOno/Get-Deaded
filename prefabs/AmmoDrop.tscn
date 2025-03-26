@@ -1,14 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://bpaeqgg3f1ur3"]
+[gd_scene load_steps=4 format=3 uid="uid://bpaeqgg3f1ur3"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_g720a"]
-radius = 0.2
+[sub_resource type="BoxShape3D" id="BoxShape3D_g720a"]
+size = Vector3(0.22, 0.12, 0.3)
 
-[sub_resource type="SphereMesh" id="SphereMesh_j11da"]
-radius = 0.2
-height = 0.4
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j11da"]
+albedo_color = Color(0.476563, 0.476563, 0.476563, 1)
+metallic = 0.8
+roughness = 0.39
+
+[sub_resource type="BoxMesh" id="BoxMesh_7qa2k"]
+material = SubResource("StandardMaterial3D_j11da")
+size = Vector3(0.22, 0.12, 0.3)
 
 [node name="CollisionShape3D" type="CollisionShape3D"]
-shape = SubResource("SphereShape3D_g720a")
+shape = SubResource("BoxShape3D_g720a")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_j11da")
+mesh = SubResource("BoxMesh_7qa2k")

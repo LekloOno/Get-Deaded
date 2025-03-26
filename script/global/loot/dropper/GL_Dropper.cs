@@ -7,6 +7,7 @@ public partial class GL_Dropper : Node3D
     [Export] private GL_DropTable _dropTable;
     [Export] private float _upImpulseForce;
     [Export] private float _sideImpulseForce;
+    [Export] private Vector3 _angularImpulse; 
 
     private Random _rng = new Random();
 
@@ -24,6 +25,7 @@ public partial class GL_Dropper : Node3D
                 float xImpulse = Mathf.Cos(seedImpulse) * _sideImpulseForce;
                 float zImpulse = Mathf.Sin(seedImpulse) * _sideImpulseForce;
                 pickable.ApplyImpulse(new Vector3(xImpulse, _upImpulseForce, zImpulse));
+                pickable.ApplyTorqueImpulse(_angularImpulse);
             }
         }
     }

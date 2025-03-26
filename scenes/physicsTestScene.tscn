@@ -30,6 +30,7 @@ script = ExtResource("2_movqw")
 RepulsingStrength = 100.0
 RepulsingCurve = SubResource("Curve_1yuhj")
 SphereShape = SubResource("SphereShape3D_iylj5")
+CollisionMask = 0
 metadata/_custom_type_script = "uid://c3akiwtfovofa"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1yuhj"]
