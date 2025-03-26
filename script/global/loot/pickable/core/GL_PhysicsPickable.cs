@@ -1,7 +1,11 @@
 using Godot;
 
-public abstract partial class GL_PhysicsPickable(GL_IPickHandler handler) : RigidBody3D, GL_IPickable
+public partial class GL_PhysicsPickable(GL_IPickHandler handler) : RigidBody3D, GL_IPickable
 {
-    protected GL_IPickHandler _handler = handler;
-    public abstract void GetPicked(GL_Picker picker);
+    private GL_IPickHandler _handler = handler;
+    public void GetPicked(GL_Picker picker)
+    {
+        if (_handler.HandlePick(picker))
+            QueueFree();
+    }
 }
