@@ -310,7 +310,7 @@ public partial class PW_WeaponsHandler : Node
         SwitchEnded?.Invoke(this, _activeWeapon);
     }
 
-    public void PickAmmo(GL_AmmoData data)
+    public bool PickAmmo(GL_AmmoData data)
     {
         // Distribute ammos among all weapons
         if (data.WeaponIndex == 0)
@@ -319,18 +319,28 @@ public partial class PW_WeaponsHandler : Node
             int distribAmount = data.Ammos / count;
             int remainder = data.Ammos % count;
 
+            bool couldPick = false;
+
             for (int i = 0; i < count; i++)
             {
                 int realAmount = distribAmount + (i < remainder ? 1 : 0);
-                _weapons.ElementAt(i).PickAmmo(realAmount, data.FireIndex);
+                couldPick |= _weapons.ElementAt(i).PickAmmo(realAmount, data.FireIndex);
             }
+
+            return couldPick;
         }
-        // Distribute ammos to the target weapon
-        else
+
+        // Distribute ammos to the current weapon
+        if (data.WeaponIndex == -1)
         {
-            int realIndex = (int)data.WeaponIndex - 1;
-            _weapons.ElementAt(realIndex % _weapons.Count).PickAmmo(data.Ammos, data.FireIndex);
+            if (_activeWeapon == null)
+                return false;
+            
+            return _activeWeapon.PickAmmo(data.Ammos, data.FireIndex);
         }
-        //
+
+        // Distribute ammos to the target weapon
+        int realIndex = data.WeaponIndex - 1;
+        return _weapons.ElementAt(realIndex % _weapons.Count).PickAmmo(data.Ammos, data.FireIndex);
     }
 }

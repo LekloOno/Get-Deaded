@@ -42,22 +42,22 @@ public partial class PW_Alternate : PW_Weapon
     }
     protected override bool CanReload(out bool tactical) => _primaryFire.CanReload(out tactical) || _secondaryFire.CanReload(out tactical);
 
-    public override void PickAmmo(int amount, uint targetFireIndex)
+    public override bool PickAmmo(int amount, int targetFireIndex)
     {
         if (targetFireIndex == 0)
         {
             int distribAmount = amount / 2;
             int remainder = amount % 2;
-            _primaryFire.PickAmmo(distribAmount + remainder);
-            _secondaryFire.PickAmmo(distribAmount);
-            return;
+            bool primary = _primaryFire.PickAmmo(distribAmount + remainder);
+            bool secondary = _secondaryFire.PickAmmo(distribAmount);
+            return primary || secondary;
         }
 
-        uint realTargetIndex = targetFireIndex - 1;
+        int realTargetIndex = targetFireIndex - 1;
         if ((realTargetIndex & 1) == 0)
-            _primaryFire.PickAmmo(amount);
-        else
-            _secondaryFire.PickAmmo(amount);
+            return _primaryFire.PickAmmo(amount);
+
+        return _secondaryFire.PickAmmo(amount);
     }
 
 }
