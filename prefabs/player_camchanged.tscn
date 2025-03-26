@@ -178,6 +178,9 @@ _fire = ExtResource("86_8j20c")
 SwitchInTime = 0.2
 SwitchOutTime = 0.25
 MoveSpeedModifier = -0.1
+ReloadTime = 1.0
+TacticalReloadTime = 1.0
+ReloadReadyTime = 0.15
 metadata/_custom_type_script = "uid://c3are182lodyx"
 
 [sub_resource type="Resource" id="Resource_wow6d"]
@@ -197,6 +200,9 @@ _fire = ExtResource("88_ewcnl")
 SwitchInTime = 0.15
 SwitchOutTime = 0.25
 MoveSpeedModifier = -0.08
+ReloadTime = 1.2
+TacticalReloadTime = 0.8
+ReloadReadyTime = 0.15
 _ads = SubResource("Resource_wow6d")
 metadata/_custom_type_script = "uid://c3are182lodyx"
 
@@ -259,6 +265,9 @@ _fire = SubResource("Resource_jbksd")
 SwitchInTime = 0.12
 SwitchOutTime = 0.12
 MoveSpeedModifier = 0.0
+ReloadTime = 0.0
+TacticalReloadTime = 0.0
+ReloadReadyTime = 0.0
 metadata/_custom_type_script = "uid://c3are182lodyx"
 
 [node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("_healthManager", "_walkProcess", "_wallJump", "_wallClimb", "_groundState", "_cameraControl", "_surfaceControl", "_straffeSnap")]

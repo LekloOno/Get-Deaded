@@ -90,21 +90,7 @@ public partial class PW_Ammunition : Resource
         return true;
     }
 
-    public void StartReload()
-    {
-        if (LoadedAmos == _magazineSize || UnloadedAmos == 0)
-            return;
-
-        IsReloading = true;
-        float time = LoadedAmos > 0 ? _tacticalReloadTime : _reloadTime;
-        _reloadTimer = _sceneTree.CreateTimer(time);
-        _reloadTimer.Timeout += DoReload;
-    }
-
-    public void DoReload()
-    {
-        Reload();
-    }
+    public bool CanReload() => LoadedAmos < _magazineSize && UnloadedAmos > 0;
 
     /// <summary>
     /// Reloads the loaded amos with the unloaded amos.

@@ -40,6 +40,7 @@ public partial class PW_Alternate : PW_Weapon
         _primaryFire.Reload();
         _secondaryFire.Reload();
     }
+    protected override bool CanReload(out bool tactical) => _primaryFire.CanReload(out tactical) || _secondaryFire.CanReload(out tactical);
 
     public override void PickAmmo(int amount, uint targetFireIndex)
     {
@@ -58,4 +59,5 @@ public partial class PW_Alternate : PW_Weapon
         else
             _secondaryFire.PickAmmo(amount);
     }
+
 }

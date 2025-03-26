@@ -35,6 +35,9 @@ public partial class PW_WeaponsHandler : Node
     /// Event Arg is the weapon the player has now active.
     /// </summary>
     public EventHandler<PW_Weapon> SwitchEnded;
+    public Action ReloadReady;
+    public Action Reloaded;
+    private Action Available;
 
     private PW_Weapon _activeWeapon;
     private int _weaponIndex = 0;
@@ -45,6 +48,12 @@ public partial class PW_WeaponsHandler : Node
     private bool _switchingIn = false;
     private bool _bufferedPrimary = false;
     private bool _bufferedSecondary = false;
+
+    private bool _reloading = false;
+    private bool _ready = true;
+
+    private SceneTreeTimer _reloadTimer;
+    
 
     public override void _Ready()
     {
@@ -67,31 +76,42 @@ public partial class PW_WeaponsHandler : Node
         _weaponsInput.OnSwitch += Switch;
         _weaponsInput.OnHolster += Holster;
         _weaponsInput.OnReload += Reload;
+
+        SwitchEnded += (o, e) => Available?.Invoke();
+        ReloadReady += () => Available?.Invoke();
     }
+
+    public bool ActiveWeaponHalted() => !_ready || _switchingIn || _switchingOut;
 
     // Very redondant way to define the buffers, could use a little rework !
     private void BufferPrimary()
     {
+        if (_bufferedPrimary)
+            return;
+
         _bufferedPrimary = true;
-        SwitchEnded += SendPrimary;
+        Available += SendPrimary;
     }
+
     private void ResetPrimaryBuffer()
     {
+        if (!_bufferedPrimary)
+            return;
+
         _bufferedPrimary = false;
-        SwitchEnded -= SendPrimary;
+        Available -= SendPrimary;
     }
-    private void SendPrimary(object sender, PW_Weapon e)
+
+    private void SendPrimary()
     {
         ResetPrimaryBuffer();
         _activeWeapon.HandlePrimaryDown();
     }
+
     private void HandleStartPrimary(object sender, EventArgs e)
     {
-        if (_activeWeapon == null)
+        if (ActiveWeaponHalted())
         {
-            if (_bufferedPrimary)
-                return;
-
             BufferPrimary();
             return;
         }
@@ -126,7 +146,7 @@ public partial class PW_WeaponsHandler : Node
     }
     private void HandleStartSecondary(object sender, EventArgs e)
     {
-        if (_activeWeapon == null)
+        if (ActiveWeaponHalted())
         {
             if (_bufferedSecondary)
                 return;
@@ -170,7 +190,45 @@ public partial class PW_WeaponsHandler : Node
 
     public void Reload(object sender, EventArgs e)
     {
+        if(_reloading || _activeWeapon == null)
+            return;
+
+        if(!_activeWeapon.HandleCanReload(out float reloadTime))
+            return;
+
+        _reloading = true;
+        _ready = false;
+        _reloadTimer = GetTree().CreateTimer(reloadTime);
+        _reloadTimer.Timeout += DoReload;
+    }
+
+    private void DoReload()
+    {
         _activeWeapon.HandleReload();
+        _reloadTimer = GetTree().CreateTimer(_activeWeapon.ReloadReadyTime);
+        _reloadTimer.Timeout += CompleteReload;
+        _reloading = false;
+    }
+
+    private void CompleteReload()
+    {
+        _ready = true;
+        ReloadReady?.Invoke();
+    }
+
+    private void CancelReload()
+    {
+        if (_reloadTimer == null)
+            return;
+        
+        if (_reloading)
+            _reloadTimer.Timeout -= DoReload;
+        else
+            _reloadTimer.Timeout -= CompleteReload;
+
+        _reloadTimer = null;
+        _reloading = false;
+        _ready = true;
     }
 
     public void StartSwitch()
@@ -259,7 +317,6 @@ public partial class PW_WeaponsHandler : Node
             int count = _weapons.Count;
             int distribAmount = data.Ammos / count;
             int remainder = data.Ammos % count;
-            GD.Print(data.Ammos + " count : " + count + " distrib : " + distribAmount);
 
             for (int i = 0; i < count; i++)
             {

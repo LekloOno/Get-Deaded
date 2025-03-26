@@ -24,7 +24,6 @@ public partial class GL_Vacuum : Area3D
         {
             if (body is RigidBody3D rigidBody)
             {
-                GD.Print("oui");
                 Vector3 direction = GlobalPosition - rigidBody.GlobalPosition;
                 float forceRatio = (_sphere.Radius - direction.Length()) / _sphere.Radius;
                 float force = _vacuumCurve.Sample(forceRatio);

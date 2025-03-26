@@ -109,7 +109,7 @@ public abstract partial class PW_Fire : Resource
 
     public void Reload()
     {
-        _ammos.StartReload();
+        _ammos.Reload();
     }
 
     private void ResetBuffer()
@@ -161,6 +161,12 @@ public abstract partial class PW_Fire : Resource
     {
         _releaseBuffered = false;
         Release();
+    }
+
+    public bool CanReload(out bool tactical)
+    {
+        tactical = _ammos.LoadedAmos > 0;
+        return _ammos.CanReload();
     }
 
     /// <summary>

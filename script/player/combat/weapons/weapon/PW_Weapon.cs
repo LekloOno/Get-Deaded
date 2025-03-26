@@ -6,7 +6,10 @@ public abstract partial class PW_Weapon : Resource
 {
     [Export] public float SwitchInTime {get; private set;}
     [Export] public float SwitchOutTime {get; private set;}
-    [Export] public float MoveSpeedModifier {get; private set;} = 0f;        // An additive modifier to set. - is a malus + is a bonus
+    [Export] public float MoveSpeedModifier {get; private set;} = 0f;   // An additive modifier to set. - is a malus + is a bonus
+    [Export] public float ReloadTime {get; private set;}
+    [Export] public float TacticalReloadTime {get; private set;}
+    [Export] public float ReloadReadyTime {get; private set;}            // Additionnal time before the weapon is ready once it's reloaded, allow annimation cancels
     [Export] protected PW_ADS _ads;
     protected PC_DirectCamera _camera;
     protected Node3D _sight;
@@ -54,6 +57,14 @@ public abstract partial class PW_Weapon : Resource
     public void HandlePrimaryDown() => PrimaryDown();   // For naming consistency
     public void HandlePrimaryUp() => PrimaryUp();       // For naming consistency
     public void HandleReload() => Reload();             // For naming consistency
+    public bool HandleCanReload(out float reloadTime)
+    {
+        bool canReload = CanReload(out bool tactical);
+        reloadTime = tactical ? TacticalReloadTime : ReloadTime;
+        return canReload;
+    }
+
+    protected abstract bool CanReload(out bool tactical);
 
     public void HandleDisable()
     {
