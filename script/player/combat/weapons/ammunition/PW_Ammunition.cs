@@ -126,11 +126,17 @@ public partial class PW_Ammunition : Resource
     /// </summary>
     /// <param name="amos">The amount to fill.</param>
     /// <returns>The amos really filled. 0 if the maximum amount of amos is already reached.</returns>
-    public uint FillAmos(uint amos)
+    public int FillAmos(int amos)
     {
-        uint loaded = Math.Min(_maxAmos - TotalAmos(), amos);
-        UnloadedAmos += amos;
-        return loaded;
+        int filled = (int)Math.Clamp(amos, -UnloadedAmos, _maxAmos - TotalAmos());
+
+        UnloadedAmos = filled < 0 
+        ? UnloadedAmos - (uint)-filled 
+        : UnloadedAmos + (uint)filled;
+
+        Log();
+
+        return filled;
     }
 
     /// <summary>

@@ -4,7 +4,7 @@ using Godot;
 public partial class GL_DropItem : Resource
 {
     [Export] private float _dropRate;
-    [Export] private GL_PickableInfos _item;
+    [Export] private GL_PickableData _item;
 
     // Use a seed to avoid instantiation of random for each drop item.
     public bool TryDrop(float seed, out GL_PhysicsPickable pickable)

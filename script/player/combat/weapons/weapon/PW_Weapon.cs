@@ -102,6 +102,7 @@ public abstract partial class PW_Weapon : Resource
     /// Allow for some specific disabling process.
     /// </summary>
     protected abstract void Disable();
+    public abstract void PickAmmo(int amount, uint targetFireIndex);
 
     private void ActivateADS()
     {
@@ -122,4 +123,5 @@ public abstract partial class PW_Weapon : Resource
         _surfaceControl.SpeedModifiers.Remove(_ads.MoveSpeedMultiplier);
         StopADS();
     }
+
 }

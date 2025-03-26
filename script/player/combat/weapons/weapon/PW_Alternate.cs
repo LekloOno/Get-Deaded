@@ -41,4 +41,21 @@ public partial class PW_Alternate : PW_Weapon
         _secondaryFire.Reload();
     }
 
+    public override void PickAmmo(int amount, uint targetFireIndex)
+    {
+        if (targetFireIndex == 0)
+        {
+            int distribAmount = amount / 2;
+            int remainder = amount % 2;
+            _primaryFire.PickAmmo(distribAmount + remainder);
+            _secondaryFire.PickAmmo(distribAmount);
+            return;
+        }
+
+        uint realTargetIndex = targetFireIndex - 1;
+        if ((realTargetIndex & 1) == 0)
+            _primaryFire.PickAmmo(amount);
+        else
+            _secondaryFire.PickAmmo(amount);
+    }
 }

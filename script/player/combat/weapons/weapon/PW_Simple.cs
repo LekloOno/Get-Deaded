@@ -43,4 +43,10 @@ public partial class PW_Simple : PW_Weapon
     {
         _fire.Reload();
     }
+
+    public override void PickAmmo(int amount, uint targetFireIndex)
+    {
+        _fire.PickAmmo(amount);
+    }
+
 }

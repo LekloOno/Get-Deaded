@@ -26,10 +26,10 @@ public partial class GL_Picker : Area3D
         CollisionMask = 0x10;
     }
 
-    public bool PickAmmo()
+    public bool PickAmmo(GL_AmmoData data)
     {
         // oui
-        GD.Print("oui");
+        _weaponsHandler.PickAmmo(data);
         return true;
     }
 }

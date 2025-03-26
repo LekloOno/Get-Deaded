@@ -14,7 +14,6 @@ public partial class PHX_RepulsionField3D : ShapeCast3D
 
     public override void _Ready()
     {
-        GD.Print("oi");
         if (GetParent() is RigidBody3D body)
         {
             _bounceBody = body;
