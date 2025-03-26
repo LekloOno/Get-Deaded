@@ -40,7 +40,7 @@ public partial class GL_Vacuum : Area3D
 
     public void Enable()
     {
-        CollisionMask = 0x10;
+        CollisionMask = CONF_Collision.Masks.Picker;
         SetPhysicsProcess(true);
     }
 }

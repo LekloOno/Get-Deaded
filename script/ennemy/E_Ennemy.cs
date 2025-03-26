@@ -67,7 +67,7 @@ public partial class E_Ennemy : CharacterBody3D
 
     public void Enable()
     {
-        CollisionLayer = 1;
+        CollisionLayer = CONF_Collision.Layers.EnvironmentEntity;
         Tween surfaceTween = CreateTween();
         surfaceTween.TweenProperty(_surfaceMeshMaterial, "albedo_color:a", 1f, 0.2f);
         Tween jointTween = CreateTween();
@@ -76,7 +76,7 @@ public partial class E_Ennemy : CharacterBody3D
         Show();
         SetPhysicsProcess(true);
         foreach (GC_HurtBox hurtBox in _hurtBoxes)
-            hurtBox.CollisionLayer = 2;
+            hurtBox.CollisionLayer = CONF_Collision.Layers.EnnemiesHurtBox;
 
         _healthManager.Init(true);
     }

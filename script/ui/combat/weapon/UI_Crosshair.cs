@@ -38,7 +38,7 @@ public partial class UI_Crosshair : Control
         );
 
         query.CollideWithAreas = true;
-        query.CollisionMask = 0b11;
+        query.CollisionMask = CONF_Collision.Masks.HitScan;
 
         var result = spaceState.IntersectRay(query);
 

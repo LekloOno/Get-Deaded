@@ -11,6 +11,7 @@ public partial class GC_HealBox: Area3D
     public override void _Ready()
     {
         AreaEntered += ProcessCollision;
+        _hit.InitializeModifiers();
     }
 
     private void ProcessCollision(Area3D area3D)

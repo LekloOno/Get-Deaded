@@ -15,7 +15,7 @@ public partial class PWS_Hitscan : PW_Shot
         PhysicsDirectSpaceState3D spaceState = world.DirectSpaceState;
         PhysicsRayQueryParameters3D query = PhysicsRayQueryParameters3D.Create(castOrigin, hit);
         query.CollideWithAreas = true;
-        query.CollisionMask = 2;
+        query.CollisionMask = CONF_Collision.Masks.HitScan;
 
         var result = spaceState.IntersectRay(query);
 

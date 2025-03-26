@@ -23,7 +23,7 @@ public partial class GL_Picker : Area3D
 
     public void Enable()
     {
-        CollisionMask = 0x10;
+        CollisionMask = CONF_Collision.Masks.Picker;
     }
 
     public bool PickAmmo(GL_AmmoData data) => _weaponsHandler.PickAmmo(data);

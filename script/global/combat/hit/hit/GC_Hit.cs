@@ -24,6 +24,6 @@ public partial class GC_Hit : Resource
 
     public void InitializeModifiers() => _hitModifier = new(_inspectorModifiers);
 
-    public float GetDamage(GC_BodyPart bodyPart) =>  _hitModifier.GetDamage(bodyPart, _damage);
+    public float GetDamage(GC_BodyPart bodyPart) => _hitModifier.GetDamage(bodyPart, _damage);
     public bool SendHit(GC_HurtBox hurtBox, out float takenDamage) => hurtBox.Damage(GetDamage(hurtBox.BodyPart), out takenDamage);
 }

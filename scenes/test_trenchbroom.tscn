@@ -1075,16 +1075,10 @@ scale_curve = SubResource("CurveTexture_mxe6x")
 
 [sub_resource type="QuadMesh" id="QuadMesh_c66wn"]
 
-[sub_resource type="Resource" id="Resource_efpjk"]
-script = ExtResource("23_qy2j6")
-BodyPart = 0
-Modifier = 1.0
-metadata/_custom_type_script = "uid://sujdlokcwnd6"
-
 [sub_resource type="Resource" id="Resource_o3j50"]
 script = ExtResource("21_y2alo")
 _damage = 10.0
-_inspectorModifiers = Array[Object]([SubResource("Resource_efpjk")])
+_inspectorModifiers = Array[Object]([])
 metadata/_custom_type_script = "uid://cjmiash71uc7b"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_vqbvp"]
@@ -1096,10 +1090,16 @@ albedo_color = Color(0.317647, 0.847059, 0, 0.839216)
 [sub_resource type="SphereMesh" id="SphereMesh_xqord"]
 material = SubResource("StandardMaterial3D_wk1by")
 
+[sub_resource type="Resource" id="Resource_f60qe"]
+script = ExtResource("23_qy2j6")
+BodyPart = 1
+Modifier = 1.0
+metadata/_custom_type_script = "uid://sujdlokcwnd6"
+
 [sub_resource type="Resource" id="Resource_583vm"]
 script = ExtResource("21_y2alo")
 _damage = 10.0
-_inspectorModifiers = null
+_inspectorModifiers = Array[Object]([SubResource("Resource_f60qe")])
 metadata/_custom_type_script = "uid://cjmiash71uc7b"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_qy2j6"]

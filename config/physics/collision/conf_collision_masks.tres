@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CONFD_CollisionMasks" load_steps=2 format=3 uid="uid://c0cfbfi3be65e"]
+
+[ext_resource type="Script" uid="uid://0tffkh0jqmks" path="res://config/physics/collision/CONFD_CollisionMasks.cs" id="1_87gy7"]
+
+[resource]
+script = ExtResource("1_87gy7")
+Environment = 3
+EnvironmentEntity = 3
+HurtBox = 0
+HitBox = 12
+Picker = 16
+metadata/_custom_type_script = "uid://0tffkh0jqmks"
