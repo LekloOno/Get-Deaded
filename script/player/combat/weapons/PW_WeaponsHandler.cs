@@ -233,6 +233,7 @@ public partial class PW_WeaponsHandler : Node
 
     public void StartSwitch()
     {
+        CancelReload();
         // Could be done with index instead, but having only one weapon and holster could cause bug if so
         //   - Cancel will always happen, since the index will always be 0
         if (_nextWeapon == _activeWeapon)   // The player is switching back to its initial weapon
