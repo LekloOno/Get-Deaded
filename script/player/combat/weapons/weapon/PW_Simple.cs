@@ -45,5 +45,5 @@ public partial class PW_Simple : PW_Weapon
     }
 
     protected override bool CanReload(out bool tactical) => _fire.CanReload(out tactical);
-    public override bool PickAmmo(int amount, int targetFireIndex) => _fire.PickAmmo(amount);
+    public override bool PickAmmo(int amount, bool magazine, int targetFireIndex) => _fire.PickAmmo(amount, magazine);
 }

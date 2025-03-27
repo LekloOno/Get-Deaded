@@ -113,7 +113,7 @@ public abstract partial class PW_Weapon : Resource
     /// Allow for some specific disabling process.
     /// </summary>
     protected abstract void Disable();
-    public abstract bool PickAmmo(int amount, int targetFireIndex);
+    public abstract bool PickAmmo(int amount, bool magazine, int targetFireIndex);
 
     private void ActivateADS()
     {

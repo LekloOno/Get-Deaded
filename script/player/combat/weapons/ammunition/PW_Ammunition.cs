@@ -5,6 +5,11 @@ using Godot;
 public partial class PW_Ammunition : Resource
 {
     [Export] private uint _magazineSize;
+    /// <summary>
+    /// The amount of ammunitions filled from one magazine pickup. Leave 0 for _magazineSize.
+    /// Typically, there might be weapons with no magazine, and lots of ammunitions, but we don't want to load the entire ammunitions from one "magazine pickup".
+    /// </summary>
+    [Export] private uint _magazinePick;
     [Export] private uint _maxMagazines;
     [Export] private float _reloadTime;
     [Export] private float _tacticalReloadTime;
@@ -110,19 +115,31 @@ public partial class PW_Ammunition : Resource
     /// <summary>
     /// Fill in the unloaded amos.
     /// </summary>
-    /// <param name="amos">The amount to fill.</param>
+    /// <param name="amount">The amount to fill.</param>
+    /// <param name="magazine">If the amount is pure ammos, or pickup magazines.</param>
     /// <returns>The amos really filled. 0 if the maximum amount of amos is already reached.</returns>
-    public int FillAmos(int amos)
+    public uint FillAmos(uint amount, bool magazine)
     {
-        int filled = (int)Math.Clamp(amos, -UnloadedAmos, _maxAmos - UnloadedAmos - _magazineSize);
-
-        UnloadedAmos = filled < 0 
-        ? UnloadedAmos - (uint)-filled 
-        : UnloadedAmos + (uint)filled;
-
+        uint amos = magazine ? AmmosFromPickup(amount) : amount;
+        uint filled = Math.Min(amos, _maxAmos - UnloadedAmos - _magazineSize);
+        UnloadedAmos += filled;
         Log();
-
         return filled;
+    }
+
+    /// <summary>
+    /// Empty from the unloaded amos.
+    /// </summary>
+    /// <param name="amount">The amount to empty.</param>
+    /// <param name="magazine">If the amount is pure ammos, or pickup magazines.</param>
+    /// <returns>The amos really emptied. 0 if the unloaded amos were already 0.</returns>
+    public uint EmptyAmos(uint amount, bool magazine)
+    {
+        uint amos = magazine ? AmmosFromPickup(amount) : amount;
+        uint emptied = Math.Min(amos, UnloadedAmos);
+        UnloadedAmos -= emptied;
+        Log();
+        return emptied;
     }
 
     /// <summary>
@@ -130,4 +147,11 @@ public partial class PW_Ammunition : Resource
     /// </summary>
     /// <returns>The total amos currently possessed.</returns>
     public uint TotalAmos() => UnloadedAmos + LoadedAmos;
+
+    /// <summary>
+    /// A quick way to access the amount of munitions gathered from `amount` pickup magazines.
+    /// </summary>
+    /// <param name="amount">the amount of pickup magazines.</param>
+    /// <returns>The amount of ammunitions.</returns>
+    public uint AmmosFromPickup(uint amount) => (_magazinePick == 0 ? _magazineSize : _magazinePick) * amount;
 }

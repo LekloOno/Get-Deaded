@@ -44,7 +44,18 @@ public abstract partial class PW_Fire : Resource
 
     public ulong NextAvailableShot() => _fireRate + _lastShot - Time.GetTicksMsec();
 
-    public bool PickAmmo(int amount) => _ammos.FillAmos(amount) > 0;
+    public bool PickAmmo(int amount, bool magazine)
+    {
+
+
+        if (amount == 0)
+            return true;
+        
+        if (amount > 0)
+            return _ammos.FillAmos((uint)amount, magazine) > 0;
+        
+        return _ammos.EmptyAmos((uint)-amount, magazine) > 0;
+    }
 
     protected bool TryShoot()
     {

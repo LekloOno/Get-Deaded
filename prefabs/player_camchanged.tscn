@@ -209,6 +209,7 @@ metadata/_custom_type_script = "uid://c3are182lodyx"
 [sub_resource type="Resource" id="Resource_vj6q7"]
 script = ExtResource("92_3bwxm")
 _magazineSize = 0
+_magazinePick = 0
 _maxMagazines = 0
 _reloadTime = 0.0
 _tacticalReloadTime = 0.0
