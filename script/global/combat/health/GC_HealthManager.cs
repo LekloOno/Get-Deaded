@@ -1,10 +1,12 @@
 using System;
 using Godot;
+using Godot.Collections;
 
 [GlobalClass]
 public partial class GC_HealthManager : Node3D
 {
     [Export] public GC_Health TopHealthLayer {get; private set;}
+    [Export] private Array<GC_HurtBox> _hurtBoxes;
     public HealthInitEventArgs InitState {get; private set;} = null;
 
     public EventHandler<HealthInitEventArgs> OnLayerInit;
@@ -21,4 +23,16 @@ public partial class GC_HealthManager : Node3D
     }
     public GC_Health GetLowerLayer() => TopHealthLayer.GetLowerLayer();
     public GC_Health GetExposedLayer() => TopHealthLayer.GetExposedLayer();
+
+    public void EnableHurt(uint collisionLayer)
+    {
+        foreach (GC_HurtBox hurtBox in _hurtBoxes)
+            hurtBox.CollisionLayer = collisionLayer;
+    }
+
+    public void DisableHurt()
+    {
+        foreach (GC_HurtBox hurtBox in _hurtBoxes)
+            hurtBox.CollisionLayer = 0;
+    }
 }

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://c6o8mw13kagni" path="res://assets/sprites/skyboxes/Sky_trainyard_01_1b2.png" id="2_k74wy"]
 [ext_resource type="Material" uid="uid://tu7ne3521eed" path="res://assets/materials/orangeGrid.tres" id="3_lcjrb"]
 [ext_resource type="Material" uid="uid://t2nvujbehqp3" path="res://assets/materials/greenGrid.tres" id="4_di6lj"]
-[ext_resource type="PackedScene" uid="uid://cgxay2q63b8m8" path="res://prefabs/simplebot.tscn" id="5_m6jvf"]
+[ext_resource type="PackedScene" uid="uid://cgxay2q63b8m8" path="res://prefabs/simplebot/simplebot.tscn" id="5_m6jvf"]
 [ext_resource type="Material" uid="uid://bc8petulu1x6h" path="res://assets/materials/lightGrid.tres" id="5_o0loy"]
 [ext_resource type="Material" uid="uid://bn43ebup84oy3" path="res://assets/materials/factory/factorywall.tres" id="8_k3vvs"]
 

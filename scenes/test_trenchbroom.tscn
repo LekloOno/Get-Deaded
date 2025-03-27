@@ -16,7 +16,7 @@
 [ext_resource type="Material" uid="uid://qaiv0bg125qu" path="res://assets/textures/factory/factory_pillar1.tres" id="12_j6kmx"]
 [ext_resource type="Material" uid="uid://c8uqlqfsypx8y" path="res://assets/textures/factory/factory_wall_dark.tres" id="13_m2at4"]
 [ext_resource type="Material" uid="uid://h2ivyy4upgyr" path="res://assets/textures/factory/factory_pillar1_gloss.tres" id="14_oihfr"]
-[ext_resource type="PackedScene" uid="uid://cgxay2q63b8m8" path="res://prefabs/simplebot.tscn" id="16_716do"]
+[ext_resource type="PackedScene" uid="uid://cgxay2q63b8m8" path="res://prefabs/simplebot/simplebot.tscn" id="16_716do"]
 [ext_resource type="Material" uid="uid://c7p68evacni7v" path="res://assets/materials/darkGrid.tres" id="18_322tx"]
 [ext_resource type="Script" uid="uid://8thrj88gtdf" path="res://script/ennemy/E_EnnemySpawner.cs" id="18_qlgsc"]
 [ext_resource type="Material" uid="uid://daxwgciv66e17" path="res://assets/materials/whiteGrid.tres" id="19_pcerp"]
@@ -32,7 +32,7 @@
 [ext_resource type="Script" uid="uid://d01sb0k1e87yt" path="res://script/ui/combat/health/UI_EntityHealth.cs" id="25_ux68e"]
 [ext_resource type="Script" uid="uid://db8e5l76dsikn" path="res://script/ui/combat/health/UI_HealthBar.cs" id="26_5y3lt"]
 [ext_resource type="Material" uid="uid://c0boa35qtrcpj" path="res://assets/shaders/blood_material.tres" id="27_pxgqc"]
-[ext_resource type="PackedScene" uid="uid://5xqfm2mmkdsg" path="res://prefabs/simplebot_barrier.tscn" id="32_50g17"]
+[ext_resource type="PackedScene" uid="uid://5xqfm2mmkdsg" path="res://prefabs/simplebot/simplebot_barrier.tscn" id="32_50g17"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_6v6fv"]
 panorama = ExtResource("1_niaf1")
@@ -2014,10 +2014,11 @@ transform = Transform3D(0.625, 0, 1.08253, 0, 1.25, 0, -1.08253, 0, 0.625, -6.2,
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_vupcu")
 
-[node name="GC_HealthManager" type="Node3D" parent="Entities/Albert"]
+[node name="GC_HealthManager" type="Node3D" parent="Entities/Albert" node_paths=PackedStringArray("_hurtBoxes")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.54684, 0)
 script = ExtResource("21_pxgqc")
 TopHealthLayer = SubResource("Resource_qlgsc")
+_hurtBoxes = []
 metadata/_custom_type_script = "uid://bbc8us8vvouq0"
 
 [node name="Head" type="Area3D" parent="Entities/Albert" node_paths=PackedStringArray("HealthManager", "_damageSplatter")]

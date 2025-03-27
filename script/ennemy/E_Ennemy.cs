@@ -4,7 +4,6 @@ using Godot.Collections;
 public partial class E_Ennemy : CharacterBody3D
 {
     [Export] private GC_HealthManager _healthManager;
-    [Export] private Array<GC_HurtBox> _hurtBoxes;
     [Export] private float _hideDelay;
     [Export] private MeshInstance3D _surfaceMesh;
     [Export] private MeshInstance3D _jointMesh;
@@ -37,8 +36,7 @@ public partial class E_Ennemy : CharacterBody3D
     {
         CollisionLayer = 0;
         SetPhysicsProcess(false);
-        foreach (GC_HurtBox hurtBox in _hurtBoxes)
-            hurtBox.CollisionLayer = 0;
+        _healthManager.DisableHurt();
 
         //_hideTimer = GetTree().CreateTimer(_hideDelay);
         //_hideTimer.Timeout += Hide;
@@ -58,13 +56,6 @@ public partial class E_Ennemy : CharacterBody3D
         Hide();
     }
 
-    public void DisablePhysics()
-    {
-        SetPhysicsProcess(false);
-        foreach (GC_HurtBox hurtBox in _hurtBoxes)
-            hurtBox.CollisionLayer = 0;
-    }
-
     public void Enable()
     {
         CollisionLayer = CONF_Collision.Layers.EnvironmentEntity;
@@ -75,9 +66,8 @@ public partial class E_Ennemy : CharacterBody3D
 
         Show();
         SetPhysicsProcess(true);
-        foreach (GC_HurtBox hurtBox in _hurtBoxes)
-            hurtBox.CollisionLayer = CONF_Collision.Layers.EnnemiesHurtBox;
-
+        _healthManager.EnableHurt(CONF_Collision.Layers.EnnemiesHurtBox);
+    
         _healthManager.Init(true);
     }
 
