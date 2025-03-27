@@ -1,4 +1,4 @@
-[gd_scene load_steps=132 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=133 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://script/player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://assets/script/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -97,6 +97,7 @@
 [ext_resource type="Script" uid="uid://bxxmkegnq67qe" path="res://script/player/combat/weapons/ads/PW_SimpleADS.cs" id="87_htv2j"]
 [ext_resource type="Resource" uid="uid://dkeof2yotipev" path="res://assets/script/combat/weapons/fire/pwf_simple_continuous.tres" id="88_ewcnl"]
 [ext_resource type="Script" uid="uid://sujdlokcwnd6" path="res://script/global/combat/hit/GC_DamageModifier.cs" id="89_4vhab"]
+[ext_resource type="Script" uid="uid://dkysuj8gsdwv4" path="res://script/player/connectors/CNT_SprintWeapon.cs" id="91_cqits"]
 [ext_resource type="Script" uid="uid://0w0m608ktkwu" path="res://script/vfx/combat/trail/moving_light/VFX_MovingLightTrail.cs" id="91_lk6x0"]
 [ext_resource type="Script" uid="uid://cxiwvat6vddlp" path="res://script/player/combat/weapons/ammunition/PW_Ammunition.cs" id="92_3bwxm"]
 
@@ -991,6 +992,32 @@ _dashDuration = 0.1
 _minDashRatio = 0.5
 _cooldown = 3.0
 
+[node name="PW_WeaponsHandler" type="Node" parent="." node_paths=PackedStringArray("_camera", "_recoilController", "_sight", "_barel", "_weaponsInput", "_surfaceControl")]
+script = ExtResource("81_stdu8")
+_camera = NodePath("../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/Camera3D")
+_recoilController = NodePath("../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil")
+_sight = NodePath("../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean")
+_barel = NodePath("Weapons/Barrel")
+_weaponsInput = NodePath("../PIM_Arena/PI_Weapons")
+_weapons = Array[Object]([SubResource("Resource_fdvd6"), SubResource("Resource_fvk8i")])
+_melee = SubResource("Resource_5dw8r")
+_surfaceControl = NodePath("../Movement/PM_SurfaceControl")
+metadata/_custom_type_script = "uid://b4hdeuwma0ma8"
+
+[node name="Weapons" type="Node3D" parent="PW_WeaponsHandler"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0)
+
+[node name="Barrel" type="Node3D" parent="PW_WeaponsHandler/Weapons"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.287144, -0.225284, -0.236747)
+
+[node name="Connectors" type="Node" parent="."]
+
+[node name="CNT_SprintWeapon" type="Node" parent="Connectors" node_paths=PackedStringArray("_sprintInput", "_weaponsHandler")]
+script = ExtResource("91_cqits")
+_sprintInput = NodePath("../../PIM_Arena/PI_Sprint")
+_weaponsHandler = NodePath("../../PW_WeaponsHandler")
+metadata/_custom_type_script = "uid://dkysuj8gsdwv4"
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="UI_Crosshair" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("_sightPosition", "_camera", "image")]
@@ -1082,21 +1109,3 @@ metadata/_custom_type_script = "uid://c7tdbt357bj80"
 [node name="Timer" type="Timer" parent="CanvasLayer/UI_DamageIndicatorManager"]
 wait_time = 0.3
 one_shot = true
-
-[node name="PW_WeaponsHandler" type="Node" parent="." node_paths=PackedStringArray("_camera", "_recoilController", "_sight", "_barel", "_weaponsInput", "_surfaceControl")]
-script = ExtResource("81_stdu8")
-_camera = NodePath("../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/Camera3D")
-_recoilController = NodePath("../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil")
-_sight = NodePath("../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean")
-_barel = NodePath("Weapons/Barrel")
-_weaponsInput = NodePath("../PIM_Arena/PI_Weapons")
-_weapons = Array[Object]([SubResource("Resource_fdvd6"), SubResource("Resource_fvk8i")])
-_melee = SubResource("Resource_5dw8r")
-_surfaceControl = NodePath("../Movement/PM_SurfaceControl")
-metadata/_custom_type_script = "uid://b4hdeuwma0ma8"
-
-[node name="Weapons" type="Node3D" parent="PW_WeaponsHandler"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0)
-
-[node name="Barrel" type="Node3D" parent="PW_WeaponsHandler/Weapons"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.287144, -0.225284, -0.236747)

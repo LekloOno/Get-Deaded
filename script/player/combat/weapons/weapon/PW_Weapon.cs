@@ -16,7 +16,9 @@ public abstract partial class PW_Weapon : Resource
     protected Node3D _barel;
     private PM_SurfaceControl _surfaceControl;
     public EventHandler<ShotHitEventArgs> Hit;
-    private bool _adsActive = false;       // Not ideal, maybe make so ads return 3 state instead of true/false to know when nothing happened.
+    public Action ADSStarted;
+    public Action ADSStopped;
+    public bool ADSActive {get; private set;} = false;          // Not ideal, maybe make so ads return 3 state instead of true/false to know when nothing happened.
 
     public void Initialize(PC_DirectCamera camera, Node3D sight, Node3D barel, PM_SurfaceControl surfaceControl, PC_Recoil recoilController)
     {
@@ -117,22 +119,24 @@ public abstract partial class PW_Weapon : Resource
 
     private void ActivateADS()
     {
-        if (_adsActive)
+        if (ADSActive)
                 return;
 
-        _adsActive = true;
+        ADSActive = true;
         _surfaceControl.SpeedModifiers.Add(_ads.MoveSpeedMultiplier);
         StartADS();
+        ADSStarted?.Invoke();
     }
 
     public void DeactivateADS()
     {
-        if (!_adsActive)
+        if (!ADSActive)
                 return;
             
-        _adsActive = false;
+        ADSActive = false;
         _surfaceControl.SpeedModifiers.Remove(_ads.MoveSpeedMultiplier);
         StopADS();
+        ADSStopped?.Invoke();
     }
 
 }

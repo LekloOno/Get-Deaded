@@ -18,7 +18,7 @@ public abstract partial class PI_PressHandler<T> : PI_ActionHandler<T>
     /// <param name="event">The received event. STARTED, STOPPED, PERFORMED or NONE.</param>
     protected abstract void InputUp(InputEvent @event);
 
-    protected override void HandleExternal(PI_ActionState actionState, T value) => Send(actionState, value);
+    public override void HandleExternal(PI_ActionState actionState, T value) => Send(actionState, value);
     protected override void HandleInput(InputEvent @event)
     {
         if (@event.IsActionPressed(Action))

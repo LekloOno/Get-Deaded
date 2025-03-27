@@ -83,7 +83,7 @@ public partial class PI_CrouchDispatcher : PI_ActionHandler<float>
     }
 
 
-    protected override void HandleExternal(PI_ActionState actionState, float value)
+    public override void HandleExternal(PI_ActionState actionState, float value)
     {
         switch (actionState)
         {

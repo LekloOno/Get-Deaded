@@ -57,7 +57,7 @@ public partial class PI_Walk : PI_ActionHandler<Vector2>
         if(IsBacking())
             OnStopOrBackward?.Invoke(this, EventArgs.Empty);
     }
-    protected override void HandleExternal(PI_ActionState actionState, Vector2 value)
+    public override void HandleExternal(PI_ActionState actionState, Vector2 value)
     {
         switch (actionState)
         {

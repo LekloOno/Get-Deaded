@@ -40,7 +40,7 @@ public abstract partial class PI_ActionHandler<T> : Node, PI_InputAction
     /// </summary>
     /// <param name="actionState">The requested action state.</param>
     /// <param name="value">The virtual input value.</param>
-    protected abstract void HandleExternal(PI_ActionState actionState, T value);
+    public abstract void HandleExternal(PI_ActionState actionState, T value);
     
     /// <summary>
     /// Extract an input value from a given InputEvent

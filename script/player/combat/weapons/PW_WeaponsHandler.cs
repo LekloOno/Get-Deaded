@@ -35,8 +35,11 @@ public partial class PW_WeaponsHandler : Node
     /// Event Arg is the weapon the player has now active.
     /// </summary>
     public EventHandler<PW_Weapon> SwitchEnded;
+    public bool ADSactive {get => _activeWeapon.ADSActive;}
     public Action ReloadReady;
     public Action Reloaded;
+    public Action ADSStarted;
+    public Action ADSStopped;
     private Action Available;
 
     private PW_Weapon _activeWeapon;
@@ -61,6 +64,8 @@ public partial class PW_WeaponsHandler : Node
         {
             weapon.Initialize(_camera, _sight, _barel, _surfaceControl, _recoilController);
             weapon.Hit += (o, e) => Hit?.Invoke(o, e);
+            weapon.ADSStarted += () => ADSStarted?.Invoke();
+            weapon.ADSStopped += () => ADSStopped?.Invoke();
         }
 
         _melee.Initialize(_camera, _sight, _barel, _surfaceControl, _recoilController);

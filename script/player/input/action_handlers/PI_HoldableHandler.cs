@@ -36,7 +36,7 @@ public abstract partial class PI_HoldableHandler<T> : PI_PressHandler<T>
             Stopped(GetInputValue(@event));
     }
 
-    protected override void HandleExternal(PI_ActionState actionState, T value)
+    public override void HandleExternal(PI_ActionState actionState, T value)
     {
         switch (actionState)
         {
