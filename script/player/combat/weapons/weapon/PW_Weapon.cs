@@ -71,7 +71,10 @@ public abstract partial class PW_Weapon : Resource
     public void HandleDisable()
     {
         if (_ads != null && _ads.Disable())
+        {
+            DeactivateADS();
             _surfaceControl.SpeedModifiers.Remove(_ads.MoveSpeedMultiplier);
+        }
 
         Disable();
     }
