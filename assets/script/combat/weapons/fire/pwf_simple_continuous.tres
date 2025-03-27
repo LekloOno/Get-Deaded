@@ -10,6 +10,7 @@
 [sub_resource type="Resource" id="Resource_yx0jo"]
 script = ExtResource("1_uiypm")
 _magazineSize = 30
+_magazinePick = 0
 _maxMagazines = 5
 _reloadTime = 1.8
 _tacticalReloadTime = 1.3
