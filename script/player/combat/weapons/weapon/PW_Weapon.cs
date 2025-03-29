@@ -11,6 +11,8 @@ public abstract partial class PW_Weapon : Resource
     [Export] public float TacticalReloadTime {get; private set;}
     [Export] public float ReloadReadyTime {get; private set;}            // Additionnal time before the weapon is ready once it's reloaded, allow annimation cancels
     [Export] protected PW_ADS _ads;
+    [Export] public Texture2D Icon {get; private set;}
+    [Export] public Color IconColor {get; private set;}
     protected PC_DirectCamera _camera;
     protected Node3D _sight;
     protected Node3D _barel;

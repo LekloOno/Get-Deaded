@@ -1,0 +1,99 @@
+[gd_scene load_steps=7 format=3 uid="uid://chiiaxip4exa1"]
+
+[ext_resource type="Texture2D" uid="uid://8rrtqp0otyee" path="res://assets/sprites/weapons/meleepixel.png" id="1_dohfl"]
+[ext_resource type="Script" uid="uid://bqe8doqvnciay" path="res://script/ui/combat/weapon/loadout/UI_WeaponsLoadout.cs" id="1_ysygd"]
+[ext_resource type="Script" uid="uid://bqdxbkvf8rvgl" path="res://script/ui/combat/weapon/loadout/UI_UnactiveWeaponsList.cs" id="2_aap5x"]
+[ext_resource type="Texture2D" uid="uid://c050onpc3r17u" path="res://assets/sprites/weapons/pewpixel.png" id="2_ysygd"]
+[ext_resource type="Script" uid="uid://dipouroto55hy" path="res://script/ui/combat/weapon/loadout/UI_WeaponHolder.cs" id="3_8fe6x"]
+[ext_resource type="Texture2D" uid="uid://cll1rrqagufi2" path="res://assets/sprites/weapons/brrtpixel2.png" id="3_iojif"]
+
+[node name="SubViewportContainer" type="SubViewportContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1024, 768)
+render_target_update_mode = 4
+
+[node name="weapons" type="VBoxContainer" parent="SubViewport" node_paths=PackedStringArray("_list", "_active", "_holster")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -256.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+alignment = 2
+script = ExtResource("1_ysygd")
+_list = NodePath("unactive/list")
+_active = NodePath("active")
+_holster = NodePath("unactive/holster")
+
+[node name="unactive" type="VBoxContainer" parent="SubViewport/weapons"]
+layout_mode = 2
+
+[node name="list" type="VBoxContainer" parent="SubViewport/weapons/unactive" node_paths=PackedStringArray("_template")]
+layout_mode = 2
+script = ExtResource("2_aap5x")
+_template = NodePath("weapon_template")
+
+[node name="weapon_template" type="AspectRatioContainer" parent="SubViewport/weapons/unactive/list" node_paths=PackedStringArray("_icon")]
+custom_minimum_size = Vector2(384, 192)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+ratio = 2.0
+script = ExtResource("3_8fe6x")
+_icon = NodePath("texture_switch")
+
+[node name="texture_switch" type="TextureRect" parent="SubViewport/weapons/unactive/list/weapon_template"]
+modulate = Color(0.441, 0.921, 1, 0.8)
+texture_filter = 1
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_iojif")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="holster" type="AspectRatioContainer" parent="SubViewport/weapons/unactive" node_paths=PackedStringArray("_icon")]
+custom_minimum_size = Vector2(384, 192)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+ratio = 2.0
+alignment_horizontal = 2
+script = ExtResource("3_8fe6x")
+_icon = NodePath("texture_holster")
+
+[node name="texture_holster" type="TextureRect" parent="SubViewport/weapons/unactive/holster"]
+modulate = Color(1, 0.814366, 0.550781, 0.8)
+texture_filter = 1
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_ysygd")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="active" type="AspectRatioContainer" parent="SubViewport/weapons" node_paths=PackedStringArray("_icon")]
+custom_minimum_size = Vector2(768, 384)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+ratio = 2.0
+alignment_horizontal = 2
+script = ExtResource("3_8fe6x")
+_icon = NodePath("texture_active")
+
+[node name="texture_active" type="TextureRect" parent="SubViewport/weapons/active"]
+modulate = Color(1, 1, 1, 0.8)
+texture_filter = 1
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_dohfl")
+expand_mode = 1
+stretch_mode = 4

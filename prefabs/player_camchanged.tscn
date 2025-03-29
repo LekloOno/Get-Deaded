@@ -1,4 +1,4 @@
-[gd_scene load_steps=133 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=140 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://script/player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://assets/script/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -27,15 +27,21 @@
 [ext_resource type="Script" uid="uid://cn5ymkg0qsvpn" path="res://script/player/input/actions/movement/PI_Sprint.cs" id="14_puula"]
 [ext_resource type="AudioStream" uid="uid://bnck0lo2ewye5" path="res://assets/sounds/woosh/woosh2.wav" id="14_qlcgr"]
 [ext_resource type="Script" uid="uid://cxlnavyewfmhb" path="res://script/player/input/actions/movement/PI_CrouchDispatcher.cs" id="15_03g52"]
+[ext_resource type="Script" uid="uid://bqe8doqvnciay" path="res://script/ui/combat/weapon/loadout/UI_WeaponsLoadout.cs" id="15_42twc"]
 [ext_resource type="AudioStream" uid="uid://dw0ipfbd7lxkv" path="res://assets/sounds/footsteps/concrete-step2.wav" id="15_53h66"]
 [ext_resource type="Script" uid="uid://ce82euclamj77" path="res://script/global/combat/hit/hurt/GC_HurtBox.cs" id="15_h1ove"]
 [ext_resource type="AudioStream" uid="uid://b7y6fn7u2t61j" path="res://assets/sounds/woosh/woosh3.wav" id="15_vrr6v"]
 [ext_resource type="AudioStream" uid="uid://c3yn8oxpxhvy0" path="res://assets/sounds/clothes/clothes_4.wav" id="15_yrqyn"]
 [ext_resource type="AudioStream" uid="uid://cv7hf0tm8n6mw" path="res://assets/sounds/clothes/clothes_5.wav" id="16_71snu"]
+[ext_resource type="Texture2D" uid="uid://cll1rrqagufi2" path="res://assets/sprites/weapons/brrtpixel2.png" id="16_lsyns"]
 [ext_resource type="Script" uid="uid://d27dbwl0y8qkt" path="res://script/player/input/actions/movement/crouch/PI_Dash.cs" id="16_t2wfm"]
 [ext_resource type="AudioStream" uid="uid://dnjywl4vsbygw" path="res://assets/sounds/footsteps/concrete-step3.wav" id="16_ul8s5"]
+[ext_resource type="Script" uid="uid://bqdxbkvf8rvgl" path="res://script/ui/combat/weapon/loadout/UI_UnactiveWeaponsList.cs" id="16_w8edb"]
+[ext_resource type="Script" uid="uid://dipouroto55hy" path="res://script/ui/combat/weapon/loadout/UI_WeaponHolder.cs" id="17_0vaqj"]
 [ext_resource type="Script" uid="uid://b37yb21n7qltn" path="res://script/player/input/actions/movement/crouch/PI_Slide.cs" id="17_d5kvj"]
+[ext_resource type="Texture2D" uid="uid://c050onpc3r17u" path="res://assets/sprites/weapons/pewpixel.png" id="17_w8edb"]
 [ext_resource type="AudioStream" uid="uid://byvkie35nxxfe" path="res://assets/sounds/clothes/clothes_6.wav" id="17_yke2y"]
+[ext_resource type="Texture2D" uid="uid://8rrtqp0otyee" path="res://assets/sprites/weapons/meleepixel.png" id="18_0vaqj"]
 [ext_resource type="AudioStream" uid="uid://c51litrqlhdk8" path="res://assets/sounds/footsteps/concrete-step5.wav" id="18_1gs0t"]
 [ext_resource type="Script" uid="uid://cvmm2apn1tg0v" path="res://script/global/loot/picker/GL_Picker.cs" id="18_u3xwg"]
 [ext_resource type="Script" uid="uid://3tjawmkgaiwa" path="res://script/global/loot/picker/GL_Vacuum.cs" id="18_wow6d"]
@@ -109,8 +115,11 @@ point_count = 5
 [sub_resource type="Gradient" id="Gradient_k51pg"]
 colors = PackedColorArray(0, 0.4, 0.894118, 0.764706, 0, 1, 0.537255, 0.784314)
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_w8edb"]
+viewport_path = NodePath("Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport")
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_7bleo"]
-viewport_path = NodePath("Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/Sprite3D/SubViewport")
+viewport_path = NodePath("Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/health/SubViewport")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tujlf"]
 bg_color = Color(0, 0, 0, 0.505882)
@@ -182,6 +191,8 @@ MoveSpeedModifier = -0.1
 ReloadTime = 1.0
 TacticalReloadTime = 1.0
 ReloadReadyTime = 0.15
+Icon = ExtResource("17_w8edb")
+IconColor = Color(1, 0.589, 0.109, 0.8)
 metadata/_custom_type_script = "uid://c3are182lodyx"
 
 [sub_resource type="Resource" id="Resource_wow6d"]
@@ -205,6 +216,8 @@ ReloadTime = 1.2
 TacticalReloadTime = 0.8
 ReloadReadyTime = 0.15
 _ads = SubResource("Resource_wow6d")
+Icon = ExtResource("16_lsyns")
+IconColor = Color(0.094, 0.681, 1, 0.8)
 metadata/_custom_type_script = "uid://c3are182lodyx"
 
 [sub_resource type="Resource" id="Resource_vj6q7"]
@@ -270,9 +283,13 @@ MoveSpeedModifier = 0.0
 ReloadTime = 0.0
 TacticalReloadTime = 0.0
 ReloadReadyTime = 0.0
+Icon = ExtResource("18_0vaqj")
+IconColor = Color(1, 1, 1, 0.8)
 metadata/_custom_type_script = "uid://c3are182lodyx"
 
 [node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("_healthManager", "_walkProcess", "_wallJump", "_wallClimb", "_groundState", "_cameraControl", "_surfaceControl", "_straffeSnap")]
+collision_layer = 2
+collision_mask = 3
 axis_lock_angular_y = true
 floor_constant_speed = true
 floor_block_on_wall = false
@@ -382,27 +399,120 @@ fov = 103.0
 script = ExtResource("12_htv2j")
 
 [node name="Label3D" type="Label3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing" node_paths=PackedStringArray("_controller")]
-transform = Transform3D(0.956305, 0.0406903, -0.289526, 0, 0.990268, 0.139173, 0.292372, -0.133092, 0.946998, 0.535, -0.353, -0.361)
+transform = Transform3D(0.997204, -0.00519158, 0.0745445, 0.00178622, 0.998955, 0.0456761, -0.0747032, -0.0454155, 0.996171, -0.584324, -0.222796, -0.294555)
 pixel_size = 0.001
 modulate = Color(0.0196078, 0.498039, 1, 0.764706)
 outline_modulate = Color(0, 0, 0, 0.101961)
 text = "poo"
+horizontal_alignment = 0
 script = ExtResource("10_kvg1p")
 _gradient = SubResource("Gradient_k51pg")
 _minSpeed = 10.0
 _maxSpeed = 60.0
 _controller = NodePath("../../../../../../..")
 
-[node name="Sprite3D" type="Sprite3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing"]
+[node name="weapons" type="Sprite3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing"]
+transform = Transform3D(0.976387, 0, -0.216031, 0, 1, 0, 0.216031, 0, 0.976387, 0.508073, -0.213446, -0.3)
+pixel_size = 0.0003
+texture = SubResource("ViewportTexture_w8edb")
+
+[node name="SubViewport" type="SubViewport" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1024, 768)
+render_target_update_mode = 4
+
+[node name="weapons" type="VBoxContainer" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport" node_paths=PackedStringArray("_weaponsHandler", "_list", "_active", "_holster")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -256.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+alignment = 2
+script = ExtResource("15_42twc")
+_weaponsHandler = NodePath("../../../../../../../../../PW_WeaponsHandler")
+_list = NodePath("unactive/list")
+_active = NodePath("active")
+_holster = NodePath("unactive/holster")
+
+[node name="unactive" type="VBoxContainer" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport/weapons"]
+layout_mode = 2
+
+[node name="list" type="VBoxContainer" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport/weapons/unactive" node_paths=PackedStringArray("_template")]
+layout_mode = 2
+script = ExtResource("16_w8edb")
+_template = NodePath("weapon_template")
+
+[node name="weapon_template" type="AspectRatioContainer" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport/weapons/unactive/list" node_paths=PackedStringArray("_icon")]
+custom_minimum_size = Vector2(384, 192)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+ratio = 2.0
+script = ExtResource("17_0vaqj")
+_icon = NodePath("texture_switch")
+
+[node name="texture_switch" type="TextureRect" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport/weapons/unactive/list/weapon_template"]
+modulate = Color(0.441, 0.921, 1, 0.8)
+texture_filter = 1
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("16_lsyns")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="holster" type="AspectRatioContainer" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport/weapons/unactive" node_paths=PackedStringArray("_icon")]
+custom_minimum_size = Vector2(384, 192)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+ratio = 2.0
+alignment_horizontal = 2
+script = ExtResource("17_0vaqj")
+_icon = NodePath("texture_holster")
+
+[node name="texture_holster" type="TextureRect" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport/weapons/unactive/holster"]
+modulate = Color(1, 0.814366, 0.550781, 0.8)
+texture_filter = 1
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("17_w8edb")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="active" type="AspectRatioContainer" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport/weapons" node_paths=PackedStringArray("_icon")]
+custom_minimum_size = Vector2(768, 384)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+ratio = 2.0
+alignment_horizontal = 2
+script = ExtResource("17_0vaqj")
+_icon = NodePath("texture_active")
+
+[node name="texture_active" type="TextureRect" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport/weapons/active"]
+modulate = Color(1, 1, 1, 0.8)
+texture_filter = 1
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("18_0vaqj")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="health" type="Sprite3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing"]
 transform = Transform3D(0.154622, -0.000283032, 0.0108085, 0, 0.154947, 0.00405743, -0.0108123, -0.00404754, 0.154569, -0.485, -0.28, -0.3)
 texture = SubResource("ViewportTexture_7bleo")
 
-[node name="SubViewport" type="SubViewport" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/Sprite3D"]
+[node name="SubViewport" type="SubViewport" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/health"]
 transparent_bg = true
 handle_input_locally = false
 render_target_update_mode = 4
 
-[node name="UI_EntityHealth" type="VBoxContainer" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/Sprite3D/SubViewport" node_paths=PackedStringArray("_healthManager", "_higherBar", "_lowerBar")]
+[node name="UI_EntityHealth" type="VBoxContainer" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/health/SubViewport" node_paths=PackedStringArray("_healthManager", "_higherBar", "_lowerBar")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -422,7 +532,7 @@ _higherBar = NodePath("HigherLayer")
 _lowerBar = NodePath("LowerLayer")
 metadata/_custom_type_script = "uid://d01sb0k1e87yt"
 
-[node name="HigherLayer" type="Control" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/Sprite3D/SubViewport/UI_EntityHealth" node_paths=PackedStringArray("_body", "_tail")]
+[node name="HigherLayer" type="Control" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/health/SubViewport/UI_EntityHealth" node_paths=PackedStringArray("_body", "_tail")]
 layout_mode = 2
 script = ExtResource("14_elf0p")
 _body = NodePath("Body")
@@ -430,7 +540,7 @@ _tail = NodePath("Tail")
 _tailSpeed = 0.4
 metadata/_custom_type_script = "uid://db8e5l76dsikn"
 
-[node name="Tail" type="ProgressBar" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/Sprite3D/SubViewport/UI_EntityHealth/HigherLayer"]
+[node name="Tail" type="ProgressBar" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/health/SubViewport/UI_EntityHealth/HigherLayer"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -450,7 +560,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_5oo0i")
 value = 40.43
 show_percentage = false
 
-[node name="Body" type="ProgressBar" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/Sprite3D/SubViewport/UI_EntityHealth/HigherLayer"]
+[node name="Body" type="ProgressBar" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/health/SubViewport/UI_EntityHealth/HigherLayer"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -470,7 +580,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_0kw87")
 value = 27.46
 show_percentage = false
 
-[node name="LowerLayer" type="Control" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/Sprite3D/SubViewport/UI_EntityHealth" node_paths=PackedStringArray("_body", "_tail")]
+[node name="LowerLayer" type="Control" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/health/SubViewport/UI_EntityHealth" node_paths=PackedStringArray("_body", "_tail")]
 layout_mode = 2
 script = ExtResource("14_elf0p")
 _body = NodePath("Body")
@@ -478,7 +588,7 @@ _tail = NodePath("Tail")
 _tailSpeed = 0.4
 metadata/_custom_type_script = "uid://db8e5l76dsikn"
 
-[node name="Tail" type="ProgressBar" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/Sprite3D/SubViewport/UI_EntityHealth/LowerLayer"]
+[node name="Tail" type="ProgressBar" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/health/SubViewport/UI_EntityHealth/LowerLayer"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -498,7 +608,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_6opq1")
 value = 40.43
 show_percentage = false
 
-[node name="Body" type="ProgressBar" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/Sprite3D/SubViewport/UI_EntityHealth/LowerLayer"]
+[node name="Body" type="ProgressBar" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/health/SubViewport/UI_EntityHealth/LowerLayer"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

@@ -2377,7 +2377,7 @@ draw_pass_1 = SubResource("QuadMesh_c66wn")
 [node name="GC_HealBox" type="Area3D" parent="Entities"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2.6, 20)
 collision_layer = 0
-collision_mask = 6
+collision_mask = 12
 script = ExtResource("22_583vm")
 _hit = SubResource("Resource_o3j50")
 _cd = 0.5
@@ -2392,7 +2392,7 @@ mesh = SubResource("SphereMesh_xqord")
 [node name="GC_Hitbox" type="Area3D" parent="Entities"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, 16)
 collision_layer = 0
-collision_mask = 6
+collision_mask = 12
 script = ExtResource("20_50c6l")
 _hit = SubResource("Resource_583vm")
 _cd = 0.5
@@ -2407,7 +2407,7 @@ mesh = SubResource("SphereMesh_o3j50")
 [node name="GC_Hitbox2" type="Area3D" parent="Entities"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2.6, 18)
 collision_layer = 0
-collision_mask = 6
+collision_mask = 12
 script = ExtResource("20_50c6l")
 _hit = SubResource("Resource_583vm")
 _cd = 0.5

@@ -46,8 +46,6 @@ public abstract partial class PW_Fire : Resource
 
     public bool PickAmmo(int amount, bool magazine)
     {
-
-
         if (amount == 0)
             return true;
         

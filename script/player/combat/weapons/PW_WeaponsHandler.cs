@@ -6,6 +6,8 @@ using System.Net.NetworkInformation;
 using Godot;
 using Godot.Collections;
 
+public delegate void SwitchEvent(PW_Weapon active, PW_Weapon nextHolster, int nextIndex, Array<PW_Weapon> weapons);
+
 [GlobalClass]
 public partial class PW_WeaponsHandler : Node
 {
@@ -19,6 +21,8 @@ public partial class PW_WeaponsHandler : Node
     [Export] private PM_SurfaceControl _surfaceControl;
     public EventHandler<ShotHitEventArgs> Hit;
 
+    public SwitchEvent SwitchStarted;
+    public SwitchEvent Initialized;
     /// <summary>
     /// Event Arg is the weapon the player is switching out from.
     /// </summary>
@@ -44,8 +48,7 @@ public partial class PW_WeaponsHandler : Node
 
     private PW_Weapon _activeWeapon;
     private int _weaponIndex = 0;
-    private PW_Weapon _nextWeapon;      // The weapon we are currently switching to, if it's _activeWeapon, no switch is happening
-    private PW_Weapon _prevWeapon;
+    private PW_Weapon _targetWeapon;      // The weapon we are currently switching to, if it's _activeWeapon, no switch is happening
     private SceneTreeTimer _switchTimer;
     private bool _switchingOut = false;
     private bool _switchingIn = false;
@@ -72,6 +75,7 @@ public partial class PW_WeaponsHandler : Node
         _melee.Hit += (o, e) => Hit?.Invoke(o, e);
 
         _activeWeapon = _melee;
+        _targetWeapon = _melee;
         _surfaceControl.SpeedModifiers.Add(_activeWeapon.MoveSpeedModifier);
 
         _weaponsInput.OnStartPrimary += HandleStartPrimary;
@@ -84,9 +88,21 @@ public partial class PW_WeaponsHandler : Node
 
         SwitchEnded += (o, e) => Available?.Invoke();
         ReloadReady += () => Available?.Invoke();
+
+        int nextIndex = (_weaponIndex + 1) % _weapons.Count;
+        Initialized?.Invoke(_melee, _weapons[_weaponIndex], nextIndex, _weapons);
+    }
+
+    public void InitData(out PW_Weapon active, out PW_Weapon nextHolster, out int nextIndex, out Array<PW_Weapon> weapons)
+    {
+        active = _activeWeapon;
+        nextHolster = _activeWeapon == _melee ? _weapons[_weaponIndex] : _melee;
+        nextIndex = (_weaponIndex + 1) % _weapons.Count;
+        weapons = _weapons;
     }
 
     public bool ActiveWeaponHalted() => !_ready || _switchingIn || _switchingOut;
+    public bool IsSwitching() => _switchingIn || _switchingOut;
 
     // Very redondant way to define the buffers, could use a little rework !
     private void BufferPrimary()
@@ -178,24 +194,27 @@ public partial class PW_WeaponsHandler : Node
     public void Switch(object sender, EventArgs e)
     {
         _weaponIndex = (_weaponIndex + 1) % _weapons.Count;
-        _nextWeapon = _weapons[_weaponIndex];
+        _targetWeapon = _weapons[_weaponIndex];
 
+        SwitchStarted?.Invoke(_targetWeapon, _melee, (_weaponIndex + 1) % _weapons.Count, _weapons);
         StartSwitch();
     }
 
     public void Holster(object sender, EventArgs e)
     {
-        if (_activeWeapon == _melee)
-            _nextWeapon = _weapons[_weaponIndex];
+        PW_Weapon targetPrev = _targetWeapon;
+        if (_targetWeapon == _melee)
+            _targetWeapon = _weapons[_weaponIndex];
         else
-            _nextWeapon = _melee;
+            _targetWeapon = _melee;
 
+        SwitchStarted?.Invoke(_targetWeapon, targetPrev, (_weaponIndex + 1) % _weapons.Count, _weapons);
         StartSwitch();
     }
 
     public void Reload(object sender, EventArgs e)
     {
-        if(_reloading || _activeWeapon == null)
+        if(_reloading || IsSwitching())
             return;
 
         if(!_activeWeapon.HandleCanReload(out float reloadTime))
@@ -239,9 +258,10 @@ public partial class PW_WeaponsHandler : Node
     public void StartSwitch()
     {
         CancelReload();
+
         // Could be done with index instead, but having only one weapon and holster could cause bug if so
         //   - Cancel will always happen, since the index will always be 0
-        if (_nextWeapon == _activeWeapon)   // The player is switching back to its initial weapon
+        if (_targetWeapon == _activeWeapon)   // The player is switching back to its initial weapon
         {                                   // We can cancel the switch.
             EndSwitch();
             SwitchCanceled?.Invoke(this, _activeWeapon);
@@ -253,7 +273,7 @@ public partial class PW_WeaponsHandler : Node
 
         if (_switchingIn)   // The player is switching in his target weapon
         {                   // We want to restart the switch in process. Otherwize he could abuse the short switch in time of, typically, holster, to switch to other weapons.
-            float time = _nextWeapon.SwitchOutTime; // (Holster, then switch weapon : the holster switch in time will be used, but the target weapon will be the side weapon)
+            float time = _targetWeapon.SwitchOutTime; // (Holster, then switch weapon : the holster switch in time will be used, but the target weapon will be the side weapon)
             _switchTimer.Timeout -= EndSwitch;
             _switchTimer = GetTree().CreateTimer(time);
             _switchTimer.Timeout += EndSwitch;
@@ -270,13 +290,11 @@ public partial class PW_WeaponsHandler : Node
 
         float time = _activeWeapon.SwitchOutTime;
         _activeWeapon.HandleDisable();
-        _prevWeapon = _activeWeapon;
-        _activeWeapon = null;
 
         _switchTimer = GetTree().CreateTimer(time);
         _switchTimer.Timeout += OnSwitchIn;
         
-        SwitchOut?.Invoke(this, _prevWeapon);
+        SwitchOut?.Invoke(this, _activeWeapon);
     }
 
     public void OnSwitchIn()
@@ -284,12 +302,12 @@ public partial class PW_WeaponsHandler : Node
         _switchingOut = false;
         _switchingIn = true;
 
-        float time = _nextWeapon.SwitchOutTime;
+        float time = _targetWeapon.SwitchOutTime;
 
         _switchTimer = GetTree().CreateTimer(time);
         _switchTimer.Timeout += EndSwitch;
 
-        SwitchIn?.Invoke(this, _nextWeapon);
+        SwitchIn?.Invoke(this, _targetWeapon);
     }
 
     public void EndSwitch()
@@ -308,9 +326,9 @@ public partial class PW_WeaponsHandler : Node
             }
         }
 
-        _surfaceControl.SpeedModifiers.Remove(_prevWeapon.MoveSpeedModifier);
-        _surfaceControl.SpeedModifiers.Add(_nextWeapon.MoveSpeedModifier);
-        _activeWeapon = _nextWeapon;
+        _surfaceControl.SpeedModifiers.Remove(_activeWeapon.MoveSpeedModifier);
+        _surfaceControl.SpeedModifiers.Add(_targetWeapon.MoveSpeedModifier);
+        _activeWeapon = _targetWeapon;
 
         SwitchEnded?.Invoke(this, _activeWeapon);
     }
@@ -337,12 +355,7 @@ public partial class PW_WeaponsHandler : Node
 
         // Distribute ammos to the current weapon
         if (data.WeaponIndex == -1)
-        {
-            if (_activeWeapon == null)
-                return false;
-            
             return _activeWeapon.PickAmmo(data.Amount, data.Magazine, data.FireIndex);
-        }
 
         // Distribute ammos to the target weapon
         int realIndex = data.WeaponIndex - 1;

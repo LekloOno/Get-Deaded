@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://bpk6ns2xwoidb"]
+
+[ext_resource type="Texture2D" uid="uid://chgreh1llc8hq" path="res://assets/textures/factory/trim_02_norm.png" id="1_r65xn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g720a"]
+size = Vector3(0.22, 0.12, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j11da"]
+albedo_color = Color(0.476563, 0.476563, 0.476563, 1)
+metallic = 1.0
+metallic_texture_channel = 3
+roughness = 0.14
+normal_enabled = true
+normal_texture = ExtResource("1_r65xn")
+
+[sub_resource type="BoxMesh" id="BoxMesh_7qa2k"]
+material = SubResource("StandardMaterial3D_j11da")
+size = Vector3(0.22, 0.12, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g720a"]
+albedo_color = Color(0.448568, 0.343506, 0.65625, 1)
+emission = Color(0.589844, 1, 1, 1)
+emission_energy_multiplier = 8.0
+
+[node name="CollisionShape3D" type="CollisionShape3D"]
+shape = SubResource("BoxShape3D_g720a")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_7qa2k")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+size = Vector3(0.24, 0.14, 0.32)
+material = SubResource("StandardMaterial3D_g720a")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGBox3D"]
+visible = false
+operation = 2
+size = Vector3(0.21, 0.11, 0.32)
+material = SubResource("StandardMaterial3D_g720a")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGBox3D"]
+operation = 2
+size = Vector3(0.24, 0.11, 0.29)
+material = SubResource("StandardMaterial3D_g720a")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000301503, 0.02, 0)
+operation = 2
+size = Vector3(0.25, 0.12, 0.29)
+material = SubResource("StandardMaterial3D_g720a")
