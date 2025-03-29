@@ -27,6 +27,7 @@ public partial class UI_UnactiveWeaponsList : VBoxContainer
         weaponHolder.SetIcon(weapon);
         _weaponHolders.Add(weaponHolder);
         AddChild(weaponHolder);
+        MoveChild(weaponHolder, 0);
     }
 
     public void SetWeapons(Array<PW_Weapon> weapons, int nextIndex)
