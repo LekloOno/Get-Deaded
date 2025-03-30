@@ -117,7 +117,7 @@ point_count = 5
 [sub_resource type="Gradient" id="Gradient_k51pg"]
 colors = PackedColorArray(0, 0.4, 0.894118, 0.764706, 0, 1, 0.537255, 0.784314)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_n5lof"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_vdq31"]
 viewport_path = NodePath("Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_7bleo"]
@@ -414,9 +414,10 @@ _maxSpeed = 60.0
 _controller = NodePath("../../../../../../..")
 
 [node name="weapons" type="Sprite3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing"]
-transform = Transform3D(0.976387, 0, -0.216031, 0, 1, 0, 0.216031, 0, 0.976387, 0.508073, -0.213446, -0.3)
+transform = Transform3D(0.976387, 0, -0.216031, 0, 1, 0, 0.216031, 0, 0.976387, 0.508073, -0.223526, -0.3)
 pixel_size = 0.0003
-texture = SubResource("ViewportTexture_n5lof")
+texture_filter = 5
+texture = SubResource("ViewportTexture_vdq31")
 
 [node name="SubViewport" type="SubViewport" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons"]
 transparent_bg = true
@@ -425,6 +426,7 @@ size = Vector2i(1024, 768)
 render_target_update_mode = 4
 
 [node name="weapons" type="VBoxContainer" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport" node_paths=PackedStringArray("_weaponsHandler", "_list", "_active", "_holster")]
+texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -445,11 +447,13 @@ _holster = NodePath("unactive/holster")
 layout_mode = 2
 
 [node name="list" type="VBoxContainer" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport/weapons/unactive" node_paths=PackedStringArray("_template")]
+texture_filter = 1
 layout_mode = 2
 script = ExtResource("16_w8edb")
 _template = NodePath("template")
 
 [node name="template" type="HBoxContainer" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport/weapons/unactive/list" node_paths=PackedStringArray("_icon", "_bind")]
+texture_filter = 1
 layout_mode = 2
 theme_override_constants/separation = 50
 alignment = 2
@@ -458,7 +462,8 @@ _icon = NodePath("icon/icon_texture")
 _bind = NodePath("bind/bind_texture")
 
 [node name="bind" type="AspectRatioContainer" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport/weapons/unactive/list/template"]
-custom_minimum_size = Vector2(32, 32)
+texture_filter = 1
+custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 
 [node name="bind_texture" type="TextureRect" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport/weapons/unactive/list/template/bind"]
@@ -493,7 +498,7 @@ _icon = NodePath("icon/icon_texture")
 _bind = NodePath("bind/bind_texture")
 
 [node name="bind" type="AspectRatioContainer" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport/weapons/unactive/holster"]
-custom_minimum_size = Vector2(32, 32)
+custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 
 [node name="bind_texture" type="TextureRect" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport/weapons/unactive/holster/bind"]

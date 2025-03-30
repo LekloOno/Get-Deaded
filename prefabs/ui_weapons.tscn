@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bffiy1g6ksce8" path="res://assets/sprites/binds/keys/c.png" id="6_qi2ox"]
 
 [node name="SubViewportContainer" type="SubViewportContainer"]
+texture_filter = 1
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
@@ -21,6 +22,7 @@ size = Vector2i(1024, 768)
 render_target_update_mode = 4
 
 [node name="weapons" type="VBoxContainer" parent="SubViewport" node_paths=PackedStringArray("_list", "_active", "_holster")]
+texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -40,20 +42,23 @@ _holster = NodePath("unactive/holster")
 layout_mode = 2
 
 [node name="list" type="VBoxContainer" parent="SubViewport/weapons/unactive" node_paths=PackedStringArray("_template")]
+texture_filter = 1
 layout_mode = 2
 script = ExtResource("2_aap5x")
 _template = NodePath("template")
 
 [node name="template" type="HBoxContainer" parent="SubViewport/weapons/unactive/list" node_paths=PackedStringArray("_icon", "_bind")]
+texture_filter = 1
 layout_mode = 2
 theme_override_constants/separation = 50
 alignment = 2
 script = ExtResource("3_8fe6x")
-_icon = NodePath("icon/icon_texture")
+_icon = NodePath("weapon/icon/icon_texture")
 _bind = NodePath("bind/bind_texture")
 
 [node name="bind" type="AspectRatioContainer" parent="SubViewport/weapons/unactive/list/template"]
-custom_minimum_size = Vector2(32, 32)
+texture_filter = 1
+custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 
 [node name="bind_texture" type="TextureRect" parent="SubViewport/weapons/unactive/list/template/bind"]
@@ -63,14 +68,18 @@ layout_mode = 2
 texture = ExtResource("4_4r3qv")
 expand_mode = 1
 
-[node name="icon" type="AspectRatioContainer" parent="SubViewport/weapons/unactive/list/template"]
+[node name="weapon" type="HBoxContainer" parent="SubViewport/weapons/unactive/list/template"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="icon" type="AspectRatioContainer" parent="SubViewport/weapons/unactive/list/template/weapon"]
 custom_minimum_size = Vector2(384, 192)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 ratio = 2.0
 
-[node name="icon_texture" type="TextureRect" parent="SubViewport/weapons/unactive/list/template/icon"]
+[node name="icon_texture" type="TextureRect" parent="SubViewport/weapons/unactive/list/template/weapon/icon"]
 modulate = Color(0.441, 0.921, 1, 0.8)
 texture_filter = 1
 layout_mode = 2
@@ -78,6 +87,21 @@ mouse_filter = 2
 texture = ExtResource("3_iojif")
 expand_mode = 1
 stretch_mode = 4
+
+[node name="amos" type="VBoxContainer" parent="SubViewport/weapons/unactive/list/template/weapon"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="Fire1" type="Label" parent="SubViewport/weapons/unactive/list/template/weapon/amos"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "030"
+
+[node name="Fire2" type="Label" parent="SubViewport/weapons/unactive/list/template/weapon/amos"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "030"
 
 [node name="holster" type="HBoxContainer" parent="SubViewport/weapons/unactive" node_paths=PackedStringArray("_icon", "_bind")]
 layout_mode = 2
@@ -88,7 +112,7 @@ _icon = NodePath("icon/icon_texture")
 _bind = NodePath("bind/bind_texture")
 
 [node name="bind" type="AspectRatioContainer" parent="SubViewport/weapons/unactive/holster"]
-custom_minimum_size = Vector2(32, 32)
+custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 
 [node name="bind_texture" type="TextureRect" parent="SubViewport/weapons/unactive/holster/bind"]
@@ -114,6 +138,21 @@ mouse_filter = 2
 texture = ExtResource("2_ysygd")
 expand_mode = 1
 stretch_mode = 4
+
+[node name="amos" type="VBoxContainer" parent="SubViewport/weapons/unactive/holster"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="Fire1" type="Label" parent="SubViewport/weapons/unactive/holster/amos"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "030"
+
+[node name="Fire2" type="Label" parent="SubViewport/weapons/unactive/holster/amos"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "030"
 
 [node name="active" type="HBoxContainer" parent="SubViewport/weapons" node_paths=PackedStringArray("_icon")]
 layout_mode = 2

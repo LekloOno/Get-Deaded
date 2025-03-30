@@ -15,6 +15,8 @@ public abstract partial class PW_Fire : Resource
     [Export] protected PW_Ammunition _ammos;
     [Export] protected uint _ammosPerShot = 1;
     [Export] protected uint _baseAmmos;
+    [Export] public bool IsDerived;     // To indicate that this fire should be considered as a derived fire mode. Only usefull for ui, to not display this fire mode.
+    [Export] public Texture2D Icon {get; private set;}
     public PHX_AdditiveModifiers SpreadMultiplier {get; private set;} = new();
     public PHX_AdditiveModifiers RecoilMultiplier {get => _recoil.Modifier;}
     public EventHandler<ShotHitEventArgs> Hit;
@@ -27,6 +29,8 @@ public abstract partial class PW_Fire : Resource
     private bool _pressBuffered = false;
     private bool _releaseBuffered = false;
     private static Random _random = new();
+
+    public PW_Ammunition Ammos {get => _ammos;}
 
     public void Initialize(PC_DirectCamera camera, Node3D sight, Node3D _barel, PC_Recoil recoilController)
     {

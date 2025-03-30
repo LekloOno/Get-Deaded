@@ -1,6 +1,8 @@
 using System;
 using Godot;
 
+public delegate void AmmutionEvent(int amount, uint finalAmount);
+
 [GlobalClass]
 public partial class PW_Ammunition : Resource
 {
@@ -15,12 +17,44 @@ public partial class PW_Ammunition : Resource
     [Export] private float _tacticalReloadTime;
     public bool IsReloading {get; private set;} = false;
     private uint _maxAmos;
-    public uint UnloadedAmos {get; private set;}
-    public uint LoadedAmos {get; private set;}
+    private uint _unloadedAmmos;
+    private uint _loadedAmmos;
+
+    public uint UnloadedAmos
+    {
+        get => _unloadedAmmos;
+        private set
+        {
+            
+            int difference = value > _unloadedAmmos
+                            ? (int) (value - _unloadedAmmos)
+                            : - (int) (_unloadedAmmos - value);
+
+            _unloadedAmmos = value;
+            UnloadedChanged?.Invoke(difference, LoadedAmos);
+        }
+    }
+
+    public uint LoadedAmos
+    {
+        get => _loadedAmmos;
+        private set
+        {
+            int difference = value > _loadedAmmos
+                            ? (int) (value - _loadedAmmos)
+                            : - (int) (_loadedAmmos - value);
+
+            _loadedAmmos = value;
+            LoadedChanged?.Invoke(difference, LoadedAmos);
+        }
+    }
+
     private SceneTree _sceneTree;
     private SceneTreeTimer _reloadTimer;
 
     public EventHandler ReloadCompleted;
+    public AmmutionEvent LoadedChanged;
+    public AmmutionEvent UnloadedChanged;
 
     /// <summary>
     /// Initialize the ammutions.

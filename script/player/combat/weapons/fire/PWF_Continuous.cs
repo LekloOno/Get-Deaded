@@ -30,7 +30,7 @@ public partial class PWF_Continuous : PW_Fire
 
     private void ReShoot()
     {
-        if (!_ammos.DidConsume(_ammosPerShot))
+        if (!Ammos.DidConsume(_ammosPerShot))
         {
             StopShoot();
             return;
