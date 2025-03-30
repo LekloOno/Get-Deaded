@@ -1,6 +1,6 @@
-using System;
 using Godot;
 
+[GlobalClass]
 public abstract partial class UIW_FireHolder : BoxContainer
 {
     protected PW_Ammunition _ammos;

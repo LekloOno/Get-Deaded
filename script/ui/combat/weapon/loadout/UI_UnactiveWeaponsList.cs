@@ -24,7 +24,7 @@ public partial class UI_UnactiveWeaponsList : VBoxContainer
     public void AddWeapon(PW_Weapon weapon)
     {
         UI_WeaponHolder weaponHolder = (UI_WeaponHolder) _template.Duplicate();
-        weaponHolder.SetIcon(weapon);
+        weaponHolder.Initialize(weapon);
         _weaponHolders.Add(weaponHolder);
         AddChild(weaponHolder);
         MoveChild(weaponHolder, 0);
@@ -36,7 +36,7 @@ public partial class UI_UnactiveWeaponsList : VBoxContainer
         for (int i = 0; i < _weaponHolders.Count; i++)
         {
             int realIndex = (i + nextIndex) % count;
-            _weaponHolders[i].SetIcon(weapons[realIndex]);
+            _weaponHolders[i].Initialize(weapons[realIndex]);
         }
     }
 }

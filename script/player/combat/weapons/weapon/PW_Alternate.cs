@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Godot;
 
 [GlobalClass]
@@ -60,4 +61,5 @@ public partial class PW_Alternate : PW_Weapon
         return _secondaryFire.PickAmmo(amount, magazine);
     }
 
+    public override List<PW_Fire> GetFireModes() => [_primaryFire, _secondaryFire];
 }

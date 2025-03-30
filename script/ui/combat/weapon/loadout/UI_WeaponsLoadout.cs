@@ -23,15 +23,15 @@ public partial class UI_WeaponsLoadout : Control
 
     private void Initialize(PW_Weapon active, PW_Weapon nextHolster, int nextIndex, Array<PW_Weapon> weapons)
     {
-        _active.SetIcon(active);
-        _holster.SetIcon(nextHolster);
+        _active.Initialize(active);
+        _holster.Initialize(nextHolster);
         _list.InitializeWeapons(weapons, nextIndex);
     }
 
     private void HandleSwitch(PW_Weapon active, PW_Weapon nextHolster, int nextIndex, Array<PW_Weapon> weapons)
     {
-        _active.SetIcon(active);
-        _holster.SetIcon(nextHolster);
+        _active.Initialize(active);
+        _holster.Initialize(nextHolster);
         _list.SetWeapons(weapons, nextIndex);
     }
 }

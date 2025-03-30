@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Godot;
 
 [GlobalClass]
@@ -80,6 +81,12 @@ public abstract partial class PW_Weapon : Resource
 
         Disable();
     }
+    
+    /// <summary>
+    /// Allows to retrieve existing fire modes for this weapon.
+    /// </summary>
+    /// <returns></returns>
+    public abstract List<PW_Fire> GetFireModes();
 
     /// <summary>
     /// Allow for some specific initialization.
@@ -120,6 +127,7 @@ public abstract partial class PW_Weapon : Resource
     /// Allow for some specific disabling process.
     /// </summary>
     protected abstract void Disable();
+
     public abstract bool PickAmmo(int amount, bool magazine, int targetFireIndex);
 
     private void ActivateADS()
