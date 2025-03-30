@@ -6,6 +6,7 @@ using Godot.Collections;
 public partial class UI_UnactiveWeaponsList : VBoxContainer
 {
     [Export] private UI_WeaponHolder _template;
+    
     private List<UI_WeaponHolder> _weaponHolders = [];
 
     public void InitializeWeapons(Array<PW_Weapon> weapons, int nextIndex)

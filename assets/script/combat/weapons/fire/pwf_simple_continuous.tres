@@ -48,4 +48,5 @@ _recoil = SubResource("Resource_8p40u")
 _ammos = SubResource("Resource_yx0jo")
 _ammosPerShot = 1
 _baseAmmos = 60
+IsDerived = false
 metadata/_custom_type_script = "uid://cu3n4oi1x76dl"

@@ -1,5 +1,6 @@
 using Godot;
 
+[GlobalClass]
 public partial class UIW_ActiveFireHolder : UIW_FireHolder
 {
     [Export] private TextureRect _fireIcon;
@@ -14,6 +15,9 @@ public partial class UIW_ActiveFireHolder : UIW_FireHolder
         }
         else
             _fireIcon.Hide();
+
+        _loadedAmmos.Text = _ammos.LoadedAmos + "";
+        _unloadedAmmos.Text = _ammos.UnloadedAmos + "";
     }
 
     protected override void HandleLoaded(int amount, uint finalAmount) => _loadedAmmos.Text = finalAmount + "";

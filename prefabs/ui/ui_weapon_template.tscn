@@ -1,0 +1,98 @@
+[gd_scene load_steps=6 format=3 uid="uid://b5tr7coy5u25i"]
+
+[ext_resource type="Script" uid="uid://dfhd0aslc2ms8" path="res://script/ui/combat/weapon/loadout/UIW_Weapon.cs" id="1_fe4rp"]
+[ext_resource type="Script" uid="uid://dipouroto55hy" path="res://script/ui/combat/weapon/loadout/UI_WeaponHolder.cs" id="2_v4mgk"]
+[ext_resource type="Texture2D" uid="uid://cll1rrqagufi2" path="res://assets/sprites/weapons/brrtpixel2.png" id="3_8uisc"]
+[ext_resource type="Script" uid="uid://cdbktynmd0v7q" path="res://script/ui/combat/weapon/loadout/fire/UIW_UnactiveFireHolder.cs" id="4_rt5cm"]
+[ext_resource type="Script" uid="uid://b2bfo1y3av28f" path="res://script/ui/combat/weapon/loadout/fire/UIW_ActiveFireHolder.cs" id="5_g4k06"]
+
+[node name="weapon" type="BoxContainer" node_paths=PackedStringArray("_active", "_unactive", "_directBind")]
+alignment = 2
+script = ExtResource("1_fe4rp")
+_active = NodePath("active")
+_unactive = NodePath("unactive")
+_directBind = NodePath("direct_bind")
+metadata/_custom_type_script = "uid://dfhd0aslc2ms8"
+
+[node name="direct_bind" type="TextureRect" parent="."]
+layout_mode = 2
+
+[node name="unactive" type="BoxContainer" parent="." node_paths=PackedStringArray("_icon", "_fireHolderTemplate")]
+layout_mode = 2
+script = ExtResource("2_v4mgk")
+_icon = NodePath("AspectRatioContainer/unactive_icon")
+_fireHolderTemplate = NodePath("fire")
+metadata/_custom_type_script = "uid://dipouroto55hy"
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="unactive"]
+custom_minimum_size = Vector2(384, 192)
+layout_mode = 2
+ratio = 2.0
+
+[node name="unactive_icon" type="TextureRect" parent="unactive/AspectRatioContainer"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+texture = ExtResource("3_8uisc")
+expand_mode = 1
+
+[node name="fire" type="BoxContainer" parent="unactive" node_paths=PackedStringArray("_totalAmmos")]
+layout_mode = 2
+script = ExtResource("4_rt5cm")
+_totalAmmos = NodePath("total_ammos_label")
+metadata/_custom_type_script = "uid://cdbktynmd0v7q"
+
+[node name="total_ammos_label" type="Label" parent="unactive/fire"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "130"
+horizontal_alignment = 2
+
+[node name="active" type="BoxContainer" parent="." node_paths=PackedStringArray("_icon", "_fireHolderTemplate")]
+layout_mode = 2
+alignment = 2
+script = ExtResource("2_v4mgk")
+_icon = NodePath("AspectRatioContainer/active_icon")
+_fireHolderTemplate = NodePath("fire")
+metadata/_custom_type_script = "uid://dipouroto55hy"
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="active"]
+custom_minimum_size = Vector2(768, 384)
+layout_mode = 2
+ratio = 2.0
+
+[node name="active_icon" type="TextureRect" parent="active/AspectRatioContainer"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+texture = ExtResource("3_8uisc")
+expand_mode = 1
+
+[node name="fire" type="BoxContainer" parent="active" node_paths=PackedStringArray("_fireIcon", "_loadedAmmos", "_unloadedAmmos")]
+layout_mode = 2
+script = ExtResource("5_g4k06")
+_fireIcon = NodePath("fire_icon")
+_loadedAmmos = NodePath("ammos/loaded_label")
+_unloadedAmmos = NodePath("ammos/unloaded_label")
+metadata/_custom_type_script = "uid://b2bfo1y3av28f"
+
+[node name="fire_icon" type="TextureRect" parent="active/fire"]
+layout_mode = 2
+
+[node name="ammos" type="VBoxContainer" parent="active/fire"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="loaded_label" type="Label" parent="active/fire/ammos"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 150
+text = "30"
+horizontal_alignment = 2
+
+[node name="unloaded_label" type="Label" parent="active/fire/ammos"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 90
+text = "100"
+horizontal_alignment = 2

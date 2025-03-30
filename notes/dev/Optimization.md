@@ -3,3 +3,5 @@ A solution could be to keep the resource linked list but for data only. From thi
 It makes it slightly less modular since you would have to add a specific data container for each new type of health.
 
 Some fields of some class are computed at run time for editability purposes, but it could be computed on ready.
+
+UI_WeaponsLoadout - Dictionnary lookup at initialization could be avoided

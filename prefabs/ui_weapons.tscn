@@ -1,12 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://chiiaxip4exa1"]
+[gd_scene load_steps=12 format=3 uid="uid://chiiaxip4exa1"]
 
 [ext_resource type="Texture2D" uid="uid://8rrtqp0otyee" path="res://assets/sprites/weapons/meleepixel.png" id="1_dohfl"]
 [ext_resource type="Script" uid="uid://bqe8doqvnciay" path="res://script/ui/combat/weapon/loadout/UI_WeaponsLoadout.cs" id="1_ysygd"]
 [ext_resource type="Script" uid="uid://bqdxbkvf8rvgl" path="res://script/ui/combat/weapon/loadout/UI_UnactiveWeaponsList.cs" id="2_aap5x"]
+[ext_resource type="Script" uid="uid://dfhd0aslc2ms8" path="res://script/ui/combat/weapon/loadout/UIW_Weapon.cs" id="2_fwg2p"]
 [ext_resource type="Texture2D" uid="uid://c050onpc3r17u" path="res://assets/sprites/weapons/pewpixel.png" id="2_ysygd"]
 [ext_resource type="Script" uid="uid://dipouroto55hy" path="res://script/ui/combat/weapon/loadout/UI_WeaponHolder.cs" id="3_8fe6x"]
 [ext_resource type="Texture2D" uid="uid://cll1rrqagufi2" path="res://assets/sprites/weapons/brrtpixel2.png" id="3_iojif"]
 [ext_resource type="Texture2D" uid="uid://bxrr4qhg364rp" path="res://assets/sprites/binds/mouse/click4.png" id="4_4r3qv"]
+[ext_resource type="Script" uid="uid://cdbktynmd0v7q" path="res://script/ui/combat/weapon/loadout/fire/UIW_UnactiveFireHolder.cs" id="5_442ha"]
+[ext_resource type="Script" uid="uid://b2bfo1y3av28f" path="res://script/ui/combat/weapon/loadout/fire/UIW_ActiveFireHolder.cs" id="6_icr28"]
 [ext_resource type="Texture2D" uid="uid://bffiy1g6ksce8" path="res://assets/sprites/binds/keys/c.png" id="6_qi2ox"]
 
 [node name="SubViewportContainer" type="SubViewportContainer"]
@@ -18,10 +21,124 @@ mouse_filter = 2
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(1024, 768)
+size = Vector2i(2056, 2056)
 render_target_update_mode = 4
 
-[node name="weapons" type="VBoxContainer" parent="SubViewport" node_paths=PackedStringArray("_list", "_active", "_holster")]
+[node name="loadout" type="BoxContainer" parent="SubViewport" node_paths=PackedStringArray("_weaponTemplate", "_active")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical = true
+script = ExtResource("1_ysygd")
+_weaponTemplate = NodePath("active/weapon")
+_active = NodePath("active")
+metadata/_custom_type_script = "uid://bqe8doqvnciay"
+
+[node name="holster" type="BoxContainer" parent="SubViewport/loadout"]
+layout_mode = 2
+alignment = 2
+
+[node name="active" type="BoxContainer" parent="SubViewport/loadout"]
+layout_mode = 2
+alignment = 2
+
+[node name="weapon" type="BoxContainer" parent="SubViewport/loadout/active" node_paths=PackedStringArray("_active", "_unactive", "_directBind")]
+layout_mode = 2
+alignment = 2
+script = ExtResource("2_fwg2p")
+_active = NodePath("active")
+_unactive = NodePath("unactive")
+_directBind = NodePath("direct_bind")
+metadata/_custom_type_script = "uid://dfhd0aslc2ms8"
+
+[node name="direct_bind" type="TextureRect" parent="SubViewport/loadout/active/weapon"]
+layout_mode = 2
+
+[node name="unactive" type="BoxContainer" parent="SubViewport/loadout/active/weapon" node_paths=PackedStringArray("_icon", "_fireHolderTemplate")]
+visible = false
+layout_mode = 2
+script = ExtResource("3_8fe6x")
+_icon = NodePath("AspectRatioContainer/unactive_icon")
+_fireHolderTemplate = NodePath("fire")
+metadata/_custom_type_script = "uid://dipouroto55hy"
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="SubViewport/loadout/active/weapon/unactive"]
+custom_minimum_size = Vector2(384, 192)
+layout_mode = 2
+ratio = 2.0
+
+[node name="unactive_icon" type="TextureRect" parent="SubViewport/loadout/active/weapon/unactive/AspectRatioContainer"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+texture = ExtResource("3_iojif")
+expand_mode = 1
+
+[node name="fire" type="BoxContainer" parent="SubViewport/loadout/active/weapon/unactive" node_paths=PackedStringArray("_totalAmmos")]
+layout_mode = 2
+script = ExtResource("5_442ha")
+_totalAmmos = NodePath("total_ammos_label")
+metadata/_custom_type_script = "uid://cdbktynmd0v7q"
+
+[node name="total_ammos_label" type="Label" parent="SubViewport/loadout/active/weapon/unactive/fire"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "130"
+horizontal_alignment = 2
+
+[node name="active" type="BoxContainer" parent="SubViewport/loadout/active/weapon" node_paths=PackedStringArray("_icon", "_fireHolderTemplate")]
+layout_mode = 2
+alignment = 2
+script = ExtResource("3_8fe6x")
+_icon = NodePath("AspectRatioContainer/active_icon")
+_fireHolderTemplate = NodePath("fire")
+metadata/_custom_type_script = "uid://dipouroto55hy"
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="SubViewport/loadout/active/weapon/active"]
+custom_minimum_size = Vector2(768, 384)
+layout_mode = 2
+ratio = 2.0
+
+[node name="active_icon" type="TextureRect" parent="SubViewport/loadout/active/weapon/active/AspectRatioContainer"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+texture = ExtResource("3_iojif")
+expand_mode = 1
+
+[node name="fire" type="BoxContainer" parent="SubViewport/loadout/active/weapon/active" node_paths=PackedStringArray("_fireIcon", "_loadedAmmos", "_unloadedAmmos")]
+layout_mode = 2
+script = ExtResource("6_icr28")
+_fireIcon = NodePath("fire_icon")
+_loadedAmmos = NodePath("ammos/loaded_label")
+_unloadedAmmos = NodePath("ammos/unloaded_label")
+metadata/_custom_type_script = "uid://b2bfo1y3av28f"
+
+[node name="fire_icon" type="TextureRect" parent="SubViewport/loadout/active/weapon/active/fire"]
+layout_mode = 2
+
+[node name="ammos" type="VBoxContainer" parent="SubViewport/loadout/active/weapon/active/fire"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="loaded_label" type="Label" parent="SubViewport/loadout/active/weapon/active/fire/ammos"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 150
+text = "30"
+horizontal_alignment = 2
+
+[node name="unloaded_label" type="Label" parent="SubViewport/loadout/active/weapon/active/fire/ammos"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 90
+text = "100"
+horizontal_alignment = 2
+
+[node name="weapons" type="VBoxContainer" parent="SubViewport" node_paths=PackedStringArray("_holster", "_active")]
+visible = false
 texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,9 +151,8 @@ mouse_filter = 2
 theme_override_constants/separation = 10
 alignment = 2
 script = ExtResource("1_ysygd")
-_list = NodePath("unactive/list")
-_active = NodePath("active")
 _holster = NodePath("unactive/holster")
+_active = NodePath("active")
 
 [node name="unactive" type="VBoxContainer" parent="SubViewport/weapons"]
 layout_mode = 2
@@ -47,30 +163,30 @@ layout_mode = 2
 script = ExtResource("2_aap5x")
 _template = NodePath("template")
 
-[node name="template" type="HBoxContainer" parent="SubViewport/weapons/unactive/list" node_paths=PackedStringArray("_icon", "_bind")]
+[node name="template" type="HBoxContainer" parent="SubViewport/weapons/unactive/list" node_paths=PackedStringArray("_icon")]
 texture_filter = 1
 layout_mode = 2
 theme_override_constants/separation = 50
 alignment = 2
 script = ExtResource("3_8fe6x")
 _icon = NodePath("weapon/icon/icon_texture")
-_bind = NodePath("bind/bind_texture")
 
-[node name="bind" type="AspectRatioContainer" parent="SubViewport/weapons/unactive/list/template"]
+[node name="weapon" type="HBoxContainer" parent="SubViewport/weapons/unactive/list/template"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="bind" type="AspectRatioContainer" parent="SubViewport/weapons/unactive/list/template/weapon"]
 texture_filter = 1
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 
-[node name="bind_texture" type="TextureRect" parent="SubViewport/weapons/unactive/list/template/bind"]
+[node name="bind_texture" type="TextureRect" parent="SubViewport/weapons/unactive/list/template/weapon/bind"]
 modulate = Color(1, 1, 1, 0.8)
 texture_filter = 1
 layout_mode = 2
 texture = ExtResource("4_4r3qv")
 expand_mode = 1
-
-[node name="weapon" type="HBoxContainer" parent="SubViewport/weapons/unactive/list/template"]
-layout_mode = 2
-theme_override_constants/separation = 30
 
 [node name="icon" type="AspectRatioContainer" parent="SubViewport/weapons/unactive/list/template/weapon"]
 custom_minimum_size = Vector2(384, 192)
@@ -103,13 +219,47 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 45
 text = "030"
 
-[node name="holster" type="HBoxContainer" parent="SubViewport/weapons/unactive" node_paths=PackedStringArray("_icon", "_bind")]
+[node name="weapon2" type="HBoxContainer" parent="SubViewport/weapons/unactive/list/template"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="icon" type="AspectRatioContainer" parent="SubViewport/weapons/unactive/list/template/weapon2"]
+custom_minimum_size = Vector2(768, 384)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+ratio = 2.0
+
+[node name="icon_texture" type="TextureRect" parent="SubViewport/weapons/unactive/list/template/weapon2/icon"]
+modulate = Color(0.441, 0.921, 1, 0.8)
+texture_filter = 1
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_iojif")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="amos" type="VBoxContainer" parent="SubViewport/weapons/unactive/list/template/weapon2"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="Fire1" type="Label" parent="SubViewport/weapons/unactive/list/template/weapon2/amos"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "030"
+
+[node name="Fire2" type="Label" parent="SubViewport/weapons/unactive/list/template/weapon2/amos"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "030"
+
+[node name="holster" type="HBoxContainer" parent="SubViewport/weapons/unactive" node_paths=PackedStringArray("_icon")]
 layout_mode = 2
 theme_override_constants/separation = 50
 alignment = 2
 script = ExtResource("3_8fe6x")
 _icon = NodePath("icon/icon_texture")
-_bind = NodePath("bind/bind_texture")
 
 [node name="bind" type="AspectRatioContainer" parent="SubViewport/weapons/unactive/holster"]
 custom_minimum_size = Vector2(48, 48)
@@ -176,3 +326,9 @@ mouse_filter = 2
 texture = ExtResource("1_dohfl")
 expand_mode = 1
 stretch_mode = 4
+
+[node name="UI_WeaponsLoadout" type="BoxContainer" parent="SubViewport"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_ysygd")
+metadata/_custom_type_script = "uid://bqe8doqvnciay"

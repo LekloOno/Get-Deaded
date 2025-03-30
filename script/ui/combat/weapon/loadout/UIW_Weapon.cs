@@ -1,6 +1,7 @@
 using Godot;
 
-public partial class UIW_Weapon : Node
+[GlobalClass]
+public partial class UIW_Weapon : BoxContainer
 {
     [Export] private UI_WeaponHolder _active;
     [Export] private UI_WeaponHolder _unactive;
