@@ -367,8 +367,12 @@ _controller = NodePath("../../../../../..")
 [node name="PC_Spring" type="Node3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing" node_paths=PackedStringArray("_cameraTarget")]
 script = ExtResource("6_v2bpg")
 Frequency = 17.01
-AngularDisplacement = 12.01
-LinearDisplacement = 0.0
+AngularDisplacement = 11.01
+AngularZDisplacement = 4.01
+MaxAngularDisplacement = 20.01
+MaxAngularZDisplacement = 6.01
+LinearDisplacement = 0.03
+MaxLinearDisplacement = 0.05
 _cameraTarget = NodePath("../../../../../../../Body/SpatialAnchor/RemoteTransform3D")
 
 [node name="PC_Lean" type="Node3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring" node_paths=PackedStringArray("_camera", "_controller")]
@@ -386,7 +390,7 @@ _surfaceGroundState = NodePath("../../../../../../../../../Movement/PM_SurfaceCo
 script = ExtResource("9_727yx")
 _curve = SubResource("Curve_ux8de")
 _slideStrengthX = 3.0
-_slideStrengthZ = 1.5
+_slideStrengthZ = 2.0
 _ledgeStrengthX = 8.0
 _ledgeStrengthZ = 4.0
 _duration = 0.8

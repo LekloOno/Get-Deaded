@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 [GlobalClass]
@@ -13,8 +14,18 @@ public partial class PC_Spring : Node3D
     [Export(PropertyHint.Range, "0.01,15.0,0.1,or_greater")]
     public float AngularDisplacement {get; private set;} = 6f;
 
+    [Export(PropertyHint.Range, "0.01,15.0,0.1,or_greater")]
+    public float AngularZDisplacement {get; private set;} = 0.8f;
+
+    [Export(PropertyHint.Range, "0.01,45.0,0.1,or_greater")]
+    public float MaxAngularDisplacement {get; private set;} = 15f;
+    [Export(PropertyHint.Range, "0.01,45.0,0.1,or_greater")]
+    public float MaxAngularZDisplacement {get; private set;} = 15f;
+
     [Export(PropertyHint.Range, "0.0,0.3,0.01,or_greater")]
     public float LinearDisplacement {get; private set;} = 0.05f;
+    [Export(PropertyHint.Range, "0.0,0.5,0.01,or_greater")]
+    public float MaxLinearDisplacement {get; private set;} = 0.1f;
     
     [ExportCategory("Setup")]
     [Export] private RemoteTransform3D _cameraTarget;
@@ -34,8 +45,16 @@ public partial class PC_Spring : Node3D
         
         Vector3 localSpringPosition = _springPosition - GlobalPosition;
         float springHeight = localSpringPosition.Dot(_cameraTarget.Basis.Y);
-        RotationDegrees = new Vector3(springHeight * AngularDisplacement, 0f, 0f);
-        Position = localSpringPosition * LinearDisplacement;
+
+        float absSpringHeight = Mathf.Abs(springHeight);
+        float signSpringHeight = Mathf.Sign(springHeight);
+        float xAngularDisplacement = Mathf.Min(absSpringHeight * AngularDisplacement, MaxAngularDisplacement) * signSpringHeight;
+        float zAngularDisplacement = Mathf.Min(absSpringHeight * AngularZDisplacement, MaxAngularZDisplacement) * signSpringHeight;
+        RotationDegrees = new Vector3(xAngularDisplacement, 0f, zAngularDisplacement);
+
+        Vector3 normalizedSpringPosition = localSpringPosition.Normalized();
+        float linearDisplacementCoef = Mathf.Min(localSpringPosition.Length() * LinearDisplacement, MaxLinearDisplacement);
+        GlobalPosition += normalizedSpringPosition * linearDisplacementCoef;
     }
 
     //https://gist.github.com/keenanwoodall/951134976ad26a39e75b8b7643d026d6
