@@ -8,6 +8,7 @@ public partial class UIW_Loadout : BoxContainer
     [Export] private UIW_Weapon _weaponTemplate;
     [Export] private Container _holster;
     [Export] private Container _active;
+    [Export] private Container _next;
     [Export] private Container _unactiveList;
 
     private Dictionary<PW_Weapon, UIW_Weapon> _weapons = [];
@@ -56,36 +57,32 @@ public partial class UIW_Loadout : BoxContainer
 
     private void Update(PW_Weapon active, PW_Weapon nextHolster, int nextIndex, Godot.Collections.Array<PW_Weapon> weapons)
     {
-        if (_weapons.TryGetValue(active, out UIW_Weapon uiWeapon))
-        {
-            uiWeapon.SetActive();
-            if (uiWeapon.GetParent() is Node parent)
-                parent.RemoveChild(uiWeapon);
-                
-            _active.AddChild(uiWeapon);
-        }
-
-        if (_weapons.TryGetValue(nextHolster, out uiWeapon))
-        {
-            uiWeapon.SetUnactive();
-            if (uiWeapon.GetParent() is Node parent)
-                parent.RemoveChild(uiWeapon);
-
-            _holster.AddChild(uiWeapon);
-        }
+        UpdateWeapon(active, _active, true);
+        UpdateWeapon(nextHolster, _holster, false);
+        UpdateWeapon(weapons[nextIndex], _next, false);
 
         int count = weapons.Count;
-        for (int i = 0; i < count - 1; i++)
+        for (int i = 1; i < count - 1; i++)
         {
             int realIndex = (i + nextIndex) % count;
-            if (_weapons.TryGetValue(weapons[realIndex], out uiWeapon))
-            {
-                uiWeapon.SetUnactive();
-                if (uiWeapon.GetParent() is Node parent)
-                    parent.RemoveChild(uiWeapon);
-                    
-                _unactiveList.AddChild(uiWeapon);
-            }
+            UpdateWeapon(weapons[realIndex], _unactiveList, false);
         }
+    }
+
+    private void UpdateWeapon(PW_Weapon weapon, Node targetParent, bool active)
+    {
+        if (!_weapons.TryGetValue(weapon, out UIW_Weapon uiWeapon))
+            return;
+
+        uiWeapon.Active = active;
+
+        if (uiWeapon.GetParent() is Node parent)
+        {
+            if (parent == targetParent)
+                return;
+            parent.RemoveChild(uiWeapon);
+        }
+
+        targetParent.AddChild(uiWeapon);
     }
 }

@@ -6,6 +6,14 @@ public partial class UIW_Weapon : BoxContainer
     [Export] private UIW_WeaponHolder _active;
     [Export] private UIW_WeaponHolder _unactive;
     [Export] private TextureRect _directBind;
+
+    public bool Active {
+        set {
+            _unactive.Visible = !value;
+            _directBind.Visible = !value;
+            _active.Visible = value;
+        }
+    }
     
     public void Initialize(PW_Weapon weapon)
     {

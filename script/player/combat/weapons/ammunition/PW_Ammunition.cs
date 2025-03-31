@@ -31,7 +31,7 @@ public partial class PW_Ammunition : Resource
                             : - (int) (_unloadedAmmos - value);
 
             _unloadedAmmos = value;
-            UnloadedChanged?.Invoke(difference, LoadedAmos);
+            UnloadedChanged?.Invoke(difference, UnloadedAmos);
         }
     }
 
