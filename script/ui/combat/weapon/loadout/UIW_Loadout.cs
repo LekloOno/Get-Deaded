@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Godot;
 
 [GlobalClass]
-public partial class UI_WeaponsLoadout : BoxContainer
+public partial class UIW_Loadout : BoxContainer
 {
     [Export] private PW_WeaponsHandler _weaponsHandler;
     [Export] private UIW_Weapon _weaponTemplate;
@@ -45,10 +45,6 @@ public partial class UI_WeaponsLoadout : BoxContainer
 
         // Initialization could be more efficient by avoiding one dictionnary lookup, since we already know the uiw elements.
         Update(active, nextHolster, nextIndex, weapons);
-
-        //_active.Initialize(active);
-        //_holster.Initialize(nextHolster);
-        //_list.InitializeWeapons(weapons, nextIndex);
     }
 
     private void InitializeWeapon(PW_Weapon weapon)
@@ -92,11 +88,4 @@ public partial class UI_WeaponsLoadout : BoxContainer
             }
         }
     }
-/*
-    private void HandleSwitch(PW_Weapon active, PW_Weapon nextHolster, int nextIndex, Godot.Collections.Array<PW_Weapon> weapons)
-    {
-        //_active.Initialize(active);
-        //_holster.Initialize(nextHolster);
-        _list.SetWeapons(weapons, nextIndex);
-    }*/
 }

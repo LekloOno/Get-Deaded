@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://b5tr7coy5u25i"]
 
-[ext_resource type="Script" uid="uid://dfhd0aslc2ms8" path="res://script/ui/combat/weapon/loadout/UIW_Weapon.cs" id="1_fe4rp"]
-[ext_resource type="Script" uid="uid://dipouroto55hy" path="res://script/ui/combat/weapon/loadout/UI_WeaponHolder.cs" id="2_v4mgk"]
+[ext_resource type="Script" uid="uid://dfhd0aslc2ms8" path="res://script/ui/combat/weapon/loadout/weapon/UIW_Weapon.cs" id="1_fe4rp"]
+[ext_resource type="Script" uid="uid://dipouroto55hy" path="res://script/ui/combat/weapon/loadout/weapon/UIW_WeaponHolder.cs" id="2_v4mgk"]
 [ext_resource type="Texture2D" uid="uid://cll1rrqagufi2" path="res://assets/sprites/weapons/brrtpixel2.png" id="3_8uisc"]
 [ext_resource type="Script" uid="uid://cdbktynmd0v7q" path="res://script/ui/combat/weapon/loadout/fire/UIW_UnactiveFireHolder.cs" id="4_rt5cm"]
 [ext_resource type="Script" uid="uid://b2bfo1y3av28f" path="res://script/ui/combat/weapon/loadout/fire/UIW_ActiveFireHolder.cs" id="5_g4k06"]

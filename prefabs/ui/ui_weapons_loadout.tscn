@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://uyvo2jeluirn"]
 
-[ext_resource type="Script" uid="uid://bqe8doqvnciay" path="res://script/ui/combat/weapon/loadout/UI_WeaponsLoadout.cs" id="1_npt2m"]
+[ext_resource type="Script" uid="uid://bqe8doqvnciay" path="res://script/ui/combat/weapon/loadout/UIW_Loadout.cs" id="1_npt2m"]
 [ext_resource type="Texture2D" uid="uid://bffiy1g6ksce8" path="res://assets/sprites/binds/keys/c.png" id="2_qpjn0"]
 [ext_resource type="PackedScene" uid="uid://b5tr7coy5u25i" path="res://prefabs/ui/ui_weapon_template.tscn" id="3_31lwq"]
 

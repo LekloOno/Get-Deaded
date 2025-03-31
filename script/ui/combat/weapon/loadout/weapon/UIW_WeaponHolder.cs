@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Godot;
 
 [GlobalClass]
-public partial class UI_WeaponHolder : BoxContainer
+public partial class UIW_WeaponHolder : BoxContainer
 {
     [Export] private TextureRect _icon;
     [Export] private Container _fireHoldersContainer;

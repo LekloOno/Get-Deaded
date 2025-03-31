@@ -3,8 +3,8 @@ using Godot;
 [GlobalClass]
 public partial class UIW_Weapon : BoxContainer
 {
-    [Export] private UI_WeaponHolder _active;
-    [Export] private UI_WeaponHolder _unactive;
+    [Export] private UIW_WeaponHolder _active;
+    [Export] private UIW_WeaponHolder _unactive;
     [Export] private TextureRect _directBind;
     
     public void Initialize(PW_Weapon weapon)
