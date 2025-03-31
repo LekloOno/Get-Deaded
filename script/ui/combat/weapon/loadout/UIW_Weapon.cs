@@ -24,6 +24,6 @@ public partial class UIW_Weapon : BoxContainer
     {
         _active.Hide();
         _directBind.Show();
-        _active.Show();
+        _unactive.Show();
     }
 }

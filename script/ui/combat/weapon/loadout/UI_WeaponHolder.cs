@@ -1,20 +1,30 @@
+using System;
+using System.Collections.Generic;
 using Godot;
 
 [GlobalClass]
 public partial class UI_WeaponHolder : BoxContainer
 {
     [Export] private TextureRect _icon;
+    [Export] private Container _fireHoldersContainer;
     [Export] private UIW_FireHolder _fireHolderTemplate;
+    private List<UIW_FireHolder> _fireHolders = [];
+
     public void Initialize(PW_Weapon weapon)
     {
-        if (_fireHolderTemplate.GetParent() == this)
-            RemoveChild(_fireHolderTemplate);
+        // Clear previous state
+        if (_fireHolderTemplate.GetParent() == _fireHoldersContainer)
+            _fireHoldersContainer.RemoveChild(_fireHolderTemplate);
+
+        foreach (UIW_FireHolder _fireHolder in _fireHolders)
+            _fireHolder.QueueFree();
         
+        _fireHolders.Clear();
+
+
+        // Initialize new state
         _icon.Texture = weapon.Icon;
         _icon.Modulate = weapon.IconColor;
-
-        foreach (Node child in GetChildren())
-            child.QueueFree();
 
         foreach (PW_Fire fire in weapon.GetFireModes())
         {
@@ -23,7 +33,9 @@ public partial class UI_WeaponHolder : BoxContainer
 
             UIW_FireHolder fireHolder = (UIW_FireHolder) _fireHolderTemplate.Duplicate();
             fireHolder.Initialize(fire);
-            AddChild(fireHolder);
+            _fireHolders.Add(fireHolder);
+
+            _fireHoldersContainer.AddChild(fireHolder);
         }
     }
 }

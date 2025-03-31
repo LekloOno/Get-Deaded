@@ -16,6 +16,8 @@ public abstract partial class UIW_FireHolder : BoxContainer
         _ammos = fire.Ammos;
         _ammos.LoadedChanged += HandleLoaded;
         _ammos.UnloadedChanged += HanldedUnloaded;
+
+        InnerInitialize(fire);
     }
 
     public abstract void InnerInitialize(PW_Fire fire);

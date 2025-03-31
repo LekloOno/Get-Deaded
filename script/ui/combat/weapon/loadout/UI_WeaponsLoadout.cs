@@ -25,8 +25,8 @@ public partial class UI_WeaponsLoadout : BoxContainer
 
     private void Initialize(PW_Weapon active, PW_Weapon nextHolster, int nextIndex, Godot.Collections.Array<PW_Weapon> weapons)
     {
-        if (_weaponTemplate.GetParent() == this)
-            RemoveChild(_weaponTemplate);
+        if (_weaponTemplate.GetParent() is Node parent)
+            parent.RemoveChild(_weaponTemplate);
 
         foreach (UIW_Weapon weapon in _weapons.Values)
             weapon.QueueFree();
@@ -63,12 +63,18 @@ public partial class UI_WeaponsLoadout : BoxContainer
         if (_weapons.TryGetValue(active, out UIW_Weapon uiWeapon))
         {
             uiWeapon.SetActive();
+            if (uiWeapon.GetParent() is Node parent)
+                parent.RemoveChild(uiWeapon);
+                
             _active.AddChild(uiWeapon);
         }
 
         if (_weapons.TryGetValue(nextHolster, out uiWeapon))
         {
             uiWeapon.SetUnactive();
+            if (uiWeapon.GetParent() is Node parent)
+                parent.RemoveChild(uiWeapon);
+
             _holster.AddChild(uiWeapon);
         }
 
@@ -79,6 +85,9 @@ public partial class UI_WeaponsLoadout : BoxContainer
             if (_weapons.TryGetValue(weapons[realIndex], out uiWeapon))
             {
                 uiWeapon.SetUnactive();
+                if (uiWeapon.GetParent() is Node parent)
+                    parent.RemoveChild(uiWeapon);
+                    
                 _unactiveList.AddChild(uiWeapon);
             }
         }

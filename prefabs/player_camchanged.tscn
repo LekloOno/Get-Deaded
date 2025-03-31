@@ -1,4 +1,4 @@
-[gd_scene load_steps=142 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=138 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://script/player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://assets/script/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -27,7 +27,7 @@
 [ext_resource type="Script" uid="uid://cn5ymkg0qsvpn" path="res://script/player/input/actions/movement/PI_Sprint.cs" id="14_puula"]
 [ext_resource type="AudioStream" uid="uid://bnck0lo2ewye5" path="res://assets/sounds/woosh/woosh2.wav" id="14_qlcgr"]
 [ext_resource type="Script" uid="uid://cxlnavyewfmhb" path="res://script/player/input/actions/movement/PI_CrouchDispatcher.cs" id="15_03g52"]
-[ext_resource type="Script" uid="uid://bqe8doqvnciay" path="res://script/ui/combat/weapon/loadout/UI_WeaponsLoadout.cs" id="15_42twc"]
+[ext_resource type="PackedScene" uid="uid://uyvo2jeluirn" path="res://prefabs/ui/ui_weapons_loadout.tscn" id="15_42twc"]
 [ext_resource type="AudioStream" uid="uid://dw0ipfbd7lxkv" path="res://assets/sounds/footsteps/concrete-step2.wav" id="15_53h66"]
 [ext_resource type="Script" uid="uid://ce82euclamj77" path="res://script/global/combat/hit/hurt/GC_HurtBox.cs" id="15_h1ove"]
 [ext_resource type="AudioStream" uid="uid://b7y6fn7u2t61j" path="res://assets/sounds/woosh/woosh3.wav" id="15_vrr6v"]
@@ -36,15 +36,12 @@
 [ext_resource type="Texture2D" uid="uid://cll1rrqagufi2" path="res://assets/sprites/weapons/brrtpixel2.png" id="16_lsyns"]
 [ext_resource type="Script" uid="uid://d27dbwl0y8qkt" path="res://script/player/input/actions/movement/crouch/PI_Dash.cs" id="16_t2wfm"]
 [ext_resource type="AudioStream" uid="uid://dnjywl4vsbygw" path="res://assets/sounds/footsteps/concrete-step3.wav" id="16_ul8s5"]
-[ext_resource type="Script" uid="uid://bqdxbkvf8rvgl" path="res://script/ui/combat/weapon/loadout/UI_UnactiveWeaponsList.cs" id="16_w8edb"]
-[ext_resource type="Script" uid="uid://dipouroto55hy" path="res://script/ui/combat/weapon/loadout/UI_WeaponHolder.cs" id="17_0vaqj"]
 [ext_resource type="Script" uid="uid://b37yb21n7qltn" path="res://script/player/input/actions/movement/crouch/PI_Slide.cs" id="17_d5kvj"]
 [ext_resource type="Texture2D" uid="uid://c050onpc3r17u" path="res://assets/sprites/weapons/pewpixel.png" id="17_w8edb"]
 [ext_resource type="AudioStream" uid="uid://byvkie35nxxfe" path="res://assets/sounds/clothes/clothes_6.wav" id="17_yke2y"]
 [ext_resource type="Texture2D" uid="uid://8rrtqp0otyee" path="res://assets/sprites/weapons/meleepixel.png" id="18_0vaqj"]
 [ext_resource type="AudioStream" uid="uid://c51litrqlhdk8" path="res://assets/sounds/footsteps/concrete-step5.wav" id="18_1gs0t"]
 [ext_resource type="Script" uid="uid://cvmm2apn1tg0v" path="res://script/global/loot/picker/GL_Picker.cs" id="18_u3xwg"]
-[ext_resource type="Texture2D" uid="uid://bxrr4qhg364rp" path="res://assets/sprites/binds/mouse/click4.png" id="18_vdq31"]
 [ext_resource type="Script" uid="uid://3tjawmkgaiwa" path="res://script/global/loot/picker/GL_Vacuum.cs" id="18_wow6d"]
 [ext_resource type="Script" uid="uid://llwmjg24ml7x" path="res://script/player/input/actions/movement/crouch/PI_Crouch.cs" id="18_wrcsk"]
 [ext_resource type="Script" uid="uid://b2jn2nortl4pm" path="res://script/player/audio/PA_Slide.cs" id="18_yrtf3"]
@@ -53,7 +50,6 @@
 [ext_resource type="Script" uid="uid://ca4sbvyfspdlk" path="res://script/player/audio/PA_LayeredSound.cs" id="19_wuy3o"]
 [ext_resource type="Script" uid="uid://bh2x2qbdyp8do" path="res://script/player/movement/actions/surface-control/PM_SurfaceControl.cs" id="20_ncxc1"]
 [ext_resource type="AudioStream" uid="uid://bfoha2oj2ts6j" path="res://assets/sounds/clothes/clothes.wav" id="20_o38yh"]
-[ext_resource type="Texture2D" uid="uid://bffiy1g6ksce8" path="res://assets/sprites/binds/keys/c.png" id="20_r6ddn"]
 [ext_resource type="Script" uid="uid://dfun1vtneg2lr" path="res://script/player/movement/actions/surface-control/PM_SurfaceState.cs" id="21_fhiml"]
 [ext_resource type="AudioStream" uid="uid://cbgjk066ugfoy" path="res://assets/sounds/clothes/clothes_2.wav" id="21_ux4x4"]
 [ext_resource type="AudioStream" uid="uid://dqjv7glvctdav" path="res://assets/sounds/clothes/clothes_3.wav" id="22_dbo1v"]
@@ -117,7 +113,7 @@ point_count = 5
 [sub_resource type="Gradient" id="Gradient_k51pg"]
 colors = PackedColorArray(0, 0.4, 0.894118, 0.764706, 0, 1, 0.537255, 0.784314)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_vdq31"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_w8edb"]
 viewport_path = NodePath("Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_7bleo"]
@@ -274,6 +270,7 @@ _fireRate = 600
 _ammos = SubResource("Resource_vj6q7")
 _ammosPerShot = 0
 _baseAmmos = 0
+IsDerived = false
 metadata/_custom_type_script = "uid://dmsklefspdvlw"
 
 [sub_resource type="Resource" id="Resource_5dw8r"]
@@ -414,139 +411,19 @@ _maxSpeed = 60.0
 _controller = NodePath("../../../../../../..")
 
 [node name="weapons" type="Sprite3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing"]
-transform = Transform3D(0.976387, 0, -0.216031, 0, 1, 0, 0.216031, 0, 0.976387, 0.508073, -0.223526, -0.3)
+transform = Transform3D(0.996074, 0, -0.0885295, 0, 1, 0, 0.0885295, 0, 0.996074, 0.204675, 0.02148, -0.3)
 pixel_size = 0.0003
 texture_filter = 5
-texture = SubResource("ViewportTexture_vdq31")
+texture = SubResource("ViewportTexture_w8edb")
 
 [node name="SubViewport" type="SubViewport" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons"]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(1024, 768)
+size = Vector2i(2056, 2056)
 render_target_update_mode = 4
 
-[node name="weapons" type="VBoxContainer" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport" node_paths=PackedStringArray("_weaponsHandler", "_list", "_active", "_holster")]
-texture_filter = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -256.0
-offset_bottom = 14.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/separation = 10
-alignment = 2
-script = ExtResource("15_42twc")
+[node name="loadout" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport" node_paths=PackedStringArray("_weaponsHandler") instance=ExtResource("15_42twc")]
 _weaponsHandler = NodePath("../../../../../../../../../PW_WeaponsHandler")
-_list = NodePath("unactive/list")
-_active = NodePath("active")
-_holster = NodePath("unactive/holster")
-
-[node name="unactive" type="VBoxContainer" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport/weapons"]
-layout_mode = 2
-
-[node name="list" type="VBoxContainer" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport/weapons/unactive" node_paths=PackedStringArray("_template")]
-texture_filter = 1
-layout_mode = 2
-script = ExtResource("16_w8edb")
-_template = NodePath("template")
-
-[node name="template" type="HBoxContainer" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport/weapons/unactive/list" node_paths=PackedStringArray("_icon", "_bind")]
-texture_filter = 1
-layout_mode = 2
-theme_override_constants/separation = 50
-alignment = 2
-script = ExtResource("17_0vaqj")
-_icon = NodePath("icon/icon_texture")
-_bind = NodePath("bind/bind_texture")
-
-[node name="bind" type="AspectRatioContainer" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport/weapons/unactive/list/template"]
-texture_filter = 1
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="bind_texture" type="TextureRect" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport/weapons/unactive/list/template/bind"]
-modulate = Color(1, 1, 1, 0.8)
-texture_filter = 1
-layout_mode = 2
-texture = ExtResource("18_vdq31")
-expand_mode = 1
-
-[node name="icon" type="AspectRatioContainer" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport/weapons/unactive/list/template"]
-custom_minimum_size = Vector2(384, 192)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-ratio = 2.0
-
-[node name="icon_texture" type="TextureRect" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport/weapons/unactive/list/template/icon"]
-modulate = Color(0.441, 0.921, 1, 0.8)
-texture_filter = 1
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("16_lsyns")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="holster" type="HBoxContainer" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport/weapons/unactive" node_paths=PackedStringArray("_icon", "_bind")]
-layout_mode = 2
-theme_override_constants/separation = 50
-alignment = 2
-script = ExtResource("17_0vaqj")
-_icon = NodePath("icon/icon_texture")
-_bind = NodePath("bind/bind_texture")
-
-[node name="bind" type="AspectRatioContainer" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport/weapons/unactive/holster"]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="bind_texture" type="TextureRect" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport/weapons/unactive/holster/bind"]
-modulate = Color(1, 1, 1, 0.8)
-texture_filter = 1
-layout_mode = 2
-texture = ExtResource("20_r6ddn")
-expand_mode = 1
-
-[node name="icon" type="AspectRatioContainer" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport/weapons/unactive/holster"]
-custom_minimum_size = Vector2(384, 192)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-ratio = 2.0
-alignment_horizontal = 2
-
-[node name="icon_texture" type="TextureRect" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport/weapons/unactive/holster/icon"]
-modulate = Color(1, 0.814366, 0.550781, 0.8)
-texture_filter = 1
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("17_w8edb")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="active" type="HBoxContainer" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport/weapons" node_paths=PackedStringArray("_icon")]
-layout_mode = 2
-script = ExtResource("17_0vaqj")
-_icon = NodePath("active/texture_active")
-metadata/_custom_type_script = "uid://dipouroto55hy"
-
-[node name="active" type="AspectRatioContainer" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport/weapons/active"]
-custom_minimum_size = Vector2(768, 384)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-ratio = 2.0
-alignment_horizontal = 2
-
-[node name="texture_active" type="TextureRect" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport/weapons/active/active"]
-modulate = Color(1, 1, 1, 0.8)
-texture_filter = 1
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("18_0vaqj")
-expand_mode = 1
-stretch_mode = 4
 
 [node name="health" type="Sprite3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing"]
 transform = Transform3D(0.154622, -0.000283032, 0.0108085, 0, 0.154947, 0.00405743, -0.0108123, -0.00404754, 0.154569, -0.485, -0.28, -0.3)
