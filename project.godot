@@ -123,6 +123,11 @@ reload={
 ]
 }
 
+[layer_names]
+
+3d_render/layer_1="Main"
+3d_render/layer_2="UI"
+
 [physics]
 
 common/physics_jitter_fix=0.0

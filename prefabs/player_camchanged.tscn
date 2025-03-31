@@ -1,4 +1,4 @@
-[gd_scene load_steps=138 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=140 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://script/player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://assets/script/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -104,6 +104,8 @@
 [ext_resource type="Script" uid="uid://dkysuj8gsdwv4" path="res://script/player/connectors/CNT_SprintWeapon.cs" id="91_cqits"]
 [ext_resource type="Script" uid="uid://0w0m608ktkwu" path="res://script/vfx/combat/trail/moving_light/VFX_MovingLightTrail.cs" id="91_lk6x0"]
 [ext_resource type="Script" uid="uid://cxiwvat6vddlp" path="res://script/player/combat/weapons/ammunition/PW_Ammunition.cs" id="92_3bwxm"]
+[ext_resource type="Script" uid="uid://b2flfi73k8d71" path="res://script/ui/viewport/UI_SpatialViewport.cs" id="96_w8edb"]
+[ext_resource type="Script" uid="uid://cjkogi1w2j3wf" path="res://script/ui/viewport/UI_SpatialVPCamera.cs" id="97_0vaqj"]
 
 [sub_resource type="Curve" id="Curve_ux8de"]
 _limits = [-0.5, 1.0, 0.0, 1.0]
@@ -394,11 +396,14 @@ _groundSurfaceState = NodePath("../../../../../../../../../../Movement/PM_Surfac
 _ledgeClimb = NodePath("../../../../../../../../../../Movement/Actions/Jump/PM_LedgeClimb")
 
 [node name="Camera3D" type="Camera3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim"]
+cull_mask = 1048573
 fov = 103.0
 script = ExtResource("12_htv2j")
 
 [node name="Label3D" type="Label3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing" node_paths=PackedStringArray("_controller")]
+physics_interpolation_mode = 2
 transform = Transform3D(0.997204, -0.00519158, 0.0745445, 0.00178622, 0.998955, 0.0456761, -0.0747032, -0.0454155, 0.996171, -0.584324, -0.222796, -0.294555)
+layers = 2
 pixel_size = 0.001
 modulate = Color(0.0196078, 0.498039, 1, 0.764706)
 outline_modulate = Color(0, 0, 0, 0.101961)
@@ -411,7 +416,9 @@ _maxSpeed = 60.0
 _controller = NodePath("../../../../../../..")
 
 [node name="weapons" type="Sprite3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing"]
-transform = Transform3D(0.996074, 0, -0.0885295, 0, 1, 0, 0.0885295, 0, 0.996074, 0.204675, 0.02148, -0.3)
+physics_interpolation_mode = 2
+transform = Transform3D(0.991482, 0, -0.13025, 0, 1, 0, 0.13025, 0, 0.991482, 0.249234, 0.02148, -0.3)
+layers = 2
 pixel_size = 0.0003
 texture_filter = 5
 texture = SubResource("ViewportTexture_w8edb")
@@ -426,7 +433,9 @@ render_target_update_mode = 4
 _weaponsHandler = NodePath("../../../../../../../../../PW_WeaponsHandler")
 
 [node name="health" type="Sprite3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing"]
+physics_interpolation_mode = 2
 transform = Transform3D(0.154622, -0.000283032, 0.0108085, 0, 0.154947, 0.00405743, -0.0108123, -0.00404754, 0.154569, -0.485, -0.28, -0.3)
+layers = 2
 texture = SubResource("ViewportTexture_7bleo")
 
 [node name="SubViewport" type="SubViewport" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/health"]
@@ -1050,6 +1059,28 @@ script = ExtResource("91_cqits")
 _sprintInput = NodePath("../../PIM_Arena/PI_Sprint")
 _weaponsHandler = NodePath("../../PW_WeaponsHandler")
 metadata/_custom_type_script = "uid://dkysuj8gsdwv4"
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+script = ExtResource("96_w8edb")
+
+[node name="UICamera" type="Camera3D" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("_camera")]
+physics_interpolation_mode = 2
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0)
+cull_mask = 2
+fov = 103.0
+script = ExtResource("97_0vaqj")
+_camera = NodePath("../../../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/Camera3D")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

@@ -97,7 +97,6 @@ public partial class PW_Ammunition : Resource
     /// <returns>true if the operation did consume some of the requested amos, false otherwise.</returns>
     public bool DidConsume(uint amos)
     {
-        Log();
         if (IsReloading)
             return false;
 
@@ -118,7 +117,6 @@ public partial class PW_Ammunition : Resource
     /// <returns>true if it did consume, false otherwise.</returns>
     public bool TryConsume(uint amos)
     {
-        Log();
         if (IsReloading)
             return false;
 
@@ -142,7 +140,6 @@ public partial class PW_Ammunition : Resource
         LoadedAmos += reloaded;
         IsReloading = false;
         ReloadCompleted?.Invoke(this, EventArgs.Empty);
-        Log();
         return reloaded;
     }
 
@@ -157,7 +154,6 @@ public partial class PW_Ammunition : Resource
         uint amos = magazine ? AmmosFromPickup(amount) : amount;
         uint filled = Math.Min(amos, _maxAmos - UnloadedAmos - _magazineSize);
         UnloadedAmos += filled;
-        Log();
         return filled;
     }
 
@@ -172,7 +168,6 @@ public partial class PW_Ammunition : Resource
         uint amos = magazine ? AmmosFromPickup(amount) : amount;
         uint emptied = Math.Min(amos, UnloadedAmos);
         UnloadedAmos -= emptied;
-        Log();
         return emptied;
     }
 
