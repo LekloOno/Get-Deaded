@@ -4,16 +4,16 @@ using Godot;
 public partial class PC_Spring : Node3D
 {
     [ExportCategory("Settings")]
-    [Export(PropertyHint.Range, "0.01,0.2,0.01")]
+    [Export(PropertyHint.Range, "0.01,0.2,0.01,or_greater")]
     public float HalfLife {get; private set;} = 0.08f;
 
-    [Export(PropertyHint.Range, "0.01,30.0,0.1")]
+    [Export(PropertyHint.Range, "0.01,30.0,0.1,or_greater")]
     public float Frequency {get; private set;} = 14f;
 
-    [Export(PropertyHint.Range, "0.01,15.0,0.1")]
+    [Export(PropertyHint.Range, "0.01,15.0,0.1,or_greater")]
     public float AngularDisplacement {get; private set;} = 6f;
 
-    [Export(PropertyHint.Range, "0.0,0.3,0.01")]
+    [Export(PropertyHint.Range, "0.0,0.3,0.01,or_greater")]
     public float LinearDisplacement {get; private set;} = 0.05f;
     
     [ExportCategory("Setup")]
@@ -34,7 +34,7 @@ public partial class PC_Spring : Node3D
         
         Vector3 localSpringPosition = _springPosition - GlobalPosition;
         float springHeight = localSpringPosition.Dot(_cameraTarget.Basis.Y);
-        RotationDegrees = new Vector3(-springHeight * AngularDisplacement, 0f, 0f);
+        RotationDegrees = new Vector3(springHeight * AngularDisplacement, 0f, 0f);
         Position = localSpringPosition * LinearDisplacement;
     }
 

@@ -366,7 +366,8 @@ _controller = NodePath("../../../../../..")
 
 [node name="PC_Spring" type="Node3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing" node_paths=PackedStringArray("_cameraTarget")]
 script = ExtResource("6_v2bpg")
-AngularDisplacement = 8.01
+Frequency = 17.01
+AngularDisplacement = 12.01
 LinearDisplacement = 0.0
 _cameraTarget = NodePath("../../../../../../../Body/SpatialAnchor/RemoteTransform3D")
 
