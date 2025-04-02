@@ -53,7 +53,6 @@ public partial class PH_Manager : GC_HealthManager
     {
         OnProcess -= Decay;
         OnProcess += Regen;
-        _shield.Absorb();
     }
 
     public void Regen(object sender, double delta) => _shield.Regen((float)delta * _regenPerSecond);
