@@ -179,7 +179,7 @@ metadata/_custom_type_script = "uid://dqcp38rr3u5gx"
 [sub_resource type="Resource" id="Resource_gcum8"]
 script = ExtResource("48_h1ove")
 _parryTime = 0
-_absorbTime = 0
+_absorbTime = 40
 _maxHealth = 50.0
 Child = SubResource("Resource_htv2j")
 metadata/_custom_type_script = "uid://be02fh6y0vldv"

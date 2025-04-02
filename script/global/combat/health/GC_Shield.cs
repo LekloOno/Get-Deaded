@@ -29,7 +29,7 @@ public partial class GC_Shield : GC_Health
         if (!_active)
             return;
 
-        DamageBuffer.Clear();
+        Absorb();
         _active = false;
         OnDeactivate?.Invoke(this, EventArgs.Empty);
     }
@@ -38,13 +38,17 @@ public partial class GC_Shield : GC_Health
     public void Absorb()
     {
         ulong later = Time.GetTicksMsec() - _absorbTime;
-        Regen(DamageBuffer.Sum(t => t.Item2 > later ? t.Item2 : 0));
+        float absorbed = DamageBuffer.Sum(t => t.Item1 > later ? t.Item2 : 0);
+        Regen(absorbed);
+        GD.Print(absorbed);
+        DamageBuffer.Clear();
     }
 
     public override bool TakeDamage(float damage, out float takenDamage)
     {
         if (_active)
         {
+            GD.Print(damage);
             DamageBuffer.Add((Time.GetTicksMsec(), damage));
             return base.TakeDamage(damage, out takenDamage);
         }
