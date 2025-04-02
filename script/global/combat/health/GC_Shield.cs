@@ -1,18 +1,25 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Godot;
 
 [GlobalClass]
 public partial class GC_Shield : GC_Health
 {
-    public bool _active;
+    [Export] private ulong _parryTime;
+    [Export] private ulong _absorbTime;
+    private ulong _lastActivate;
+    private bool _active;
     public EventHandler OnActivate;
     public EventHandler OnDeactivate;
+    public List<(ulong, float)> DamageBuffer = [];
 
     public void Activate()
     {
         if (_active)
             return;
         
+        _lastActivate = Time.GetTicksMsec();
         _active = true;
         OnActivate?.Invoke(this, EventArgs.Empty);
     }
@@ -22,14 +29,25 @@ public partial class GC_Shield : GC_Health
         if (!_active)
             return;
 
+        DamageBuffer.Clear();
         _active = false;
         OnDeactivate?.Invoke(this, EventArgs.Empty);
+    }
+
+    public bool IsParrying() => _active && Time.GetTicksMsec() - _lastActivate < _parryTime;
+    public void Absorb()
+    {
+        ulong later = Time.GetTicksMsec() - _absorbTime;
+        Regen(DamageBuffer.Sum(t => t.Item2 > later ? t.Item2 : 0));
     }
 
     public override bool TakeDamage(float damage, out float takenDamage)
     {
         if (_active)
+        {
+            DamageBuffer.Add((Time.GetTicksMsec(), damage));
             return base.TakeDamage(damage, out takenDamage);
+        }
 
         return Child.TakeDamage(damage, out takenDamage);
     }

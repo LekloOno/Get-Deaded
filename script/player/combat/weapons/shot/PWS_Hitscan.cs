@@ -1,17 +1,18 @@
 using Godot;
 
 [GlobalClass]
-public partial class PWS_Hitscan : PW_Shot
+public partial class PWS_Hitscan : PW_Shot, GC_IHitDealer
 {
     [Export] protected float _maxDistance;
-    public override void HandleShoot(Node3D manager, Vector3 origin, Vector3 direction)
+
+    public override void Shoot(Vector3 origin, Vector3 direction)
     {
         Vector3 castOrigin = origin + _originOffset;
         Vector3 castDirection = direction + _directionOffset;
 
         Vector3 hit = castOrigin + castDirection * _maxDistance;
 
-        World3D world = manager.GetWorld3D();
+        World3D world = _barel.GetWorld3D();
         PhysicsDirectSpaceState3D spaceState = world.DirectSpaceState;
         PhysicsRayQueryParameters3D query = PhysicsRayQueryParameters3D.Create(castOrigin, hit);
         query.CollideWithAreas = true;
@@ -25,7 +26,8 @@ public partial class PWS_Hitscan : PW_Shot
             Node3D collider = result["collider"].AsGodotObject() as Node3D;
             if (collider is GC_HurtBox hurtBox)
             {
-                bool killed = _hitData.SendHit(hurtBox, out float takenDamage);
+                bool killed = hurtBox.Damage(this, out float takenDamage);
+                //_hitData.SendHit(hurtBox, out float takenDamage);
                 DoHit(new(hurtBox.HealthManager, hurtBox.HealthManager.GetExposedLayer(), hurtBox, takenDamage, killed), hit, castOrigin);
             }
             else
@@ -35,6 +37,6 @@ public partial class PWS_Hitscan : PW_Shot
         }
 
         foreach (VFX_Trail trail in _trails)
-            trail.Shoot(manager, _barel.GlobalPosition + _originOffset, hit);
+            trail.Shoot(_barel, _barel.GlobalPosition + _originOffset, hit);
     }
 }

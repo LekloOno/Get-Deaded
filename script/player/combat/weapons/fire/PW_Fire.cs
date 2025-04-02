@@ -86,7 +86,7 @@ public abstract partial class PW_Fire : Resource
         }
         
         foreach (PW_Shot shot in _shots)
-            shot.Shoot(_sight, origin, direction);
+            shot.Shoot(origin, direction);
     }
 
     protected bool CanShoot() => Time.GetTicksMsec() - _lastShot >= _fireRate && _ammos.DidConsume(_ammosPerShot);

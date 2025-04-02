@@ -4,11 +4,22 @@ using Godot;
 [GlobalClass]
 public partial class PH_Manager : GC_HealthManager
 {
+    [Export] private Node3D _sight;
     [Export] private GC_Shield _shield;
     [Export] private float _decayPerSecond;
     [Export] private float _regenPerSecond;
 
     private EventHandler<double> OnProcess;
+
+    public override bool Damage(GC_IHitDealer hitDealer, float expectedDamage, out float takenDamage)
+    {
+        if (!_shield.IsParrying())
+            return base.Damage(hitDealer, expectedDamage, out takenDamage);
+        
+        hitDealer.Shoot(_sight.GlobalPosition, -_sight.GlobalBasis.Z);
+        takenDamage = 0;
+        return false;
+    }
 
     public override void _Ready()
     {

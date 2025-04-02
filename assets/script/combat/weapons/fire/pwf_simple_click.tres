@@ -11,7 +11,7 @@
 
 [sub_resource type="Resource" id="Resource_5youj"]
 script = ExtResource("1_c3nw5")
-_magazineSize = 6
+_magazineSize = 8
 _magazinePick = 0
 _maxMagazines = 5
 _reloadTime = 1.2
@@ -21,7 +21,7 @@ metadata/_custom_type_script = "uid://cxiwvat6vddlp"
 [sub_resource type="Resource" id="Resource_86bjm"]
 script = ExtResource("1_7yt7b")
 _autoReset = true
-_angle = Vector2(0.05, 4)
+_angle = Vector2(0.05, 5)
 _time = 0.04
 _resetTime = 0.4
 metadata/_custom_type_script = "uid://djecalg7cxlvg"

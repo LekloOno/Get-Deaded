@@ -1,12 +1,15 @@
 using Godot;
 
 [GlobalClass]
-public partial class GC_Hitbox : Area3D
+public partial class GC_Hitbox : Area3D, GC_IHitDealer
 {
     [Export] private GC_Hit _hit;
     [Export] private float _cd;
     private bool _active = true;
     private SceneTreeTimer _reset;
+
+    public GC_Hit HitData => _hit;
+
 
     public override void _Ready()
     {
@@ -20,7 +23,7 @@ public partial class GC_Hitbox : Area3D
 
         if (area3D is GC_HurtBox hurtBox)
         {
-            hurtBox.Damage(_hit.GetDamage(hurtBox.BodyPart), out _);
+            hurtBox.Damage(this, out _);
             _active = false;
             _reset = GetTree().CreateTimer(_cd);
             _reset.Timeout += Reset;
@@ -36,4 +39,7 @@ public partial class GC_Hitbox : Area3D
             _reset = null;
         }
     }
+
+    public void Shoot(Vector3 origin, Vector3 direction){}
+
 }
