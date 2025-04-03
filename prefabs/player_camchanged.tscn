@@ -169,6 +169,7 @@ radius = 0.25
 height = 1.8
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_aav2a"]
+margin = 0.001
 size = Vector3(0.5, 0.15, 0.5)
 
 [sub_resource type="Resource" id="Resource_htv2j"]
@@ -642,6 +643,7 @@ skeleton = NodePath("../../..")
 
 [node name="LedgeCast" type="ShapeCast3D" parent="Body/SpatialAnchor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+enabled = false
 shape = SubResource("BoxShape3D_aav2a")
 target_position = Vector3(0, 0, 0)
 

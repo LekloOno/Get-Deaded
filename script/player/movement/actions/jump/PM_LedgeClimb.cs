@@ -36,7 +36,11 @@ public partial class PM_LedgeClimb : PM_Action
     private Vector3 _direction = Vector3.Zero;
     private KinematicCollision3D _lastCollision;
 
-    public override void _Ready() => SetPhysicsProcess(false);
+    public override void _Ready()
+    {
+        _ledgeCast.Enabled = false;
+        SetPhysicsProcess(false);
+    }
     public override void _PhysicsProcess(double delta) => Climb();
 
     public Vector3 LedgeClimb(Vector3 velocity)

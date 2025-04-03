@@ -42,6 +42,7 @@ public static class PHX_Checks
     {
         Vector3 motion = -pivot.GlobalBasis.Z * amount;
         headCast.TargetPosition = motion;
+        headCast.ForceShapecastUpdate();
 
         result = new();
 
