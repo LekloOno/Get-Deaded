@@ -1,4 +1,4 @@
-[gd_scene load_steps=140 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=141 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://script/player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://assets/script/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -89,6 +89,7 @@
 [ext_resource type="Texture2D" uid="uid://dsma1lip7bvch" path="res://assets/sprites/dash/dash_cd_mid_shadow.png" id="69_arr85"]
 [ext_resource type="Texture2D" uid="uid://cbh1opskekaqn" path="res://assets/sprites/dash/dash_cd_mid_fill.png" id="70_ee4um"]
 [ext_resource type="Script" uid="uid://bd37jsqipcwxc" path="res://script/ui/movement/UI_DashReset.cs" id="71_j12ti"]
+[ext_resource type="Script" uid="uid://cq31c653np61x" path="res://script/player/movement/actions/surface-control/PM_AirState.cs" id="72_0vaqj"]
 [ext_resource type="PackedScene" uid="uid://d06ge8pykx8s1" path="res://prefabs/hitmarker.tscn" id="77_fdvd6"]
 [ext_resource type="Script" uid="uid://cjmiash71uc7b" path="res://script/global/combat/hit/hit/GC_Hit.cs" id="80_ufgmq"]
 [ext_resource type="Script" uid="uid://fc7gkofu3df7" path="res://script/player/combat/weapons/shot/PWS_Hitscan.cs" id="81_f31u3"]
@@ -936,7 +937,7 @@ script = ExtResource("20_ncxc1")
 _walkInput = NodePath("../../PIM_Arena/PI_Walk")
 _groundState = NodePath("../../State/PS_Grounded")
 _ground = NodePath("GroundState")
-_air = NodePath("AirState")
+_air = NodePath("PM_AirState")
 
 [node name="GroundState" type="Node" parent="Movement/PM_SurfaceControl" node_paths=PackedStringArray("_sprintInput", "_crouch", "_slide")]
 script = ExtResource("21_fhiml")
@@ -951,6 +952,19 @@ _stateData = ExtResource("23_jl0xl")
 _sprintInput = NodePath("../../../PIM_Arena/PI_Sprint")
 _crouch = NodePath("../../Actions/Crouch/PM_Crouch")
 _slide = NodePath("../../Actions/Crouch/PM_Slide")
+
+[node name="PM_AirState" type="Node" parent="Movement/PM_SurfaceControl" node_paths=PackedStringArray("_sprintInput", "_crouch", "_slide")]
+script = ExtResource("72_0vaqj")
+_slowMaxSpeed = 7.0
+_speedCurveStrength = 2.0
+_slowAccel = 3.0
+_accelCurveStrength = 2.0
+_concreteMaxSpeed = 4.0
+_stateData = ExtResource("23_jl0xl")
+_sprintInput = NodePath("../../../PIM_Arena/PI_Sprint")
+_crouch = NodePath("../../Actions/Crouch/PM_Crouch")
+_slide = NodePath("../../Actions/Crouch/PM_Slide")
+metadata/_custom_type_script = "uid://cq31c653np61x"
 
 [node name="PM_StraffeSnap" type="Node" parent="Movement" node_paths=PackedStringArray("_groundState", "_crouchDispatcher")]
 script = ExtResource("24_4bvsd")

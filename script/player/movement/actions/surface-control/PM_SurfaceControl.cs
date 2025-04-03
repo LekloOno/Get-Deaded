@@ -63,11 +63,12 @@ public partial class PM_SurfaceControl : PM_Action
     }
 
     public Vector3 Accelerate(Vector3 velocity, float delta)
-    {
+    {/*
         Vector3 direction = _walkInput.WishDir;
         float speed = _currentSurface.CurrentData.MaxSpeed;
         float accel = _currentSurface.CurrentData.MaxAccel;
-        return PHX_MovementPhysics.Acceleration(speed * SpeedModifiers.Result(), accel, velocity, direction, delta);
+        return PHX_MovementPhysics.Acceleration(speed * SpeedModifiers.Result(), accel, velocity, direction, delta);*/
+        return _currentSurface.Accelerate(_walkInput.WishDir, velocity, SpeedModifiers.Result(), delta);
     }
 
     public Vector3 ApplyDrag(Vector3 velocity, double deltaTime)

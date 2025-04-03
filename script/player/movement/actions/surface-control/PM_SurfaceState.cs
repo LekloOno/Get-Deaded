@@ -37,6 +37,13 @@ public partial class PM_SurfaceState : Node
         data.OnStart?.Invoke(this, EventArgs.Empty);
     }
 
+    public virtual Vector3 Accelerate(Vector3 wishDir, Vector3 velocity, float speedModifier, float delta)
+    {
+        float speed = CurrentData.MaxSpeed;
+        float accel = CurrentData.MaxAccel;
+        return PHX_MovementPhysics.Acceleration(speed * speedModifier, accel, velocity, wishDir, delta);
+    }
+
     public bool IsNormal() => _currentData == _stateData.Normal;
     public bool IsSprint() => _currentData == _stateData.Sprint;
     public bool IsSlide() => _currentData == _stateData.Slide;
