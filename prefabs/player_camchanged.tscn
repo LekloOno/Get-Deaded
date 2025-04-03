@@ -955,11 +955,11 @@ _slide = NodePath("../../Actions/Crouch/PM_Slide")
 
 [node name="PM_AirState" type="Node" parent="Movement/PM_SurfaceControl" node_paths=PackedStringArray("_sprintInput", "_crouch", "_slide")]
 script = ExtResource("72_0vaqj")
-_slowMaxSpeed = 7.0
+_slowMaxSpeed = 6.0
 _speedCurveStrength = 2.0
 _slowAccel = 3.0
 _accelCurveStrength = 2.0
-_concreteMaxSpeed = 4.0
+_concreteMaxSpeed = 4.5
 _stateData = ExtResource("23_jl0xl")
 _sprintInput = NodePath("../../../PIM_Arena/PI_Sprint")
 _crouch = NodePath("../../Actions/Crouch/PM_Crouch")
