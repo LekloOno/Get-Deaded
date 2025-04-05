@@ -8,6 +8,7 @@ public partial class E_Ennemy : CharacterBody3D
     [Export] private MeshInstance3D _surfaceMesh;
     [Export] private MeshInstance3D _jointMesh;
     [Export] private GL_Dropper _lootDropper;
+    [Export] private PC_TraumaCauser _traumaCauser;
     private StandardMaterial3D _surfaceMeshMaterial;
     private StandardMaterial3D _jointMeshMaterial;
     private SceneTreeTimer _hideTimer;
@@ -29,6 +30,7 @@ public partial class E_Ennemy : CharacterBody3D
     public void PlayDeath(GC_Health health)
     {
         _lootDropper.Drop();
+        _traumaCauser.CauseTrauma();
         Disable();
     }
 
