@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://fo74v01ot17s"]
+
+[ext_resource type="Script" uid="uid://d15clqym1lgvu" path="res://script/player/camera/annimation/trauma/causers/undirect/PCT_UndirectScalable.cs" id="1_jldyy"]
+[ext_resource type="Script" uid="uid://b45bkdess3pld" path="res://script/engine_tools/math/curve/float/MATH_LinearCurve.cs" id="2_wl6d4"]
+
+[sub_resource type="Resource" id="Resource_hauau"]
+script = ExtResource("2_wl6d4")
+_minInput = 8.0
+_maxInput = 40.0
+_minOutput = 0.21
+_maxOutput = 0.12
+metadata/_custom_type_script = "uid://b45bkdess3pld"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ln32h"]
+radius = 40.0
+
+[node name="BotDieTrauma" type="Area3D"]
+script = ExtResource("1_jldyy")
+_curveSampler = SubResource("Resource_hauau")
+_amount = 0.21
+metadata/_custom_type_script = "uid://d15clqym1lgvu"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02954, 0)
+shape = SubResource("SphereShape3D_ln32h")

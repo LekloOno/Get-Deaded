@@ -1,4 +1,4 @@
-[gd_scene load_steps=148 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=149 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://script/player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://assets/script/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -111,6 +111,7 @@
 [ext_resource type="Script" uid="uid://b2flfi73k8d71" path="res://script/ui/viewport/UI_SpatialViewport.cs" id="96_w8edb"]
 [ext_resource type="Script" uid="uid://cjkogi1w2j3wf" path="res://script/ui/viewport/UI_SpatialVPCamera.cs" id="97_0vaqj"]
 [ext_resource type="Script" uid="uid://51kwj2ldm4xq" path="res://script/player/camera/annimation/trauma/causers/direct/PCT_Fire.cs" id="99_hbsv2"]
+[ext_resource type="Script" uid="uid://r8ad50yt78dm" path="res://script/player/camera/annimation/trauma/causers/direct/PCT_ContinuousFire.cs" id="100_cqns0"]
 
 [sub_resource type="Curve" id="Curve_ux8de"]
 _limits = [-0.5, 1.0, 0.0, 1.0]
@@ -1120,11 +1121,12 @@ _shakeableCamera = NodePath("../../../Camera Pivot/PC_Anchor/Camera Control/PC_R
 metadata/_custom_type_script = "uid://51kwj2ldm4xq"
 
 [node name="Track" type="Node" parent="PW_WeaponsHandler/Trauma" node_paths=PackedStringArray("_shakeableCamera")]
-script = ExtResource("99_hbsv2")
+script = ExtResource("100_cqns0")
+_max = 0.15
 _fire = ExtResource("88_ewcnl")
-_amount = 0.08
+_amount = 0.1
 _shakeableCamera = NodePath("../../../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable")
-metadata/_custom_type_script = "uid://51kwj2ldm4xq"
+metadata/_custom_type_script = "uid://r8ad50yt78dm"
 
 [node name="Connectors" type="Node" parent="."]
 

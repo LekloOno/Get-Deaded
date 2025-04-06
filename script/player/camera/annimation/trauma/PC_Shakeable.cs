@@ -47,6 +47,9 @@ public partial class PC_Shakeable : Area3D
         SetProcess(true);
     }
 
+    public void AddClampedTrauma(float amount, float max) =>
+        AddTrauma(Mathf.Max(Mathf.Min(_trauma + amount, max) - _trauma, 0f));
+
     public float GetShakeIntensity() => _trauma * _trauma;
     public float GetNoiseFromSeed(int seed)
     {
