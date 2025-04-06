@@ -5,9 +5,9 @@
 
 [sub_resource type="Resource" id="Resource_hauau"]
 script = ExtResource("2_wl6d4")
-_minInput = 8.0
+_minInput = 5.0
 _maxInput = 40.0
-_minOutput = 0.21
+_minOutput = 0.42
 _maxOutput = 0.12
 metadata/_custom_type_script = "uid://b45bkdess3pld"
 

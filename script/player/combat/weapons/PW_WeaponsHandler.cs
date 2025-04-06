@@ -19,6 +19,7 @@ public partial class PW_WeaponsHandler : Node
     [Export] private Array<PW_Weapon> _weapons;
     [Export] private PW_Weapon _melee;
     [Export] private PM_SurfaceControl _surfaceControl;
+    [Export] private float _meleeRecover;
     public EventHandler<ShotHitEventArgs> Hit;
 
     public SwitchEvent SwitchStarted;
@@ -59,6 +60,7 @@ public partial class PW_WeaponsHandler : Node
     private bool _ready = true;
 
     private SceneTreeTimer _reloadTimer;
+    private SceneTreeTimer _meleeRecoverTimer;
     
 
     public override void _Ready()
@@ -85,12 +87,42 @@ public partial class PW_WeaponsHandler : Node
         _weaponsInput.OnSwitch += Switch;
         _weaponsInput.OnHolster += Holster;
         _weaponsInput.OnReload += Reload;
+        _weaponsInput.OnStartMelee += DirectMeleeStart;
+        _weaponsInput.OnStopMelee += DirectMeleeStop;
 
         SwitchEnded += (o, e) => Available?.Invoke();
         ReloadReady += () => Available?.Invoke();
 
         int nextIndex = (_weaponIndex + 1) % _weapons.Count;
         Initialized?.Invoke(_melee, _weapons[_weaponIndex], nextIndex, _weapons);
+    }
+
+    private void DirectMeleeStop(object sender, EventArgs e)
+    {
+        _melee.HandleSecondaryDown();
+    }
+
+    private void DirectMeleeStart(object sender, EventArgs e)
+    {
+        CancelReload();
+        _activeWeapon.HandleDisable();
+        _melee.HandlePrimaryDown();
+        _ready = false;
+
+        if (_switchingOut || _switchingIn)
+            EndSwitch();
+
+        if (_meleeRecoverTimer != null)
+            _meleeRecoverTimer.Timeout -= EndMeleeRecover;
+
+        _meleeRecoverTimer = GetTree().CreateTimer(_meleeRecover);
+        _meleeRecoverTimer.Timeout += EndMeleeRecover;
+    }
+
+    private void EndMeleeRecover()
+    {
+        _ready = true;
+        Available?.Invoke();
     }
 
     public void InitData(out PW_Weapon active, out PW_Weapon nextHolster, out int nextIndex, out Array<PW_Weapon> weapons)
@@ -214,7 +246,7 @@ public partial class PW_WeaponsHandler : Node
 
     public void Reload(object sender, EventArgs e)
     {
-        if(_reloading || IsSwitching())
+        if(!_ready || _reloading || IsSwitching())
             return;
 
         if(!_activeWeapon.HandleCanReload(out float reloadTime))

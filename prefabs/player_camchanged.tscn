@@ -1126,6 +1126,7 @@ _weaponsInput = NodePath("../PIM_Arena/PI_Weapons")
 _weapons = Array[Object]([SubResource("Resource_fdvd6"), SubResource("Resource_fvk8i")])
 _melee = SubResource("Resource_5dw8r")
 _surfaceControl = NodePath("../Movement/PM_SurfaceControl")
+_meleeRecover = 0.6
 metadata/_custom_type_script = "uid://b4hdeuwma0ma8"
 
 [node name="Weapons" type="Node3D" parent="PW_WeaponsHandler"]

@@ -8,4 +8,5 @@ public class ACTIONS_Combat(StringName value) : ACTIONS_Action(value)
     public static readonly ACTIONS_Combat SWITCH = new("switch");
     public static readonly ACTIONS_Combat HOLSTER = new("holster");
     public static readonly ACTIONS_Combat RELOAD = new("reload");
+    public static readonly ACTIONS_Combat MELEE = new("melee");
 }

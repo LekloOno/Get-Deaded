@@ -11,6 +11,8 @@ public partial class PI_Weapons : PI_InputGlobalAction
     public EventHandler OnSwitch;
     public EventHandler OnHolster;
     public EventHandler OnReload;
+    public EventHandler OnStartMelee;
+    public EventHandler OnStopMelee;
 
     public override void _UnhandledInput(InputEvent @event)
     {
@@ -28,5 +30,9 @@ public partial class PI_Weapons : PI_InputGlobalAction
             OnHolster?.Invoke(this, EventArgs.Empty);
         else if (@event.IsActionPressed(ACTIONS_Combat.RELOAD))
             OnReload?.Invoke(this, EventArgs.Empty);
+        else if (@event.IsActionPressed(ACTIONS_Combat.MELEE))
+            OnStartMelee?.Invoke(this, EventArgs.Empty);
+        else if (@event.IsActionReleased(ACTIONS_Combat.MELEE))
+            OnStopMelee?.Invoke(this, EventArgs.Empty);
     }
 }
