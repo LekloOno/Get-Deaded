@@ -5,6 +5,7 @@ using Godot.Collections;
 public partial class PCT_Undirect : Area3D
 {
     [Export] protected float _amount = 0.1f;
+
     public override void _Ready()
     {
         CollisionLayer = 0;
@@ -18,6 +19,16 @@ public partial class PCT_Undirect : Area3D
         {
             if (area is PC_Shakeable shakeable)
                 shakeable.AddTrauma(ProcessedAmount(shakeable));
+        }
+    }
+
+    public void CauseClampedTrauma(float max)
+    {
+        Array<Area3D> traumaAreas = GetOverlappingAreas();
+        foreach (Area3D area in traumaAreas)
+        {
+            if (area is PC_Shakeable shakeable)
+                shakeable.AddClampedTrauma(ProcessedAmount(shakeable), max);
         }
     }
 

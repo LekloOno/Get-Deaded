@@ -1,4 +1,4 @@
-[gd_scene load_steps=153 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=156 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://script/player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://assets/script/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -287,6 +287,13 @@ _trailSpeed = 5.0
 _inclination = 87.0
 metadata/_custom_type_script = "uid://0w0m608ktkwu"
 
+[sub_resource type="Resource" id="Resource_btq8w"]
+script = ExtResource("59_n5lof")
+_halfInput = 0.0
+_minOutput = 0.0
+_maxOutput = 0.4
+metadata/_custom_type_script = "uid://t5n7py52g5oj"
+
 [sub_resource type="Resource" id="Resource_nkqrs"]
 script = ExtResource("81_f31u3")
 _maxDistance = 2.0
@@ -294,6 +301,10 @@ _hitData = SubResource("Resource_u3xwg")
 _originOffset = Vector3(0, 0, 0)
 _directionOffset = Vector3(0, 0, 0)
 _trails = Array[Object]([SubResource("Resource_cqits")])
+_traumaSampler = SubResource("Resource_btq8w")
+_traumaRadius = 2.5
+_clampTrauma = true
+_maxTrauma = 0.6
 metadata/_custom_type_script = "uid://fc7gkofu3df7"
 
 [sub_resource type="Resource" id="Resource_jbksd"]
@@ -332,6 +343,18 @@ script = ExtResource("14_0agck")
 _noise = SubResource("FastNoiseLite_r6ddn")
 _reductionRate = 1.0
 _noiseSpeed = 50.0
+metadata/_custom_type_script = "uid://c0vf7xmi1u8t4"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0agck"]
+frequency = 0.05
+fractal_octaves = 4
+fractal_gain = 0.8
+
+[sub_resource type="Resource" id="Resource_yw1gl"]
+script = ExtResource("14_0agck")
+_noise = SubResource("FastNoiseLite_0agck")
+_reductionRate = 0.6
+_noiseSpeed = 13.0
 metadata/_custom_type_script = "uid://c0vf7xmi1u8t4"
 
 [node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("_healthManager", "_walkProcess", "_wallJump", "_wallClimb", "_groundState", "_cameraControl", "_surfaceControl", "_straffeSnap")]
@@ -1153,6 +1176,14 @@ _traumaLayer = SubResource("Resource_0fwqu")
 _amount = 0.1
 _shakeableCamera = NodePath("../../../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable")
 metadata/_custom_type_script = "uid://r8ad50yt78dm"
+
+[node name="Melee" type="Node" parent="PW_WeaponsHandler/Trauma" node_paths=PackedStringArray("_shakeableCamera")]
+script = ExtResource("99_hbsv2")
+_fire = SubResource("Resource_jbksd")
+_traumaLayer = SubResource("Resource_yw1gl")
+_amount = 0.4
+_shakeableCamera = NodePath("../../../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable")
+metadata/_custom_type_script = "uid://51kwj2ldm4xq"
 
 [node name="Connectors" type="Node" parent="."]
 

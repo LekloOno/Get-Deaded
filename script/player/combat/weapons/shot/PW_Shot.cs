@@ -8,6 +8,12 @@ public abstract partial class PW_Shot : Resource, GC_IHitDealer
     [Export] protected Vector3 _originOffset = Vector3.Zero;
     [Export] protected Vector3 _directionOffset = Vector3.Zero;
     [Export] protected Godot.Collections.Array<VFX_Trail> _trails;
+    [Export] private MATH_FloatCurveSampler _traumaSampler;
+    [Export] private float _traumaRadius = 1f;
+    [Export] private bool _clampTrauma = true;
+    [Export] private float _maxTrauma = 0.2f;
+
+    private PCT_UndirectScalable _traumaCauser;
     protected Node3D _barel;
 
     public EventHandler<ShotHitEventArgs> Hit;
@@ -18,6 +24,18 @@ public abstract partial class PW_Shot : Resource, GC_IHitDealer
     {
         _barel = barel;
         _hitData.InitializeModifiers();
+
+        if (_traumaSampler == null)
+            return;
+
+        if (_traumaCauser != null)
+            _traumaCauser.QueueFree();
+        
+        _traumaCauser = new(_traumaSampler);
+        CollisionShape3D causerShape = new(){Shape = new SphereShape3D(){Radius = _traumaRadius}};
+        _traumaCauser.AddChild(causerShape);
+
+        _barel.AddChild(_traumaCauser);
     }    
 
     //public void Shoot(Vector3 origin, Vector3 direction) =>
@@ -29,5 +47,15 @@ public abstract partial class PW_Shot : Resource, GC_IHitDealer
     {
         Hit?.Invoke(this, e);
         e.HurtBox?.TriggerDamageParticles(hitPosition, from);
+        
+        if (_traumaCauser == null)
+            return;
+
+        _traumaCauser.GlobalPosition = hitPosition;
+
+        if (_clampTrauma)
+            _traumaCauser.CauseClampedTrauma(_maxTrauma);
+        else
+            _traumaCauser.CauseTrauma();
     }
 }

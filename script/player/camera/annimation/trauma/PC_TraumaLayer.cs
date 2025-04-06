@@ -14,7 +14,7 @@ public partial class PC_TraumaLayer : Resource
         if (!_active)
             return Vector3.Zero;
 
-        _trauma -= delta;
+        _trauma -= delta * _reductionRate;
 
         if (_trauma > 0)
         {

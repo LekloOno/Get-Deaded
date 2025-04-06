@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PWF_Ponctual" load_steps=16 format=3 uid="uid://ca7lrmxnc1hsm"]
+[gd_resource type="Resource" script_class="PWF_Ponctual" load_steps=18 format=3 uid="uid://ca7lrmxnc1hsm"]
 
 [ext_resource type="Script" uid="uid://cjmiash71uc7b" path="res://script/global/combat/hit/hit/GC_Hit.cs" id="1_1tkve"]
 [ext_resource type="Script" uid="uid://djecalg7cxlvg" path="res://script/player/combat/weapons/fire/recoil/PW_ConstantRecoil.cs" id="1_7yt7b"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://dmsklefspdvlw" path="res://script/player/combat/weapons/fire/PWF_Ponctual.cs" id="4_2sdg2"]
 [ext_resource type="Script" uid="uid://btuswij6bk44u" path="res://script/vfx/combat/trail/line/types/VFX_RectangleLine.cs" id="4_h2md4"]
 [ext_resource type="Script" uid="uid://ddcjrbuymtie4" path="res://script/vfx/combat/trail/line/VFX_LineTrail.cs" id="5_8e4cj"]
+[ext_resource type="Script" uid="uid://t5n7py52g5oj" path="res://script/engine_tools/math/curve/float/MATH_FastLogCurve.cs" id="7_5youj"]
 
 [sub_resource type="Resource" id="Resource_5youj"]
 script = ExtResource("1_c3nw5")
@@ -49,6 +50,13 @@ _lineType = SubResource("Resource_bo6g0")
 _material = SubResource("StandardMaterial3D_lx4on")
 metadata/_custom_type_script = "uid://ddcjrbuymtie4"
 
+[sub_resource type="Resource" id="Resource_l20hf"]
+script = ExtResource("7_5youj")
+_halfInput = 0.2
+_minOutput = 0.0
+_maxOutput = 0.5
+metadata/_custom_type_script = "uid://t5n7py52g5oj"
+
 [sub_resource type="Resource" id="Resource_ewcnl"]
 script = ExtResource("3_86bjm")
 _maxDistance = 100.0
@@ -56,6 +64,10 @@ _hitData = SubResource("Resource_5dw8r")
 _originOffset = Vector3(0, 0, 0)
 _directionOffset = Vector3(0, 0, 0)
 _trails = Array[Object]([ExtResource("2_7yt7b"), SubResource("Resource_00ofc")])
+_traumaSampler = SubResource("Resource_l20hf")
+_traumaRadius = 2.0
+_clampTrauma = true
+_maxTrauma = 0.6
 metadata/_custom_type_script = "uid://fc7gkofu3df7"
 
 [resource]
