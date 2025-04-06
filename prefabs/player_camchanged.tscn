@@ -22,7 +22,7 @@
 [ext_resource type="AudioStream" uid="uid://dk7e4dghcdv1" path="res://assets/sounds/woosh/woosh1.wav" id="13_ruv8u"]
 [ext_resource type="Script" uid="uid://bgi6chbsxv7hc" path="res://script/player/input/actions/movement/PI_Jump.cs" id="13_ua84m"]
 [ext_resource type="Script" uid="uid://d3uwl2heay8uf" path="res://script/player/audio/PA_Sound.cs" id="13_uyiqg"]
-[ext_resource type="Script" uid="uid://buwnj0x0u8flu" path="res://script/player/camera/annimation/PC_Shakeable.cs" id="13_vdq31"]
+[ext_resource type="Script" uid="uid://buwnj0x0u8flu" path="res://script/player/camera/annimation/trauma/PC_Shakeable.cs" id="13_vdq31"]
 [ext_resource type="AudioStream" uid="uid://c202uar3rg40l" path="res://assets/sounds/footsteps/concrete-step1.wav" id="14_6x03f"]
 [ext_resource type="Script" uid="uid://db8e5l76dsikn" path="res://script/ui/combat/health/UI_HealthBar.cs" id="14_elf0p"]
 [ext_resource type="Script" uid="uid://cn5ymkg0qsvpn" path="res://script/player/input/actions/movement/PI_Sprint.cs" id="14_puula"]
