@@ -19,10 +19,10 @@ public partial class PW_Alternate : PW_Weapon
     }
 
     protected override void Disable() => _currentFire.Disable();
-    protected override void PrimaryDown() => _currentFire.HandlePress();
-    protected override void PrimaryUp() => _currentFire.HandleRelease();
-    protected override void SecondaryDown() => _secondaryFire.HandlePress();
-    protected override void SecondaryUp() => _secondaryFire.HandleRelease();
+    protected override bool PrimaryDown() => _currentFire.HandlePress();
+    protected override bool PrimaryUp() => _currentFire.HandleRelease();
+    protected override bool SecondaryDown() => _secondaryFire.HandlePress();
+    protected override bool SecondaryUp() => _secondaryFire.HandleRelease();
 
     protected override void StartADS()
     {
@@ -62,4 +62,11 @@ public partial class PW_Alternate : PW_Weapon
     }
 
     public override List<PW_Fire> GetFireModes() => [_primaryFire, _secondaryFire];
+
+    public override void ResetBuffer()
+    {
+        _primaryFire.ResetBuffer();
+        _secondaryFire.ResetBuffer();
+    }
+
 }

@@ -90,6 +90,8 @@ public partial class PW_WeaponsHandler : Node
         _weaponsInput.OnStartMelee += DirectMeleeStart;
         _weaponsInput.OnStopMelee += DirectMeleeStop;
 
+        _melee.Shot += OnMeleeShot;
+
         SwitchEnded += (o, e) => Available?.Invoke();
         ReloadReady += () => Available?.Invoke();
 
@@ -97,19 +99,20 @@ public partial class PW_WeaponsHandler : Node
         Initialized?.Invoke(_melee, _weapons[_weaponIndex], nextIndex, _weapons);
     }
 
-    private void DirectMeleeStop(object sender, EventArgs e)
-    {
-        _melee.HandleSecondaryDown();
-    }
+    private void DirectMeleeStop(object sender, EventArgs e) => _melee.HandlePrimaryUp();
+    private void DirectMeleeStart(object sender, EventArgs e) => _melee.HandlePrimaryDown();
 
-    private void DirectMeleeStart(object sender, EventArgs e)
+    private void OnMeleeShot()
     {
+        if (_activeWeapon == _melee)
+            return;
+        
         CancelReload();
         _activeWeapon.HandleDisable();
-        _melee.HandlePrimaryDown();
+        
         _ready = false;
 
-        if (_switchingOut || _switchingIn)
+        if (_switchingIn)
             EndSwitch();
 
         if (_meleeRecoverTimer != null)
@@ -163,6 +166,7 @@ public partial class PW_WeaponsHandler : Node
 
     private void HandleStartPrimary(object sender, EventArgs e)
     {
+        _melee.ResetBuffer();
         if (ActiveWeaponHalted())
         {
             BufferPrimary();

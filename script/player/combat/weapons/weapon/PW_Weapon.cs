@@ -19,6 +19,7 @@ public abstract partial class PW_Weapon : Resource
     protected Node3D _barel;
     private PM_SurfaceControl _surfaceControl;
     public EventHandler<ShotHitEventArgs> Hit;
+    public Action Shot;
     public Action ADSStarted;
     public Action ADSStopped;
     public bool ADSActive {get; private set;} = false;          // Not ideal, maybe make so ads return 3 state instead of true/false to know when nothing happened.
@@ -59,8 +60,8 @@ public abstract partial class PW_Weapon : Resource
             DeactivateADS();
     }
 
-    public void HandlePrimaryDown() => PrimaryDown();   // For naming consistency
-    public void HandlePrimaryUp() => PrimaryUp();       // For naming consistency
+    public bool HandlePrimaryDown() => PrimaryDown();   // For naming consistency
+    public bool HandlePrimaryUp() => PrimaryUp();       // For naming consistency
     public void HandleReload() => Reload();             // For naming consistency
     public bool HandleCanReload(out float reloadTime)
     {
@@ -87,6 +88,7 @@ public abstract partial class PW_Weapon : Resource
     /// </summary>
     /// <returns></returns>
     public abstract List<PW_Fire> GetFireModes();
+    public abstract void ResetBuffer();
 
     /// <summary>
     /// Allow for some specific initialization.
@@ -100,20 +102,20 @@ public abstract partial class PW_Weapon : Resource
     /// <summary>
     /// Called when the primary input is pressed down. Will typically handle shooting process.
     /// </summary>
-    protected abstract void PrimaryDown();
+    protected abstract bool PrimaryDown();
     /// <summary>
     /// Called when the primary input is released up. Could handle some special behaviors, or shooting.
     /// </summary>
-    protected abstract void PrimaryUp();
+    protected abstract bool PrimaryUp();
 
     /// <summary>
     /// Called if the ADS handler didn't consume the incoming secondary input pressed down.
     /// </summary>
-    protected abstract void SecondaryDown();
+    protected abstract bool SecondaryDown();
     /// <summary>
     /// Called if the ADS handler didn't consume the incoming secondary input pressed up.
     /// </summary>
-    protected abstract void SecondaryUp();
+    protected abstract bool SecondaryUp();
     /// <summary>
     /// Called right after handling a starting ADS input.
     /// </summary>

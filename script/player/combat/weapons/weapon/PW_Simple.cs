@@ -9,6 +9,7 @@ public partial class PW_Simple : PW_Weapon
 
     protected override void WeaponInitialize(PC_Recoil recoilController)
     {
+        _fire.Shot += (o, e) => Shot?.Invoke();
         _fire.Initialize(_camera, _sight, _barel, recoilController);
         _fire.Hit += (o, e) => Hit?.Invoke(o, e);
 
@@ -17,10 +18,10 @@ public partial class PW_Simple : PW_Weapon
     }
 
     protected override void Disable() => _fire.Disable();
-    protected override void PrimaryDown() => _fire.HandlePress();
-    protected override void PrimaryUp() => _fire.HandleRelease();
-    protected override void SecondaryDown() {}
-    protected override void SecondaryUp() {}
+    protected override bool PrimaryDown() => _fire.HandlePress();
+    protected override bool PrimaryUp() => _fire.HandleRelease();
+    protected override bool SecondaryDown() => true;
+    protected override bool SecondaryUp() => true;
 
     protected override void StartADS()
     {
@@ -49,4 +50,5 @@ public partial class PW_Simple : PW_Weapon
     public override bool PickAmmo(int amount, bool magazine, int targetFireIndex) => _fire.PickAmmo(amount, magazine);
 
     public override List<PW_Fire> GetFireModes() => [_fire];
+    public override void ResetBuffer() => _fire.ResetBuffer();
 }

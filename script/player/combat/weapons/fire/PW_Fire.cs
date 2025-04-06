@@ -100,24 +100,26 @@ public abstract partial class PW_Fire : Resource
         direction = -_sight.GlobalBasis.Z;
     }
 
-    public void HandlePress()
+    public bool HandlePress()
     {
         ResetBuffer();
 
         if(Press())
-            return;
+            return true;
         
         BufferPress();
+        return false;
     }
 
-    public void HandleRelease()
+    public bool HandleRelease()
     {
         ResetBuffer();
 
         if(Release())
-            return;
+            return true;
         
         BufferRelease();
+        return false;
     }
 
     public void Reload()
@@ -125,7 +127,7 @@ public abstract partial class PW_Fire : Resource
         _ammos.Reload();
     }
 
-    private void ResetBuffer()
+    public void ResetBuffer()
     {
         if (_pressBuffered)
         {
