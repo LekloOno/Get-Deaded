@@ -1,5 +1,4 @@
 using Godot;
-using Godot.Collections;
 
 public partial class E_Ennemy : CharacterBody3D
 {
@@ -8,7 +7,7 @@ public partial class E_Ennemy : CharacterBody3D
     [Export] private MeshInstance3D _surfaceMesh;
     [Export] private MeshInstance3D _jointMesh;
     [Export] private GL_Dropper _lootDropper;
-    [Export] private PC_TraumaCauser _traumaCauser;
+    [Export] private PCT_Undirect _traumaCauser;
     private StandardMaterial3D _surfaceMeshMaterial;
     private StandardMaterial3D _jointMeshMaterial;
     private SceneTreeTimer _hideTimer;

@@ -20,6 +20,7 @@ public abstract partial class PW_Fire : Resource
     public MATH_AdditiveModifiers SpreadMultiplier {get; private set;} = new();
     public MATH_AdditiveModifiers RecoilMultiplier {get => _recoil.Modifier;}
     public EventHandler<ShotHitEventArgs> Hit;
+    public EventHandler<int> Shot;      // Event arg is the amount of shots shot, most likely _shots.Count
     protected Node3D _sight;
     protected PC_DirectCamera _camera;
 
@@ -87,6 +88,8 @@ public abstract partial class PW_Fire : Resource
         
         foreach (PW_Shot shot in _shots)
             shot.Shoot(origin, direction);
+        
+        Shot?.Invoke(this, _shots.Count);
     }
 
     protected bool CanShoot() => Time.GetTicksMsec() - _lastShot >= _fireRate && _ammos.DidConsume(_ammosPerShot);

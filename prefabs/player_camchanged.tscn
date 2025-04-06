@@ -1,4 +1,4 @@
-[gd_scene load_steps=147 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=148 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://script/player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://assets/script/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -83,7 +83,7 @@
 [ext_resource type="Script" uid="uid://dqcp38rr3u5gx" path="res://script/global/combat/health/GC_Health.cs" id="47_rvgf0"]
 [ext_resource type="Script" uid="uid://be02fh6y0vldv" path="res://script/global/combat/health/GC_Shield.cs" id="48_h1ove"]
 [ext_resource type="Script" uid="uid://bwxjledgrnbsb" path="res://script/player/input/maps/PIM_Arena.cs" id="49_stdu8"]
-[ext_resource type="Script" uid="uid://3a0e4x3r12vl" path="res://script/player/health/PH_Trauma.cs" id="58_r6ddn"]
+[ext_resource type="Script" uid="uid://3a0e4x3r12vl" path="res://script/player/camera/annimation/trauma/causers/direct/PCT_Health.cs" id="58_r6ddn"]
 [ext_resource type="Script" uid="uid://fevuhhr2vg16" path="res://script/player/input/actions/combat/PI_Revive.cs" id="58_ufgmq"]
 [ext_resource type="Script" uid="uid://t5n7py52g5oj" path="res://script/engine_tools/math/curve/float/MATH_FastLogCurve.cs" id="59_n5lof"]
 [ext_resource type="Script" uid="uid://diuvohbhr003k" path="res://script/player/input/actions/combat/PI_Weapons.cs" id="60_jlgrh"]
@@ -110,6 +110,7 @@
 [ext_resource type="Script" uid="uid://cxiwvat6vddlp" path="res://script/player/combat/weapons/ammunition/PW_Ammunition.cs" id="92_3bwxm"]
 [ext_resource type="Script" uid="uid://b2flfi73k8d71" path="res://script/ui/viewport/UI_SpatialViewport.cs" id="96_w8edb"]
 [ext_resource type="Script" uid="uid://cjkogi1w2j3wf" path="res://script/ui/viewport/UI_SpatialVPCamera.cs" id="97_0vaqj"]
+[ext_resource type="Script" uid="uid://51kwj2ldm4xq" path="res://script/player/camera/annimation/trauma/causers/direct/PCT_Fire.cs" id="99_hbsv2"]
 
 [sub_resource type="Curve" id="Curve_ux8de"]
 _limits = [-0.5, 1.0, 0.0, 1.0]
@@ -897,10 +898,8 @@ metadata/_custom_type_script = "uid://dettpmrm6albd"
 [node name="PH_Trauma" type="Node" parent="Body/PH_Manager" node_paths=PackedStringArray("_healthManager", "_shakeableCamera")]
 script = ExtResource("58_r6ddn")
 _healthManager = NodePath("..")
-_shakeableCamera = NodePath("../../../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable")
 _curveSampler = SubResource("Resource_hbsv2")
-_minTrauma = 0.1
-_maxDamage = 60.0
+_shakeableCamera = NodePath("../../../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable")
 metadata/_custom_type_script = "uid://3a0e4x3r12vl"
 
 [node name="PIM_Arena" type="Node" parent="." node_paths=PackedStringArray("_controller", "_walkInput", "_sprintInput", "_jumpInput", "_crouchDispatcherInput", "_weaponsInput", "_reviveInput")]
@@ -1110,6 +1109,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0)
 
 [node name="Barrel" type="Node3D" parent="PW_WeaponsHandler/Weapons"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.287144, -0.225284, -0.236747)
+
+[node name="Trauma" type="Node" parent="PW_WeaponsHandler"]
+
+[node name="Click" type="Node" parent="PW_WeaponsHandler/Trauma" node_paths=PackedStringArray("_shakeableCamera")]
+script = ExtResource("99_hbsv2")
+_fire = ExtResource("86_8j20c")
+_amount = 0.3
+_shakeableCamera = NodePath("../../../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable")
+metadata/_custom_type_script = "uid://51kwj2ldm4xq"
+
+[node name="Track" type="Node" parent="PW_WeaponsHandler/Trauma" node_paths=PackedStringArray("_shakeableCamera")]
+script = ExtResource("99_hbsv2")
+_fire = ExtResource("88_ewcnl")
+_amount = 0.08
+_shakeableCamera = NodePath("../../../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable")
+metadata/_custom_type_script = "uid://51kwj2ldm4xq"
 
 [node name="Connectors" type="Node" parent="."]
 
