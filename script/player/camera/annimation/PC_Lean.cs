@@ -22,12 +22,12 @@ public partial class PC_Lean : Node3D
 
     public override void _Process(double delta)
     {
-        Vector3 planeAccel = PHX_Vector3Ext.Flat(_controller.Acceleration);
+        Vector3 planeAccel = MATH_Vector3Ext.Flat(_controller.Acceleration);
         float damping = planeAccel.Length() > _dampedAcceleration.Length()
             ? AttackDamping
             : DecayDamping;
 
-        _dampedAcceleration = PHX_Vector3Ext.SmoothDamp
+        _dampedAcceleration = MATH_Vector3Ext.SmoothDamp
         (
             current: _dampedAcceleration,
             target: planeAccel,

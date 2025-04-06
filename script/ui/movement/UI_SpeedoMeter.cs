@@ -12,7 +12,7 @@ public partial class UI_SpeedoMeter : Label3D
 
     public override void _Process(double delta)
     {
-        Vector3 faltVel = PHX_Vector3Ext.Flat(_controller.RealVelocity);
+        Vector3 faltVel = MATH_Vector3Ext.Flat(_controller.RealVelocity);
         float speed = faltVel.Length() * 3.6f;
         float scaledSpeed = (speed - _minSpeed)/(_maxSpeed-_minSpeed);
         scaledSpeed = Mathf.Clamp(scaledSpeed, 0, 1);

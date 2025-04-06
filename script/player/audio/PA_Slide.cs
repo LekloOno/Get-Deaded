@@ -89,7 +89,7 @@ public partial class PA_Slide : Node3D
         }
 
         float elapsedScaled = elapsed/currentFadeTime;
-        float lerped = PHX_Math.LerpDB(_startVolume, currentTargetVolume, elapsedScaled);
+        float lerped = MATH_Sound.LerpDB(_startVolume, currentTargetVolume, elapsedScaled);
         
         _slideHold.VolumeDb = lerped;
     }

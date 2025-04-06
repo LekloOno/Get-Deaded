@@ -138,7 +138,7 @@ public partial class PM_WallClimb : PM_Action
             return;
 
         _controller.AdditionalForces.AddImpulse(normal*_kickStrength);
-        _controller.AdditionalForces.AddImpulse(-PHX_Vector3Ext.Flat(_controller.Velocity)*_kickDebuf);
+        _controller.AdditionalForces.AddImpulse(-MATH_Vector3Ext.Flat(_controller.Velocity)*_kickDebuf);
         OnKick?.Invoke(this, EventArgs.Empty);
     }
 

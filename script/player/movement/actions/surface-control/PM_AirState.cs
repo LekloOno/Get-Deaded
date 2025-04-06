@@ -12,7 +12,7 @@ public partial class PM_AirState : PM_SurfaceState
 
     public override Vector3 Accelerate(Vector3 wishDir, Vector3 velocity, float speedModifier, float delta)
     {
-        float flatSpeed = PHX_Vector3Ext.Flat(velocity).Length();
+        float flatSpeed = MATH_Vector3Ext.Flat(velocity).Length();
         if (flatSpeed >= _concreteMaxSpeed)
             return base.Accelerate(wishDir, velocity, speedModifier, delta);
 

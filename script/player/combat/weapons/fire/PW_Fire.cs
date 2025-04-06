@@ -17,8 +17,8 @@ public abstract partial class PW_Fire : Resource
     [Export] protected uint _baseAmmos;
     [Export] public bool IsDerived;     // To indicate that this fire should be considered as a derived fire mode. Only usefull for ui, to not display this fire mode.
     [Export] public Texture2D Icon {get; private set;}
-    public PHX_AdditiveModifiers SpreadMultiplier {get; private set;} = new();
-    public PHX_AdditiveModifiers RecoilMultiplier {get => _recoil.Modifier;}
+    public MATH_AdditiveModifiers SpreadMultiplier {get; private set;} = new();
+    public MATH_AdditiveModifiers RecoilMultiplier {get => _recoil.Modifier;}
     public EventHandler<ShotHitEventArgs> Hit;
     protected Node3D _sight;
     protected PC_DirectCamera _camera;

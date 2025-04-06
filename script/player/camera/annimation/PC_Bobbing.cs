@@ -84,6 +84,6 @@ public partial class PC_Bobbing : Node3D
     public void OnStopSprint(object sender, EventArgs e) => _active = false;
     public void OnStopWalk(object sender, EventArgs e) => _active = false;
 
-    private bool TooSlow() => PHX_Vector3Ext.Flat(_controller.RealVelocity).Length() < _toggleSpeed;
+    private bool TooSlow() => MATH_Vector3Ext.Flat(_controller.RealVelocity).Length() < _toggleSpeed;
 
 }

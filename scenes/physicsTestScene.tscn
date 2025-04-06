@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://dpcvynlmpga4e"]
 
-[ext_resource type="Script" uid="uid://cly25k5keg1ft" path="res://script/physics/bodies/PHX_RepulsionField3D.cs" id="1_8fdsp"]
-[ext_resource type="Script" uid="uid://c3akiwtfovofa" path="res://script/physics/bodies/PHX_RepulsionField3DData.cs" id="2_movqw"]
+[ext_resource type="Script" uid="uid://cly25k5keg1ft" path="res://script/engine_tools/physics/bodies/PHX_RepulsionField3D.cs" id="1_8fdsp"]
+[ext_resource type="Script" uid="uid://c3akiwtfovofa" path="res://script/engine_tools/physics/bodies/PHX_RepulsionField3DData.cs" id="2_movqw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_34mur"]
 sky_top_color = Color(0.395325, 0.782353, 0.992188, 1)

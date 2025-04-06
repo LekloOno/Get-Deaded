@@ -42,7 +42,7 @@ public partial class PC_SlideLedgeAnim : Node3D
             _xDirection = 1f;
             
             Vector3 flatDirAxis = _flatDir.Basis.X.Normalized();
-            Vector3 flatVel = PHX_Vector3Ext.Flat(_controller.RealVelocity.Normalized());
+            Vector3 flatVel = MATH_Vector3Ext.Flat(_controller.RealVelocity.Normalized());
             
             float dot = flatVel.Dot(flatDirAxis);
             _zDirection = (1-Mathf.Abs(dot)) * Mathf.Sign(dot);

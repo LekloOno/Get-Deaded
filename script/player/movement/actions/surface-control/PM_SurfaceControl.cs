@@ -48,7 +48,7 @@ public partial class PM_SurfaceControl : PM_Action
     [Export] private PS_Grounded _groundState;
     [Export] private PM_SurfaceState _ground;
     [Export] private PM_SurfaceState _air;
-    public PHX_AdditiveModifiers SpeedModifiers {get; private set;} = new();       // Modifiers are additive. Resulting speed is _speedModifiers.sum() * _speed
+    public MATH_AdditiveModifiers SpeedModifiers {get; private set;} = new();       // Modifiers are additive. Resulting speed is _speedModifiers.sum() * _speed
     private SceneTreeTimer _delayedGroundTimer;
 
     private PM_SurfaceState _currentSurface;
