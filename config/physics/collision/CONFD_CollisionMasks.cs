@@ -8,4 +8,5 @@ public partial class CONFD_CollisionMasks : Resource
     public uint Environment {get => CONF_Collision.Layers.Environment | CONF_Collision.Layers.EnvironmentEntity;}
     public uint HurtBox {get => 0;}
     public uint Picker {get => CONF_Collision.Layers.Pickup;}
+    public uint Trauma {get => CONF_Collision.Layers.Trauma;}
 }

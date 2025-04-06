@@ -416,6 +416,7 @@ _ledgeClimb = NodePath("../../../../../../../../../../Movement/Actions/Jump/PM_L
 [node name="PC_Shakeable" type="Area3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim"]
 script = ExtResource("13_vdq31")
 _noise = SubResource("FastNoiseLite_r6ddn")
+_maxRotation = Vector3(15, 15, 8)
 metadata/_custom_type_script = "uid://buwnj0x0u8flu"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable"]

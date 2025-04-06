@@ -9,4 +9,5 @@ EnvironmentEntity = 2
 EnnemiesHurtBox = 4
 PlayerHurtBox = 8
 Pickup = 16
+Trauma = 32
 metadata/_custom_type_script = "uid://do0jpdixqwycp"

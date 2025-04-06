@@ -15,4 +15,5 @@ public partial class CONFD_CollisionLayers : Resource
     [Export(PropertyHint.Layers3DPhysics)] public uint EnnemiesHurtBox {get; private set;}
     [Export(PropertyHint.Layers3DPhysics)] public uint PlayerHurtBox {get; private set;}
     [Export(PropertyHint.Layers3DPhysics)] public uint Pickup {get; private set;}
+    [Export(PropertyHint.Layers3DPhysics)] public uint Trauma {get; private set;}
 }
