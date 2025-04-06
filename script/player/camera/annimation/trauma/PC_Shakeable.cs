@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Godot;
 
 [GlobalClass]
@@ -6,14 +8,17 @@ public partial class PC_Shakeable : Area3D
     [Export] private float _reductionRate = 1f;
     [Export] private FastNoiseLite _noise;
     [Export] private float _noiseSpeed = 50f;
+    [Export] private PC_TraumaLayer _baseLayer;
     [Export] private Vector3 _maxRotation = new(10f, 10f, 5f);
+
+    private List<PC_TraumaLayer> _traumaLayers = [];
 
     private float _trauma = 0f;
     private float _time = 0f;
 
     public override void _Ready()
     {
-        SetProcess(false);
+        _traumaLayers = [_baseLayer];
         CollisionLayer = CONF_Collision.Layers.Trauma;
         CollisionMask = 0;
     }
@@ -21,39 +26,16 @@ public partial class PC_Shakeable : Area3D
     public override void _Process(double delta)
     {
         _time += (float)delta;
-        _trauma -= (float)delta * _reductionRate;
 
-        if (_trauma > 0)
-        {
-            float intensity = GetShakeIntensity();
-            Vector3 _shakeAngleIntensity = new(
-                intensity * GetNoiseFromSeed(0),
-                intensity * GetNoiseFromSeed(1),
-                intensity * GetNoiseFromSeed(2)
-                );
-            
-            RotationDegrees = _maxRotation * _shakeAngleIntensity;
-        }
-        else
-        {
-            _trauma = 0f;
-            SetProcess(false);
-        }
+        Vector3 shakeAngleIntensity = Vector3.Zero;
+        foreach(PC_TraumaLayer layer in _traumaLayers)
+            shakeAngleIntensity += layer.GetShakeAngleIntensity((float) delta, _time);
+
+        RotationDegrees = _maxRotation * shakeAngleIntensity;
     }
 
-    public void AddTrauma(float amount)
-    {
-        _trauma = Mathf.Clamp(_trauma + amount, 0f, 1f);
-        SetProcess(true);
-    }
-
-    public void AddClampedTrauma(float amount, float max) =>
-        AddTrauma(Mathf.Max(Mathf.Min(_trauma + amount, max) - _trauma, 0f));
-
-    public float GetShakeIntensity() => _trauma * _trauma;
-    public float GetNoiseFromSeed(int seed)
-    {
-        _noise.Seed = seed;
-        return _noise.GetNoise1D(_time * _noiseSpeed);
-    }
+    public void AddTrauma(float amount) => _baseLayer.AddTrauma(amount);
+    public void AddClampedTrauma(float amount, float max) => _baseLayer.AddClampedTrauma(amount, max);
+    public void AddLayer(PC_TraumaLayer layer) => _traumaLayers.Add(layer);
+    public void RemoveLayer(PC_TraumaLayer layer) => _traumaLayers.Remove(layer);
 }

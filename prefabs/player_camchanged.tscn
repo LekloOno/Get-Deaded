@@ -1,4 +1,4 @@
-[gd_scene load_steps=149 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=153 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://script/player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://assets/script/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -23,6 +23,7 @@
 [ext_resource type="Script" uid="uid://bgi6chbsxv7hc" path="res://script/player/input/actions/movement/PI_Jump.cs" id="13_ua84m"]
 [ext_resource type="Script" uid="uid://d3uwl2heay8uf" path="res://script/player/audio/PA_Sound.cs" id="13_uyiqg"]
 [ext_resource type="Script" uid="uid://buwnj0x0u8flu" path="res://script/player/camera/annimation/trauma/PC_Shakeable.cs" id="13_vdq31"]
+[ext_resource type="Script" uid="uid://c0vf7xmi1u8t4" path="res://script/player/camera/annimation/trauma/PC_TraumaLayer.cs" id="14_0agck"]
 [ext_resource type="AudioStream" uid="uid://c202uar3rg40l" path="res://assets/sounds/footsteps/concrete-step1.wav" id="14_6x03f"]
 [ext_resource type="Script" uid="uid://db8e5l76dsikn" path="res://script/ui/combat/health/UI_HealthBar.cs" id="14_elf0p"]
 [ext_resource type="Script" uid="uid://cn5ymkg0qsvpn" path="res://script/player/input/actions/movement/PI_Sprint.cs" id="14_puula"]
@@ -122,6 +123,13 @@ point_count = 5
 frequency = 0.05
 fractal_octaves = 4
 fractal_gain = 0.8
+
+[sub_resource type="Resource" id="Resource_ahe41"]
+script = ExtResource("14_0agck")
+_noise = SubResource("FastNoiseLite_r6ddn")
+_reductionRate = 1.0
+_noiseSpeed = 50.0
+metadata/_custom_type_script = "uid://c0vf7xmi1u8t4"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_n5lof"]
 radius = 1.5
@@ -312,6 +320,20 @@ Icon = ExtResource("18_0vaqj")
 IconColor = Color(1, 1, 1, 0.8)
 metadata/_custom_type_script = "uid://c3are182lodyx"
 
+[sub_resource type="Resource" id="Resource_0agck"]
+script = ExtResource("14_0agck")
+_noise = SubResource("FastNoiseLite_r6ddn")
+_reductionRate = 1.0
+_noiseSpeed = 50.0
+metadata/_custom_type_script = "uid://c0vf7xmi1u8t4"
+
+[sub_resource type="Resource" id="Resource_0fwqu"]
+script = ExtResource("14_0agck")
+_noise = SubResource("FastNoiseLite_r6ddn")
+_reductionRate = 1.0
+_noiseSpeed = 50.0
+metadata/_custom_type_script = "uid://c0vf7xmi1u8t4"
+
 [node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("_healthManager", "_walkProcess", "_wallJump", "_wallClimb", "_groundState", "_cameraControl", "_surfaceControl", "_straffeSnap")]
 collision_layer = 2
 collision_mask = 3
@@ -427,6 +449,7 @@ _ledgeClimb = NodePath("../../../../../../../../../../Movement/Actions/Jump/PM_L
 [node name="PC_Shakeable" type="Area3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim"]
 script = ExtResource("13_vdq31")
 _noise = SubResource("FastNoiseLite_r6ddn")
+_baseLayer = SubResource("Resource_ahe41")
 _maxRotation = Vector3(15, 15, 8)
 metadata/_custom_type_script = "uid://buwnj0x0u8flu"
 
@@ -1116,6 +1139,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.287144, -0.225284, -0.23674
 [node name="Click" type="Node" parent="PW_WeaponsHandler/Trauma" node_paths=PackedStringArray("_shakeableCamera")]
 script = ExtResource("99_hbsv2")
 _fire = ExtResource("86_8j20c")
+_traumaLayer = SubResource("Resource_0agck")
 _amount = 0.3
 _shakeableCamera = NodePath("../../../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable")
 metadata/_custom_type_script = "uid://51kwj2ldm4xq"
@@ -1124,6 +1148,7 @@ metadata/_custom_type_script = "uid://51kwj2ldm4xq"
 script = ExtResource("100_cqns0")
 _max = 0.15
 _fire = ExtResource("88_ewcnl")
+_traumaLayer = SubResource("Resource_0fwqu")
 _amount = 0.1
 _shakeableCamera = NodePath("../../../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable")
 metadata/_custom_type_script = "uid://r8ad50yt78dm"
