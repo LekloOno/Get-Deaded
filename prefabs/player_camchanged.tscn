@@ -1,4 +1,4 @@
-[gd_scene load_steps=144 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=145 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://script/player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://assets/script/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -83,6 +83,7 @@
 [ext_resource type="Script" uid="uid://dqcp38rr3u5gx" path="res://script/global/combat/health/GC_Health.cs" id="47_rvgf0"]
 [ext_resource type="Script" uid="uid://be02fh6y0vldv" path="res://script/global/combat/health/GC_Shield.cs" id="48_h1ove"]
 [ext_resource type="Script" uid="uid://bwxjledgrnbsb" path="res://script/player/input/maps/PIM_Arena.cs" id="49_stdu8"]
+[ext_resource type="Script" uid="uid://3a0e4x3r12vl" path="res://script/player/health/PH_Trauma.cs" id="58_r6ddn"]
 [ext_resource type="Script" uid="uid://fevuhhr2vg16" path="res://script/player/input/actions/combat/PI_Revive.cs" id="58_ufgmq"]
 [ext_resource type="Script" uid="uid://diuvohbhr003k" path="res://script/player/input/actions/combat/PI_Weapons.cs" id="60_jlgrh"]
 [ext_resource type="Script" uid="uid://mds7cr6i4noc" path="res://script/player/movement/actions/jump/PM_WallClimb.cs" id="61_x3a7t"]
@@ -884,6 +885,14 @@ _regenPerSecond = 10.0
 TopHealthLayer = SubResource("Resource_gcum8")
 _hurtBoxes = []
 metadata/_custom_type_script = "uid://dettpmrm6albd"
+
+[node name="PH_Trauma" type="Node" parent="Body/PH_Manager" node_paths=PackedStringArray("_healthManager", "_shakeableCamera")]
+script = ExtResource("58_r6ddn")
+_healthManager = NodePath("..")
+_shakeableCamera = NodePath("../../../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable")
+_minTrauma = 0.5
+_maxDamage = 70.0
+metadata/_custom_type_script = "uid://3a0e4x3r12vl"
 
 [node name="PIM_Arena" type="Node" parent="." node_paths=PackedStringArray("_controller", "_walkInput", "_sprintInput", "_jumpInput", "_crouchDispatcherInput", "_weaponsInput", "_reviveInput")]
 script = ExtResource("49_stdu8")
