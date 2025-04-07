@@ -52,9 +52,9 @@ metadata/_custom_type_script = "uid://ddcjrbuymtie4"
 
 [sub_resource type="Resource" id="Resource_l20hf"]
 script = ExtResource("7_5youj")
-_halfInput = 0.2
-_minOutput = 0.0
-_maxOutput = 0.5
+_halfInput = 0.5
+_minOutput = 0.5
+_maxOutput = 0.0
 metadata/_custom_type_script = "uid://t5n7py52g5oj"
 
 [sub_resource type="Resource" id="Resource_ewcnl"]

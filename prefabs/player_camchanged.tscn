@@ -18,7 +18,6 @@
 [ext_resource type="Script" uid="uid://38i6kejmo2hs" path="res://script/player/audio/PA_Jump.cs" id="12_nveww"]
 [ext_resource type="Script" uid="uid://c6mut48npwi4w" path="res://script/player/input/actions/movement/PI_Walk.cs" id="12_pwafq"]
 [ext_resource type="Script" uid="uid://e4bcjkfxrbxl" path="res://script/player/audio/PA_FootSteps.cs" id="12_ttbg8"]
-[ext_resource type="Script" uid="uid://d01sb0k1e87yt" path="res://script/ui/combat/health/UI_EntityHealth.cs" id="13_3qmec"]
 [ext_resource type="AudioStream" uid="uid://dk7e4dghcdv1" path="res://assets/sounds/woosh/woosh1.wav" id="13_ruv8u"]
 [ext_resource type="Script" uid="uid://bgi6chbsxv7hc" path="res://script/player/input/actions/movement/PI_Jump.cs" id="13_ua84m"]
 [ext_resource type="Script" uid="uid://d3uwl2heay8uf" path="res://script/player/audio/PA_Sound.cs" id="13_uyiqg"]
@@ -41,6 +40,7 @@
 [ext_resource type="Script" uid="uid://b37yb21n7qltn" path="res://script/player/input/actions/movement/crouch/PI_Slide.cs" id="17_d5kvj"]
 [ext_resource type="Texture2D" uid="uid://c050onpc3r17u" path="res://assets/sprites/weapons/pewpixel.png" id="17_w8edb"]
 [ext_resource type="AudioStream" uid="uid://byvkie35nxxfe" path="res://assets/sounds/clothes/clothes_6.wav" id="17_yke2y"]
+[ext_resource type="Script" uid="uid://pcc1itcc2dlb" path="res://script/ui/combat/health/UI_PlayerHealth.cs" id="18_0agck"]
 [ext_resource type="Texture2D" uid="uid://8rrtqp0otyee" path="res://assets/sprites/weapons/meleepixel.png" id="18_0vaqj"]
 [ext_resource type="AudioStream" uid="uid://c51litrqlhdk8" path="res://assets/sounds/footsteps/concrete-step5.wav" id="18_1gs0t"]
 [ext_resource type="Script" uid="uid://cvmm2apn1tg0v" path="res://script/global/loot/picker/GL_Picker.cs" id="18_u3xwg"]
@@ -143,6 +143,19 @@ viewport_path = NodePath("Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_Spr
 [sub_resource type="ViewportTexture" id="ViewportTexture_7bleo"]
 viewport_path = NodePath("Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/health/SubViewport")
 
+[sub_resource type="Resource" id="Resource_htv2j"]
+script = ExtResource("47_rvgf0")
+_maxHealth = 100.0
+metadata/_custom_type_script = "uid://dqcp38rr3u5gx"
+
+[sub_resource type="Resource" id="Resource_gcum8"]
+script = ExtResource("48_h1ove")
+_parryTime = 0
+_absorbTime = 40
+_maxHealth = 50.0
+Child = SubResource("Resource_htv2j")
+metadata/_custom_type_script = "uid://be02fh6y0vldv"
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tujlf"]
 bg_color = Color(0, 0, 0, 0.505882)
 
@@ -193,19 +206,6 @@ height = 1.8
 [sub_resource type="BoxShape3D" id="BoxShape3D_aav2a"]
 margin = 0.001
 size = Vector3(0.5, 0.15, 0.5)
-
-[sub_resource type="Resource" id="Resource_htv2j"]
-script = ExtResource("47_rvgf0")
-_maxHealth = 100.0
-metadata/_custom_type_script = "uid://dqcp38rr3u5gx"
-
-[sub_resource type="Resource" id="Resource_gcum8"]
-script = ExtResource("48_h1ove")
-_parryTime = 0
-_absorbTime = 40
-_maxHealth = 50.0
-Child = SubResource("Resource_htv2j")
-metadata/_custom_type_script = "uid://be02fh6y0vldv"
 
 [sub_resource type="Resource" id="Resource_hbsv2"]
 script = ExtResource("59_n5lof")
@@ -311,7 +311,7 @@ metadata/_custom_type_script = "uid://fc7gkofu3df7"
 script = ExtResource("82_fuwq2")
 _shots = Array[Object]([SubResource("Resource_nkqrs")])
 _spread = 0.0
-_fireRate = 600
+_fireRate = 700
 _ammos = SubResource("Resource_vj6q7")
 _ammosPerShot = 0
 _baseAmmos = 0
@@ -541,7 +541,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
 alignment = 1
-script = ExtResource("13_3qmec")
+script = ExtResource("18_0agck")
+_shield = SubResource("Resource_gcum8")
 _healthManager = NodePath("../../../../../../../../../Body/PH_Manager")
 _higherBar = NodePath("HigherLayer")
 _lowerBar = NodePath("LowerLayer")
@@ -1149,7 +1150,7 @@ _weaponsInput = NodePath("../PIM_Arena/PI_Weapons")
 _weapons = Array[Object]([SubResource("Resource_fdvd6"), SubResource("Resource_fvk8i")])
 _melee = SubResource("Resource_5dw8r")
 _surfaceControl = NodePath("../Movement/PM_SurfaceControl")
-_meleeRecover = 0.6
+_meleeRecover = 0.7
 metadata/_custom_type_script = "uid://b4hdeuwma0ma8"
 
 [node name="Weapons" type="Node3D" parent="PW_WeaponsHandler"]

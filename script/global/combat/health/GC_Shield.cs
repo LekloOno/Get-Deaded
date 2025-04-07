@@ -12,6 +12,7 @@ public partial class GC_Shield : GC_Health
     private bool _active;
     public EventHandler OnActivate;
     public EventHandler OnDeactivate;
+    public HealthEventHandler<DamageEventArgs> OnDecay;
     public List<(ulong, float)> DamageBuffer = [];
 
     public void Activate()
@@ -74,7 +75,7 @@ public partial class GC_Shield : GC_Health
         float realDamage = Mathf.Min(amount, CurrentHealth);
         CurrentHealth -= realDamage;
 
-        OnDamage?.Invoke(this, DamageArgs(realDamage));
+        OnDecay?.Invoke(this, DamageArgs(realDamage));
         if (CurrentHealth == 0f)
             OnBreak?.Invoke(this, Child);
     }

@@ -17,7 +17,7 @@ public partial class UI_EntityHealth : VBoxContainer
             InitState(_healthManager.InitState);     
     }
 
-    public void InitState(HealthInitEventArgs initState)
+    public virtual void InitState(HealthInitEventArgs initState)
     {
         float lowerMax = initState.LowerMaxHealth;
         float lowerInit = initState.LowerInitHealth;

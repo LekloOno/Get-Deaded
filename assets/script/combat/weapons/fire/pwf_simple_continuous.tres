@@ -37,6 +37,9 @@ _hitData = SubResource("Resource_fvk8i")
 _originOffset = Vector3(0, 0, 0)
 _directionOffset = Vector3(0, 0, 0)
 _trails = Array[Object]([ExtResource("2_si0j0")])
+_traumaRadius = 1.0
+_clampTrauma = true
+_maxTrauma = 0.2
 metadata/_custom_type_script = "uid://fc7gkofu3df7"
 
 [resource]
