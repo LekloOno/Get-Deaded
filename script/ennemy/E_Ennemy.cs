@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class E_Ennemy : CharacterBody3D
@@ -9,22 +10,61 @@ public partial class E_Ennemy : CharacterBody3D
     [Export] private GL_Dropper _lootDropper;
     [Export] private PCT_Undirect _traumaCauser;
     [Export] private float _drag = 10f;
+    [Export] private Color _hitColor = new(1f, 1f, 1f, 1f);
+    [Export] private float _hitTime = 0.15f;
     private StandardMaterial3D _surfaceMeshMaterial;
     private StandardMaterial3D _jointMeshMaterial;
     private SceneTreeTimer _hideTimer;
     public HealthEventHandler OnDie { get => _healthManager.TopHealthLayer.OnDie; set => _healthManager.TopHealthLayer.OnDie = value;}
+    public HealthEventHandler<DamageEventArgs> OnDamage { get => _healthManager.TopHealthLayer.OnDamage; set => _healthManager.TopHealthLayer.OnDamage = value;}
+
+    private BaseMaterial3D.ShadingModeEnum _initialShadingMode;
+    private BaseMaterial3D.ShadingModeEnum _initialJointShadingMode;
+    private Color _initialColor;
+    private Color _initialJointColor;
+    private SceneTreeTimer _hitResetTimer;
 
     public override void _Ready()
     {
         if(_surfaceMesh?.Mesh.SurfaceGetMaterial(0) is StandardMaterial3D surfaceMat)
+        {
             _surfaceMeshMaterial = surfaceMat;
+            _initialColor = surfaceMat.AlbedoColor;
+            _initialShadingMode = surfaceMat.ShadingMode;
+        }
 
         if(_jointMesh?.Mesh.SurfaceGetMaterial(0) is StandardMaterial3D jointMat)
+        {
             _jointMeshMaterial = jointMat;
+            _initialJointColor = jointMat.AlbedoColor;
+            _initialJointShadingMode = jointMat.ShadingMode;
+        }
 
         Enable();
+        
 
         OnDie += PlayDeath;
+        OnDamage += PlayHit;
+    }
+
+    private void PlayHit(GC_Health senderLayer, DamageEventArgs e)
+    {
+        _surfaceMeshMaterial.AlbedoColor = _jointMeshMaterial.AlbedoColor = _hitColor;
+        _surfaceMeshMaterial.ShadingMode = _jointMeshMaterial.ShadingMode = BaseMaterial3D.ShadingModeEnum.Unshaded;
+
+        if (_hitResetTimer != null)
+            _hitResetTimer.Timeout -= ResetHitMaterial;
+
+        _hitResetTimer = GetTree().CreateTimer(_hitTime);
+        _hitResetTimer.Timeout += ResetHitMaterial;
+    }
+
+    private void ResetHitMaterial()
+    {
+        _surfaceMeshMaterial.AlbedoColor = _initialColor;
+        _surfaceMeshMaterial.ShadingMode = _initialShadingMode;
+        _jointMeshMaterial.AlbedoColor = _initialJointColor;
+        _jointMeshMaterial.ShadingMode = _initialJointShadingMode;
     }
 
     public void PlayDeath(GC_Health health)
