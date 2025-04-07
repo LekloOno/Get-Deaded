@@ -8,6 +8,7 @@ public partial class E_Ennemy : CharacterBody3D
     [Export] private MeshInstance3D _jointMesh;
     [Export] private GL_Dropper _lootDropper;
     [Export] private PCT_Undirect _traumaCauser;
+    [Export] private float _drag = 10f;
     private StandardMaterial3D _surfaceMeshMaterial;
     private StandardMaterial3D _jointMeshMaterial;
     private SceneTreeTimer _hideTimer;
@@ -36,7 +37,6 @@ public partial class E_Ennemy : CharacterBody3D
     public void Disable()
     {
         CollisionLayer = 0;
-        SetPhysicsProcess(false);
         _healthManager.DisableHurt();
 
         //_hideTimer = GetTree().CreateTimer(_hideDelay);
@@ -55,6 +55,8 @@ public partial class E_Ennemy : CharacterBody3D
         await ToSignal(opacityTween, "finished");
         
         Hide();
+        
+        SetPhysicsProcess(false);
     }
 
     public void Enable()
@@ -77,6 +79,8 @@ public partial class E_Ennemy : CharacterBody3D
         Vector3 velocity = Velocity;
         if (!IsOnFloor())
             velocity += GetGravity() * (float) delta;
+        else
+            velocity -= velocity * (float) delta * _drag;
         
         Velocity = velocity;
         

@@ -1,5 +1,4 @@
 using Godot;
-using Godot.Collections;
 
 // A child of a HealthManager.
 // It could be a head, a chest, leg, etc.
@@ -30,7 +29,8 @@ public partial class GC_HurtBox : Area3D
         _damageSplatter.Emitting = true;
         return true;
     }
-    
+
+    public void HandleKnockBack(Vector3 force) => HealthManager.HandleKnockBack(force);
     public static float RealHitModifier(GC_DamageModifier damageModifier) => damageModifier/CONF_BodyModifiers.GetDefaultModifier(damageModifier.BodyPart);
 
 }

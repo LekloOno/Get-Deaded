@@ -8,6 +8,7 @@ public abstract partial class PW_Shot : Resource, GC_IHitDealer
     [Export] protected Vector3 _originOffset = Vector3.Zero;
     [Export] protected Vector3 _directionOffset = Vector3.Zero;
     [Export] protected Godot.Collections.Array<VFX_Trail> _trails;
+    [Export] protected float _knockBack = 0f;
     [Export] private MATH_FloatCurveSampler _traumaSampler;
     [Export] private float _traumaRadius = 1f;
     [Export] private bool _clampTrauma = true;

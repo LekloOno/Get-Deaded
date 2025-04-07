@@ -41,7 +41,6 @@ public partial class GC_Shield : GC_Health
         ulong later = Time.GetTicksMsec() - _absorbTime;
         float absorbed = DamageBuffer.Sum(t => t.Item1 > later ? t.Item2 : 0);
         Regen(absorbed);
-        GD.Print(absorbed);
         DamageBuffer.Clear();
     }
 
@@ -49,7 +48,6 @@ public partial class GC_Shield : GC_Health
     {
         if (_active)
         {
-            GD.Print(damage);
             DamageBuffer.Add((Time.GetTicksMsec(), damage));
             return base.TakeDamage(damage, out takenDamage);
         }

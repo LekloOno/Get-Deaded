@@ -1,8 +1,9 @@
-[gd_scene load_steps=156 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=157 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://script/player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://assets/script/movement/basic_velocity_cache.tres" id="2_7wk04"]
 [ext_resource type="Script" uid="uid://u4chbwn5b4q1" path="res://script/player/camera/setup/PC_FlatDir.cs" id="3_31qv1"]
+[ext_resource type="Script" uid="uid://bsqmpk5maq3ow" path="res://script/global/body/GB_PlayerBodyManager.cs" id="3_ahe41"]
 [ext_resource type="Script" uid="uid://b8papnphcevbc" path="res://script/player/camera/control/PC_Control.cs" id="3_xv583"]
 [ext_resource type="Script" uid="uid://dw01565ra6d7q" path="res://script/player/camera/annimation/PC_SprintLean.cs" id="4_s37k1"]
 [ext_resource type="Script" uid="uid://kabi8i2dqa4f" path="res://script/player/camera/setup/PC_Anchor.cs" id="4_wobo6"]
@@ -301,6 +302,7 @@ _hitData = SubResource("Resource_u3xwg")
 _originOffset = Vector3(0, 0, 0)
 _directionOffset = Vector3(0, 0, 0)
 _trails = Array[Object]([SubResource("Resource_cqits")])
+_knockBack = 10.0
 _traumaSampler = SubResource("Resource_btq8w")
 _traumaRadius = 2.5
 _clampTrauma = true
@@ -374,6 +376,11 @@ _cameraControl = NodePath("Camera Pivot/PC_Anchor/Camera Control")
 _surfaceControl = NodePath("Movement/PM_SurfaceControl")
 _velocityCache = ExtResource("2_7wk04")
 _straffeSnap = NodePath("Movement/PM_StraffeSnap")
+
+[node name="GB_PlayerBodyManager" type="Node" parent="." node_paths=PackedStringArray("_body")]
+script = ExtResource("3_ahe41")
+_body = NodePath("..")
+metadata/_custom_type_script = "uid://bsqmpk5maq3ow"
 
 [node name="Camera Pivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0)
@@ -934,11 +941,12 @@ _wind = NodePath("Wind")
 stream = ExtResource("44_vhlgj")
 autoplay = true
 
-[node name="PH_Manager" type="Node3D" parent="Body" node_paths=PackedStringArray("_hurtBoxes")]
+[node name="PH_Manager" type="Node3D" parent="Body" node_paths=PackedStringArray("_body", "_hurtBoxes")]
 script = ExtResource("46_eanik")
 _shield = SubResource("Resource_gcum8")
 _decayPerSecond = 25.0
 _regenPerSecond = 10.0
+_body = NodePath("../../GB_PlayerBodyManager")
 TopHealthLayer = SubResource("Resource_gcum8")
 _hurtBoxes = []
 metadata/_custom_type_script = "uid://dettpmrm6albd"

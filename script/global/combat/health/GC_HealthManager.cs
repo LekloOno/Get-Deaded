@@ -5,6 +5,7 @@ using Godot.Collections;
 [GlobalClass]
 public partial class GC_HealthManager : Node3D
 {
+    [Export] public GB_ExternalBodyManager _body;
     [Export] public GC_Health TopHealthLayer {get; private set;}
     [Export] private Array<GC_HurtBox> _hurtBoxes;
     public HealthInitEventArgs InitState {get; private set;} = null;
@@ -34,5 +35,10 @@ public partial class GC_HealthManager : Node3D
     {
         foreach (GC_HurtBox hurtBox in _hurtBoxes)
             hurtBox.CollisionLayer = 0;
+    }
+
+    public void HandleKnockBack(Vector3 force)
+    {
+        _body.HandleKnockBack(force);
     }
 }
