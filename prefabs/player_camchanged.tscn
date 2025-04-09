@@ -355,8 +355,8 @@ fractal_gain = 0.8
 [sub_resource type="Resource" id="Resource_yw1gl"]
 script = ExtResource("14_0agck")
 _noise = SubResource("FastNoiseLite_0agck")
-_reductionRate = 0.6
-_noiseSpeed = 13.0
+_reductionRate = 0.7
+_noiseSpeed = 30.0
 metadata/_custom_type_script = "uid://c0vf7xmi1u8t4"
 
 [node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("_healthManager", "_walkProcess", "_wallJump", "_wallClimb", "_groundState", "_cameraControl", "_surfaceControl", "_straffeSnap")]
@@ -1190,7 +1190,7 @@ metadata/_custom_type_script = "uid://r8ad50yt78dm"
 script = ExtResource("99_hbsv2")
 _fire = SubResource("Resource_jbksd")
 _traumaLayer = SubResource("Resource_yw1gl")
-_amount = 0.4
+_amount = 0.35
 _shakeableCamera = NodePath("../../../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable")
 metadata/_custom_type_script = "uid://51kwj2ldm4xq"
 

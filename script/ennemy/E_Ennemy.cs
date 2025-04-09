@@ -12,32 +12,43 @@ public partial class E_Ennemy : CharacterBody3D
     [Export] private float _drag = 10f;
     [Export] private Color _hitColor = new(1f, 1f, 1f, 1f);
     [Export] private float _hitTime = 0.15f;
-    private StandardMaterial3D _surfaceMeshMaterial;
-    private StandardMaterial3D _jointMeshMaterial;
+    private ShaderMaterial _surfaceMeshMaterial;
+    private ShaderMaterial _jointMeshMaterial;
     private SceneTreeTimer _hideTimer;
     public HealthEventHandler OnDie { get => _healthManager.TopHealthLayer.OnDie; set => _healthManager.TopHealthLayer.OnDie = value;}
     public HealthEventHandler<DamageEventArgs> OnDamage { get => _healthManager.TopHealthLayer.OnDamage; set => _healthManager.TopHealthLayer.OnDamage = value;}
 
-    private BaseMaterial3D.ShadingModeEnum _initialShadingMode;
     private BaseMaterial3D.ShadingModeEnum _initialJointShadingMode;
     private Color _initialColor;
     private Color _initialJointColor;
     private SceneTreeTimer _hitResetTimer;
 
+    public float Alpha
+    {
+        get => ((Color) _surfaceMeshMaterial.GetShaderParameter("albedo")).A;
+        set
+        {
+            Color color = (Color) _surfaceMeshMaterial.GetShaderParameter("albedo");
+            color.A = value;
+            _surfaceMeshMaterial.SetShaderParameter("albedo", color);
+            Color jointColor = (Color) _jointMeshMaterial.GetShaderParameter("albedo");
+            jointColor.A = value;
+            _jointMeshMaterial.SetShaderParameter("albedo", jointColor);
+        }
+    }
+
     public override void _Ready()
     {
-        if(_surfaceMesh?.Mesh.SurfaceGetMaterial(0) is StandardMaterial3D surfaceMat)
+        if(_surfaceMesh?.Mesh.SurfaceGetMaterial(0) is ShaderMaterial surfaceMat)
         {
             _surfaceMeshMaterial = surfaceMat;
-            _initialColor = surfaceMat.AlbedoColor;
-            _initialShadingMode = surfaceMat.ShadingMode;
+            _initialColor = (Color) surfaceMat.GetShaderParameter("albedo");
         }
 
-        if(_jointMesh?.Mesh.SurfaceGetMaterial(0) is StandardMaterial3D jointMat)
+        if(_jointMesh?.Mesh.SurfaceGetMaterial(0) is ShaderMaterial jointMat)
         {
             _jointMeshMaterial = jointMat;
-            _initialJointColor = jointMat.AlbedoColor;
-            _initialJointShadingMode = jointMat.ShadingMode;
+            _initialJointColor = (Color) jointMat.GetShaderParameter("albedo");
         }
 
         Enable();
@@ -49,8 +60,7 @@ public partial class E_Ennemy : CharacterBody3D
 
     private void PlayHit(GC_Health senderLayer, DamageEventArgs e)
     {
-        _surfaceMeshMaterial.AlbedoColor = _jointMeshMaterial.AlbedoColor = _hitColor;
-        _surfaceMeshMaterial.ShadingMode = _jointMeshMaterial.ShadingMode = BaseMaterial3D.ShadingModeEnum.Unshaded;
+        _surfaceMeshMaterial.SetShaderParameter("albedo", _hitColor);
 
         if (_hitResetTimer != null)
             _hitResetTimer.Timeout -= ResetHitMaterial;
@@ -61,10 +71,8 @@ public partial class E_Ennemy : CharacterBody3D
 
     private void ResetHitMaterial()
     {
-        _surfaceMeshMaterial.AlbedoColor = _initialColor;
-        _surfaceMeshMaterial.ShadingMode = _initialShadingMode;
-        _jointMeshMaterial.AlbedoColor = _initialJointColor;
-        _jointMeshMaterial.ShadingMode = _initialJointShadingMode;
+        _surfaceMeshMaterial.SetShaderParameter("albedo", _initialColor);
+        _jointMeshMaterial.SetShaderParameter("albedo", _initialJointColor);
     }
 
     public void PlayDeath(GC_Health health)
@@ -88,9 +96,7 @@ public partial class E_Ennemy : CharacterBody3D
     public async void HideMesh()
     {
         Tween opacityTween = CreateTween();
-        opacityTween.TweenProperty(_surfaceMeshMaterial, "albedo_color:a", 0f, _hideDelay);
-        Tween jointTween = CreateTween();
-        jointTween.TweenProperty(_jointMeshMaterial, "albedo_color:a", 0f, _hideDelay);
+        opacityTween.TweenProperty(this, "Alpha", 0f, _hideDelay);
 
         await ToSignal(opacityTween, "finished");
         
@@ -103,9 +109,7 @@ public partial class E_Ennemy : CharacterBody3D
     {
         CollisionLayer = CONF_Collision.Layers.EnvironmentEntity;
         Tween surfaceTween = CreateTween();
-        surfaceTween.TweenProperty(_surfaceMeshMaterial, "albedo_color:a", 1f, 0.2f);
-        Tween jointTween = CreateTween();
-        jointTween.TweenProperty(_jointMeshMaterial, "albedo_color:a", 1f, 0.2f);
+        surfaceTween.TweenProperty(this, "Alpha", 1f, 0.2f);
 
         Show();
         SetPhysicsProcess(true);
