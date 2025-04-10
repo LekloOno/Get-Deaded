@@ -38,5 +38,7 @@ public partial class PWS_Hitscan : PW_Shot, GC_IHitDealer
 
         foreach (VFX_Trail trail in _trails)
             trail.Shoot(_barel, _barel.GlobalPosition + _originOffset, hit);
+
+        HandleKick(origin, direction);
     }
 }

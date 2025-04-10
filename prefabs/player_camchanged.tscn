@@ -303,6 +303,7 @@ _originOffset = Vector3(0, 0, 0)
 _directionOffset = Vector3(0, 0, 0)
 _trails = Array[Object]([SubResource("Resource_cqits")])
 _knockBack = 10.0
+_kickBack = 5.0
 _traumaSampler = SubResource("Resource_btq8w")
 _traumaRadius = 2.5
 _clampTrauma = true
@@ -1148,12 +1149,13 @@ _dashDuration = 0.1
 _minDashRatio = 0.5
 _cooldown = 3.0
 
-[node name="PW_WeaponsHandler" type="Node" parent="." node_paths=PackedStringArray("_camera", "_recoilController", "_sight", "_barel", "_weaponsInput", "_surfaceControl")]
+[node name="PW_WeaponsHandler" type="Node" parent="." node_paths=PackedStringArray("_camera", "_recoilController", "_sight", "_barel", "_ownerBody", "_weaponsInput", "_surfaceControl")]
 script = ExtResource("81_stdu8")
 _camera = NodePath("../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable/Camera3D")
 _recoilController = NodePath("../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil")
 _sight = NodePath("../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean")
 _barel = NodePath("Weapons/Barrel")
+_ownerBody = NodePath("../GB_PlayerBodyManager")
 _weaponsInput = NodePath("../PIM_Arena/PI_Weapons")
 _weapons = Array[Object]([SubResource("Resource_fdvd6"), SubResource("Resource_fvk8i")])
 _melee = SubResource("Resource_5dw8r")

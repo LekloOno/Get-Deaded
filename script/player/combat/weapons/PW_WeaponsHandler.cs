@@ -15,6 +15,7 @@ public partial class PW_WeaponsHandler : Node
     [Export] private PC_Recoil _recoilController;
     [Export] private Node3D _sight;
     [Export] private Node3D _barel;
+    [Export] private GB_ExternalBodyManager _ownerBody;
     [Export] private PI_Weapons _weaponsInput;
     [Export] private Array<PW_Weapon> _weapons;
     [Export] private PW_Weapon _melee;
@@ -67,13 +68,13 @@ public partial class PW_WeaponsHandler : Node
     {
         foreach(PW_Weapon weapon in _weapons)
         {
-            weapon.Initialize(_camera, _sight, _barel, _surfaceControl, _recoilController);
+            weapon.Initialize(_camera, _sight, _barel, _surfaceControl, _recoilController, _ownerBody);
             weapon.Hit += (o, e) => Hit?.Invoke(o, e);
             weapon.ADSStarted += () => ADSStarted?.Invoke();
             weapon.ADSStopped += () => ADSStopped?.Invoke();
         }
 
-        _melee.Initialize(_camera, _sight, _barel, _surfaceControl, _recoilController);
+        _melee.Initialize(_camera, _sight, _barel, _surfaceControl, _recoilController, _ownerBody);
         _melee.Hit += (o, e) => Hit?.Invoke(o, e);
 
         _activeWeapon = _melee;

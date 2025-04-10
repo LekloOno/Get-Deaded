@@ -7,10 +7,10 @@ public partial class PW_Simple : PW_Weapon
     [Export] private PW_Fire _fire;
     private PW_SimpleADS _simpleADS;
 
-    protected override void WeaponInitialize(PC_Recoil recoilController)
+    protected override void WeaponInitialize(PC_Recoil recoilController, GB_ExternalBodyManager owberBody)
     {
         _fire.Shot += (o, e) => Shot?.Invoke();
-        _fire.Initialize(_camera, _sight, _barel, recoilController);
+        _fire.Initialize(_camera, _sight, _barel, recoilController, owberBody);
         _fire.Hit += (o, e) => Hit?.Invoke(o, e);
 
         if (_ads is PW_SimpleADS simpleADS)

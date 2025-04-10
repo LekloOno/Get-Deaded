@@ -33,7 +33,7 @@ public abstract partial class PW_Fire : Resource
 
     public PW_Ammunition Ammos {get => _ammos;}
 
-    public void Initialize(PC_DirectCamera camera, Node3D sight, Node3D _barel, PC_Recoil recoilController)
+    public void Initialize(PC_DirectCamera camera, Node3D sight, Node3D _barel, PC_Recoil recoilController, GB_ExternalBodyManager ownerBody)
     {
         _camera = camera;
         _sight = sight;
@@ -42,7 +42,7 @@ public abstract partial class PW_Fire : Resource
         _recoil?.Initialize(recoilController);
         foreach (PW_Shot shot in _shots)
         {
-            shot.Initialize(_barel);
+            shot.Initialize(_barel, ownerBody);
             shot.Hit += (o, e) => Hit?.Invoke(o, e);
         }
     }
