@@ -12,6 +12,7 @@ public delegate void SwitchEvent(PW_Weapon active, PW_Weapon nextHolster, int ne
 public partial class PW_WeaponsHandler : Node3D
 {
     [Export] private PC_DirectCamera _camera;
+    [Export] private PC_Shakeable _shakeableCamera;
     [Export] private PC_Recoil _recoilController;
     [Export] private Node3D _sight;
     [Export] private Node3D _barel;
@@ -68,13 +69,13 @@ public partial class PW_WeaponsHandler : Node3D
     {
         foreach(PW_Weapon weapon in _weapons)
         {
-            weapon.Initialize(_camera, _sight, _surfaceControl, _recoilController, _ownerBody);
+            weapon.Initialize(_shakeableCamera, _camera, _sight, _surfaceControl, _recoilController, _ownerBody);
             weapon.Hit += (o, e) => Hit?.Invoke(o, e);
             weapon.ADSStarted += () => ADSStarted?.Invoke();
             weapon.ADSStopped += () => ADSStopped?.Invoke();
         }
 
-        _melee.Initialize(_camera, _sight, _surfaceControl, _recoilController, _ownerBody);
+        _melee.Initialize(_shakeableCamera, _camera, _sight, _surfaceControl, _recoilController, _ownerBody);
         _melee.Hit += (o, e) => Hit?.Invoke(o, e);
 
         _activeWeapon = _melee;

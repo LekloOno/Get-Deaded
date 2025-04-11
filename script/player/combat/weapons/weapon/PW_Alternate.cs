@@ -9,11 +9,11 @@ public partial class PW_Alternate : PW_Weapon
     private PW_Fire _currentFire;
 
 
-    protected override void WeaponInitialize(PC_Recoil recoilController, GB_ExternalBodyManager owberBody)
+    protected override void WeaponInitialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManager owberBody)
     {
         _currentFire = _primaryFire;
-        _primaryFire.Initialize(_camera, _sight, _barrel, recoilController, owberBody);
-        _secondaryFire.Initialize(_camera, _sight, _barrel, recoilController, owberBody);
+        _primaryFire.Initialize(shakeableCamera, _camera, _sight, _barrel, recoilController, owberBody);
+        _secondaryFire.Initialize(shakeableCamera, _camera, _sight, _barrel, recoilController, owberBody);
         _primaryFire.Hit += (o, e) => Hit?.Invoke(o, e);
         _secondaryFire.Hit += (o, e) => Hit?.Invoke(o, e);
     }

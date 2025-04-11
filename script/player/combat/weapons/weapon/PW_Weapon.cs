@@ -26,13 +26,13 @@ public abstract partial class PW_Weapon : Node3D
     public Action ADSStopped;
     public bool ADSActive {get; private set;} = false;          // Not ideal, maybe make so ads return 3 state instead of true/false to know when nothing happened.
 
-    public void Initialize(PC_DirectCamera camera, Node3D sight, PM_SurfaceControl surfaceControl, PC_Recoil recoilController, GB_ExternalBodyManager owberBody)
+    public void Initialize(PC_Shakeable shakeableCamera, PC_DirectCamera camera, Node3D sight, PM_SurfaceControl surfaceControl, PC_Recoil recoilController, GB_ExternalBodyManager owberBody)
     {
         _camera = camera;
         _sight = sight;
         _surfaceControl = surfaceControl;
         _ads?.Initialize(_camera, surfaceControl);
-        WeaponInitialize(recoilController, owberBody);
+        WeaponInitialize(shakeableCamera, recoilController, owberBody);
     }   
 
     public void HandleSecondaryDown()
@@ -91,7 +91,7 @@ public abstract partial class PW_Weapon : Node3D
     /// <summary>
     /// Allow for some specific initialization.
     /// </summary>
-    protected virtual void WeaponInitialize(PC_Recoil recoilController, GB_ExternalBodyManager owberBody) {}
+    protected virtual void WeaponInitialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManager owberBody) {}
 
     /// <summary>
     /// Called when the reload input is pressed down.

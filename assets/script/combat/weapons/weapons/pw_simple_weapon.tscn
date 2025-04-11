@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://cjmiash71uc7b" path="res://script/global/combat/hit/hit/GC_Hit.cs" id="7_2b0g7"]
 [ext_resource type="Resource" uid="uid://mcobvwmhuq3a" path="res://assets/script/vfx/trails/simple_moving_trail.tres" id="8_debeo"]
 [ext_resource type="Script" uid="uid://bxxmkegnq67qe" path="res://script/player/combat/weapons/ads/PW_SimpleADS.cs" id="9_r4wwr"]
+[ext_resource type="FastNoiseLite" uid="uid://dcqwnhaim8ock" path="res://assets/misc/shake_noise.tres" id="10_8kujm"]
 [ext_resource type="Script" uid="uid://r8ad50yt78dm" path="res://script/player/camera/annimation/trauma/causers/direct/PCT_ContinuousFire.cs" id="10_j06ou"]
 [ext_resource type="Script" uid="uid://c0vf7xmi1u8t4" path="res://script/player/camera/annimation/trauma/PC_TraumaLayer.cs" id="11_8kujm"]
 
@@ -18,11 +19,9 @@ _damage = 6.0
 _inspectorModifiers = null
 metadata/_custom_type_script = "uid://cjmiash71uc7b"
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_akysb"]
-
 [sub_resource type="Resource" id="Resource_b25vv"]
 script = ExtResource("11_8kujm")
-_noise = SubResource("FastNoiseLite_akysb")
+_noise = ExtResource("10_8kujm")
 _reductionRate = 1.0
 _noiseSpeed = 50.0
 metadata/_custom_type_script = "uid://c0vf7xmi1u8t4"
@@ -43,8 +42,9 @@ IconColor = Color(0.281, 0.697, 1, 0.8)
 metadata/_custom_type_script = "uid://c3are182lodyx"
 
 [node name="Barrel" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.337142, -0.282863, -0.256452)
 
-[node name="PWF_Continuous" type="Node3D" parent="." node_paths=PackedStringArray("_shots", "_recoil", "_ammos")]
+[node name="PWF_Continuous" type="Node3D" parent="." node_paths=PackedStringArray("_shots", "_recoil", "_ammos", "_fireTraumaCauser")]
 script = ExtResource("3_j06ou")
 _shots = [NodePath("PWS_Hitscan")]
 _spread = 1.2
@@ -52,6 +52,7 @@ _fireRate = 50
 _recoil = NodePath("PW_ConstantRecoil")
 _ammos = NodePath("PW_Ammunition")
 _baseAmmos = 60
+_fireTraumaCauser = NodePath("PCT_ContinuousFire")
 metadata/_custom_type_script = "uid://cu3n4oi1x76dl"
 
 [node name="PW_ConstantRecoil" type="Node3D" parent="PWF_Continuous"]
@@ -74,6 +75,13 @@ _hitData = SubResource("Resource_ad73j")
 _trails = Array[Object]([ExtResource("8_debeo")])
 metadata/_custom_type_script = "uid://fc7gkofu3df7"
 
+[node name="PCT_ContinuousFire" type="Node" parent="PWF_Continuous"]
+script = ExtResource("10_j06ou")
+_max = 0.1
+_traumaLayer = SubResource("Resource_b25vv")
+_amount = 0.3
+metadata/_custom_type_script = "uid://r8ad50yt78dm"
+
 [node name="PW_SimpleADS" type="Node3D" parent="." node_paths=PackedStringArray("_fire")]
 script = ExtResource("9_r4wwr")
 _spreadMultiplier = -0.85
@@ -85,11 +93,3 @@ _scopeOutTime = 0.2
 _fovMultiplier = 0.9
 _moveSpeedMultiplier = -0.1
 metadata/_custom_type_script = "uid://bxxmkegnq67qe"
-
-[node name="PCT_ContinuousFire" type="Node" parent="." node_paths=PackedStringArray("_fire")]
-script = ExtResource("10_j06ou")
-_max = 0.1
-_fire = NodePath("../PWF_Continuous")
-_traumaLayer = SubResource("Resource_b25vv")
-_amount = 0.3
-metadata/_custom_type_script = "uid://r8ad50yt78dm"

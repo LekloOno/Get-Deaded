@@ -4,6 +4,6 @@ using Godot;
 public partial class PCT_ContinuousFire : PCT_Fire
 {
     [Export] private float _max;
-    protected override void ShotTrauma(object sender, int e) =>
+    public override void ShotTrauma(object sender, int e) =>
         _traumaLayer.AddClampedTrauma(_amount, _max);
 }
