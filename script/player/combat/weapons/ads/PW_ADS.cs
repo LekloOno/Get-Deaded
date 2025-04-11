@@ -4,16 +4,18 @@ using Godot;
 public partial class PW_ADS : Node3D
 {
     [Export] public bool Hold {get; private set;}
-    [Export] public float ScopeInTime {get; private set;}
-    [Export] public float ScopeOutTime {get; private set;}
-    [Export] public float FovMultiplier {get; private set;} = 1f;
-    [Export] public float MoveSpeedMultiplier {get; private set;} = 0f; // Additive percent modifier
+    [Export] private float _scopeInTime;
+    [Export] private float _scopeOutTime;
+    [Export] private float _fovMultiplier = 1f;
+    [Export] private float _moveSpeedMultiplier = 0f; // Additive percent modifier
     private bool _active = false;
+    private PM_SurfaceControl _surfaceControl;
     private PC_DirectCamera _camera;
 
-    public void Initialize(PC_DirectCamera camera)
+    public void Initialize(PC_DirectCamera camera, PM_SurfaceControl surfaceControl)
     {
         _camera = camera;
+        _surfaceControl = surfaceControl;
     }
 
     /// <summary>
@@ -56,18 +58,25 @@ public partial class PW_ADS : Node3D
 
         return false;
     }
+    
+    protected virtual void InnerActivate(){}
+    protected virtual void InnerDeactivate(){}
 
     private bool Activate()
     {
         _active = true;
-        _camera.ModifyFov(FovMultiplier, ScopeInTime);
+        _camera.ModifyFov(_fovMultiplier, _scopeInTime);
+        _surfaceControl.SpeedModifiers.Add(_moveSpeedMultiplier);
+        InnerActivate();
         return true;
     }
 
     private bool Deactivate()
     {
         _active = false;
-        _camera.ResetFov(ScopeOutTime);
+        _camera.ResetFov(_scopeOutTime);
+        _surfaceControl.SpeedModifiers.Remove(_moveSpeedMultiplier);
+        InnerDeactivate();
         return false;
     }
 }

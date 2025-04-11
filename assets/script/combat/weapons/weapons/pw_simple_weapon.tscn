@@ -59,6 +59,7 @@ _hitData = SubResource("Resource_ad73j")
 _trails = Array[Object]([ExtResource("8_debeo")])
 metadata/_custom_type_script = "uid://fc7gkofu3df7"
 
-[node name="PW_SimpleADS" type="Node3D" parent="."]
+[node name="PW_SimpleADS" type="Node3D" parent="." node_paths=PackedStringArray("_fire")]
 script = ExtResource("9_r4wwr")
+_fire = NodePath("../PWF_Continuous")
 metadata/_custom_type_script = "uid://bxxmkegnq67qe"

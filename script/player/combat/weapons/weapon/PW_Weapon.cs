@@ -31,7 +31,7 @@ public abstract partial class PW_Weapon : Node3D
         _camera = camera;
         _sight = sight;
         _surfaceControl = surfaceControl;
-        _ads?.Initialize(_camera);
+        _ads?.Initialize(_camera, surfaceControl);
         WeaponInitialize(recoilController, owberBody);
     }   
 
@@ -76,10 +76,7 @@ public abstract partial class PW_Weapon : Node3D
     public void HandleDisable()
     {
         if (_ads != null && _ads.Disable())
-        {
             DeactivateADS();
-            _surfaceControl.SpeedModifiers.Remove(_ads.MoveSpeedMultiplier);
-        }
 
         Disable();
     }
@@ -135,22 +132,12 @@ public abstract partial class PW_Weapon : Node3D
 
     private void ActivateADS()
     {
-        if (ADSActive)
-                return;
-
-        ADSActive = true;
-        _surfaceControl.SpeedModifiers.Add(_ads.MoveSpeedMultiplier);
         StartADS();
         ADSStarted?.Invoke();
     }
 
     public void DeactivateADS()
     {
-        if (!ADSActive)
-                return;
-            
-        ADSActive = false;
-        _surfaceControl.SpeedModifiers.Remove(_ads.MoveSpeedMultiplier);
         StopADS();
         ADSStopped?.Invoke();
     }

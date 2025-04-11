@@ -23,23 +23,9 @@ public partial class PW_Simple : PW_Weapon
     protected override bool SecondaryDown() => true;
     protected override bool SecondaryUp() => true;
 
-    protected override void StartADS()
-    {
-        if(_simpleADS == null)
-            return;
+    protected override void StartADS(){}
 
-        _fire.SpreadMultiplier.Add(_simpleADS.SpreadMultiplier);
-        _fire?.RecoilMultiplier.Add(_simpleADS.RecoilMultiplier);
-    }
-
-    protected override void StopADS()
-    {
-        if(_simpleADS == null)
-            return;
-
-        _fire.SpreadMultiplier.Remove(_simpleADS.SpreadMultiplier);
-        _fire?.RecoilMultiplier.Remove(_simpleADS.RecoilMultiplier);
-    }
+    protected override void StopADS(){}
 
     protected override void Reload()
     {
