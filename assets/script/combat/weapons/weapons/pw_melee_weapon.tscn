@@ -1,14 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://bhxt3qoevxipp"]
+[gd_scene load_steps=13 format=3 uid="uid://bhxt3qoevxipp"]
 
 [ext_resource type="Script" uid="uid://c3are182lodyx" path="res://script/player/combat/weapons/weapon/PW_Simple.cs" id="1_dmkpc"]
-[ext_resource type="Texture2D" uid="uid://cll1rrqagufi2" path="res://assets/sprites/weapons/brrtpixel2.png" id="2_488s0"]
-[ext_resource type="Script" uid="uid://cu3n4oi1x76dl" path="res://script/player/combat/weapons/fire/PWF_Continuous.cs" id="3_013eg"]
-[ext_resource type="Script" uid="uid://djecalg7cxlvg" path="res://script/player/combat/weapons/fire/recoil/PW_ConstantRecoil.cs" id="4_gc5oi"]
+[ext_resource type="Texture2D" uid="uid://8rrtqp0otyee" path="res://assets/sprites/weapons/meleepixel.png" id="2_76u7k"]
+[ext_resource type="Script" uid="uid://dmsklefspdvlw" path="res://script/player/combat/weapons/fire/PWF_Ponctual.cs" id="3_dmkpc"]
 [ext_resource type="Script" uid="uid://cxiwvat6vddlp" path="res://script/player/combat/weapons/ammunition/PW_Ammunition.cs" id="5_pxa3m"]
 [ext_resource type="Script" uid="uid://fc7gkofu3df7" path="res://script/player/combat/weapons/shot/PWS_Hitscan.cs" id="6_38m5i"]
 [ext_resource type="Script" uid="uid://cjmiash71uc7b" path="res://script/global/combat/hit/hit/GC_Hit.cs" id="7_4osp6"]
-[ext_resource type="Resource" uid="uid://mcobvwmhuq3a" path="res://assets/script/vfx/trails/simple_moving_trail.tres" id="8_sogkq"]
-[ext_resource type="Script" uid="uid://bxxmkegnq67qe" path="res://script/player/combat/weapons/ads/PW_SimpleADS.cs" id="9_mrh4h"]
+[ext_resource type="Script" uid="uid://0w0m608ktkwu" path="res://script/vfx/combat/trail/moving_light/VFX_MovingLightTrail.cs" id="7_488s0"]
+[ext_resource type="Script" uid="uid://t5n7py52g5oj" path="res://script/engine_tools/math/curve/float/MATH_FastLogCurve.cs" id="8_013eg"]
 
 [sub_resource type="Resource" id="Resource_ad73j"]
 script = ExtResource("7_4osp6")
@@ -16,57 +15,60 @@ _damage = 6.0
 _inspectorModifiers = null
 metadata/_custom_type_script = "uid://cjmiash71uc7b"
 
-[node name="PW_Simple" type="Node3D" node_paths=PackedStringArray("_fire", "_ads", "_barrel")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gc5oi"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(0.852, 0.852, 0.852, 0.16)
+rim_tint = 0.0
+
+[sub_resource type="Resource" id="Resource_pxa3m"]
+script = ExtResource("7_488s0")
+_material = SubResource("StandardMaterial3D_gc5oi")
+_thickness = 1.2
+_bulletSpeed = 12.0
+_trailSpeed = 5.0
+_inclination = 87.0
+metadata/_custom_type_script = "uid://0w0m608ktkwu"
+
+[sub_resource type="Resource" id="Resource_38m5i"]
+script = ExtResource("8_013eg")
+_halfInput = 0.0
+_minOutput = 0.0
+_maxOutput = 0.4
+metadata/_custom_type_script = "uid://t5n7py52g5oj"
+
+[node name="PW_BasicMelee" type="Node3D" node_paths=PackedStringArray("_fire", "_barrel")]
 script = ExtResource("1_dmkpc")
-_fire = NodePath("PWF_Continuous")
-MoveSpeedModifier = -0.08
-SwitchInTime = 0.2
-SwitchOutTime = 0.3
-ReloadTime = 1.4
-TacticalReloadTime = 0.9
-ReloadReadyTime = 0.2
-_ads = NodePath("PW_SimpleADS")
+_fire = NodePath("PWF_Ponctual")
+SwitchInTime = 0.12
+SwitchOutTime = 0.12
 _barrel = NodePath("Barrel")
-Icon = ExtResource("2_488s0")
-IconColor = Color(0.281, 0.697, 1, 0.8)
+Icon = ExtResource("2_76u7k")
+IconColor = Color(1, 1, 1, 0.8)
 metadata/_custom_type_script = "uid://c3are182lodyx"
 
 [node name="Barrel" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.142744, 0, 0.16983)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.141212, -0.187122, -0.217735)
 
-[node name="PWF_Continuous" type="Node3D" parent="." node_paths=PackedStringArray("_shots", "_recoil", "_ammos")]
-script = ExtResource("3_013eg")
+[node name="PWF_Ponctual" type="Node3D" parent="." node_paths=PackedStringArray("_shots", "_ammos")]
+script = ExtResource("3_dmkpc")
 _shots = [NodePath("PWS_Hitscan")]
-_spread = 2.0
-_fireRate = 50
-_recoil = NodePath("PW_ConstantRecoil")
+_fireRate = 700
 _ammos = NodePath("PW_Ammunition")
-metadata/_custom_type_script = "uid://cu3n4oi1x76dl"
+_ammosPerShot = 0
+metadata/_custom_type_script = "uid://dmsklefspdvlw"
 
-[node name="PW_ConstantRecoil" type="Node3D" parent="PWF_Continuous"]
-script = ExtResource("4_gc5oi")
-metadata/_custom_type_script = "uid://djecalg7cxlvg"
-
-[node name="PW_Ammunition" type="Node3D" parent="PWF_Continuous"]
+[node name="PW_Ammunition" type="Node3D" parent="PWF_Ponctual"]
 script = ExtResource("5_pxa3m")
-_magazineSize = 30
-_maxMagazines = 5
 metadata/_custom_type_script = "uid://cxiwvat6vddlp"
 
-[node name="PWS_Hitscan" type="Node3D" parent="PWF_Continuous"]
+[node name="PWS_Hitscan" type="Node3D" parent="PWF_Ponctual"]
 script = ExtResource("6_38m5i")
+_maxDistance = 2.0
 _hitData = SubResource("Resource_ad73j")
-_trails = Array[Object]([ExtResource("8_sogkq")])
+_trails = Array[Object]([SubResource("Resource_pxa3m")])
+_knockBack = 8.0
+_traumaSampler = SubResource("Resource_38m5i")
+_traumaRadius = 2.5
+_maxTrauma = 0.6
 metadata/_custom_type_script = "uid://fc7gkofu3df7"
-
-[node name="PW_SimpleADS" type="Node3D" parent="." node_paths=PackedStringArray("_fire")]
-script = ExtResource("9_mrh4h")
-_spreadMultiplier = -0.85
-_recoilMultiplier = -0.2
-_fire = NodePath("../PWF_Continuous")
-Hold = true
-_scopeInTime = 0.2
-_scopeOutTime = 0.2
-_fovMultiplier = 0.9
-_moveSpeedMultiplier = -0.1
-metadata/_custom_type_script = "uid://bxxmkegnq67qe"
