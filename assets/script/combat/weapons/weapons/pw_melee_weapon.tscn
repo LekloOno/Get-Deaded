@@ -1,23 +1,23 @@
-[gd_scene load_steps=11 format=3 uid="uid://dcmylvqsy66rj"]
+[gd_scene load_steps=11 format=3 uid="uid://bhxt3qoevxipp"]
 
-[ext_resource type="Script" uid="uid://c3are182lodyx" path="res://script/player/combat/weapons/weapon/PW_Simple.cs" id="1_5idl2"]
-[ext_resource type="Texture2D" uid="uid://cll1rrqagufi2" path="res://assets/sprites/weapons/brrtpixel2.png" id="2_ykmm0"]
-[ext_resource type="Script" uid="uid://cu3n4oi1x76dl" path="res://script/player/combat/weapons/fire/PWF_Continuous.cs" id="3_j06ou"]
-[ext_resource type="Script" uid="uid://djecalg7cxlvg" path="res://script/player/combat/weapons/fire/recoil/PW_ConstantRecoil.cs" id="4_8kujm"]
-[ext_resource type="Script" uid="uid://cxiwvat6vddlp" path="res://script/player/combat/weapons/ammunition/PW_Ammunition.cs" id="5_akysb"]
-[ext_resource type="Script" uid="uid://fc7gkofu3df7" path="res://script/player/combat/weapons/shot/PWS_Hitscan.cs" id="6_b25vv"]
-[ext_resource type="Script" uid="uid://cjmiash71uc7b" path="res://script/global/combat/hit/hit/GC_Hit.cs" id="7_2b0g7"]
-[ext_resource type="Resource" uid="uid://mcobvwmhuq3a" path="res://assets/script/vfx/trails/simple_moving_trail.tres" id="8_debeo"]
-[ext_resource type="Script" uid="uid://bxxmkegnq67qe" path="res://script/player/combat/weapons/ads/PW_SimpleADS.cs" id="9_r4wwr"]
+[ext_resource type="Script" uid="uid://c3are182lodyx" path="res://script/player/combat/weapons/weapon/PW_Simple.cs" id="1_dmkpc"]
+[ext_resource type="Texture2D" uid="uid://cll1rrqagufi2" path="res://assets/sprites/weapons/brrtpixel2.png" id="2_488s0"]
+[ext_resource type="Script" uid="uid://cu3n4oi1x76dl" path="res://script/player/combat/weapons/fire/PWF_Continuous.cs" id="3_013eg"]
+[ext_resource type="Script" uid="uid://djecalg7cxlvg" path="res://script/player/combat/weapons/fire/recoil/PW_ConstantRecoil.cs" id="4_gc5oi"]
+[ext_resource type="Script" uid="uid://cxiwvat6vddlp" path="res://script/player/combat/weapons/ammunition/PW_Ammunition.cs" id="5_pxa3m"]
+[ext_resource type="Script" uid="uid://fc7gkofu3df7" path="res://script/player/combat/weapons/shot/PWS_Hitscan.cs" id="6_38m5i"]
+[ext_resource type="Script" uid="uid://cjmiash71uc7b" path="res://script/global/combat/hit/hit/GC_Hit.cs" id="7_4osp6"]
+[ext_resource type="Resource" uid="uid://mcobvwmhuq3a" path="res://assets/script/vfx/trails/simple_moving_trail.tres" id="8_sogkq"]
+[ext_resource type="Script" uid="uid://bxxmkegnq67qe" path="res://script/player/combat/weapons/ads/PW_SimpleADS.cs" id="9_mrh4h"]
 
 [sub_resource type="Resource" id="Resource_ad73j"]
-script = ExtResource("7_2b0g7")
+script = ExtResource("7_4osp6")
 _damage = 6.0
 _inspectorModifiers = null
 metadata/_custom_type_script = "uid://cjmiash71uc7b"
 
 [node name="PW_Simple" type="Node3D" node_paths=PackedStringArray("_fire", "_ads", "_barrel")]
-script = ExtResource("1_5idl2")
+script = ExtResource("1_dmkpc")
 _fire = NodePath("PWF_Continuous")
 MoveSpeedModifier = -0.08
 SwitchInTime = 0.2
@@ -27,7 +27,7 @@ TacticalReloadTime = 0.9
 ReloadReadyTime = 0.2
 _ads = NodePath("PW_SimpleADS")
 _barrel = NodePath("Barrel")
-Icon = ExtResource("2_ykmm0")
+Icon = ExtResource("2_488s0")
 IconColor = Color(0.281, 0.697, 1, 0.8)
 metadata/_custom_type_script = "uid://c3are182lodyx"
 
@@ -35,7 +35,7 @@ metadata/_custom_type_script = "uid://c3are182lodyx"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.142744, 0, 0.16983)
 
 [node name="PWF_Continuous" type="Node3D" parent="." node_paths=PackedStringArray("_shots", "_recoil", "_ammos")]
-script = ExtResource("3_j06ou")
+script = ExtResource("3_013eg")
 _shots = [NodePath("PWS_Hitscan")]
 _spread = 2.0
 _fireRate = 50
@@ -44,23 +44,23 @@ _ammos = NodePath("PW_Ammunition")
 metadata/_custom_type_script = "uid://cu3n4oi1x76dl"
 
 [node name="PW_ConstantRecoil" type="Node3D" parent="PWF_Continuous"]
-script = ExtResource("4_8kujm")
+script = ExtResource("4_gc5oi")
 metadata/_custom_type_script = "uid://djecalg7cxlvg"
 
 [node name="PW_Ammunition" type="Node3D" parent="PWF_Continuous"]
-script = ExtResource("5_akysb")
+script = ExtResource("5_pxa3m")
 _magazineSize = 30
 _maxMagazines = 5
 metadata/_custom_type_script = "uid://cxiwvat6vddlp"
 
 [node name="PWS_Hitscan" type="Node3D" parent="PWF_Continuous"]
-script = ExtResource("6_b25vv")
+script = ExtResource("6_38m5i")
 _hitData = SubResource("Resource_ad73j")
-_trails = Array[Object]([ExtResource("8_debeo")])
+_trails = Array[Object]([ExtResource("8_sogkq")])
 metadata/_custom_type_script = "uid://fc7gkofu3df7"
 
 [node name="PW_SimpleADS" type="Node3D" parent="." node_paths=PackedStringArray("_fire")]
-script = ExtResource("9_r4wwr")
+script = ExtResource("9_mrh4h")
 _spreadMultiplier = -0.85
 _recoilMultiplier = -0.2
 _fire = NodePath("../PWF_Continuous")
