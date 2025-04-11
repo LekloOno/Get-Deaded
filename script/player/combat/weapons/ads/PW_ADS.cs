@@ -1,7 +1,7 @@
 using Godot;
 
 [GlobalClass]
-public partial class PW_ADS : Resource
+public partial class PW_ADS : Node3D
 {
     [Export] public bool Hold {get; private set;}
     [Export] public float ScopeInTime {get; private set;}

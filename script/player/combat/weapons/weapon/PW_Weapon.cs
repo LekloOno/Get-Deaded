@@ -3,20 +3,22 @@ using System.Collections.Generic;
 using Godot;
 
 [GlobalClass]
-public abstract partial class PW_Weapon : Resource
+public abstract partial class PW_Weapon : Node3D
 {
+    [Export] public float MoveSpeedModifier {get; private set;} = 0f;   // An additive modifier to set. - is a malus + is a bonus
     [Export] public float SwitchInTime {get; private set;}
     [Export] public float SwitchOutTime {get; private set;}
-    [Export] public float MoveSpeedModifier {get; private set;} = 0f;   // An additive modifier to set. - is a malus + is a bonus
     [Export] public float ReloadTime {get; private set;}
     [Export] public float TacticalReloadTime {get; private set;}
     [Export] public float ReloadReadyTime {get; private set;}            // Additionnal time before the weapon is ready once it's reloaded, allow annimation cancels
     [Export] protected PW_ADS _ads;
+
+    [ExportCategory("Visuals")]
+    [Export] protected Node3D _barrel;
     [Export] public Texture2D Icon {get; private set;}
     [Export] public Color IconColor {get; private set;}
     protected PC_DirectCamera _camera;
     protected Node3D _sight;
-    protected Node3D _barel;
     private PM_SurfaceControl _surfaceControl;
     public EventHandler<ShotHitEventArgs> Hit;
     public Action Shot;
@@ -24,11 +26,10 @@ public abstract partial class PW_Weapon : Resource
     public Action ADSStopped;
     public bool ADSActive {get; private set;} = false;          // Not ideal, maybe make so ads return 3 state instead of true/false to know when nothing happened.
 
-    public void Initialize(PC_DirectCamera camera, Node3D sight, Node3D barel, PM_SurfaceControl surfaceControl, PC_Recoil recoilController, GB_ExternalBodyManager owberBody)
+    public void Initialize(PC_DirectCamera camera, Node3D sight, PM_SurfaceControl surfaceControl, PC_Recoil recoilController, GB_ExternalBodyManager owberBody)
     {
         _camera = camera;
         _sight = sight;
-        _barel = barel;
         _surfaceControl = surfaceControl;
         _ads?.Initialize(_camera);
         WeaponInitialize(recoilController, owberBody);

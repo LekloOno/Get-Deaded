@@ -1,4 +1,4 @@
-[gd_scene load_steps=157 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=132 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://script/player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://assets/script/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -35,14 +35,11 @@
 [ext_resource type="AudioStream" uid="uid://b7y6fn7u2t61j" path="res://assets/sounds/woosh/woosh3.wav" id="15_vrr6v"]
 [ext_resource type="AudioStream" uid="uid://c3yn8oxpxhvy0" path="res://assets/sounds/clothes/clothes_4.wav" id="15_yrqyn"]
 [ext_resource type="AudioStream" uid="uid://cv7hf0tm8n6mw" path="res://assets/sounds/clothes/clothes_5.wav" id="16_71snu"]
-[ext_resource type="Texture2D" uid="uid://cll1rrqagufi2" path="res://assets/sprites/weapons/brrtpixel2.png" id="16_lsyns"]
 [ext_resource type="Script" uid="uid://d27dbwl0y8qkt" path="res://script/player/input/actions/movement/crouch/PI_Dash.cs" id="16_t2wfm"]
 [ext_resource type="AudioStream" uid="uid://dnjywl4vsbygw" path="res://assets/sounds/footsteps/concrete-step3.wav" id="16_ul8s5"]
 [ext_resource type="Script" uid="uid://b37yb21n7qltn" path="res://script/player/input/actions/movement/crouch/PI_Slide.cs" id="17_d5kvj"]
-[ext_resource type="Texture2D" uid="uid://c050onpc3r17u" path="res://assets/sprites/weapons/pewpixel.png" id="17_w8edb"]
 [ext_resource type="AudioStream" uid="uid://byvkie35nxxfe" path="res://assets/sounds/clothes/clothes_6.wav" id="17_yke2y"]
 [ext_resource type="Script" uid="uid://pcc1itcc2dlb" path="res://script/ui/combat/health/UI_PlayerHealth.cs" id="18_0agck"]
-[ext_resource type="Texture2D" uid="uid://8rrtqp0otyee" path="res://assets/sprites/weapons/meleepixel.png" id="18_0vaqj"]
 [ext_resource type="AudioStream" uid="uid://c51litrqlhdk8" path="res://assets/sounds/footsteps/concrete-step5.wav" id="18_1gs0t"]
 [ext_resource type="Script" uid="uid://cvmm2apn1tg0v" path="res://script/global/loot/picker/GL_Picker.cs" id="18_u3xwg"]
 [ext_resource type="Script" uid="uid://3tjawmkgaiwa" path="res://script/global/loot/picker/GL_Vacuum.cs" id="18_wow6d"]
@@ -96,20 +93,10 @@
 [ext_resource type="Script" uid="uid://bd37jsqipcwxc" path="res://script/ui/movement/UI_DashReset.cs" id="71_j12ti"]
 [ext_resource type="Script" uid="uid://cq31c653np61x" path="res://script/player/movement/actions/surface-control/PM_AirState.cs" id="72_0vaqj"]
 [ext_resource type="PackedScene" uid="uid://d06ge8pykx8s1" path="res://prefabs/hitmarker.tscn" id="77_fdvd6"]
-[ext_resource type="Script" uid="uid://cjmiash71uc7b" path="res://script/global/combat/hit/hit/GC_Hit.cs" id="80_ufgmq"]
-[ext_resource type="Script" uid="uid://fc7gkofu3df7" path="res://script/player/combat/weapons/shot/PWS_Hitscan.cs" id="81_f31u3"]
 [ext_resource type="Script" uid="uid://b4hdeuwma0ma8" path="res://script/player/combat/weapons/PW_WeaponsHandler.cs" id="81_stdu8"]
 [ext_resource type="Script" uid="uid://c7tdbt357bj80" path="res://script/ui/combat/weapon/hit/number/UI_DamageIndicatorManager.cs" id="82_5dw8r"]
-[ext_resource type="Script" uid="uid://dmsklefspdvlw" path="res://script/player/combat/weapons/fire/PWF_Ponctual.cs" id="82_fuwq2"]
 [ext_resource type="PackedScene" uid="uid://bj3ck4u2xa8hu" path="res://prefabs/damage_indicator.tscn" id="83_ewcnl"]
-[ext_resource type="Resource" uid="uid://ca7lrmxnc1hsm" path="res://assets/script/combat/weapons/fire/pwf_simple_click.tres" id="86_8j20c"]
-[ext_resource type="Script" uid="uid://c3are182lodyx" path="res://script/player/combat/weapons/weapon/PW_Simple.cs" id="87_5dw8r"]
-[ext_resource type="Script" uid="uid://bxxmkegnq67qe" path="res://script/player/combat/weapons/ads/PW_SimpleADS.cs" id="87_htv2j"]
-[ext_resource type="Resource" uid="uid://dkeof2yotipev" path="res://assets/script/combat/weapons/fire/pwf_simple_continuous.tres" id="88_ewcnl"]
-[ext_resource type="Script" uid="uid://sujdlokcwnd6" path="res://script/global/combat/hit/GC_DamageModifier.cs" id="89_4vhab"]
 [ext_resource type="Script" uid="uid://dkysuj8gsdwv4" path="res://script/player/connectors/CNT_SprintWeapon.cs" id="91_cqits"]
-[ext_resource type="Script" uid="uid://0w0m608ktkwu" path="res://script/vfx/combat/trail/moving_light/VFX_MovingLightTrail.cs" id="91_lk6x0"]
-[ext_resource type="Script" uid="uid://cxiwvat6vddlp" path="res://script/player/combat/weapons/ammunition/PW_Ammunition.cs" id="92_3bwxm"]
 [ext_resource type="Script" uid="uid://b2flfi73k8d71" path="res://script/ui/viewport/UI_SpatialViewport.cs" id="96_w8edb"]
 [ext_resource type="Script" uid="uid://cjkogi1w2j3wf" path="res://script/ui/viewport/UI_SpatialVPCamera.cs" id="97_0vaqj"]
 [ext_resource type="Script" uid="uid://51kwj2ldm4xq" path="res://script/player/camera/annimation/trauma/causers/direct/PCT_Fire.cs" id="99_hbsv2"]
@@ -214,125 +201,6 @@ _halfInput = 40.0
 _minOutput = 0.15
 _maxOutput = 1.0
 metadata/_custom_type_script = "uid://t5n7py52g5oj"
-
-[sub_resource type="Resource" id="Resource_fdvd6"]
-script = ExtResource("87_5dw8r")
-_fire = ExtResource("86_8j20c")
-SwitchInTime = 0.2
-SwitchOutTime = 0.25
-MoveSpeedModifier = -0.1
-ReloadTime = 1.0
-TacticalReloadTime = 1.0
-ReloadReadyTime = 0.15
-Icon = ExtResource("17_w8edb")
-IconColor = Color(1, 0.589, 0.109, 0.8)
-metadata/_custom_type_script = "uid://c3are182lodyx"
-
-[sub_resource type="Resource" id="Resource_wow6d"]
-script = ExtResource("87_htv2j")
-SpreadMultiplier = -0.85
-RecoilMultiplier = -0.2
-Hold = true
-ScopeInTime = 0.2
-ScopeOutTime = 0.2
-FovMultiplier = 0.9
-MoveSpeedMultiplier = -0.1
-metadata/_custom_type_script = "uid://bxxmkegnq67qe"
-
-[sub_resource type="Resource" id="Resource_fvk8i"]
-script = ExtResource("87_5dw8r")
-_fire = ExtResource("88_ewcnl")
-SwitchInTime = 0.15
-SwitchOutTime = 0.25
-MoveSpeedModifier = -0.08
-ReloadTime = 1.2
-TacticalReloadTime = 0.8
-ReloadReadyTime = 0.15
-_ads = SubResource("Resource_wow6d")
-Icon = ExtResource("16_lsyns")
-IconColor = Color(0.094, 0.681, 1, 0.8)
-metadata/_custom_type_script = "uid://c3are182lodyx"
-
-[sub_resource type="Resource" id="Resource_vj6q7"]
-script = ExtResource("92_3bwxm")
-_magazineSize = 0
-_magazinePick = 0
-_maxMagazines = 0
-_reloadTime = 0.0
-_tacticalReloadTime = 0.0
-metadata/_custom_type_script = "uid://cxiwvat6vddlp"
-
-[sub_resource type="Resource" id="Resource_3bwxm"]
-script = ExtResource("89_4vhab")
-BodyPart = 0
-Modifier = 1.0
-metadata/_custom_type_script = "uid://sujdlokcwnd6"
-
-[sub_resource type="Resource" id="Resource_u3xwg"]
-script = ExtResource("80_ufgmq")
-_damage = 25.0
-_inspectorModifiers = Array[Object]([SubResource("Resource_3bwxm")])
-metadata/_custom_type_script = "uid://cjmiash71uc7b"
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gcum8"]
-transparency = 1
-cull_mode = 2
-albedo_color = Color(0.945098, 0.945098, 0.945098, 0.133333)
-
-[sub_resource type="Resource" id="Resource_cqits"]
-script = ExtResource("91_lk6x0")
-_material = SubResource("StandardMaterial3D_gcum8")
-_thickness = 1.2
-_bulletSpeed = 12.0
-_trailSpeed = 5.0
-_inclination = 87.0
-metadata/_custom_type_script = "uid://0w0m608ktkwu"
-
-[sub_resource type="Resource" id="Resource_btq8w"]
-script = ExtResource("59_n5lof")
-_halfInput = 0.0
-_minOutput = 0.0
-_maxOutput = 0.4
-metadata/_custom_type_script = "uid://t5n7py52g5oj"
-
-[sub_resource type="Resource" id="Resource_nkqrs"]
-script = ExtResource("81_f31u3")
-_maxDistance = 2.0
-_hitData = SubResource("Resource_u3xwg")
-_originOffset = Vector3(0, 0, 0)
-_directionOffset = Vector3(0, 0, 0)
-_trails = Array[Object]([SubResource("Resource_cqits")])
-_knockBack = 10.0
-_kickBack = 5.0
-_traumaSampler = SubResource("Resource_btq8w")
-_traumaRadius = 2.5
-_clampTrauma = true
-_maxTrauma = 0.6
-metadata/_custom_type_script = "uid://fc7gkofu3df7"
-
-[sub_resource type="Resource" id="Resource_jbksd"]
-script = ExtResource("82_fuwq2")
-_shots = Array[Object]([SubResource("Resource_nkqrs")])
-_spread = 0.0
-_fireRate = 700
-_ammos = SubResource("Resource_vj6q7")
-_ammosPerShot = 0
-_baseAmmos = 0
-IsDerived = false
-metadata/_custom_type_script = "uid://dmsklefspdvlw"
-
-[sub_resource type="Resource" id="Resource_5dw8r"]
-script = ExtResource("87_5dw8r")
-_fire = SubResource("Resource_jbksd")
-SwitchInTime = 0.12
-SwitchOutTime = 0.12
-MoveSpeedModifier = 0.0
-ReloadTime = 0.0
-TacticalReloadTime = 0.0
-ReloadReadyTime = 0.0
-Icon = ExtResource("18_0vaqj")
-IconColor = Color(1, 1, 1, 0.8)
-metadata/_custom_type_script = "uid://c3are182lodyx"
 
 [sub_resource type="Resource" id="Resource_0agck"]
 script = ExtResource("14_0agck")
@@ -1149,7 +1017,20 @@ _dashDuration = 0.1
 _minDashRatio = 0.5
 _cooldown = 3.0
 
-[node name="PW_WeaponsHandler" type="Node" parent="." node_paths=PackedStringArray("_camera", "_recoilController", "_sight", "_barel", "_ownerBody", "_weaponsInput", "_surfaceControl")]
+[node name="PW_WeaponsHandler2" type="Node3D" parent="." node_paths=PackedStringArray("_camera", "_recoilController", "_sight", "_barel", "_ownerBody", "_weaponsInput", "_weapons", "_surfaceControl")]
+script = ExtResource("81_stdu8")
+_camera = NodePath("../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable/Camera3D")
+_recoilController = NodePath("../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil")
+_sight = NodePath("../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean")
+_barel = NodePath("../PW_WeaponsHandler/Weapons/Barrel")
+_ownerBody = NodePath("../GB_PlayerBodyManager")
+_weaponsInput = NodePath("../PIM_Arena/PI_Weapons")
+_weapons = []
+_surfaceControl = NodePath("../Movement/PM_SurfaceControl")
+_meleeRecover = 0.7
+metadata/_custom_type_script = "uid://b4hdeuwma0ma8"
+
+[node name="PW_WeaponsHandler" type="Node" parent="." node_paths=PackedStringArray("_camera", "_recoilController", "_sight", "_barel", "_ownerBody", "_weaponsInput", "_weapons", "_surfaceControl")]
 script = ExtResource("81_stdu8")
 _camera = NodePath("../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable/Camera3D")
 _recoilController = NodePath("../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil")
@@ -1157,8 +1038,7 @@ _sight = NodePath("../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintL
 _barel = NodePath("Weapons/Barrel")
 _ownerBody = NodePath("../GB_PlayerBodyManager")
 _weaponsInput = NodePath("../PIM_Arena/PI_Weapons")
-_weapons = Array[Object]([SubResource("Resource_fdvd6"), SubResource("Resource_fvk8i")])
-_melee = SubResource("Resource_5dw8r")
+_weapons = []
 _surfaceControl = NodePath("../Movement/PM_SurfaceControl")
 _meleeRecover = 0.7
 metadata/_custom_type_script = "uid://b4hdeuwma0ma8"
@@ -1173,7 +1053,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.287144, -0.225284, -0.23674
 
 [node name="Click" type="Node" parent="PW_WeaponsHandler/Trauma" node_paths=PackedStringArray("_shakeableCamera")]
 script = ExtResource("99_hbsv2")
-_fire = ExtResource("86_8j20c")
 _traumaLayer = SubResource("Resource_0agck")
 _amount = 0.3
 _shakeableCamera = NodePath("../../../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable")
@@ -1182,7 +1061,6 @@ metadata/_custom_type_script = "uid://51kwj2ldm4xq"
 [node name="Track" type="Node" parent="PW_WeaponsHandler/Trauma" node_paths=PackedStringArray("_shakeableCamera")]
 script = ExtResource("100_cqns0")
 _max = 0.15
-_fire = ExtResource("88_ewcnl")
 _traumaLayer = SubResource("Resource_0fwqu")
 _amount = 0.1
 _shakeableCamera = NodePath("../../../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable")
@@ -1190,7 +1068,6 @@ metadata/_custom_type_script = "uid://r8ad50yt78dm"
 
 [node name="Melee" type="Node" parent="PW_WeaponsHandler/Trauma" node_paths=PackedStringArray("_shakeableCamera")]
 script = ExtResource("99_hbsv2")
-_fire = SubResource("Resource_jbksd")
 _traumaLayer = SubResource("Resource_yw1gl")
 _amount = 0.35
 _shakeableCamera = NodePath("../../../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable")

@@ -1,7 +1,7 @@
 using Godot;
 
 [GlobalClass]
-public abstract partial class PW_Recoil : Resource
+public abstract partial class PW_Recoil : Node3D
 {
     public MATH_AdditiveModifiers Modifier {get; protected set;} = new();
     public abstract void Initialize(PC_Recoil _recoilController);

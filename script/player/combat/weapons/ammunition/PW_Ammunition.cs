@@ -4,7 +4,7 @@ using Godot;
 public delegate void AmmutionEvent(int amount, uint finalAmount);
 
 [GlobalClass]
-public partial class PW_Ammunition : Resource
+public partial class PW_Ammunition : Node3D
 {
     [Export] private uint _magazineSize;
     /// <summary>
@@ -13,8 +13,6 @@ public partial class PW_Ammunition : Resource
     /// </summary>
     [Export] private uint _magazinePick;
     [Export] private uint _maxMagazines;
-    [Export] private float _reloadTime;
-    [Export] private float _tacticalReloadTime;
     public bool IsReloading {get; private set;} = false;
     private uint _maxAmos;
     private uint _unloadedAmmos;

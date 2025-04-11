@@ -38,6 +38,7 @@ _originOffset = Vector3(0, 0, 0)
 _directionOffset = Vector3(0, 0, 0)
 _trails = Array[Object]([ExtResource("2_si0j0")])
 _knockBack = 0.0
+_kickBack = 0.0
 _traumaRadius = 1.0
 _clampTrauma = true
 _maxTrauma = 0.2
