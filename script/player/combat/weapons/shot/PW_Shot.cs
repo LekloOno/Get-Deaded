@@ -40,15 +40,21 @@ public abstract partial class PW_Shot : Resource, GC_IHitDealer
         _traumaCauser.AddChild(causerShape);
 
         _barel.AddChild(_traumaCauser);
-    }    
+        ShotInitialize();
+    }
+
+    public abstract void ShotInitialize();    
 
     //public void Shoot(Vector3 origin, Vector3 direction) =>
     //    HShoot(origin, direction);
 
     public abstract void Shoot(Vector3 origin, Vector3 direction);
 
-    protected void HandleKick(Vector3 origin, Vector3 direction) =>
-        _ownerBody.HandleKnockBack(-direction * _kickBack);
+    protected void HandleKick(Vector3 origin, Vector3 direction)
+    {
+        if (_kickBack != 0)
+            _ownerBody.HandleKnockBack(-direction * _kickBack);
+    }
 
     protected void DoHit(ShotHitEventArgs e, Vector3 hitPosition, Vector3 from)
     {

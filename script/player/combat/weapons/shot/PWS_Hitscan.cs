@@ -41,4 +41,6 @@ public partial class PWS_Hitscan : PW_Shot, GC_IHitDealer
 
         HandleKick(origin, direction);
     }
+
+    public override void ShotInitialize(){}
 }
