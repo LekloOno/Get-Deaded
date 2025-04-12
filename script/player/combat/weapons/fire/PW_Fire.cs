@@ -105,22 +105,22 @@ public abstract partial class PW_Fire : Node3D
         direction = -_sight.GlobalBasis.Z;
     }
 
-    public bool HandlePress()
+    public bool Press()
     {
         ResetBuffer();
 
-        if(Press())
+        if(SpecPress())
             return true;
         
         BufferPress();
         return false;
     }
 
-    public bool HandleRelease()
+    public bool Release()
     {
         ResetBuffer();
 
-        if(Release())
+        if(SpecRelease())
             return true;
         
         BufferRelease();
@@ -175,12 +175,12 @@ public abstract partial class PW_Fire : Node3D
     private void SendPress()
     {
         _pressBuffered = false;
-        Press();
+        SpecPress();
     }
     private void SendRelease()
     {
         _releaseBuffered = false;
-        Release();
+        SpecRelease();
     }
 
     public bool CanReload(out bool tactical)
@@ -195,14 +195,14 @@ public abstract partial class PW_Fire : Node3D
     /// <para> It should return true when it handled the input expectedly. Example - if it is supposed to shoot, and it did shoot.</para>
     /// </summary>
     /// <returns>true if it was able to handle the input expectedly, false otherwise</returns>
-    protected abstract bool Press();
+    protected abstract bool SpecPress();
     /// <summary>
     /// Handle an up input. It would typically use TryShoot or Shoot/CanShoot for finer behaviors. It can also do nothing or more complex behaviors.
     /// <para> It should return false when it results in an "unexpected" behavior. Example - if it is supposed to shoot but it was too soon to do so.</para>
     /// <para> It should return true when it handled the input expectedly. Example - if it is supposed to shoot, and it did shoot.</para>
     /// </summary>
     /// <returns>true if it was able to handle the input expectedly, false otherwise</returns>
-    protected abstract bool Release();
+    protected abstract bool SpecRelease();
     /// <summary>
     /// Handle the weapon disabling. Example - A weapons which shoots continuously should stop shooting on disable, even if no up input has been sent.
     /// </summary>

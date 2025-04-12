@@ -25,8 +25,8 @@ public abstract partial class PW_Weapon : Node3D
     public Action ADSStarted;
     public Action ADSStopped;
     
-    protected Node3D _sight;
     protected PW_Fire _currentFire;
+    protected Node3D _sight;
     private PM_SurfaceControl _surfaceControl;
 
     /// -----------------------------
@@ -147,11 +147,11 @@ public abstract partial class PW_Weapon : Node3D
     /// <summary>
     /// Called when the primary input is pressed down. Will typically handle shooting process.
     /// </summary>
-    public virtual bool PrimaryPress() => _currentFire.HandlePress();
+    public virtual bool PrimaryPress() => _currentFire.Press();
     /// <summary>
     /// Called when the primary input is released up. Could handle some special behaviors, or shooting.
     /// </summary>
-    public virtual bool PrimaryRelease() => _currentFire.HandleRelease();
+    public virtual bool PrimaryRelease() => _currentFire.Release();
     /// <summary>
     /// Called if the ADS handler didn't consume the incoming secondary press input.
     /// </summary>

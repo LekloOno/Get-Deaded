@@ -21,8 +21,8 @@ public partial class PW_Alternate : PW_Weapon
         SecondaryFire.Hit += (o, e) => Hit?.Invoke(o, e);
     }
 
-    protected override bool SpecSecondaryPress() => SecondaryFire.HandlePress();
-    protected override bool SpecSecondaryRelease() => SecondaryFire.HandleRelease();
+    protected override bool SpecSecondaryPress() => SecondaryFire.Press();
+    protected override bool SpecSecondaryRelease() => SecondaryFire.Release();
 
 
     protected override void SpecStartADS()

@@ -7,7 +7,7 @@ public partial class PWF_Continuous : PW_Fire
     public override void Disable() => StopShoot();
 
 
-    protected override bool Press()
+    protected override bool SpecPress()
     {
         StopShoot();
         _recoil.ResetBuffer();
@@ -22,7 +22,7 @@ public partial class PWF_Continuous : PW_Fire
         _timer.Timeout += ReShoot;
         return true;
     }
-    protected override bool Release()
+    protected override bool SpecRelease()
     {
         StopShoot();
         return true;

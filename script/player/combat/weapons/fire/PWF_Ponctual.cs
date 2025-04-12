@@ -3,7 +3,7 @@ using Godot;
 [GlobalClass]
 public partial class PWF_Ponctual : PW_Fire
 {
-    protected override bool Press()
+    protected override bool SpecPress()
     {
         bool didShoot = TryShoot();
         if (didShoot)
@@ -11,6 +11,6 @@ public partial class PWF_Ponctual : PW_Fire
 
         return didShoot;
     }
-    protected override bool Release() => true;
+    protected override bool SpecRelease() => true;
     public override void Disable() {}
 }
