@@ -12,7 +12,7 @@ public partial class PWS_Hitscan : PW_Shot, GC_IHitDealer
 
         Vector3 hit = castOrigin + castDirection * _maxDistance;
 
-        World3D world = _barel.GetWorld3D();
+        World3D world = _barrel.GetWorld3D();
         PhysicsDirectSpaceState3D spaceState = world.DirectSpaceState;
         PhysicsRayQueryParameters3D query = PhysicsRayQueryParameters3D.Create(castOrigin, hit);
         query.CollideWithAreas = true;
@@ -37,10 +37,10 @@ public partial class PWS_Hitscan : PW_Shot, GC_IHitDealer
         }
 
         foreach (VFX_Trail trail in _trails)
-            trail.Shoot(_barel, _barel.GlobalPosition + _originOffset, hit);
+            trail.Shoot(_barrel, _barrel.GlobalPosition + _originOffset, hit);
 
         HandleKick(origin, direction);
     }
 
-    public override void ShotInitialize(){}
+    public override void SpecInitialize(Node3D barel, GB_ExternalBodyManager ownerBody){}
 }

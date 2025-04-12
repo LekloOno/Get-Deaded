@@ -2,10 +2,8 @@ using Godot;
 using Godot.Collections;
 
 [GlobalClass]
-public partial class PCT_Undirect : Area3D
+public abstract partial class PCT_Undirect : Area3D
 {
-    [Export] protected float _amount = 0.1f;
-
     public override void _Ready()
     {
         CollisionLayer = 0;
@@ -32,5 +30,5 @@ public partial class PCT_Undirect : Area3D
         }
     }
 
-    protected virtual float ProcessedAmount(PC_Shakeable shakeable) => _amount;
+    protected abstract float ProcessedAmount(PC_Shakeable shakeable);
 }
