@@ -1,9 +1,10 @@
+using System;
 using Godot;
 
 [GlobalClass]
 public partial class PWS_Hitscan : PW_Shot, GC_IHitDealer
 {
-    [Export] protected float _maxDistance;
+    [Export] protected float _maxDistance = 20f;
 
     public override void Shoot(Vector3 origin, Vector3 direction)
     {
@@ -42,5 +43,12 @@ public partial class PWS_Hitscan : PW_Shot, GC_IHitDealer
         HandleKick(origin, direction);
     }
 
-    public override void SpecInitialize(Node3D barel, GB_ExternalBodyManager ownerBody){}
+    public override void SpecInitialize(Node3D barel, GB_ExternalBodyManager ownerBody)
+    {
+        if (_maxDistance == 0)
+        {
+            _maxDistance = 0.1f;
+            throw new InvalidOperationException($"PWS_Hitscan._maxDistance cannot be 0, it has been defaulted to {_maxDistance}.");
+        }
+    }
 }

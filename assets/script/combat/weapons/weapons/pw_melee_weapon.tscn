@@ -71,12 +71,13 @@ metadata/_custom_type_script = "uid://c3are182lodyx"
 [node name="Barrel" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.141212, -0.187122, -0.217735)
 
-[node name="PWF_Ponctual" type="Node3D" parent="." node_paths=PackedStringArray("_shots", "_ammos")]
+[node name="PWF_Ponctual" type="Node3D" parent="." node_paths=PackedStringArray("_shots", "_ammos", "_fireTraumaCauser")]
 script = ExtResource("3_dmkpc")
 _shots = [NodePath("PWS_Hitscan")]
 _fireRate = 700
 _ammos = NodePath("PW_Ammunition")
 _ammosPerShot = 0
+_fireTraumaCauser = NodePath("PCT_Fire")
 metadata/_custom_type_script = "uid://dmsklefspdvlw"
 
 [node name="PW_Ammunition" type="Node3D" parent="PWF_Ponctual"]

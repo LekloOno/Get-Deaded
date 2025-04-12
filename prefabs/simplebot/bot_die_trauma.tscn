@@ -17,7 +17,6 @@ radius = 40.0
 [node name="BotDieTrauma" type="Area3D"]
 script = ExtResource("1_jldyy")
 _curveSampler = SubResource("Resource_hauau")
-_amount = 0.21
 metadata/_custom_type_script = "uid://d15clqym1lgvu"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
