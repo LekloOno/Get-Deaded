@@ -101,8 +101,8 @@ public partial class PW_WeaponsHandler : Node3D
         Initialized?.Invoke(_melee, _weapons[_weaponIndex], nextIndex, _weapons);
     }
 
-    private void DirectMeleeStop(object sender, EventArgs e) => _melee.HandlePrimaryUp();
-    private void DirectMeleeStart(object sender, EventArgs e) => _melee.HandlePrimaryDown();
+    private void DirectMeleeStop(object sender, EventArgs e) => _melee.PrimaryRelease();
+    private void DirectMeleeStart(object sender, EventArgs e) => _melee.PrimaryPress();
 
     private void OnMeleeShot()
     {
@@ -110,7 +110,7 @@ public partial class PW_WeaponsHandler : Node3D
             return;
         
         CancelReload();
-        _activeWeapon.HandleDisable();
+        _activeWeapon.Disable();
         
         _ready = false;
 
@@ -163,7 +163,7 @@ public partial class PW_WeaponsHandler : Node3D
     private void SendPrimary()
     {
         ResetPrimaryBuffer();
-        _activeWeapon.HandlePrimaryDown();
+        _activeWeapon.PrimaryPress();
     }
 
     private void HandleStartPrimary(object sender, EventArgs e)
@@ -178,14 +178,14 @@ public partial class PW_WeaponsHandler : Node3D
         if (_bufferedPrimary)
             ResetPrimaryBuffer();
 
-        _activeWeapon?.HandlePrimaryDown();
+        _activeWeapon?.PrimaryPress();
     }
     private void HandleStopPrimary(object sender, EventArgs e)
     {
         if (_bufferedPrimary)
             ResetPrimaryBuffer();
         
-        _activeWeapon?.HandlePrimaryUp();
+        _activeWeapon?.PrimaryRelease();
     }
 
     private void BufferSecondary()
@@ -201,7 +201,7 @@ public partial class PW_WeaponsHandler : Node3D
     private void SendSecondary(object sender, PW_Weapon e)
     {
         ResetSecondaryBuffer();
-        _activeWeapon.HandleSecondaryDown();
+        _activeWeapon.SecondaryPress();
     }
     private void HandleStartSecondary(object sender, EventArgs e)
     {
@@ -218,14 +218,14 @@ public partial class PW_WeaponsHandler : Node3D
             ResetSecondaryBuffer();
 
 
-        _activeWeapon?.HandleSecondaryDown();
+        _activeWeapon?.SecondaryPress();
     }
     private void HandleStopSecondary(object sender, EventArgs e)
     {
         if (_bufferedSecondary)
             ResetSecondaryBuffer();
 
-        _activeWeapon?.HandleSecondaryUp();
+        _activeWeapon?.SecondaryRelease();
     }
 
 
@@ -255,7 +255,7 @@ public partial class PW_WeaponsHandler : Node3D
         if(!_ready || _reloading || IsSwitching())
             return;
 
-        if(!_activeWeapon.HandleCanReload(out float reloadTime))
+        if(!_activeWeapon.CanReload(out float reloadTime))
             return;
 
         _reloading = true;
@@ -266,7 +266,7 @@ public partial class PW_WeaponsHandler : Node3D
 
     private void DoReload()
     {
-        _activeWeapon.HandleReload();
+        _activeWeapon.Reload();
         _reloadTimer = GetTree().CreateTimer(_activeWeapon.ReloadReadyTime);
         _reloadTimer.Timeout += CompleteReload;
         _reloading = false;
@@ -327,7 +327,7 @@ public partial class PW_WeaponsHandler : Node3D
         _switchingOut = true;
 
         float time = _activeWeapon.SwitchOutTime;
-        _activeWeapon.HandleDisable();
+        _activeWeapon.Disable();
 
         _switchTimer = GetTree().CreateTimer(time);
         _switchTimer.Timeout += OnSwitchIn;

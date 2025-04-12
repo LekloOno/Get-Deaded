@@ -8,12 +8,12 @@ public partial class PW_SimpleADS : PW_ADS
 
     [Export] private PW_Fire _fire;
 
-    protected override void InnerActivate()
+    protected override void SpecActivate()
     {
         _fire.SpreadMultiplier.Add(_spreadMultiplier);
         _fire?.RecoilMultiplier.Add(_recoilMultiplier);
     }
-    protected override void InnerDeactivate()
+    protected override void SpecDeactivate()
     {
         _fire.SpreadMultiplier.Remove(_spreadMultiplier);
         _fire?.RecoilMultiplier.Remove(_recoilMultiplier);

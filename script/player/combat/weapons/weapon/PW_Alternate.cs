@@ -9,7 +9,7 @@ public partial class PW_Alternate : PW_Weapon
     private PW_Fire _currentFire;
 
 
-    protected override void WeaponInitialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManager owberBody)
+    protected override void SpecInitialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManager owberBody)
     {
         _currentFire = _primaryFire;
         _primaryFire.Initialize(shakeableCamera, _camera, _sight, _barrel, recoilController, owberBody);
@@ -18,30 +18,30 @@ public partial class PW_Alternate : PW_Weapon
         _secondaryFire.Hit += (o, e) => Hit?.Invoke(o, e);
     }
 
-    protected override void Disable() => _currentFire.Disable();
-    protected override bool PrimaryDown() => _currentFire.HandlePress();
-    protected override bool PrimaryUp() => _currentFire.HandleRelease();
-    protected override bool SecondaryDown() => _secondaryFire.HandlePress();
-    protected override bool SecondaryUp() => _secondaryFire.HandleRelease();
+    protected override void SpecDisable() => _currentFire.Disable();
+    protected override bool SpecPrimaryPress() => _currentFire.HandlePress();
+    protected override bool SpecPrimaryRelease() => _currentFire.HandleRelease();
+    protected override bool SpecSecondaryPress() => _secondaryFire.HandlePress();
+    protected override bool SpecSecondaryRelease() => _secondaryFire.HandleRelease();
 
-    protected override void StartADS()
+
+    protected override void SpecStartADS()
     {
         _currentFire.Disable();
         _currentFire = _secondaryFire;
     }
 
-    protected override void StopADS()
+    protected override void SpecStopADS()
     {
         _currentFire.Disable();
         _currentFire = _primaryFire;
     }
-
-    protected override void Reload()
+    protected override void SpecReload()
     {
         _primaryFire.Reload();
         _secondaryFire.Reload();
     }
-    protected override bool CanReload(out bool tactical) => _primaryFire.CanReload(out tactical) || _secondaryFire.CanReload(out tactical);
+    protected override bool SpecCanReload(out bool tactical) => _primaryFire.CanReload(out tactical) || _secondaryFire.CanReload(out tactical);
 
     public override bool PickAmmo(int amount, bool magazine, int targetFireIndex)
     {
@@ -68,5 +68,4 @@ public partial class PW_Alternate : PW_Weapon
         _primaryFire.ResetBuffer();
         _secondaryFire.ResetBuffer();
     }
-
 }

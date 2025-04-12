@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 [GlobalClass]
@@ -11,6 +12,9 @@ public partial class PW_ADS : Node3D
     private bool _active = false;
     private PM_SurfaceControl _surfaceControl;
     private PC_DirectCamera _camera;
+    
+    public Action Started;
+    public Action Stopped;
 
     public void Initialize(PC_DirectCamera camera, PM_SurfaceControl surfaceControl)
     {
@@ -22,61 +26,73 @@ public partial class PW_ADS : Node3D
     /// Disables the ADS.
     /// </summary>
     /// <returns>true if it was active, false otherwise.</returns>
-    public bool Disable()
-    {
-        bool wasActive = _active;
-
-        if (wasActive)
-            Deactivate();
-        
-        return wasActive;
-    }
+    public bool Disable() => TryDeactivate();
 
     /// <summary>
     /// Handles pressed input.
     /// </summary>
-    /// <returns>true if the following ADS state is active, false otherwise.</returns>
-    public bool Pressed()
+    /// <returns>true if the state of the ADS has changed, false otherwise.</returns>
+    public bool Press()
     {
         if (Hold)
-            return Activate();
+            return TryActivate();
         
-        if (_active)
-            return Deactivate();
 
-        return Activate();
+        if (_active)
+            Deactivate();
+        else
+            Activate();
+        return true;
     }
 
     /// <summary>
     /// Handle released input.
     /// </summary>
     /// <returns>true if the state of the ADS has changed, false otherwise.</returns>
-    public bool Released()
+    public bool Release()
     {
         if (Hold)
-            return !Deactivate();
+            return TryDeactivate();
 
         return false;
     }
     
-    protected virtual void InnerActivate(){}
-    protected virtual void InnerDeactivate(){}
+    protected virtual void SpecActivate(){}
+    protected virtual void SpecDeactivate(){}
 
-    private bool Activate()
+    private bool TryActivate()
+    {
+        if (_active)
+            return false;
+
+        Activate();
+        return true;
+    }
+
+    private void Activate()
     {
         _active = true;
         _camera.ModifyFov(_fovMultiplier, _scopeInTime);
         _surfaceControl.SpeedModifiers.Add(_moveSpeedMultiplier);
-        InnerActivate();
+        SpecActivate();
+        Started?.Invoke();
+    }
+
+    private bool TryDeactivate()
+    {
+        if (!_active)
+            return false;
+            
+        Deactivate();
         return true;
     }
 
-    private bool Deactivate()
+    private void Deactivate()
     {
         _active = false;
         _camera.ResetFov(_scopeOutTime);
         _surfaceControl.SpeedModifiers.Remove(_moveSpeedMultiplier);
-        InnerDeactivate();
-        return false;
+        SpecDeactivate();
+        Stopped?.Invoke();
     }
 }
