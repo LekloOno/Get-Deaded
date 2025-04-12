@@ -5,7 +5,7 @@ using Godot.Collections;
 
 
 [GlobalClass]
-public abstract partial class PW_Fire : Node3D
+public abstract partial class PW_Fire : WeaponSystem
 {
     private const double BUFFER_MARGIN = 0.008;
     [Export] private Array<PW_Shot> _shots;

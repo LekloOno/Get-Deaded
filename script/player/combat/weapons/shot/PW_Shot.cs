@@ -2,7 +2,7 @@ using System;
 using Godot;
 
 [GlobalClass]
-public abstract partial class PW_Shot : Node3D, GC_IHitDealer
+public abstract partial class PW_Shot : WeaponSystem, GC_IHitDealer
 {
     [Export] protected GC_Hit _hitData;
     [Export] protected Vector3 _originOffset = Vector3.Zero;

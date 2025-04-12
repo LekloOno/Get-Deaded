@@ -4,7 +4,7 @@ using Godot;
 public delegate void AmmutionEvent(int amount, uint finalAmount);
 
 [GlobalClass]
-public partial class PW_Ammunition : Node3D
+public partial class PW_Ammunition : WeaponSystem
 {
     [Export] private uint _magazineSize;
     /// <summary>
@@ -21,7 +21,7 @@ public partial class PW_Ammunition : Node3D
     public EventHandler ReloadCompleted;
     public AmmutionEvent LoadedChanged;
     public AmmutionEvent UnloadedChanged;
-    
+
     public uint UnloadedAmos
     {
         get => _unloadedAmmos;

@@ -2,7 +2,7 @@ using System;
 using Godot;
 
 [GlobalClass]
-public partial class PW_ADS : Node3D
+public partial class PW_ADS : WeaponSystem
 {
     [Export] private bool _hold = true;
     [Export] private float _scopeInTime;

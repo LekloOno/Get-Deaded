@@ -3,7 +3,7 @@ using Godot;
 using Godot.Collections;
 
 [GlobalClass]
-public abstract partial class PW_Weapon : Node3D
+public abstract partial class PW_Weapon : WeaponSystem
 {
     [Export] public float MoveSpeedModifier {get; private set;} = 0f;   // An additive modifier to set. - is a malus + is a bonus
     [Export] public float SwitchInTime {get; private set;}
@@ -56,7 +56,7 @@ public abstract partial class PW_Weapon : Node3D
             _ads.Started += StartADS;
             _ads.Stopped += StopADS;
         }
-        
+
         SpecInitialize(shakeableCamera, sight, recoilController, ownerBody);
 
         foreach(PW_Fire fire in _fires)

@@ -1,15 +1,12 @@
-//using System.Linq;
 using System;
-using System.Diagnostics;
 using System.Linq;
-using System.Net.NetworkInformation;
 using Godot;
 using Godot.Collections;
 
 public delegate void SwitchEvent(PW_Weapon active, PW_Weapon nextHolster, int nextIndex, Array<PW_Weapon> weapons);
 
-[GlobalClass]
-public partial class PW_WeaponsHandler : Node3D
+[GlobalClass, Icon("res://gd_icons/weapon_system/WeaponSystemIcon")]
+public partial class PW_WeaponsHandler : WeaponSystem
 {
     [Export] private PC_DirectCamera _camera;
     [Export] private PC_Shakeable _shakeableCamera;
