@@ -42,7 +42,7 @@ public partial class PW_WeaponsHandler : Node3D
     /// Event Arg is the weapon the player has now active.
     /// </summary>
     public EventHandler<PW_Weapon> SwitchEnded;
-    public bool ADSactive {get => _activeWeapon.ADSActive;}
+    public bool ADSactive => _activeWeapon.ADSActive;
     public Action ReloadReady;
     public Action Reloaded;
     public Action ADSStarted;

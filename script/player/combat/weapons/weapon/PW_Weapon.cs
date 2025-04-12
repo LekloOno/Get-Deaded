@@ -17,15 +17,16 @@ public abstract partial class PW_Weapon : Node3D
     [Export] protected Node3D _barrel;
     [Export] public Texture2D Icon {get; private set;}
     [Export] public Color IconColor {get; private set;}
-    protected PC_DirectCamera _camera;
-    protected Node3D _sight;
-    private PM_SurfaceControl _surfaceControl;
+    
+    public bool ADSActive => _ads.Active;
     public EventHandler<ShotHitEventArgs> Hit;
     public Action Shot;
     public Action ADSStarted;
     public Action ADSStopped;
-    public bool ADSActive {get; private set;} = false;          // Not ideal, maybe make so ads return 3 state instead of true/false to know when nothing happened.
-
+    
+    protected Node3D _sight;
+    private PM_SurfaceControl _surfaceControl;
+    
     /// -----------------------------
     ///      ___                
     ///     | _ ) __ _  ___ ___ 
@@ -47,12 +48,11 @@ public abstract partial class PW_Weapon : Node3D
     /// <param name="owberBody">The owner's external forces manager.</param>
     public void Initialize(PC_Shakeable shakeableCamera, PC_DirectCamera camera, Node3D sight, PM_SurfaceControl surfaceControl, PC_Recoil recoilController, GB_ExternalBodyManager owberBody)
     {
-        _camera = camera;
         _sight = sight;
         _surfaceControl = surfaceControl;
         if (_ads != null)
         {
-            _ads.Initialize(_camera, surfaceControl);
+            _ads.Initialize(camera, surfaceControl);
             _ads.Started += StartADS;
             _ads.Stopped += StopADS;
         }

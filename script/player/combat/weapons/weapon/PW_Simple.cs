@@ -9,7 +9,7 @@ public partial class PW_Simple : PW_Weapon
     protected override void SpecInitialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManager owberBody)
     {
         _fire.Shot += (o, e) => Shot?.Invoke();
-        _fire.Initialize(shakeableCamera, _camera, _sight, _barrel, recoilController, owberBody);
+        _fire.Initialize(shakeableCamera, _sight, _barrel, recoilController, owberBody);
         _fire.Hit += (o, e) => Hit?.Invoke(o, e);
     }
 

@@ -87,7 +87,6 @@ script = ExtResource("9_r4wwr")
 _spreadMultiplier = -0.85
 _recoilMultiplier = -0.2
 _fire = NodePath("../PWF_Continuous")
-Hold = true
 _scopeInTime = 0.2
 _scopeOutTime = 0.2
 _fovMultiplier = 0.9

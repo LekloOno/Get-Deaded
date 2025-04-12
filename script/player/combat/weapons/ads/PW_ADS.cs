@@ -4,18 +4,29 @@ using Godot;
 [GlobalClass]
 public partial class PW_ADS : Node3D
 {
-    [Export] public bool Hold {get; private set;}
+    [Export] private bool _hold = true;
     [Export] private float _scopeInTime;
     [Export] private float _scopeOutTime;
     [Export] private float _fovMultiplier = 1f;
     [Export] private float _moveSpeedMultiplier = 0f; // Additive percent modifier
     private bool _active = false;
+    public bool Active => _active;
     private PM_SurfaceControl _surfaceControl;
     private PC_DirectCamera _camera;
     
     public Action Started;
     public Action Stopped;
 
+    /// -------------------------
+    ///    ___                
+    ///   | _ ) __ _  ___ ___ 
+    ///   | _ \/ _` |(_-</ -_)
+    ///   |___/\__,_|/__/\___|
+    /// 
+    /// -------------------------
+    /// Base Definitions for ADS.
+
+    #region base
     public void Initialize(PC_DirectCamera camera, PM_SurfaceControl surfaceControl)
     {
         _camera = camera;
@@ -34,7 +45,7 @@ public partial class PW_ADS : Node3D
     /// <returns>true if the state of the ADS has changed, false otherwise.</returns>
     public bool Press()
     {
-        if (Hold)
+        if (_hold)
             return TryActivate();
         
 
@@ -51,14 +62,11 @@ public partial class PW_ADS : Node3D
     /// <returns>true if the state of the ADS has changed, false otherwise.</returns>
     public bool Release()
     {
-        if (Hold)
+        if (_hold)
             return TryDeactivate();
 
         return false;
     }
-    
-    protected virtual void SpecActivate(){}
-    protected virtual void SpecDeactivate(){}
 
     private bool TryActivate()
     {
@@ -95,4 +103,16 @@ public partial class PW_ADS : Node3D
         SpecDeactivate();
         Stopped?.Invoke();
     }
+    #endregion
+    
+    /// ----------------------------------------------------------------
+    ///  ___                 _        _  _            _    _            
+    /// / __| _ __  ___  __ (_) __ _ | |(_) ___ __ _ | |_ (_) ___  _ _  
+    /// \__ \| '_ \/ -_)/ _|| |/ _` || || ||_ // _` ||  _|| |/ _ \| ' \ 
+    /// |___/| .__/\___|\__||_|\__,_||_||_|/__|\__,_| \__||_|\___/|_||_|
+    ///      |_|                                                        
+    /// ----------------------------------------------------------------
+    /// Signatures for specialized ADS.
+    protected virtual void SpecActivate(){}
+    protected virtual void SpecDeactivate(){}
 }

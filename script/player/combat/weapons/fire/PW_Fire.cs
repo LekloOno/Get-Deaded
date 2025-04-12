@@ -23,7 +23,6 @@ public abstract partial class PW_Fire : Node3D
     public EventHandler<ShotHitEventArgs> Hit;
     public EventHandler<int> Shot;      // Event arg is the amount of shots shot, most likely _shots.Count
     protected Node3D _sight;
-    protected PC_DirectCamera _camera;
 
     protected ulong _lastShot = 0;
     
@@ -34,7 +33,7 @@ public abstract partial class PW_Fire : Node3D
 
     public PW_Ammunition Ammos {get => _ammos;}
 
-    public void Initialize(PC_Shakeable shakeableCamera, PC_DirectCamera camera, Node3D sight, Node3D _barel, PC_Recoil recoilController, GB_ExternalBodyManager ownerBody)
+    public void Initialize(PC_Shakeable shakeableCamera, Node3D sight, Node3D _barel, PC_Recoil recoilController, GB_ExternalBodyManager ownerBody)
     {
         if (_fireTraumaCauser != null)
         {
@@ -42,7 +41,6 @@ public abstract partial class PW_Fire : Node3D
             Shot += _fireTraumaCauser.ShotTrauma;
         }
         
-        _camera = camera;
         _sight = sight;
         _ammos.Initialize(_sight.GetTree(), _baseAmmos);
 
