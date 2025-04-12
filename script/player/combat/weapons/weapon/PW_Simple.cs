@@ -6,17 +6,13 @@ public partial class PW_Simple : PW_Weapon
 {
     private PW_Fire Fire => _fires[0];
 
-    protected override void SpecInitialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManager owberBody)
+    protected override void SpecInitialize(PC_Shakeable shakeableCamera, Node3D sight, PC_Recoil recoilController, GB_ExternalBodyManager owberBody)
     {
         int firesCount = _fires.Count;
         if (firesCount == 0)
             throw new InvalidOperationException($"Simple weapons must have exactly 1 fire mode, but none are assigned.");
         else if (firesCount > 1)
             GD.PushWarning($"Simple weapons expects 1 fire mode, but {firesCount} are assigned. The extra modes will be ignored.");
-
-        Fire.Shot += (o, e) => Shot?.Invoke();
-        Fire.Initialize(shakeableCamera, _sight, _barrel, recoilController, owberBody);
-        Fire.Hit += (o, e) => Hit?.Invoke(o, e);
     }
 
     protected override bool SpecSecondaryPress() => true;

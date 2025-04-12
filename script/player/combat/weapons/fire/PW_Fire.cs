@@ -7,7 +7,7 @@ using Godot.Collections;
 [GlobalClass]
 public abstract partial class PW_Fire : Node3D
 {
-    private const double _bufferMargin = 0.008;
+    private const double BUFFER_MARGIN = 0.008;
     [Export] private Array<PW_Shot> _shots;
     [Export] protected float _spread = 0;
     [Export] protected ulong _fireRate;
@@ -15,23 +15,26 @@ public abstract partial class PW_Fire : Node3D
     [Export] protected PW_Ammunition _ammos;
     [Export] protected uint _ammosPerShot = 1;
     [Export] protected uint _baseAmmos;
+    protected Node3D _sight;
+
+    [ExportCategory("Visuals")]
     [Export] public bool IsDerived;     // To indicate that this fire should be considered as a derived fire mode. Only usefull for ui, to not display this fire mode.
     [Export] public Texture2D Icon {get; private set;}
     [Export] private PCT_Fire _fireTraumaCauser;
+
     public MATH_AdditiveModifiers SpreadMultiplier {get; private set;} = new();
-    public MATH_AdditiveModifiers RecoilMultiplier {get => _recoil.Modifier;}
+    public MATH_AdditiveModifiers RecoilMultiplier => _recoil.Modifier;
+    public PW_Ammunition Ammos => _ammos;
     public EventHandler<ShotHitEventArgs> Hit;
     public EventHandler<int> Shot;      // Event arg is the amount of shots shot, most likely _shots.Count
-    protected Node3D _sight;
+
 
     protected ulong _lastShot = 0;
-    
     private SceneTreeTimer _bufferTimer;
     private bool _pressBuffered = false;
     private bool _releaseBuffered = false;
     private static Random _random = new();
 
-    public PW_Ammunition Ammos {get => _ammos;}
 
     public void Initialize(PC_Shakeable shakeableCamera, Node3D sight, Node3D _barel, PC_Recoil recoilController, GB_ExternalBodyManager ownerBody)
     {
@@ -159,7 +162,7 @@ public abstract partial class PW_Fire : Node3D
         }
         else
         {
-            _bufferTimer = _sight.GetTree().CreateTimer(NextAvailableShot()/1000.0 + _bufferMargin);
+            _bufferTimer = _sight.GetTree().CreateTimer(NextAvailableShot()/1000.0 + BUFFER_MARGIN);
             _bufferTimer.Timeout += SendPress;
         }
     }
@@ -167,7 +170,7 @@ public abstract partial class PW_Fire : Node3D
     private void BufferRelease()
     {
         _releaseBuffered = true;
-        _bufferTimer = _sight.GetTree().CreateTimer(NextAvailableShot()/1000.0 + _bufferMargin);
+        _bufferTimer = _sight.GetTree().CreateTimer(NextAvailableShot()/1000.0 + BUFFER_MARGIN);
         _bufferTimer.Timeout += SendRelease;
     }
 

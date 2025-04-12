@@ -13,6 +13,7 @@ public abstract partial class PW_Weapon : Node3D
     [Export] public float ReloadReadyTime {get; private set;}            // Additionnal time before the weapon is ready once it's reloaded, allow annimation cancels
     [Export] protected Array<PW_Fire> _fires;
     [Export] protected PW_ADS _ads;
+    private PM_SurfaceControl _surfaceControl;
 
     [ExportCategory("Visuals")]
     [Export] protected Node3D _barrel;
@@ -26,8 +27,6 @@ public abstract partial class PW_Weapon : Node3D
     public Action ADSStopped;
     
     protected PW_Fire _currentFire;
-    protected Node3D _sight;
-    private PM_SurfaceControl _surfaceControl;
 
     /// -----------------------------
     ///      ___                
@@ -47,10 +46,9 @@ public abstract partial class PW_Weapon : Node3D
     /// <param name="sight">The owner's sight.</param>
     /// <param name="surfaceControl">The owner's surface control.</param>
     /// <param name="recoilController">The owner's recoil controller.</param>
-    /// <param name="owberBody">The owner's external forces manager.</param>
-    public void Initialize(PC_Shakeable shakeableCamera, PC_DirectCamera camera, Node3D sight, PM_SurfaceControl surfaceControl, PC_Recoil recoilController, GB_ExternalBodyManager owberBody)
+    /// <param name="ownerBody">The owner's external forces manager.</param>
+    public void Initialize(PC_Shakeable shakeableCamera, PC_DirectCamera camera, Node3D sight, PM_SurfaceControl surfaceControl, PC_Recoil recoilController, GB_ExternalBodyManager ownerBody)
     {
-        _sight = sight;
         _surfaceControl = surfaceControl;
         if (_ads != null)
         {
@@ -58,7 +56,15 @@ public abstract partial class PW_Weapon : Node3D
             _ads.Started += StartADS;
             _ads.Stopped += StopADS;
         }
-        SpecInitialize(shakeableCamera, recoilController, owberBody);
+        
+        SpecInitialize(shakeableCamera, sight, recoilController, ownerBody);
+
+        foreach(PW_Fire fire in _fires)
+        {
+            fire.Initialize(shakeableCamera, sight, _barrel, recoilController, ownerBody);
+            fire.Shot += (o, e) => Shot?.Invoke();
+            fire.Hit += (o, e) => Hit?.Invoke(o, e);
+        }
         _currentFire = InitCurrentFire();
     }
 
@@ -136,7 +142,7 @@ public abstract partial class PW_Weapon : Node3D
     /// <summary>
     /// Allow for some specific initialization.
     /// </summary>
-    protected abstract void SpecInitialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManager owberBody);
+    protected abstract void SpecInitialize(PC_Shakeable shakeableCamera, Node3D sight, PC_Recoil recoilController, GB_ExternalBodyManager ownerBody);
     protected virtual PW_Fire InitCurrentFire() => _fires[0];
     /// <summary>
     /// Allow for some specific disabling process.
