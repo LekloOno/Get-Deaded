@@ -54,11 +54,11 @@ _reductionRate = 0.8
 _noiseSpeed = 30.0
 metadata/_custom_type_script = "uid://c0vf7xmi1u8t4"
 
-[node name="PW_BasicMelee" type="Node3D" node_paths=PackedStringArray("_fire", "_barrel")]
+[node name="PW_BasicMelee" type="Node3D" node_paths=PackedStringArray("_fires", "_barrel")]
 script = ExtResource("1_dmkpc")
-_fire = NodePath("PWF_Ponctual")
 SwitchInTime = 0.12
 SwitchOutTime = 0.12
+_fires = [NodePath("PWF_Ponctual")]
 _barrel = NodePath("Barrel")
 Icon = ExtResource("2_76u7k")
 IconColor = Color(1, 1, 1, 0.8)

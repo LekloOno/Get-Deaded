@@ -26,15 +26,15 @@ _reductionRate = 1.0
 _noiseSpeed = 50.0
 metadata/_custom_type_script = "uid://c0vf7xmi1u8t4"
 
-[node name="PW_Simple" type="Node3D" node_paths=PackedStringArray("_fire", "_ads", "_barrel")]
+[node name="PW_Simple" type="Node3D" node_paths=PackedStringArray("_fires", "_ads", "_barrel")]
 script = ExtResource("1_5idl2")
-_fire = NodePath("PWF_Continuous")
 MoveSpeedModifier = -0.08
 SwitchInTime = 0.2
 SwitchOutTime = 0.3
 ReloadTime = 1.4
 TacticalReloadTime = 0.9
 ReloadReadyTime = 0.2
+_fires = [NodePath("PWF_Continuous")]
 _ads = NodePath("PW_SimpleADS")
 _barrel = NodePath("Barrel")
 Icon = ExtResource("2_ykmm0")

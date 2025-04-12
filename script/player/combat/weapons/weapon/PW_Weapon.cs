@@ -1,6 +1,6 @@
 using System;
-using System.Collections.Generic;
 using Godot;
+using Godot.Collections;
 
 [GlobalClass]
 public abstract partial class PW_Weapon : Node3D
@@ -11,6 +11,7 @@ public abstract partial class PW_Weapon : Node3D
     [Export] public float ReloadTime {get; private set;}
     [Export] public float TacticalReloadTime {get; private set;}
     [Export] public float ReloadReadyTime {get; private set;}            // Additionnal time before the weapon is ready once it's reloaded, allow annimation cancels
+    [Export] protected Array<PW_Fire> _fires;
     [Export] protected PW_ADS _ads;
 
     [ExportCategory("Visuals")]
@@ -18,15 +19,16 @@ public abstract partial class PW_Weapon : Node3D
     [Export] public Texture2D Icon {get; private set;}
     [Export] public Color IconColor {get; private set;}
     
-    public bool ADSActive => _ads.Active;
+    public bool ADSActive => _ads == null ? false : _ads.Active;
     public EventHandler<ShotHitEventArgs> Hit;
     public Action Shot;
     public Action ADSStarted;
     public Action ADSStopped;
     
     protected Node3D _sight;
+    protected PW_Fire _currentFire;
     private PM_SurfaceControl _surfaceControl;
-    
+
     /// -----------------------------
     ///      ___                
     ///     | _ ) __ _  ___ ___ 
@@ -57,12 +59,25 @@ public abstract partial class PW_Weapon : Node3D
             _ads.Stopped += StopADS;
         }
         SpecInitialize(shakeableCamera, recoilController, owberBody);
-    }   
+        _currentFire = InitCurrentFire();
+    }
 
     public void Disable()
     {
         _ads?.Disable();
         SpecDisable();
+    }
+    
+    /// <summary>
+    /// Allows to retrieve existing fire modes for this weapon.
+    /// </summary>
+    /// <returns></returns>
+    public Array<PW_Fire> GetFireModes() => _fires;
+
+    public void ResetBuffer()
+    {
+        foreach (PW_Fire fire in _fires)
+            fire.ResetBuffer();
     }
 
     public void SecondaryPress()
@@ -80,12 +95,6 @@ public abstract partial class PW_Weapon : Node3D
         else
             _ads.Release();
     }
-
-    public bool PrimaryPress() => SpecPrimaryPress();       // For naming consistency
-    public bool PrimaryRelease() => SpecPrimaryRelease();   // For naming consistency
-    
-
-    public void Reload() => SpecReload();                   // For naming consistency
 
     /// <summary>
     /// Check if this weapon can start realoading.
@@ -122,37 +131,33 @@ public abstract partial class PW_Weapon : Node3D
     /// Signatures for specialized weapons.
     
     #region abstract
-    /// <summary>
-    /// Allows to retrieve existing fire modes for this weapon.
-    /// </summary>
-    /// <returns></returns>
-    public abstract List<PW_Fire> GetFireModes();
-    public abstract void ResetBuffer();
     public abstract bool PickAmmo(int amount, bool magazine, int targetFireIndex);
 
     /// <summary>
     /// Allow for some specific initialization.
     /// </summary>
-    protected virtual void SpecInitialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManager owberBody) {}
+    protected abstract void SpecInitialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManager owberBody);
+    protected virtual PW_Fire InitCurrentFire() => _fires[0];
     /// <summary>
     /// Allow for some specific disabling process.
     /// </summary>
-    protected abstract void SpecDisable();
+    protected virtual void SpecDisable() => _currentFire.Disable();
+    
 
     /// <summary>
     /// Called when the primary input is pressed down. Will typically handle shooting process.
     /// </summary>
-    protected abstract bool SpecPrimaryPress();
+    public virtual bool PrimaryPress() => _currentFire.HandlePress();
     /// <summary>
     /// Called when the primary input is released up. Could handle some special behaviors, or shooting.
     /// </summary>
-    protected abstract bool SpecPrimaryRelease();
+    public virtual bool PrimaryRelease() => _currentFire.HandleRelease();
     /// <summary>
-    /// Called if the ADS handler didn't consume the incoming secondary input pressed down.
+    /// Called if the ADS handler didn't consume the incoming secondary press input.
     /// </summary>
     protected abstract bool SpecSecondaryPress();
     /// <summary>
-    /// Called if the ADS handler didn't consume the incoming secondary input pressed up.
+    /// Called if the ADS handler didn't consume the incoming secondary release input.
     /// </summary>
     protected abstract bool SpecSecondaryRelease();
 
@@ -166,17 +171,25 @@ public abstract partial class PW_Weapon : Node3D
     /// </summary>
     protected abstract void SpecStopADS();
 
-
-    /// <summary>
-    /// Called when the reload input is pressed down.
-    /// </summary>
-    protected abstract void SpecReload();
     /// <summary>
     /// Specialize the reload check using the weapon's fire(s).
     /// </summary>
     /// <param name="tactical">Secondary output to indicate if a tactical or normal reload should be applied.</param>
     /// <returns>true if the weapon can reload, false otherwise.</returns>
-    protected abstract bool SpecCanReload(out bool tactical);
+    protected virtual bool SpecCanReload(out bool tactical)
+    {
+        foreach (PW_Fire fire in _fires)
+            if (fire.CanReload(out tactical)) return true;
+        
+        tactical = false;
+        return false;
+    }
+
+    public virtual void Reload()
+    {
+        foreach (PW_Fire fire in _fires)
+            fire.Reload();
+    }
 
     #endregion
 }

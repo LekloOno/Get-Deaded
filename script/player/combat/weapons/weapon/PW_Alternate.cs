@@ -1,47 +1,41 @@
-using System.Collections.Generic;
+using System;
 using Godot;
 
 [GlobalClass]
 public partial class PW_Alternate : PW_Weapon
 {
-    [Export] private PW_Fire _primaryFire;
-    [Export] private PW_Fire _secondaryFire;
-    private PW_Fire _currentFire;
-
+    private PW_Fire PrimaryFire => _fires[0];
+    private PW_Fire SecondaryFire => _fires[1];
 
     protected override void SpecInitialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManager owberBody)
     {
-        _currentFire = _primaryFire;
-        _primaryFire.Initialize(shakeableCamera, _sight, _barrel, recoilController, owberBody);
-        _secondaryFire.Initialize(shakeableCamera, _sight, _barrel, recoilController, owberBody);
-        _primaryFire.Hit += (o, e) => Hit?.Invoke(o, e);
-        _secondaryFire.Hit += (o, e) => Hit?.Invoke(o, e);
+        int firesCount = _fires.Count;
+        if (firesCount < 2)
+            throw new InvalidOperationException($"Alternate weapons must have exactly 2 fire modes, but {firesCount} are assigned.");
+        else if (firesCount > 2)
+            GD.PushWarning($"Alternate weapons expects 2 fire modes, but {firesCount} are assigned. The extra modes will be ignored.");
+
+        PrimaryFire.Initialize(shakeableCamera, _sight, _barrel, recoilController, owberBody);
+        SecondaryFire.Initialize(shakeableCamera, _sight, _barrel, recoilController, owberBody);
+        PrimaryFire.Hit += (o, e) => Hit?.Invoke(o, e);
+        SecondaryFire.Hit += (o, e) => Hit?.Invoke(o, e);
     }
 
-    protected override void SpecDisable() => _currentFire.Disable();
-    protected override bool SpecPrimaryPress() => _currentFire.HandlePress();
-    protected override bool SpecPrimaryRelease() => _currentFire.HandleRelease();
-    protected override bool SpecSecondaryPress() => _secondaryFire.HandlePress();
-    protected override bool SpecSecondaryRelease() => _secondaryFire.HandleRelease();
+    protected override bool SpecSecondaryPress() => SecondaryFire.HandlePress();
+    protected override bool SpecSecondaryRelease() => SecondaryFire.HandleRelease();
 
 
     protected override void SpecStartADS()
     {
         _currentFire.Disable();
-        _currentFire = _secondaryFire;
+        _currentFire = SecondaryFire;
     }
 
     protected override void SpecStopADS()
     {
         _currentFire.Disable();
-        _currentFire = _primaryFire;
+        _currentFire = PrimaryFire;
     }
-    protected override void SpecReload()
-    {
-        _primaryFire.Reload();
-        _secondaryFire.Reload();
-    }
-    protected override bool SpecCanReload(out bool tactical) => _primaryFire.CanReload(out tactical) || _secondaryFire.CanReload(out tactical);
 
     public override bool PickAmmo(int amount, bool magazine, int targetFireIndex)
     {
@@ -49,23 +43,15 @@ public partial class PW_Alternate : PW_Weapon
         {
             int distribAmount = amount / 2;
             int remainder = amount % 2;
-            bool primary = _primaryFire.PickAmmo(distribAmount + remainder, magazine);
-            bool secondary = _secondaryFire.PickAmmo(distribAmount, magazine);
+            bool primary = PrimaryFire.PickAmmo(distribAmount + remainder, magazine);
+            bool secondary = SecondaryFire.PickAmmo(distribAmount, magazine);
             return primary || secondary;
         }
 
         int realTargetIndex = targetFireIndex - 1;
         if ((realTargetIndex & 1) == 0)
-            return _primaryFire.PickAmmo(amount, magazine);
+            return PrimaryFire.PickAmmo(amount, magazine);
 
-        return _secondaryFire.PickAmmo(amount, magazine);
-    }
-
-    public override List<PW_Fire> GetFireModes() => [_primaryFire, _secondaryFire];
-
-    public override void ResetBuffer()
-    {
-        _primaryFire.ResetBuffer();
-        _secondaryFire.ResetBuffer();
+        return SecondaryFire.PickAmmo(amount, magazine);
     }
 }
