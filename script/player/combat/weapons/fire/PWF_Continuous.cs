@@ -6,7 +6,6 @@ public partial class PWF_Continuous : PW_Fire
     private SceneTreeTimer _timer;
     public override void Disable() => StopShoot();
 
-
     protected override bool SpecPress()
     {
         StopShoot();

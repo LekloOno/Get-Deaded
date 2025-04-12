@@ -18,6 +18,10 @@ public partial class PW_Ammunition : Node3D
     private uint _unloadedAmmos;
     private uint _loadedAmmos;
 
+    public EventHandler ReloadCompleted;
+    public AmmutionEvent LoadedChanged;
+    public AmmutionEvent UnloadedChanged;
+    
     public uint UnloadedAmos
     {
         get => _unloadedAmmos;
@@ -50,9 +54,6 @@ public partial class PW_Ammunition : Node3D
     private SceneTree _sceneTree;
     private SceneTreeTimer _reloadTimer;
 
-    public EventHandler ReloadCompleted;
-    public AmmutionEvent LoadedChanged;
-    public AmmutionEvent UnloadedChanged;
 
     /// <summary>
     /// Initialize the ammutions.

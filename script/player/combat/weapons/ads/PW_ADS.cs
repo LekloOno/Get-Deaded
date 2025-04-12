@@ -9,13 +9,13 @@ public partial class PW_ADS : Node3D
     [Export] private float _scopeOutTime;
     [Export] private float _fovMultiplier = 1f;
     [Export] private float _moveSpeedMultiplier = 0f; // Additive percent modifier
-    private bool _active = false;
-    public bool Active => _active;
     private PM_SurfaceControl _surfaceControl;
     private PC_DirectCamera _camera;
     
+    public bool Active => _active;
     public Action Started;
     public Action Stopped;
+    private bool _active = false;
 
     /// -------------------------
     ///    ___                
