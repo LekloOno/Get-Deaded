@@ -2,7 +2,7 @@ using System;
 using Godot;
 using Godot.Collections;
 
-[GlobalClass]
+[GlobalClass, Icon("res://gd_icons/weapon_system/weapon_icon.svg")]
 public abstract partial class PW_Weapon : WeaponSystem
 {
     [Export] public float MoveSpeedModifier {get; private set;} = 0f;   // An additive modifier to set. - is a malus + is a bonus

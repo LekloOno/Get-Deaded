@@ -3,7 +3,7 @@ using Godot;
 
 public delegate void AmmutionEvent(int amount, uint finalAmount);
 
-[GlobalClass]
+[GlobalClass, Icon("res://gd_icons/weapon_system/amos_icon.svg")]
 public partial class PW_Ammunition : WeaponSystem
 {
     [Export] private uint _magazineSize;

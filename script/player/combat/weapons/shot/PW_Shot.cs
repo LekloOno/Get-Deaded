@@ -1,7 +1,8 @@
 using System;
 using Godot;
 
-[GlobalClass]
+// Icon credits - under CC BY 4.0 - https://www.onlinewebfonts.com/icon
+[GlobalClass, Icon("res://gd_icons/weapon_system/shot_icon.svg")]
 public abstract partial class PW_Shot : WeaponSystem, GC_IHitDealer
 {
     [Export] protected GC_Hit _hitData;

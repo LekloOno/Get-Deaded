@@ -1,7 +1,7 @@
 using System;
 using Godot;
 
-[GlobalClass]
+[GlobalClass, Icon("res://gd_icons/weapon_system/sight_icon.svg")]
 public partial class PW_ADS : WeaponSystem
 {
     [Export] private bool _hold = true;

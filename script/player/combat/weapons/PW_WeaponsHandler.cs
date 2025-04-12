@@ -5,7 +5,8 @@ using Godot.Collections;
 
 public delegate void SwitchEvent(PW_Weapon active, PW_Weapon nextHolster, int nextIndex, Array<PW_Weapon> weapons);
 
-[GlobalClass, Icon("res://gd_icons/weapon_system/WeaponSystemIcon")]
+// Icon credits - Skoll - under CC BY 3.0 - https://game-icons.net/1x1/skoll/ak47u.html
+[GlobalClass, Icon("res://gd_icons/weapon_system/weapon_icon.svg")]
 public partial class PW_WeaponsHandler : WeaponSystem
 {
     [Export] private PC_DirectCamera _camera;
