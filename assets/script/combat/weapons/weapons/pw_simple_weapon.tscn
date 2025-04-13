@@ -47,7 +47,6 @@ _shots = [NodePath("PWS_Hitscan")]
 _fireRate = 50
 _recoil = NodePath("PW_ConstantRecoil")
 _ammos = NodePath("PW_Ammunition")
-_baseAmmos = 60
 _fireTraumaCauser = NodePath("PCT_ContinuousFire")
 metadata/_custom_type_script = "uid://cu3n4oi1x76dl"
 
@@ -62,6 +61,7 @@ metadata/_custom_type_script = "uid://djecalg7cxlvg"
 script = ExtResource("5_akysb")
 _magazineSize = 30
 _maxMagazines = 5
+_baseAmmos = 60
 metadata/_custom_type_script = "uid://cxiwvat6vddlp"
 
 [node name="PWS_Hitscan" type="Node3D" parent="PWF_Continuous" node_paths=PackedStringArray("_trail")]
