@@ -1,7 +1,7 @@
 using Godot;
 
 [GlobalClass]
-public partial class PW_SimpleADS : PW_ADS
+public partial class PWA_SimpleADS : PW_ADS
 {
     [Export] private float _spreadMultiplier = 0f;
     [Export] private float _recoilMultiplier = 0f;

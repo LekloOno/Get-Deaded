@@ -1,7 +1,7 @@
 using Godot;
 
 [GlobalClass]
-public partial class PWF_Continuous : PW_Fire
+public partial class PWF_FullAuto : PW_Fire
 {
     private SceneTreeTimer _timer;
     public override void Disable() => StopShoot();

@@ -1,7 +1,7 @@
 using Godot;
 
 [GlobalClass]
-public partial class PWF_Ponctual : PW_Fire
+public partial class PWF_SemiAuto : PW_Fire
 {
     protected override bool SpecPress()
     {

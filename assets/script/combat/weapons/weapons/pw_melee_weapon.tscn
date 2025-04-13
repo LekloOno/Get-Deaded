@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c3are182lodyx" path="res://script/player/combat/weapons/weapon/PW_Simple.cs" id="1_dmkpc"]
 [ext_resource type="Texture2D" uid="uid://8rrtqp0otyee" path="res://assets/sprites/weapons/meleepixel.png" id="2_76u7k"]
-[ext_resource type="Script" uid="uid://dmsklefspdvlw" path="res://script/player/combat/weapons/fire/PWF_Ponctual.cs" id="3_dmkpc"]
+[ext_resource type="Script" uid="uid://dmsklefspdvlw" path="res://script/player/combat/weapons/fire/PWF_SemiAuto.cs" id="3_dmkpc"]
 [ext_resource type="Script" uid="uid://cxiwvat6vddlp" path="res://script/player/combat/weapons/ammunition/PW_Ammunition.cs" id="5_pxa3m"]
 [ext_resource type="Script" uid="uid://fc7gkofu3df7" path="res://script/player/combat/weapons/shot/PWS_Hitscan.cs" id="6_38m5i"]
 [ext_resource type="Script" uid="uid://sujdlokcwnd6" path="res://script/global/combat/hit/GC_DamageModifier.cs" id="6_dmkpc"]
@@ -62,12 +62,12 @@ metadata/_custom_type_script = "uid://c0vf7xmi1u8t4"
 script = ExtResource("1_dmkpc")
 SwitchInTime = 0.12
 SwitchOutTime = 0.12
-_fires = [NodePath("PWF_Ponctual")]
+_fires = [NodePath("PWF_SemiAuto")]
 Icon = ExtResource("2_76u7k")
 IconColor = Color(1, 1, 1, 0.8)
 metadata/_custom_type_script = "uid://c3are182lodyx"
 
-[node name="PWF_Ponctual" type="Node3D" parent="." node_paths=PackedStringArray("_shots", "_ammos", "_fireTraumaCauser")]
+[node name="PWF_SemiAuto" type="Node3D" parent="." node_paths=PackedStringArray("_shots", "_ammos", "_fireTraumaCauser")]
 script = ExtResource("3_dmkpc")
 _shots = [NodePath("PWS_Hitscan")]
 _fireRate = 700
@@ -76,11 +76,11 @@ _ammosPerShot = 0
 _fireTraumaCauser = NodePath("PCT_Fire")
 metadata/_custom_type_script = "uid://dmsklefspdvlw"
 
-[node name="PW_Ammunition" type="Node3D" parent="PWF_Ponctual"]
+[node name="PW_Ammunition" type="Node3D" parent="PWF_SemiAuto"]
 script = ExtResource("5_pxa3m")
 metadata/_custom_type_script = "uid://cxiwvat6vddlp"
 
-[node name="PWS_Hitscan" type="Node3D" parent="PWF_Ponctual" node_paths=PackedStringArray("_trail", "_traumaCauser")]
+[node name="PWS_Hitscan" type="Node3D" parent="PWF_SemiAuto" node_paths=PackedStringArray("_trail", "_traumaCauser")]
 script = ExtResource("6_38m5i")
 _maxDistance = 2.0
 _hitData = SubResource("Resource_76u7k")
@@ -90,21 +90,21 @@ _traumaCauser = NodePath("PCT_UndirectScalable")
 _maxTrauma = 0.6
 metadata/_custom_type_script = "uid://fc7gkofu3df7"
 
-[node name="PW_Trail" type="Node3D" parent="PWF_Ponctual/PWS_Hitscan"]
+[node name="PW_Trail" type="Node3D" parent="PWF_SemiAuto/PWS_Hitscan"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.287, -0.225, -0.237)
 script = ExtResource("8_38m5i")
 _trails = Array[Object]([SubResource("Resource_sogkq")])
 metadata/_custom_type_script = "uid://cytkgtw0ebs3x"
 
-[node name="PCT_UndirectScalable" type="Area3D" parent="PWF_Ponctual/PWS_Hitscan"]
+[node name="PCT_UndirectScalable" type="Area3D" parent="PWF_SemiAuto/PWS_Hitscan"]
 script = ExtResource("10_pxa3m")
 _curveSampler = SubResource("Resource_38m5i")
 metadata/_custom_type_script = "uid://d15clqym1lgvu"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PWF_Ponctual/PWS_Hitscan/PCT_UndirectScalable"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PWF_SemiAuto/PWS_Hitscan/PCT_UndirectScalable"]
 shape = SubResource("SphereShape3D_38m5i")
 
-[node name="PCT_Fire" type="Node" parent="PWF_Ponctual"]
+[node name="PCT_Fire" type="Node" parent="PWF_SemiAuto"]
 script = ExtResource("10_gc5oi")
 _traumaLayer = SubResource("Resource_4osp6")
 _amount = 0.35

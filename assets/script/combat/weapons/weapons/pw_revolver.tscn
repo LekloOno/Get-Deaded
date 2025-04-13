@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://c3are182lodyx" path="res://script/player/combat/weapons/weapon/PW_Simple.cs" id="1_ce3gq"]
 [ext_resource type="Texture2D" uid="uid://c050onpc3r17u" path="res://assets/sprites/weapons/pewpixel.png" id="2_odgi6"]
-[ext_resource type="Script" uid="uid://dmsklefspdvlw" path="res://script/player/combat/weapons/fire/PWF_Ponctual.cs" id="3_25fv7"]
-[ext_resource type="Script" uid="uid://djecalg7cxlvg" path="res://script/player/combat/weapons/recoil/PW_ConstantRecoil.cs" id="4_odgi6"]
+[ext_resource type="Script" uid="uid://dmsklefspdvlw" path="res://script/player/combat/weapons/fire/PWF_SemiAuto.cs" id="3_25fv7"]
+[ext_resource type="Script" uid="uid://djecalg7cxlvg" path="res://script/player/combat/weapons/recoil/PWR_ConstantRecoil.cs" id="4_odgi6"]
 [ext_resource type="Script" uid="uid://fc7gkofu3df7" path="res://script/player/combat/weapons/shot/PWS_Hitscan.cs" id="4_utu8p"]
 [ext_resource type="Script" uid="uid://cxiwvat6vddlp" path="res://script/player/combat/weapons/ammunition/PW_Ammunition.cs" id="5_25fv7"]
 [ext_resource type="Script" uid="uid://cjmiash71uc7b" path="res://script/global/combat/hit/hit/GC_Hit.cs" id="5_d2gec"]
@@ -65,21 +65,21 @@ SwitchOutTime = 0.25
 ReloadTime = 1.0
 TacticalReloadTime = 1.0
 ReloadReadyTime = 0.15
-_fires = [NodePath("PWF_Ponctual")]
+_fires = [NodePath("PWF_SemiAuto")]
 Icon = ExtResource("2_odgi6")
 IconColor = Color(1, 0.569375, 0.152, 0.8)
 metadata/_custom_type_script = "uid://c3are182lodyx"
 
-[node name="PWF_Ponctual" type="Node3D" parent="." node_paths=PackedStringArray("_shots", "_recoil", "_ammos", "_fireTraumaCauser")]
+[node name="PWF_SemiAuto" type="Node3D" parent="." node_paths=PackedStringArray("_shots", "_recoil", "_ammos", "_fireTraumaCauser")]
 script = ExtResource("3_25fv7")
 _shots = [NodePath("PWS_Hitscan")]
 _fireRate = 460
-_recoil = NodePath("PW_ConstantRecoil")
+_recoil = NodePath("PWR_ConstantRecoil")
 _ammos = NodePath("PW_Ammunition")
 _fireTraumaCauser = NodePath("PCT_Fire")
 metadata/_custom_type_script = "uid://dmsklefspdvlw"
 
-[node name="PW_ConstantRecoil" type="Node3D" parent="PWF_Ponctual"]
+[node name="PWR_ConstantRecoil" type="Node3D" parent="PWF_SemiAuto"]
 script = ExtResource("4_odgi6")
 _autoReset = true
 _angle = Vector2(0.05, 5)
@@ -87,14 +87,14 @@ _time = 0.04
 _resetTime = 0.4
 metadata/_custom_type_script = "uid://djecalg7cxlvg"
 
-[node name="PW_Ammunition" type="Node3D" parent="PWF_Ponctual"]
+[node name="PW_Ammunition" type="Node3D" parent="PWF_SemiAuto"]
 script = ExtResource("5_25fv7")
 _magazineSize = 8
 _maxMagazines = 5
 _baseAmmos = 16
 metadata/_custom_type_script = "uid://cxiwvat6vddlp"
 
-[node name="PWS_Hitscan" type="Node3D" parent="PWF_Ponctual" node_paths=PackedStringArray("_trail", "_traumaCauser")]
+[node name="PWS_Hitscan" type="Node3D" parent="PWF_SemiAuto" node_paths=PackedStringArray("_trail", "_traumaCauser")]
 script = ExtResource("4_utu8p")
 _maxDistance = 100.0
 _hitData = SubResource("Resource_wj164")
@@ -103,21 +103,21 @@ _traumaCauser = NodePath("PCT_UndirectScalable")
 _maxTrauma = 0.6
 metadata/_custom_type_script = "uid://fc7gkofu3df7"
 
-[node name="PW_Trail" type="Node3D" parent="PWF_Ponctual/PWS_Hitscan"]
+[node name="PW_Trail" type="Node3D" parent="PWF_SemiAuto/PWS_Hitscan"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.287, -0.225, -0.237)
 script = ExtResource("6_0mgwp")
 _trails = Array[Object]([ExtResource("7_7a4vo"), SubResource("Resource_wnyrd")])
 metadata/_custom_type_script = "uid://cytkgtw0ebs3x"
 
-[node name="PCT_UndirectScalable" type="Area3D" parent="PWF_Ponctual/PWS_Hitscan"]
+[node name="PCT_UndirectScalable" type="Area3D" parent="PWF_SemiAuto/PWS_Hitscan"]
 script = ExtResource("11_d2gec")
 _curveSampler = SubResource("Resource_7a4vo")
 metadata/_custom_type_script = "uid://d15clqym1lgvu"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PWF_Ponctual/PWS_Hitscan/PCT_UndirectScalable"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PWF_SemiAuto/PWS_Hitscan/PCT_UndirectScalable"]
 shape = SubResource("SphereShape3D_86tae")
 
-[node name="PCT_Fire" type="Node" parent="PWF_Ponctual"]
+[node name="PCT_Fire" type="Node" parent="PWF_SemiAuto"]
 script = ExtResource("9_rhime")
 _traumaLayer = SubResource("Resource_hd2gv")
 _amount = 0.3

@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" uid="uid://c3are182lodyx" path="res://script/player/combat/weapons/weapon/PW_Simple.cs" id="1_5idl2"]
 [ext_resource type="Texture2D" uid="uid://cll1rrqagufi2" path="res://assets/sprites/weapons/brrtpixel2.png" id="2_ykmm0"]
-[ext_resource type="Script" uid="uid://cu3n4oi1x76dl" path="res://script/player/combat/weapons/fire/PWF_Continuous.cs" id="3_j06ou"]
-[ext_resource type="Script" uid="uid://djecalg7cxlvg" path="res://script/player/combat/weapons/recoil/PW_ConstantRecoil.cs" id="4_8kujm"]
+[ext_resource type="Script" uid="uid://cu3n4oi1x76dl" path="res://script/player/combat/weapons/fire/PWF_FullAuto.cs" id="3_j06ou"]
+[ext_resource type="Script" uid="uid://djecalg7cxlvg" path="res://script/player/combat/weapons/recoil/PWR_ConstantRecoil.cs" id="4_8kujm"]
 [ext_resource type="Script" uid="uid://cxiwvat6vddlp" path="res://script/player/combat/weapons/ammunition/PW_Ammunition.cs" id="5_akysb"]
 [ext_resource type="Script" uid="uid://fc7gkofu3df7" path="res://script/player/combat/weapons/shot/PWS_Hitscan.cs" id="6_b25vv"]
 [ext_resource type="Script" uid="uid://cjmiash71uc7b" path="res://script/global/combat/hit/hit/GC_Hit.cs" id="7_2b0g7"]
 [ext_resource type="Script" uid="uid://cytkgtw0ebs3x" path="res://script/player/combat/weapons/trail/PW_Trail.cs" id="8_akysb"]
 [ext_resource type="Resource" uid="uid://mcobvwmhuq3a" path="res://assets/script/vfx/trails/simple_moving_trail.tres" id="8_debeo"]
-[ext_resource type="Script" uid="uid://bxxmkegnq67qe" path="res://script/player/combat/weapons/ads/PW_SimpleADS.cs" id="9_r4wwr"]
+[ext_resource type="Script" uid="uid://bxxmkegnq67qe" path="res://script/player/combat/weapons/ads/PWA_SimpleADS.cs" id="9_r4wwr"]
 [ext_resource type="FastNoiseLite" uid="uid://dcqwnhaim8ock" path="res://assets/misc/shake_noise.tres" id="10_8kujm"]
 [ext_resource type="Script" uid="uid://r8ad50yt78dm" path="res://script/player/camera/annimation/trauma/causers/direct/PCT_ContinuousFire.cs" id="10_j06ou"]
 [ext_resource type="Script" uid="uid://c0vf7xmi1u8t4" path="res://script/player/camera/annimation/trauma/PC_TraumaLayer.cs" id="11_8kujm"]
@@ -35,36 +35,36 @@ SwitchOutTime = 0.25
 ReloadTime = 1.2
 TacticalReloadTime = 0.8
 ReloadReadyTime = 0.15
-_fires = [NodePath("PWF_Continuous")]
-_ads = NodePath("PW_SimpleADS")
+_fires = [NodePath("PWF_FullAuto")]
+_ads = NodePath("PWA_SimpleADS")
 Icon = ExtResource("2_ykmm0")
 IconColor = Color(0.281, 0.697, 1, 0.8)
 metadata/_custom_type_script = "uid://c3are182lodyx"
 
-[node name="PWF_Continuous" type="Node3D" parent="." node_paths=PackedStringArray("_shots", "_recoil", "_ammos", "_fireTraumaCauser")]
+[node name="PWF_FullAuto" type="Node3D" parent="." node_paths=PackedStringArray("_shots", "_recoil", "_ammos", "_fireTraumaCauser")]
 script = ExtResource("3_j06ou")
 _shots = [NodePath("PWS_Hitscan")]
 _fireRate = 50
-_recoil = NodePath("PW_ConstantRecoil")
+_recoil = NodePath("PWR_ConstantRecoil")
 _ammos = NodePath("PW_Ammunition")
 _fireTraumaCauser = NodePath("PCT_ContinuousFire")
 metadata/_custom_type_script = "uid://cu3n4oi1x76dl"
 
-[node name="PW_ConstantRecoil" type="Node3D" parent="PWF_Continuous"]
+[node name="PWR_ConstantRecoil" type="Node3D" parent="PWF_FullAuto"]
 script = ExtResource("4_8kujm")
 _angle = Vector2(0.05, 0.5)
 _time = 0.1
 _resetTime = 0.3
 metadata/_custom_type_script = "uid://djecalg7cxlvg"
 
-[node name="PW_Ammunition" type="Node3D" parent="PWF_Continuous"]
+[node name="PW_Ammunition" type="Node3D" parent="PWF_FullAuto"]
 script = ExtResource("5_akysb")
 _magazineSize = 30
 _maxMagazines = 5
 _baseAmmos = 60
 metadata/_custom_type_script = "uid://cxiwvat6vddlp"
 
-[node name="PWS_Hitscan" type="Node3D" parent="PWF_Continuous" node_paths=PackedStringArray("_trail")]
+[node name="PWS_Hitscan" type="Node3D" parent="PWF_FullAuto" node_paths=PackedStringArray("_trail")]
 script = ExtResource("6_b25vv")
 _maxDistance = 100.0
 _hitData = SubResource("Resource_ad73j")
@@ -72,24 +72,24 @@ _spread = 1.2
 _trail = NodePath("PW_Trail")
 metadata/_custom_type_script = "uid://fc7gkofu3df7"
 
-[node name="PW_Trail" type="Node3D" parent="PWF_Continuous/PWS_Hitscan"]
+[node name="PW_Trail" type="Node3D" parent="PWF_FullAuto/PWS_Hitscan"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.287, -0.225, -0.237)
 script = ExtResource("8_akysb")
 _trails = Array[Object]([ExtResource("8_debeo")])
 metadata/_custom_type_script = "uid://cytkgtw0ebs3x"
 
-[node name="PCT_ContinuousFire" type="Node" parent="PWF_Continuous"]
+[node name="PCT_ContinuousFire" type="Node" parent="PWF_FullAuto"]
 script = ExtResource("10_j06ou")
 _max = 0.15
 _traumaLayer = SubResource("Resource_b25vv")
 _amount = 0.1
 metadata/_custom_type_script = "uid://r8ad50yt78dm"
 
-[node name="PW_SimpleADS" type="Node3D" parent="." node_paths=PackedStringArray("_fire")]
+[node name="PWA_SimpleADS" type="Node3D" parent="." node_paths=PackedStringArray("_fire")]
 script = ExtResource("9_r4wwr")
 _spreadMultiplier = -0.85
 _recoilMultiplier = -0.2
-_fire = NodePath("../PWF_Continuous")
+_fire = NodePath("../PWF_FullAuto")
 _scopeInTime = 0.2
 _scopeOutTime = 0.2
 _fovMultiplier = 0.9

@@ -2,7 +2,7 @@ using System;
 using Godot;
 
 [GlobalClass]
-public partial class PW_ConstantRecoil : PW_Recoil
+public partial class PWR_ConstantRecoil : PW_Recoil
 {
     [Export] private bool _autoReset;   // Automatically resets recoil when it's completed. Otherwise, the Fire is responsible for calling Reset().
     [Export] public Vector2 _angle;     // In degrees
