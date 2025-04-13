@@ -11,9 +11,9 @@ public partial class PWS_Melee : PW_Shot
         _area = (PWS_MeleeHitBox) _meleeHitBox.Instantiate();
     }
 
-    public override void SpecInitialize(Node3D barel, GB_ExternalBodyManager ownerBody)
+    public override void SpecInitialize(GB_ExternalBodyManager ownerBody)
     {
         _area = (PWS_MeleeHitBox) _meleeHitBox.Instantiate();
-        _barrel.AddChild(_area);
+        //_barrel.AddChild(_area);
     }
 }

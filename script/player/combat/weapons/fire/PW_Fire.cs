@@ -35,7 +35,7 @@ public abstract partial class PW_Fire : WeaponComponent
     private static Random _random = new();
 
 
-    public void Initialize(PC_Shakeable shakeableCamera, Node3D sight, Node3D _barel, PC_Recoil recoilController, GB_ExternalBodyManager ownerBody)
+    public void Initialize(PC_Shakeable shakeableCamera, Node3D sight, PC_Recoil recoilController, GB_ExternalBodyManager ownerBody)
     {
         if (_fireTraumaCauser != null)
         {
@@ -49,7 +49,7 @@ public abstract partial class PW_Fire : WeaponComponent
         _recoil?.Initialize(recoilController);
         foreach (PW_Shot shot in _shots)
         {
-            shot.Initialize(_barel, ownerBody);
+            shot.Initialize(ownerBody);
             shot.Hit += (o, e) => Hit?.Invoke(o, e);
         }
     }

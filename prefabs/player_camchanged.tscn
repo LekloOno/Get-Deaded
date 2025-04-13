@@ -504,17 +504,15 @@ _recoilController = NodePath("../..")
 _sight = NodePath("..")
 _ownerBody = NodePath("../../../../../../GB_PlayerBodyManager")
 _weaponsInput = NodePath("../../../../../../PIM_Arena/PI_Weapons")
-_weapons = [NodePath("PW_Simple"), NodePath("PW_Simple2")]
+_weapons = [NodePath("PW_Simple")]
 _melee = NodePath("PW_BasicMelee")
 _surfaceControl = NodePath("../../../../../../Movement/PM_SurfaceControl")
 _meleeRecover = 0.7
 metadata/_custom_type_script = "uid://b4hdeuwma0ma8"
 
-[node name="PW_Simple2" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PW_WeaponsHandler2" instance=ExtResource("88_cqits")]
+[node name="PW_BasicMelee" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PW_WeaponsHandler2" instance=ExtResource("89_nkqrs")]
 
 [node name="PW_Simple" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PW_WeaponsHandler2" instance=ExtResource("88_cqits")]
-
-[node name="PW_BasicMelee" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PW_WeaponsHandler2" instance=ExtResource("89_nkqrs")]
 
 [node name="GroundCast" type="ShapeCast3D" parent="."]
 shape = SubResource("SphereShape3D_4jpmy")

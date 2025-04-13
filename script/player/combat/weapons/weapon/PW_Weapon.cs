@@ -17,7 +17,6 @@ public abstract partial class PW_Weapon : WeaponComponent
     private PM_SurfaceControl _surfaceControl;
 
     [ExportCategory("Visuals")]
-    [Export] protected Node3D _barrel;
     [Export] public Texture2D Icon {get; private set;}
     [Export] public Color IconColor {get; private set;}
     
@@ -62,7 +61,7 @@ public abstract partial class PW_Weapon : WeaponComponent
 
         foreach(PW_Fire fire in _fires)
         {
-            fire.Initialize(shakeableCamera, sight, _barrel, recoilController, ownerBody);
+            fire.Initialize(shakeableCamera, sight, recoilController, ownerBody);
             fire.Shot += (o, e) => Shot?.Invoke();
             fire.Hit += (o, e) => Hit?.Invoke(o, e);
         }

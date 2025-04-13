@@ -12,28 +12,24 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
     [Export] private float _kickBack = 0f;
 
     [ExportCategory("Visuals")]
-    [Export] protected Godot.Collections.Array<VFX_Trail> _trails;
+    [Export] protected PW_Trail _trail;
     [Export] private PCT_UndirectScalable _traumaCauser;
     [Export] private bool _clampTrauma = true;
     [Export] private float _maxTrauma = 0.2f;
 
     private GB_ExternalBodyManager _ownerBody;
-    protected Node3D _barrel;
 
     public GC_Hit HitData => _hitData;
     public EventHandler<ShotHitEventArgs> Hit;
 
-    public void Initialize(Node3D barel, GB_ExternalBodyManager ownerBody)
+    public void Initialize(GB_ExternalBodyManager ownerBody)
     {
-        _barrel = barel;
         _ownerBody = ownerBody;
-
         _hitData.InitializeModifiers();
-
-        SpecInitialize(barel, ownerBody);
+        SpecInitialize(ownerBody);
     }
 
-    public abstract void SpecInitialize(Node3D barel, GB_ExternalBodyManager ownerBody);
+    public abstract void SpecInitialize(GB_ExternalBodyManager ownerBody);
 
     public abstract void Shoot(Vector3 origin, Vector3 direction);
 
