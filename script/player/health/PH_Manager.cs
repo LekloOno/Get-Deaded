@@ -4,7 +4,6 @@ using Godot;
 [GlobalClass]
 public partial class PH_Manager : GC_HealthManager
 {
-    [Export] private Node3D _sight;
     [Export] private GC_Shield _shield;
     [Export] private float _decayPerSecond;
     [Export] private float _regenPerSecond;

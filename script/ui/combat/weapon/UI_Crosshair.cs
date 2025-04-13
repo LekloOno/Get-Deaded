@@ -4,7 +4,7 @@ using Godot;
 [GlobalClass]
 public partial class UI_Crosshair : Control
 {
-    [Export] private Node3D _sightPosition;
+    [Export] private PW_WeaponsHandler _sightPosition;
     [Export] private Camera3D _camera;
     [Export] private Control image;
     [Export] float _maxRange = 20;
