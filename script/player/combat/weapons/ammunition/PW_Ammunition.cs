@@ -1,7 +1,7 @@
 using System;
 using Godot;
 
-public delegate void AmmutionEvent(int amount, uint finalAmount);
+public delegate void AmmunitionEvent(int amount, uint finalAmount);
 
 // Icon credits - LekloOno - https://github.com/LekloOno
 [GlobalClass, Icon("res://gd_icons/weapon_system/amos_icon.svg")]
@@ -20,8 +20,8 @@ public partial class PW_Ammunition : WeaponComponent
     private uint _loadedAmmos;
 
     public EventHandler ReloadCompleted;
-    public AmmutionEvent LoadedChanged;
-    public AmmutionEvent UnloadedChanged;
+    public AmmunitionEvent LoadedChanged;
+    public AmmunitionEvent UnloadedChanged;
 
     public uint UnloadedAmos
     {
