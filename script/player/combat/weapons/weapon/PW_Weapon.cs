@@ -2,6 +2,33 @@ using System;
 using Godot;
 using Godot.Collections;
 
+/// <summary>
+/// Base Weapon Component.
+/// <para>
+/// You can inherits from this class to create new weapon specifications.
+/// </para>
+/// </summary>
+
+/*
+--------------------------------------------------------------------
+Logic elements
+- A generic list of PW_Fire.
+- (Optional) A PW_ADS.
+- A move speed modifier to apply when this weapon is held.
+- Reload Informations - time, tactical time and ready time
+- Switching informations - Switch in and out.
+
+--------------------------------------------------------------------
+And Visual elements
+- Icon & Icon Color.
+--------------------------------------------------------------------
+Connections
+- Hit - an Event casted with a ShotHitEventArgs when this weapon has Hit.
+- Shot - an Action casted when this weapon has Shot.
+- ADSStarted - an Event casted when this weapon entered ADS mode.
+- ADSStarted - an Event casted when this weapon exited ADS mode.
+*/
+
 // Icon credits - Skoll - under CC BY 3.0 - https://game-icons.net/1x1/skoll/ak47u.html
 [GlobalClass, Icon("res://gd_icons/weapon_system/weapon_icon.svg")]
 public abstract partial class PW_Weapon : WeaponComponent

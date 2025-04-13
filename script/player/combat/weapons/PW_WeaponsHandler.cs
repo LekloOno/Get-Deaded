@@ -5,6 +5,13 @@ using Godot.Collections;
 
 public delegate void SwitchEvent(PW_Weapon active, PW_Weapon nextHolster, int nextIndex, Array<PW_Weapon> weapons);
 
+/// <summary>
+/// A weapons handler.
+/// <para>
+/// It is responsible for initializing properly its weapons, and for the interactions between them.
+/// </para>
+/// </summary>
+
 // Icon credits - Skoll - under CC BY 3.0 - https://game-icons.net/1x1/skoll/ak47u.html, https://game-icons.net/1x1/skoll/mp5.html, https://game-icons.net/1x1/skoll/revolver.html
 [GlobalClass, Icon("res://gd_icons/weapon_system/weapons_handler_icon.svg")]
 public partial class PW_WeaponsHandler : WeaponSystem

@@ -2,6 +2,13 @@ using System;
 using Godot;
 using Godot.Collections;
 
+/// <summary>
+/// Handles the firing behavior of its Shots.
+/// <para>
+/// It handles input buffering, and allows to set custom fire rythms and modes such as a full-auto, burst or semi-auto fire.
+/// </para>
+/// </summary>
+
 // Icon credits - Lorc - under CC BY 3.0 - https://lorcblog.blogspot.com/ - https://game-icons.net/1x1/lorc/gunshot.html
 [GlobalClass, Icon("res://gd_icons/weapon_system/fire_icon.svg")]
 public abstract partial class PW_Fire : WeaponComponent
@@ -12,7 +19,6 @@ public abstract partial class PW_Fire : WeaponComponent
     [Export] protected PW_Recoil _recoil;
     [Export] protected PW_Ammunition _ammos;
     [Export] protected uint _ammosPerShot = 1;
-    [Export] protected uint _baseAmmos;
 
     [ExportCategory("Visuals")]
     [Export] public bool IsDerived;     // To indicate that this fire should be considered as a derived fire mode. Only usefull for ui, to not display this fire mode.
@@ -40,7 +46,7 @@ public abstract partial class PW_Fire : WeaponComponent
             Shot += _fireTraumaCauser.ShotTrauma;
         }
         
-        _ammos.Initialize(GetTree(), _baseAmmos);
+        _ammos.Initialize();
 
         _recoil?.Initialize(recoilController);
         foreach (PW_Shot shot in _shots)
@@ -58,9 +64,9 @@ public abstract partial class PW_Fire : WeaponComponent
             return true;
         
         if (amount > 0)
-            return _ammos.FillAmos((uint)amount, magazine) > 0;
+            return _ammos.FillAmmos((uint)amount, magazine) > 0;
         
-        return _ammos.EmptyAmos((uint)-amount, magazine) > 0;
+        return _ammos.EmptyAmmos((uint)-amount, magazine) > 0;
     }
 
     protected bool TryShoot()
@@ -164,7 +170,7 @@ public abstract partial class PW_Fire : WeaponComponent
 
     public bool CanReload(out bool tactical)
     {
-        tactical = _ammos.LoadedAmos > 0;
+        tactical = _ammos.LoadedAmmos > 0;
         return _ammos.CanReload();
     }
 

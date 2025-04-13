@@ -1,6 +1,14 @@
 using System;
 using Godot;
 
+/// <summary>
+/// Handles final shot outcomes - shooting.
+/// <para>
+/// Its GlobalPosition and -GlobalBasis.Z serves as the shooting origin position and direction.<br/>
+/// You can offset it from the weapon transform to create specific patterns.
+/// </para>
+/// </summary>
+
 // Icon credits - under CC BY 4.0 - https://www.onlinewebfonts.com/icon/504938
 [GlobalClass, Icon("res://gd_icons/weapon_system/shot_icon.svg")]
 public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer

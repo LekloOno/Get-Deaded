@@ -3,8 +3,12 @@ using Godot;
 
 public delegate void AmmunitionEvent(int amount, uint finalAmount);
 
+/// <summary>
+/// Handles Weapons Ammunitions.
+/// </summary>
+
 // Icon credits - LekloOno - https://github.com/LekloOno
-[GlobalClass, Icon("res://gd_icons/weapon_system/amos_icon.svg")]
+[GlobalClass, Icon("res://gd_icons/weapon_system/Ammos_icon.svg")]
 public partial class PW_Ammunition : WeaponComponent
 {
     [Export] private uint _magazineSize;
@@ -14,8 +18,9 @@ public partial class PW_Ammunition : WeaponComponent
     /// </summary>
     [Export] private uint _magazinePick;
     [Export] private uint _maxMagazines;
+    [Export] protected uint _baseAmmos;
     public bool IsReloading {get; private set;} = false;
-    private uint _maxAmos;
+    private uint _maxAmmos;
     private uint _unloadedAmmos;
     private uint _loadedAmmos;
 
@@ -23,7 +28,7 @@ public partial class PW_Ammunition : WeaponComponent
     public AmmunitionEvent LoadedChanged;
     public AmmunitionEvent UnloadedChanged;
 
-    public uint UnloadedAmos
+    public uint UnloadedAmmos
     {
         get => _unloadedAmmos;
         private set
@@ -34,11 +39,11 @@ public partial class PW_Ammunition : WeaponComponent
                             : - (int) (_unloadedAmmos - value);
 
             _unloadedAmmos = value;
-            UnloadedChanged?.Invoke(difference, UnloadedAmos);
+            UnloadedChanged?.Invoke(difference, UnloadedAmmos);
         }
     }
 
-    public uint LoadedAmos
+    public uint LoadedAmmos
     {
         get => _loadedAmmos;
         private set
@@ -48,134 +53,129 @@ public partial class PW_Ammunition : WeaponComponent
                             : - (int) (_loadedAmmos - value);
 
             _loadedAmmos = value;
-            LoadedChanged?.Invoke(difference, LoadedAmos);
+            LoadedChanged?.Invoke(difference, LoadedAmmos);
         }
     }
-
-    private SceneTree _sceneTree;
-    private SceneTreeTimer _reloadTimer;
-
 
     /// <summary>
     /// Initialize the ammutions.
     /// </summary>
-    /// <param name="baseAmos">The starting amount of ammutions.</param>
-    /// <param name="load">true if the maximum amount of amos possible should be preloaded. false otherwise.</param>
-    public void Initialize(SceneTree sceneTree, uint baseAmos, bool load = true)
+    /// <param name="baseAmmos">The starting amount of ammutions.</param>
+    /// <param name="load">true if the maximum amount of ammos possible should be preloaded. false otherwise.</param>
+    public void Initialize(bool load = true)
     {
-        _sceneTree = sceneTree;
-        _maxAmos = _maxMagazines * _magazineSize;
-        uint ammos = Math.Min(baseAmos, _maxAmos);
+        _maxAmmos = _maxMagazines * _magazineSize;
+        uint ammos = Math.Min(_baseAmmos, _maxAmmos);
         if (load)
-            LoadedAmos = Math.Min(_magazineSize, ammos);
+            LoadedAmmos = Math.Min(_magazineSize, ammos);
         else
-            LoadedAmos = 0;
+            LoadedAmmos = 0;
 
-        UnloadedAmos = ammos - LoadedAmos;
+        UnloadedAmmos = ammos - LoadedAmmos;
     }
 
     /// <summary>
-    /// Consume the currently loaded amos.
+    /// Consume the currently loaded ammos.
     /// </summary>
-    /// <param name="amos">The amount to consume.</param>
-    /// <returns>The amos really consumed. 0 if there's no loaded amos left.</returns>
-    public uint Consume(uint amos)
+    /// <param name="ammos">The amount to consume.</param>
+    /// <returns>The ammos really consumed. 0 if there's no loaded ammos left.</returns>
+    public uint Consume(uint ammos)
     {
-        uint consumed = Math.Min(amos, LoadedAmos);
-        LoadedAmos -= consumed;
+        uint consumed = Math.Min(ammos, LoadedAmmos);
+        LoadedAmmos -= consumed;
         return consumed;
     }
 
-    private void Log() => GD.Print(LoadedAmos + " mag : " + UnloadedAmos/Math.Max(_magazineSize,1) + " (" + UnloadedAmos + ")");
+    private void Log() => GD.Print(LoadedAmmos + " mag : " + UnloadedAmmos/Math.Max(_magazineSize,1) + " (" + UnloadedAmmos + ")");
 
 
     /// <summary>
-    /// Consume the currently loaded amos and returns wether or not it did consume any of the requested amount.
+    /// Consume the currently loaded ammos and returns wether or not it did consume any of the requested amount.
     /// <para>A null amount to consumed is always considered successfull i.e. DidConsume(0) will always return true.</para>
     /// </summary>
-    /// <param name="amos">The amount to consume.</param>
-    /// <returns>true if the operation did consume some of the requested amos, false otherwise.</returns>
-    public bool DidConsume(uint amos)
+    /// <param name="ammos">The amount to consume.</param>
+    /// <returns>true if the operation did consume some of the requested ammos, false otherwise.</returns>
+    public bool DidConsume(uint ammos)
     {
         if (IsReloading)
             return false;
 
-        if (amos == 0)
+        if (ammos == 0)
             return true;
         
-        if (LoadedAmos == 0)
+        if (LoadedAmmos == 0)
             return false;
         
-        LoadedAmos -= amos;
+        LoadedAmmos -= ammos;
         return true;
     }
 
     /// <summary>
-    /// Only consumes the given amount if it does have enough loaded amos.
+    /// Only consumes the given amount if it does have enough loaded ammos.
     /// </summary>
-    /// <param name="amos">The amount to consume.</param>
+    /// <param name="ammos">The amount to consume.</param>
     /// <returns>true if it did consume, false otherwise.</returns>
-    public bool TryConsume(uint amos)
+    public bool TryConsume(uint ammos)
     {
         if (IsReloading)
             return false;
 
-        if (amos > LoadedAmos)
+        if (ammos > LoadedAmmos)
             return false;
         
-        LoadedAmos -= amos;
+        LoadedAmmos -= ammos;
         return true;
     }
 
-    public bool CanReload() => LoadedAmos < _magazineSize && UnloadedAmos > 0;
+    public bool CanReload() => LoadedAmmos < _magazineSize && UnloadedAmmos > 0;
 
     /// <summary>
-    /// Reloads the loaded amos with the unloaded amos.
+    /// Reloads the loaded ammos with the unloaded ammos.
     /// </summary>
-    /// <returns>The amos reloaded. 0 if there's no unloaded amos left.</returns>
+    /// <returns>The ammos reloaded. 0 if there's no unloaded ammos left.</returns>
     public uint Reload()
     {
-        uint reloaded = Math.Min(_magazineSize - LoadedAmos, UnloadedAmos);
-        UnloadedAmos -= reloaded;
-        LoadedAmos += reloaded;
+        uint reloaded = Math.Min(_magazineSize - LoadedAmmos, UnloadedAmmos);
+        UnloadedAmmos -= reloaded;
+        LoadedAmmos += reloaded;
         IsReloading = false;
         ReloadCompleted?.Invoke(this, EventArgs.Empty);
         return reloaded;
     }
 
     /// <summary>
-    /// Fill in the unloaded amos.
+    /// Fill in the unloaded ammos.
     /// </summary>
     /// <param name="amount">The amount to fill.</param>
     /// <param name="magazine">If the amount is pure ammos, or pickup magazines.</param>
-    /// <returns>The amos really filled. 0 if the maximum amount of amos is already reached.</returns>
-    public uint FillAmos(uint amount, bool magazine)
+    /// <returns>The ammos really filled. 0 if the maximum amount of ammos is already reached.</returns>
+    public uint FillAmmos(uint amount, bool magazine)
     {
-        uint amos = magazine ? AmmosFromPickup(amount) : amount;
-        uint filled = Math.Min(amos, _maxAmos - UnloadedAmos - _magazineSize);
-        UnloadedAmos += filled;
+        uint ammos = magazine ? AmmosFromPickup(amount) : amount;
+        uint filled = Math.Min(ammos, _maxAmmos - UnloadedAmmos - _magazineSize);
+        UnloadedAmmos += filled;
         return filled;
     }
 
     /// <summary>
-    /// Empty from the unloaded amos.
+    /// Empty from the unloaded ammos.
     /// </summary>
     /// <param name="amount">The amount to empty.</param>
     /// <param name="magazine">If the amount is pure ammos, or pickup magazines.</param>
-    /// <returns>The amos really emptied. 0 if the unloaded amos were already 0.</returns>
-    public uint EmptyAmos(uint amount, bool magazine)
+    /// <returns>The ammos really emptied. 0 if the unloaded ammos were already 0.</returns>
+    public uint EmptyAmmos(uint amount, bool magazine)
     {
-        uint amos = magazine ? AmmosFromPickup(amount) : amount;
-        uint emptied = Math.Min(amos, UnloadedAmos);
-        UnloadedAmos -= emptied;
+        uint ammos = magazine ? AmmosFromPickup(amount) : amount;
+        uint emptied = Math.Min(ammos, UnloadedAmmos);
+        UnloadedAmmos -= emptied;
         return emptied;
     }
 
     /// <summary>
-    /// A short hand for the sum of Unloaded and Loaded amos.
+    /// A short hand for the sum of Unloaded and Loaded ammos.
     /// </summary>
-    /// <returns>The total amos currently possessed.</returns>
-    public uint TotalAmos() => UnloadedAmos + LoadedAmos;
+    /// <returns>The total ammos currently possessed.</returns>
+    public uint TotalAmmos() => UnloadedAmmos + LoadedAmmos;
 
     /// <summary>
     /// A quick way to access the amount of munitions gathered from `amount` pickup magazines.

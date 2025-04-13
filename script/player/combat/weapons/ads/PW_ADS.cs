@@ -1,6 +1,10 @@
 using System;
 using Godot;
 
+/// <summary>
+/// Allow for some ADS behavior. (Aim-down-sight)
+/// </summary>
+
 // Icon credits - LekloOno - https://github.com/LekloOno
 [GlobalClass, Icon("res://gd_icons/weapon_system/sight_icon.svg")]
 public partial class PW_ADS : WeaponComponent

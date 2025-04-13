@@ -16,8 +16,8 @@ public partial class UIW_ActiveFireHolder : UIW_FireHolder
         else
             _fireIcon.Hide();
 
-        _loadedAmmos.Text = _ammos.LoadedAmos + "";
-        _unloadedAmmos.Text = _ammos.UnloadedAmos + "";
+        _loadedAmmos.Text = _ammos.LoadedAmmos + "";
+        _unloadedAmmos.Text = _ammos.UnloadedAmmos + "";
     }
 
     protected override void HandleLoaded(int amount, uint finalAmount) => _loadedAmmos.Text = finalAmount + "";
