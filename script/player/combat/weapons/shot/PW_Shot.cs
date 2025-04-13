@@ -14,8 +14,6 @@ using Godot;
 public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
 {
     [Export] protected GC_Hit _hitData;
-    [Export] protected Vector3 _originOffset = Vector3.Zero;
-    [Export] protected Vector3 _directionOffset = Vector3.Zero;
     [Export] protected float _spread = 0f;          // In degrees
     [Export] protected float _knockBack = 0f;
     [Export] private float _kickBack = 0f;
