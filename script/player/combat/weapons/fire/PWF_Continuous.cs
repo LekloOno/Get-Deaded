@@ -17,7 +17,7 @@ public partial class PWF_Continuous : PW_Fire
         Shoot();
         _recoil?.Start();
 
-        _timer = _sight.GetTree().CreateTimer(_fireRate/1000f);
+        _timer = GetTree().CreateTimer(_fireRate/1000f);
         _timer.Timeout += ReShoot;
         return true;
     }
@@ -37,7 +37,7 @@ public partial class PWF_Continuous : PW_Fire
 
         Shoot();
         _recoil?.Add();
-        _timer = _sight.GetTree().CreateTimer(_fireRate/1000f);
+        _timer = GetTree().CreateTimer(_fireRate/1000f);
         _timer.Timeout += ReShoot;
     }
 

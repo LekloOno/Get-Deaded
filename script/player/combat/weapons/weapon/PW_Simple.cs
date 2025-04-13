@@ -6,7 +6,7 @@ public partial class PW_Simple : PW_Weapon
 {
     private PW_Fire Fire => _fires[0];
 
-    protected override void SpecInitialize(PC_Shakeable shakeableCamera, Node3D sight, PC_Recoil recoilController, GB_ExternalBodyManager owberBody)
+    protected override void SpecInitialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManager owberBody)
     {
         int firesCount = _fires.Count;
         if (firesCount == 0)

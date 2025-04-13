@@ -6,10 +6,10 @@ public partial class PWS_Hitscan : PW_Shot, GC_IHitDealer
 {
     [Export] protected float _maxDistance = 20f;
 
-    public override void Shoot(Vector3 origin, Vector3 direction)
+    protected override void ShootWithSpread(Vector3 direction)
     {
-        Vector3 castOrigin = origin + _originOffset;
-        Vector3 castDirection = direction + _directionOffset;
+        Vector3 castOrigin = GlobalPosition;
+        Vector3 castDirection = direction;
 
         Vector3 hit = castOrigin + castDirection * _maxDistance;
 
@@ -38,7 +38,7 @@ public partial class PWS_Hitscan : PW_Shot, GC_IHitDealer
         }
 
         _trail?.Shoot(hit);
-        HandleKick(origin, direction);
+        HandleKick(castOrigin, castDirection);
     }
 
     public override void SpecInitialize(GB_ExternalBodyManager ownerBody)

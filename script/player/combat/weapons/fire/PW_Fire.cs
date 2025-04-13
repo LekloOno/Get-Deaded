@@ -8,20 +8,17 @@ public abstract partial class PW_Fire : WeaponComponent
 {
     private const double BUFFER_MARGIN = 0.008;
     [Export] private Array<PW_Shot> _shots;
-    [Export] protected float _spread = 0;
     [Export] protected ulong _fireRate;
     [Export] protected PW_Recoil _recoil;
     [Export] protected PW_Ammunition _ammos;
     [Export] protected uint _ammosPerShot = 1;
     [Export] protected uint _baseAmmos;
-    protected Node3D _sight;
 
     [ExportCategory("Visuals")]
     [Export] public bool IsDerived;     // To indicate that this fire should be considered as a derived fire mode. Only usefull for ui, to not display this fire mode.
     [Export] public Texture2D Icon {get; private set;}
     [Export] private PCT_Fire _fireTraumaCauser;
 
-    public MATH_AdditiveModifiers SpreadMultiplier {get; private set;} = new();
     public MATH_AdditiveModifiers RecoilMultiplier => _recoil.Modifier;
     public PW_Ammunition Ammos => _ammos;
     public EventHandler<ShotHitEventArgs> Hit;
@@ -35,7 +32,7 @@ public abstract partial class PW_Fire : WeaponComponent
     private static Random _random = new();
 
 
-    public void Initialize(PC_Shakeable shakeableCamera, Node3D sight, PC_Recoil recoilController, GB_ExternalBodyManager ownerBody)
+    public void Initialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManager ownerBody)
     {
         if (_fireTraumaCauser != null)
         {
@@ -43,8 +40,7 @@ public abstract partial class PW_Fire : WeaponComponent
             Shot += _fireTraumaCauser.ShotTrauma;
         }
         
-        _sight = sight;
-        _ammos.Initialize(_sight.GetTree(), _baseAmmos);
+        _ammos.Initialize(GetTree(), _baseAmmos);
 
         _recoil?.Initialize(recoilController);
         foreach (PW_Shot shot in _shots)
@@ -79,33 +75,14 @@ public abstract partial class PW_Fire : WeaponComponent
     protected void Shoot()
     {
         _lastShot = Time.GetTicksMsec();
-
-        SightTo(out Vector3 origin, out Vector3 direction);
-
-        float spread = Mathf.Max(_spread * SpreadMultiplier.Result(), 0f);
-        if (spread != 0)
-        {
-            Vector3 perp = _sight.GlobalBasis.X;
-            float theta = (float)(_random.NextDouble() * 2.0 * Mathf.Pi);
-            Vector3 rotationAxis = perp.Rotated(direction.Normalized(), theta).Normalized();
-
-            float spreadAngle = Mathf.DegToRad((float)_random.NextDouble()*spread);
-            direction = direction.Rotated(rotationAxis, spreadAngle);
-        }
         
         foreach (PW_Shot shot in _shots)
-            shot.Shoot(origin, direction);
+            shot.Shoot();
         
         Shot?.Invoke(this, _shots.Count);
     }
 
     protected bool CanShoot() => Time.GetTicksMsec() - _lastShot >= _fireRate && _ammos.DidConsume(_ammosPerShot);
-
-    private void SightTo(out Vector3 origin, out Vector3 direction)
-    {
-        origin = _sight.GlobalPosition;
-        direction = -_sight.GlobalBasis.Z;
-    }
 
     public bool Press()
     {
@@ -161,7 +138,7 @@ public abstract partial class PW_Fire : WeaponComponent
         }
         else
         {
-            _bufferTimer = _sight.GetTree().CreateTimer(NextAvailableShot()/1000.0 + BUFFER_MARGIN);
+            _bufferTimer = GetTree().CreateTimer(NextAvailableShot()/1000.0 + BUFFER_MARGIN);
             _bufferTimer.Timeout += SendPress;
         }
     }
@@ -169,7 +146,7 @@ public abstract partial class PW_Fire : WeaponComponent
     private void BufferRelease()
     {
         _releaseBuffered = true;
-        _bufferTimer = _sight.GetTree().CreateTimer(NextAvailableShot()/1000.0 + BUFFER_MARGIN);
+        _bufferTimer = GetTree().CreateTimer(NextAvailableShot()/1000.0 + BUFFER_MARGIN);
         _bufferTimer.Timeout += SendRelease;
     }
 
@@ -189,6 +166,18 @@ public abstract partial class PW_Fire : WeaponComponent
     {
         tactical = _ammos.LoadedAmos > 0;
         return _ammos.CanReload();
+    }
+
+    public void AddSpread(float multiplier)
+    {
+        foreach (PW_Shot shot in _shots)
+            shot.SpreadMultiplier?.Add(multiplier);
+    }
+
+    public void RemoveSpread(float multiplier)
+    {
+        foreach (PW_Shot shot in _shots)
+            shot.SpreadMultiplier?.Remove(multiplier);
     }
 
     /// <summary>

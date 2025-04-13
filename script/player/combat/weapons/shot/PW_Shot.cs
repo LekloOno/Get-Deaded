@@ -8,6 +8,7 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
     [Export] protected GC_Hit _hitData;
     [Export] protected Vector3 _originOffset = Vector3.Zero;
     [Export] protected Vector3 _directionOffset = Vector3.Zero;
+    [Export] protected float _spread = 0f;          // In degrees
     [Export] protected float _knockBack = 0f;
     [Export] private float _kickBack = 0f;
 
@@ -19,8 +20,11 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
 
     private GB_ExternalBodyManager _ownerBody;
 
-    public GC_Hit HitData => _hitData;
     public EventHandler<ShotHitEventArgs> Hit;
+    public MATH_AdditiveModifiers SpreadMultiplier {get; private set;} = new();
+    public GC_Hit HitData => _hitData;
+    public Vector3 Direction => -GlobalBasis.Z; 
+    private static Random _random = new();
 
     public void Initialize(GB_ExternalBodyManager ownerBody)
     {
@@ -31,7 +35,24 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
 
     public abstract void SpecInitialize(GB_ExternalBodyManager ownerBody);
 
-    public abstract void Shoot(Vector3 origin, Vector3 direction);
+    public void Shoot()
+    {
+        Vector3 direction = Direction;
+        float spread = Mathf.Max(_spread * SpreadMultiplier.Result(), 0f);
+        if (spread != 0)
+        {
+            Vector3 perp = GlobalBasis.X;
+            float theta = (float)(_random.NextDouble() * 2.0 * Mathf.Pi);
+            Vector3 rotationAxis = perp.Rotated(direction.Normalized(), theta).Normalized();
+
+            float spreadAngle = Mathf.DegToRad((float)_random.NextDouble()*spread);
+            direction = direction.Rotated(rotationAxis, spreadAngle);
+        }
+
+        ShootWithSpread(direction);
+    }
+
+    protected abstract void ShootWithSpread(Vector3 direction);
 
     protected void HandleKick(Vector3 origin, Vector3 direction)
     {

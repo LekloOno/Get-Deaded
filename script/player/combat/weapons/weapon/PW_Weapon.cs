@@ -43,11 +43,10 @@ public abstract partial class PW_Weapon : WeaponComponent
     /// </summary>
     /// <param name="shakeableCamera">A shakeable node for camera shakes.</param>
     /// <param name="camera">The owner's camera.</param>
-    /// <param name="sight">The owner's sight.</param>
     /// <param name="surfaceControl">The owner's surface control.</param>
     /// <param name="recoilController">The owner's recoil controller.</param>
     /// <param name="ownerBody">The owner's external forces manager.</param>
-    public void Initialize(PC_Shakeable shakeableCamera, PC_DirectCamera camera, Node3D sight, PM_SurfaceControl surfaceControl, PC_Recoil recoilController, GB_ExternalBodyManager ownerBody)
+    public void Initialize(PC_Shakeable shakeableCamera, PC_DirectCamera camera, PM_SurfaceControl surfaceControl, PC_Recoil recoilController, GB_ExternalBodyManager ownerBody)
     {
         _surfaceControl = surfaceControl;
         if (_ads != null)
@@ -57,11 +56,11 @@ public abstract partial class PW_Weapon : WeaponComponent
             _ads.Stopped += StopADS;
         }
 
-        SpecInitialize(shakeableCamera, sight, recoilController, ownerBody);
+        SpecInitialize(shakeableCamera, recoilController, ownerBody);
 
         foreach(PW_Fire fire in _fires)
         {
-            fire.Initialize(shakeableCamera, sight, recoilController, ownerBody);
+            fire.Initialize(shakeableCamera, recoilController, ownerBody);
             fire.Shot += (o, e) => Shot?.Invoke();
             fire.Hit += (o, e) => Hit?.Invoke(o, e);
         }
@@ -142,7 +141,7 @@ public abstract partial class PW_Weapon : WeaponComponent
     /// <summary>
     /// Allow for some specific initialization.
     /// </summary>
-    protected abstract void SpecInitialize(PC_Shakeable shakeableCamera, Node3D sight, PC_Recoil recoilController, GB_ExternalBodyManager ownerBody);
+    protected abstract void SpecInitialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManager ownerBody);
     protected virtual PW_Fire InitCurrentFire() => _fires[0];
     /// <summary>
     /// Allow for some specific disabling process.

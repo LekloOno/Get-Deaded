@@ -496,12 +496,11 @@ show_percentage = false
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing"]
 
-[node name="PW_WeaponsHandler2" type="Node3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean" node_paths=PackedStringArray("_camera", "_shakeableCamera", "_recoilController", "_sight", "_ownerBody", "_weaponsInput", "_weapons", "_melee", "_surfaceControl")]
+[node name="PW_WeaponsHandler2" type="Node3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean" node_paths=PackedStringArray("_camera", "_shakeableCamera", "_recoilController", "_ownerBody", "_weaponsInput", "_weapons", "_melee", "_surfaceControl")]
 script = ExtResource("81_stdu8")
 _camera = NodePath("../PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable/Camera3D")
 _shakeableCamera = NodePath("../PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable")
 _recoilController = NodePath("../..")
-_sight = NodePath("..")
 _ownerBody = NodePath("../../../../../../GB_PlayerBodyManager")
 _weaponsInput = NodePath("../../../../../../PIM_Arena/PI_Weapons")
 _weapons = [NodePath("PW_Simple")]

@@ -44,7 +44,6 @@ metadata/_custom_type_script = "uid://c3are182lodyx"
 [node name="PWF_Continuous" type="Node3D" parent="." node_paths=PackedStringArray("_shots", "_recoil", "_ammos", "_fireTraumaCauser")]
 script = ExtResource("3_j06ou")
 _shots = [NodePath("PWS_Hitscan")]
-_spread = 1.2
 _fireRate = 50
 _recoil = NodePath("PW_ConstantRecoil")
 _ammos = NodePath("PW_Ammunition")
@@ -69,6 +68,7 @@ metadata/_custom_type_script = "uid://cxiwvat6vddlp"
 script = ExtResource("6_b25vv")
 _maxDistance = 100.0
 _hitData = SubResource("Resource_ad73j")
+_spread = 1.0
 _trail = NodePath("PW_Trail")
 metadata/_custom_type_script = "uid://fc7gkofu3df7"
 

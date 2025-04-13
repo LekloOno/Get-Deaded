@@ -16,7 +16,7 @@ public partial class PH_Manager : GC_HealthManager
         if (!_shield.IsParrying())
             return base.Damage(hitDealer, expectedDamage, out takenDamage);
         
-        hitDealer.Shoot(_sight.GlobalPosition, -_sight.GlobalBasis.Z);
+        hitDealer.Shoot();
         takenDamage = 0;
         return false;
     }

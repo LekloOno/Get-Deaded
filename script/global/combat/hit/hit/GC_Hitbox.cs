@@ -40,6 +40,6 @@ public partial class GC_Hitbox : Area3D, GC_IHitDealer
         }
     }
 
-    public void Shoot(Vector3 origin, Vector3 direction){}
+    public void Shoot(){}
 
 }
