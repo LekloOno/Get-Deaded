@@ -3,6 +3,7 @@ using Godot;
 
 public delegate void AmmutionEvent(int amount, uint finalAmount);
 
+// Icon credits - LekloOno - https://github.com/LekloOno
 [GlobalClass, Icon("res://gd_icons/weapon_system/amos_icon.svg")]
 public partial class PW_Ammunition : WeaponSystem
 {

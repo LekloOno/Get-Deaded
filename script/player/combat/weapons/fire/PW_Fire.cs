@@ -2,7 +2,7 @@ using System;
 using Godot;
 using Godot.Collections;
 
-// Icon credits - Lorc - under CC BY 3.0 - https://game-icons.net/1x1/lorc/gunshot.html
+// Icon credits - Lorc - under CC BY 3.0 - https://lorcblog.blogspot.com/ - https://game-icons.net/1x1/lorc/gunshot.html
 [GlobalClass, Icon("res://gd_icons/weapon_system/fire_icon.svg")]
 public abstract partial class PW_Fire : WeaponSystem
 {
