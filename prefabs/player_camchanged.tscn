@@ -1,4 +1,4 @@
-[gd_scene load_steps=128 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=129 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://script/player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://assets/script/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -56,6 +56,7 @@
 [ext_resource type="Resource" uid="uid://dn58omqab4s1u" path="res://assets/script/movement/surface_control/ground.tres" id="22_fklbr"]
 [ext_resource type="Resource" uid="uid://ca5w3yr3ia7ao" path="res://assets/script/movement/surface_control/air.tres" id="23_jl0xl"]
 [ext_resource type="Script" uid="uid://djvwdvj81b0ph" path="res://script/player/movement/PM_StraffeSnap.cs" id="24_4bvsd"]
+[ext_resource type="PackedScene" uid="uid://bgfyi141ynhdb" path="res://assets/script/combat/weapons/weapons/pw_revolver.tscn" id="24_jbksd"]
 [ext_resource type="Script" uid="uid://b6v0xpkoa3vgh" path="res://script/player/movement/actions/jump/PM_Jump.cs" id="25_qc7ep"]
 [ext_resource type="Resource" uid="uid://chd67e10gx4rm" path="res://assets/script/movement/jump/basic_jump.tres" id="26_kdvrh"]
 [ext_resource type="AudioStream" uid="uid://hg0p05fsc5nk" path="res://assets/sounds/slideloop/slideloop.wav" id="26_o5goj"]
@@ -503,15 +504,17 @@ _shakeableCamera = NodePath("../PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_Sli
 _recoilController = NodePath("../..")
 _ownerBody = NodePath("../../../../../../GB_PlayerBodyManager")
 _weaponsInput = NodePath("../../../../../../PIM_Arena/PI_Weapons")
-_weapons = [NodePath("PW_Simple")]
+_weapons = [NodePath("PW_Simple"), NodePath("PW_Revolver")]
 _melee = NodePath("PW_BasicMelee")
 _surfaceControl = NodePath("../../../../../../Movement/PM_SurfaceControl")
 _meleeRecover = 0.7
 metadata/_custom_type_script = "uid://b4hdeuwma0ma8"
 
-[node name="PW_BasicMelee" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PW_WeaponsHandler2" instance=ExtResource("89_nkqrs")]
+[node name="PW_Revolver" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PW_WeaponsHandler2" instance=ExtResource("24_jbksd")]
 
 [node name="PW_Simple" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PW_WeaponsHandler2" instance=ExtResource("88_cqits")]
+
+[node name="PW_BasicMelee" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PW_WeaponsHandler2" instance=ExtResource("89_nkqrs")]
 
 [node name="GroundCast" type="ShapeCast3D" parent="."]
 shape = SubResource("SphereShape3D_4jpmy")

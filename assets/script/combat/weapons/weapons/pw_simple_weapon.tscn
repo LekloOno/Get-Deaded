@@ -30,11 +30,11 @@ metadata/_custom_type_script = "uid://c0vf7xmi1u8t4"
 [node name="PW_Simple" type="Node3D" node_paths=PackedStringArray("_fires", "_ads")]
 script = ExtResource("1_5idl2")
 MoveSpeedModifier = -0.08
-SwitchInTime = 0.2
-SwitchOutTime = 0.3
-ReloadTime = 1.4
-TacticalReloadTime = 0.9
-ReloadReadyTime = 0.2
+SwitchInTime = 0.15
+SwitchOutTime = 0.25
+ReloadTime = 1.2
+TacticalReloadTime = 0.8
+ReloadReadyTime = 0.15
 _fires = [NodePath("PWF_Continuous")]
 _ads = NodePath("PW_SimpleADS")
 Icon = ExtResource("2_ykmm0")
@@ -68,21 +68,21 @@ metadata/_custom_type_script = "uid://cxiwvat6vddlp"
 script = ExtResource("6_b25vv")
 _maxDistance = 100.0
 _hitData = SubResource("Resource_ad73j")
-_spread = 1.0
+_spread = 1.2
 _trail = NodePath("PW_Trail")
 metadata/_custom_type_script = "uid://fc7gkofu3df7"
 
 [node name="PW_Trail" type="Node3D" parent="PWF_Continuous/PWS_Hitscan"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.337142, -0.282863, -0.256452)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.287, -0.225, -0.237)
 script = ExtResource("8_akysb")
 _trails = Array[Object]([ExtResource("8_debeo")])
 metadata/_custom_type_script = "uid://cytkgtw0ebs3x"
 
 [node name="PCT_ContinuousFire" type="Node" parent="PWF_Continuous"]
 script = ExtResource("10_j06ou")
-_max = 0.1
+_max = 0.15
 _traumaLayer = SubResource("Resource_b25vv")
-_amount = 0.3
+_amount = 0.1
 metadata/_custom_type_script = "uid://r8ad50yt78dm"
 
 [node name="PW_SimpleADS" type="Node3D" parent="." node_paths=PackedStringArray("_fire")]

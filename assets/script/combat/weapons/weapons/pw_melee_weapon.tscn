@@ -35,9 +35,9 @@ albedo_color = Color(1, 1, 1, 0.138)
 [sub_resource type="Resource" id="Resource_sogkq"]
 script = ExtResource("7_488s0")
 _material = SubResource("StandardMaterial3D_4osp6")
-_thickness = 0.8
-_bulletSpeed = 1.0
-_trailSpeed = 1.0
+_thickness = 1.2
+_bulletSpeed = 12.0
+_trailSpeed = 5.0
 _inclination = 87.0
 metadata/_custom_type_script = "uid://0w0m608ktkwu"
 
@@ -54,7 +54,7 @@ radius = 2.5
 [sub_resource type="Resource" id="Resource_4osp6"]
 script = ExtResource("12_38m5i")
 _noise = ExtResource("11_pxa3m")
-_reductionRate = 0.8
+_reductionRate = 0.7
 _noiseSpeed = 30.0
 metadata/_custom_type_script = "uid://c0vf7xmi1u8t4"
 
@@ -91,7 +91,7 @@ _maxTrauma = 0.6
 metadata/_custom_type_script = "uid://fc7gkofu3df7"
 
 [node name="PW_Trail" type="Node3D" parent="PWF_Ponctual/PWS_Hitscan"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.141212, -0.187122, -0.217735)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.287, -0.225, -0.237)
 script = ExtResource("8_38m5i")
 _trails = Array[Object]([SubResource("Resource_sogkq")])
 metadata/_custom_type_script = "uid://cytkgtw0ebs3x"

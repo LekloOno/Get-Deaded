@@ -1,0 +1,124 @@
+[gd_scene load_steps=24 format=3 uid="uid://bgfyi141ynhdb"]
+
+[ext_resource type="Script" uid="uid://c3are182lodyx" path="res://script/player/combat/weapons/weapon/PW_Simple.cs" id="1_ce3gq"]
+[ext_resource type="Texture2D" uid="uid://c050onpc3r17u" path="res://assets/sprites/weapons/pewpixel.png" id="2_odgi6"]
+[ext_resource type="Script" uid="uid://dmsklefspdvlw" path="res://script/player/combat/weapons/fire/PWF_Ponctual.cs" id="3_25fv7"]
+[ext_resource type="Script" uid="uid://djecalg7cxlvg" path="res://script/player/combat/weapons/recoil/PW_ConstantRecoil.cs" id="4_odgi6"]
+[ext_resource type="Script" uid="uid://fc7gkofu3df7" path="res://script/player/combat/weapons/shot/PWS_Hitscan.cs" id="4_utu8p"]
+[ext_resource type="Script" uid="uid://cxiwvat6vddlp" path="res://script/player/combat/weapons/ammunition/PW_Ammunition.cs" id="5_25fv7"]
+[ext_resource type="Script" uid="uid://cjmiash71uc7b" path="res://script/global/combat/hit/hit/GC_Hit.cs" id="5_d2gec"]
+[ext_resource type="Script" uid="uid://cytkgtw0ebs3x" path="res://script/player/combat/weapons/trail/PW_Trail.cs" id="6_0mgwp"]
+[ext_resource type="Resource" uid="uid://y3jeidgf2oba" path="res://assets/script/vfx/trails/heavy_moving_trail.tres" id="7_7a4vo"]
+[ext_resource type="Script" uid="uid://ddcjrbuymtie4" path="res://script/vfx/combat/trail/line/VFX_LineTrail.cs" id="8_86tae"]
+[ext_resource type="Script" uid="uid://51kwj2ldm4xq" path="res://script/player/camera/annimation/trauma/causers/direct/PCT_Fire.cs" id="9_rhime"]
+[ext_resource type="Script" uid="uid://btuswij6bk44u" path="res://script/vfx/combat/trail/line/types/VFX_RectangleLine.cs" id="10_0mgwp"]
+[ext_resource type="Script" uid="uid://d15clqym1lgvu" path="res://script/player/camera/annimation/trauma/causers/undirect/PCT_UndirectScalable.cs" id="11_d2gec"]
+[ext_resource type="Script" uid="uid://t5n7py52g5oj" path="res://script/engine_tools/math/curve/float/MATH_FastLogCurve.cs" id="12_0mgwp"]
+[ext_resource type="FastNoiseLite" uid="uid://dcqwnhaim8ock" path="res://assets/misc/shake_noise.tres" id="15_86tae"]
+[ext_resource type="Script" uid="uid://c0vf7xmi1u8t4" path="res://script/player/camera/annimation/trauma/PC_TraumaLayer.cs" id="16_rhime"]
+
+[sub_resource type="Resource" id="Resource_wj164"]
+script = ExtResource("5_d2gec")
+_damage = 50.0
+_inspectorModifiers = null
+metadata/_custom_type_script = "uid://cjmiash71uc7b"
+
+[sub_resource type="Resource" id="Resource_86tae"]
+script = ExtResource("10_0mgwp")
+_thickness = 0.02
+metadata/_custom_type_script = "uid://btuswij6bk44u"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rhime"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(0.529412, 0.529412, 0.529412, 0.109804)
+
+[sub_resource type="Resource" id="Resource_wnyrd"]
+script = ExtResource("8_86tae")
+_fadeTime = 1.0
+_lineType = SubResource("Resource_86tae")
+_material = SubResource("StandardMaterial3D_rhime")
+metadata/_custom_type_script = "uid://ddcjrbuymtie4"
+
+[sub_resource type="Resource" id="Resource_7a4vo"]
+script = ExtResource("12_0mgwp")
+_halfInput = 0.5
+_minOutput = 0.5
+_maxOutput = 0.0
+metadata/_custom_type_script = "uid://t5n7py52g5oj"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_86tae"]
+radius = 2.0
+
+[sub_resource type="Resource" id="Resource_hd2gv"]
+script = ExtResource("16_rhime")
+_noise = ExtResource("15_86tae")
+_reductionRate = 1.0
+_noiseSpeed = 50.0
+metadata/_custom_type_script = "uid://c0vf7xmi1u8t4"
+
+[node name="PW_Revolver" type="Node3D" node_paths=PackedStringArray("_fires")]
+script = ExtResource("1_ce3gq")
+MoveSpeedModifier = -0.1
+SwitchInTime = 0.2
+SwitchOutTime = 0.25
+ReloadTime = 1.0
+TacticalReloadTime = 1.0
+ReloadReadyTime = 0.15
+_fires = [NodePath("PWF_Ponctual")]
+Icon = ExtResource("2_odgi6")
+IconColor = Color(1, 0.569375, 0.152, 0.8)
+metadata/_custom_type_script = "uid://c3are182lodyx"
+
+[node name="PWF_Ponctual" type="Node3D" parent="." node_paths=PackedStringArray("_shots", "_recoil", "_ammos", "_fireTraumaCauser")]
+script = ExtResource("3_25fv7")
+_shots = [NodePath("PWS_Hitscan")]
+_fireRate = 460
+_recoil = NodePath("PW_ConstantRecoil")
+_ammos = NodePath("PW_Ammunition")
+_fireTraumaCauser = NodePath("PCT_Fire")
+metadata/_custom_type_script = "uid://dmsklefspdvlw"
+
+[node name="PW_ConstantRecoil" type="Node3D" parent="PWF_Ponctual"]
+script = ExtResource("4_odgi6")
+_autoReset = true
+_angle = Vector2(0.05, 5)
+_time = 0.04
+_resetTime = 0.4
+metadata/_custom_type_script = "uid://djecalg7cxlvg"
+
+[node name="PW_Ammunition" type="Node3D" parent="PWF_Ponctual"]
+script = ExtResource("5_25fv7")
+_magazineSize = 8
+_maxMagazines = 5
+_baseAmmos = 16
+metadata/_custom_type_script = "uid://cxiwvat6vddlp"
+
+[node name="PWS_Hitscan" type="Node3D" parent="PWF_Ponctual" node_paths=PackedStringArray("_trail", "_traumaCauser")]
+script = ExtResource("4_utu8p")
+_maxDistance = 100.0
+_hitData = SubResource("Resource_wj164")
+_trail = NodePath("PW_Trail")
+_traumaCauser = NodePath("PCT_UndirectScalable")
+_maxTrauma = 0.6
+metadata/_custom_type_script = "uid://fc7gkofu3df7"
+
+[node name="PW_Trail" type="Node3D" parent="PWF_Ponctual/PWS_Hitscan"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.287, -0.225, -0.237)
+script = ExtResource("6_0mgwp")
+_trails = Array[Object]([ExtResource("7_7a4vo"), SubResource("Resource_wnyrd")])
+metadata/_custom_type_script = "uid://cytkgtw0ebs3x"
+
+[node name="PCT_UndirectScalable" type="Area3D" parent="PWF_Ponctual/PWS_Hitscan"]
+script = ExtResource("11_d2gec")
+_curveSampler = SubResource("Resource_7a4vo")
+metadata/_custom_type_script = "uid://d15clqym1lgvu"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PWF_Ponctual/PWS_Hitscan/PCT_UndirectScalable"]
+shape = SubResource("SphereShape3D_86tae")
+
+[node name="PCT_Fire" type="Node" parent="PWF_Ponctual"]
+script = ExtResource("9_rhime")
+_traumaLayer = SubResource("Resource_hd2gv")
+_amount = 0.3
+metadata/_custom_type_script = "uid://51kwj2ldm4xq"
