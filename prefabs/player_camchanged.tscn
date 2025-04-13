@@ -365,7 +365,7 @@ size = Vector2i(2056, 2056)
 render_target_update_mode = 4
 
 [node name="loadout" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/weapons/SubViewport" node_paths=PackedStringArray("_weaponsHandler") instance=ExtResource("15_42twc")]
-_weaponsHandler = NodePath("../../../../PW_WeaponsHandler2")
+_weaponsHandler = NodePath("../../../../PW_WeaponsHandler")
 
 [node name="health" type="Sprite3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing"]
 physics_interpolation_mode = 2
@@ -497,24 +497,24 @@ show_percentage = false
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing"]
 
-[node name="PW_WeaponsHandler2" type="Node3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean" node_paths=PackedStringArray("_camera", "_shakeableCamera", "_recoilController", "_ownerBody", "_weaponsInput", "_weapons", "_melee", "_surfaceControl")]
+[node name="PW_WeaponsHandler" type="Node3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean" node_paths=PackedStringArray("_camera", "_shakeableCamera", "_recoilController", "_ownerBody", "_weaponsInput", "_weapons", "_melee", "_surfaceControl")]
 script = ExtResource("81_stdu8")
 _camera = NodePath("../PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable/Camera3D")
 _shakeableCamera = NodePath("../PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable")
 _recoilController = NodePath("../..")
 _ownerBody = NodePath("../../../../../../GB_PlayerBodyManager")
 _weaponsInput = NodePath("../../../../../../PIM_Arena/PI_Weapons")
-_weapons = [NodePath("PW_Simple"), NodePath("PW_Revolver")]
+_weapons = [NodePath("PW_Revolver"), NodePath("PW_Simple")]
 _melee = NodePath("PW_BasicMelee")
 _surfaceControl = NodePath("../../../../../../Movement/PM_SurfaceControl")
 _meleeRecover = 0.7
 metadata/_custom_type_script = "uid://b4hdeuwma0ma8"
 
-[node name="PW_Revolver" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PW_WeaponsHandler2" instance=ExtResource("24_jbksd")]
+[node name="PW_Revolver" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PW_WeaponsHandler" instance=ExtResource("24_jbksd")]
 
-[node name="PW_Simple" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PW_WeaponsHandler2" instance=ExtResource("88_cqits")]
+[node name="PW_Simple" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PW_WeaponsHandler" instance=ExtResource("88_cqits")]
 
-[node name="PW_BasicMelee" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PW_WeaponsHandler2" instance=ExtResource("89_nkqrs")]
+[node name="PW_BasicMelee" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PW_WeaponsHandler" instance=ExtResource("89_nkqrs")]
 
 [node name="GroundCast" type="ShapeCast3D" parent="."]
 shape = SubResource("SphereShape3D_4jpmy")
@@ -542,7 +542,7 @@ shape = SubResource("SphereShape3D_cqits")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0315512, 0)
 collision_layer = 0
 script = ExtResource("18_u3xwg")
-_weaponsHandler = NodePath("../../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PW_WeaponsHandler2")
+_weaponsHandler = NodePath("../../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PW_WeaponsHandler")
 metadata/_custom_type_script = "uid://cvmm2apn1tg0v"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body/GL_Picker"]
@@ -1015,7 +1015,7 @@ _cooldown = 3.0
 [node name="CNT_SprintWeapon" type="Node" parent="Connectors" node_paths=PackedStringArray("_sprintInput", "_weaponsHandler")]
 script = ExtResource("91_cqits")
 _sprintInput = NodePath("../../PIM_Arena/PI_Sprint")
-_weaponsHandler = NodePath("../../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PW_WeaponsHandler2")
+_weaponsHandler = NodePath("../../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PW_WeaponsHandler")
 metadata/_custom_type_script = "uid://dkysuj8gsdwv4"
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
@@ -1075,7 +1075,7 @@ texture = ExtResource("33_ck35o")
 
 [node name="UI_HitMarker" parent="CanvasLayer/UI_Crosshair/TextureRect" node_paths=PackedStringArray("_weaponsHandler") instance=ExtResource("77_fdvd6")]
 layout_mode = 1
-_weaponsHandler = NodePath("../../../../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PW_WeaponsHandler2")
+_weaponsHandler = NodePath("../../../../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PW_WeaponsHandler")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/UI_Crosshair/TextureRect" node_paths=PackedStringArray("_dash")]
 layout_mode = 1
@@ -1124,7 +1124,7 @@ mouse_filter = 2
 script = ExtResource("82_5dw8r")
 _camera = NodePath("../../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable/Camera3D")
 _indicatorScene = ExtResource("83_ewcnl")
-_weaponsHandler = NodePath("../../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PW_WeaponsHandler2")
+_weaponsHandler = NodePath("../../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PW_WeaponsHandler")
 _bufferTimer = NodePath("Timer")
 metadata/_custom_type_script = "uid://c7tdbt357bj80"
 

@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://b2bfo1y3av28f" path="res://script/ui/combat/weapon/loadout/fire/UIW_ActiveFireHolder.cs" id="5_g4k06"]
 
 [node name="weapon" type="BoxContainer" node_paths=PackedStringArray("_active", "_unactive", "_directBind")]
+mouse_filter = 2
 theme_override_constants/separation = 0
 alignment = 2
 script = ExtResource("1_fe4rp")
@@ -17,9 +18,11 @@ metadata/_custom_type_script = "uid://dfhd0aslc2ms8"
 
 [node name="direct_bind" type="TextureRect" parent="."]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="unactive" type="BoxContainer" parent="." node_paths=PackedStringArray("_icon", "_fireHoldersContainer", "_fireHolderTemplate")]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 0
 script = ExtResource("2_v4mgk")
 _icon = NodePath("MarginContainer/AspectRatioContainer/unactive_icon")
@@ -29,6 +32,7 @@ metadata/_custom_type_script = "uid://dipouroto55hy"
 
 [node name="MarginContainer" type="MarginContainer" parent="unactive"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
@@ -49,10 +53,12 @@ expand_mode = 1
 
 [node name="fires_container" type="BoxContainer" parent="unactive"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="fire" type="BoxContainer" parent="unactive/fires_container" node_paths=PackedStringArray("_totalAmmos")]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 0
 alignment = 1
 vertical = true
@@ -69,6 +75,7 @@ horizontal_alignment = 2
 
 [node name="active" type="BoxContainer" parent="." node_paths=PackedStringArray("_icon", "_fireHoldersContainer", "_fireHolderTemplate")]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 0
 alignment = 2
 script = ExtResource("2_v4mgk")

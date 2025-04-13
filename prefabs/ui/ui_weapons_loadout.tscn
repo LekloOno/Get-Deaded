@@ -5,12 +5,13 @@
 [ext_resource type="Texture2D" uid="uid://bffiy1g6ksce8" path="res://assets/sprites/binds/keys/c.png" id="2_qpjn0"]
 [ext_resource type="PackedScene" uid="uid://b5tr7coy5u25i" path="res://prefabs/ui/ui_weapon_template.tscn" id="3_31lwq"]
 
-[node name="loadout" type="BoxContainer" node_paths=PackedStringArray("_weaponTemplate", "_holster", "_active", "_next", "_unactiveList")]
+[node name="loadout" type="BoxContainer" node_paths=PackedStringArray("_weaponTemplate", "_holster", "_active", "_next", "_nextHolder", "_unactiveList")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 alignment = 2
 vertical = true
 script = ExtResource("1_npt2m")
@@ -18,21 +19,25 @@ _weaponTemplate = NodePath("holster/holster_weapon/weapon")
 _holster = NodePath("holster/holster_weapon")
 _active = NodePath("active")
 _next = NodePath("unactive_list/next/next_weapon")
+_nextHolder = NodePath("unactive_list/next")
 _unactiveList = NodePath("unactive_list")
 metadata/_custom_type_script = "uid://bqe8doqvnciay"
 
 [node name="unactive_list" type="VBoxContainer" parent="."]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="next" type="BoxContainer" parent="unactive_list"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 0
 alignment = 2
 
 [node name="switch_bind" type="AspectRatioContainer" parent="unactive_list/next"]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="switch_bind_texture" type="TextureRect" parent="unactive_list/next/switch_bind"]
 texture_filter = 1
@@ -43,33 +48,40 @@ expand_mode = 1
 
 [node name="next_weapon" type="BoxContainer" parent="unactive_list/next"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 0
 alignment = 2
 
 [node name="holster" type="BoxContainer" parent="."]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 0
 alignment = 2
 
 [node name="holster_bind" type="AspectRatioContainer" parent="holster"]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="holster_bind_texture" type="TextureRect" parent="holster/holster_bind"]
 texture_filter = 1
 texture_repeat = 1
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("2_qpjn0")
 expand_mode = 1
 
 [node name="holster_weapon" type="BoxContainer" parent="holster"]
 layout_mode = 2
+mouse_filter = 2
 alignment = 2
 
 [node name="weapon" parent="holster/holster_weapon" instance=ExtResource("3_31lwq")]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="active" type="BoxContainer" parent="."]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 0
 alignment = 2
