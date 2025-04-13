@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b4y8allu42lpp"
-path="res://.godot/imported/amos_icon.svg-b0e9efc0b2ff48adc01cd864b663a4a9.ctex"
+path="res://.godot/imported/ammos_icon.svg-7cac8491637658362dac63e7ca0db82c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://gd_icons/weapon_system/amos_icon.svg"
-dest_files=["res://.godot/imported/amos_icon.svg-b0e9efc0b2ff48adc01cd864b663a4a9.ctex"]
+source_file="res://gd_icons/weapon_system/ammos_icon.svg"
+dest_files=["res://.godot/imported/ammos_icon.svg-7cac8491637658362dac63e7ca0db82c.ctex"]
 
 [params]
 

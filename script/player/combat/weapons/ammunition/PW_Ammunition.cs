@@ -8,7 +8,7 @@ public delegate void AmmunitionEvent(int amount, uint finalAmount);
 /// </summary>
 
 // Icon credits - LekloOno - https://github.com/LekloOno
-[GlobalClass, Icon("res://gd_icons/weapon_system/Ammos_icon.svg")]
+[GlobalClass, Icon("res://gd_icons/weapon_system/ammos_icon.svg")]
 public partial class PW_Ammunition : WeaponComponent
 {
     [Export] private uint _magazineSize;
