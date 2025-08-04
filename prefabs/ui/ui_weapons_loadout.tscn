@@ -78,7 +78,6 @@ alignment = 2
 
 [node name="weapon" parent="holster/holster_weapon" instance=ExtResource("3_31lwq")]
 layout_mode = 2
-mouse_filter = 2
 
 [node name="active" type="BoxContainer" parent="."]
 layout_mode = 2

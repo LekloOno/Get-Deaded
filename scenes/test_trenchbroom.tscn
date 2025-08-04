@@ -978,6 +978,7 @@ metadata/_custom_type_script = "uid://cjmiash71uc7b"
 [sub_resource type="SphereShape3D" id="SphereShape3D_vqbvp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wk1by"]
+render_priority = 1
 transparency = 1
 albedo_color = Color(0.317647, 0.847059, 0, 0.839216)
 

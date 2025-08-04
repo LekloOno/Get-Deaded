@@ -1,6 +1,7 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://sdeae7lb8rdp"]
 
 [resource]
+render_priority = 1
 transparency = 1
 cull_mode = 2
 emission_enabled = true
