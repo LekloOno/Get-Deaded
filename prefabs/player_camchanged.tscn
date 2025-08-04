@@ -262,7 +262,6 @@ metadata/_custom_type_script = "uid://kabi8i2dqa4f"
 [node name="Camera Control" type="Node3D" parent="Camera Pivot/PC_Anchor" node_paths=PackedStringArray("_flatDir")]
 physics_interpolation_mode = 2
 script = ExtResource("3_xv583")
-_sensitivity = 2.7
 _flatDir = NodePath("../..")
 
 [node name="PC_Recoil" type="Node3D" parent="Camera Pivot/PC_Anchor/Camera Control" node_paths=PackedStringArray("CameraControl")]

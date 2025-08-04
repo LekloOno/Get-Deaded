@@ -6,8 +6,10 @@ using System.Runtime;
 public partial class PC_Control : Node3D
 {
     [ExportCategory("Settings")]
-    [Export(PropertyHint.Range, "0,100,0.05")]
-    private float _sensitivity = 2.8f;
+    [Export(PropertyHint.Range, "0,100,0.1")]
+    private float _cmPer360 = 32f;
+    [Export(PropertyHint.Range, "0,64000,1")]
+    private uint _dpi = 1600;
     
     [ExportCategory("Setup")]
     [Export] private Node3D _flatDir;
@@ -19,7 +21,6 @@ public partial class PC_Control : Node3D
 
     public override void _Ready()
     {
-        _realSens = _sensitivity / 6500f;
         Input.MouseMode = Input.MouseModeEnum.Captured;
         Rotation = _eulerAngles = Vector3.Zero;
     }
@@ -29,11 +30,12 @@ public partial class PC_Control : Node3D
         if (@event is InputEventMouseMotion mouseMotion)
         {
             //_flatDir.RotateY(-mouseMotion.Relative.X * _realSens);
-            
+
             //_eulerAngles += new Vector3(-mouseMotion.Relative.Y * _realSens, -mouseMotion.Relative.X * _realSens, 0f);
             //_eulerAngles.X = Mathf.Clamp(_eulerAngles.X, Mathf.DegToRad(-90), Mathf.DegToRad(90));
             //Rotation = _eulerAngles;
-            Vector2 sensMotion = -mouseMotion.Relative * _realSens;
+            Vector2 cmMotion = (-mouseMotion.ScreenRelative / _dpi) * 2.54f;
+            Vector2 sensMotion = cmMotion * 2 * Mathf.Pi / _cmPer360;
             RotateFlatDir(sensMotion.X);
             RotateXClamped(sensMotion.Y);
             MouseMove.Invoke(this, sensMotion);
