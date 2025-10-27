@@ -1009,7 +1009,7 @@ albedo_color = Color(0.780392, 0.113725, 0.0823529, 0.92549)
 material = SubResource("StandardMaterial3D_efpjk")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ux68e"]
-render_priority = 0
+render_priority = -1
 shader = ExtResource("34_f60qe")
 shader_parameter/depth_threshold = 0.01
 
@@ -1974,4 +1974,5 @@ mesh = SubResource("SphereMesh_o3j50")
 [node name="PostProcessing" type="MeshInstance3D" parent="."]
 material_override = SubResource("ShaderMaterial_ux68e")
 extra_cull_margin = 16384.0
+ignore_occlusion_culling = true
 mesh = SubResource("QuadMesh_5y3lt")

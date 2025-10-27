@@ -24,7 +24,7 @@ public partial class GC_HurtBox : Area3D
         if (_damageSplatter == null)
             return false;
 
-        _damageSplatter.Position = hitPosition;
+        _damageSplatter.GlobalPosition = hitPosition;
         _damageSplatter.LookAt(from);
         _damageSplatter.Emitting = true;
         return true;
