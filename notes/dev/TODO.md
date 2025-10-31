@@ -36,4 +36,20 @@ Externalize data of recently implemented actions in ressources, just like the pr
 ~~Lower camera when sprinting ?~~
 ~~Slide tilt~~
 
-Maybe SurfaceState should only cast event when enabled by SurfaceControl ? and add an event for disabling/enabling
+Maybe SurfaceState should only cast event when enabled by SurfaceControl ? and add an event for disabling/enabling  
+
+
+
+## COME BACK
+
+DOCUMENT THE ENGINE MF  
+    - debug
+
+Redo completely character controller  
+
+proper hit registration system  
+
+Animation state machine and global system for ennemies  
+
+Player animation workflow & animation (headaacacac)  
+
