@@ -1,3 +1,7 @@
+/[scripts](../../../scripts_doc.md)/debug
+
+---
+
 # [Display FPS](display_fps.gd)
 
 `extends Label`  

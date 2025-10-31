@@ -15,15 +15,20 @@ public static class PHX_Checks
         return !current.TestMove(transform, motion, maxCollisions: 1, safeMargin: 0.1f, recoveryAsCollision: true);
     }
 
-    public static bool CanMoveForward(PhysicsBody3D current, BoxShape3D shape, Node3D pivot, float amount, out KinematicCollision3D result, float feetMargin = 0f)
+    public static bool CanMoveForward(PhysicsBody3D current, BoxShape3D shape, Node3D pivot, float distance, out KinematicCollision3D result, float feetMargin = 0f)
     {
         Vector3 feetMarginVector = new(0f, feetMargin, 0f);
         Transform3D transform = current.Transform;
-        Vector3 motion = -pivot.GlobalBasis.Z * amount;
+        Vector3 motion = -pivot.GlobalBasis.Z * distance;
 
         KinematicCollision3D localResult = new();
 
         Vector3 initSize = shape.Size;
+        // Why modifying the shape ?
+        // - TestMove does not take an explicit shape
+        //   it implictly uses the shape of the given physicsBody3D.
+        //   We would have to create a whole copy of the physicsBody3D otherwise, or do it manually.
+        //     (Might be cleaner to do it manually then, but not a priority at all)
         if (feetMargin != 0)
         {
             shape.Size -= feetMarginVector;
@@ -38,9 +43,9 @@ public static class PHX_Checks
         return canMove;
     }
 
-    public static bool CanLedgeClimb(PhysicsBody3D current, BoxShape3D shape, Node3D pivot, float amount, float minHeight, ShapeCast3D headCast, out KinematicCollision3D result)
+    public static bool CanLedgeClimb(PhysicsBody3D current, BoxShape3D shape, Node3D pivot, float distance, float minHeight, ShapeCast3D headCast, out KinematicCollision3D result)
     {
-        Vector3 motion = -pivot.GlobalBasis.Z * amount;
+        Vector3 motion = -pivot.GlobalBasis.Z * distance;
         headCast.TargetPosition = motion;
         headCast.ForceShapecastUpdate();
 
@@ -49,6 +54,6 @@ public static class PHX_Checks
         if (headCast.IsColliding())
             return false;
 
-        return !CanMoveForward(current, shape, pivot, amount, out result, minHeight);
+        return !CanMoveForward(current, shape, pivot, distance, out result, minHeight);
     }
 }
