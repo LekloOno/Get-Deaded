@@ -1,4 +1,4 @@
-/[scripts](../../scripts_doc.md)/[engine_tools](../engine_tools_doc.md)/physics
+/[scripts](../../)/[engine_tools](../)/physics
 
 ---
 
