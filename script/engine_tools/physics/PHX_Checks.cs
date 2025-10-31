@@ -3,7 +3,7 @@ using Godot;
 /// Provides methods to avoid physics conflicts
 public static class PHX_Checks
 {
-    public static bool CanUncrouch(PhysicsBody3D current, PB_Scale bodyScale, float upSafeMargin = 0.05f)
+    public static bool CanUncrouch(PhysicsBody3D current, PHX_BodyScale bodyScale, float upSafeMargin = 0.05f)
     {
         float halfDeltaScale = bodyScale.ScaleDelta/2f;
 

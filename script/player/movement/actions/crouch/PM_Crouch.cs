@@ -5,7 +5,7 @@ using Godot;
 public partial class PM_Crouch : PM_Action
 {
     [Export] private PI_Crouch _crouchInput;
-    [Export] private PB_Scale _codyScalor;
+    [Export] private PHX_BodyScale _bodyScalor;
     
     [Export(PropertyHint.Range, "0.0, 10.0")] private float _scaleSpeed = 10f;
     [Export(PropertyHint.Range, "0.0, 10.0")] private float _resetScaleSpeed = 10f;
@@ -19,13 +19,13 @@ public partial class PM_Crouch : PM_Action
 
     public void StartCrouch()
     {
-        _codyScalor.SetTargetScale(_targetScaleRatio, _scaleSpeed);
+        _bodyScalor.SetTargetScale(_targetScaleRatio, _scaleSpeed);
         OnStart?.Invoke(this, EventArgs.Empty);
     }
 
     public void StopCrouch()
     {
-        _codyScalor.ResetScale(_resetScaleSpeed);
+        _bodyScalor.ResetScale(_resetScaleSpeed);
         OnStop?.Invoke(this, EventArgs.Empty);
     }
 }

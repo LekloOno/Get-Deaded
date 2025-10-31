@@ -21,7 +21,7 @@ public partial class PM_LedgeClimb : PM_Action
     [Export] private PM_Controller _controller;
     [Export] private PM_Dash _dash;
     [Export] private PM_Jump _jump;
-    [Export] private PB_Scale _bodyScale;
+    [Export] private PHX_BodyScale _bodyScale;
     [Export] private Node3D _pivot;
     
     [Export] private ShapeCast3D _ledgeCast; 

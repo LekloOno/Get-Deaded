@@ -7,7 +7,7 @@ public partial class PM_Slide : PM_Action
     [Export] private PI_Slide _slideInput;
     [Export] private PM_Controller _controller;
     [Export] private PS_Grounded _groundState;
-    [Export] private PB_Scale _bodyScalor;
+    [Export] private PHX_BodyScale _bodyScalor;
     [Export(PropertyHint.Range, "0.0, 20.0")] private float _scaleSpeed = 10f;
     [Export(PropertyHint.Range, "0.0, 20.0")] private float _resetScaleSpeed = 10f;
     [Export(PropertyHint.Range, "0.2,  1.0")] private float _targetScaleRatio = 0.6f;

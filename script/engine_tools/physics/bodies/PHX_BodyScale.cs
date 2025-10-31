@@ -2,10 +2,10 @@ using System;
 using Godot;
 
 [GlobalClass]
-public partial class PB_Scale : CollisionShape3D
+public partial class PHX_BodyScale : CollisionShape3D
 {
     [Export] private Node3D _modelAnchor;
-    [Export] private PM_Controller _controller;
+    [Export] private PhysicsBody3D _physicsBody;
     [Export] private CollisionShape3D _bodyHitBox;
 
     public float ScaleDelta => _colliderInitScale - _capsule.Size.Y;
@@ -67,7 +67,7 @@ public partial class PB_Scale : CollisionShape3D
 
     public void ProcessResetScale(object sender, EventArgs e)
     {
-        if (!PHX_Checks.CanUncrouch(_controller, this))
+        if (!PHX_Checks.CanUncrouch(_physicsBody, this))
             return;
         
         ProcessScale(sender, e);

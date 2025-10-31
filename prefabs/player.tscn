@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://b8papnphcevbc" path="res://script/player/camera/control/PC_Control.cs" id="3_duaqo"]
 [ext_resource type="Script" uid="uid://bakhc66d22q1p" path="res://script/player/camera/annimation/PC_Spring.cs" id="3_iyr31"]
 [ext_resource type="Script" uid="uid://dw01565ra6d7q" path="res://script/player/camera/annimation/PC_SprintLean.cs" id="4_ckxhl"]
-[ext_resource type="Script" uid="uid://bpp610usa4y00" path="res://script/player/body/PB_Scale.cs" id="4_ldkbw"]
+[ext_resource type="Script" uid="uid://bpp610usa4y00" path="res://script/engine_tools/physics/bodies/PHX_BodyScale.cs" id="4_ldkbw"]
 [ext_resource type="Script" uid="uid://c6mut48npwi4w" path="res://script/player/input/actions/movement/PI_Walk.cs" id="4_ob50j"]
 [ext_resource type="Script" uid="uid://bgi6chbsxv7hc" path="res://script/player/input/actions/movement/PI_Jump.cs" id="5_kj45h"]
 [ext_resource type="Script" uid="uid://bvccexbb184to" path="res://script/player/camera/annimation/PC_Bobbing.cs" id="6_a1iy8"]
@@ -259,10 +259,9 @@ _wallCastHigh = NodePath("../../../../WallJumpCastHigh")
 
 [node name="Crouch" type="Node" parent="Movement/Actions"]
 
-[node name="PM_Crouch" type="Node" parent="Movement/Actions/Crouch" node_paths=PackedStringArray("_crouchInput", "_codyScalor")]
+[node name="PM_Crouch" type="Node" parent="Movement/Actions/Crouch" node_paths=PackedStringArray("_crouchInput")]
 script = ExtResource("15_vd3v3")
 _crouchInput = NodePath("../../../../Input/PI_CrouchDispatcher/PI_Slide/PI_Crouch")
-_codyScalor = NodePath("../../../../Body")
 
 [node name="PM_Slide" type="Node" parent="Movement/Actions/Crouch" node_paths=PackedStringArray("_slideInput", "_controller", "_groundState", "_bodyScalor")]
 script = ExtResource("20_5y6qm")

@@ -16,7 +16,7 @@ public partial class PI_CrouchDispatcher : PI_ActionHandler<float>
 
     [ExportCategory("Setup")]
     [Export] private PM_Controller _controller;
-    [Export] private PB_Scale _body;
+    [Export] private PHX_BodyScale _body;
     [Export] private PI_Slide _slideInput;
 
     public bool IsCrouched => _active || _tryingUncrouch;
