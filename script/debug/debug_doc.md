@@ -1,4 +1,4 @@
-/[scripts](../../../scripts_doc.md)/debug
+/[scripts](../scripts_doc.md)/debug
 
 ---
 
