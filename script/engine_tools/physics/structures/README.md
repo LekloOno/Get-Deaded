@@ -17,9 +17,9 @@ A tool to cache and consume forces, typically for some exterior actors to be abl
 Instead of risking concurrent modifications, and not to be sure when they are applied, the actor holding this forcesCache is reponsible for consuming it when it wants to.  
 
 See usage example in -
-- [PM_Controller](../../player/PM_Controller.cs) - Controller is the holder of the cache.
-- [PM_Slide](../../player/movement/actions/crouch/PM_Slide.cs) - Slide adds some impulse forces.
-- [PM_Dash](../../player/movement/actions/crouch/PM_Dash.cs) - Dash adds some persistent forces.
+- [PM_Controller](../../../player/PM_Controller.cs) - Controller is the holder of the cache.
+- [PM_Slide](../../../player/movement/actions/crouch/PM_Slide.cs) - Slide adds some impulse forces.
+- [PM_Dash](../../../player/movement/actions/crouch/PM_Dash.cs) - Dash adds some persistent forces.
 
 ## Impulse Forces
 
