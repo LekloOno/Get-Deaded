@@ -10,7 +10,6 @@ public partial class PHX_RepulsionField3D : ShapeCast3D
     public PHX_RepulsionField3D(PHX_RepulsionField3DData data)
     {
         _data = data;
-        CollisionMask = data.CollisionMask;
     }
 
     public override void _Ready()
@@ -19,6 +18,7 @@ public partial class PHX_RepulsionField3D : ShapeCast3D
         {
             _bounceBody = body;
             Shape = _data.SphereShape;
+            CollisionMask = _data.CollisionMask;
         }
         else
             SetPhysicsProcess(false);

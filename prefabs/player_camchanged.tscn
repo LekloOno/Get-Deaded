@@ -14,7 +14,7 @@
 [ext_resource type="Script" uid="uid://bj0x13p8w17v" path="res://script/player/camera/annimation/PC_SlideTilt.cs" id="8_ey8l8"]
 [ext_resource type="Script" uid="uid://bpx1sfcw442s1" path="res://script/player/camera/annimation/PC_SlideLedgeAnim.cs" id="9_727yx"]
 [ext_resource type="Script" uid="uid://nat0vtl7jqqp" path="res://script/ui/movement/UI_SpeedoMeter.cs" id="10_kvg1p"]
-[ext_resource type="Script" uid="uid://bpp610usa4y00" path="res://script/engine_tools/physics/bodies/PHX_BodyScale.cs" id="11_6ifu1"]
+[ext_resource type="Script" uid="uid://bpp610usa4y00" path="res://script/engine_tools/physics/bodies/tools/PHX_BodyScale.cs" id="11_6ifu1"]
 [ext_resource type="Script" uid="uid://di34syfygvow1" path="res://script/player/camera/control/PC_DirectCamera.cs" id="12_htv2j"]
 [ext_resource type="Script" uid="uid://38i6kejmo2hs" path="res://script/player/audio/PA_Jump.cs" id="12_nveww"]
 [ext_resource type="Script" uid="uid://c6mut48npwi4w" path="res://script/player/input/actions/movement/PI_Walk.cs" id="12_pwafq"]
