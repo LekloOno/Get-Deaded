@@ -34,7 +34,7 @@ Consuming these forces do not clear them. They allow for long lasting forces, bu
 - **IsEmpty** - returns true if no forces are currently cached, false otherwise.
 - **ConsumeImpulse** - Consume and clears all cached impulse forces, returning their sum.
 - **ConsumePersistent** - Consume all cached persistent forces, without clearing them, returning their sum.
-- **Consume** - Consume all forces. Same as calling ``ConsumeImpulse`` then ``ConsumePersistent``.
+- **Consume** - Consume all forces and returns their sum. Same as calling ``ConsumeImpulse`` + ``ConsumePersistent``.
 - **AddImpulse** - Adds an impulse force to the cache.
 - **AddPersistent** - Adds a persistent force to the cache.
 - **RemovePersistent** - Removes a persistent force to the cache.
