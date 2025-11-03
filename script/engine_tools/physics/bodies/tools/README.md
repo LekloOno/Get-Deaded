@@ -4,8 +4,18 @@
 
 This folder contains tools used to simplify and normalize physics bodies manipulations. 
 
-- [Repulsion Field 3D](#repulsion-field-3d)
-
+- [Body Scale](#body-scale)
+  - [Brief reminder - Environmental hitboxes/Collision Boxes](#brief-reminder---environmental-hitboxescollision-boxes)
+    - [Design choice](#design-choice)
+  - [Box constraint](#box-constraint)
+  - [Usage](#usage)
+    - [SpatialAnchor](#spatialanchor)
+    - [PhysicsBody](#physicsbody)
+    - [BodyHitBox](#bodyhitbox)
+  - [Thorough Documentation](#thorough-documentation)
+    - [Initial Scale](#initial-scale)
+    - [SetTargetScale](#settargetscale)
+    - [ResetScale](#resetscale)
 
 
 # [Body Scale](PHX_BodyScale.cs)
