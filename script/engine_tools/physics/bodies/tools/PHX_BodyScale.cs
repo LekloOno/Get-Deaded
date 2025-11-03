@@ -4,14 +4,14 @@ using Godot;
 [GlobalClass]
 public partial class PHX_BodyScale : CollisionShape3D
 {
-    [Export] private Node3D _modelAnchor;
+    [Export] private Node3D _spatialAnchor;
     [Export] private PhysicsBody3D _physicsBody;
     [Export] private CollisionShape3D _bodyHitBox;
 
-    public float ScaleDelta => _colliderInitScale - _capsule.Size.Y;
-    public BoxShape3D Collider => _capsule; 
+    public float ScaleDelta => _colliderInitScale - _box.Size.Y;
+    public BoxShape3D Collider => _box; 
 
-    private BoxShape3D _capsule;
+    private BoxShape3D _box;
     private CapsuleShape3D _bodyHitShape;
 
     private float _modelInitScale;
@@ -27,11 +27,11 @@ public partial class PHX_BodyScale : CollisionShape3D
 
     public override void _Ready()
     {
-        _capsule = Shape as BoxShape3D;
+        _box = Shape as BoxShape3D;
         _bodyHitShape = _bodyHitBox.Shape as CapsuleShape3D;
 
-        _colliderInitScale = _capsule.Size.Y;
-        _modelInitScale = _modelAnchor.Scale.Y;
+        _colliderInitScale = _box.Size.Y;
+        _modelInitScale = _spatialAnchor.Scale.Y;
         _bodyHitBoxInitScale = _bodyHitShape.Height;
     }
     public override void _PhysicsProcess(double delta)
@@ -65,7 +65,7 @@ public partial class PHX_BodyScale : CollisionShape3D
         OnPhysicsProcess += ProcessResetScale;
     }
 
-    public void ProcessResetScale(object sender, EventArgs e)
+    private void ProcessResetScale(object sender, EventArgs e)
     {
         if (!PHX_Checks.CanUncrouch(_physicsBody, this))
             return;
@@ -74,13 +74,13 @@ public partial class PHX_BodyScale : CollisionShape3D
 
         if (ScaleDelta < 0.01f)
         {
-            Vector3 size = _capsule.Size;
+            Vector3 size = _box.Size;
             size.Y = _colliderInitScale;
-            _capsule.Size = size;
+            _box.Size = size;
 
-            Vector3 modelScale = _modelAnchor.Scale;
+            Vector3 modelScale = _spatialAnchor.Scale;
             modelScale.Y = _modelInitScale;
-            _modelAnchor.Scale = modelScale;
+            _spatialAnchor.Scale = modelScale;
 
             _bodyHitShape.Height = _bodyHitBoxInitScale;
             
@@ -88,15 +88,15 @@ public partial class PHX_BodyScale : CollisionShape3D
         }
     }
 
-    public void ProcessScale(object sender, EventArgs e)
+    private void ProcessScale(object sender, EventArgs e)
     {
-        Vector3 size = _capsule.Size;
-        size.Y = Mathf.Lerp(_capsule.Size.Y, _colliderTargetScale, _scaleSpeed);
-        _capsule.Size = size;
+        Vector3 size = _box.Size;
+        size.Y = Mathf.Lerp(_box.Size.Y, _colliderTargetScale, _scaleSpeed);
+        _box.Size = size;
 
-        Vector3 modelScale = _modelAnchor.Scale;
+        Vector3 modelScale = _spatialAnchor.Scale;
         modelScale.Y = Mathf.Lerp(modelScale.Y, _modelTargetScale, _scaleSpeed);
-        _modelAnchor.Scale = modelScale;
+        _spatialAnchor.Scale = modelScale;
 
         _bodyHitShape.Height = Mathf.Lerp(_bodyHitShape.Height, _bodyHitBoxTargetScale, _scaleSpeed);
     }

@@ -520,11 +520,11 @@ show_percentage = false
 shape = SubResource("SphereShape3D_4jpmy")
 target_position = Vector3(0, -20, 0)
 
-[node name="Body" type="CollisionShape3D" parent="." node_paths=PackedStringArray("_modelAnchor", "_physicsBody", "_bodyHitBox")]
+[node name="Body" type="CollisionShape3D" parent="." node_paths=PackedStringArray("_spatialAnchor", "_physicsBody", "_bodyHitBox")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("BoxShape3D_2am5o")
 script = ExtResource("11_6ifu1")
-_modelAnchor = NodePath("SpatialAnchor")
+_spatialAnchor = NodePath("SpatialAnchor")
 _physicsBody = NodePath("..")
 _bodyHitBox = NodePath("BodyBox/CollisionShape3D")
 
