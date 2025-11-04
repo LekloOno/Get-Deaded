@@ -3,7 +3,7 @@ using System.Collections.Generic;
 public abstract class MATH_PropertyModifier<T>
 {
     protected List<T> _modifiers = [];
-    public abstract float Result();
+    public abstract T Result();
     public MATH_PropertyModifier<T> Add(T modifier)
     {
         _modifiers.Add(modifier);
