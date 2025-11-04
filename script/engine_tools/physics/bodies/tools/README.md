@@ -24,6 +24,7 @@ This Node is a Wrapper of `CollisionShape3D`, and allows to safely change the sc
 It is mostly intended for environmental hitboxes which is the simplified hitbox of an entity used to check collisions with the environment.
 
 > ⚠️ It would benefit a rework to handle in a more generic way models and damage hitboxes. This Node is currently quite ad-hoc to the current player architecture.
+> Later on, this node should only scale the collision box and anchor point. The model and damage hitboxes should be scaled through another intermediate node, which would typically handle animations of the model, and the body scale node should pilot this intermediate node. 
 
 ## Brief reminder - Environmental hitboxes/Collision Boxes
 

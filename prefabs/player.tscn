@@ -119,11 +119,10 @@ text = "poo"
 script = ExtResource("31_jxc7o")
 _controller = NodePath("../../../..")
 
-[node name="Body" type="CollisionShape3D" parent="." node_paths=PackedStringArray("_modelAnchor")]
+[node name="Body" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_o274a")
 script = ExtResource("4_ldkbw")
-_modelAnchor = NodePath("SpatialAnchor")
 
 [node name="SpatialAnchor" type="Node3D" parent="Body"]
 
