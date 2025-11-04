@@ -85,7 +85,7 @@
 [ext_resource type="Script" uid="uid://bwxjledgrnbsb" path="res://script/player/input/maps/PIM_Arena.cs" id="49_stdu8"]
 [ext_resource type="Script" uid="uid://3a0e4x3r12vl" path="res://script/player/camera/annimation/trauma/causers/direct/PCT_Health.cs" id="58_r6ddn"]
 [ext_resource type="Script" uid="uid://fevuhhr2vg16" path="res://script/player/input/actions/combat/PI_Revive.cs" id="58_ufgmq"]
-[ext_resource type="Script" uid="uid://t5n7py52g5oj" path="res://script/engine_tools/math/curve/float/MATH_FastLogCurve.cs" id="59_n5lof"]
+[ext_resource type="Script" uid="uid://t5n7py52g5oj" path="res://script/engine_tools/math/curve/float/clamped/MATH_FastLogCurve.cs" id="59_n5lof"]
 [ext_resource type="Script" uid="uid://diuvohbhr003k" path="res://script/player/input/actions/combat/PI_Weapons.cs" id="60_jlgrh"]
 [ext_resource type="Script" uid="uid://mds7cr6i4noc" path="res://script/player/movement/actions/jump/PM_WallClimb.cs" id="61_x3a7t"]
 [ext_resource type="Script" uid="uid://byy7tiy37y47h" path="res://script/debug/display_fps.gd" id="65_wohr1"]

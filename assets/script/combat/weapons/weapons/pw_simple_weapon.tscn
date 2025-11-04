@@ -23,7 +23,7 @@ metadata/_custom_type_script = "uid://cjmiash71uc7b"
 [sub_resource type="Resource" id="Resource_b25vv"]
 script = ExtResource("11_8kujm")
 _noise = ExtResource("10_8kujm")
-_reductionRate = 1.0
+_reductionRate = 10.0
 _noiseSpeed = 50.0
 metadata/_custom_type_script = "uid://c0vf7xmi1u8t4"
 

@@ -13,7 +13,7 @@
 [ext_resource type="Script" uid="uid://51kwj2ldm4xq" path="res://script/player/camera/annimation/trauma/causers/direct/PCT_Fire.cs" id="9_rhime"]
 [ext_resource type="Script" uid="uid://btuswij6bk44u" path="res://script/vfx/combat/trail/line/types/VFX_RectangleLine.cs" id="10_0mgwp"]
 [ext_resource type="Script" uid="uid://d15clqym1lgvu" path="res://script/player/camera/annimation/trauma/causers/undirect/PCT_UndirectScalable.cs" id="11_d2gec"]
-[ext_resource type="Script" uid="uid://t5n7py52g5oj" path="res://script/engine_tools/math/curve/float/MATH_FastLogCurve.cs" id="12_0mgwp"]
+[ext_resource type="Script" uid="uid://t5n7py52g5oj" path="res://script/engine_tools/math/curve/float/clamped/MATH_FastLogCurve.cs" id="12_0mgwp"]
 [ext_resource type="FastNoiseLite" uid="uid://dcqwnhaim8ock" path="res://assets/misc/shake_noise.tres" id="15_86tae"]
 [ext_resource type="Script" uid="uid://c0vf7xmi1u8t4" path="res://script/player/camera/annimation/trauma/PC_TraumaLayer.cs" id="16_rhime"]
 

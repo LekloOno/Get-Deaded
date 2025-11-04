@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://fo74v01ot17s"]
 
 [ext_resource type="Script" uid="uid://d15clqym1lgvu" path="res://script/player/camera/annimation/trauma/causers/undirect/PCT_UndirectScalable.cs" id="1_jldyy"]
-[ext_resource type="Script" uid="uid://b45bkdess3pld" path="res://script/engine_tools/math/curve/float/MATH_LinearCurve.cs" id="2_wl6d4"]
+[ext_resource type="Script" uid="uid://b45bkdess3pld" path="res://script/engine_tools/math/curve/float/clamped/MATH_LinearCurve.cs" id="2_wl6d4"]
 
 [sub_resource type="Resource" id="Resource_hauau"]
 script = ExtResource("2_wl6d4")
