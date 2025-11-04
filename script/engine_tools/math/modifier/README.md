@@ -20,6 +20,10 @@ To compute the result of the stored modifiers, you should call the method `Resul
 
 > 💡 Maybe it would be more interesting to make this class a wrapper for an actual value, instead of an external modifier. For now, you need to have a property, and the property modifier handler, then call for example ``property*propertyModifiers.Result()``.  
 > It could be a pure wrapper, containing an initial value, and the modifiers at the same place, and we would simply call ``property.Value()``, or even make it abstract by adding an implicit conversion !
+>
+> It would add a layer of complexity though, since the modifier isn't necessarily the same type of the property.
+> For example, in PW_ConstantRecoil, we use `float` additive modifier, to scale a `Vector2` angle.  
+> We will need two Generic types, and it might get unecessarily complex, although very easy from the user perspective.
 
 
 ## Implementation
