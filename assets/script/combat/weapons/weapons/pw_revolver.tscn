@@ -55,7 +55,7 @@ radius = 2.0
 script = ExtResource("16_rhime")
 _noise = ExtResource("15_86tae")
 _reductionRate = 1.0
-_noiseSpeed = 50.0
+_noiseSpeed = 40.0
 metadata/_custom_type_script = "uid://c0vf7xmi1u8t4"
 
 [node name="PW_Revolver" type="Node3D" node_paths=PackedStringArray("_fires")]
@@ -121,5 +121,5 @@ shape = SubResource("SphereShape3D_86tae")
 [node name="PCT_Fire" type="Node" parent="PWF_SemiAuto"]
 script = ExtResource("9_rhime")
 _traumaLayer = SubResource("Resource_hd2gv")
-_amount = 0.3
+_amount = 0.4
 metadata/_custom_type_script = "uid://51kwj2ldm4xq"

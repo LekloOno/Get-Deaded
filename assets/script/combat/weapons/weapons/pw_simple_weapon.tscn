@@ -80,9 +80,9 @@ metadata/_custom_type_script = "uid://cytkgtw0ebs3x"
 
 [node name="PCT_ContinuousFire" type="Node" parent="PWF_FullAuto"]
 script = ExtResource("10_j06ou")
-_max = 0.15
+_max = 0.26
 _traumaLayer = SubResource("Resource_b25vv")
-_amount = 0.1
+_amount = 0.24
 metadata/_custom_type_script = "uid://r8ad50yt78dm"
 
 [node name="PWA_SimpleADS" type="Node3D" parent="." node_paths=PackedStringArray("_fire")]
