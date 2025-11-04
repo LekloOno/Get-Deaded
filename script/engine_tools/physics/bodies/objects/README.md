@@ -26,7 +26,7 @@ A repulsion field for a ``RigidBody3D``. The repulsion field gets pushed back by
 
 To use it, you simply put this node as a child of a ``RigidBody3D``, and assign it a [repulsion force data](#thorough-documentation).
 
-> You should ignore the alert about ``ShapeCast3D`` missing a given shape, as the ``PHX_RepulsionField3D`` will automatically fetch the shape assigned in its associated data at runtime.
+> You should ignore the alert about ``ShapeCast3D`` missing a given shape, as the ``PHX_RepulsionField3D`` will automatically fetch the shape assigned in its associated data at runtime.  
 ![alt text](doc_resources/repulsionfield_alert.png)  
 > This is done to force the use of a Sphere Shape, as ``ShapeCast3D``'s shape can be any kind of shape.  
 > We could further define a more generic repulsion field, but there's no use for such for now.  
