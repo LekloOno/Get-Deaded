@@ -18,7 +18,7 @@ public partial class PC_Shakeable : Area3D
 
     public override void _Ready()
     {
-        _traumaLayers = [_baseLayer];
+        _traumaLayers.Add(_baseLayer);
         CollisionLayer = CONF_Collision.Layers.Trauma;
         CollisionMask = 0;
     }
