@@ -18,7 +18,7 @@
 [ext_resource type="Material" uid="uid://h2ivyy4upgyr" path="res://assets/textures/factory/factory_pillar1_gloss.tres" id="14_oihfr"]
 [ext_resource type="PackedScene" uid="uid://cgxay2q63b8m8" path="res://prefabs/simplebot/simplebot.tscn" id="16_716do"]
 [ext_resource type="Material" uid="uid://c7p68evacni7v" path="res://assets/materials/darkGrid.tres" id="18_322tx"]
-[ext_resource type="Script" uid="uid://8thrj88gtdf" path="res://script/ennemy/E_EnnemySpawner.cs" id="18_qlgsc"]
+[ext_resource type="Script" uid="uid://8thrj88gtdf" path="res://script/enemy/E_EnemySpawner.cs" id="18_qlgsc"]
 [ext_resource type="Material" uid="uid://daxwgciv66e17" path="res://assets/materials/whiteGrid.tres" id="19_pcerp"]
 [ext_resource type="Script" uid="uid://d4a4vftx6y17" path="res://script/global/combat/hit/hit/GC_Hitbox.cs" id="20_50c6l"]
 [ext_resource type="Script" uid="uid://cjmiash71uc7b" path="res://script/global/combat/hit/hit/GC_Hit.cs" id="21_y2alo"]
