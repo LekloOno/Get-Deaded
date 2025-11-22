@@ -2,14 +2,14 @@
 
 ---
 
+This folder contains generic structures to handle property modification explicitly, and some implementations.
+
 - [PropertyModifier](#propertymodifier)
   - [Usage](#usage)
   - [Implementation](#implementation)
 - [Additive Modifiers](#additive-modifiers)
   - [Usage](#usage-1)
 
-
-This folder contains generic structures to handle property modification explicitly, and some implementations.
 
 # [PropertyModifier](MATH_PropertyModifiers.cs)
 

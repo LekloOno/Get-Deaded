@@ -263,6 +263,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
 
         _reloading = true;
         _ready = false;
+        _activeWeapon.Interrupt();
         _reloadTimer = GetTree().CreateTimer(reloadTime);
         _reloadTimer.Timeout += DoReload;
     }

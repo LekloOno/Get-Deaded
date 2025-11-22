@@ -223,5 +223,11 @@ public abstract partial class PW_Weapon : WeaponComponent
             fire.Reload();
     }
 
+    public virtual void Interrupt()
+    {
+        foreach (PW_Fire fire in _fires)
+            fire.Disable();
+    }
+
     #endregion
 }
