@@ -4,6 +4,11 @@ using Godot;
 [GlobalClass]
 public partial class PI_Weapons : PI_InputGlobalAction
 {
+    [Export] private PI_Reload _reloadInput;
+
+    public bool ReloadIsBuffered() => _reloadInput.IsBuffered();
+    public bool ReloadUseBuffer() => _reloadInput.UseBuffer();
+
     public EventHandler OnStartPrimary;
     public EventHandler OnStartSecondary;
     public EventHandler OnStopPrimary;
@@ -28,11 +33,18 @@ public partial class PI_Weapons : PI_InputGlobalAction
             OnSwitch?.Invoke(this, EventArgs.Empty);
         else if (@event.IsActionPressed(ACTIONS_Combat.HOLSTER))
             OnHolster?.Invoke(this, EventArgs.Empty);
-        else if (@event.IsActionPressed(ACTIONS_Combat.RELOAD))
-            OnReload?.Invoke(this, EventArgs.Empty);
         else if (@event.IsActionPressed(ACTIONS_Combat.MELEE))
             OnStartMelee?.Invoke(this, EventArgs.Empty);
         else if (@event.IsActionReleased(ACTIONS_Combat.MELEE))
             OnStopMelee?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void ForwardReload(object sender, EmptyInput e) => OnReload?.Invoke(this, EventArgs.Empty);
+
+    public override void EnableAction()
+    {
+        base.EnableAction();
+        _reloadInput.EnableAction();
+        _reloadInput.Start += ForwardReload;
     }
 }

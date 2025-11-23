@@ -253,11 +253,15 @@ public partial class PW_WeaponsHandler : WeaponSystem
         StartSwitch();
     }
 
-    public void Reload(object sender, EventArgs e)
+    private void SendReload()
     {
-        if(!_ready || _reloading || IsSwitching())
-            return;
+        Available -= SendReload;
+        if (_weaponsInput.ReloadUseBuffer())
+            TryReload();
+    }
 
+    private void TryReload()
+    {
         if(!_activeWeapon.CanReload(out float reloadTime))
             return;
 
@@ -266,6 +270,25 @@ public partial class PW_WeaponsHandler : WeaponSystem
         _activeWeapon.Interrupt();
         _reloadTimer = GetTree().CreateTimer(reloadTime);
         _reloadTimer.Timeout += DoReload;
+    }
+
+    // Maybe later make a new PI class which handles auto buffering
+    // Like the subscriber would return boolean
+    //  If true, then it means the input has been handled
+    //  If false, then it means the input should be buffered, and we automatically
+    //      subscribe to the buffer consuming event that has been set previously or on the fly  
+    public void Reload(object sender, EventArgs e)
+    {
+        if (_reloading)
+            return;
+
+        if(!_ready || IsSwitching())
+        {
+            Available += SendReload;
+            return;
+        }
+
+        TryReload();
     }
 
     private void DoReload()

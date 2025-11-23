@@ -9,7 +9,7 @@ using Godot;
 public abstract partial class PI_BufferedHandler<T> : PI_PressHandler<T>
 {
     [Export] private ulong _bufferWindow;
-    private ulong _lastInput = 0;
+    protected ulong _lastInput = 0;
 
     public bool UseBuffer()
     {

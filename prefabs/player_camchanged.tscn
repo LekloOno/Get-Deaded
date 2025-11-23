@@ -1,4 +1,4 @@
-[gd_scene load_steps=129 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=130 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://script/player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://assets/script/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -93,6 +93,7 @@
 [ext_resource type="Texture2D" uid="uid://cbh1opskekaqn" path="res://assets/sprites/dash/dash_cd_mid_fill.png" id="70_ee4um"]
 [ext_resource type="Script" uid="uid://bd37jsqipcwxc" path="res://script/ui/movement/UI_DashReset.cs" id="71_j12ti"]
 [ext_resource type="Script" uid="uid://cq31c653np61x" path="res://script/player/movement/actions/surface-control/PM_AirState.cs" id="72_0vaqj"]
+[ext_resource type="Script" uid="uid://77x30sxsp5c" path="res://script/player/input/actions/combat/PI_Reload.cs" id="75_vj6q7"]
 [ext_resource type="PackedScene" uid="uid://d06ge8pykx8s1" path="res://prefabs/hitmarker.tscn" id="77_fdvd6"]
 [ext_resource type="Script" uid="uid://b4hdeuwma0ma8" path="res://script/player/combat/weapons/PW_WeaponsHandler.cs" id="81_stdu8"]
 [ext_resource type="Script" uid="uid://c7tdbt357bj80" path="res://script/ui/combat/weapon/hit/number/UI_DamageIndicatorManager.cs" id="82_5dw8r"]
@@ -867,9 +868,15 @@ _sprintInput = NodePath("../../PI_Sprint")
 script = ExtResource("18_wrcsk")
 _sprintInput = NodePath("../../../PI_Sprint")
 
-[node name="PI_Weapons" type="Node" parent="PIM_Arena"]
+[node name="PI_Weapons" type="Node" parent="PIM_Arena" node_paths=PackedStringArray("_reloadInput")]
 script = ExtResource("60_jlgrh")
+_reloadInput = NodePath("PI_Reload")
 metadata/_custom_type_script = "uid://diuvohbhr003k"
+
+[node name="PI_Reload" type="Node" parent="PIM_Arena/PI_Weapons"]
+script = ExtResource("75_vj6q7")
+_bufferWindow = 10000
+metadata/_custom_type_script = "uid://77x30sxsp5c"
 
 [node name="PI_Revive" type="Node" parent="PIM_Arena"]
 script = ExtResource("58_ufgmq")
