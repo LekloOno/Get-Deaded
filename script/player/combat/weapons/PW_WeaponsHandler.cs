@@ -22,13 +22,15 @@ public partial class PW_WeaponsHandler : WeaponSystem
     [Export] private GB_ExternalBodyManager _ownerBody;
     [Export] private PI_Weapons _weaponsInput;
     [Export] private Array<PW_Weapon> _weapons;
+    public Array<PW_Weapon> Weapons => _weapons;
+
     [Export] private PW_Weapon _melee;
     [Export] private PM_SurfaceControl _surfaceControl;
     [Export] private float _meleeRecover;
     public EventHandler<ShotHitEventArgs> Hit;
 
     public SwitchEvent SwitchStarted;
-    public SwitchEvent Initialized;
+    public SwitchEvent GotInitialized;
     /// <summary>
     /// Event Arg is the weapon the player is switching out from.
     /// </summary>
@@ -67,6 +69,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
     private SceneTreeTimer _reloadTimer;
     private SceneTreeTimer _meleeRecoverTimer;
     
+    public bool Initialized {get; private set;} = false;
 
     public override void _Ready()
     {
@@ -101,7 +104,8 @@ public partial class PW_WeaponsHandler : WeaponSystem
         ReloadReady += () => Available?.Invoke();
 
         int nextIndex = (_weaponIndex + 1) % _weapons.Count;
-        Initialized?.Invoke(_melee, _weapons[_weaponIndex], nextIndex, _weapons);
+        GotInitialized?.Invoke(_melee, _weapons[_weaponIndex], nextIndex, _weapons);
+        Initialized = true;
     }
 
     private void DirectMeleeStop(object sender, EventArgs e) => _melee.PrimaryRelease();

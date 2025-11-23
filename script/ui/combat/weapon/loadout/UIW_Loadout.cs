@@ -16,7 +16,7 @@ public partial class UIW_Loadout : BoxContainer
     public override void _Ready()
     {
         _weaponsHandler.SwitchStarted += Update;
-        _weaponsHandler.Initialized += Initialize;
+        _weaponsHandler.GotInitialized += Initialize;
 
         _weaponsHandler.InitData(out PW_Weapon active, out PW_Weapon nextHolster, out int nextIndex, out Godot.Collections.Array<PW_Weapon> weapons);
         if (active == null)
