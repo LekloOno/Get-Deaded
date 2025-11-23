@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+[GlobalClass]
 public partial class STAT_Combat : Node
 {
     [Export] private PW_WeaponsHandler _weaponsHandler;
@@ -20,6 +21,7 @@ public partial class STAT_Combat : Node
             .ToList();
         
         GotInitialized?.Invoke();
+        Initialized = true;
     }
 
     private void WeaponsHandlerInitialized(PW_Weapon active, PW_Weapon nextHolster, int nextIndex, Godot.Collections.Array<PW_Weapon> weapons) =>

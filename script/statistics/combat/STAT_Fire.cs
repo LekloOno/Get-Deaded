@@ -9,19 +9,20 @@ public class STAT_Fire
     public Observable<int> Kills {get; private set;} = new(0);
     public Observable<float> Damage {get; private set;} = new(0);
     public Texture2D Icon {get;}
+    public Color IconColor {get;}
 
-    public STAT_Fire(PW_Fire fire, Texture2D defaultIcon)
+    public STAT_Fire(PW_Fire fire, Texture2D defaultIcon, Color color)
     {
         if (fire.Icon != null)
             Icon = fire.Icon;
         else
             Icon = defaultIcon;
-    }
 
-    public void Initialize(PW_Fire fire)
-    {
+        IconColor = color;
+        
         fire.Hit += HandleHit;
-    }    
+        fire.Shot += HandleShot;
+    }  
 
     public void HandleHit(object sender, ShotHitEventArgs hit)
     {

@@ -12,6 +12,10 @@ public partial class UIW_FireStat : UIW_Stats
     public void Initialize(STAT_Fire fire)
     {
         _fire = fire;
+        
+        _icon.Texture = _fire.Icon;
+        _icon.Modulate = _fire.IconColor;
+
         _fire.Shots.Subscribe(UpdatePrecision);
         _fire.Hits.Subscribe(UpdatePrecision);
     }

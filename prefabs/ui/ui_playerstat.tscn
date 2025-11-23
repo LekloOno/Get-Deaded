@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://di6ks47ucoai4"]
+
+[ext_resource type="Script" uid="uid://faww3t8do782" path="res://script/ui/combat/weapon/statistics/UIW_PlayerStat.cs" id="1_ishwc"]
+[ext_resource type="PackedScene" uid="uid://dh7dl3a1cqot4" path="res://prefabs/ui/ui_weaponstat.tscn" id="2_m345k"]
+
+[node name="UIW_PlayerStat" type="BoxContainer" node_paths=PackedStringArray("_weaponStatTemplate")]
+mouse_filter = 2
+script = ExtResource("1_ishwc")
+_weaponStatTemplate = NodePath("UIW_WeaponStat")
+metadata/_custom_type_script = "uid://faww3t8do782"
+
+[node name="UIW_WeaponStat" parent="." instance=ExtResource("2_m345k")]
+layout_mode = 2

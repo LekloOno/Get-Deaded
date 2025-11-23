@@ -1,10 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bhafdiql2jopi"]
+[gd_scene load_steps=3 format=3 uid="uid://bhafdiql2jopi"]
 
 [ext_resource type="Script" uid="uid://bv13oqdudxna5" path="res://script/ui/combat/weapon/statistics/UIW_CombatStats.cs" id="1_yhqg0"]
-[ext_resource type="Script" uid="uid://faww3t8do782" path="res://script/ui/combat/weapon/statistics/UIW_PlayerStat.cs" id="2_56aib"]
-[ext_resource type="Script" uid="uid://douqxivdi6sqp" path="res://script/ui/combat/weapon/statistics/UIW_WeaponStat.cs" id="3_e0rfh"]
-[ext_resource type="Script" uid="uid://dbhqsqe7b31sv" path="res://script/ui/combat/weapon/statistics/UIW_FireStat.cs" id="4_sweeg"]
-[ext_resource type="Texture2D" uid="uid://cll1rrqagufi2" path="res://assets/sprites/weapons/brrtpixel2.png" id="5_j3dpr"]
+[ext_resource type="PackedScene" uid="uid://di6ks47ucoai4" path="res://prefabs/ui/ui_playerstat.tscn" id="2_rin8f"]
 
 [node name="UIW_CombatStats" type="BoxContainer" node_paths=PackedStringArray("_uiPlayerStatTemplate")]
 anchors_preset = 15
@@ -18,43 +15,5 @@ script = ExtResource("1_yhqg0")
 _uiPlayerStatTemplate = NodePath("UIW_PlayerStat")
 metadata/_custom_type_script = "uid://bv13oqdudxna5"
 
-[node name="UIW_PlayerStat" type="BoxContainer" parent="." node_paths=PackedStringArray("_weaponStatTemplate")]
+[node name="UIW_PlayerStat" parent="." instance=ExtResource("2_rin8f")]
 layout_mode = 2
-mouse_filter = 2
-script = ExtResource("2_56aib")
-_weaponStatTemplate = NodePath("UIW_WeaponStat")
-metadata/_custom_type_script = "uid://faww3t8do782"
-
-[node name="UIW_WeaponStat" type="BoxContainer" parent="UIW_PlayerStat" node_paths=PackedStringArray("_fireStatTemplate")]
-layout_mode = 2
-mouse_filter = 2
-script = ExtResource("3_e0rfh")
-_fireStatTemplate = NodePath("UIW_FireStat")
-metadata/_custom_type_script = "uid://douqxivdi6sqp"
-
-[node name="UIW_FireStat" type="BoxContainer" parent="UIW_PlayerStat/UIW_WeaponStat" node_paths=PackedStringArray("_icon", "_accuracy")]
-layout_mode = 2
-mouse_filter = 2
-script = ExtResource("4_sweeg")
-_icon = NodePath("AspectRatioContainer2/unactive_icon")
-_accuracy = NodePath("Accuracy")
-metadata/_custom_type_script = "uid://dbhqsqe7b31sv"
-
-[node name="AspectRatioContainer2" type="AspectRatioContainer" parent="UIW_PlayerStat/UIW_WeaponStat/UIW_FireStat"]
-custom_minimum_size = Vector2(72, 72)
-layout_mode = 2
-mouse_filter = 2
-ratio = 2.0
-alignment_horizontal = 2
-
-[node name="unactive_icon" type="TextureRect" parent="UIW_PlayerStat/UIW_WeaponStat/UIW_FireStat/AspectRatioContainer2"]
-texture_filter = 1
-texture_repeat = 1
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("5_j3dpr")
-expand_mode = 1
-
-[node name="Accuracy" type="Label" parent="UIW_PlayerStat/UIW_WeaponStat/UIW_FireStat"]
-layout_mode = 2
-text = "100 %"

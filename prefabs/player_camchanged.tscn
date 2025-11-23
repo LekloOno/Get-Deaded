@@ -1,4 +1,4 @@
-[gd_scene load_steps=130 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=133 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://script/player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://assets/script/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -95,14 +95,17 @@
 [ext_resource type="Script" uid="uid://cq31c653np61x" path="res://script/player/movement/actions/surface-control/PM_AirState.cs" id="72_0vaqj"]
 [ext_resource type="Script" uid="uid://77x30sxsp5c" path="res://script/player/input/actions/combat/PI_Reload.cs" id="75_vj6q7"]
 [ext_resource type="PackedScene" uid="uid://d06ge8pykx8s1" path="res://prefabs/hitmarker.tscn" id="77_fdvd6"]
+[ext_resource type="Script" uid="uid://bkkj6g5jwcpqc" path="res://script/player/input/actions/ui/PI_Stats.cs" id="77_w8edb"]
 [ext_resource type="Script" uid="uid://b4hdeuwma0ma8" path="res://script/player/combat/weapons/PW_WeaponsHandler.cs" id="81_stdu8"]
 [ext_resource type="Script" uid="uid://c7tdbt357bj80" path="res://script/ui/combat/weapon/hit/number/UI_DamageIndicatorManager.cs" id="82_5dw8r"]
 [ext_resource type="PackedScene" uid="uid://bj3ck4u2xa8hu" path="res://prefabs/damage_indicator.tscn" id="83_ewcnl"]
 [ext_resource type="PackedScene" uid="uid://dcmylvqsy66rj" path="res://assets/script/combat/weapons/weapons/pw_simple_weapon.tscn" id="88_cqits"]
 [ext_resource type="PackedScene" uid="uid://bhxt3qoevxipp" path="res://assets/script/combat/weapons/weapons/pw_melee_weapon.tscn" id="89_nkqrs"]
 [ext_resource type="Script" uid="uid://dkysuj8gsdwv4" path="res://script/player/connectors/CNT_SprintWeapon.cs" id="91_cqits"]
+[ext_resource type="Script" uid="uid://pt5tc0gqn0vd" path="res://script/statistics/combat/STAT_Combat.cs" id="94_0vaqj"]
 [ext_resource type="Script" uid="uid://b2flfi73k8d71" path="res://script/ui/viewport/UI_SpatialViewport.cs" id="96_w8edb"]
 [ext_resource type="Script" uid="uid://cjkogi1w2j3wf" path="res://script/ui/viewport/UI_SpatialVPCamera.cs" id="97_0vaqj"]
+[ext_resource type="PackedScene" uid="uid://bhafdiql2jopi" path="res://prefabs/ui/ui_weapons_stats.tscn" id="106_vdq31"]
 
 [sub_resource type="Curve" id="Curve_ux8de"]
 _limits = [-0.5, 1.0, 0.0, 1.0]
@@ -821,7 +824,7 @@ _curveSampler = SubResource("Resource_hbsv2")
 _shakeableCamera = NodePath("../../../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable")
 metadata/_custom_type_script = "uid://3a0e4x3r12vl"
 
-[node name="PIM_Arena" type="Node" parent="." node_paths=PackedStringArray("_controller", "_walkInput", "_sprintInput", "_jumpInput", "_crouchDispatcherInput", "_weaponsInput", "_reviveInput")]
+[node name="PIM_Arena" type="Node" parent="." node_paths=PackedStringArray("_controller", "_walkInput", "_sprintInput", "_jumpInput", "_crouchDispatcherInput", "_weaponsInput", "_reviveInput", "_statsInput")]
 script = ExtResource("49_stdu8")
 _controller = NodePath("..")
 _walkInput = NodePath("PI_Walk")
@@ -830,6 +833,7 @@ _jumpInput = NodePath("PI_Jump")
 _crouchDispatcherInput = NodePath("PI_CrouchDispatcher")
 _weaponsInput = NodePath("PI_Weapons")
 _reviveInput = NodePath("PI_Revive")
+_statsInput = NodePath("PI_Stats")
 metadata/_custom_type_script = "uid://bwxjledgrnbsb"
 
 [node name="PI_Walk" type="Node" parent="PIM_Arena" node_paths=PackedStringArray("_flatDirNode")]
@@ -881,6 +885,10 @@ metadata/_custom_type_script = "uid://77x30sxsp5c"
 [node name="PI_Revive" type="Node" parent="PIM_Arena"]
 script = ExtResource("58_ufgmq")
 metadata/_custom_type_script = "uid://fevuhhr2vg16"
+
+[node name="PI_Stats" type="Node" parent="PIM_Arena"]
+script = ExtResource("77_w8edb")
+metadata/_custom_type_script = "uid://bkkj6g5jwcpqc"
 
 [node name="State" type="Node" parent="."]
 
@@ -1027,6 +1035,11 @@ _sprintInput = NodePath("../../PIM_Arena/PI_Sprint")
 _weaponsHandler = NodePath("../../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable/PW_WeaponsHandler")
 metadata/_custom_type_script = "uid://dkysuj8gsdwv4"
 
+[node name="STAT_Combat" type="Node" parent="." node_paths=PackedStringArray("_weaponsHandler")]
+script = ExtResource("94_0vaqj")
+_weaponsHandler = NodePath("../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable/PW_WeaponsHandler")
+metadata/_custom_type_script = "uid://pt5tc0gqn0vd"
+
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
@@ -1140,3 +1153,7 @@ metadata/_custom_type_script = "uid://c7tdbt357bj80"
 [node name="Timer" type="Timer" parent="CanvasLayer/UI_DamageIndicatorManager"]
 wait_time = 0.3
 one_shot = true
+
+[node name="UIW_CombatStats" parent="CanvasLayer" node_paths=PackedStringArray("_playersStats", "_statsInput") instance=ExtResource("106_vdq31")]
+_playersStats = [NodePath("../../STAT_Combat")]
+_statsInput = NodePath("../../PIM_Arena/PI_Stats")

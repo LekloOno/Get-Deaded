@@ -1,6 +1,9 @@
 using Godot;
 
-public struct EmptyInput { }
+public struct EmptyInput { 
+    public static EmptyInput NONE = new();
+}
+
 public delegate void ActionInputEvent<T>(object sender, T args);
 
 public abstract partial class PI_ActionHandler<T> : Node, PI_InputAction

@@ -5,7 +5,7 @@ using Godot;
 public partial class UIW_WeaponStat : UIW_Stats
 {
     [Export] private UIW_FireStat _fireStatTemplate;
-    private List<UIW_FireStat> _firesStat;
+    private List<UIW_FireStat> _firesStat = [];
 
     public void Initialize(STAT_Weapon weapon)
     {
@@ -22,6 +22,7 @@ public partial class UIW_WeaponStat : UIW_Stats
             UIW_FireStat stat = (UIW_FireStat) _fireStatTemplate.Duplicate();
             stat.Initialize(fire);
             _firesStat.Add(stat);
+            AddChild(stat);
         }
     }
 }

@@ -10,14 +10,17 @@ public partial class PIM_Arena : Node
     [Export] private PI_CrouchDispatcher _crouchDispatcherInput;
     [Export] private PI_Weapons _weaponsInput;
     [Export] private PI_Revive _reviveInput;
+    [Export] private PI_Stats _statsInput;
 
     private PI_Map _alive;
     private PI_Map _dead;
     
     public override void _Ready()
     {
-        _alive = [_walkInput, _sprintInput, _jumpInput, _crouchDispatcherInput, _weaponsInput ];
+        _alive = [_walkInput, _sprintInput, _jumpInput, _crouchDispatcherInput, _weaponsInput];
         _dead = [_reviveInput];
+        _statsInput.EnableAction();
+        
         Alive();
 
         _controller.OnDie += (o, e) => Dead();

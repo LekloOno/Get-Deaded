@@ -34,7 +34,7 @@ public class STAT_Weapon
     public STAT_Weapon(PW_Weapon weapon)
     {
         Fires = weapon.GetFireModes()
-            .Select(fire => new STAT_Fire(fire, weapon.Icon))
+            .Select(fire => new STAT_Fire(fire, weapon.Icon, weapon.IconColor))
             .ToArray();
 
         LocalHits = new LocalHitsMerger(Fires);

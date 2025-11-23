@@ -1,5 +1,4 @@
 using System;
-using System.Reflection.Metadata;
 using Godot;
 
 [GlobalClass]
@@ -15,7 +14,7 @@ public partial class PI_Sprint : PI_HoldableHandler<EmptyInput>
     public EventHandler OnStopSprinting;
 
     protected override ACTIONS_Action Action => ACTIONS_Movement.SPRINT;
-    protected override EmptyInput GetInputValue(InputEvent @event) => new();
+    protected override EmptyInput GetInputValue(InputEvent @event) => EmptyInput.NONE;
 
     protected override void HandlerReady()
     {

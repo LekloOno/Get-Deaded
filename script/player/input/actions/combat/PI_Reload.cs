@@ -11,5 +11,5 @@ public partial class PI_Reload : PI_BufferedHandler<EmptyInput>
 
     protected override void DisableBufferAction() => SetProcessUnhandledKeyInput(false);
 
-    protected override EmptyInput GetInputValue(InputEvent @event) => new();
+    protected override EmptyInput GetInputValue(InputEvent @event) => EmptyInput.NONE;
 }

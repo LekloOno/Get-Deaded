@@ -5,7 +5,7 @@ using Godot;
 public partial class UIW_PlayerStat : UIW_Stats
 {
     [Export] private UIW_WeaponStat _weaponStatTemplate;
-    private List<UIW_WeaponStat> _weaponsStats;
+    private List<UIW_WeaponStat> _weaponsStats = [];
     private STAT_Combat _combatStats;
 
     public void Initialize(STAT_Combat combat)
@@ -25,6 +25,7 @@ public partial class UIW_PlayerStat : UIW_Stats
             UIW_WeaponStat stat = (UIW_WeaponStat) _weaponStatTemplate.Duplicate();
             stat.Initialize(weapon);
             _weaponsStats.Add(stat);
+            AddChild(stat);
         }
     }
 }
