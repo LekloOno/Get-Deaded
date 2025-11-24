@@ -1017,8 +1017,9 @@ _controller = NodePath("../../../..")
 _groundState = NodePath("../../../../State/PS_Grounded")
 _bodyScalor = NodePath("../../../../Body")
 
-[node name="PM_Dash" type="Node" parent="Movement/Actions/Crouch" node_paths=PackedStringArray("_dashInput", "_walkInput", "_cameraControl", "_controller", "_groundState", "_ledgeClimb", "_wallJump")]
+[node name="PM_Dash" type="Node" parent="Movement/Actions/Crouch" node_paths=PackedStringArray("_crouchDispatcher", "_dashInput", "_walkInput", "_cameraControl", "_controller", "_groundState", "_ledgeClimb", "_wallJump")]
 script = ExtResource("31_5px2t")
+_crouchDispatcher = NodePath("../../../../PIM_Arena/PI_CrouchDispatcher")
 _dashInput = NodePath("../../../../PIM_Arena/PI_CrouchDispatcher/PI_Dash")
 _walkInput = NodePath("../../../../PIM_Arena/PI_Walk")
 _cameraControl = NodePath("../../../../Camera Pivot/PC_Anchor/Camera Control")
@@ -1030,6 +1031,7 @@ _strength = 30.0
 _dashDuration = 0.1
 _minDashRatio = 0.5
 _cooldown = 3.0
+_slamWindow = 50.0
 
 [node name="Connectors" type="Node" parent="."]
 

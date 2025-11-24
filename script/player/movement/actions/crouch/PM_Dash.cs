@@ -4,6 +4,7 @@ using Godot;
 [GlobalClass]
 public partial class PM_Dash : PM_Action
 {
+    [Export] private PI_CrouchDispatcher _crouchDispatcher;
     [Export] private PI_Dash _dashInput;
     [Export] private PI_Walk _walkInput;
     [Export] private PC_Control _cameraControl;
@@ -17,6 +18,7 @@ public partial class PM_Dash : PM_Action
     [Export(PropertyHint.Range, "0.0, 1.0")] private float _minDashRatio;
     // The velocity coefficient when dashing upward. The more upward you dash, the less speed you will keep.
     [Export(PropertyHint.Range, "0.0, 10.0")] private float _cooldown;       // Only triggered when reseting from the same surface twice in a row (ground/wall)
+    [Export] private float _slamWindow;
 
     public EventHandler<float> OnTryReset;
     public EventHandler OnUnavailable;
@@ -42,12 +44,8 @@ public partial class PM_Dash : PM_Action
 
     public void StartDash(object sender, EventArgs e)
     {
-        
-
         if (_groundState.IsGrounded() || _ledgeClimb.IsClimbing)
-        {
             return;
-        }
 
         if (!_available)
         {
@@ -55,7 +53,9 @@ public partial class PM_Dash : PM_Action
             return;
         }
         
-        if (_walkInput.WalkAxis != Vector2.Zero)
+        if (Time.GetTicksMsec() - _crouchDispatcher.LastCrouchDown <= _slamWindow)
+            _direction = Vector3.Down;
+        else if (_walkInput.WalkAxis != Vector2.Zero)
             _direction = _walkInput.WishDir;
         else
             _direction = -_cameraControl.GlobalBasis.Z;
