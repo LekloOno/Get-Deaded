@@ -24,7 +24,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
     [Export] private Array<PW_Weapon> _weapons;
     public Array<PW_Weapon> Weapons => _weapons;
 
-    [Export] private PW_Weapon _melee;
+    [Export] public PW_Weapon Melee {get; private set;}
     [Export] private PM_SurfaceControl _surfaceControl;
     [Export] private float _meleeRecover;
     public EventHandler<ShotHitEventArgs> Hit;
@@ -81,11 +81,11 @@ public partial class PW_WeaponsHandler : WeaponSystem
             weapon.ADSStopped += () => ADSStopped?.Invoke();
         }
 
-        _melee.Initialize(_shakeableCamera, _camera, _surfaceControl, _recoilController, _ownerBody);
-        _melee.Hit += (o, e) => Hit?.Invoke(o, e);
+        Melee.Initialize(_shakeableCamera, _camera, _surfaceControl, _recoilController, _ownerBody);
+        Melee.Hit += (o, e) => Hit?.Invoke(o, e);
 
-        _activeWeapon = _melee;
-        _targetWeapon = _melee;
+        _activeWeapon = Melee;
+        _targetWeapon = Melee;
         _surfaceControl.SpeedModifiers.Add(_activeWeapon.MoveSpeedModifier);
 
         _weaponsInput.OnStartPrimary += HandleStartPrimary;
@@ -98,22 +98,22 @@ public partial class PW_WeaponsHandler : WeaponSystem
         _weaponsInput.OnStartMelee += DirectMeleeStart;
         _weaponsInput.OnStopMelee += DirectMeleeStop;
 
-        _melee.Shot += OnMeleeShot;
+        Melee.Shot += OnMeleeShot;
 
         SwitchEnded += (o, e) => Available?.Invoke();
         ReloadReady += () => Available?.Invoke();
 
         int nextIndex = (_weaponIndex + 1) % _weapons.Count;
-        GotInitialized?.Invoke(_melee, _weapons[_weaponIndex], nextIndex, _weapons);
+        GotInitialized?.Invoke(Melee, _weapons[_weaponIndex], nextIndex, _weapons);
         Initialized = true;
     }
 
-    private void DirectMeleeStop(object sender, EventArgs e) => _melee.PrimaryRelease();
-    private void DirectMeleeStart(object sender, EventArgs e) => _melee.PrimaryPress();
+    private void DirectMeleeStop(object sender, EventArgs e) => Melee.PrimaryRelease();
+    private void DirectMeleeStart(object sender, EventArgs e) => Melee.PrimaryPress();
 
     private void OnMeleeShot()
     {
-        if (_activeWeapon == _melee)
+        if (_activeWeapon == Melee)
             return;
         
         CancelReload();
@@ -140,7 +140,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
     public void InitData(out PW_Weapon active, out PW_Weapon nextHolster, out int nextIndex, out Array<PW_Weapon> weapons)
     {
         active = _activeWeapon;
-        nextHolster = _activeWeapon == _melee ? _weapons[_weaponIndex] : _melee;
+        nextHolster = _activeWeapon == Melee ? _weapons[_weaponIndex] : Melee;
         nextIndex = (_weaponIndex + 1) % _weapons.Count;
         weapons = _weapons;
     }
@@ -175,7 +175,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
 
     private void HandleStartPrimary(object sender, EventArgs e)
     {
-        _melee.ResetBuffer();
+        Melee.ResetBuffer();
         if (ActiveWeaponHalted())
         {
             BufferPrimary();
@@ -241,17 +241,17 @@ public partial class PW_WeaponsHandler : WeaponSystem
         _weaponIndex = (_weaponIndex + 1) % _weapons.Count;
         _targetWeapon = _weapons[_weaponIndex];
 
-        SwitchStarted?.Invoke(_targetWeapon, _melee, (_weaponIndex + 1) % _weapons.Count, _weapons);
+        SwitchStarted?.Invoke(_targetWeapon, Melee, (_weaponIndex + 1) % _weapons.Count, _weapons);
         StartSwitch();
     }
 
     public void Holster(object sender, EventArgs e)
     {
         PW_Weapon targetPrev = _targetWeapon;
-        if (_targetWeapon == _melee)
+        if (_targetWeapon == Melee)
             _targetWeapon = _weapons[_weaponIndex];
         else
-            _targetWeapon = _melee;
+            _targetWeapon = Melee;
 
         SwitchStarted?.Invoke(_targetWeapon, targetPrev, (_weaponIndex + 1) % _weapons.Count, _weapons);
         StartSwitch();

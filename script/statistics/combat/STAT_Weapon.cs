@@ -2,6 +2,7 @@ using System.Linq;
 
 public class STAT_Weapon
 {
+    /*
     public class LocalHitsMerger
     {
         private STAT_Fire[] _fires;
@@ -23,20 +24,39 @@ public class STAT_Weapon
                 .ToArray();
         }
     }
+    */
     public STAT_Fire[] Fires {get; private set;}
 
-    public int Shots => Fires.Sum(fire => fire.Shots);
-    public int Hits => Fires.Sum(fire => fire.Hits);
-    public float Damage => Fires.Sum(fire => fire.Damage);
-    public int Kills => Fires.Sum(fire => fire.Kills);
-    public LocalHitsMerger LocalHits {get;}
+    public Observable<int> Shots {get; private set;} = new(0);
+    public Observable<int> Hits {get; private set;} = new (0);
+    public Observable<float> Damage {get; private set;} = new (0f);
+    public Observable<int> Kills {get; private set;} = new (0);
+    //public LocalHitsMerger LocalHits {get;}
+    public Observable<int[]> LocalHits {get; private set;} = new(new int[System.Enum.GetValues<GC_BodyPart>().Length]);
+
+    private void UpdateShots(int value) {Shots.Value = Fires.Sum(fire => fire.Shots);}
+    private void UpdateHits(int value) {Hits.Value = Fires.Sum(fire => fire.Hits);}
+    private void UpdateDamage(float value) {Damage.Value = Fires.Sum(fire => fire.Damage);}
+    private void UpdateKills(int value) {Kills.Value = Fires.Sum(fire => fire.Kills);}
+    private void UpdateLocalHits(int[] value)
+    {
+        LocalHits.Value = Enumerable.Range(0, System.Enum.GetValues<GC_BodyPart>().Length)
+                .Select(i => Fires.Sum(fire => fire.LocalHits.Value[i]))
+                .ToArray(); 
+    }
 
     public STAT_Weapon(PW_Weapon weapon)
     {
         Fires = weapon.GetFireModes()
-            .Select(fire => new STAT_Fire(fire, weapon.Icon, weapon.IconColor))
+            .Select(fire => {
+                STAT_Fire stat = new(fire, weapon.Icon, weapon.IconColor);
+                stat.Shots.Subscribe(UpdateShots);
+                stat.Hits.Subscribe(UpdateHits);
+                stat.Damage.Subscribe(UpdateDamage);
+                stat.Kills.Subscribe(UpdateKills);
+                stat.LocalHits.Subscribe(UpdateLocalHits);
+                return stat;
+            })
             .ToArray();
-
-        LocalHits = new LocalHitsMerger(Fires);
     }
 }

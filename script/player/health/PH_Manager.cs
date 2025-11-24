@@ -10,13 +10,14 @@ public partial class PH_Manager : GC_HealthManager
 
     private EventHandler<double> OnProcess;
 
-    public override bool Damage(GC_IHitDealer hitDealer, float expectedDamage, out float takenDamage)
+    public override bool Damage(GC_IHitDealer hitDealer, float expectedDamage, out float takenDamage, out float overflow)
     {
         if (!_shield.IsParrying())
-            return base.Damage(hitDealer, expectedDamage, out takenDamage);
+            return base.Damage(hitDealer, expectedDamage, out takenDamage, out overflow);
         
         hitDealer.Shoot();
         takenDamage = 0;
+        overflow = 0;
         return false;
     }
 

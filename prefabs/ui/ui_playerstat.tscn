@@ -3,11 +3,26 @@
 [ext_resource type="Script" uid="uid://faww3t8do782" path="res://script/ui/combat/weapon/statistics/UIW_PlayerStat.cs" id="1_ishwc"]
 [ext_resource type="PackedScene" uid="uid://dh7dl3a1cqot4" path="res://prefabs/ui/ui_weaponstat.tscn" id="2_m345k"]
 
-[node name="UIW_PlayerStat" type="BoxContainer" node_paths=PackedStringArray("_weaponStatTemplate")]
+[node name="UIW_PlayerStat" type="BoxContainer" node_paths=PackedStringArray("_weaponStatTemplate", "_damageLabel", "_killsLabel", "_deathsLabel")]
 mouse_filter = 2
 script = ExtResource("1_ishwc")
 _weaponStatTemplate = NodePath("UIW_WeaponStat")
+_damageLabel = NodePath("Damages")
+_killsLabel = NodePath("Kills")
+_deathsLabel = NodePath("Damages")
 metadata/_custom_type_script = "uid://faww3t8do782"
+
+[node name="Kills" type="Label" parent="."]
+layout_mode = 2
+text = "0"
+
+[node name="Deaths" type="Label" parent="."]
+layout_mode = 2
+text = "0"
+
+[node name="Damages" type="Label" parent="."]
+layout_mode = 2
+text = "0"
 
 [node name="UIW_WeaponStat" parent="." instance=ExtResource("2_m345k")]
 layout_mode = 2

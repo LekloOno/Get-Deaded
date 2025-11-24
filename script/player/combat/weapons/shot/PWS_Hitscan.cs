@@ -28,8 +28,8 @@ public partial class PWS_Hitscan : PW_Shot, GC_IHitDealer
             if (collider is GC_HurtBox hurtBox)
             {
                 hurtBox.HandleKnockBack(_knockBack * castDirection.Normalized());
-                bool killed = hurtBox.Damage(this, out float takenDamage);
-                DoHit(new(hurtBox.HealthManager, hurtBox.HealthManager.GetExposedLayer(), hurtBox, takenDamage, killed), hit, castOrigin);
+                bool killed = hurtBox.Damage(this, out float takenDamage, out float overflow);
+                DoHit(new(hurtBox.HealthManager, hurtBox.HealthManager.GetExposedLayer(), hurtBox, takenDamage, killed, overflow), hit, castOrigin);
             }
             else
             {

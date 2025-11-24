@@ -331,7 +331,7 @@ _baseLayer = SubResource("Resource_ahe41")
 _maxRotation = Vector3(15, 15, 8)
 metadata/_custom_type_script = "uid://buwnj0x0u8flu"
 
-[node name="PW_WeaponsHandler" type="Node3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable" node_paths=PackedStringArray("_camera", "_shakeableCamera", "_recoilController", "_ownerBody", "_weaponsInput", "_weapons", "_melee", "_surfaceControl")]
+[node name="PW_WeaponsHandler" type="Node3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable" node_paths=PackedStringArray("_camera", "_shakeableCamera", "_recoilController", "_ownerBody", "_weaponsInput", "_weapons", "Melee", "_surfaceControl")]
 script = ExtResource("81_stdu8")
 _camera = NodePath("../Camera3D")
 _shakeableCamera = NodePath("..")
@@ -339,7 +339,7 @@ _recoilController = NodePath("../../../../../../../..")
 _ownerBody = NodePath("../../../../../../../../../../../../GB_PlayerBodyManager")
 _weaponsInput = NodePath("../../../../../../../../../../../../PIM_Arena/PI_Weapons")
 _weapons = [NodePath("PW_Revolver"), NodePath("PW_Simple")]
-_melee = NodePath("PW_BasicMelee")
+Melee = NodePath("PW_BasicMelee")
 _surfaceControl = NodePath("../../../../../../../../../../../../Movement/PM_SurfaceControl")
 _meleeRecover = 0.7
 metadata/_custom_type_script = "uid://b4hdeuwma0ma8"
@@ -1035,9 +1035,10 @@ _sprintInput = NodePath("../../PIM_Arena/PI_Sprint")
 _weaponsHandler = NodePath("../../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable/PW_WeaponsHandler")
 metadata/_custom_type_script = "uid://dkysuj8gsdwv4"
 
-[node name="STAT_Combat" type="Node" parent="." node_paths=PackedStringArray("_weaponsHandler")]
+[node name="STAT_Combat" type="Node" parent="." node_paths=PackedStringArray("_weaponsHandler", "_healthManager")]
 script = ExtResource("94_0vaqj")
 _weaponsHandler = NodePath("../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable/PW_WeaponsHandler")
+_healthManager = NodePath("../Body/PH_Manager")
 metadata/_custom_type_script = "uid://pt5tc0gqn0vd"
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]

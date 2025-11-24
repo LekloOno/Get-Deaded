@@ -17,7 +17,7 @@ public partial class GC_HurtBox : Area3D
         if (!_useSpecialModifier) _modifier = CONF_BodyModifiers.GetDefaultModifier(BodyPart);
     }
 
-    public bool Damage(GC_IHitDealer hitDealer, out float takenDamage) => HealthManager.Damage(hitDealer, hitDealer.HitData.GetDamage(BodyPart) * _modifier, out takenDamage);
+    public bool Damage(GC_IHitDealer hitDealer, out float takenDamage, out float overflow) => HealthManager.Damage(hitDealer, hitDealer.HitData.GetDamage(BodyPart) * _modifier, out takenDamage, out overflow);
     public float Heal(float heal) => HealthManager.Heal(heal);
     public bool TriggerDamageParticles(Vector3 hitPosition, Vector3 from)
     {
