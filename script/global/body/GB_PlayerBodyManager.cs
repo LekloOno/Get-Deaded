@@ -8,4 +8,6 @@ public partial class GB_PlayerBodyManager : GB_ExternalBodyManager
     {
         _body.AdditionalForces.AddImpulse(force);
     }
+
+    public override Vector3 Velocity() => _body.RealVelocity;
 }

@@ -14,7 +14,7 @@ using Godot.Collections;
 public abstract partial class PW_Fire : WeaponComponent
 {
     private const double BUFFER_MARGIN = 0.008;
-    [Export] private Array<PW_Shot> _shots;
+    [Export] protected Array<PW_Shot> _shots;
     [Export] protected ulong _fireRate;
     [Export] protected PW_Recoil _recoil;
     [Export] protected PW_Ammunition _ammos;
@@ -49,6 +49,8 @@ public abstract partial class PW_Fire : WeaponComponent
         _ammos.Initialize();
 
         _recoil?.Initialize(recoilController);
+        SpecInitialize(shakeableCamera, recoilController, ownerBody);
+
         foreach (PW_Shot shot in _shots)
         {
             shot.Initialize(ownerBody);
@@ -200,6 +202,7 @@ public abstract partial class PW_Fire : WeaponComponent
     /// </summary>
     /// <returns>true if it was able to handle the input expectedly, false otherwise</returns>
     protected abstract bool SpecRelease();
+    protected abstract void SpecInitialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManager ownerBody);
     /// <summary>
     /// Handle the weapon disabling. Example - A weapons which shoots continuously should stop shooting on disable, even if no up input has been sent.
     /// </summary>

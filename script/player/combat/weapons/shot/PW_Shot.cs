@@ -28,6 +28,10 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
 
     public EventHandler<ShotHitEventArgs> Hit;
     public MATH_AdditiveModifiers SpreadMultiplier {get; private set;} = new();
+    public float Spread => _spread * SpreadMultiplier.Result();
+    public MATH_AdditiveModifiers KnockBackMultiplier {get; private set;} = new();
+    public float KnockBack => _knockBack * KnockBackMultiplier.Result();
+    public MATH_AdditiveModifiers DamageMultipler => _hitData.DamageMultiplier;
     public GC_Hit HitData => _hitData;
     public Vector3 Direction => -GlobalBasis.Z; 
     private static Random _random = new();
@@ -44,7 +48,7 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
     public void Shoot()
     {
         Vector3 direction = Direction;
-        float spread = Mathf.Max(_spread * SpreadMultiplier.Result(), 0f);
+        float spread = Mathf.Max(Spread, 0f);
         if (spread != 0)
         {
             Vector3 perp = GlobalBasis.X;

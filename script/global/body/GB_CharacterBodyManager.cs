@@ -8,4 +8,6 @@ public partial class GB_CharacterBodyManager : GB_ExternalBodyManager
     {
         _body.Velocity += force;
     }
+
+    public override Vector3 Velocity() => _body.Velocity;
 }

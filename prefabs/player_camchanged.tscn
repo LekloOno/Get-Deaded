@@ -1,4 +1,4 @@
-[gd_scene load_steps=133 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=134 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://script/player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://assets/script/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -37,6 +37,7 @@
 [ext_resource type="AudioStream" uid="uid://cv7hf0tm8n6mw" path="res://assets/sounds/clothes/clothes_5.wav" id="16_71snu"]
 [ext_resource type="Script" uid="uid://d27dbwl0y8qkt" path="res://script/player/input/actions/movement/crouch/PI_Dash.cs" id="16_t2wfm"]
 [ext_resource type="AudioStream" uid="uid://dnjywl4vsbygw" path="res://assets/sounds/footsteps/concrete-step3.wav" id="16_ul8s5"]
+[ext_resource type="PackedScene" uid="uid://be54as36nebp4" path="res://assets/script/combat/weapons/weapons/pw_fists.tscn" id="17_0vaqj"]
 [ext_resource type="Script" uid="uid://b37yb21n7qltn" path="res://script/player/input/actions/movement/crouch/PI_Slide.cs" id="17_d5kvj"]
 [ext_resource type="AudioStream" uid="uid://byvkie35nxxfe" path="res://assets/sounds/clothes/clothes_6.wav" id="17_yke2y"]
 [ext_resource type="Script" uid="uid://pcc1itcc2dlb" path="res://script/ui/combat/health/UI_PlayerHealth.cs" id="18_0agck"]
@@ -339,10 +340,12 @@ _recoilController = NodePath("../../../../../../../..")
 _ownerBody = NodePath("../../../../../../../../../../../../GB_PlayerBodyManager")
 _weaponsInput = NodePath("../../../../../../../../../../../../PIM_Arena/PI_Weapons")
 _weapons = [NodePath("PW_Revolver"), NodePath("PW_Simple")]
-Melee = NodePath("PW_BasicMelee")
+Melee = NodePath("PW_BasicMelee2")
 _surfaceControl = NodePath("../../../../../../../../../../../../Movement/PM_SurfaceControl")
 _meleeRecover = 0.7
 metadata/_custom_type_script = "uid://b4hdeuwma0ma8"
+
+[node name="PW_BasicMelee2" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable/PW_WeaponsHandler" instance=ExtResource("17_0vaqj")]
 
 [node name="PW_Revolver" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable/PW_WeaponsHandler" instance=ExtResource("24_jbksd")]
 
@@ -534,6 +537,7 @@ _bodyHitBox = NodePath("BodyBox/CollisionShape3D")
 
 [node name="GL_Vacuum" type="Area3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0451076, 0)
+collision_layer = 0
 script = ExtResource("18_wow6d")
 _vacuumCurve = SubResource("Curve_wow6d")
 _vacuumStrength = 20.0

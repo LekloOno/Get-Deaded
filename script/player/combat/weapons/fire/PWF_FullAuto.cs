@@ -6,6 +6,9 @@ public partial class PWF_FullAuto : PW_Fire
     private SceneTreeTimer _timer;
     public override void Disable() => StopShoot();
 
+    protected override void SpecInitialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManager ownerBody){}
+
+
     protected override bool SpecPress()
     {
         StopShoot();

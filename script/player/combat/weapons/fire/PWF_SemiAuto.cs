@@ -13,4 +13,6 @@ public partial class PWF_SemiAuto : PW_Fire
     }
     protected override bool SpecRelease() => true;
     public override void Disable() {}
+
+    protected override void SpecInitialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManager ownerBody){}
 }
