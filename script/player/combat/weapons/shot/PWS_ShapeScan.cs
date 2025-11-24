@@ -33,7 +33,7 @@ public partial class PWS_ShapeScan : PW_Shot
 
                     _healthManagers.Add(hurtBox.HealthManager);
 
-                    hurtBox.HandleKnockBack(KnockBack * castDirection.Normalized());
+                    hurtBox.HandleKnockBack(KnockBackFrom(castDirection));
                     bool killed = hurtBox.Damage(this, out float takenDamage, out float overflow);
 
                     DoHit(

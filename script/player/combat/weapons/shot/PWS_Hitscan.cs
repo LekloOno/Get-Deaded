@@ -27,7 +27,7 @@ public partial class PWS_Hitscan : PW_Shot, GC_IHitDealer
             Node3D collider = result["collider"].AsGodotObject() as Node3D;
             if (collider is GC_HurtBox hurtBox)
             {
-                hurtBox.HandleKnockBack(_knockBack * castDirection.Normalized());
+                hurtBox.HandleKnockBack(KnockBackFrom(castDirection));
                 bool killed = hurtBox.Damage(this, out float takenDamage, out float overflow);
                 DoHit(new(hurtBox.HealthManager, hurtBox.HealthManager.GetExposedLayer(), hurtBox, takenDamage, killed, overflow), hit, castOrigin);
             }

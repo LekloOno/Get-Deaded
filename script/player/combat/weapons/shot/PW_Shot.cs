@@ -30,11 +30,14 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
     public MATH_AdditiveModifiers SpreadMultiplier {get; private set;} = new();
     public float Spread => _spread * SpreadMultiplier.Result();
     public MATH_AdditiveModifiers KnockBackMultiplier {get; private set;} = new();
+    public MATH_FlatVec3Modifiers KnockBackDirFlatAdd {get; private set;} = new();
     public float KnockBack => _knockBack * KnockBackMultiplier.Result();
     public MATH_AdditiveModifiers DamageMultipler => _hitData.DamageMultiplier;
     public GC_Hit HitData => _hitData;
     public Vector3 Direction => -GlobalBasis.Z; 
     private static Random _random = new();
+
+    protected Vector3 KnockBackFrom(Vector3 target) => KnockBack * target.Normalized() + KnockBackDirFlatAdd.Result();
 
     public void Initialize(GB_ExternalBodyManager ownerBody)
     {

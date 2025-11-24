@@ -5,7 +5,11 @@ public partial class PW_FistsFire : PW_Fire
 {
     [Export] private float _chargedKbMultiplier;
     [Export] private float _chargedDmgMultiplier;
+    [Export] private float _uppercutMaxKbMultiplier;
+    [Export] private float _uppercutMinSpeed;
+    [Export] private float _uppercutMaxSpeed;
     [Export] private float _speedKbMultiplier;
+    [Export] private float _baseVerticalSpeed;
     [Export] private float _maxSpeed;
     [Export] private ulong _chargeTime;
     private GB_ExternalBodyManager _ownerBody;
@@ -26,13 +30,32 @@ public partial class PW_FistsFire : PW_Fire
 
     protected override bool SpecRelease()
     {
-        float ratio = Mathf.Min((float) (Time.GetTicksMsec() - _chargeStartTime) / _chargeTime, 1);
+        float chargeRatio = Mathf.Min((float) (Time.GetTicksMsec() - _chargeStartTime) / _chargeTime, 1);
+        float damage = chargeRatio * _chargedDmgMultiplier;
+        float knockBack = chargeRatio * _chargedKbMultiplier;
 
-        float speed = (_ownerBody.Velocity() * new Vector3(1, 0, 1)).Length();
-        float velocityBoost = Mathf.Min(speed * 3.6f / _maxSpeed, 1) * _speedKbMultiplier;
-        
-        float knockBack = ratio*_chargedKbMultiplier + velocityBoost;
-        float damage = ratio*_chargedDmgMultiplier;
+
+
+        float verticalSpeed = _ownerBody.Velocity().Y;
+        float verticalSpeedKM = verticalSpeed * 3.6f;
+        bool uppercut = verticalSpeedKM > _uppercutMinSpeed;
+        Vector3 dirKnockBack = Vector3.Zero;
+        if (uppercut)
+        {
+            float uppercutRatio = (verticalSpeedKM - _uppercutMinSpeed) / (_uppercutMaxSpeed - _uppercutMinSpeed);
+            float multiplier = 1 + uppercutRatio * _uppercutMaxKbMultiplier;
+            dirKnockBack = new(0, multiplier*_baseVerticalSpeed*verticalSpeed, 0);
+
+            AddDirKnockback(dirKnockBack);
+        }
+        else
+        {
+            float flatSpeed = (_ownerBody.Velocity() * new Vector3(1, 0, 1)).Length();
+            float speedRatio = Mathf.Min(flatSpeed * 3.6f / _maxSpeed, 1);
+            float multiplier = speedRatio * _speedKbMultiplier;
+
+            knockBack += multiplier;
+        }
 
         AddModifiers(knockBack, damage);
 
@@ -41,6 +64,9 @@ public partial class PW_FistsFire : PW_Fire
             _recoil?.Start();
 
         RemoveModifiers(knockBack, damage);
+        if (uppercut)
+            RemoveDirKnockback(dirKnockBack);
+
         return didShoot;
     }
 
@@ -51,6 +77,18 @@ public partial class PW_FistsFire : PW_Fire
             shot.KnockBackMultiplier.Add(knockBack);
             shot.DamageMultipler.Add(damage);
         }
+    }
+
+    private void AddDirKnockback(Vector3 dirKnockback)
+    {
+        foreach (PW_Shot shot in _shots)
+            shot.KnockBackDirFlatAdd.Add(dirKnockback);
+    }
+
+    private void RemoveDirKnockback(Vector3 dirKnockback)
+    {
+        foreach (PW_Shot shot in _shots)
+            shot.KnockBackDirFlatAdd.Remove(dirKnockback);
     }
 
     private void RemoveModifiers(float knockBack, float damage)

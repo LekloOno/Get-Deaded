@@ -28,6 +28,7 @@ _inspectorModifiers = Array[Object]([SubResource("Resource_488s0")])
 metadata/_custom_type_script = "uid://cjmiash71uc7b"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_klj4u"]
+size = Vector3(0.8, 1, 0.9)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4osp6"]
 transparency = 1
@@ -73,7 +74,11 @@ metadata/_custom_type_script = "uid://c3are182lodyx"
 script = ExtResource("3_k4qra")
 _chargedKbMultiplier = 0.8
 _chargedDmgMultiplier = 0.8
-_speedKbMultiplier = 3.0
+_uppercutMaxKbMultiplier = 0.3
+_uppercutMinSpeed = 5.0
+_uppercutMaxSpeed = 20.0
+_speedKbMultiplier = 2.0
+_baseVerticalSpeed = 0.8
 _maxSpeed = 40.0
 _chargeTime = 1500
 _shots = [NodePath("PWS_ShapeScan")]
@@ -100,7 +105,7 @@ metadata/_custom_type_script = "uid://cn0p3uk7xbb3s"
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="PW_FistsFire/PWS_ShapeScan"]
 shape = SubResource("BoxShape3D_klj4u")
-target_position = Vector3(0, 0, -1.8)
+target_position = Vector3(0, 0, -1)
 
 [node name="PW_Trail" type="Node3D" parent="PW_FistsFire/PWS_ShapeScan"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.287, -0.225, -0.237)
