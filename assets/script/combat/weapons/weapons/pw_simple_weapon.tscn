@@ -108,10 +108,13 @@ script = ExtResource("14_b25vv")
 _fire = NodePath("../PWF_FullAuto")
 _holdFire = NodePath("PA_Looper")
 _tail = NodePath("Tail")
-_slideInLayers = [NodePath("PA_Sound")]
+_slideInLayers = [NodePath("AttackSound")]
 metadata/_custom_type_script = "uid://bdm4kpw6u4ocg"
 
-[node name="PA_Sound" type="AudioStreamPlayer3D" parent="PA_FullAuto"]
+[node name="AttackSound" type="AudioStreamPlayer3D" parent="PA_FullAuto"]
+attenuation_model = 3
+volume_db = 80.0
+max_db = 6.0
 script = ExtResource("15_ad73j")
 _stepSounds = Array[AudioStream]([ExtResource("16_mbjng")])
 _minPitch = 1.05
@@ -121,19 +124,20 @@ metadata/_custom_type_script = "uid://d3uwl2heay8uf"
 [node name="PA_Looper" type="AudioStreamPlayer2D" parent="PA_FullAuto"]
 stream = ExtResource("17_8vbpy")
 autoplay = true
+panning_strength = 0.0
 script = ExtResource("18_f28ci")
 _fadeInTime = 0.1
 _fadeOutTime = 0.1
-_volume = 20.0
+_volume = 12.0
 metadata/_custom_type_script = "uid://dxtqg0xnanovw"
 
 [node name="Tail" type="Node3D" parent="PA_FullAuto" node_paths=PackedStringArray("_slideInLayers")]
 script = ExtResource("19_8vbpy")
-_slideInLayers = [NodePath("PA_Sound")]
+_slideInLayers = [NodePath("TailSound")]
 metadata/_custom_type_script = "uid://ca4sbvyfspdlk"
 
-[node name="PA_Sound" type="AudioStreamPlayer3D" parent="PA_FullAuto/Tail"]
-volume_db = 80.0
+[node name="TailSound" type="AudioStreamPlayer3D" parent="PA_FullAuto/Tail"]
+attenuation_model = 3
 script = ExtResource("15_ad73j")
 _stepSounds = Array[AudioStream]([ExtResource("20_8vbpy")])
 _minPitch = 1.1

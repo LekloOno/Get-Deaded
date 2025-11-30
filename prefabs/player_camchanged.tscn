@@ -1,4 +1,4 @@
-[gd_scene load_steps=134 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=135 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://script/player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://assets/script/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -82,6 +82,7 @@
 [ext_resource type="AudioStream" uid="uid://d1ot41x8qebwj" path="res://assets/sounds/wind/wind.wav" id="44_vhlgj"]
 [ext_resource type="Script" uid="uid://dettpmrm6albd" path="res://script/player/health/PH_Manager.cs" id="46_eanik"]
 [ext_resource type="Script" uid="uid://dqcp38rr3u5gx" path="res://script/global/combat/health/GC_Health.cs" id="47_rvgf0"]
+[ext_resource type="Script" uid="uid://dxtqg0xnanovw" path="res://script/player/audio/PA_Looper.cs" id="47_vdq31"]
 [ext_resource type="Script" uid="uid://be02fh6y0vldv" path="res://script/global/combat/health/GC_Shield.cs" id="48_h1ove"]
 [ext_resource type="Script" uid="uid://bwxjledgrnbsb" path="res://script/player/input/maps/PIM_Arena.cs" id="49_stdu8"]
 [ext_resource type="Script" uid="uid://3a0e4x3r12vl" path="res://script/player/camera/annimation/trauma/causers/direct/PCT_Health.cs" id="58_r6ddn"]
@@ -638,9 +639,6 @@ process_callback = 0
 script = ExtResource("18_yrtf3")
 _slideIn = NodePath("Slide in")
 _slideHold = NodePath("Hold")
-_holdVolume = -5.0
-_holdFadeInTime = 0.5
-_holdFadeOutTime = 0.3
 _slide = NodePath("../../../Movement/Actions/Crouch/PM_Slide")
 _groundState = NodePath("../../../State/PS_Grounded")
 
@@ -662,6 +660,12 @@ _stepSounds = Array[AudioStream]([ExtResource("20_o38yh"), ExtResource("21_ux4x4
 [node name="Hold" type="AudioStreamPlayer2D" parent="Body/Sound/PA_Slide"]
 stream = ExtResource("26_o5goj")
 autoplay = true
+panning_strength = 0.0
+script = ExtResource("47_vdq31")
+_fadeInTime = 0.5
+_fadeOutTime = 0.3
+_volume = -5.0
+metadata/_custom_type_script = "uid://dxtqg0xnanovw"
 
 [node name="PA_Jump" type="Node3D" parent="Body/Sound" node_paths=PackedStringArray("_wooshes", "_clothes", "_steps", "_wallJumpClothes", "_wallJumpWoosh", "_wallClimbClothes", "_wallClimbLow", "_wallClimbNoise", "_jump", "_wallJump", "_wallClimb")]
 script = ExtResource("12_nveww")
