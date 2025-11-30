@@ -55,8 +55,7 @@ public partial class PM_WallClimb : PM_Action
             if(!_ledgeClimb.CanLedgeClimb())
                 return _jump.Jump(velocity);
                 
-            _ledgeClimb.DoLedgeClimb();
-            return velocity;
+            return _ledgeClimb.LazyLedgeClimb(velocity);
         }
 
         if (_isWallClimbing)
