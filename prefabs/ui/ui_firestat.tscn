@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bx1b1pole5qhj"]
+[gd_scene load_steps=4 format=3 uid="uid://bx1b1pole5qhj"]
 
 [ext_resource type="Script" uid="uid://dbhqsqe7b31sv" path="res://script/ui/combat/weapon/statistics/UIW_FireStat.cs" id="1_66bho"]
 [ext_resource type="Texture2D" uid="uid://cll1rrqagufi2" path="res://assets/sprites/weapons/brrtpixel2.png" id="2_ymu7v"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_66bho"]
+font_size = 50
 
 [node name="UIW_FireStat" type="BoxContainer" node_paths=PackedStringArray("_icon", "_accuracy")]
 mouse_filter = 2
@@ -11,7 +14,7 @@ _accuracy = NodePath("Accuracy")
 metadata/_custom_type_script = "uid://dbhqsqe7b31sv"
 
 [node name="AspectRatioContainer2" type="AspectRatioContainer" parent="."]
-custom_minimum_size = Vector2(72, 72)
+custom_minimum_size = Vector2(144, 144)
 layout_mode = 2
 mouse_filter = 2
 ratio = 2.0
@@ -28,3 +31,4 @@ expand_mode = 1
 [node name="Accuracy" type="Label" parent="."]
 layout_mode = 2
 text = "- %"
+label_settings = SubResource("LabelSettings_66bho")
