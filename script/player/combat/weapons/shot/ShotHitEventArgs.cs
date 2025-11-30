@@ -24,4 +24,5 @@ public class ShotHitEventArgs : EventArgs
     }
 
     public float TotalDamage() => Damage + Overflow;
+    public bool IsNotEnemy() => this == MISS || this == ENV;
 }

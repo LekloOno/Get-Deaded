@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cygbfsypwtaaf"
+path="res://.godot/imported/layer hit 3.wav-f5687f1288c6d3a36b9de73479bbf1cb.sample"
+
+[deps]
+
+source_file="res://assets/sounds/combat/hit/Base/layer hit 3.wav"
+dest_files=["res://.godot/imported/layer hit 3.wav-f5687f1288c6d3a36b9de73479bbf1cb.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

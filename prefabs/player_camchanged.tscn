@@ -1,4 +1,4 @@
-[gd_scene load_steps=135 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=142 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://script/player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://assets/script/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -90,8 +90,15 @@
 [ext_resource type="Script" uid="uid://t5n7py52g5oj" path="res://script/engine_tools/math/curve/float/clamped/MATH_FastLogCurve.cs" id="59_n5lof"]
 [ext_resource type="Script" uid="uid://diuvohbhr003k" path="res://script/player/input/actions/combat/PI_Weapons.cs" id="60_jlgrh"]
 [ext_resource type="Script" uid="uid://mds7cr6i4noc" path="res://script/player/movement/actions/jump/PM_WallClimb.cs" id="61_x3a7t"]
+[ext_resource type="Script" uid="uid://b6mcyevg8fydi" path="res://script/player/audio/combat/hit/PA_Hit.cs" id="65_0agck"]
 [ext_resource type="Script" uid="uid://byy7tiy37y47h" path="res://script/debug/display_fps.gd" id="65_wohr1"]
+[ext_resource type="AudioStream" uid="uid://ii0mf5ixql72" path="res://assets/sounds/combat/hit/kill.mp3" id="66_0fwqu"]
+[ext_resource type="AudioStream" uid="uid://rsg5px5vq270" path="res://assets/sounds/combat/hit/Base/layer hit 1.wav" id="66_ahe41"]
+[ext_resource type="AudioStream" uid="uid://dax3gdltkhfwg" path="res://assets/sounds/combat/hit/Base/layer hit 2.wav" id="67_0fwqu"]
+[ext_resource type="AudioStream" uid="uid://drgvayjpwlalv" path="res://assets/sounds/combat/hit/Base/43942 - player_hitbeep_headshotrapid_human_1p_vs_3p.wav" id="67_btq8w"]
+[ext_resource type="AudioStream" uid="uid://cygbfsypwtaaf" path="res://assets/sounds/combat/hit/Base/layer hit 3.wav" id="68_btq8w"]
 [ext_resource type="Texture2D" uid="uid://dsma1lip7bvch" path="res://assets/sprites/dash/dash_cd_mid_shadow.png" id="69_arr85"]
+[ext_resource type="AudioStream" uid="uid://vkujnkvqpx8w" path="res://assets/sounds/combat/hit/Base/layer hit 4.wav" id="69_yw1gl"]
 [ext_resource type="Texture2D" uid="uid://cbh1opskekaqn" path="res://assets/sprites/dash/dash_cd_mid_fill.png" id="70_ee4um"]
 [ext_resource type="Script" uid="uid://bd37jsqipcwxc" path="res://script/ui/movement/UI_DashReset.cs" id="71_j12ti"]
 [ext_resource type="Script" uid="uid://cq31c653np61x" path="res://script/player/movement/actions/surface-control/PM_AirState.cs" id="72_0vaqj"]
@@ -816,6 +823,51 @@ _wind = NodePath("Wind")
 [node name="Wind" type="AudioStreamPlayer2D" parent="Body/Sound/PA_SpeedWind"]
 stream = ExtResource("44_vhlgj")
 autoplay = true
+
+[node name="PA_Hit" type="Node" parent="Body/Sound" node_paths=PackedStringArray("_weaponsHandler", "_criticalHit", "_kill", "_meatHit", "_barrierHit", "_armorHit")]
+script = ExtResource("65_0agck")
+_weaponsHandler = NodePath("../../../Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable/PW_WeaponsHandler")
+_criticalHit = NodePath("PA_CritHit")
+_kill = NodePath("PA_Kill")
+_meatHit = NodePath("PA_Hit")
+_barrierHit = NodePath("PA_Hit")
+_armorHit = NodePath("PA_Hit")
+metadata/_custom_type_script = "uid://b6mcyevg8fydi"
+
+[node name="PA_Kill" type="AudioStreamPlayer3D" parent="Body/Sound/PA_Hit"]
+attenuation_model = 3
+volume_db = 1.0
+panning_strength = 0.0
+attenuation_filter_db = 0.0
+script = ExtResource("13_uyiqg")
+_stepSounds = Array[AudioStream]([ExtResource("66_0fwqu")])
+_minPitch = 0.98
+_maxPitch = 1.02
+metadata/_custom_type_script = "uid://d3uwl2heay8uf"
+
+[node name="PA_CritHit" type="AudioStreamPlayer3D" parent="Body/Sound/PA_Hit"]
+attenuation_model = 3
+max_db = -7.0
+max_polyphony = 30
+panning_strength = 0.0
+attenuation_filter_db = 0.0
+script = ExtResource("13_uyiqg")
+_stepSounds = Array[AudioStream]([ExtResource("67_btq8w")])
+_minPitch = 0.8
+_maxPitch = 1.2
+metadata/_custom_type_script = "uid://d3uwl2heay8uf"
+
+[node name="PA_Hit" type="AudioStreamPlayer3D" parent="Body/Sound/PA_Hit"]
+attenuation_model = 3
+max_db = -0.167
+max_polyphony = 4
+panning_strength = 0.0
+attenuation_filter_db = 0.0
+script = ExtResource("13_uyiqg")
+_stepSounds = Array[AudioStream]([ExtResource("66_ahe41"), ExtResource("67_0fwqu"), ExtResource("68_btq8w"), ExtResource("69_yw1gl")])
+_minPitch = 0.9
+_maxPitch = 1.1
+metadata/_custom_type_script = "uid://d3uwl2heay8uf"
 
 [node name="PH_Manager" type="Node3D" parent="Body" node_paths=PackedStringArray("_body", "_hurtBoxes")]
 script = ExtResource("46_eanik")
