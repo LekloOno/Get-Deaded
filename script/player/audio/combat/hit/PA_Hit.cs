@@ -23,7 +23,7 @@ public partial class PA_Hit : Node
         if (hit.Kill)
             _kill?.PlaySound();
 
-        if (hit.HurtBox.BodyPart == GC_BodyPart.Head)
+        if (!hit.OverrideBodyPart && hit.HurtBox.BodyPart == GC_BodyPart.Head)
             _criticalHit?.PlaySound();
         
         GC_Health layer = hit.SenderLayer;

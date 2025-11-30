@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dghvyacggbmt3"
-path="res://.godot/imported/smg_fire_1.wav-3bb6a72b8da75d0903abc4e30ba5a576.sample"
+path="res://.godot/imported/smg_fire_1.wav-b45b8491707aad221fbcba5597c64ce3.sample"
 
 [deps]
 
-source_file="res://assets/sounds/combat/weapons/fires/smg_fire_1.wav"
-dest_files=["res://.godot/imported/smg_fire_1.wav-3bb6a72b8da75d0903abc4e30ba5a576.sample"]
+source_file="res://assets/sounds/combat/weapons/fires/brrt/smg_fire_1.wav"
+dest_files=["res://.godot/imported/smg_fire_1.wav-b45b8491707aad221fbcba5597c64ce3.sample"]
 
 [params]
 

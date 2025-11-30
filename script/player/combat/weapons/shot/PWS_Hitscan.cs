@@ -29,7 +29,7 @@ public partial class PWS_Hitscan : PW_Shot, GC_IHitDealer
             {
                 hurtBox.HandleKnockBack(KnockBackFrom(castDirection));
                 bool killed = hurtBox.Damage(this, out float takenDamage, out float overflow);
-                DoHit(new(hurtBox.HealthManager, hurtBox.HealthManager.GetExposedLayer(), hurtBox, takenDamage, killed, overflow), hit, castOrigin);
+                DoHit(new(hurtBox.HealthManager, hurtBox.HealthManager.GetExposedLayer(), hurtBox, takenDamage, killed, overflow, _ignoreCrit), hit, castOrigin);
             }
             else
             {

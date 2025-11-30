@@ -43,7 +43,8 @@ public partial class PWS_ShapeScan : PW_Shot
                             hurtBox,
                             takenDamage,
                             killed,
-                            overflow
+                            overflow,
+                            _ignoreCrit
                         ),
                         hit,
                         castOrigin

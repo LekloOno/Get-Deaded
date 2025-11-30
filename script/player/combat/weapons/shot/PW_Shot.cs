@@ -16,6 +16,7 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
     [Export] protected GC_Hit _hitData;
     [Export] protected float _spread = 0f;          // In degrees
     [Export] protected float _knockBack = 0f;
+    [Export] protected bool _ignoreCrit = false;      // For visual and sound mostly
     [Export] private float _kickBack = 0f;
 
     [ExportCategory("Visuals")]

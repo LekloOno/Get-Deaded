@@ -97,6 +97,7 @@ script = ExtResource("5_sqc2j")
 _shapeCast = NodePath("ShapeCast3D")
 _hitData = SubResource("Resource_76u7k")
 _knockBack = 4.0
+_ignoreCrit = true
 _kickBack = 1.5
 _trail = NodePath("PW_Trail")
 _traumaCauser = NodePath("PCT_UndirectScalable")

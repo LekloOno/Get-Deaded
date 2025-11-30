@@ -12,15 +12,17 @@ public class ShotHitEventArgs : EventArgs
     public float Damage {get;}
     public bool Kill {get;}
     public float Overflow {get;}
+    public bool OverrideBodyPart {get;}
 
-    public ShotHitEventArgs(GC_HealthManager target, GC_Health senderLayer, GC_HurtBox hurtBox, float damage, bool kill, float overflow = 0)
+    public ShotHitEventArgs(GC_HealthManager target, GC_Health senderLayer, GC_HurtBox hurtBox, float damage, bool kill, float overflow = 0, bool overrideBodyPart = false)
     {
         SenderLayer = senderLayer;
         Target = target;
         HurtBox = hurtBox;
         Damage = damage;
         Kill = kill;
-        Overflow = overflow;    
+        Overflow = overflow;
+        OverrideBodyPart = overrideBodyPart;
     }
 
     public float TotalDamage() => Damage + Overflow;

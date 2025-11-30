@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://b8jop7b5xtx8c"
-path="res://.godot/imported/brrrt_tail.wav-7c9f7d3514468041d1dcf79f4680eb0c.sample"
+path="res://.godot/imported/brrrt_tail.wav-839d0698da6ec912399ac56a01d63ec7.sample"
 
 [deps]
 
-source_file="res://assets/sounds/combat/weapons/fires/brrrt_tail.wav"
-dest_files=["res://.godot/imported/brrrt_tail.wav-7c9f7d3514468041d1dcf79f4680eb0c.sample"]
+source_file="res://assets/sounds/combat/weapons/fires/brrt/brrrt_tail.wav"
+dest_files=["res://.godot/imported/brrrt_tail.wav-839d0698da6ec912399ac56a01d63ec7.sample"]
 
 [params]
 

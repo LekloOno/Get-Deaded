@@ -82,7 +82,7 @@ public partial class UI_DamageMarker : Control
         float sizeRatio = Mathf.Tanh(e.TotalDamage()/_sizeDispersion)*(_sizeMaxCoef - 1f) + 1f;
         SticksSize = _baseSize * sizeRatio;
 
-        if (e.HurtBox.BodyPart == GC_BodyPart.Head)
+        if (!e.OverrideBodyPart && e.HurtBox.BodyPart == GC_BodyPart.Head)
             _hitStyle.BgColor = _headShotColor;
         else
             _hitStyle.BgColor = _normalColor;
