@@ -1,5 +1,7 @@
 using Godot;
 
+
+// Godot doesn't allow to [Export] interfaces, so this is a simple glue wrapper to get around it.
 [GlobalClass]
 public abstract partial class GB_ExternalBodyManagerWrapper : Node, GB_IExternalBodyManager
 {

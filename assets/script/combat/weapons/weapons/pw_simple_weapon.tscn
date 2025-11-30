@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dcmylvqsy66rj"]
+[gd_scene load_steps=23 format=3 uid="uid://dcmylvqsy66rj"]
 
 [ext_resource type="Script" uid="uid://c3are182lodyx" path="res://script/player/combat/weapons/weapon/PW_Simple.cs" id="1_5idl2"]
 [ext_resource type="Texture2D" uid="uid://cll1rrqagufi2" path="res://assets/sprites/weapons/brrtpixel2.png" id="2_ykmm0"]
@@ -13,6 +13,13 @@
 [ext_resource type="FastNoiseLite" uid="uid://dcqwnhaim8ock" path="res://assets/misc/shake_noise.tres" id="10_8kujm"]
 [ext_resource type="Script" uid="uid://r8ad50yt78dm" path="res://script/player/camera/annimation/trauma/causers/direct/PCT_ContinuousFire.cs" id="10_j06ou"]
 [ext_resource type="Script" uid="uid://c0vf7xmi1u8t4" path="res://script/player/camera/annimation/trauma/PC_TraumaLayer.cs" id="11_8kujm"]
+[ext_resource type="Script" uid="uid://bdm4kpw6u4ocg" path="res://script/player/audio/weapons/fire/PA_FullAuto.cs" id="14_b25vv"]
+[ext_resource type="Script" uid="uid://d3uwl2heay8uf" path="res://script/player/audio/PA_Sound.cs" id="15_ad73j"]
+[ext_resource type="AudioStream" uid="uid://dghvyacggbmt3" path="res://assets/sounds/weapons/fires/smg_fire_1.wav" id="16_mbjng"]
+[ext_resource type="AudioStream" uid="uid://6gxtdu8m25i" path="res://assets/sounds/weapons/fires/brrrt.wav" id="17_8vbpy"]
+[ext_resource type="Script" uid="uid://dxtqg0xnanovw" path="res://script/player/audio/PA_Looper.cs" id="18_f28ci"]
+[ext_resource type="Script" uid="uid://ca4sbvyfspdlk" path="res://script/player/audio/PA_LayeredSound.cs" id="19_8vbpy"]
+[ext_resource type="AudioStream" uid="uid://b8jop7b5xtx8c" path="res://assets/sounds/weapons/fires/brrrt_tail.wav" id="20_8vbpy"]
 
 [sub_resource type="Resource" id="Resource_ad73j"]
 script = ExtResource("7_2b0g7")
@@ -95,3 +102,40 @@ _scopeOutTime = 0.2
 _fovMultiplier = 0.9
 _moveSpeedMultiplier = -0.1
 metadata/_custom_type_script = "uid://bxxmkegnq67qe"
+
+[node name="PA_FullAuto" type="Node3D" parent="." node_paths=PackedStringArray("_fire", "_holdFire", "_tail", "_slideInLayers")]
+script = ExtResource("14_b25vv")
+_fire = NodePath("../PWF_FullAuto")
+_holdFire = NodePath("PA_Looper")
+_tail = NodePath("Tail")
+_slideInLayers = [NodePath("PA_Sound")]
+metadata/_custom_type_script = "uid://bdm4kpw6u4ocg"
+
+[node name="PA_Sound" type="AudioStreamPlayer3D" parent="PA_FullAuto"]
+script = ExtResource("15_ad73j")
+_stepSounds = Array[AudioStream]([ExtResource("16_mbjng")])
+_minPitch = 1.05
+_maxPitch = 0.9
+metadata/_custom_type_script = "uid://d3uwl2heay8uf"
+
+[node name="PA_Looper" type="AudioStreamPlayer2D" parent="PA_FullAuto"]
+stream = ExtResource("17_8vbpy")
+autoplay = true
+script = ExtResource("18_f28ci")
+_fadeInTime = 0.1
+_fadeOutTime = 0.1
+_volume = 20.0
+metadata/_custom_type_script = "uid://dxtqg0xnanovw"
+
+[node name="Tail" type="Node3D" parent="PA_FullAuto" node_paths=PackedStringArray("_slideInLayers")]
+script = ExtResource("19_8vbpy")
+_slideInLayers = [NodePath("PA_Sound")]
+metadata/_custom_type_script = "uid://ca4sbvyfspdlk"
+
+[node name="PA_Sound" type="AudioStreamPlayer3D" parent="PA_FullAuto/Tail"]
+volume_db = 80.0
+script = ExtResource("15_ad73j")
+_stepSounds = Array[AudioStream]([ExtResource("20_8vbpy")])
+_minPitch = 1.1
+_maxPitch = 0.9
+metadata/_custom_type_script = "uid://d3uwl2heay8uf"

@@ -1,9 +1,11 @@
+using System;
 using Godot;
 
 [GlobalClass]
 public partial class PWF_FullAuto : PW_Fire
 {
     private SceneTreeTimer _timer;
+    public Action Stopped;
     public override void Disable() => StopShoot();
 
     protected override void SpecInitialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManagerWrapper ownerBody){}
@@ -51,6 +53,7 @@ public partial class PWF_FullAuto : PW_Fire
             _timer.Timeout -= ReShoot;
             _timer = null;
             _recoil?.Reset();
+            Stopped?.Invoke();
         }
     }
 }
