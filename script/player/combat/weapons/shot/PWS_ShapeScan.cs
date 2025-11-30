@@ -6,7 +6,7 @@ public partial class PWS_ShapeScan : PW_Shot
 {
     [Export] private ShapeCast3D _shapeCast;
 
-    public override void SpecInitialize(GB_ExternalBodyManager ownerBody)
+    public override void SpecInitialize(GB_ExternalBodyManagerWrapper ownerBody)
     {
         _shapeCast.CollisionMask = CONF_Collision.Masks.HitScan;
         _shapeCast.CollideWithAreas = true;

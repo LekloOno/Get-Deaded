@@ -19,7 +19,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
     [Export] private PC_DirectCamera _camera;
     [Export] private PC_Shakeable _shakeableCamera;
     [Export] private PC_Recoil _recoilController;
-    [Export] private GB_ExternalBodyManager _ownerBody;
+    [Export] private GB_ExternalBodyManagerWrapper _ownerBody;
     [Export] private PI_Weapons _weaponsInput;
     [Export] private Array<PW_Weapon> _weapons;
     public Array<PW_Weapon> Weapons => _weapons;

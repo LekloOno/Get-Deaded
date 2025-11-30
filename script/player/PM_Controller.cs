@@ -2,7 +2,7 @@ using System;
 using Godot;
 
 [GlobalClass]
-public partial class PM_Controller : CharacterBody3D
+public partial class PM_Controller : CharacterBody3D, GB_IExternalBodyManager
 {
     [Export] private PH_Manager _healthManager;
     [Export] private PI_Walk _walkProcess;
@@ -118,4 +118,13 @@ public partial class PM_Controller : CharacterBody3D
         RealVelocity = (GlobalPosition - pos)/(float)delta;
         Acceleration = (RealVelocity - startVelocity)/(float)delta;
     }
+
+    
+    public void HandleKnockBack(Vector3 force)
+    {
+        AdditionalForces.AddImpulse(force);
+    }
+
+    Vector3 GB_IExternalBodyManager.Velocity() => RealVelocity;
+
 }

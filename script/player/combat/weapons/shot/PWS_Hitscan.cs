@@ -41,7 +41,7 @@ public partial class PWS_Hitscan : PW_Shot, GC_IHitDealer
         HandleKick(castOrigin, castDirection);
     }
 
-    public override void SpecInitialize(GB_ExternalBodyManager ownerBody)
+    public override void SpecInitialize(GB_ExternalBodyManagerWrapper ownerBody)
     {
         if (_maxDistance == 0)
         {

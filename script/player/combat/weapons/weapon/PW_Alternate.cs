@@ -7,7 +7,7 @@ public partial class PW_Alternate : PW_Weapon
     private PW_Fire PrimaryFire => _fires[0];
     private PW_Fire SecondaryFire => _fires[1];
 
-    protected override void SpecInitialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManager ownerBody)
+    protected override void SpecInitialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManagerWrapper ownerBody)
     {
         int firesCount = _fires.Count;
         if (firesCount < 2)

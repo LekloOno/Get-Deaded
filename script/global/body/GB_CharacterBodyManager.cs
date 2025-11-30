@@ -1,13 +1,9 @@
 using Godot;
 
 [GlobalClass]
-public partial class GB_CharacterBodyManager : GB_ExternalBodyManager
+public partial class GB_CharacterBodyManager : GB_ExternalBodyManagerWrapper
 {
-    [Export] private CharacterBody3D _body;
-    public override void HandleKnockBack(Vector3 force)
-    {
-        _body.Velocity += force;
-    }
+    [Export] private GB_CharacterBody _body;
 
-    public override Vector3 Velocity() => _body.Velocity;
+    public override GB_IExternalBodyManager Body => _body;
 }

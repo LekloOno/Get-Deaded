@@ -26,7 +26,7 @@ public partial class PM_WallJump : PM_Action
             return _ledgeClimb.LedgeClimb(velocity); // Propagate to Ledge
 
         Vector3 normal = new();
-        if (!IsCollidingWall(ref normal))
+        if (!IsCollidingWall(ref normal, out GB_IExternalBodyManager entity))
             return _ledgeClimb.LedgeClimb(velocity); // Propagate to Ledge
 
         if (!IsWall(normal))
@@ -44,10 +44,10 @@ public partial class PM_WallJump : PM_Action
             return _ledgeClimb.LedgeClimb(velocity); // Propagate to Ledge
 
         _jumpInput.UseBuffer(); 
-        return DoWallJump(wallJumpVel, _wallCastLow.GetCollisionNormal()); // Do it !
+        return DoWallJump(wallJumpVel, _wallCastLow.GetCollisionNormal(), entity); // Do it !
     }
 
-    private Vector3 DoWallJump(Vector3 velocity, Vector3 normal)
+    private Vector3 DoWallJump(Vector3 velocity, Vector3 normal, GB_IExternalBodyManager entity)
     {
         velocity = velocity.Bounce(normal);
 
@@ -61,24 +61,28 @@ public partial class PM_WallJump : PM_Action
 
         velocity.Y = _strength;
         OnStart?.Invoke(this, EventArgs.Empty);
+
+        entity?.HandleKnockBack(- MATH_Vector3Ext.Flat(velocity));
+
         return velocity;
     }
 
-    private bool IsCollidingWall(ref Vector3 normal)
+    private bool IsCollidingWall(ref Vector3 normal, out GB_IExternalBodyManager entity)
     {
-        if(_wallCastLow.IsColliding())
-        {
-            normal = _wallCastLow.GetCollisionNormal();
-            return true;
-        }
+        entity = null;
 
-        if(_wallCastHigh.IsColliding())
-        {
-            normal = _wallCastHigh.GetCollisionNormal();
-            return true;
-        }
+        RayCast3D cast = _wallCastLow.IsColliding() ? _wallCastLow
+                        : _wallCastHigh.IsColliding() ? _wallCastHigh
+                        : null;
 
-        return false;
+        if (cast == null)
+            return false;
+
+        normal = cast.GetCollisionNormal();
+
+        if (cast.GetCollider() is GB_IExternalBodyManager a) entity = a;
+
+        return true;
     }
 
     private bool TooSlow(Vector3 velocity, Vector3 normal) => velocity.Dot(-normal) < _minSpeedInWall;

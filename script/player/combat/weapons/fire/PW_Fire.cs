@@ -38,7 +38,7 @@ public abstract partial class PW_Fire : WeaponComponent
     private static Random _random = new();
 
 
-    public void Initialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManager ownerBody)
+    public void Initialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManagerWrapper ownerBody)
     {
         if (_fireTraumaCauser != null)
         {
@@ -202,7 +202,7 @@ public abstract partial class PW_Fire : WeaponComponent
     /// </summary>
     /// <returns>true if it was able to handle the input expectedly, false otherwise</returns>
     protected abstract bool SpecRelease();
-    protected abstract void SpecInitialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManager ownerBody);
+    protected abstract void SpecInitialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManagerWrapper ownerBody);
     /// <summary>
     /// Handle the weapon disabling. Example - A weapons which shoots continuously should stop shooting on disable, even if no up input has been sent.
     /// </summary>

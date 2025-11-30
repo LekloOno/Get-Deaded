@@ -12,12 +12,12 @@ public partial class PW_FistsFire : PW_Fire
     [Export] private float _baseVerticalSpeed;
     [Export] private float _maxSpeed;
     [Export] private ulong _chargeTime;
-    private GB_ExternalBodyManager _ownerBody;
+    private GB_ExternalBodyManagerWrapper _ownerBody;
     private ulong _chargeStartTime;
 
     public override void Disable() {}
 
-    protected override void SpecInitialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManager ownerBody)
+    protected override void SpecInitialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManagerWrapper ownerBody)
     {
         _ownerBody = ownerBody;
     }

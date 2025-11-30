@@ -73,7 +73,7 @@ public abstract partial class PW_Weapon : WeaponComponent
     /// <param name="surfaceControl">The owner's surface control.</param>
     /// <param name="recoilController">The owner's recoil controller.</param>
     /// <param name="ownerBody">The owner's external forces manager.</param>
-    public void Initialize(PC_Shakeable shakeableCamera, PC_DirectCamera camera, PM_SurfaceControl surfaceControl, PC_Recoil recoilController, GB_ExternalBodyManager ownerBody)
+    public void Initialize(PC_Shakeable shakeableCamera, PC_DirectCamera camera, PM_SurfaceControl surfaceControl, PC_Recoil recoilController, GB_ExternalBodyManagerWrapper ownerBody)
     {
         _surfaceControl = surfaceControl;
         if (_ads != null)
@@ -168,7 +168,7 @@ public abstract partial class PW_Weapon : WeaponComponent
     /// <summary>
     /// Allow for some specific initialization.
     /// </summary>
-    protected abstract void SpecInitialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManager ownerBody);
+    protected abstract void SpecInitialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManagerWrapper ownerBody);
     protected virtual PW_Fire InitCurrentFire() => _fires[0];
     /// <summary>
     /// Allow for some specific disabling process.
