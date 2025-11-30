@@ -15,7 +15,7 @@ public static class PHX_Checks
         return !current.TestMove(transform, motion, maxCollisions: 1, safeMargin: 0.1f, recoveryAsCollision: true);
     }
 
-    public static bool CanMoveForward(PhysicsBody3D current, BoxShape3D shape, Node3D pivot, float distance, out KinematicCollision3D result, float feetMargin = 0f)
+    public static bool CanMoveForward(PhysicsBody3D current, BoxShape3D shape, Node3D pivot, float distance, out KinematicCollision3D result, float feetMargin = 0f, uint? collisionMask = null)
     {
         Vector3 feetMarginVector = new(0f, feetMargin, 0f);
         Transform3D transform = current.Transform;
@@ -35,10 +35,14 @@ public static class PHX_Checks
             transform.Origin += feetMarginVector/2f;
         }
 
+        uint initCollisionMask = current.CollisionMask;
+        current.CollisionMask = collisionMask.GetValueOrDefault(current.CollisionMask);
+
         bool canMove = !current.TestMove(transform, motion, localResult);
         result = localResult;
 
         shape.Size = initSize;
+        current.CollisionMask = initCollisionMask;
 
         return canMove;
     }
@@ -54,6 +58,6 @@ public static class PHX_Checks
         if (headCast.IsColliding())
             return false;
 
-        return !CanMoveForward(current, shape, pivot, distance, out result, minHeight);
+        return !CanMoveForward(current, shape, pivot, distance, out result, minHeight, CONF_Collision.Layers.Environment);
     }
 }
