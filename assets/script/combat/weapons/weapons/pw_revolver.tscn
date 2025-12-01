@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bgfyi141ynhdb"]
+[gd_scene load_steps=32 format=3 uid="uid://bgfyi141ynhdb"]
 
 [ext_resource type="Script" uid="uid://c3are182lodyx" path="res://script/player/combat/weapons/weapon/PW_Simple.cs" id="1_ce3gq"]
 [ext_resource type="Texture2D" uid="uid://c050onpc3r17u" path="res://assets/sprites/weapons/pewpixel.png" id="2_odgi6"]
@@ -22,6 +22,8 @@
 [ext_resource type="AudioStream" uid="uid://de4jxbwbg2sjh" path="res://assets/sounds/combat/weapons/fires/revolver/pew_layer1_2.wav" id="20_v6myh"]
 [ext_resource type="AudioStream" uid="uid://bkilaxmf0setg" path="res://assets/sounds/combat/weapons/fires/revolver/pew_layer2_1.wav" id="21_wbedf"]
 [ext_resource type="AudioStream" uid="uid://bas1dflcdofvu" path="res://assets/sounds/combat/weapons/fires/revolver/pew_layer2_2.wav" id="22_jf62l"]
+[ext_resource type="AudioStream" uid="uid://dghvyacggbmt3" path="res://assets/sounds/combat/weapons/fires/brrt/smg_fire_1.wav" id="23_8w7py"]
+[ext_resource type="AudioStream" uid="uid://b45218olxwvgf" path="res://assets/sounds/combat/weapons/fires/revolver/whistle.wav" id="24_15h8q"]
 
 [sub_resource type="Resource" id="Resource_wj164"]
 script = ExtResource("5_d2gec")
@@ -133,7 +135,7 @@ metadata/_custom_type_script = "uid://51kwj2ldm4xq"
 [node name="PA_SemiAuto" type="Node3D" parent="." node_paths=PackedStringArray("_fire", "_slideInLayers")]
 script = ExtResource("17_w2eku")
 _fire = NodePath("../PWF_SemiAuto")
-_slideInLayers = [NodePath("Layer1"), NodePath("Layer2")]
+_slideInLayers = [NodePath("Layer1"), NodePath("Layer2"), NodePath("Layer3"), NodePath("Whistle")]
 metadata/_custom_type_script = "uid://bwuyvfcylptdk"
 
 [node name="Layer1" type="AudioStreamPlayer3D" parent="PA_SemiAuto"]
@@ -154,4 +156,24 @@ max_db = 0.0
 attenuation_filter_db = 0.0
 script = ExtResource("18_8w7py")
 _stepSounds = Array[AudioStream]([ExtResource("21_wbedf"), ExtResource("22_jf62l")])
+metadata/_custom_type_script = "uid://d3uwl2heay8uf"
+
+[node name="Layer3" type="AudioStreamPlayer3D" parent="PA_SemiAuto"]
+attenuation_model = 3
+volume_db = 4.0
+max_db = 2.0
+attenuation_filter_db = 0.0
+script = ExtResource("18_8w7py")
+_stepSounds = Array[AudioStream]([ExtResource("23_8w7py")])
+_minPitch = 0.7
+_maxPitch = 0.7
+metadata/_custom_type_script = "uid://d3uwl2heay8uf"
+
+[node name="Whistle" type="AudioStreamPlayer3D" parent="PA_SemiAuto"]
+attenuation_model = 3
+volume_db = -0.8
+max_db = 0.0
+attenuation_filter_db = 0.0
+script = ExtResource("18_8w7py")
+_stepSounds = Array[AudioStream]([ExtResource("24_15h8q")])
 metadata/_custom_type_script = "uid://d3uwl2heay8uf"
