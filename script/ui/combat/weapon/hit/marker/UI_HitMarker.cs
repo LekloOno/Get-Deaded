@@ -8,6 +8,7 @@ public partial class UI_HitMarker : Control
     [Export] private PW_WeaponsHandler _weaponsHandler;
     [Export] private UI_KillMarker _killMarker;
     [Export] private UI_DamageMarker _damageMarker;
+    [Export] private UI_KillSkullManager _killSkull;
 
     public override void _Ready()
     {
@@ -22,6 +23,7 @@ public partial class UI_HitMarker : Control
         if (e.Kill)
         {
             _killMarker.StartAnim();
+            _killSkull.PopSkull(e.HurtBox.BodyPart, e.OverrideBodyPart);
             return;
         }
 
