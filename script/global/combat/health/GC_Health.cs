@@ -28,7 +28,7 @@ public partial class GC_Health : Resource
                 Child.OnDamage += (o, damage) => OnDamage?.Invoke(o, damage.Stack(CurrentHealth) );
                 Child.OnHeal += (o, heal) => OnHeal?.Invoke(o, heal.Stack(CurrentHealth));
                 Child.OnBreak += (o, childLayer) => OnBreak?.Invoke(o, childLayer);
-                Child.OnFull += (o, parentLayer) => OnBreak?.Invoke(o, parentLayer);
+                Child.OnFull += (o, parentLayer) => OnFull?.Invoke(o, parentLayer);
                 Child.OnDie += (o) => OnDie?.Invoke(o);
             }
 
