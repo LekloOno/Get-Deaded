@@ -1,4 +1,4 @@
-[gd_scene load_steps=142 format=3 uid="uid://b5w3ok85lmxgf"]
+[gd_scene load_steps=141 format=3 uid="uid://b5w3ok85lmxgf"]
 
 [ext_resource type="Script" uid="uid://bh8wpubs02ob5" path="res://script/player/PM_Controller.cs" id="1_vw06q"]
 [ext_resource type="Resource" uid="uid://b4nfitu4xc6mj" path="res://assets/script/movement/basic_velocity_cache.tres" id="2_7wk04"]
@@ -109,7 +109,6 @@
 [ext_resource type="Script" uid="uid://c7tdbt357bj80" path="res://script/ui/combat/weapon/hit/number/UI_DamageIndicatorManager.cs" id="82_5dw8r"]
 [ext_resource type="PackedScene" uid="uid://bj3ck4u2xa8hu" path="res://prefabs/damage_indicator.tscn" id="83_ewcnl"]
 [ext_resource type="PackedScene" uid="uid://dcmylvqsy66rj" path="res://assets/script/combat/weapons/weapons/pw_simple_weapon.tscn" id="88_cqits"]
-[ext_resource type="PackedScene" uid="uid://bhxt3qoevxipp" path="res://assets/script/combat/weapons/weapons/pw_melee_weapon.tscn" id="89_nkqrs"]
 [ext_resource type="Script" uid="uid://dkysuj8gsdwv4" path="res://script/player/connectors/CNT_SprintWeapon.cs" id="91_cqits"]
 [ext_resource type="Script" uid="uid://pt5tc0gqn0vd" path="res://script/statistics/combat/STAT_Combat.cs" id="94_0vaqj"]
 [ext_resource type="Script" uid="uid://b2flfi73k8d71" path="res://script/ui/viewport/UI_SpatialViewport.cs" id="96_w8edb"]
@@ -352,7 +351,7 @@ _weaponsInput = NodePath("../../../../../../../../../../../../PIM_Arena/PI_Weapo
 _weapons = [NodePath("PW_Revolver"), NodePath("PW_Simple")]
 Melee = NodePath("PW_BasicMelee2")
 _surfaceControl = NodePath("../../../../../../../../../../../../Movement/PM_SurfaceControl")
-_meleeRecover = 0.7
+_meleeRecover = 0.5
 metadata/_custom_type_script = "uid://b4hdeuwma0ma8"
 
 [node name="PW_BasicMelee2" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable/PW_WeaponsHandler" instance=ExtResource("17_0vaqj")]
@@ -360,8 +359,6 @@ metadata/_custom_type_script = "uid://b4hdeuwma0ma8"
 [node name="PW_Revolver" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable/PW_WeaponsHandler" instance=ExtResource("24_jbksd")]
 
 [node name="PW_Simple" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable/PW_WeaponsHandler" instance=ExtResource("88_cqits")]
-
-[node name="PW_BasicMelee" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable/PW_WeaponsHandler" instance=ExtResource("89_nkqrs")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable"]
 shape = SubResource("SphereShape3D_n5lof")

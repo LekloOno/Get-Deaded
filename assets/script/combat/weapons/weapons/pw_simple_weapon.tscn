@@ -100,7 +100,7 @@ _fire = NodePath("../PWF_FullAuto")
 _scopeInTime = 0.2
 _scopeOutTime = 0.2
 _fovMultiplier = 0.9
-_moveSpeedMultiplier = -0.1
+_moveSpeedMultiplier = -0.2
 metadata/_custom_type_script = "uid://bxxmkegnq67qe"
 
 [node name="PA_FullAuto" type="Node3D" parent="." node_paths=PackedStringArray("_fire", "_holdFire", "_tail", "_slideInLayers")]
