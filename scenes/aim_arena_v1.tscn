@@ -1,0 +1,95 @@
+[gd_scene load_steps=12 format=3 uid="uid://cje820yam7s62"]
+
+[ext_resource type="Texture2D" uid="uid://c6o8mw13kagni" path="res://assets/sprites/skyboxes/Sky_trainyard_01_1b2.png" id="1_xes0e"]
+[ext_resource type="Material" uid="uid://daxwgciv66e17" path="res://assets/materials/whiteGrid.tres" id="2_0o3ea"]
+[ext_resource type="Material" uid="uid://c7p68evacni7v" path="res://assets/materials/darkGrid.tres" id="2_3mm7d"]
+[ext_resource type="PackedScene" uid="uid://b5w3ok85lmxgf" path="res://prefabs/player_camchanged.tscn" id="3_0o3ea"]
+[ext_resource type="Shader" uid="uid://cgvs2rofqr7fc" path="res://assets/shaders/toon_post_process.gdshader" id="4_n74u5"]
+[ext_resource type="LightmapGIData" uid="uid://dnqyc5lqkgrt6" path="res://scenes/test_trenchbroom.lmbake" id="5_e58q0"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_c33g5"]
+panorama = ExtResource("1_xes0e")
+
+[sub_resource type="Sky" id="Sky_ts1ij"]
+sky_material = SubResource("PanoramaSkyMaterial_c33g5")
+
+[sub_resource type="Environment" id="Environment_c71jq"]
+background_mode = 2
+sky = SubResource("Sky_ts1ij")
+tonemap_mode = 2
+sdfgi_use_occlusion = true
+glow_enabled = true
+volumetric_fog_density = 0.0224
+volumetric_fog_albedo = Color(0.811234, 0.891075, 0.957031, 1)
+volumetric_fog_emission = Color(0.570313, 0.929504, 1, 1)
+volumetric_fog_emission_energy = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h84yg"]
+render_priority = -1
+shader = ExtResource("4_n74u5")
+shader_parameter/depth_threshold = 0.01
+
+[sub_resource type="QuadMesh" id="QuadMesh_bm8tx"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[node name="AimArenaV1" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_c71jq")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.99956, -0.024362, 0.016932, 0, 0.570713, 0.82115, -0.0296682, 0.820788, -0.570462, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Map" type="Node" parent="."]
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Map"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -22.1, 1.5, 0)
+material_override = ExtResource("2_0o3ea")
+use_collision = true
+size = Vector3(43, 4, 1)
+material = ExtResource("2_3mm7d")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Map"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 19.1, 1.5, 0)
+material_override = ExtResource("2_0o3ea")
+use_collision = true
+size = Vector3(43, 4, 1)
+material = ExtResource("2_3mm7d")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1.5, -20)
+material_override = ExtResource("2_0o3ea")
+use_collision = true
+size = Vector3(43, 4, 1)
+material = ExtResource("2_3mm7d")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1.5, 19.5)
+material_override = ExtResource("2_0o3ea")
+use_collision = true
+size = Vector3(43, 4, 1)
+material = ExtResource("2_3mm7d")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0.5)
+use_collision = true
+size = Vector3(40, 1, 40)
+material = ExtResource("2_3mm7d")
+
+[node name="Entities" type="Node" parent="."]
+
+[node name="PlayerController" parent="Entities" instance=ExtResource("3_0o3ea")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, -1)
+
+[node name="PostProcessing" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_h84yg")
+extra_cull_margin = 16384.0
+ignore_occlusion_culling = true
+mesh = SubResource("QuadMesh_bm8tx")
+
+[node name="LightmapGI" type="LightmapGI" parent="."]
+supersampling = true
+directional = true
+light_data = ExtResource("5_e58q0")
