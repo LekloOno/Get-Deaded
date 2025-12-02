@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://c5b5ks0l28jp5"]
 
-[ext_resource type="Script" uid="uid://68f0vys1tm3r" path="res://script/ui/combat/weapon/hit/marker/UI_KillSkullShaker.cs" id="1_tqr8d"]
+[ext_resource type="Script" uid="uid://68f0vys1tm3r" path="res://script/ui/combat/weapon/hit/marker/kill_skull/UI_KillSkullShaker.cs" id="1_tqr8d"]
 [ext_resource type="Script" uid="uid://foau1gurk2py" path="res://script/engine_tools/animation/shakes/ANIM_Vec2TraumaLayer.cs" id="2_adnve"]
 [ext_resource type="Texture2D" uid="uid://dw1uugk5o1sxh" path="res://assets/sprites/hit/kill.png" id="3_yiw8s"]
-[ext_resource type="Script" uid="uid://boxpscnow88nk" path="res://script/ui/combat/weapon/hit/marker/UI_KillSkull.cs" id="4_qllvk"]
+[ext_resource type="Script" uid="uid://boxpscnow88nk" path="res://script/ui/combat/weapon/hit/marker/kill_skull/UI_KillSkull.cs" id="4_qllvk"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_tqr8d"]
 frequency = 0.05

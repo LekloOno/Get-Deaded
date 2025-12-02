@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://d06ge8pykx8s1"]
 
 [ext_resource type="Script" uid="uid://ds1ebussoj6l7" path="res://script/ui/combat/weapon/hit/marker/UI_HitMarker.cs" id="1_w4cu8"]
-[ext_resource type="Script" uid="uid://pxg54fo2ojgy" path="res://script/ui/combat/weapon/hit/marker/UI_KillSkullManager.cs" id="2_n7502"]
+[ext_resource type="Script" uid="uid://pxg54fo2ojgy" path="res://script/ui/combat/weapon/hit/marker/kill_skull/UI_KillSkullManager.cs" id="2_n7502"]
 [ext_resource type="Texture2D" uid="uid://dw1uugk5o1sxh" path="res://assets/sprites/hit/kill.png" id="3_33tg5"]
 [ext_resource type="PackedScene" uid="uid://c5b5ks0l28jp5" path="res://prefabs/ui/combat/hit/kill_skull_shaker.tscn" id="3_n7502"]
 [ext_resource type="Texture2D" uid="uid://c5qts6d7p7bka" path="res://assets/sprites/hit/headshot_kill.png" id="4_4g8la"]
@@ -17,7 +17,7 @@ fractal_gain = 0.8
 [sub_resource type="Resource" id="Resource_oyy5y"]
 script = ExtResource("6_33tg5")
 _noise = SubResource("FastNoiseLite_4g8la")
-_reductionRate = 3.0
+_reductionRate = 2.8
 _noiseSpeed = 60.0
 metadata/_custom_type_script = "uid://foau1gurk2py"
 
@@ -28,7 +28,7 @@ shadow_size = 1
 anti_aliasing_size = 10.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tnwbf"]
-bg_color = Color(1, 0, 0, 1)
+bg_color = Color(1, 1, 1, 1)
 border_color = Color(0, 0, 0, 0)
 shadow_size = 1
 anti_aliasing_size = 10.0
@@ -60,22 +60,19 @@ script = ExtResource("2_n7502")
 _killTemplate = ExtResource("3_n7502")
 _normalTexture = ExtResource("3_33tg5")
 _criticalTexture = ExtResource("4_4g8la")
-_normalColor = Color(1, 1, 1, 1)
-_criticalColor = Color(1, 0.09, 0.197, 1)
 _fadeTime = 2.0
-_shakeIntensity = 450.0
+_shakeIntensity = 700.0
 _shakeLayer = SubResource("Resource_oyy5y")
 metadata/_custom_type_script = "uid://pxg54fo2ojgy"
 
 [node name="UI_DamageMarker" type="Control" parent="." node_paths=PackedStringArray("_markerSticks")]
+self_modulate = Color(1, 1, 1, 0.8)
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
 script = ExtResource("5_oyy5y")
 _markerSticks = [NodePath("Control/BotRight"), NodePath("Control2/BotLeft"), NodePath("Control3/TopRight"), NodePath("Control4/TopLeft")]
-_headShotColor = Color(1, 0.745098, 0, 0.862745)
-_normalColor = Color(1, 1, 1, 0.862745)
 _baseSize = Vector2(18, 3)
 metadata/_custom_type_script = "uid://c5ie4xhq4n5p7"
 

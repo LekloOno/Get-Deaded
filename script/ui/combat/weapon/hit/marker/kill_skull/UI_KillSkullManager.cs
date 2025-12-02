@@ -8,8 +8,6 @@ public partial class UI_KillSkullManager : Control
     [Export] private PackedScene _killTemplate;
     [Export] private Texture2D _normalTexture;
     [Export] private Texture2D _criticalTexture;
-    [Export] private Color _normalColor;
-    [Export] private Color _criticalColor;
     [Export] private float _fadeTime;
     
     // Live edit - should later be removed, it's purely to live-tweak the values of _killTemplate
@@ -37,11 +35,11 @@ public partial class UI_KillSkullManager : Control
         if (!overrideBodyPart && bodyPart == GC_BodyPart.Head)
         {
             newSkull.Texture = _criticalTexture;
-            newSkull.Modulate = _criticalColor;
+            newSkull.Modulate = CONF_HitColors.Colors.Critical;
         } else
         {
             newSkull.Texture = _normalTexture;
-            newSkull.Modulate = _normalColor;
+            newSkull.Modulate = CONF_HitColors.Colors.Normal;
         }
 
         FadeTimer.Start(_fadeTime);

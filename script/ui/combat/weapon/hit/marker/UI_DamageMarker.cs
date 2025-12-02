@@ -6,8 +6,6 @@ using Godot.Collections;
 public partial class UI_DamageMarker : Control
 {
     [Export] private Array<Panel> _markerSticks;
-    [Export] private Color _headShotColor;
-    [Export] private Color _normalColor;
     [Export] private float _fadeTime = .18f;
     [Export] private float _expandTime = .1f;
     [Export] private float _baseStartOffset = 12f;
@@ -83,9 +81,9 @@ public partial class UI_DamageMarker : Control
         SticksSize = _baseSize * sizeRatio;
 
         if (!e.OverrideBodyPart && e.HurtBox.BodyPart == GC_BodyPart.Head)
-            _hitStyle.BgColor = _headShotColor;
+            _hitStyle.BgColor = CONF_HitColors.Colors.Critical;
         else
-            _hitStyle.BgColor = _normalColor;
+            _hitStyle.BgColor = CONF_HitColors.Colors.Normal;
         
         opacityTween = CreateTween();
         opacityTween.TweenProperty(this, "modulate:a", 0.0f, _fadeTime);
