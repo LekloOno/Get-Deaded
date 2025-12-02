@@ -1,6 +1,5 @@
 using Godot;
 using System;
-using System.Threading.Tasks;
 
 [GlobalClass]
 public partial class UI_KillSkull : TextureRect
@@ -18,6 +17,7 @@ public partial class UI_KillSkull : TextureRect
     [Export] private float _fadeInTime;
 
     public Action MaxScaleReached;
+    public Action Removed;
     private Tween _opacityTween;
     private Tween _scaleTween;
     private Tween _offsetTween;
@@ -25,7 +25,9 @@ public partial class UI_KillSkull : TextureRect
 
     public void Init(UI_KillSkullManager manager)
     {
+        
         _manager = manager;
+        _manager.FadeTimer.Timeout += Fade;
 
         Color mod = Modulate;
         Color targetColor = mod;
@@ -80,6 +82,7 @@ public partial class UI_KillSkull : TextureRect
     {
         _manager.PushSkull -= Push;
         _manager.FadeTimer.Timeout -= Fade;
+        Removed?.Invoke();
         QueueFree();
     }
 }

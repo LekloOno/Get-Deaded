@@ -5,9 +5,18 @@ using Godot;
 [GlobalClass]
 public partial class UI_KillSkullManager : Control
 {
-    [Export] private UI_KillSkull _killTemplate;
-    [Export] private UI_KillSkull _headshotKillTemplate;
+    [Export] private PackedScene _killTemplate;
+    [Export] private Texture2D _normalTexture;
+    [Export] private Texture2D _criticalTexture;
+    [Export] private Color _normalColor;
+    [Export] private Color _criticalColor;
     [Export] private float _fadeTime;
+    
+    // Live edit - should later be removed, it's purely to live-tweak the values of _killTemplate
+    [Export] private float _trauma = 1f;
+    [Export] private float _shakeIntensity = 10f;
+    [Export] private ANIM_Vec2TraumaLayer _shakeLayer;
+
 
     public Action PushSkull;
     public Timer FadeTimer;
@@ -16,27 +25,30 @@ public partial class UI_KillSkullManager : Control
     {
         FadeTimer = new();
         AddChild(FadeTimer);
-
-        if (_killTemplate.GetParent() is Node parent)
-            parent.RemoveChild(_killTemplate);
-            
-        if (_headshotKillTemplate.GetParent() is Node headParent)
-            headParent.RemoveChild(_headshotKillTemplate);
     }
 
     public void PopSkull(GC_BodyPart bodyPart, bool overrideBodyPart)
     {
-        UI_KillSkull newSkull =  !overrideBodyPart && bodyPart == GC_BodyPart.Head
-            ? (UI_KillSkull) _headshotKillTemplate.Duplicate()
-            : (UI_KillSkull) _killTemplate.Duplicate();
+        UI_KillSkullShaker newSkull = (UI_KillSkullShaker) _killTemplate.Instantiate();
+        newSkull.ShakeIntensity = _shakeIntensity;
+        newSkull.Trauma = _trauma;
+        newSkull.ShakeLayer = (ANIM_Vec2TraumaLayer) _shakeLayer.Duplicate();
         
-        FadeTimer.Start(_fadeTime);
-        FadeTimer.Timeout += newSkull.Fade;
+        if (!overrideBodyPart && bodyPart == GC_BodyPart.Head)
+        {
+            newSkull.Texture = _criticalTexture;
+            newSkull.Modulate = _criticalColor;
+        } else
+        {
+            newSkull.Texture = _normalTexture;
+            newSkull.Modulate = _normalColor;
+        }
 
+        FadeTimer.Start(_fadeTime);
         newSkull.MaxScaleReached += Push;
-        newSkull.Init(this);
 
         AddChild(newSkull);
+        newSkull.Init(this);
     }
 
     public void Push() => PushSkull?.Invoke();

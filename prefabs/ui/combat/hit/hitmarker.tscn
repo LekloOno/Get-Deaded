@@ -1,12 +1,25 @@
-[gd_scene load_steps=10 format=3 uid="uid://d06ge8pykx8s1"]
+[gd_scene load_steps=13 format=3 uid="uid://d06ge8pykx8s1"]
 
-[ext_resource type="Script" uid="uid://ds1ebussoj6l7" path="res://script/ui/combat/weapon/hit/marker/UI_HitMarker.cs" id="1_lvplh"]
-[ext_resource type="Script" uid="uid://pxg54fo2ojgy" path="res://script/ui/combat/weapon/hit/marker/UI_KillSkullManager.cs" id="2_n6044"]
-[ext_resource type="Script" uid="uid://c5ie4xhq4n5p7" path="res://script/ui/combat/weapon/hit/marker/UI_DamageMarker.cs" id="2_tnwbf"]
-[ext_resource type="Script" uid="uid://brn5nu2bbuq5w" path="res://script/ui/combat/weapon/hit/marker/UI_KillMarker.cs" id="2_v7leq"]
-[ext_resource type="Texture2D" uid="uid://dw1uugk5o1sxh" path="res://assets/sprites/hit/kill.png" id="4_jkani"]
-[ext_resource type="Script" uid="uid://boxpscnow88nk" path="res://script/ui/combat/weapon/hit/marker/UI_KillSkull.cs" id="5_0m3vp"]
-[ext_resource type="Texture2D" uid="uid://c5qts6d7p7bka" path="res://assets/sprites/hit/headshot_kill.png" id="5_y8ako"]
+[ext_resource type="Script" uid="uid://ds1ebussoj6l7" path="res://script/ui/combat/weapon/hit/marker/UI_HitMarker.cs" id="1_w4cu8"]
+[ext_resource type="Script" uid="uid://pxg54fo2ojgy" path="res://script/ui/combat/weapon/hit/marker/UI_KillSkullManager.cs" id="2_n7502"]
+[ext_resource type="Texture2D" uid="uid://dw1uugk5o1sxh" path="res://assets/sprites/hit/kill.png" id="3_33tg5"]
+[ext_resource type="PackedScene" uid="uid://c5b5ks0l28jp5" path="res://prefabs/ui/combat/hit/kill_skull_shaker.tscn" id="3_n7502"]
+[ext_resource type="Texture2D" uid="uid://c5qts6d7p7bka" path="res://assets/sprites/hit/headshot_kill.png" id="4_4g8la"]
+[ext_resource type="Script" uid="uid://c5ie4xhq4n5p7" path="res://script/ui/combat/weapon/hit/marker/UI_DamageMarker.cs" id="5_oyy5y"]
+[ext_resource type="Script" uid="uid://brn5nu2bbuq5w" path="res://script/ui/combat/weapon/hit/marker/UI_KillMarker.cs" id="6_0bddu"]
+[ext_resource type="Script" uid="uid://foau1gurk2py" path="res://script/engine_tools/animation/shakes/ANIM_Vec2TraumaLayer.cs" id="6_33tg5"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_4g8la"]
+frequency = 0.05
+fractal_octaves = 4
+fractal_gain = 0.8
+
+[sub_resource type="Resource" id="Resource_oyy5y"]
+script = ExtResource("6_33tg5")
+_noise = SubResource("FastNoiseLite_4g8la")
+_reductionRate = 3.0
+_noiseSpeed = 60.0
+metadata/_custom_type_script = "uid://foau1gurk2py"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wngje"]
 bg_color = Color(1, 1, 1, 1)
@@ -32,91 +45,34 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-script = ExtResource("1_lvplh")
+script = ExtResource("1_w4cu8")
 _killMarker = NodePath("UI_KillMarker")
 _damageMarker = NodePath("UI_DamageMarker")
 _killSkull = NodePath("UI_KillSkullManager")
 metadata/_custom_type_script = "uid://ds1ebussoj6l7"
 
-[node name="UI_KillSkullManager" type="Control" parent="." node_paths=PackedStringArray("_killTemplate", "_headshotKillTemplate")]
+[node name="UI_KillSkullManager" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
-script = ExtResource("2_n6044")
-_killTemplate = NodePath("UI_KillSkull")
-_headshotKillTemplate = NodePath("UI_KillSkullHead")
+script = ExtResource("2_n7502")
+_killTemplate = ExtResource("3_n7502")
+_normalTexture = ExtResource("3_33tg5")
+_criticalTexture = ExtResource("4_4g8la")
+_normalColor = Color(1, 1, 1, 1)
+_criticalColor = Color(1, 0.09, 0.197, 1)
 _fadeTime = 2.0
+_shakeIntensity = 450.0
+_shakeLayer = SubResource("Resource_oyy5y")
 metadata/_custom_type_script = "uid://pxg54fo2ojgy"
-
-[node name="UI_KillSkull" type="TextureRect" parent="UI_KillSkullManager"]
-modulate = Color(1, 1, 1, 0.796)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -84.0
-offset_top = -84.0
-offset_right = 44.0
-offset_bottom = 44.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(64, 64)
-mouse_filter = 2
-texture = ExtResource("4_jkani")
-script = ExtResource("5_0m3vp")
-_maxScale = 3.0
-_maxScaleTime = 0.1
-_scaleInTrans = 11
-_normalScale = 0.2
-_normalScaleTime = 0.18
-_scaleOutTrans = 10
-_offset = Vector2(100, 0)
-_offsetTime = 0.4
-_offsetTrans = 10
-_fadeOutTime = 0.25
-_fadeInTime = 0.25
-metadata/_custom_type_script = "uid://boxpscnow88nk"
-
-[node name="UI_KillSkullHead" type="TextureRect" parent="UI_KillSkullManager"]
-modulate = Color(1, 0.164063, 0.262024, 0.796)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -84.0
-offset_top = -84.0
-offset_right = 44.0
-offset_bottom = 44.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(64, 64)
-mouse_filter = 2
-texture = ExtResource("5_y8ako")
-script = ExtResource("5_0m3vp")
-_maxScale = 3.0
-_maxScaleTime = 0.1
-_scaleInTrans = 11
-_normalScale = 0.2
-_normalScaleTime = 0.18
-_scaleOutTrans = 10
-_offset = Vector2(100, 0)
-_offsetTime = 0.4
-_offsetTrans = 10
-_fadeOutTime = 0.25
-_fadeInTime = 0.25
-metadata/_custom_type_script = "uid://boxpscnow88nk"
 
 [node name="UI_DamageMarker" type="Control" parent="." node_paths=PackedStringArray("_markerSticks")]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
-script = ExtResource("2_tnwbf")
+script = ExtResource("5_oyy5y")
 _markerSticks = [NodePath("Control/BotRight"), NodePath("Control2/BotLeft"), NodePath("Control3/TopRight"), NodePath("Control4/TopLeft")]
 _headShotColor = Color(1, 0.745098, 0, 0.862745)
 _normalColor = Color(1, 1, 1, 0.862745)
@@ -252,7 +208,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
-script = ExtResource("2_v7leq")
+script = ExtResource("6_0bddu")
 _markerSticks = [NodePath("Control/BotRight"), NodePath("Control2/BotLeft"), NodePath("Control3/TopRight"), NodePath("Control4/TopLeft")]
 _fadeTime = 0.3
 _fadeBackTime = 0.05

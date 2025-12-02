@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://c5b5ks0l28jp5"]
+
+[ext_resource type="Script" uid="uid://68f0vys1tm3r" path="res://script/ui/combat/weapon/hit/marker/UI_KillSkullShaker.cs" id="1_tqr8d"]
+[ext_resource type="Script" uid="uid://foau1gurk2py" path="res://script/engine_tools/animation/shakes/ANIM_Vec2TraumaLayer.cs" id="2_adnve"]
+[ext_resource type="Texture2D" uid="uid://dw1uugk5o1sxh" path="res://assets/sprites/hit/kill.png" id="3_yiw8s"]
+[ext_resource type="Script" uid="uid://boxpscnow88nk" path="res://script/ui/combat/weapon/hit/marker/UI_KillSkull.cs" id="4_qllvk"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tqr8d"]
+frequency = 0.05
+fractal_octaves = 4
+fractal_gain = 0.8
+
+[sub_resource type="Resource" id="Resource_adnve"]
+script = ExtResource("2_adnve")
+_noise = SubResource("FastNoiseLite_tqr8d")
+_reductionRate = 1.0
+_noiseSpeed = 50.0
+metadata/_custom_type_script = "uid://foau1gurk2py"
+
+[node name="UI_KillSkullShaker" type="Control" node_paths=PackedStringArray("_killSkull")]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(20, 20)
+mouse_filter = 2
+script = ExtResource("1_tqr8d")
+_killSkull = NodePath("UI_KillSkull")
+ShakeLayer = SubResource("Resource_adnve")
+metadata/_custom_type_script = "uid://68f0vys1tm3r"
+
+[node name="UI_KillSkull" type="TextureRect" parent="."]
+self_modulate = Color(1, 1, 1, 0.65)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(64, 64)
+mouse_filter = 2
+texture = ExtResource("3_yiw8s")
+script = ExtResource("4_qllvk")
+_maxScale = 3.0
+_maxScaleTime = 0.1
+_scaleInTrans = 11
+_normalScale = 0.2
+_normalScaleTime = 0.18
+_scaleOutTrans = 10
+_offset = Vector2(100, 0)
+_offsetTime = 0.4
+_offsetTrans = 10
+_fadeOutTime = 0.25
+_fadeInTime = 0.25
+metadata/_custom_type_script = "uid://boxpscnow88nk"

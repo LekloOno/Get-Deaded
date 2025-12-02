@@ -103,7 +103,7 @@
 [ext_resource type="Script" uid="uid://bd37jsqipcwxc" path="res://script/ui/movement/UI_DashReset.cs" id="71_j12ti"]
 [ext_resource type="Script" uid="uid://cq31c653np61x" path="res://script/player/movement/actions/surface-control/PM_AirState.cs" id="72_0vaqj"]
 [ext_resource type="Script" uid="uid://77x30sxsp5c" path="res://script/player/input/actions/combat/PI_Reload.cs" id="75_vj6q7"]
-[ext_resource type="PackedScene" uid="uid://d06ge8pykx8s1" path="res://prefabs/hitmarker.tscn" id="77_fdvd6"]
+[ext_resource type="PackedScene" uid="uid://d06ge8pykx8s1" path="res://prefabs/ui/combat/hit/hitmarker.tscn" id="77_fdvd6"]
 [ext_resource type="Script" uid="uid://bkkj6g5jwcpqc" path="res://script/player/input/actions/ui/PI_Stats.cs" id="77_w8edb"]
 [ext_resource type="Script" uid="uid://b4hdeuwma0ma8" path="res://script/player/combat/weapons/PW_WeaponsHandler.cs" id="81_stdu8"]
 [ext_resource type="Script" uid="uid://c7tdbt357bj80" path="res://script/ui/combat/weapon/hit/number/UI_DamageIndicatorManager.cs" id="82_5dw8r"]
