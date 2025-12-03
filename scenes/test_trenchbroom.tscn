@@ -2057,6 +2057,7 @@ mesh = SubResource("SphereMesh_o3j50")
 
 [node name="SC_AimArenaAmoConfig" type="Area3D" parent="Entities/AimArena"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.8, 0.4, 16)
+collision_layer = 0
 collision_mask = 2
 script = ExtResource("26_mmn4w")
 metadata/_custom_type_script = "uid://c1b6fea15qlys"
@@ -2071,7 +2072,7 @@ script = ExtResource("26_wk1by")
 _enemy = ExtResource("27_xqord")
 _count = 6
 _spawnRadius = 10.0
-_respawnDelay = 0.6
+_respawnDelay = 0.5
 metadata/_custom_type_script = "uid://beb4d7jnqyra"
 
 [node name="PostProcessing" type="MeshInstance3D" parent="."]
