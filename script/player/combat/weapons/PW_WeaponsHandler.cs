@@ -209,15 +209,21 @@ public partial class PW_WeaponsHandler : WeaponSystem
 
     private void BufferSecondary()
     {
+        if (_bufferedSecondary)
+            return;
+
         _bufferedSecondary = true;
-        SwitchEnded += SendSecondary;
+        Available += SendSecondary;
     }
     private void ResetSecondaryBuffer()
     {
+        if (!_bufferedSecondary)
+            return;
+
         _bufferedSecondary = false;
-        SwitchEnded -= SendSecondary;
+        Available -= SendSecondary;
     }
-    private void SendSecondary(object sender, PW_Weapon e)
+    private void SendSecondary()
     {
         ResetSecondaryBuffer();
         _activeWeapon.SecondaryPress();
