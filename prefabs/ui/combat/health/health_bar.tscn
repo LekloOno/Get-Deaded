@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://c37umalpt1ts6"]
+
+[ext_resource type="PackedScene" uid="uid://dvogrhetro621" path="res://prefabs/ui/combat/health/ui_entity_health.tscn" id="1_oqo5d"]
+
+[node name="SubViewportContainer" type="SubViewportContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="UI_EntityHealth" parent="SubViewport" instance=ExtResource("1_oqo5d")]

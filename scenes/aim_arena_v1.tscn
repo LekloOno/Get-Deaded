@@ -5,7 +5,7 @@
 [ext_resource type="Material" uid="uid://c7p68evacni7v" path="res://assets/materials/darkGrid.tres" id="2_3mm7d"]
 [ext_resource type="PackedScene" uid="uid://b5w3ok85lmxgf" path="res://prefabs/player_camchanged.tscn" id="3_0o3ea"]
 [ext_resource type="Shader" uid="uid://cgvs2rofqr7fc" path="res://assets/shaders/toon_post_process.gdshader" id="4_n74u5"]
-[ext_resource type="LightmapGIData" uid="uid://dnqyc5lqkgrt6" path="res://scenes/test_trenchbroom.lmbake" id="5_e58q0"]
+[ext_resource type="PackedScene" uid="uid://cgxay2q63b8m8" path="res://prefabs/simplebot/simplebot.tscn" id="6_3mm7d"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_c33g5"]
 panorama = ExtResource("1_xes0e")
@@ -89,7 +89,5 @@ extra_cull_margin = 16384.0
 ignore_occlusion_culling = true
 mesh = SubResource("QuadMesh_bm8tx")
 
-[node name="LightmapGI" type="LightmapGI" parent="."]
-supersampling = true
-directional = true
-light_data = ExtResource("5_e58q0")
+[node name="CharacterBody3D" parent="." instance=ExtResource("6_3mm7d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1, 1)

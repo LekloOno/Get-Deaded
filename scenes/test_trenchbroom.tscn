@@ -2072,7 +2072,7 @@ script = ExtResource("26_wk1by")
 _enemy = ExtResource("27_xqord")
 _count = 6
 _spawnRadius = 10.0
-_respawnDelay = 0.5
+_respawnDelay = 0.51
 metadata/_custom_type_script = "uid://beb4d7jnqyra"
 
 [node name="PostProcessing" type="MeshInstance3D" parent="."]

@@ -6,6 +6,7 @@ public partial class UI_HealthBar : Control
     [Export] private ProgressBar _body;
     [Export] private ProgressBar _tail;
     [Export] private float _tailSpeed;
+    [Export] private Tween.TransitionType _tailAnimation;
 
     private Tween _tailTween;
     private StyleBoxFlat _bodyColor;
@@ -40,7 +41,7 @@ public partial class UI_HealthBar : Control
 
         _tailTween?.Kill();
         _tailTween = CreateTween();
-        _tailTween.TweenProperty(_tail, "value", _body.Value, _tailSpeed).SetTrans(Tween.TransitionType.Linear).SetEase(Tween.EaseType.InOut);
+        _tailTween.TweenProperty(_tail, "value", _body.Value, _tailSpeed).SetTrans(_tailAnimation);
     }
 
     public void Heal(float currentHealth)

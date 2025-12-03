@@ -1,0 +1,146 @@
+[gd_scene load_steps=10 format=3 uid="uid://dvogrhetro621"]
+
+[ext_resource type="Script" uid="uid://d01sb0k1e87yt" path="res://script/ui/combat/health/UI_EntityHealth.cs" id="1_j0hyn"]
+[ext_resource type="Script" uid="uid://db8e5l76dsikn" path="res://script/ui/combat/health/UI_HealthBar.cs" id="2_qhjjj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tujlf"]
+bg_color = Color(0, 0, 0, 0.505882)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5oo0i"]
+resource_local_to_scene = true
+bg_color = Color(0.883632, 0.842725, 0.825069, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iwqyq"]
+bg_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0kw87"]
+resource_local_to_scene = true
+bg_color = Color(0, 0.49066, 0.829606, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y3kqx"]
+bg_color = Color(0, 0, 0, 0.505882)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6opq1"]
+resource_local_to_scene = true
+bg_color = Color(0.784314, 0.141176, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvlm"]
+resource_local_to_scene = true
+bg_color = Color(1, 1, 1, 1)
+
+[node name="UI_EntityHealth" type="VBoxContainer" node_paths=PackedStringArray("_higherBar", "_lowerBar")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+script = ExtResource("1_j0hyn")
+_higherBar = NodePath("HigherLayer")
+_lowerBar = NodePath("LowerLayer")
+metadata/_custom_type_script = "uid://d01sb0k1e87yt"
+
+[node name="HigherLayer" type="Control" parent="." node_paths=PackedStringArray("_body", "_tail")]
+layout_mode = 2
+script = ExtResource("2_qhjjj")
+_body = NodePath("Body")
+_tail = NodePath("Tail")
+_tailSpeed = 0.5
+_tailAnimation = 6
+metadata/_custom_type_script = "uid://db8e5l76dsikn"
+
+[node name="Tail" type="ProgressBar" parent="HigherLayer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -8.0
+offset_right = 64.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_tujlf")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5oo0i")
+value = 40.43
+show_percentage = false
+
+[node name="Body" type="ProgressBar" parent="HigherLayer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -8.0
+offset_right = 64.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_iwqyq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0kw87")
+value = 27.46
+show_percentage = false
+
+[node name="LowerLayer" type="Control" parent="." node_paths=PackedStringArray("_body", "_tail")]
+layout_mode = 2
+script = ExtResource("2_qhjjj")
+_body = NodePath("Body")
+_tail = NodePath("Tail")
+_tailSpeed = 0.5
+_tailAnimation = 6
+metadata/_custom_type_script = "uid://db8e5l76dsikn"
+
+[node name="Tail" type="ProgressBar" parent="LowerLayer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -8.0
+offset_right = 64.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_y3kqx")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6opq1")
+value = 40.43
+show_percentage = false
+
+[node name="Body" type="ProgressBar" parent="LowerLayer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -8.0
+offset_right = 64.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_iwqyq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1bvlm")
+value = 27.46
+show_percentage = false
