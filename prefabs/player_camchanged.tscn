@@ -215,7 +215,7 @@ _minOutput = 0.15
 _maxOutput = 1.0
 metadata/_custom_type_script = "uid://t5n7py52g5oj"
 
-[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("_healthManager", "_walkProcess", "_wallJump", "_wallClimb", "_groundState", "_cameraControl", "_surfaceControl", "_straffeSnap")]
+[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("_healthManager", "_walkProcess", "_wallJump", "_wallClimb", "_groundState", "_cameraControl", "_surfaceControl", "_straffeSnap", "WeaponsHandler")]
 collision_layer = 2
 collision_mask = 3
 axis_lock_angular_y = true
@@ -232,6 +232,7 @@ _cameraControl = NodePath("Camera Pivot/PC_Anchor/Camera Control")
 _surfaceControl = NodePath("Movement/PM_SurfaceControl")
 _velocityCache = ExtResource("2_7wk04")
 _straffeSnap = NodePath("Movement/PM_StraffeSnap")
+WeaponsHandler = NodePath("Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable/PW_WeaponsHandler")
 
 [node name="GB_PlayerBodyManager" type="Node" parent="." node_paths=PackedStringArray("_body")]
 script = ExtResource("3_ahe41")

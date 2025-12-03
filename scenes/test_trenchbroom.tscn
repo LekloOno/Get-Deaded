@@ -1,4 +1,4 @@
-[gd_scene load_steps=309 format=4 uid="uid://co0vxcbu5hxvc"]
+[gd_scene load_steps=311 format=4 uid="uid://co0vxcbu5hxvc"]
 
 [ext_resource type="Script" uid="uid://b8ob8d1uxja85" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_kt2k2"]
 [ext_resource type="Texture2D" uid="uid://c6o8mw13kagni" path="res://assets/sprites/skyboxes/Sky_trainyard_01_1b2.png" id="1_niaf1"]
@@ -24,6 +24,7 @@
 [ext_resource type="Script" uid="uid://cjmiash71uc7b" path="res://script/global/combat/hit/hit/GC_Hit.cs" id="21_y2alo"]
 [ext_resource type="Script" uid="uid://mgqkiomvv11i" path="res://script/global/combat/hit/hit/GC_HealBox.cs" id="22_583vm"]
 [ext_resource type="Script" uid="uid://sujdlokcwnd6" path="res://script/global/combat/hit/GC_DamageModifier.cs" id="23_qy2j6"]
+[ext_resource type="Script" uid="uid://c1b6fea15qlys" path="res://script/scenario/SC_AimArenaAmoConfig.cs" id="26_mmn4w"]
 [ext_resource type="Script" uid="uid://beb4d7jnqyra" path="res://script/scenario/SC_AimArenaSpawner.cs" id="26_wk1by"]
 [ext_resource type="LightmapGIData" uid="uid://dnqyc5lqkgrt6" path="res://scenes/test_trenchbroom.lmbake" id="27_vqbvp"]
 [ext_resource type="PackedScene" uid="uid://cg6805jlx25is" path="res://prefabs/simplebot/simplebot_aim_arena.tscn" id="27_xqord"]
@@ -1020,6 +1021,9 @@ albedo_color = Color(0.780392, 0.113725, 0.0823529, 0.92549)
 
 [sub_resource type="SphereMesh" id="SphereMesh_o3j50"]
 material = SubResource("StandardMaterial3D_efpjk")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pxgqc"]
+size = Vector3(5.8, 2.4, 6.5)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ux68e"]
 render_priority = -1
@@ -2050,6 +2054,16 @@ shape = SubResource("SphereShape3D_qy2j6")
 mesh = SubResource("SphereMesh_o3j50")
 
 [node name="AimArena" type="Node" parent="Entities"]
+
+[node name="SC_AimArenaAmoConfig" type="Area3D" parent="Entities/AimArena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.8, 0.4, 16)
+collision_mask = 2
+script = ExtResource("26_mmn4w")
+metadata/_custom_type_script = "uid://c1b6fea15qlys"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/AimArena/SC_AimArenaAmoConfig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_pxgqc")
 
 [node name="SC_AimArenaSpawner" type="Node3D" parent="Entities/AimArena"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.8, 0, 16)

@@ -34,7 +34,7 @@ public partial class PWF_FullAuto : PW_Fire
 
     private void ReShoot()
     {
-        if (!_ammos.DidConsume(_ammosPerShot))
+        if (!InfiniteMagazine && !_ammos.DidConsume(_ammosPerShot))
         {
             StopShoot();
             return;

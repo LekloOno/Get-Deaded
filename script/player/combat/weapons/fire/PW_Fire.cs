@@ -25,6 +25,13 @@ public abstract partial class PW_Fire : WeaponComponent
     [Export] public Texture2D Icon {get; private set;}
     [Export] private PCT_Fire _fireTraumaCauser;
 
+    public bool InfiniteAmmo
+    {
+        get => _ammos.InfiniteAmmo;
+        set => _ammos.InfiniteAmmo = value;
+    }
+
+    public bool InfiniteMagazine = false;
     public MATH_AdditiveModifiers RecoilMultiplier => _recoil.Modifier;
     public PW_Ammunition Ammos => _ammos;
     public EventHandler<ShotHitEventArgs> Hit;
@@ -90,7 +97,7 @@ public abstract partial class PW_Fire : WeaponComponent
         Shot?.Invoke(this, _shots.Count);
     }
 
-    protected bool CanShoot() => Time.GetTicksMsec() - _lastShot >= _fireRate && _ammos.DidConsume(_ammosPerShot);
+    protected bool CanShoot() => Time.GetTicksMsec() - _lastShot >= _fireRate && (InfiniteMagazine || _ammos.DidConsume(_ammosPerShot));
 
     public bool Press()
     {

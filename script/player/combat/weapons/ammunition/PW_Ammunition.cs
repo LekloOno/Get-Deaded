@@ -19,6 +19,7 @@ public partial class PW_Ammunition : WeaponComponent
     [Export] private uint _magazinePick;
     [Export] private uint _maxMagazines;
     [Export] protected uint _baseAmmos;
+    public bool InfiniteAmmo = false;
     public bool IsReloading {get; private set;} = false;
     private uint _maxAmmos;
     private uint _unloadedAmmos;
@@ -136,7 +137,10 @@ public partial class PW_Ammunition : WeaponComponent
     public uint Reload()
     {
         uint reloaded = Math.Min(_magazineSize - LoadedAmmos, UnloadedAmmos);
-        UnloadedAmmos -= reloaded;
+
+        if (!InfiniteAmmo)
+            UnloadedAmmos -= reloaded;
+        
         LoadedAmmos += reloaded;
         IsReloading = false;
         ReloadCompleted?.Invoke(this, EventArgs.Empty);

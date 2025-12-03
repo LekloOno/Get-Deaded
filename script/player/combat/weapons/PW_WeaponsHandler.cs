@@ -108,6 +108,18 @@ public partial class PW_WeaponsHandler : WeaponSystem
         Initialized = true;
     }
 
+    public void SetInfiniteAmmo(bool active)
+    {
+        foreach (PW_Weapon weapon in _weapons)
+            weapon.SetInfiniteAmmo(active);
+    }
+
+    public void SetInfiniteMagazine(bool active)
+    {
+        foreach (PW_Weapon weapon in _weapons)
+            weapon.SetInfiniteMagazine(active);
+    }
+
     private void DirectMeleeStop(object sender, EventArgs e) => Melee.PrimaryRelease();
     private void DirectMeleeStart(object sender, EventArgs e) => Melee.PrimaryPress();
 

@@ -94,6 +94,18 @@ public abstract partial class PW_Weapon : WeaponComponent
         _currentFire = InitCurrentFire();
     }
 
+    public void SetInfiniteAmmo(bool active)
+    {
+        foreach (PW_Fire fire in _fires)
+            fire.InfiniteAmmo = active;
+    }
+
+    public void SetInfiniteMagazine(bool active)
+    {
+        foreach (PW_Fire fire in _fires)
+            fire.InfiniteMagazine = active;
+    }
+
     public void Disable()
     {
         _ads?.Disable();

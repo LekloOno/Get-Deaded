@@ -14,6 +14,7 @@ public partial class PM_Controller : CharacterBody3D, GB_IExternalBodyManager
     [Export] private PM_VelocityCache _velocityCache;
     [Export] private PM_StraffeSnap _straffeSnap;
     [Export] private float _debugDashStrength = 10f;
+    [Export] public PW_WeaponsHandler WeaponsHandler {get; private set;}
     
     public EventHandler OnDie;
 
