@@ -23,7 +23,7 @@
 
 [sub_resource type="Resource" id="Resource_ad73j"]
 script = ExtResource("7_2b0g7")
-_damage = 6.0
+_damage = 9.0
 _inspectorModifiers = null
 metadata/_custom_type_script = "uid://cjmiash71uc7b"
 
@@ -95,7 +95,7 @@ metadata/_custom_type_script = "uid://r8ad50yt78dm"
 [node name="PWA_SimpleADS" type="Node3D" parent="." node_paths=PackedStringArray("_fire")]
 script = ExtResource("9_r4wwr")
 _spreadMultiplier = -0.85
-_recoilMultiplier = -0.2
+_recoilMultiplier = -0.35
 _fire = NodePath("../PWF_FullAuto")
 _scopeInTime = 0.2
 _scopeOutTime = 0.2
