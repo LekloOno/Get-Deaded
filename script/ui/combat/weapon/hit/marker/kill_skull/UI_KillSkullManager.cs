@@ -14,6 +14,7 @@ public partial class UI_KillSkullManager : Control
     [Export] private float _trauma = 1f;
     [Export] private float _shakeIntensity = 10f;
     [Export] private ANIM_Vec2TraumaLayer _shakeLayer;
+    [Export] public uint MaxChainSize {get; private set;} = 8;
 
 
     public Action PushSkull;
