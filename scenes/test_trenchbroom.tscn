@@ -2055,11 +2055,12 @@ mesh = SubResource("SphereMesh_o3j50")
 
 [node name="AimArena" type="Node" parent="Entities"]
 
-[node name="SC_AimArenaAmoConfig" type="Area3D" parent="Entities/AimArena"]
+[node name="SC_AimArenaAmoConfig" type="Area3D" parent="Entities/AimArena" node_paths=PackedStringArray("_game")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.8, 0.4, 16)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("26_mmn4w")
+_game = NodePath("../SC_AimArenaSpawner")
 metadata/_custom_type_script = "uid://c1b6fea15qlys"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/AimArena/SC_AimArenaAmoConfig"]

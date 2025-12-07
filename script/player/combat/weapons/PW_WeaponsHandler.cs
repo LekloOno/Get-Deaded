@@ -108,6 +108,16 @@ public partial class PW_WeaponsHandler : WeaponSystem
         Initialized = true;
     }
 
+    public void DisableFire() => _ready = false;
+    public void EnableFire()
+    {
+        if (!_ready)
+        {
+            _ready = true;
+            Available?.Invoke();
+        }
+    }
+
     public void SetInfiniteAmmo(bool active)
     {
         foreach (PW_Weapon weapon in _weapons)

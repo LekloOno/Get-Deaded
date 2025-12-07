@@ -8,21 +8,45 @@ public partial class SC_AimArenaSpawner : Node3D
     [Export] private PackedScene _enemy;
     [Export] private uint _count = 4;
     [Export] private float _spawnRadius = 20f;
+    [Export] private float _spawnMinDistance = 7f;
     [Export] private float _respawnDelay = 0f;
+    [Export] private float _roundTime = 30f;
+    [Export] private float _countDown = 2f;
     private E_Enemy _caca;
     private Timer _cacaTimer;
     private List<E_Enemy> _enemies = [];
     private List<Timer> _respawnTimers = [];
     private Random _rng = new();
+    private PM_Controller _player;
+    public SceneTreeTimer RoundTimer;
+    public SceneTreeTimer CountDownTimer;
+    private uint _kills = 0;
 
     public override void _Ready()
     {
-        
+        CreateBots();
+    }
+
+    public void InitGame(PM_Controller player)
+    {
+        //ClearBots();
+        _kills = 0;
+        _player = player;
+        _player?.WeaponsHandler.DisableFire();
+
+        CountDownTimer = GetTree().CreateTimer(_countDown);
+        CountDownTimer.Timeout += StartGame;
+
+        //CreateBots();
+    }
+
+    private void CreateBots()
+    {
         for (int i = 0; i < _count; i++)
         {
             int id = i;
 
-            Timer timer = new(){WaitTime = _respawnDelay, OneShot = true};
+            Timer timer = new() { WaitTime = _respawnDelay, OneShot = true };
 
             AddChild(timer);
 
@@ -32,13 +56,48 @@ public partial class SC_AimArenaSpawner : Node3D
             E_Enemy enemy = _enemy.Instantiate<E_Enemy>();
 
             AddChild(enemy);
-            
-            enemy.Position = RandomPosition();
-            enemy.OnDie += (senderLayer) => _respawnTimers[id].Start();
+
+            Spawn(enemy);
+            enemy.OnDie += (_) => Killed(id);
 
             _enemies.Add(enemy);
         }
     }
+
+    private void ClearBots()
+    {
+        foreach (E_Enemy enemy in _enemies)
+            enemy.QueueFree();
+
+        foreach (Timer timer in _respawnTimers)
+            timer.QueueFree();
+
+        _enemies.Clear();
+        _respawnTimers.Clear();
+    }
+
+    private void Killed(int id)
+    {
+        _kills ++;
+        _respawnTimers[id].Start();
+    }
+
+    private void StartGame()
+    {
+        CountDownTimer.Timeout -= StartGame;
+
+        _player?.WeaponsHandler.EnableFire();
+        
+        RoundTimer = GetTree().CreateTimer(_roundTime);
+        RoundTimer.Timeout += StopGame;
+    }
+
+    private void StopGame()
+    {
+        RoundTimer.Timeout -= StopGame;
+        //GD.Print("Got " + _kills + " kills !");
+    }
+
 
     private Vector3 RandomPosition()
     {
@@ -47,18 +106,36 @@ public partial class SC_AimArenaSpawner : Node3D
         rot.Y = _rng.NextSingle() * 360;
         RotationDegrees = rot;
         
-        Vector3 rnd = - Basis.Z * _spawnRadius;
+        float distance = _spawnMinDistance + _rng.NextSingle() * (_spawnRadius - _spawnMinDistance);
+        Vector3 rnd = - Basis.Z * distance;
         
         RotationDegrees = initRot;
 
         return rnd;
     }
 
+    public void Spawn(E_Enemy enemy)
+    {
+        Vector3 position = RandomPosition();
+        
+        Vector3 target = _player == null
+            ? GlobalPosition
+            : _player.GlobalPosition;
+        
+        Vector3 direction = new(
+            target.X,
+            0, target.Z);
+        
+
+        enemy.ResetPhysicsInterpolation();
+        enemy.Enable();
+        enemy.Position = position;
+        enemy.LookAt(direction);
+    }
+
     public void Respawn(int id)
     {
         E_Enemy enemy = _enemies[id];
-        enemy.Position = RandomPosition();
-        enemy.ResetPhysicsInterpolation();
-        enemy.Enable();
+        Spawn(enemy);
     }
 }

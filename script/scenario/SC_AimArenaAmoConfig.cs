@@ -1,24 +1,39 @@
+using System.Reflection.Metadata.Ecma335;
 using Godot;
 
 [GlobalClass]
 public partial class SC_AimArenaAmoConfig : Area3D
 {
+    [Export] private SC_AimArenaSpawner _game;
     bool _infActive = false;
-    public override void _Process(double delta)
+    public override void _UnhandledKeyInput(InputEvent @event)
     {
         if (Input.IsActionJustPressed("special_interaction"))
         {
-            foreach (var body in GetOverlappingBodies())
-            {
-                
-                if (body is PM_Controller controller)
-                {
-                    _infActive = !_infActive;
-                    controller.WeaponsHandler.SetInfiniteMagazine(_infActive);
-                    controller.WeaponsHandler.SetInfiniteAmmo(_infActive);
-                    return;
-                }
-            }
+            if (!TryGetPlayer(out PM_Controller player))
+                return;
+
+            _infActive = !_infActive;
+            player.WeaponsHandler.SetInfiniteMagazine(_infActive);
+            player.WeaponsHandler.SetInfiniteAmmo(_infActive);
+        } else if (Input.IsActionJustPressed("start_game"))
+        {
+            if (!TryGetPlayer(out PM_Controller player))
+                return;
+
+            _game.InitGame(player);
         }
+    }
+
+    private bool TryGetPlayer(out PM_Controller player)
+    {
+        foreach (var body in GetOverlappingBodies())
+            if (body is PM_Controller p)
+            {
+                player = p;
+                return true;
+            }
+        player = null;
+        return false;
     }
 }
