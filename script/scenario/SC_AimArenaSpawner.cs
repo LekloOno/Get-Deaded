@@ -116,21 +116,19 @@ public partial class SC_AimArenaSpawner : Node3D
 
     public void Spawn(E_Enemy enemy)
     {
-        Vector3 position = RandomPosition();
+        enemy.Enable();
         
+        enemy.Position = RandomPosition();
+
         Vector3 target = _player == null
             ? GlobalPosition
             : _player.GlobalPosition;
         
-        Vector3 direction = new(
-            target.X,
-            0, target.Z);
-        
+        target.Y = enemy.GlobalPosition.Y;
 
+        enemy.LookAt(target);
+        
         enemy.ResetPhysicsInterpolation();
-        enemy.Enable();
-        enemy.Position = position;
-        enemy.LookAt(direction);
     }
 
     public void Respawn(int id)
