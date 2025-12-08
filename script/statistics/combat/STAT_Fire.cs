@@ -26,10 +26,10 @@ public class STAT_Fire
 
     public void HandleHit(object sender, ShotHitEventArgs hit)
     {
-        if (hit == ShotHitEventArgs.MISS)
+        if (hit.Missed)
             return;
 
-        if (hit == ShotHitEventArgs.ENV)
+        if (hit.IsEnv)
         {
             Shots.Value --;
             return;
@@ -39,7 +39,7 @@ public class STAT_Fire
         LocalHits.Value[(int)hit.HurtBox.BodyPart] ++;
         Damage.Value += hit.Damage;
         
-        if (hit.Kill)
+        if (hit.Killed)
             Kills.Value ++;
     }
 

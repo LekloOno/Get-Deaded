@@ -20,7 +20,7 @@ public partial class UI_HitMarker : Control
         if (e.HurtBox == null || e.Target == null)
             return;
         
-        if (e.Kill)
+        if (e.Killed)
         {
             _killMarker.StartAnim();
             _killSkull.PopSkull(e.HurtBox.BodyPart, e.OverrideBodyPart);

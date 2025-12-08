@@ -27,6 +27,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
     [Export] public PW_Weapon Melee {get; private set;}
     [Export] private PM_SurfaceControl _surfaceControl;
     [Export] private float _meleeRecover;
+    public GE_CombatEntity OwnerEntity {get; private set;}
     public EventHandler<ShotHitEventArgs> Hit;
 
     public SwitchEvent SwitchStarted;
@@ -71,17 +72,22 @@ public partial class PW_WeaponsHandler : WeaponSystem
     
     public bool Initialized {get; private set;} = false;
 
+    public void Init(GE_CombatEntity owner)
+    {
+        OwnerEntity = owner;
+    }
+
     public override void _Ready()
     {
         foreach(PW_Weapon weapon in _weapons)
         {
-            weapon.Initialize(_shakeableCamera, _camera, _surfaceControl, _recoilController, _ownerBody);
+            weapon.Initialize(_shakeableCamera, _camera, _surfaceControl, _recoilController, _ownerBody, this);
             weapon.Hit += (o, e) => Hit?.Invoke(o, e);
             weapon.ADSStarted += () => ADSStarted?.Invoke();
             weapon.ADSStopped += () => ADSStopped?.Invoke();
         }
 
-        Melee.Initialize(_shakeableCamera, _camera, _surfaceControl, _recoilController, _ownerBody);
+        Melee.Initialize(_shakeableCamera, _camera, _surfaceControl, _recoilController, _ownerBody, this);
         Melee.Hit += (o, e) => Hit?.Invoke(o, e);
 
         _activeWeapon = Melee;

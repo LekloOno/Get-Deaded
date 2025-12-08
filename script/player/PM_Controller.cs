@@ -2,7 +2,7 @@ using System;
 using Godot;
 
 [GlobalClass]
-public partial class PM_Controller : CharacterBody3D, GB_IExternalBodyManager
+public partial class PM_Controller : CharacterBody3D, GB_IExternalBodyManager, GE_CombatEntity
 {
     [Export] private PH_Manager _healthManager;
     [Export] private PI_Walk _walkProcess;
@@ -37,6 +37,10 @@ public partial class PM_Controller : CharacterBody3D, GB_IExternalBodyManager
         }
     }
 
+    public GC_HealthManager HealthManager => _healthManager;
+    public GB_IExternalBodyManager Body => this;
+
+
     public void ResetGravity()
     {
         _hasSpecialGravity = false;
@@ -52,6 +56,7 @@ public partial class PM_Controller : CharacterBody3D, GB_IExternalBodyManager
     public override void _Ready()
     {
         _healthManager.TopHealthLayer.OnDie += Die;
+        WeaponsHandler.Init(this);
     }
 
     private void NormalBehavior(object sender, double delta)

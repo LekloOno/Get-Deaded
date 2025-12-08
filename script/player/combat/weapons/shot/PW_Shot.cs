@@ -26,6 +26,9 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
     [Export] private float _maxTrauma = 0.2f;
 
     private GB_ExternalBodyManagerWrapper _ownerBody;
+    public PW_Fire Fire {get; protected set;}
+    protected PW_Weapon _weapon => Fire.Weapon;
+    protected GE_CombatEntity _owner => Fire.Weapon.Handler.OwnerEntity;
 
     public EventHandler<ShotHitEventArgs> Hit;
     public MATH_AdditiveModifiers SpreadMultiplier {get; private set;} = new();
@@ -40,8 +43,9 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
 
     protected Vector3 KnockBackFrom(Vector3 target) => KnockBack * target.Normalized() + KnockBackDirFlatAdd.Result();
 
-    public void Initialize(GB_ExternalBodyManagerWrapper ownerBody)
+    public void Initialize(GB_ExternalBodyManagerWrapper ownerBody, PW_Fire fire)
     {
+        Fire = fire;
         _ownerBody = ownerBody;
         _hitData.InitializeModifiers();
         SpecInitialize(ownerBody);

@@ -24,6 +24,7 @@ public abstract partial class PW_Fire : WeaponComponent
     [Export] public bool IsDerived;     // To indicate that this fire should be considered as a derived fire mode. Only usefull for ui, to not display this fire mode.
     [Export] public Texture2D Icon {get; private set;}
     [Export] private PCT_Fire _fireTraumaCauser;
+    public PW_Weapon Weapon {get; protected set;}
 
     public bool InfiniteAmmo
     {
@@ -45,8 +46,9 @@ public abstract partial class PW_Fire : WeaponComponent
     private static Random _random = new();
 
 
-    public void Initialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManagerWrapper ownerBody)
+    public void Initialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManagerWrapper ownerBody, PW_Weapon weapon)
     {
+        Weapon = weapon;
         if (_fireTraumaCauser != null)
         {
             _fireTraumaCauser.Initialize(shakeableCamera);
@@ -60,7 +62,7 @@ public abstract partial class PW_Fire : WeaponComponent
 
         foreach (PW_Shot shot in _shots)
         {
-            shot.Initialize(ownerBody);
+            shot.Initialize(ownerBody, this);
             shot.Hit += (o, e) => Hit?.Invoke(o, e);
         }
     }

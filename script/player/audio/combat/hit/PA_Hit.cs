@@ -17,10 +17,10 @@ public partial class PA_Hit : Node
 
     public void HandleHit(object sender, ShotHitEventArgs hit)
     {
-        if (hit.IsNotEnemy())
+        if (hit.Missed)
             return;
 
-        if (hit.Kill)
+        if (hit.Killed)
             _kill?.PlaySound();
 
         if (!hit.OverrideBodyPart && hit.HurtBox.BodyPart == GC_BodyPart.Head)

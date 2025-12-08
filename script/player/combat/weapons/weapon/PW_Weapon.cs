@@ -46,6 +46,7 @@ public abstract partial class PW_Weapon : WeaponComponent
     [ExportCategory("Visuals")]
     [Export] public Texture2D Icon {get; private set;}
     [Export] public Color IconColor {get; private set;}
+    public PW_WeaponsHandler Handler {get; private set;}
     
     public bool ADSActive => _ads == null ? false : _ads.Active;
     public EventHandler<ShotHitEventArgs> Hit;
@@ -73,8 +74,9 @@ public abstract partial class PW_Weapon : WeaponComponent
     /// <param name="surfaceControl">The owner's surface control.</param>
     /// <param name="recoilController">The owner's recoil controller.</param>
     /// <param name="ownerBody">The owner's external forces manager.</param>
-    public void Initialize(PC_Shakeable shakeableCamera, PC_DirectCamera camera, PM_SurfaceControl surfaceControl, PC_Recoil recoilController, GB_ExternalBodyManagerWrapper ownerBody)
+    public void Initialize(PC_Shakeable shakeableCamera, PC_DirectCamera camera, PM_SurfaceControl surfaceControl, PC_Recoil recoilController, GB_ExternalBodyManagerWrapper ownerBody, PW_WeaponsHandler handler)
     {
+        Handler = handler;
         _surfaceControl = surfaceControl;
         if (_ads != null)
         {
@@ -87,7 +89,7 @@ public abstract partial class PW_Weapon : WeaponComponent
 
         foreach(PW_Fire fire in _fires)
         {
-            fire.Initialize(shakeableCamera, recoilController, ownerBody);
+            fire.Initialize(shakeableCamera, recoilController, ownerBody, this);
             fire.Shot += (o, e) => Shot?.Invoke();
             fire.Hit += (o, e) => Hit?.Invoke(o, e);
         }

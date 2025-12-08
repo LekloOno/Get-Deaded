@@ -40,27 +40,19 @@ public partial class PWS_ShapeScan : PW_Shot
                         new(
                             hurtBox.HealthManager,
                             hurtBox.HealthManager.GetExposedLayer(),
-                            hurtBox,
-                            takenDamage,
-                            killed,
+                            hurtBox, takenDamage, killed,
+                            _weapon, Fire, _owner,
                             overflow,
                             _ignoreCrit
                         ),
-                        hit,
-                        castOrigin
+                        hit, castOrigin
                     );
                 }
                 else
-                {
-                    DoHit(ShotHitEventArgs.MISS, hit, castOrigin);
-                }
+                    DoHit(ShotHitEventArgs.Miss(_weapon, Fire, _owner), hit, castOrigin);
             }
-
             _trail?.Shoot(GlobalPosition + _shapeCast.TargetPosition.Length() * direction.Normalized());
             HandleKick(castOrigin, castDirection);
         }
-
-
     }
-
 }
