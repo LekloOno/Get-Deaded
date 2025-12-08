@@ -7,7 +7,7 @@ using Godot.Collections;
 public partial class UIW_CombatStats : UIW_Stats
 {
     [Export] private UIW_PlayerStat _uiPlayerStatTemplate;
-    [Export] private Array<STAT_Combat> _playersStats = [];
+    [Export] private Array<STAT_CombatTracker> _playersStats = [];
     [Export] private PI_Stats _statsInput;
     private List<UIW_PlayerStat> _uiPlayerStats = [];
 
@@ -21,7 +21,7 @@ public partial class UIW_CombatStats : UIW_Stats
         if (_playersStats.Count == 0)
             return;
         
-        STAT_Combat c = _playersStats.ElementAt(0);
+        STAT_CombatTracker c = _playersStats.ElementAt(0);
         
         if (c.Initialized)
             Initialize();
@@ -39,7 +39,7 @@ public partial class UIW_CombatStats : UIW_Stats
         
         _uiPlayerStats.Clear();
 
-        foreach (STAT_Combat combat in _playersStats)
+        foreach (STAT_CombatTracker combat in _playersStats)
         {
             UIW_PlayerStat stat = (UIW_PlayerStat) _uiPlayerStatTemplate.Duplicate();
             stat.Initialize(combat);
