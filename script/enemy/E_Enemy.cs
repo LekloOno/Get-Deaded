@@ -1,7 +1,7 @@
 using System;
 using Godot;
 
-public partial class E_Enemy : GB_CharacterBody
+public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 {
     [Export] private GC_HealthManager _healthManager;
     [Export] private float _hideDelay;
@@ -12,11 +12,14 @@ public partial class E_Enemy : GB_CharacterBody
     [Export] private float _drag = 10f;
     [Export] private Color _hitColor = new(1f, 1f, 1f, 1f);
     [Export] private float _hitTime = 0.15f;
+    [Export] private uint _score = 0;
     private ShaderMaterial _surfaceMeshMaterial;
     private ShaderMaterial _jointMeshMaterial;
     private SceneTreeTimer _hideTimer;
-    public HealthEventHandler OnDie { get => _healthManager.TopHealthLayer.OnDie; set => _healthManager.TopHealthLayer.OnDie = value;}
-    public HealthEventHandler<DamageEventArgs> OnDamage { get => _healthManager.TopHealthLayer.OnDamage; set => _healthManager.TopHealthLayer.OnDamage = value;}
+    //public HealthEventHandler OnDie { get => _healthManager.TopHealthLayer.OnDie; set => _healthManager.TopHealthLayer.OnDie = value;}
+    //public HealthEventHandler<DamageEventArgs> OnDamage { get => _healthManager.TopHealthLayer.OnDamage; set => _healthManager.TopHealthLayer.OnDamage = value;}
+    public EnemyHealthEventHandler OnDie {get; set;}
+    public EnemyHealthEventHandler<DamageEventArgs> OnDamage {get; set;}
 
     private BaseMaterial3D.ShadingModeEnum _initialJointShadingMode;
     private Color _initialColor;
@@ -37,8 +40,21 @@ public partial class E_Enemy : GB_CharacterBody
         }
     }
 
+    public uint Score => _score;
+
+    public GC_HealthManager HealthManager => _healthManager;
+
+    public PW_WeaponsHandler WeaponsHandler => null;
+
+    public GB_IExternalBodyManager Body => this;
+
+    
+
     public override void _Ready()
     {
+        _healthManager.TopHealthLayer.OnDie += (layer) => OnDie?.Invoke(this, layer);
+        _healthManager.TopHealthLayer.OnDamage += (layer, damageArgs) => OnDamage?.Invoke(this, layer, damageArgs);
+
         if(_surfaceMesh?.Mesh.SurfaceGetMaterial(0) is ShaderMaterial surfaceMat)
         {
             _surfaceMeshMaterial = surfaceMat;
@@ -58,7 +74,7 @@ public partial class E_Enemy : GB_CharacterBody
         OnDamage += PlayHit;
     }
 
-    private void PlayHit(GC_Health senderLayer, DamageEventArgs e)
+    private void PlayHit(E_IEnemy _, GC_Health senderLayer, DamageEventArgs e)
     {
         _surfaceMeshMaterial.SetShaderParameter("albedo", _hitColor);
 
@@ -75,7 +91,7 @@ public partial class E_Enemy : GB_CharacterBody
         _jointMeshMaterial.SetShaderParameter("albedo", _initialJointColor);
     }
 
-    public void PlayDeath(GC_Health health)
+    public void PlayDeath(E_IEnemy _, GC_Health health)
     {
         _lootDropper.Drop();
         _traumaCauser.CauseTrauma();
