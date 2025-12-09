@@ -12,6 +12,9 @@ public partial class STAT_Combat
 
     public Action GotInitialized;
 
+    public STAT_Combat(GE_CombatEntity entity) :
+    this(entity.WeaponsHandler.Weapons, entity.WeaponsHandler.Melee, entity.HealthManager){}
+
     public STAT_Combat(Godot.Collections.Array<PW_Weapon> weapons, PW_Weapon melee, GC_HealthManager healthManager)
     {
         Weapons = [.. weapons
@@ -37,4 +40,10 @@ public partial class STAT_Combat
 
 
     private void CountDeath(GC_Health senderLayer) => Deaths.Value ++;
+    public void Disable()
+    {
+        MeleeWeapon.Disable();
+        foreach (STAT_Weapon weapon in Weapons)
+            weapon.Disable();
+    }
 }

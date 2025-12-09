@@ -42,7 +42,7 @@ public partial class UIW_CombatStats : UIW_Stats
         foreach (STAT_CombatTracker combat in _playersStats)
         {
             UIW_PlayerStat stat = (UIW_PlayerStat) _uiPlayerStatTemplate.Duplicate();
-            stat.Initialize(combat);
+            stat.Initialize(combat.Data);
             _uiPlayerStats.Add(stat);
             AddChild(stat);
         }

@@ -59,4 +59,10 @@ public class STAT_Weapon
             })
             .ToArray();
     }
+
+    public void Disable()
+    {
+        foreach (STAT_Fire fire in Fires)
+            fire.Disable();
+    }
 }

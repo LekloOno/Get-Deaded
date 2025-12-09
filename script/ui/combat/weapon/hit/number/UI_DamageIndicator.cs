@@ -60,7 +60,11 @@ public partial class UI_DamageIndicator : Label
 
     public override void _Process(double delta)
     {
-        Vector3 worldPosition = _target.GlobalPosition + new Vector3(0f, HeightOffset, 0f);
+        Vector3 worldPosition = new Vector3(0f, HeightOffset, 0f);
+
+        if (_target != null && IsInstanceValid(_target))
+            worldPosition += _target.GlobalPosition;
+
         Visible = !_camera.IsPositionBehind(worldPosition);
         Position = _camera.UnprojectPosition(worldPosition);
     }

@@ -13,6 +13,8 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
     [Export] private Color _hitColor = new(1f, 1f, 1f, 1f);
     [Export] private float _hitTime = 0.15f;
     [Export] private uint _score = 0;
+    [Export] private GC_Health _healthOverride = null;
+
     private ShaderMaterial _surfaceMeshMaterial;
     private ShaderMaterial _jointMeshMaterial;
     private SceneTreeTimer _hideTimer;
@@ -52,6 +54,9 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 
     public override void _Ready()
     {
+        if (_healthOverride != null)
+            _healthManager.TopHealthLayer = _healthOverride;
+
         _healthManager.TopHealthLayer.OnDie += (layer) => OnDie?.Invoke(this, layer);
         _healthManager.TopHealthLayer.OnDamage += (layer, damageArgs) => OnDamage?.Invoke(this, layer, damageArgs);
 

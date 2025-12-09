@@ -11,8 +11,11 @@ public class STAT_Fire
     public Texture2D Icon {get;}
     public Color IconColor {get;}
 
+    private PW_Fire _fire;
+
     public STAT_Fire(PW_Fire fire, Texture2D defaultIcon, Color color)
     {
+        _fire = fire;
         if (fire.Icon != null)
             Icon = fire.Icon;
         else
@@ -44,4 +47,10 @@ public class STAT_Fire
     }
 
     public void HandleShot(object sender, int shots) => Shots.Value += shots;
+
+    public void Disable()
+    {
+        _fire.Hit -= HandleHit;
+        _fire.Shot -= HandleShot;
+    }
 }

@@ -6,7 +6,7 @@ using Godot.Collections;
 public partial class GC_HealthManager : Node3D
 {
     [Export] public GB_ExternalBodyManagerWrapper _body;
-    [Export] public GC_Health TopHealthLayer {get; private set;}
+    [Export] public GC_Health TopHealthLayer {get; set;}
     [Export] private Array<GC_HurtBox> _hurtBoxes;
     public HealthInitEventArgs InitState {get; private set;} = null;
 
