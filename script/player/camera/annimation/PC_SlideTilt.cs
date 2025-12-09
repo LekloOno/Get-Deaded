@@ -44,12 +44,14 @@ public partial class PC_SlideTilt : Node3D
 
         float angle = (_strength * velDirScalar - Rotation.Z) * (float)delta * _resetSpeed;
         RotateZ(angle);
+        Transform = Transform.Orthonormalized();
     }
 
     private void ResetTilt(double delta)
     {
         float angle = (-Rotation.Z)* (float)delta * _resetSpeed;
         RotateZ(angle); 
+        Transform = Transform.Orthonormalized();
     }
 
 }

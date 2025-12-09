@@ -39,6 +39,7 @@ public partial class PC_Control : Node3D
             RotateFlatDir(sensMotion.X);
             RotateXClamped(sensMotion.Y);
             MouseMove.Invoke(this, sensMotion);
+            Transform = Transform.Orthonormalized();
         }
     }
 

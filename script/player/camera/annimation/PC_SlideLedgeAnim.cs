@@ -87,6 +87,7 @@ public partial class PC_SlideLedgeAnim : Node3D
         float rotZ = curvY * _strengthZ * _zDirection;
 
         RotationDegrees = new(rotX, 0, rotZ);
+        Transform = Transform.Orthonormalized();
 
         _curveX += (float)delta/_duration;
     }

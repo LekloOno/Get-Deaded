@@ -51,6 +51,7 @@ public partial class PC_Spring : Node3D
         float xAngularDisplacement = Mathf.Min(absSpringHeight * AngularDisplacement, MaxAngularDisplacement) * signSpringHeight;
         float zAngularDisplacement = Mathf.Min(absSpringHeight * AngularZDisplacement, MaxAngularZDisplacement) * signSpringHeight;
         RotationDegrees = new Vector3(xAngularDisplacement, 0f, zAngularDisplacement);
+        Transform = Transform.Orthonormalized();
 
         Vector3 normalizedSpringPosition = localSpringPosition.Normalized();
         float linearDisplacementCoef = Mathf.Min(localSpringPosition.Length() * LinearDisplacement, MaxLinearDisplacement);

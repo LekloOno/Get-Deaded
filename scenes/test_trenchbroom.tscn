@@ -2801,6 +2801,7 @@ shape = SubResource("ConvexPolygonShape3D_ru68o")
 
 [node name="shoot map" type="CSGCombiner3D" parent="Map/Node"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51, 3, 42.5)
+visible = false
 use_collision = true
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="Map/Node/shoot map"]
@@ -2845,6 +2846,7 @@ skeleton = NodePath("../..")
 
 [node name="oui" type="CSGCombiner3D" parent="Map/Node"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49, 1, 44)
+visible = false
 use_collision = true
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="Map/Node/oui"]
@@ -3216,6 +3218,7 @@ _gameManager = NodePath("..")
 metadata/_custom_type_script = "uid://b361d5nxjt30o"
 
 [node name="PostProcessing" type="MeshInstance3D" parent="."]
+visible = false
 material_override = SubResource("ShaderMaterial_ux68e")
 extra_cull_margin = 16384.0
 ignore_occlusion_culling = true

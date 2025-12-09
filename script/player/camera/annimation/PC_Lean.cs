@@ -43,5 +43,6 @@ public partial class PC_Lean : Node3D
             return;
 
         GlobalRotate(leanAxis, _dampedAcceleration.Length() * Strength * 0.1f);
+        Transform = Transform.Orthonormalized();
     }
 }

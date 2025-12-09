@@ -240,6 +240,7 @@ _body = NodePath("..")
 metadata/_custom_type_script = "uid://bsqmpk5maq3ow"
 
 [node name="Camera Pivot" type="Node3D" parent="."]
+physics_interpolation_mode = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0)
 top_level = true
 script = ExtResource("3_31qv1")
@@ -271,7 +272,7 @@ target_position = Vector3(0, 0, -0.8)
 [node name="PC_Anchor" type="Node3D" parent="Camera Pivot" node_paths=PackedStringArray("_target")]
 physics_interpolation_mode = 2
 script = ExtResource("4_wobo6")
-_target = NodePath("../../Body/SpatialAnchor/RemoteTransform3D")
+_target = NodePath("../../Body/SpatialAnchor/CameraPosition")
 metadata/_custom_type_script = "uid://kabi8i2dqa4f"
 
 [node name="Camera Control" type="Node3D" parent="Camera Pivot/PC_Anchor" node_paths=PackedStringArray("_flatDir")]
@@ -308,7 +309,7 @@ MaxAngularDisplacement = 20.01
 MaxAngularZDisplacement = 6.01
 LinearDisplacement = 0.03
 MaxLinearDisplacement = 0.05
-_cameraTarget = NodePath("../../../../../../../Body/SpatialAnchor/RemoteTransform3D")
+_cameraTarget = NodePath("../../../../../../../Body/SpatialAnchor/CameraPosition")
 
 [node name="PC_Lean" type="Node3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing/PC_Spring" node_paths=PackedStringArray("_camera", "_controller")]
 script = ExtResource("7_64lfg")
@@ -370,7 +371,6 @@ fov = 103.0
 script = ExtResource("12_htv2j")
 
 [node name="Label3D" type="Label3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing" node_paths=PackedStringArray("_controller")]
-physics_interpolation_mode = 2
 transform = Transform3D(0.997204, -0.00519158, 0.0745445, 0.00178622, 0.998955, 0.0456761, -0.0747032, -0.0454155, 0.996171, -0.584324, -0.222796, -0.294555)
 layers = 2
 pixel_size = 0.001
@@ -385,7 +385,6 @@ _maxSpeed = 60.0
 _controller = NodePath("../../../../../../..")
 
 [node name="weapons" type="Sprite3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing"]
-physics_interpolation_mode = 2
 transform = Transform3D(0.991482, 0, -0.13025, 0, 1, 0, 0.13025, 0, 0.991482, 0.249234, 0.02148, -0.3)
 layers = 2
 pixel_size = 0.0003
@@ -402,7 +401,6 @@ render_target_update_mode = 4
 _weaponsHandler = NodePath("../../../PC_Spring/PC_Lean/PC_SlideTilt/PC_SlideLedgeAnim/PC_Shakeable/PW_WeaponsHandler")
 
 [node name="health" type="Sprite3D" parent="Camera Pivot/PC_Anchor/Camera Control/PC_Recoil/PC_SprintLean/PC_Bobbing"]
-physics_interpolation_mode = 2
 transform = Transform3D(0.154622, -0.000283032, 0.0108085, 0, 0.154947, 0.00405743, -0.0108123, -0.00404754, 0.154569, -0.485, -0.28, -0.3)
 layers = 2
 texture = SubResource("ViewportTexture_7bleo")
@@ -593,7 +591,7 @@ debug_color = Color(1, 0, 0, 0.713726)
 
 [node name="SpatialAnchor" type="Node3D" parent="Body"]
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Body/SpatialAnchor"]
+[node name="CameraPosition" type="RemoteTransform3D" parent="Body/SpatialAnchor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
 remote_path = NodePath("../../../Camera Pivot")
 update_rotation = false

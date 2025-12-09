@@ -31,6 +31,7 @@ public partial class PC_Shakeable : Area3D
             shakeAngleIntensity += layer.GetShakeAngleIntensity((float) delta, _time);
 
         RotationDegrees = _maxRotation * shakeAngleIntensity;
+        Transform = Transform.Orthonormalized();
     }
 
     public void AddTrauma(float amount) => _baseLayer.AddTrauma(amount);
