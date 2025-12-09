@@ -1,6 +1,7 @@
+using System;
 using Godot;
 
-public class STAT_Fire
+public class STAT_Fire: IDisposable
 {
     public Observable<int> Shots {get; private set;} = new(0);
     public Observable<int> Hits {get; private set;} = new(0);
@@ -52,5 +53,10 @@ public class STAT_Fire
     {
         _fire.Hit -= HandleHit;
         _fire.Shot -= HandleShot;
+    }
+
+    public void Dispose()
+    {
+        Disable();
     }
 }

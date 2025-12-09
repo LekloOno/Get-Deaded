@@ -24,4 +24,13 @@ public partial class UIW_FireStat : UIW_Stats
     {
         _accuracy.Text = Math.Round((float) _fire.Hits * 100 / (float) _fire.Shots) + " %";
     }
+
+    public override void _ExitTree()
+    {
+        if (_fire == null)
+            return;
+            
+        _fire.Shots.Unsubscribe(UpdatePrecision);
+        _fire.Hits.Unsubscribe(UpdatePrecision);
+    }
 }

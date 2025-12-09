@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 
@@ -40,5 +41,15 @@ public partial class UIW_PlayerStat : UIW_Stats
             _weaponsStats.Add(stat);
             AddChild(stat);
         }
+    }
+
+    public override void _ExitTree()
+    {
+        if (_combatStats == null)
+            return;
+            
+        _combatStats.Damage.Unsubscribe(UpdateDamage);
+        _combatStats.Kills.Unsubscribe(UpdateKills);
+        _combatStats.Deaths.Unsubscribe(UpdateDeaths);
     }
 }

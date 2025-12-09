@@ -40,8 +40,8 @@ public partial class SC_TestSpawner : SC_SpawnerScript
     protected override void StopSpec()
     {
         RoundTimer.Timeout -= DoStop;
+        RoundTimer = null;
         ClearEnemies();
-        //GD.Print("Got " + _kills + " kills !");
     }
 
 
@@ -82,6 +82,9 @@ public partial class SC_TestSpawner : SC_SpawnerScript
 
     public override void Start()
     {
+        if (RoundTimer != null)
+            return;
+            
         RoundTimer = GetTree().CreateTimer(_roundTime);
         RoundTimer.Timeout += DoStop;
         CreateBots();
@@ -99,6 +102,8 @@ public partial class SC_TestSpawner : SC_SpawnerScript
 
     protected override void RemoveEnemySpec(E_IEnemy enemy)
     {
-        _respawnTimers.Remove(enemy);
+        enemy.OnDie -= Killed;
+        _respawnTimers.Remove(enemy, out Timer timer);
+        timer?.QueueFree();
     }
 }

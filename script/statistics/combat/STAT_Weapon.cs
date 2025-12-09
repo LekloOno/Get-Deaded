@@ -1,6 +1,7 @@
+using System;
 using System.Linq;
 
-public class STAT_Weapon
+public class STAT_Weapon: IDisposable
 {
     /*
     public class LocalHitsMerger
@@ -64,5 +65,10 @@ public class STAT_Weapon
     {
         foreach (STAT_Fire fire in Fires)
             fire.Disable();
+    }
+
+    public void Dispose()
+    {
+        Disable();
     }
 }

@@ -41,6 +41,5 @@ public partial class SC_GameManager : Node
     public void EndGame()
     {
         Stats.Disable();
-        GD.Print(_score);
     }
 }
