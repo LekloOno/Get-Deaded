@@ -17,6 +17,8 @@ uniform float angle_mask_power = 1.;
 uniform float angle_modulation = 20.;
 uniform bool relative_depth = true;
 uniform bool half_thickness = true;	// Adds an outline pass to smoothen the discrete texel nature
+uniform bool focal_scaled = true;	// Outline sizes distance scale uses camera focal length
+uniform bool kernel_depth = true;	// Depth is determined as the smallest depth in the kernel rather than the depth of uv
 
 void vertex() {
 	POSITION = vec4(VERTEX.xy, 1.0, 1.0);
@@ -159,15 +161,39 @@ float get_outline_with_grazed(
 	return outline;
 }
 
+float screen_size_thickness(
+	float focal_length, float min_d,
+	float thickness, float depth
+) {
+	float clamped_depth = max(depth, min_d)/min_d;
+	return abs((focal_length * thickness)) / clamped_depth;
+}
+
 void fragment() {
 	// Called for every pixel the material is visible on.
 	vec3 original = get_original(SCREEN_UV);
 	vec2[4] surroundings = get_kernel(SCREEN_UV, vec2(max_thickness));
-	float modulated_thickness = thickness_modulation(
-		closest_in_kernel(SCREEN_UV, surroundings, INV_PROJECTION_MATRIX),
-		//get_depth(SCREEN_UV, INV_PROJECTION_MATRIX),
-		max_thickness, min_depth);
-		
+	
+	float depth;
+	if (kernel_depth) {
+		depth = closest_in_kernel(SCREEN_UV, surroundings, INV_PROJECTION_MATRIX);
+	} else {
+		depth = get_depth(SCREEN_UV, INV_PROJECTION_MATRIX);
+	}
+	
+	
+	float modulated_thickness;
+	if (focal_scaled) {
+		modulated_thickness = screen_size_thickness(
+			PROJECTION_MATRIX[1][1],
+			min_depth,
+			max_thickness,
+			depth);
+	} else {
+		modulated_thickness = thickness_modulation(
+			depth,
+			max_thickness, min_depth);
+	}
 	
 	float thickness = floor(modulated_thickness);
 	float semi_thickness = max(ceil(modulated_thickness), min_thickness);
@@ -176,14 +202,19 @@ void fragment() {
 	vec2 texel_size = thickness / VIEWPORT_SIZE.xy;
 	vec2 semi_texel_size = semi_thickness / VIEWPORT_SIZE.xy;
 
-	float d_grazing;
 	float outline = .0;
 	
+	float d_grazing;
 	if (thickness > 0.5) {
 		outline += get_outline(
 			SCREEN_UV, NORMAL, VIEW, INV_PROJECTION_MATRIX,
 			texel_size, depth_threshold, normal_threshold, d_grazing);
+	} else {
+		d_grazing = depth_grazing(
+			fresnel_power, angle_mask_power,
+			angle_modulation, NORMAL, VIEW);
 	}
+	
 	if (half_thickness) {
 		float ratio = semi_thickness_ratio;
 		if (thickness == 0.) {

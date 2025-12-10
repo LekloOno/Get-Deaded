@@ -1570,15 +1570,17 @@ render_priority = -1
 shader = ExtResource("34_f60qe")
 shader_parameter/depth_threshold = 0.1
 shader_parameter/normal_threshold = 1.2
-shader_parameter/max_thickness = 10.0
+shader_parameter/max_thickness = 7.0
 shader_parameter/min_thickness = 1.0
 shader_parameter/min_ratio = 0.6
-shader_parameter/min_depth = 0.45
+shader_parameter/min_depth = 0.3
 shader_parameter/fresnel_power = 5.0
 shader_parameter/angle_mask_power = 1.0
 shader_parameter/angle_modulation = 20.0
-shader_parameter/relative_depth = true
+shader_parameter/relative_depth = false
 shader_parameter/half_thickness = true
+shader_parameter/focal_scaled = true
+shader_parameter/kernel_depth = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_5y3lt"]
 flip_faces = true
