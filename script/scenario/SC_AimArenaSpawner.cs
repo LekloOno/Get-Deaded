@@ -116,7 +116,7 @@ public partial class SC_AimArenaSpawner : Node3D
 
     public void Spawn(E_Enemy enemy)
     {
-        enemy.Enable();
+        enemy.Spawn();
         
         enemy.Position = RandomPosition();
 

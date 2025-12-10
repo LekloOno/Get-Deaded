@@ -74,7 +74,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
             _initialJointColor = (Color) jointMat.GetShaderParameter("albedo");
         }
 
-        Enable();
+        Spawn();
         
 
         OnDie += PlayDeath;
@@ -102,10 +102,10 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
     {
         _lootDropper.Drop();
         _traumaCauser.CauseTrauma();
-        Disable();
+        Pool();
     }
 
-    public void Disable()
+    public void Pool()
     {
         if (!Enabled)
             return;
@@ -132,7 +132,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
         OnDisable?.Invoke(this);
     }
 
-    public void Enable()
+    public void Spawn()
     {
         if (Enabled)
             return;

@@ -5,6 +5,7 @@ using System;
 [GlobalClass]
 public partial class SC_TestSpawner : SC_SpawnerScript
 {
+    // We could make an improved object pooling by having two lists, one for the pool, one for the 
     [Export] private PackedScene _enemy;
     [Export] private uint _count = 4;
     [Export] private float _spawnRadius = 20f;
@@ -88,8 +89,6 @@ public partial class SC_TestSpawner : SC_SpawnerScript
         if (enemy is not Node node)
             return;
 
-        //enemy.OnDisable += Killed;
-
         Timer timer = new() { OneShot = true };
         timer.Timeout += () => SpawnEnemy(enemy);
         _respawnTimers.Add(enemy, timer);
@@ -102,7 +101,7 @@ public partial class SC_TestSpawner : SC_SpawnerScript
         if (enemy is not E_Enemy node)
             return;
 
-        node.Enable();
+        node.Spawn();
         node.Position = RandomPosition();
 
         Vector3 target = _player == null
@@ -121,7 +120,7 @@ public partial class SC_TestSpawner : SC_SpawnerScript
         if (!_respawnTimers.TryGetValue(enemy, out Timer timer))
             return;
 
-        enemy.Disable();
+        enemy.Pool();
     }
 
     protected override void QueueFreeEnemySpec(E_IEnemy enemy)

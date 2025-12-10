@@ -22,6 +22,6 @@ public partial class E_EnemySpawner : Node3D
     public void Respawn()
     {
         _ennemy.GlobalPosition = GlobalPosition;
-        _ennemy.Enable();
+        _ennemy.Spawn();
     }
 }
