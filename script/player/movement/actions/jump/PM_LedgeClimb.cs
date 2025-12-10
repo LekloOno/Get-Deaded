@@ -48,7 +48,7 @@ public partial class PM_LedgeClimb : PM_Action
         if (_isClimbing)        // Shouldn't happen ? to verify - might not neeed is climbing anymore
             return velocity;
 
-        if (!CanLedgeClimb())
+        if (!CheckPhysics())
             return _jump.Jump(velocity); // Propagate to _jump
 
         if (_jumpInput.UseBuffer())
@@ -59,13 +59,14 @@ public partial class PM_LedgeClimb : PM_Action
 
     public Vector3 LazyLedgeClimb(Vector3 velocity)
     {
-        if (_jumpInput.UseBuffer())
+        if (!_isClimbing && (_jumpInput.UseBuffer() || _jumpInput.IsDown))
             DoLedgeClimb();             // Do it !
 
         return velocity;
     }
 
-    public bool CanLedgeClimb() => PHX_Checks.CanLedgeClimb(_controller, _bodyScale.Collider, _pivot, _minSpace, _minHeight, _ledgeCast, out _lastCollision);
+    public bool CanLedgeClimb() => CheckPhysics() && !_isClimbing;
+    private bool CheckPhysics() => PHX_Checks.CanLedgeClimb(_controller, _bodyScale.Collider, _pivot, _minSpace, _minHeight, _ledgeCast, out _lastCollision);
 
     public void DoLedgeClimb()
     {
