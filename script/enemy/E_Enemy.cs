@@ -14,6 +14,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
     [Export] private float _hitTime = 0.15f;
     [Export] private uint _score = 0;
     [Export] private GC_Health _healthOverride = null;
+    public bool Enabled {get; private set;} = false;
 
     private ShaderMaterial _surfaceMeshMaterial;
     private ShaderMaterial _jointMeshMaterial;
@@ -21,6 +22,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
     //public HealthEventHandler OnDie { get => _healthManager.TopHealthLayer.OnDie; set => _healthManager.TopHealthLayer.OnDie = value;}
     //public HealthEventHandler<DamageEventArgs> OnDamage { get => _healthManager.TopHealthLayer.OnDamage; set => _healthManager.TopHealthLayer.OnDamage = value;}
     public EnemyHealthEventHandler OnDie {get; set;}
+    public EnemyDisableEventHandler OnDisable {get; set;}
     public EnemyHealthEventHandler<DamageEventArgs> OnDamage {get; set;}
 
     private BaseMaterial3D.ShadingModeEnum _initialJointShadingMode;
@@ -105,12 +107,15 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 
     public void Disable()
     {
+        if (!Enabled)
+            return;
+
+        Enabled = false;
         CollisionLayer = 0;
         _healthManager.DisableHurt();
 
         //_hideTimer = GetTree().CreateTimer(_hideDelay);
         //_hideTimer.Timeout += Hide;
-        
         HideMesh();
     }
 
@@ -124,10 +129,15 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
         Hide();
         
         SetPhysicsProcess(false);
+        OnDisable?.Invoke(this);
     }
 
     public void Enable()
     {
+        if (Enabled)
+            return;
+        
+        Enabled = true;
         CollisionLayer = CONF_Collision.Layers.EnvironmentEntity;
         Tween surfaceTween = CreateTween();
         surfaceTween.TweenProperty(this, "Alpha", 1f, 0.2f);

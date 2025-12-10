@@ -10,14 +10,16 @@ public partial class UI_DamageIndicator : Label
     private Camera3D _camera;
     private Node3D _target;
     private float _damage;
-    private Task lastTweenTask = Task.CompletedTask;
-    private Tween opacityTween;
-    private Tween offsetTween;
+    private Task _lastTweenTask = Task.CompletedTask;
+    private Tween _opacityTween;
+    private Tween _offsetTween;
+    private Vector3 _prevTargetPosition;
     
     public void Initialize(Camera3D camera, Node3D target, float damage, Color color)
     {
         _camera = camera;
         _target = target;
+        _prevTargetPosition = target.GlobalPosition;
         _damage = damage;
         Text = (int)_damage + "";
         AddThemeColorOverride("font_shadow_color", color);
@@ -29,14 +31,14 @@ public partial class UI_DamageIndicator : Label
         _damage += damage;
         Text = (int)_damage + "";
         AddThemeColorOverride("font_shadow_color", color);
-        opacityTween?.Kill();
-        offsetTween?.Kill();
+        _opacityTween?.Kill();
+        _offsetTween?.Kill();
         StartAnim();
     }
 
     public void StartAnim()
     {
-        lastTweenTask = Anim();
+        _lastTweenTask = Anim();
     }
 
     public async Task Anim()
@@ -47,13 +49,13 @@ public partial class UI_DamageIndicator : Label
 
         HeightOffset = 0f;
 
-        opacityTween = CreateTween();
-        opacityTween.TweenProperty(this, "modulate:a", 0.0f, _fadeTime);
+        _opacityTween = CreateTween();
+        _opacityTween.TweenProperty(this, "modulate:a", 0.0f, _fadeTime);
 
-        offsetTween = CreateTween();
-        offsetTween.TweenProperty(this, "HeightOffset", _maxHeightOffset, _fadeTime);
+        _offsetTween = CreateTween();
+        _offsetTween.TweenProperty(this, "HeightOffset", _maxHeightOffset, _fadeTime);
 
-        await ToSignal(opacityTween, "finished");
+        await ToSignal(_opacityTween, "finished");
 
         QueueFree();
     }
@@ -62,8 +64,14 @@ public partial class UI_DamageIndicator : Label
     {
         Vector3 worldPosition = new Vector3(0f, HeightOffset, 0f);
 
-        if (_target != null && IsInstanceValid(_target))
+        if (_target != null && IsInstanceValid(_target) && _target.IsInsideTree())
+        {
             worldPosition += _target.GlobalPosition;
+            _prevTargetPosition = _target.GlobalPosition;
+        }
+        else
+            worldPosition += _prevTargetPosition;
+
 
         Visible = !_camera.IsPositionBehind(worldPosition);
         Position = _camera.UnprojectPosition(worldPosition);

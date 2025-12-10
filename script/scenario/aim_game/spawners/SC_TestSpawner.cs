@@ -17,7 +17,7 @@ public partial class SC_TestSpawner : SC_SpawnerScript
 
     public override void _Ready()
     {
-        //CreateBots();
+        CreateBots();
     }
 
 
@@ -26,22 +26,33 @@ public partial class SC_TestSpawner : SC_SpawnerScript
         for (int i = 0; i < _count; i++)
         {
             E_Enemy enemy = _enemy.Instantiate<E_Enemy>();
-            AddEnemy(enemy);
-            AddChild(enemy);
-            Spawn(enemy);
+            CreateEnemy(enemy);
         }
     }
 
-    private void Killed(E_IEnemy enemy, GC_Health senderLayer)
+    private void SpawnBots()
     {
-        _respawnTimers[enemy].Start();
+        foreach (E_IEnemy enemy in Enemies)
+            SpawnEnemy(enemy);
+    }
+
+    private void Killed(E_IEnemy enemy)
+    {
+        _respawnTimers[enemy].Start(_respawnDelay);
+        RemoveEnemy(enemy);
     }
 
     protected override void StopSpec()
     {
         RoundTimer.Timeout -= DoStop;
         RoundTimer = null;
+        
+        foreach (Timer timer in _respawnTimers.Values)
+            timer.Stop();
+
         ClearEnemies();
+        foreach (E_IEnemy enemy in Enemies)
+            enemy.OnDisable -= Killed;
     }
 
 
@@ -60,13 +71,38 @@ public partial class SC_TestSpawner : SC_SpawnerScript
         return rnd;
     }
 
-    public void Spawn(E_IEnemy enemy)
+    public override void Start()
+    {
+        if (RoundTimer != null)
+            return;
+            
+        RoundTimer = GetTree().CreateTimer(_roundTime);
+        RoundTimer.Timeout += DoStop;
+        SpawnBots();
+        foreach (E_IEnemy enemy in Enemies)
+            enemy.OnDisable += Killed;
+    }
+
+    protected override void CreateEnemySpec(E_IEnemy enemy)
+    {
+        if (enemy is not Node node)
+            return;
+
+        //enemy.OnDisable += Killed;
+
+        Timer timer = new() { OneShot = true };
+        timer.Timeout += () => SpawnEnemy(enemy);
+        _respawnTimers.Add(enemy, timer);
+        AddChild(timer);
+        AddChild(node);
+    }
+
+    protected override void SpawnEnemy(E_IEnemy enemy)
     {
         if (enemy is not E_Enemy node)
             return;
-        
+
         node.Enable();
-        
         node.Position = RandomPosition();
 
         Vector3 target = _player == null
@@ -80,29 +116,17 @@ public partial class SC_TestSpawner : SC_SpawnerScript
         node.ResetPhysicsInterpolation();
     }
 
-    public override void Start()
+    protected override void RemoveEnemy(E_IEnemy enemy)
     {
-        if (RoundTimer != null)
+        if (!_respawnTimers.TryGetValue(enemy, out Timer timer))
             return;
-            
-        RoundTimer = GetTree().CreateTimer(_roundTime);
-        RoundTimer.Timeout += DoStop;
-        CreateBots();
+
+        enemy.Disable();
     }
 
-    protected override void AddEnemySpec(E_IEnemy enemy)
+    protected override void QueueFreeEnemySpec(E_IEnemy enemy)
     {
-        enemy.OnDie += Killed;
-
-        Timer timer = new() { WaitTime = _respawnDelay, OneShot = true };
-        timer.Timeout += () => Spawn(enemy);
-        _respawnTimers.Add(enemy, timer);
-        AddChild(timer);
-    }
-
-    protected override void RemoveEnemySpec(E_IEnemy enemy)
-    {
-        enemy.OnDie -= Killed;
+        enemy.OnDisable -= Killed;
         _respawnTimers.Remove(enemy, out Timer timer);
         timer?.QueueFree();
     }

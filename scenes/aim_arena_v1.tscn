@@ -40,6 +40,7 @@ shader_parameter/relative_depth = true
 shader_parameter/half_thickness = true
 shader_parameter/focal_scaled = true
 shader_parameter/kernel_depth = true
+shader_parameter/color = Color(0, 0, 0, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_bm8tx"]
 flip_faces = true
