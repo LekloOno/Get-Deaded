@@ -11,6 +11,7 @@ public partial class GC_HurtBox : Area3D
     [Export] private float _modifier = 1f;
     [Export] public GC_HealthManager HealthManager {get; private set;}
     [Export] public GpuParticles3D _damageSplatter;
+    [Export] public PhysicalBone3D RagdollBone {get; private set;}
     
     public override void _Ready()
     {

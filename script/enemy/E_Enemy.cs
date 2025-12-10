@@ -14,6 +14,9 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
     [Export] private float _hitTime = 0.15f;
     [Export] private uint _score = 0;
     [Export] private GC_Health _healthOverride = null;
+    [Export] private PhysicalBoneSimulator3D _ragdolSimulator;
+    [Export] private Skeleton3D _skeleton;
+
     public bool Enabled {get; private set;} = false;
 
     private ShaderMaterial _surfaceMeshMaterial;
@@ -137,6 +140,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
         if (Enabled)
             return;
         
+
         Enabled = true;
         CollisionLayer = CONF_Collision.Layers.EnvironmentEntity;
         Tween surfaceTween = CreateTween();
@@ -145,6 +149,8 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
         Show();
         SetPhysicsProcess(true);
         _healthManager.EnableHurt(CONF_Collision.Layers.EnnemiesHurtBox);
+        _ragdolSimulator?.PhysicalBonesStopSimulation();
+        _skeleton?.ResetBonePoses();
     
         _healthManager.Init(true);
     }
