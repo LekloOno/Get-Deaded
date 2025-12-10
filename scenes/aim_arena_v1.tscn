@@ -37,6 +37,7 @@ shader_parameter/fresnel_power = 5.0
 shader_parameter/angle_mask_power = 1.0
 shader_parameter/angle_modulation = 10.0
 shader_parameter/relative_depth = true
+shader_parameter/half_thickness = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_bm8tx"]
 flip_faces = true

@@ -16,6 +16,7 @@ uniform float fresnel_power = 5.;
 uniform float angle_mask_power = 1.;
 uniform float angle_modulation = 20.;
 uniform bool relative_depth = true;
+uniform bool half_thickness = true;	// Adds an outline pass to smoothen the discrete texel nature
 
 void vertex() {
 	POSITION = vec4(VERTEX.xy, 1.0, 1.0);
@@ -102,18 +103,61 @@ float thickness_modulation(float depth, float max_t, float min_d) {
 	return max_t/clamped_depth;
 }
 
-float gray(vec3 text) {
-	return dot(text, vec3(0.299, 0.587, 0.114));
+float get_normal_outline(vec2 uv, vec2[4] kernel, float threshold) {
+	float variation = normal_variation(uv, kernel);
+	//return clamp(pow(mix(.0, 1., n_variation/n_threshold),8.), 0., 1.);
+	//return += smoothstep(.0, n_threshold, n_variation);
+	return step(threshold, variation);
 }
 
-float soften(vec2 uv, vec2 screen_size, float edge) {
-	return (edge
-	+ gray(texture(screen_texture, uv + vec2(1.,0.)/screen_size).rgb)
-	+ gray(texture(screen_texture, uv + vec2(-1.,0.)/screen_size).rgb)
-	+ gray(texture(screen_texture, uv + vec2(0.,1.)/screen_size).rbg)
-	+ gray(texture(screen_texture, uv + vec2(0.,-1.)/screen_size).rbg)) / 5.;
+float get_depth_outline(
+	vec2 uv, mat4 inv_projection_matrix,
+	vec2[4] kernel, float threshold, float grazing
+) {
+	float variation = depth_variation(uv, kernel, inv_projection_matrix);
+	float grazed_threshold = threshold * grazing;
+	//return smoothstep(.0, grazed_threshold, d_variation);
+	//return clamp(mix(.0, 1., d_variation/grazed_threshold), 0., 1.);
+	return step(grazed_threshold, variation);
 }
 
+float get_outline(
+	vec2 uv, vec3 normal, vec3 view, mat4 inv_projection_matrix,
+	vec2 texel_size, float d_threshold, float n_threshold,
+	out float d_grazing
+) {
+	vec2 kernel[4] = get_kernel(uv, texel_size);
+	
+	float outline = get_normal_outline(uv, kernel, n_threshold);
+		
+	if (outline < 1.) {
+		d_grazing = depth_grazing(
+			fresnel_power, angle_mask_power,
+			angle_modulation, normal, view);
+		
+		outline += get_depth_outline(
+			uv, inv_projection_matrix, kernel,
+			d_threshold, d_grazing);
+	}
+	return outline;
+}
+
+float get_outline_with_grazed(
+	vec2 uv, vec3 normal, vec3 view, mat4 inv_projection_matrix,
+	vec2 texel_size, float d_threshold, float n_threshold,
+	float d_grazing
+) {
+	vec2 kernel[4] = get_kernel(uv, texel_size);
+	
+	float outline = get_normal_outline(uv, kernel, n_threshold);
+	
+	if (outline < 1.) {
+		outline += get_depth_outline(
+			uv, inv_projection_matrix, kernel,
+			d_threshold, d_grazing);
+	}
+	return outline;
+}
 
 void fragment() {
 	// Called for every pixel the material is visible on.
@@ -124,44 +168,31 @@ void fragment() {
 		//get_depth(SCREEN_UV, INV_PROJECTION_MATRIX),
 		max_thickness, min_depth);
 		
-	float thickness_diff = min(modulated_thickness - min_thickness, 0.);
-	modulated_thickness = modulated_thickness - thickness_diff;
-	float thickness_ratio = 1. + (thickness_diff / min_thickness);
-	thickness_ratio = max(min_ratio, thickness_ratio);
 	
-	vec2 texel_size = modulated_thickness / VIEWPORT_SIZE.xy;
-		
-	vec2 kernel[4] = get_kernel(SCREEN_UV, texel_size);
+	float thickness = floor(modulated_thickness);
+	float semi_thickness = max(ceil(modulated_thickness), min_thickness);
+	float semi_thickness_ratio = mod(modulated_thickness, min_thickness)/min_thickness;
 	
-	float outline = 0.;
-	float normal_variation = normal_variation(SCREEN_UV, kernel);
+	vec2 texel_size = thickness / VIEWPORT_SIZE.xy;
+	vec2 semi_texel_size = semi_thickness / VIEWPORT_SIZE.xy;
+
+	float d_grazing;
+	float outline = .0;
 	
-	/*
-	if (normal_variation > normal_threshold)
-		outline = 1.;
-	else {
-		float depth_variation = depth_variation(SCREEN_UV, kernel, INV_PROJECTION_MATRIX);
-		float grazing = depth_grazing(
-			fresnel_power, angle_mask_power,
-			angle_modulation, NORMAL, VIEW);
-			
-		float threshold = depth_threshold * grazing;
-		if (depth_variation > threshold)
-			outline = 1.;
-	}*/
-	float depth_variation = depth_variation(SCREEN_UV, kernel, INV_PROJECTION_MATRIX);
-	float grazing = depth_grazing(
-		fresnel_power, angle_mask_power,
-		angle_modulation, NORMAL, VIEW);
-		
-	float threshold = depth_threshold * grazing;
-	//outline = smoothstep(.0, threshold, depth_variation);
-	//outline += smoothstep(.0, normal_threshold, normal_variation);
-	outline = step(threshold, depth_variation);
-	outline += step(normal_threshold, normal_variation);
+	if (thickness > 0.5) {
+		outline += get_outline(
+			SCREEN_UV, NORMAL, VIEW, INV_PROJECTION_MATRIX,
+			texel_size, depth_threshold, normal_threshold, d_grazing);
+	}
+	if (half_thickness) {
+		float ratio = semi_thickness_ratio;
+		if (thickness == 0.) {
+			ratio = max(ratio, min_ratio);
+		}
+		outline += get_outline_with_grazed(
+			SCREEN_UV, NORMAL, VIEW, INV_PROJECTION_MATRIX,
+			semi_texel_size, depth_threshold, normal_threshold, d_grazing) * ratio;
+	}
 	
-	outline = max(outline * thickness_ratio, 0.);
 	ALBEDO = mix(original, vec3(0.0), outline);
-	//outline = soften(SCREEN_UV, VIEWPORT_SIZE, outline);
-	//ALBEDO = mix(original, vec3(0.0), outline);
 }
