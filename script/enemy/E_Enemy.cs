@@ -152,7 +152,6 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
         _skeleton?.ResetBonePoses();
     
         _healthManager.Init(true);
-        _ragdolSimulator?.PhysicalBonesStartSimulation();
     }
 
     public override void _PhysicsProcess(double delta)

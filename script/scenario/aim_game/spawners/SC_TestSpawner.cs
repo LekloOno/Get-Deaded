@@ -94,6 +94,7 @@ public partial class SC_TestSpawner : SC_SpawnerScript
         _respawnTimers.Add(enemy, timer);
         AddChild(timer);
         AddChild(node);
+        enemy.Pool();
     }
 
     protected override void SpawnEnemy(E_IEnemy enemy)

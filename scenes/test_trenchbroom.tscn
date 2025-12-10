@@ -3236,14 +3236,12 @@ _gameManager = NodePath("..")
 metadata/_custom_type_script = "uid://b361d5nxjt30o"
 
 [node name="PostProcessing" type="MeshInstance3D" parent="."]
-visible = false
 material_override = SubResource("ShaderMaterial_ux68e")
 extra_cull_margin = 16384.0
 ignore_occlusion_culling = true
 mesh = SubResource("QuadMesh_5y3lt")
 
 [node name="LightmapGI" type="LightmapGI" parent="."]
-visible = false
 supersampling = true
 directional = true
 light_data = ExtResource("27_vqbvp")
