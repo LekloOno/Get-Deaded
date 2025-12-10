@@ -19,6 +19,7 @@ uniform bool relative_depth = true;
 uniform bool half_thickness = true;	// Adds an outline pass to smoothen the discrete texel nature
 uniform bool focal_scaled = true;	// Outline sizes distance scale uses camera focal length
 uniform bool kernel_depth = true;	// Depth is determined as the smallest depth in the kernel rather than the depth of uv
+uniform vec4 color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
 
 void vertex() {
 	POSITION = vec4(VERTEX.xy, 1.0, 1.0);
@@ -225,5 +226,5 @@ void fragment() {
 			semi_texel_size, depth_threshold, normal_threshold, d_grazing) * ratio;
 	}
 	
-	ALBEDO = mix(original, vec3(0.0), outline);
+	ALBEDO = mix(original, color.rgb, outline * color.a);
 }
