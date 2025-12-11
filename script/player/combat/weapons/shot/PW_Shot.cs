@@ -25,6 +25,7 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
     [Export] private bool _clampTrauma = true;
     [Export] private float _maxTrauma = 0.2f;
     [Export] private float _ragdollFactor = 1f;
+    [Export] private bool _ragdollUseFlatDamage = true;
 
     private GB_ExternalBodyManagerWrapper _ownerBody;
     public PW_Fire Fire {get; protected set;}
@@ -87,7 +88,8 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
             && bone.GetParentOrNull<PhysicalBoneSimulator3D>() is PhysicalBoneSimulator3D simulator)
         {
             simulator.PhysicalBonesStartSimulation();
-            bone.ApplyImpulse(direction * e.TotalDamage() * _ragdollFactor, hitPosition);
+            float ragdollDamage = _ragdollUseFlatDamage ? _hitData.Damage : e.TotalDamage();
+            bone.ApplyImpulse(direction * ragdollDamage * _ragdollFactor, hitPosition);
             if (_knockBack != 0f && KnockBackFrom(direction) is Vector3 knockBack && knockBack.Length() != 0f)
             {
                 foreach (Node children in simulator.GetChildren())

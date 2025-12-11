@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public partial class STAT_Combat
+public partial class STAT_Combat: IDisposable
 {
     public List<STAT_Weapon> Weapons {get; private set;}
     public STAT_Weapon MeleeWeapon {get; private set;}
@@ -45,5 +45,10 @@ public partial class STAT_Combat
         MeleeWeapon.Disable();
         foreach (STAT_Weapon weapon in Weapons)
             weapon.Disable();
+    }
+
+    public void Dispose()
+    {
+        Disable();
     }
 }

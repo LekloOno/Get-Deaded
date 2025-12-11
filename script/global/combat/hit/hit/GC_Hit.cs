@@ -4,7 +4,7 @@ using Godot.Collections;
 [GlobalClass]
 public partial class GC_Hit : Resource
 {
-    [Export] private float _damage;
+    [Export] public float Damage {get; private set;}
     public MATH_AdditiveModifiers DamageMultiplier {get; private set;} = new(); 
     [Export] private Array<GC_DamageModifier> _inspectorModifiers;
     // We use a "Game designer side" base array, plus a hitModifier "logic side" so we can determine the modifier more intuitively.
@@ -25,6 +25,6 @@ public partial class GC_Hit : Resource
 
     public void InitializeModifiers() => _hitModifier = new(_inspectorModifiers);
 
-    public float GetDamage(GC_BodyPart bodyPart) => _hitModifier.GetDamage(bodyPart, _damage) * DamageMultiplier.Result();
+    public float GetDamage(GC_BodyPart bodyPart) => _hitModifier.GetDamage(bodyPart, Damage) * DamageMultiplier.Result();
     //public bool SendHit(GC_HurtBox hurtBox, out float takenDamage) => hurtBox.Damage(this, out takenDamage);
 }

@@ -27,7 +27,7 @@
 
 [sub_resource type="Resource" id="Resource_wj164"]
 script = ExtResource("5_d2gec")
-_damage = 50.0
+Damage = 50.0
 _inspectorModifiers = null
 metadata/_custom_type_script = "uid://cjmiash71uc7b"
 

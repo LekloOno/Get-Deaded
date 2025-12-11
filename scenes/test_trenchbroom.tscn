@@ -1525,7 +1525,7 @@ emission_energy_multiplier = 1.96
 
 [sub_resource type="Resource" id="Resource_o3j50"]
 script = ExtResource("21_y2alo")
-_damage = 10.0
+Damage = 0.0
 _inspectorModifiers = Array[Object]([])
 metadata/_custom_type_script = "uid://cjmiash71uc7b"
 
@@ -1547,7 +1547,7 @@ metadata/_custom_type_script = "uid://sujdlokcwnd6"
 
 [sub_resource type="Resource" id="Resource_583vm"]
 script = ExtResource("21_y2alo")
-_damage = 10.0
+Damage = 0.0
 _inspectorModifiers = Array[Object]([SubResource("Resource_f60qe")])
 metadata/_custom_type_script = "uid://cjmiash71uc7b"
 
