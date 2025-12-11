@@ -112,6 +112,8 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
     {
         if (!Enabled)
             return;
+        
+        Velocity = Vector3.Zero;
 
         Enabled = false;
         CollisionLayer = 0;
