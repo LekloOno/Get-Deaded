@@ -39,14 +39,6 @@ public partial class PWS_Hitscan : PW_Shot, GC_IHitDealer
                         _ignoreCrit
                     ),
                     hit, castOrigin);
-                
-                if (killed
-                    && hurtBox.RagdollBone is PhysicalBone3D bone
-                    && bone.GetParentOrNull<PhysicalBoneSimulator3D>() is PhysicalBoneSimulator3D simulator)
-                {
-                    simulator.PhysicalBonesStartSimulation();
-                    bone.ApplyImpulse(direction * (takenDamage + overflow), hit);
-                }
             }
             else
                 DoHit(ShotHitEventArgs.Miss(_weapon, Fire, _owner), hit, castOrigin);

@@ -3231,7 +3231,7 @@ _enemy = ExtResource("27_xqord")
 _count = 6
 _spawnRadius = 10.0
 _respawnDelay = 0.0
-_roundTime = 10.0
+_roundTime = 500.0
 _gameManager = NodePath("..")
 metadata/_custom_type_script = "uid://b361d5nxjt30o"
 

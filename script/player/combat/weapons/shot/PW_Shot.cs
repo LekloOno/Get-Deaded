@@ -24,6 +24,7 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
     [Export] private PCT_UndirectScalable _traumaCauser;
     [Export] private bool _clampTrauma = true;
     [Export] private float _maxTrauma = 0.2f;
+    [Export] private float _ragdollFactor = 1f;
 
     private GB_ExternalBodyManagerWrapper _ownerBody;
     public PW_Fire Fire {get; protected set;}
@@ -80,6 +81,25 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
 
     protected void DoHit(ShotHitEventArgs e, Vector3 hitPosition, Vector3 from)
     {
+        Vector3 direction = (hitPosition - from).Normalized();
+        if (e.Killed
+            && e.HurtBox.RagdollBone is PhysicalBone3D bone
+            && bone.GetParentOrNull<PhysicalBoneSimulator3D>() is PhysicalBoneSimulator3D simulator)
+        {
+            simulator.PhysicalBonesStartSimulation();
+            bone.ApplyImpulse(direction * e.TotalDamage() * _ragdollFactor, hitPosition);
+            if (_knockBack != 0f && KnockBackFrom(direction) is Vector3 knockBack && knockBack.Length() != 0f)
+            {
+                foreach (Node children in simulator.GetChildren())
+                {
+                    if (children is not PhysicalBone3D childBone)
+                        continue;
+                    
+                    childBone.ApplyImpulse(knockBack, hitPosition);
+                }
+            }
+        }
+
         Hit?.Invoke(this, e);
         e.HurtBox?.TriggerDamageParticles(hitPosition, from);
         

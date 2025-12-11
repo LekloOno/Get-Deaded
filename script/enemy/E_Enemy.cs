@@ -104,6 +104,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
     {
         _lootDropper.Drop();
         _traumaCauser.CauseTrauma();
+        _ragdolSimulator?.PhysicalBonesStartSimulation();
         Pool();
     }
 
