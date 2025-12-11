@@ -45,7 +45,7 @@ public partial class PWS_Hitscan : PW_Shot, GC_IHitDealer
                     && bone.GetParentOrNull<PhysicalBoneSimulator3D>() is PhysicalBoneSimulator3D simulator)
                 {
                     simulator.PhysicalBonesStartSimulation();
-                    bone.ApplyCentralImpulse(direction * (takenDamage + overflow));
+                    bone.ApplyImpulse(direction * (takenDamage + overflow), hit);
                 }
             }
             else
