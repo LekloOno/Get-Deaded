@@ -17,7 +17,7 @@ public partial class UI_DamageIndicatorManager : Control
         _bufferTimer.Timeout += ResetCurrentIndicator;
     }
 
-    public void HandleHit(object sender, ShotHitEventArgs e)
+    public void HandleHit(object sender, HitEventArgs e)
     {
         if (e.HurtBox == null || e.Target == null)
             return;
@@ -26,7 +26,7 @@ public partial class UI_DamageIndicatorManager : Control
 
         if (_currentIndicator != null && e.Target == _currentTarget)
         {
-            _currentIndicator.Stack(e.TotalDamage(), color);
+            _currentIndicator.Stack(e.TotalDamage, color);
             _bufferTimer.Start();
         } else
         {
@@ -37,7 +37,7 @@ public partial class UI_DamageIndicatorManager : Control
             if(indicatorNode is UI_DamageIndicator indicator)
             {
                 _currentIndicator = indicator;
-                _currentIndicator.Initialize(_camera, e.Target, e.TotalDamage(), color);
+                _currentIndicator.Initialize(_camera, e.Target, e.TotalDamage, color);
                 AddChild(_currentIndicator);
                 _bufferTimer.Start();
             }

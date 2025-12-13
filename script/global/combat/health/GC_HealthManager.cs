@@ -12,7 +12,14 @@ public partial class GC_HealthManager : Node3D
 
     public EventHandler<HealthInitEventArgs> OnLayerInit;
 
-    public virtual bool Damage(GC_IHitDealer hitDealer, float expectedDamage, out float takenDamage, out float overflow) => TopHealthLayer.TakeDamage(expectedDamage, out takenDamage, out overflow);
+    public virtual bool Damage(
+        GC_IHitDealer hitDealer,
+        float expectedDamage,
+        out float takenDamage,
+        out float overflow,
+        out GC_Health deepest
+    ) => TopHealthLayer.TakeDamage(expectedDamage, out takenDamage, out overflow, out deepest);
+
     public float Heal(float heal) => TopHealthLayer.Heal(heal, null);
     public override void _Ready() => Init();
 

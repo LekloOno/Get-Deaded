@@ -28,7 +28,7 @@ public class STAT_Fire: IDisposable
         fire.Shot += HandleShot;
     }  
 
-    public void HandleHit(object sender, ShotHitEventArgs hit)
+    public void HandleHit(object sender, HitEventArgs hit)
     {
         if (hit.Missed)
             return;

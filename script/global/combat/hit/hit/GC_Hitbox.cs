@@ -10,6 +10,7 @@ public partial class GC_Hitbox : Area3D, GC_IHitDealer
 
     public GC_Hit HitData => _hit;
 
+    public GE_IActiveCombatEntity OwnerEntity => GE_Environment.Instance;
 
     public override void _Ready()
     {
@@ -23,7 +24,7 @@ public partial class GC_Hitbox : Area3D, GC_IHitDealer
 
         if (area3D is GC_HurtBox hurtBox)
         {
-            hurtBox.Damage(this, out _, out _);
+            hurtBox.Damage(this, out _, out _, out _);
             _active = false;
             _reset = GetTree().CreateTimer(_cd);
             _reset.Timeout += Reset;

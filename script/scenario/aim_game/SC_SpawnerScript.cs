@@ -9,7 +9,7 @@ public abstract partial class SC_SpawnerScript : Node3D
     [Export] protected SC_GameManager _gameManager;
     protected PM_Controller _player;
     [Signal] public delegate void StopEventHandler();   // Called at the end of this scene script
-    public EventHandler<ShotHitEventArgs> Hit;          // Report hits handled by bots spawned from this script
+    public EventHandler<HitEventArgs> Hit;          // Report hits handled by bots spawned from this script
     public List<E_IEnemy> Enemies {get; private set;} = [];
 
     /// <summary>

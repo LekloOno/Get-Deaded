@@ -77,6 +77,7 @@ _maxDistance = 100.0
 _hitData = SubResource("Resource_ad73j")
 _spread = 1.2
 _trail = NodePath("PW_Trail")
+_ragdollFactor = 1.5
 metadata/_custom_type_script = "uid://fc7gkofu3df7"
 
 [node name="PW_Trail" type="Node3D" parent="PWF_FullAuto/PWS_Hitscan"]

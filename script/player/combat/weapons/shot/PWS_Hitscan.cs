@@ -11,11 +11,11 @@ public partial class PWS_Hitscan : PW_Shot, GC_IHitDealer
         Vector3 castOrigin = GlobalPosition;
         Vector3 castDirection = direction;
 
-        Vector3 hit = castOrigin + castDirection * _maxDistance;
+        Vector3 hitPosition = castOrigin + castDirection * _maxDistance;
 
         World3D world = GetWorld3D();
         PhysicsDirectSpaceState3D spaceState = world.DirectSpaceState;
-        PhysicsRayQueryParameters3D query = PhysicsRayQueryParameters3D.Create(castOrigin, hit);
+        PhysicsRayQueryParameters3D query = PhysicsRayQueryParameters3D.Create(castOrigin, hitPosition);
         query.CollideWithAreas = true;
         query.CollisionMask = CONF_Collision.Masks.HitScan;
 
@@ -23,29 +23,17 @@ public partial class PWS_Hitscan : PW_Shot, GC_IHitDealer
 
         if (result.Count > 0)
         {
-            hit = (Vector3)result["position"];
+            hitPosition = (Vector3)result["position"];
             Node3D collider = result["collider"].AsGodotObject() as Node3D;
+
             if (collider is GC_HurtBox hurtBox)
-            {
-                hurtBox.HandleKnockBack(KnockBackFrom(castDirection));
-                bool killed = hurtBox.Damage(this, out float takenDamage, out float overflow);
-                DoHit(
-                    new(
-                        hurtBox.HealthManager,
-                        hurtBox.HealthManager.GetExposedLayer(),
-                        hurtBox, takenDamage, killed,
-                        _weapon, Fire, _owner,
-                        overflow,
-                        _ignoreCrit
-                    ),
-                    hit, castOrigin);
-            }
+                SendHit(hurtBox, hitPosition, castOrigin);
             else
-                DoHit(ShotHitEventArgs.Miss(_weapon, Fire, _owner), hit, castOrigin);
+                DoHit(HitEventArgs.Miss(this, OwnerEntity), hitPosition);
         }
 
-        _trail?.Shoot(hit);
-        HandleKick(castOrigin, castDirection);
+        _trail?.Shoot(hitPosition);
+        HandleKick(castDirection);
     }
 
     public override void SpecInitialize(GB_ExternalBodyManagerWrapper ownerBody)

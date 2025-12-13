@@ -15,7 +15,7 @@ public partial class UI_HitMarker : Control
         _weaponsHandler.Hit += HandleHit;
     }
 
-    public void HandleHit(object sender, ShotHitEventArgs e)
+    public void HandleHit(object sender, HitEventArgs e)
     {
         if (e.HurtBox == null || e.Target == null)
             return;

@@ -68,7 +68,7 @@ public partial class UI_DamageMarker : Control
         Offset = _baseStartOffset;
     }
 
-    public void StartAnim(ShotHitEventArgs e)
+    public void StartAnim(HitEventArgs e)
     {
         Color mod = Modulate;
         mod.A = 1f;
@@ -77,7 +77,7 @@ public partial class UI_DamageMarker : Control
         opacityTween?.Kill();
         offsetTween?.Kill();
 
-        float sizeRatio = Mathf.Tanh(e.TotalDamage()/_sizeDispersion)*(_sizeMaxCoef - 1f) + 1f;
+        float sizeRatio = Mathf.Tanh(e.TotalDamage/_sizeDispersion)*(_sizeMaxCoef - 1f) + 1f;
         SticksSize = _baseSize * sizeRatio;
 
         if (!e.OverrideBodyPart && e.HurtBox.BodyPart == GC_BodyPart.Head)
@@ -89,7 +89,7 @@ public partial class UI_DamageMarker : Control
         opacityTween.TweenProperty(this, "modulate:a", 0.0f, _fadeTime);
 
         offsetTween = CreateTween();
-        float scaledDamage = Mathf.Tanh(e.TotalDamage()/_offsetDispersion) * (_offsetMaxCoef-1f) + 1;
+        float scaledDamage = Mathf.Tanh(e.TotalDamage/_offsetDispersion) * (_offsetMaxCoef-1f) + 1;
 
         offsetTween.TweenProperty(this, "Offset", _basePeakOffset * scaledDamage, _expandTime).SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Sine);
         offsetTween.TweenProperty(this, "Offset", _baseStartOffset, _expandTime);

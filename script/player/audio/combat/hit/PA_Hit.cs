@@ -15,7 +15,7 @@ public partial class PA_Hit : Node
         _weaponsHandler.Hit += HandleHit;
     }
 
-    public void HandleHit(object sender, ShotHitEventArgs hit)
+    public void HandleHit(object sender, HitEventArgs hit)
     {
         if (hit.Missed)
             return;

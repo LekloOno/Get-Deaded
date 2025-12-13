@@ -35,7 +35,7 @@ public abstract partial class PW_Fire : WeaponComponent
     public bool InfiniteMagazine = false;
     public MATH_AdditiveModifiers RecoilMultiplier => _recoil.Modifier;
     public PW_Ammunition Ammos => _ammos;
-    public EventHandler<ShotHitEventArgs> Hit;
+    public EventHandler<HitEventArgs> Hit;
     public EventHandler<int> Shot;      // Event arg is the amount of shots shot, most likely _shots.Count
 
 

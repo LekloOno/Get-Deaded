@@ -25,14 +25,13 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
     [Export] private bool _clampTrauma = true;
     [Export] private float _maxTrauma = 0.2f;
     [Export] private float _ragdollFactor = 1f;
-    [Export] private bool _ragdollUseFlatDamage = true;
 
     private GB_ExternalBodyManagerWrapper _ownerBody;
     public PW_Fire Fire {get; protected set;}
     protected PW_Weapon _weapon => Fire.Weapon;
-    protected GE_CombatEntity _owner => Fire.Weapon.Handler.OwnerEntity;
+    public GE_IActiveCombatEntity OwnerEntity => Fire.Weapon.Handler.OwnerEntity;
 
-    public EventHandler<ShotHitEventArgs> Hit;
+    public EventHandler<HitEventArgs> Hit;
     public MATH_AdditiveModifiers SpreadMultiplier {get; private set;} = new();
     public float Spread => _spread * SpreadMultiplier.Result();
     public MATH_AdditiveModifiers KnockBackMultiplier {get; private set;} = new();
@@ -42,8 +41,6 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
     public GC_Hit HitData => _hitData;
     public Vector3 Direction => -GlobalBasis.Z; 
     private static Random _random = new();
-
-    protected Vector3 KnockBackFrom(Vector3 target) => KnockBack * target.Normalized() + KnockBackDirFlatAdd.Result();
 
     public void Initialize(GB_ExternalBodyManagerWrapper ownerBody, PW_Fire fire)
     {
@@ -74,36 +71,48 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
 
     protected abstract void ShootWithSpread(Vector3 direction);
 
-    protected void HandleKick(Vector3 origin, Vector3 direction)
+    protected void HandleKick(Vector3 direction)
     {
         if (_kickBack != 0)
-            _ownerBody.HandleKnockBack(-direction * _kickBack);
+            _ownerBody.HandleKnockBack(-direction.Normalized() * _kickBack);
     }
 
-    protected void DoHit(ShotHitEventArgs e, Vector3 hitPosition, Vector3 from)
+    /// <summary>
+    /// Handles redundant operation to send a hit to a target Hurtbox. <br/>
+    /// <br/>
+    /// `globalKbDir` is optional and overrides the direction used to apply global knockback. If unspecified, it will use the normalized vector between the origin (from) and hit position. 
+    /// </summary>
+    /// <param name="hurtBox"></param>
+    /// <param name="hitPosition"></param>
+    /// <param name="from"></param>
+    /// <param name="globalKbDir">optional - override the direction used to apply global knockback. If unspecified, it will use the normalized vector between the origin (from) and hit position. </param>
+    /// <returns></returns>
+    protected HitEventArgs SendHit(GC_HurtBox hurtBox, Vector3 hitPosition, Vector3 from, Vector3? globalKbDir = null)
     {
         Vector3 direction = (hitPosition - from).Normalized();
-        if (e.Killed
-            && e.HurtBox.RagdollBone is PhysicalBone3D bone
-            && bone.GetParentOrNull<PhysicalBoneSimulator3D>() is PhysicalBoneSimulator3D simulator)
-        {
-            simulator.PhysicalBonesStartSimulation();
-            float ragdollDamage = _ragdollUseFlatDamage ? _hitData.Damage : e.TotalDamage();
-            bone.ApplyImpulse(direction * ragdollDamage * _ragdollFactor, hitPosition);
-            if (_knockBack != 0f && KnockBackFrom(direction) is Vector3 knockBack && knockBack.Length() != 0f)
-            {
-                foreach (Node children in simulator.GetChildren())
-                {
-                    if (children is not PhysicalBone3D childBone)
-                        continue;
-                    
-                    childBone.ApplyImpulse(knockBack, hitPosition);
-                }
-            }
-        }
 
+        Vector3? globalKnockBack = null;
+
+        if (globalKbDir is Vector3 overrideDirection)
+            globalKnockBack = NullableKnockBack(overrideDirection);
+        else
+            globalKnockBack = NullableKnockBack(direction);
+        
+        Vector3 localKnockBack = direction * _hitData.Damage * _ragdollFactor;
+
+        HitEventArgs reg = hurtBox.HandleHit(
+            OwnerEntity, this, hitPosition, from,
+            localKnockBack, globalKnockBack,
+            _ignoreCrit
+        );
+
+        DoHit(reg, hitPosition);
+        return reg;
+    }
+
+    protected void DoHit(HitEventArgs e, Vector3 hitPosition)
+    {
         Hit?.Invoke(this, e);
-        e.HurtBox?.TriggerDamageParticles(hitPosition, from);
         
         if (_traumaCauser == null)
             return;
@@ -116,5 +125,20 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
             _traumaCauser.CauseClampedTrauma(_maxTrauma);
         else
             _traumaCauser.CauseTrauma();
+    }
+
+    protected Vector3 KnockBackFrom(Vector3 direction) =>
+        KnockBack * direction.Normalized() + KnockBackDirFlatAdd.Result();
+
+    private Vector3? NullableKnockBack(Vector3 direction)
+    {
+        if (_knockBack == 0f)
+            return null;
+
+        Vector3 impulse = KnockBackFrom(direction);
+        if (impulse.Length() == 0f)
+            return null;
+
+        return impulse;
     }
 }

@@ -12,7 +12,7 @@ public partial class STAT_Combat: IDisposable
 
     public Action GotInitialized;
 
-    public STAT_Combat(GE_CombatEntity entity) :
+    public STAT_Combat(GE_IActiveCombatEntity entity) :
     this(entity.WeaponsHandler.Weapons, entity.WeaponsHandler.Melee, entity.HealthManager){}
 
     public STAT_Combat(Godot.Collections.Array<PW_Weapon> weapons, PW_Weapon melee, GC_HealthManager healthManager)

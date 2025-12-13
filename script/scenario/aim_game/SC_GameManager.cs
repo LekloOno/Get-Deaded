@@ -9,9 +9,9 @@ public partial class SC_GameManager : Node
     public STAT_Combat Stats {get; private set;}
     private uint _score;
     public SceneTreeTimer CountDownTimer;
-    private GE_CombatEntity _player;
+    private GE_IActiveCombatEntity _player;
 
-    public void Init(GE_CombatEntity player)
+    public void Init(GE_IActiveCombatEntity player)
     {
         _player = player;
         Stats = new(player);

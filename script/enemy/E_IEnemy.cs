@@ -4,7 +4,7 @@ public delegate void EnemyHealthEventHandler<T>(E_IEnemy enemy, GC_Health sender
 public delegate void EnemyHealthEventHandler(E_IEnemy enemy, GC_Health senderLayer);
 public delegate void EnemyDisableEventHandler(E_IEnemy enemy);
 
-public interface E_IEnemy : GE_CombatEntity, PHX_PoolObject
+public interface E_IEnemy : GE_IActiveCombatEntity, PHX_PoolObject
 {
     public uint Score {get;}
     public EnemyHealthEventHandler OnDie {get; set;}

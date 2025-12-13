@@ -20,39 +20,27 @@ public partial class PWS_ShapeScan : PW_Shot
         _shapeCast.ForceShapecastUpdate();
         if (_shapeCast.IsColliding())
         {
-            List<GC_HealthManager> _healthManagers = [];
+            // To avoid hitting multiple times the single target, yet allow hitting multiple different ones.
+            HashSet<GC_HealthManager> _hitHealthManagers = [];
+
             for (int i = 0; i < _shapeCast.GetCollisionCount(); i ++)
             {
-                Vector3 hit = _shapeCast.GetCollisionPoint(i);
+                Vector3 hitPosition = _shapeCast.GetCollisionPoint(i);
                 Node3D collider = _shapeCast.GetCollider(i) as Node3D;
 
                 if (collider is GC_HurtBox hurtBox)
                 {
-                    if (_healthManagers.Contains(hurtBox.HealthManager))
+                    if (!_hitHealthManagers.Add(hurtBox.HealthManager))
                         continue;
 
-                    _healthManagers.Add(hurtBox.HealthManager);
-
-                    hurtBox.HandleKnockBack(KnockBackFrom(castDirection));
-                    bool killed = hurtBox.Damage(this, out float takenDamage, out float overflow);
-
-                    DoHit(
-                        new(
-                            hurtBox.HealthManager,
-                            hurtBox.HealthManager.GetExposedLayer(),
-                            hurtBox, takenDamage, killed,
-                            _weapon, Fire, _owner,
-                            overflow,
-                            _ignoreCrit
-                        ),
-                        hit, castOrigin
-                    );
+                    SendHit(hurtBox, hitPosition, castOrigin, castDirection);
                 }
                 else
-                    DoHit(ShotHitEventArgs.Miss(_weapon, Fire, _owner), hit, castOrigin);
+                    DoHit(HitEventArgs.Miss(this, OwnerEntity), hitPosition);
             }
+            
             _trail?.Shoot(GlobalPosition + _shapeCast.TargetPosition.Length() * direction.Normalized());
-            HandleKick(castOrigin, castDirection);
+            HandleKick(castDirection);
         }
     }
 }

@@ -10,14 +10,20 @@ public partial class PH_Manager : GC_HealthManager
 
     private EventHandler<double> OnProcess;
 
-    public override bool Damage(GC_IHitDealer hitDealer, float expectedDamage, out float takenDamage, out float overflow)
-    {
+    public override bool Damage(
+        GC_IHitDealer hitDealer, float expectedDamage,
+        out float takenDamage, out float overflow, out GC_Health deepest
+    ) {
         if (!_shield.IsParrying())
-            return base.Damage(hitDealer, expectedDamage, out takenDamage, out overflow);
+            return base.Damage(
+                hitDealer, expectedDamage,
+                out takenDamage, out overflow, out deepest
+            );
         
         hitDealer.Shoot();
         takenDamage = 0;
         overflow = 0;
+        deepest = GetExposedLayer();
         return false;
     }
 

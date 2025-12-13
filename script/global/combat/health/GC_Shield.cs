@@ -44,15 +44,15 @@ public partial class GC_Shield : GC_Health
         DamageBuffer.Clear();
     }
 
-    public override bool TakeDamage(float damage, out float takenDamage, out float overflow)
+    public override bool TakeDamage(float damage, out float takenDamage, out float overflow, out GC_Health deepest)
     {
         if (_active)
         {
             DamageBuffer.Add((Time.GetTicksMsec(), damage));
-            return base.TakeDamage(damage, out takenDamage, out overflow);
+            return base.TakeDamage(damage, out takenDamage, out overflow, out deepest);
         }
 
-        return Child.TakeDamage(damage, out takenDamage, out overflow);
+        return Child.TakeDamage(damage, out takenDamage, out overflow, out deepest);
     }
 
     public override float Heal(float healing, GC_Health parent) => Child.Heal(healing, this);

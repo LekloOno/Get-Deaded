@@ -83,7 +83,7 @@ public partial class GC_Health : Resource
 
         return reducedDamage;
     }
-    public virtual bool TakeDamage(float damage, out float takenDamage, out float overflow)
+    public virtual bool TakeDamage(float damage, out float takenDamage, out float overflow, out GC_Health deepest)
     {
         float damageTaken = ModifiedDamage(damage, out float remainingDamage);
         overflow = 0;
@@ -94,9 +94,12 @@ public partial class GC_Health : Resource
         takenDamage = damageTaken;
 
         if (CurrentHealth > 0)
+        {
+            deepest = this;
             return false;
+        }
 
-        bool died = Propagate(remainingDamage, out float childDamage, out overflow);
+        bool died = Propagate(remainingDamage, out float childDamage, out overflow, out deepest);
         takenDamage += childDamage;
         OnDamage?.Invoke(this, DamageArgs(overflow));
 
@@ -107,17 +110,18 @@ public partial class GC_Health : Resource
         return false;
     }
 
-    private bool Propagate(float remainingDamage, out float takenDamage, out float overflow)
+    private bool Propagate(float remainingDamage, out float takenDamage, out float overflow, out GC_Health deepest)
     {
         if (Child == null)
         {
             takenDamage = 0;
             overflow = remainingDamage;
+            deepest = this;
             OnDie?.Invoke(this);
             return true;
         }
 
-        return Child.TakeDamage(remainingDamage, out takenDamage, out overflow);
+        return Child.TakeDamage(remainingDamage, out takenDamage, out overflow, out deepest);
     }
 
     public virtual float Heal(float healing, GC_Health parent)

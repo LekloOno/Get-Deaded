@@ -2,7 +2,7 @@ using System;
 using Godot;
 
 [GlobalClass]
-public partial class PM_Controller : CharacterBody3D, GB_IExternalBodyManager, GE_CombatEntity
+public partial class PM_Controller : CharacterBody3D, GB_IExternalBodyManager, GE_IActiveCombatEntity
 {
     [Export] private PH_Manager _healthManager;
     [Export] private PI_Walk _walkProcess;

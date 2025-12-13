@@ -27,8 +27,8 @@ public partial class PW_WeaponsHandler : WeaponSystem
     [Export] public PW_Weapon Melee {get; private set;}
     [Export] private PM_SurfaceControl _surfaceControl;
     [Export] private float _meleeRecover;
-    public GE_CombatEntity OwnerEntity {get; private set;}
-    public EventHandler<ShotHitEventArgs> Hit;
+    public GE_IActiveCombatEntity OwnerEntity {get; private set;}
+    public EventHandler<HitEventArgs> Hit;
 
     public SwitchEvent SwitchStarted;
     public SwitchEvent GotInitialized;
@@ -72,7 +72,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
     
     public bool Initialized {get; private set;} = false;
 
-    public void Init(GE_CombatEntity owner)
+    public void Init(GE_IActiveCombatEntity owner)
     {
         OwnerEntity = owner;
     }

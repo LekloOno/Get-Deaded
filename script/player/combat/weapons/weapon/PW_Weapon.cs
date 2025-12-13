@@ -49,7 +49,7 @@ public abstract partial class PW_Weapon : WeaponComponent
     public PW_WeaponsHandler Handler {get; private set;}
     
     public bool ADSActive => _ads == null ? false : _ads.Active;
-    public EventHandler<ShotHitEventArgs> Hit;
+    public EventHandler<HitEventArgs> Hit;
     public Action Shot;
     public Action ADSStarted;
     public Action ADSStopped;
