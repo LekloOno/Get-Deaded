@@ -21,7 +21,6 @@ public partial class SC_TestSpawner : SC_SpawnerScript
         CreateBots();
     }
 
-
     private void CreateBots()
     {
         for (int i = 0; i < _count; i++)
@@ -72,7 +71,7 @@ public partial class SC_TestSpawner : SC_SpawnerScript
         return rnd;
     }
 
-    public override void Start()
+    public override void Start(GE_ICombatEntity starter)
     {
         if (RoundTimer != null)
             return;
@@ -81,7 +80,10 @@ public partial class SC_TestSpawner : SC_SpawnerScript
         RoundTimer.Timeout += DoStop;
         SpawnBots();
         foreach (E_IEnemy enemy in Enemies)
+        {
             enemy.OnDisable += Killed;
+            enemy.Target = starter;
+        }
     }
 
     protected override void CreateEnemySpec(E_IEnemy enemy)

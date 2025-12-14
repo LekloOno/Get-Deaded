@@ -30,7 +30,7 @@ public partial class SC_GameManager : Node
         CountDownTimer.Timeout -= StartGame;
 
         _player?.WeaponsHandler.EnableFire();
-        _initial.Start();
+        _initial.Start(_player);
     }
 
     public void HandleKill(E_IEnemy enemy, GC_Health senderLayer)

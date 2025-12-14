@@ -16,6 +16,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
     [Export] private GC_Health _healthOverride = null;
     [Export] private PhysicalBoneSimulator3D _ragdolSimulator;
     [Export] private Skeleton3D _skeleton;
+    [Export] private PROTO_Mover _mover;
 
     public bool Enabled {get; private set;} = false;
 
@@ -32,6 +33,10 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
     private Color _initialColor;
     private Color _initialJointColor;
     private SceneTreeTimer _hitResetTimer;
+    private GE_ICombatEntity _target;
+    private Node3D _targetNode;
+
+    public void SetTarget(Node3D target) => _mover.Target = target;
 
     public float Alpha
     {
@@ -55,10 +60,20 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 
     public GB_IExternalBodyManager Body => this;
 
-    
+    public GE_ICombatEntity Target
+    {
+        get => _target;
+        set {
+            if (value is Node3D node)
+                _mover.Target = node;
+            _target = value;
+        }
+    }
 
     public override void _Ready()
     {
+        SetProcess(false);
+
         if (_healthOverride != null)
             _healthManager.TopHealthLayer = _healthOverride;
 
@@ -112,6 +127,8 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
     {
         if (!Enabled)
             return;
+
+        SetProcess(false);
         
         Velocity = Vector3.Zero;
 
@@ -141,7 +158,9 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
     {
         if (Enabled)
             return;
-        
+
+        if (_mover != null)
+            SetProcess(true);        
 
         Enabled = true;
         CollisionLayer = CONF_Collision.Layers.EnvironmentEntity;
@@ -163,10 +182,26 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
         if (!IsOnFloor())
             velocity += GetGravity() * (float) delta;
         else
-            velocity -= velocity * (float) delta * _drag;
+        {
+            velocity = ApplyDrag(velocity, delta);
+            
+            if (_mover != null)
+                velocity += _mover.GetAcceleration(this, velocity, delta);
+        }
         
         Velocity = velocity;
         
         MoveAndSlide();
+    }
+
+    public Vector3 ApplyDrag(Vector3 velocity, double deltaTime)
+    {
+        float dragFactor = 1f/(1f+(float)deltaTime*_drag);    // Transform the drag to a velocity coeficient
+        return velocity * dragFactor;
+    }
+
+    public override void _Process(double delta)
+    {
+        _mover.Rotate(this);
     }
 }

@@ -16,7 +16,7 @@ public abstract partial class SC_SpawnerScript : Node3D
     /// Called when starting this spawn script.
     /// Typically setup the dummies entities.
     /// </summary>
-    public abstract void Start();
+    public abstract void Start(GE_ICombatEntity starter);
     public void DoStop()
     {   
         EmitSignal(SignalName.Stop);
@@ -30,6 +30,10 @@ public abstract partial class SC_SpawnerScript : Node3D
         _player = player;
     }
 
+    protected void SetTarget(E_IEnemy enemy, GE_ICombatEntity target)
+    {
+        enemy.Target = target;
+    }
 
     /// <summary>
     /// Define what should be done to enable an enemy that has been previously created through CreateEnemy. <br/>
