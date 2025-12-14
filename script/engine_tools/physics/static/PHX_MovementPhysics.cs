@@ -2,7 +2,7 @@ using Godot;
 
 public static class PHX_MovementPhysics
 {
-    static public Vector3 Acceleration(float maxSpeedBase, float maxAccelBase, Vector3 velocity, Vector3 direction, float deltaTime)
+    public static Vector3 Acceleration(float maxSpeedBase, float maxAccelBase, Vector3 velocity, Vector3 direction, float deltaTime)
     {
     /*  Returns the Accelerated Vector to be added to the current velocity vector of an entity.
     */
@@ -10,4 +10,7 @@ public static class PHX_MovementPhysics
         float accel = Mathf.Max(Mathf.Min(maxSpeedBase - currentSpeed, maxAccelBase*maxSpeedBase*deltaTime),0);
         return accel * direction;
     }
+
+    public static Vector3 HookesLaw(Vector3 displacement, Vector3 currentVelocity, float stiffness, float damping) =>
+        (stiffness * displacement) - (damping * currentVelocity);
 }

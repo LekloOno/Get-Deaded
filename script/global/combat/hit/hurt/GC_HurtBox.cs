@@ -69,6 +69,12 @@ public partial class GC_HurtBox : Area3D
         if (globalKnockBack is Vector3 knockBack)
             HandleKnockBack(knockBack);
 
+        if (RagdollBone is PHX_ActiveRagdollBone bone2)
+        {
+            if (localKnockback is Vector3 localImpulse)
+                bone2.Hit(localImpulse * 0.2f, hitPosition);
+        }
+
         if (killed && RagdollBone is PHX_ActiveRagdollBone bone)
         {
             if (localKnockback is Vector3 localImpulse)

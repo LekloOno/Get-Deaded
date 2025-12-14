@@ -9,7 +9,9 @@ using Godot;
 public partial class PHX_ActiveRagdollSim : Node
 {
     [Export] private PhysicalBoneSimulator3D _simulator;
-    [Export] private Skeleton3D _skeleton;
+    [Export] private Skeleton3D _animSkeleton;
+    [Export] private Skeleton3D _ragdollSkeleton;
+    [Export] private float blend = 1f;
 
     private struct BoneData
     {
@@ -28,7 +30,7 @@ public partial class PHX_ActiveRagdollSim : Node
             if (child is not PhysicalBone3D pb)
                 continue;
 
-            PHX_ActiveRagdollBone ragdollBone = new(pb, this);
+            PHX_ActiveRagdollBone ragdollBone = new(pb, this, 110f, 150f, 10f, 20f);
             InitHurtBox(pb, ragdollBone);
 
             int boneIdx = pb.GetBoneId();
@@ -36,7 +38,7 @@ public partial class PHX_ActiveRagdollSim : Node
             _bones.Add(new BoneData
             {
                 BoneIdx = boneIdx,
-                ParentIdx = _skeleton.GetBoneParent(boneIdx),
+                ParentIdx = _ragdollSkeleton.GetBoneParent(boneIdx),
                 Bone = ragdollBone,
                 Blend = 1f
             });
@@ -52,7 +54,13 @@ public partial class PHX_ActiveRagdollSim : Node
 
     public override void _Ready()
     {
-        CacheBones();
+        if (_ragdollSkeleton == null || _simulator == null)
+            SetPhysicsProcess(false);
+        else
+        {
+            CacheBones();
+            StartSimulation();
+        }
     }
 
     public void StartSimulation() => _simulator.PhysicalBonesStartSimulation();
@@ -62,5 +70,18 @@ public partial class PHX_ActiveRagdollSim : Node
         StartSimulation();
         foreach (BoneData bone in _bones)
             bone.Bone.ApplyImpulse(impulse, from);
+    }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        for (int i = 0; i < _bones.Count; i++)
+        {
+            var data = _bones[i];
+
+            Transform3D targetTransform = _ragdollSkeleton.GlobalTransform * _ragdollSkeleton.GetBoneGlobalPose(data.BoneIdx);
+            Transform3D currentTransform = data.Bone.GlobalTransform;
+
+            data.Bone.ActiveRagdoll(targetTransform, currentTransform, delta, blend);
+        }
     }
 }

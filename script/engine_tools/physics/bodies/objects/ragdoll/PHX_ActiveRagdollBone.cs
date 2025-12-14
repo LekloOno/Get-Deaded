@@ -10,10 +10,26 @@ public class PHX_ActiveRagdollBone
     private PhysicalBone3D _bone;
     // Bone parent fetched by default
     private PHX_ActiveRagdollSim _simulator;
+    private float _maxLinearStiffness;
+    private float _maxAngularStiffness;
+    private float _linearDamping;
+    private float _angularDamping;
+    private float _blend = 100f;  // 0 = floppy, 1 = animated
 
-    public PHX_ActiveRagdollBone(PhysicalBone3D bone, PHX_ActiveRagdollSim simulator) {
+    public PHX_ActiveRagdollBone(
+        PhysicalBone3D bone,
+        PHX_ActiveRagdollSim simulator,
+        float maxLinearStiffness,
+        float maxAngularStiffness,
+        float linearDamping,
+        float angularDamping    
+    ) {
         _bone = bone;
-        _simulator = simulator;    
+        _simulator = simulator;
+        _maxLinearStiffness = maxLinearStiffness;
+        _maxAngularStiffness = maxAngularStiffness;
+        _linearDamping = linearDamping;
+        _angularDamping = angularDamping;
     }
 
     public void Hit(Vector3 impulse, Vector3? from = null)
@@ -27,4 +43,54 @@ public class PHX_ActiveRagdollBone
 
     public void ApplyImpulse(Vector3 impulse, Vector3? position = null) =>
         _bone.ApplyImpulse(impulse, position);
+
+    public void ActiveRagdoll(
+        Transform3D targetTransform, Transform3D currentTransform,
+        double delta, float blend
+    ) {
+        float linearStiffness = _maxLinearStiffness * blend;
+        Vector3 positionDelta = targetTransform.Origin - currentTransform.Origin; 
+        
+        Vector3 force = PHX_MovementPhysics.HookesLaw(
+            positionDelta, _bone.LinearVelocity,
+            linearStiffness, _linearDamping
+        );
+        
+        _bone.LinearVelocity += force * (float) delta;
+
+
+        float angularStiffness = _maxAngularStiffness * blend;
+
+        Quaternion qCurrent = currentTransform.Basis.GetRotationQuaternion();
+        Quaternion qTarget  = targetTransform.Basis.GetRotationQuaternion();
+
+        Quaternion qError = qTarget * qCurrent.Inverse();
+
+        if (qError.W < 0)
+            qError = new Quaternion(-qError.X, -qError.Y, -qError.Z, -qError.W);
+
+        Vector3 axis = qError.GetAxis();
+        float angle = qError.GetAngle();
+        
+        if (axis.LengthSquared() < 1e-6f || angle < 1e-4f)
+            return;
+
+        //angle = Mathf.Clamp(angle, -0.5f, 0.5f); 
+
+        Vector3 angularError = axis * angle;
+
+        Vector3 torque = PHX_MovementPhysics.HookesLaw(
+            angularError, _bone.AngularVelocity,
+            angularStiffness, _angularDamping
+        );
+
+        // Smoothly move toward it
+        _bone.AngularVelocity += torque * (float)delta;
+
+        //_bone.AngularVelocity = _bone.AngularVelocity.LimitLength(20f);
+
+        //_bone.AngularVelocity = torque * (float) delta;
+    }
+
+    public Transform3D GlobalTransform => _bone.GlobalTransform;
 }

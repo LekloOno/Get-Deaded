@@ -3246,5 +3246,8 @@ supersampling = true
 directional = true
 light_data = ExtResource("27_vqbvp")
 
+[node name="CharacterBody3D" parent="." instance=ExtResource("27_xqord")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 22)
+
 [connection signal="Initialize" from="Entities/AimArena/SC_GameManager" to="Map/Sprite3D/SubViewport/Control" method="InitializeStat"]
 [connection signal="Stop" from="Entities/AimArena/SC_GameManager/SC_TestSpawner" to="Entities/AimArena/SC_GameManager" method="EndGame"]
