@@ -17,6 +17,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
     [Export] private PhysicalBoneSimulator3D _ragdolSimulator;
     [Export] private Skeleton3D _skeleton;
     [Export] private PROTO_Mover _mover;
+    [Export] private bool _aim;
 
     public bool Enabled {get; private set;} = false;
 
@@ -202,6 +203,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 
     public override void _Process(double delta)
     {
-        _mover.Rotate(this);
+        if (_aim)
+            _mover.Rotate(this);
     }
 }

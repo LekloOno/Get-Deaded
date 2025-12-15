@@ -1541,8 +1541,6 @@ material = SubResource("StandardMaterial3D_wk1by")
 
 [sub_resource type="Resource" id="Resource_f60qe"]
 script = ExtResource("23_qy2j6")
-BodyPart = 1
-Modifier = 1.0
 metadata/_custom_type_script = "uid://sujdlokcwnd6"
 
 [sub_resource type="Resource" id="Resource_583vm"]

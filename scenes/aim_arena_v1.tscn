@@ -5,7 +5,7 @@
 [ext_resource type="Material" uid="uid://c7p68evacni7v" path="res://assets/materials/darkGrid.tres" id="2_3mm7d"]
 [ext_resource type="PackedScene" uid="uid://b5w3ok85lmxgf" path="res://prefabs/player_camchanged.tscn" id="3_0o3ea"]
 [ext_resource type="Shader" uid="uid://cgvs2rofqr7fc" path="res://assets/shaders/toon_post_process.gdshader" id="4_n74u5"]
-[ext_resource type="PackedScene" uid="uid://cgxay2q63b8m8" path="res://prefabs/simplebot/simplebot.tscn" id="6_3mm7d"]
+[ext_resource type="PackedScene" uid="uid://cg6805jlx25is" path="res://prefabs/simplebot/simplebot_aim_arena.tscn" id="6_3mm7d"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_c33g5"]
 panorama = ExtResource("1_xes0e")
@@ -24,28 +24,6 @@ volumetric_fog_albedo = Color(0.811234, 0.891075, 0.957031, 1)
 volumetric_fog_emission = Color(0.570313, 0.929504, 1, 1)
 volumetric_fog_emission_energy = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_h84yg"]
-render_priority = -1
-shader = ExtResource("4_n74u5")
-shader_parameter/depth_threshold = 0.01
-shader_parameter/normal_threshold = 0.05
-shader_parameter/max_thickness = 2.0
-shader_parameter/min_thickness = 0.5
-shader_parameter/min_ratio = 0.2
-shader_parameter/min_depth = 0.5
-shader_parameter/fresnel_power = 5.0
-shader_parameter/angle_mask_power = 1.0
-shader_parameter/angle_modulation = 10.0
-shader_parameter/relative_depth = true
-shader_parameter/half_thickness = true
-shader_parameter/focal_scaled = true
-shader_parameter/kernel_depth = true
-shader_parameter/color = Color(0, 0, 0, 1)
-
-[sub_resource type="QuadMesh" id="QuadMesh_bm8tx"]
-flip_faces = true
-size = Vector2(2, 2)
-
 [sub_resource type="ArrayMesh" id="ArrayMesh_3mm7d"]
 lightmap_size_hint = Vector2i(614, 602)
 _surfaces = [{
@@ -59,6 +37,28 @@ _surfaces = [{
 "vertex_count": 223,
 "vertex_data": PackedByteArray("AAAAP6jMzL0AAJDAAAAAPwIAAD8AAJDAAADAPwAAIMAAAJDAAADAP5uZOUAAACjBAADAP5aZmb8AAPDAAADAP5uZOUAAANDAmpmZP/z//z4zM0PBmpmZP5uZOUAAANDAmpmZP/z//z6amZnAmpmZP5uZOUAAACjBmpmZP2ZmhkAzM0PBAADAPwAAkEAAAEjBAADAP5aZmb8AAEjBQAAAPwIAAD8AAJDAAADAPwAAkEAAAJDAAADAPwAAIMAAAJDAAADAPwAAIMAAAJDAAADAPwAAkEAAAJDAmpmZPwEAYEAAANDAQAAAPwIAAD+amZnAAAAAPwIAAD8AAJDA4P+/vwIAAD8AAJDAmpmZP/z//z6amZnAQAAAPwIAAD+amZnA4P+/vwIAAD+amZnA4P+/vwIAAD+amZnAAAAAP///H8AAAJDAAAAAP///H8AAAJDAAADAPwAAIMAAAJDAAAAAv///H8AAAJDAAADAP///H8AAAPDAAADAPwAAIMAAAEjB4P+/v2hmJkAAAJDAQAAAP2hmJkAAAJDA4P+/v2hmJkCamZnAQAAAP2hmJkCamZnAmpmZP2ZmhkCamZnA4P+/v2hmJkCamZnAmpmZP2ZmhkCamZnAQAAAP2hmJkAAAJDAQAAAP2hmJkAAAJDAQAAAPwIAAD8AAJDAQAAAP2hmJkCamZnAQAAAPwIAAD+amZnAQAAAP2hmJkCamZnAAADgwAAAIMAAAJDAAADgwAAAIMAAAEjBAADgwAAAkEAAAEjBAADAPwEAYEAAANDAmpmZPwEAYEAAACjBAADAPwEAYEAAACjBZmbWwPz//z6amZnAZmbWwGZmhkAzM0PBZmbWwPz//z4zM0PBZmbWwPz//z6amZnA4P+/vwUAAD8AAJDA4P+/v2hmJkAAAJDA4P+/vwIAAD+amZnAAADgwAAAkEAAAJDA4P+/v2hmJkAAAJDAAADgwAAAIMAAAJDAZmbWwGZmhkCamZnAmpmZP2ZmhkCamZnAZmbWwGZmhkAzM0PBAADAPwAAkEAAAEjBAADAPwAAkEAAAJDAAADgwAAAkEAAAEjBmpmZP2ZmhkAzM0PBZmbWwGZmhkAzM0PBmpmZP2ZmhkAzM0PBmpmZP/z//z4zM0PBAADgwAAAkEAAAEjBAADAP5aZmb8AAEjBAADAPwAAkEAAAEjBZmbWwPz//z4zM0PBAADgwAAAkEAAAJDAZmbWwGZmhkCamZnAAADgwAAAkEAAAJDAAADAvwUAAD8AAJDAAADAv6jMzL0AAJDAAAAAv6jMzL0AAJDAAAAAv///H8AAAJDAAAAAv///H8AAAJDAAADgwAAAIMAAAJDAmpmZP/z//z4zM0PBmpmZP/z//z6amZnAZmbWwPz//z6amZnAAADAP///H8AAAEjBZmbWwPz//z4zM0PBAADgwAAAIMAAAJDAAADAPwAAIMAAAJDAAADAPwAAIMAAAEjBAADAPwAAIMAAAEjBAADgwAAAkEAAAEjBAADgwAAAIMAAAEjBAADgwAAAIMAAAEjBZmbWwGZmhkCamZnA4P+/v2hmJkCamZnAAAAAv///H8CfmXnAAAAAv///H8AAAJDAAAAAv6jMzL2fmXnAAAAAv///H8AAAJDAAAAAv///H8CfmXnAAAAAP///H8AAAJDAAAAAP///H8CfmXnAAAAAv6jMzL0AAMA/AAAAP6jMzL0AAMA/AAAAv///H8AAAMA/AAAAv6jMzL0AAJDAAAAAP6jMzL0AAJDAAAAAP///H8AAAJDAAAAAP///H8CfmXnAAAAAP6jMzL2fmXnAAAAAv///H8B4mZk+AAAAv///H8AAAMA/AAAAP///H8B4mZk+AAAAP///H8AAAMA/AAAAv6jMzL0AAMA/AAAAv///H8AAAMA/AAAAv///H8B4mZk+AAAAP///H8B4mZk+AAAAP///H8AAAMA/AAAAP6jMzL14mZk+AAAAP6jMzL0AAMA/AAAAv6jMzL14mZk+AAAAP///H8AAAMA/AAAAv///H8B4mZk+AAAAP///H8B4mZk+AAAAv6jMzL14mZk+AAAAP///H8CfmXnAAAAAv///H8CfmXnAAAAAP6jMzL2fmXnAAAAAv6jMzL2fmXnAAAAAP6jMzL14mZk+AAAAv6jMzL14mZk+AADAv6jMzL0AAMA/AAAAv6jMzL0AAMA/AAAAP6jMzL0AAJDAAAAAP6jMzL2fmXnAAAAAPwUAAD8AAMA/AAAAPwUAAD8AAMA/4P+/vwUAAD8AAJDAAAAAPwUAAD8AAJDAAADAv6jMzL0AAMA/AADAv6jMzL0AAJDAAADAvwUAAD8AAJDAAAAAv6jMzL2fmXnAAAAAv6jMzL0AAJDAAADAv6jMzL0AAJDAAADAvwUAAD8AAMA/AAAAP6jMzL2fmXnAAAAAPwIAAD8AAJDAAAAAP6jMzL14mZk+AAAAv6jMzL0AAMA/AADAv6jMzL0AAMA/AAAAPwUAAD8AAMA/AAAAP6jMzL0AAMA/AAAAPwUAAD8AAMA/AADAvwUAAD8AAMA/AADAvwUAAD8AAJDAAADAvwUAAD8AAMA/AAAAP6jMzL14mZk+AAAAP6jMzL0AAMA/AAAgQJuZOUAAACjBAAAgQAEAYEAAACjBAADAPwEAYEAAACjBAADAP5uZOUAAANDAAADAPwEAYEAAANDAAAAgQAEAYEAAANDAAAAgQJuZOUAAANDAAAAgQJuZOUAAANDAAAAgQAEAYEAAANDAAAAgQJuZOUAAACjBAADAPwEAYEAAACjBAAAgQAEAYEAAANDAAADAPwEAYEAAANDAAADAP5uZOUAAANDAAAAgQJuZOUAAANDAAADAP5uZOUAAACjBAAAgQAEAYEAAACjBAAAgQAEAYEAAACjBAAAAP5uZOUAAACjBAAAAPwEAYEAAACjBAAAAP5uZOUAAANDAAAAgQJuZOUAAACjBAADAP5uZOUAAACjBAAAAPwEAYEAAACjBmpmZP5uZOUAAACjBmpmZPwEAYEAAACjBAAAAP5uZOUAAACjBAAAAP5uZOUAAANDAmpmZP5uZOUAAACjBAAAAPwEAYEAAACjBmpmZPwEAYEAAACjBAAAAPwEAYEAAANDAAAAAP5uZOUAAACjBAAAAPwEAYEAAANDAmpmZP5uZOUAAANDAmpmZPwEAYEAAANDAAAAAP5uZOUAAANDAAAAAPwEAYEAAANDAmpmZPwEAYEAAANDAmpmZP5uZOUAAANDAAACQQJaZmb8AAEjBAACQQJaZmb8AAPDAAADAP5aZmb8AAEjBAACQQP//H8AAAPDAAACQQJaZmb8AAPDAAACQQP//H8AAAEjBAADAP///H8AAAPDAAACQQP//H8AAAPDAAACQQP//H8AAAEjBAACQQJaZmb8AAEjBAACQQP//H8AAAEjBAACQQJaZmb8AAEjBAADAP5aZmb8AAEjBAADAP5aZmb8AAPDAAADAP///H8AAAEjBAADAP///H8AAAEjBAACQQJaZmb8AAPDAAACQQP//H8AAAPDAAADAP///H8AAAPDAAADAP5aZmb8AAPDA/3//fwAA/z//f/9/AAD/P/9//38AAP8///8AgP9//n///wCA/3/+f///AID/f/5/AAAAgP9/AIAAAACA/38AgAAAAID/fwCAAAAAgP9/AIAAAACA/38AgP//AID/f/5///8AgP9//n//f/9/AAD/P/9//38AAP8//3//fwAA/z///wCA/3/+f///AID/f/5/AAAAgP9/AIAAgP///////wCA////////AID/////////////AAD/v/////8AAP+//////wAA/78AgP////////9//38AAP8//3//fwAA/z//f/9/AAD/P/9//38AAP7///8AgP9//n///wCA/3/+fwCAAAD/////AIAAAP////8AgAAA//////////8AAP+//////wAA/7//////AAD/vwAAAID/fwCA/3//fwAA/z8AAACA/38AgAAAAID/fwCAAAAAgP9/AIAAAACA/38AgACAAAD/////AAAAgP9//n8AAACA/3/+fwAAAID/f/5///8AgP9//n8AAACA/38AgP//AID/f/5///8AgP9/AID//wCA/38AgP//AID/fwCA/////wAA/7///wCA/38AgP//AID/fwCA//8AgP9/AID/f/9/AAD/P/9//38AAP8//3//fwAA/z8AgAAA/////wCAAAD/////AIAAAP////8AgP////8AAACA/////wAAAID/////AAAAgAAA//////9//38AAP+//3//fwAA/7//f/9/AAD/v/////8AAP8//////wAA/z//////AAD/P/9//38AAP+/AID/////AAD//wCA/38AgAAAAID/f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8//3//fwAA/z//f/9/AAD+//9//3////8/AID///////8AgP///////wCA/////////////wAA/z8AgP///////wCAAAD//wAAAIAAAP//AAAAgAAA//8AAP////8AAP8//////wAA/z//////AAD/PwCAAAD//wAA/////wAA/7///wCA/38AgAAAAID/f/5/AAAAgP9//n8AAACA/3/+fwCAAAD//wAAAIAAAP//AAAAgAAA//8AAACAAAD//wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8/AAAAgP9//n///wCA/3/+f///AID/f/5///8AgP9//n///wCA/3/+fwCAAAD//wAAAIAAAP//AAAAgAAA//8AAACAAAD//wAAAAAAgP9//n8AAACA/3/+fwAAAID/f/5///8AgP9//n///wCA/3/+f///AID/f/5///8AgP9//n8AAACA/3/+f/9//38AAP8//////wAA/7//////AAD/v/////8AAP+//3//fwAA/7//f/9/AAD/v/9//38AAP+//3//fwAA/7//////AAD/vwCAAAD//wAAAIAAAP//AAAAgAAA//8AAP//AID/f/5///8AgP9//n///wCA/3/+fwCA/////wAAAID/////AAAAgP////8AAAAAAID/f/5/AAAAgP9//n8AAACA/3/+fwCAAAD//wAAAIAAAP//AAAAgAAA//8AAAAAAID/f/5/AIAAAP//AAD//wCA/3/+fwCAAAD//wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8//3//fwAA/z8AgP////8AAACA/////wAAAID/////AAD/f/9/AAD/P///AID/f/5///8AgP9//n//////AAD/P/////8AAP8//////wAA/z//f/9/AAD/P/9//38AAP8//3//fwAA/z//f/9/AAD/P///AID/f/5///8AgP9//n///wCA/3/+fwCA/////wAAAID/////AAAAgP////8AAACAAAD//wAAAIAAAP//AAAAgAAA//8AAP//AID/f/5/AID/////AAAAAACA/3/+fwAAAID/f/5/AAAAgP9//n8AgAAA//8AAP////8AAP8//////wAA/z//////AAD/P/////8AAP8/AIAAAP//AAAAgAAA//8AAACAAAD//wAAAID/////AAAAgP////8AAACA/////wAA/////wAA/z8AAACA/3/+fwCAAAD//wAAAID/////AAD/f/9/AAD/P/9//38AAP8//3//fwAA/z//f/9/AAD/PwCA/////wAAAID/////AAAAgP////8AAP//AID/f/5///8AgP9//n///wCA/3/+fwCAAAD//wAAAIAAAP//AAAAgAAA//8AAP//AID/f/5//////wAA/z//////AAD/P/////8AAP8/AID/////AAAAgAAA//8AAP////8AAP8//3//fwAA/z//f/9/AAD/P/9//38AAP8//3//fwAA/z8=")
 }]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0o3ea"]
+render_priority = -1
+shader = ExtResource("4_n74u5")
+shader_parameter/depth_threshold = 0.1
+shader_parameter/normal_threshold = 1.2
+shader_parameter/max_thickness = 16.0
+shader_parameter/min_thickness = 1.0
+shader_parameter/min_ratio = 0.6
+shader_parameter/min_depth = 0.3
+shader_parameter/fresnel_power = 5.0
+shader_parameter/angle_mask_power = 1.0
+shader_parameter/angle_modulation = 20.0
+shader_parameter/relative_depth = false
+shader_parameter/half_thickness = true
+shader_parameter/focal_scaled = true
+shader_parameter/kernel_depth = true
+shader_parameter/color = Color(0, 0, 0, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_n74u5"]
+flip_faces = true
+size = Vector2(2, 2)
 
 [node name="AimArenaV1" type="Node3D"]
 
@@ -110,16 +110,16 @@ material = ExtResource("2_3mm7d")
 [node name="PlayerController" parent="Entities" instance=ExtResource("3_0o3ea")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, -1)
 
-[node name="PostProcessing" type="MeshInstance3D" parent="."]
-material_override = SubResource("ShaderMaterial_h84yg")
-extra_cull_margin = 16384.0
-ignore_occlusion_culling = true
-mesh = SubResource("QuadMesh_bm8tx")
-
-[node name="CharacterBody3D" parent="." instance=ExtResource("6_3mm7d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1, 1)
-
 [node name="CSGBakedMeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51, 3, 42.5)
 mesh = SubResource("ArrayMesh_3mm7d")
 skeleton = NodePath("../..")
+
+[node name="PostProcessing" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_0o3ea")
+extra_cull_margin = 16384.0
+ignore_occlusion_culling = true
+mesh = SubResource("QuadMesh_n74u5")
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("6_3mm7d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 1, 0)
