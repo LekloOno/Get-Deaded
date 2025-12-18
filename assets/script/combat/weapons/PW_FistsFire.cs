@@ -58,7 +58,6 @@ public partial class PW_FistsFire : PW_Fire
         }
 
         AddModifiers(knockBack, damage);
-        GD.Print("added modifiers");
 
         bool didShoot = TryShoot();
         if (didShoot)

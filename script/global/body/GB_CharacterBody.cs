@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class GB_CharacterBody : CharacterBody3D, GB_IExternalBodyManager
+public abstract partial class GB_CharacterBody : CharacterBody3D, GB_IExternalBodyManager
 {
     public void HandleKnockBack(Vector3 force)
     {
