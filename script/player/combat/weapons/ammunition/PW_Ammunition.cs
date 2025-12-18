@@ -19,7 +19,7 @@ public partial class PW_Ammunition : WeaponComponent
     [Export] private uint _magazinePick;
     [Export] private uint _maxMagazines;
     [Export] protected uint _baseAmmos;
-    public bool InfiniteAmmo = false;
+    [Export] public bool InfiniteAmmo = false;
     public bool IsReloading {get; private set;} = false;
     private uint _maxAmmos;
     private uint _unloadedAmmos;
@@ -128,7 +128,7 @@ public partial class PW_Ammunition : WeaponComponent
         return true;
     }
 
-    public bool CanReload() => LoadedAmmos < _magazineSize && UnloadedAmmos > 0;
+    public bool CanReload() => LoadedAmmos < _magazineSize && (InfiniteAmmo || UnloadedAmmos > 0);
 
     /// <summary>
     /// Reloads the loaded ammos with the unloaded ammos.

@@ -23,7 +23,7 @@
 
 [sub_resource type="Resource" id="Resource_ad73j"]
 script = ExtResource("7_2b0g7")
-Damage = 10.0
+Damage = 11.0
 _inspectorModifiers = null
 metadata/_custom_type_script = "uid://cjmiash71uc7b"
 
@@ -31,7 +31,6 @@ metadata/_custom_type_script = "uid://cjmiash71uc7b"
 script = ExtResource("11_8kujm")
 _noise = ExtResource("10_8kujm")
 _reductionRate = 10.0
-_noiseSpeed = 50.0
 metadata/_custom_type_script = "uid://c0vf7xmi1u8t4"
 
 [node name="PW_Simple" type="Node3D" node_paths=PackedStringArray("_fires", "_ads")]
@@ -39,8 +38,8 @@ script = ExtResource("1_5idl2")
 MoveSpeedModifier = -0.08
 SwitchInTime = 0.15
 SwitchOutTime = 0.25
-ReloadTime = 1.2
-TacticalReloadTime = 0.8
+ReloadTime = 1.1
+TacticalReloadTime = 0.7
 ReloadReadyTime = 0.15
 _fires = [NodePath("PWF_FullAuto")]
 _ads = NodePath("PWA_SimpleADS")
@@ -69,6 +68,7 @@ script = ExtResource("5_akysb")
 _magazineSize = 30
 _maxMagazines = 5
 _baseAmmos = 60
+InfiniteAmmo = true
 metadata/_custom_type_script = "uid://cxiwvat6vddlp"
 
 [node name="PWS_Hitscan" type="Node3D" parent="PWF_FullAuto" node_paths=PackedStringArray("_trail")]
@@ -129,7 +129,7 @@ panning_strength = 0.0
 script = ExtResource("18_f28ci")
 _fadeInTime = 0.1
 _fadeOutTime = 0.1
-_volume = 12.0
+_volume = 15.0
 metadata/_custom_type_script = "uid://dxtqg0xnanovw"
 
 [node name="Tail" type="Node3D" parent="PA_FullAuto" node_paths=PackedStringArray("_slideInLayers")]
