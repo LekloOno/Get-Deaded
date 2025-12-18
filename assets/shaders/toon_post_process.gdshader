@@ -2,9 +2,9 @@ shader_type spatial;
 
 render_mode unshaded, fog_disabled;
 
-uniform sampler2D depth_texture : source_color, hint_depth_texture, filter_nearest;
-uniform sampler2D screen_texture : source_color, hint_screen_texture, filter_nearest;
-uniform sampler2D normal_texture : source_color, hint_normal_roughness_texture, filter_nearest;
+uniform sampler2D depth_texture : source_color, hint_depth_texture, filter_nearest, repeat_disable;
+uniform sampler2D screen_texture : source_color, hint_screen_texture, filter_nearest, repeat_disable;
+uniform sampler2D normal_texture : source_color, hint_normal_roughness_texture, filter_nearest, repeat_disable;
 
 uniform float depth_threshold = .1;
 uniform float normal_threshold = 1.2;
@@ -39,6 +39,7 @@ vec2[4] get_kernel(vec2 uv, vec2 width) {
 	kernel[1] = vec2(uv.x, uv.y - width.y);
 	kernel[2] = vec2(uv.x + width.x, uv.y);
 	kernel[3] = vec2(uv.x - width.x, uv.y);
+	
 	return kernel;
 }
 
@@ -74,6 +75,7 @@ float depth_variation(vec2 screen_uv, vec2 kernel[4], mat4 inversion_matrix) {
 		variation += d;
 	}
 	variation = abs(variation);
+		
 	if (relative_depth)
 		variation /= depth;
 	return variation;
@@ -173,7 +175,7 @@ float screen_size_thickness(
 void fragment() {
 	// Called for every pixel the material is visible on.
 	vec3 original = get_original(SCREEN_UV);
-	vec2[4] surroundings = get_kernel(SCREEN_UV, vec2(max_thickness));
+	vec2[4] surroundings = get_kernel(SCREEN_UV, vec2(max_thickness)/VIEWPORT_SIZE.xy);
 	
 	float depth;
 	if (kernel_depth) {
