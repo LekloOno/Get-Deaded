@@ -187,7 +187,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
             velocity = ApplyDrag(velocity, delta);
             
             if (_mover != null)
-                velocity += _mover.GetAcceleration(this, velocity, delta);
+                velocity += _mover.GetAcceleration(velocity, delta);
         }
         
         Velocity = velocity;

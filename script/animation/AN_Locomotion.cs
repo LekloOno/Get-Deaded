@@ -6,7 +6,7 @@ public partial class AN_Locomotion : Node
 {
     [ExportCategory("References")]
     [Export] private GB_CharacterBody _body;
-    [Export] private PROTO_Mover _mover;
+    [Export] private GM_Mover _mover;
     [Export] private AnimationTree _animationTree;
     [Export] private string _locomotionBlendPath;
     [Export] private string _timeScaleBlendPath;
@@ -91,8 +91,7 @@ public partial class AN_Locomotion : Node
         // Animation
         float animationSpeedRatio = AnimationStateSpeedRatio(flatSpeed);
 
-        Vector2 flatDir = new(_mover.WishDir.X, _mover.WishDir.Z);
-        Vector2 newPos = animationSpeedRatio * flatDir;
+        Vector2 newPos = animationSpeedRatio * _mover.WalkAxis;
         
         _smoothedAnimPos = _smoothedAnimPos.Lerp(newPos, _animationTransitionSpeed);
         _animationTree.Set(_locomotionBlendPath, _smoothedAnimPos);

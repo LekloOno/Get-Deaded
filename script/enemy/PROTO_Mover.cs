@@ -5,10 +5,12 @@ using System;
 public partial class PROTO_Mover : Node
 {
     [Export] private PROTO_MoverData _data;
+    [Export] private Node3D _dirNode;
     public Node3D Target;
 
-    private Vector3 _wishDir = Vector3.Zero;
-    public Vector3 WishDir {get => _wishDir;}
+    private Vector2 _walkAxis = Vector2.Zero;
+    public Vector2 WalkAxis {get => _walkAxis;}
+    public Vector3 WishDir => ComputeWishDir();
     private Timer _straffeTimer;
     private Timer _speedTimer;
     private Random _rng = new Random();
@@ -17,7 +19,7 @@ public partial class PROTO_Mover : Node
 
     public override void _Ready()
     {
-        _wishDir.X = _rng.Next(2) * 2f - 1f;
+        _walkAxis.X = _rng.Next(2) * 2f - 1f;
         _straffeTimer = new();
         _straffeTimer.Timeout += ChangeStraffeDir;
         AddChild(_straffeTimer);
@@ -28,6 +30,9 @@ public partial class PROTO_Mover : Node
         AddChild(_speedTimer);
         StartSpeedTimer();
     }
+
+    private Vector3 ComputeWishDir() => _dirNode.Transform.Basis.Z * WalkAxis.Y
+                                        + _dirNode.Transform.Basis.X * WalkAxis.X;
 
     public void Rotate(Node3D self)
     {
@@ -42,18 +47,18 @@ public partial class PROTO_Mover : Node
 
     public void ChangeStraffeDir()
     {
-        _wishDir.X *= -1;
+        _walkAxis.X *= -1;
 
         float seed = _rng.NextSingle();
         if (seed < _data.StraightProbability)
         {
             seed -= _data.StraightProbability / 2;
-            _wishDir.Z = Math.Sign(seed);
+            _walkAxis.Y = Math.Sign(seed);
         }
         else
-            _wishDir.Z = 0;
+            _walkAxis.Y = 0;
 
-        _wishDir = _wishDir.Normalized();
+        _walkAxis = _walkAxis.Normalized();
         
         StartStraffeTimer();
     }
@@ -93,10 +98,9 @@ public partial class PROTO_Mover : Node
     }
     
 
-    public Vector3 GetAcceleration(Node3D self, Vector3 velocity, double delta)
+    public Vector3 GetAcceleration(Vector3 velocity, double delta)
     {
-        Vector3 globalDir = self.GlobalBasis * _wishDir;
-        Vector3 accel = PHX_MovementPhysics.Acceleration(_speed, _data.Acceleration, velocity, globalDir.Normalized(), (float)delta);
+        Vector3 accel = PHX_MovementPhysics.Acceleration(_speed, _data.Acceleration, velocity, WishDir.Normalized(), (float)delta);
         return accel;
     }
 }
