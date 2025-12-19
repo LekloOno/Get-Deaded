@@ -5,7 +5,6 @@ using Godot;
 public partial class AN_Locomotion : Node
 {
     [ExportCategory("References")]
-    [Export] private GB_CharacterBody _body;
     [Export] private GM_Mover _mover;
     [Export] private AnimationTree _animationTree;
     [Export] private string _locomotionBlendPath;
@@ -86,7 +85,7 @@ public partial class AN_Locomotion : Node
     }
     public override void _PhysicsProcess(double delta)
     {
-        float flatSpeed = MATH_Vector3Ext.Flat(_body.Velocity).Length();
+        float flatSpeed = MATH_Vector3Ext.Flat(_mover.Velocity).Length();
 
         // Animation
         float animationSpeedRatio = AnimationStateSpeedRatio(flatSpeed);
