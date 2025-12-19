@@ -43,12 +43,24 @@ public partial class PROTO_Mover : Node
     public void ChangeStraffeDir()
     {
         _wishDir.X *= -1;
+
+        float seed = _rng.NextSingle();
+        if (seed < _data.StraightProbability)
+        {
+            seed -= _data.StraightProbability / 2;
+            _wishDir.Z = Math.Sign(seed);
+        }
+        else
+            _wishDir.Z = 0;
+
+        _wishDir = _wishDir.Normalized();
+        
         StartStraffeTimer();
     }
 
     private void StartStraffeTimer()
     {
-        float seed = (float)_rng.NextSingle();
+        float seed = _rng.NextSingle();
         float nextStaffe = Mathf.Lerp(_data.MinStraffe, _data.MaxStraffe, seed); 
         _straffeTimer.Start(nextStaffe);
     }

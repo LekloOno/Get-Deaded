@@ -6,11 +6,12 @@ public partial class PROTO_MoverData : Resource
     [ExportCategory("Straffe")]
     [Export] public float MinStraffe {get; private set;} = 0.06f;
     [Export] public float MaxStraffe {get; private set;} = 1.5f;
+    [Export] public float StraightProbability {get; private set;} = 0.2f;
 
     [ExportCategory("Base Speed")]
     [Export] public float Acceleration {get; private set;} = 20f;
     [Export] public float SprintSpeed {get; private set;} = 4.2f;
-    
+
     [ExportCategory("Speed variations")]
     [Export] public float RunSpeed {get; private set;} = 3.3f;
     [Export] public float WalkSpeed {get; private set;} = 2.5f;
