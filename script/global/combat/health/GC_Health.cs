@@ -5,7 +5,7 @@ public delegate void HealthEventHandler<T>(GC_Health senderLayer, T e);
 public delegate void HealthEventHandler(GC_Health senderLayer);
 
 [GlobalClass]
-public partial class GC_Health : Resource
+public partial class GC_Health : Node
 {
     [Export] protected float _maxHealth;
     [Export] public GC_Health Child {get; private set;}
