@@ -101,7 +101,7 @@ public partial class PM_Controller : CharacterBody3D, GB_IExternalBodyManager, G
 
     private void DeadBehavior(object sender, double delta)
     {
-        Vector3 velocity = RealVelocity;
+        Vector3 velocity = _velocityCache.GetVelocity(this, Velocity, _walkProcess.WishDir, _groundState.IsGrounded(), delta);
         velocity = _surfaceControl.ApplyDrag(velocity, delta);
 
         if (!_groundState.IsGrounded())
