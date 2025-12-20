@@ -3220,6 +3220,7 @@ shape = SubResource("BoxShape3D_pxgqc")
 [node name="SC_GameManager" type="Node" parent="Entities/AimArena" node_paths=PackedStringArray("_initial")]
 script = ExtResource("35_0iwb2")
 _initial = NodePath("SC_TestSpawner")
+_killRegen = 15.0
 metadata/_custom_type_script = "uid://bwxdr2xchhkya"
 
 [node name="SC_TestSpawner" type="Node3D" parent="Entities/AimArena/SC_GameManager" node_paths=PackedStringArray("_gameManager")]

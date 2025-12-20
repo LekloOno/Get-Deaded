@@ -89,7 +89,8 @@ public partial class GC_Health : Node
         overflow = 0;
         CurrentHealth -= damageTaken;
 
-        OnDamage?.Invoke(this, DamageArgs(damageTaken));
+        if (damageTaken > 0)
+            OnDamage?.Invoke(this, DamageArgs(damageTaken));
 
         takenDamage = damageTaken;
 
@@ -101,7 +102,7 @@ public partial class GC_Health : Node
 
         bool died = Propagate(remainingDamage, out float childDamage, out overflow, out deepest);
         takenDamage += childDamage;
-        OnDamage?.Invoke(this, DamageArgs(overflow));
+        //OnDamage?.Invoke(this, DamageArgs(overflow));
 
         if (died)
             return true;
