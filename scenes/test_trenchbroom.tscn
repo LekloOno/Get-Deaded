@@ -1561,7 +1561,7 @@ albedo_color = Color(0.780392, 0.113725, 0.0823529, 0.92549)
 material = SubResource("StandardMaterial3D_efpjk")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pxgqc"]
-size = Vector3(5.8, 2.4, 6.5)
+size = Vector3(24, 2.4, 20)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ux68e"]
 render_priority = -1
@@ -3214,7 +3214,7 @@ _gameManager = NodePath("../SC_GameManager")
 metadata/_custom_type_script = "uid://c1b6fea15qlys"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/AimArena/SC_AimArenaAmoConfig"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10000229, 1, -0.25)
 shape = SubResource("BoxShape3D_pxgqc")
 
 [node name="SC_GameManager" type="Node" parent="Entities/AimArena" node_paths=PackedStringArray("_initial")]
