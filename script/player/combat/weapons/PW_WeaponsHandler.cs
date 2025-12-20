@@ -114,7 +114,12 @@ public partial class PW_WeaponsHandler : WeaponSystem
         Initialized = true;
     }
 
-    public void DisableFire() => _ready = false;
+    public void DisableFire()
+    {
+        _ready = false;
+        _activeWeapon.Disable();
+    }
+    
     public void EnableFire()
     {
         if (!_ready)
