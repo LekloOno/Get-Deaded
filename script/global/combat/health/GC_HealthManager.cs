@@ -60,4 +60,32 @@ public partial class GC_HealthManager : Node3D
     {
         _body.HandleKnockBack(force);
     }
+
+    public HealthEventHandler OnDie
+    {
+        get => TopHealthLayer.OnDie;
+        set => TopHealthLayer.OnDie = value;
+    }
+    public HealthEventHandler<DamageEventArgs> OnDamage
+    {
+        get => TopHealthLayer.OnDamage;
+        set => TopHealthLayer.OnDamage = value;
+    }
+    public HealthEventHandler<DamageEventArgs> OnHeal
+    {
+        get => TopHealthLayer.OnHeal;
+        set => TopHealthLayer.OnHeal = value;
+    }
+
+    public HealthEventHandler<GC_Health> OnBreak
+    {
+        get => TopHealthLayer.OnBreak;
+        set => TopHealthLayer.OnBreak = value;
+    }
+
+    public HealthEventHandler<GC_Health> OnFull
+    {
+        get => TopHealthLayer.OnFull;
+        set => TopHealthLayer.OnFull = value;
+    }
 }

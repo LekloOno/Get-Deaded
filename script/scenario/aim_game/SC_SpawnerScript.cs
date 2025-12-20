@@ -12,6 +12,12 @@ public abstract partial class SC_SpawnerScript : Node3D
     public EventHandler<HitEventArgs> Hit;          // Report hits handled by bots spawned from this script
     public List<E_IEnemy> Enemies {get; private set;} = [];
 
+    public override void _EnterTree()
+    {
+        _gameManager.Interrupt -= StopSpec;
+        _gameManager.Interrupt += StopSpec;
+    }
+
     /// <summary>
     /// Called when starting this spawn script.
     /// Typically setup the dummies entities.

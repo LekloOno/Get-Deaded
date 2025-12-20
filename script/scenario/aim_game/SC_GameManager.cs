@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 [GlobalClass]
@@ -12,10 +13,19 @@ public partial class SC_GameManager : Node
     public SceneTreeTimer CountDownTimer;
     private GE_IActiveCombatEntity _player;
     private GC_SpeedShield _speedShield;
+    /// <summary>
+    /// An "unexpected" stop, like the player manually stopping, or dying.
+    /// </summary>
+    public Action Interrupt;
 
     public void Init(GE_IActiveCombatEntity player)
     {
+        if (_player != null)
+            _player.HealthManager.OnDie -= DoInterrupt;
+
         _player = player;
+        _player.HealthManager.OnDie += DoInterrupt;
+
         Stats = new(player);
         _score = 0;
 
@@ -25,6 +35,12 @@ public partial class SC_GameManager : Node
 
         CountDownTimer = GetTree().CreateTimer(_countDown);
         CountDownTimer.Timeout += StartGame;
+    }
+
+    private void DoInterrupt(GC_Health _)
+    {
+        Interrupt?.Invoke();
+        Reset();
     }
 
     private void StartGame()
@@ -49,9 +65,13 @@ public partial class SC_GameManager : Node
 
     public void EndGame()
     {
-        Stats.Disable();
-
         _player.HealthManager.Heal(99999);
+        Reset();
+    }
+
+    private void Reset()
+    {
+        Stats.Disable();
         if (_speedShield != null)
             _speedShield.Active = false;
     }
