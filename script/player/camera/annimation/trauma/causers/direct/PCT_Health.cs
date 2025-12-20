@@ -3,7 +3,7 @@ using Godot;
 [GlobalClass]
 public partial class PCT_Health : PCT_DirectCauser
 {
-    [Export] private PH_Manager _healthManager;
+    [Export] private GC_HealthManager _healthManager;
     [Export] MATH_FloatCurveSampler _curveSampler;
 
     public override void _Ready() =>

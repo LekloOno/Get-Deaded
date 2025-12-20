@@ -4,7 +4,7 @@ using Godot;
 [GlobalClass]
 public partial class PM_Controller : CharacterBody3D, GB_IExternalBodyManager, GE_IActiveCombatEntity
 {
-    [Export] private PH_Manager _healthManager;
+    [Export] private GC_HealthManager _healthManager;
     [Export] private PI_Walk _walkProcess;
     [Export] private PM_WallJump _wallJump;
     [Export] private PM_WallClimb _wallClimb;
