@@ -17,6 +17,9 @@ public partial class GC_SpeedShield : GC_Health
         Active = false;
     }
 
+    public override void SpecDisable() =>
+        Active = false;
+
     public override void _PhysicsProcess(double delta)
     {
         float diff = (ComputeHeal() - _dps) * (float) delta;

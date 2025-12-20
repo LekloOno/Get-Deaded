@@ -8,6 +8,7 @@ public partial class GC_HealthManager : Node3D
     [Export] public GB_ExternalBodyManagerWrapper _body;
     [Export] public GC_Health TopHealthLayer {get; set;}
     [Export] private Array<GC_HurtBox> _hurtBoxes;
+    [Export] private CONF_HurtBoxFaction _hurtMask = CONF_HurtBoxFaction.Enemy;
     public HealthInitEventArgs InitState {get; private set;} = null;
 
     public EventHandler<HealthInitEventArgs> OnLayerInit;
@@ -21,10 +22,21 @@ public partial class GC_HealthManager : Node3D
     ) => TopHealthLayer.TakeDamage(expectedDamage, out takenDamage, out overflow, out deepest);
 
     public float Heal(float heal) => TopHealthLayer.Heal(heal, null);
-    public override void _Ready() => Init();
+    public override void _Ready()
+    {
+        TopHealthLayer.OnDie += Die;
+        Init();
+    }
+
+    public void Die(GC_Health _)
+    {
+        DisableHurt();
+        TopHealthLayer.Disable();
+    }
 
     public void Init(bool reInit = false)
     {
+        EnableHurt(_hurtMask.LayerMask());
         TopHealthLayer.Initialize(out float totalInit, out float lowerInit, out float totalMax, out float lowerMax, reInit);
         InitState = new(totalInit, lowerInit, totalMax, lowerMax, reInit);
         OnLayerInit?.Invoke(this, InitState);

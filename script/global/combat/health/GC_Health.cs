@@ -17,8 +17,23 @@ public partial class GC_Health : Node
     public HealthEventHandler<GC_Health> OnFull;  // Passes the parent layer of the full one as event arg
     public HealthEventHandler OnDie;
 
+    public virtual void Disable()
+    {
+        SpecDisable();
+        Child?.Disable();
+    }
+    public virtual void SpecDisable() {} 
+
+    public virtual void Enable()
+    {
+        SpecEnable();
+        Child?.Enable();
+    }
+    public virtual void SpecEnable() {} 
+
     public void Initialize(out float totalInit, out float lowerInit, out float totalMax, out float lowerMax, bool reInit = false)
     {
+        Enable();
         CurrentHealth = _maxHealth;
 
         if (Child != null)
