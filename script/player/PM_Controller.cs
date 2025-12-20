@@ -51,6 +51,7 @@ public partial class PM_Controller : CharacterBody3D, GB_IExternalBodyManager, G
         _healthManager.Init(true);
         WeaponsHandler.EnableFire();
         _onPhysicsProcess -= DeadBehavior;
+        _onPhysicsProcess -= NormalBehavior;
         _onPhysicsProcess += NormalBehavior;
     }
 
@@ -94,6 +95,7 @@ public partial class PM_Controller : CharacterBody3D, GB_IExternalBodyManager, G
     {
         ResetGravity();
         _onPhysicsProcess -= NormalBehavior;
+        _onPhysicsProcess -= DeadBehavior;
         _onPhysicsProcess += DeadBehavior;
         WeaponsHandler.DisableFire();
         OnDie?.Invoke(this, EventArgs.Empty);
