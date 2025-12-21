@@ -103,6 +103,8 @@ public partial class PW_WeaponsHandler : WeaponSystem
         _weaponsInput.OnReload += Reload;
         _weaponsInput.OnStartMelee += DirectMeleeStart;
         _weaponsInput.OnStopMelee += DirectMeleeStop;
+        _weaponsInput.OnDisable += DisableFire;
+        _weaponsInput.OnEnable += EnableFire;
 
         Melee.Shot += OnMeleeShot;
 

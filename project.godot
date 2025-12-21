@@ -43,6 +43,8 @@ enabled=PackedStringArray("res://addons/func_godot/plugin.cfg")
 folder_colors={
 "res://assets/": "orange",
 "res://assets/script/": "purple",
+"res://config/": "gray",
+"res://prefabs/": "teal",
 "res://script/": "purple"
 }
 
@@ -158,4 +160,5 @@ jolt_physics_3d/simulation/areas_detect_static_bodies=true
 
 [rendering]
 
+occlusion_culling/jitter_projection=false
 occlusion_culling/use_occlusion_culling=true

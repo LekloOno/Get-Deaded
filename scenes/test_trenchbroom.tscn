@@ -1564,7 +1564,7 @@ material = SubResource("StandardMaterial3D_efpjk")
 size = Vector3(24, 2.4, 20)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ux68e"]
-render_priority = -1
+render_priority = 0
 shader = ExtResource("34_f60qe")
 shader_parameter/depth_threshold = 0.1
 shader_parameter/normal_threshold = 1.2
@@ -3235,7 +3235,9 @@ _gameManager = NodePath("..")
 metadata/_custom_type_script = "uid://b361d5nxjt30o"
 
 [node name="PostProcessing" type="MeshInstance3D" parent="."]
+sorting_offset = -5000.0
 material_override = SubResource("ShaderMaterial_ux68e")
+cast_shadow = 0
 extra_cull_margin = 16384.0
 ignore_occlusion_culling = true
 mesh = SubResource("QuadMesh_5y3lt")

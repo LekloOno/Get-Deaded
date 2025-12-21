@@ -18,6 +18,8 @@ public partial class PI_Weapons : PI_InputGlobalAction
     public EventHandler OnReload;
     public EventHandler OnStartMelee;
     public EventHandler OnStopMelee;
+    public Action OnDisable;
+    public Action OnEnable;
 
     public override void _UnhandledInput(InputEvent @event)
     {
@@ -46,5 +48,12 @@ public partial class PI_Weapons : PI_InputGlobalAction
         base.EnableAction();
         _reloadInput.EnableAction();
         _reloadInput.Start += ForwardReload;
+        OnEnable?.Invoke();
+    }
+
+    public override void DisableAction()
+    {
+        base.DisableAction();
+        OnDisable?.Invoke();
     }
 }
