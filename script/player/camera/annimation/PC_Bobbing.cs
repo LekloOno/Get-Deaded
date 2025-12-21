@@ -56,7 +56,7 @@ public partial class PC_Bobbing : Node3D
     private Vector3 FootStepMotion()
     {
         Vector3 pos = Vector3.Zero;
-        float time = Time.GetTicksMsec()/1000f;
+        float time = PHX_Time.ScaledTicksMsec/1000f;
         pos.Y += Mathf.Sin(time/_waveLength * Mathf.Pi) * _amplitude;
         pos.X += Mathf.Sin(time/_waveLength * Mathf.Pi/2) * _amplitude * 2;
         return pos;

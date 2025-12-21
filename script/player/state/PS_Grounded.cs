@@ -60,7 +60,7 @@ public partial class PS_Grounded : Node
             else
             {
                 OnLeaving?.Invoke(this, EventArgs.Empty);
-                _lastGrounded = Time.GetTicksMsec();
+                _lastGrounded = PHX_Time.ScaledTicksMsec;
             }
         }
     }
@@ -70,7 +70,7 @@ public partial class PS_Grounded : Node
     }
 
     public float MsecSinceLastGrounded() {
-        return Time.GetTicksMsec() - _lastGrounded;
+        return PHX_Time.ScaledTicksMsec - _lastGrounded;
     }
 
     public bool IsGrounded() {

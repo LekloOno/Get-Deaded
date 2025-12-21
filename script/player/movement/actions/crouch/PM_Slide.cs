@@ -35,7 +35,7 @@ public partial class PM_Slide : PM_Action
     {
         if (_groundState.IsGrounded())
         {
-            ulong currentTime = Time.GetTicksMsec();
+            ulong currentTime = PHX_Time.ScaledTicksMsec;
             
             // Compute decay
             float elapsedTime = (currentTime/1000f) - (_lastForceTime/1000f);
@@ -52,7 +52,7 @@ public partial class PM_Slide : PM_Action
     {
         if (_groundState.IsGrounded())
         {
-            _delayedForceTimer = GetTree().CreateTimer(_forceDelay);
+            _delayedForceTimer = GetTree().CreateTimer(_forceDelay, false, true);
             _delayedForceTimer.Timeout += AddForce;
         }
 
@@ -67,7 +67,7 @@ public partial class PM_Slide : PM_Action
 
     public void StopSlide()
     {
-        ulong currentTime = Time.GetTicksMsec();
+        ulong currentTime = PHX_Time.ScaledTicksMsec;
         float elapsedTime = (currentTime/1000f) - (_lastForceTime/1000f);
 
         if (_slideDecayRecover-elapsedTime < _slideDecayMinRecover)

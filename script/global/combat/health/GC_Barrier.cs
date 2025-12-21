@@ -9,15 +9,15 @@ public partial class GC_Barrier : GC_Health
     private ulong _coolDown;
     private ulong _lastReduction = 0;
 
-    private bool CanReduce() => Time.GetTicksMsec() - _lastReduction >= _coolDown;
-    private bool JustReduced() => Time.GetTicksMsec() == _lastReduction;
+    private bool CanReduce() => PHX_Time.ScaledTicksMsec - _lastReduction >= _coolDown;
+    private bool JustReduced() => PHX_Time.ScaledTicksMsec == _lastReduction;
 
     protected override float ReductionFromDamage(float damage)
     {
         if (!CanReduce())
             return 0f;
         
-        _lastReduction = Time.GetTicksMsec();
+        _lastReduction = PHX_Time.ScaledTicksMsec;
         return damage * _resistance; 
     }
 

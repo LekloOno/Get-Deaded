@@ -53,7 +53,7 @@ public partial class PM_Dash : PM_Action
             return;
         }
         
-        if (Time.GetTicksMsec() - _crouchDispatcher.LastCrouchDown <= _slamWindow)
+        if (PHX_Time.ScaledTicksMsec - _crouchDispatcher.LastCrouchDown <= _slamWindow)
             _direction = Vector3.Down;
         else if (_walkInput.WalkAxis != Vector2.Zero)
             _direction = _walkInput.WishDir;
@@ -67,12 +67,12 @@ public partial class PM_Dash : PM_Action
         _dashForce = appliedStrength * _direction;
 
         _controller.TakeOverForces.AddPersistent(_dashForce);
-        _endDashTimer = GetTree().CreateTimer(_dashDuration);
+        _endDashTimer = GetTree().CreateTimer(_dashDuration, false, true);
         _endDashTimer.Timeout += EndDash;
         _isDashing = true;
         _available = false;
 
-        _lastDash = Time.GetTicksMsec();
+        _lastDash = PHX_Time.ScaledTicksMsec;
         OnStart?.Invoke(this, EventArgs.Empty);
     }
 
@@ -92,7 +92,7 @@ public partial class PM_Dash : PM_Action
         }
         else
         {
-            float sinceLastDash = (Time.GetTicksMsec() - _lastDash)/1000f;
+            float sinceLastDash = (PHX_Time.ScaledTicksMsec - _lastDash)/1000f;
             float remaining = _cooldown - sinceLastDash;
 
             if (remaining <= 0)
@@ -102,7 +102,7 @@ public partial class PM_Dash : PM_Action
             }
             else if (_delayedResetTimer == null)
             {
-                _delayedResetTimer = GetTree().CreateTimer(remaining);
+                _delayedResetTimer = GetTree().CreateTimer(remaining, false, true);
                 _delayedResetTimer.Timeout += Reset;
                 OnTryReset?.Invoke(this, remaining);
             }

@@ -24,13 +24,13 @@ public partial class PW_FistsFire : PW_Fire
 
     protected override bool SpecPress()
     {
-        _chargeStartTime = Time.GetTicksMsec();
+        _chargeStartTime = PHX_Time.ScaledTicksMsec;
         return true;
     }
 
     protected override bool SpecRelease()
     {
-        float chargeRatio = Mathf.Min((float) (Time.GetTicksMsec() - _chargeStartTime) / _chargeTime, 1);
+        float chargeRatio = Mathf.Min((float) (PHX_Time.ScaledTicksMsec - _chargeStartTime) / _chargeTime, 1);
         float damage = chargeRatio * _chargedDmgMultiplier;
         float knockBack = chargeRatio * _chargedKbMultiplier;
 

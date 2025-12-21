@@ -22,7 +22,12 @@ public partial class UI_KillSkullManager : Control
 
     public override void _Ready()
     {
-        FadeTimer = new();
+        FadeTimer = new()
+        {
+            ProcessMode = ProcessModeEnum.Pausable,
+            ProcessCallback = Timer.TimerProcessCallback.Physics
+        };
+        
         AddChild(FadeTimer);
     }
 

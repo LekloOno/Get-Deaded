@@ -12,8 +12,6 @@ public partial class SC_AimArenaSpawner : Node3D
     [Export] private float _respawnDelay = 0f;
     [Export] private float _roundTime = 30f;
     [Export] private float _countDown = 2f;
-    private E_Enemy _caca;
-    private Timer _cacaTimer;
     private List<E_Enemy> _enemies = [];
     private List<Timer> _respawnTimers = [];
     private Random _rng = new();
@@ -34,7 +32,7 @@ public partial class SC_AimArenaSpawner : Node3D
         _player = player;
         _player?.WeaponsHandler.DisableFire();
 
-        CountDownTimer = GetTree().CreateTimer(_countDown);
+        CountDownTimer = GetTree().CreateTimer(_countDown, false, true);
         CountDownTimer.Timeout += StartGame;
 
         //CreateBots();
@@ -88,7 +86,7 @@ public partial class SC_AimArenaSpawner : Node3D
 
         _player?.WeaponsHandler.EnableFire();
         
-        RoundTimer = GetTree().CreateTimer(_roundTime);
+        RoundTimer = GetTree().CreateTimer(_roundTime, false, true);
         RoundTimer.Timeout += StopGame;
     }
 

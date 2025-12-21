@@ -52,7 +52,7 @@ public partial class PM_Jump : PM_Action
 
     private (float, float, float) ComputeForce()
     {
-        ulong fatigueTime = Time.GetTicksMsec() - _jumpInput.LastJumped;
+        ulong fatigueTime = PHX_Time.ScaledTicksMsec - _jumpInput.LastJumped;
 
         if (_data.FatigueMsec == 0)      // Avoid 0 division
             //return _data.Force;

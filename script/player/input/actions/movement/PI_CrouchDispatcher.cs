@@ -57,7 +57,7 @@ public partial class PI_CrouchDispatcher : PI_ActionHandler<float>
 
     private void TryStart()
     {
-        LastCrouchDown = Time.GetTicksMsec();
+        LastCrouchDown = PHX_Time.ScaledTicksMsec;
         if (_active && !Hold)
             TryStop();
         else 

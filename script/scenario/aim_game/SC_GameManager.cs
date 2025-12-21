@@ -33,7 +33,7 @@ public partial class SC_GameManager : Node
 
         EmitSignal(SignalName.Initialize, this);
 
-        CountDownTimer = GetTree().CreateTimer(_countDown);
+        CountDownTimer = GetTree().CreateTimer(_countDown, false, true);
         CountDownTimer.Timeout += StartGame;
     }
 

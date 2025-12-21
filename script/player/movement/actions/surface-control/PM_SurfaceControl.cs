@@ -93,7 +93,7 @@ public partial class PM_SurfaceControl : PM_Action
 
     private void SetGroundState(object sender, LandingEventArgs e)
     {
-        _delayedGroundTimer = GetTree().CreateTimer(LandGroundDelayMsec/1000f);
+        _delayedGroundTimer = GetTree().CreateTimer(LandGroundDelayMsec/1000f, false, true);
         _delayedGroundTimer.Timeout += SetGroundState;
     }
 

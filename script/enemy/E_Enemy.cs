@@ -106,7 +106,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
         if (_hitResetTimer != null)
             _hitResetTimer.Timeout -= ResetHitMaterial;
 
-        _hitResetTimer = GetTree().CreateTimer(_hitTime);
+        _hitResetTimer = GetTree().CreateTimer(_hitTime, false, true);
         _hitResetTimer.Timeout += ResetHitMaterial;
     }
 

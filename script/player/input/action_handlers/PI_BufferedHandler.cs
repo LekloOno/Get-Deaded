@@ -9,7 +9,12 @@ using Godot;
 public abstract partial class PI_BufferedHandler<T> : PI_PressHandler<T>
 {
     [Export] private ulong _bufferWindow;
+    [Export] private bool _scaledTime = true;
     protected ulong _lastInput = 0;
+
+    private ulong GetLocalTicksMsec() => _scaledTime
+            ? PHX_Time.ScaledTicksMsec
+            : Time.GetTicksMsec();
 
     public bool UseBuffer()
     {
@@ -18,7 +23,7 @@ public abstract partial class PI_BufferedHandler<T> : PI_PressHandler<T>
         return wasBuffered;
     }
 
-    public bool IsBuffered() => Time.GetTicksMsec() - _lastInput < _bufferWindow;
+    public bool IsBuffered() => GetLocalTicksMsec() - _lastInput < _bufferWindow;
 
     /// <summary>
     /// Automatically empties the buffer on disabling.
@@ -37,7 +42,7 @@ public abstract partial class PI_BufferedHandler<T> : PI_PressHandler<T>
     
     protected override void InputDown(InputEvent @event)
     {
-        _lastInput = Time.GetTicksMsec();
+        _lastInput = GetLocalTicksMsec();
         T value = GetInputValue(@event);
         Start?.Invoke(this, value);
     }

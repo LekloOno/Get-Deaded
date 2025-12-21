@@ -50,7 +50,7 @@ public partial class PA_Looper : AudioStreamPlayer2D
 
     private void InitFade()
     {
-        _fadeStart = Time.GetTicksMsec();
+        _fadeStart = PHX_Time.ScaledTicksMsec;
         _startVolume = VolumeDb;
         SetPhysicsProcess(true);
     }
@@ -61,7 +61,7 @@ public partial class PA_Looper : AudioStreamPlayer2D
 
     private void Fade(Action action, float currentFadeTime, float currentTargetVolume)
     {
-        float elapsed = (Time.GetTicksMsec() - _fadeStart)/1000f;
+        float elapsed = (PHX_Time.ScaledTicksMsec - _fadeStart)/1000f;
 
         if (elapsed >= currentFadeTime)
         {

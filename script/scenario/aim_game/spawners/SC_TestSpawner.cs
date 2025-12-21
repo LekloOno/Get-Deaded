@@ -76,7 +76,7 @@ public partial class SC_TestSpawner : SC_SpawnerScript
         if (RoundTimer != null)
             return;
             
-        RoundTimer = GetTree().CreateTimer(_roundTime);
+        RoundTimer = GetTree().CreateTimer(_roundTime, false, true);
         RoundTimer.Timeout += DoStop;
         SpawnBots();
         foreach (E_IEnemy enemy in Enemies)
@@ -91,7 +91,11 @@ public partial class SC_TestSpawner : SC_SpawnerScript
         if (enemy is not Node node)
             return;
 
-        Timer timer = new() { OneShot = true };
+        Timer timer = new() {
+            OneShot = true,
+            ProcessMode = ProcessModeEnum.Pausable,
+            ProcessCallback = Timer.TimerProcessCallback.Physics
+        };
         timer.Timeout += () => SpawnEnemy(enemy);
         _respawnTimers.Add(enemy, timer);
         AddChild(timer);

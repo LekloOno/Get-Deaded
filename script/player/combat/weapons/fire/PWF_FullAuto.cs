@@ -22,7 +22,7 @@ public partial class PWF_FullAuto : PW_Fire
         Shoot();
         _recoil?.Start();
 
-        _timer = GetTree().CreateTimer(_fireRate/1000f);
+        _timer = GetTree().CreateTimer(_fireRate/1000f, false, true);
         _timer.Timeout += ReShoot;
         return true;
     }
@@ -42,7 +42,7 @@ public partial class PWF_FullAuto : PW_Fire
 
         Shoot();
         _recoil?.Add();
-        _timer = GetTree().CreateTimer(_fireRate/1000f);
+        _timer = GetTree().CreateTimer(_fireRate/1000f, false, true);
         _timer.Timeout += ReShoot;
     }
 

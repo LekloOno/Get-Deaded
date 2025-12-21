@@ -111,7 +111,7 @@ public partial class PM_WallClimb : PM_Action
     {
         OnHopStart?.Invoke(this, EventArgs.Empty);
         _isHopping = true;
-        _hopEndTimer = GetTree().CreateTimer(_hopDuration);
+        _hopEndTimer = GetTree().CreateTimer(_hopDuration, false, true);
         _hopEndTimer.Timeout += ResetWallHop;
         _currentHop += 1;
     }

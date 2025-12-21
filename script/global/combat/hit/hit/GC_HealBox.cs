@@ -22,7 +22,7 @@ public partial class GC_HealBox: Area3D
         {
             hurtBox.Heal(_hit.GetDamage(hurtBox.BodyPart));
             _active = false;
-            _reset = GetTree().CreateTimer(_cd);
+            _reset = GetTree().CreateTimer(_cd, false, true);
             _reset.Timeout += Reset;
         }
     }

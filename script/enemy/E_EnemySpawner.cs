@@ -15,7 +15,7 @@ public partial class E_EnemySpawner : Node3D
 
     public void Die(E_IEnemy _, GC_Health senderLayer)
     {
-        _respawnTimer = GetTree().CreateTimer(_respawnDelay);
+        _respawnTimer = GetTree().CreateTimer(_respawnDelay, false, true);
         _respawnTimer.Timeout += Respawn;
     }
 

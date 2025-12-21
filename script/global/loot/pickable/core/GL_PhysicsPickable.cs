@@ -10,7 +10,7 @@ public partial class GL_PhysicsPickable(GL_IPickHandler handler, float horizonta
         if (lifeTime <= 0)
             return;
 
-        GetTree().CreateTimer(lifeTime).Timeout += QueueFree;
+        GetTree().CreateTimer(lifeTime, false, true).Timeout += QueueFree;
     }
 
     public override void _PhysicsProcess(double delta)

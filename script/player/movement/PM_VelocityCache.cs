@@ -27,10 +27,10 @@ public partial class PM_VelocityCache : Resource
     public void Cache(Vector3 velocity)
     {
         _cachedVelocity = velocity;
-        _cachedTime = Time.GetTicksMsec();
+        _cachedTime = PHX_Time.ScaledTicksMsec;
     }
 
-    public bool IsCached() => Time.GetTicksMsec() - _cachedTime < _cacheFrameMsec;
+    public bool IsCached() => PHX_Time.ScaledTicksMsec - _cachedTime < _cacheFrameMsec;
 
     public void DiscardCache()
     {

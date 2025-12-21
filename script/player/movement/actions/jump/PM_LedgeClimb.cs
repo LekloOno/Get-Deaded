@@ -70,7 +70,7 @@ public partial class PM_LedgeClimb : PM_Action
 
     public void DoLedgeClimb()
     {
-        _startTime = Time.GetTicksMsec();
+        _startTime = PHX_Time.ScaledTicksMsec;
         _prevVelocity = _controller.VelocityCache.UseCacheOr(_controller.RealVelocity);
         _dash.AbortDash();
 
@@ -88,7 +88,7 @@ public partial class PM_LedgeClimb : PM_Action
 
     private void Climb()
     {
-        float timeElapsed = (Time.GetTicksMsec() - _startTime)/1000f;
+        float timeElapsed = (PHX_Time.ScaledTicksMsec - _startTime)/1000f;
         if (timeElapsed > _maxClimbTime || PHX_Checks.CanMoveForward(_controller, _bodyScale.Collider, _pivot, 0.5f, out _lastCollision))
             StopClimb();
     }
@@ -106,7 +106,7 @@ public partial class PM_LedgeClimb : PM_Action
         if(minOut.Length() > outVelocity.Length())
             outVelocity = minOut;
         
-        if (Time.GetTicksMsec() - _crouchInput.LastCrouchDown < _superGlideWindow)
+        if (PHX_Time.ScaledTicksMsec - _crouchInput.LastCrouchDown < _superGlideWindow)
         {
             outVelocity += _direction * _superGlideXStrength;
             outVelocity.Y = _superGlideYStrength;

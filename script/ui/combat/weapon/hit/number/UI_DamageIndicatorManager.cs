@@ -14,6 +14,8 @@ public partial class UI_DamageIndicatorManager : Control
     {
         _weaponsHandler.Hit += HandleHit;
         _bufferTimer.OneShot = true;
+        _bufferTimer.ProcessMode = ProcessModeEnum.Pausable;
+        _bufferTimer.ProcessCallback = Timer.TimerProcessCallback.Physics;
         _bufferTimer.Timeout += ResetCurrentIndicator;
     }
 

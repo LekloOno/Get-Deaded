@@ -26,7 +26,7 @@ public partial class GC_Hitbox : Area3D, GC_IHitDealer
         {
             hurtBox.Damage(this, out _, out _, out _);
             _active = false;
-            _reset = GetTree().CreateTimer(_cd);
+            _reset = GetTree().CreateTimer(_cd, false, true);
             _reset.Timeout += Reset;
         }
     }

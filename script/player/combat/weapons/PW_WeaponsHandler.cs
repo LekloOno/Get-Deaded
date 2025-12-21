@@ -66,6 +66,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
 
     private bool _reloading = false;
     private bool _ready = true;
+    private bool _externalReady = true;
 
     private SceneTreeTimer _reloadTimer;
     private SceneTreeTimer _meleeRecoverTimer;
@@ -108,27 +109,31 @@ public partial class PW_WeaponsHandler : WeaponSystem
 
         Melee.Shot += OnMeleeShot;
 
-        SwitchEnded += (o, e) => Available?.Invoke();
-        ReloadReady += () => Available?.Invoke();
+        SwitchEnded += (o, e) => SendAvailable();
+        ReloadReady += SendAvailable;
 
         int nextIndex = (_weaponIndex + 1) % _weapons.Count;
         GotInitialized?.Invoke(Melee, _weapons[_weaponIndex], nextIndex, _weapons);
         Initialized = true;
     }
 
+    private void SendAvailable()
+    {
+        if (_externalReady)
+            Available?.Invoke();
+    }
+
     public void DisableFire()
     {
-        _ready = false;
+        _externalReady = false;
         _activeWeapon.Disable();
     }
     
     public void EnableFire()
     {
-        if (!_ready)
-        {
-            _ready = true;
+        _externalReady = true;
+        if (!ActiveWeaponHalted())
             Available?.Invoke();
-        }
     }
 
     public void SetInfiniteAmmo(bool active)
@@ -162,14 +167,14 @@ public partial class PW_WeaponsHandler : WeaponSystem
         if (_meleeRecoverTimer != null)
             _meleeRecoverTimer.Timeout -= EndMeleeRecover;
 
-        _meleeRecoverTimer = GetTree().CreateTimer(_meleeRecover);
+        _meleeRecoverTimer = GetTree().CreateTimer(_meleeRecover, false, true);
         _meleeRecoverTimer.Timeout += EndMeleeRecover;
     }
 
     private void EndMeleeRecover()
     {
         _ready = true;
-        Available?.Invoke();
+        SendAvailable();
     }
 
     public void InitData(out PW_Weapon active, out PW_Weapon nextHolster, out int nextIndex, out Array<PW_Weapon> weapons)
@@ -180,7 +185,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
         weapons = _weapons;
     }
 
-    public bool ActiveWeaponHalted() => !_ready || _switchingIn || _switchingOut;
+    public bool ActiveWeaponHalted() => !_ready || !_externalReady || _switchingIn || _switchingOut;
     public bool IsSwitching() => _switchingIn || _switchingOut;
 
     // Very redondant way to define the buffers, could use a little rework !
@@ -313,7 +318,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
         _reloading = true;
         _ready = false;
         _activeWeapon.Interrupt();
-        _reloadTimer = GetTree().CreateTimer(reloadTime);
+        _reloadTimer = GetTree().CreateTimer(reloadTime, false, true);
         _reloadTimer.Timeout += DoReload;
     }
 
@@ -339,7 +344,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
     private void DoReload()
     {
         _activeWeapon.Reload();
-        _reloadTimer = GetTree().CreateTimer(_activeWeapon.ReloadReadyTime);
+        _reloadTimer = GetTree().CreateTimer(_activeWeapon.ReloadReadyTime, false, true);
         _reloadTimer.Timeout += CompleteReload;
         _reloading = false;
     }
@@ -385,7 +390,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
         {                   // We want to restart the switch in process. Otherwize he could abuse the short switch in time of, typically, holster, to switch to other weapons.
             float time = _targetWeapon.SwitchOutTime; // (Holster, then switch weapon : the holster switch in time will be used, but the target weapon will be the side weapon)
             _switchTimer.Timeout -= EndSwitch;
-            _switchTimer = GetTree().CreateTimer(time);
+            _switchTimer = GetTree().CreateTimer(time, false, true);
             _switchTimer.Timeout += EndSwitch;
             return;
         }
@@ -401,7 +406,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
         float time = _activeWeapon.SwitchOutTime;
         _activeWeapon.Disable();
 
-        _switchTimer = GetTree().CreateTimer(time);
+        _switchTimer = GetTree().CreateTimer(time, false, true);
         _switchTimer.Timeout += OnSwitchIn;
         
         SwitchOut?.Invoke(this, _activeWeapon);
@@ -414,7 +419,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
 
         float time = _targetWeapon.SwitchOutTime;
 
-        _switchTimer = GetTree().CreateTimer(time);
+        _switchTimer = GetTree().CreateTimer(time, false, true);
         _switchTimer.Timeout += EndSwitch;
 
         SwitchIn?.Invoke(this, _targetWeapon);

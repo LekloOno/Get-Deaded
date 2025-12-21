@@ -67,7 +67,7 @@ public abstract partial class PW_Fire : WeaponComponent
         }
     }
 
-    public ulong NextAvailableShot() => _fireRate + _lastShot - Time.GetTicksMsec();
+    public ulong NextAvailableShot() => _fireRate + _lastShot - PHX_Time.ScaledTicksMsec;
 
     public bool PickAmmo(int amount, bool magazine)
     {
@@ -91,7 +91,7 @@ public abstract partial class PW_Fire : WeaponComponent
 
     protected void Shoot()
     {
-        _lastShot = Time.GetTicksMsec();
+        _lastShot = PHX_Time.ScaledTicksMsec;
         
         foreach (PW_Shot shot in _shots)
             shot.Shoot();
@@ -99,7 +99,7 @@ public abstract partial class PW_Fire : WeaponComponent
         Shot?.Invoke(this, _shots.Count);
     }
 
-    protected bool CanShoot() => Time.GetTicksMsec() - _lastShot >= _fireRate && (InfiniteMagazine || _ammos.DidConsume(_ammosPerShot));
+    protected bool CanShoot() => PHX_Time.ScaledTicksMsec - _lastShot >= _fireRate && (InfiniteMagazine || _ammos.DidConsume(_ammosPerShot));
 
     public bool Press()
     {
@@ -155,7 +155,7 @@ public abstract partial class PW_Fire : WeaponComponent
         }
         else
         {
-            _bufferTimer = GetTree().CreateTimer(NextAvailableShot()/1000.0 + BUFFER_MARGIN);
+            _bufferTimer = GetTree().CreateTimer(NextAvailableShot()/1000.0 + BUFFER_MARGIN, false, true);
             _bufferTimer.Timeout += SendPress;
         }
     }
@@ -163,7 +163,7 @@ public abstract partial class PW_Fire : WeaponComponent
     private void BufferRelease()
     {
         _releaseBuffered = true;
-        _bufferTimer = GetTree().CreateTimer(NextAvailableShot()/1000.0 + BUFFER_MARGIN);
+        _bufferTimer = GetTree().CreateTimer(NextAvailableShot()/1000.0 + BUFFER_MARGIN, false, true);
         _bufferTimer.Timeout += SendRelease;
     }
 

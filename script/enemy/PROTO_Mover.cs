@@ -20,12 +20,20 @@ public partial class PROTO_Mover : Node
     public override void _Ready()
     {
         _walkAxis.X = _rng.Next(2) * 2f - 1f;
-        _straffeTimer = new();
+        _straffeTimer = new()
+        {
+            ProcessMode = ProcessModeEnum.Pausable,
+            ProcessCallback = Timer.TimerProcessCallback.Physics
+        };
         _straffeTimer.Timeout += ChangeStraffeDir;
         AddChild(_straffeTimer);
         StartStraffeTimer();
 
-        _speedTimer = new();
+        _speedTimer = new()
+        {
+            ProcessMode = ProcessModeEnum.Pausable,
+            ProcessCallback = Timer.TimerProcessCallback.Physics
+        };
         _speedTimer.Timeout += ChangeSpeed;
         AddChild(_speedTimer);
         StartSpeedTimer();
