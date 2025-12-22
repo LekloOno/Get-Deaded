@@ -8,7 +8,9 @@ public partial class UI_3DSpaceMenu : Sprite3D
     [Export] private PIM_Arena _arenaMap;
     [Export] private Node3D _cameraBiPivot;
     [Export] private Node3D _pivot;
-    [Export] private Node3D _spatialUI;
+    [Export] private Node3D _combatSpatialUI;
+    [Export] private CanvasLayer _combatControlUI;
+    [Export] private CanvasLayer _menuCrossHair;
 
     public override void _Ready()
     {
@@ -20,7 +22,9 @@ public partial class UI_3DSpaceMenu : Sprite3D
     {
         Show();
         _backgroundDimmer?.Show();
-        _spatialUI?.Hide();
+        _combatSpatialUI?.Hide();
+        _combatControlUI?.Hide();
+        _menuCrossHair?.Show();
         _pivot.GlobalRotation = _cameraBiPivot.GlobalRotation;
     }
 
@@ -28,6 +32,8 @@ public partial class UI_3DSpaceMenu : Sprite3D
     {
         Hide();
         _backgroundDimmer?.Hide();
-        _spatialUI?.Show();
+        _combatSpatialUI?.Show();
+        _combatControlUI?.Show();
+        _menuCrossHair?.Hide();
     }
 }
