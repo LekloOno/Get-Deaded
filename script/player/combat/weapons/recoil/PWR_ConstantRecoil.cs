@@ -14,9 +14,12 @@ public partial class PWR_ConstantRecoil : PW_Recoil
     {
         _recoilController = recoilController;
     }
-    public override void Add()
+    public override void Add() =>
+        AddPartial(1);
+
+    public override void AddPartial(double subHitSize)
     {
-        PCR_BaseHandler handler = _recoilController.AddRecoil(_angle * Modifier.Result(), _time);
+        PCR_BaseHandler handler = _recoilController.AddRecoil(_angle * Modifier.Result() * (float) subHitSize, _time);
         if (_autoReset)
             handler.Completed += Complete;
     }

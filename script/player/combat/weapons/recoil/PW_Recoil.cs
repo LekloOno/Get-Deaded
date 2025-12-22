@@ -12,6 +12,7 @@ public abstract partial class PW_Recoil : WeaponComponent
     public abstract void Initialize(PC_Recoil _recoilController);
     public abstract void Start();
     public abstract void Add();
+    public abstract void AddPartial(double subHitSize);
     public abstract void Reset();
     public abstract void ResetBuffer();
 }

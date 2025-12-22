@@ -35,12 +35,19 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
     public MATH_AdditiveModifiers SpreadMultiplier {get; private set;} = new();
     public float Spread => _spread * SpreadMultiplier.Result();
     public MATH_AdditiveModifiers KnockBackMultiplier {get; private set;} = new();
+    public MATH_AdditiveModifiers KickBackMultiplier {get; private set;} = new();
     public MATH_FlatVec3Modifiers KnockBackDirFlatAdd {get; private set;} = new();
-    public float KnockBack => _knockBack * KnockBackMultiplier.Result();
     public MATH_AdditiveModifiers DamageMultipler => _hitData.DamageMultiplier;
     public GC_Hit HitData => _hitData;
     public Vector3 Direction => -GlobalBasis.Z; 
     private static Random _random = new();
+    public float KnockBack => _knockBack * KnockBackMultiplier.Result() * _partialMultiplier;
+    public float KickBack => _kickBack * KickBackMultiplier.Result() * _partialMultiplier;
+    public float Damage => _hitData.Damage * _partialMultiplier;
+    public float HitTrauma => _maxTrauma * _partialMultiplier;
+
+
+    private float _partialMultiplier = 1f;
 
     public void Initialize(GB_ExternalBodyManagerWrapper ownerBody, PW_Fire fire)
     {
@@ -69,12 +76,32 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
         ShootWithSpread(direction);
     }
 
+    /// <summary>
+    /// Allows to shoot shot fragments, when fire rate can't match physics tick rate. <br/>
+    /// "size" is the size of the partial shot, like 0.5 if half a shot should be emulated. <br/>
+    /// If greater than 1, then multiple independent shot will be emulated. <br/>
+    /// <br/>
+    /// You can redefine its behavior if required for your specific case. 
+    /// </summary>
+    /// <param name="size">The sub-shot amount. If greater than 1, it will shoot multiple shots.</param>
+    public virtual void PartialShoot(double size)
+    {
+        while (size > 0)
+        {
+            _partialMultiplier = (float) Math.Min(size, 1);
+            Shoot();
+            size -= 1;
+        }
+        _partialMultiplier = 1f;
+    }
+
     protected abstract void ShootWithSpread(Vector3 direction);
 
     protected void HandleKick(Vector3 direction)
     {
-        if (_kickBack != 0)
-            _ownerBody.HandleKnockBack(-direction.Normalized() * _kickBack);
+        float kickBack = KickBack;
+        if (kickBack != 0)
+            _ownerBody.HandleKnockBack(-direction.Normalized() * kickBack);
     }
 
     /// <summary>
@@ -98,12 +125,14 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
         else
             globalKnockBack = NullableKnockBack(direction);
         
+        // Do not use partial hit ragdoll here for now since we only trigger ragdoll on hit
+        // But if we add active ragdoll later, it might be better to consider using scaled Damage.
         Vector3 localKnockBack = direction * _hitData.Damage * _ragdollFactor;
 
         HitEventArgs reg = hurtBox.HandleHit(
             OwnerEntity, this, hitPosition, from,
             localKnockBack, globalKnockBack,
-            _ignoreCrit
+            _ignoreCrit, _partialMultiplier
         );
 
         DoHit(reg, hitPosition);
@@ -122,7 +151,7 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
         // OPTIMIZE ME - Reduces editability
         // We could generate one specialization of trauma causer which directly does Clamped or not clamped. 
         if (_clampTrauma)
-            _traumaCauser.CauseClampedTrauma(_maxTrauma);
+            _traumaCauser.CauseClampedTrauma(HitTrauma);
         else
             _traumaCauser.CauseTrauma();
     }
@@ -132,7 +161,7 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
 
     private Vector3? NullableKnockBack(Vector3 direction)
     {
-        if (_knockBack == 0f)
+        if (KnockBack == 0f)
             return null;
 
         Vector3 impulse = KnockBackFrom(direction);

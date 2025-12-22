@@ -58,6 +58,12 @@ public class HitEventArgs : EventArgs
     ///  7 - 0x80 : Should be considered as a normal body hit by UI, statistics, etc.
     /// </summary>
     public HitFlags Flags { get; }
+    /// <summary>
+    /// Indicates the size of the hit. <br/>
+    /// SubHit are used to emulate continuous fire at firerate that are too fast for engine ticks to keep up. </br>
+    /// 1f is the default and represent a non-subed hit.
+    /// </summary>
+    public float SubHitSize { get; }
 
     public HitEventArgs(
         GC_HealthManager target,
@@ -69,12 +75,14 @@ public class HitEventArgs : EventArgs
         GE_IActiveCombatEntity author,
         float overflow = 0,
         bool overrideBodyPart = false,
-        bool env = false
+        bool env = false,
+        float subHitSize = 1f
     ) : this(
         target, senderLayer, hurtBox, damage, dealer, author, overflow,
         (kill ? HitFlags.Killed : 0) |
         (overrideBodyPart ? HitFlags.OverrideBodyPart : 0) |
-        (env ? HitFlags.Environment : 0)){}
+        (env ? HitFlags.Environment : 0),
+        subHitSize){}
 
     public HitEventArgs(
         GC_HealthManager target,
@@ -84,7 +92,8 @@ public class HitEventArgs : EventArgs
         GC_IHitDealer dealer,
         GE_IActiveCombatEntity author,
         float overflow,
-        HitFlags flags
+        HitFlags flags,
+        float subHitSize = 1f
     )
     {
         Target = target;
@@ -95,6 +104,7 @@ public class HitEventArgs : EventArgs
         Author = author;
         Overflow = overflow;
         Flags = flags;
+        SubHitSize = subHitSize;
     }
 
     public static HitEventArgs Miss(GC_IHitDealer dealer, GE_IActiveCombatEntity author) =>

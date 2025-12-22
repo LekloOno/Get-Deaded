@@ -29,9 +29,9 @@ public partial class GC_HurtBox : Area3D
     public static float RealHitModifier(GC_DamageModifier damageModifier) =>
         damageModifier / CONF_BodyModifiers.GetDefaultModifier(damageModifier.BodyPart);
 
-    public bool Damage(GC_IHitDealer hitDealer, out float takenDamage, out float overflow, out GC_Health deepest)
+    public bool Damage(GC_IHitDealer hitDealer, out float takenDamage, out float overflow, out GC_Health deepest, float subHitSize = 1f)
     {
-        float expectedDamage = hitDealer.HitData.GetDamage(BodyPart) * _modifier;
+        float expectedDamage = hitDealer.HitData.GetDamage(BodyPart) * _modifier * subHitSize;
         return HealthManager.Damage(hitDealer, expectedDamage, out takenDamage, out overflow, out deepest);
     }
     public float Heal(float heal) => HealthManager.Heal(heal);
@@ -57,13 +57,15 @@ public partial class GC_HurtBox : Area3D
         Vector3 from,
         Vector3? localKnockback,    // used for ragdoll physics
         Vector3? globalKnockBack,   // Global KnockBack, actually influences the entity position
-        bool overrideBodyPart = false
+        bool overrideBodyPart = false,
+        float subHitSize = 1f       // used to emulate sub-tick continuous fire. 
     ) {
         bool killed = Damage(
             hitDealer,
             out float takenDamage,
             out float overflow,
-            out GC_Health deepest
+            out GC_Health deepest,
+            subHitSize
         );
 
         if (globalKnockBack is Vector3 knockBack)
@@ -81,10 +83,11 @@ public partial class GC_HurtBox : Area3D
         TriggerDamageParticles(hitPosition, from); // Experimental from position, to check.
 
         return new(
-            HealthManager, deepest, this,   // Target infos
-            takenDamage, killed,            // Hit infos
-            hitDealer, author,              // Author infos
-            overflow, overrideBodyPart      // Optional infos
+            HealthManager, deepest, this,           // Target infos
+            takenDamage, killed,                    // Hit infos
+            hitDealer, author,                      // Author infos
+            overflow, overrideBodyPart,             // Optional infos
+            false, subHitSize                       // Optional infos
         );
     }
 }
