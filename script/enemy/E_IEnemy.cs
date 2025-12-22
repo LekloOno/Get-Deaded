@@ -1,6 +1,3 @@
-using System;
-using Godot;
-
 public delegate void EnemyHealthEventHandler<T>(E_IEnemy enemy, GC_Health senderLayer, T e);
 public delegate void EnemyHealthEventHandler(E_IEnemy enemy, GC_Health senderLayer);
 public delegate void EnemyDisableEventHandler(E_IEnemy enemy);

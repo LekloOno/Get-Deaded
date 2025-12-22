@@ -1,6 +1,4 @@
-using System.Linq;
 using Godot;
-using Godot.Collections;
 
 [GlobalClass]
 public partial class UI_HitMarker : Control

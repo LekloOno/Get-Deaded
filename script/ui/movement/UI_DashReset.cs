@@ -1,5 +1,4 @@
 using System;
-using System.ComponentModel.Design;
 using Godot;
 
 public partial class UI_DashReset : TextureProgressBar

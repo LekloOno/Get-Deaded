@@ -1,8 +1,5 @@
 using System;
-using System.Data;
-using System.Linq.Expressions;
 using Godot;
-using Godot.Collections;
 
 [GlobalClass]
 public partial class PA_Slide : Node3D
