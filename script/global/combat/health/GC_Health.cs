@@ -1,4 +1,3 @@
-using System;
 using Godot;
 
 public delegate void HealthEventHandler<T>(GC_Health senderLayer, T e);

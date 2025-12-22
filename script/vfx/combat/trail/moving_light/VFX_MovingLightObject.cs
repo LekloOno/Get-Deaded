@@ -1,4 +1,3 @@
-using System.Drawing;
 using Godot;
 
 public partial class VFX_MovingLightObject : Node3D

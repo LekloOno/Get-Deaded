@@ -1,4 +1,3 @@
-using System;
 using Godot;
 
 public partial class E_Enemy : GB_CharacterBody, E_IEnemy
