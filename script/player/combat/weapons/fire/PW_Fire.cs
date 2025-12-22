@@ -43,7 +43,7 @@ public abstract partial class PW_Fire : WeaponComponent
     private SceneTreeTimer _bufferTimer;
     private bool _pressBuffered = false;
     private bool _releaseBuffered = false;
-    private static Random _random = new();
+    private static readonly Random _random = new();
 
 
     public void Initialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManagerWrapper ownerBody, PW_Weapon weapon)

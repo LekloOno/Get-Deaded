@@ -10,7 +10,7 @@ public partial class PC_Shakeable : Area3D
     [Export] private PC_TraumaLayer _baseLayer;
     [Export] private Vector3 _maxRotation = new(10f, 10f, 5f);
 
-    private List<PC_TraumaLayer> _traumaLayers = [];
+    private readonly List<PC_TraumaLayer> _traumaLayers = [];
 
     private float _trauma = 0f;
     private float _time = 0f;

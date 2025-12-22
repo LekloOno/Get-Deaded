@@ -19,7 +19,7 @@ public partial class PHX_ActiveRagdollSim : Node
         public float Blend; // 0 = floppy, 1 = animated
     }
 
-    private List<BoneData> _bones = [];
+    private readonly List<BoneData> _bones = [];
 
     private void CacheBones()
     {

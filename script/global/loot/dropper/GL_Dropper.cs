@@ -9,7 +9,7 @@ public partial class GL_Dropper : Node3D
     [Export] private float _sideImpulseForce;
     [Export] private Vector3 _angularImpulse; 
 
-    private Random _rng = new Random();
+    private readonly Random _rng = new Random();
 
     public void Drop()
     {

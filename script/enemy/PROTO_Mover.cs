@@ -13,7 +13,7 @@ public partial class PROTO_Mover : Node
     public Vector3 WishDir => ComputeWishDir();
     private Timer _straffeTimer;
     private Timer _speedTimer;
-    private Random _rng = new Random();
+    private readonly Random _rng = new Random();
     private float _speed = 1f;
     private bool _walking;
 

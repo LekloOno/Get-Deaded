@@ -14,7 +14,7 @@ public partial class PA_Slide : Node3D
     [Export] private PM_Slide _slide;
     [Export] private PS_Grounded _groundState;
 
-    private EventHandler OnUpdate;
+    private readonly EventHandler OnUpdate;
 
     private float _fadeStart;
     private float _startVolume;

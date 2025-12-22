@@ -10,7 +10,7 @@ public partial class UIW_PlayerStat : UIW_Stats
     [Export] private Label _killsLabel;
     [Export] private Label _deathsLabel;
 
-    private List<UIW_WeaponStat> _weaponsStats = [];
+    private readonly List<UIW_WeaponStat> _weaponsStats = [];
     private STAT_Combat _combatStats;
 
     private void UpdateDamage(float value) {_damageLabel.Text = Mathf.Floor(value) + "";}

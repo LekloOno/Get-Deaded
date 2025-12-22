@@ -12,8 +12,8 @@ public partial class SC_TestSpawner : SC_SpawnerScript
     [Export] private float _spawnMinDistance = 7f;
     [Export] private float _respawnDelay = 0.52f;
     [Export] private float _roundTime = 30f;
-    private Dictionary<E_IEnemy, Timer> _respawnTimers = [];
-    private Random _rng = new();
+    private readonly Dictionary<E_IEnemy, Timer> _respawnTimers = [];
+    private readonly Random _rng = new();
     public SceneTreeTimer RoundTimer;
 
     public override void _Ready()

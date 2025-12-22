@@ -3,7 +3,7 @@ using Godot;
 
 public class GC_HitModifier
 {
-    private Dictionary<GC_BodyPart, float> _modifiers;
+    private readonly Dictionary<GC_BodyPart, float> _modifiers;
 
     public GC_HitModifier(Godot.Collections.Array<GC_DamageModifier> damageModifiers)
     {

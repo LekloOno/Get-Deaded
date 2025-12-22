@@ -7,9 +7,9 @@ using Godot;
 public class PHX_ActiveRagdollBone
 {
     // Parent fetched by default
-    private PhysicalBone3D _bone;
+    private readonly PhysicalBone3D _bone;
     // Bone parent fetched by default
-    private PHX_ActiveRagdollSim _simulator;
+    private readonly PHX_ActiveRagdollSim _simulator;
 
     public PHX_ActiveRagdollBone(PhysicalBone3D bone, PHX_ActiveRagdollSim simulator) {
         _bone = bone;
