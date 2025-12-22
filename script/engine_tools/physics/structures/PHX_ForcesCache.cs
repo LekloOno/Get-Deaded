@@ -5,8 +5,8 @@ using System.Linq;
 
 public class PHX_ForcesCache
 {
-    private List<Vector3> impulseForces = new List<Vector3>();      // Are automatically cleared by consuming them.
-    private List<Vector3> persistentForces = new List<Vector3>();   // Can be consumed without clearing them, should be removed explicitly.
+    private readonly List<Vector3> impulseForces = new List<Vector3>();      // Are automatically cleared by consuming them.
+    private readonly List<Vector3> persistentForces = new List<Vector3>();   // Can be consumed without clearing them, should be removed explicitly.
     
     public bool IsEmpty() => !impulseForces.Any() && !persistentForces.Any();
 

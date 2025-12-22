@@ -8,7 +8,7 @@ public partial class UIW_WeaponHolder : BoxContainer
     [Export] private TextureRect _icon;
     [Export] private Container _fireHoldersContainer;
     [Export] private UIW_FireHolder _fireHolderTemplate;
-    private List<UIW_FireHolder> _fireHolders = [];
+    private readonly List<UIW_FireHolder> _fireHolders = [];
 
     public void Initialize(PW_Weapon weapon)
     {

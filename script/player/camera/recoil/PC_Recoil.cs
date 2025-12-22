@@ -12,7 +12,7 @@ public partial class PC_Recoil : Node3D
     private Vector2 _bufferedRecoil;
     private Vector2 _bufferedMovement;
 
-    private List<PCR_BaseHandler> _recoilHandlers = [];
+    private readonly List<PCR_BaseHandler> _recoilHandlers = [];
 
     public override void _Ready()
     {

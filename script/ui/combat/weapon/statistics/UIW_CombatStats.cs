@@ -9,7 +9,7 @@ public partial class UIW_CombatStats : UIW_Stats
     [Export] private UIW_PlayerStat _uiPlayerStatTemplate;
     [Export] private Array<STAT_CombatTracker> _playersStats = [];
     [Export] private PI_Stats _statsInput;
-    private List<UIW_PlayerStat> _uiPlayerStats = [];
+    private readonly List<UIW_PlayerStat> _uiPlayerStats = [];
 
     public override void _Ready()
     {

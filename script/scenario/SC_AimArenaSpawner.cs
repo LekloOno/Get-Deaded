@@ -12,9 +12,9 @@ public partial class SC_AimArenaSpawner : Node3D
     [Export] private float _respawnDelay = 0f;
     [Export] private float _roundTime = 30f;
     [Export] private float _countDown = 2f;
-    private List<E_Enemy> _enemies = [];
-    private List<Timer> _respawnTimers = [];
-    private Random _rng = new();
+    private readonly List<E_Enemy> _enemies = [];
+    private readonly List<Timer> _respawnTimers = [];
+    private readonly Random _rng = new();
     private PM_Controller _player;
     public SceneTreeTimer RoundTimer;
     public SceneTreeTimer CountDownTimer;

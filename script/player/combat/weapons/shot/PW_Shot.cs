@@ -40,7 +40,7 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
     public MATH_AdditiveModifiers DamageMultipler => _hitData.DamageMultiplier;
     public GC_Hit HitData => _hitData;
     public Vector3 Direction => -GlobalBasis.Z; 
-    private static Random _random = new();
+    private static readonly Random _random = new();
     public float KnockBack => _knockBack * KnockBackMultiplier.Result() * _partialMultiplier;
     public float KickBack => _kickBack * KickBackMultiplier.Result() * _partialMultiplier;
     public float Damage => _hitData.Damage * _partialMultiplier;

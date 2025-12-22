@@ -3,7 +3,7 @@ using Godot;
 
 public class PCR_ResetHandler : PCR_BaseHandler
 {
-    private float _time;
+    private readonly float _time;
     private Vector2 _angleCubeTime;
     private float _x;
 

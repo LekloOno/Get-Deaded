@@ -2,7 +2,7 @@ using Godot;
 
 public partial class GL_PhysicsPickable(GL_IPickHandler handler, float horizontalDamp, float lifeTime) : RigidBody3D, GL_IPickable
 {
-    private GL_IPickHandler _handler = handler;
+    private readonly GL_IPickHandler _handler = handler;
     private float _horizontalDamp = horizontalDamp;
 
     public override void _Ready()

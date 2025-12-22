@@ -12,7 +12,7 @@ public partial class UIW_Loadout : BoxContainer
     [Export] private Container _nextHolder;
     [Export] private Container _unactiveList;
 
-    private Dictionary<PW_Weapon, UIW_Weapon> _weapons = [];
+    private readonly Dictionary<PW_Weapon, UIW_Weapon> _weapons = [];
     public override void _Ready()
     {
         _weaponsHandler.SwitchStarted += Update;

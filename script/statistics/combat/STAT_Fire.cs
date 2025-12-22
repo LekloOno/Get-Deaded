@@ -12,7 +12,7 @@ public class STAT_Fire: IDisposable
     public Texture2D Icon {get;}
     public Color IconColor {get;}
 
-    private PW_Fire _fire;
+    private readonly PW_Fire _fire;
 
     public STAT_Fire(PW_Fire fire, Texture2D defaultIcon, Color color)
     {
