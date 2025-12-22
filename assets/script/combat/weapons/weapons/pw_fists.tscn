@@ -69,6 +69,7 @@ _fires = [NodePath("PW_FistsFire")]
 Icon = ExtResource("2_sqc2j")
 IconColor = Color(1, 1, 1, 0.8)
 metadata/_custom_type_script = "uid://c3are182lodyx"
+metadata/_edit_lock_ = true
 
 [node name="PW_FistsFire" type="Node3D" parent="." node_paths=PackedStringArray("_shots", "_ammos", "_fireTraumaCauser")]
 script = ExtResource("3_k4qra")
@@ -87,10 +88,12 @@ _ammos = NodePath("PW_Ammunition")
 _ammosPerShot = 0
 _fireTraumaCauser = NodePath("PCT_Fire")
 metadata/_custom_type_script = "uid://co06wv08f4cgo"
+metadata/_edit_lock_ = true
 
 [node name="PW_Ammunition" type="Node3D" parent="PW_FistsFire"]
 script = ExtResource("4_2xwjd")
 metadata/_custom_type_script = "uid://cxiwvat6vddlp"
+metadata/_edit_lock_ = true
 
 [node name="PWS_ShapeScan" type="Node3D" parent="PW_FistsFire" node_paths=PackedStringArray("_shapeCast", "_trail", "_traumaCauser")]
 script = ExtResource("5_sqc2j")
@@ -103,24 +106,29 @@ _trail = NodePath("PW_Trail")
 _traumaCauser = NodePath("PCT_UndirectScalable")
 _maxTrauma = 0.6
 metadata/_custom_type_script = "uid://cn0p3uk7xbb3s"
+metadata/_edit_lock_ = true
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="PW_FistsFire/PWS_ShapeScan"]
 shape = SubResource("BoxShape3D_klj4u")
 target_position = Vector3(0, 0, -1)
+metadata/_edit_lock_ = true
 
 [node name="PW_Trail" type="Node3D" parent="PW_FistsFire/PWS_ShapeScan"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.287, -0.225, -0.237)
 script = ExtResource("8_nnrhg")
 _trails = Array[Object]([SubResource("Resource_sogkq")])
 metadata/_custom_type_script = "uid://cytkgtw0ebs3x"
+metadata/_edit_lock_ = true
 
 [node name="PCT_UndirectScalable" type="Area3D" parent="PW_FistsFire/PWS_ShapeScan"]
 script = ExtResource("10_awukx")
 _curveSampler = SubResource("Resource_38m5i")
 metadata/_custom_type_script = "uid://d15clqym1lgvu"
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PW_FistsFire/PWS_ShapeScan/PCT_UndirectScalable"]
 shape = SubResource("SphereShape3D_38m5i")
+metadata/_edit_lock_ = true
 
 [node name="PCT_Fire" type="Node" parent="PW_FistsFire"]
 script = ExtResource("12_jqbem")

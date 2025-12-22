@@ -50,6 +50,7 @@ _killMarker = NodePath("UI_KillMarker")
 _damageMarker = NodePath("UI_DamageMarker")
 _killSkull = NodePath("UI_KillSkullManager")
 metadata/_custom_type_script = "uid://ds1ebussoj6l7"
+metadata/_edit_lock_ = true
 
 [node name="UI_KillSkullManager" type="Control" parent="."]
 anchors_preset = 0
@@ -64,6 +65,7 @@ _fadeTime = 2.0
 _shakeIntensity = 700.0
 _shakeLayer = SubResource("Resource_oyy5y")
 metadata/_custom_type_script = "uid://pxg54fo2ojgy"
+metadata/_edit_lock_ = true
 
 [node name="UI_DamageMarker" type="Control" parent="." node_paths=PackedStringArray("_markerSticks")]
 self_modulate = Color(1, 1, 1, 0.8)
@@ -80,6 +82,7 @@ _baseSize = Vector2(12, 2)
 _offsetDispersion = 300.0
 _offsetMaxCoef = 2.0
 metadata/_custom_type_script = "uid://c5ie4xhq4n5p7"
+metadata/_edit_lock_ = true
 
 [node name="Control" type="Control" parent="UI_DamageMarker"]
 layout_mode = 1
@@ -96,6 +99,7 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = 0.785398
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="BotRight" type="Panel" parent="UI_DamageMarker/Control"]
 layout_mode = 1
@@ -111,6 +115,7 @@ pivot_offset = Vector2(0, 2)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_wngje")
 metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
 
 [node name="Control2" type="Control" parent="UI_DamageMarker"]
 layout_mode = 1
@@ -127,6 +132,7 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = 2.35619
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="BotLeft" type="Panel" parent="UI_DamageMarker/Control2"]
 layout_mode = 1
@@ -142,6 +148,7 @@ pivot_offset = Vector2(0, 2)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_wngje")
 metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
 
 [node name="Control3" type="Control" parent="UI_DamageMarker"]
 layout_mode = 1
@@ -158,6 +165,7 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = -0.785398
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="TopRight" type="Panel" parent="UI_DamageMarker/Control3"]
 layout_mode = 1
@@ -173,6 +181,7 @@ pivot_offset = Vector2(0, 2)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_wngje")
 metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
 
 [node name="Control4" type="Control" parent="UI_DamageMarker"]
 layout_mode = 1
@@ -189,6 +198,7 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = -2.35619
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="TopLeft" type="Panel" parent="UI_DamageMarker/Control4"]
 layout_mode = 1
@@ -204,6 +214,7 @@ pivot_offset = Vector2(0, 2)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_wngje")
 metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
 
 [node name="UI_KillMarker" type="Control" parent="." node_paths=PackedStringArray("_markerSticks")]
 anchors_preset = 0
@@ -217,6 +228,7 @@ _fadeBackTime = 0.05
 _baseStartOffset = 10.0
 _basePeakOffset = 300.0
 metadata/_custom_type_script = "uid://brn5nu2bbuq5w"
+metadata/_edit_lock_ = true
 
 [node name="Control" type="Control" parent="UI_KillMarker"]
 layout_mode = 1
@@ -233,6 +245,7 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = 0.785398
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="BotRight" type="Panel" parent="UI_KillMarker/Control"]
 layout_mode = 1
@@ -248,6 +261,7 @@ pivot_offset = Vector2(0, 2)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_tnwbf")
 metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
 
 [node name="Control2" type="Control" parent="UI_KillMarker"]
 layout_mode = 1
@@ -264,6 +278,7 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = 2.35619
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="BotLeft" type="Panel" parent="UI_KillMarker/Control2"]
 layout_mode = 1
@@ -279,6 +294,7 @@ pivot_offset = Vector2(0, 2)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_tnwbf")
 metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
 
 [node name="Control3" type="Control" parent="UI_KillMarker"]
 layout_mode = 1
@@ -295,6 +311,7 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = -0.785398
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="TopRight" type="Panel" parent="UI_KillMarker/Control3"]
 layout_mode = 1
@@ -310,6 +327,7 @@ pivot_offset = Vector2(0, 2)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_tnwbf")
 metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
 
 [node name="Control4" type="Control" parent="UI_KillMarker"]
 layout_mode = 1
@@ -326,6 +344,7 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = -2.35619
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="TopLeft" type="Panel" parent="UI_KillMarker/Control4"]
 layout_mode = 1
@@ -341,3 +360,4 @@ pivot_offset = Vector2(0, 2)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_tnwbf")
 metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true

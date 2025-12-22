@@ -14,6 +14,7 @@ vertical = true
 script = ExtResource("1_yhqg0")
 _uiPlayerStatTemplate = NodePath("UIW_PlayerStat")
 metadata/_custom_type_script = "uid://bv13oqdudxna5"
+metadata/_edit_lock_ = true
 
 [node name="UIW_PlayerStat" parent="." instance=ExtResource("2_rin8f")]
 layout_mode = 2
