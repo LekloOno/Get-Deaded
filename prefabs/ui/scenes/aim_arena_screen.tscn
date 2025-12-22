@@ -16,6 +16,7 @@ grow_vertical = 2
 scale = Vector2(0.3, 0.3)
 script = ExtResource("1_ba6jx")
 _playerStat = NodePath("BoxContainer2/UIW_PlayerStat")
+metadata/_edit_lock_ = true
 
 [node name="BoxContainer2" type="BoxContainer" parent="."]
 layout_mode = 0

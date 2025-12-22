@@ -12,6 +12,7 @@ script = ExtResource("1_66bho")
 _icon = NodePath("AspectRatioContainer2/unactive_icon")
 _accuracy = NodePath("Accuracy")
 metadata/_custom_type_script = "uid://dbhqsqe7b31sv"
+metadata/_edit_lock_ = true
 
 [node name="AspectRatioContainer2" type="AspectRatioContainer" parent="."]
 custom_minimum_size = Vector2(144, 144)
@@ -27,6 +28,7 @@ layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("2_ymu7v")
 expand_mode = 1
+metadata/_edit_lock_ = true
 
 [node name="Accuracy" type="Label" parent="."]
 layout_mode = 2

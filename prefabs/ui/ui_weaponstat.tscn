@@ -8,6 +8,7 @@ mouse_filter = 2
 script = ExtResource("1_cftxm")
 _fireStatTemplate = NodePath("UIW_FireStat")
 metadata/_custom_type_script = "uid://douqxivdi6sqp"
+metadata/_edit_lock_ = true
 
 [node name="UIW_FireStat" parent="." instance=ExtResource("2_xghj8")]
 layout_mode = 2

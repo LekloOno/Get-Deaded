@@ -1586,6 +1586,7 @@ flip_faces = true
 size = Vector2(2, 2)
 
 [node name="Node3D" type="Node3D"]
+metadata/_edit_lock_ = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_7um5b")

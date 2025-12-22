@@ -13,8 +13,6 @@ fractal_gain = 0.8
 [sub_resource type="Resource" id="Resource_adnve"]
 script = ExtResource("2_adnve")
 _noise = SubResource("FastNoiseLite_tqr8d")
-_reductionRate = 1.0
-_noiseSpeed = 50.0
 metadata/_custom_type_script = "uid://foau1gurk2py"
 
 [node name="UI_KillSkullShaker" type="Control" node_paths=PackedStringArray("_killSkull")]
@@ -34,6 +32,7 @@ script = ExtResource("1_tqr8d")
 _killSkull = NodePath("UI_KillSkull")
 ShakeLayer = SubResource("Resource_adnve")
 metadata/_custom_type_script = "uid://68f0vys1tm3r"
+metadata/_edit_lock_ = true
 
 [node name="UI_KillSkull" type="TextureRect" parent="."]
 self_modulate = Color(1, 1, 1, 0.65)
@@ -65,3 +64,4 @@ _offsetTrans = 10
 _fadeOutTime = 0.25
 _fadeInTime = 0.25
 metadata/_custom_type_script = "uid://boxpscnow88nk"
+metadata/_edit_lock_ = true

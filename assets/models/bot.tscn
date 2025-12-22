@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://d3k8tbho54a8" path="res://assets/models/botidle.gltf" id="1_tgc5j"]
 
 [node name="AuxScene" instance=ExtResource("1_tgc5j")]
+metadata/_edit_lock_ = true
 
 [node name="Node" parent="." index="0"]
 transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
