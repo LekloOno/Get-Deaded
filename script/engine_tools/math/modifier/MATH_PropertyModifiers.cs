@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 
+namespace Pew;
+
 public abstract class MATH_PropertyModifier<T>
 {
     protected List<T> _modifiers = [];

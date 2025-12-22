@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using Godot;
 using System;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class SC_AimArenaSpawner : Node3D
 {

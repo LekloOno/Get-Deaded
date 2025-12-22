@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 public abstract partial class MATH_ClampedOutputSampler : MATH_FloatCurveSampler
 {
     [Export] protected float _minOutput;

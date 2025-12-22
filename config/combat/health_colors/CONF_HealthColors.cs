@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 public partial class CONF_HealthColors : Node
 {
     public static CONF_HealthColors Instance { get; private set; }

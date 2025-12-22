@@ -1,6 +1,8 @@
 using System;
 using Godot;
 
+namespace Pew;
+
 public delegate void AmmunitionEvent(int amount, uint finalAmount);
 
 /// <summary>

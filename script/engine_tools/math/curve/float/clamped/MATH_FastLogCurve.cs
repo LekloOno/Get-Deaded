@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class MATH_FastLogCurve : MATH_ClampedOutputSampler
 {

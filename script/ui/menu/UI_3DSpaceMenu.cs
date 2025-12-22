@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class UI_3DSpaceMenu : Sprite3D
 {

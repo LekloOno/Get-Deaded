@@ -3,6 +3,8 @@ using System.Linq;
 using Godot;
 using Godot.Collections;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class UIW_CombatStats : UIW_Stats
 {

@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 public partial class PA_Weapon : PA_LayeredSound
 {
     public override void _Ready()

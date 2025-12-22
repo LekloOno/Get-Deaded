@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+namespace Pew;
+
 public partial class STAT_Combat: IDisposable
 {
     public List<STAT_Weapon> Weapons {get; private set;}

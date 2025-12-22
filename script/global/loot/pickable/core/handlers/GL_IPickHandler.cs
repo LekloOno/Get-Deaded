@@ -1,3 +1,5 @@
+namespace Pew;
+
 public interface GL_IPickHandler
 {
     /// <summary>

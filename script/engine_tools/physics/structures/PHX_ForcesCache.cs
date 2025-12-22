@@ -3,6 +3,8 @@ using Godot;
 using System.Collections.Generic;
 using System.Linq;
 
+namespace Pew;
+
 public class PHX_ForcesCache
 {
     private List<Vector3> impulseForces = new List<Vector3>();      // Are automatically cleared by consuming them.

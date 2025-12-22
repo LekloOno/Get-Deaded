@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 public class PI_Direction(StringName value) : ACTIONS_Action(value)
 {
     public static readonly PI_Direction FORWARD = new("move_forward");

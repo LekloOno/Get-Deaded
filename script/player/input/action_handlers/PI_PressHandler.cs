@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 public abstract partial class PI_PressHandler<T> : PI_ActionHandler<T>
 {
     protected abstract ACTIONS_Action Action {get;}

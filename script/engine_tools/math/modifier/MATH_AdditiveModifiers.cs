@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 
+namespace Pew;
+
 /// <summary>
 /// Store some run-time modulable modifiers as percent modifiers to use on a float property.
 /// <para> The resulting percent modifier is the addition of all currently stored modifiers. </para>

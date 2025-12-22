@@ -1,5 +1,7 @@
 using System;
 
+namespace Pew;
+
 public class HitEventArgs : EventArgs
 {
     [Flags]

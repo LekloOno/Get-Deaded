@@ -1,6 +1,8 @@
 using System.Threading.Tasks;
 using Godot;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class UI_DamageIndicator : Label
 {

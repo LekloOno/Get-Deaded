@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 
+namespace Pew;
+
 public class Observable<T>
 {
     private T _field;

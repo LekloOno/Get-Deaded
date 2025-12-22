@@ -2,6 +2,8 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class STAT_CombatTracker : Node
 {

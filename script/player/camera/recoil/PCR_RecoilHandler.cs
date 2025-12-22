@@ -1,6 +1,8 @@
 using System;
 using Godot;
 
+namespace Pew;
+
 public class PCR_RecoilHandler : PCR_BaseHandler
 {
     private Vector2 _velocity = Vector2.Zero;

@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class VFX_LineTrail : VFX_HitscanTrail
 {

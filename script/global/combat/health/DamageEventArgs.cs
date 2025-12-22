@@ -1,5 +1,7 @@
 using System;
 
+namespace Pew;
+
 public class DamageEventArgs : EventArgs
 {
     public float Amount {get;}

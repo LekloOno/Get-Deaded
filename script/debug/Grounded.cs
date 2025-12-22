@@ -1,6 +1,8 @@
 using Godot;
 using System;
 
+namespace Pew;
+
 public partial class Grounded : Label
 {
     [Export] private PS_Grounded _groundState;

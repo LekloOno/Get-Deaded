@@ -2,6 +2,8 @@ using System;
 using Godot;
 using Godot.Collections;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class GC_HealthManager : Node3D
 {

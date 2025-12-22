@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 public abstract partial class VFX_TrailMesh : MeshInstance3D
 {
     protected Vector3 _origin;

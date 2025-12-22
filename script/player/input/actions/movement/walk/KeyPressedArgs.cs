@@ -1,6 +1,8 @@
 using System;
 using Godot;
 
+namespace Pew;
+
 public class KeyPressedArgs : EventArgs
 {
     private Vector3 _wishDir;

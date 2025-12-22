@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 public partial class VFX_LineTrailMesh(Vector3 origin, Vector3 hit, Material material, float fadeTime, VFX_LineType _lineType) : VFX_TrailMesh(origin, hit, material)
 {
     public override void Shoot()

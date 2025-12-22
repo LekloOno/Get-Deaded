@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using Godot;
 
+namespace Pew;
+
 public class GC_HitModifier
 {
     private Dictionary<GC_BodyPart, float> _modifiers;

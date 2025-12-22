@@ -1,6 +1,8 @@
 using System;
 using Godot;
 
+namespace Pew;
+
 public class STAT_Fire: IDisposable
 {
     public Observable<int> Shots {get; private set;} = new(0);

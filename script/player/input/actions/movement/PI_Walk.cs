@@ -1,6 +1,8 @@
 using System;
 using Godot;
-using static PI_Direction;
+using static Pew.PI_Direction;
+
+namespace Pew;
 
 [GlobalClass]
 public partial class PI_Walk : PI_ActionHandler<Vector2>

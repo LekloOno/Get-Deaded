@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class ANIM_Vec2TraumaLayer : ANIM_TraumaLayer<Vector2>
 {

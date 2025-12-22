@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 public partial class CONF_BodyModifiers : Node
 {
     public static CONF_BodyModifiers Instance { get; private set; }

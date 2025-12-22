@@ -1,6 +1,8 @@
 using Godot;
 using System;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class PROTO_Mover : Node
 {

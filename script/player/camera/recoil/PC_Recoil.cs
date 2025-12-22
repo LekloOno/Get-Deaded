@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using Godot;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class PC_Recoil : Node3D
 {

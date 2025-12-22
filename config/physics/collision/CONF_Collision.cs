@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 public partial class CONF_Collision : Node
 {
     public static CONF_Collision Instance { get; private set; }

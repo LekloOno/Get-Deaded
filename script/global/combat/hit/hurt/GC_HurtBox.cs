@@ -1,5 +1,6 @@
 using Godot;
 
+namespace Pew;
 
 /// <summary>
 /// A child of a HealthManager. <br/>

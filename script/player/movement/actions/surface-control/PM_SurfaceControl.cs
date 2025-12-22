@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class PM_SurfaceControl : PM_Action
 {

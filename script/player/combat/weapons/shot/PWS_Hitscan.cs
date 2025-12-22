@@ -1,6 +1,8 @@
 using System;
 using Godot;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class PWS_Hitscan : PW_Shot, GC_IHitDealer
 {

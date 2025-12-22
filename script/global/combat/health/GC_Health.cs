@@ -1,6 +1,8 @@
 using System;
 using Godot;
 
+namespace Pew;
+
 public delegate void HealthEventHandler<T>(GC_Health senderLayer, T e);
 public delegate void HealthEventHandler(GC_Health senderLayer);
 

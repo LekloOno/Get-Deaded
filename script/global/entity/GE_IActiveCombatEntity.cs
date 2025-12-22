@@ -1,5 +1,7 @@
 using System;
 
+namespace Pew;
+
 /// <summary>
 /// Describes the base components of an entity that can be evolved in any form of active "combat". <br/>
 /// That is, it can be attacked, but can also attack.

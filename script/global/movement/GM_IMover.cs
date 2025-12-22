@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 public interface GM_IMover
 {
     public Vector3 Velocity {get;}

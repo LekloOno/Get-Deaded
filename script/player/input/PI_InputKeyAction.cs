@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 public abstract partial class PI_InputKeyAction : Node, PI_InputAction
 {
     public void EnableAction() => SetProcessUnhandledKeyInput(true);

@@ -4,6 +4,8 @@ using System.Linq.Expressions;
 using Godot;
 using Godot.Collections;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class PA_Slide : Node3D
 {

@@ -1,6 +1,8 @@
 using System.Reflection.Metadata.Ecma335;
 using Godot;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class SC_AimArenaAmoConfig : Area3D
 {

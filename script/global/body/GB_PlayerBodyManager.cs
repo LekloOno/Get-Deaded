@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class GB_PlayerBodyManager : GB_ExternalBodyManagerWrapper
 {

@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class PA_LedgeClimb : PA_LayeredSound
 {

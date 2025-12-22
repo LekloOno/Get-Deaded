@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class PI_Reload : PI_BufferedHandler<EmptyInput>
 {

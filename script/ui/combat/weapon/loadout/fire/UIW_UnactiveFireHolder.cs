@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class UIW_UnactiveFireHolder : UIW_FireHolder
 {

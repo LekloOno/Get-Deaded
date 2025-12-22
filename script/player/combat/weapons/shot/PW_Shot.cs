@@ -1,6 +1,8 @@
 using System;
 using Godot;
 
+namespace Pew;
+
 /// <summary>
 /// Handles final shot outcomes - shooting.
 /// <para>

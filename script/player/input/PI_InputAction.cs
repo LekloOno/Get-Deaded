@@ -1,3 +1,5 @@
+namespace Pew;
+
 public interface PI_InputAction
 {
     /// <summary>

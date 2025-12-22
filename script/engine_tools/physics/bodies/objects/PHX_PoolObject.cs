@@ -1,3 +1,5 @@
+namespace Pew;
+
 public interface PHX_PoolObject
 {
     /// <summary>

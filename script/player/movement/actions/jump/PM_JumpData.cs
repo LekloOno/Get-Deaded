@@ -1,5 +1,6 @@
-
 using Godot;
+
+namespace Pew;
 
 [GlobalClass]
 public partial class PM_JumpData : Resource

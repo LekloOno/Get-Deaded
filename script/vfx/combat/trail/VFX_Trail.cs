@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 [GlobalClass]
 public abstract partial class VFX_Trail : Resource
 {

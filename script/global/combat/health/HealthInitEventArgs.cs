@@ -1,5 +1,7 @@
 using System;
 
+namespace Pew;
+
 public class HealthInitEventArgs : EventArgs
 {
     public float LowerInitHealth {get;}

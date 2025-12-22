@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 public static class MATH_Sound
 {
     public static float LerpDB(float dB1, float dB2, float t)

@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 public partial class CONF_HitColors : Node
 {
     public static CONF_HitColors Instance { get; private set; }

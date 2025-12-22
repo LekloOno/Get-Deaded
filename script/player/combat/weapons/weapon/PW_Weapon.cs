@@ -2,6 +2,8 @@ using System;
 using Godot;
 using Godot.Collections;
 
+namespace Pew;
+
 /// <summary>
 /// Base Weapon Component.
 /// <para>

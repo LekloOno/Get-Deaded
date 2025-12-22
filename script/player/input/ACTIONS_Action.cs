@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 public abstract class ACTIONS_Action(StringName value)
 {
     public StringName Value { get; } = value;

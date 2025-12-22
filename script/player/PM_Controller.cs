@@ -1,6 +1,8 @@
 using System;
 using Godot;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class PM_Controller : CharacterBody3D, GB_IExternalBodyManager, GE_IActiveCombatEntity
 {

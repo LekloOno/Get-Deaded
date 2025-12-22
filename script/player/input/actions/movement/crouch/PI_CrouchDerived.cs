@@ -1,5 +1,7 @@
 using System;
 
+namespace Pew;
+
 public interface PI_CrouchDerived
 {
     protected bool IsActive {set;}

@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 public abstract partial class ANIM_TraumaLayer<T> : Resource
 {
     [Export] private FastNoiseLite _noise;

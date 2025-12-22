@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 public class ACTIONS_Combat(StringName value) : ACTIONS_Action(value)
 {
     public static readonly ACTIONS_Combat PRIMARY = new("primary");

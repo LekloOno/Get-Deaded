@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 public abstract partial class PA_Fire : PA_LayeredSound
 {
     public abstract PW_Fire Fire {get;}

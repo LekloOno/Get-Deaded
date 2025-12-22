@@ -2,6 +2,8 @@ using System;
 using Godot;
 using Godot.Collections;
 
+namespace Pew;
+
 /// <summary>
 /// Handles the firing behavior of its Shots.
 /// <para>
