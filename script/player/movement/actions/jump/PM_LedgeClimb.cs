@@ -2,6 +2,8 @@ using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using Godot;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class PM_LedgeClimb : PM_Action
 {

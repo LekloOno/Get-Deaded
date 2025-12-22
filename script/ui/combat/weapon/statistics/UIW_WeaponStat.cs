@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using Godot;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class UIW_WeaponStat : UIW_Stats
 {

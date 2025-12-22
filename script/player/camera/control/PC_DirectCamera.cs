@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class PC_DirectCamera : Camera3D
 {

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using Godot;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class PC_Shakeable : Area3D
 {

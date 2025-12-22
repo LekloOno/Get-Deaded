@@ -1,6 +1,8 @@
 using System;
 using Godot;
 
+namespace Pew;
+
 public class PCR_ResetHandler : PCR_BaseHandler
 {
     private float _time;

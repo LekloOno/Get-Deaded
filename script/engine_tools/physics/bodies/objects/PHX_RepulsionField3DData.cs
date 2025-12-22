@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class PHX_RepulsionField3DData : Resource
 {

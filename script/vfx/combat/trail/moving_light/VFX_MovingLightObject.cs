@@ -1,6 +1,8 @@
 using System.Drawing;
 using Godot;
 
+namespace Pew;
+
 public partial class VFX_MovingLightObject : Node3D
 {
     private float _speed;

@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 /// <summary>
 /// Just like BufferedHandler, but empties the buffer whenever the key is released.
 /// </summary>

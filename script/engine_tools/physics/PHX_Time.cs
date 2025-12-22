@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 public partial class PHX_Time : Node
 {
     public static PHX_Time Instance {get; private set;}

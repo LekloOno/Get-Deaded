@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 public partial class Speedometer : Label
 {
     [Export] private PM_Controller _controller;

@@ -1,6 +1,8 @@
 using System;
 using Godot;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class PWR_ConstantRecoil : PW_Recoil
 {

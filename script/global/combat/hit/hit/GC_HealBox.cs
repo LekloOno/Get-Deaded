@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class GC_HealBox: Area3D
 {

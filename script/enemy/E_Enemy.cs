@@ -1,6 +1,8 @@
 using System;
 using Godot;
 
+namespace Pew;
+
 public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 {
     [Export] private GC_HealthManager _healthManager;

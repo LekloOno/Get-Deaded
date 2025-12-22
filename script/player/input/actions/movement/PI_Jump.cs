@@ -1,6 +1,8 @@
 using System;
 using Godot;
 
+namespace Pew;
+
 /// <summary>
 /// Handles buffer input for the jump.
 /// 

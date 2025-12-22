@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 public static class MATH_Vector3Ext
 {
     public static Vector3 SmoothDamp(Vector3 current, Vector3 target, ref Vector3 currentVelocity, float smoothTime, float deltaTime)

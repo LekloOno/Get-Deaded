@@ -3,6 +3,8 @@ using System.Linq;
 using Godot;
 using Godot.Collections;
 
+namespace Pew;
+
 public delegate void SwitchEvent(PW_Weapon active, PW_Weapon nextHolster, int nextIndex, Array<PW_Weapon> weapons);
 
 /// <summary>

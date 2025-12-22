@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 public static class PHX_MovementPhysics
 {
     static public Vector3 Acceleration(float maxSpeedBase, float maxAccelBase, Vector3 velocity, Vector3 direction, float deltaTime)

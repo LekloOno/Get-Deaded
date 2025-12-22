@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class UI_DamageIndicatorManager : Control
 {

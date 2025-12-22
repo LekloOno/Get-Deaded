@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 public partial class UI_SpeedoMeter : Label3D
 {
     [ExportCategory("Settings")]

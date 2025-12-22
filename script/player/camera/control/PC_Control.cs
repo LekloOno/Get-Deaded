@@ -2,6 +2,8 @@ using Godot;
 using System;
 using System.Runtime;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class PC_Control : Node3D
 {

@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 public struct EmptyInput { 
     public static EmptyInput NONE = new();
 }

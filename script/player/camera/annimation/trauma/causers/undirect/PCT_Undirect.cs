@@ -1,6 +1,8 @@
 using Godot;
 using Godot.Collections;
 
+namespace Pew;
+
 [GlobalClass]
 public abstract partial class PCT_Undirect : Area3D
 {

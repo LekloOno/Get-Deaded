@@ -1,6 +1,8 @@
 using System;
 using Godot;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class GL_Dropper : Node3D
 {

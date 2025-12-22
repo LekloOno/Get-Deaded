@@ -1,6 +1,8 @@
 using System;
 using Godot;
 
+namespace Pew;
+
 public abstract class PCR_BaseHandler
 {
     public bool Sleep;

@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 /// <summary>
 /// A simple Holdable press input implementation.
 /// It can be configured on Tap or Hold mode.

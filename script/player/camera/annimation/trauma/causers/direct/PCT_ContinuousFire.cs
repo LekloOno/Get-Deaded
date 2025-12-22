@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class PCT_ContinuousFire : PCT_Fire
 {

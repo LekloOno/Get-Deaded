@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 [GlobalClass]
 public abstract partial class GM_Mover : Node, GM_IMover
 {

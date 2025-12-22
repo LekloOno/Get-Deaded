@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class GC_Hitbox : Area3D, GC_IHitDealer
 {

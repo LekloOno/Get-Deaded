@@ -1,3 +1,5 @@
+namespace Pew;
+
 /// <summary>
 /// Describes the base components of an entity that can be evolved in any form of "combat".
 /// </summary>

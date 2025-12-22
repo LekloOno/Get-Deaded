@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 public interface GB_IExternalBodyManager
 {
     public void HandleKnockBack(Vector3 force);

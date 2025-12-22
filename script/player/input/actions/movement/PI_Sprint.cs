@@ -1,6 +1,8 @@
 using System;
 using Godot;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class PI_Sprint : PI_HoldableHandler<EmptyInput>
 {

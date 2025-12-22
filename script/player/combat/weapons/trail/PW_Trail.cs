@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 /// <summary>
 /// Handles visual trail shooting.
 /// <para>

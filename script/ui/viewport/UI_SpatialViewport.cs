@@ -1,4 +1,7 @@
 using Godot;
+
+namespace Pew;
+
 public partial class UI_SpatialViewport : SubViewport
 {
     private Vector2I _screenSize;

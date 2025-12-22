@@ -1,3 +1,5 @@
+namespace Pew;
+
 public enum PI_ActionState
 {
     STARTED,

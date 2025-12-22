@@ -2,6 +2,8 @@ using System.Linq;
 using Godot;
 using Godot.Collections;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class PA_Sound : AudioStreamPlayer3D
 {

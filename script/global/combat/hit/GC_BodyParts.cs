@@ -1,3 +1,5 @@
+namespace Pew;
+
 public enum GC_BodyPart
 {
     Head,

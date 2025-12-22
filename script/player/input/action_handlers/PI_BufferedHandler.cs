@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 /// <summary>
 /// A simple Buffered Press input implementation.
 /// Whenever the input is pressed down, it is stored in buffer.

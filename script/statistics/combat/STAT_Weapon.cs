@@ -1,6 +1,8 @@
 using System;
 using System.Linq;
 
+namespace Pew;
+
 public class STAT_Weapon: IDisposable
 {
     /*

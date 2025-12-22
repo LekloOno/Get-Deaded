@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 [GlobalClass]
 public abstract partial class PCT_DirectCauser : Node
 {

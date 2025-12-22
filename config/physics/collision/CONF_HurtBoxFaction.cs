@@ -1,3 +1,5 @@
+namespace Pew;
+
 public enum CONF_HurtBoxFaction
 {
     Player = 0,

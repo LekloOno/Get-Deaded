@@ -1,3 +1,5 @@
+namespace Pew;
+
 /// <summary>
 /// Represents the environment as an entity. <br/>
 /// For example, if an enemy dies in lava, out of a fall, void, etc., the entity credited for the kill would be the environment.

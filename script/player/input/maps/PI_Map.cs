@@ -1,7 +1,7 @@
-
-
 using System.Collections;
 using System.Collections.Generic;
+
+namespace Pew;
 
 public class PI_Map : IEnumerable<PI_InputAction>
 {

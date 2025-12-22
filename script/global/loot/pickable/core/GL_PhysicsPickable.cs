@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 public partial class GL_PhysicsPickable(GL_IPickHandler handler, float horizontalDamp, float lifeTime) : RigidBody3D, GL_IPickable
 {
     private GL_IPickHandler _handler = handler;

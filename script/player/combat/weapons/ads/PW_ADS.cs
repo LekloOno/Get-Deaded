@@ -1,6 +1,8 @@
 using System;
 using Godot;
 
+namespace Pew;
+
 /// <summary>
 /// Allow for some ADS behavior. (Aim-down-sight)
 /// </summary>

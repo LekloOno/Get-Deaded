@@ -2,6 +2,8 @@ using System;
 using System.ComponentModel.Design;
 using Godot;
 
+namespace Pew;
+
 public partial class UI_DashReset : TextureProgressBar
 {
     [Export] private PM_Dash _dash;

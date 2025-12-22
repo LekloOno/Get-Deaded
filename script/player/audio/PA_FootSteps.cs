@@ -2,6 +2,8 @@ using System;
 using Godot;
 using Godot.Collections;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class PA_FootSteps : PA_Sound
 {

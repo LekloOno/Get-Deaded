@@ -1,5 +1,6 @@
 using Godot;
 
+namespace Pew;
 
 // Godot doesn't allow to [Export] interfaces, so this is a simple glue wrapper to get around it.
 [GlobalClass]

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using Godot;
 
+namespace Pew;
+
 /// <summary>
 /// A PhysicalBoneSimulator3D wrapper. <br/>
 /// Generates associated PHX_RagdollBone.

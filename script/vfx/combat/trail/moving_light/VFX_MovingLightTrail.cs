@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 [GlobalClass]
 public partial class VFX_MovingLightTrail : VFX_Trail
 {

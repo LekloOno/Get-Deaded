@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Pew;
+
 /// Provides methods to avoid physics conflicts
 public static class PHX_Checks
 {

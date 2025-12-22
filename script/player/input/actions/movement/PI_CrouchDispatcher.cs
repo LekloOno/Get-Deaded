@@ -1,5 +1,6 @@
 using Godot;
 
+namespace Pew;
 
 /// <summary>
 /// Handles virtual inputs for crouch and slide.
