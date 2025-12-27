@@ -11,15 +11,25 @@ public partial class UI_3DSpaceMenu : Sprite3D
     [Export] private Node3D _combatSpatialUI;
     [Export] private CanvasLayer _combatControlUI;
     [Export] private CanvasLayer _menuCrossHair;
+    [Export] private bool _useMouseCursor = false;
+    private Input.MouseModeEnum _prevMouseMode;
 
     public override void _Ready()
     {
         _arenaMap.OnMenuOpen += Open;
         _arenaMap.OnMenuClose += Close;
+        _prevMouseMode = Input.MouseMode;
     }
 
     public void Open()
     {
+        if (_useMouseCursor)
+        {
+            _prevMouseMode = Input.MouseMode;
+            Input.WarpMouse(GetViewport().GetVisibleRect().Size / 2f);
+            Input.MouseMode = Input.MouseModeEnum.Visible;
+        }
+
         Show();
         _backgroundDimmer?.Show();
         _combatSpatialUI?.Hide();
@@ -30,6 +40,9 @@ public partial class UI_3DSpaceMenu : Sprite3D
 
     public void Close()
     {
+        if (_useMouseCursor)
+            Input.MouseMode = _prevMouseMode;
+            
         Hide();
         _backgroundDimmer?.Hide();
         _combatSpatialUI?.Show();

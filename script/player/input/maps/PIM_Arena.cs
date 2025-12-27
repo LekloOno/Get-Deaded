@@ -12,8 +12,6 @@ public partial class PIM_Arena : Node
     [Export] private PI_Weapons _weaponsInput;
     [Export] private PI_Revive _reviveInput;
     [Export] private PI_Stats _statsInput;
-    [Export] private bool _useMouseCursor = false;
-    [Export] private bool _pauseGame = true;
 
     public Action OnMenuOpen;
     public Action OnMenuClose;
@@ -25,7 +23,6 @@ public partial class PIM_Arena : Node
     private PI_Map _activeGameMap;
     private bool _menu = false;
 
-    private Input.MouseModeEnum _prevMouseMode;
     
     public override void _Ready()
     {
@@ -37,7 +34,6 @@ public partial class PIM_Arena : Node
         
         Alive(null, 0f);
         _activeGameMap = _alive;
-        _prevMouseMode = Input.MouseMode;
 
         _controller.OnDie += Dead;
         _controller.OnDie += TrackDead;
@@ -82,18 +78,7 @@ public partial class PIM_Arena : Node
         _controller.OnDie -= Dead;
         _reviveInput.Revive -= Alive;
 
-        if (_useMouseCursor)
-        {
-            _prevMouseMode = Input.MouseMode;
-            Input.WarpMouse(GetViewport().GetVisibleRect().Size / 2f);
-            Input.MouseMode = Input.MouseModeEnum.Visible;
-        }
-
-        if (_pauseGame)
-            GetTree().Paused = true;
-        
         _statsInput.DisableAction();
-
         _escapeMenu.Enable();
         OnMenuOpen?.Invoke();
     }
@@ -101,12 +86,6 @@ public partial class PIM_Arena : Node
     private void MenuHide()
     {
         _escapeMenu.Disable();
-
-        if (_useMouseCursor)
-            Input.MouseMode = _prevMouseMode;
-
-        if (_pauseGame)
-            GetTree().Paused = false;
 
         _activeGameMap.Enable();
         _controller.OnDie += Dead;
