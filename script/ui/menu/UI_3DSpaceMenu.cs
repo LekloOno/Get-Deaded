@@ -36,10 +36,14 @@ public partial class UI_3DSpaceMenu : Sprite3D
         _combatControlUI?.Hide();
         _menuCrossHair?.Show();
         _pivot.GlobalRotation = _cameraBiPivot.GlobalRotation;
+
+        _menu.Open();
     }
 
     public void Close()
     {
+        _menu.Close();
+
         if (_useMouseCursor)
             Input.MouseMode = _prevMouseMode;
             

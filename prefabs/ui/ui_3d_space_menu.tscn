@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://bbkillht8xop2"]
+
+[ext_resource type="Script" uid="uid://bs4j51tlq6aj3" path="res://script/ui/menu/UI_3DSpaceMenu.cs" id="1_6ugyk"]
+[ext_resource type="PackedScene" uid="uid://dbwbuyf2bwus0" path="res://prefabs/ui/ui_menu.tscn" id="2_dlujf"]
+[ext_resource type="Texture2D" uid="uid://co5hdyqgdvrkm" path="res://assets/sprites/crosshairs/PNG/White/crosshair002.png" id="3_ykrql"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_21d0l"]
+viewport_path = NodePath("Body/SpatialAnchor/CameraPosition/Node3D/UI_3DSpaceMenu/SubViewport")
+
+[node name="UI_3DSpaceMenu" type="Sprite3D" node_paths=PackedStringArray("_menu", "_backgroundDimmer", "_arenaMap", "_cameraBiPivot", "_pivot", "_combatSpatialUI", "_combatControlUI", "_menuCrossHair")]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+visible = false
+layers = 2
+centered = false
+texture = SubResource("ViewportTexture_21d0l")
+script = ExtResource("1_6ugyk")
+_menu = NodePath("SubViewport/UI_EscapeMenu")
+_backgroundDimmer = NodePath("")
+_arenaMap = NodePath("")
+_cameraBiPivot = NodePath("")
+_pivot = NodePath("")
+_combatSpatialUI = NodePath("")
+_combatControlUI = NodePath("")
+_menuCrossHair = NodePath("CanvasLayer")
+metadata/_custom_type_script = "uid://bs4j51tlq6aj3"
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(1920, 1080)
+
+[node name="UI_EscapeMenu" parent="SubViewport" node_paths=PackedStringArray("_arenaMap") instance=ExtResource("2_dlujf")]
+_arenaMap = NodePath("")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="CrossHair" type="TextureRect" parent="CanvasLayer"]
+self_modulate = Color(0, 0.92947316, 1, 0.70000005)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -36.0
+offset_right = 36.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_ykrql")
+expand_mode = 2
