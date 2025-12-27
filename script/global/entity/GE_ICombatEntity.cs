@@ -4,4 +4,5 @@
 public interface GE_ICombatEntity : GE_Entity
 {
     public GC_HealthManager HealthManager {get;}
+    public PCT_SimpleTraumaData KillTraumaData {get;}
 }

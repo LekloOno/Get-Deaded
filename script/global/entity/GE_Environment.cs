@@ -13,4 +13,6 @@ public class GE_Environment : GE_IActiveCombatEntity
     public PW_WeaponsHandler WeaponsHandler => null;
 
     public GB_IExternalBodyManager Body => null;
+
+    public PCT_SimpleTraumaData KillTraumaData => null;
 }

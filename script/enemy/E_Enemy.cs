@@ -8,7 +8,6 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
     [Export] private MeshInstance3D _surfaceMesh;
     [Export] private MeshInstance3D _jointMesh;
     [Export] private GL_Dropper _lootDropper;
-    [Export] private PCT_Undirect _traumaCauser;
     [Export] private float _drag = 10f;
     [Export] private Color _hitColor = new(1f, 1f, 1f, 1f);
     [Export] private float _hitTime = 0.15f;
@@ -18,6 +17,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
     [Export] private Skeleton3D _skeleton;
     [Export] private PROTO_Mover _mover;
     [Export] private bool _aim;
+    [Export] public PCT_SimpleTraumaData KillTraumaData {get; private set;}
 
     public bool Enabled {get; private set;} = false;
 
@@ -119,7 +119,6 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
     public void PlayDeath(E_IEnemy _, GC_Health health)
     {
         _lootDropper.Drop();
-        _traumaCauser.CauseTrauma();
         _ragdolSimulator?.PhysicalBonesStartSimulation();
         Pool();
     }

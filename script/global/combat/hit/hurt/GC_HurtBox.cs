@@ -13,7 +13,7 @@ public partial class GC_HurtBox : Area3D
     [Export] private bool _useSpecialModifier = false;
     [Export] private float _modifier = 1f;
     [Export] public GpuParticles3D DamageSplatter;
-    [Export] public GE_CombatWrapper Entity {get; private set;}
+    [Export] public GE_CombatEntity Entity {get; private set;}
     public PHX_ActiveRagdollBone RagdollBone {get; private set;}
     
     public override void _Ready()

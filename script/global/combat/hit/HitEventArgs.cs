@@ -13,7 +13,7 @@ public class HitEventArgs : EventArgs
     }
 
     /// <summary>
-    /// The health manager of the entity it did hit.
+    /// The entity it did hit.
     /// </summary>
     public GE_ICombatEntity Target {get;}
     /// <summary>
