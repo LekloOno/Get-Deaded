@@ -8,7 +8,7 @@ public partial class UI_DamageIndicatorManager : Control
     [Export] private PW_WeaponsHandler _weaponsHandler;
     [Export] private Timer _bufferTimer;
     private UI_DamageIndicator _currentIndicator;
-    private GC_HealthManager _currentTarget;
+    private GE_ICombatEntity _currentTarget;
 
     public override void _Ready()
     {
@@ -39,7 +39,7 @@ public partial class UI_DamageIndicatorManager : Control
             if(indicatorNode is UI_DamageIndicator indicator)
             {
                 _currentIndicator = indicator;
-                _currentIndicator.Initialize(_camera, e.Target, e.TotalDamage, color);
+                _currentIndicator.Initialize(_camera, e.Target.HealthManager, e.TotalDamage, color);
                 AddChild(_currentIndicator);
                 _bufferTimer.Start();
             }

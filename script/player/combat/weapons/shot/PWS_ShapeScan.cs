@@ -21,7 +21,7 @@ public partial class PWS_ShapeScan : PW_Shot
         if (_shapeCast.IsColliding())
         {
             // To avoid hitting multiple times the single target, yet allow hitting multiple different ones.
-            HashSet<GC_HealthManager> _hitHealthManagers = [];
+            HashSet<GE_ICombatEntity> _hitEntities = [];
 
             for (int i = 0; i < _shapeCast.GetCollisionCount(); i ++)
             {
@@ -30,7 +30,7 @@ public partial class PWS_ShapeScan : PW_Shot
 
                 if (collider is GC_HurtBox hurtBox)
                 {
-                    if (!_hitHealthManagers.Add(hurtBox.HealthManager))
+                    if (!_hitEntities.Add(hurtBox.Entity))
                         continue;
 
                     SendHit(hurtBox, hitPosition, castOrigin, castDirection);

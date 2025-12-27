@@ -15,7 +15,7 @@ public class HitEventArgs : EventArgs
     /// <summary>
     /// The health manager of the entity it did hit.
     /// </summary>
-    public GC_HealthManager Target {get;}
+    public GE_ICombatEntity Target {get;}
     /// <summary>
     /// The deepest health layer this hit did hit. <br/>
     /// For example, if a target with 40 shield points, and 20 health points behind this shield, receives 50 damage, then the deepest layer to be hit is the health layer.
@@ -66,7 +66,7 @@ public class HitEventArgs : EventArgs
     public float SubHitSize { get; }
 
     public HitEventArgs(
-        GC_HealthManager target,
+        GE_ICombatEntity target,
         GC_Health senderLayer,
         GC_HurtBox hurtBox,
         float damage,
@@ -85,7 +85,7 @@ public class HitEventArgs : EventArgs
         subHitSize){}
 
     public HitEventArgs(
-        GC_HealthManager target,
+        GE_ICombatEntity target,
         GC_Health senderLayer,
         GC_HurtBox hurtBox,
         float damage,

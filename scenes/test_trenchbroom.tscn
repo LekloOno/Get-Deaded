@@ -1,4 +1,4 @@
-[gd_scene load_steps=464 format=4 uid="uid://co0vxcbu5hxvc"]
+[gd_scene load_steps=461 format=4 uid="uid://co0vxcbu5hxvc"]
 
 [ext_resource type="Script" uid="uid://b8ob8d1uxja85" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_kt2k2"]
 [ext_resource type="Texture2D" uid="uid://c6o8mw13kagni" path="res://assets/sprites/skyboxes/Sky_trainyard_01_1b2.png" id="1_niaf1"]
@@ -16,12 +16,10 @@
 [ext_resource type="Material" uid="uid://qaiv0bg125qu" path="res://assets/textures/factory/factory_pillar1.tres" id="12_j6kmx"]
 [ext_resource type="Material" uid="uid://c8uqlqfsypx8y" path="res://assets/textures/factory/factory_wall_dark.tres" id="13_m2at4"]
 [ext_resource type="Material" uid="uid://h2ivyy4upgyr" path="res://assets/textures/factory/factory_pillar1_gloss.tres" id="14_oihfr"]
-[ext_resource type="PackedScene" uid="uid://cgxay2q63b8m8" path="res://prefabs/simplebot/simplebot.tscn" id="16_716do"]
 [ext_resource type="Material" uid="uid://cbfimcwmy0ge1" path="res://assets/textures/factory/test_sand.tres" id="16_qlgsc"]
 [ext_resource type="Material" uid="uid://ceiat4iiao04q" path="res://assets/textures/factory/metal_dark.tres" id="17_81hwy"]
 [ext_resource type="Material" uid="uid://c7p68evacni7v" path="res://assets/materials/darkGrid.tres" id="18_322tx"]
 [ext_resource type="Material" uid="uid://jqnluj5cve8f" path="res://assets/textures/factory/factory_wall.tres" id="18_ousnk"]
-[ext_resource type="Script" uid="uid://8thrj88gtdf" path="res://script/enemy/E_EnemySpawner.cs" id="18_qlgsc"]
 [ext_resource type="Material" uid="uid://l4vtoahkq06s" path="res://assets/textures/grid/PNG/Green/texture_13.tres" id="19_0iwb2"]
 [ext_resource type="Material" uid="uid://daxwgciv66e17" path="res://assets/materials/whiteGrid.tres" id="19_pcerp"]
 [ext_resource type="Script" uid="uid://d4a4vftx6y17" path="res://script/global/combat/hit/hit/GC_Hitbox.cs" id="20_50c6l"]
@@ -35,7 +33,6 @@
 [ext_resource type="Script" uid="uid://c1b6fea15qlys" path="res://script/scenario/SC_AimArenaAmoConfig.cs" id="26_mmn4w"]
 [ext_resource type="LightmapGIData" uid="uid://dnqyc5lqkgrt6" path="res://scenes/test_trenchbroom.lmbake" id="27_vqbvp"]
 [ext_resource type="PackedScene" uid="uid://cg6805jlx25is" path="res://prefabs/simplebot/simplebot_aim_arena.tscn" id="27_xqord"]
-[ext_resource type="PackedScene" uid="uid://5xqfm2mmkdsg" path="res://prefabs/simplebot/simplebot_barrier.tscn" id="32_50g17"]
 [ext_resource type="Shader" uid="uid://cgvs2rofqr7fc" path="res://assets/shaders/toon_post_process.gdshader" id="34_f60qe"]
 [ext_resource type="Script" uid="uid://bwxdr2xchhkya" path="res://script/scenario/aim_game/SC_GameManager.cs" id="35_0iwb2"]
 [ext_resource type="Script" uid="uid://b361d5nxjt30o" path="res://script/scenario/aim_game/spawners/SC_TestSpawner.cs" id="36_r601x"]
@@ -3102,58 +3099,6 @@ shadow_enabled = true
 [node name="Entities" type="Node" parent="."]
 
 [node name="Spawners" type="Node" parent="Entities"]
-
-[node name="FabriceSpawner2" type="Node3D" parent="Entities/Spawners" node_paths=PackedStringArray("_ennemy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 2, 7)
-script = ExtResource("18_qlgsc")
-_ennemy = NodePath("Fabrice")
-_respawnDelay = 2.0
-metadata/_custom_type_script = "uid://8thrj88gtdf"
-
-[node name="Fabrice" parent="Entities/Spawners/FabriceSpawner2" instance=ExtResource("16_716do")]
-physics_interpolation_mode = 1
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
-
-[node name="FabriceSpawner" type="Node3D" parent="Entities/Spawners" node_paths=PackedStringArray("_ennemy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2, 7)
-script = ExtResource("18_qlgsc")
-_ennemy = NodePath("Fabrice")
-_respawnDelay = 2.0
-metadata/_custom_type_script = "uid://8thrj88gtdf"
-
-[node name="Fabrice" parent="Entities/Spawners/FabriceSpawner" instance=ExtResource("16_716do")]
-physics_interpolation_mode = 1
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
-
-[node name="SebastienSpawner" type="Node3D" parent="Entities/Spawners" node_paths=PackedStringArray("_ennemy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1.9, 17.1)
-script = ExtResource("18_qlgsc")
-_ennemy = NodePath("Sebastien")
-_respawnDelay = 2.0
-metadata/_custom_type_script = "uid://8thrj88gtdf"
-
-[node name="Sebastien" parent="Entities/Spawners/SebastienSpawner" instance=ExtResource("16_716do")]
-transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, 0, -1.4, -0.0999994)
-
-[node name="MichelSpawner" type="Node3D" parent="Entities/Spawners" node_paths=PackedStringArray("_ennemy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 5.4, 19)
-script = ExtResource("18_qlgsc")
-_ennemy = NodePath("Michel")
-_respawnDelay = 2.0
-metadata/_custom_type_script = "uid://8thrj88gtdf"
-
-[node name="Michel" parent="Entities/Spawners/MichelSpawner" instance=ExtResource("32_50g17")]
-transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, 0, -1.4, 0)
-
-[node name="BertrandSpawner" type="Node3D" parent="Entities/Spawners" node_paths=PackedStringArray("_ennemy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 9)
-script = ExtResource("18_qlgsc")
-_ennemy = NodePath("Bertrand")
-_respawnDelay = 2.0
-metadata/_custom_type_script = "uid://8thrj88gtdf"
-
-[node name="Bertrand" parent="Entities/Spawners/BertrandSpawner" instance=ExtResource("32_50g17")]
-transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 0, -1.5, 0)
 
 [node name="PlayerController" parent="Entities" instance=ExtResource("10_ki50h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, 16)

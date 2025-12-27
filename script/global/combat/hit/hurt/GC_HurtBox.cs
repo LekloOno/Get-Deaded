@@ -12,8 +12,8 @@ public partial class GC_HurtBox : Area3D
     [Export] public GC_BodyPart BodyPart {get; private set;} = GC_BodyPart.Chest;
     [Export] private bool _useSpecialModifier = false;
     [Export] private float _modifier = 1f;
-    [Export] public GC_HealthManager HealthManager {get; private set;}
-    [Export] public GpuParticles3D _damageSplatter;
+    [Export] public GpuParticles3D DamageSplatter;
+    [Export] public GE_CombatWrapper Entity {get; private set;}
     public PHX_ActiveRagdollBone RagdollBone {get; private set;}
     
     public override void _Ready()
@@ -32,23 +32,23 @@ public partial class GC_HurtBox : Area3D
     public bool Damage(GC_IHitDealer hitDealer, out float takenDamage, out float overflow, out GC_Health deepest, float subHitSize = 1f)
     {
         float expectedDamage = hitDealer.HitData.GetDamage(BodyPart) * _modifier * subHitSize;
-        return HealthManager.Damage(hitDealer, expectedDamage, out takenDamage, out overflow, out deepest);
+        return Entity.HealthManager.Damage(hitDealer, expectedDamage, out takenDamage, out overflow, out deepest);
     }
-    public float Heal(float heal) => HealthManager.Heal(heal);
+    public float Heal(float heal) => Entity.HealthManager.Heal(heal);
 
     public bool TriggerDamageParticles(Vector3 hitPosition, Vector3 from)
     {
-        if (_damageSplatter == null)
+        if (DamageSplatter == null)
             return false;
 
-        _damageSplatter.GlobalPosition = hitPosition;
-        _damageSplatter.LookAt(from);
-        _damageSplatter.Emitting = true;
+        DamageSplatter.GlobalPosition = hitPosition;
+        DamageSplatter.LookAt(from);
+        DamageSplatter.Emitting = true;
         return true;
     }
 
     public void HandleKnockBack(Vector3 force) =>
-        HealthManager.HandleKnockBack(force);
+        Entity.HealthManager.HandleKnockBack(force);
 
     public HitEventArgs HandleHit(
         GE_IActiveCombatEntity author,
@@ -83,7 +83,7 @@ public partial class GC_HurtBox : Area3D
         TriggerDamageParticles(hitPosition, from); // Experimental from position, to check.
 
         return new(
-            HealthManager, deepest, this,           // Target infos
+            Entity, deepest, this,           // Target infos
             takenDamage, killed,                    // Hit infos
             hitDealer, author,                      // Author infos
             overflow, overrideBodyPart,             // Optional infos
