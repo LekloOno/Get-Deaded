@@ -127,6 +127,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
     public void DisableFire()
     {
         _externalReady = false;
+        CancelReload();
         _activeWeapon.Disable();
     }
     
