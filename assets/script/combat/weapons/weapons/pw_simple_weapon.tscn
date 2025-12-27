@@ -36,8 +36,8 @@ metadata/_custom_type_script = "uid://c0vf7xmi1u8t4"
 [node name="PW_Simple" type="Node3D" node_paths=PackedStringArray("_fires", "_ads")]
 script = ExtResource("1_5idl2")
 MoveSpeedModifier = -0.08
-SwitchInTime = 0.15
-SwitchOutTime = 0.25
+SwitchInTime = 0.1
+SwitchOutTime = 0.18
 ReloadTime = 1.1
 TacticalReloadTime = 0.7
 ReloadReadyTime = 0.15

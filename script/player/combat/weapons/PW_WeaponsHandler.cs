@@ -65,6 +65,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
     private bool _bufferedSecondary = false;
 
     private bool _reloading = false;
+    private bool _reloadQueued = false;
     private bool _ready = true;
     private bool _externalReady = true;
 
@@ -185,7 +186,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
         weapons = _weapons;
     }
 
-    public bool ActiveWeaponHalted() => !_ready || !_externalReady || _switchingIn || _switchingOut;
+    public bool ActiveWeaponHalted() => !_ready || !_externalReady || IsSwitching();
     public bool IsSwitching() => _switchingIn || _switchingOut;
 
     // Very redondant way to define the buffers, could use a little rework !
@@ -306,6 +307,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
     private void SendReload()
     {
         Available -= SendReload;
+        _reloadQueued = false;
         if (_weaponsInput.ReloadUseBuffer())
             TryReload();
     }
@@ -332,13 +334,17 @@ public partial class PW_WeaponsHandler : WeaponSystem
         if (_reloading)
             return;
 
-        if(!_ready || IsSwitching())
+        if(!ActiveWeaponHalted())
         {
-            Available += SendReload;
+            TryReload();
             return;
         }
 
-        TryReload();
+        if (!_reloadQueued)
+        {
+            Available += SendReload;
+            _reloadQueued = true;
+        }
     }
 
     private void DoReload()

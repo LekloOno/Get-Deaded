@@ -10,6 +10,6 @@ public abstract partial class PI_HoldBufferdHandler<T> : PI_BufferedHandler<T>
     {
         T value = GetInputValue(@event);
         Stop?.Invoke(this, value);
-        _lastInput = 0;
+        Empty();
     }
 }

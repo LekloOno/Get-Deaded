@@ -67,8 +67,8 @@ metadata/_custom_type_script = "uid://c0vf7xmi1u8t4"
 [node name="PW_Revolver" type="Node3D" node_paths=PackedStringArray("_fires")]
 script = ExtResource("1_ce3gq")
 MoveSpeedModifier = -0.1
-SwitchInTime = 0.2
-SwitchOutTime = 0.25
+SwitchInTime = 0.13
+SwitchOutTime = 0.18
 ReloadTime = 1.0
 TacticalReloadTime = 1.0
 ReloadReadyTime = 0.15

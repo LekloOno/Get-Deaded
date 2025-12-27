@@ -9,8 +9,18 @@ using Godot;
 public abstract partial class PI_BufferedHandler<T> : PI_PressHandler<T>
 {
     [Export] private ulong _bufferWindow;
+    /// <summary>
+    /// Overrides the _bufferWindow for an infinite window, and changes the way the input are buffered. <br/>
+    /// In permanent mode, the buffer does not depend on a lifetime anymore. <br/>
+    /// Instead, the buffer is filled when it was empty, and the input is pressed, and it is emptied on consumption or when the input is pressed as the buffer was already filled. 
+    /// </summary>
+    [Export] private bool _permanent = false;
+    /// <summary>
+    /// Defines if 
+    /// </summary>
     [Export] private bool _scaledTime = true;
-    protected ulong _lastInput = 0;
+    private ulong _lastInput = 0;
+    private bool _inputBuffered = false;
 
     private ulong GetLocalTicksMsec() => _scaledTime
             ? PHX_Time.ScaledTicksMsec
@@ -19,11 +29,14 @@ public abstract partial class PI_BufferedHandler<T> : PI_PressHandler<T>
     public bool UseBuffer()
     {
         bool wasBuffered = IsBuffered();
-        _lastInput = 0;
+        Empty();
         return wasBuffered;
     }
 
-    public bool IsBuffered() => GetLocalTicksMsec() - _lastInput < _bufferWindow;
+    public bool IsBuffered() =>
+        _permanent
+        ? _inputBuffered
+        : GetLocalTicksMsec() - _lastInput < _bufferWindow;
 
     /// <summary>
     /// Automatically empties the buffer on disabling.
@@ -31,7 +44,7 @@ public abstract partial class PI_BufferedHandler<T> : PI_PressHandler<T>
     /// </summary>
     public sealed override void DisableAction()
     {
-        _lastInput = 0;
+        Empty();
         DisableBufferAction();
     }
 
@@ -43,6 +56,7 @@ public abstract partial class PI_BufferedHandler<T> : PI_PressHandler<T>
     protected override void InputDown(InputEvent @event)
     {
         _lastInput = GetLocalTicksMsec();
+        _inputBuffered = !_inputBuffered;
         T value = GetInputValue(@event);
         Start?.Invoke(this, value);
     }
@@ -53,4 +67,9 @@ public abstract partial class PI_BufferedHandler<T> : PI_PressHandler<T>
         Stop?.Invoke(this, value);
     }
 
+    protected void Empty()
+    {
+        _lastInput = 0;
+        _inputBuffered = false;
+    }
 }
