@@ -74,11 +74,19 @@ mouse_filter = 2
 script = ExtResource("5_oyy5y")
 _markerSticks = [NodePath("Control/BotRight"), NodePath("Control2/BotLeft"), NodePath("Control3/TopRight"), NodePath("Control4/TopLeft")]
 _fadeTime = 0.3
-_expandTime = 0.08
-_baseStartOffset = 8.0
-_baseSize = Vector2(12, 2)
+_fadeDelay = 0.4
+_basePeakOffset = 80.0
+_peakSize = Vector2(30, 5)
+_sizeMaxCoef = Vector2(1, 1)
 _offsetDispersion = 300.0
-_offsetMaxCoef = 2.0
+_offsetExpTransition = 10
+_offsetTightTransition = 5
+_offsetExpEase = 2
+_offsetTightEase = 1
+_maxChainedDamage = 100.0
+_chainLifetime = 150
+_minPeakOffset = 17.0
+_minOffsetDelta = 5.0
 metadata/_custom_type_script = "uid://c5ie4xhq4n5p7"
 
 [node name="Control" type="Control" parent="UI_DamageMarker"]

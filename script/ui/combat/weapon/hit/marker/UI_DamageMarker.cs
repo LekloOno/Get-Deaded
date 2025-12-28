@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Godot;
 using Godot.Collections;
@@ -6,21 +7,55 @@ using Godot.Collections;
 public partial class UI_DamageMarker : Control
 {
     [Export] private Array<Panel> _markerSticks;
-    [Export] private float _fadeTime = .18f;
-    [Export] private float _expandTime = .1f;
-    [Export] private float _baseStartOffset = 12f;
-    [Export] private float _basePeakOffset = 15f;
-    [Export] private Vector2 _baseSize = new(16f, 2f);
-
-    // Higher values means higher damages are required to get the maximum size.
-    // It is the dispersion of the tanh() function used to convert the damage to a size.
+    [Export] private float _fadeTime = .3f;
+    [Export] private float _fadeDelay = 0.4f;
+    [Export] private float _expandTime = .01f;
+    [Export] private float _tightenTime = .5f;
+    [Export] private float _baseTightOffset = 15f;
+    [Export] private float _basePeakOffset = 80f;
+    [Export] private Vector2 _baseSize = new(10f, 2f);
+    /// <summary>
+    /// The 
+    /// </summary>
+    [Export] private Vector2 _maxDmgSize = new(30f, 5f);
+    /// <summary>
+    /// Higher values means higher damages are required to get the maximum size. <br/>
+    /// It is the dispersion of the tanh() function used to convert the damage to a size. <br/>
+    /// Concretely, for this exact amount of damage, the size will be interpolated around 76% between base and peak size. 
+    /// </summary>
     [Export] private float _sizeDispersion = 300f;
-    // The maximum size coeficient, x times bigger than _baseSize.
-    [Export] private float _sizeMaxCoef = 5f; // The final coeficient (-1) could be computed on ready
-    
-    // Same as for the dispersion but for the peak offset
-    [Export] private float _offsetDispersion = 20f;
-    [Export] private float _offsetMaxCoef = 2.5f;
+    /// <summary>
+    /// Higher values means higher damages are required to get the maximum offset. <br/>
+    /// It is the dispersion of the tanh() function used to convert the damage to an offset. <br/>
+    /// Concretely, for this exact amount of damage, the size will be interpolated around 76% between base and peak offset. 
+    /// </summary>
+    [Export] private float _offsetDispersion = 300f;
+    /// <summary>
+    /// The peak offset maximum damage coef. That is, how much damages can multiply the markers peak offset at most. 
+    /// </summary>
+    [Export] private float _offsetMaxDmgCoef = 2.5f;
+    [Export] private Tween.TransitionType _offsetExpTransition = Tween.TransitionType.Back;
+    [Export] private Tween.TransitionType _offsetTightTransition = Tween.TransitionType.Expo;
+    [Export] private Tween.EaseType _offsetExpEase = Tween.EaseType.InOut;
+    [Export] private Tween.EaseType _offsetTightEase = Tween.EaseType.Out;
+    /// <summary>
+    /// When multiple consecutive hits occur, the hit markers offset starts shrinking until reaching its tight offset at this much damage.
+    /// </summary>
+    [Export] private float _maxChainedDamage = 100f;
+    /// <summary>
+    /// Hit's damages are stacked into a damage chain if there's less than this amount of time between them.
+    /// </summary>
+    [Export] private ulong _chainLifetime = 150;
+    /// <summary>
+    /// The minimum peak offset the stacked damage makes the offset shrink to.
+    /// </summary>
+    [Export] private float _minPeakOffset = 17f;
+    /// <summary>
+    /// The minimum offset delta between peak and tight offset. This would eventually make the actual start offset tighter than _baseTightOffset.
+    /// </summary>
+    [Export] private float _minOffsetDelta = 5f;
+    private float _chainedDamage = 0f;
+    private ulong _lastHit = 0;
 
     private StyleBoxFlat _hitStyle;
     private Tween opacityTween;
@@ -65,33 +100,81 @@ public partial class UI_DamageMarker : Control
         Color mod = Modulate;
         mod.A = 0f;
         Modulate = mod;
-        Offset = _baseStartOffset;
+        Offset = _baseTightOffset;
     }
 
     public void StartAnim(HitEventArgs e)
     {
+        SetSize(e);
+        SetColor(e); 
+        AnimOpacity(e);
+        AnimOffset(e);
+    }
+
+    private void AnimOffset(HitEventArgs e)
+    {
+        offsetTween?.Kill();
+        
+        float offsetDmgCoef = Mathf.Tanh(e.TotalDamage/_offsetDispersion) * (_offsetMaxDmgCoef-1f) + 1;
+
+        DamageChainOffset(e, out float peakOffset, out float tightOffset);
+
+        offsetTween = CreateTween();
+        offsetTween
+            .TweenProperty(this, "Offset", peakOffset * offsetDmgCoef, _expandTime)
+            .SetTrans(_offsetExpTransition)
+            .SetEase(_offsetExpEase);
+
+        offsetTween
+            .TweenProperty(this, "Offset", tightOffset, _tightenTime)
+            .SetTrans(_offsetTightTransition)
+            .SetEase(_offsetTightEase);
+    }
+
+    private void DamageChainOffset(HitEventArgs e, out float peakOffset, out float tightOffset)
+    {
+        ulong now = PHX_Time.ScaledTicksMsec;
+        if (now - _lastHit < _chainLifetime)
+        {
+            _chainedDamage += e.TotalDamage;
+            peakOffset = Mathf.Lerp(_basePeakOffset, _minPeakOffset, Mathf.Min(_chainedDamage/_maxChainedDamage, 1));
+            tightOffset = Mathf.Min(_baseTightOffset, peakOffset - _minOffsetDelta);
+            Offset = Mathf.Lerp(tightOffset, peakOffset, 0.5f);
+        }
+        else
+        {
+            _chainedDamage = 0;
+            peakOffset = _basePeakOffset;
+            tightOffset = _baseTightOffset;   
+        }
+
+        _lastHit = now;
+    } 
+
+    private void AnimOpacity(HitEventArgs e)
+    {
+        opacityTween?.Kill();
+
         Color mod = Modulate;
         mod.A = 1f;
         Modulate = mod;
 
-        opacityTween?.Kill();
-        offsetTween?.Kill();
+        opacityTween = CreateTween();
+        opacityTween.TweenInterval(_fadeDelay);
+        opacityTween.TweenProperty(this, "modulate:a", 0.0f, _fadeTime);
+    }
 
-        float sizeRatio = Mathf.Tanh(e.TotalDamage/_sizeDispersion)*(_sizeMaxCoef - 1f) + 1f;
-        SticksSize = _baseSize * sizeRatio;
+    private void SetSize(HitEventArgs e)
+    {
+        float sizeRatio = Mathf.Tanh(e.TotalDamage/_sizeDispersion);
+        SticksSize = _baseSize.Lerp(_maxDmgSize, sizeRatio);
+    }
 
+    private void SetColor(HitEventArgs e)
+    {
         if (!e.OverrideBodyPart && e.HurtBox.BodyPart == GC_BodyPart.Head)
             _hitStyle.BgColor = CONF_HitColors.Colors.Critical;
         else
             _hitStyle.BgColor = CONF_HitColors.Colors.Normal;
-        
-        opacityTween = CreateTween();
-        opacityTween.TweenProperty(this, "modulate:a", 0.0f, _fadeTime);
-
-        offsetTween = CreateTween();
-        float scaledDamage = Mathf.Tanh(e.TotalDamage/_offsetDispersion) * (_offsetMaxCoef-1f) + 1;
-
-        offsetTween.TweenProperty(this, "Offset", _basePeakOffset * scaledDamage, _expandTime).SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Sine);
-        offsetTween.TweenProperty(this, "Offset", _baseStartOffset, _expandTime);
     }
 }
