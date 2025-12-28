@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d06ge8pykx8s1"]
+[gd_scene load_steps=14 format=3 uid="uid://d06ge8pykx8s1"]
 
 [ext_resource type="Script" uid="uid://ds1ebussoj6l7" path="res://script/ui/combat/weapon/hit/marker/UI_HitMarker.cs" id="1_w4cu8"]
 [ext_resource type="Script" uid="uid://pxg54fo2ojgy" path="res://script/ui/combat/weapon/hit/marker/kill_skull/UI_KillSkullManager.cs" id="2_n7502"]
@@ -19,6 +19,12 @@ script = ExtResource("6_33tg5")
 _noise = SubResource("FastNoiseLite_4g8la")
 _reductionRate = 2.8
 _noiseSpeed = 60.0
+metadata/_custom_type_script = "uid://foau1gurk2py"
+
+[sub_resource type="Resource" id="Resource_33tg5"]
+script = ExtResource("6_33tg5")
+_noise = SubResource("FastNoiseLite_4g8la")
+_reductionRate = 0.8
 metadata/_custom_type_script = "uid://foau1gurk2py"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wngje"]
@@ -73,20 +79,8 @@ offset_bottom = 40.0
 mouse_filter = 2
 script = ExtResource("5_oyy5y")
 _markerSticks = [NodePath("Control/BotRight"), NodePath("Control2/BotLeft"), NodePath("Control3/TopRight"), NodePath("Control4/TopLeft")]
-_fadeTime = 0.3
-_fadeDelay = 0.4
-_basePeakOffset = 80.0
-_peakSize = Vector2(30, 5)
-_sizeMaxCoef = Vector2(1, 1)
-_offsetDispersion = 300.0
-_offsetExpTransition = 10
-_offsetTightTransition = 5
-_offsetExpEase = 2
-_offsetTightEase = 1
-_maxChainedDamage = 100.0
-_chainLifetime = 150
-_minPeakOffset = 17.0
-_minOffsetDelta = 5.0
+_shakeLayer = SubResource("Resource_33tg5")
+_shakeIntensity = 3.0
 metadata/_custom_type_script = "uid://c5ie4xhq4n5p7"
 
 [node name="Control" type="Control" parent="UI_DamageMarker"]

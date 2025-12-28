@@ -54,6 +54,10 @@ public partial class UI_DamageMarker : Control
     /// The minimum offset delta between peak and tight offset. This would eventually make the actual start offset tighter than _baseTightOffset.
     /// </summary>
     [Export] private float _minOffsetDelta = 5f;
+    [Export] private ANIM_Vec2TraumaLayer _shakeLayer;
+    [Export] private float _trauma = 1f;
+    [Export] private float _shakeIntensity;
+
     private float _chainedDamage = 0f;
     private ulong _lastHit = 0;
 
@@ -103,12 +107,21 @@ public partial class UI_DamageMarker : Control
         Offset = _baseTightOffset;
     }
 
+    private double _time = 0;
+
+    public override void _Process(double delta)
+    {
+        _time += delta;
+        Position = _shakeLayer.GetShakeAngleIntensity((float) delta, (float) _time) * _shakeIntensity;
+    }
+
     public void StartAnim(HitEventArgs e)
     {
         SetSize(e);
         SetColor(e); 
         AnimOpacity(e);
         AnimOffset(e);
+        _shakeLayer.AddTrauma(_trauma);
     }
 
     private void AnimOffset(HitEventArgs e)
