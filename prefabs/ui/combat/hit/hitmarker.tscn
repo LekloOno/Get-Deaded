@@ -24,7 +24,7 @@ metadata/_custom_type_script = "uid://foau1gurk2py"
 [sub_resource type="Resource" id="Resource_33tg5"]
 script = ExtResource("6_33tg5")
 _noise = SubResource("FastNoiseLite_4g8la")
-_reductionRate = 0.9
+_reductionRate = 1.8
 metadata/_custom_type_script = "uid://foau1gurk2py"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wngje"]
@@ -80,7 +80,9 @@ mouse_filter = 2
 script = ExtResource("5_oyy5y")
 _markerSticks = [NodePath("Control/BotRight"), NodePath("Control2/BotLeft"), NodePath("Control3/TopRight"), NodePath("Control4/TopLeft")]
 _shakeLayer = SubResource("Resource_33tg5")
-_shakeIntensity = 3.4
+_shakeIntensity = 0.05
+_shakeMaxDmgCoef = 500.0
+_shakeDispersion = 100.0
 metadata/_custom_type_script = "uid://c5ie4xhq4n5p7"
 
 [node name="Control" type="Control" parent="UI_DamageMarker"]

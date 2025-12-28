@@ -56,7 +56,10 @@ public partial class UI_DamageMarker : Control
     [Export] private float _minOffsetDelta = 5f;
     [Export] private ANIM_Vec2TraumaLayer _shakeLayer;
     [Export] private float _trauma = 1f;
-    [Export] private float _shakeIntensity;
+    [Export] private float _shakeIntensity = 0.05f;
+    [Export] private float _shakeMaxDmgCoef = 500f;
+    [Export] private float _shakeDispersion = 100f;
+    private float _shakeDmgCoef = 1f;
 
     private float _chainedDamage = 0f;
     private ulong _lastHit = 0;
@@ -112,7 +115,7 @@ public partial class UI_DamageMarker : Control
     public override void _Process(double delta)
     {
         _time += delta;
-        Position = _shakeLayer.GetShakeAngleIntensity((float) delta, (float) _time) * _shakeIntensity;
+        Position = _shakeLayer.GetShakeAngleIntensity((float) delta, (float) _time) * _shakeIntensity * _shakeDmgCoef;
     }
 
     public void StartAnim(HitEventArgs e)
@@ -121,6 +124,12 @@ public partial class UI_DamageMarker : Control
         SetColor(e); 
         AnimOpacity(e);
         AnimOffset(e);
+        Shake(e);
+    }
+
+    private void Shake(HitEventArgs e)
+    {
+        _shakeDmgCoef = Mathf.Tanh(e.TotalDamage/_shakeDispersion) * (_shakeMaxDmgCoef - 1f) + 1f;
         _shakeLayer.AddTrauma(_trauma);
     }
 
