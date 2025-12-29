@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmyfvd0kn5bog"]
+
+[ext_resource type="Script" uid="uid://ct0dsw1xarajw" path="res://script/player/audio/PA_Dash.cs" id="1_0fwyc"]
+
+[node name="PA_Dash" type="Node3D" node_paths=PackedStringArray("_dash", "_slideInLayers")]
+script = ExtResource("1_0fwyc")
+_dash = NodePath("")
+_slideInLayers = [NodePath(""), NodePath(""), NodePath(""), NodePath("")]
+
+[node name="slide" type="AudioStreamPlayer3D" parent="."]
+volume_db = -30.0
+
+[node name="woosh" type="AudioStreamPlayer3D" parent="."]
+volume_db = -30.0
+attenuation_filter_cutoff_hz = 20500.0
+
+[node name="woosh2" type="AudioStreamPlayer3D" parent="."]
+volume_db = -37.0
+attenuation_filter_cutoff_hz = 20500.0
+
+[node name="clothes" type="AudioStreamPlayer3D" parent="."]
+volume_db = -30.0
+attenuation_filter_cutoff_hz = 20500.0
