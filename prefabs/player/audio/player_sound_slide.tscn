@@ -15,6 +15,7 @@
 script = ExtResource("1_gthyh")
 _slideIn = NodePath("slide_in")
 _slideHold = NodePath("slide_hold/slide_hold")
+metadata/_custom_type_script = "uid://b2jn2nortl4pm"
 
 [node name="slide_in" type="Node" parent="." node_paths=PackedStringArray("_slideInLayers")]
 script = ExtResource("2_kpy2o")

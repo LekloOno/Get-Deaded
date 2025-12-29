@@ -28,6 +28,7 @@ _wallJumpWoosh = NodePath("walljump_woosh/walljump_woosh")
 _wallClimbClothes = NodePath("wallclimb/wallclimb")
 _wallClimbLow = NodePath("wallclimb_low/wallclimb_low")
 _wallClimbNoise = NodePath("wallclimb_noise/wallclimb_noise")
+metadata/_custom_type_script = "uid://38i6kejmo2hs"
 
 [node name="woosh" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
@@ -52,6 +53,18 @@ _player = NodePath("..")
 _sounds = Array[AudioStream]([ExtResource("4_rd8yu"), ExtResource("5_tef14")])
 _minPitch = 1.2
 _maxPitch = 1.4
+metadata/_custom_type_script = "uid://d3uwl2heay8uf"
+
+[node name="steps" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7, 0)
+volume_db = -32.0
+
+[node name="steps" type="Node" parent="steps" node_paths=PackedStringArray("_player")]
+script = ExtResource("2_d3fm2")
+_player = NodePath("..")
+_sounds = Array[AudioStream]([ExtResource("13_ttwdl"), ExtResource("14_gkude"), ExtResource("15_urv4d"), ExtResource("16_ow7aq"), ExtResource("17_k8lso")])
+_minPitch = 0.55
+_maxPitch = 0.75
 metadata/_custom_type_script = "uid://d3uwl2heay8uf"
 
 [node name="walljump_clothes" type="AudioStreamPlayer3D" parent="."]
@@ -109,16 +122,4 @@ _player = NodePath("..")
 _sounds = Array[AudioStream]([ExtResource("12_ttwdl")])
 _minPitch = 1.2
 _maxPitch = 1.6
-metadata/_custom_type_script = "uid://d3uwl2heay8uf"
-
-[node name="steps" type="AudioStreamPlayer3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7, 0)
-volume_db = -32.0
-
-[node name="steps" type="Node" parent="steps" node_paths=PackedStringArray("_player")]
-script = ExtResource("2_d3fm2")
-_player = NodePath("..")
-_sounds = Array[AudioStream]([ExtResource("13_ttwdl"), ExtResource("14_gkude"), ExtResource("15_urv4d"), ExtResource("16_ow7aq"), ExtResource("17_k8lso")])
-_minPitch = 0.55
-_maxPitch = 0.75
 metadata/_custom_type_script = "uid://d3uwl2heay8uf"
