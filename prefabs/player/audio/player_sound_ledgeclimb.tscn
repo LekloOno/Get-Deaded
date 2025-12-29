@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5es61iegplj"]
+
+[ext_resource type="Script" uid="uid://drst58njg40lu" path="res://script/player/audio/PA_LedgeClimb.cs" id="1_seima"]
+
+[node name="PA_LedgeClimb" type="Node3D" node_paths=PackedStringArray("_LedgeClimb", "_slideInLayers")]
+script = ExtResource("1_seima")
+_LedgeClimb = NodePath("")
+_slideInLayers = [NodePath("")]
+
+[node name="PA_Sound" type="AudioStreamPlayer3D" parent="."]
+volume_db = -30.0
+attenuation_filter_cutoff_hz = 15000.0
