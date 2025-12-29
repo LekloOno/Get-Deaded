@@ -13,18 +13,13 @@
 
 [node name="PA_Slide" type="Node3D" node_paths=PackedStringArray("_slideIn", "_slideHold")]
 script = ExtResource("1_gthyh")
-_slideIn = NodePath("Slide in")
-_slideHold = NodePath("Slide hold")
+_slideIn = NodePath("slide_in")
+_slideHold = NodePath("slide_hold/slide_hold")
 
-[node name="Slide in" type="Node" parent="." node_paths=PackedStringArray("_slideInLayers")]
+[node name="slide_in" type="Node" parent="." node_paths=PackedStringArray("_slideInLayers")]
 script = ExtResource("2_kpy2o")
 _slideInLayers = [null, null]
 metadata/_custom_type_script = "uid://ca4sbvyfspdlk"
-
-[node name="Slide hold" type="Node" parent="." node_paths=PackedStringArray("_player")]
-script = ExtResource("3_cmx6y")
-_player = NodePath("../slide_hold")
-metadata/_custom_type_script = "uid://dxtqg0xnanovw"
 
 [node name="slide_in_noise" type="AudioStreamPlayer3D" parent="."]
 max_polyphony = 4
@@ -50,3 +45,8 @@ metadata/_custom_type_script = "uid://d3uwl2heay8uf"
 stream = ExtResource("10_srf5i")
 autoplay = true
 panning_strength = 0.0
+
+[node name="slide_hold" type="Node" parent="slide_hold" node_paths=PackedStringArray("_player")]
+script = ExtResource("3_cmx6y")
+_player = NodePath("..")
+metadata/_custom_type_script = "uid://dxtqg0xnanovw"
