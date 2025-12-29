@@ -1,12 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://b5es61iegplj"]
+[gd_scene load_steps=5 format=3 uid="uid://b5es61iegplj"]
 
 [ext_resource type="Script" uid="uid://drst58njg40lu" path="res://script/player/audio/PA_LedgeClimb.cs" id="1_seima"]
+[ext_resource type="Script" uid="uid://d3uwl2heay8uf" path="res://script/engine_tools/audio/3d/AUD_Sound3D.cs" id="2_elhyg"]
+[ext_resource type="AudioStream" uid="uid://dqjv7glvctdav" path="res://assets/sounds/clothes/clothes_3.wav" id="3_gmh50"]
+[ext_resource type="AudioStream" uid="uid://c3yn8oxpxhvy0" path="res://assets/sounds/clothes/clothes_4.wav" id="4_vkf3d"]
 
-[node name="PA_LedgeClimb" type="Node3D" node_paths=PackedStringArray("_LedgeClimb", "_slideInLayers")]
+[node name="PA_LedgeClimb" type="Node3D" node_paths=PackedStringArray("_sound")]
 script = ExtResource("1_seima")
-_LedgeClimb = NodePath("")
-_slideInLayers = [NodePath("")]
+_sound = NodePath("clothes/clothes")
+metadata/_custom_type_script = "uid://drst58njg40lu"
 
-[node name="PA_Sound" type="AudioStreamPlayer3D" parent="."]
+[node name="clothes" type="AudioStreamPlayer3D" parent="."]
 volume_db = -30.0
 attenuation_filter_cutoff_hz = 15000.0
+
+[node name="clothes" type="Node" parent="clothes" node_paths=PackedStringArray("_player")]
+script = ExtResource("2_elhyg")
+_player = NodePath("..")
+_sounds = Array[AudioStream]([ExtResource("3_gmh50"), ExtResource("4_vkf3d")])
+_minPitch = 1.2
+_maxPitch = 1.5
+metadata/_custom_type_script = "uid://d3uwl2heay8uf"
