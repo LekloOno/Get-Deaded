@@ -1,12 +1,11 @@
-using System;
 using Godot;
 
 [GlobalClass]
 public partial class PA_FullAuto : PA_Fire
 {
     [Export] private PWF_FullAuto _fire;
-    [Export] private PA_Looper _holdFire;
-    [Export] private PA_LayeredSound _tail;
+    [Export] private AUD_Looper _holdFire;
+    [Export] private AUD_Sound _tail;
 
     public override PW_Fire Fire => _fire;
 
@@ -28,7 +27,7 @@ public partial class PA_FullAuto : PA_Fire
     private void Release()
     {
         _holdFire?.StopLoop();
-        _tail?.PlayLayers();
+        _tail?.Play();
         _fire.Shot += ShotSound;
     }
 }

@@ -1,37 +1,54 @@
-[gd_scene load_steps=2 format=3 uid="uid://r8x6ip5chtis"]
+[gd_scene load_steps=10 format=3 uid="uid://r8x6ip5chtis"]
 
 [ext_resource type="Script" uid="uid://b6mcyevg8fydi" path="res://script/player/audio/combat/hit/PA_Hit.cs" id="1_qvta0"]
+[ext_resource type="Script" uid="uid://c8ux4mvw6ve1t" path="res://script/engine_tools/audio/AUD_ParallelSound.cs" id="2_vmlij"]
+[ext_resource type="AudioStream" uid="uid://rsg5px5vq270" path="res://assets/sounds/combat/hit/Base/layer hit 1.wav" id="3_yj0ak"]
+[ext_resource type="AudioStream" uid="uid://dax3gdltkhfwg" path="res://assets/sounds/combat/hit/Base/layer hit 2.wav" id="4_cmbjv"]
+[ext_resource type="AudioStream" uid="uid://ii0mf5ixql72" path="res://assets/sounds/combat/hit/kill.mp3" id="4_u0ev1"]
+[ext_resource type="AudioStream" uid="uid://cygbfsypwtaaf" path="res://assets/sounds/combat/hit/Base/layer hit 3.wav" id="5_u0ev1"]
+[ext_resource type="AudioStream" uid="uid://vkujnkvqpx8w" path="res://assets/sounds/combat/hit/Base/layer hit 4.wav" id="6_b2os4"]
+[ext_resource type="AudioStream" uid="uid://drgvayjpwlalv" path="res://assets/sounds/combat/hit/Base/43942 - player_hitbeep_headshotrapid_human_1p_vs_3p.wav" id="7_yj0ak"]
 
-[node name="PA_Hit" type="Node" node_paths=PackedStringArray("_weaponsHandler", "_criticalHit", "_kill", "_meatHit", "_barrierHit", "_armorHit")]
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_ran1i"]
+polyphony = 10
+
+[node name="PA_Hit" type="Node" node_paths=PackedStringArray("_criticalHit", "_kill", "_meatHit", "_barrierHit", "_armorHit")]
 script = ExtResource("1_qvta0")
-_weaponsHandler = NodePath("")
-_criticalHit = NodePath("PA_CritHit")
-_kill = NodePath("PA_Kill")
-_meatHit = NodePath("PA_Hit")
-_barrierHit = NodePath("PA_Hit")
-_armorHit = NodePath("PA_Hit")
+_criticalHit = NodePath("critical_hit/critical_hit")
+_kill = NodePath("kill/kill")
+_meatHit = NodePath("hit/hit")
+_barrierHit = NodePath("hit/hit")
+_armorHit = NodePath("hit/hit")
 metadata/_custom_type_script = "uid://b6mcyevg8fydi"
 
-[node name="PA_Kill" type="AudioStreamPlayer3D" parent="."]
-attenuation_model = 3
-volume_db = 5.0
-panning_strength = 0.0
-attenuation_filter_db = 0.0
-metadata/_custom_type_script = "uid://d3uwl2heay8uf"
+[node name="critical_hit" type="AudioStreamPlayer" parent="."]
 
-[node name="PA_CritHit" type="AudioStreamPlayer3D" parent="."]
-attenuation_model = 3
-max_db = -8.0
-max_polyphony = 30
-panning_strength = 0.0
-attenuation_filter_db = 0.0
-metadata/_custom_type_script = "uid://d3uwl2heay8uf"
+[node name="critical_hit" type="Node" parent="critical_hit" node_paths=PackedStringArray("_player")]
+script = ExtResource("2_vmlij")
+_polyphonicStream = SubResource("AudioStreamPolyphonic_ran1i")
+_player = NodePath("..")
+_sounds = Array[AudioStream]([ExtResource("7_yj0ak")])
+_minPitch = 0.8
+_maxPitch = 1.2
+metadata/_custom_type_script = "uid://c8ux4mvw6ve1t"
 
-[node name="PA_Hit" type="AudioStreamPlayer3D" parent="."]
-attenuation_model = 3
-volume_db = 2.0
-max_db = 4.0
-max_polyphony = 4
-panning_strength = 0.0
-attenuation_filter_db = 0.0
-metadata/_custom_type_script = "uid://d3uwl2heay8uf"
+[node name="kill" type="AudioStreamPlayer" parent="."]
+
+[node name="kill" type="Node" parent="kill" node_paths=PackedStringArray("_player")]
+script = ExtResource("2_vmlij")
+_polyphonicStream = SubResource("AudioStreamPolyphonic_ran1i")
+_player = NodePath("..")
+_sounds = Array[AudioStream]([ExtResource("4_u0ev1")])
+_maxPitch = 1.04
+metadata/_custom_type_script = "uid://c8ux4mvw6ve1t"
+
+[node name="hit" type="AudioStreamPlayer" parent="."]
+
+[node name="hit" type="Node" parent="hit" node_paths=PackedStringArray("_player")]
+script = ExtResource("2_vmlij")
+_polyphonicStream = SubResource("AudioStreamPolyphonic_ran1i")
+_player = NodePath("..")
+_sounds = Array[AudioStream]([ExtResource("3_yj0ak"), ExtResource("4_cmbjv"), ExtResource("5_u0ev1"), ExtResource("6_b2os4")])
+_minPitch = 0.9
+_maxPitch = 1.1
+metadata/_custom_type_script = "uid://c8ux4mvw6ve1t"

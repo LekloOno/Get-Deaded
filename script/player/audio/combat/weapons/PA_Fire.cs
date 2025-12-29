@@ -1,7 +1,8 @@
 using Godot;
 
-public abstract partial class PA_Fire : PA_LayeredSound
+public abstract partial class PA_Fire : Node3D
 {
+    [Export] protected AUD_Sound _sound;
     public abstract PW_Fire Fire {get;}
 
     public override void _Ready()
@@ -15,5 +16,5 @@ public abstract partial class PA_Fire : PA_LayeredSound
     /// <param name="sender"></param>
     /// <param name="shots"></param>
     public virtual void ShotSound(object sender, int shots) =>
-        PlayLayers();
+        _sound.Play();
 }
