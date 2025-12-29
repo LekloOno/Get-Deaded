@@ -1,15 +1,42 @@
-[gd_scene load_steps=2 format=3 uid="uid://82grtep18xri"]
+[gd_scene load_steps=8 format=3 uid="uid://82grtep18xri"]
 
 [ext_resource type="Script" uid="uid://couy6kxscsx0g" path="res://script/player/audio/PA_Land.cs" id="1_mupqa"]
+[ext_resource type="Script" uid="uid://ca4sbvyfspdlk" path="res://script/engine_tools/audio/3d/AUD_LayeredSound3D.cs" id="2_bd0aa"]
+[ext_resource type="Script" uid="uid://d3uwl2heay8uf" path="res://script/engine_tools/audio/3d/AUD_Sound3D.cs" id="3_cffvy"]
+[ext_resource type="AudioStream" uid="uid://cdhw3f001dd4s" path="res://assets/sounds/slides/slide_2.wav" id="4_apts4"]
+[ext_resource type="AudioStream" uid="uid://d05ucxtpaae4y" path="res://assets/sounds/land/land1.wav" id="5_apts4"]
+[ext_resource type="AudioStream" uid="uid://e3bucuoxk0i5" path="res://assets/sounds/land/land2.wav" id="6_q1y74"]
+[ext_resource type="AudioStream" uid="uid://b58o4cj4n22u8" path="res://assets/sounds/land/land3.wav" id="7_dtbis"]
 
-[node name="PA_Land" type="Node3D" node_paths=PackedStringArray("_groundState", "_slideInLayers")]
+[node name="PA_Land" type="Node3D" node_paths=PackedStringArray("_sound")]
 script = ExtResource("1_mupqa")
-_groundState = NodePath("")
-_slideInLayers = [NodePath(""), null, NodePath("")]
+_sound = NodePath("layers")
+metadata/_custom_type_script = "uid://couy6kxscsx0g"
+
+[node name="layers" type="Node" parent="." node_paths=PackedStringArray("_slideInLayers")]
+script = ExtResource("2_bd0aa")
+_slideInLayers = [NodePath("../pouish/pouish"), NodePath("../impact/impact")]
+metadata/_custom_type_script = "uid://ca4sbvyfspdlk"
 
 [node name="pouish" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
 volume_db = -40.0
 
+[node name="pouish" type="Node" parent="pouish" node_paths=PackedStringArray("_player")]
+script = ExtResource("3_cffvy")
+_player = NodePath("..")
+_sounds = Array[AudioStream]([ExtResource("4_apts4")])
+_minPitch = 0.8
+metadata/_custom_type_script = "uid://d3uwl2heay8uf"
+
 [node name="impact" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
 volume_db = -30.0
 attenuation_filter_cutoff_hz = 20500.0
+
+[node name="impact" type="Node" parent="impact" node_paths=PackedStringArray("_player")]
+script = ExtResource("3_cffvy")
+_player = NodePath("..")
+_sounds = Array[AudioStream]([ExtResource("5_apts4"), ExtResource("6_q1y74"), ExtResource("7_dtbis")])
+_minPitch = 0.8
+metadata/_custom_type_script = "uid://d3uwl2heay8uf"
