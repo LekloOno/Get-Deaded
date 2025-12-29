@@ -1,23 +1,73 @@
-[gd_scene load_steps=2 format=3 uid="uid://cmyfvd0kn5bog"]
+[gd_scene load_steps=12 format=3 uid="uid://cmyfvd0kn5bog"]
 
 [ext_resource type="Script" uid="uid://ct0dsw1xarajw" path="res://script/player/audio/PA_Dash.cs" id="1_0fwyc"]
+[ext_resource type="Script" uid="uid://d3uwl2heay8uf" path="res://script/engine_tools/audio/3d/AUD_Sound3D.cs" id="2_cr81d"]
+[ext_resource type="Script" uid="uid://ca4sbvyfspdlk" path="res://script/engine_tools/audio/3d/AUD_LayeredSound3D.cs" id="2_tlkli"]
+[ext_resource type="AudioStream" uid="uid://cdhw3f001dd4s" path="res://assets/sounds/slides/slide_2.wav" id="3_tlkli"]
+[ext_resource type="AudioStream" uid="uid://suxvntk8hrh" path="res://assets/sounds/slides/slide_3.wav" id="4_ilefn"]
+[ext_resource type="AudioStream" uid="uid://bnck0lo2ewye5" path="res://assets/sounds/woosh/woosh2.wav" id="5_y7evh"]
+[ext_resource type="AudioStream" uid="uid://cdo61fljcs0xo" path="res://assets/sounds/slides/slide_4.wav" id="7_ilefn"]
+[ext_resource type="AudioStream" uid="uid://bfoha2oj2ts6j" path="res://assets/sounds/clothes/clothes.wav" id="8_1ptnn"]
+[ext_resource type="AudioStream" uid="uid://cbgjk066ugfoy" path="res://assets/sounds/clothes/clothes_2.wav" id="9_0jpch"]
+[ext_resource type="AudioStream" uid="uid://cv7hf0tm8n6mw" path="res://assets/sounds/clothes/clothes_5.wav" id="10_jwpo8"]
+[ext_resource type="AudioStream" uid="uid://byvkie35nxxfe" path="res://assets/sounds/clothes/clothes_6.wav" id="11_w41n0"]
 
-[node name="PA_Dash" type="Node3D" node_paths=PackedStringArray("_dash", "_slideInLayers")]
+[node name="PA_Dash" type="Node3D" node_paths=PackedStringArray("_sound")]
 script = ExtResource("1_0fwyc")
-_dash = NodePath("")
-_slideInLayers = [NodePath(""), NodePath(""), NodePath(""), NodePath("")]
+_sound = NodePath("layers")
+metadata/_custom_type_script = "uid://ct0dsw1xarajw"
+
+[node name="layers" type="Node" parent="." node_paths=PackedStringArray("_slideInLayers")]
+script = ExtResource("2_tlkli")
+_slideInLayers = [NodePath("../slide/slide"), NodePath("../woosh/woosh"), NodePath("../woosh2/woosh2"), NodePath("../clothes/clothes")]
+metadata/_custom_type_script = "uid://ca4sbvyfspdlk"
 
 [node name="slide" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
 volume_db = -30.0
 
+[node name="slide" type="Node" parent="slide" node_paths=PackedStringArray("_player")]
+script = ExtResource("2_cr81d")
+_player = NodePath("..")
+_sounds = Array[AudioStream]([ExtResource("3_tlkli"), ExtResource("4_ilefn")])
+_minPitch = 1.1
+_maxPitch = 1.3
+metadata/_custom_type_script = "uid://d3uwl2heay8uf"
+
 [node name="woosh" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
 volume_db = -30.0
 attenuation_filter_cutoff_hz = 20500.0
 
+[node name="woosh" type="Node" parent="woosh" node_paths=PackedStringArray("_player")]
+script = ExtResource("2_cr81d")
+_player = NodePath("..")
+_sounds = Array[AudioStream]([ExtResource("5_y7evh")])
+_minPitch = 0.8
+metadata/_custom_type_script = "uid://d3uwl2heay8uf"
+
 [node name="woosh2" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
 volume_db = -37.0
 attenuation_filter_cutoff_hz = 20500.0
 
+[node name="woosh2" type="Node" parent="woosh2" node_paths=PackedStringArray("_player")]
+script = ExtResource("2_cr81d")
+_player = NodePath("..")
+_sounds = Array[AudioStream]([ExtResource("7_ilefn")])
+_minPitch = 1.5
+_maxPitch = 1.7
+metadata/_custom_type_script = "uid://d3uwl2heay8uf"
+
 [node name="clothes" type="AudioStreamPlayer3D" parent="."]
-volume_db = -30.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+volume_db = -37.0
 attenuation_filter_cutoff_hz = 20500.0
+
+[node name="clothes" type="Node" parent="clothes" node_paths=PackedStringArray("_player")]
+script = ExtResource("2_cr81d")
+_player = NodePath("..")
+_sounds = Array[AudioStream]([ExtResource("8_1ptnn"), ExtResource("9_0jpch"), ExtResource("10_jwpo8"), ExtResource("11_w41n0")])
+_minPitch = 2.0
+_maxPitch = 2.0
+metadata/_custom_type_script = "uid://d3uwl2heay8uf"
