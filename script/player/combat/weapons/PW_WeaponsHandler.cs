@@ -314,10 +314,10 @@ public partial class PW_WeaponsHandler : WeaponSystem
 
     private void TryReload()
     {
-        if(!_activeWeapon.CanReload(out float reloadTime))
+        if (!_weaponsInput.ReloadUseBuffer())
             return;
 
-        if (!_weaponsInput.ReloadUseBuffer())
+        if(!_activeWeapon.CanReload(out float reloadTime))
             return;
 
         _reloading = true;
