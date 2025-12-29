@@ -38,8 +38,8 @@ script = ExtResource("1_5idl2")
 MoveSpeedModifier = -0.08
 SwitchInTime = 0.1
 SwitchOutTime = 0.18
-ReloadTime = 1.1
-TacticalReloadTime = 0.7
+ReloadTime = 1.25
+TacticalReloadTime = 0.9
 ReloadReadyTime = 0.15
 _fires = [NodePath("PWF_FullAuto")]
 _ads = NodePath("PWA_SimpleADS")
@@ -65,9 +65,9 @@ metadata/_custom_type_script = "uid://djecalg7cxlvg"
 
 [node name="PW_Ammunition" type="Node3D" parent="PWF_FullAuto"]
 script = ExtResource("5_akysb")
-_magazineSize = 30
-_maxMagazines = 5
-_baseAmmos = 60
+_magazineSize = 26
+_maxMagazines = 15
+_baseAmmos = 52
 InfiniteAmmo = true
 metadata/_custom_type_script = "uid://cxiwvat6vddlp"
 
@@ -129,7 +129,7 @@ panning_strength = 0.0
 script = ExtResource("18_f28ci")
 _fadeInTime = 0.1
 _fadeOutTime = 0.1
-_volume = 15.0
+_volume = 19.0
 metadata/_custom_type_script = "uid://dxtqg0xnanovw"
 
 [node name="Tail" type="Node3D" parent="PA_FullAuto" node_paths=PackedStringArray("_slideInLayers")]
