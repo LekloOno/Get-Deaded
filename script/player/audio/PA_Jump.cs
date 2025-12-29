@@ -5,14 +5,14 @@ using Godot;
 public partial class PA_Jump : Node3D
 {
     [ExportCategory("Settings")]
-    [Export] private PA_Sound _wooshes;
-    [Export] private PA_Sound _clothes;
-    [Export] private PA_Sound _steps;
-    [Export] private PA_Sound _wallJumpClothes;
-    [Export] private PA_Sound _wallJumpWoosh;
-    [Export] private PA_Sound _wallClimbClothes;
-    [Export] private PA_Sound _wallClimbLow;
-    [Export] private PA_Sound _wallClimbNoise;
+    [Export] private AUD_Sound _wooshes;
+    [Export] private AUD_Sound _clothes;
+    [Export] private AUD_Sound _steps;
+    [Export] private AUD_Sound _wallJumpClothes;
+    [Export] private AUD_Sound _wallJumpWoosh;
+    [Export] private AUD_Sound _wallClimbClothes;
+    [Export] private AUD_Sound _wallClimbLow;
+    [Export] private AUD_Sound _wallClimbNoise;
 
     [ExportCategory("Setup")]
     [Export] private PM_Jump _jump;
@@ -30,39 +30,39 @@ public partial class PA_Jump : Node3D
 
     public void PlaySoundWall(object sender, EventArgs e)
     {
-        _wooshes.PlaySound();
-        _steps.PlaySound();
-        _wallJumpClothes.PlaySound();
-        _wallJumpWoosh.PlaySound();
+        _wooshes.Play();
+        _steps.Play();
+        _wallJumpClothes.Play();
+        _wallJumpWoosh.Play();
     }
 
     public void PlaySoundKick(object sender, EventArgs e)
     {
-        _wooshes.PlaySound();
-        _steps.PlaySound();
+        _wooshes.Play();
+        _steps.Play();
         
-        _wallClimbNoise.PlaySound();
-        _wallClimbLow.PlaySound();
+        _wallClimbNoise.Play();
+        _wallClimbLow.Play();
     }
 
     public void PlaySoundHop(object sender, EventArgs e)
     {
-        _wallClimbNoise.PlaySound();
-        _wallClimbClothes.PlaySound();
-        _wallClimbLow.PlaySound();
+        _wallClimbNoise.Play();
+        _wallClimbClothes.Play();
+        _wallClimbLow.Play();
     }
 
     public void PlaySoundWallClimb(object sender, EventArgs e)
     {
-        _steps.PlaySound();
-        _wooshes.PlaySound();
-        _wallClimbLow.PlaySound();
+        _steps.Play();
+        _wooshes.Play();
+        _wallClimbLow.Play();
     }
 
     public void PlaySound(object sender, EventArgs e)
     {
-        _wooshes.PlaySound();
-        _clothes.PlaySound();
-        _steps.PlaySound();
+        _wooshes.Play();
+        _clothes.Play();
+        _steps.Play();
     }
 }
