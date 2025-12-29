@@ -1,47 +1,124 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8bud1776ti8m"]
+[gd_scene load_steps=18 format=3 uid="uid://c8bud1776ti8m"]
 
 [ext_resource type="Script" uid="uid://38i6kejmo2hs" path="res://script/player/audio/PA_Jump.cs" id="1_5tljq"]
+[ext_resource type="Script" uid="uid://d3uwl2heay8uf" path="res://script/engine_tools/audio/3d/AUD_Sound3D.cs" id="2_d3fm2"]
+[ext_resource type="AudioStream" uid="uid://dk7e4dghcdv1" path="res://assets/sounds/woosh/woosh1.wav" id="3_rmq11"]
+[ext_resource type="AudioStream" uid="uid://c3yn8oxpxhvy0" path="res://assets/sounds/clothes/clothes_4.wav" id="4_rd8yu"]
+[ext_resource type="AudioStream" uid="uid://cv7hf0tm8n6mw" path="res://assets/sounds/clothes/clothes_5.wav" id="5_tef14"]
+[ext_resource type="AudioStream" uid="uid://byvkie35nxxfe" path="res://assets/sounds/clothes/clothes_6.wav" id="6_tef14"]
+[ext_resource type="AudioStream" uid="uid://b7y6fn7u2t61j" path="res://assets/sounds/woosh/woosh3.wav" id="7_dqnya"]
+[ext_resource type="AudioStream" uid="uid://cdhw3f001dd4s" path="res://assets/sounds/slides/slide_2.wav" id="8_3f8na"]
+[ext_resource type="AudioStream" uid="uid://suxvntk8hrh" path="res://assets/sounds/slides/slide_3.wav" id="9_m3p2h"]
+[ext_resource type="AudioStream" uid="uid://d05ucxtpaae4y" path="res://assets/sounds/land/land1.wav" id="10_pq24k"]
+[ext_resource type="AudioStream" uid="uid://e3bucuoxk0i5" path="res://assets/sounds/land/land2.wav" id="11_jir4u"]
+[ext_resource type="AudioStream" uid="uid://e4vkndcsojck" path="res://assets/sounds/slides/slide.wav" id="12_ttwdl"]
+[ext_resource type="AudioStream" uid="uid://c202uar3rg40l" path="res://assets/sounds/footsteps/concrete-step1.wav" id="13_ttwdl"]
+[ext_resource type="AudioStream" uid="uid://dw0ipfbd7lxkv" path="res://assets/sounds/footsteps/concrete-step2.wav" id="14_gkude"]
+[ext_resource type="AudioStream" uid="uid://dnjywl4vsbygw" path="res://assets/sounds/footsteps/concrete-step3.wav" id="15_urv4d"]
+[ext_resource type="AudioStream" uid="uid://c51litrqlhdk8" path="res://assets/sounds/footsteps/concrete-step5.wav" id="16_ow7aq"]
+[ext_resource type="AudioStream" uid="uid://8we7lgvkmauv" path="res://assets/sounds/footsteps/concrete-step.wav" id="17_k8lso"]
 
-[node name="PA_Jump" type="Node3D" node_paths=PackedStringArray("_wooshes", "_clothes", "_wallJumpClothes", "_wallJumpWoosh", "_wallClimbClothes", "_wallClimbLow", "_wallClimbNoise", "_jump", "_wallJump", "_wallClimb")]
+[node name="PA_Jump" type="Node3D" node_paths=PackedStringArray("_wooshes", "_clothes", "_steps", "_wallJumpClothes", "_wallJumpWoosh", "_wallClimbClothes", "_wallClimbLow", "_wallClimbNoise")]
 script = ExtResource("1_5tljq")
-_wooshes = NodePath("woosh")
-_clothes = NodePath("clothes")
-_wallJumpClothes = NodePath("walljump")
-_wallJumpWoosh = NodePath("walljumpwoosh")
-_wallClimbClothes = NodePath("wallClimb")
-_wallClimbLow = NodePath("wallClimbLow")
-_wallClimbNoise = NodePath("wallClimbnoise")
-_jump = NodePath("")
-_wallJump = NodePath("")
-_wallClimb = NodePath("")
+_wooshes = NodePath("woosh/woosh")
+_clothes = NodePath("clothes/clothes")
+_steps = NodePath("steps/steps")
+_wallJumpClothes = NodePath("walljump_clothes/walljump_clothes")
+_wallJumpWoosh = NodePath("walljump_woosh/walljump_woosh")
+_wallClimbClothes = NodePath("wallclimb/wallclimb")
+_wallClimbLow = NodePath("wallclimb_low/wallclimb_low")
+_wallClimbNoise = NodePath("wallclimb_noise/wallclimb_noise")
 
 [node name="woosh" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
 volume_db = -40.0
 attenuation_filter_cutoff_hz = 20500.0
 
+[node name="woosh" type="Node" parent="woosh" node_paths=PackedStringArray("_player")]
+script = ExtResource("2_d3fm2")
+_player = NodePath("..")
+_sounds = Array[AudioStream]([ExtResource("3_rmq11")])
+_maxPitch = 1.2
+metadata/_custom_type_script = "uid://d3uwl2heay8uf"
+
 [node name="clothes" type="AudioStreamPlayer3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.601717, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.602, 0)
 volume_db = -60.0
 attenuation_filter_cutoff_hz = 7000.0
 
-[node name="walljump" type="AudioStreamPlayer3D" parent="."]
+[node name="clothes" type="Node" parent="clothes" node_paths=PackedStringArray("_player")]
+script = ExtResource("2_d3fm2")
+_player = NodePath("..")
+_sounds = Array[AudioStream]([ExtResource("4_rd8yu"), ExtResource("5_tef14")])
+_minPitch = 1.2
+_maxPitch = 1.4
+metadata/_custom_type_script = "uid://d3uwl2heay8uf"
+
+[node name="walljump_clothes" type="AudioStreamPlayer3D" parent="."]
 volume_db = -32.0
 attenuation_filter_cutoff_hz = 20500.0
 
-[node name="walljumpwoosh" type="AudioStreamPlayer3D" parent="."]
+[node name="walljump_clothes" type="Node" parent="walljump_clothes" node_paths=PackedStringArray("_player")]
+script = ExtResource("2_d3fm2")
+_player = NodePath("..")
+_sounds = Array[AudioStream]([ExtResource("5_tef14"), ExtResource("6_tef14")])
+_minPitch = 1.6
+_maxPitch = 2.2
+metadata/_custom_type_script = "uid://d3uwl2heay8uf"
+
+[node name="walljump_woosh" type="AudioStreamPlayer3D" parent="."]
 volume_db = -40.0
 attenuation_filter_cutoff_hz = 20500.0
 
-[node name="wallClimb" type="AudioStreamPlayer3D" parent="."]
-volume_db = -34.872
+[node name="walljump_woosh" type="Node" parent="walljump_woosh" node_paths=PackedStringArray("_player")]
+script = ExtResource("2_d3fm2")
+_player = NodePath("..")
+_sounds = Array[AudioStream]([ExtResource("7_dqnya")])
+_maxPitch = 1.5
 metadata/_custom_type_script = "uid://d3uwl2heay8uf"
 
-[node name="wallClimbLow" type="AudioStreamPlayer3D" parent="."]
+[node name="wallclimb" type="AudioStreamPlayer3D" parent="."]
+volume_db = -34.872
+
+[node name="wallclimb" type="Node" parent="wallclimb" node_paths=PackedStringArray("_player")]
+script = ExtResource("2_d3fm2")
+_player = NodePath("..")
+_sounds = Array[AudioStream]([ExtResource("8_3f8na"), ExtResource("9_m3p2h")])
+_minPitch = 1.2
+_maxPitch = 1.8
+metadata/_custom_type_script = "uid://d3uwl2heay8uf"
+
+[node name="wallclimb_low" type="AudioStreamPlayer3D" parent="."]
 volume_db = -32.0
 attenuation_filter_cutoff_hz = 400.0
+
+[node name="wallclimb_low" type="Node" parent="wallclimb_low" node_paths=PackedStringArray("_player")]
+script = ExtResource("2_d3fm2")
+_player = NodePath("..")
+_sounds = Array[AudioStream]([ExtResource("10_pq24k"), ExtResource("11_jir4u")])
+_minPitch = 0.6
+_maxPitch = 0.7
 metadata/_custom_type_script = "uid://d3uwl2heay8uf"
 
-[node name="wallClimbnoise" type="AudioStreamPlayer3D" parent="."]
+[node name="wallclimb_noise" type="AudioStreamPlayer3D" parent="."]
 volume_db = -35.0
+
+[node name="wallclimb_noise" type="Node" parent="wallclimb_noise" node_paths=PackedStringArray("_player")]
+script = ExtResource("2_d3fm2")
+_player = NodePath("..")
+_sounds = Array[AudioStream]([ExtResource("12_ttwdl")])
+_minPitch = 1.2
+_maxPitch = 1.6
+metadata/_custom_type_script = "uid://d3uwl2heay8uf"
+
+[node name="steps" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7, 0)
+volume_db = -32.0
+
+[node name="steps" type="Node" parent="steps" node_paths=PackedStringArray("_player")]
+script = ExtResource("2_d3fm2")
+_player = NodePath("..")
+_sounds = Array[AudioStream]([ExtResource("13_ttwdl"), ExtResource("14_gkude"), ExtResource("15_urv4d"), ExtResource("16_ow7aq"), ExtResource("17_k8lso")])
+_minPitch = 0.55
+_maxPitch = 0.75
 metadata/_custom_type_script = "uid://d3uwl2heay8uf"
