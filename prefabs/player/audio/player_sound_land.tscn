@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://82grtep18xri"]
+
+[ext_resource type="Script" uid="uid://couy6kxscsx0g" path="res://script/player/audio/PA_Land.cs" id="1_mupqa"]
+
+[node name="PA_Land" type="Node3D" node_paths=PackedStringArray("_groundState", "_slideInLayers")]
+script = ExtResource("1_mupqa")
+_groundState = NodePath("")
+_slideInLayers = [NodePath(""), null, NodePath("")]
+
+[node name="pouish" type="AudioStreamPlayer3D" parent="."]
+volume_db = -40.0
+
+[node name="impact" type="AudioStreamPlayer3D" parent="."]
+volume_db = -30.0
+attenuation_filter_cutoff_hz = 20500.0
