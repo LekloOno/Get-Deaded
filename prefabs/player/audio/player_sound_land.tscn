@@ -19,7 +19,6 @@ _slideInLayers = [NodePath("../pouish/pouish"), NodePath("../impact/impact")]
 metadata/_custom_type_script = "uid://ca4sbvyfspdlk"
 
 [node name="pouish" type="AudioStreamPlayer3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
 volume_db = -40.0
 
 [node name="pouish" type="Node" parent="pouish" node_paths=PackedStringArray("_player")]
@@ -30,7 +29,6 @@ _minPitch = 0.8
 metadata/_custom_type_script = "uid://d3uwl2heay8uf"
 
 [node name="impact" type="AudioStreamPlayer3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
 volume_db = -30.0
 attenuation_filter_cutoff_hz = 20500.0
 
