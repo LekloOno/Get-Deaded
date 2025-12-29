@@ -1,18 +1,15 @@
 using System;
 using Godot;
-using Godot.Collections;
 
 [GlobalClass]
-public partial class PA_FootSteps : PA_Sound
+public partial class PA_FootSteps : Node3D
 {
+    [Export] private AUD_Sound _normalSound;
+    [Export] private AUD_Sound _sprintSound;
+
     [ExportCategory("Settings")]
     [Export] private float _normalInterval = 0.35f;
-    [Export] private float _normalPitchBase = 0.8f;
-    [Export] private float _normalVolume = -40f;
-
     [Export] private float _sprintInterval = 0.3f;
-    [Export] private float _sprintPitchBase = 1f;
-    [Export] private float _sprintVolume = -25f;
 
     [ExportCategory("Setup")]
     [Export] private PI_Walk _walkInput;
@@ -20,10 +17,11 @@ public partial class PA_FootSteps : PA_Sound
     [Export] private PS_Grounded _groundState;
     [Export] private Timer _stepLoop;
     private float _currentInterval;
+    private AUD_Sound _currentSound;
     
     public override void _Ready()
     {
-        _stepLoop.Timeout += PlaySound;
+        _stepLoop.Timeout += Play;
 
         _walkInput.Stop += DirectStopPlay;
         _groundState.OnLeaving += StopPlay;
@@ -35,6 +33,8 @@ public partial class PA_FootSteps : PA_Sound
         _groundSurfaceState.Sprint.OnStart += TryPlaySprint;
         _groundSurfaceState.Normal.OnStart += TryPlayNormal;
     }
+
+    private void Play() => _currentSound.Play();
 
     public void TryInputPlay(object sender, Vector2 axis)
     {
@@ -81,14 +81,12 @@ public partial class PA_FootSteps : PA_Sound
 
     private void StartPlayNormal()
     {
-        _pitchBaseDelta = _normalPitchBase - 1f;
-        VolumeDb = _normalVolume;
+        _currentSound = _normalSound;
         _stepLoop.Start(_normalInterval);
     }
     private void StartPlaySprint()
     {
-        _pitchBaseDelta = _sprintPitchBase - 1f;
-        VolumeDb = _sprintVolume;
+        _currentSound = _sprintSound;
         _stepLoop.Start(_sprintInterval);
     }   
 
