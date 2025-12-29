@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dcmylvqsy66rj"]
+[gd_scene load_steps=24 format=3 uid="uid://dcmylvqsy66rj"]
 
 [ext_resource type="Script" uid="uid://c3are182lodyx" path="res://script/player/combat/weapons/weapon/PW_Simple.cs" id="1_5idl2"]
 [ext_resource type="Texture2D" uid="uid://cll1rrqagufi2" path="res://assets/sprites/weapons/brrtpixel2.png" id="2_ykmm0"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://r8ad50yt78dm" path="res://script/player/camera/annimation/trauma/causers/direct/PCT_ContinuousFire.cs" id="10_j06ou"]
 [ext_resource type="Script" uid="uid://c0vf7xmi1u8t4" path="res://script/player/camera/annimation/trauma/PC_TraumaLayer.cs" id="11_8kujm"]
 [ext_resource type="Script" uid="uid://bdm4kpw6u4ocg" path="res://script/player/audio/combat/weapons/fire/PA_FullAuto.cs" id="14_b25vv"]
+[ext_resource type="Script" uid="uid://b8wru2tmfhgrb" path="res://script/engine_tools/audio/3d/AUD_StreamPlayer3D.cs" id="15_8vbpy"]
 [ext_resource type="Script" uid="uid://c8ux4mvw6ve1t" path="res://script/engine_tools/audio/AUD_ParallelSound.cs" id="15_mbjng"]
 [ext_resource type="AudioStream" uid="uid://dghvyacggbmt3" path="res://assets/sounds/combat/weapons/fires/brrt/smg_fire_1.wav" id="16_mbjng"]
 [ext_resource type="AudioStream" uid="uid://6gxtdu8m25i" path="res://assets/sounds/combat/weapons/fires/brrt/brrrt.wav" id="17_8vbpy"]
@@ -119,10 +120,15 @@ attenuation_model = 3
 volume_db = 80.0
 max_db = 6.0
 
+[node name="player" type="Node" parent="Sound/attack" node_paths=PackedStringArray("_player")]
+script = ExtResource("15_8vbpy")
+_player = NodePath("..")
+metadata/_custom_type_script = "uid://b8wru2tmfhgrb"
+
 [node name="attack" type="Node" parent="Sound/attack" node_paths=PackedStringArray("_player")]
 script = ExtResource("15_mbjng")
 _polyphonicStream = SubResource("AudioStreamPolyphonic_8vbpy")
-_player = NodePath("..")
+_player = NodePath("../player")
 _sounds = Array[AudioStream]([ExtResource("16_mbjng")])
 _minPitch = 0.9
 _maxPitch = 1.05
@@ -145,10 +151,15 @@ panning_strength = 0.0
 attenuation_model = 3
 volume_db = 5.0
 
+[node name="player" type="Node" parent="Sound/tail" node_paths=PackedStringArray("_player")]
+script = ExtResource("15_8vbpy")
+_player = NodePath("..")
+metadata/_custom_type_script = "uid://b8wru2tmfhgrb"
+
 [node name="tail" type="Node" parent="Sound/tail" node_paths=PackedStringArray("_player")]
 script = ExtResource("15_mbjng")
 _polyphonicStream = SubResource("AudioStreamPolyphonic_8vbpy")
-_player = NodePath("..")
+_player = NodePath("../player")
 _sounds = Array[AudioStream]([ExtResource("20_8vbpy")])
 _minPitch = 0.9
 _maxPitch = 1.1
