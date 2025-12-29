@@ -139,7 +139,8 @@ metadata/_custom_type_script = "uid://ca4sbvyfspdlk"
 
 [node name="tail" type="AudioStreamPlayer3D" parent="PAF_Generic2"]
 attenuation_model = 3
-volume_db = 1.0
+volume_db = 8.0
+max_db = 6.0
 
 [node name="player" type="Node" parent="PAF_Generic2/tail" node_paths=PackedStringArray("_player")]
 script = ExtResource("16_v8jjb")
@@ -157,7 +158,7 @@ metadata/_custom_type_script = "uid://c8ux4mvw6ve1t"
 
 [node name="layer1" type="AudioStreamPlayer3D" parent="PAF_Generic2"]
 attenuation_model = 3
-volume_db = 8.0
+volume_db = 4.0
 
 [node name="player" type="Node" parent="PAF_Generic2/layer1" node_paths=PackedStringArray("_player")]
 script = ExtResource("16_v8jjb")
@@ -175,7 +176,7 @@ metadata/_custom_type_script = "uid://c8ux4mvw6ve1t"
 
 [node name="layer2" type="AudioStreamPlayer3D" parent="PAF_Generic2"]
 attenuation_model = 3
-volume_db = 1.0
+volume_db = 5.0
 max_db = 6.0
 
 [node name="layer2" type="Node" parent="PAF_Generic2/layer2" node_paths=PackedStringArray("_player")]
@@ -194,7 +195,7 @@ metadata/_custom_type_script = "uid://b8wru2tmfhgrb"
 
 [node name="layer3" type="AudioStreamPlayer3D" parent="PAF_Generic2"]
 attenuation_model = 3
-volume_db = 5.0
+volume_db = 6.0
 max_db = 6.0
 
 [node name="layer3" type="Node" parent="PAF_Generic2/layer3" node_paths=PackedStringArray("_player")]
@@ -202,8 +203,7 @@ script = ExtResource("17_l5b2w")
 _polyphonicStream = SubResource("AudioStreamPolyphonic_x86ej")
 _player = NodePath("../player")
 _sounds = Array[AudioStream]([ExtResource("20_jqekf")])
-_minPitch = 0.98
-_maxPitch = 1.05
+_maxPitch = 1.1
 metadata/_custom_type_script = "uid://c8ux4mvw6ve1t"
 
 [node name="player" type="Node" parent="PAF_Generic2/layer3" node_paths=PackedStringArray("_player")]

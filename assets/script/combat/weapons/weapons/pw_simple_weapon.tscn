@@ -139,7 +139,7 @@ script = ExtResource("18_f28ci")
 _player = NodePath("hold")
 _fadeInTime = 0.1
 _fadeOutTime = 0.1
-_volume = 18.0
+_volume = 20.0
 metadata/_custom_type_script = "uid://dxtqg0xnanovw"
 
 [node name="hold" type="AudioStreamPlayer2D" parent="Sound/hold"]

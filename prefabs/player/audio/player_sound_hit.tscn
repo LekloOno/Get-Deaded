@@ -11,7 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://drgvayjpwlalv" path="res://assets/sounds/combat/hit/Base/43942 - player_hitbeep_headshotrapid_human_1p_vs_3p.wav" id="7_yj0ak"]
 
 [sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_ran1i"]
-polyphony = 2
+polyphony = 20
 
 [node name="PA_Hit" type="Node" node_paths=PackedStringArray("_criticalHit", "_kill", "_meatHit", "_barrierHit", "_armorHit")]
 script = ExtResource("1_qvta0")
@@ -23,6 +23,7 @@ _armorHit = NodePath("hit/hit")
 metadata/_custom_type_script = "uid://b6mcyevg8fydi"
 
 [node name="critical_hit" type="AudioStreamPlayer" parent="."]
+volume_db = -5.0
 
 [node name="critical_hit" type="Node" parent="critical_hit" node_paths=PackedStringArray("_player")]
 script = ExtResource("2_vmlij")
@@ -31,6 +32,7 @@ _player = NodePath("../player")
 _sounds = Array[AudioStream]([ExtResource("7_yj0ak")])
 _minPitch = 0.8
 _maxPitch = 1.2
+_maxPolyphony = 2.0
 metadata/_custom_type_script = "uid://c8ux4mvw6ve1t"
 
 [node name="player" type="Node" parent="critical_hit" node_paths=PackedStringArray("_player")]
