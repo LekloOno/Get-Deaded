@@ -4,11 +4,11 @@ using Godot;
 public partial class PA_Hit : Node
 {
     [Export] private PW_WeaponsHandler _weaponsHandler;
-    [Export] private PA_Sound _criticalHit;
-    [Export] private PA_Sound _kill;
-    [Export] private PA_Sound _meatHit;
-    [Export] private PA_Sound _barrierHit;
-    [Export] private PA_Sound _armorHit;
+    [Export] private AUD_Sound _criticalHit;
+    [Export] private AUD_Sound _kill;
+    [Export] private AUD_Sound _meatHit;
+    [Export] private AUD_Sound _barrierHit;
+    [Export] private AUD_Sound _armorHit;
 
     public override void _Ready()
     {
@@ -21,18 +21,18 @@ public partial class PA_Hit : Node
             return;
 
         if (hit.Killed)
-            _kill?.PlaySound();
+            _kill?.Play();
 
         if (!hit.OverrideBodyPart && hit.HurtBox.BodyPart == GC_BodyPart.Head)
-            _criticalHit?.PlaySound();
+            _criticalHit?.Play();
         
         GC_Health layer = hit.SenderLayer;
 
         if (layer is GC_Barrier)
-            _barrierHit.PlaySound();
+            _barrierHit.Play();
         else if (layer is GC_Armor)
-            _armorHit.PlaySound();
+            _armorHit.Play();
         else
-            _meatHit.PlaySound();
+            _meatHit.Play();
     }
 }

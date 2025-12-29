@@ -1,14 +1,11 @@
 using System;
-using System.Data;
-using System.Linq.Expressions;
 using Godot;
-using Godot.Collections;
 
 [GlobalClass]
 public partial class PA_Slide : Node3D
 {
-    [Export] private PA_LayeredSound _slideIn;
-    [Export] private PA_Looper _slideHold;
+    [Export] private AUD_Sound _slideIn;
+    [Export] private AUD_Looper _slideHold;
 
     [ExportCategory("Setup")]
     [Export] private PM_Slide _slide;
@@ -21,7 +18,7 @@ public partial class PA_Slide : Node3D
 
     public override void _Ready()
     {
-        _slideHold.VolumeDb = -80;
+        //_slideHold.VolumeDb = -80;
 
         _slide.OnStart += StartPlaySound;
         _slide.OnStop += (o, e) => _slideHold.StopLoop();
@@ -36,14 +33,14 @@ public partial class PA_Slide : Node3D
     {
         if(_groundState.IsGrounded())
         {
-            _slideIn.PlayLayers();
+            _slideIn.Play();
             _slideHold.StartLoop();
         }
     }
 
     private void StopPlaySound(object sender, EventArgs e)
     {
-        _slideIn.StopLayers();
+        _slideIn.Stop();
         _slideHold.StopLoop();
     }
 

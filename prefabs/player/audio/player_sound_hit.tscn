@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://r8x6ip5chtis"]
+
+[ext_resource type="Script" uid="uid://b6mcyevg8fydi" path="res://script/player/audio/combat/hit/PA_Hit.cs" id="1_qvta0"]
+
+[node name="PA_Hit" type="Node" node_paths=PackedStringArray("_weaponsHandler", "_criticalHit", "_kill", "_meatHit", "_barrierHit", "_armorHit")]
+script = ExtResource("1_qvta0")
+_weaponsHandler = NodePath("")
+_criticalHit = NodePath("PA_CritHit")
+_kill = NodePath("PA_Kill")
+_meatHit = NodePath("PA_Hit")
+_barrierHit = NodePath("PA_Hit")
+_armorHit = NodePath("PA_Hit")
+metadata/_custom_type_script = "uid://b6mcyevg8fydi"
+
+[node name="PA_Kill" type="AudioStreamPlayer3D" parent="."]
+attenuation_model = 3
+volume_db = 5.0
+panning_strength = 0.0
+attenuation_filter_db = 0.0
+metadata/_custom_type_script = "uid://d3uwl2heay8uf"
+
+[node name="PA_CritHit" type="AudioStreamPlayer3D" parent="."]
+attenuation_model = 3
+max_db = -8.0
+max_polyphony = 30
+panning_strength = 0.0
+attenuation_filter_db = 0.0
+metadata/_custom_type_script = "uid://d3uwl2heay8uf"
+
+[node name="PA_Hit" type="AudioStreamPlayer3D" parent="."]
+attenuation_model = 3
+volume_db = 2.0
+max_db = 4.0
+max_polyphony = 4
+panning_strength = 0.0
+attenuation_filter_db = 0.0
+metadata/_custom_type_script = "uid://d3uwl2heay8uf"
