@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ct0dsw1xarajw" path="res://script/player/audio/PA_Dash.cs" id="1_0fwyc"]
 [ext_resource type="Script" uid="uid://d3uwl2heay8uf" path="res://script/engine_tools/audio/3d/AUD_Sound3D.cs" id="2_cr81d"]
-[ext_resource type="Script" uid="uid://ca4sbvyfspdlk" path="res://script/engine_tools/audio/3d/AUD_LayeredSound3D.cs" id="2_tlkli"]
+[ext_resource type="Script" uid="uid://ca4sbvyfspdlk" path="res://script/engine_tools/audio/AUD_LayeredSound.cs" id="2_tlkli"]
 [ext_resource type="AudioStream" uid="uid://cdhw3f001dd4s" path="res://assets/sounds/slides/slide_2.wav" id="3_tlkli"]
 [ext_resource type="AudioStream" uid="uid://suxvntk8hrh" path="res://assets/sounds/slides/slide_3.wav" id="4_ilefn"]
 [ext_resource type="AudioStream" uid="uid://bnck0lo2ewye5" path="res://assets/sounds/woosh/woosh2.wav" id="5_y7evh"]
@@ -17,9 +17,9 @@ script = ExtResource("1_0fwyc")
 _sound = NodePath("layers")
 metadata/_custom_type_script = "uid://ct0dsw1xarajw"
 
-[node name="layers" type="Node" parent="." node_paths=PackedStringArray("_slideInLayers")]
+[node name="layers" type="Node" parent="." node_paths=PackedStringArray("_layers")]
 script = ExtResource("2_tlkli")
-_slideInLayers = [NodePath("../slide/slide"), NodePath("../woosh/woosh"), NodePath("../woosh2/woosh2"), NodePath("../clothes/clothes")]
+_layers = [NodePath("../slide/slide"), NodePath("../woosh/woosh"), NodePath("../woosh2/woosh2"), NodePath("../clothes/clothes")]
 metadata/_custom_type_script = "uid://ca4sbvyfspdlk"
 
 [node name="slide" type="AudioStreamPlayer3D" parent="."]

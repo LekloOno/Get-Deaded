@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://biqrtt8bmy320"]
 
 [ext_resource type="Script" uid="uid://b2jn2nortl4pm" path="res://script/player/audio/PA_Slide.cs" id="1_gthyh"]
-[ext_resource type="Script" uid="uid://ca4sbvyfspdlk" path="res://script/engine_tools/audio/3d/AUD_LayeredSound3D.cs" id="2_kpy2o"]
+[ext_resource type="Script" uid="uid://ca4sbvyfspdlk" path="res://script/engine_tools/audio/AUD_LayeredSound.cs" id="2_kpy2o"]
 [ext_resource type="Script" uid="uid://dxtqg0xnanovw" path="res://script/engine_tools/audio/2d/AUD_Looper2D.cs" id="3_cmx6y"]
 [ext_resource type="Script" uid="uid://d3uwl2heay8uf" path="res://script/engine_tools/audio/3d/AUD_Sound3D.cs" id="4_hes6f"]
 [ext_resource type="AudioStream" uid="uid://bfoha2oj2ts6j" path="res://assets/sounds/clothes/clothes.wav" id="5_fxpf0"]
@@ -17,9 +17,9 @@ _slideIn = NodePath("slide_in")
 _slideHold = NodePath("slide_hold/slide_hold")
 metadata/_custom_type_script = "uid://b2jn2nortl4pm"
 
-[node name="slide_in" type="Node" parent="." node_paths=PackedStringArray("_slideInLayers")]
+[node name="slide_in" type="Node" parent="." node_paths=PackedStringArray("_layers")]
 script = ExtResource("2_kpy2o")
-_slideInLayers = [null, null]
+_layers = [NodePath("../slide_in_noise/noise"), NodePath("../slide_in_clothes/clothes")]
 metadata/_custom_type_script = "uid://ca4sbvyfspdlk"
 
 [node name="slide_in_noise" type="AudioStreamPlayer3D" parent="."]
