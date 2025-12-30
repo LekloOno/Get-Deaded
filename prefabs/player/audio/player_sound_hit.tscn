@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://r8x6ip5chtis"]
 
 [ext_resource type="Script" uid="uid://b6mcyevg8fydi" path="res://script/player/audio/combat/hit/PA_Hit.cs" id="1_qvta0"]
-[ext_resource type="Script" uid="uid://c8ux4mvw6ve1t" path="res://script/engine_tools/audio/AUD_ParallelSound.cs" id="2_vmlij"]
+[ext_resource type="Script" uid="uid://c8ux4mvw6ve1t" path="res://script/engine_tools/audio/simple/AUD_ParallelSound.cs" id="2_vmlij"]
 [ext_resource type="AudioStream" uid="uid://rsg5px5vq270" path="res://assets/sounds/combat/hit/Base/layer hit 1.wav" id="3_yj0ak"]
 [ext_resource type="Script" uid="uid://iiivy6ysp8od" path="res://script/engine_tools/audio/1d/AUD_StreamPlayer1D.cs" id="4_b2os4"]
 [ext_resource type="AudioStream" uid="uid://dax3gdltkhfwg" path="res://assets/sounds/combat/hit/Base/layer hit 2.wav" id="4_cmbjv"]

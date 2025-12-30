@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://82grtep18xri"]
 
 [ext_resource type="Script" uid="uid://couy6kxscsx0g" path="res://script/player/audio/PA_Land.cs" id="1_mupqa"]
-[ext_resource type="Script" uid="uid://ca4sbvyfspdlk" path="res://script/engine_tools/audio/AUD_LayeredSound.cs" id="2_bd0aa"]
+[ext_resource type="Script" uid="uid://ca4sbvyfspdlk" path="res://script/engine_tools/audio/simple/AUD_LayeredSound.cs" id="2_bd0aa"]
 [ext_resource type="Script" uid="uid://d3uwl2heay8uf" path="res://script/engine_tools/audio/3d/AUD_Sound3D.cs" id="3_cffvy"]
 [ext_resource type="AudioStream" uid="uid://cdhw3f001dd4s" path="res://assets/sounds/slides/slide_2.wav" id="4_apts4"]
 [ext_resource type="AudioStream" uid="uid://d05ucxtpaae4y" path="res://assets/sounds/land/land1.wav" id="5_apts4"]
