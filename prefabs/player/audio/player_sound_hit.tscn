@@ -20,10 +20,12 @@ _kill = NodePath("kill/kill")
 _meatHit = NodePath("hit/hit")
 _barrierHit = NodePath("hit/hit")
 _armorHit = NodePath("hit/hit")
+_minimumDelay = 45
+_criticalMinimumDelay = 100
 metadata/_custom_type_script = "uid://b6mcyevg8fydi"
 
 [node name="critical_hit" type="AudioStreamPlayer" parent="."]
-volume_db = -6.0
+volume_db = -5.5
 bus = &"Hit"
 
 [node name="critical_hit" type="Node" parent="critical_hit" node_paths=PackedStringArray("_player")]

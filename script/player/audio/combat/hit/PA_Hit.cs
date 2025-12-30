@@ -9,6 +9,12 @@ public partial class PA_Hit : Node
     [Export] private AUD_Sound _meatHit;
     [Export] private AUD_Sound _barrierHit;
     [Export] private AUD_Sound _armorHit;
+    [Export] private ulong _minimumDelay = 45;
+    [Export] private ulong _criticalMinimumDelay = 100;
+    private ulong _lastBarrier = 0;
+    private ulong _lastArmor = 0;
+    private ulong _lastMeat = 0;
+    private ulong _lastCritical = 0;
 
     public override void _Ready()
     {
@@ -24,15 +30,25 @@ public partial class PA_Hit : Node
             _kill?.Play();
 
         if (!hit.OverrideBodyPart && hit.HurtBox.BodyPart == GC_BodyPart.Head)
-            _criticalHit?.Play();
+            PlayHit(_criticalHit, ref _lastCritical, _criticalMinimumDelay);
         
         GC_Health layer = hit.SenderLayer;
 
         if (layer is GC_Barrier)
-            _barrierHit.Play();
+            PlayHit(_barrierHit, ref _lastBarrier, _minimumDelay);
         else if (layer is GC_Armor)
-            _armorHit.Play();
+            PlayHit(_armorHit, ref _lastArmor, _minimumDelay);
         else
-            _meatHit.Play();
+            PlayHit(_meatHit, ref _lastMeat, _minimumDelay);
+    }
+
+    private void PlayHit(AUD_Sound type, ref ulong lastProc, ulong delay)
+    {
+        ulong now = PHX_Time.ScaledTicksMsec;
+        if (now - lastProc < delay)
+            return;
+
+        type.Play();
+        lastProc = now;
     }
 }
