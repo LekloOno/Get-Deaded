@@ -11,7 +11,8 @@ _sound = NodePath("clothes/clothes")
 metadata/_custom_type_script = "uid://drst58njg40lu"
 
 [node name="clothes" type="AudioStreamPlayer3D" parent="."]
-volume_db = -30.0
+volume_db = -12.0
+bus = &"Locomotion"
 attenuation_filter_cutoff_hz = 15000.0
 
 [node name="clothes" type="Node" parent="clothes" node_paths=PackedStringArray("_player")]

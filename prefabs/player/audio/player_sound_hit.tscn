@@ -23,7 +23,8 @@ _armorHit = NodePath("hit/hit")
 metadata/_custom_type_script = "uid://b6mcyevg8fydi"
 
 [node name="critical_hit" type="AudioStreamPlayer" parent="."]
-volume_db = -5.0
+volume_db = -6.0
+bus = &"Hit"
 
 [node name="critical_hit" type="Node" parent="critical_hit" node_paths=PackedStringArray("_player")]
 script = ExtResource("2_vmlij")
@@ -41,6 +42,8 @@ _player = NodePath("..")
 metadata/_custom_type_script = "uid://iiivy6ysp8od"
 
 [node name="kill" type="AudioStreamPlayer" parent="."]
+volume_db = 9.0
+bus = &"Hit"
 
 [node name="kill" type="Node" parent="kill" node_paths=PackedStringArray("_player")]
 script = ExtResource("2_vmlij")
@@ -56,6 +59,8 @@ _player = NodePath("..")
 metadata/_custom_type_script = "uid://iiivy6ysp8od"
 
 [node name="hit" type="AudioStreamPlayer" parent="."]
+volume_db = 7.5
+bus = &"Hit"
 
 [node name="hit" type="Node" parent="hit" node_paths=PackedStringArray("_player")]
 script = ExtResource("2_vmlij")

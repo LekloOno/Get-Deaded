@@ -13,6 +13,7 @@ script = ExtResource("1_eqwql")
 _normalSound = NodePath("normal/normal")
 _sprintSound = NodePath("sprint/sprint")
 _normalInterval = 0.32
+_sprintInterval = 0.28
 _stepLoop = NodePath("Timer")
 metadata/_custom_type_script = "uid://e4bcjkfxrbxl"
 
@@ -21,7 +22,8 @@ process_callback = 0
 
 [node name="normal" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
-volume_db = -32.0
+volume_db = -12.0
+bus = &"Locomotion"
 
 [node name="normal" type="Node" parent="normal" node_paths=PackedStringArray("_player")]
 script = ExtResource("2_avjmi")
@@ -33,7 +35,8 @@ metadata/_custom_type_script = "uid://d3uwl2heay8uf"
 
 [node name="sprint" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
-volume_db = -26.0
+max_db = 6.0
+bus = &"Locomotion"
 
 [node name="sprint" type="Node" parent="sprint" node_paths=PackedStringArray("_player")]
 script = ExtResource("2_avjmi")

@@ -22,10 +22,10 @@
 [ext_resource type="Script" uid="uid://c8ux4mvw6ve1t" path="res://script/engine_tools/audio/AUD_ParallelSound.cs" id="19_438kg"]
 [ext_resource type="Script" uid="uid://b8wru2tmfhgrb" path="res://script/engine_tools/audio/3d/AUD_StreamPlayer3D.cs" id="19_wbedf"]
 [ext_resource type="AudioStream" uid="uid://de4jxbwbg2sjh" path="res://assets/sounds/combat/weapons/fires/revolver/pew_layer1_2.wav" id="20_v6myh"]
-[ext_resource type="AudioStream" uid="uid://b8jop7b5xtx8c" path="res://assets/sounds/combat/weapons/fires/brrt/brrrt_tail.wav" id="20_w2eku"]
 [ext_resource type="AudioStream" uid="uid://bkilaxmf0setg" path="res://assets/sounds/combat/weapons/fires/revolver/pew_layer2_1.wav" id="21_wbedf"]
 [ext_resource type="AudioStream" uid="uid://bas1dflcdofvu" path="res://assets/sounds/combat/weapons/fires/revolver/pew_layer2_2.wav" id="22_jf62l"]
 [ext_resource type="AudioStream" uid="uid://dghvyacggbmt3" path="res://assets/sounds/combat/weapons/fires/brrt/smg_fire_1.wav" id="23_8w7py"]
+[ext_resource type="AudioStream" uid="uid://b45218olxwvgf" path="res://assets/sounds/combat/weapons/fires/revolver/whistle.wav" id="24_15h8q"]
 
 [sub_resource type="Resource" id="Resource_wj164"]
 script = ExtResource("5_d2gec")
@@ -149,8 +149,10 @@ metadata/_custom_type_script = "uid://ca4sbvyfspdlk"
 
 [node name="whistle" type="AudioStreamPlayer3D" parent="Sound"]
 attenuation_model = 3
-volume_db = -0.8
+volume_db = 20.0
 max_db = 0.0
+panning_strength = 0.0
+bus = &"Weapons"
 attenuation_filter_db = 0.0
 
 [node name="player" type="Node" parent="Sound/whistle" node_paths=PackedStringArray("_player")]
@@ -162,15 +164,16 @@ metadata/_custom_type_script = "uid://b8wru2tmfhgrb"
 script = ExtResource("19_438kg")
 _polyphonicStream = SubResource("AudioStreamPolyphonic_8w7py")
 _player = NodePath("../player")
-_sounds = Array[AudioStream]([ExtResource("20_w2eku")])
+_sounds = Array[AudioStream]([ExtResource("24_15h8q")])
 _minPitch = 0.99
 _maxPitch = 1.02
 metadata/_custom_type_script = "uid://c8ux4mvw6ve1t"
 
 [node name="layer1" type="AudioStreamPlayer3D" parent="Sound"]
 attenuation_model = 3
-volume_db = -4.0
 max_db = 0.0
+panning_strength = 0.0
+bus = &"Weapons"
 attenuation_filter_db = 0.0
 
 [node name="player" type="Node" parent="Sound/layer1" node_paths=PackedStringArray("_player")]
@@ -189,8 +192,9 @@ metadata/_custom_type_script = "uid://c8ux4mvw6ve1t"
 
 [node name="layer2" type="AudioStreamPlayer3D" parent="Sound"]
 attenuation_model = 3
-volume_db = -4.0
 max_db = 0.0
+panning_strength = 0.0
+bus = &"Weapons"
 attenuation_filter_db = 0.0
 
 [node name="player" type="Node" parent="Sound/layer2" node_paths=PackedStringArray("_player")]
@@ -207,8 +211,10 @@ metadata/_custom_type_script = "uid://c8ux4mvw6ve1t"
 
 [node name="layer3" type="AudioStreamPlayer3D" parent="Sound"]
 attenuation_model = 3
-volume_db = 4.0
-max_db = 2.0
+volume_db = 10.0
+max_db = 6.0
+panning_strength = 0.0
+bus = &"Weapons"
 attenuation_filter_db = 0.0
 
 [node name="player" type="Node" parent="Sound/layer3" node_paths=PackedStringArray("_player")]

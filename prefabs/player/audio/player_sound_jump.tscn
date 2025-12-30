@@ -32,7 +32,9 @@ metadata/_custom_type_script = "uid://38i6kejmo2hs"
 
 [node name="woosh" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
-volume_db = -40.0
+volume_db = -28.0
+panning_strength = 0.2
+bus = &"Locomotion"
 attenuation_filter_cutoff_hz = 20500.0
 
 [node name="woosh" type="Node" parent="woosh" node_paths=PackedStringArray("_player")]
@@ -44,7 +46,9 @@ metadata/_custom_type_script = "uid://d3uwl2heay8uf"
 
 [node name="clothes" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.602, 0)
-volume_db = -60.0
+volume_db = -30.0
+panning_strength = 0.2
+bus = &"Locomotion"
 attenuation_filter_cutoff_hz = 7000.0
 
 [node name="clothes" type="Node" parent="clothes" node_paths=PackedStringArray("_player")]
@@ -57,18 +61,22 @@ metadata/_custom_type_script = "uid://d3uwl2heay8uf"
 
 [node name="steps" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
-volume_db = -32.0
+volume_db = -20.0
+panning_strength = 0.2
+bus = &"Locomotion"
 
 [node name="steps" type="Node" parent="steps" node_paths=PackedStringArray("_player")]
 script = ExtResource("2_d3fm2")
 _player = NodePath("..")
 _sounds = Array[AudioStream]([ExtResource("13_ttwdl"), ExtResource("14_gkude"), ExtResource("15_urv4d"), ExtResource("16_ow7aq"), ExtResource("17_k8lso")])
-_minPitch = 0.55
+_minPitch = 0.6
 _maxPitch = 0.75
 metadata/_custom_type_script = "uid://d3uwl2heay8uf"
 
 [node name="walljump_clothes" type="AudioStreamPlayer3D" parent="."]
-volume_db = -32.0
+volume_db = -19.0
+panning_strength = 0.2
+bus = &"Locomotion"
 attenuation_filter_cutoff_hz = 20500.0
 
 [node name="walljump_clothes" type="Node" parent="walljump_clothes" node_paths=PackedStringArray("_player")]
@@ -80,7 +88,9 @@ _maxPitch = 2.2
 metadata/_custom_type_script = "uid://d3uwl2heay8uf"
 
 [node name="walljump_woosh" type="AudioStreamPlayer3D" parent="."]
-volume_db = -40.0
+volume_db = -30.0
+panning_strength = 0.2
+bus = &"Locomotion"
 attenuation_filter_cutoff_hz = 20500.0
 
 [node name="walljump_woosh" type="Node" parent="walljump_woosh" node_paths=PackedStringArray("_player")]
@@ -91,7 +101,9 @@ _maxPitch = 1.5
 metadata/_custom_type_script = "uid://d3uwl2heay8uf"
 
 [node name="wallclimb" type="AudioStreamPlayer3D" parent="."]
-volume_db = -34.872
+volume_db = -19.0
+panning_strength = 0.2
+bus = &"Locomotion"
 
 [node name="wallclimb" type="Node" parent="wallclimb" node_paths=PackedStringArray("_player")]
 script = ExtResource("2_d3fm2")
@@ -102,7 +114,9 @@ _maxPitch = 1.8
 metadata/_custom_type_script = "uid://d3uwl2heay8uf"
 
 [node name="wallclimb_low" type="AudioStreamPlayer3D" parent="."]
-volume_db = -32.0
+volume_db = -17.5
+panning_strength = 0.2
+bus = &"Locomotion"
 attenuation_filter_cutoff_hz = 400.0
 
 [node name="wallclimb_low" type="Node" parent="wallclimb_low" node_paths=PackedStringArray("_player")]
@@ -114,7 +128,9 @@ _maxPitch = 0.7
 metadata/_custom_type_script = "uid://d3uwl2heay8uf"
 
 [node name="wallclimb_noise" type="AudioStreamPlayer3D" parent="."]
-volume_db = -35.0
+volume_db = -19.0
+panning_strength = 0.2
+bus = &"Locomotion"
 
 [node name="wallclimb_noise" type="Node" parent="wallclimb_noise" node_paths=PackedStringArray("_player")]
 script = ExtResource("2_d3fm2")
