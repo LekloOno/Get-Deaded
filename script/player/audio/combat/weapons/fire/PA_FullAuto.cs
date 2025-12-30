@@ -4,7 +4,7 @@ using Godot;
 public partial class PA_FullAuto : PA_Fire
 {
     [Export] private PWF_FullAuto _fire;
-    [Export] private AUD_Looper _holdFire;
+    [Export] private AUD_Sound _holdFire;
     [Export] private AUD_Sound _tail;
 
     public override PW_Fire Fire => _fire;
@@ -19,14 +19,14 @@ public partial class PA_FullAuto : PA_Fire
     public override void ShotSound(object sender, int shots)
     {
         base.ShotSound(sender, shots);
-        _holdFire?.StartLoop();
+        _holdFire?.Play();
         // Desub instead of a boolean - that will avoid countless branching
         _fire.Shot -= ShotSound;
     }
 
     private void Release()
     {
-        _holdFire?.StopLoop();
+        _holdFire?.Stop();
         _tail?.Play();
         _fire.Shot += ShotSound;
     }
