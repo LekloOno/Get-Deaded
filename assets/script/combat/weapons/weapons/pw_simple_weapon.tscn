@@ -174,11 +174,11 @@ script = ExtResource("20_23d4d")
 _sound = NodePath("player")
 _fadeInTime = 0.1
 _fadeOutTime = 0.1
-VolumeDb = 8.0
 metadata/_custom_type_script = "uid://3xa4bffw5636"
 
 [node name="hold1" type="AudioStreamPlayer" parent="Sound/hold_layers/hold1"]
 stream = ExtResource("17_8vbpy")
+volume_db = 7.0
 autoplay = true
 bus = &"Weapons"
 
@@ -192,11 +192,11 @@ script = ExtResource("20_23d4d")
 _sound = NodePath("player")
 _fadeInTime = 0.1
 _fadeOutTime = 0.1
-VolumeDb = -6.0
 metadata/_custom_type_script = "uid://3xa4bffw5636"
 
 [node name="hold2" type="AudioStreamPlayer" parent="Sound/hold_layers/hold2"]
 stream = ExtResource("23_1bp4h")
+volume_db = -5.5
 autoplay = true
 bus = &"Weapons"
 
