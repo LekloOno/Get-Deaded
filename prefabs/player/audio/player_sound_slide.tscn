@@ -16,13 +16,8 @@
 [node name="PA_Slide" type="Node3D" node_paths=PackedStringArray("_slideIn", "_slideHold")]
 script = ExtResource("1_gthyh")
 _slideIn = NodePath("slide_in")
-_slideHold = NodePath("slide_hold/slide_hold")
+_slideHold = NodePath("slide_hold2")
 metadata/_custom_type_script = "uid://b2jn2nortl4pm"
-
-[node name="slide_in" type="Node" parent="." node_paths=PackedStringArray("_layers")]
-script = ExtResource("2_kpy2o")
-_layers = [NodePath("../slide_in_clothes/slide_in_clothes")]
-metadata/_custom_type_script = "uid://ca4sbvyfspdlk"
 
 [node name="slide_in_clothes" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62662995, 0)
@@ -32,15 +27,20 @@ panning_strength = 0.0
 bus = &"Locomotion"
 attenuation_filter_cutoff_hz = 20500.0
 
-[node name="slide_in_clothes" type="Node" parent="slide_in_clothes" node_paths=PackedStringArray("_player")]
+[node name="slide_in" type="Node" parent="." node_paths=PackedStringArray("_layers")]
+script = ExtResource("2_kpy2o")
+_layers = [NodePath("slide_in_clothes"), NodePath("slide_in_clothes")]
+metadata/_custom_type_script = "uid://ca4sbvyfspdlk"
+
+[node name="slide_in_clothes" type="Node" parent="slide_in" node_paths=PackedStringArray("_player")]
 script = ExtResource("3_xrf4p")
-_player = NodePath("../player")
+_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("5_fxpf0"), ExtResource("6_vraua"), ExtResource("7_3dpqv"), ExtResource("8_7mlrt"), ExtResource("9_3wy3k")])
 metadata/_custom_type_script = "uid://b0meb4dnvqc3l"
 
-[node name="player" type="Node" parent="slide_in_clothes" node_paths=PackedStringArray("_player")]
+[node name="player" type="Node" parent="slide_in/slide_in_clothes" node_paths=PackedStringArray("_player")]
 script = ExtResource("9_aam5v")
-_player = NodePath("..")
+_player = NodePath("../../../slide_in_clothes")
 metadata/_custom_type_script = "uid://b8wru2tmfhgrb"
 
 [node name="slide_hold" type="AudioStreamPlayer" parent="."]
@@ -49,15 +49,15 @@ volume_db = -2.0
 autoplay = true
 bus = &"Locomotion"
 
-[node name="player" type="Node" parent="slide_hold" node_paths=PackedStringArray("_player")]
-script = ExtResource("11_dsvqf")
-_player = NodePath("..")
-BaseVolumeDb = -2.0
-metadata/_custom_type_script = "uid://iiivy6ysp8od"
-
-[node name="slide_hold" type="Node" parent="slide_hold" node_paths=PackedStringArray("_sound")]
+[node name="slide_hold2" type="Node" parent="." node_paths=PackedStringArray("_sound")]
 script = ExtResource("12_rciob")
-_sound = NodePath("../player")
+_sound = NodePath("player")
 _fadeInTime = 0.1
 _fadeOutTime = 0.2
 metadata/_custom_type_script = "uid://3xa4bffw5636"
+
+[node name="player" type="Node" parent="slide_hold2" node_paths=PackedStringArray("_player")]
+script = ExtResource("11_dsvqf")
+_player = NodePath("../../slide_hold")
+BaseVolumeDb = -2.0
+metadata/_custom_type_script = "uid://iiivy6ysp8od"

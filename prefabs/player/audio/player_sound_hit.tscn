@@ -33,15 +33,15 @@ bus = &"Hit"
 script = ExtResource("2_vmlij")
 _polyphonicStream = SubResource("AudioStreamPolyphonic_ran1i")
 _maxPolyphony = 2.0
-_player = NodePath("../player")
+_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("7_yj0ak")])
 _minPitch = 0.8
 _maxPitch = 1.2
 metadata/_custom_type_script = "uid://c8ux4mvw6ve1t"
 
-[node name="player" type="Node" parent="critical_hit" node_paths=PackedStringArray("_player")]
+[node name="player" type="Node" parent="critical_hit/critical_hit" node_paths=PackedStringArray("_player")]
 script = ExtResource("4_b2os4")
-_player = NodePath("..")
+_player = NodePath("../..")
 BaseVolumeDb = -3.0
 metadata/_custom_type_script = "uid://iiivy6ysp8od"
 
@@ -53,14 +53,14 @@ bus = &"Hit"
 [node name="kill" type="Node" parent="kill" node_paths=PackedStringArray("_player")]
 script = ExtResource("2_vmlij")
 _polyphonicStream = SubResource("AudioStreamPolyphonic_ran1i")
-_player = NodePath("../player")
+_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("4_u0ev1")])
 _maxPitch = 1.04
 metadata/_custom_type_script = "uid://c8ux4mvw6ve1t"
 
-[node name="player" type="Node" parent="kill" node_paths=PackedStringArray("_player")]
+[node name="player" type="Node" parent="kill/kill" node_paths=PackedStringArray("_player")]
 script = ExtResource("4_b2os4")
-_player = NodePath("..")
+_player = NodePath("../..")
 BaseVolumeDb = 2.5
 metadata/_custom_type_script = "uid://iiivy6ysp8od"
 
@@ -72,14 +72,14 @@ bus = &"Hit"
 [node name="hit" type="Node" parent="hit" node_paths=PackedStringArray("_player")]
 script = ExtResource("2_vmlij")
 _polyphonicStream = SubResource("AudioStreamPolyphonic_ran1i")
-_player = NodePath("../player")
+_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("3_yj0ak"), ExtResource("4_cmbjv"), ExtResource("5_u0ev1"), ExtResource("6_b2os4")])
 _minPitch = 0.9
 _maxPitch = 1.1
 metadata/_custom_type_script = "uid://c8ux4mvw6ve1t"
 
-[node name="player" type="Node" parent="hit" node_paths=PackedStringArray("_player")]
+[node name="player" type="Node" parent="hit/hit" node_paths=PackedStringArray("_player")]
 script = ExtResource("4_b2os4")
-_player = NodePath("..")
+_player = NodePath("../..")
 BaseVolumeDb = 15.0
 metadata/_custom_type_script = "uid://iiivy6ysp8od"
