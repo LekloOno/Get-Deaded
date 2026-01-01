@@ -41,6 +41,7 @@ metadata/_custom_type_script = "uid://c8ux4mvw6ve1t"
 [node name="player" type="Node" parent="critical_hit" node_paths=PackedStringArray("_player")]
 script = ExtResource("4_b2os4")
 _player = NodePath("..")
+_baseVolumeDb = -4.0
 metadata/_custom_type_script = "uid://iiivy6ysp8od"
 
 [node name="kill" type="AudioStreamPlayer" parent="."]
@@ -58,6 +59,7 @@ metadata/_custom_type_script = "uid://c8ux4mvw6ve1t"
 [node name="player" type="Node" parent="kill" node_paths=PackedStringArray("_player")]
 script = ExtResource("4_b2os4")
 _player = NodePath("..")
+_baseVolumeDb = 3.0
 metadata/_custom_type_script = "uid://iiivy6ysp8od"
 
 [node name="hit" type="AudioStreamPlayer" parent="."]
@@ -76,4 +78,5 @@ metadata/_custom_type_script = "uid://c8ux4mvw6ve1t"
 [node name="player" type="Node" parent="hit" node_paths=PackedStringArray("_player")]
 script = ExtResource("4_b2os4")
 _player = NodePath("..")
+_baseVolumeDb = 15.0
 metadata/_custom_type_script = "uid://iiivy6ysp8od"
