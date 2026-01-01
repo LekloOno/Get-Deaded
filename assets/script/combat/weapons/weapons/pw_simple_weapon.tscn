@@ -119,9 +119,8 @@ _tail = NodePath("tail_parallel")
 _sound = NodePath("attack_layers")
 metadata/_custom_type_script = "uid://bdm4kpw6u4ocg"
 
-[node name="attack_layers" type="Node" parent="Sound" node_paths=PackedStringArray("_layers")]
+[node name="attack_layers" type="Node" parent="Sound"]
 script = ExtResource("15_06ubc")
-_layers = [NodePath("attack"), NodePath("attack2")]
 metadata/_custom_type_script = "uid://ca4sbvyfspdlk"
 
 [node name="attack" type="Node" parent="Sound/attack_layers" node_paths=PackedStringArray("_player")]
@@ -170,7 +169,7 @@ bus = &"Weapons"
 
 [node name="hold_layers" type="Node" parent="Sound" node_paths=PackedStringArray("_layers")]
 script = ExtResource("15_06ubc")
-_layers = [NodePath("hold1"), NodePath("hold2"), NodePath("hold1"), NodePath("hold2")]
+_layers = [NodePath("hold1"), NodePath("hold2"), NodePath("hold1"), NodePath("hold2"), NodePath("hold1"), NodePath("hold2"), NodePath("hold1"), NodePath("hold2")]
 metadata/_custom_type_script = "uid://ca4sbvyfspdlk"
 
 [node name="hold1" type="Node" parent="Sound/hold_layers" node_paths=PackedStringArray("_sound")]

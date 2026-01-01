@@ -16,40 +16,38 @@ metadata/_custom_type_script = "uid://couy6kxscsx0g"
 
 [node name="layers" type="Node" parent="." node_paths=PackedStringArray("_layers")]
 script = ExtResource("2_bd0aa")
-_layers = [NodePath("../pouish/pouish"), NodePath("../impact/impact")]
+_layers = [NodePath("pouish"), NodePath("impact")]
 metadata/_custom_type_script = "uid://ca4sbvyfspdlk"
 
-[node name="pouish" type="AudioStreamPlayer3D" parent="."]
-volume_db = -27.0
-panning_strength = 0.0
-bus = &"Locomotion"
-
-[node name="player" type="Node" parent="pouish" node_paths=PackedStringArray("_player")]
-script = ExtResource("3_q1y74")
-_player = NodePath("..")
-metadata/_custom_type_script = "uid://b8wru2tmfhgrb"
-
-[node name="pouish" type="Node" parent="pouish" node_paths=PackedStringArray("_player")]
+[node name="pouish" type="Node" parent="layers" node_paths=PackedStringArray("_player")]
 script = ExtResource("4_dtbis")
-_player = NodePath("../player")
+_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("4_apts4")])
 _minPitch = 0.8
 metadata/_custom_type_script = "uid://b0meb4dnvqc3l"
 
-[node name="impact" type="AudioStreamPlayer3D" parent="."]
-volume_db = -16.0
-panning_strength = 0.0
-bus = &"Locomotion"
-attenuation_filter_cutoff_hz = 20500.0
-
-[node name="player" type="Node" parent="impact" node_paths=PackedStringArray("_player")]
+[node name="player" type="Node" parent="layers/pouish" node_paths=PackedStringArray("_player")]
 script = ExtResource("3_q1y74")
-_player = NodePath("..")
+_player = NodePath("../../../pouish")
 metadata/_custom_type_script = "uid://b8wru2tmfhgrb"
 
-[node name="impact" type="Node" parent="impact" node_paths=PackedStringArray("_player")]
+[node name="impact" type="Node" parent="layers" node_paths=PackedStringArray("_player")]
 script = ExtResource("4_dtbis")
-_player = NodePath("../player")
+_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("5_apts4"), ExtResource("6_q1y74"), ExtResource("7_dtbis")])
 _minPitch = 0.8
 metadata/_custom_type_script = "uid://b0meb4dnvqc3l"
+
+[node name="player" type="Node" parent="layers/impact" node_paths=PackedStringArray("_player")]
+script = ExtResource("3_q1y74")
+_player = NodePath("../../../impact")
+metadata/_custom_type_script = "uid://b8wru2tmfhgrb"
+
+[node name="pouish" type="AudioStreamPlayer3D" parent="."]
+panning_strength = 0.0
+bus = &"Locomotion"
+
+[node name="impact" type="AudioStreamPlayer3D" parent="."]
+panning_strength = 0.0
+bus = &"Locomotion"
+attenuation_filter_cutoff_hz = 20500.0

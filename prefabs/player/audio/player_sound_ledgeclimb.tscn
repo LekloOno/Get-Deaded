@@ -12,19 +12,18 @@ _sound = NodePath("clothes/clothes")
 metadata/_custom_type_script = "uid://drst58njg40lu"
 
 [node name="clothes" type="AudioStreamPlayer3D" parent="."]
-volume_db = -12.0
 bus = &"Locomotion"
 attenuation_filter_cutoff_hz = 15000.0
 
 [node name="clothes" type="Node" parent="clothes" node_paths=PackedStringArray("_player")]
 script = ExtResource("2_gmh50")
-_player = NodePath("../player")
+_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("3_gmh50"), ExtResource("4_vkf3d")])
 _minPitch = 1.2
 _maxPitch = 1.5
 metadata/_custom_type_script = "uid://b0meb4dnvqc3l"
 
-[node name="player" type="Node" parent="clothes" node_paths=PackedStringArray("_player")]
+[node name="player" type="Node" parent="clothes/clothes" node_paths=PackedStringArray("_player")]
 script = ExtResource("5_vkf3d")
-_player = NodePath("..")
+_player = NodePath("../..")
 metadata/_custom_type_script = "uid://b8wru2tmfhgrb"

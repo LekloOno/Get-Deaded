@@ -29,7 +29,7 @@ attenuation_filter_cutoff_hz = 20500.0
 
 [node name="slide_in" type="Node" parent="." node_paths=PackedStringArray("_layers")]
 script = ExtResource("2_kpy2o")
-_layers = [NodePath("slide_in_clothes"), NodePath("slide_in_clothes")]
+_layers = [NodePath("slide_in_clothes")]
 metadata/_custom_type_script = "uid://ca4sbvyfspdlk"
 
 [node name="slide_in_clothes" type="Node" parent="slide_in" node_paths=PackedStringArray("_player")]
