@@ -20,12 +20,13 @@ _kill = NodePath("kill/kill")
 _meatHit = NodePath("hit/hit")
 _barrierHit = NodePath("hit/hit")
 _armorHit = NodePath("hit/hit")
-_minimumVolume = -15.0
-_damageDispersion = 90.0
+_minimumVolume = -19.0
+_damageDispersion = 75.0
 metadata/_custom_type_script = "uid://b6mcyevg8fydi"
 
 [node name="critical_hit" type="AudioStreamPlayer" parent="."]
-volume_db = -4.0
+stream = SubResource("AudioStreamPolyphonic_ran1i")
+volume_db = -3.0
 bus = &"Hit"
 
 [node name="critical_hit" type="Node" parent="critical_hit" node_paths=PackedStringArray("_player")]
@@ -41,11 +42,12 @@ metadata/_custom_type_script = "uid://c8ux4mvw6ve1t"
 [node name="player" type="Node" parent="critical_hit" node_paths=PackedStringArray("_player")]
 script = ExtResource("4_b2os4")
 _player = NodePath("..")
-_baseVolumeDb = -4.0
+BaseVolumeDb = -3.0
 metadata/_custom_type_script = "uid://iiivy6ysp8od"
 
 [node name="kill" type="AudioStreamPlayer" parent="."]
-volume_db = 3.0
+stream = SubResource("AudioStreamPolyphonic_ran1i")
+volume_db = 2.5
 bus = &"Hit"
 
 [node name="kill" type="Node" parent="kill" node_paths=PackedStringArray("_player")]
@@ -59,10 +61,11 @@ metadata/_custom_type_script = "uid://c8ux4mvw6ve1t"
 [node name="player" type="Node" parent="kill" node_paths=PackedStringArray("_player")]
 script = ExtResource("4_b2os4")
 _player = NodePath("..")
-_baseVolumeDb = 3.0
+BaseVolumeDb = 2.5
 metadata/_custom_type_script = "uid://iiivy6ysp8od"
 
 [node name="hit" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamPolyphonic_ran1i")
 volume_db = 15.0
 bus = &"Hit"
 
@@ -78,5 +81,5 @@ metadata/_custom_type_script = "uid://c8ux4mvw6ve1t"
 [node name="player" type="Node" parent="hit" node_paths=PackedStringArray("_player")]
 script = ExtResource("4_b2os4")
 _player = NodePath("..")
-_baseVolumeDb = 15.0
+BaseVolumeDb = 15.0
 metadata/_custom_type_script = "uid://iiivy6ysp8od"

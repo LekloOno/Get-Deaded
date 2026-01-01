@@ -23,12 +23,15 @@ process_callback = 0
 
 [node name="normal" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
-volume_db = -12.0
+volume_db = -23.0
+pitch_scale = 0.8
 bus = &"Locomotion"
 
 [node name="player" type="Node" parent="normal" node_paths=PackedStringArray("_player")]
 script = ExtResource("2_8rppm")
 _player = NodePath("..")
+BaseVolumeDb = -23.0
+BasePitchScale = 0.8
 metadata/_custom_type_script = "uid://b8wru2tmfhgrb"
 
 [node name="normal" type="Node" parent="normal" node_paths=PackedStringArray("_player")]
