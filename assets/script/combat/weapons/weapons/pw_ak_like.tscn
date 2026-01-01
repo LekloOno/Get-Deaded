@@ -126,105 +126,101 @@ _fovMultiplier = 0.9
 _moveSpeedMultiplier = -0.35
 metadata/_custom_type_script = "uid://bxxmkegnq67qe"
 
-[node name="PAF_Generic2" type="Node3D" parent="." node_paths=PackedStringArray("_fire", "_sound")]
+[node name="PAF_Generic" type="Node3D" parent="." node_paths=PackedStringArray("_fire", "_sound")]
 script = ExtResource("14_hoxdg")
 _fire = NodePath("../PWF_FullAuto")
 _sound = NodePath("layers")
 metadata/_custom_type_script = "uid://baygafcv8gr3s"
 
-[node name="layers" type="Node" parent="PAF_Generic2" node_paths=PackedStringArray("_layers")]
+[node name="layers" type="Node" parent="PAF_Generic" node_paths=PackedStringArray("_layers")]
 script = ExtResource("16_xke5c")
-_layers = [NodePath("../tail/tail"), NodePath("../layer1/layer1"), NodePath("../layer2/layer2"), NodePath("../layer3/layer3")]
+_layers = [NodePath("tail"), NodePath("layer1"), NodePath("layer2"), NodePath("layer3")]
 metadata/_custom_type_script = "uid://ca4sbvyfspdlk"
 
-[node name="tail" type="AudioStreamPlayer3D" parent="PAF_Generic2"]
-stream = SubResource("AudioStreamPolyphonic_x86ej")
-attenuation_model = 3
-max_db = 6.0
-stream_paused = true
-panning_strength = 0.0
-bus = &"Weapons"
-
-[node name="player" type="Node" parent="PAF_Generic2/tail" node_paths=PackedStringArray("_player")]
-script = ExtResource("16_v8jjb")
-_player = NodePath("..")
-metadata/_custom_type_script = "uid://b8wru2tmfhgrb"
-
-[node name="tail" type="Node" parent="PAF_Generic2/tail" node_paths=PackedStringArray("_player")]
+[node name="tail" type="Node" parent="PAF_Generic/layers" node_paths=PackedStringArray("_player")]
 script = ExtResource("17_l5b2w")
 _polyphonicStream = SubResource("AudioStreamPolyphonic_x86ej")
-_player = NodePath("../player")
+_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("20_ivdpx")])
 _minPitch = 0.8
 _maxPitch = 0.9
 metadata/_custom_type_script = "uid://c8ux4mvw6ve1t"
 
-[node name="layer1" type="AudioStreamPlayer3D" parent="PAF_Generic2"]
-stream = SubResource("AudioStreamPolyphonic_x86ej")
-attenuation_model = 3
-volume_db = 2.0
-stream_paused = true
-panning_strength = 0.0
-bus = &"Weapons"
-
-[node name="player" type="Node" parent="PAF_Generic2/layer1" node_paths=PackedStringArray("_player")]
+[node name="player" type="Node" parent="PAF_Generic/layers/tail" node_paths=PackedStringArray("_player")]
 script = ExtResource("16_v8jjb")
-_player = NodePath("..")
-BaseVolumeDb = 2.0
+_player = NodePath("../../../tail")
 metadata/_custom_type_script = "uid://b8wru2tmfhgrb"
 
-[node name="layer1" type="Node" parent="PAF_Generic2/layer1" node_paths=PackedStringArray("_player")]
+[node name="layer1" type="Node" parent="PAF_Generic/layers" node_paths=PackedStringArray("_player")]
 script = ExtResource("17_l5b2w")
 _polyphonicStream = SubResource("AudioStreamPolyphonic_x86ej")
-_player = NodePath("../player")
+_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("17_yciib"), ExtResource("18_jqekf")])
 _minPitch = 2.0
 _maxPitch = 2.5
 metadata/_custom_type_script = "uid://c8ux4mvw6ve1t"
 
-[node name="layer2" type="AudioStreamPlayer3D" parent="PAF_Generic2"]
-stream = SubResource("AudioStreamPolyphonic_x86ej")
-attenuation_model = 3
-volume_db = 4.0
-max_db = 6.0
-stream_paused = true
-panning_strength = 0.0
-bus = &"Weapons"
+[node name="player" type="Node" parent="PAF_Generic/layers/layer1" node_paths=PackedStringArray("_player")]
+script = ExtResource("16_v8jjb")
+_player = NodePath("../../../layer1")
+BaseVolumeDb = 2.0
+metadata/_custom_type_script = "uid://b8wru2tmfhgrb"
 
-[node name="layer2" type="Node" parent="PAF_Generic2/layer2" node_paths=PackedStringArray("_player")]
+[node name="layer2" type="Node" parent="PAF_Generic/layers" node_paths=PackedStringArray("_player")]
 script = ExtResource("17_l5b2w")
 _polyphonicStream = SubResource("AudioStreamPolyphonic_x86ej")
-_player = NodePath("../player")
+_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("16_3ruek")])
 _minPitch = 0.7
 _maxPitch = 0.8
 metadata/_custom_type_script = "uid://c8ux4mvw6ve1t"
 
-[node name="player" type="Node" parent="PAF_Generic2/layer2" node_paths=PackedStringArray("_player")]
+[node name="player" type="Node" parent="PAF_Generic/layers/layer2" node_paths=PackedStringArray("_player")]
 script = ExtResource("16_v8jjb")
-_player = NodePath("..")
+_player = NodePath("../../../layer2")
 BaseVolumeDb = 4.0
 metadata/_custom_type_script = "uid://b8wru2tmfhgrb"
 
-[node name="layer3" type="AudioStreamPlayer3D" parent="PAF_Generic2"]
-stream = SubResource("AudioStreamPolyphonic_x86ej")
-attenuation_model = 3
-volume_db = 2.0
-max_db = 6.0
-stream_paused = true
-panning_strength = 0.0
-bus = &"Weapons"
-
-[node name="layer3" type="Node" parent="PAF_Generic2/layer3" node_paths=PackedStringArray("_player")]
+[node name="layer3" type="Node" parent="PAF_Generic/layers" node_paths=PackedStringArray("_player")]
 script = ExtResource("17_l5b2w")
 _polyphonicStream = SubResource("AudioStreamPolyphonic_x86ej")
-_player = NodePath("../player")
+_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("20_jqekf")])
 _maxPitch = 1.1
 metadata/_custom_type_script = "uid://c8ux4mvw6ve1t"
 
-[node name="player" type="Node" parent="PAF_Generic2/layer3" node_paths=PackedStringArray("_player")]
+[node name="player" type="Node" parent="PAF_Generic/layers/layer3" node_paths=PackedStringArray("_player")]
 script = ExtResource("16_v8jjb")
-_player = NodePath("..")
+_player = NodePath("../../../layer3")
 BaseVolumeDb = 2.0
 metadata/_custom_type_script = "uid://b8wru2tmfhgrb"
+
+[node name="tail" type="AudioStreamPlayer3D" parent="PAF_Generic"]
+stream = SubResource("AudioStreamPolyphonic_x86ej")
+attenuation_model = 3
+max_db = 6.0
+panning_strength = 0.0
+bus = &"Weapons"
+
+[node name="layer1" type="AudioStreamPlayer3D" parent="PAF_Generic"]
+stream = SubResource("AudioStreamPolyphonic_x86ej")
+attenuation_model = 3
+volume_db = 2.0
+panning_strength = 0.0
+bus = &"Weapons"
+
+[node name="layer2" type="AudioStreamPlayer3D" parent="PAF_Generic"]
+stream = SubResource("AudioStreamPolyphonic_x86ej")
+attenuation_model = 3
+volume_db = 4.0
+max_db = 6.0
+panning_strength = 0.0
+bus = &"Weapons"
+
+[node name="layer3" type="AudioStreamPlayer3D" parent="PAF_Generic"]
+stream = SubResource("AudioStreamPolyphonic_x86ej")
+attenuation_model = 3
+volume_db = 2.0
+max_db = 6.0
+panning_strength = 0.0
+bus = &"Weapons"
