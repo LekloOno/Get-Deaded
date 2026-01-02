@@ -9,7 +9,7 @@ using Godot;
 /// You can thus place an AudioStreamPlayer2D/3D wherever you want to be correctly spatially-parented.
 /// </summary>
 [GlobalClass, Tool]
-public abstract partial class AUD_StreamPlayer : AUD_Sound
+public abstract partial class AUD2_StreamPlayer : AUD2_Sound
 {
     public abstract AudioStream Stream {get; set;}
     public abstract StringName Bus {get; set;}

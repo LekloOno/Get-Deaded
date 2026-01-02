@@ -4,8 +4,8 @@ using Godot;
 public partial class PA_FullAuto : PA_Fire
 {
     [Export] private PWF_FullAuto _fire;
-    [Export] private AUD_Sound _holdFire;
-    [Export] private AUD_Sound _tail;
+    [Export] private AUD2_Sound _holdFire;
+    [Export] private AUD2_Sound _tail;
 
     public override PW_Fire Fire => _fire;
 

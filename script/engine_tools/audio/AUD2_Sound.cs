@@ -8,7 +8,7 @@ using Godot;
 /// The stream nodes bind this tree to concrete Godot AudioStreamPlayers, in a generic manner so that any "spatialness" can be relevant to the same processing tree.
 /// </summary>
 [GlobalClass, Tool]
-public abstract partial class AUD_Sound : Node, AUD_ISound
+public abstract partial class AUD2_Sound : Node, AUD2_ISound
 {
     protected const float MIN_PITCH = 0.001f;
     private float _baseVolumeDb = 0f;

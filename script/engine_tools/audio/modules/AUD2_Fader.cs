@@ -6,9 +6,9 @@ using Godot;
 /// Fades in and out the VolumeDb of a child AUD_Sound by respectively calling Play() and Stop().
 /// </summary>
 [GlobalClass, Tool]
-public partial class AUD_Fader : AUD_Module
+public partial class AUD2_Fader : AUD2_Module
 {
-    private AUD_Sound _sound;
+    private AUD2_Sound _sound;
     /// <summary>
     /// Time for the volume to reach _volume on start - in seconds.
     /// </summary>
@@ -69,14 +69,14 @@ public partial class AUD_Fader : AUD_Module
     {
         _sound = null;
         foreach (Node node in GetChildren())
-            if (node is AUD_Sound sound)
+            if (node is AUD2_Sound sound)
             {
                 _sound = sound;
                 return;
             }
     }
 
-    protected override void OnSoundChildChanged(List<AUD_Sound> sounds)
+    protected override void OnSoundChildChanged(List<AUD2_Sound> sounds)
     {
         if (sounds.Count == 0)
             _sound = null;
@@ -103,7 +103,7 @@ public partial class AUD_Fader : AUD_Module
     {
         bool found = false;
         foreach (Node node in GetChildren())
-            if (node is AUD_Sound)
+            if (node is AUD2_Sound)
                 if (found)
                     return true;
                 else

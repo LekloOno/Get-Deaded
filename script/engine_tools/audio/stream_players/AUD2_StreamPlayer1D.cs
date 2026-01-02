@@ -2,12 +2,13 @@ using System.Collections.Generic;
 using Godot;
 
 /// <summary>
-/// AUD_StreamPlayer implementation for Godot's AudioStreamPlayer3D.
+/// AUD_StreamPlayer implementation for Godot's AudioStreamPlayer.
 /// </summary>
 [GlobalClass, Tool]
-public partial class AUD_StreamPlayer3D : AUD_StreamPlayer
+public partial class AUD2_StreamPlayer1D : AUD2_StreamPlayer
 {
-    [Export] private AudioStreamPlayer3D _player;
+    [Export] private AudioStreamPlayer _player;
+    
     public override AudioStream Stream
     {
         get => _player?.Stream;
@@ -56,7 +57,7 @@ public partial class AUD_StreamPlayer3D : AUD_StreamPlayer
         List<string> warnings = [];
 
         if (_player == null)
-            warnings.Add("This node has no attached AudioStreamPlayer3D.\nConsider assigning one in the inspector.");
+            warnings.Add("This node has no attached AudioStreamPlayer.\nConsider assigning one in the inspector.");
 
         return [.. warnings];
     }

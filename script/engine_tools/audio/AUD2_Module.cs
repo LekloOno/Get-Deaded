@@ -6,7 +6,7 @@ using Godot;
 /// It encapsulates one or multiple other AUD_Sound - its children - and provides interractions with them through its AUD_Sound and AUD_Module implementation.
 /// </summary>
 [GlobalClass, Tool]
-public abstract partial class AUD_Module : AUD_Sound
+public abstract partial class AUD2_Module : AUD2_Sound
 {
     public override float VolumeDb
     {
@@ -41,9 +41,9 @@ public abstract partial class AUD_Module : AUD_Sound
         if (what != NotificationChildOrderChanged)
             return;
         
-        List<AUD_Sound> children = [];
+        List<AUD2_Sound> children = [];
         foreach(Node node in GetChildren())
-            if (node is AUD_Sound sound)
+            if (node is AUD2_Sound sound)
                 children.Add(sound);
 
         OnSoundChildChanged(children);
@@ -56,5 +56,5 @@ public abstract partial class AUD_Module : AUD_Sound
     /// This callback is typically used to auto-reference it in its attributes.
     /// </summary>
     /// <param name="sound">The new child node.</param>
-    protected abstract void OnSoundChildChanged(List<AUD_Sound> sounds);
+    protected abstract void OnSoundChildChanged(List<AUD2_Sound> sounds);
 }

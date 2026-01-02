@@ -5,14 +5,14 @@ using Godot;
 public partial class PA_Jump : Node3D
 {
     [ExportCategory("Settings")]
-    [Export] private AUD_Sound _wooshes;
-    [Export] private AUD_Sound _clothes;
-    [Export] private AUD_Sound _steps;
-    [Export] private AUD_Sound _wallJumpClothes;
-    [Export] private AUD_Sound _wallJumpWoosh;
-    [Export] private AUD_Sound _wallClimbClothes;
-    [Export] private AUD_Sound _wallClimbLow;
-    [Export] private AUD_Sound _wallClimbNoise;
+    [Export] private AUD2_Sound _wooshes;
+    [Export] private AUD2_Sound _clothes;
+    [Export] private AUD2_Sound _steps;
+    [Export] private AUD2_Sound _wallJumpClothes;
+    [Export] private AUD2_Sound _wallJumpWoosh;
+    [Export] private AUD2_Sound _wallClimbClothes;
+    [Export] private AUD2_Sound _wallClimbLow;
+    [Export] private AUD2_Sound _wallClimbNoise;
 
     [ExportCategory("Setup")]
     [Export] private PM_Jump _jump;

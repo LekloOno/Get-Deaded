@@ -1,7 +1,7 @@
 /// <summary>
 /// The AUD_ISound interface defines the specification of generic sound processing tree nodes.
 /// </summary>
-public interface AUD_ISound
+public interface AUD2_ISound
 {
     void Play();
     void Stop();

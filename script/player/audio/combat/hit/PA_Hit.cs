@@ -4,11 +4,11 @@ using Godot;
 public partial class PA_Hit : Node
 {
     [Export] private PW_WeaponsHandler _weaponsHandler;
-    [Export] private AUD_Sound _criticalHit;
-    [Export] private AUD_Sound _kill;
-    [Export] private AUD_Sound _meatHit;
-    [Export] private AUD_Sound _barrierHit;
-    [Export] private AUD_Sound _armorHit;
+    [Export] private AUD2_Sound _criticalHit;
+    [Export] private AUD2_Sound _kill;
+    [Export] private AUD2_Sound _meatHit;
+    [Export] private AUD2_Sound _barrierHit;
+    [Export] private AUD2_Sound _armorHit;
     [Export] private ulong _minimumDelay = 45;
     [Export] private ulong _criticalMinimumDelay = 100;
     [Export] private bool _volumeDamageScale = true;
@@ -46,7 +46,7 @@ public partial class PA_Hit : Node
             PlayHit(_meatHit, ref _lastMeat, _minimumDelay, hit.Damage);
     }
 
-    private void PlayHit(AUD_Sound type, ref ulong lastProc, ulong delay, float damage)
+    private void PlayHit(AUD2_Sound type, ref ulong lastProc, ulong delay, float damage)
     {
         ulong now = PHX_Time.ScaledTicksMsec;
         if (now - lastProc < delay)

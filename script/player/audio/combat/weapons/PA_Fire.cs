@@ -2,7 +2,7 @@ using Godot;
 
 public abstract partial class PA_Fire : Node3D
 {
-    [Export] protected AUD_Sound _sound;
+    [Export] protected AUD2_Sound _sound;
     public abstract PW_Fire Fire {get;}
 
     public override void _Ready()

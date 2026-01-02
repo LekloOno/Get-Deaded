@@ -5,7 +5,7 @@ using Godot;
 /// AUD_StreamPlayer implementation for Godot's AudioStreamPlayer2D.
 /// </summary>
 [GlobalClass, Tool]
-public partial class AUD_StreamPlayer2D : AUD_StreamPlayer
+public partial class AUD2_StreamPlayer2D : AUD2_StreamPlayer
 {
     [Export] private AudioStreamPlayer2D _player;
     public override AudioStream Stream

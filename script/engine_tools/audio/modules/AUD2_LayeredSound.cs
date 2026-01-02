@@ -5,9 +5,9 @@ using Godot;
 /// Plays and control multiple children sound as one.
 /// </summary>
 [GlobalClass, Tool]
-public partial class AUD_LayeredSound : AUD_Module
+public partial class AUD2_LayeredSound : AUD2_Module
 {
-    private List<AUD_Sound> _layers;
+    private List<AUD2_Sound> _layers;
 
     // +-----------------+
     // |  CONFIGURATION  |
@@ -17,11 +17,11 @@ public partial class AUD_LayeredSound : AUD_Module
     {
         _layers = [];
         foreach (Node node in GetChildren())
-            if (node is AUD_Sound sound)
+            if (node is AUD2_Sound sound)
                 _layers.Add(sound);
     }
 
-    protected override void OnSoundChildChanged(List<AUD_Sound> sounds) =>
+    protected override void OnSoundChildChanged(List<AUD2_Sound> sounds) =>
         _layers = sounds;
     
     // +-------------------+
@@ -47,7 +47,7 @@ public partial class AUD_LayeredSound : AUD_Module
         if (_layers == null)
             return;
 
-        foreach (AUD_Sound layer in _layers)
+        foreach (AUD2_Sound layer in _layers)
             layer.RelativeVolumeDb = volumeDb;
     }
     protected override void SetBaseVolumeDb(float volumeDb) =>
@@ -61,7 +61,7 @@ public partial class AUD_LayeredSound : AUD_Module
         if (_layers == null)
             return;
             
-        foreach (AUD_Sound layer in _layers)
+        foreach (AUD2_Sound layer in _layers)
             layer.RelativePitchScale = pitchScale;
     }
     protected override void SetBasePitchScale(float pitchScale) =>
@@ -72,13 +72,13 @@ public partial class AUD_LayeredSound : AUD_Module
 
     public override void Play()
     {
-        foreach (AUD_Sound layer in _layers)
+        foreach (AUD2_Sound layer in _layers)
             layer.Play();
     }
 
     public override void Stop()
     {
-        foreach (AUD_Sound layer in _layers)
+        foreach (AUD2_Sound layer in _layers)
             layer.Stop();
     }
 }

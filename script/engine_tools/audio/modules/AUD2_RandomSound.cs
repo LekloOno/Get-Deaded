@@ -8,9 +8,9 @@ using Godot.Collections;
 /// Otherwize, that would imply the use of many distinct players for such a common pattern.
 /// </summary>
 [GlobalClass, Tool]
-public partial class AUD_RandomSound : AUD_Module
+public partial class AUD2_RandomSound : AUD2_Module
 {
-    protected AUD_StreamPlayer _player;
+    protected AUD2_StreamPlayer _player;
     protected Array<AudioStream> _sounds;
     [Export] public Array<AudioStream> Sounds
     {
@@ -48,18 +48,18 @@ public partial class AUD_RandomSound : AUD_Module
     {
         _player = null;
         foreach (Node node in GetChildren())
-            if (node is AUD_StreamPlayer player)
+            if (node is AUD2_StreamPlayer player)
             {
                 _player = player;
                 return;
             }
     }
 
-    protected override void OnSoundChildChanged(List<AUD_Sound> sounds)
+    protected override void OnSoundChildChanged(List<AUD2_Sound> sounds)
     {
         _player = null;
-        foreach (AUD_Sound sound in sounds)
-            if (sound is AUD_StreamPlayer player)
+        foreach (AUD2_Sound sound in sounds)
+            if (sound is AUD2_StreamPlayer player)
             {
                 _player = player;
                 return;
@@ -88,7 +88,7 @@ public partial class AUD_RandomSound : AUD_Module
     {
         bool found = false;
         foreach (Node node in GetChildren())
-            if (node is AUD_StreamPlayer)
+            if (node is AUD2_StreamPlayer)
                 if (found)
                     return true;
                 else

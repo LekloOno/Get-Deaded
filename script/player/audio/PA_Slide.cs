@@ -4,8 +4,8 @@ using Godot;
 [GlobalClass]
 public partial class PA_Slide : Node3D
 {
-    [Export] private AUD_Sound _slideIn;
-    [Export] private AUD_Sound _slideHold;
+    [Export] private AUD2_Sound _slideIn;
+    [Export] private AUD2_Sound _slideHold;
 
     [ExportCategory("Setup")]
     [Export] private PM_Slide _slide;
