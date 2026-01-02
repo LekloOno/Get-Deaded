@@ -4,8 +4,8 @@ using Godot;
 [GlobalClass]
 public partial class PA_FootSteps : Node3D
 {
-    [Export] private AUD2_Sound _normalSound;
-    [Export] private AUD2_Sound _sprintSound;
+    [Export] private AUD_Sound _normalSound;
+    [Export] private AUD_Sound _sprintSound;
 
     [ExportCategory("Settings")]
     [Export] private float _normalInterval = 0.35f;
@@ -17,7 +17,7 @@ public partial class PA_FootSteps : Node3D
     [Export] private PS_Grounded _groundState;
     [Export] private Timer _stepLoop;
     private float _currentInterval;
-    private AUD2_Sound _currentSound;
+    private AUD_Sound _currentSound;
     
     public override void _Ready()
     {
