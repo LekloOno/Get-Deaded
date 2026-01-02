@@ -178,7 +178,7 @@ metadata/_custom_type_script = "uid://3xa4bffw5636"
 [node name="player" type="Node" parent="Sound/hold_layers/hold1" node_paths=PackedStringArray("_player")]
 script = ExtResource("22_1bp4h")
 _player = NodePath("../../../hold1")
-BaseVolumeDb = 7.0
+BaseVolumeDb = 15.0
 metadata/_custom_type_script = "uid://iiivy6ysp8od"
 
 [node name="hold2" type="Node" parent="Sound/hold_layers"]
@@ -195,7 +195,7 @@ metadata/_custom_type_script = "uid://iiivy6ysp8od"
 
 [node name="hold1" type="AudioStreamPlayer" parent="Sound"]
 stream = ExtResource("17_8vbpy")
-volume_db = 7.0
+volume_db = 15.0
 autoplay = true
 bus = &"Weapons"
 
