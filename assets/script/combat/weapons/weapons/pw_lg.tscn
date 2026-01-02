@@ -17,13 +17,13 @@
 [ext_resource type="Script" uid="uid://bdm4kpw6u4ocg" path="res://script/player/audio/combat/weapons/fire/PA_FullAuto.cs" id="14_e68g3"]
 [ext_resource type="AudioStream" uid="uid://bo1rj54migyfy" path="res://assets/sounds/combat/weapons/fires/lg/lg_attack.wav" id="16_i06g8"]
 [ext_resource type="AudioStream" uid="uid://cai7h3lm75ijp" path="res://assets/sounds/combat/weapons/fires/lg/lg_hold.wav" id="17_eksov"]
-[ext_resource type="Script" uid="uid://b8wru2tmfhgrb" path="res://script/engine_tools/audio/stream_player/AUD_StreamPlayer3D.cs" id="17_i06g8"]
-[ext_resource type="Script" uid="uid://c8ux4mvw6ve1t" path="res://script/engine_tools/audio/wrapper/AUD_ParallelSound.cs" id="17_u7yby"]
-[ext_resource type="Script" uid="uid://ca4sbvyfspdlk" path="res://script/engine_tools/audio/wrapper/AUD_LayeredSound.cs" id="19_om7ua"]
+[ext_resource type="Script" uid="uid://b8wru2tmfhgrb" path="res://script/engine_tools/audio/stream_players/AUD_StreamPlayer3D.cs" id="17_i06g8"]
+[ext_resource type="Script" uid="uid://c8ux4mvw6ve1t" path="res://script/engine_tools/audio/modules/AUD_ParallelSound.cs" id="17_u7yby"]
+[ext_resource type="Script" uid="uid://ca4sbvyfspdlk" path="res://script/engine_tools/audio/modules/AUD_LayeredSound.cs" id="19_om7ua"]
 [ext_resource type="AudioStream" uid="uid://b8jop7b5xtx8c" path="res://assets/sounds/combat/weapons/fires/brrt/brrrt_tail.wav" id="20_7215l"]
 [ext_resource type="AudioStream" uid="uid://mn7t52lxlr7n" path="res://assets/sounds/combat/weapons/fires/lg/lg_attack_2.wav" id="20_shr1g"]
-[ext_resource type="Script" uid="uid://3xa4bffw5636" path="res://script/engine_tools/audio/wrapper/AUD_Fader.cs" id="21_olywm"]
-[ext_resource type="Script" uid="uid://iiivy6ysp8od" path="res://script/engine_tools/audio/stream_player/AUD_StreamPlayer1D.cs" id="23_o6dp4"]
+[ext_resource type="Script" uid="uid://3xa4bffw5636" path="res://script/engine_tools/audio/modules/AUD_Fader.cs" id="21_olywm"]
+[ext_resource type="Script" uid="uid://iiivy6ysp8od" path="res://script/engine_tools/audio/stream_players/AUD_StreamPlayer1D.cs" id="23_o6dp4"]
 
 [sub_resource type="Resource" id="Resource_o6dp4"]
 script = ExtResource("7_eksov")
