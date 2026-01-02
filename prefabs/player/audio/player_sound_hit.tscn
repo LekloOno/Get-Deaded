@@ -29,11 +29,10 @@ stream = SubResource("AudioStreamPolyphonic_ran1i")
 volume_db = -3.0
 bus = &"Hit"
 
-[node name="critical_hit" type="Node" parent="critical_hit" node_paths=PackedStringArray("_player")]
+[node name="critical_hit" type="Node" parent="critical_hit"]
 script = ExtResource("2_vmlij")
 _polyphonicStream = SubResource("AudioStreamPolyphonic_ran1i")
 _maxPolyphony = 2.0
-_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("7_yj0ak")])
 _minPitch = 0.8
 _maxPitch = 1.2
@@ -50,10 +49,9 @@ stream = SubResource("AudioStreamPolyphonic_ran1i")
 volume_db = 2.5
 bus = &"Hit"
 
-[node name="kill" type="Node" parent="kill" node_paths=PackedStringArray("_player")]
+[node name="kill" type="Node" parent="kill"]
 script = ExtResource("2_vmlij")
 _polyphonicStream = SubResource("AudioStreamPolyphonic_ran1i")
-_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("4_u0ev1")])
 _maxPitch = 1.04
 metadata/_custom_type_script = "uid://c8ux4mvw6ve1t"
@@ -69,10 +67,9 @@ stream = SubResource("AudioStreamPolyphonic_ran1i")
 volume_db = 15.0
 bus = &"Hit"
 
-[node name="hit" type="Node" parent="hit" node_paths=PackedStringArray("_player")]
+[node name="hit" type="Node" parent="hit"]
 script = ExtResource("2_vmlij")
 _polyphonicStream = SubResource("AudioStreamPolyphonic_ran1i")
-_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("3_yj0ak"), ExtResource("4_cmbjv"), ExtResource("5_u0ev1"), ExtResource("6_b2os4")])
 _minPitch = 0.9
 _maxPitch = 1.1

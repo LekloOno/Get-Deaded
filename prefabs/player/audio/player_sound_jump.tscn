@@ -37,9 +37,8 @@ panning_strength = 0.2
 bus = &"Locomotion"
 attenuation_filter_cutoff_hz = 20500.0
 
-[node name="woosh" type="Node" parent="woosh" node_paths=PackedStringArray("_player")]
+[node name="woosh" type="Node" parent="woosh"]
 script = ExtResource("3_ow7aq")
-_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("3_rmq11")])
 _maxPitch = 1.2
 metadata/_custom_type_script = "uid://b0meb4dnvqc3l"
@@ -55,9 +54,8 @@ panning_strength = 0.2
 bus = &"Locomotion"
 attenuation_filter_cutoff_hz = 7000.0
 
-[node name="clothes" type="Node" parent="clothes" node_paths=PackedStringArray("_player")]
+[node name="clothes" type="Node" parent="clothes"]
 script = ExtResource("3_ow7aq")
-_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("4_rd8yu"), ExtResource("5_tef14")])
 _minPitch = 1.2
 _maxPitch = 1.4
@@ -73,9 +71,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
 panning_strength = 0.2
 bus = &"Locomotion"
 
-[node name="steps" type="Node" parent="steps" node_paths=PackedStringArray("_player")]
+[node name="steps" type="Node" parent="steps"]
 script = ExtResource("3_ow7aq")
-_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("13_ttwdl"), ExtResource("14_gkude"), ExtResource("15_urv4d"), ExtResource("16_ow7aq"), ExtResource("17_k8lso")])
 _minPitch = 0.6
 _maxPitch = 0.75
@@ -91,9 +88,8 @@ panning_strength = 0.2
 bus = &"Locomotion"
 attenuation_filter_cutoff_hz = 20500.0
 
-[node name="walljump_clothes" type="Node" parent="walljump_clothes" node_paths=PackedStringArray("_player")]
+[node name="walljump_clothes" type="Node" parent="walljump_clothes"]
 script = ExtResource("3_ow7aq")
-_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("5_tef14"), ExtResource("6_tef14")])
 _minPitch = 1.6
 _maxPitch = 2.2
@@ -109,9 +105,8 @@ panning_strength = 0.2
 bus = &"Locomotion"
 attenuation_filter_cutoff_hz = 20500.0
 
-[node name="walljump_woosh" type="Node" parent="walljump_woosh" node_paths=PackedStringArray("_player")]
+[node name="walljump_woosh" type="Node" parent="walljump_woosh"]
 script = ExtResource("3_ow7aq")
-_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("7_dqnya")])
 _maxPitch = 1.5
 metadata/_custom_type_script = "uid://b0meb4dnvqc3l"
@@ -125,9 +120,8 @@ metadata/_custom_type_script = "uid://b8wru2tmfhgrb"
 panning_strength = 0.2
 bus = &"Locomotion"
 
-[node name="wallclimb" type="Node" parent="wallclimb" node_paths=PackedStringArray("_player")]
+[node name="wallclimb" type="Node" parent="wallclimb"]
 script = ExtResource("3_ow7aq")
-_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("8_3f8na"), ExtResource("9_m3p2h")])
 _minPitch = 1.2
 _maxPitch = 1.8
@@ -143,9 +137,8 @@ panning_strength = 0.2
 bus = &"Locomotion"
 attenuation_filter_cutoff_hz = 400.0
 
-[node name="wallclimb_low" type="Node" parent="wallclimb_low" node_paths=PackedStringArray("_player")]
+[node name="wallclimb_low" type="Node" parent="wallclimb_low"]
 script = ExtResource("3_ow7aq")
-_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("10_pq24k"), ExtResource("11_jir4u")])
 _minPitch = 0.6
 _maxPitch = 0.7
@@ -160,9 +153,8 @@ metadata/_custom_type_script = "uid://b8wru2tmfhgrb"
 panning_strength = 0.2
 bus = &"Locomotion"
 
-[node name="wallclimb_noise" type="Node" parent="wallclimb_noise" node_paths=PackedStringArray("_player")]
+[node name="wallclimb_noise" type="Node" parent="wallclimb_noise"]
 script = ExtResource("3_ow7aq")
-_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("12_ttwdl")])
 _minPitch = 1.2
 _maxPitch = 1.6

@@ -14,14 +14,12 @@ script = ExtResource("1_mupqa")
 _sound = NodePath("layers")
 metadata/_custom_type_script = "uid://couy6kxscsx0g"
 
-[node name="layers" type="Node" parent="." node_paths=PackedStringArray("_layers")]
+[node name="layers" type="Node" parent="."]
 script = ExtResource("2_bd0aa")
-_layers = [NodePath("pouish"), NodePath("impact")]
 metadata/_custom_type_script = "uid://ca4sbvyfspdlk"
 
-[node name="pouish" type="Node" parent="layers" node_paths=PackedStringArray("_player")]
+[node name="pouish" type="Node" parent="layers"]
 script = ExtResource("4_dtbis")
-_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("4_apts4")])
 _minPitch = 0.8
 metadata/_custom_type_script = "uid://b0meb4dnvqc3l"
@@ -31,9 +29,8 @@ script = ExtResource("3_q1y74")
 _player = NodePath("../../../pouish")
 metadata/_custom_type_script = "uid://b8wru2tmfhgrb"
 
-[node name="impact" type="Node" parent="layers" node_paths=PackedStringArray("_player")]
+[node name="impact" type="Node" parent="layers"]
 script = ExtResource("4_dtbis")
-_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("5_apts4"), ExtResource("6_q1y74"), ExtResource("7_dtbis")])
 _minPitch = 0.8
 metadata/_custom_type_script = "uid://b0meb4dnvqc3l"

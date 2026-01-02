@@ -27,14 +27,12 @@ panning_strength = 0.0
 bus = &"Locomotion"
 attenuation_filter_cutoff_hz = 20500.0
 
-[node name="slide_in" type="Node" parent="." node_paths=PackedStringArray("_layers")]
+[node name="slide_in" type="Node" parent="."]
 script = ExtResource("2_kpy2o")
-_layers = [NodePath("slide_in_clothes")]
 metadata/_custom_type_script = "uid://ca4sbvyfspdlk"
 
-[node name="slide_in_clothes" type="Node" parent="slide_in" node_paths=PackedStringArray("_player")]
+[node name="slide_in_clothes" type="Node" parent="slide_in"]
 script = ExtResource("3_xrf4p")
-_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("5_fxpf0"), ExtResource("6_vraua"), ExtResource("7_3dpqv"), ExtResource("8_7mlrt"), ExtResource("9_3wy3k")])
 metadata/_custom_type_script = "uid://b0meb4dnvqc3l"
 
@@ -49,9 +47,8 @@ volume_db = -2.0
 autoplay = true
 bus = &"Locomotion"
 
-[node name="slide_hold2" type="Node" parent="." node_paths=PackedStringArray("_sound")]
+[node name="slide_hold2" type="Node" parent="."]
 script = ExtResource("12_rciob")
-_sound = NodePath("player")
 _fadeInTime = 0.1
 _fadeOutTime = 0.2
 metadata/_custom_type_script = "uid://3xa4bffw5636"

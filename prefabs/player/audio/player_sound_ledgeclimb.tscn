@@ -15,9 +15,8 @@ metadata/_custom_type_script = "uid://drst58njg40lu"
 bus = &"Locomotion"
 attenuation_filter_cutoff_hz = 15000.0
 
-[node name="clothes" type="Node" parent="clothes" node_paths=PackedStringArray("_player")]
+[node name="clothes" type="Node" parent="clothes"]
 script = ExtResource("2_gmh50")
-_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("3_gmh50"), ExtResource("4_vkf3d")])
 _minPitch = 1.2
 _maxPitch = 1.5

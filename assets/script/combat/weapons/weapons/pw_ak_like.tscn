@@ -132,15 +132,13 @@ _fire = NodePath("../PWF_FullAuto")
 _sound = NodePath("layers")
 metadata/_custom_type_script = "uid://baygafcv8gr3s"
 
-[node name="layers" type="Node" parent="PAF_Generic" node_paths=PackedStringArray("_layers")]
+[node name="layers" type="Node" parent="PAF_Generic"]
 script = ExtResource("16_xke5c")
-_layers = [NodePath("tail"), NodePath("layer1"), NodePath("layer2"), NodePath("layer3")]
 metadata/_custom_type_script = "uid://ca4sbvyfspdlk"
 
-[node name="tail" type="Node" parent="PAF_Generic/layers" node_paths=PackedStringArray("_player")]
+[node name="tail" type="Node" parent="PAF_Generic/layers"]
 script = ExtResource("17_l5b2w")
 _polyphonicStream = SubResource("AudioStreamPolyphonic_x86ej")
-_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("20_ivdpx")])
 _minPitch = 0.8
 _maxPitch = 0.9
@@ -151,10 +149,9 @@ script = ExtResource("16_v8jjb")
 _player = NodePath("../../../tail")
 metadata/_custom_type_script = "uid://b8wru2tmfhgrb"
 
-[node name="layer1" type="Node" parent="PAF_Generic/layers" node_paths=PackedStringArray("_player")]
+[node name="layer1" type="Node" parent="PAF_Generic/layers"]
 script = ExtResource("17_l5b2w")
 _polyphonicStream = SubResource("AudioStreamPolyphonic_x86ej")
-_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("17_yciib"), ExtResource("18_jqekf")])
 _minPitch = 2.0
 _maxPitch = 2.5
@@ -166,10 +163,9 @@ _player = NodePath("../../../layer1")
 BaseVolumeDb = 2.0
 metadata/_custom_type_script = "uid://b8wru2tmfhgrb"
 
-[node name="layer2" type="Node" parent="PAF_Generic/layers" node_paths=PackedStringArray("_player")]
+[node name="layer2" type="Node" parent="PAF_Generic/layers"]
 script = ExtResource("17_l5b2w")
 _polyphonicStream = SubResource("AudioStreamPolyphonic_x86ej")
-_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("16_3ruek")])
 _minPitch = 0.7
 _maxPitch = 0.8
@@ -181,10 +177,9 @@ _player = NodePath("../../../layer2")
 BaseVolumeDb = 4.0
 metadata/_custom_type_script = "uid://b8wru2tmfhgrb"
 
-[node name="layer3" type="Node" parent="PAF_Generic/layers" node_paths=PackedStringArray("_player")]
+[node name="layer3" type="Node" parent="PAF_Generic/layers"]
 script = ExtResource("17_l5b2w")
 _polyphonicStream = SubResource("AudioStreamPolyphonic_x86ej")
-_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("20_jqekf")])
 _maxPitch = 1.1
 metadata/_custom_type_script = "uid://c8ux4mvw6ve1t"

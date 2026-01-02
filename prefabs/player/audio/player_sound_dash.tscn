@@ -22,9 +22,8 @@ metadata/_custom_type_script = "uid://ct0dsw1xarajw"
 script = ExtResource("2_tlkli")
 metadata/_custom_type_script = "uid://ca4sbvyfspdlk"
 
-[node name="slide" type="Node" parent="layers" node_paths=PackedStringArray("_player")]
+[node name="slide" type="Node" parent="layers"]
 script = ExtResource("3_jwpo8")
-_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("3_tlkli"), ExtResource("4_ilefn")])
 _minPitch = 1.1
 _maxPitch = 1.3
@@ -35,9 +34,8 @@ script = ExtResource("6_w41n0")
 _player = NodePath("../../../slide")
 metadata/_custom_type_script = "uid://b8wru2tmfhgrb"
 
-[node name="woosh" type="Node" parent="layers" node_paths=PackedStringArray("_player")]
+[node name="woosh" type="Node" parent="layers"]
 script = ExtResource("3_jwpo8")
-_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("5_y7evh")])
 _minPitch = 0.8
 metadata/_custom_type_script = "uid://b0meb4dnvqc3l"
@@ -47,9 +45,8 @@ script = ExtResource("6_w41n0")
 _player = NodePath("../../../woosh")
 metadata/_custom_type_script = "uid://b8wru2tmfhgrb"
 
-[node name="woosh2" type="Node" parent="layers" node_paths=PackedStringArray("_player")]
+[node name="woosh2" type="Node" parent="layers"]
 script = ExtResource("3_jwpo8")
-_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("7_ilefn")])
 _minPitch = 1.5
 _maxPitch = 1.7
@@ -60,9 +57,8 @@ script = ExtResource("6_w41n0")
 _player = NodePath("../../../woosh2")
 metadata/_custom_type_script = "uid://b8wru2tmfhgrb"
 
-[node name="clothes" type="Node" parent="layers" node_paths=PackedStringArray("_player")]
+[node name="clothes" type="Node" parent="layers"]
 script = ExtResource("3_jwpo8")
-_player = NodePath("player")
 _sounds = Array[AudioStream]([ExtResource("8_1ptnn"), ExtResource("9_0jpch"), ExtResource("10_jwpo8"), ExtResource("11_w41n0")])
 _minPitch = 2.0
 _maxPitch = 2.0
