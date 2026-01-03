@@ -1,17 +1,17 @@
 [gd_scene load_steps=13 format=3 uid="uid://biqrtt8bmy320"]
 
 [ext_resource type="Script" uid="uid://b2jn2nortl4pm" path="res://script/player/audio/PA_Slide.cs" id="1_gthyh"]
-[ext_resource type="Script" uid="uid://ca4sbvyfspdlk" path="res://addons/GaudioProcessTree/nodes/modules/AUD_Layerer.cs" id="2_kpy2o"]
-[ext_resource type="Script" uid="uid://b0meb4dnvqc3l" path="res://addons/GaudioProcessTree/nodes/modules/AUD_Randomizer.cs" id="3_xrf4p"]
+[ext_resource type="Script" uid="uid://dwg5mwrq18ow2" path="res://addons/GaudioProcessTree/nodes/modules/AUD_Layerer.cs" id="2_kpy2o"]
+[ext_resource type="Script" uid="uid://dmowaohx8nd7q" path="res://addons/GaudioProcessTree/nodes/modules/AUD_Randomizer.cs" id="3_xrf4p"]
 [ext_resource type="AudioStream" uid="uid://bfoha2oj2ts6j" path="res://assets/sounds/clothes/clothes.wav" id="5_fxpf0"]
 [ext_resource type="AudioStream" uid="uid://cbgjk066ugfoy" path="res://assets/sounds/clothes/clothes_2.wav" id="6_vraua"]
 [ext_resource type="AudioStream" uid="uid://dqjv7glvctdav" path="res://assets/sounds/clothes/clothes_3.wav" id="7_3dpqv"]
 [ext_resource type="AudioStream" uid="uid://cv7hf0tm8n6mw" path="res://assets/sounds/clothes/clothes_5.wav" id="8_7mlrt"]
 [ext_resource type="AudioStream" uid="uid://byvkie35nxxfe" path="res://assets/sounds/clothes/clothes_6.wav" id="9_3wy3k"]
-[ext_resource type="Script" uid="uid://b8wru2tmfhgrb" path="res://addons/GaudioProcessTree/nodes/stream_players/AUD_StreamPlayer3D.cs" id="9_aam5v"]
+[ext_resource type="Script" uid="uid://dsv3ptnaeu18d" path="res://addons/GaudioProcessTree/nodes/stream_players/AUD_StreamPlayer3D.cs" id="9_aam5v"]
 [ext_resource type="AudioStream" uid="uid://hg0p05fsc5nk" path="res://assets/sounds/slideloop/slideloop.wav" id="10_srf5i"]
-[ext_resource type="Script" uid="uid://iiivy6ysp8od" path="res://addons/GaudioProcessTree/nodes/stream_players/AUD_StreamPlayer1D.cs" id="11_dsvqf"]
-[ext_resource type="Script" uid="uid://3xa4bffw5636" path="res://addons/GaudioProcessTree/nodes/modules/AUD_Fader.cs" id="12_rciob"]
+[ext_resource type="Script" uid="uid://dbtsyp0hru7g" path="res://addons/GaudioProcessTree/nodes/stream_players/AUD_StreamPlayer1D.cs" id="11_dsvqf"]
+[ext_resource type="Script" uid="uid://ex600fu1m5wd" path="res://addons/GaudioProcessTree/nodes/modules/AUD_Fader.cs" id="12_rciob"]
 
 [node name="PA_Slide" type="Node3D" node_paths=PackedStringArray("_slideIn", "_slideHold")]
 script = ExtResource("1_gthyh")
@@ -29,17 +29,14 @@ attenuation_filter_cutoff_hz = 20500.0
 
 [node name="slide_in" type="Node" parent="."]
 script = ExtResource("2_kpy2o")
-metadata/_custom_type_script = "uid://ca4sbvyfspdlk"
 
 [node name="slide_in_clothes" type="Node" parent="slide_in"]
 script = ExtResource("3_xrf4p")
-_sounds = Array[AudioStream]([ExtResource("5_fxpf0"), ExtResource("6_vraua"), ExtResource("7_3dpqv"), ExtResource("8_7mlrt"), ExtResource("9_3wy3k")])
-metadata/_custom_type_script = "uid://b0meb4dnvqc3l"
+Sounds = Array[AudioStream]([ExtResource("5_fxpf0"), ExtResource("6_vraua"), ExtResource("7_3dpqv"), ExtResource("8_7mlrt"), ExtResource("9_3wy3k")])
 
-[node name="player" type="Node" parent="slide_in/slide_in_clothes" node_paths=PackedStringArray("_player")]
+[node name="player" type="Node" parent="slide_in/slide_in_clothes" node_paths=PackedStringArray("Player")]
 script = ExtResource("9_aam5v")
-_player = NodePath("../../../slide_in_clothes")
-metadata/_custom_type_script = "uid://b8wru2tmfhgrb"
+Player = NodePath("../../../slide_in_clothes")
 
 [node name="slide_hold" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_srf5i")
@@ -51,10 +48,8 @@ bus = &"Locomotion"
 script = ExtResource("12_rciob")
 _fadeInTime = 0.1
 _fadeOutTime = 0.2
-metadata/_custom_type_script = "uid://3xa4bffw5636"
 
-[node name="player" type="Node" parent="slide_hold2" node_paths=PackedStringArray("_player")]
+[node name="player" type="Node" parent="slide_hold2" node_paths=PackedStringArray("Player")]
 script = ExtResource("11_dsvqf")
-_player = NodePath("../../slide_hold")
+Player = NodePath("../../slide_hold")
 BaseVolumeDb = -2.0
-metadata/_custom_type_script = "uid://iiivy6ysp8od"

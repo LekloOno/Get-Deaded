@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://hpjwxvscq5v5"]
 
 [ext_resource type="Script" uid="uid://e4bcjkfxrbxl" path="res://script/player/audio/PA_FootSteps.cs" id="1_eqwql"]
-[ext_resource type="Script" uid="uid://b8wru2tmfhgrb" path="res://addons/GaudioProcessTree/nodes/stream_players/AUD_StreamPlayer3D.cs" id="2_8rppm"]
+[ext_resource type="Script" uid="uid://dsv3ptnaeu18d" path="res://addons/GaudioProcessTree/nodes/stream_players/AUD_StreamPlayer3D.cs" id="2_8rppm"]
 [ext_resource type="AudioStream" uid="uid://c202uar3rg40l" path="res://assets/sounds/footsteps/concrete-step1.wav" id="3_fkhlg"]
-[ext_resource type="Script" uid="uid://b0meb4dnvqc3l" path="res://addons/GaudioProcessTree/nodes/modules/AUD_Randomizer.cs" id="3_s405y"]
+[ext_resource type="Script" uid="uid://dmowaohx8nd7q" path="res://addons/GaudioProcessTree/nodes/modules/AUD_Randomizer.cs" id="3_s405y"]
 [ext_resource type="AudioStream" uid="uid://dw0ipfbd7lxkv" path="res://assets/sounds/footsteps/concrete-step2.wav" id="4_8rppm"]
 [ext_resource type="AudioStream" uid="uid://dnjywl4vsbygw" path="res://assets/sounds/footsteps/concrete-step3.wav" id="5_s405y"]
 [ext_resource type="AudioStream" uid="uid://c51litrqlhdk8" path="res://assets/sounds/footsteps/concrete-step5.wav" id="6_ikmkf"]
@@ -29,17 +29,15 @@ bus = &"Locomotion"
 
 [node name="normal" type="Node" parent="normal"]
 script = ExtResource("3_s405y")
-_sounds = Array[AudioStream]([ExtResource("3_fkhlg"), ExtResource("4_8rppm"), ExtResource("5_s405y"), ExtResource("6_ikmkf"), ExtResource("7_g3030")])
-_minPitch = 0.55
-_maxPitch = 0.75
-metadata/_custom_type_script = "uid://b0meb4dnvqc3l"
+Sounds = Array[AudioStream]([ExtResource("3_fkhlg"), ExtResource("4_8rppm"), ExtResource("5_s405y"), ExtResource("6_ikmkf"), ExtResource("7_g3030")])
+MinPitch = 0.55
+MaxPitch = 0.75
 
-[node name="player" type="Node" parent="normal/normal" node_paths=PackedStringArray("_player")]
+[node name="player" type="Node" parent="normal/normal" node_paths=PackedStringArray("Player")]
 script = ExtResource("2_8rppm")
-_player = NodePath("../..")
+Player = NodePath("../..")
 BaseVolumeDb = -23.0
 BasePitchScale = 0.8
-metadata/_custom_type_script = "uid://b8wru2tmfhgrb"
 
 [node name="sprint" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
@@ -48,12 +46,10 @@ bus = &"Locomotion"
 
 [node name="sprint" type="Node" parent="sprint"]
 script = ExtResource("3_s405y")
-_sounds = Array[AudioStream]([ExtResource("3_fkhlg"), ExtResource("4_8rppm"), ExtResource("5_s405y"), ExtResource("6_ikmkf"), ExtResource("7_g3030")])
-_minPitch = 0.85
-_maxPitch = 1.05
-metadata/_custom_type_script = "uid://b0meb4dnvqc3l"
+Sounds = Array[AudioStream]([ExtResource("3_fkhlg"), ExtResource("4_8rppm"), ExtResource("5_s405y"), ExtResource("6_ikmkf"), ExtResource("7_g3030")])
+MinPitch = 0.85
+MaxPitch = 1.05
 
-[node name="player" type="Node" parent="sprint/sprint" node_paths=PackedStringArray("_player")]
+[node name="player" type="Node" parent="sprint/sprint" node_paths=PackedStringArray("Player")]
 script = ExtResource("2_8rppm")
-_player = NodePath("../..")
-metadata/_custom_type_script = "uid://b8wru2tmfhgrb"
+Player = NodePath("../..")

@@ -1,12 +1,12 @@
 [gd_scene load_steps=13 format=3 uid="uid://cmyfvd0kn5bog"]
 
 [ext_resource type="Script" uid="uid://ct0dsw1xarajw" path="res://script/player/audio/PA_Dash.cs" id="1_0fwyc"]
-[ext_resource type="Script" uid="uid://ca4sbvyfspdlk" path="res://addons/GaudioProcessTree/nodes/modules/AUD_Layerer.cs" id="2_tlkli"]
-[ext_resource type="Script" uid="uid://b0meb4dnvqc3l" path="res://addons/GaudioProcessTree/nodes/modules/AUD_Randomizer.cs" id="3_jwpo8"]
+[ext_resource type="Script" uid="uid://dwg5mwrq18ow2" path="res://addons/GaudioProcessTree/nodes/modules/AUD_Layerer.cs" id="2_tlkli"]
+[ext_resource type="Script" uid="uid://dmowaohx8nd7q" path="res://addons/GaudioProcessTree/nodes/modules/AUD_Randomizer.cs" id="3_jwpo8"]
 [ext_resource type="AudioStream" uid="uid://cdhw3f001dd4s" path="res://assets/sounds/slides/slide_2.wav" id="3_tlkli"]
 [ext_resource type="AudioStream" uid="uid://suxvntk8hrh" path="res://assets/sounds/slides/slide_3.wav" id="4_ilefn"]
 [ext_resource type="AudioStream" uid="uid://bnck0lo2ewye5" path="res://assets/sounds/woosh/woosh2.wav" id="5_y7evh"]
-[ext_resource type="Script" uid="uid://b8wru2tmfhgrb" path="res://addons/GaudioProcessTree/nodes/stream_players/AUD_StreamPlayer3D.cs" id="6_w41n0"]
+[ext_resource type="Script" uid="uid://dsv3ptnaeu18d" path="res://addons/GaudioProcessTree/nodes/stream_players/AUD_StreamPlayer3D.cs" id="6_w41n0"]
 [ext_resource type="AudioStream" uid="uid://cdo61fljcs0xo" path="res://assets/sounds/slides/slide_4.wav" id="7_ilefn"]
 [ext_resource type="AudioStream" uid="uid://bfoha2oj2ts6j" path="res://assets/sounds/clothes/clothes.wav" id="8_1ptnn"]
 [ext_resource type="AudioStream" uid="uid://cbgjk066ugfoy" path="res://assets/sounds/clothes/clothes_2.wav" id="9_0jpch"]
@@ -20,54 +20,45 @@ metadata/_custom_type_script = "uid://ct0dsw1xarajw"
 
 [node name="layers" type="Node" parent="."]
 script = ExtResource("2_tlkli")
-metadata/_custom_type_script = "uid://ca4sbvyfspdlk"
 
 [node name="slide" type="Node" parent="layers"]
 script = ExtResource("3_jwpo8")
-_sounds = Array[AudioStream]([ExtResource("3_tlkli"), ExtResource("4_ilefn")])
-_minPitch = 1.1
-_maxPitch = 1.3
-metadata/_custom_type_script = "uid://b0meb4dnvqc3l"
+Sounds = Array[AudioStream]([ExtResource("3_tlkli"), ExtResource("4_ilefn")])
+MinPitch = 1.1
+MaxPitch = 1.3
 
-[node name="player" type="Node" parent="layers/slide" node_paths=PackedStringArray("_player")]
+[node name="player" type="Node" parent="layers/slide" node_paths=PackedStringArray("Player")]
 script = ExtResource("6_w41n0")
-_player = NodePath("../../../slide")
-metadata/_custom_type_script = "uid://b8wru2tmfhgrb"
+Player = NodePath("../../../slide")
 
 [node name="woosh" type="Node" parent="layers"]
 script = ExtResource("3_jwpo8")
-_sounds = Array[AudioStream]([ExtResource("5_y7evh")])
-_minPitch = 0.8
-metadata/_custom_type_script = "uid://b0meb4dnvqc3l"
+Sounds = Array[AudioStream]([ExtResource("5_y7evh")])
+MinPitch = 0.8
 
-[node name="player" type="Node" parent="layers/woosh" node_paths=PackedStringArray("_player")]
+[node name="player" type="Node" parent="layers/woosh" node_paths=PackedStringArray("Player")]
 script = ExtResource("6_w41n0")
-_player = NodePath("../../../woosh")
-metadata/_custom_type_script = "uid://b8wru2tmfhgrb"
+Player = NodePath("../../../woosh")
 
 [node name="woosh2" type="Node" parent="layers"]
 script = ExtResource("3_jwpo8")
-_sounds = Array[AudioStream]([ExtResource("7_ilefn")])
-_minPitch = 1.5
-_maxPitch = 1.7
-metadata/_custom_type_script = "uid://b0meb4dnvqc3l"
+Sounds = Array[AudioStream]([ExtResource("7_ilefn")])
+MinPitch = 1.5
+MaxPitch = 1.7
 
-[node name="player" type="Node" parent="layers/woosh2" node_paths=PackedStringArray("_player")]
+[node name="player" type="Node" parent="layers/woosh2" node_paths=PackedStringArray("Player")]
 script = ExtResource("6_w41n0")
-_player = NodePath("../../../woosh2")
-metadata/_custom_type_script = "uid://b8wru2tmfhgrb"
+Player = NodePath("../../../woosh2")
 
 [node name="clothes" type="Node" parent="layers"]
 script = ExtResource("3_jwpo8")
-_sounds = Array[AudioStream]([ExtResource("8_1ptnn"), ExtResource("9_0jpch"), ExtResource("10_jwpo8"), ExtResource("11_w41n0")])
-_minPitch = 2.0
-_maxPitch = 2.0
-metadata/_custom_type_script = "uid://b0meb4dnvqc3l"
+Sounds = Array[AudioStream]([ExtResource("8_1ptnn"), ExtResource("9_0jpch"), ExtResource("10_jwpo8"), ExtResource("11_w41n0")])
+MinPitch = 2.0
+MaxPitch = 2.0
 
-[node name="player" type="Node" parent="layers/clothes" node_paths=PackedStringArray("_player")]
+[node name="player" type="Node" parent="layers/clothes" node_paths=PackedStringArray("Player")]
 script = ExtResource("6_w41n0")
-_player = NodePath("../../../clothes")
-metadata/_custom_type_script = "uid://b8wru2tmfhgrb"
+Player = NodePath("../../../clothes")
 
 [node name="slide" type="AudioStreamPlayer3D" parent="."]
 bus = &"Locomotion"

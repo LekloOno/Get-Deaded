@@ -18,7 +18,6 @@
 [sub_resource type="Resource" id="Resource_488s0"]
 script = ExtResource("6_s0i7c")
 BodyPart = 0
-Modifier = 1.0
 metadata/_custom_type_script = "uid://sujdlokcwnd6"
 
 [sub_resource type="Resource" id="Resource_76u7k"]
@@ -46,8 +45,6 @@ metadata/_custom_type_script = "uid://0w0m608ktkwu"
 
 [sub_resource type="Resource" id="Resource_38m5i"]
 script = ExtResource("11_rvdm3")
-_halfInput = 0.0
-_minOutput = 0.0
 _maxOutput = 0.4
 metadata/_custom_type_script = "uid://t5n7py52g5oj"
 
