@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class PHX_Time : Node, AUD_ILocalTime
+public partial class PHX_Time : Node
 {
     public static PHX_Time Instance {get; private set;}
     /// <summary>
@@ -25,7 +25,7 @@ public partial class PHX_Time : Node, AUD_ILocalTime
     public override void _EnterTree()
     {
         Instance = this;
-        AUD_Time.Instance = this;
+        StaticServiceLifeCycle<PHX_Time>.MarkInitialized();
     }
 
     public override void _Ready()
@@ -39,5 +39,4 @@ public partial class PHX_Time : Node, AUD_ILocalTime
         _scaledTicksMsec += (ulong) deltaMsec;
         _scaledTicksUsec += (ulong) deltaMsec * 1000;;
     }
-    
 }
