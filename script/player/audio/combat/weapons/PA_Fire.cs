@@ -1,3 +1,4 @@
+using GaudioProcessTree;
 using Godot;
 
 public abstract partial class PA_Fire : Node3D

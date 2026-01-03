@@ -1,3 +1,4 @@
+using GaudioProcessTree;
 using Godot;
 
 [GlobalClass]

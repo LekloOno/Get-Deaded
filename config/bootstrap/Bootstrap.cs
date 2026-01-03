@@ -1,3 +1,4 @@
+using GaudioProcessTree.Static.Time;
 using Godot;
 
 public partial class Bootstrap : Node
