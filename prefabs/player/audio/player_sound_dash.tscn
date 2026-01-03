@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=3 uid="uid://cmyfvd0kn5bog"]
 
 [ext_resource type="Script" uid="uid://ct0dsw1xarajw" path="res://script/player/audio/PA_Dash.cs" id="1_0fwyc"]
-[ext_resource type="Script" uid="uid://ca4sbvyfspdlk" path="res://addons/GaudioProcessTree/nodes/modules/AUD_LayeredSound.cs" id="2_tlkli"]
-[ext_resource type="Script" uid="uid://b0meb4dnvqc3l" path="res://addons/GaudioProcessTree/nodes/modules/AUD_RandomSound.cs" id="3_jwpo8"]
+[ext_resource type="Script" uid="uid://ca4sbvyfspdlk" path="res://addons/GaudioProcessTree/nodes/modules/AUD_Layerer.cs" id="2_tlkli"]
+[ext_resource type="Script" uid="uid://b0meb4dnvqc3l" path="res://addons/GaudioProcessTree/nodes/modules/AUD_Randomizer.cs" id="3_jwpo8"]
 [ext_resource type="AudioStream" uid="uid://cdhw3f001dd4s" path="res://assets/sounds/slides/slide_2.wav" id="3_tlkli"]
 [ext_resource type="AudioStream" uid="uid://suxvntk8hrh" path="res://assets/sounds/slides/slide_3.wav" id="4_ilefn"]
 [ext_resource type="AudioStream" uid="uid://bnck0lo2ewye5" path="res://assets/sounds/woosh/woosh2.wav" id="5_y7evh"]
