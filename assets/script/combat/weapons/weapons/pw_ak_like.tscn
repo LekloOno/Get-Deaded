@@ -134,6 +134,7 @@ metadata/_custom_type_script = "uid://baygafcv8gr3s"
 
 [node name="layers" type="Node" parent="PAF_Generic"]
 script = ExtResource("16_xke5c")
+UseTimeScale = true
 
 [node name="tail" type="Node" parent="PAF_Generic/layers"]
 script = ExtResource("17_l5b2w")
