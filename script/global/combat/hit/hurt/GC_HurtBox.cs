@@ -31,11 +31,18 @@ public partial class GC_HurtBox : Area3D
     public static float RealHitModifier(GC_DamageModifier damageModifier) =>
         damageModifier / CONF_BodyModifiers.GetDefaultModifier(damageModifier.BodyPart);
 
-    public bool Damage(GC_IHitDealer hitDealer, out float takenDamage, out float overflow, out GC_Health deepest, float subHitSize = 1f)
-    {
+    public bool Damage(
+        GC_IHitDealer hitDealer,
+        out float takenDamage,
+        out float overflow,
+        out GC_Health deepest,
+        float dmgMultiplier = 1f,
+        float subHitSize = 1f
+    ) {
         float expectedDamage = hitDealer.HitData.GetDamage(BodyPart);
         expectedDamage *= _modifier;
         expectedDamage *= subHitSize;
+        expectedDamage *= dmgMultiplier;
         expectedDamage *= DirMultiplier(hitDealer);
 
         return Entity.HealthManager.Damage(hitDealer, expectedDamage, out takenDamage, out overflow, out deepest);
@@ -86,6 +93,7 @@ public partial class GC_HurtBox : Area3D
         Vector3? localKnockback,    // used for ragdoll physics
         Vector3? globalKnockBack,   // Global KnockBack, actually influences the entity position
         bool overrideBodyPart = false,
+        float dmgMultiplier = 1f,
         float subHitSize = 1f       // used to emulate sub-tick continuous fire. 
     ) {
         bool killed = Damage(
@@ -93,6 +101,7 @@ public partial class GC_HurtBox : Area3D
             out float takenDamage,
             out float overflow,
             out GC_Health deepest,
+            dmgMultiplier,
             subHitSize
         );
 
