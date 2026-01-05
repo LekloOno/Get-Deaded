@@ -37,13 +37,21 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
     public MATH_AdditiveModifiers SpreadMultiplier {get; private set;} = new();
     public float Spread => _spread * SpreadMultiplier.Result();
     public MATH_AdditiveModifiers KickBackMultiplier {get; private set;} = new();
-    public MATH_AdditiveModifiers DamageMultipler => _hitData.DamageMultiplier;
+    /// <summary>
+    /// A damage Multiplier related to one individual shot. It is consumed for each fired shot.
+    /// </summary>
+    public MATH_AdditiveModifiers TempDamageMultiplier {get; private set;} = new();
+    public MATH_AdditiveModifiers TempKnockBackMultiplier {get; private set;} = new();
+    public MATH_AdditiveModifiers DamageMultiplier => _hitData.DamageMultiplier;
     public GC_Hit HitData => _hitData;
     public Vector3 Direction => -GlobalBasis.Z; 
     private static Random _random = new();
     public float KickBack => _kickBack * KickBackMultiplier.Result() * _partialMultiplier;
     public float Damage => _hitData.Damage * _partialMultiplier;
     public float HitTrauma => _maxTrauma * _partialMultiplier;
+
+    private float _tempDamageMultiplier = 1f;
+    private float _tempKnockBackMultiplier = 1f;
 
 
     private float _partialMultiplier = 1f;
@@ -82,6 +90,9 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
 
     public void Shoot()
     {
+        _tempDamageMultiplier = TempDamageMultiplier.Consume();
+        _tempKnockBackMultiplier = TempKnockBackMultiplier.Consume();
+
         Vector3 direction = Direction;
         float spread = Mathf.Max(Spread, 0f);
         if (spread != 0)
@@ -145,14 +156,15 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
         else
             globalKnockBack = _knockBack?.KnockBackImpulse(direction);
         
+        globalKnockBack *= _tempKnockBackMultiplier;
         // Do not use partial hit ragdoll here for now since we only trigger ragdoll on hit
         // But if we add active ragdoll later, it might be better to consider using scaled Damage.
-        Vector3 localKnockBack = direction * _hitData.Damage * _ragdollFactor;
+        Vector3 localKnockBack = direction * Damage * _ragdollFactor;
 
         HitEventArgs reg = hurtBox.HandleHit(
             OwnerEntity, this, hitPosition, from,
             localKnockBack, globalKnockBack,
-            _ignoreCrit, _partialMultiplier
+            _ignoreCrit, _tempDamageMultiplier, _partialMultiplier
         );
 
         DoHit(reg, hitPosition);
