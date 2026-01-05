@@ -4,6 +4,13 @@ public abstract class MATH_PropertyModifier<T>
 {
     protected List<T> _modifiers = [];
     public abstract T Result();
+    public T Consume()
+    {
+        T result = Result();
+        _modifiers.Clear();
+        return result;
+    }
+    
     public MATH_PropertyModifier<T> Add(T modifier)
     {
         _modifiers.Add(modifier);
