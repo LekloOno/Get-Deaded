@@ -55,7 +55,7 @@ public partial class GC_SequenceHitBox : Node
 
     private void RegisterHit(GC_HurtBox hurtBox)
     {
-        _hitEntities.Add(hurtBox.Entity, PHX_Time.ScaledTicksMsec);
+        _hitEntities[hurtBox.Entity] = PHX_Time.ScaledTicksMsec;
         HitEntity?.Invoke(hurtBox);
     }
 
