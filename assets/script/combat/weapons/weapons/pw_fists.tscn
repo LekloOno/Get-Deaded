@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://be54as36nebp4"]
+[gd_scene load_steps=26 format=3 uid="uid://be54as36nebp4"]
 
 [ext_resource type="Script" uid="uid://c3are182lodyx" path="res://script/player/combat/weapons/weapon/PW_Simple.cs" id="1_k4qra"]
 [ext_resource type="Texture2D" uid="uid://8rrtqp0otyee" path="res://assets/sprites/weapons/meleepixel.png" id="2_sqc2j"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://cxiwvat6vddlp" path="res://script/player/combat/weapons/ammunition/PW_Ammunition.cs" id="4_2xwjd"]
 [ext_resource type="Script" uid="uid://sujdlokcwnd6" path="res://script/global/combat/hit/GC_DamageModifier.cs" id="6_s0i7c"]
 [ext_resource type="Script" uid="uid://cjmiash71uc7b" path="res://script/global/combat/hit/hit/GC_Hit.cs" id="7_g68l2"]
+[ext_resource type="Script" uid="uid://c7q1lkhbh7u6h" path="res://script/player/combat/weapons/knockback/PWK_Velocity.cs" id="8_2xwjd"]
 [ext_resource type="Script" uid="uid://cytkgtw0ebs3x" path="res://script/player/combat/weapons/trail/PW_Trail.cs" id="8_nnrhg"]
 [ext_resource type="Script" uid="uid://0w0m608ktkwu" path="res://script/vfx/combat/trail/moving_light/VFX_MovingLightTrail.cs" id="9_j2vjm"]
 [ext_resource type="Script" uid="uid://d15clqym1lgvu" path="res://script/player/camera/annimation/trauma/causers/undirect/PCT_UndirectScalable.cs" id="10_awukx"]
@@ -96,13 +97,23 @@ metadata/_custom_type_script = "uid://cxiwvat6vddlp"
 script = ExtResource("15_2xwjd")
 _sequenceHitBox = NodePath("GC_SequenceHitBox")
 _hitData = SubResource("Resource_76u7k")
-_knockBack = 4.0
 _ignoreCrit = true
 _kickBack = 1.5
 _trail = NodePath("PW_Trail")
 _traumaCauser = NodePath("PCT_UndirectScalable")
 _maxTrauma = 0.6
 metadata/_custom_type_script = "uid://v03t7md2i0v8"
+
+[node name="PWK_Velocity" type="Node3D" parent="PW_FistsFire/PWS_SequenceHit"]
+script = ExtResource("8_2xwjd")
+_uppercutMaxKbMultiplier = 0.3
+_uppercutMinSpeed = 5.0
+_uppercutMaxSpeed = 20.0
+_speedKbMultiplier = 2.0
+_baseVerticalSpeed = 0.8
+_maxSpeed = 40.0
+_knockBack = 0.8
+metadata/_custom_type_script = "uid://c7q1lkhbh7u6h"
 
 [node name="HitBox" type="Area3D" parent="PW_FistsFire/PWS_SequenceHit"]
 
