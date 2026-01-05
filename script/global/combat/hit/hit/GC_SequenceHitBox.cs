@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Godot;
 
+[GlobalClass]
 public partial class GC_SequenceHitBox : Node
 {
     [Export] private PHX_SequenceArea3D _sequenceArea;
@@ -58,6 +59,6 @@ public partial class GC_SequenceHitBox : Node
         HitEntity?.Invoke(hurtBox);
     }
 
-    public void Shoot() => _sequenceArea.StartSequence();
-    public void Interrupt() => _sequenceArea.StopSequence();
+    public void StartSequence() => _sequenceArea.StartSequence();
+    public void StopSequence() => _sequenceArea.StopSequence();
 }
