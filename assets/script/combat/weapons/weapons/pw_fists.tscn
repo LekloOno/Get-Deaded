@@ -1,10 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://be54as36nebp4"]
+[gd_scene load_steps=25 format=3 uid="uid://be54as36nebp4"]
 
 [ext_resource type="Script" uid="uid://c3are182lodyx" path="res://script/player/combat/weapons/weapon/PW_Simple.cs" id="1_k4qra"]
 [ext_resource type="Texture2D" uid="uid://8rrtqp0otyee" path="res://assets/sprites/weapons/meleepixel.png" id="2_sqc2j"]
 [ext_resource type="Script" uid="uid://co06wv08f4cgo" path="res://assets/script/combat/weapons/PW_FistsFire.cs" id="3_k4qra"]
 [ext_resource type="Script" uid="uid://cxiwvat6vddlp" path="res://script/player/combat/weapons/ammunition/PW_Ammunition.cs" id="4_2xwjd"]
-[ext_resource type="Script" uid="uid://cn0p3uk7xbb3s" path="res://script/player/combat/weapons/shot/PWS_ShapeScan.cs" id="5_sqc2j"]
 [ext_resource type="Script" uid="uid://sujdlokcwnd6" path="res://script/global/combat/hit/GC_DamageModifier.cs" id="6_s0i7c"]
 [ext_resource type="Script" uid="uid://cjmiash71uc7b" path="res://script/global/combat/hit/hit/GC_Hit.cs" id="7_g68l2"]
 [ext_resource type="Script" uid="uid://cytkgtw0ebs3x" path="res://script/player/combat/weapons/trail/PW_Trail.cs" id="8_nnrhg"]
@@ -14,6 +13,9 @@
 [ext_resource type="Script" uid="uid://51kwj2ldm4xq" path="res://script/player/camera/annimation/trauma/causers/direct/PCT_Fire.cs" id="12_jqbem"]
 [ext_resource type="FastNoiseLite" uid="uid://dcqwnhaim8ock" path="res://assets/misc/shake_noise.tres" id="13_b7iem"]
 [ext_resource type="Script" uid="uid://c0vf7xmi1u8t4" path="res://script/player/camera/annimation/trauma/PC_TraumaLayer.cs" id="14_4t1hw"]
+[ext_resource type="Script" uid="uid://v03t7md2i0v8" path="res://script/player/combat/weapons/shot/PWS_SequenceHit.cs" id="15_2xwjd"]
+[ext_resource type="Script" uid="uid://b88xre8wsrllr" path="res://script/global/combat/hit/hit/GC_SequenceHitBox.cs" id="16_ghv7x"]
+[ext_resource type="Script" uid="uid://cw3m0ga8jfbw7" path="res://script/engine_tools/physics/bodies/objects/hitbox/PHX_ShapeSeqArea3D.cs" id="17_s0i7c"]
 
 [sub_resource type="Resource" id="Resource_488s0"]
 script = ExtResource("6_s0i7c")
@@ -24,10 +26,11 @@ metadata/_custom_type_script = "uid://sujdlokcwnd6"
 script = ExtResource("7_g68l2")
 Damage = 20.0
 _inspectorModifiers = Array[Object]([SubResource("Resource_488s0")])
+BackModifier = 2.0
 metadata/_custom_type_script = "uid://cjmiash71uc7b"
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_klj4u"]
-size = Vector3(0.8, 1, 0.9)
+[sub_resource type="BoxShape3D" id="BoxShape3D_2xwjd"]
+size = Vector3(0.8, 1, 1.3460938)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4osp6"]
 transparency = 1
@@ -78,7 +81,7 @@ _speedKbMultiplier = 2.0
 _baseVerticalSpeed = 0.8
 _maxSpeed = 40.0
 _chargeTime = 1500
-_shots = [NodePath("PWS_ShapeScan")]
+_shots = [NodePath("PWS_SequenceHit")]
 _fireRate = 500
 _ammos = NodePath("PW_Ammunition")
 _ammosPerShot = 0
@@ -89,9 +92,9 @@ metadata/_custom_type_script = "uid://co06wv08f4cgo"
 script = ExtResource("4_2xwjd")
 metadata/_custom_type_script = "uid://cxiwvat6vddlp"
 
-[node name="PWS_ShapeScan" type="Node3D" parent="PW_FistsFire" node_paths=PackedStringArray("_shapeCast", "_trail", "_traumaCauser")]
-script = ExtResource("5_sqc2j")
-_shapeCast = NodePath("ShapeCast3D")
+[node name="PWS_SequenceHit" type="Node3D" parent="PW_FistsFire" node_paths=PackedStringArray("_sequenceHitBox", "_trail", "_traumaCauser")]
+script = ExtResource("15_2xwjd")
+_sequenceHitBox = NodePath("GC_SequenceHitBox")
 _hitData = SubResource("Resource_76u7k")
 _knockBack = 4.0
 _ignoreCrit = true
@@ -99,24 +102,42 @@ _kickBack = 1.5
 _trail = NodePath("PW_Trail")
 _traumaCauser = NodePath("PCT_UndirectScalable")
 _maxTrauma = 0.6
-metadata/_custom_type_script = "uid://cn0p3uk7xbb3s"
+metadata/_custom_type_script = "uid://v03t7md2i0v8"
 
-[node name="ShapeCast3D" type="ShapeCast3D" parent="PW_FistsFire/PWS_ShapeScan"]
-shape = SubResource("BoxShape3D_klj4u")
-target_position = Vector3(0, 0, -1)
+[node name="HitBox" type="Area3D" parent="PW_FistsFire/PWS_SequenceHit"]
 
-[node name="PW_Trail" type="Node3D" parent="PW_FistsFire/PWS_ShapeScan"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PW_FistsFire/PWS_SequenceHit/HitBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.9707728)
+shape = SubResource("BoxShape3D_2xwjd")
+
+[node name="Timer" type="Timer" parent="PW_FistsFire/PWS_SequenceHit/HitBox/CollisionShape3D"]
+process_callback = 0
+wait_time = 0.15
+one_shot = true
+
+[node name="GC_SequenceHitBox" type="Node" parent="PW_FistsFire/PWS_SequenceHit" node_paths=PackedStringArray("_sequenceArea")]
+script = ExtResource("16_ghv7x")
+_sequenceArea = NodePath("PHX_ShapeSeqArea3D")
+_hitCooldown = 300
+metadata/_custom_type_script = "uid://b88xre8wsrllr"
+
+[node name="PHX_ShapeSeqArea3D" type="Node" parent="PW_FistsFire/PWS_SequenceHit/GC_SequenceHitBox" node_paths=PackedStringArray("_area3D")]
+script = ExtResource("17_s0i7c")
+_area3D = NodePath("../../HitBox")
+metadata/_custom_type_script = "uid://cw3m0ga8jfbw7"
+
+[node name="PW_Trail" type="Node3D" parent="PW_FistsFire/PWS_SequenceHit"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.287, -0.225, -0.237)
 script = ExtResource("8_nnrhg")
 _trails = Array[Object]([SubResource("Resource_sogkq")])
 metadata/_custom_type_script = "uid://cytkgtw0ebs3x"
 
-[node name="PCT_UndirectScalable" type="Area3D" parent="PW_FistsFire/PWS_ShapeScan"]
+[node name="PCT_UndirectScalable" type="Area3D" parent="PW_FistsFire/PWS_SequenceHit"]
 script = ExtResource("10_awukx")
 _curveSampler = SubResource("Resource_38m5i")
 metadata/_custom_type_script = "uid://d15clqym1lgvu"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PW_FistsFire/PWS_ShapeScan/PCT_UndirectScalable"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PW_FistsFire/PWS_SequenceHit/PCT_UndirectScalable"]
 shape = SubResource("SphereShape3D_38m5i")
 
 [node name="PCT_Fire" type="Node" parent="PW_FistsFire"]

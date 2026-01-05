@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 [GlobalClass]
@@ -9,25 +10,34 @@ public partial class PWS_SequenceHit : PW_Shot
     {
         _sequenceHitBox.CollisionMask = CONF_Collision.Masks.HitScan;
         _sequenceHitBox.CollisionLayer = 0;
-        _sequenceHitBox.HitEntity += DoHitEntity;
+        _sequenceHitBox.HitHurtBox += DoHitEntity;
+        _sequenceHitBox.HitEnvironment += DoHitEnvironment;
     }
+
+    private void DoHitEnvironment() =>
+        HandleKick(Direction);
 
     private void DoHitEntity(GC_HurtBox hurtBox)
     {
-        Vector3 castOrigin = OwnerEntity.Body.GlobalTransform.Origin;
-        Vector3 hitPosition = hurtBox.GlobalPosition;
+        Vector3 hitPosition = ApproxHitPosition(CONF_Collision.Layers.EnnemiesHurtBox, hurtBox.GlobalPosition);
 
+        SendHit(hurtBox, hitPosition, GlobalPosition, Direction);
+        HandleKick(Direction);
+    }
+
+    private Vector3 ApproxHitPosition(uint targetMask, Vector3 targetHitPosition)
+    {
         PhysicsDirectSpaceState3D spaceState = GetWorld3D().DirectSpaceState;
-        PhysicsRayQueryParameters3D query = PhysicsRayQueryParameters3D.Create(castOrigin, hitPosition);
+        PhysicsRayQueryParameters3D query = PhysicsRayQueryParameters3D.Create(GlobalPosition, targetHitPosition);
         query.CollideWithAreas = true;
-        query.CollisionMask = CONF_Collision.Masks.HitBox;
+        query.CollisionMask = targetMask;
 
         var result = spaceState.IntersectRay(query);
 
         if (result.Count > 0)
-            hitPosition = (Vector3)result["position"];
+            return (Vector3)result["position"];
 
-        SendHit(hurtBox, hitPosition, castOrigin);
+        return targetHitPosition;
     }
 
     protected override void ShootWithSpread(Vector3 direction) =>
