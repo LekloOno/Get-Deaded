@@ -4,7 +4,7 @@ using static Godot.Area3D;
 [GlobalClass]
 public abstract partial class PHX_SequenceArea3D : Node, PHX_ISequenceArea3D
 {
-    [Export] private Area3D _area3D;
+    [Export] protected Area3D _area3D;
     public uint CollisionMask
     {
         get => _area3D.CollisionMask;
