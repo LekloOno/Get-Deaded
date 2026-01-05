@@ -18,4 +18,7 @@ public static class MATH_Vector3Ext
     }
 
     public static Vector3 Flat(Vector3 vector) => new(vector.X, 0, vector.Z);
+
+    public static float FlatAngle(Vector3 vectorA, Vector3 vectorB) =>
+        Flat(vectorA).AngleTo(Flat(vectorB));
 }
