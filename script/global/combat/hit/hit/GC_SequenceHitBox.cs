@@ -23,29 +23,51 @@ public partial class GC_SequenceHitBox : Node
         set => _sequenceArea.CollisionLayer = value;
     }
 
-    public event Action<GC_HurtBox> HitEntity;
-    private Dictionary<GE_CombatEntity, ulong> _hitEntities = [];
+    public event Action<GC_HurtBox> HitHurtBox;
+    public event Action HitEnvironment;
+    private Dictionary<Node, ulong> _hitEntities = [];
 
     public override void _Ready()
     {
-        _sequenceArea.AreaEntered += OnAreaEntered;
+        _sequenceArea.AreaEntered += OnBodyEntered;
+        _sequenceArea.BodyEntered += OnBodyEntered;
     }
 
-    private void OnAreaEntered(Area3D area)
+    private void OnBodyEntered(Node3D body)
     {
-        if (area is not GC_HurtBox hurtBox)
-            return;
-
-        if (CanRegister(hurtBox))
+        if (body is GC_HurtBox hurtBox)
             RegisterHit(hurtBox);
+        else
+            RegisterMiss(body);
     }
 
-    private bool CanRegister(GC_HurtBox hurtBox)
+    private void RegisterHit(GC_HurtBox hurtBox)
+    {
+        if (Register(hurtBox.Entity))
+            HitHurtBox?.Invoke(hurtBox);
+    }
+
+    private void RegisterMiss(Node node)
+    {
+        if (Register(node))
+            HitEnvironment?.Invoke();
+    }
+
+    private bool Register(Node node)
+    {
+        if (!CanRegister(node))
+            return false;
+
+        _hitEntities[node] = PHX_Time.ScaledTicksMsec;
+        return true;
+    }
+
+    private bool CanRegister(Node node)
     {
         if (_hitCooldown == 0)
             return true;
         
-        if (!_hitEntities.TryGetValue(hurtBox.Entity, out ulong lastHit))
+        if (!_hitEntities.TryGetValue(node, out ulong lastHit))
             return true;
 
         return CoolDownPassed(lastHit);
@@ -53,11 +75,6 @@ public partial class GC_SequenceHitBox : Node
 
     private bool CoolDownPassed(ulong lastHit) => _hitCooldown == 0 || PHX_Time.ScaledTicksMsec - lastHit >= _hitCooldown;
 
-    private void RegisterHit(GC_HurtBox hurtBox)
-    {
-        _hitEntities[hurtBox.Entity] = PHX_Time.ScaledTicksMsec;
-        HitEntity?.Invoke(hurtBox);
-    }
 
     public void StartSequence() => _sequenceArea.StartSequence();
     public void StopSequence() => _sequenceArea.StopSequence();
