@@ -13,11 +13,31 @@ public partial class PM_Dash : PM_Action
     [Export] private PM_LedgeClimb _ledgeClimb;
     [Export] private PM_WallJump _wallJump;
 
-    [Export(PropertyHint.Range, "0.0, 40.0")] private float _strength;
-    [Export(PropertyHint.Range, "0.0, 1.0")] private float _dashDuration;
+    private float _distance = 7;
+    [Export(PropertyHint.Range, "0.0, 10.0, or_greater")] public float Distance
+    {
+        get => _distance;
+        set
+        {
+            _distance = value;
+            SetDashSpeed();
+        }
+    }
+    private float _speed;
+    private float _dashDuration = 0.1f;
+    [Export(PropertyHint.Range, "0.01, 0.5, or_greater")]
+    public float DashDuration
+    {
+        get => _dashDuration;
+        set
+        {
+            _dashDuration = value;
+            SetDashSpeed();
+        }
+    }
     [Export(PropertyHint.Range, "0.0, 1.0")] private float _minDashRatio;
     // The velocity coefficient when dashing upward. The more upward you dash, the less speed you will keep.
-    [Export(PropertyHint.Range, "0.0, 10.0")] private float _cooldown;       // Only triggered when reseting from the same surface twice in a row (ground/wall)
+    [Export(PropertyHint.Range, "0.0, 10.0, or_greater")] private float _cooldown;       // Only triggered when reseting from the same surface twice in a row (ground/wall)
     [Export] private float _slamWindow;
 
     public EventHandler<float> OnTryReset;
@@ -37,14 +57,18 @@ public partial class PM_Dash : PM_Action
 
     public override void _Ready()
     {
+        SetDashSpeed();
         _dashInput.OnStartInput += StartDash;
         _groundState.OnLanding += LandReset;
         _wallJump.OnStart += WallReset;
     }
 
+    private void SetDashSpeed() =>
+        _speed = _distance/_dashDuration;
+
     public void StartDash(object sender, EventArgs e)
     {
-        if (_groundState.IsGrounded() || _ledgeClimb.IsClimbing)
+        if (_ledgeClimb.IsClimbing)
             return;
 
         if (!_available)
@@ -53,18 +77,13 @@ public partial class PM_Dash : PM_Action
             return;
         }
         
-        if (PHX_Time.ScaledTicksMsec - _crouchDispatcher.LastCrouchDown <= _slamWindow)
-            _direction = Vector3.Down;
-        else if (_walkInput.WalkAxis != Vector2.Zero)
-            _direction = _walkInput.WishDir;
-        else
-            _direction = -_cameraControl.GlobalBasis.Z;
+        _direction = GetDashDirection();
 
         _prevRealVelocity = _controller.RealVelocity;
         Vector3 velocity = _prevRealVelocity;
 
-        float appliedStrength = Mathf.Max(_strength, velocity.Length());
-        _dashForce = appliedStrength * _direction;
+        float appliedSpeed = Mathf.Max(_speed, velocity.Length());
+        _dashForce = appliedSpeed * _direction;
 
         _controller.TakeOverForces.AddPersistent(_dashForce);
         _endDashTimer = GetTree().CreateTimer(_dashDuration, false, true);
@@ -75,6 +94,31 @@ public partial class PM_Dash : PM_Action
         _lastDash = PHX_Time.ScaledTicksMsec;
         OnStart?.Invoke(this, EventArgs.Empty);
     }
+
+    private Vector3 GetDashDirection() =>
+        GetDashDirection(
+            _walkInput.WalkAxis,
+            _walkInput.WishDir,
+            -_cameraControl.GlobalBasis.Z,
+            _walkInput.FlatDir
+        );
+        
+    private Vector3 GetDashDirection(Vector2 walkAxis, Vector3 wishDir, Vector3 dir, Vector3 flatDir)
+    {
+        if (IsSlam())
+            return Vector3.Down;
+        
+        if (walkAxis != Vector2.Zero)
+            return wishDir;
+        
+        if (!_groundState.IsGrounded())
+            return dir;
+        
+        return flatDir;
+    }
+
+    private bool IsSlam() =>
+        PHX_Time.ScaledTicksMsec - _crouchDispatcher.LastCrouchDown <= _slamWindow;
 
     public void TryReset(bool ground)
     {
@@ -146,6 +190,8 @@ public partial class PM_Dash : PM_Action
         _controller.RealVelocity = outVelocity;
 
         AbortDash();
+        if (_groundState.IsGrounded())
+            TryReset(true);
     }
 
     private Vector3 OutVelocity()

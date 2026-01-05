@@ -121,6 +121,7 @@ metadata/_custom_type_script = "uid://bdm4kpw6u4ocg"
 
 [node name="attack_layers" type="Node" parent="Sound"]
 script = ExtResource("15_06ubc")
+UseTimeScale = true
 
 [node name="attack" type="Node" parent="Sound/attack_layers"]
 script = ExtResource("15_mbjng")
@@ -162,6 +163,7 @@ bus = &"Weapons"
 
 [node name="hold_layers" type="Node" parent="Sound"]
 script = ExtResource("15_06ubc")
+UseTimeScale = true
 
 [node name="hold1" type="Node" parent="Sound/hold_layers"]
 script = ExtResource("20_23d4d")
@@ -198,6 +200,7 @@ bus = &"Weapons"
 [node name="tail_parallel" type="Node" parent="Sound"]
 script = ExtResource("15_mbjng")
 PolyphonicStream = SubResource("AudioStreamPolyphonic_8vbpy")
+UseTimeScale = true
 Sounds = Array[AudioStream]([ExtResource("20_8vbpy")])
 MinPitch = 0.9
 MaxPitch = 1.1

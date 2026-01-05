@@ -6,6 +6,7 @@ using static PI_Direction;
 public partial class PI_Walk : PI_ActionHandler<Vector2>
 {
     [Export] private Node3D _flatDirNode;
+    public Vector3 FlatDir => - _flatDirNode.Transform.Basis.Z;
 
     public EventHandler OnStopOrBackward;
     public EventHandler<KeyPressedArgs> KeyPressed;
