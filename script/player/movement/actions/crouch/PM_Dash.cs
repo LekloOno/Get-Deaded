@@ -92,6 +92,8 @@ public partial class PM_Dash : PM_Action
         _available = false;
 
         _lastDash = PHX_Time.ScaledTicksMsec;
+
+        _controller.CollisionMask = CONF_Collision.Layers.Environment;
         OnStart?.Invoke(this, EventArgs.Empty);
     }
 
@@ -173,6 +175,7 @@ public partial class PM_Dash : PM_Action
     {
         _controller.TakeOverForces.RemovePersistent(_dashForce);
         _isDashing = false;
+        _controller.CollisionMask = CONF_Collision.Masks.Environment;
         if (_endDashTimer != null)
         {
             _endDashTimer.Timeout -= EndDash;
