@@ -44,7 +44,6 @@ public partial class GC_HurtBox : Area3D
     private float DirMultiplier(GC_IHitDealer hitDealer)
     {
         float multiplier = hitDealer.HitData.BackModifier;
-        
         if (multiplier == 1f)
             return 1f;
         if (IsHittingFront(hitDealer))
@@ -57,9 +56,10 @@ public partial class GC_HurtBox : Area3D
     {
         Vector3 selfDir = -Entity.Body.GlobalTransform.Basis.Z;
         Vector3 hitDealerPos = hitDealer.OwnerEntity.Body.GlobalTransform.Origin;
-        float hitAngle = MATH_Vector3Ext.FlatAngle(selfDir, hitDealerPos);
-        
-        return hitAngle < BackAngle;
+        Vector3 direction = hitDealerPos - Entity.Body.GlobalTransform.Origin;
+
+        float hitAngle = MATH_Vector3Ext.FlatAngle(selfDir, direction);
+        return Mathf.RadToDeg(hitAngle) < BackAngle;
     }
 
     public float Heal(float heal) => Entity.HealthManager.Heal(heal);
