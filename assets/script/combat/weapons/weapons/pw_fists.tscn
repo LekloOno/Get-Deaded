@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c3are182lodyx" path="res://script/player/combat/weapons/weapon/PW_Simple.cs" id="1_k4qra"]
 [ext_resource type="Texture2D" uid="uid://8rrtqp0otyee" path="res://assets/sprites/weapons/meleepixel.png" id="2_sqc2j"]
-[ext_resource type="Script" uid="uid://co06wv08f4cgo" path="res://assets/script/combat/weapons/PW_FistsFire.cs" id="3_k4qra"]
+[ext_resource type="Script" uid="uid://co06wv08f4cgo" path="res://script/player/combat/weapons/fire/special/PW_FistsFire.cs" id="3_k4qra"]
 [ext_resource type="Script" uid="uid://cxiwvat6vddlp" path="res://script/player/combat/weapons/ammunition/PW_Ammunition.cs" id="4_2xwjd"]
 [ext_resource type="Script" uid="uid://sujdlokcwnd6" path="res://script/global/combat/hit/GC_DamageModifier.cs" id="6_s0i7c"]
 [ext_resource type="Script" uid="uid://cjmiash71uc7b" path="res://script/global/combat/hit/hit/GC_Hit.cs" id="7_g68l2"]
