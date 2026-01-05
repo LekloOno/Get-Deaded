@@ -44,4 +44,16 @@ public abstract partial class PHX_SequenceArea3D : Node, PHX_ISequenceArea3D
 
     public abstract void StartSequence();
     public abstract void StopSequence();
+    
+    protected void Enable()
+    {
+        _area3D.Monitorable = true;
+        _area3D.Monitoring = true;
+    }
+    
+    protected void Disable()
+    {
+        _area3D.Monitorable = false;
+        _area3D.Monitoring = false;
+    }
 }
