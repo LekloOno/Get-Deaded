@@ -15,7 +15,11 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
 {
     [Export] protected GC_Hit _hitData;
     [Export] protected float _spread = 0f;          // In degrees
-    [Export] protected bool _ignoreCrit = false;      // For visual and sound mostly
+    /// <summary>
+    /// If true, a hit is always considered a chest hit. <br/>
+    /// It affects damage inputs, statistics, UI, VFX and SFX.
+    /// </summary>
+    [Export] protected bool _ignoreBodyPart = false;
     [Export] private float _kickBack = 0f;
 
     [ExportCategory("Visuals")]
@@ -164,7 +168,7 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
         HitEventArgs reg = hurtBox.HandleHit(
             OwnerEntity, this, hitPosition, from,
             localKnockBack, globalKnockBack,
-            _ignoreCrit, _tempDamageMultiplier, _partialMultiplier
+            _ignoreBodyPart, _tempDamageMultiplier, _partialMultiplier
         );
 
         DoHit(reg, hitPosition);

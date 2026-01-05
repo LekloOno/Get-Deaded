@@ -25,13 +25,13 @@ metadata/_custom_type_script = "uid://sujdlokcwnd6"
 
 [sub_resource type="Resource" id="Resource_76u7k"]
 script = ExtResource("7_g68l2")
-Damage = 20.0
+Damage = 30.0
 _inspectorModifiers = Array[Object]([SubResource("Resource_488s0")])
 BackModifier = 2.0
 metadata/_custom_type_script = "uid://cjmiash71uc7b"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2xwjd"]
-size = Vector3(0.8, 1, 1.3460938)
+size = Vector3(0.9, 1, 1.6)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4osp6"]
 transparency = 1
@@ -73,11 +73,11 @@ metadata/_custom_type_script = "uid://c3are182lodyx"
 
 [node name="PW_FistsFire" type="Node3D" parent="." node_paths=PackedStringArray("_shots", "_ammos", "_fireTraumaCauser")]
 script = ExtResource("3_k4qra")
-_chargedKbMultiplier = 0.8
-_chargedDmgMultiplier = 0.8
+_chargedKbMultiplier = 0.5
+_chargedDmgMultiplier = 0.5
 _chargeTime = 1500
 _shots = [NodePath("PWS_SequenceHit")]
-_fireRate = 500
+_fireRate = 800
 _ammos = NodePath("PW_Ammunition")
 _ammosPerShot = 0
 _fireTraumaCauser = NodePath("PCT_Fire")
@@ -91,7 +91,7 @@ metadata/_custom_type_script = "uid://cxiwvat6vddlp"
 script = ExtResource("15_2xwjd")
 _sequenceHitBox = NodePath("GC_SequenceHitBox")
 _hitData = SubResource("Resource_76u7k")
-_ignoreCrit = true
+_ignoreBodyPart = true
 _kickBack = 1.5
 _trail = NodePath("PW_Trail")
 _traumaCauser = NodePath("PCT_UndirectScalable")
@@ -112,12 +112,12 @@ metadata/_custom_type_script = "uid://c7q1lkhbh7u6h"
 [node name="HitBox" type="Area3D" parent="PW_FistsFire/PWS_SequenceHit"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PW_FistsFire/PWS_SequenceHit/HitBox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.9707728)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.8)
 shape = SubResource("BoxShape3D_2xwjd")
 
 [node name="Timer" type="Timer" parent="PW_FistsFire/PWS_SequenceHit/HitBox/CollisionShape3D"]
 process_callback = 0
-wait_time = 0.15
+wait_time = 0.1
 one_shot = true
 
 [node name="GC_SequenceHitBox" type="Node" parent="PW_FistsFire/PWS_SequenceHit" node_paths=PackedStringArray("_sequenceArea")]

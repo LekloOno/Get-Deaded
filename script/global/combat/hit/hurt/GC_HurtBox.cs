@@ -36,12 +36,20 @@ public partial class GC_HurtBox : Area3D
         out float takenDamage,
         out float overflow,
         out GC_Health deepest,
+        bool overrideBodyPart = false,
         float dmgMultiplier = 1f,
         float subHitSize = 1f
     ) {
-        float expectedDamage = hitDealer.HitData.GetDamage(BodyPart);
-        expectedDamage *= _modifier;
-        expectedDamage *= subHitSize;
+        float expectedDamage = subHitSize;
+
+        if (overrideBodyPart)
+            expectedDamage *= hitDealer.HitData.GetDamage(GC_BodyPart.Chest);
+        else
+        {
+            expectedDamage *= hitDealer.HitData.GetDamage(BodyPart);
+            expectedDamage *= _modifier;
+        }
+        
         expectedDamage *= dmgMultiplier;
         expectedDamage *= DirMultiplier(hitDealer);
 
@@ -101,6 +109,7 @@ public partial class GC_HurtBox : Area3D
             out float takenDamage,
             out float overflow,
             out GC_Health deepest,
+            overrideBodyPart,
             dmgMultiplier,
             subHitSize
         );
