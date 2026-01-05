@@ -15,7 +15,6 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
 {
     [Export] protected GC_Hit _hitData;
     [Export] protected float _spread = 0f;          // In degrees
-    [Export] protected float _knockBack = 0f;
     [Export] protected bool _ignoreCrit = false;      // For visual and sound mostly
     [Export] private float _kickBack = 0f;
 
@@ -25,6 +24,9 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
     [Export] private bool _clampTrauma = true;
     [Export] private float _maxTrauma = 0.2f;
     [Export] private float _ragdollFactor = 1f;
+    private PW_IKnockBack _knockBack;
+    public MATH_AdditiveModifiers KnockBackMultiplier => _knockBack?.KnockBackMultiplier;
+    public MATH_FlatVec3Modifiers KnockBackDirFlatAdd => _knockBack?.KnockBackDirFlatAdd;
 
     private GB_ExternalBodyManagerWrapper _ownerBody;
     public PW_Fire Fire {get; protected set;}
@@ -34,20 +36,39 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
     public EventHandler<HitEventArgs> Hit;
     public MATH_AdditiveModifiers SpreadMultiplier {get; private set;} = new();
     public float Spread => _spread * SpreadMultiplier.Result();
-    public MATH_AdditiveModifiers KnockBackMultiplier {get; private set;} = new();
     public MATH_AdditiveModifiers KickBackMultiplier {get; private set;} = new();
-    public MATH_FlatVec3Modifiers KnockBackDirFlatAdd {get; private set;} = new();
     public MATH_AdditiveModifiers DamageMultipler => _hitData.DamageMultiplier;
     public GC_Hit HitData => _hitData;
     public Vector3 Direction => -GlobalBasis.Z; 
     private static Random _random = new();
-    public float KnockBack => _knockBack * KnockBackMultiplier.Result() * _partialMultiplier;
     public float KickBack => _kickBack * KickBackMultiplier.Result() * _partialMultiplier;
     public float Damage => _hitData.Damage * _partialMultiplier;
     public float HitTrauma => _maxTrauma * _partialMultiplier;
 
 
     private float _partialMultiplier = 1f;
+
+    public override sealed void _Ready()
+    {
+        _knockBack = GetKnockBack();
+        ReadySpec();
+    }
+    /// <summary>
+    /// Allows the implementing class to define further custom _Ready routines. <br/>
+    /// <br/>
+    /// This prevents the user from unintendedly hiding important PW_Shot's _Ready base routines. <br/>
+    /// It is called after the PW_Shot base routines.
+    /// </summary>
+    protected virtual void ReadySpec(){}
+
+    private PW_IKnockBack GetKnockBack()
+    {
+        foreach (Node node in GetChildren())
+            if (node is PW_IKnockBack knockBack)
+                return knockBack;
+
+        return null;
+    }
 
     public void Initialize(GB_ExternalBodyManagerWrapper ownerBody, PW_Fire fire)
     {
@@ -120,9 +141,9 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
 
         Vector3? globalKnockBack;
         if (globalKbDir is Vector3 overrideDirection)
-            globalKnockBack = NullableKnockBack(overrideDirection);
+            globalKnockBack = _knockBack?.KnockBackImpulse(overrideDirection);
         else
-            globalKnockBack = NullableKnockBack(direction);
+            globalKnockBack = _knockBack?.KnockBackImpulse(direction);
         
         // Do not use partial hit ragdoll here for now since we only trigger ragdoll on hit
         // But if we add active ragdoll later, it might be better to consider using scaled Damage.
@@ -153,21 +174,6 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
             _traumaCauser.CauseClampedTrauma(HitTrauma);
         else
             _traumaCauser.CauseTrauma();
-    }
-
-    protected Vector3 KnockBackFrom(Vector3 direction) =>
-        KnockBack * direction.Normalized() + KnockBackDirFlatAdd.Result();
-
-    private Vector3? NullableKnockBack(Vector3 direction)
-    {
-        if (KnockBack == 0f)
-            return null;
-
-        Vector3 impulse = KnockBackFrom(direction);
-        if (impulse.Length() == 0f)
-            return null;
-
-        return impulse;
     }
 
     public virtual void Interrupt(){}
