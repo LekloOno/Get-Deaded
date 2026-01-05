@@ -2,7 +2,7 @@ using System;
 using Godot;
 
 [GlobalClass]
-public partial class PWS_Hitscan : PW_Shot, GC_IHitDealer
+public partial class PWS_Hitscan : PW_Shot
 {
     [Export] protected float _maxDistance = 20f;
 

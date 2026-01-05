@@ -118,8 +118,7 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
     {
         Vector3 direction = (hitPosition - from).Normalized();
 
-        Vector3? globalKnockBack = null;
-
+        Vector3? globalKnockBack;
         if (globalKbDir is Vector3 overrideDirection)
             globalKnockBack = NullableKnockBack(overrideDirection);
         else
@@ -170,4 +169,6 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
 
         return impulse;
     }
+
+    public virtual void Interrupt(){}
 }

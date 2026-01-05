@@ -42,5 +42,5 @@ public partial class GC_Hitbox : Area3D, GC_IHitDealer
     }
 
     public void Shoot(){}
-
+    public void Interrupt(){}
 }
