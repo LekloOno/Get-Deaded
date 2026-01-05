@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 
@@ -14,6 +15,7 @@ public partial class GC_HurtBox : Area3D
     [Export] private float _modifier = 1f;
     [Export] public GpuParticles3D DamageSplatter;
     [Export] public GE_CombatEntity Entity {get; private set;}
+    public static float BackAngle = 135;
     public PHX_ActiveRagdollBone RagdollBone {get; private set;}
     
     public override void _Ready()
@@ -31,9 +33,35 @@ public partial class GC_HurtBox : Area3D
 
     public bool Damage(GC_IHitDealer hitDealer, out float takenDamage, out float overflow, out GC_Health deepest, float subHitSize = 1f)
     {
-        float expectedDamage = hitDealer.HitData.GetDamage(BodyPart) * _modifier * subHitSize;
+        float expectedDamage = hitDealer.HitData.GetDamage(BodyPart);
+        expectedDamage *= _modifier;
+        expectedDamage *= subHitSize;
+        expectedDamage *= DirMultiplier(hitDealer);
+
         return Entity.HealthManager.Damage(hitDealer, expectedDamage, out takenDamage, out overflow, out deepest);
     }
+
+    private float DirMultiplier(GC_IHitDealer hitDealer)
+    {
+        float multiplier = hitDealer.HitData.BackModifier;
+        
+        if (multiplier == 1f)
+            return 1f;
+        if (IsHittingFront(hitDealer))
+            return 1f;
+
+        return multiplier;
+    }
+
+    private bool IsHittingFront(GC_IHitDealer hitDealer)
+    {
+        Vector3 selfDir = -Entity.Body.GlobalTransform.Basis.Z;
+        Vector3 hitDealerPos = hitDealer.OwnerEntity.Body.GlobalTransform.Origin;
+        float hitAngle = MATH_Vector3Ext.FlatAngle(selfDir, hitDealerPos);
+        
+        return hitAngle < BackAngle;
+    }
+
     public float Heal(float heal) => Entity.HealthManager.Heal(heal);
 
     public bool TriggerDamageParticles(Vector3 hitPosition, Vector3 from)

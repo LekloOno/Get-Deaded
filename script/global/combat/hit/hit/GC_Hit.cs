@@ -7,6 +7,10 @@ public partial class GC_Hit : Resource
     [Export] public float Damage {get; private set;}
     public MATH_AdditiveModifiers DamageMultiplier {get; private set;} = new(); 
     [Export] private Array<GC_DamageModifier> _inspectorModifiers;
+    /// <summary>
+    /// A multiplicative modifier applied when hitting the target from its back.
+    /// </summary>
+    [Export] public float BackModifier {get; private set;} = 1f;
     // We use a "Game designer side" base array, plus a hitModifier "logic side" so we can determine the modifier more intuitively.
     // The indicated multiplier in _inspectorModifiers is as a reference to a basic hurt receiver - the default ones. See examples below.
     // This is because of how multiplier works - i.e. both receiver and sender can specify their own specific multiplier, and they should both have an impact on the final result.
