@@ -6,6 +6,7 @@ using Godot;
 public abstract partial class GB_ExternalBodyManagerWrapper : Node, GB_IExternalBodyManager
 {
     public abstract GB_IExternalBodyManager Body {get;}
+
     public void HandleKnockBack(Vector3 force)
     {
         Body.HandleKnockBack(force);
@@ -13,4 +14,6 @@ public abstract partial class GB_ExternalBodyManagerWrapper : Node, GB_IExternal
 
     public Vector3 Velocity() =>
         Body.Velocity();
+
+    public Transform3D GlobalTransform => Body.GlobalTransform;
 }

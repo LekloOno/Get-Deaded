@@ -8,4 +8,5 @@ public abstract partial class GB_CharacterBody : CharacterBody3D, GB_IExternalBo
     }
 
     Vector3 GB_IExternalBodyManager.Velocity() => Velocity;
+    Transform3D GB_IExternalBodyManager.GlobalTransform => GlobalTransform;
 }

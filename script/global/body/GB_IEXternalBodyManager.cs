@@ -2,6 +2,7 @@ using Godot;
 
 public interface GB_IExternalBodyManager
 {
-    public void HandleKnockBack(Vector3 force);
-    public Vector3 Velocity();
+    void HandleKnockBack(Vector3 force);
+    Vector3 Velocity();
+    Transform3D GlobalTransform {get;}
 }
