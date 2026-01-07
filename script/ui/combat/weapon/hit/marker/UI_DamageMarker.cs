@@ -194,7 +194,7 @@ public partial class UI_DamageMarker : Control
 
     private void SetColor(HitEventArgs e)
     {
-        if (!e.OverrideBodyPart && e.HurtBox.BodyPart == GC_BodyPart.Head)
+        if (e.Critical)
             _hitStyle.BgColor = CONF_HitColors.Colors.Critical;
         else
             _hitStyle.BgColor = CONF_HitColors.Colors.Normal;

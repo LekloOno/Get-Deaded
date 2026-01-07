@@ -6,10 +6,12 @@ public class HitEventArgs : EventArgs
     public enum HitFlags : byte
     {
         None = 0,
-        Killed = 1 << 0,          // 0x1
-        Missed = 1 << 1,          // 0x2
-        Environment = 1 << 2,     // 0x4
-        OverrideBodyPart = 1 << 7 // 0x80
+        Killed = 1 << 0,            // 0x01
+        Missed = 1 << 1,            // 0x02
+        Environment = 1 << 2,       // 0x04
+        BackStab = 1 << 3,          // 0x08
+        Critical = 1 << 4,          // 0x10
+        OverrideBodyPart = 1 << 7   // 0x80
     }
 
     /// <summary>
@@ -47,15 +49,15 @@ public class HitEventArgs : EventArgs
     public GE_IActiveCombatEntity Author {get;}
     /// <summary>
     /// Various flags about the hit. Below is a list of the correspondance to each bit. <br />
-    ///  0 - 0x1    : This hit did kill. <br />
-    ///  1 - 0x2    : This hit is a miss - it did hit a wall, ground, etc. <br />
-    ///  2 - 0x4    : This hit did hit a damageable environment object. <br />
-    ///  3 - ---    : <br />
+    ///  0 - 0x01   : This hit did kill. <br />
+    ///  1 - 0x02   : This hit is a miss - it did hit a wall, ground, etc. <br />
+    ///  2 - 0x04   : This hit did hit a damageable environment object. <br />
+    ///  3 - 0x08   : This hit did register as a back stab. <br />
     ///  <br />
-    ///  4 - ---    : <br />
+    ///  4 - 0x10   : This hit did register as a critical hit. <br />
     ///  5 - ---    : <br />
     ///  6 - ---    : <br />
-    ///  7 - 0x80 : Should be considered as a normal body hit by UI, statistics, etc.
+    ///  7 - 0x80   : Should be considered as a normal body hit by UI, statistics, etc.
     /// </summary>
     public HitFlags Flags { get; }
     /// <summary>
@@ -75,11 +77,15 @@ public class HitEventArgs : EventArgs
         GE_IActiveCombatEntity author,
         float overflow = 0,
         bool overrideBodyPart = false,
+        bool backStab = false,
+        bool critical = false,
         bool env = false,
         float subHitSize = 1f
     ) : this(
         target, senderLayer, hurtBox, damage, dealer, author, overflow,
         (kill ? HitFlags.Killed : 0) |
+        (backStab ? HitFlags.BackStab : 0) |
+        (critical ? HitFlags.Critical : 0) |
         (overrideBodyPart ? HitFlags.OverrideBodyPart : 0) |
         (env ? HitFlags.Environment : 0),
         subHitSize){}
@@ -130,6 +136,14 @@ public class HitEventArgs : EventArgs
     /// True if the hit is a miss - it did hit a wall, ground, etc.
     /// </summary>
     public bool Missed => Flags.HasFlag(HitFlags.Missed);
+    /// <summary>
+    /// True if it did register as a backstab. Not necessarily handled as a damage modifier.
+    /// </summary>
+    public bool BackStab => Flags.HasFlag(HitFlags.BackStab);
+    /// <summary>
+    /// True if the hit is critical - that is, it is either an effective backstab or headshot.
+    /// </summary>
+    public bool Critical => Flags.HasFlag(HitFlags.Critical);
     /// <summary>
     /// True if the hit did not miss - it did hit a damageable thing.
     /// </summary>

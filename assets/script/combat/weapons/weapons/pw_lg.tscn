@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://gn17uk4kh7rt"]
+[gd_scene load_steps=36 format=3 uid="uid://gn17uk4kh7rt"]
 
 [ext_resource type="Script" uid="uid://c3are182lodyx" path="res://script/player/combat/weapons/weapon/PW_Simple.cs" id="1_i06g8"]
 [ext_resource type="Texture2D" uid="uid://cll1rrqagufi2" path="res://assets/sprites/weapons/brrtpixel2.png" id="2_eksov"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://ddcjrbuymtie4" path="res://script/vfx/combat/trail/line/VFX_LineTrail.cs" id="10_eksov"]
 [ext_resource type="FastNoiseLite" uid="uid://dcqwnhaim8ock" path="res://assets/misc/shake_noise.tres" id="11_ye5j3"]
 [ext_resource type="Script" uid="uid://c0vf7xmi1u8t4" path="res://script/player/camera/annimation/trauma/PC_TraumaLayer.cs" id="12_38v4m"]
+[ext_resource type="Script" uid="uid://da30t8fgei5h7" path="res://script/player/combat/weapons/knockback/PWK_Simple.cs" id="12_o6dp4"]
 [ext_resource type="Script" uid="uid://bdm4kpw6u4ocg" path="res://script/player/audio/combat/weapons/fire/PA_FullAuto.cs" id="14_e68g3"]
 [ext_resource type="AudioStream" uid="uid://bo1rj54migyfy" path="res://assets/sounds/combat/weapons/fires/lg/lg_attack.wav" id="16_i06g8"]
 [ext_resource type="AudioStream" uid="uid://cai7h3lm75ijp" path="res://assets/sounds/combat/weapons/fires/lg/lg_hold.wav" id="17_eksov"]
@@ -129,8 +130,7 @@ metadata/_custom_type_script = "uid://cxiwvat6vddlp"
 script = ExtResource("6_o6dp4")
 _maxDistance = 15.0
 _hitData = SubResource("Resource_sq02u")
-_knockBack = 0.2
-_ignoreCrit = true
+_ignoreBodyPart = true
 _trail = NodePath("PW_Trail")
 _ragdollFactor = 1.5
 metadata/_custom_type_script = "uid://fc7gkofu3df7"
@@ -140,6 +140,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.287, -0.225, -0.237)
 script = ExtResource("8_dau1f")
 _trails = Array[Object]([SubResource("Resource_olywm"), SubResource("Resource_shr1g")])
 metadata/_custom_type_script = "uid://cytkgtw0ebs3x"
+
+[node name="PWK_Simple" type="Node3D" parent="PWF_FullAuto/PWS_Hitscan"]
+script = ExtResource("12_o6dp4")
+_knockBack = 0.2
+metadata/_custom_type_script = "uid://da30t8fgei5h7"
 
 [node name="PCT_ContinuousFire" type="Node" parent="PWF_FullAuto"]
 script = ExtResource("10_0gw71")
@@ -158,6 +163,7 @@ metadata/_custom_type_script = "uid://bdm4kpw6u4ocg"
 
 [node name="attack_layers" type="Node" parent="Sound"]
 script = ExtResource("19_om7ua")
+UseTimeScale = true
 
 [node name="attack" type="Node" parent="Sound/attack_layers"]
 script = ExtResource("17_u7yby")
@@ -197,6 +203,7 @@ bus = &"Weapons"
 script = ExtResource("21_olywm")
 _fadeInTime = 0.1
 _fadeOutTime = 0.1
+UseTimeScale = true
 
 [node name="player" type="Node" parent="Sound/hold_fader" node_paths=PackedStringArray("Player")]
 script = ExtResource("23_o6dp4")
@@ -212,6 +219,7 @@ bus = &"Weapons"
 [node name="tail_parallel" type="Node" parent="Sound"]
 script = ExtResource("17_u7yby")
 PolyphonicStream = SubResource("AudioStreamPolyphonic_shr1g")
+UseTimeScale = true
 Sounds = Array[AudioStream]([ExtResource("20_7215l")])
 MinPitch = 0.9
 MaxPitch = 1.1

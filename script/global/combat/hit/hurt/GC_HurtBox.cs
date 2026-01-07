@@ -35,36 +35,44 @@ public partial class GC_HurtBox : Area3D
         GC_IHitDealer hitDealer,
         out float takenDamage,
         out float overflow,
+        out bool backStab,
+        out bool critical,
         out GC_Health deepest,
         bool overrideBodyPart = false,
         float dmgMultiplier = 1f,
         float subHitSize = 1f
     ) {
-        float expectedDamage = subHitSize;
-
-        if (overrideBodyPart)
-            expectedDamage *= hitDealer.HitData.GetDamage(GC_BodyPart.Chest);
-        else
-        {
-            expectedDamage *= hitDealer.HitData.GetDamage(BodyPart);
-            expectedDamage *= _modifier;
-        }
-        
+        float expectedDamage = BaseDamage(hitDealer.HitData, overrideBodyPart);
+        expectedDamage *= subHitSize;
         expectedDamage *= dmgMultiplier;
-        expectedDamage *= DirMultiplier(hitDealer);
+
+        float dirMultiplier = DirMultiplier(hitDealer, out backStab);
+        expectedDamage *= dirMultiplier;
+        
+        critical = IsCritical(overrideBodyPart, backStab, dirMultiplier);
 
         return Entity.HealthManager.Damage(hitDealer, expectedDamage, out takenDamage, out overflow, out deepest);
     }
 
-    private float DirMultiplier(GC_IHitDealer hitDealer)
-    {
-        float multiplier = hitDealer.HitData.BackModifier;
-        if (multiplier == 1f)
-            return 1f;
-        if (IsHittingFront(hitDealer))
-            return 1f;
+    private bool IsCritical(bool overrideBodyPart, bool backStab, float dirMultiplier) =>
+        (!overrideBodyPart && BodyPart == GC_BodyPart.Head) ||
+        (backStab && dirMultiplier > 1.0f);
 
-        return multiplier;
+    private float DirMultiplier(GC_IHitDealer hitDealer, out bool backStab)
+    {
+        if (backStab = IsHittingFront(hitDealer))
+            return hitDealer.HitData.BackModifier;
+
+        return 1f;
+    }
+
+
+    private float BaseDamage(GC_Hit hitData, bool overrideBodyPart)
+    {
+        if (overrideBodyPart)
+            return hitData.GetDamage(GC_BodyPart.Chest);
+        
+        return hitData.GetDamage(BodyPart) * _modifier;
     }
 
     private bool IsHittingFront(GC_IHitDealer hitDealer)
@@ -74,7 +82,7 @@ public partial class GC_HurtBox : Area3D
         Vector3 direction = hitDealerPos - Entity.Body.GlobalTransform.Origin;
 
         float hitAngle = MATH_Vector3Ext.FlatAngle(selfDir, direction);
-        return Mathf.RadToDeg(hitAngle) < BackAngle;
+        return Mathf.RadToDeg(hitAngle) > BackAngle;
     }
 
     public float Heal(float heal) => Entity.HealthManager.Heal(heal);
@@ -108,6 +116,8 @@ public partial class GC_HurtBox : Area3D
             hitDealer,
             out float takenDamage,
             out float overflow,
+            out bool backStab,
+            out bool critical,
             out GC_Health deepest,
             overrideBodyPart,
             dmgMultiplier,
@@ -133,6 +143,7 @@ public partial class GC_HurtBox : Area3D
             takenDamage, killed,                    // Hit infos
             hitDealer, author,                      // Author infos
             overflow, overrideBodyPart,             // Optional infos
+            backStab, critical,                     // Optional infos
             false, subHitSize                       // Optional infos
         );
     }

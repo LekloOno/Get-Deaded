@@ -31,7 +31,7 @@ BackModifier = 2.0
 metadata/_custom_type_script = "uid://cjmiash71uc7b"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2xwjd"]
-size = Vector3(0.9, 1, 1.6)
+size = Vector3(0.9, 1, 1.4)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4osp6"]
 transparency = 1
@@ -112,7 +112,7 @@ metadata/_custom_type_script = "uid://c7q1lkhbh7u6h"
 [node name="HitBox" type="Area3D" parent="PW_FistsFire/PWS_SequenceHit"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PW_FistsFire/PWS_SequenceHit/HitBox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.9)
 shape = SubResource("BoxShape3D_2xwjd")
 
 [node name="Timer" type="Timer" parent="PW_FistsFire/PWS_SequenceHit/HitBox/CollisionShape3D"]
