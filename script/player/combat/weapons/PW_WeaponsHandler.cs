@@ -335,7 +335,10 @@ public partial class PW_WeaponsHandler : WeaponSystem
     public void Reload(object sender, EventArgs e)
     {
         if (_reloading)
+        {
+            _weaponsInput.ReloadUseBuffer();
             return;
+        }
 
         if(!ActiveWeaponHalted())
         {
