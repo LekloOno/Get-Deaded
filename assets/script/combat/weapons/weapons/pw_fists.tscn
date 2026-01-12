@@ -117,7 +117,7 @@ shape = SubResource("BoxShape3D_2xwjd")
 
 [node name="Timer" type="Timer" parent="PW_FistsFire/PWS_SequenceHit/HitBox/CollisionShape3D"]
 process_callback = 0
-wait_time = 0.1
+wait_time = 0.15
 one_shot = true
 
 [node name="GC_SequenceHitBox" type="Node" parent="PW_FistsFire/PWS_SequenceHit" node_paths=PackedStringArray("_sequenceArea")]
