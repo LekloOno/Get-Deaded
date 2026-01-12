@@ -77,6 +77,9 @@ public partial class GC_HurtBox : Area3D
 
     private bool IsHittingFront(GC_IHitDealer hitDealer)
     {
+        if (hitDealer.OwnerEntity == GE_Environment.Instance)
+            return true;
+
         Vector3 selfDir = -Entity.Body.GlobalTransform.Basis.Z;
         Vector3 hitDealerPos = hitDealer.OwnerEntity.Body.GlobalTransform.Origin;
         Vector3 direction = hitDealerPos - Entity.Body.GlobalTransform.Origin;
