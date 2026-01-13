@@ -193,4 +193,12 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
     }
 
     public virtual void Interrupt(){}
+    /// <summary>
+    /// Disable the shot without interrupting any ongoing operation. It simply ignores any interractions.
+    /// </summary>
+    public virtual void Sleep(){}
+    /// <summary>
+    /// Enables interractions of this shot.
+    /// </summary>
+    public virtual void Awake(){}
 }

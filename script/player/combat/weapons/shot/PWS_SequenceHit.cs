@@ -44,4 +44,10 @@ public partial class PWS_SequenceHit : PW_Shot
 
     public override void Interrupt() =>
         _sequenceHitBox.StopSequence();
+
+    public override void Sleep() =>
+        _sequenceHitBox.CollisionMask = 0;
+
+    public override void Awake() =>
+        _sequenceHitBox.CollisionMask = CONF_Collision.Masks.HitScan;
 }

@@ -96,6 +96,12 @@ public abstract partial class PW_Weapon : WeaponComponent
         _currentFire = InitCurrentFire();
     }
 
+    public virtual void Sleep() =>
+        _currentFire.Sleep();
+
+    public virtual void Awake() =>
+        _currentFire.Awake();
+
     public void SetInfiniteAmmo(bool active)
     {
         foreach (PW_Fire fire in _fires)

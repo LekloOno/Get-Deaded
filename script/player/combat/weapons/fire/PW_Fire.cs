@@ -216,4 +216,16 @@ public abstract partial class PW_Fire : WeaponComponent
     /// Handle the weapon disabling. Example - A weapons which shoots continuously should stop shooting on disable, even if no up input has been sent.
     /// </summary>
     public abstract void Disable();
+
+    public void Sleep()
+    {
+        foreach (PW_Shot shot in _shots)
+            shot.Sleep();
+    }
+
+    public void Awake()
+    {
+        foreach (PW_Shot shot in _shots)
+            shot.Awake();
+    }
 }
