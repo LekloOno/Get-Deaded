@@ -31,14 +31,14 @@ public partial class UI_KillSkullManager : Control
         AddChild(FadeTimer);
     }
 
-    public void PopSkull(GC_BodyPart bodyPart, bool overrideBodyPart)
+    public void PopSkull(bool critical)
     {
         UI_KillSkullShaker newSkull = (UI_KillSkullShaker) _killTemplate.Instantiate();
         newSkull.ShakeIntensity = _shakeIntensity;
         newSkull.Trauma = _trauma;
         newSkull.ShakeLayer = (ANIM_Vec2TraumaLayer) _shakeLayer.Duplicate();
         
-        if (!overrideBodyPart && bodyPart == GC_BodyPart.Head)
+        if (critical)
         {
             newSkull.Texture = _criticalTexture;
             newSkull.Modulate = CONF_HitColors.Colors.Critical;

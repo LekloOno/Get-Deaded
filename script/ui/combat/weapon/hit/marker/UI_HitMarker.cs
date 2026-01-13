@@ -23,7 +23,7 @@ public partial class UI_HitMarker : Control
         if (e.Killed)
         {
             _killMarker.StartAnim();
-            _killSkull.PopSkull(e.HurtBox.BodyPart, e.OverrideBodyPart);
+            _killSkull.PopSkull(e.Critical);
             return;
         }
 
