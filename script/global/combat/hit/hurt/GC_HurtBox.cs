@@ -81,7 +81,7 @@ public partial class GC_HurtBox : Area3D
             return true;
 
         Vector3 selfDir = -Entity.Body.GlobalTransform.Basis.Z;
-        Vector3 hitDealerPos = hitDealer.OwnerEntity.Body.GlobalTransform.Origin;
+        Vector3 hitDealerPos = hitDealer.OwnerEntity.Body.PrevGlobalTransform.Origin;
         Vector3 direction = hitDealerPos - Entity.Body.GlobalTransform.Origin;
 
         float hitAngle = MATH_Vector3Ext.FlatAngle(selfDir, direction);
