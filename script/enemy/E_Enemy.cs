@@ -19,6 +19,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
     [Export] private bool _aim;
     [Export] public PCT_SimpleTraumaData KillTraumaData {get; private set;}
 
+
     public bool Enabled {get; private set;} = false;
 
     private ShaderMaterial _surfaceMeshMaterial;
@@ -70,6 +71,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
             _target = value;
         }
     }
+
 
     public override void _Ready()
     {
@@ -176,7 +178,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
         _healthManager.Init(true);
     }
 
-    public override void _PhysicsProcess(double delta)
+    protected override void PhysicsProcessSpec(double delta)
     {
         Vector3 velocity = Velocity;
         if (!IsOnFloor())

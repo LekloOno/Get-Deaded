@@ -16,6 +16,9 @@ public partial class PM_Controller : CharacterBody3D, GB_IExternalBodyManager, G
     [Export] private float _debugDashStrength = 10f;
     [Export] public PW_WeaponsHandler WeaponsHandler {get; private set;}
     [Export] public PCT_SimpleTraumaData KillTraumaData {get; private set;}
+
+    public Transform3D PrevGlobalTransform {get; protected set;}
+    public Vector3 PrevVelocity {get; protected set;}
     
     public EventHandler OnDie;
 
@@ -118,6 +121,9 @@ public partial class PM_Controller : CharacterBody3D, GB_IExternalBodyManager, G
 
     public override void _PhysicsProcess(double delta)
     {
+        PrevGlobalTransform = GlobalTransform;
+        PrevVelocity = RealVelocity;
+
         Acceleration = Vector3.Zero;
 
         Vector3 startVelocity = RealVelocity;

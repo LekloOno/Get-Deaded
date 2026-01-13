@@ -12,8 +12,9 @@ public abstract partial class GB_ExternalBodyManagerWrapper : Node, GB_IExternal
         Body.HandleKnockBack(force);
     }
 
-    public Vector3 Velocity() =>
-        Body.Velocity();
+    public Vector3 Velocity() => Body.Velocity();
+    public Vector3 PrevVelocity => Body.PrevVelocity;
 
     public Transform3D GlobalTransform => Body.GlobalTransform;
+    public Transform3D PrevGlobalTransform => Body.GlobalTransform;
 }

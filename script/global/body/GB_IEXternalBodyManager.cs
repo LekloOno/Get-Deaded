@@ -4,5 +4,7 @@ public interface GB_IExternalBodyManager
 {
     void HandleKnockBack(Vector3 force);
     Vector3 Velocity();
+    Vector3 PrevVelocity {get;}
     Transform3D GlobalTransform {get;}
+    Transform3D PrevGlobalTransform {get;}
 }
