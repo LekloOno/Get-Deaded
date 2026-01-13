@@ -19,10 +19,10 @@ config/icon="res://icon.svg"
 [autoload]
 
 Bootstrap="*res://config/bootstrap/Bootstrap.cs"
+ConfHitColors="*res://config/combat/hit/CONF_HitColors.cs"
 ConfHealthColors="*res://config/combat/health_colors/CONF_HealthColors.cs"
 ConfBodyModifiers="*res://config/combat/body_modifiers/CONF_BodyModifiers.cs"
 ConfCollision="*res://config/physics/collision/CONF_Collision.cs"
-ConfHitColors="*res://config/combat/hit/CONF_HitColors.cs"
 PHX_Time="*res://script/engine_tools/physics/PHX_Time.cs"
 
 [display]

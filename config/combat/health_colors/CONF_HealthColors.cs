@@ -14,7 +14,7 @@ public partial class CONF_HealthColors : Node
         Damages = (CONFD_DamageColors) ResourceLoader.Load("res://config/combat/health_colors/conf_damage_colors.tres");
     }
 
-    public static CONFD_BarColors GetBarColors(GC_Health healthType)
+    public static CONFD_IBarColors GetBarColors(GC_Health healthType)
     {
         return healthType switch
         {
@@ -22,7 +22,7 @@ public partial class CONF_HealthColors : Node
             GC_Shield _ =>  Instance.Bars.Shield,
             GC_SpeedShield _ => Instance.Bars.Shield,
             GC_Barrier _ => Instance.Bars.Barrier,
-            GC_Health _ =>  Instance.Bars.Health,
+            GC_Health _ =>  CONFD_DefaultBarColors.Default,
             _ => Instance.Bars.Default,
         };
     }

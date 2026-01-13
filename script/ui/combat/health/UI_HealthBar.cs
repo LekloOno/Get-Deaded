@@ -11,8 +11,9 @@ public partial class UI_HealthBar : Control
     private Tween _tailTween;
     private StyleBoxFlat _bodyColor;
     private StyleBoxFlat _tailColor;
+    private CONFD_IBarColors _barColors;
 
-    public void InitBar(float _maxHealth, float _initHealth, CONFD_BarColors barColors)
+    public void InitBar(float _maxHealth, float _initHealth, CONFD_IBarColors barColors)
     {
         _body.MinValue = _tail.MinValue = 0f;
         _body.MaxValue = _tail.MaxValue = _maxHealth;
@@ -21,22 +22,25 @@ public partial class UI_HealthBar : Control
         _bodyColor = (StyleBoxFlat) _body.GetThemeStylebox("fill");
         _tailColor = (StyleBoxFlat) _tail.GetThemeStylebox("fill");
         
-        SetColor(barColors);
+        _barColors = barColors;
+        SetColor();
     }
 
-    public void SetColor(CONFD_BarColors barColors)
+    public void SetColor()
     {
-        _bodyColor.BgColor = barColors.Body;
-        _tailColor.BgColor = barColors.Tail;
+        _bodyColor.BgColor = _barColors.Body;
+        _tailColor.BgColor = _barColors.Tail;
     }
 
-    public void Break(CONFD_BarColors barColors)
+    public void Break(CONFD_IBarColors barColors)
     {
-        SetColor(barColors);
+        _barColors = barColors;
+        SetColor();
     }
 
     public void Damage(float currentHealth)
     {
+        SetColor();
         _body.Value = currentHealth;
 
         _tailTween?.Kill();

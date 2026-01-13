@@ -29,7 +29,6 @@ metadata/_custom_type_script = "uid://o0xwdckg83g2"
 
 [resource]
 script = ExtResource("1_dp6h2")
-Health = SubResource("Resource_0y0qp")
 Shield = SubResource("Resource_t2hbb")
 Barrier = SubResource("Resource_h1g26")
 Armor = SubResource("Resource_hbegh")
