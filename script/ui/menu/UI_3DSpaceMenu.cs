@@ -19,6 +19,8 @@ public partial class UI_3DSpaceMenu : Sprite3D
         _arenaMap.OnMenuOpen += Open;
         _arenaMap.OnMenuClose += Close;
         _prevMouseMode = Input.MouseMode;
+
+        _menu.Exit += Resume;
     }
 
     public void Open()
@@ -42,8 +44,14 @@ public partial class UI_3DSpaceMenu : Sprite3D
 
     public void Close()
     {
-        _menu.Close();
+        if (_menu.ExitCurrent())
+            return;
 
+        Resume();
+    }
+
+    public void Resume()
+    {
         if (_useMouseCursor)
             Input.MouseMode = _prevMouseMode;
             

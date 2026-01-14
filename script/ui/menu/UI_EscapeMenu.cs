@@ -1,17 +1,18 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 
 [GlobalClass]
-public partial class UI_EscapeMenu : Control
+public partial class UI_EscapeMenu : Control, UI_IMenuStackManager
 {
     [Export] private bool _pauseGame = true;
-    [Export] private Control _menus;
     [Export] private Control _baseMenu;
     private Stack<Control> _menuStack = [];
+    public event Action Exit;
 
     public override void _Ready()
     {
-        foreach (Node child in _menus.GetChildren())
+        foreach (Node child in GetChildren())
             if (child is Control control)
                 control.Visible = false;
     }
@@ -31,6 +32,7 @@ public partial class UI_EscapeMenu : Control
             GetTree().Paused = false;
 
         Hide();
+        Exit?.Invoke();
     }
 
     public void Enter(Control menu)
@@ -49,7 +51,7 @@ public partial class UI_EscapeMenu : Control
         current.Hide();
 
         bool stillInMenu = _menuStack.TryPeek(out Control next); 
-        
+
         if (stillInMenu)
             next.Show();
         else

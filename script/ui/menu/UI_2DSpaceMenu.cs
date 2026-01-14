@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 [GlobalClass]
@@ -14,6 +15,8 @@ public partial class UI_2DSpaceMenu : Node
         _arenaMap.OnMenuOpen += Open;
         _arenaMap.OnMenuClose += Close;
         _prevMouseMode = Input.MouseMode;
+
+        _menu.Exit += Resume;
     }
 
     public void Open()
@@ -32,8 +35,14 @@ public partial class UI_2DSpaceMenu : Node
         if (_menu.ExitCurrent())
             return;
 
+        Resume();
+    }
+
+    public void Resume()
+    {
         _cameraControl.ProcessMode = _prevCameraMode;
         Input.MouseMode = _prevMouseMode;
         _cameraControl.SetProcessUnhandledInput(true);
     }
+
 }
