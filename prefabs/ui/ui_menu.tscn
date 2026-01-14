@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dbwbuyf2bwus0"]
+[gd_scene load_steps=3 format=3 uid="uid://dbwbuyf2bwus0"]
 
 [ext_resource type="Script" uid="uid://dg5hxnex777ma" path="res://script/ui/menu/UI_EscapeMenu.cs" id="1_nsprt"]
+[ext_resource type="Theme" uid="uid://ddkca4fk8kto5" path="res://assets/ui/menu_theme.tres" id="2_cg8yy"]
 
-[node name="UI_EscapeMenu" type="Control"]
+[node name="UI_EscapeMenu" type="Control" node_paths=PackedStringArray("_menus", "_baseMenu")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,6 +11,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_nsprt")
+_menus = NodePath("ColorRect")
+_baseMenu = NodePath("ColorRect/VBoxContainer")
 metadata/_custom_type_script = "uid://dg5hxnex777ma"
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -21,16 +24,32 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.61300004)
 
-[node name="ColorRect2" type="ColorRect" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -57.0
+offset_top = -62.5
+offset_right = 57.0
+offset_bottom = 62.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_cg8yy")
+
+[node name="Resume" type="Button" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "RESUME"
+
+[node name="Settings" type="Button" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "SETTINGS"
+
+[node name="Quit" type="Button" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "QUIT"

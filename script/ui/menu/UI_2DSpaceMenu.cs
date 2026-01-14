@@ -29,9 +29,10 @@ public partial class UI_2DSpaceMenu : Node
 
     public void Close()
     {
+        if (_menu.ExitCurrent())
+            return;
+
         _cameraControl.ProcessMode = _prevCameraMode;
-        
-        _menu.Close();
         Input.MouseMode = _prevMouseMode;
         _cameraControl.SetProcessUnhandledInput(true);
     }
