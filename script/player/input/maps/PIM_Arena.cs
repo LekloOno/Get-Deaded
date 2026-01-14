@@ -13,15 +13,12 @@ public partial class PIM_Arena : Node
     [Export] private PI_Revive _reviveInput;
     [Export] private PI_Stats _statsInput;
 
-    public Action OnMenuOpen;
-    public Action OnMenuClose;
-
     private PI_Map _alive;
     private PI_Map _dead;
     private PI_Map _escapeMenu;
 
     private PI_Map _activeGameMap;
-    private bool _menu = false;
+    public bool Menu = false;
 
     
     public override void _Ready()
@@ -39,19 +36,6 @@ public partial class PIM_Arena : Node
         _controller.OnDie += TrackDead;
         _reviveInput.Revive += Alive;
         _reviveInput.Revive += TrackAlive;
-    }
-
-    public override void _UnhandledKeyInput(InputEvent @event)
-    {
-        if (!@event.IsActionPressed("ui_cancel"))
-            return;
-
-        _menu = !_menu;
-        
-        if (_menu)
-            MenuShow();
-        else
-            MenuHide();
     }
 
     public void TrackAlive(object _, float __) =>
@@ -72,7 +56,7 @@ public partial class PIM_Arena : Node
         _dead.Enable();
     }
 
-    private void MenuShow()
+    public void MenuShow()
     {
         _activeGameMap.Disable();
         _controller.OnDie -= Dead;
@@ -80,10 +64,9 @@ public partial class PIM_Arena : Node
 
         _statsInput.DisableAction();
         _escapeMenu.Enable();
-        OnMenuOpen?.Invoke();
     }
 
-    private void MenuHide()
+    public void MenuHide()
     {
         _escapeMenu.Disable();
 
@@ -92,6 +75,5 @@ public partial class PIM_Arena : Node
         _reviveInput.Revive += Alive;
 
         _statsInput.EnableAction();
-        OnMenuClose?.Invoke();
     }
 }
