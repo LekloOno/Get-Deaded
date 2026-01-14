@@ -53,6 +53,9 @@ public partial class UI_EscapeMenu : Control, UI_IMenuStackManager
 
     public void Enter(Control menu)
     {
+        if (_menuStack.TryPeek(out Control current))
+            current.Hide();
+
         _menuStack.Push(menu);
         menu.Show();
     }
