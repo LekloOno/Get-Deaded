@@ -137,7 +137,6 @@ layout_mode = 2
 [node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/VIDEO/GridContainer/FovInput"]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("5_kpbb8")
@@ -187,7 +186,6 @@ layout_mode = 2
 [node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/SOUND/GridContainer/MasterInput"]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("5_kpbb8")
@@ -224,7 +222,6 @@ layout_mode = 2
 [node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/SOUND/GridContainer/SFXInput"]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("5_kpbb8")
@@ -262,7 +259,6 @@ layout_mode = 2
 [node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/SOUND/GridContainer/EnvSFXInput"]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("5_kpbb8")
@@ -301,7 +297,6 @@ layout_mode = 2
 [node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/SOUND/GridContainer/FbSFXInput"]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("5_kpbb8")
