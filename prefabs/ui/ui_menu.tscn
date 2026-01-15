@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dbwbuyf2bwus0"]
+[gd_scene load_steps=10 format=3 uid="uid://dbwbuyf2bwus0"]
 
 [ext_resource type="Script" uid="uid://dg5hxnex777ma" path="res://script/ui/menu/UI_EscapeMenu.cs" id="1_nsprt"]
 [ext_resource type="Theme" uid="uid://ddkca4fk8kto5" path="res://assets/ui/menu_theme.tres" id="2_cg8yy"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://frtvhj4puyeh" path="res://script/ui/menu/contexts/ui_quit_button.gd" id="4_wkf4o"]
 [ext_resource type="Script" uid="uid://bwag4h0e76hv" path="res://script/ui/menu/ui_num_input.gd" id="5_kpbb8"]
 [ext_resource type="Script" uid="uid://yone8b285x4t" path="res://script/ui/menu/contexts/sound/ui_volume_slider.gd" id="5_mpkul"]
+[ext_resource type="Script" uid="uid://b73bupbbmrl8h" path="res://script/ui/menu/contexts/video/ui_display_mode_picker.gd" id="5_nlcml"]
+[ext_resource type="Script" uid="uid://cxmv5fyashr30" path="res://script/ui/menu/contexts/video/ui_resolution_picker.gd" id="5_ov0ei"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wkf4o"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -71,15 +73,82 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_wkf4o")
 [node name="TabContainer" type="TabContainer" parent="PanelContainer"]
 layout_mode = 2
 mouse_filter = 0
-current_tab = 1
+current_tab = 0
 
 [node name="VIDEO" type="TabBar" parent="PanelContainer/TabContainer"]
-visible = false
 layout_mode = 2
 mouse_filter = 1
 metadata/_tab_index = 0
 
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/TabContainer/VIDEO"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 217.0
+offset_top = 39.0
+offset_right = -228.0
+offset_bottom = -73.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 6
+columns = 2
+
+[node name="DisplayMode" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO/GridContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO/GridContainer/DisplayMode"]
+layout_mode = 2
+text = "DISPLAY MODE"
+
+[node name="DisplayModeInput" type="OptionButton" parent="PanelContainer/TabContainer/VIDEO/GridContainer"]
+layout_mode = 2
+script = ExtResource("5_nlcml")
+
+[node name="Resolution" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO/GridContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO/GridContainer/Resolution"]
+layout_mode = 2
+text = "RESOLUTION"
+
+[node name="ResolutionInput" type="OptionButton" parent="PanelContainer/TabContainer/VIDEO/GridContainer"]
+layout_mode = 2
+script = ExtResource("5_ov0ei")
+
+[node name="Fov" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO/GridContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO/GridContainer/Fov"]
+layout_mode = 2
+text = "FOV"
+
+[node name="FovInput" type="HSplitContainer" parent="PanelContainer/TabContainer/VIDEO/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/VIDEO/GridContainer/FovInput"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+virtual_keyboard_type = 2
+script = ExtResource("5_kpbb8")
+
+[node name="MasterSlider" type="HSlider" parent="PanelContainer/TabContainer/VIDEO/GridContainer/FovInput"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 30.0
+max_value = 140.0
+value = 103.0
+
 [node name="SOUND" type="TabBar" parent="PanelContainer/TabContainer"]
+visible = false
 layout_mode = 2
 mouse_filter = 1
 metadata/_tab_index = 1
@@ -247,7 +316,19 @@ visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="Back" type="Button" parent="PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="APPLY" type="Button" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "APPLY"
+
+[node name="Back" type="Button" parent="PanelContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
@@ -255,4 +336,9 @@ text = "BACK"
 
 [connection signal="pressed" from="VBoxContainer/Resume" to="." method="ExitCurrent"]
 [connection signal="enter_settings" from="VBoxContainer/Settings" to="." method="Enter"]
-[connection signal="pressed" from="PanelContainer/Back" to="." method="ExitCurrent"]
+[connection signal="item_selected" from="PanelContainer/TabContainer/VIDEO/GridContainer/DisplayModeInput" to="PanelContainer/TabContainer/VIDEO/GridContainer/DisplayModeInput" method="_on_item_selected"]
+[connection signal="visibility_changed" from="PanelContainer/TabContainer/VIDEO/GridContainer/DisplayModeInput" to="PanelContainer/TabContainer/VIDEO/GridContainer/DisplayModeInput" method="_on_visibility_changed"]
+[connection signal="item_selected" from="PanelContainer/TabContainer/VIDEO/GridContainer/ResolutionInput" to="PanelContainer/TabContainer/VIDEO/GridContainer/ResolutionInput" method="_on_item_selected"]
+[connection signal="visibility_changed" from="PanelContainer/TabContainer/VIDEO/GridContainer/ResolutionInput" to="PanelContainer/TabContainer/VIDEO/GridContainer/ResolutionInput" method="_on_visibility_changed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/APPLY" to="." method="ExitCurrent"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/Back" to="." method="ExitCurrent"]
