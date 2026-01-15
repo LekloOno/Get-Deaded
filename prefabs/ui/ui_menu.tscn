@@ -337,6 +337,7 @@ text = "BACK"
 [connection signal="pressed" from="VBoxContainer/Resume" to="." method="ExitCurrent"]
 [connection signal="enter_settings" from="VBoxContainer/Settings" to="." method="Enter"]
 [connection signal="item_selected" from="PanelContainer/TabContainer/VIDEO/GridContainer/DisplayModeInput" to="PanelContainer/TabContainer/VIDEO/GridContainer/DisplayModeInput" method="_on_item_selected"]
+[connection signal="switched_mode" from="PanelContainer/TabContainer/VIDEO/GridContainer/DisplayModeInput" to="PanelContainer/TabContainer/VIDEO/GridContainer/ResolutionInput" method="set_window_size"]
 [connection signal="visibility_changed" from="PanelContainer/TabContainer/VIDEO/GridContainer/DisplayModeInput" to="PanelContainer/TabContainer/VIDEO/GridContainer/DisplayModeInput" method="_on_visibility_changed"]
 [connection signal="item_selected" from="PanelContainer/TabContainer/VIDEO/GridContainer/ResolutionInput" to="PanelContainer/TabContainer/VIDEO/GridContainer/ResolutionInput" method="_on_item_selected"]
 [connection signal="visibility_changed" from="PanelContainer/TabContainer/VIDEO/GridContainer/ResolutionInput" to="PanelContainer/TabContainer/VIDEO/GridContainer/ResolutionInput" method="_on_visibility_changed"]

@@ -1,5 +1,7 @@
 extends OptionButton
 
+signal switched_mode()
+
 var modes = {
 	"FULLSCREEN": DisplayServer.WindowMode.WINDOW_MODE_EXCLUSIVE_FULLSCREEN,
 	"BORDERLESS": DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN,
@@ -17,9 +19,13 @@ func _ready() -> void:
 	for mode in modes:
 		add_item(mode)
 
+func set_mode(mode: DisplayServer.WindowMode):
+	DisplayServer.window_set_mode(mode)
+	switched_mode.emit()
+
 func _on_item_selected(index: int) -> void:
 	var key = get_item_text(index)
-	DisplayServer.window_set_mode(modes[key])
+	set_mode(modes[key])
 
 
 func _on_visibility_changed() -> void:
@@ -27,4 +33,5 @@ func _on_visibility_changed() -> void:
 		return
 		
 	var mode_str = display_mode_to_key(DisplayServer.window_get_mode())
+	
 	selected = modes.keys().find(mode_str)
