@@ -15,7 +15,6 @@ var resolutions = {
 var curr_res: Vector2i
 
 func _ready() -> void:
-	print(get_window().content_scale_size)
 	for resolution in resolutions:
 		add_item(resolution)
 		
