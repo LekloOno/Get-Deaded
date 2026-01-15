@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dbwbuyf2bwus0"]
+[gd_scene load_steps=8 format=3 uid="uid://dbwbuyf2bwus0"]
 
 [ext_resource type="Script" uid="uid://dg5hxnex777ma" path="res://script/ui/menu/UI_EscapeMenu.cs" id="1_nsprt"]
 [ext_resource type="Theme" uid="uid://ddkca4fk8kto5" path="res://assets/ui/menu_theme.tres" id="2_cg8yy"]
 [ext_resource type="Script" uid="uid://m4lycxmjea5x" path="res://script/ui/menu/contexts/ui_settings_button.gd" id="3_y758u"]
 [ext_resource type="Script" uid="uid://frtvhj4puyeh" path="res://script/ui/menu/contexts/ui_quit_button.gd" id="4_wkf4o"]
+[ext_resource type="Script" uid="uid://bwag4h0e76hv" path="res://script/ui/menu/ui_num_input.gd" id="5_kpbb8"]
 [ext_resource type="Script" uid="uid://yone8b285x4t" path="res://script/ui/menu/contexts/sound/ui_volume_slider.gd" id="5_mpkul"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wkf4o"]
@@ -98,16 +99,29 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 6
 columns = 2
 
-[node name="Master2" type="PanelContainer" parent="PanelContainer/TabContainer/SOUND/GridContainer"]
+[node name="Master" type="PanelContainer" parent="PanelContainer/TabContainer/SOUND/GridContainer"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 
-[node name="Master" type="Label" parent="PanelContainer/TabContainer/SOUND/GridContainer/Master2"]
+[node name="Master" type="Label" parent="PanelContainer/TabContainer/SOUND/GridContainer/Master"]
 layout_mode = 2
 text = "MASTER VOLUME"
 
-[node name="MasterSlider" type="HSlider" parent="PanelContainer/TabContainer/SOUND/GridContainer"]
+[node name="MasterInput" type="HSplitContainer" parent="PanelContainer/TabContainer/SOUND/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/SOUND/GridContainer/MasterInput"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+virtual_keyboard_type = 2
+script = ExtResource("5_kpbb8")
+
+[node name="MasterSlider" type="HSlider" parent="PanelContainer/TabContainer/SOUND/GridContainer/MasterInput"]
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 4
 max_value = 1.0
 step = 0.01
@@ -130,7 +144,19 @@ layout_mode = 2
 layout_mode = 2
 text = "SOUND EFFECTS"
 
-[node name="SFXSlider" type="HSlider" parent="PanelContainer/TabContainer/SOUND/GridContainer"]
+[node name="SFXInput" type="HSplitContainer" parent="PanelContainer/TabContainer/SOUND/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/SOUND/GridContainer/SFXInput"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+virtual_keyboard_type = 2
+script = ExtResource("5_kpbb8")
+
+[node name="SFXSlider" type="HSlider" parent="PanelContainer/TabContainer/SOUND/GridContainer/SFXInput"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -156,7 +182,19 @@ tooltip_text = "Diegetical sfx"
 mouse_filter = 1
 text = "ENVIRONMENT"
 
-[node name="EnvSFXSlider" type="HSlider" parent="PanelContainer/TabContainer/SOUND/GridContainer"]
+[node name="EnvSFXInput" type="HSplitContainer" parent="PanelContainer/TabContainer/SOUND/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/SOUND/GridContainer/EnvSFXInput"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+virtual_keyboard_type = 2
+script = ExtResource("5_kpbb8")
+
+[node name="EnvSFXSlider" type="HSlider" parent="PanelContainer/TabContainer/SOUND/GridContainer/EnvSFXInput"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -183,7 +221,19 @@ tooltip_text = "Diegetical sfx"
 mouse_filter = 1
 text = "FEEDBACK"
 
-[node name="FbSFXSlider" type="HSlider" parent="PanelContainer/TabContainer/SOUND/GridContainer"]
+[node name="FbSFXInput" type="HSplitContainer" parent="PanelContainer/TabContainer/SOUND/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/SOUND/GridContainer/FbSFXInput"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+virtual_keyboard_type = 2
+script = ExtResource("5_kpbb8")
+
+[node name="FbSFXSlider" type="HSlider" parent="PanelContainer/TabContainer/SOUND/GridContainer/FbSFXInput"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
