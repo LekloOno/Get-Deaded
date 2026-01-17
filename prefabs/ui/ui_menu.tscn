@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dbwbuyf2bwus0"]
+[gd_scene load_steps=16 format=3 uid="uid://dbwbuyf2bwus0"]
 
 [ext_resource type="Script" uid="uid://dg5hxnex777ma" path="res://script/ui/menu/UI_EscapeMenu.cs" id="1_nsprt"]
 [ext_resource type="Theme" uid="uid://ddkca4fk8kto5" path="res://assets/ui/menu_theme.tres" id="2_cg8yy"]
@@ -11,7 +11,9 @@
 [ext_resource type="Script" uid="uid://tyihd8beo5j" path="res://script/ui/menu/contexts/video/ui_fov_slider.gd" id="8_cbaf7"]
 [ext_resource type="Script" uid="uid://n62sbtg1xvbp" path="res://script/ui/menu/contexts/video/ui_fps_limit_checkbox.gd" id="9_k7jqq"]
 [ext_resource type="Script" uid="uid://d2ws6gavso5wd" path="res://script/ui/menu/contexts/video/ui_fps_limiter.gd" id="10_vvu1j"]
+[ext_resource type="Script" uid="uid://diq354ubrwntn" path="res://script/ui/menu/contexts/controls/ui_dpi.gd" id="12_ek014"]
 [ext_resource type="Script" uid="uid://b2gps3n30fk26" path="res://script/ui/menu/contexts/accessibility/ui_ennemies_color.gd" id="12_g471r"]
+[ext_resource type="Script" uid="uid://ctjmgs5r2eyrr" path="res://script/ui/menu/ui_line_edit_helper.gd" id="12_i4pqc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wkf4o"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -77,7 +79,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_wkf4o")
 [node name="TabContainer" type="TabContainer" parent="PanelContainer"]
 layout_mode = 2
 mouse_filter = 0
-current_tab = 3
+current_tab = 2
 
 [node name="VIDEO" type="TabBar" parent="PanelContainer/TabContainer"]
 visible = false
@@ -360,11 +362,109 @@ script = ExtResource("5_mpkul")
 bus_name = "Feedback SFX"
 
 [node name="CONTROLS" type="TabBar" parent="PanelContainer/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/TabContainer/CONTROLS"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 217.0
+offset_top = 39.0
+offset_right = -228.0
+offset_bottom = -73.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 6
+columns = 2
+
+[node name="Sensitivity" type="PanelContainer" parent="PanelContainer/TabContainer/CONTROLS/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/CONTROLS/GridContainer/Sensitivity"]
+layout_mode = 2
+text = "SENSITIVITY"
+
+[node name="Control" type="Control" parent="PanelContainer/TabContainer/CONTROLS/GridContainer"]
+layout_mode = 2
+
+[node name="DPI" type="PanelContainer" parent="PanelContainer/TabContainer/CONTROLS/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="hbox" type="HBoxContainer" parent="PanelContainer/TabContainer/CONTROLS/GridContainer/DPI"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="PanelContainer/TabContainer/CONTROLS/GridContainer/DPI/hbox"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/CONTROLS/GridContainer/DPI/hbox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "DPI"
+
+[node name="DPIInput" type="HSplitContainer" parent="PanelContainer/TabContainer/CONTROLS/GridContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+script = ExtResource("12_ek014")
+
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/CONTROLS/GridContainer/DPIInput"]
+layout_mode = 2
+size_flags_horizontal = 0
+alignment = 1
+virtual_keyboard_type = 2
+script = ExtResource("5_kpbb8")
+allow_float = false
+
+[node name="OptionButton" type="OptionButton" parent="PanelContainer/TabContainer/CONTROLS/GridContainer/DPIInput"]
+layout_mode = 2
+script = ExtResource("12_i4pqc")
+
+[node name="cm360" type="PanelContainer" parent="PanelContainer/TabContainer/CONTROLS/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="hbox" type="HBoxContainer" parent="PanelContainer/TabContainer/CONTROLS/GridContainer/cm360"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="PanelContainer/TabContainer/CONTROLS/GridContainer/cm360/hbox"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/CONTROLS/GridContainer/cm360/hbox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "CM/360°"
+
+[node name="SensitivityInput2" type="HSplitContainer" parent="PanelContainer/TabContainer/CONTROLS/GridContainer" node_paths=PackedStringArray("label", "slider")]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+script = ExtResource("10_vvu1j")
+label = NodePath("../Sensitivity")
+slider = NodePath("MasterSlider")
+
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/CONTROLS/GridContainer/SensitivityInput2"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+virtual_keyboard_type = 2
+script = ExtResource("5_kpbb8")
+allow_float = false
+
+[node name="MasterSlider" type="HSlider" parent="PanelContainer/TabContainer/CONTROLS/GridContainer/SensitivityInput2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 1.0
+max_value = 600.0
+value = 103.0
+
 [node name="ACCESSIBILITY" type="TabBar" parent="PanelContainer/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 3
 
@@ -429,5 +529,7 @@ text = "BACK"
 [connection signal="value_applied" from="PanelContainer/TabContainer/SOUND/GridContainer/SFXInput/LineEdit" to="PanelContainer/TabContainer/SOUND/GridContainer/SFXInput/SFXSlider" method="_on_value_changed"]
 [connection signal="value_applied" from="PanelContainer/TabContainer/SOUND/GridContainer/EnvSFXInput/LineEdit" to="PanelContainer/TabContainer/SOUND/GridContainer/EnvSFXInput/EnvSFXSlider" method="_on_value_changed"]
 [connection signal="value_applied" from="PanelContainer/TabContainer/SOUND/GridContainer/FbSFXInput/LineEdit" to="PanelContainer/TabContainer/SOUND/GridContainer/FbSFXInput/FbSFXSlider" method="_on_value_changed"]
+[connection signal="value_applied" from="PanelContainer/TabContainer/CONTROLS/GridContainer/DPIInput/LineEdit" to="PanelContainer/TabContainer/CONTROLS/GridContainer/DPIInput" method="_on_line_edit_value_applied"]
+[connection signal="item_selected" from="PanelContainer/TabContainer/CONTROLS/GridContainer/DPIInput/OptionButton" to="PanelContainer/TabContainer/CONTROLS/GridContainer/DPIInput" method="_on_option_button_item_selected"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/APPLY" to="." method="ExitCurrent"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/Back" to="." method="ExitCurrent"]

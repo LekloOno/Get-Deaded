@@ -7,9 +7,9 @@ public partial class PC_Control : Node3D
 {
     [ExportCategory("Settings")]
     [Export(PropertyHint.Range, "0,100,0.1")]
-    private float _cmPer360 = 32f;
+    public float CmPer360 = 32f;
     [Export(PropertyHint.Range, "0,64000,1")]
-    private uint _dpi = 1600;
+    public uint Dpi = 1600;
     
     [ExportCategory("Setup")]
     [Export] private Node3D _flatDir;
@@ -34,8 +34,8 @@ public partial class PC_Control : Node3D
             //_eulerAngles += new Vector3(-mouseMotion.Relative.Y * _realSens, -mouseMotion.Relative.X * _realSens, 0f);
             //_eulerAngles.X = Mathf.Clamp(_eulerAngles.X, Mathf.DegToRad(-90), Mathf.DegToRad(90));
             //Rotation = _eulerAngles;
-            Vector2 cmMotion = (-mouseMotion.ScreenRelative / _dpi) * 2.54f;
-            Vector2 sensMotion = cmMotion * 2 * Mathf.Pi / _cmPer360;
+            Vector2 cmMotion = (-mouseMotion.ScreenRelative / Dpi) * 2.54f;
+            Vector2 sensMotion = cmMotion * 2 * Mathf.Pi / CmPer360;
             RotateFlatDir(sensMotion.X);
             RotateXClamped(sensMotion.Y);
             MouseMove.Invoke(this, sensMotion);
