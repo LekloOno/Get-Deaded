@@ -28,6 +28,6 @@ func _initialize():
 	if label:
 		label.visible = show_limiter
 
-func _on_value_changed(new_value: int) -> void:
+func _on_value_changed(new_value: float) -> void:
 	max_fps = new_value
 	Engine.max_fps = max_fps

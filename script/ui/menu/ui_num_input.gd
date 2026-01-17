@@ -5,6 +5,9 @@ extends LineEdit
 
 var slider: Slider
 
+@export var link_to_slider: bool = true
+@export var clamp_to_slider: bool = true
+
 @export var clamp_value: bool
 @export var min_value: float
 @export var max_value: float
@@ -12,29 +15,37 @@ var slider: Slider
 signal value_applied(value: float)
 
 var last_value = 0.
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
-	for sibling in get_parent().get_children():
-		if sibling is Slider:
-			slider = sibling
-			clamp_value = true
-			min_value = slider.min_value
-			max_value = slider.max_value
-			value_applied.connect(slider.set_value_no_signal)
-			slider.value_changed.connect(_on_slider_value_changed)
-			break
+	if link_to_slider:
+		slider = get_slider()
+		if slider:
+			init_to_slider()
 			
 	text_submitted.connect(_on_text_changed)
 
+func get_slider() -> Slider:
+	for sibling in get_parent().get_children():
+		if sibling is Slider:
+			return sibling
+	return null
+	
+func init_to_slider() -> void:
+	if clamp_to_slider:
+		clamp_value = true
+		min_value = slider.min_value
+		max_value = slider.max_value
+		
+	value_applied.connect(slider.set_value_no_signal)
+	slider.value_changed.connect(_on_slider_value_changed)
+
 func _on_text_changed(new_text: String) -> void:
 	var new_value
-	match allow_float:
-		true: match new_text.is_valid_float():
-			true: new_value = float(new_text)
-			false: new_value = last_value
-		false: match new_text.is_valid_int():
-			true: new_value = int(new_text)
-			false: new_value = last_value
+	if new_text.is_valid_float():
+		var float_val = float(new_text)
+		match allow_float:
+			true: new_value = float_val
+			false: new_value = roundi(float_val)
 			
 	if !allow_negative:
 		new_value = max(0, new_value)
@@ -50,7 +61,9 @@ func _on_text_changed(new_text: String) -> void:
 	
 func _on_slider_value_changed(value: float):
 	last_value = value
-	text = str(value)
+	match allow_float:
+		true: text = str(value)
+		false: text = str(int(value))
 			
 func apply_value(value: float):
 	last_value = value

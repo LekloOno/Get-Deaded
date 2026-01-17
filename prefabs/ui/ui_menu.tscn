@@ -187,6 +187,7 @@ size_flags_horizontal = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("5_kpbb8")
+allow_float = false
 
 [node name="MasterSlider" type="HSlider" parent="PanelContainer/TabContainer/VIDEO/GridContainer/MaxFPSInput"]
 layout_mode = 2
@@ -386,7 +387,13 @@ text = "BACK"
 [connection signal="visibility_changed" from="PanelContainer/TabContainer/VIDEO/GridContainer/DisplayModeInput" to="PanelContainer/TabContainer/VIDEO/GridContainer/DisplayModeInput" method="_on_visibility_changed"]
 [connection signal="item_selected" from="PanelContainer/TabContainer/VIDEO/GridContainer/ResolutionInput" to="PanelContainer/TabContainer/VIDEO/GridContainer/ResolutionInput" method="_on_item_selected"]
 [connection signal="visibility_changed" from="PanelContainer/TabContainer/VIDEO/GridContainer/ResolutionInput" to="PanelContainer/TabContainer/VIDEO/GridContainer/ResolutionInput" method="_on_visibility_changed"]
+[connection signal="value_applied" from="PanelContainer/TabContainer/VIDEO/GridContainer/FovInput/LineEdit" to="PanelContainer/TabContainer/VIDEO/GridContainer/FovInput/MasterSlider" method="_on_value_changed"]
 [connection signal="toggled" from="PanelContainer/TabContainer/VIDEO/GridContainer/LimitFPSInput" to="PanelContainer/TabContainer/VIDEO/GridContainer/Max FPS" method="set_visible"]
 [connection signal="toggled" from="PanelContainer/TabContainer/VIDEO/GridContainer/LimitFPSInput" to="PanelContainer/TabContainer/VIDEO/GridContainer/MaxFPSInput" method="set_visible"]
+[connection signal="value_applied" from="PanelContainer/TabContainer/VIDEO/GridContainer/MaxFPSInput/LineEdit" to="PanelContainer/TabContainer/VIDEO/GridContainer/MaxFPSInput" method="_on_value_changed"]
+[connection signal="value_applied" from="PanelContainer/TabContainer/SOUND/GridContainer/MasterInput/LineEdit" to="PanelContainer/TabContainer/SOUND/GridContainer/MasterInput/MasterSlider" method="_on_value_changed"]
+[connection signal="value_applied" from="PanelContainer/TabContainer/SOUND/GridContainer/SFXInput/LineEdit" to="PanelContainer/TabContainer/SOUND/GridContainer/SFXInput/SFXSlider" method="_on_value_changed"]
+[connection signal="value_applied" from="PanelContainer/TabContainer/SOUND/GridContainer/EnvSFXInput/LineEdit" to="PanelContainer/TabContainer/SOUND/GridContainer/EnvSFXInput/EnvSFXSlider" method="_on_value_changed"]
+[connection signal="value_applied" from="PanelContainer/TabContainer/SOUND/GridContainer/FbSFXInput/LineEdit" to="PanelContainer/TabContainer/SOUND/GridContainer/FbSFXInput/FbSFXSlider" method="_on_value_changed"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/APPLY" to="." method="ExitCurrent"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/Back" to="." method="ExitCurrent"]
