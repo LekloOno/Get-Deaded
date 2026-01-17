@@ -14,7 +14,7 @@ public partial class CONF_HealthColors : Node
         Damages = (CONFD_DamageColors) ResourceLoader.Load("res://config/combat/health_colors/conf_damage_colors.tres");
     }
 
-    public static CONFD_IBarColors GetBarColors(GC_Health healthType)
+    public static CONFD_IBarColors GetBarColors(GC_Health healthType, CONF_HurtBoxFaction faction = CONF_HurtBoxFaction.Enemy)
     {
         return healthType switch
         {
@@ -22,8 +22,19 @@ public partial class CONF_HealthColors : Node
             GC_Shield _ =>  Instance.Bars.Shield,
             GC_SpeedShield _ => Instance.Bars.Shield,
             GC_Barrier _ => Instance.Bars.Barrier,
-            GC_Health _ =>  CONFD_DefaultBarColors.Default,
+            GC_Health _ => GetDefaultBarColors(faction),
             _ => Instance.Bars.Default,
+        };
+    }
+
+    public static CONFD_IBarColors GetDefaultBarColors(CONF_HurtBoxFaction faction)
+    {
+        return faction switch
+        {
+            CONF_HurtBoxFaction.Player => CONFD_DefaultBarColors.Default,
+            CONF_HurtBoxFaction.Enemy => CONFD_DefaultHostileBarColors.Default,
+            _ => CONFD_DefaultHostileBarColors.Default,
+
         };
     }
 

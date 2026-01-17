@@ -25,8 +25,8 @@ public partial class UI_EntityHealth : VBoxContainer
         float higherMax = initState.TotalMaxHealth - lowerMax;
         float higherInit = initState.TotalInitHealth - lowerInit;
 
-        CONFD_IBarColors higherInitColor = CONF_HealthColors.GetBarColors(_healthManager.GetExposedLayer());
-        CONFD_IBarColors lowerInitColor = CONF_HealthColors.GetBarColors(_healthManager.GetLowerLayer());
+        CONFD_IBarColors higherInitColor = CONF_HealthColors.GetBarColors(_healthManager.GetExposedLayer(), _healthManager.HurtMask);
+        CONFD_IBarColors lowerInitColor = CONF_HealthColors.GetBarColors(_healthManager.GetLowerLayer(), _healthManager.HurtMask);
 
         _higherBar.InitBar(higherMax, higherInit, higherInitColor);
         _lowerBar.InitBar(lowerMax, lowerInit, lowerInitColor);
