@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dbwbuyf2bwus0"]
+[gd_scene load_steps=17 format=3 uid="uid://dbwbuyf2bwus0"]
 
 [ext_resource type="Script" uid="uid://dg5hxnex777ma" path="res://script/ui/menu/UI_EscapeMenu.cs" id="1_nsprt"]
 [ext_resource type="Theme" uid="uid://ddkca4fk8kto5" path="res://assets/ui/menu_theme.tres" id="2_cg8yy"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://diq354ubrwntn" path="res://script/ui/menu/contexts/controls/ui_dpi.gd" id="12_ek014"]
 [ext_resource type="Script" uid="uid://b2gps3n30fk26" path="res://script/ui/menu/contexts/accessibility/ui_ennemies_color.gd" id="12_g471r"]
 [ext_resource type="Script" uid="uid://ctjmgs5r2eyrr" path="res://script/ui/menu/ui_line_edit_helper.gd" id="12_i4pqc"]
+[ext_resource type="Script" uid="uid://bpduowbhu517b" path="res://script/ui/menu/contexts/controls/ui_cm360.gd" id="14_t6rq5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wkf4o"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -440,28 +441,29 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "CM/360°"
 
-[node name="SensitivityInput2" type="HSplitContainer" parent="PanelContainer/TabContainer/CONTROLS/GridContainer" node_paths=PackedStringArray("label", "slider")]
+[node name="cm360Input" type="HSplitContainer" parent="PanelContainer/TabContainer/CONTROLS/GridContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-script = ExtResource("10_vvu1j")
-label = NodePath("../Sensitivity")
-slider = NodePath("MasterSlider")
+script = ExtResource("14_t6rq5")
 
-[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/CONTROLS/GridContainer/SensitivityInput2"]
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/CONTROLS/GridContainer/cm360Input"]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("5_kpbb8")
-allow_float = false
+allow_negative = false
+clamp_to_slider = false
+clamp_value = true
+min_value = 0.1
+max_value = 10000.0
 
-[node name="MasterSlider" type="HSlider" parent="PanelContainer/TabContainer/CONTROLS/GridContainer/SensitivityInput2"]
+[node name="MasterSlider" type="HSlider" parent="PanelContainer/TabContainer/CONTROLS/GridContainer/cm360Input"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-min_value = 1.0
-max_value = 600.0
-value = 103.0
+min_value = 0.1
+value = 0.1
 
 [node name="ACCESSIBILITY" type="TabBar" parent="PanelContainer/TabContainer"]
 visible = false
@@ -531,5 +533,7 @@ text = "BACK"
 [connection signal="value_applied" from="PanelContainer/TabContainer/SOUND/GridContainer/FbSFXInput/LineEdit" to="PanelContainer/TabContainer/SOUND/GridContainer/FbSFXInput/FbSFXSlider" method="_on_value_changed"]
 [connection signal="value_applied" from="PanelContainer/TabContainer/CONTROLS/GridContainer/DPIInput/LineEdit" to="PanelContainer/TabContainer/CONTROLS/GridContainer/DPIInput" method="_on_line_edit_value_applied"]
 [connection signal="item_selected" from="PanelContainer/TabContainer/CONTROLS/GridContainer/DPIInput/OptionButton" to="PanelContainer/TabContainer/CONTROLS/GridContainer/DPIInput" method="_on_option_button_item_selected"]
+[connection signal="value_applied" from="PanelContainer/TabContainer/CONTROLS/GridContainer/cm360Input/LineEdit" to="PanelContainer/TabContainer/CONTROLS/GridContainer/cm360Input" method="_on_line_edit_value_applied"]
+[connection signal="value_changed" from="PanelContainer/TabContainer/CONTROLS/GridContainer/cm360Input/MasterSlider" to="PanelContainer/TabContainer/CONTROLS/GridContainer/cm360Input" method="_on_master_slider_value_changed"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/APPLY" to="." method="ExitCurrent"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/Back" to="." method="ExitCurrent"]
