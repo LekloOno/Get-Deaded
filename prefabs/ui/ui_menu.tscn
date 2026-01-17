@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dbwbuyf2bwus0"]
+[gd_scene load_steps=13 format=3 uid="uid://dbwbuyf2bwus0"]
 
 [ext_resource type="Script" uid="uid://dg5hxnex777ma" path="res://script/ui/menu/UI_EscapeMenu.cs" id="1_nsprt"]
 [ext_resource type="Theme" uid="uid://ddkca4fk8kto5" path="res://assets/ui/menu_theme.tres" id="2_cg8yy"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" uid="uid://b73bupbbmrl8h" path="res://script/ui/menu/contexts/video/ui_display_mode_picker.gd" id="5_nlcml"]
 [ext_resource type="Script" uid="uid://cxmv5fyashr30" path="res://script/ui/menu/contexts/video/ui_resolution_picker.gd" id="5_ov0ei"]
 [ext_resource type="Script" uid="uid://tyihd8beo5j" path="res://script/ui/menu/contexts/video/ui_fov_slider.gd" id="8_cbaf7"]
+[ext_resource type="Script" uid="uid://n62sbtg1xvbp" path="res://script/ui/menu/contexts/video/ui_fps_limit_checkbox.gd" id="9_k7jqq"]
+[ext_resource type="Script" uid="uid://d2ws6gavso5wd" path="res://script/ui/menu/contexts/video/ui_fps_limiter.gd" id="10_vvu1j"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wkf4o"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -149,6 +151,50 @@ min_value = 30.0
 max_value = 140.0
 value = 103.0
 script = ExtResource("8_cbaf7")
+
+[node name="Limit FPS" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO/GridContainer/Limit FPS"]
+layout_mode = 2
+text = "LIMIT FPS"
+
+[node name="LimitFPSInput" type="CheckBox" parent="PanelContainer/TabContainer/VIDEO/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+script = ExtResource("9_k7jqq")
+
+[node name="Max FPS" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO/GridContainer/Max FPS"]
+layout_mode = 2
+text = "FOV"
+
+[node name="MaxFPSInput" type="HSplitContainer" parent="PanelContainer/TabContainer/VIDEO/GridContainer" node_paths=PackedStringArray("label", "slider")]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+script = ExtResource("10_vvu1j")
+label = NodePath("../Max FPS")
+slider = NodePath("MasterSlider")
+
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/VIDEO/GridContainer/MaxFPSInput"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+virtual_keyboard_type = 2
+script = ExtResource("5_kpbb8")
+
+[node name="MasterSlider" type="HSlider" parent="PanelContainer/TabContainer/VIDEO/GridContainer/MaxFPSInput"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 1.0
+max_value = 600.0
+value = 103.0
 
 [node name="SOUND" type="TabBar" parent="PanelContainer/TabContainer"]
 visible = false
@@ -340,5 +386,7 @@ text = "BACK"
 [connection signal="visibility_changed" from="PanelContainer/TabContainer/VIDEO/GridContainer/DisplayModeInput" to="PanelContainer/TabContainer/VIDEO/GridContainer/DisplayModeInput" method="_on_visibility_changed"]
 [connection signal="item_selected" from="PanelContainer/TabContainer/VIDEO/GridContainer/ResolutionInput" to="PanelContainer/TabContainer/VIDEO/GridContainer/ResolutionInput" method="_on_item_selected"]
 [connection signal="visibility_changed" from="PanelContainer/TabContainer/VIDEO/GridContainer/ResolutionInput" to="PanelContainer/TabContainer/VIDEO/GridContainer/ResolutionInput" method="_on_visibility_changed"]
+[connection signal="toggled" from="PanelContainer/TabContainer/VIDEO/GridContainer/LimitFPSInput" to="PanelContainer/TabContainer/VIDEO/GridContainer/Max FPS" method="set_visible"]
+[connection signal="toggled" from="PanelContainer/TabContainer/VIDEO/GridContainer/LimitFPSInput" to="PanelContainer/TabContainer/VIDEO/GridContainer/MaxFPSInput" method="set_visible"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/APPLY" to="." method="ExitCurrent"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/Back" to="." method="ExitCurrent"]

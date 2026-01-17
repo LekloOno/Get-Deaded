@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://ddkca4fk8kto5"]
+[gd_resource type="Theme" load_steps=12 format=3 uid="uid://ddkca4fk8kto5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ppmnc"]
 content_margin_left = 20.0
@@ -11,6 +11,23 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qvvi2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jwr44"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0.8, 0.42352942)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ll30"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l6w15"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xadh"]
 content_margin_left = 15.0
@@ -37,6 +54,10 @@ bg_color = Color(0.18039216, 0.18039216, 0.18039216, 0)
 [resource]
 Button/colors/font_color = Color(1, 1, 1, 1)
 Button/styles/normal = SubResource("StyleBoxFlat_ppmnc")
+CheckBox/styles/focus = SubResource("StyleBoxEmpty_qvvi2")
+CheckBox/styles/hover = SubResource("StyleBoxFlat_jwr44")
+CheckBox/styles/normal = SubResource("StyleBoxFlat_8ll30")
+CheckBox/styles/pressed = SubResource("StyleBoxFlat_l6w15")
 Label/font_sizes/font_size = 14
 Label/styles/normal = SubResource("StyleBoxFlat_0xadh")
 LineEdit/font_sizes/font_size = 13
