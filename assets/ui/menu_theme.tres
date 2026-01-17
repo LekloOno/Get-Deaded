@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=12 format=3 uid="uid://ddkca4fk8kto5"]
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://ddkca4fk8kto5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ppmnc"]
 content_margin_left = 20.0
@@ -29,6 +29,8 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l6w15"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ppmnc"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xadh"]
 content_margin_left = 15.0
 content_margin_top = 4.0
@@ -58,6 +60,7 @@ CheckBox/styles/focus = SubResource("StyleBoxEmpty_qvvi2")
 CheckBox/styles/hover = SubResource("StyleBoxFlat_jwr44")
 CheckBox/styles/normal = SubResource("StyleBoxFlat_8ll30")
 CheckBox/styles/pressed = SubResource("StyleBoxFlat_l6w15")
+ColorPickerButton/styles/normal = SubResource("StyleBoxEmpty_ppmnc")
 Label/font_sizes/font_size = 14
 Label/styles/normal = SubResource("StyleBoxFlat_0xadh")
 LineEdit/font_sizes/font_size = 13
