@@ -2,6 +2,8 @@ extends LineEdit
 
 @export var allow_float: bool = true
 @export var allow_negative: bool = true
+# -1 means no rounding
+@export var decimals: int = 2
 
 var slider: Slider
 
@@ -44,21 +46,25 @@ func _on_text_changed(new_text: String) -> void:
 	if new_text.is_valid_float():
 		var float_val = float(new_text)
 		match allow_float:
-			true: new_value = float_val
+			true: new_value = round_to_decimals(float_val)
 			false: new_value = roundi(float_val)
 			
 	if !allow_negative:
 		new_value = max(0, new_value)
 			
 	if clamp_value:
-		if slider is Slider:
-			new_value = clamp(new_value, slider.min_value, slider.max_value)
-		else:
-			new_value = clamp(new_value, min_value, max_value)
+		new_value = clamp(new_value, min_value, max_value)
 		
 	text = str(new_value)
 	apply_value(new_value)
+
+func round_to_decimals(value: float) -> float:
+	if decimals == -1:
+		return value
 	
+	var offset = pow(10, decimals)
+	return round(value*offset)/offset
+
 func _on_slider_value_changed(value: float):
 	last_value = value
 	match allow_float:
