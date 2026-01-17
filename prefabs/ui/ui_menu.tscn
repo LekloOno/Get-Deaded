@@ -533,6 +533,7 @@ text = "BACK"
 [connection signal="value_applied" from="PanelContainer/TabContainer/SOUND/GridContainer/FbSFXInput/LineEdit" to="PanelContainer/TabContainer/SOUND/GridContainer/FbSFXInput/FbSFXSlider" method="_on_value_changed"]
 [connection signal="value_applied" from="PanelContainer/TabContainer/CONTROLS/GridContainer/DPIInput/LineEdit" to="PanelContainer/TabContainer/CONTROLS/GridContainer/DPIInput" method="_on_line_edit_value_applied"]
 [connection signal="item_selected" from="PanelContainer/TabContainer/CONTROLS/GridContainer/DPIInput/OptionButton" to="PanelContainer/TabContainer/CONTROLS/GridContainer/DPIInput" method="_on_option_button_item_selected"]
+[connection signal="cm_360_changed" from="PanelContainer/TabContainer/CONTROLS/GridContainer/cm360Input" to="PanelContainer/TabContainer/CONTROLS/GridContainer/cm360Input/LineEdit" method="apply_value_no_signal"]
 [connection signal="value_applied" from="PanelContainer/TabContainer/CONTROLS/GridContainer/cm360Input/LineEdit" to="PanelContainer/TabContainer/CONTROLS/GridContainer/cm360Input" method="_on_line_edit_value_applied"]
 [connection signal="value_changed" from="PanelContainer/TabContainer/CONTROLS/GridContainer/cm360Input/MasterSlider" to="PanelContainer/TabContainer/CONTROLS/GridContainer/cm360Input" method="_on_master_slider_value_changed"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/APPLY" to="." method="ExitCurrent"]

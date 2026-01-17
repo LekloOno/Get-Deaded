@@ -19,6 +19,8 @@ func _ready() -> void:
 	init_children()
 	for dpi in dpis:
 		dpi_option.add_item(dpi)
+	
+	dpi_option.selected = -1
 		
 	visibility_changed.connect(_on_visibility_changed)
 	camera_control = get_camera_control()
@@ -47,7 +49,6 @@ func _on_visibility_changed() -> void:
 	if !visible:
 		return
 		
-	dpi_option.selected = dpis.keys().find(str(camera_control.Dpi))
 	dpi_edit.text = str(camera_control.Dpi)
 
 func _on_line_edit_value_applied(value: float) -> void:

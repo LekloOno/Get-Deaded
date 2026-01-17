@@ -5,6 +5,8 @@ var slider: Slider
 
 var camera_control: PC_Control
 
+signal cm_360_changed(val: float)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	init_children()
@@ -23,8 +25,8 @@ func _on_visibility_changed() -> void:
 	if !visible:
 		return
 	
-	edit.text = str(camera_control.CmPer360)
 	slider.value = camera_control.CmPer360
+	cm_360_changed.emit(camera_control.CmPer360)
 
 func init_children():
 	for child in get_children():

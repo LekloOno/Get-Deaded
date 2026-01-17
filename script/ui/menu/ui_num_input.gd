@@ -42,6 +42,15 @@ func init_to_slider() -> void:
 	slider.value_changed.connect(_on_slider_value_changed)
 
 func _on_text_changed(new_text: String) -> void:
+	var new_value = formated_value(new_text)
+	text = str(new_value)
+	apply_value(new_value)
+	
+func apply_value_no_signal(value: float):
+	text = str(formated_value(str(value)))
+	last_value = value
+	
+func formated_value(new_text: String) :
 	var new_value
 	if new_text.is_valid_float():
 		var float_val = float(new_text)
@@ -54,9 +63,8 @@ func _on_text_changed(new_text: String) -> void:
 			
 	if clamp_value:
 		new_value = clamp(new_value, min_value, max_value)
-		
-	text = str(new_value)
-	apply_value(new_value)
+	return new_value
+	
 
 func round_to_decimals(value: float) -> float:
 	if decimals == -1:
