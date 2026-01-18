@@ -52,3 +52,10 @@ func _on_render_scale_mode_changed(mode: int):
 	
 	if !do_show:
 		get_tree().root.scaling_3d_scale = 1
+		return
+	
+	if mode == Viewport.SCALING_3D_MODE_BILINEAR:
+		slider.max_value = 2
+	else : # implictly, if it is FSR
+		slider.max_value = 1
+	
