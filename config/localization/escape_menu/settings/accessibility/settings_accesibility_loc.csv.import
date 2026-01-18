@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://hij7tru2mgeu"
+
+[deps]
+
+files=["res://config/localization/escape_menu/settings/accessibility/settings_accesibility_loc.en.translation", "res://config/localization/escape_menu/settings/accessibility/settings_accesibility_loc.fr.translation"]
+
+source_file="res://config/localization/escape_menu/settings/accessibility/settings_accesibility_loc.csv"
+dest_files=["res://config/localization/escape_menu/settings/accessibility/settings_accesibility_loc.en.translation", "res://config/localization/escape_menu/settings/accessibility/settings_accesibility_loc.fr.translation"]
+
+[params]
+
+compress=true
+delimiter=0

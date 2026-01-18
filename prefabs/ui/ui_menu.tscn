@@ -498,7 +498,7 @@ size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="PanelContainer/TabContainer/ACCESSIBILITY_TAB/GridContainer/EnnemiesColor"]
 layout_mode = 2
-text = "ENNEMIES_COLOR_LABEL"
+text = "ENEMIES_COLOR_LABEL"
 
 [node name="EnnemiesColorInput" type="ColorPickerButton" parent="PanelContainer/TabContainer/ACCESSIBILITY_TAB/GridContainer"]
 custom_minimum_size = Vector2(50, 0)
