@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dbwbuyf2bwus0"]
+[gd_scene load_steps=30 format=3 uid="uid://dbwbuyf2bwus0"]
 
 [ext_resource type="Script" uid="uid://dg5hxnex777ma" path="res://script/ui/menu/UI_EscapeMenu.cs" id="1_nsprt"]
 [ext_resource type="Theme" uid="uid://ddkca4fk8kto5" path="res://assets/ui/menu_theme.tres" id="2_cg8yy"]
@@ -27,19 +27,21 @@
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kqyci"]
-content_margin_left = 5.0
-content_margin_right = 5.0
+content_margin_left = 8.0
+content_margin_right = 8.0
 bg_color = Color(1, 1, 1, 0.84313726)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_poje1"]
-content_margin_left = 5.0
-content_margin_right = 5.0
+content_margin_left = 8.0
+content_margin_right = 8.0
 bg_color = Color(1, 1, 1, 0.84313726)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nvxak"]
-content_margin_left = 5.0
-content_margin_right = 5.0
+content_margin_left = 8.0
+content_margin_right = 8.0
 bg_color = Color(1, 1, 1, 0.61960787)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kqyci"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rlv2r"]
 
@@ -150,6 +152,7 @@ layout_mode = 2
 text = "RESOLUTION_LABEL"
 
 [node name="Button" type="Button" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/Resolution" node_paths=PackedStringArray("label", "input")]
+custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(0, 0, 0, 0.93333334)
@@ -159,8 +162,14 @@ theme_override_colors/font_hover_color = Color(0, 0, 0, 0.93333334)
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 0.93333334)
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_kqyci")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_kqyci")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_poje1")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_poje1")
 theme_override_styles/hover = SubResource("StyleBoxFlat_nvxak")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_nvxak")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_nvxak")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_nvxak")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kqyci")
 toggle_mode = true
 text = "+"
 script = ExtResource("6_kqyci")
@@ -189,10 +198,12 @@ text = "CUSTOM_RESOLUTION_LABEL"
 
 [node name="CustomResolutionInput" type="HBoxContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_constants/separation = 6
 
 [node name="PanelContainer" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/CustomResolutionInput"]
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxEmpty_rlv2r")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/CustomResolutionInput/PanelContainer"]
@@ -203,16 +214,16 @@ layout_mode = 2
 size_flags_horizontal = 4
 placeholder_text = "1280"
 alignment = 1
+max_length = 5
 script = ExtResource("5_kpbb8")
 allow_float = false
 allow_negative = false
 link_to_slider = false
 clamp_to_slider = false
-min_value = 200.0
-max_value = 10000.0
 
 [node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/CustomResolutionInput/PanelContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 10
 theme_override_styles/normal = SubResource("StyleBoxEmpty_lmot5")
 text = "x"
 
@@ -220,20 +231,18 @@ text = "x"
 layout_mode = 2
 placeholder_text = "720"
 alignment = 1
+max_length = 5
 script = ExtResource("5_kpbb8")
 allow_float = false
 allow_negative = false
 link_to_slider = false
 clamp_to_slider = false
-clamp_value = true
-min_value = 200.0
-max_value = 10000.0
 
 [node name="Button" type="Button" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/CustomResolutionInput" node_paths=PackedStringArray("resolution_options", "x_value", "y_value")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 9
 text = "ADD_BUTTON"
 script = ExtResource("8_5o1e0")
 resolution_options = NodePath("../../ResolutionInput")
