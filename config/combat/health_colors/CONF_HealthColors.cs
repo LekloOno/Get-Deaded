@@ -29,6 +29,9 @@ public partial class CONF_HealthColors : Node
 
     public static CONFD_IBarColors GetDefaultBarColors(CONF_HurtBoxFaction faction)
     {
+        if (!Instance.Bars.InvertEnemyColors)
+            return CONFD_DefaultBarColors.Default;
+            
         return faction switch
         {
             CONF_HurtBoxFaction.Player => CONFD_DefaultBarColors.Default,
