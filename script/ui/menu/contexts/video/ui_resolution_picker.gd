@@ -1,5 +1,7 @@
 extends OptionButton
 
+class_name UI_ResolutionPicker
+
 var resolutions = {
 	"3840x2160": Vector2i(3840,2160),
 	"2560x1440": Vector2i(2560,1440),
@@ -47,3 +49,11 @@ func _on_item_selected(index: int) -> void:
 	var resolution = resolutions[key]
 	curr_res = resolution
 	set_window_size()
+	
+func add_resolution(resolution: Vector2i):
+	var res_str = str(resolution.x, "x", resolution.y)
+	if resolutions.has(res_str):
+		return
+	
+	resolutions[res_str] = resolution
+	add_item(res_str)
