@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://c410mfbjtmp8r"
+
+[deps]
+
+files=["res://config/localization/escape_menu/settings/video/settings_video_loc.en.translation", "res://config/localization/escape_menu/settings/video/settings_video_loc.fr.translation"]
+
+source_file="res://config/localization/escape_menu/settings/video/settings_video_loc.csv"
+dest_files=["res://config/localization/escape_menu/settings/video/settings_video_loc.en.translation", "res://config/localization/escape_menu/settings/video/settings_video_loc.fr.translation"]
+
+[params]
+
+compress=true
+delimiter=0

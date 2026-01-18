@@ -80,10 +80,9 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_wkf4o")
 [node name="TabContainer" type="TabContainer" parent="PanelContainer"]
 layout_mode = 2
 mouse_filter = 0
-current_tab = 3
+current_tab = 0
 
 [node name="VIDEO_TAB" type="TabBar" parent="PanelContainer/TabContainer"]
-visible = false
 layout_mode = 2
 mouse_filter = 1
 metadata/_tab_index = 0
@@ -467,6 +466,7 @@ min_value = 1.0
 value = 1.0
 
 [node name="ACCESSIBILITY_TAB" type="TabBar" parent="PanelContainer/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 3
 

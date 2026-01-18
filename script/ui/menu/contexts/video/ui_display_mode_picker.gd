@@ -3,17 +3,17 @@ extends OptionButton
 signal switched_mode()
 
 var modes = {
-	"FULLSCREEN": DisplayServer.WindowMode.WINDOW_MODE_EXCLUSIVE_FULLSCREEN,
-	"BORDERLESS": DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN,
-	"WINDOWED": DisplayServer.WindowMode.WINDOW_MODE_WINDOWED,
+	"FULLSCREEN_DISPLAY_MODE": DisplayServer.WindowMode.WINDOW_MODE_EXCLUSIVE_FULLSCREEN,
+	"BORDERLESS_DISPLAY_MODE": DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN,
+	"WINDOWED_DISPLAY_MODE": DisplayServer.WindowMode.WINDOW_MODE_WINDOWED,
 }
 
 func display_mode_to_key(mode: DisplayServer.WindowMode) -> String:
 	match mode:
-		DisplayServer.WindowMode.WINDOW_MODE_EXCLUSIVE_FULLSCREEN: return "FULLSCREEN"
-		DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN: return "BORDERLESS"
-		DisplayServer.WindowMode.WINDOW_MODE_WINDOWED: return "WINDOWED"
-	return "BORDERLESS"
+		DisplayServer.WindowMode.WINDOW_MODE_EXCLUSIVE_FULLSCREEN: return "FULLSCREEN_DISPLAY_MODE"
+		DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN: return "BORDERLESS_DISPLAY_MODE"
+		DisplayServer.WindowMode.WINDOW_MODE_WINDOWED: return "WINDOWED_DISPLAY_MODE"
+	return "BORDERLESS_DISPLAY_MODE"
 
 func _ready() -> void:
 	for mode in modes:
