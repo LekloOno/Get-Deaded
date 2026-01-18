@@ -174,7 +174,14 @@ script = ExtResource("9_k7jqq")
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/Max FPS"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/Max FPS"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/Max FPS/HBoxContainer"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/Max FPS/HBoxContainer"]
 layout_mode = 2
 text = "MAX_FPS_LABEL"
 
