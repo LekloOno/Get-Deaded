@@ -159,7 +159,7 @@ dash={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://config/localization/localization.en.translation", "res://config/localization/localization.fr.translation")
+locale/translations=PackedStringArray("res://config/localization/escape_menu/escape_menu_loc.en.translation", "res://config/localization/escape_menu/escape_menu_loc.fr.translation", "res://config/localization/escape_menu/settings/settings_loc.en.translation", "res://config/localization/escape_menu/settings/settings_loc.fr.translation")
 
 [layer_names]
 
