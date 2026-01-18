@@ -47,7 +47,7 @@ func _on_value_changed(new_value: float) -> void:
 	get_tree().root.fsr_sharpness = sharpness
 	
 func _on_render_scale_mode_changed(mode: int):
-	var do_show = mode != -1
+	var do_show = mode == Viewport.SCALING_3D_MODE_FSR || mode == Viewport.SCALING_3D_MODE_FSR2
 	visible = do_show
 	label.visible = do_show
 	
