@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dbwbuyf2bwus0"]
+[gd_scene load_steps=31 format=3 uid="uid://dbwbuyf2bwus0"]
 
 [ext_resource type="Script" uid="uid://dg5hxnex777ma" path="res://script/ui/menu/UI_EscapeMenu.cs" id="1_nsprt"]
 [ext_resource type="Theme" uid="uid://ddkca4fk8kto5" path="res://assets/ui/menu_theme.tres" id="2_cg8yy"]
@@ -21,6 +21,7 @@
 [ext_resource type="Script" uid="uid://b2gps3n30fk26" path="res://script/ui/menu/contexts/accessibility/ui_ennemies_color.gd" id="12_g471r"]
 [ext_resource type="Script" uid="uid://ctjmgs5r2eyrr" path="res://script/ui/menu/ui_line_edit_helper.gd" id="12_i4pqc"]
 [ext_resource type="Script" uid="uid://bpduowbhu517b" path="res://script/ui/menu/contexts/controls/ui_cm360.gd" id="14_t6rq5"]
+[ext_resource type="Script" uid="uid://cg5dedg2yo8yj" path="res://script/ui/menu/contexts/video/ui_v_sync_mode.gd" id="15_poje1"]
 [ext_resource type="Script" uid="uid://d2oxuiywjinnd" path="res://script/ui/menu/contexts/accessibility/ui_language_option.gd" id="16_sith4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wkf4o"]
@@ -375,6 +376,19 @@ min_value = 30.0
 max_value = 140.0
 value = 103.0
 script = ExtResource("8_cbaf7")
+
+[node name="VSyncMode" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/VSyncMode"]
+layout_mode = 2
+text = "VSYNC_MODE_LABEL"
+
+[node name="VSyncModeInput" type="OptionButton" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+script = ExtResource("15_poje1")
 
 [node name="Limit FPS" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
 layout_mode = 2
