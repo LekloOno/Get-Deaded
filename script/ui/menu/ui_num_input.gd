@@ -33,11 +33,6 @@ func get_slider() -> Slider:
 	return null
 	
 func init_to_slider() -> void:
-	if clamp_to_slider:
-		clamp_value = true
-		min_value = slider.min_value
-		max_value = slider.max_value
-		
 	value_applied.connect(slider.set_value_no_signal)
 	slider.value_changed.connect(_on_slider_value_changed)
 
@@ -61,10 +56,15 @@ func formated_value(new_text: String) :
 	if !allow_negative:
 		new_value = max(0, new_value)
 			
-	if clamp_value:
-		new_value = clamp(new_value, min_value, max_value)
+	new_value = clamped(new_value)
 	return new_value
-	
+
+func clamped(value: float) -> float:
+	if clamp_to_slider:
+		return clamp(value, slider.min_value, slider.max_value)
+	if clamp_value:
+		return clamp(value, min_value, max_value)
+	return value
 
 func round_to_decimals(value: float) -> float:
 	if decimals == -1:
