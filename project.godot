@@ -157,6 +157,10 @@ dash={
 ]
 }
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://config/localization/localization.en.translation", "res://config/localization/localization.fr.translation")
+
 [layer_names]
 
 3d_render/layer_1="Main"

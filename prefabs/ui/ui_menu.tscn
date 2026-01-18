@@ -49,19 +49,19 @@ theme_override_constants/separation = 8
 [node name="Resume" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
-text = "RESUME"
+text = "RESUME_BUTTON"
 
 [node name="Settings" type="Button" parent="VBoxContainer" node_paths=PackedStringArray("settings_menu")]
 layout_mode = 2
 size_flags_vertical = 4
-text = "SETTINGS"
+text = "SETTINGS_BUTTON"
 script = ExtResource("3_y758u")
 settings_menu = NodePath("../../PanelContainer")
 
 [node name="Quit" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
-text = "QUIT"
+text = "QUIT_BUTTON"
 script = ExtResource("4_wkf4o")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
@@ -80,15 +80,15 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_wkf4o")
 [node name="TabContainer" type="TabContainer" parent="PanelContainer"]
 layout_mode = 2
 mouse_filter = 0
-current_tab = 2
+current_tab = 3
 
-[node name="VIDEO" type="TabBar" parent="PanelContainer/TabContainer"]
+[node name="VIDEO_TAB" type="TabBar" parent="PanelContainer/TabContainer"]
 visible = false
 layout_mode = 2
 mouse_filter = 1
 metadata/_tab_index = 0
 
-[node name="GridContainer" type="GridContainer" parent="PanelContainer/TabContainer/VIDEO"]
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/TabContainer/VIDEO_TAB"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -103,52 +103,52 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 6
 columns = 2
 
-[node name="DisplayMode" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO/GridContainer"]
+[node name="DisplayMode" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO/GridContainer/DisplayMode"]
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/DisplayMode"]
 layout_mode = 2
-text = "DISPLAY MODE"
+text = "DISPLAY_MODE_LABEL"
 
-[node name="DisplayModeInput" type="OptionButton" parent="PanelContainer/TabContainer/VIDEO/GridContainer"]
+[node name="DisplayModeInput" type="OptionButton" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 script = ExtResource("5_nlcml")
 
-[node name="Resolution" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO/GridContainer"]
+[node name="Resolution" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO/GridContainer/Resolution"]
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/Resolution"]
 layout_mode = 2
-text = "RESOLUTION"
+text = "RESOLUTION_LABEL"
 
-[node name="ResolutionInput" type="OptionButton" parent="PanelContainer/TabContainer/VIDEO/GridContainer"]
+[node name="ResolutionInput" type="OptionButton" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 script = ExtResource("5_ov0ei")
 
-[node name="Fov" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO/GridContainer"]
+[node name="Fov" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO/GridContainer/Fov"]
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/Fov"]
 layout_mode = 2
-text = "FOV"
+text = "FOV_LABEL"
 
-[node name="FovInput" type="HSplitContainer" parent="PanelContainer/TabContainer/VIDEO/GridContainer"]
+[node name="FovInput" type="HSplitContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/VIDEO/GridContainer/FovInput"]
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/FovInput"]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("5_kpbb8")
 
-[node name="MasterSlider" type="HSlider" parent="PanelContainer/TabContainer/VIDEO/GridContainer/FovInput"]
+[node name="MasterSlider" type="HSlider" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/FovInput"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -157,36 +157,36 @@ max_value = 140.0
 value = 103.0
 script = ExtResource("8_cbaf7")
 
-[node name="Limit FPS" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO/GridContainer"]
+[node name="Limit FPS" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO/GridContainer/Limit FPS"]
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/Limit FPS"]
 layout_mode = 2
-text = "LIMIT FPS"
+text = "LIMIT_FPS_LABEL"
 
-[node name="LimitFPSInput" type="CheckBox" parent="PanelContainer/TabContainer/VIDEO/GridContainer"]
+[node name="LimitFPSInput" type="CheckBox" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 script = ExtResource("9_k7jqq")
 
-[node name="Max FPS" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO/GridContainer"]
+[node name="Max FPS" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO/GridContainer/Max FPS"]
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/Max FPS"]
 layout_mode = 2
-text = "MAX FPS"
+text = "MAX_FPS_LABEL"
 
-[node name="MaxFPSInput" type="HSplitContainer" parent="PanelContainer/TabContainer/VIDEO/GridContainer" node_paths=PackedStringArray("label", "slider")]
+[node name="MaxFPSInput" type="HSplitContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer" node_paths=PackedStringArray("label", "slider")]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 script = ExtResource("10_vvu1j")
 label = NodePath("../Max FPS")
 slider = NodePath("MasterSlider")
 
-[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/VIDEO/GridContainer/MaxFPSInput"]
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/MaxFPSInput"]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
@@ -194,7 +194,7 @@ virtual_keyboard_type = 2
 script = ExtResource("5_kpbb8")
 allow_float = false
 
-[node name="MasterSlider" type="HSlider" parent="PanelContainer/TabContainer/VIDEO/GridContainer/MaxFPSInput"]
+[node name="MasterSlider" type="HSlider" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/MaxFPSInput"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -202,13 +202,13 @@ min_value = 1.0
 max_value = 600.0
 value = 103.0
 
-[node name="SOUND" type="TabBar" parent="PanelContainer/TabContainer"]
+[node name="SOUND_TAB" type="TabBar" parent="PanelContainer/TabContainer"]
 visible = false
 layout_mode = 2
 mouse_filter = 1
 metadata/_tab_index = 1
 
-[node name="GridContainer" type="GridContainer" parent="PanelContainer/TabContainer/SOUND"]
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/TabContainer/SOUND_TAB"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -223,26 +223,26 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 6
 columns = 2
 
-[node name="Master" type="PanelContainer" parent="PanelContainer/TabContainer/SOUND/GridContainer"]
+[node name="Master" type="PanelContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Master" type="Label" parent="PanelContainer/TabContainer/SOUND/GridContainer/Master"]
+[node name="Master" type="Label" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/Master"]
 layout_mode = 2
-text = "MASTER VOLUME"
+text = "MASTER_VOLUME_LABEL"
 
-[node name="MasterInput" type="HSplitContainer" parent="PanelContainer/TabContainer/SOUND/GridContainer"]
+[node name="MasterInput" type="HSplitContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/SOUND/GridContainer/MasterInput"]
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/MasterInput"]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("5_kpbb8")
 
-[node name="MasterSlider" type="HSlider" parent="PanelContainer/TabContainer/SOUND/GridContainer/MasterInput"]
+[node name="MasterSlider" type="HSlider" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/MasterInput"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -252,33 +252,33 @@ value = 1.0
 script = ExtResource("5_mpkul")
 bus_name = "Master"
 
-[node name="SFX" type="PanelContainer" parent="PanelContainer/TabContainer/SOUND/GridContainer"]
+[node name="SFX" type="PanelContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SFX" type="HBoxContainer" parent="PanelContainer/TabContainer/SOUND/GridContainer/SFX"]
+[node name="SFX" type="HBoxContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/SFX"]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="PanelContainer/TabContainer/SOUND/GridContainer/SFX/SFX"]
+[node name="Control" type="Control" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/SFX/SFX"]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 
-[node name="SFX" type="Label" parent="PanelContainer/TabContainer/SOUND/GridContainer/SFX/SFX"]
+[node name="SFX" type="Label" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/SFX/SFX"]
 layout_mode = 2
-text = "SOUND EFFECTS"
+text = "SOUND_EFFECTS_VOLUME_LABEL"
 
-[node name="SFXInput" type="HSplitContainer" parent="PanelContainer/TabContainer/SOUND/GridContainer"]
+[node name="SFXInput" type="HSplitContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/SOUND/GridContainer/SFXInput"]
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/SFXInput"]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("5_kpbb8")
 
-[node name="SFXSlider" type="HSlider" parent="PanelContainer/TabContainer/SOUND/GridContainer/SFXInput"]
+[node name="SFXSlider" type="HSlider" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/SFXInput"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -287,35 +287,35 @@ step = 0.01
 script = ExtResource("5_mpkul")
 bus_name = "Sound effects"
 
-[node name="EnvSFX" type="PanelContainer" parent="PanelContainer/TabContainer/SOUND/GridContainer"]
+[node name="EnvSFX" type="PanelContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="EnvSFX" type="HBoxContainer" parent="PanelContainer/TabContainer/SOUND/GridContainer/EnvSFX"]
+[node name="EnvSFX" type="HBoxContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/EnvSFX"]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="PanelContainer/TabContainer/SOUND/GridContainer/EnvSFX/EnvSFX"]
+[node name="Control" type="Control" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/EnvSFX/EnvSFX"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
-[node name="EnvSFX" type="Label" parent="PanelContainer/TabContainer/SOUND/GridContainer/EnvSFX/EnvSFX"]
+[node name="EnvSFX" type="Label" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/EnvSFX/EnvSFX"]
 layout_mode = 2
 tooltip_text = "Diegetical sfx"
 mouse_filter = 1
-text = "ENVIRONMENT"
+text = "ENVIRONMENT_SOUND_VOLUME_LABEL"
 
-[node name="EnvSFXInput" type="HSplitContainer" parent="PanelContainer/TabContainer/SOUND/GridContainer"]
+[node name="EnvSFXInput" type="HSplitContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/SOUND/GridContainer/EnvSFXInput"]
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/EnvSFXInput"]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("5_kpbb8")
 
-[node name="EnvSFXSlider" type="HSlider" parent="PanelContainer/TabContainer/SOUND/GridContainer/EnvSFXInput"]
+[node name="EnvSFXSlider" type="HSlider" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/EnvSFXInput"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -325,35 +325,35 @@ value = 1.0
 script = ExtResource("5_mpkul")
 bus_name = "Environment SFX"
 
-[node name="FbSFX" type="PanelContainer" parent="PanelContainer/TabContainer/SOUND/GridContainer"]
+[node name="FbSFX" type="PanelContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="FbSFX" type="HBoxContainer" parent="PanelContainer/TabContainer/SOUND/GridContainer/FbSFX"]
+[node name="FbSFX" type="HBoxContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/FbSFX"]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="PanelContainer/TabContainer/SOUND/GridContainer/FbSFX/FbSFX"]
+[node name="Control" type="Control" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/FbSFX/FbSFX"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
-[node name="FbSFX" type="Label" parent="PanelContainer/TabContainer/SOUND/GridContainer/FbSFX/FbSFX"]
+[node name="FbSFX" type="Label" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/FbSFX/FbSFX"]
 layout_mode = 2
 tooltip_text = "Diegetical sfx"
 mouse_filter = 1
-text = "FEEDBACK"
+text = "FEEDBACK_SOUND_VOLUME_LABEL"
 
-[node name="FbSFXInput" type="HSplitContainer" parent="PanelContainer/TabContainer/SOUND/GridContainer"]
+[node name="FbSFXInput" type="HSplitContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/SOUND/GridContainer/FbSFXInput"]
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/FbSFXInput"]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("5_kpbb8")
 
-[node name="FbSFXSlider" type="HSlider" parent="PanelContainer/TabContainer/SOUND/GridContainer/FbSFXInput"]
+[node name="FbSFXSlider" type="HSlider" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/FbSFXInput"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -362,11 +362,12 @@ step = 0.01
 script = ExtResource("5_mpkul")
 bus_name = "Feedback SFX"
 
-[node name="CONTROLS" type="TabBar" parent="PanelContainer/TabContainer"]
+[node name="CONTROLS_TAB" type="TabBar" parent="PanelContainer/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="GridContainer" type="GridContainer" parent="PanelContainer/TabContainer/CONTROLS"]
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/TabContainer/CONTROLS_TAB"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -381,39 +382,39 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 6
 columns = 2
 
-[node name="Sensitivity" type="PanelContainer" parent="PanelContainer/TabContainer/CONTROLS/GridContainer"]
+[node name="Sensitivity" type="PanelContainer" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="PanelContainer/TabContainer/CONTROLS/GridContainer/Sensitivity"]
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/Sensitivity"]
 layout_mode = 2
-text = "SENSITIVITY"
+text = "SENSITIVITY_LABEL"
 
-[node name="Control" type="Control" parent="PanelContainer/TabContainer/CONTROLS/GridContainer"]
+[node name="Control" type="Control" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer"]
 layout_mode = 2
 
-[node name="DPI" type="PanelContainer" parent="PanelContainer/TabContainer/CONTROLS/GridContainer"]
+[node name="DPI" type="PanelContainer" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="hbox" type="HBoxContainer" parent="PanelContainer/TabContainer/CONTROLS/GridContainer/DPI"]
+[node name="hbox" type="HBoxContainer" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/DPI"]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="PanelContainer/TabContainer/CONTROLS/GridContainer/DPI/hbox"]
+[node name="Control" type="Control" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/DPI/hbox"]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/TabContainer/CONTROLS/GridContainer/DPI/hbox"]
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/DPI/hbox"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "DPI"
+text = "DPI_LABEL"
 
-[node name="DPIInput" type="HSplitContainer" parent="PanelContainer/TabContainer/CONTROLS/GridContainer"]
+[node name="DPIInput" type="HSplitContainer" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 script = ExtResource("12_ek014")
 
-[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/CONTROLS/GridContainer/DPIInput"]
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/DPIInput"]
 layout_mode = 2
 size_flags_horizontal = 0
 alignment = 1
@@ -421,32 +422,32 @@ virtual_keyboard_type = 2
 script = ExtResource("5_kpbb8")
 allow_float = false
 
-[node name="OptionButton" type="OptionButton" parent="PanelContainer/TabContainer/CONTROLS/GridContainer/DPIInput"]
+[node name="OptionButton" type="OptionButton" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/DPIInput"]
 layout_mode = 2
 script = ExtResource("12_i4pqc")
 
-[node name="cm360" type="PanelContainer" parent="PanelContainer/TabContainer/CONTROLS/GridContainer"]
+[node name="cm360" type="PanelContainer" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="hbox" type="HBoxContainer" parent="PanelContainer/TabContainer/CONTROLS/GridContainer/cm360"]
+[node name="hbox" type="HBoxContainer" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/cm360"]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="PanelContainer/TabContainer/CONTROLS/GridContainer/cm360/hbox"]
+[node name="Control" type="Control" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/cm360/hbox"]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/TabContainer/CONTROLS/GridContainer/cm360/hbox"]
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/cm360/hbox"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "CM/360°"
+text = "CM_360_LABEL"
 
-[node name="cm360Input" type="HSplitContainer" parent="PanelContainer/TabContainer/CONTROLS/GridContainer"]
+[node name="cm360Input" type="HSplitContainer" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 script = ExtResource("14_t6rq5")
 
-[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/CONTROLS/GridContainer/cm360Input"]
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/cm360Input"]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
@@ -458,19 +459,18 @@ clamp_value = true
 min_value = 0.1
 max_value = 10000.0
 
-[node name="MasterSlider" type="HSlider" parent="PanelContainer/TabContainer/CONTROLS/GridContainer/cm360Input"]
+[node name="MasterSlider" type="HSlider" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/cm360Input"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 min_value = 1.0
 value = 1.0
 
-[node name="ACCESSIBILITY" type="TabBar" parent="PanelContainer/TabContainer"]
-visible = false
+[node name="ACCESSIBILITY_TAB" type="TabBar" parent="PanelContainer/TabContainer"]
 layout_mode = 2
 metadata/_tab_index = 3
 
-[node name="GridContainer" type="GridContainer" parent="PanelContainer/TabContainer/ACCESSIBILITY"]
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/TabContainer/ACCESSIBILITY_TAB"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -485,15 +485,15 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 6
 columns = 2
 
-[node name="EnnemiesColor" type="PanelContainer" parent="PanelContainer/TabContainer/ACCESSIBILITY/GridContainer"]
+[node name="EnnemiesColor" type="PanelContainer" parent="PanelContainer/TabContainer/ACCESSIBILITY_TAB/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="PanelContainer/TabContainer/ACCESSIBILITY/GridContainer/EnnemiesColor"]
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/ACCESSIBILITY_TAB/GridContainer/EnnemiesColor"]
 layout_mode = 2
-text = "ENNEMIES COLOR"
+text = "ENNEMIES_COLOR_LABEL"
 
-[node name="EnnemiesColorInput" type="ColorPickerButton" parent="PanelContainer/TabContainer/ACCESSIBILITY/GridContainer"]
+[node name="EnnemiesColorInput" type="ColorPickerButton" parent="PanelContainer/TabContainer/ACCESSIBILITY_TAB/GridContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 script = ExtResource("12_g471r")
@@ -518,23 +518,23 @@ text = "BACK"
 
 [connection signal="pressed" from="VBoxContainer/Resume" to="." method="ExitCurrent"]
 [connection signal="enter_settings" from="VBoxContainer/Settings" to="." method="Enter"]
-[connection signal="item_selected" from="PanelContainer/TabContainer/VIDEO/GridContainer/DisplayModeInput" to="PanelContainer/TabContainer/VIDEO/GridContainer/DisplayModeInput" method="_on_item_selected"]
-[connection signal="switched_mode" from="PanelContainer/TabContainer/VIDEO/GridContainer/DisplayModeInput" to="PanelContainer/TabContainer/VIDEO/GridContainer/ResolutionInput" method="set_window_size"]
-[connection signal="visibility_changed" from="PanelContainer/TabContainer/VIDEO/GridContainer/DisplayModeInput" to="PanelContainer/TabContainer/VIDEO/GridContainer/DisplayModeInput" method="_on_visibility_changed"]
-[connection signal="item_selected" from="PanelContainer/TabContainer/VIDEO/GridContainer/ResolutionInput" to="PanelContainer/TabContainer/VIDEO/GridContainer/ResolutionInput" method="_on_item_selected"]
-[connection signal="visibility_changed" from="PanelContainer/TabContainer/VIDEO/GridContainer/ResolutionInput" to="PanelContainer/TabContainer/VIDEO/GridContainer/ResolutionInput" method="_on_visibility_changed"]
-[connection signal="value_applied" from="PanelContainer/TabContainer/VIDEO/GridContainer/FovInput/LineEdit" to="PanelContainer/TabContainer/VIDEO/GridContainer/FovInput/MasterSlider" method="_on_value_changed"]
-[connection signal="toggled" from="PanelContainer/TabContainer/VIDEO/GridContainer/LimitFPSInput" to="PanelContainer/TabContainer/VIDEO/GridContainer/Max FPS" method="set_visible"]
-[connection signal="toggled" from="PanelContainer/TabContainer/VIDEO/GridContainer/LimitFPSInput" to="PanelContainer/TabContainer/VIDEO/GridContainer/MaxFPSInput" method="set_visible"]
-[connection signal="value_applied" from="PanelContainer/TabContainer/VIDEO/GridContainer/MaxFPSInput/LineEdit" to="PanelContainer/TabContainer/VIDEO/GridContainer/MaxFPSInput" method="_on_value_changed"]
-[connection signal="value_applied" from="PanelContainer/TabContainer/SOUND/GridContainer/MasterInput/LineEdit" to="PanelContainer/TabContainer/SOUND/GridContainer/MasterInput/MasterSlider" method="_on_value_changed"]
-[connection signal="value_applied" from="PanelContainer/TabContainer/SOUND/GridContainer/SFXInput/LineEdit" to="PanelContainer/TabContainer/SOUND/GridContainer/SFXInput/SFXSlider" method="_on_value_changed"]
-[connection signal="value_applied" from="PanelContainer/TabContainer/SOUND/GridContainer/EnvSFXInput/LineEdit" to="PanelContainer/TabContainer/SOUND/GridContainer/EnvSFXInput/EnvSFXSlider" method="_on_value_changed"]
-[connection signal="value_applied" from="PanelContainer/TabContainer/SOUND/GridContainer/FbSFXInput/LineEdit" to="PanelContainer/TabContainer/SOUND/GridContainer/FbSFXInput/FbSFXSlider" method="_on_value_changed"]
-[connection signal="value_applied" from="PanelContainer/TabContainer/CONTROLS/GridContainer/DPIInput/LineEdit" to="PanelContainer/TabContainer/CONTROLS/GridContainer/DPIInput" method="_on_line_edit_value_applied"]
-[connection signal="item_selected" from="PanelContainer/TabContainer/CONTROLS/GridContainer/DPIInput/OptionButton" to="PanelContainer/TabContainer/CONTROLS/GridContainer/DPIInput" method="_on_option_button_item_selected"]
-[connection signal="cm_360_changed" from="PanelContainer/TabContainer/CONTROLS/GridContainer/cm360Input" to="PanelContainer/TabContainer/CONTROLS/GridContainer/cm360Input/LineEdit" method="apply_value_no_signal"]
-[connection signal="value_applied" from="PanelContainer/TabContainer/CONTROLS/GridContainer/cm360Input/LineEdit" to="PanelContainer/TabContainer/CONTROLS/GridContainer/cm360Input" method="_on_line_edit_value_applied"]
-[connection signal="value_changed" from="PanelContainer/TabContainer/CONTROLS/GridContainer/cm360Input/MasterSlider" to="PanelContainer/TabContainer/CONTROLS/GridContainer/cm360Input" method="_on_master_slider_value_changed"]
+[connection signal="item_selected" from="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/DisplayModeInput" to="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/DisplayModeInput" method="_on_item_selected"]
+[connection signal="switched_mode" from="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/DisplayModeInput" to="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/ResolutionInput" method="set_window_size"]
+[connection signal="visibility_changed" from="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/DisplayModeInput" to="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/DisplayModeInput" method="_on_visibility_changed"]
+[connection signal="item_selected" from="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/ResolutionInput" to="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/ResolutionInput" method="_on_item_selected"]
+[connection signal="visibility_changed" from="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/ResolutionInput" to="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/ResolutionInput" method="_on_visibility_changed"]
+[connection signal="value_applied" from="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/FovInput/LineEdit" to="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/FovInput/MasterSlider" method="_on_value_changed"]
+[connection signal="toggled" from="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/LimitFPSInput" to="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/Max FPS" method="set_visible"]
+[connection signal="toggled" from="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/LimitFPSInput" to="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/MaxFPSInput" method="set_visible"]
+[connection signal="value_applied" from="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/MaxFPSInput/LineEdit" to="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/MaxFPSInput" method="_on_value_changed"]
+[connection signal="value_applied" from="PanelContainer/TabContainer/SOUND_TAB/GridContainer/MasterInput/LineEdit" to="PanelContainer/TabContainer/SOUND_TAB/GridContainer/MasterInput/MasterSlider" method="_on_value_changed"]
+[connection signal="value_applied" from="PanelContainer/TabContainer/SOUND_TAB/GridContainer/SFXInput/LineEdit" to="PanelContainer/TabContainer/SOUND_TAB/GridContainer/SFXInput/SFXSlider" method="_on_value_changed"]
+[connection signal="value_applied" from="PanelContainer/TabContainer/SOUND_TAB/GridContainer/EnvSFXInput/LineEdit" to="PanelContainer/TabContainer/SOUND_TAB/GridContainer/EnvSFXInput/EnvSFXSlider" method="_on_value_changed"]
+[connection signal="value_applied" from="PanelContainer/TabContainer/SOUND_TAB/GridContainer/FbSFXInput/LineEdit" to="PanelContainer/TabContainer/SOUND_TAB/GridContainer/FbSFXInput/FbSFXSlider" method="_on_value_changed"]
+[connection signal="value_applied" from="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/DPIInput/LineEdit" to="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/DPIInput" method="_on_line_edit_value_applied"]
+[connection signal="item_selected" from="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/DPIInput/OptionButton" to="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/DPIInput" method="_on_option_button_item_selected"]
+[connection signal="cm_360_changed" from="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/cm360Input" to="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/cm360Input/LineEdit" method="apply_value_no_signal"]
+[connection signal="value_applied" from="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/cm360Input/LineEdit" to="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/cm360Input" method="_on_line_edit_value_applied"]
+[connection signal="value_changed" from="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/cm360Input/MasterSlider" to="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/cm360Input" method="_on_master_slider_value_changed"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/APPLY" to="." method="ExitCurrent"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/Back" to="." method="ExitCurrent"]
