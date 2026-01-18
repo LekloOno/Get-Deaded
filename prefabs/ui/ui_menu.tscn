@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dbwbuyf2bwus0"]
+[gd_scene load_steps=21 format=3 uid="uid://dbwbuyf2bwus0"]
 
 [ext_resource type="Script" uid="uid://dg5hxnex777ma" path="res://script/ui/menu/UI_EscapeMenu.cs" id="1_nsprt"]
 [ext_resource type="Theme" uid="uid://ddkca4fk8kto5" path="res://assets/ui/menu_theme.tres" id="2_cg8yy"]
@@ -10,6 +10,8 @@
 [ext_resource type="Script" uid="uid://cxmv5fyashr30" path="res://script/ui/menu/contexts/video/ui_resolution_picker.gd" id="5_ov0ei"]
 [ext_resource type="Script" uid="uid://doqiy13nhuvvd" path="res://script/ui/menu/contexts/video/ui_strech_mode_picker.gd" id="7_t8qxr"]
 [ext_resource type="Script" uid="uid://tyihd8beo5j" path="res://script/ui/menu/contexts/video/ui_fov_slider.gd" id="8_cbaf7"]
+[ext_resource type="Script" uid="uid://2y4g11w6asxb" path="res://script/ui/menu/contexts/video/ui_render_scale_mode_picker.gd" id="8_naio2"]
+[ext_resource type="Script" uid="uid://dupm1u5o4d16c" path="res://script/ui/menu/contexts/video/ui_render_scale.gd" id="9_ewesh"]
 [ext_resource type="Script" uid="uid://n62sbtg1xvbp" path="res://script/ui/menu/contexts/video/ui_fps_limit_checkbox.gd" id="9_k7jqq"]
 [ext_resource type="Script" uid="uid://d2ws6gavso5wd" path="res://script/ui/menu/contexts/video/ui_fps_limiter.gd" id="10_vvu1j"]
 [ext_resource type="Script" uid="uid://diq354ubrwntn" path="res://script/ui/menu/contexts/controls/ui_dpi.gd" id="12_ek014"]
@@ -142,6 +144,56 @@ text = "ASPECT_RATIO_LABEL"
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 script = ExtResource("7_t8qxr")
+
+[node name="RenderScaleMode" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/RenderScaleMode"]
+layout_mode = 2
+text = "RENDER_SCALE_MODE_LABEL"
+
+[node name="RenderScaleModeInput" type="OptionButton" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+script = ExtResource("8_naio2")
+
+[node name="RenderScale" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/RenderScale"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/RenderScale/HBoxContainer"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/RenderScale/HBoxContainer"]
+layout_mode = 2
+text = "RENDER_SCALE_LABEL"
+
+[node name="RenderScaleInput" type="HSplitContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer" node_paths=PackedStringArray("label")]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+script = ExtResource("9_ewesh")
+label = NodePath("../RenderScale")
+
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/RenderScaleInput"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+virtual_keyboard_type = 2
+script = ExtResource("5_kpbb8")
+
+[node name="Slider" type="HSlider" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/RenderScaleInput"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 0.1
+max_value = 10.0
+step = 0.1
+value = 1.0
 
 [node name="Fov" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
 layout_mode = 2
@@ -566,6 +618,8 @@ text = "BACK"
 [connection signal="visibility_changed" from="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/DisplayModeInput" to="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/DisplayModeInput" method="_on_visibility_changed"]
 [connection signal="item_selected" from="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/ResolutionInput" to="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/ResolutionInput" method="_on_item_selected"]
 [connection signal="visibility_changed" from="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/ResolutionInput" to="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/ResolutionInput" method="_on_visibility_changed"]
+[connection signal="mode_changed" from="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/RenderScaleModeInput" to="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/RenderScaleInput" method="_on_render_scale_mode_changed"]
+[connection signal="value_applied" from="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/RenderScaleInput/LineEdit" to="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/RenderScaleInput" method="_on_value_changed"]
 [connection signal="value_applied" from="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/FovInput/LineEdit" to="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/FovInput/MasterSlider" method="_on_value_changed"]
 [connection signal="toggled" from="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/LimitFPSInput" to="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/Max FPS" method="set_visible"]
 [connection signal="toggled" from="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/LimitFPSInput" to="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/MaxFPSInput" method="set_visible"]
