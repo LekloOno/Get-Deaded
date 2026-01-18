@@ -44,7 +44,7 @@ func show_scale() -> bool:
 
 func _on_value_changed(new_value: float) -> void:
 	sharpness = new_value
-	get_tree().root.fsr_sharpness = new_value
+	get_tree().root.fsr_sharpness = sharpness
 	
 func _on_render_scale_mode_changed(mode: int):
 	var do_show = mode != -1
