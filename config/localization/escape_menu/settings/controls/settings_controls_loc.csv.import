@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://d4jggbofljvrm"
+
+[deps]
+
+files=["res://config/localization/escape_menu/settings/controls/settings_controls_loc.en.translation", "res://config/localization/escape_menu/settings/controls/settings_controls_loc.fr.translation"]
+
+source_file="res://config/localization/escape_menu/settings/controls/settings_controls_loc.csv"
+dest_files=["res://config/localization/escape_menu/settings/controls/settings_controls_loc.en.translation", "res://config/localization/escape_menu/settings/controls/settings_controls_loc.fr.translation"]
+
+[params]
+
+compress=true
+delimiter=0
