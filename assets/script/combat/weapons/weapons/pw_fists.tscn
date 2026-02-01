@@ -73,7 +73,7 @@ metadata/_custom_type_script = "uid://c3are182lodyx"
 
 [node name="PW_FistsFire" type="Node3D" parent="." node_paths=PackedStringArray("_shots", "_ammos", "_fireTraumaCauser")]
 script = ExtResource("3_k4qra")
-_chargedKbMultiplier = 0.5
+_chargedKbMultiplier = 0.2
 _chargedDmgMultiplier = 0.5
 _chargeTime = 1500
 _shots = [NodePath("PWS_SequenceHit")]
@@ -103,7 +103,7 @@ script = ExtResource("8_2xwjd")
 _uppercutMaxKbMultiplier = 0.3
 _uppercutMinSpeed = 5.0
 _uppercutMaxSpeed = 20.0
-_speedKbMultiplier = 2.0
+_speedKbMultiplier = 10.0
 _baseVerticalSpeed = 0.8
 _maxSpeed = 40.0
 _knockBack = 0.8

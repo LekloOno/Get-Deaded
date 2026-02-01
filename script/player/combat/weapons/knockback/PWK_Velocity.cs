@@ -18,23 +18,18 @@ public partial class PWK_Velocity : PWK_Simple
         float verticalSpeed = OwnerBody.Velocity().Y;
         float verticalSpeedKM = verticalSpeed * 3.6f;
 
-        Vector3 dirKnockBack = Vector3.Zero;
+        float flatSpeed = (OwnerBody.Velocity() * new Vector3(1, 0, 1)).Length();
+        float speedRatio = Mathf.Min(flatSpeed * 3.6f / _maxSpeed, 1);
+        float multiplier = speedRatio * _speedKbMultiplier;
+
+        impulse *= 1 + multiplier;
 
         if (IsUppercut(verticalSpeedKM))
         {
             float uppercutRatio = (verticalSpeedKM - _uppercutMinSpeed) / (_uppercutMaxSpeed - _uppercutMinSpeed);
-            float multiplier = 1 + uppercutRatio * _uppercutMaxKbMultiplier;
-            dirKnockBack = new(0, multiplier*_baseVerticalSpeed*verticalSpeed, 0);
+            multiplier = 1 + uppercutRatio * _uppercutMaxKbMultiplier;
 
-            impulse += dirKnockBack;
-        }
-        else
-        {
-            float flatSpeed = (OwnerBody.Velocity() * new Vector3(1, 0, 1)).Length();
-            float speedRatio = Mathf.Min(flatSpeed * 3.6f / _maxSpeed, 1);
-            float multiplier = speedRatio * _speedKbMultiplier;
-
-            impulse *= multiplier;
+            impulse += new Vector3(0, multiplier*_baseVerticalSpeed*verticalSpeed, 0);
         }
 
         return impulse;
