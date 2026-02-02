@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="VFX_MovingLightTrail" load_steps=3 format=3 uid="uid://mcobvwmhuq3a"]
+[gd_resource type="Resource" script_class="VFX_MovingLightTrail" format=3 uid="uid://mcobvwmhuq3a"]
 
 [ext_resource type="Material" uid="uid://bmwhbvhkyyqnm" path="res://assets/materials/vfx/basic_line_trail.tres" id="1_nbafh"]
 [ext_resource type="Script" uid="uid://0w0m608ktkwu" path="res://script/vfx/combat/trail/moving_light/VFX_MovingLightTrail.cs" id="2_xf6am"]
