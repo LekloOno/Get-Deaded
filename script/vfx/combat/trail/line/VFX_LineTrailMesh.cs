@@ -1,10 +1,29 @@
 using Godot;
 
-public partial class VFX_LineTrailMesh(Vector3 origin, Vector3 hit, Material material, float fadeTime, VFX_LineType _lineType) : VFX_TrailMesh(origin, hit, material)
+public partial class VFX_LineTrailMesh : VFX_TrailMesh
 {
-    public override void Shoot()
+    private float _fadeTime;
+    private VFX_LineType _lineType;
+    private float _initialOpacity;
+
+    public VFX_LineTrailMesh(
+        Material material,
+        float fadeTime,
+        VFX_LineType lineType
+    ) : base(material)
     {
-        ImmediateMesh drawMesh = _lineType.GenerateMesh(_origin, _hit, GetViewport().GetCamera3D());
+        _fadeTime = fadeTime;
+        _lineType = lineType;
+
+        if (material is StandardMaterial3D std)
+            _initialOpacity = std.AlbedoColor.A;
+        else
+            _initialOpacity = 1f;
+    }
+
+    protected override void SpecShoot(Vector3 origin, Vector3 hit)
+    {
+        ImmediateMesh drawMesh = _lineType.GenerateMesh(origin, hit, GetViewport().GetCamera3D());
         Mesh = drawMesh;
         drawMesh.SurfaceEnd();
         Anim();
@@ -13,10 +32,27 @@ public partial class VFX_LineTrailMesh(Vector3 origin, Vector3 hit, Material mat
     public async void Anim()
     {
         Tween opacityTween = CreateTween();
-        opacityTween.TweenProperty(MaterialOverride, "albedo_color:a", 0f, fadeTime);
+        opacityTween.TweenProperty(MaterialOverride, "albedo_color:a", 0f, _fadeTime);
 
         await ToSignal(opacityTween, "finished");
         
-        QueueFree();
+        Pool();
     }
+
+    protected override void SpecPool()
+    {
+        Visible = false;
+    }
+
+    public override void Spawn()
+    {
+        Visible = true;
+        if (MaterialOverride is StandardMaterial3D std)
+        {
+            Color color = std.AlbedoColor;
+            color.A = _initialOpacity;
+            std.AlbedoColor = color;
+        }
+    }
+
 }

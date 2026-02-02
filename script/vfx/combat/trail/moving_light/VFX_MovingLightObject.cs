@@ -1,37 +1,22 @@
-using System.Drawing;
 using Godot;
 
-public partial class VFX_MovingLightObject : Node3D
+public partial class VFX_MovingLightObject : VFX_TrailMesh
 {
     private float _speed;
     private float _trailSpeed;
     private QuadMesh _mesh;
-    private MeshInstance3D _meshInstance;
     private Vector2 _edgesDistance; // X is the nearest edge, Y is the furthest edge
-    private Vector3 _origin;
-    private Vector3 _hit;
 
     private float _distance;
 
-    public VFX_MovingLightObject(Vector3 origin, Vector3 hit, Material material, float speed, float trailSpeed, float thickness, float _inclination)
+    public VFX_MovingLightObject(Material material, float speed, float trailSpeed, float thickness, float _inclination): base(material)
     {
-        TopLevel = true;
-
-        _origin = origin;
-        _hit = hit;
-
         _speed = speed;
         _trailSpeed = trailSpeed;
-        _distance = origin.DistanceTo(hit);
-        _edgesDistance = Vector2.Zero;
 
         _mesh = new QuadMesh(){Size = new Vector2(0f, thickness)};
-
-        _meshInstance = new(){
-            Mesh = _mesh,
-            MaterialOverride = material,
-            Rotation = new Vector3(Mathf.DegToRad(_inclination), Mathf.DegToRad(90f), 0f),
-        };
+        Mesh = _mesh;
+        Rotation = new Vector3(Mathf.DegToRad(_inclination), 0f, 0f);
     }
     
     public Vector2 EdgesDistance
@@ -40,7 +25,7 @@ public partial class VFX_MovingLightObject : Node3D
         set
         {
             if (value.X >= _distance - 0.2f)
-                QueueFree();
+                Pool();
             
             float cappedY = Mathf.Min(_distance, value.Y);
 
@@ -57,13 +42,6 @@ public partial class VFX_MovingLightObject : Node3D
         }
     }
 
-    public override void _Ready()
-    {
-        AddChild(_meshInstance);
-        Position = _origin;
-        LookAt(_hit, Vector3.Up);
-    }
-
     public override void _Process(double delta)
     {
         float frontMove = (float)delta * _speed;
@@ -71,4 +49,27 @@ public partial class VFX_MovingLightObject : Node3D
 
         EdgesDistance = new Vector2(backMove, _edgesDistance.Y + frontMove);
     }
+
+    protected override void SpecShoot(Vector3 origin, Vector3 hit)
+    {
+        Position = origin;   
+        _distance = origin.DistanceTo(hit);
+        _edgesDistance = Vector2.Zero;
+        _mesh.Size = new Vector2(0f, _mesh.Size.Y);
+        LookAt(hit, Vector3.Up);
+        RotateObjectLocal(Vector3.Up, Mathf.DegToRad(90f));
+    }
+
+    protected override void SpecPool()
+    {
+        Visible = false;
+        SetProcess(false);
+    }
+
+    public override void Spawn()
+    {
+        Visible = true;
+        SetProcess(true);
+    }
+
 }

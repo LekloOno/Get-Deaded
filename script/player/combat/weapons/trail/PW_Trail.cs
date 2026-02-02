@@ -14,6 +14,13 @@ public partial class PW_Trail : WeaponComponent
 {
     [Export] protected Godot.Collections.Array<VFX_Trail> _trails;
 
+    public override void _Ready()
+    {
+        foreach (VFX_Trail trail in _trails)
+            trail.Preload(this, 1);
+    }
+
+
     public void Shoot(Vector3 hitPosition)
     {
         foreach (VFX_Trail trail in _trails)
