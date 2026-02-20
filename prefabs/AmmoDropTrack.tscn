@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bpk6ns2xwoidb"]
+[gd_scene format=3 uid="uid://bpk6ns2xwoidb"]
 
 [ext_resource type="Texture2D" uid="uid://chgreh1llc8hq" path="res://assets/textures/factory/trim_02_norm.png" id="1_r65xn"]
 

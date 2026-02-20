@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://tututtvxca36"]
+
+[ext_resource type="PackedScene" uid="uid://daa54wi0sheck" path="res://assets/models/cars/stg_v12/stg_v12_96_-_retro_styled_model.glb" id="1_e3ty0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ralq4"]
+size = Vector3(5, 0.90000004, 1.8000001)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b1yl2"]
+size = Vector3(2.4, 0.5, 1.8000001)
+
+[node name="StgV12" type="Node3D" unique_id=1032433642]
+
+[node name="Sketchfab_Scene" parent="." unique_id=564921336 instance=ExtResource("1_e3ty0")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=882209331]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=197775183]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45000002, -8.940697e-08)
+shape = SubResource("BoxShape3D_ralq4")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" unique_id=1613876902]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.40000007, 1.15, -8.940697e-08)
+shape = SubResource("BoxShape3D_b1yl2")

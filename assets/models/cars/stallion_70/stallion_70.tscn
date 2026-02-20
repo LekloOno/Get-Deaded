@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://b6jb7mh24dk4y"]
+
+[ext_resource type="PackedScene" uid="uid://btc716tj6l47s" path="res://assets/models/cars/stallion_70/stallion_70_-_retro_styled_model.glb" id="1_p5clj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f4jm6"]
+size = Vector3(4.5, 1.1, 1.8000001)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4v0ve"]
+size = Vector3(2.5, 0.6, 1.8000001)
+
+[node name="Stallion70" type="Node3D" unique_id=2027673635]
+
+[node name="Sketchfab_Scene" parent="." unique_id=1364313504 instance=ExtResource("1_p5clj")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=819108366]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1866025374]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.049999714, 0.55, -8.940697e-08)
+shape = SubResource("BoxShape3D_f4jm6")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" unique_id=1490109715]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5500002, 1.4000001, -8.940697e-08)
+shape = SubResource("BoxShape3D_4v0ve")

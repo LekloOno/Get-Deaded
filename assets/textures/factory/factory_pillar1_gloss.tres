@@ -1,8 +1,12 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://h2ivyy4upgyr"]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://h2ivyy4upgyr"]
 
 [ext_resource type="Texture2D" uid="uid://b128ggpngmcu4" path="res://assets/textures/factory/factory_pillar1_gloss.png" id="1_l8d3x"]
+[ext_resource type="Texture2D" uid="uid://cx83j0gphxq0v" path="res://assets/textures/factory/factory_pillar2_norm.png" id="2_858ne"]
 
 [resource]
 albedo_texture = ExtResource("1_l8d3x")
+metallic = 0.75
 metallic_specular = 0.0
+roughness = 0.5
+normal_texture = ExtResource("2_858ne")
 texture_filter = 2

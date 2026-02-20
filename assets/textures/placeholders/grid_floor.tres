@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://c1d8elpp75xkn"]
+
+[ext_resource type="Texture2D" uid="uid://bsbntk1fmlq16" path="res://assets/textures/placeholders/grid_floor.png" id="1_a6wt2"]
+
+[resource]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("1_a6wt2")
+texture_filter = 2

@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bwvpipehckry7"]
+
+[ext_resource type="Texture2D" uid="uid://3jhqaldylwhy" path="res://assets/textures/factory/factory_tile.png" id="1_i6vlr"]
+[ext_resource type="Texture2D" uid="uid://c44hs82f566j8" path="res://assets/textures/factory/factory_tile_norm.png" id="2_d2dw6"]
+
+[resource]
+albedo_texture = ExtResource("1_i6vlr")
+metallic_specular = 0.0
+normal_enabled = true
+normal_scale = 0.36
+normal_texture = ExtResource("2_d2dw6")
+texture_filter = 2

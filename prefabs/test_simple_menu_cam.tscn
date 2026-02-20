@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://k25xiixl3iy5"]
+
+[ext_resource type="PackedScene" uid="uid://dbwbuyf2bwus0" path="res://prefabs/ui/ui_menu.tscn" id="1_dd7wy"]
+[ext_resource type="Script" uid="uid://byy7tiy37y47h" path="res://script/debug/display_fps.gd" id="2_fqu6i"]
+
+[node name="Camera3D" type="Camera3D" unique_id=552850918]
+transform = Transform3D(0.8541595, 0, -0.5200112, 0, 1, 0, 0.5200112, 0, 0.8541595, 0, 0, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=179796511]
+process_mode = 3
+
+[node name="ColorRect" parent="CanvasLayer" unique_id=909842155 instance=ExtResource("1_dd7wy")]
+visible = false
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1869417687]
+process_mode = 3
+
+[node name="Label" type="Label" parent="CanvasLayer2" unique_id=1769463905]
+process_mode = 3
+offset_right = 47.0
+offset_bottom = 23.0
+text = "aaaaa"
+script = ExtResource("2_fqu6i")

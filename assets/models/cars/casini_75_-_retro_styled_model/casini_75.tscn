@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://2y20pmbaebm0"]
+
+[ext_resource type="PackedScene" uid="uid://dum2kob2fws0n" path="res://assets/models/cars/casini_75_-_retro_styled_model/scene.gltf" id="1_cniar"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x4x6w"]
+size = Vector3(4, 0.8, 1.6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6ylp2"]
+size = Vector3(1.7, 0.4, 1.4)
+
+[node name="Casini75" type="Node3D" unique_id=868313885]
+
+[node name="Sketchfab_Scene" parent="." unique_id=104524150 instance=ExtResource("1_cniar")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1370641403]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1007320458]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, -8.940697e-08)
+shape = SubResource("BoxShape3D_x4x6w")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" unique_id=923996147]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45000014, 1.0000001, -8.940697e-08)
+shape = SubResource("BoxShape3D_6ylp2")

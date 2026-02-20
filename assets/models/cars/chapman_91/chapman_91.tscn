@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cwox0vfbo1akf"]
+
+[ext_resource type="PackedScene" uid="uid://b0i7ryw0bjfup" path="res://assets/models/cars/chapman_91/chapman_91_tuned_-_retro_styled_model.glb" id="1_uv6ye"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4ea3s"]
+size = Vector3(5.1, 0.8, 1.8000001)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y3m5r"]
+size = Vector3(2.2, 0.5, 1.8000001)
+
+[node name="Chapman91" type="Node3D" unique_id=826464713]
+
+[node name="Sketchfab_Scene" parent="." unique_id=1952129014 instance=ExtResource("1_uv6ye")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=95626379]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1801441699]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.049999952, 0.4, -8.940697e-08)
+shape = SubResource("BoxShape3D_4ea3s")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" unique_id=1840103514]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39999995, 1.05, -8.940697e-08)
+shape = SubResource("BoxShape3D_y3m5r")

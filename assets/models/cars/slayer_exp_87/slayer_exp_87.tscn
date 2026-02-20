@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://btr1x52k807cj"]
+
+[ext_resource type="PackedScene" uid="uid://vsv7bst18tr4" path="res://assets/models/cars/slayer_exp_87/slayer_exp_87_-_low_poly_model.glb" id="1_klc4e"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lwvt2"]
+size = Vector3(5, 0.90000004, 1.8000001)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kilir"]
+size = Vector3(1.9, 0.5, 1.8000001)
+
+[node name="SlayerExp87" type="Node3D" unique_id=250659014]
+
+[node name="Sketchfab_Scene" parent="." unique_id=690018325 instance=ExtResource("1_klc4e")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=2096982644]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1582077121]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45000002, -8.940697e-08)
+shape = SubResource("BoxShape3D_lwvt2")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" unique_id=1755842161]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35000017, 1.15, -8.940697e-08)
+shape = SubResource("BoxShape3D_kilir")

@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://davxi0uu1oao8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_b25op"]
+size = Vector3(1, 0.2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mt5a5"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 1.96
+
+[node name="MeshInstance3D14" type="MeshInstance3D" unique_id=637765832]
+transform = Transform3D(-5.9604645e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -5.9604645e-08, 0, 0, 0)
+cast_shadow = 0
+mesh = SubResource("BoxMesh_b25op")
+skeleton = NodePath("../../FuncGodotMap")
+surface_material_override/0 = SubResource("StandardMaterial3D_mt5a5")
+
+[node name="OmniLight3D7" type="OmniLight3D" parent="." unique_id=755441776]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0999999, -0.55, 0)
+light_energy = 2.0
+distance_fade_enabled = true
+distance_fade_begin = 10.0
+distance_fade_shadow = 8.0
+distance_fade_length = 12.0
+omni_range = 8.0
