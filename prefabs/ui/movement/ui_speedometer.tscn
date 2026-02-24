@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://dycj3guve8rms"]
+
+[ext_resource type="Script" uid="uid://donu346pdynxw" path="res://script/ui/movement/UI_SpeedoMeter2D.cs" id="1_xtli7"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_xtli7"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xtli7"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_xtli7")
+use_z_clip_scale = true
+z_clip_scale = 0.01
+use_fov_override = true
+fov_override = 103.0
+
+[sub_resource type="Gradient" id="Gradient_k51pg"]
+colors = PackedColorArray(0, 0.4, 0.894118, 0.764706, 0, 1, 0.537255, 0.784314)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xtli7"]
+font_size = 32
+
+[node name="Speedometer" type="Sprite3D" unique_id=2135017054 node_paths=PackedStringArray("_label")]
+material_override = SubResource("StandardMaterial3D_xtli7")
+cast_shadow = 0
+extra_cull_margin = 1.0
+texture = SubResource("ViewportTexture_xtli7")
+script = ExtResource("1_xtli7")
+_gradient = SubResource("Gradient_k51pg")
+_minSpeed = 10.0
+_maxSpeed = 60.0
+_label = NodePath("SubViewport/Label")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=379392027]
+transparent_bg = true
+size = Vector2i(128, 64)
+
+[node name="Label" type="Label" parent="SubViewport" unique_id=1071449542]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "poo"
+label_settings = SubResource("LabelSettings_xtli7")
+vertical_alignment = 1

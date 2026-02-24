@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bl4u5ep58pi50"]
+
+[ext_resource type="Script" uid="uid://fbrtloolgk5v" path="res://script/ui/menu/UI_2DSpaceMenu.cs" id="1_nvo4i"]
+[ext_resource type="PackedScene" uid="uid://dbwbuyf2bwus0" path="res://prefabs/ui/ui_menu.tscn" id="2_f1waw"]
+[ext_resource type="Script" uid="uid://byy7tiy37y47h" path="res://script/debug/display_fps.gd" id="3_sq1th"]
+
+[node name="Camera3D" type="Camera3D" unique_id=41489718]
+
+[node name="UI_2DSpaceMenu" type="CanvasLayer" parent="." unique_id=902606756 node_paths=PackedStringArray("_cameraControl")]
+process_mode = 3
+layer = 2
+script = ExtResource("1_nvo4i")
+_cameraControl = NodePath("")
+
+[node name="UI_EscapeMenu" parent="UI_2DSpaceMenu" unique_id=1552493279 instance=ExtResource("2_f1waw")]
+visible = false
+
+[node name="Label" type="Label" parent="." unique_id=1904220621]
+process_mode = 3
+offset_right = 47.0
+offset_bottom = 23.0
+text = "aaaaa"
+script = ExtResource("3_sq1th")
+
+[connection signal="Closed" from="UI_2DSpaceMenu/UI_EscapeMenu" to="UI_2DSpaceMenu" method="Close"]
+[connection signal="Opened" from="UI_2DSpaceMenu/UI_EscapeMenu" to="UI_2DSpaceMenu" method="Open"]
