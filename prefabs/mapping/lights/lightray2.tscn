@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://bioysx8g5kih7"]
+
+[ext_resource type="Shader" uid="uid://db85ge55ambmc" path="res://assets/shaders/light_flare.gdshader" id="1_etwgm"]
+[ext_resource type="Script" uid="uid://b3ev88jgq3iep" path="res://script/vfx/light/VFX_GodsRay.cs" id="2_musq1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l8cbt"]
+render_priority = 0
+shader = ExtResource("1_etwgm")
+shader_parameter/ray_color = Color(1, 1, 1, 0.34901962)
+shader_parameter/edge_fade = 0.1
+shader_parameter/dust_size = 0.2
+shader_parameter/dust_strength = 0.7
+shader_parameter/dust_sharpness = 2.0
+shader_parameter/dust_speed = 0.05
+shader_parameter/fluctuation_size = 3.0
+shader_parameter/fluctuation_strength = 1.0
+shader_parameter/fluctuation_sharpness = 1.0
+shader_parameter/fluctuation_speed = 0.3
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_musq1"]
+
+[node name="VFX_GodsRay" type="MeshInstance3D" unique_id=605019919]
+material_override = SubResource("ShaderMaterial_l8cbt")
+mesh = SubResource("ImmediateMesh_musq1")
+script = ExtResource("2_musq1")
+Length = 10.0
+metadata/_custom_type_script = "uid://b3ev88jgq3iep"
