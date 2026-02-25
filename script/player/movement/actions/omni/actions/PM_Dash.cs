@@ -13,7 +13,7 @@ public partial class PM_Dash : PM_Action
     [Export] private PM_LedgeClimb _ledgeClimb;
     [Export] private PM_WallJump _wallJump;
     [Export] private PM_OmniCharge _charge;
-    [Export] private float _chargeCost;
+    [Export] private float _chargeCost = 100f;
 
     private float _distance = 7;
     [Export(PropertyHint.Range, "0.0, 10.0, or_greater")] public float Distance
@@ -73,10 +73,7 @@ public partial class PM_Dash : PM_Action
             return;
 
         if (!_charge.TryConsume(_chargeCost))
-        {
-            OnUnavailable?.Invoke(this, EventArgs.Empty);
             return;
-        }
         
         _direction = GetDashDirection();
 
