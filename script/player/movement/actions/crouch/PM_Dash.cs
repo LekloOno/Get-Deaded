@@ -69,6 +69,9 @@ public partial class PM_Dash : PM_Action
         if (_ledgeClimb.IsClimbing)
             return;
 
+        if (_isDashing)
+            return;
+
         if (!_charge.TryConsume(_chargeCost))
         {
             OnUnavailable?.Invoke(this, EventArgs.Empty);
