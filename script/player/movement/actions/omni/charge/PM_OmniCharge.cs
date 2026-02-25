@@ -1,8 +1,12 @@
+using System;
 using Godot;
 
 [GlobalClass, Tool]
 public partial class PM_OmniCharge : Node
 {
+    public event Action<float> TriedConsume;
+    public event Action<float> Consumed;
+
     [Export] public float Max {get; private set;}
     
     public float Current
@@ -29,11 +33,13 @@ public partial class PM_OmniCharge : Node
         if (charge > Current)
         {
             _loader.TriedConsume(charge);
+            TriedConsume?.Invoke(charge);
             return false;
         }
 
         Current -= charge;
         _loader.Consumed(charge);
+        Consumed?.Invoke(charge);
         return true;
     }
 
