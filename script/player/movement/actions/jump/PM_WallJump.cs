@@ -60,7 +60,7 @@ public partial class PM_WallJump : PM_Action
         velocity *= angleRatio;
 
         velocity.Y = _strength;
-        OnStart?.Invoke(this, EventArgs.Empty);
+        InvokeStart();
 
         entity?.HandleKnockBack(- MATH_Vector3Ext.Flat(velocity));
 

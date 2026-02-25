@@ -29,7 +29,7 @@ public partial class PA_Jump : Node3D
         _wallClimb.OnHopStart += PlaySoundHop;
     }
 
-    public void PlaySoundWall(object sender, EventArgs e)
+    public void PlaySoundWall()
     {
         _wooshes.Play();
         _steps.Play();
@@ -37,7 +37,7 @@ public partial class PA_Jump : Node3D
         _wallJumpWoosh.Play();
     }
 
-    public void PlaySoundKick(object sender, EventArgs e)
+    public void PlaySoundKick()
     {
         _wooshes.Play();
         _steps.Play();
@@ -46,21 +46,21 @@ public partial class PA_Jump : Node3D
         _wallClimbLow.Play();
     }
 
-    public void PlaySoundHop(object sender, EventArgs e)
+    public void PlaySoundHop()
     {
         _wallClimbNoise.Play();
         _wallClimbClothes.Play();
         _wallClimbLow.Play();
     }
 
-    public void PlaySoundWallClimb(object sender, EventArgs e)
+    public void PlaySoundWallClimb()
     {
         _steps.Play();
         _wooshes.Play();
         _wallClimbLow.Play();
     }
 
-    public void PlaySound(object sender, EventArgs e)
+    public void PlaySound()
     {
         _wooshes.Play();
         _clothes.Play();

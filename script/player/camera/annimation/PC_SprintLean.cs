@@ -35,13 +35,13 @@ public partial class PC_SprintLean : Node3D
         Position = Position.Lerp(_targetPosition, _currentSpeed * (float)delta);
     }
 
-    public void OnStartSprint(object sender, EventArgs e)
+    public void OnStartSprint()
     {
         _targetPosition = _downPosition;
         _currentSpeed = _inSpeed;
     }
 
-    public void OnStopSprint(object sender, EventArgs e)
+    public void OnStopSprint()
     {
         _targetPosition = Vector3.Zero;
         _currentSpeed = _outSpeed;

@@ -9,6 +9,6 @@ public partial class PM_SurfaceData : Resource
     [Export] public float MaxAccel {get; private set;}
     [Export] public float Drag {get; private set;}
 
-    public EventHandler OnStart;
-    public EventHandler OnStop;
+    public Action OnStart;
+    public Action OnStop;
 }

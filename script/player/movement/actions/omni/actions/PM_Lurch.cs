@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 [GlobalClass]
@@ -33,6 +34,8 @@ public partial class PM_Lurch : PM_Action
 
         _controller.Velocity = nextVelocity;
         _controller.RealVelocity = nextVelocity;
+
+        InvokeStart();
     }
 
     public Vector3 GetLurchDirection()

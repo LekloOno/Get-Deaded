@@ -22,15 +22,15 @@ public partial class PA_Slide : Node3D
         //_slideHold.VolumeDb = -80;
 
         _slide.OnStart += StartPlaySound;
-        _slide.OnStop += (o, e) => _slideHold.Stop();
-        _slide.OnSlowStop += (o, e) => _slideHold.Stop();
+        _slide.OnStop += _slideHold.Stop;
+        _slide.OnSlowStop +=  _slideHold.Stop;
 
         _groundState.OnLeaving += StopPlaySound;
         _groundState.OnLanding += TryLandStartHold;
     }
     public override void _PhysicsProcess(double delta) => OnUpdate?.Invoke(this, EventArgs.Empty);
 
-    private void StartPlaySound(object sender, EventArgs e)
+    private void StartPlaySound()
     {
         if(_groundState.IsGrounded())
         {
@@ -39,13 +39,13 @@ public partial class PA_Slide : Node3D
         }
     }
 
-    private void StopPlaySound(object sender, EventArgs e)
+    private void StopPlaySound()
     {
         _slideIn.Stop();
         _slideHold.Stop();
     }
 
-    private void TryLandStartHold(object sender, EventArgs e)
+    private void TryLandStartHold(LandingEventArgs e)
     {
         if (_slide.IsActive)
             _slideHold.Play();

@@ -34,7 +34,7 @@ public partial class PC_SlideLedgeAnim : Node3D
         SetProcess(false);
     }
 
-    private void OnStartSlide(object sender, EventArgs e)
+    private void OnStartSlide()
     {
        
         if (_groundState.IsGrounded())
@@ -54,7 +54,7 @@ public partial class PC_SlideLedgeAnim : Node3D
         }
     }
 
-    private void OnStartLedge(object sender, EventArgs e)
+    private void OnStartLedge()
     {
         _xDirection = -1f;
         _zDirection = (_rng.Next(2) * 2f) - 1f;

@@ -46,7 +46,7 @@ public partial class PM_Jump : PM_Action
         _jumpInput.SetLastJumped();
         _groundState.UpdateGrounded(false);
         
-        OnStart?.Invoke(this, EventArgs.Empty);
+        InvokeStart();
         return velocity;
     }
 

@@ -91,7 +91,7 @@ public partial class PM_Dash : PM_Action
         _lastDash = PHX_Time.ScaledTicksMsec;
 
         _controller.CollisionMask = CONF_Collision.Layers.Environment;
-        OnStart?.Invoke(this, EventArgs.Empty);
+        InvokeStart();
     }
 
     private Vector3 GetDashDirection() =>
@@ -130,7 +130,7 @@ public partial class PM_Dash : PM_Action
             _endDashTimer = null;
         }
 
-        OnStop?.Invoke(this, EventArgs.Empty);
+        InvokeStop();
     }
 
     private void EndDash()

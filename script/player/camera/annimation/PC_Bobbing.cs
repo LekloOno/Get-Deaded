@@ -68,21 +68,21 @@ public partial class PC_Bobbing : Node3D
         Position = Position.Lerp(Vector3.Zero, (float)deltaTime);
     }
 
-    public void OnStartSprint(object sender, EventArgs e)
+    public void OnStartSprint()
     {
         _amplitude = _sprintAmplitude;
         _waveLength = _sprintWaveLength;
         _active = true;
     }
-    public void OnStartWalk(object sender, EventArgs e)
+    public void OnStartWalk()
     {
         _amplitude = _walkAmplitude;
         _waveLength = _walkWaveLength;
         _active = true;
     }
 
-    public void OnStopSprint(object sender, EventArgs e) => _active = false;
-    public void OnStopWalk(object sender, EventArgs e) => _active = false;
+    public void OnStopSprint() => _active = false;
+    public void OnStopWalk() => _active = false;
 
     private bool TooSlow() => MATH_Vector3Ext.Flat(_controller.RealVelocity).Length() < _toggleSpeed;
 

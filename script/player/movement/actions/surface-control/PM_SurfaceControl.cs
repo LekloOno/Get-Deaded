@@ -80,7 +80,7 @@ public partial class PM_SurfaceControl : PM_Action
         return velocity * dragFactor;
     }
 
-    private void SetAirState(object sender, EventArgs e)
+    private void SetAirState()
     {
         if(_delayedGroundTimer != null)
         {
@@ -91,7 +91,7 @@ public partial class PM_SurfaceControl : PM_Action
         _currentSurface = _air;
     }
 
-    private void SetGroundState(object sender, LandingEventArgs e)
+    private void SetGroundState(LandingEventArgs e)
     {
         _delayedGroundTimer = GetTree().CreateTimer(LandGroundDelayMsec/1000f, false, true);
         _delayedGroundTimer.Timeout += SetGroundState;

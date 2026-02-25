@@ -43,13 +43,13 @@ public partial class PA_FootSteps : Node3D
         // So we just dispatch to the right listener.
 
         if (_groundSurfaceState.IsNormal())
-            TryPlayNormal(sender, EventArgs.Empty);
+            TryPlayNormal();
 
         if (_groundSurfaceState.IsSprint())
-            TryPlaySprint(sender, EventArgs.Empty);
+            TryPlaySprint();
     }
 
-    public void TryLandPlay(object sender, EventArgs e)
+    public void TryLandPlay(EventArgs e)
     {
         // Just landed, no need to check for grounded state.
 
@@ -63,7 +63,7 @@ public partial class PA_FootSteps : Node3D
             StartPlaySprint();
     }
 
-    public void TryPlaySprint(object sender, EventArgs e)
+    public void TryPlaySprint()
     {
         if (!_groundState.IsGrounded())
             return;
@@ -72,7 +72,7 @@ public partial class PA_FootSteps : Node3D
         StartPlaySprint();
     }
 
-    public void TryPlayNormal(object sender, EventArgs e)
+    public void TryPlayNormal()
     {
         if (!_groundState.IsGrounded() || _walkInput.IsStopped())
             return;
@@ -91,6 +91,6 @@ public partial class PA_FootSteps : Node3D
         _stepLoop.Start(_sprintInterval);
     }   
 
-    public void StopPlay(object sender, EventArgs e) => _stepLoop.Stop();
+    public void StopPlay() => _stepLoop.Stop();
     public void DirectStopPlay(object sender, Vector2 axis) => _stepLoop.Stop();
 }

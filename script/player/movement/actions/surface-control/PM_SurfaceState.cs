@@ -22,19 +22,23 @@ public partial class PM_SurfaceState : Node
         _sprintInput.Start += (o, e) => SetData(_stateData.Sprint);
         _sprintInput.Stop += (o, e) => SetData(_stateData.Normal);
         
-        _crouch.OnStart += (o, e) => SetData(_stateData.Crouch);
-        _crouch.OnStop += (o, e) => SetData(_stateData.Normal);
+        _crouch.OnStart += SetDataCrouch;
+        _crouch.OnStop += SetDataNormal;
 
-        _slide.OnStart += (o, e) => SetData(_stateData.Slide);
-        _slide.OnStop += (o, e) => SetData(_stateData.Normal);
+        _slide.OnStart += SetDataSlide;
+        _slide.OnStop += SetDataNormal;
     }
+
+    private void SetDataCrouch() => SetData(_stateData.Crouch);
+    private void SetDataNormal() => SetData(_stateData.Normal);
+    private void SetDataSlide() => SetData(_stateData.Slide);
 
     public void SetData(PM_SurfaceData data)
     {
-        _currentData.OnStop?.Invoke(this, EventArgs.Empty);
+        _currentData.OnStop?.Invoke();
         
         _currentData = data;
-        data.OnStart?.Invoke(this, EventArgs.Empty);
+        data.OnStart?.Invoke();
     }
 
     public virtual Vector3 Accelerate(Vector3 wishDir, Vector3 velocity, float speedModifier, float delta)

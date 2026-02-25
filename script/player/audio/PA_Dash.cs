@@ -9,6 +9,6 @@ public partial class PA_Dash : Node3D
 
     public override void _Ready()
     {
-        _dash.OnStart += (o, e) => _sound.Play();
+        _dash.OnStart += _sound.Play;
     }
 }

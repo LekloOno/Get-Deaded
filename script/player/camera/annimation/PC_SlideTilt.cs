@@ -26,8 +26,8 @@ public partial class PC_SlideTilt : Node3D
         _surfaceGroundState.Slide.OnStart += OnStartSlide;
         _surfaceGroundState.Slide.OnStop += OnStopSlide;
     }
-    public void OnStartSlide(object sender, EventArgs e) => _active = true;
-    public void OnStopSlide(object sender, EventArgs e) => _active = false;
+    public void OnStartSlide() => _active = true;
+    public void OnStopSlide() => _active = false;
 
     public override void _Process(double delta)
     {

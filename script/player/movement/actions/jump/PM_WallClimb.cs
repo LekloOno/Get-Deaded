@@ -29,9 +29,9 @@ public partial class PM_WallClimb : PM_Action
     [Export] private PM_LedgeClimb _ledgeClimb;
     [Export] private RayCast3D _headCast;
 
-    public EventHandler OnHopStart;
-    public EventHandler OnHopStop;
-    public EventHandler OnKick;
+    public event Action OnHopStart;
+    public event Action OnHopStop;
+    public event Action OnKick;
 
     private SceneTreeTimer _hopEndTimer;
     private bool _isWallClimbing = false;
@@ -96,7 +96,7 @@ public partial class PM_WallClimb : PM_Action
         SetPhysicsProcess(true);
 
         _isWallClimbing = true;
-        OnStart?.Invoke(this, EventArgs.Empty);
+        InvokeStart();
     }
 
     public void WallHop()
@@ -109,7 +109,7 @@ public partial class PM_WallClimb : PM_Action
 
     private void DoWallHop()
     {
-        OnHopStart?.Invoke(this, EventArgs.Empty);
+        OnHopStart?.Invoke();
         _isHopping = true;
         _hopEndTimer = GetTree().CreateTimer(_hopDuration, false, true);
         _hopEndTimer.Timeout += ResetWallHop;
@@ -123,7 +123,7 @@ public partial class PM_WallClimb : PM_Action
             _isHopping = false;
             _hopEndTimer.Timeout -= ResetWallHop;
             _hopEndTimer = null;
-            OnHopStop?.Invoke(this, EventArgs.Empty);
+            OnHopStop?.Invoke();
         }
     }
 
@@ -138,7 +138,7 @@ public partial class PM_WallClimb : PM_Action
 
         _controller.AdditionalForces.AddImpulse(normal*_kickStrength);
         _controller.AdditionalForces.AddImpulse(-MATH_Vector3Ext.Flat(_controller.Velocity)*_kickDebuf);
-        OnKick?.Invoke(this, EventArgs.Empty);
+        OnKick?.Invoke();
     }
 
     private void EndWallClimb()
@@ -149,7 +149,7 @@ public partial class PM_WallClimb : PM_Action
         SetPhysicsProcess(false);
 
         _isWallClimbing = false;
-        OnStop?.Invoke(this, EventArgs.Empty);
+        InvokeStop();
     }
 
     public override void _PhysicsProcess(double delta)

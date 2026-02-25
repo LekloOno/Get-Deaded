@@ -18,9 +18,12 @@ public partial class PI_Sprint : PI_HoldableHandler<EmptyInput>
 
     protected override void HandlerReady()
     {
-        _jump.OnStart += (o, f) => HandleExternal(PI_ActionState.STOPPED, new());
-        _walkInput.OnStopOrBackward += (o, f) => HandleExternal(PI_ActionState.STOPPED, new());
+        _jump.OnStart += HandleExternalStop;
+        _walkInput.OnStopOrBackward += (o, f) => HandleExternalStop();
     }
+
+    private void HandleExternalStop() =>
+        HandleExternal(PI_ActionState.STOPPED, new());
 
     public override void _UnhandledKeyInput(InputEvent @event)
     {

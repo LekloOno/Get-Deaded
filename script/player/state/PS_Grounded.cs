@@ -11,8 +11,8 @@ public partial class PS_Grounded : Node
     [Export] private PM_Controller _characterBody3D;
     [Export] private ShapeCast3D _groundCast;
 
-    public event EventHandler<LandingEventArgs> OnLanding;
-    public event EventHandler OnLeaving;
+    public event Action<LandingEventArgs> OnLanding;
+    public event Action OnLeaving;
 
     public float DistanceToGround { get; private set; } // Capped to abs(_groundCast.TargetPosition.Y)
 
@@ -54,12 +54,12 @@ public partial class PS_Grounded : Node
             _prevGrounded = realNextGrounded;
             if(realNextGrounded)
             {
-                OnLanding?.Invoke(this, new LandingEventArgs(_prevDownardSpeed));
+                OnLanding?.Invoke(new LandingEventArgs(_prevDownardSpeed));
                 _prevDownardSpeed = _characterBody3D.Velocity.Y;
             }
             else
             {
-                OnLeaving?.Invoke(this, EventArgs.Empty);
+                OnLeaving?.Invoke();
                 _lastGrounded = PHX_Time.ScaledTicksMsec;
             }
         }

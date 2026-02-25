@@ -19,7 +19,7 @@ public partial class PM_Slide : PM_Action
 
     public bool IsActive {get; private set;} = false;
     private ulong _lastForceTime = 0;
-    public EventHandler OnSlowStop;
+    public event Action OnSlowStop;
 
     private SceneTreeTimer _delayedForceTimer;
 
@@ -62,7 +62,7 @@ public partial class PM_Slide : PM_Action
         IsActive = true;
         //_controller.FloorConstantSpeed = false;
         //_controller.FloorStopOnSlope = false;
-        OnStart?.Invoke(this, EventArgs.Empty);
+        InvokeStart();
     }
 
     public void StopSlide()
@@ -88,7 +88,7 @@ public partial class PM_Slide : PM_Action
         IsActive = false;
         //_controller.FloorConstantSpeed = true;
         //_controller.FloorStopOnSlope = true;
-        OnStop?.Invoke(this, EventArgs.Empty);
+        InvokeStop();
     }
 
     public void SlowStop()
@@ -96,6 +96,6 @@ public partial class PM_Slide : PM_Action
         //_controller.FloorConstantSpeed = true;
 
         IsActive = false;
-        OnSlowStop?.Invoke(this, EventArgs.Empty);
+        OnSlowStop?.Invoke();
     }
 }

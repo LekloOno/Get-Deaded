@@ -9,6 +9,6 @@ public partial class PA_Land : Node3D
 
     public override void _Ready()
     {
-        _groundState.OnLanding += (o, e) => _sound.Play();
+        _groundState.OnLanding += (e) => _sound.Play();
     }
 }

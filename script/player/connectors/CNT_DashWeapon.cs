@@ -13,13 +13,13 @@ public partial class CNT_DashWeapon : Node
         _dash.OnStop += EnableWeapons;
     }
 
-    private void EnableWeapons(object sender, EventArgs e)
+    private void EnableWeapons()
     {
         _weaponsHandler.EnableFire();
         _weaponsHandler.Melee.Awake();
     }
 
-    private void DisableWeapons(object sender, EventArgs e)
+    private void DisableWeapons()
     {
         _weaponsHandler.DisableFire();
         _weaponsHandler.Melee.Sleep();   

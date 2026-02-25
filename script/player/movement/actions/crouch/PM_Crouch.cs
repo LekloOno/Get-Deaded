@@ -20,13 +20,13 @@ public partial class PM_Crouch : PM_Action
     public void StartCrouch()
     {
         _bodyScalor.SetTargetScale(_targetScaleRatio, _scaleSpeed);
-        OnStart?.Invoke(this, EventArgs.Empty);
+        InvokeStart();
     }
 
     public void StopCrouch()
     {
         _bodyScalor.ResetScale(_resetScaleSpeed);
-        OnStop?.Invoke(this, EventArgs.Empty);
+        InvokeStop();
     }
 }
 

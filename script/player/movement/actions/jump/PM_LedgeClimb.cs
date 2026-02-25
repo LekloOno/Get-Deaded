@@ -80,7 +80,7 @@ public partial class PM_LedgeClimb : PM_Action
         _controller.TakeOverForces.AddPersistent(_force);
         _isClimbing = true;
 
-        OnStart?.Invoke(this, EventArgs.Empty);
+        InvokeStart();
 
         SetPhysicsProcess(true);
     }
