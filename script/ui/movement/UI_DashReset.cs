@@ -28,7 +28,7 @@ public partial class UI_DashReset : TextureProgressBar
 
     public override void _Ready()
     {
-        _dash.OnTryReset += StartReset;
+        //_dash.OnTryReset += StartReset;
         _dash.OnUnavailable += Unavailable;
 
         _baseColor = TintProgress;

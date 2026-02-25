@@ -12,6 +12,8 @@ public partial class PM_Dash : PM_Action
     [Export] private PS_Grounded _groundState;
     [Export] private PM_LedgeClimb _ledgeClimb;
     [Export] private PM_WallJump _wallJump;
+    [Export] private PM_OmniCharge _charge;
+    [Export] private float _chargeCost;
 
     private float _distance = 7;
     [Export(PropertyHint.Range, "0.0, 10.0, or_greater")] public float Distance
@@ -40,7 +42,6 @@ public partial class PM_Dash : PM_Action
     [Export(PropertyHint.Range, "0.0, 10.0, or_greater")] private float _cooldown;       // Only triggered when reseting from the same surface twice in a row (ground/wall)
     [Export] private float _slamWindow;
 
-    public EventHandler<float> OnTryReset;
     public EventHandler OnUnavailable;
 
     private bool _available = true;
@@ -52,15 +53,12 @@ public partial class PM_Dash : PM_Action
     private Vector3 _dashForce = Vector3.Zero;
     private Vector3 _direction = Vector3.Zero;
     private SceneTreeTimer _endDashTimer;
-    private SceneTreeTimer _delayedResetTimer;
 
 
     public override void _Ready()
     {
         SetDashSpeed();
         _dashInput.OnStartInput += StartDash;
-        _groundState.OnLanding += LandReset;
-        _wallJump.OnStart += WallReset;
     }
 
     private void SetDashSpeed() =>
@@ -71,7 +69,7 @@ public partial class PM_Dash : PM_Action
         if (_ledgeClimb.IsClimbing)
             return;
 
-        if (!_available)
+        if (!_charge.TryConsume(_chargeCost))
         {
             OnUnavailable?.Invoke(this, EventArgs.Empty);
             return;
@@ -89,7 +87,6 @@ public partial class PM_Dash : PM_Action
         _endDashTimer = GetTree().CreateTimer(_dashDuration, false, true);
         _endDashTimer.Timeout += EndDash;
         _isDashing = true;
-        _available = false;
 
         _lastDash = PHX_Time.ScaledTicksMsec;
 
@@ -122,55 +119,6 @@ public partial class PM_Dash : PM_Action
     private bool IsSlam() =>
         PHX_Time.ScaledTicksMsec - _crouchDispatcher.LastCrouchDown <= _slamWindow;
 
-    public void TryReset(bool ground)
-    {
-
-        bool realLastGround = _lastGround;
-        _lastGround = ground;
-        
-        if(_available)
-            return;
-
-        if(realLastGround ^ ground)
-        {
-            Reset();
-            OnTryReset?.Invoke(this, 0f);
-        }
-        else
-        {
-            float sinceLastDash = (PHX_Time.ScaledTicksMsec - _lastDash)/1000f;
-            float remaining = _cooldown - sinceLastDash;
-
-            if (remaining <= 0)
-            {
-                Reset();
-                OnTryReset?.Invoke(this, 0f);
-            }
-            else if (_delayedResetTimer == null)
-            {
-                _delayedResetTimer = GetTree().CreateTimer(remaining, false, true);
-                _delayedResetTimer.Timeout += Reset;
-                OnTryReset?.Invoke(this, remaining);
-            }
-        }
-    }
-
-    public void WallReset(object sender, EventArgs e) => TryReset(false);
-    public void LandReset(object sender, EventArgs e) => TryReset(true);
-
-    private void Reset()
-    {
-        if (_delayedResetTimer != null)
-        {
-            _delayedResetTimer.Timeout -= Reset;
-            _delayedResetTimer = null;
-        }
-        else if (_isDashing)
-            EndDash();
-
-        _available = true;
-    }
-
     public void AbortDash()
     {
         _controller.TakeOverForces.RemovePersistent(_dashForce);
@@ -193,8 +141,6 @@ public partial class PM_Dash : PM_Action
         _controller.RealVelocity = outVelocity;
 
         AbortDash();
-        if (_groundState.IsGrounded())
-            TryReset(true);
     }
 
     private Vector3 OutVelocity()

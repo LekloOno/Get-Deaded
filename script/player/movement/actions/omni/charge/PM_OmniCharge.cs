@@ -16,6 +16,14 @@ public partial class PM_OmniCharge : Node
     private float _current;
     private PM_IOmniLoader _loader;
 
+    public override void _Ready()
+    {
+        if (Engine.IsEditorHint())
+            return;
+
+        _current = Max;
+    }
+
     public bool TryConsume(float charge)
     {
         if (charge > Current)
