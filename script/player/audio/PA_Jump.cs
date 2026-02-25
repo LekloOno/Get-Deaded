@@ -31,8 +31,6 @@ public partial class PA_Jump : Node3D
 
     public void PlaySoundWall()
     {
-        _wooshes.Play();
-        _steps.Play();
         _wallJumpClothes.Play();
         _wallJumpWoosh.Play();
     }
