@@ -50,7 +50,7 @@
 [ext_resource type="Script" uid="uid://bfy40slnxcea4" path="res://script/player/movement/actions/jump/PM_WallJump.cs" id="28_x5ps3"]
 [ext_resource type="Script" uid="uid://dgryvfqki14qd" path="res://script/player/movement/actions/crouch/PM_Crouch.cs" id="29_ykpqc"]
 [ext_resource type="Script" uid="uid://cnfmompqp4io5" path="res://script/player/movement/actions/crouch/PM_Slide.cs" id="30_q6qhf"]
-[ext_resource type="Script" uid="uid://3e041jkrr8vt" path="res://script/player/movement/actions/crouch/PM_Dash.cs" id="31_5px2t"]
+[ext_resource type="Script" uid="uid://3e041jkrr8vt" path="res://script/player/movement/actions/omni/actions/PM_Dash.cs" id="31_5px2t"]
 [ext_resource type="Script" uid="uid://cx8y12nd8txsu" path="res://script/engine_tools/physics/bodies/objects/ragdoll/PHX_ActiveRagdollSim.cs" id="31_31xtv"]
 [ext_resource type="Script" uid="uid://du3s3nlq8murr" path="res://script/animation/AN_Locomotion.cs" id="32_e6mop"]
 [ext_resource type="Script" uid="uid://ce1eayuhmgg3m" path="res://script/ui/combat/weapon/UI_Crosshair.cs" id="32_jex4o"]
