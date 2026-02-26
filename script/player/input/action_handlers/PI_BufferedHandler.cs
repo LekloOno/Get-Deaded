@@ -19,7 +19,7 @@ public abstract partial class PI_BufferedHandler<T> : PI_PressHandler<T>
     /// Defines if 
     /// </summary>
     [Export] private bool _scaledTime = true;
-    private ulong _lastInput = 0;
+    public ulong LastInput {get; private set;} = 0;
     private bool _inputBuffered = false;
 
     private ulong GetLocalTicksMsec() => _scaledTime
@@ -36,7 +36,7 @@ public abstract partial class PI_BufferedHandler<T> : PI_PressHandler<T>
     public bool IsBuffered() =>
         _permanent
         ? _inputBuffered
-        : GetLocalTicksMsec() - _lastInput < _bufferWindow;
+        : GetLocalTicksMsec() - LastInput < _bufferWindow;
 
     /// <summary>
     /// Automatically empties the buffer on disabling.
@@ -55,7 +55,7 @@ public abstract partial class PI_BufferedHandler<T> : PI_PressHandler<T>
     
     protected override void InputDown(InputEvent @event)
     {
-        _lastInput = GetLocalTicksMsec();
+        LastInput = GetLocalTicksMsec();
         _inputBuffered = !_inputBuffered;
         T value = GetInputValue(@event);
         Start?.Invoke(this, value);
@@ -69,7 +69,7 @@ public abstract partial class PI_BufferedHandler<T> : PI_PressHandler<T>
 
     protected void Empty()
     {
-        _lastInput = 0;
+        LastInput = 0;
         _inputBuffered = false;
     }
 }

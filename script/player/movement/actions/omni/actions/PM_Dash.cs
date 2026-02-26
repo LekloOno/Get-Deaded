@@ -7,26 +7,29 @@ public partial class PM_Dash : PM_Action
     [Export] private PI_CrouchDispatcher _crouchDispatcher;
     [Export] private PI_Dash _dashInput;
     [Export] private PI_Walk _walkInput;
+    [Export] private PI_Jump _jumpInput;
     [Export] private PC_Control _cameraControl;
     [Export] private PM_Controller _controller;
     [Export] private PS_Grounded _groundState;
     [Export] private PM_LedgeClimb _ledgeClimb;
     [Export] private PM_WallJump _wallJump;
     [Export] private PM_OmniCharge _charge;
-    [Export] private float _chargeCost = 100f;
+    [Export] private float _dashCost = 90f;
+    [Export] private float _slamCost = 60f;
+    [Export] private float _doubleJumpCost = 60f;
 
-    private float _distance = 7;
+    private float _dashDistance = 6.5f;
     [Export(PropertyHint.Range, "0.0, 10.0, or_greater")] public float Distance
     {
-        get => _distance;
+        get => _dashDistance;
         set
         {
-            _distance = value;
+            _dashDistance = value;
             SetDashSpeed();
         }
     }
-    private float _speed;
-    private float _dashDuration = 0.1f;
+    private float _dashSpeed;
+    private float _dashDuration = 0.09f;
     [Export(PropertyHint.Range, "0.01, 0.5, or_greater")]
     public float DashDuration
     {
@@ -37,10 +40,31 @@ public partial class PM_Dash : PM_Action
             SetDashSpeed();
         }
     }
-    [Export(PropertyHint.Range, "0.0, 1.0")] private float _minDashRatio;
-    // The velocity coefficient when dashing upward. The more upward you dash, the less speed you will keep.
-    [Export(PropertyHint.Range, "0.0, 10.0, or_greater")] private float _cooldown;       // Only triggered when reseting from the same surface twice in a row (ground/wall)
     [Export] private float _slamWindow;
+
+    [Export] private float _doubleJumpStrength = 5f;
+    private float _doubleJumpSpeed;
+    private float _doubleJumpDistance;
+    private float _doubleJumpDuration;
+    [Export(PropertyHint.Range, "0.0, 10.0, or_greater")] public float DoubleJumpDistance
+    {
+        get => _doubleJumpDistance;
+        set
+        {
+            _doubleJumpDistance = value;
+            SetDoubleJumpSpeed();
+        }
+    }
+    [Export(PropertyHint.Range, "0.01, 0.5, or_greater")]
+    public float DoubleJumpDuration
+    {
+        get => _doubleJumpDuration;
+        set
+        {
+            _doubleJumpDuration = value;
+            SetDoubleJumpSpeed();
+        }
+    }
 
     public EventHandler OnUnavailable;
 
@@ -50,7 +74,7 @@ public partial class PM_Dash : PM_Action
     private ulong _lastDash = 0;
     private Vector3 _prevVelocity = Vector3.Zero;
     private Vector3 _prevRealVelocity = Vector3.Zero;
-    private Vector3 _dashForce = Vector3.Zero;
+    private Vector3 _force = Vector3.Zero;
     private Vector3 _direction = Vector3.Zero;
     private SceneTreeTimer _endDashTimer;
 
@@ -58,11 +82,15 @@ public partial class PM_Dash : PM_Action
     public override void _Ready()
     {
         SetDashSpeed();
+        SetDoubleJumpSpeed();
         _dashInput.OnStartInput += StartDash;
     }
 
     private void SetDashSpeed() =>
-        _speed = _distance/_dashDuration;
+        _dashSpeed = _dashDistance/_dashDuration;
+
+    private void SetDoubleJumpSpeed() =>
+        _doubleJumpSpeed = _doubleJumpDistance/_doubleJumpDuration;
 
     public void StartDash(object sender, EventArgs e)
     {
@@ -72,19 +100,35 @@ public partial class PM_Dash : PM_Action
         if (_isDashing)
             return;
 
-        if (!_charge.TryConsume(_chargeCost))
+        float cost = GetChargeCost();
+
+        if (!_charge.TryConsume(cost))
             return;
-        
-        _direction = GetDashDirection();
 
         _prevRealVelocity = _controller.RealVelocity;
         Vector3 velocity = _prevRealVelocity;
+        float duration;
+        if (IsDoubleJump())
+        {
+            velocity.Y = _doubleJumpStrength;
+            _prevRealVelocity = velocity;
 
-        float appliedSpeed = Mathf.Max(_speed, velocity.Length());
-        _dashForce = appliedSpeed * _direction;
+            _controller.RealVelocity = velocity;
+            _controller.Velocity = velocity;
 
-        _controller.TakeOverForces.AddPersistent(_dashForce);
-        _endDashTimer = GetTree().CreateTimer(_dashDuration, false, true);
+            _direction = velocity.Normalized();
+            _force = _doubleJumpSpeed * _direction;
+            duration = _doubleJumpDuration;
+        } else
+        {
+            _direction = GetDashDirection();
+            float appliedSpeed = Mathf.Max(_dashSpeed, velocity.Length());
+            _force = appliedSpeed * _direction;
+            duration = _dashDuration;
+        }
+
+        _controller.TakeOverForces.AddPersistent(_force);
+        _endDashTimer = GetTree().CreateTimer(duration, false, true);
         _endDashTimer.Timeout += EndDash;
         _isDashing = true;
 
@@ -101,27 +145,41 @@ public partial class PM_Dash : PM_Action
             -_cameraControl.GlobalBasis.Z,
             _walkInput.FlatDir
         );
+
+    private float GetChargeCost()
+    {
+        if (_groundState.IsGrounded())
+            return _dashCost;
+
+        if (IsSlam())
+            return _slamCost;
+
+        if (IsDoubleJump())
+            return _doubleJumpCost;
+
+        return _dashCost;
+    }
         
     private Vector3 GetDashDirection(Vector2 walkAxis, Vector3 wishDir, Vector3 dir, Vector3 flatDir)
     {
-        if (IsSlam())
+        if (!_groundState.IsGrounded() && IsSlam())
             return Vector3.Down;
         
         if (walkAxis != Vector2.Zero)
             return wishDir;
-        
-        if (!_groundState.IsGrounded())
-            return dir;
-        
+
         return flatDir;
     }
+
+    private bool IsDoubleJump() =>
+        PHX_Time.ScaledTicksMsec - _jumpInput.LastInput <= _slamWindow;
 
     private bool IsSlam() =>
         PHX_Time.ScaledTicksMsec - _crouchDispatcher.LastCrouchDown <= _slamWindow;
 
     public void AbortDash()
     {
-        _controller.TakeOverForces.RemovePersistent(_dashForce);
+        _controller.TakeOverForces.RemovePersistent(_force);
         _isDashing = false;
         _controller.CollisionMask = CONF_Collision.Masks.Environment;
         if (_endDashTimer != null)
@@ -147,11 +205,6 @@ public partial class PM_Dash : PM_Action
     {
         // Angle ratio -
         // The more the dash is performed upward, the more speed you lose
-        float angleRatio = _direction.Normalized().Dot(Vector3.Up);
-        angleRatio = Mathf.Max(0, angleRatio);
-
-        angleRatio = 1 + angleRatio * _minDashRatio - angleRatio;
-
-        return _prevRealVelocity.Length() * angleRatio * _direction;
+        return _prevRealVelocity.Length() * _direction;
     }
 }
