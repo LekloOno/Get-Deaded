@@ -18,6 +18,8 @@ public partial class PM_Dash : PM_Action
     [Export] private float _slamCost = 60f;
     [Export] private float _doubleJumpCost = 60f;
 
+    private bool _wasDoubleJump = false;
+
     private float _dashDistance = 6.5f;
     [Export(PropertyHint.Range, "0.0, 10.0, or_greater")] public float Distance
     {
@@ -43,28 +45,9 @@ public partial class PM_Dash : PM_Action
     [Export] private float _slamWindow;
 
     [Export] private float _doubleJumpStrength = 5f;
-    private float _doubleJumpSpeed;
-    private float _doubleJumpDistance;
-    private float _doubleJumpDuration;
-    [Export(PropertyHint.Range, "0.0, 10.0, or_greater")] public float DoubleJumpDistance
-    {
-        get => _doubleJumpDistance;
-        set
-        {
-            _doubleJumpDistance = value;
-            SetDoubleJumpSpeed();
-        }
-    }
-    [Export(PropertyHint.Range, "0.01, 0.5, or_greater")]
-    public float DoubleJumpDuration
-    {
-        get => _doubleJumpDuration;
-        set
-        {
-            _doubleJumpDuration = value;
-            SetDoubleJumpSpeed();
-        }
-    }
+    [Export] private float _doubleJumpPenalty = 0.1f;
+    [Export] private float _doubleJumpVerticalPenalty = 0.5f;
+    [Export] private float _doubleJumpDuration;
 
     public EventHandler OnUnavailable;
 
@@ -82,15 +65,11 @@ public partial class PM_Dash : PM_Action
     public override void _Ready()
     {
         SetDashSpeed();
-        SetDoubleJumpSpeed();
         _dashInput.OnStartInput += StartDash;
     }
 
     private void SetDashSpeed() =>
         _dashSpeed = _dashDistance/_dashDuration;
-
-    private void SetDoubleJumpSpeed() =>
-        _doubleJumpSpeed = _doubleJumpDistance/_doubleJumpDuration;
 
     public void StartDash(object sender, EventArgs e)
     {
@@ -108,26 +87,35 @@ public partial class PM_Dash : PM_Action
         _prevRealVelocity = _controller.RealVelocity;
         Vector3 velocity = _prevRealVelocity;
         float duration;
-        if (IsDoubleJump())
+
+        _wasDoubleJump = IsDoubleJump();
+
+        if (_wasDoubleJump)
         {
-            velocity.Y = _doubleJumpStrength;
+            float horPenalty = 1 - _doubleJumpPenalty;
+            float vertPenalty = 1 - _doubleJumpVerticalPenalty;
+            
+            velocity *= new Vector3(horPenalty, vertPenalty, horPenalty);
+
+            //velocity.Y = _doubleJumpStrength;
             _prevRealVelocity = velocity;
 
             _controller.RealVelocity = velocity;
             _controller.Velocity = velocity;
 
             _direction = velocity.Normalized();
-            _force = _doubleJumpSpeed * _direction;
+            _force = _doubleJumpStrength * Vector3.Up;
             duration = _doubleJumpDuration;
+            _controller.AdditionalForces.AddPersistent(_force);
         } else
         {
             _direction = GetDashDirection();
             float appliedSpeed = Mathf.Max(_dashSpeed, velocity.Length());
             _force = appliedSpeed * _direction;
             duration = _dashDuration;
+            _controller.TakeOverForces.AddPersistent(_force);
         }
 
-        _controller.TakeOverForces.AddPersistent(_force);
         _endDashTimer = GetTree().CreateTimer(duration, false, true);
         _endDashTimer.Timeout += EndDash;
         _isDashing = true;
@@ -179,7 +167,11 @@ public partial class PM_Dash : PM_Action
 
     public void AbortDash()
     {
-        _controller.TakeOverForces.RemovePersistent(_force);
+        if (_wasDoubleJump)
+            _controller.AdditionalForces.RemovePersistent(_force);
+        else
+            _controller.TakeOverForces.RemovePersistent(_force);
+
         _isDashing = false;
         _controller.CollisionMask = CONF_Collision.Masks.Environment;
         if (_endDashTimer != null)
@@ -193,6 +185,12 @@ public partial class PM_Dash : PM_Action
 
     private void EndDash()
     {
+        if (_wasDoubleJump)
+        {
+            AbortDash();
+            return;
+        }
+
         Vector3 outVelocity = OutVelocity();
 
         _controller.Velocity = outVelocity;

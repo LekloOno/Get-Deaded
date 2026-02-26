@@ -78,7 +78,7 @@ public partial class PM_Controller : CharacterBody3D, GB_IExternalBodyManager, G
             Vector3 prevVelocity = velocity;
             velocity += _surfaceControl.Accelerate(velocity, (float)delta);
             
-            velocity += AdditionalForces.Consume();
+            velocity += AdditionalForces.Consume(delta);
             velocity = _straffeSnap.Snap(velocity, prevVelocity);
 
             if (!_groundState.IsGrounded())
