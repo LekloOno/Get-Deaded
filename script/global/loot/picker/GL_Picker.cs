@@ -27,4 +27,5 @@ public partial class GL_Picker : Area3D
     }
 
     public bool PickAmmo(GL_AmmoData data) => _weaponsHandler.PickAmmo(data);
+    public void PickDamageMultiplier(GL_DamageBuffData data) => _weaponsHandler.PickDamageMultiplier(data);
 }

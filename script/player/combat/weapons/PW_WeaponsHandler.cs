@@ -74,6 +74,22 @@ public partial class PW_WeaponsHandler : WeaponSystem
     
     public bool Initialized {get; private set;} = false;
 
+    private SceneTreeTimer _damageBuffTimer;
+    public void PickDamageMultiplier(GL_DamageBuffData data)
+    {
+        foreach (PW_Weapon weapon in _weapons)
+            weapon.AddDamageMultiplier(data.Multiplier);
+
+        _damageBuffTimer = GetTree().CreateTimer(data.Duration, false, true);
+        _damageBuffTimer.Timeout += () => RemoveDamageMultiplier(data.Multiplier);
+    }
+
+    public void RemoveDamageMultiplier(float multiplier)
+    {
+        foreach (PW_Weapon weapon in _weapons)
+            weapon.RemoveDamageMultiplier(multiplier);
+    }
+
     public void Init(GE_IActiveCombatEntity owner)
     {
         OwnerEntity = owner;

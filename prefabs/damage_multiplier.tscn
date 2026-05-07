@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://c0agsg2uxbklk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pbl43"]
+size = Vector3(0.8, 0.8, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b7ftn"]
+transparency = 3
+alpha_hash_scale = 1.0
+alpha_antialiasing_mode = 0
+albedo_color = Color(0.38431373, 0.58431375, 1, 0.5019608)
+emission_enabled = true
+emission = Color(0.08849629, 0.3228089, 1, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_dsuc5"]
+radius = 0.4
+height = 0.8
+radial_segments = 8
+rings = 4
+
+[node name="DamageMultiplier" type="CollisionShape3D" unique_id=518475886]
+shape = SubResource("BoxShape3D_pbl43")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=989496340]
+material_override = SubResource("StandardMaterial3D_b7ftn")
+mesh = SubResource("SphereMesh_dsuc5")

@@ -1,3 +1,4 @@
+
 using System;
 using Godot;
 using Godot.Collections;
@@ -118,6 +119,18 @@ public abstract partial class PW_Weapon : WeaponComponent
     {
         _ads?.Disable();
         SpecDisable();
+    }
+
+    public void AddDamageMultiplier(float multiplier)
+    {
+        foreach (PW_Fire fire in _fires)
+            fire.AddDamageMultiplier(multiplier);
+    }
+
+    public void RemoveDamageMultiplier(float multiplier)
+    {
+        foreach (PW_Fire fire in _fires)
+            fire.RemoveDamageMultiplier(multiplier);
     }
     
     /// <summary>

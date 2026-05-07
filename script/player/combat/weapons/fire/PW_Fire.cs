@@ -26,6 +26,18 @@ public abstract partial class PW_Fire : WeaponComponent
     [Export] private PCT_Fire _fireTraumaCauser;
     public PW_Weapon Weapon {get; protected set;}
 
+    public void AddDamageMultiplier(float multiplier)
+    {
+        foreach (PW_Shot shot in _shots)
+            shot.DamageMultiplier.Add(multiplier);
+    }
+
+    public void RemoveDamageMultiplier(float multiplier)
+    {
+        foreach (PW_Shot shot in _shots)
+            shot.DamageMultiplier.Remove(multiplier);        
+    }
+
     public bool InfiniteAmmo
     {
         get => _ammos.InfiniteAmmo;
