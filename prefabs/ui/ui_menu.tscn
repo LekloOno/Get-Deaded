@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dbwbuyf2bwus0"]
+[gd_scene format=3 uid="uid://dbwbuyf2bwus0"]
 
 [ext_resource type="Script" uid="uid://dg5hxnex777ma" path="res://script/ui/menu/UI_EscapeMenu.cs" id="1_nsprt"]
 [ext_resource type="Theme" uid="uid://ddkca4fk8kto5" path="res://assets/ui/menu_theme.tres" id="2_cg8yy"]
@@ -21,6 +21,7 @@
 [ext_resource type="Script" uid="uid://b2gps3n30fk26" path="res://script/ui/menu/contexts/accessibility/ui_ennemies_color.gd" id="12_g471r"]
 [ext_resource type="Script" uid="uid://ctjmgs5r2eyrr" path="res://script/ui/menu/ui_line_edit_helper.gd" id="12_i4pqc"]
 [ext_resource type="Script" uid="uid://bpduowbhu517b" path="res://script/ui/menu/contexts/controls/ui_cm360.gd" id="14_t6rq5"]
+[ext_resource type="Resource" uid="uid://bntla2ivt7ykt" path="res://prefabs/player/player_camera_settings.tres" id="15_nvxak"]
 [ext_resource type="Script" uid="uid://cg5dedg2yo8yj" path="res://script/ui/menu/contexts/video/ui_v_sync_mode.gd" id="15_poje1"]
 [ext_resource type="Script" uid="uid://d2oxuiywjinnd" path="res://script/ui/menu/contexts/accessibility/ui_language_option.gd" id="16_sith4"]
 
@@ -48,7 +49,7 @@ bg_color = Color(1, 1, 1, 0.61960787)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lmot5"]
 
-[node name="ColorRect" type="ColorRect" node_paths=PackedStringArray("_baseMenu")]
+[node name="ColorRect" type="ColorRect" unique_id=620824296 node_paths=PackedStringArray("_baseMenu")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -59,7 +60,7 @@ color = Color(0, 0, 0, 0.61300004)
 script = ExtResource("1_nsprt")
 _baseMenu = NodePath("VBoxContainer")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1290205898]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -75,25 +76,25 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 8
 
-[node name="Resume" type="Button" parent="VBoxContainer"]
+[node name="Resume" type="Button" parent="VBoxContainer" unique_id=804541913]
 layout_mode = 2
 size_flags_vertical = 4
 text = "RESUME_BUTTON"
 
-[node name="Settings" type="Button" parent="VBoxContainer" node_paths=PackedStringArray("settings_menu")]
+[node name="Settings" type="Button" parent="VBoxContainer" unique_id=1799708557 node_paths=PackedStringArray("settings_menu")]
 layout_mode = 2
 size_flags_vertical = 4
 text = "SETTINGS_BUTTON"
 script = ExtResource("3_y758u")
 settings_menu = NodePath("../../PanelContainer")
 
-[node name="Quit" type="Button" parent="VBoxContainer"]
+[node name="Quit" type="Button" parent="VBoxContainer" unique_id=311737932]
 layout_mode = 2
 size_flags_vertical = 4
 text = "QUIT_BUTTON"
 script = ExtResource("4_wkf4o")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=570347893]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -106,17 +107,17 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_wkf4o")
 
-[node name="TabContainer" type="TabContainer" parent="PanelContainer"]
+[node name="TabContainer" type="TabContainer" parent="PanelContainer" unique_id=1418915951]
 layout_mode = 2
 mouse_filter = 0
 current_tab = 0
 
-[node name="VIDEO_TAB" type="TabBar" parent="PanelContainer/TabContainer"]
+[node name="VIDEO_TAB" type="TabBar" parent="PanelContainer/TabContainer" unique_id=1016175328]
 layout_mode = 2
 mouse_filter = 1
 metadata/_tab_index = 0
 
-[node name="GridContainer" type="GridContainer" parent="PanelContainer/TabContainer/VIDEO_TAB"]
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/TabContainer/VIDEO_TAB" unique_id=467749202]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -131,28 +132,28 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 6
 columns = 2
 
-[node name="DisplayMode" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
+[node name="DisplayMode" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer" unique_id=1073550987]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/DisplayMode"]
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/DisplayMode" unique_id=2056722953]
 layout_mode = 2
 text = "DISPLAY_MODE_LABEL"
 
-[node name="DisplayModeInput" type="OptionButton" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
+[node name="DisplayModeInput" type="OptionButton" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer" unique_id=284364705]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 script = ExtResource("5_nlcml")
 
-[node name="Resolution" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
+[node name="Resolution" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer" unique_id=505566934]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/Resolution"]
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/Resolution" unique_id=861503562]
 layout_mode = 2
 text = "RESOLUTION_LABEL"
 
-[node name="Button" type="Button" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/Resolution" node_paths=PackedStringArray("label", "input")]
+[node name="Button" type="Button" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/Resolution" unique_id=1606864734 node_paths=PackedStringArray("label", "input")]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -177,40 +178,40 @@ script = ExtResource("6_kqyci")
 label = NodePath("../../CustomResolution")
 input = NodePath("../../CustomResolutionInput")
 
-[node name="ResolutionInput" type="OptionButton" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
+[node name="ResolutionInput" type="OptionButton" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer" unique_id=284882439]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 script = ExtResource("5_ov0ei")
 
-[node name="CustomResolution" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
+[node name="CustomResolution" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer" unique_id=1246781225]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/CustomResolution"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/CustomResolution" unique_id=689296919]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/CustomResolution/HBoxContainer"]
+[node name="Control" type="Control" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/CustomResolution/HBoxContainer" unique_id=260935377]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/CustomResolution/HBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/CustomResolution/HBoxContainer" unique_id=657640523]
 layout_mode = 2
 text = "CUSTOM_RESOLUTION_LABEL"
 
-[node name="CustomResolutionInput" type="HBoxContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
+[node name="CustomResolutionInput" type="HBoxContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer" unique_id=678480054]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 6
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/CustomResolutionInput"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/CustomResolutionInput" unique_id=366277941]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxEmpty_rlv2r")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/CustomResolutionInput/PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/CustomResolutionInput/PanelContainer" unique_id=1889884128]
 layout_mode = 2
 
-[node name="XEdit" type="LineEdit" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/CustomResolutionInput/PanelContainer/HBoxContainer"]
+[node name="XEdit" type="LineEdit" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/CustomResolutionInput/PanelContainer/HBoxContainer" unique_id=405642882]
 layout_mode = 2
 size_flags_horizontal = 4
 placeholder_text = "1280"
@@ -222,13 +223,13 @@ allow_negative = false
 link_to_slider = false
 clamp_to_slider = false
 
-[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/CustomResolutionInput/PanelContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/CustomResolutionInput/PanelContainer/HBoxContainer" unique_id=782447020]
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 theme_override_styles/normal = SubResource("StyleBoxEmpty_lmot5")
 text = "x"
 
-[node name="YEdit" type="LineEdit" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/CustomResolutionInput/PanelContainer/HBoxContainer"]
+[node name="YEdit" type="LineEdit" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/CustomResolutionInput/PanelContainer/HBoxContainer" unique_id=1012057868]
 layout_mode = 2
 placeholder_text = "720"
 alignment = 1
@@ -239,7 +240,7 @@ allow_negative = false
 link_to_slider = false
 clamp_to_slider = false
 
-[node name="Button" type="Button" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/CustomResolutionInput" node_paths=PackedStringArray("resolution_options", "x_value", "y_value")]
+[node name="Button" type="Button" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/CustomResolutionInput" unique_id=1511255841 node_paths=PackedStringArray("resolution_options", "x_value", "y_value")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -250,61 +251,61 @@ resolution_options = NodePath("../../ResolutionInput")
 x_value = NodePath("../PanelContainer/HBoxContainer/XEdit")
 y_value = NodePath("../PanelContainer/HBoxContainer/YEdit")
 
-[node name="AspectRatio" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
+[node name="AspectRatio" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer" unique_id=1561456838]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/AspectRatio"]
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/AspectRatio" unique_id=2049148071]
 layout_mode = 2
 text = "ASPECT_RATIO_LABEL"
 
-[node name="AspectRatioInput" type="OptionButton" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
+[node name="AspectRatioInput" type="OptionButton" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer" unique_id=262313874]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 script = ExtResource("7_t8qxr")
 
-[node name="RenderScaleMode" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
+[node name="RenderScaleMode" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer" unique_id=1589191822]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/RenderScaleMode"]
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/RenderScaleMode" unique_id=258747564]
 layout_mode = 2
 text = "RENDER_SCALE_MODE_LABEL"
 
-[node name="RenderScaleModeInput" type="OptionButton" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
+[node name="RenderScaleModeInput" type="OptionButton" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer" unique_id=2074574351]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 script = ExtResource("8_naio2")
 
-[node name="RenderScale" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
+[node name="RenderScale" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer" unique_id=643163651]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/RenderScale"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/RenderScale" unique_id=1075253005]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/RenderScale/HBoxContainer"]
+[node name="Control" type="Control" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/RenderScale/HBoxContainer" unique_id=1621890631]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/RenderScale/HBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/RenderScale/HBoxContainer" unique_id=649807272]
 layout_mode = 2
 text = "RENDER_SCALE_LABEL"
 
-[node name="RenderScaleInput" type="HSplitContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer" node_paths=PackedStringArray("label")]
+[node name="RenderScaleInput" type="HSplitContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer" unique_id=133607224 node_paths=PackedStringArray("label")]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 script = ExtResource("9_ewesh")
 label = NodePath("../RenderScale")
 
-[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/RenderScaleInput"]
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/RenderScaleInput" unique_id=322371036]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("5_kpbb8")
 
-[node name="Slider" type="HSlider" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/RenderScaleInput"]
+[node name="Slider" type="HSlider" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/RenderScaleInput" unique_id=651980179]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -313,35 +314,35 @@ max_value = 5.0
 step = 0.05
 value = 1.0
 
-[node name="FSRSharpness" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
+[node name="FSRSharpness" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer" unique_id=1844912128]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/FSRSharpness"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/FSRSharpness" unique_id=952713138]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/FSRSharpness/HBoxContainer"]
+[node name="Control" type="Control" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/FSRSharpness/HBoxContainer" unique_id=1280838656]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/FSRSharpness/HBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/FSRSharpness/HBoxContainer" unique_id=1525091786]
 layout_mode = 2
 text = "FSR_SHARPNESS_LABEL"
 
-[node name="FSRSharpnessInput" type="HSplitContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer" node_paths=PackedStringArray("label")]
+[node name="FSRSharpnessInput" type="HSplitContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer" unique_id=1387150490 node_paths=PackedStringArray("label")]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 script = ExtResource("11_eu4i4")
 label = NodePath("../FSRSharpness")
 
-[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/FSRSharpnessInput"]
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/FSRSharpnessInput" unique_id=309780970]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("5_kpbb8")
 
-[node name="Slider" type="HSlider" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/FSRSharpnessInput"]
+[node name="Slider" type="HSlider" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/FSRSharpnessInput" unique_id=458367339]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -349,26 +350,26 @@ max_value = 2.0
 step = 0.05
 value = 0.2
 
-[node name="Fov" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
+[node name="Fov" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer" unique_id=1691916117]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/Fov"]
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/Fov" unique_id=1855568504]
 layout_mode = 2
 text = "FOV_LABEL"
 
-[node name="FovInput" type="HSplitContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
+[node name="FovInput" type="HSplitContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer" unique_id=1182128613]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/FovInput"]
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/FovInput" unique_id=1258682356]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("5_kpbb8")
 
-[node name="MasterSlider" type="HSlider" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/FovInput"]
+[node name="MasterSlider" type="HSlider" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/FovInput" unique_id=377512449]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -376,57 +377,58 @@ min_value = 30.0
 max_value = 140.0
 value = 103.0
 script = ExtResource("8_cbaf7")
+camera_settings = ExtResource("15_nvxak")
 
-[node name="VSyncMode" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
+[node name="VSyncMode" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer" unique_id=1156529861]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/VSyncMode"]
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/VSyncMode" unique_id=251505509]
 layout_mode = 2
 text = "VSYNC_MODE_LABEL"
 
-[node name="VSyncModeInput" type="OptionButton" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
+[node name="VSyncModeInput" type="OptionButton" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer" unique_id=651100663]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 script = ExtResource("15_poje1")
 
-[node name="Limit FPS" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
+[node name="Limit FPS" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer" unique_id=209066531]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/Limit FPS"]
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/Limit FPS" unique_id=1464707941]
 layout_mode = 2
 text = "LIMIT_FPS_LABEL"
 
-[node name="LimitFPSInput" type="CheckBox" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
+[node name="LimitFPSInput" type="CheckBox" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer" unique_id=643868184]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 script = ExtResource("9_k7jqq")
 
-[node name="Max FPS" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer"]
+[node name="Max FPS" type="PanelContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer" unique_id=383498415]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/Max FPS"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/Max FPS" unique_id=1790355594]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/Max FPS/HBoxContainer"]
+[node name="Control" type="Control" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/Max FPS/HBoxContainer" unique_id=147621708]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/Max FPS/HBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/Max FPS/HBoxContainer" unique_id=1231829591]
 layout_mode = 2
 text = "MAX_FPS_LABEL"
 
-[node name="MaxFPSInput" type="HSplitContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer" node_paths=PackedStringArray("label", "slider")]
+[node name="MaxFPSInput" type="HSplitContainer" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer" unique_id=200510860 node_paths=PackedStringArray("label", "slider")]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 script = ExtResource("10_vvu1j")
 label = NodePath("../Max FPS")
 slider = NodePath("MasterSlider")
 
-[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/MaxFPSInput"]
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/MaxFPSInput" unique_id=287369190]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
@@ -434,7 +436,7 @@ virtual_keyboard_type = 2
 script = ExtResource("5_kpbb8")
 allow_float = false
 
-[node name="MasterSlider" type="HSlider" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/MaxFPSInput"]
+[node name="MasterSlider" type="HSlider" parent="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/MaxFPSInput" unique_id=740169268]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -442,13 +444,13 @@ min_value = 1.0
 max_value = 600.0
 value = 103.0
 
-[node name="SOUND_TAB" type="TabBar" parent="PanelContainer/TabContainer"]
+[node name="SOUND_TAB" type="TabBar" parent="PanelContainer/TabContainer" unique_id=1970779605]
 visible = false
 layout_mode = 2
 mouse_filter = 1
 metadata/_tab_index = 1
 
-[node name="GridContainer" type="GridContainer" parent="PanelContainer/TabContainer/SOUND_TAB"]
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/TabContainer/SOUND_TAB" unique_id=1831171880]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -463,26 +465,26 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 6
 columns = 2
 
-[node name="Master" type="PanelContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer"]
+[node name="Master" type="PanelContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer" unique_id=668396671]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Master" type="Label" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/Master"]
+[node name="Master" type="Label" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/Master" unique_id=1825706116]
 layout_mode = 2
 text = "MASTER_VOLUME_LABEL"
 
-[node name="MasterInput" type="HSplitContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer"]
+[node name="MasterInput" type="HSplitContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer" unique_id=40031535]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/MasterInput"]
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/MasterInput" unique_id=454875671]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("5_kpbb8")
 
-[node name="MasterSlider" type="HSlider" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/MasterInput"]
+[node name="MasterSlider" type="HSlider" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/MasterInput" unique_id=579255155]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -492,33 +494,33 @@ value = 1.0
 script = ExtResource("5_mpkul")
 bus_name = "Master"
 
-[node name="SFX" type="PanelContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer"]
+[node name="SFX" type="PanelContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer" unique_id=202052235]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SFX" type="HBoxContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/SFX"]
+[node name="SFX" type="HBoxContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/SFX" unique_id=1987128875]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/SFX/SFX"]
+[node name="Control" type="Control" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/SFX/SFX" unique_id=238393180]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 
-[node name="SFX" type="Label" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/SFX/SFX"]
+[node name="SFX" type="Label" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/SFX/SFX" unique_id=1525017805]
 layout_mode = 2
 text = "SOUND_EFFECTS_VOLUME_LABEL"
 
-[node name="SFXInput" type="HSplitContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer"]
+[node name="SFXInput" type="HSplitContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer" unique_id=584014289]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/SFXInput"]
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/SFXInput" unique_id=614309466]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("5_kpbb8")
 
-[node name="SFXSlider" type="HSlider" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/SFXInput"]
+[node name="SFXSlider" type="HSlider" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/SFXInput" unique_id=1948578466]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -527,35 +529,35 @@ step = 0.01
 script = ExtResource("5_mpkul")
 bus_name = "Sound effects"
 
-[node name="EnvSFX" type="PanelContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer"]
+[node name="EnvSFX" type="PanelContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer" unique_id=987994804]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="EnvSFX" type="HBoxContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/EnvSFX"]
+[node name="EnvSFX" type="HBoxContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/EnvSFX" unique_id=1806066076]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/EnvSFX/EnvSFX"]
+[node name="Control" type="Control" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/EnvSFX/EnvSFX" unique_id=787532775]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
-[node name="EnvSFX" type="Label" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/EnvSFX/EnvSFX"]
+[node name="EnvSFX" type="Label" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/EnvSFX/EnvSFX" unique_id=609931347]
 layout_mode = 2
 tooltip_text = "Diegetical sfx"
 mouse_filter = 1
 text = "ENVIRONMENT_SOUND_VOLUME_LABEL"
 
-[node name="EnvSFXInput" type="HSplitContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer"]
+[node name="EnvSFXInput" type="HSplitContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer" unique_id=1737280090]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/EnvSFXInput"]
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/EnvSFXInput" unique_id=1085087615]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("5_kpbb8")
 
-[node name="EnvSFXSlider" type="HSlider" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/EnvSFXInput"]
+[node name="EnvSFXSlider" type="HSlider" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/EnvSFXInput" unique_id=2053001975]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -565,35 +567,35 @@ value = 1.0
 script = ExtResource("5_mpkul")
 bus_name = "Environment SFX"
 
-[node name="FbSFX" type="PanelContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer"]
+[node name="FbSFX" type="PanelContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer" unique_id=1564615723]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="FbSFX" type="HBoxContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/FbSFX"]
+[node name="FbSFX" type="HBoxContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/FbSFX" unique_id=1557153651]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/FbSFX/FbSFX"]
+[node name="Control" type="Control" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/FbSFX/FbSFX" unique_id=117353232]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
-[node name="FbSFX" type="Label" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/FbSFX/FbSFX"]
+[node name="FbSFX" type="Label" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/FbSFX/FbSFX" unique_id=461225099]
 layout_mode = 2
 tooltip_text = "Diegetical sfx"
 mouse_filter = 1
 text = "FEEDBACK_SOUND_VOLUME_LABEL"
 
-[node name="FbSFXInput" type="HSplitContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer"]
+[node name="FbSFXInput" type="HSplitContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer" unique_id=1175098417]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/FbSFXInput"]
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/FbSFXInput" unique_id=1019072894]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("5_kpbb8")
 
-[node name="FbSFXSlider" type="HSlider" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/FbSFXInput"]
+[node name="FbSFXSlider" type="HSlider" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/FbSFXInput" unique_id=156582395]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -602,12 +604,12 @@ step = 0.01
 script = ExtResource("5_mpkul")
 bus_name = "Feedback SFX"
 
-[node name="CONTROLS_TAB" type="TabBar" parent="PanelContainer/TabContainer"]
+[node name="CONTROLS_TAB" type="TabBar" parent="PanelContainer/TabContainer" unique_id=1802915093]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="GridContainer" type="GridContainer" parent="PanelContainer/TabContainer/CONTROLS_TAB"]
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/TabContainer/CONTROLS_TAB" unique_id=743131888]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -622,39 +624,40 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 6
 columns = 2
 
-[node name="Sensitivity" type="PanelContainer" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer"]
+[node name="Sensitivity" type="PanelContainer" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer" unique_id=339619566]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/Sensitivity"]
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/Sensitivity" unique_id=766337504]
 layout_mode = 2
 text = "SENSITIVITY_LABEL"
 
-[node name="Control" type="Control" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer"]
+[node name="Control" type="Control" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer" unique_id=148516088]
 layout_mode = 2
 
-[node name="DPI" type="PanelContainer" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer"]
+[node name="DPI" type="PanelContainer" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer" unique_id=1254421273]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="hbox" type="HBoxContainer" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/DPI"]
+[node name="hbox" type="HBoxContainer" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/DPI" unique_id=310470559]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/DPI/hbox"]
+[node name="Control" type="Control" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/DPI/hbox" unique_id=1306170388]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/DPI/hbox"]
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/DPI/hbox" unique_id=1310238737]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "DPI_LABEL"
 
-[node name="DPIInput" type="HSplitContainer" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer"]
+[node name="DPIInput" type="HSplitContainer" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer" unique_id=1749834004]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 script = ExtResource("12_ek014")
+camera_settings = ExtResource("15_nvxak")
 
-[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/DPIInput"]
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/DPIInput" unique_id=1719183017]
 layout_mode = 2
 size_flags_horizontal = 0
 alignment = 1
@@ -662,32 +665,33 @@ virtual_keyboard_type = 2
 script = ExtResource("5_kpbb8")
 allow_float = false
 
-[node name="OptionButton" type="OptionButton" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/DPIInput"]
+[node name="OptionButton" type="OptionButton" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/DPIInput" unique_id=1880304076]
 layout_mode = 2
 script = ExtResource("12_i4pqc")
 
-[node name="cm360" type="PanelContainer" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer"]
+[node name="cm360" type="PanelContainer" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer" unique_id=9756012]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="hbox" type="HBoxContainer" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/cm360"]
+[node name="hbox" type="HBoxContainer" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/cm360" unique_id=529052024]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/cm360/hbox"]
+[node name="Control" type="Control" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/cm360/hbox" unique_id=638248067]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/cm360/hbox"]
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/cm360/hbox" unique_id=1857829317]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "CM_360_LABEL"
 
-[node name="cm360Input" type="HSplitContainer" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer"]
+[node name="cm360Input" type="HSplitContainer" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer" unique_id=625440591]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 script = ExtResource("14_t6rq5")
+camera_settings = ExtResource("15_nvxak")
 
-[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/cm360Input"]
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/cm360Input" unique_id=541891688]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
@@ -699,19 +703,19 @@ clamp_value = true
 min_value = 0.1
 max_value = 10000.0
 
-[node name="MasterSlider" type="HSlider" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/cm360Input"]
+[node name="MasterSlider" type="HSlider" parent="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/cm360Input" unique_id=685690882]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 min_value = 1.0
 value = 1.0
 
-[node name="ACCESSIBILITY_TAB" type="TabBar" parent="PanelContainer/TabContainer"]
+[node name="ACCESSIBILITY_TAB" type="TabBar" parent="PanelContainer/TabContainer" unique_id=1604114432]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 3
 
-[node name="GridContainer" type="GridContainer" parent="PanelContainer/TabContainer/ACCESSIBILITY_TAB"]
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/TabContainer/ACCESSIBILITY_TAB" unique_id=1859667621]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -726,19 +730,19 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 6
 columns = 2
 
-[node name="EnnemiesColor" type="PanelContainer" parent="PanelContainer/TabContainer/ACCESSIBILITY_TAB/GridContainer"]
+[node name="EnnemiesColor" type="PanelContainer" parent="PanelContainer/TabContainer/ACCESSIBILITY_TAB/GridContainer" unique_id=1601037487]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="PanelContainer/TabContainer/ACCESSIBILITY_TAB/GridContainer/EnnemiesColor"]
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/ACCESSIBILITY_TAB/GridContainer/EnnemiesColor" unique_id=883603373]
 layout_mode = 2
 text = "ENEMIES_COLOR_LABEL"
 
-[node name="Control" type="Control" parent="PanelContainer/TabContainer/ACCESSIBILITY_TAB/GridContainer"]
+[node name="Control" type="Control" parent="PanelContainer/TabContainer/ACCESSIBILITY_TAB/GridContainer" unique_id=943779440]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="EnnemiesColorInput" type="ColorPickerButton" parent="PanelContainer/TabContainer/ACCESSIBILITY_TAB/GridContainer/Control"]
+[node name="EnnemiesColorInput" type="ColorPickerButton" parent="PanelContainer/TabContainer/ACCESSIBILITY_TAB/GridContainer/Control" unique_id=1658776687]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 1
 anchors_preset = 9
@@ -747,32 +751,32 @@ offset_right = 8.0
 grow_vertical = 2
 script = ExtResource("12_g471r")
 
-[node name="Language" type="PanelContainer" parent="PanelContainer/TabContainer/ACCESSIBILITY_TAB/GridContainer"]
+[node name="Language" type="PanelContainer" parent="PanelContainer/TabContainer/ACCESSIBILITY_TAB/GridContainer" unique_id=530958428]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="PanelContainer/TabContainer/ACCESSIBILITY_TAB/GridContainer/Language"]
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/ACCESSIBILITY_TAB/GridContainer/Language" unique_id=1241670685]
 layout_mode = 2
 text = "LANGUAGE_LABEL"
 
-[node name="DisplayModeInput" type="OptionButton" parent="PanelContainer/TabContainer/ACCESSIBILITY_TAB/GridContainer"]
+[node name="DisplayModeInput" type="OptionButton" parent="PanelContainer/TabContainer/ACCESSIBILITY_TAB/GridContainer" unique_id=91011963]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 script = ExtResource("16_sith4")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer" unique_id=1772757656]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 theme_override_constants/separation = 10
 
-[node name="APPLY" type="Button" parent="PanelContainer/HBoxContainer"]
+[node name="APPLY" type="Button" parent="PanelContainer/HBoxContainer" unique_id=1080423467]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 text = "APPLY"
 
-[node name="Back" type="Button" parent="PanelContainer/HBoxContainer"]
+[node name="Back" type="Button" parent="PanelContainer/HBoxContainer" unique_id=1261773334]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8

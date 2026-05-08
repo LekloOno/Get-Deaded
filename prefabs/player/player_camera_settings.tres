@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="PC_Settings" format=3 uid="uid://bntla2ivt7ykt"]
+
+[ext_resource type="Script" uid="uid://deh85ny8ugmq6" path="res://script/player/camera/control/PC_Settings.cs" id="1_e0psi"]
+
+[resource]
+script = ExtResource("1_e0psi")
+metadata/_custom_type_script = "uid://deh85ny8ugmq6"

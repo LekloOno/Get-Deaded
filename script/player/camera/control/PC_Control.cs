@@ -5,6 +5,8 @@ using System.Runtime;
 [GlobalClass]
 public partial class PC_Control : Node3D
 {
+    [Export] private PC_Settings _settings;
+
     [ExportCategory("Settings")]
     [Export(PropertyHint.Range, "0,100,0.1")]
     public float CmPer360 = 32f;
@@ -34,8 +36,10 @@ public partial class PC_Control : Node3D
             //_eulerAngles += new Vector3(-mouseMotion.Relative.Y * _realSens, -mouseMotion.Relative.X * _realSens, 0f);
             //_eulerAngles.X = Mathf.Clamp(_eulerAngles.X, Mathf.DegToRad(-90), Mathf.DegToRad(90));
             //Rotation = _eulerAngles;
-            Vector2 cmMotion = (-mouseMotion.ScreenRelative / Dpi) * 2.54f;
-            Vector2 sensMotion = cmMotion * 2 * Mathf.Pi / CmPer360;
+            //Vector2 cmMotion = (-mouseMotion.ScreenRelative / Dpi) * 2.54f;
+            //Vector2 sensMotion = cmMotion * 2 * Mathf.Pi / CmPer360;
+
+            Vector2 sensMotion = - mouseMotion.ScreenRelative * _settings.Sensitivity;
             RotateFlatDir(sensMotion.X);
             RotateXClamped(sensMotion.Y);
             MouseMove.Invoke(this, sensMotion);
