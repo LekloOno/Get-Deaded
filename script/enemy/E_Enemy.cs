@@ -18,6 +18,8 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
     [Export] private PROTO_Mover _mover;
     [Export] private bool _aim;
     [Export] public PCT_SimpleTraumaData KillTraumaData {get; private set;}
+    [Export] private PW_FireBis _fire;
+    private bool _shooting = false;
 
 
     public bool Enabled {get; private set;} = false;
@@ -76,6 +78,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
     public override void _Ready()
     {
         SetProcess(false);
+        _fire?.Initialize(this);
 
         if (_healthOverride != null)
             _healthManager.TopHealthLayer = _healthOverride;
@@ -127,6 +130,9 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 
     public void Pool()
     {
+        _fire?.Disable();
+        _shooting = false;
+
         if (!Enabled)
             return;
 
@@ -161,8 +167,10 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
         if (Enabled)
             return;
 
+        _fire?.Enable();
+
         if (_mover != null)
-            SetProcess(true);        
+            SetProcess(true);
 
         Enabled = true;
         CollisionLayer = CONF_Collision.Layers.EnvironmentEntity;
@@ -194,6 +202,9 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
         Velocity = velocity;
         
         MoveAndSlide();
+
+        if (_fire != null && _target != null)
+            Attack();
     }
 
     public Vector3 ApplyDrag(Vector3 velocity, double deltaTime)
@@ -206,5 +217,29 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
     {
         if (_aim)
             _mover.Rotate(this);
+    }
+
+    public void Attack()
+    {
+        Vector3 from = _fire.GlobalPosition;
+        Vector3 to = _target.Body.GlobalTransform.Origin + new Vector3(0f, 0.5f, 0f);
+
+        var spaceState = GetWorld3D().DirectSpaceState;
+
+        var query = PhysicsRayQueryParameters3D.Create(from, to);
+
+        query.CollisionMask = 1;
+        var result = spaceState.IntersectRay(query);
+
+        bool nextShoot = result.Count == 0;
+        //bool nextShoot = true;
+
+        if (_shooting == nextShoot)
+            return;
+
+        if (nextShoot)
+            _shooting = _fire.Press();
+        else
+            _shooting = !_fire.Release();
     }
 }

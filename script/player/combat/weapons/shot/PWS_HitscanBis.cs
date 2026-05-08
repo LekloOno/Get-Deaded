@@ -2,7 +2,7 @@ using System;
 using Godot;
 
 [GlobalClass]
-public partial class PWS_Hitscan : PW_Shot
+public partial class PWS_HitscanBis : PW_ShotBis
 {
     [Export] protected float _maxDistance = 20f;
 
@@ -36,7 +36,7 @@ public partial class PWS_Hitscan : PW_Shot
         HandleKick(castDirection);
     }
 
-    public override void SpecInitialize(GB_ExternalBodyManagerWrapper ownerBody)
+    public override void SpecInitialize(GB_IExternalBodyManager ownerBody)
     {
         if (_maxDistance == 0)
         {

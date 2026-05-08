@@ -7,7 +7,7 @@ public partial class PWS_SequenceHit : PW_Shot
 
     public override void SpecInitialize(GB_ExternalBodyManagerWrapper ownerBody)
     {
-        _sequenceHitBox.CollisionMask = CONF_Collision.Masks.HitScan;
+        _sequenceHitBox.CollisionMask = _hitMask;
         _sequenceHitBox.CollisionLayer = 0;
         _sequenceHitBox.HitHurtBox += DoHitEntity;
         _sequenceHitBox.HitEnvironment += DoHitEnvironment;
@@ -49,5 +49,5 @@ public partial class PWS_SequenceHit : PW_Shot
         _sequenceHitBox.CollisionMask = 0;
 
     public override void Awake() =>
-        _sequenceHitBox.CollisionMask = CONF_Collision.Masks.HitScan;
+        _sequenceHitBox.CollisionMask = _hitMask;
 }

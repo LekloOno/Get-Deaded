@@ -8,7 +8,7 @@ public partial class PWS_ShapeScan : PW_Shot
 
     public override void SpecInitialize(GB_ExternalBodyManagerWrapper ownerBody)
     {
-        _shapeCast.CollisionMask = CONF_Collision.Masks.HitScan;
+        _shapeCast.CollisionMask = _hitMask;
         _shapeCast.CollideWithAreas = true;
     }
 

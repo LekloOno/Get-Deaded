@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Godot;
 
 [GlobalClass]
@@ -13,6 +14,7 @@ public partial class SC_GameManager : Node
     public SceneTreeTimer CountDownTimer;
     private GE_IActiveCombatEntity _player;
     private GC_SpeedShield _speedShield;
+    private GC_Shield _shield;
     /// <summary>
     /// An "unexpected" stop, like the player manually stopping, or dying.
     /// </summary>
@@ -52,6 +54,8 @@ public partial class SC_GameManager : Node
             _speedShield = speedShield;
             _speedShield.Active = true;
         }
+        else if (_player.HealthManager.TopHealthLayer is GC_Shield shield)
+            _shield = shield;
 
         _player?.WeaponsHandler.EnableFire();
         _initial.Start(_player);
@@ -61,7 +65,11 @@ public partial class SC_GameManager : Node
     public void HandleKill(E_IEnemy enemy, GC_Health senderLayer)
     {
         _score += enemy.Score;
-        _speedShield?.Regen(_killRegen);
+
+        if (_speedShield != null)
+            _speedShield?.Regen(_killRegen);
+        else if (_shield != null)
+            _shield.Regen(_killRegen);
     }
 
     public void EndGame()

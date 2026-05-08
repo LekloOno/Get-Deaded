@@ -11,7 +11,7 @@ using Godot;
 
 // Icon credits - under CC BY 4.0 - https://www.onlinewebfonts.com/icon/504938
 [GlobalClass, Icon("res://gd_icons/weapon_system/shot_icon.svg")]
-public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
+public abstract partial class PW_ShotBis : WeaponComponent, GC_IHitDealer
 {
     [Export] protected GC_Hit _hitData;
     [Export] public CONFE_HitMasks EntitiesHitMask
@@ -55,20 +55,15 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
 
     [ExportCategory("Visuals")]
     [Export] protected PW_Trail _trail;
-    [Export] private PCT_UndirectScalable _traumaCauser;
-    [Export] private bool _clampTrauma = true;
-    [Export] private float _maxTrauma = 0.2f;
     [Export] private float _ragdollFactor = 1f;
     private PW_IKnockBack _knockBack;
     public MATH_AdditiveModifiers KnockBackMultiplier => _knockBack?.KnockBackMultiplier;
     public MATH_FlatVec3Modifiers KnockBackDirFlatAdd => _knockBack?.KnockBackDirFlatAdd;
 
-    private GB_ExternalBodyManagerWrapper _ownerBody;
-    public PW_Fire Fire {get; protected set;}
-    protected PW_Weapon _weapon => Fire.Weapon;
-    public GE_IActiveCombatEntity OwnerEntity => Fire.Weapon.Handler.OwnerEntity;
+    private GB_IExternalBodyManager _ownerBody;
+    public GE_IActiveCombatEntity OwnerEntity {get; private set;}
 
-    public EventHandler<HitEventArgs> Hit;
+    public Action<HitEventArgs> Hit;
     public MATH_AdditiveModifiers SpreadMultiplier {get; private set;} = new();
     public float Spread => _spread * SpreadMultiplier.Result();
     public MATH_AdditiveModifiers KickBackMultiplier {get; private set;} = new();
@@ -83,7 +78,6 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
     private static Random _random = new();
     public float KickBack => _kickBack * KickBackMultiplier.Result() * _partialMultiplier;
     public float Damage => _hitData.Damage * _partialMultiplier;
-    public float HitTrauma => _maxTrauma * _partialMultiplier;
 
     private float _tempDamageMultiplier = 1f;
     private float _tempKnockBackMultiplier = 1f;
@@ -113,16 +107,16 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
         return null;
     }
 
-    public void Initialize(GB_ExternalBodyManagerWrapper ownerBody, PW_Fire fire)
+    public void Initialize(GE_IActiveCombatEntity owner)
     {
-        Fire = fire;
-        _ownerBody = ownerBody;
+        OwnerEntity = owner;
+        _ownerBody = owner.Body;
         _hitData.InitializeModifiers();
         UpdateHitMask();
-        SpecInitialize(ownerBody);
+        SpecInitialize(owner.Body);
     }
 
-    public abstract void SpecInitialize(GB_ExternalBodyManagerWrapper ownerBody);
+    public abstract void SpecInitialize(GB_IExternalBodyManager ownerBody);
 
     public void Shoot()
     {
@@ -209,19 +203,7 @@ public abstract partial class PW_Shot : WeaponComponent, GC_IHitDealer
 
     protected void DoHit(HitEventArgs e, Vector3 hitPosition)
     {
-        Hit?.Invoke(this, e);
-        
-        if (_traumaCauser == null)
-            return;
-
-        _traumaCauser.GlobalPosition = hitPosition;
-
-        // OPTIMIZE ME - Reduces editability
-        // We could generate one specialization of trauma causer which directly does Clamped or not clamped. 
-        if (_clampTrauma)
-            _traumaCauser.CauseClampedTrauma(HitTrauma);
-        else
-            _traumaCauser.CauseTrauma();
+        Hit?.Invoke(e);
     }
 
     public virtual void Interrupt(){}
