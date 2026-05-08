@@ -13,6 +13,7 @@ public partial class PickableSpawner : Node3D
 
     public override void _Ready()
     {
+        _current = null;
         if (_startSpawned)
             Drop();
         else
@@ -26,7 +27,8 @@ public partial class PickableSpawner : Node3D
 
         _current = _pickableData.GeneratePhysics(_horizontalDamp, _lifeTime);
         _current.TreeExiting += OnFree;
-        GetTree().Root.AddChild(_current);
+        AddChild(_current);
+        _current.TopLevel = true;
         _current.GlobalPosition = GlobalPosition;
     }
 
