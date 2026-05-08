@@ -41,6 +41,7 @@ public abstract partial class PW_Weapon : WeaponComponent
     [Export] public float TacticalReloadTime {get; private set;}
     [Export] public float ReloadReadyTime {get; private set;}            // Additionnal time before the weapon is ready once it's reloaded, allow annimation cancels
     [Export] protected Array<PW_Fire> _fires;
+    public Array<PW_Fire> Fires => _fires;
     [Export] protected PW_ADS _ads;
     private PM_SurfaceControl _surfaceControl;
 

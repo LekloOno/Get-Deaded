@@ -26,6 +26,10 @@ public partial class SC_AimArenaAmoConfig : Area3D
             _infActive = _infAmos;
             player.WeaponsHandler.SetInfiniteMagazine(_infAmos);
             player.WeaponsHandler.SetInfiniteAmmo(_infAmos);
+            
+            foreach (PW_Weapon weapon in player.WeaponsHandler.Weapons)
+                foreach (PW_Fire fire in weapon.Fires)
+                    fire.Ammos.Initialize();
 
             _gameManager.Init(player);
         }
