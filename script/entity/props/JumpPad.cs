@@ -21,6 +21,12 @@ public partial class JumpPad : Node3D
     /// </summary>
     private Area3D _hitbox;
 
+    public override void _Ready()
+    {
+        if (_hitbox != null)
+            _hitbox.CollisionMask = CONF_Collision.Layers.EnvironmentEntity;
+    }
+
     private void OnBodyEntered(Node3D body)
     {
         if (body is not GB_IExternalBodyManager bodyManager)
@@ -46,7 +52,7 @@ public partial class JumpPad : Node3D
 
         _hitbox = hitbox;
         _hitbox.BodyEntered += OnBodyEntered;
-        if (!Engine.IsEditorHint())
+        if (!Engine.IsEditorHint() && CONF_Collision.Instance != null)
             _hitbox.CollisionMask = CONF_Collision.Layers.EnvironmentEntity;
     }
 
