@@ -55,6 +55,7 @@ public partial class SC_GameManager : Node
 
         _player?.WeaponsHandler.EnableFire();
         _initial.Start(_player);
+        SC_EntitiesManager.EnablePickups();
     }
 
     public void HandleKill(E_IEnemy enemy, GC_Health senderLayer)
@@ -71,6 +72,7 @@ public partial class SC_GameManager : Node
 
     private void Reset()
     {
+        SC_EntitiesManager.DisablePickups();
         Stats.Disable();
         if (_speedShield != null)
             _speedShield.Active = false;
