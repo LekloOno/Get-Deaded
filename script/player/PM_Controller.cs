@@ -10,6 +10,7 @@ public partial class PM_Controller : CharacterBody3D, GB_IExternalBodyManager, G
     [Export] private PM_WallClimb _wallClimb;
     [Export] private PS_Grounded _groundState;
     [Export] private PC_Control _cameraControl;
+    [Export] public PC_DirectCamera Camera {get; private set;}
     [Export] private PM_SurfaceControl _surfaceControl;
     [Export] private PM_VelocityCache _velocityCache;
     [Export] private PM_StraffeSnap _straffeSnap;
