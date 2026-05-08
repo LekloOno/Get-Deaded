@@ -27,11 +27,22 @@ public partial class PickableSpawner : Node3D
     /// or being triggered by an external actor, like a scenario script.
     /// </summary>
     [Export] private bool _selfEnable = false;
+    /// <summary>
+    /// When the spawned item goes further than this distance from the spawner,
+    /// it starts the recentering timer, which will eventually recenter the item to the spawner.
+    /// </summary>
+    [Export] private float _recenterRadius = 5f;
+    /// <summary>
+    /// The amount of time spent out of recenterRadius before the spawned item is recentered.
+    /// </summary>
+    [Export] private float _recenterDelay = 5f;
+    private float _outOfRadiusTime = 0f;
     private SceneTreeTimer _respawnTimer;
 
     public override void _Ready()
     {
         SC_EntitiesManager.Register(this);
+        SetPhysicsProcess(false);
 
         if (_selfEnable)
             Enable();
@@ -40,6 +51,25 @@ public partial class PickableSpawner : Node3D
     public override void _ExitTree()
     {
         SC_EntitiesManager.Unregister(this);
+    }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        if (_current == null)
+            return;
+
+        if ((_current.GlobalPosition - GlobalPosition).Length() < _recenterRadius)
+        {
+            _outOfRadiusTime = 0;
+            return;
+        }
+        
+        _outOfRadiusTime += (float) delta;
+        if (_outOfRadiusTime < _recenterDelay)
+            return;
+
+        _outOfRadiusTime = 0f;
+        _current.GlobalPosition = GlobalPosition;
     }
 
     public void Enable()
@@ -75,6 +105,8 @@ public partial class PickableSpawner : Node3D
         AddChild(_current);
         _current.TopLevel = true;
         _current.GlobalPosition = GlobalPosition;
+
+        SetPhysicsProcess(true);
     }
 
     private void OnFree()
@@ -93,5 +125,6 @@ public partial class PickableSpawner : Node3D
     {
         _current.TreeExiting -= OnFree;
         _current = null;
+        SetPhysicsProcess(false);
     }
 }
