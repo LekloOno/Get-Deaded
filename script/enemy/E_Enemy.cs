@@ -20,6 +20,8 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
     [Export] public PCT_SimpleTraumaData KillTraumaData {get; private set;}
     [Export] private PW_FireBis _fire;
     [Export] private float _speedSpreadFactor = 10f;
+    [Export] private double _reactionTime = 0.2f;
+    private double _timeOnSight = 0f;
     private bool _shooting = false;
 
 
@@ -204,7 +206,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
         
         MoveAndSlide();
 
-        Attack();
+        Attack(delta);
     }
 
     public Vector3 ApplyDrag(Vector3 velocity, double deltaTime)
@@ -219,7 +221,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
             _mover.Rotate(this);
     }
 
-    public void Attack()
+    public void Attack(double delta)
     {
         if (_fire == null || _target == null)
             return;
@@ -233,8 +235,13 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 
         query.CollisionMask = 1;
         var result = spaceState.IntersectRay(query);
+        
+        if (result.Count == 0)
+            _timeOnSight += delta;
+        else
+            _timeOnSight = 0;
 
-        bool nextShoot = result.Count == 0;
+        bool nextShoot = _timeOnSight >= _reactionTime;
 
         if (nextShoot)
             Aim();
