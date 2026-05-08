@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://bgfyi141ynhdb"]
+[gd_scene format=3 uid="uid://bgfyi141ynhdb"]
 
 [ext_resource type="Script" uid="uid://c3are182lodyx" path="res://script/player/combat/weapons/weapon/PW_Simple.cs" id="1_ce3gq"]
 [ext_resource type="Texture2D" uid="uid://c050onpc3r17u" path="res://assets/sprites/weapons/pewpixel.png" id="2_odgi6"]
@@ -70,7 +70,7 @@ metadata/_custom_type_script = "uid://c0vf7xmi1u8t4"
 [sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_8w7py"]
 polyphony = 10
 
-[node name="PW_Revolver" type="Node3D" node_paths=PackedStringArray("_fires")]
+[node name="PW_Revolver" type="Node3D" unique_id=1663599436 node_paths=PackedStringArray("_fires")]
 script = ExtResource("1_ce3gq")
 MoveSpeedModifier = -0.1
 SwitchInTime = 0.13
@@ -83,7 +83,7 @@ Icon = ExtResource("2_odgi6")
 IconColor = Color(1, 0.569375, 0.152, 0.8)
 metadata/_custom_type_script = "uid://c3are182lodyx"
 
-[node name="PWF_SemiAuto" type="Node3D" parent="." node_paths=PackedStringArray("_shots", "_recoil", "_ammos", "_fireTraumaCauser")]
+[node name="PWF_SemiAuto" type="Node3D" parent="." unique_id=1180637477 node_paths=PackedStringArray("_shots", "_recoil", "_ammos", "_fireTraumaCauser")]
 script = ExtResource("3_25fv7")
 _shots = [NodePath("PWS_Hitscan")]
 _fireRate = 460
@@ -92,7 +92,7 @@ _ammos = NodePath("PW_Ammunition")
 _fireTraumaCauser = NodePath("PCT_Fire")
 metadata/_custom_type_script = "uid://dmsklefspdvlw"
 
-[node name="PWR_ConstantRecoil" type="Node3D" parent="PWF_SemiAuto"]
+[node name="PWR_ConstantRecoil" type="Node3D" parent="PWF_SemiAuto" unique_id=1550932078]
 script = ExtResource("4_odgi6")
 _autoReset = true
 _angle = Vector2(0.05, 5)
@@ -100,15 +100,14 @@ _time = 0.04
 _resetTime = 0.4
 metadata/_custom_type_script = "uid://djecalg7cxlvg"
 
-[node name="PW_Ammunition" type="Node3D" parent="PWF_SemiAuto"]
+[node name="PW_Ammunition" type="Node3D" parent="PWF_SemiAuto" unique_id=439418355]
 script = ExtResource("5_25fv7")
 _magazineSize = 8
 _maxMagazines = 15
 _baseAmmos = 16
-InfiniteAmmo = true
 metadata/_custom_type_script = "uid://cxiwvat6vddlp"
 
-[node name="PWS_Hitscan" type="Node3D" parent="PWF_SemiAuto" node_paths=PackedStringArray("_trail", "_traumaCauser")]
+[node name="PWS_Hitscan" type="Node3D" parent="PWF_SemiAuto" unique_id=1981834848 node_paths=PackedStringArray("_trail", "_traumaCauser")]
 script = ExtResource("4_utu8p")
 _maxDistance = 100.0
 _hitData = SubResource("Resource_wj164")
@@ -117,101 +116,102 @@ _traumaCauser = NodePath("PCT_UndirectScalable")
 _maxTrauma = 0.6
 metadata/_custom_type_script = "uid://fc7gkofu3df7"
 
-[node name="PW_Trail" type="Node3D" parent="PWF_SemiAuto/PWS_Hitscan"]
+[node name="PW_Trail" type="Node3D" parent="PWF_SemiAuto/PWS_Hitscan" unique_id=1154720255]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.287, -0.225, -0.237)
 script = ExtResource("6_0mgwp")
 _trails = Array[Object]([ExtResource("7_7a4vo"), SubResource("Resource_wnyrd")])
 metadata/_custom_type_script = "uid://cytkgtw0ebs3x"
 
-[node name="PCT_UndirectScalable" type="Area3D" parent="PWF_SemiAuto/PWS_Hitscan"]
+[node name="PCT_UndirectScalable" type="Area3D" parent="PWF_SemiAuto/PWS_Hitscan" unique_id=562420402]
 script = ExtResource("11_d2gec")
 _curveSampler = SubResource("Resource_7a4vo")
 metadata/_custom_type_script = "uid://d15clqym1lgvu"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PWF_SemiAuto/PWS_Hitscan/PCT_UndirectScalable"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PWF_SemiAuto/PWS_Hitscan/PCT_UndirectScalable" unique_id=1574017403]
 shape = SubResource("SphereShape3D_86tae")
 
-[node name="PCT_Fire" type="Node" parent="PWF_SemiAuto"]
+[node name="PCT_Fire" type="Node" parent="PWF_SemiAuto" unique_id=1868917108]
 script = ExtResource("9_rhime")
 _traumaLayer = SubResource("Resource_hd2gv")
 _amount = 0.4
 metadata/_custom_type_script = "uid://51kwj2ldm4xq"
 
-[node name="Sound" type="Node3D" parent="." node_paths=PackedStringArray("_fire", "_sound")]
+[node name="Sound" type="Node3D" parent="." unique_id=497878455 node_paths=PackedStringArray("_fire", "_sound")]
 script = ExtResource("17_w2eku")
 _fire = NodePath("../PWF_SemiAuto")
 _sound = NodePath("layers")
 metadata/_custom_type_script = "uid://bwuyvfcylptdk"
 
-[node name="layers" type="Node" parent="Sound"]
+[node name="layers" type="Node" parent="Sound" unique_id=1206034850]
 script = ExtResource("18_hd2gv")
+UseTimeScale = true
 
-[node name="whistle" type="Node" parent="Sound/layers"]
+[node name="whistle" type="Node" parent="Sound/layers" unique_id=1983292500]
 script = ExtResource("19_438kg")
 PolyphonicStream = SubResource("AudioStreamPolyphonic_8w7py")
 Sounds = Array[AudioStream]([ExtResource("24_15h8q")])
 MinPitch = 0.99
 MaxPitch = 1.02
 
-[node name="player" type="Node" parent="Sound/layers/whistle" node_paths=PackedStringArray("Player")]
+[node name="player" type="Node" parent="Sound/layers/whistle" unique_id=553250400 node_paths=PackedStringArray("Player")]
 script = ExtResource("19_wbedf")
 Player = NodePath("../../../whistle")
 BaseVolumeDb = 3.0
 
-[node name="layer1" type="Node" parent="Sound/layers"]
+[node name="layer1" type="Node" parent="Sound/layers" unique_id=2002799295]
 script = ExtResource("19_438kg")
 PolyphonicStream = SubResource("AudioStreamPolyphonic_8w7py")
 Sounds = Array[AudioStream]([ExtResource("19_15h8q"), ExtResource("20_v6myh")])
 MinPitch = 0.5
 MaxPitch = 0.7
 
-[node name="player" type="Node" parent="Sound/layers/layer1" node_paths=PackedStringArray("Player")]
+[node name="player" type="Node" parent="Sound/layers/layer1" unique_id=917868479 node_paths=PackedStringArray("Player")]
 script = ExtResource("19_wbedf")
 Player = NodePath("../../../layer1")
 
-[node name="layer2" type="Node" parent="Sound/layers"]
+[node name="layer2" type="Node" parent="Sound/layers" unique_id=2030551554]
 script = ExtResource("19_438kg")
 PolyphonicStream = SubResource("AudioStreamPolyphonic_8w7py")
 Sounds = Array[AudioStream]([ExtResource("21_wbedf"), ExtResource("22_jf62l")])
 
-[node name="player" type="Node" parent="Sound/layers/layer2" node_paths=PackedStringArray("Player")]
+[node name="player" type="Node" parent="Sound/layers/layer2" unique_id=2067260016 node_paths=PackedStringArray("Player")]
 script = ExtResource("19_wbedf")
 Player = NodePath("../../../layer2")
 
-[node name="layer3" type="Node" parent="Sound/layers"]
+[node name="layer3" type="Node" parent="Sound/layers" unique_id=1458000243]
 script = ExtResource("19_438kg")
 PolyphonicStream = SubResource("AudioStreamPolyphonic_8w7py")
 Sounds = Array[AudioStream]([ExtResource("23_8w7py")])
 MinPitch = 0.7
 MaxPitch = 0.7
 
-[node name="player" type="Node" parent="Sound/layers/layer3" node_paths=PackedStringArray("Player")]
+[node name="player" type="Node" parent="Sound/layers/layer3" unique_id=302054595 node_paths=PackedStringArray("Player")]
 script = ExtResource("19_wbedf")
 Player = NodePath("../../../layer3")
 BaseVolumeDb = 6.0
 
-[node name="layer4" type="Node" parent="Sound/layers"]
+[node name="layer4" type="Node" parent="Sound/layers" unique_id=2064163519]
 script = ExtResource("19_438kg")
 PolyphonicStream = SubResource("AudioStreamPolyphonic_8w7py")
 Sounds = Array[AudioStream]([ExtResource("23_8w7py")])
 MinPitch = 0.7
 MaxPitch = 0.7
 
-[node name="player" type="Node" parent="Sound/layers/layer4" node_paths=PackedStringArray("Player")]
+[node name="player" type="Node" parent="Sound/layers/layer4" unique_id=2060320772 node_paths=PackedStringArray("Player")]
 script = ExtResource("19_wbedf")
 Player = NodePath("../../../layer4")
 BasePitchScale = 2.0
 
-[node name="layer5" type="Node" parent="Sound/layers"]
+[node name="layer5" type="Node" parent="Sound/layers" unique_id=429857051]
 script = ExtResource("19_438kg")
 PolyphonicStream = SubResource("AudioStreamPolyphonic_8w7py")
 Sounds = Array[AudioStream]([ExtResource("27_jf62l")])
 
-[node name="player" type="Node" parent="Sound/layers/layer5" node_paths=PackedStringArray("Player")]
+[node name="player" type="Node" parent="Sound/layers/layer5" unique_id=746483594 node_paths=PackedStringArray("Player")]
 script = ExtResource("19_wbedf")
 Player = NodePath("../../../layer5")
 
-[node name="whistle" type="AudioStreamPlayer3D" parent="Sound"]
+[node name="whistle" type="AudioStreamPlayer3D" parent="Sound" unique_id=815161786]
 stream = SubResource("AudioStreamPolyphonic_8w7py")
 attenuation_model = 3
 volume_db = 3.0
@@ -220,7 +220,7 @@ panning_strength = 0.0
 bus = &"Weapons"
 attenuation_filter_db = 0.0
 
-[node name="layer1" type="AudioStreamPlayer3D" parent="Sound"]
+[node name="layer1" type="AudioStreamPlayer3D" parent="Sound" unique_id=1269550267]
 stream = SubResource("AudioStreamPolyphonic_8w7py")
 attenuation_model = 3
 max_db = 6.0
@@ -228,7 +228,7 @@ panning_strength = 0.0
 bus = &"Weapons"
 attenuation_filter_db = 0.0
 
-[node name="layer2" type="AudioStreamPlayer3D" parent="Sound"]
+[node name="layer2" type="AudioStreamPlayer3D" parent="Sound" unique_id=870536687]
 stream = SubResource("AudioStreamPolyphonic_8w7py")
 attenuation_model = 3
 max_db = 6.0
@@ -236,7 +236,7 @@ panning_strength = 0.0
 bus = &"Weapons"
 attenuation_filter_db = 0.0
 
-[node name="layer3" type="AudioStreamPlayer3D" parent="Sound"]
+[node name="layer3" type="AudioStreamPlayer3D" parent="Sound" unique_id=954069477]
 stream = SubResource("AudioStreamPolyphonic_8w7py")
 attenuation_model = 3
 volume_db = 6.0
@@ -245,7 +245,7 @@ panning_strength = 0.0
 bus = &"Weapons"
 attenuation_filter_db = 0.0
 
-[node name="layer4" type="AudioStreamPlayer3D" parent="Sound"]
+[node name="layer4" type="AudioStreamPlayer3D" parent="Sound" unique_id=111536753]
 stream = SubResource("AudioStreamPolyphonic_8w7py")
 attenuation_model = 3
 max_db = 6.0
@@ -254,7 +254,7 @@ panning_strength = 0.0
 bus = &"Weapons"
 attenuation_filter_db = 0.0
 
-[node name="layer5" type="AudioStreamPlayer3D" parent="Sound"]
+[node name="layer5" type="AudioStreamPlayer3D" parent="Sound" unique_id=680416099]
 stream = SubResource("AudioStreamPolyphonic_8w7py")
 attenuation_model = 3
 max_db = 6.0

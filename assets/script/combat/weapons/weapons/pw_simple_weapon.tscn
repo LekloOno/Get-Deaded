@@ -75,7 +75,6 @@ script = ExtResource("5_akysb")
 _magazineSize = 26
 _maxMagazines = 15
 _baseAmmos = 52
-InfiniteAmmo = true
 metadata/_custom_type_script = "uid://cxiwvat6vddlp"
 
 [node name="PWS_Hitscan" type="Node3D" parent="PWF_FullAuto" unique_id=1628610472 node_paths=PackedStringArray("_trail")]
