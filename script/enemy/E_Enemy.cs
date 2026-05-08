@@ -19,6 +19,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
     [Export] private bool _aim;
     [Export] public PCT_SimpleTraumaData KillTraumaData {get; private set;}
     [Export] private PW_FireBis _fire;
+    [Export] private float _speedSpreadFactor = 10f;
     private bool _shooting = false;
 
 
@@ -249,8 +250,18 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 
     private void Aim()
     {
-        float spread = _target.Body.Velocity().Length()/2f;
+        float spread = SpreadFromTarget() * _speedSpreadFactor;
         LookAtWithSpread(_fire, _target.Body.GlobalTransform.Origin, spread);
+    }
+
+    public float SpreadFromTarget()
+    {
+        Vector3 delta = GlobalPosition - _target.Body.GlobalTransform.Origin;
+        Vector3 direction = delta.Normalized();
+        Vector3 targetVel = _target.Body.Velocity();
+
+        float lateralSpeed = (targetVel - targetVel.Dot(direction) * direction).Length();
+        return lateralSpeed / delta.Length();
     }
 
     public static void LookAtWithSpread(
@@ -263,7 +274,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
         Vector3 direction = (targetPosition - node.GlobalPosition).Normalized();
         Vector3 spreadDirection = ApplySpread(direction, spreadDegrees);
         Vector3 lookPoint = node.GlobalPosition + spreadDirection;
-        
+
         node.LookAt(lookPoint, upVector);
     }
 

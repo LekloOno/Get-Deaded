@@ -1157,7 +1157,7 @@ metadata/_custom_type_script = "uid://c3akiwtfovofa"
 [sub_resource type="Resource" id="Resource_q2sf5"]
 script = ExtResource("37_q2sf5")
 WeaponIndex = 1
-Amount = 2
+Amount = 5
 Model = ExtResource("38_wdrsa")
 _repulsionData = SubResource("Resource_ywx5l")
 metadata/_custom_type_script = "uid://c5lwejv15n0lf"
@@ -1168,7 +1168,7 @@ size = Vector3(0.35, 0.1, 0.35)
 [sub_resource type="Resource" id="Resource_wdrsa"]
 script = ExtResource("37_q2sf5")
 WeaponIndex = 2
-Amount = 2
+Amount = 5
 Model = ExtResource("38_u80kj")
 _repulsionData = SubResource("Resource_ywx5l")
 metadata/_custom_type_script = "uid://c5lwejv15n0lf"
@@ -1176,7 +1176,7 @@ metadata/_custom_type_script = "uid://c5lwejv15n0lf"
 [sub_resource type="Resource" id="Resource_7jf4w"]
 script = ExtResource("37_q2sf5")
 WeaponIndex = -1
-Amount = 2
+Amount = 5
 Model = ExtResource("35_m44an")
 _repulsionData = SubResource("Resource_ywx5l")
 metadata/_custom_type_script = "uid://c5lwejv15n0lf"
@@ -2621,8 +2621,10 @@ metadata/_custom_type_script = "uid://bwxdr2xchhkya"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.8, -3.3, 14.3)
 script = ExtResource("119_6p37o")
 _enemy = ExtResource("120_1fq7f")
+_count = 1
 _spawnRadius = 10.0
 _respawnDelay = 0.0
+_roundTime = 60.0
 _gameManager = NodePath("..")
 metadata/_custom_type_script = "uid://b361d5nxjt30o"
 
