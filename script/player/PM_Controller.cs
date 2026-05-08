@@ -16,6 +16,7 @@ public partial class PM_Controller : CharacterBody3D, GB_IExternalBodyManager, G
     [Export] private float _debugDashStrength = 10f;
     [Export] public PW_WeaponsHandler WeaponsHandler {get; private set;}
     [Export] public PCT_SimpleTraumaData KillTraumaData {get; private set;}
+    [Export] private Node3D _exposedBody;
 
     public Transform3D PrevGlobalTransform {get; protected set;}
     public Vector3 PrevVelocity {get; protected set;}
@@ -43,6 +44,8 @@ public partial class PM_Controller : CharacterBody3D, GB_IExternalBodyManager, G
 
     public GC_HealthManager HealthManager => _healthManager;
     public GB_IExternalBodyManager Body => this;
+    Transform3D GB_IExternalBodyManager.GlobalTransform => _exposedBody.GlobalTransform;
+
 
 
     public void ResetGravity()

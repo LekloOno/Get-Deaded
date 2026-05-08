@@ -203,8 +203,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
         
         MoveAndSlide();
 
-        if (_fire != null && _target != null)
-            Attack();
+        Attack();
     }
 
     public Vector3 ApplyDrag(Vector3 velocity, double deltaTime)
@@ -221,8 +220,11 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 
     public void Attack()
     {
+        if (_fire == null || _target == null)
+            return;
+
         Vector3 from = _fire.GlobalPosition;
-        Vector3 to = _target.Body.GlobalTransform.Origin + new Vector3(0f, 0.5f, 0f);
+        Vector3 to = _target.Body.GlobalTransform.Origin;
 
         var spaceState = GetWorld3D().DirectSpaceState;
 
@@ -232,7 +234,9 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
         var result = spaceState.IntersectRay(query);
 
         bool nextShoot = result.Count == 0;
-        //bool nextShoot = true;
+
+        if (nextShoot)
+            Aim();
 
         if (_shooting == nextShoot)
             return;
@@ -241,5 +245,47 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
             _shooting = _fire.Press();
         else
             _shooting = !_fire.Release();
+    }
+
+    private void Aim()
+    {
+        float spread = _target.Body.Velocity().Length()/2f;
+        LookAtWithSpread(_fire, _target.Body.GlobalTransform.Origin, spread);
+    }
+
+    public static void LookAtWithSpread(
+        Node3D node,
+        Vector3 targetPosition,
+        float spreadDegrees,
+        Vector3? up = null)
+    {
+        Vector3 upVector = up ?? Vector3.Up;
+        Vector3 direction = (targetPosition - node.GlobalPosition).Normalized();
+        Vector3 spreadDirection = ApplySpread(direction, spreadDegrees);
+        Vector3 lookPoint = node.GlobalPosition + spreadDirection;
+        
+        node.LookAt(lookPoint, upVector);
+    }
+
+    private static Vector3 ApplySpread(Vector3 direction, float spreadDegrees)
+    {
+        if (spreadDegrees <= 0f)
+            return direction;
+
+        var rng = new RandomNumberGenerator();
+
+        Vector3 randomAxis = direction.Cross(
+            new Vector3(
+                rng.RandfRange(-1f, 1f),
+                rng.RandfRange(-1f, 1f),
+                rng.RandfRange(-1f, 1f)
+            ).Normalized()
+        ).Normalized();
+
+        float angle = Mathf.DegToRad(
+            rng.RandfRange(-spreadDegrees, spreadDegrees)
+        );
+
+        return direction.Rotated(randomAxis, angle).Normalized();
     }
 }
