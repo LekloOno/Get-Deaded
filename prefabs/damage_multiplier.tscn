@@ -24,3 +24,11 @@ shape = SubResource("BoxShape3D_pbl43")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=989496340]
 material_override = SubResource("StandardMaterial3D_b7ftn")
 mesh = SubResource("SphereMesh_dsuc5")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=647766191]
+light_color = Color(0.1726687, 0.5409191, 0.9905022, 1)
+distance_fade_enabled = true
+distance_fade_begin = 15.0
+distance_fade_length = 5.0
+omni_range = 1.2
+omni_attenuation = 2.0
