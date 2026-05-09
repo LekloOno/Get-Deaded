@@ -191,6 +191,9 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 
     protected override void PhysicsProcessSpec(double delta)
     {
+        if (!Enabled)
+            return;
+
         Vector3 velocity = Velocity;
         if (!IsOnFloor())
             velocity += GetGravity() * (float) delta;
