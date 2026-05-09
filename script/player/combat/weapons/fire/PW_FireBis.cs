@@ -17,7 +17,7 @@ public abstract partial class PW_FireBis : WeaponComponent
     [Export] protected ulong _fireRate;
     [Export] protected PW_Ammunition _ammos;
     [Export] protected uint _ammosPerShot = 1;
-    private bool _enabled = true;
+    protected bool _enabled = true;
 
     public void AddDamageMultiplier(float multiplier)
     {

@@ -7,7 +7,7 @@ public partial class PWF_FullAuto : PW_Fire
     private SceneTreeTimer _timer;
     public Action Stopped;
     private ulong _lastExpectedTime;
-    public override void Disable() => StopShoot();
+    public override void DisableSpec() => StopShoot();
 
     protected override void SpecInitialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManagerWrapper ownerBody){}
 
@@ -34,9 +34,13 @@ public partial class PWF_FullAuto : PW_Fire
         return true;
     }
 
+    private bool CanReShoot() =>
+        _enabled &&
+        (InfiniteMagazine || _ammos.DidConsume(_ammosPerShot));
+
     private void ReShoot()
     {
-        if (!InfiniteMagazine && !_ammos.DidConsume(_ammosPerShot))
+        if (!CanReShoot())
         {
             StopShoot();
             return;

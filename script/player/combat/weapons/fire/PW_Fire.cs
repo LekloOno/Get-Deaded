@@ -24,6 +24,7 @@ public abstract partial class PW_Fire : WeaponComponent
     [Export] public bool IsDerived;     // To indicate that this fire should be considered as a derived fire mode. Only usefull for ui, to not display this fire mode.
     [Export] public Texture2D Icon {get; private set;}
     [Export] private PCT_Fire _fireTraumaCauser;
+    protected bool _enabled = true;
     public PW_Weapon Weapon {get; protected set;}
 
     public void AddDamageMultiplier(float multiplier)
@@ -56,6 +57,16 @@ public abstract partial class PW_Fire : WeaponComponent
     private bool _pressBuffered = false;
     private bool _releaseBuffered = false;
     private static Random _random = new();
+
+    public void Enable()
+    {
+        _enabled = true;
+    }
+    public void Disable()
+    {
+        _enabled = false;
+        DisableSpec();
+    }
 
 
     public void Initialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManagerWrapper ownerBody, PW_Weapon weapon)
@@ -111,7 +122,9 @@ public abstract partial class PW_Fire : WeaponComponent
         Shot?.Invoke(this, _shots.Count);
     }
 
-    protected bool CanShoot() => PHX_Time.ScaledTicksMsec - _lastShot >= _fireRate && (InfiniteMagazine || _ammos.DidConsume(_ammosPerShot));
+    protected bool CanShoot() => _enabled
+        && PHX_Time.ScaledTicksMsec - _lastShot >= _fireRate
+        && (InfiniteMagazine || _ammos.DidConsume(_ammosPerShot));
 
     public bool Press()
     {
@@ -227,7 +240,7 @@ public abstract partial class PW_Fire : WeaponComponent
     /// <summary>
     /// Handle the weapon disabling. Example - A weapons which shoots continuously should stop shooting on disable, even if no up input has been sent.
     /// </summary>
-    public abstract void Disable();
+    public abstract void DisableSpec();
 
     public void Sleep()
     {

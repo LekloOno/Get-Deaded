@@ -9,7 +9,7 @@ public partial class PW_FistsFire : PW_Fire
     private GB_ExternalBodyManagerWrapper _ownerBody;
     private ulong _chargeStartTime;
 
-    public override void Disable() {}
+    public override void DisableSpec() {}
 
     protected override void SpecInitialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManagerWrapper ownerBody)
     {

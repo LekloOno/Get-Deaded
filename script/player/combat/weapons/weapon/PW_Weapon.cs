@@ -122,6 +122,11 @@ public abstract partial class PW_Weapon : WeaponComponent
         SpecDisable();
     }
 
+    public void Enable()
+    {
+        SpecEnable();
+    }
+
     public void AddDamageMultiplier(float multiplier)
     {
         foreach (PW_Fire fire in _fires)
@@ -208,6 +213,10 @@ public abstract partial class PW_Weapon : WeaponComponent
     /// Allow for some specific disabling process.
     /// </summary>
     protected virtual void SpecDisable() => _currentFire.Disable();
+    /// <summary>
+    /// Allow for some specific disabling process.
+    /// </summary>
+    protected virtual void SpecEnable() => _currentFire.Enable();
     
 
     /// <summary>

@@ -32,9 +32,14 @@ public partial class PWF_FullAutoBis : PW_FireBis
         return true;
     }
 
+    private bool CanReShoot() =>
+        _enabled &&
+        (InfiniteMagazine || _ammos.DidConsume(_ammosPerShot));
+        
+
     private void ReShoot()
     {
-        if (!InfiniteMagazine && !_ammos.DidConsume(_ammosPerShot))
+        if (!CanReShoot())
         {
             StopShoot();
             return;

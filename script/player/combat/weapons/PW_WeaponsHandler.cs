@@ -151,7 +151,10 @@ public partial class PW_WeaponsHandler : WeaponSystem
     {
         _externalReady = true;
         if (!ActiveWeaponHalted())
+        {
             Available?.Invoke();
+            _activeWeapon.Enable();
+        }
     }
 
     public void SetInfiniteAmmo(bool active)
@@ -193,6 +196,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
     {
         _ready = true;
         SendAvailable();
+        _activeWeapon.Enable();
     }
 
     public void InitData(out PW_Weapon active, out PW_Weapon nextHolster, out int nextIndex, out Array<PW_Weapon> weapons)
@@ -381,6 +385,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
     {
         _ready = true;
         ReloadReady?.Invoke();
+        _activeWeapon.Enable();
     }
 
     private void CancelReload()
@@ -471,6 +476,8 @@ public partial class PW_WeaponsHandler : WeaponSystem
 
         _surfaceControl.SpeedModifiers.Remove(_activeWeapon.MoveSpeedModifier);
         _surfaceControl.SpeedModifiers.Add(_targetWeapon.MoveSpeedModifier);
+        _activeWeapon.Enable();
+        _targetWeapon.Enable();
         _activeWeapon = _targetWeapon;
 
         SwitchEnded?.Invoke(this, _activeWeapon);
