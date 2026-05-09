@@ -46,6 +46,10 @@ text = "Deaths"
 layout_mode = 2
 text = "Damage"
 
+[node name="Score" type="Label" parent="PanelContainer/BoxContainer/GridContainer" unique_id=843038626]
+layout_mode = 2
+text = "0"
+
 [node name="Kills" type="Label" parent="PanelContainer/BoxContainer/GridContainer" unique_id=636347488]
 layout_mode = 2
 text = "0"
@@ -55,10 +59,6 @@ layout_mode = 2
 text = "0"
 
 [node name="Damages" type="Label" parent="PanelContainer/BoxContainer/GridContainer" unique_id=1271635235]
-layout_mode = 2
-text = "0"
-
-[node name="Score" type="Label" parent="PanelContainer/BoxContainer/GridContainer" unique_id=843038626]
 layout_mode = 2
 text = "0"
 

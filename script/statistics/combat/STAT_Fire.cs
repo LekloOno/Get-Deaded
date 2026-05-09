@@ -1,11 +1,15 @@
 using System;
+using System.Linq;
 using Godot;
 
 public class STAT_Fire: IDisposable
 {
     public Observable<int> Shots {get; private set;} = new(0);
     public Observable<int> Hits {get; private set;} = new(0);
-    public Observable<int[]> LocalHits {get; private set;} = new (new int[System.Enum.GetValues<GC_BodyPart>().Length]);
+    //public Observable<int[]> LocalHits {get; private set;} = new (new int[System.Enum.GetValues<GC_BodyPart>().Length]);
+    public Observable<int>[] LocalHits {get; private set;} = Enumerable.Range(0, Enum.GetValues<GC_BodyPart>().Length)
+              .Select(_ => new Observable<int>())
+              .ToArray();
 
     public Observable<int> Kills {get; private set;} = new(0);
     public Observable<float> Damage {get; private set;} = new(0);
@@ -40,7 +44,8 @@ public class STAT_Fire: IDisposable
         }
 
         Hits.Value ++;
-        LocalHits.Value[(int)hit.HurtBox.BodyPart] ++;
+        GD.Print("caca " + hit.HurtBox.BodyPart + (int)hit.HurtBox.BodyPart);
+        LocalHits[(int)hit.HurtBox.BodyPart].Value ++;
         Damage.Value += hit.Damage;
         
         if (hit.Killed)
@@ -53,8 +58,8 @@ public class STAT_Fire: IDisposable
     {
         Shots.Value = 0;
         Hits.Value = 0;
-        for (int i = 0; i < LocalHits.Value.Length; i++)
-            LocalHits.Value[i] = 0;
+        for (int i = 0; i < LocalHits.Length; i++)
+            LocalHits[i].Value = 0;
 
         Kills.Value = 0;
         Damage.Value = 0;

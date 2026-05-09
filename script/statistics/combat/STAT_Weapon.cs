@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Godot;
 
 public class STAT_Weapon: IDisposable
 {
@@ -33,18 +34,18 @@ public class STAT_Weapon: IDisposable
     public Observable<float> Damage {get; private set;} = new (0f);
     public Observable<int> Kills {get; private set;} = new (0);
     //public LocalHitsMerger LocalHits {get;}
-    public Observable<int[]> LocalHits {get; private set;} = new(new int[System.Enum.GetValues<GC_BodyPart>().Length]);
+    //public Observable<int[]> LocalHits {get; private set;} = new(new int[System.Enum.GetValues<GC_BodyPart>().Length]);
+    public Observable<int>[] LocalHits {get; private set;} = Enumerable.Range(0, Enum.GetValues<GC_BodyPart>().Length)
+              .Select(_ => new Observable<int>())
+              .ToArray();
 
     private void UpdateShots(int value) {Shots.Value = Fires.Sum(fire => fire.Shots);}
     private void UpdateHits(int value) {Hits.Value = Fires.Sum(fire => fire.Hits);}
     private void UpdateDamage(float value) {Damage.Value = Fires.Sum(fire => fire.Damage);}
     private void UpdateKills(int value) {Kills.Value = Fires.Sum(fire => fire.Kills);}
-    private void UpdateLocalHits(int[] value)
-    {
-        LocalHits.Value = Enumerable.Range(0, System.Enum.GetValues<GC_BodyPart>().Length)
-                .Select(i => Fires.Sum(fire => fire.LocalHits.Value[i]))
-                .ToArray(); 
-    }
+    private void UpdateLocalHit(int bodyPartId) =>
+        LocalHits[bodyPartId].Value = Fires.Sum(fire =>
+            fire.LocalHits[bodyPartId]);
 
     public STAT_Weapon(PW_Weapon weapon)
     {
@@ -55,7 +56,10 @@ public class STAT_Weapon: IDisposable
                 stat.Hits.Subscribe(UpdateHits);
                 stat.Damage.Subscribe(UpdateDamage);
                 stat.Kills.Subscribe(UpdateKills);
-                stat.LocalHits.Subscribe(UpdateLocalHits);
+
+                foreach (var pair in stat.LocalHits.Select((value, index) => (value, index)))
+                    pair.value.Subscribe(_ => UpdateLocalHit(pair.index));
+                    
                 return stat;
             })
             .ToArray();

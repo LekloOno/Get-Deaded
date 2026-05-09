@@ -3,11 +3,14 @@
 [ext_resource type="Script" uid="uid://dbhqsqe7b31sv" path="res://script/ui/combat/weapon/statistics/UIW_FireStat.cs" id="1_66bho"]
 [ext_resource type="Texture2D" uid="uid://cll1rrqagufi2" path="res://assets/sprites/weapons/brrtpixel2.png" id="2_ymu7v"]
 
-[node name="UIW_FireStat" type="BoxContainer" unique_id=1631877175 node_paths=PackedStringArray("_icon", "_accuracy")]
+[node name="UIW_FireStat" type="BoxContainer" unique_id=1631877175 node_paths=PackedStringArray("_icon", "_kills", "_damages", "_accuracy", "_critical")]
 mouse_filter = 2
 script = ExtResource("1_66bho")
 _icon = NodePath("AspectRatioContainer2/unactive_icon")
+_kills = NodePath("GridContainer/Kills")
+_damages = NodePath("GridContainer/Damages")
 _accuracy = NodePath("GridContainer/Accuracy")
+_critical = NodePath("GridContainer/Critical")
 metadata/_custom_type_script = "uid://dbhqsqe7b31sv"
 
 [node name="AspectRatioContainer2" type="AspectRatioContainer" parent="." unique_id=410085704]
@@ -49,7 +52,7 @@ text = "Critical"
 layout_mode = 2
 text = "0"
 
-[node name="Damage" type="Label" parent="GridContainer" unique_id=525452515]
+[node name="Damages" type="Label" parent="GridContainer" unique_id=525452515]
 layout_mode = 2
 text = "0"
 
