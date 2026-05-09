@@ -1,55 +1,68 @@
-[gd_scene load_steps=4 format=3 uid="uid://di6ks47ucoai4"]
+[gd_scene format=3 uid="uid://di6ks47ucoai4"]
 
 [ext_resource type="Script" uid="uid://faww3t8do782" path="res://script/ui/combat/weapon/statistics/UIW_PlayerStat.cs" id="1_ishwc"]
 [ext_resource type="PackedScene" uid="uid://dh7dl3a1cqot4" path="res://prefabs/ui/ui_weaponstat.tscn" id="2_m345k"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_m345k"]
-font_size = 50
-
-[node name="UIW_PlayerStat" type="BoxContainer" node_paths=PackedStringArray("_weaponStatTemplate", "_damageLabel", "_killsLabel", "_deathsLabel")]
+[node name="UIW_PlayerStat" type="BoxContainer" unique_id=61477726 node_paths=PackedStringArray("_weaponStatTemplate", "_damageLabel", "_killsLabel", "_deathsLabel")]
+offset_right = 511.0
+offset_bottom = 64.0
 mouse_filter = 2
 theme_override_constants/separation = 20
+vertical = true
 script = ExtResource("1_ishwc")
-_weaponStatTemplate = NodePath("UIW_WeaponStat")
-_damageLabel = NodePath("Damages")
-_killsLabel = NodePath("Kills")
-_deathsLabel = NodePath("Deaths")
+_weaponStatTemplate = NodePath("PanelContainer/BoxContainer/UIW_WeaponStat")
+_damageLabel = NodePath("PanelContainer/BoxContainer/GridContainer/Damages")
+_killsLabel = NodePath("PanelContainer/BoxContainer/GridContainer/Kills")
+_deathsLabel = NodePath("PanelContainer/BoxContainer/GridContainer/Deaths")
 metadata/_custom_type_script = "uid://faww3t8do782"
 
-[node name="KillsLab" type="Label" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=364213210]
 layout_mode = 2
-text = "Kills :"
-label_settings = SubResource("LabelSettings_m345k")
 
-[node name="Kills" type="Label" parent="."]
+[node name="BoxContainer" type="BoxContainer" parent="PanelContainer" unique_id=1432195499]
+layout_mode = 2
+theme_override_constants/separation = 20
+vertical = true
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/BoxContainer" unique_id=434880149]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+columns = 4
+
+[node name="ScoreLab" type="Label" parent="PanelContainer/BoxContainer/GridContainer" unique_id=1399290833]
+layout_mode = 2
+text = "Score"
+
+[node name="KillsLab" type="Label" parent="PanelContainer/BoxContainer/GridContainer" unique_id=651340347]
+layout_mode = 2
+text = "Kills"
+
+[node name="DeathLab" type="Label" parent="PanelContainer/BoxContainer/GridContainer" unique_id=289288474]
+layout_mode = 2
+text = "Deaths"
+
+[node name="DamageLab" type="Label" parent="PanelContainer/BoxContainer/GridContainer" unique_id=682454344]
+layout_mode = 2
+text = "Damage"
+
+[node name="Kills" type="Label" parent="PanelContainer/BoxContainer/GridContainer" unique_id=636347488]
 layout_mode = 2
 text = "0"
-label_settings = SubResource("LabelSettings_m345k")
 
-[node name="DeathLab" type="Label" parent="."]
-layout_mode = 2
-text = "Deaths :"
-label_settings = SubResource("LabelSettings_m345k")
-
-[node name="Deaths" type="Label" parent="."]
+[node name="Deaths" type="Label" parent="PanelContainer/BoxContainer/GridContainer" unique_id=2066721415]
 layout_mode = 2
 text = "0"
-label_settings = SubResource("LabelSettings_m345k")
 
-[node name="DamageLab" type="Label" parent="."]
-layout_mode = 2
-text = "Damage:"
-label_settings = SubResource("LabelSettings_m345k")
-
-[node name="Damages" type="Label" parent="."]
+[node name="Damages" type="Label" parent="PanelContainer/BoxContainer/GridContainer" unique_id=1271635235]
 layout_mode = 2
 text = "0"
-label_settings = SubResource("LabelSettings_m345k")
 
-[node name="Sep" type="Label" parent="."]
+[node name="Score" type="Label" parent="PanelContainer/BoxContainer/GridContainer" unique_id=843038626]
 layout_mode = 2
-text = "  |  "
-label_settings = SubResource("LabelSettings_m345k")
+text = "0"
 
-[node name="UIW_WeaponStat" parent="." instance=ExtResource("2_m345k")]
+[node name="UIW_WeaponStat" parent="PanelContainer/BoxContainer" unique_id=807635110 instance=ExtResource("2_m345k")]
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4

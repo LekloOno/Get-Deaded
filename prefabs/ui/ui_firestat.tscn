@@ -1,26 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://bx1b1pole5qhj"]
+[gd_scene format=3 uid="uid://bx1b1pole5qhj"]
 
 [ext_resource type="Script" uid="uid://dbhqsqe7b31sv" path="res://script/ui/combat/weapon/statistics/UIW_FireStat.cs" id="1_66bho"]
 [ext_resource type="Texture2D" uid="uid://cll1rrqagufi2" path="res://assets/sprites/weapons/brrtpixel2.png" id="2_ymu7v"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_66bho"]
-font_size = 50
-
-[node name="UIW_FireStat" type="BoxContainer" node_paths=PackedStringArray("_icon", "_accuracy")]
+[node name="UIW_FireStat" type="BoxContainer" unique_id=1631877175 node_paths=PackedStringArray("_icon", "_accuracy")]
 mouse_filter = 2
 script = ExtResource("1_66bho")
 _icon = NodePath("AspectRatioContainer2/unactive_icon")
-_accuracy = NodePath("Accuracy")
+_accuracy = NodePath("GridContainer/Accuracy")
 metadata/_custom_type_script = "uid://dbhqsqe7b31sv"
 
-[node name="AspectRatioContainer2" type="AspectRatioContainer" parent="."]
-custom_minimum_size = Vector2(144, 144)
+[node name="AspectRatioContainer2" type="AspectRatioContainer" parent="." unique_id=410085704]
+custom_minimum_size = Vector2(114, 64)
 layout_mode = 2
 mouse_filter = 2
 ratio = 2.0
 alignment_horizontal = 2
 
-[node name="unactive_icon" type="TextureRect" parent="AspectRatioContainer2"]
+[node name="unactive_icon" type="TextureRect" parent="AspectRatioContainer2" unique_id=1916518426]
 texture_filter = 1
 texture_repeat = 1
 layout_mode = 2
@@ -28,7 +25,38 @@ mouse_filter = 2
 texture = ExtResource("2_ymu7v")
 expand_mode = 1
 
-[node name="Accuracy" type="Label" parent="."]
+[node name="GridContainer" type="GridContainer" parent="." unique_id=871145268]
 layout_mode = 2
-text = "- %"
-label_settings = SubResource("LabelSettings_66bho")
+columns = 4
+
+[node name="KillsLab" type="Label" parent="GridContainer" unique_id=1702083682]
+layout_mode = 2
+text = "Kills"
+
+[node name="DamagesLab" type="Label" parent="GridContainer" unique_id=756227948]
+layout_mode = 2
+text = "Damages"
+
+[node name="AccuracyLab" type="Label" parent="GridContainer" unique_id=416113270]
+layout_mode = 2
+text = "Accuracy"
+
+[node name="CriticalLab" type="Label" parent="GridContainer" unique_id=70763874]
+layout_mode = 2
+text = "Critical"
+
+[node name="Kills" type="Label" parent="GridContainer" unique_id=520342835]
+layout_mode = 2
+text = "0"
+
+[node name="Damage" type="Label" parent="GridContainer" unique_id=525452515]
+layout_mode = 2
+text = "0"
+
+[node name="Accuracy" type="Label" parent="GridContainer" unique_id=646118568]
+layout_mode = 2
+text = "0 %"
+
+[node name="Critical" type="Label" parent="GridContainer" unique_id=199273303]
+layout_mode = 2
+text = "0 %"

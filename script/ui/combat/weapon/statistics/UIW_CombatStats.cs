@@ -9,18 +9,29 @@ public partial class UIW_CombatStats : UIW_Stats
     [Export] private UIW_PlayerStat _uiPlayerStatTemplate;
     [Export] private Array<STAT_CombatTracker> _playersStats = [];
     [Export] private PI_Stats _statsInput;
+    private Node _anchor;
     private List<UIW_PlayerStat> _uiPlayerStats = [];
 
     public override void _Ready()
     {
         Hide();
 
+        if (_uiPlayerStatTemplate.GetParent() is Node parent)
+        {
+            parent.RemoveChild(_uiPlayerStatTemplate);
+            _anchor = parent;
+        } else
+            _anchor = this;
+
+        Clear();
+
+
         _statsInput.Start += (o, e) => Show();
         _statsInput.Stop += (o, e) => Hide();
         
         if (_playersStats.Count == 0)
             return;
-        
+
         Clear();
         STAT_CombatTracker c = _playersStats.ElementAt(0);
 
@@ -32,9 +43,6 @@ public partial class UIW_CombatStats : UIW_Stats
 
     public void Clear()
     {
-        if (_uiPlayerStatTemplate.GetParent() is Node parent)
-            parent.RemoveChild(_uiPlayerStatTemplate);
-
         foreach (UIW_PlayerStat w in _uiPlayerStats)
             w.QueueFree();
         
@@ -44,12 +52,7 @@ public partial class UIW_CombatStats : UIW_Stats
     private void Initialize()
     {
         foreach (STAT_CombatTracker combat in _playersStats)
-        {
-            UIW_PlayerStat stat = (UIW_PlayerStat) _uiPlayerStatTemplate.Duplicate();
-            stat.Initialize(combat.Data);
-            _uiPlayerStats.Add(stat);
-            AddChild(stat);
-        }
+            AddStat(combat.Data);
     }
 
     public void AddStat(STAT_Combat data)
@@ -57,6 +60,6 @@ public partial class UIW_CombatStats : UIW_Stats
         UIW_PlayerStat stat = (UIW_PlayerStat) _uiPlayerStatTemplate.Duplicate();
         stat.Initialize(data);
         _uiPlayerStats.Add(stat);
-        AddChild(stat);
+        _anchor.AddChild(stat);
     }
 }
