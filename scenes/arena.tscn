@@ -37,6 +37,8 @@
 [ext_resource type="PackedScene" uid="uid://b1xordtuuk7r1" path="res://prefabs/ui/ui_arena_menu.tscn" id="44_yln86"]
 [ext_resource type="PackedScene" uid="uid://b5w3ok85lmxgf" path="res://prefabs/player_camchanged.tscn" id="45_femlh"]
 [ext_resource type="Script" uid="uid://ba04qst68odml" path="res://script/engine_tools/MISC_TimeScaler.cs" id="46_femlh"]
+[ext_resource type="PackedScene" uid="uid://bhafdiql2jopi" path="res://prefabs/ui/ui_weapons_stats.tscn" id="46_nag6q"]
+[ext_resource type="Script" uid="uid://bkkj6g5jwcpqc" path="res://script/player/input/actions/ui/PI_Stats.cs" id="47_6ubnd"]
 [ext_resource type="LightmapGIData" uid="uid://d3cc8iupunnf1" path="res://scenes/arena.lmbake" id="112_hskjd"]
 [ext_resource type="PackedScene" uid="uid://bioysx8g5kih7" path="res://prefabs/mapping/lights/lightray2.tscn" id="113_ie87n"]
 [ext_resource type="Shader" uid="uid://db85ge55ambmc" path="res://assets/shaders/light_flare.gdshader" id="114_xy3ri"]
@@ -946,13 +948,13 @@ shader_parameter/fluctuation_strength = 0.6
 shader_parameter/fluctuation_sharpness = 1.0
 shader_parameter/fluctuation_speed = 0.4
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_jnmui"]
-
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_nag6q"]
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_6ubnd"]
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_18ihl"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_ikwpp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3mad5"]
 transparency = 1
@@ -1902,14 +1904,14 @@ spot_angle_attenuation = 0.15932
 [node name="VFX_GodsRay" parent="arena" unique_id=605019919 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.27160624, -0.9330127, 0.23604527, 0.017453581, 0.25000003, 0.9680885, -0.9622502, -0.2588191, 0.0841859, -22.38988, 5.6927605, 5.072876)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_jnmui")
+mesh = SubResource("ImmediateMesh_nag6q")
 BaseRadius = 0.38
 InitialRotation = 45.0
 
 [node name="VFX_GodsRay3" parent="arena/VFX_GodsRay" unique_id=802324590 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.9999999, -1.4901161e-08, 7.450581e-09, -1.4901161e-08, 0.9999999, -3.1664968e-08, 0, 1.8626451e-09, 0.99999994, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_nag6q")
+mesh = SubResource("ImmediateMesh_6ubnd")
 skeleton = NodePath("../..")
 BaseRadius = 0.14
 InitialRotation = 45.0
@@ -1918,14 +1920,14 @@ FlareAngle = 6.0
 [node name="VFX_GodsRay2" parent="arena" unique_id=164366595 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.05200698, -0.25727454, -0.9649379, 0.9678007, 0.25127998, -0.0148357125, 0.24628639, -0.933096, 0.2620588, -25.830011, 7.2676578, 9.14106)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_6ubnd")
+mesh = SubResource("ImmediateMesh_18ihl")
 BaseRadius = 0.36
 InitialRotation = 45.0
 
 [node name="VFX_GodsRay3" parent="arena/VFX_GodsRay2" unique_id=294127740 instance=ExtResource("113_ie87n")]
 transform = Transform3D(1, 1.4901161e-08, 0, 1.4901161e-08, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_18ihl")
+mesh = SubResource("ImmediateMesh_ikwpp")
 skeleton = NodePath("../..")
 BaseRadius = 0.14
 InitialRotation = 45.0
@@ -2614,10 +2616,12 @@ metadata/_custom_type_script = "uid://c1b6fea15qlys"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10000229, 1, -0.25)
 shape = SubResource("BoxShape3D_rpd6q")
 
-[node name="SC_GameManager" type="Node" parent="entities/AimArena" unique_id=1857231820 node_paths=PackedStringArray("_initial")]
+[node name="SC_GameManager" type="Node" parent="entities/AimArena" unique_id=1857231820 node_paths=PackedStringArray("_initial", "_combatStats", "_statsInput")]
 script = ExtResource("118_tkrox")
 _initial = NodePath("SC_TestSpawner")
 _killRegen = 15.0
+_combatStats = NodePath("../../../CanvasLayer/UIW_CombatStats")
+_statsInput = NodePath("../../../CanvasLayer/PI_Stats")
 metadata/_custom_type_script = "uid://bwxdr2xchhkya"
 
 [node name="SC_TestSpawner" type="Node3D" parent="entities/AimArena/SC_GameManager" unique_id=2050910851 node_paths=PackedStringArray("_gameManager")]
@@ -2803,10 +2807,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, -19.5, 41)
 [node name="CollisionShape3D" parent="preload" unique_id=1612844673 instance=ExtResource("35_m44an")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, -19, 40)
 
-[node name="ColorRect" parent="." unique_id=620824296 instance=ExtResource("44_yln86")]
-color = Color(0, 0, 0, 0)
-_pauseGame = false
-
 [node name="SC_ArenaGameStarter" type="Node" parent="." unique_id=1946843958 node_paths=PackedStringArray("_spawnPoint", "_menuCamera", "_gameManager")]
 script = ExtResource("44_hn1ds")
 _spawnPoint = NodePath("../entities/SpawnPoint")
@@ -2815,12 +2815,26 @@ _menuCamera = NodePath("../entities/SpectatePivot/Node3D/Camera3D")
 _gameManager = NodePath("../entities/AimArena/SC_GameManager")
 metadata/_custom_type_script = "uid://ccj8s5i765h4j"
 
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=168625791]
+
+[node name="ColorRect" parent="CanvasLayer" unique_id=620824296 instance=ExtResource("44_yln86")]
+color = Color(0, 0, 0, 0)
+_pauseGame = false
+
+[node name="UIW_CombatStats" parent="CanvasLayer" unique_id=815525186 node_paths=PackedStringArray("_statsInput") instance=ExtResource("46_nag6q")]
+visible = false
+_statsInput = NodePath("../PI_Stats")
+
+[node name="PI_Stats" type="Node" parent="CanvasLayer" unique_id=1532279642]
+script = ExtResource("47_6ubnd")
+metadata/_custom_type_script = "uid://bkkj6g5jwcpqc"
+
 [node name="MISC_TimeScaler" type="Node" parent="." unique_id=1895755438]
 script = ExtResource("46_femlh")
 metadata/_custom_type_script = "uid://ba04qst68odml"
 
-[connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="ColorRect" method="Enable"]
+[connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/ColorRect" method="Enable"]
 [connection signal="Stop" from="entities/AimArena/SC_GameManager/SC_TestSpawner" to="entities/AimArena/SC_GameManager" method="EndGame"]
-[connection signal="pressed" from="ColorRect/VBoxContainer/Play" to="SC_ArenaGameStarter" method="StartGame"]
+[connection signal="pressed" from="CanvasLayer/ColorRect/VBoxContainer/Play" to="SC_ArenaGameStarter" method="StartGame"]
 
-[editable path="ColorRect"]
+[editable path="CanvasLayer/ColorRect"]

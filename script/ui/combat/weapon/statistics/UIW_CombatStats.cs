@@ -21,15 +21,16 @@ public partial class UIW_CombatStats : UIW_Stats
         if (_playersStats.Count == 0)
             return;
         
+        Clear();
         STAT_CombatTracker c = _playersStats.ElementAt(0);
-        
+
         if (c.Initialized)
             Initialize();
         else
             c.GotInitialized += Initialize;
     }
 
-    private void Initialize()
+    public void Clear()
     {
         if (_uiPlayerStatTemplate.GetParent() is Node parent)
             parent.RemoveChild(_uiPlayerStatTemplate);
@@ -38,7 +39,10 @@ public partial class UIW_CombatStats : UIW_Stats
             w.QueueFree();
         
         _uiPlayerStats.Clear();
+    }
 
+    private void Initialize()
+    {
         foreach (STAT_CombatTracker combat in _playersStats)
         {
             UIW_PlayerStat stat = (UIW_PlayerStat) _uiPlayerStatTemplate.Duplicate();
@@ -46,5 +50,13 @@ public partial class UIW_CombatStats : UIW_Stats
             _uiPlayerStats.Add(stat);
             AddChild(stat);
         }
+    }
+
+    public void AddStat(STAT_Combat data)
+    {
+        UIW_PlayerStat stat = (UIW_PlayerStat) _uiPlayerStatTemplate.Duplicate();
+        stat.Initialize(data);
+        _uiPlayerStats.Add(stat);
+        AddChild(stat);
     }
 }

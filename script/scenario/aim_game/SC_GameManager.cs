@@ -10,6 +10,8 @@ public partial class SC_GameManager : Node
     [Export] private float _killRegen = 10f;
     [Signal] public delegate void InitializeEventHandler(SC_GameManager manager);
     [Signal] public delegate void ResetGameEventHandler();
+    [Export] private UIW_CombatStats _combatStats;
+    [Export] private PI_Stats _statsInput;
     public STAT_Combat Stats {get; private set;}
     private uint _score;
     public SceneTreeTimer CountDownTimer;
@@ -20,28 +22,46 @@ public partial class SC_GameManager : Node
     /// </summary>
     public Action Interrupt;
 
+    public override void _Ready()
+    {
+        _statsInput.DisableAction();
+    }
+
     public void Init(GE_IActiveCombatEntity player)
     {
-        if (_player != null)
-            _player.HealthManager.OnDie -= DoInterrupt;
+        if (player == null)
+            return;
 
-        _player = player;
+        if (_player != player)
+            InitNewPlayer(player);
+        else
+            Stats.Reset();
 
         foreach (PW_Weapon weapon in player.WeaponsHandler.Weapons)
                 foreach (PW_Fire fire in weapon.Fires)
                     fire.Ammos.Initialize();
-                    
-        _player.HealthManager.OnDie += DoInterrupt;
 
-        Stats = new(player);
         _score = 0;
 
-        player?.WeaponsHandler.DisableFire();
+        player.WeaponsHandler.DisableFire();
 
         EmitSignal(SignalName.Initialize, this);
 
         CountDownTimer = GetTree().CreateTimer(_countDown, false, true);
         CountDownTimer.Timeout += StartGame;
+    }
+
+    private void InitNewPlayer(GE_IActiveCombatEntity player)
+    {
+        if (_player != null)
+            _player.HealthManager.OnDie -= DoInterrupt;
+
+        _combatStats.Clear();
+        Stats = new(player);
+        _combatStats.AddStat(Stats);
+                    
+        player.HealthManager.OnDie += DoInterrupt;
+        _player = player;
     }
 
     private void DoInterrupt(GC_Health _)
@@ -53,11 +73,13 @@ public partial class SC_GameManager : Node
     private void StartGame()
     {
         CountDownTimer.Timeout -= StartGame;
+
+        _statsInput.EnableAction();
         
         if (_player.HealthManager.TopHealthLayer is GC_Shield shield)
             _shield = shield;
 
-        _player?.WeaponsHandler.EnableFire();
+        _player.WeaponsHandler.EnableFire();
         _initial.Start(_player);
         SC_EntitiesManager.EnablePickups();
     }
@@ -72,6 +94,7 @@ public partial class SC_GameManager : Node
 
     public void EndGame()
     {
+        _statsInput.DisableAction();
         _player.HealthManager.Heal(99999);
         Reset();
     }
@@ -79,7 +102,6 @@ public partial class SC_GameManager : Node
     private void Reset()
     {
         SC_EntitiesManager.DisablePickups();
-        Stats.Disable();
         EmitSignal(SignalName.ResetGame);
     }
 }

@@ -11,7 +11,6 @@ public partial class PIM_Arena : Node
     [Export] private PI_CrouchDispatcher _crouchDispatcherInput;
     [Export] private PI_Weapons _weaponsInput;
     [Export] private PI_Revive _reviveInput;
-    [Export] private PI_Stats _statsInput;
 
     private PI_Map _alive;
     private PI_Map _dead;
@@ -26,8 +25,6 @@ public partial class PIM_Arena : Node
         _alive = [_walkInput, _sprintInput, _jumpInput, _crouchDispatcherInput, _weaponsInput];
         _dead = [_reviveInput];
         _escapeMenu = [];
-
-        _statsInput.EnableAction();
         
         Alive();
         _activeGameMap = _alive;
@@ -65,7 +62,6 @@ public partial class PIM_Arena : Node
         _controller.OnDie -= Dead;
         _controller.OnRevive -= Alive;
 
-        _statsInput.DisableAction();
         _escapeMenu.Enable();
     }
 
@@ -76,7 +72,5 @@ public partial class PIM_Arena : Node
         _activeGameMap.Enable();
         _controller.OnDie += Dead;
         _controller.OnRevive += Alive;
-
-        _statsInput.EnableAction();
     }
 }
