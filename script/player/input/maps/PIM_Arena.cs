@@ -29,23 +29,23 @@ public partial class PIM_Arena : Node
 
         _statsInput.EnableAction();
         
-        Alive(null, 0f);
+        Alive();
         _activeGameMap = _alive;
 
         _controller.OnDie += Dead;
         _controller.OnDie += TrackDead;
-        _reviveInput.Revive += Alive;
-        _reviveInput.Revive += TrackAlive;
+        _controller.OnRevive += Alive;
+        _controller.OnRevive += TrackAlive;
     }
 
-    public void TrackAlive(object _, float __) =>
+    public void TrackAlive() =>
         _activeGameMap = _alive;
     public void TrackDead(object _, EventArgs __) =>
         _activeGameMap = _dead;
 
-    public void Alive(object _, float __)
+    public void Alive()
     {
-        _controller.Revive();
+        //_controller.Revive();
         _dead.Disable();
         _alive.Enable();
     }
@@ -60,7 +60,7 @@ public partial class PIM_Arena : Node
     {
         _activeGameMap.Disable();
         _controller.OnDie -= Dead;
-        _reviveInput.Revive -= Alive;
+        _controller.OnRevive -= Alive;
 
         _statsInput.DisableAction();
         _escapeMenu.Enable();
@@ -72,7 +72,7 @@ public partial class PIM_Arena : Node
 
         _activeGameMap.Enable();
         _controller.OnDie += Dead;
-        _reviveInput.Revive += Alive;
+        _controller.OnRevive += Alive;
 
         _statsInput.EnableAction();
     }

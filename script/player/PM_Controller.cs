@@ -6,6 +6,7 @@ public partial class PM_Controller : CharacterBody3D, GB_IExternalBodyManager, G
 {
     [Export] private GC_HealthManager _healthManager;
     [Export] private PI_Walk _walkProcess;
+    [Export] private PI_Revive _reviveInput;
     [Export] private PM_WallJump _wallJump;
     [Export] private PM_WallClimb _wallClimb;
     [Export] private PS_Grounded _groundState;
@@ -23,6 +24,7 @@ public partial class PM_Controller : CharacterBody3D, GB_IExternalBodyManager, G
     public Vector3 PrevVelocity {get; protected set;}
     
     public EventHandler OnDie;
+    public Action OnRevive;
 
     public PHX_ForcesCache AdditionalForces {get; private set;} = new PHX_ForcesCache();  // To allow external entities to apply additional forces.
     public PHX_ForcesCache TakeOverForces {get; private set;} = new PHX_ForcesCache();    // To allow external entities to take over the movement behavior.
@@ -61,11 +63,13 @@ public partial class PM_Controller : CharacterBody3D, GB_IExternalBodyManager, G
         _onPhysicsProcess -= DeadBehavior;
         _onPhysicsProcess -= NormalBehavior;
         _onPhysicsProcess += NormalBehavior;
+        OnRevive?.Invoke();
     }
 
     public override void _Ready()
     {
         _healthManager.TopHealthLayer.OnDie += Die;
+        _reviveInput.Revive += (_, _) => Revive();
         WeaponsHandler.Init(this);
     }
 
