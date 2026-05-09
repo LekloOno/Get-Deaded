@@ -38,6 +38,9 @@ public partial class PIM_Arena : Node
         _controller.OnRevive += TrackAlive;
     }
 
+    public override void _ExitTree() =>
+        _activeGameMap?.Disable();
+
     public void TrackAlive() =>
         _activeGameMap = _alive;
     public void TrackDead(object _, EventArgs __) =>
