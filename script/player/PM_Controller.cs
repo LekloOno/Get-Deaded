@@ -70,6 +70,7 @@ public partial class PM_Controller : CharacterBody3D, GB_IExternalBodyManager, G
     {
         _healthManager.TopHealthLayer.OnDie += Die;
         _reviveInput.Revive += (_, _) => Revive();
+        Revive();
         WeaponsHandler.Init(this);
     }
 
