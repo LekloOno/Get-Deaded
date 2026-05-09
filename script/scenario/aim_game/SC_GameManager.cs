@@ -94,13 +94,13 @@ public partial class SC_GameManager : Node
 
     public void EndGame()
     {
-        _statsInput.DisableAction();
         _player.HealthManager.Heal(99999);
         Reset();
     }
 
     private void Reset()
     {
+        _statsInput.DisableAction();
         SC_EntitiesManager.DisablePickups();
         EmitSignal(SignalName.ResetGame);
     }
