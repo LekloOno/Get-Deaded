@@ -44,7 +44,6 @@ public class STAT_Fire: IDisposable
         }
 
         Hits.Value ++;
-        GD.Print("caca " + hit.HurtBox.BodyPart + (int)hit.HurtBox.BodyPart);
         LocalHits[(int)hit.HurtBox.BodyPart].Value ++;
         Damage.Value += hit.Damage;
         

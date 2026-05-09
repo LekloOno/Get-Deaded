@@ -33,8 +33,6 @@ public class STAT_Weapon: IDisposable
     public Observable<int> Hits {get; private set;} = new (0);
     public Observable<float> Damage {get; private set;} = new (0f);
     public Observable<int> Kills {get; private set;} = new (0);
-    //public LocalHitsMerger LocalHits {get;}
-    //public Observable<int[]> LocalHits {get; private set;} = new(new int[System.Enum.GetValues<GC_BodyPart>().Length]);
     public Observable<int>[] LocalHits {get; private set;} = Enumerable.Range(0, Enum.GetValues<GC_BodyPart>().Length)
               .Select(_ => new Observable<int>())
               .ToArray();
