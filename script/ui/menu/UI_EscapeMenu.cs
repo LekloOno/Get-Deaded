@@ -66,6 +66,7 @@ public partial class UI_EscapeMenu : Control, UI_IMenuStackManager
 		if (_pauseGame)
 			GetTree().Paused = false;
 
+		_menuStack = [];
 		Hide();
 		EmitSignal(SignalName.Closed);
 	}

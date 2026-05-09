@@ -2833,6 +2833,7 @@ metadata/_custom_type_script = "uid://bkkj6g5jwcpqc"
 script = ExtResource("46_femlh")
 metadata/_custom_type_script = "uid://ba04qst68odml"
 
+[connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/ColorRect" method="Open"]
 [connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/ColorRect" method="Enable"]
 [connection signal="Stop" from="entities/AimArena/SC_GameManager/SC_TestSpawner" to="entities/AimArena/SC_GameManager" method="EndGame"]
 [connection signal="pressed" from="CanvasLayer/ColorRect/VBoxContainer/Play" to="SC_ArenaGameStarter" method="StartGame"]
