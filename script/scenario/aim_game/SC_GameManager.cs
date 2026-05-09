@@ -9,11 +9,11 @@ public partial class SC_GameManager : Node
     [Export] private float _countDown = 2f;
     [Export] private float _killRegen = 10f;
     [Signal] public delegate void InitializeEventHandler(SC_GameManager manager);
+    [Signal] public delegate void ResetGameEventHandler();
     public STAT_Combat Stats {get; private set;}
     private uint _score;
     public SceneTreeTimer CountDownTimer;
     private GE_IActiveCombatEntity _player;
-    private GC_SpeedShield _speedShield;
     private GC_Shield _shield;
     /// <summary>
     /// An "unexpected" stop, like the player manually stopping, or dying.
@@ -26,6 +26,11 @@ public partial class SC_GameManager : Node
             _player.HealthManager.OnDie -= DoInterrupt;
 
         _player = player;
+
+        foreach (PW_Weapon weapon in player.WeaponsHandler.Weapons)
+                foreach (PW_Fire fire in weapon.Fires)
+                    fire.Ammos.Initialize();
+                    
         _player.HealthManager.OnDie += DoInterrupt;
 
         Stats = new(player);
@@ -49,12 +54,7 @@ public partial class SC_GameManager : Node
     {
         CountDownTimer.Timeout -= StartGame;
         
-        if (_player.HealthManager.TopHealthLayer is GC_SpeedShield speedShield)
-        {
-            _speedShield = speedShield;
-            _speedShield.Active = true;
-        }
-        else if (_player.HealthManager.TopHealthLayer is GC_Shield shield)
+        if (_player.HealthManager.TopHealthLayer is GC_Shield shield)
             _shield = shield;
 
         _player?.WeaponsHandler.EnableFire();
@@ -66,9 +66,7 @@ public partial class SC_GameManager : Node
     {
         _score += enemy.Score;
 
-        if (_speedShield != null)
-            _speedShield?.Regen(_killRegen);
-        else if (_shield != null)
+        if (_shield != null)
             _shield.Regen(_killRegen);
     }
 
@@ -82,7 +80,6 @@ public partial class SC_GameManager : Node
     {
         SC_EntitiesManager.DisablePickups();
         Stats.Disable();
-        if (_speedShield != null)
-            _speedShield.Active = false;
+        EmitSignal(SignalName.ResetGame);
     }
 }

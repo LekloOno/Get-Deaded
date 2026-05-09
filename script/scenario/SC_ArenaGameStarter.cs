@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 [GlobalClass]
@@ -12,14 +13,30 @@ public partial class SC_ArenaGameStarter : Node
     public override void _Ready()
     {
         _player = _playerPrefab.Instantiate<PM_Controller>();
+        _gameManager.ResetGame += Reset;
+        AddChild(_player);
+        RemoveChild(_player);
+        Input.MouseMode = Input.MouseModeEnum.Visible;
+    }
+
+    private void Reset()
+    {
+        _menuCamera.MakeCurrent();
+        Input.MouseMode = Input.MouseModeEnum.Visible;
+        RemoveChild(_player);
     }
 
     public void StartGame()
     {
-        GetTree().CurrentScene.AddChild(_player);
+        AddChild(_player);
+        _player.Revive();
         _player.GlobalPosition = _spawnPoint.GlobalPosition;
+        _player.VelocityCache.DiscardCache();
+        _player.Velocity = Vector3.Zero;
         _player.Camera.MakeCurrent();
+        Input.MouseMode = Input.MouseModeEnum.Captured;
 
         _gameManager.Init(_player);
+
     }
 }

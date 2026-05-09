@@ -82,7 +82,6 @@ public partial class UI_EscapeMenu : Control, UI_IMenuStackManager
 	/// <summary>
 	/// Exit the current menu, and returns true if it is still in a stacked menu.
 	/// </summary>
-	/// <returns></returns>
 	public void ExitCurrent()
 	{
 		Control current = _menuStack.Pop();
