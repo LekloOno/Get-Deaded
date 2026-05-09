@@ -13,7 +13,7 @@ public partial class PHX_ShapeSeqArea3D : PHX_SequenceArea3D
     private LinkedList<SequenceStep> _sequenceSteps = [];
     private LinkedListNode<SequenceStep> _currentStep;
 
-    public override void _Ready()
+    public override void _EnterTree()
     {
         foreach (Node node in _area3D.GetChildren())
         {
