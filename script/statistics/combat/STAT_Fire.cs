@@ -49,6 +49,17 @@ public class STAT_Fire: IDisposable
 
     public void HandleShot(object sender, int shots) => Shots.Value += shots;
 
+    public void Reset()
+    {
+        Shots.Value = 0;
+        Hits.Value = 0;
+        for (int i = 0; i < LocalHits.Value.Length; i++)
+            LocalHits.Value[i] = 0;
+
+        Kills.Value = 0;
+        Damage.Value = 0;
+    }
+
     public void Disable()
     {
         _fire.Hit -= HandleHit;

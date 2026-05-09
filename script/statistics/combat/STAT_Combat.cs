@@ -47,6 +47,13 @@ public partial class STAT_Combat: IDisposable
             weapon.Disable();
     }
 
+    public void Reset()
+    {
+        MeleeWeapon.Reset();
+        foreach (STAT_Weapon weapon in Weapons)
+            weapon.Reset();
+    }
+
     public void Dispose()
     {
         Disable();

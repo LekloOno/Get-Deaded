@@ -32,4 +32,7 @@ public partial class STAT_CombatTracker : Node
         else    
             _weaponsHandler.GotInitialized += WeaponsHandlerInitialized;
     }
+
+    public void Reset() =>
+        Data?.Reset();
 }

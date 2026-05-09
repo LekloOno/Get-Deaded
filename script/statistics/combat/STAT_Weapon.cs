@@ -71,4 +71,10 @@ public class STAT_Weapon: IDisposable
     {
         Disable();
     }
+
+    public void Reset()
+    {
+        foreach (STAT_Fire fire in Fires)
+            fire.Reset();
+    }
 }
