@@ -51,6 +51,8 @@ public partial class PW_WeaponsHandler : WeaponSystem
     public bool ADSactive => _activeWeapon.ADSActive;
     public Action ReloadReady;
     public Action Reloaded;
+    public Action<float> ReloadStarted;
+    public Action ReloadCancelled;
     public Action ADSStarted;
     public Action ADSStopped;
     private Action Available;
@@ -345,6 +347,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
         _activeWeapon.Interrupt();
         _reloadTimer = GetTree().CreateTimer(reloadTime, false, true);
         _reloadTimer.Timeout += DoReload;
+        ReloadStarted.Invoke(reloadTime);
     }
 
     // Maybe later make a new PI class which handles auto buffering
@@ -401,6 +404,8 @@ public partial class PW_WeaponsHandler : WeaponSystem
         _reloadTimer = null;
         _reloading = false;
         _ready = true;
+
+        ReloadCancelled?.Invoke();
     }
 
     public void StartSwitch()
