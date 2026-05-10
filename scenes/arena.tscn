@@ -42,6 +42,8 @@
 [ext_resource type="Script" uid="uid://baxgvm22qvjah" path="res://script/ui/combat/weapon/hit/marker/score/UI_ScoreMarkManager.cs" id="48_ikwpp"]
 [ext_resource type="PackedScene" uid="uid://de3jqenk8anfs" path="res://prefabs/ui/combat/hit/score_mark_shaker.tscn" id="49_kjcr2"]
 [ext_resource type="Script" uid="uid://foau1gurk2py" path="res://script/engine_tools/animation/shakes/ANIM_Vec2TraumaLayer.cs" id="50_5u5ld"]
+[ext_resource type="Script" uid="uid://bjb4tfvto4h2w" path="res://script/ui/combat/weapon/hit/marker/score/UI_GlobalTimeTracker.cs" id="51_5u5ld"]
+[ext_resource type="Script" uid="uid://c4yha4el5l40w" path="res://script/ui/combat/weapon/hit/marker/score/UI_GlobalScoreTracker.cs" id="51_kjcr2"]
 [ext_resource type="LightmapGIData" uid="uid://d3cc8iupunnf1" path="res://scenes/arena.lmbake" id="112_hskjd"]
 [ext_resource type="PackedScene" uid="uid://bioysx8g5kih7" path="res://prefabs/mapping/lights/lightray2.tscn" id="113_ie87n"]
 [ext_resource type="Shader" uid="uid://db85ge55ambmc" path="res://assets/shaders/light_flare.gdshader" id="114_xy3ri"]
@@ -951,13 +953,13 @@ shader_parameter/fluctuation_strength = 0.6
 shader_parameter/fluctuation_sharpness = 1.0
 shader_parameter/fluctuation_speed = 0.4
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_ikwpp"]
-
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_kjcr2"]
-
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_5u5ld"]
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_00ph2"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_grxjf"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_6d1h2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3mad5"]
 transparency = 1
@@ -1200,6 +1202,9 @@ _noise = SubResource("FastNoiseLite_4g8la")
 _reductionRate = 2.8
 _noiseSpeed = 60.0
 metadata/_custom_type_script = "uid://foau1gurk2py"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ur278"]
+bg_color = Color(0, 0, 0, 0.28235295)
 
 [node name="Node3D" type="Node3D" unique_id=836354206]
 
@@ -1919,14 +1924,14 @@ spot_angle_attenuation = 0.15932
 [node name="VFX_GodsRay" parent="arena" unique_id=605019919 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.27160624, -0.9330127, 0.23604527, 0.017453581, 0.25000003, 0.9680885, -0.9622502, -0.2588191, 0.0841859, -22.38988, 5.6927605, 5.072876)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_ikwpp")
+mesh = SubResource("ImmediateMesh_5u5ld")
 BaseRadius = 0.38
 InitialRotation = 45.0
 
 [node name="VFX_GodsRay3" parent="arena/VFX_GodsRay" unique_id=802324590 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.9999999, -1.4901161e-08, 7.450581e-09, -1.4901161e-08, 0.9999999, -3.1664968e-08, 0, 1.8626451e-09, 0.99999994, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_kjcr2")
+mesh = SubResource("ImmediateMesh_00ph2")
 skeleton = NodePath("../..")
 BaseRadius = 0.14
 InitialRotation = 45.0
@@ -1935,14 +1940,14 @@ FlareAngle = 6.0
 [node name="VFX_GodsRay2" parent="arena" unique_id=164366595 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.05200698, -0.25727454, -0.9649379, 0.9678007, 0.25127998, -0.0148357125, 0.24628639, -0.933096, 0.2620588, -25.830011, 7.2676578, 9.14106)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_5u5ld")
+mesh = SubResource("ImmediateMesh_grxjf")
 BaseRadius = 0.36
 InitialRotation = 45.0
 
 [node name="VFX_GodsRay3" parent="arena/VFX_GodsRay2" unique_id=294127740 instance=ExtResource("113_ie87n")]
 transform = Transform3D(1, 1.4901161e-08, 0, 1.4901161e-08, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_00ph2")
+mesh = SubResource("ImmediateMesh_6d1h2")
 skeleton = NodePath("../..")
 BaseRadius = 0.14
 InitialRotation = 45.0
@@ -2853,10 +2858,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 100.0
-offset_top = -20.0
-offset_right = 100.0
-offset_bottom = -20.0
+offset_left = 104.0
+offset_top = -25.0
+offset_right = 104.0
+offset_bottom = -25.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -2873,13 +2878,73 @@ metadata/_custom_type_script = "uid://baxgvm22qvjah"
 [node name="UI_ScoreMarkShaker" parent="CanvasLayer/UI_ScoreMarkManager" unique_id=1609368157 instance=ExtResource("49_kjcr2")]
 layout_mode = 1
 
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer" unique_id=1454411771]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -167.5
+offset_top = 20.0
+offset_right = 167.5
+offset_bottom = 65.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ur278")
+
+[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer/PanelContainer" unique_id=1405906859]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/PanelContainer/BoxContainer" unique_id=829331390]
+layout_mode = 2
+
+[node name="TimerLab" type="Label" parent="CanvasLayer/PanelContainer/BoxContainer/HBoxContainer2" unique_id=1414548261]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.91486377, 0.92964065, 0.9237171, 1)
+theme_override_font_sizes/font_size = 25
+text = " TIME "
+
+[node name="Timer" type="Label" parent="CanvasLayer/PanelContainer/BoxContainer/HBoxContainer2" unique_id=1308024103]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "00"
+script = ExtResource("51_5u5ld")
+
+[node name="Sep" type="Label" parent="CanvasLayer/PanelContainer/BoxContainer" unique_id=870390485]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.91486377, 0.92964065, 0.9237171, 1)
+theme_override_font_sizes/font_size = 25
+text = "|"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer/BoxContainer" unique_id=972770422]
+layout_mode = 2
+
+[node name="ScoreLab" type="Label" parent="CanvasLayer/PanelContainer/BoxContainer/HBoxContainer" unique_id=1462776154]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.91486377, 0.92964065, 0.9237171, 1)
+theme_override_font_sizes/font_size = 25
+text = " SCORE "
+
+[node name="Score" type="Label" parent="CanvasLayer/PanelContainer/BoxContainer/HBoxContainer" unique_id=1950786795]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "000000"
+script = ExtResource("51_kjcr2")
+_scoreTrans = 4
+_scoreTransTime = 0.8
+
 [node name="MISC_TimeScaler" type="Node" parent="." unique_id=1895755438]
 script = ExtResource("46_femlh")
 metadata/_custom_type_script = "uid://ba04qst68odml"
 
 [connection signal="EarnScore" from="entities/AimArena/SC_GameManager" to="CanvasLayer/UI_ScoreMarkManager" method="OnEarnScore"]
+[connection signal="EarnScore" from="entities/AimArena/SC_GameManager" to="CanvasLayer/PanelContainer/BoxContainer/HBoxContainer/Score" method="OnEarnScore"]
 [connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/ColorRect" method="Open"]
 [connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/ColorRect" method="Enable"]
+[connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/PanelContainer/BoxContainer/HBoxContainer/Score" method="Reset"]
+[connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/PanelContainer" method="hide"]
+[connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/PanelContainer/BoxContainer/HBoxContainer2/Timer" method="OnGameEnd"]
+[connection signal="StartGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/PanelContainer" method="show"]
+[connection signal="StartGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/PanelContainer/BoxContainer/HBoxContainer2/Timer" method="OnGameStart"]
 [connection signal="Stop" from="entities/AimArena/SC_GameManager/SC_TestSpawner" to="entities/AimArena/SC_GameManager" method="EndGame"]
 [connection signal="pressed" from="CanvasLayer/ColorRect/VBoxContainer/Play" to="SC_ArenaGameStarter" method="StartGame"]
 

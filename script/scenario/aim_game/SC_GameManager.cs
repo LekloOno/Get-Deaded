@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Godot;
 
 [GlobalClass]
@@ -9,6 +8,7 @@ public partial class SC_GameManager : Node
     [Export] private float _countDown = 2f;
     [Export] private float _killRegen = 10f;
     [Signal] public delegate void InitializeEventHandler(SC_GameManager manager);
+    [Signal] public delegate void StartGameEventHandler();
     [Signal] public delegate void ResetGameEventHandler();
     [Signal] public delegate void EarnScoreEventHandler(uint earned, uint score);
     [Export] private UIW_CombatStats _combatStats;
@@ -49,7 +49,7 @@ public partial class SC_GameManager : Node
         EmitSignal(SignalName.Initialize, this);
 
         CountDownTimer = GetTree().CreateTimer(_countDown, false, true);
-        CountDownTimer.Timeout += StartGame;
+        CountDownTimer.Timeout += Start;
     }
 
     private void InitNewPlayer(GE_IActiveCombatEntity player)
@@ -71,9 +71,11 @@ public partial class SC_GameManager : Node
         Reset();
     }
 
-    private void StartGame()
+    private void Start()
     {
-        CountDownTimer.Timeout -= StartGame;
+        CountDownTimer.Timeout -= Start;
+
+        EmitSignal(SignalName.StartGame);
 
         _statsInput.EnableAction();
         
