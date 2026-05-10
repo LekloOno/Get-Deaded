@@ -384,8 +384,8 @@ public partial class PW_WeaponsHandler : WeaponSystem
     private void CompleteReload()
     {
         _ready = true;
-        ReloadReady?.Invoke();
         _activeWeapon.Enable();
+        ReloadReady?.Invoke();
     }
 
     private void CancelReload()
