@@ -49,6 +49,7 @@ public partial class STAT_Combat: IDisposable
 
     public void Reset()
     {
+        Deaths.Value = 0;   
         MeleeWeapon.Reset();
         foreach (STAT_Weapon weapon in Weapons)
             weapon.Reset();
