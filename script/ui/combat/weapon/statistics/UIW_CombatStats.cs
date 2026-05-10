@@ -5,14 +5,11 @@ using Godot;
 public partial class UIW_CombatStats : UIW_Stats
 {
     [Export] private UIW_PlayerStat _uiPlayerStatTemplate;
-    [Export] private PI_Stats _statsInput;
     private Node _anchor;
     private List<UIW_PlayerStat> _uiPlayerStats = [];
 
     public override void _Ready()
     {
-        Hide();
-
         if (_uiPlayerStatTemplate.GetParent() is Node parent)
         {
             parent.RemoveChild(_uiPlayerStatTemplate);
@@ -21,10 +18,6 @@ public partial class UIW_CombatStats : UIW_Stats
             _anchor = this;
 
         Clear();
-
-
-        _statsInput.Start += (o, e) => Show();
-        _statsInput.Stop += (o, e) => Hide();
     }
 
     public void Clear()

@@ -28,6 +28,7 @@ metadata/_custom_type_script = "uid://bv13oqdudxna5"
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=363381016]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="UIW_PlayerStat" parent="PanelContainer" unique_id=236269413 instance=ExtResource("2_rin8f")]
 layout_mode = 2

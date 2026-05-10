@@ -30,6 +30,7 @@ expand_mode = 1
 
 [node name="GridContainer" type="GridContainer" parent="." unique_id=871145268]
 layout_mode = 2
+mouse_filter = 2
 columns = 4
 
 [node name="KillsLab" type="Label" parent="GridContainer" unique_id=1702083682]

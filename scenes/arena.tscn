@@ -39,11 +39,13 @@
 [ext_resource type="Script" uid="uid://ba04qst68odml" path="res://script/engine_tools/MISC_TimeScaler.cs" id="46_femlh"]
 [ext_resource type="PackedScene" uid="uid://bhafdiql2jopi" path="res://prefabs/ui/ui_weapons_stats.tscn" id="46_nag6q"]
 [ext_resource type="Script" uid="uid://bkkj6g5jwcpqc" path="res://script/player/input/actions/ui/PI_Stats.cs" id="47_6ubnd"]
+[ext_resource type="Theme" uid="uid://ddkca4fk8kto5" path="res://assets/ui/menu_theme.tres" id="47_grxjf"]
 [ext_resource type="Script" uid="uid://baxgvm22qvjah" path="res://script/ui/combat/weapon/hit/marker/score/UI_ScoreMarkManager.cs" id="48_ikwpp"]
 [ext_resource type="PackedScene" uid="uid://de3jqenk8anfs" path="res://prefabs/ui/combat/hit/score_mark_shaker.tscn" id="49_kjcr2"]
 [ext_resource type="Script" uid="uid://foau1gurk2py" path="res://script/engine_tools/animation/shakes/ANIM_Vec2TraumaLayer.cs" id="50_5u5ld"]
 [ext_resource type="Script" uid="uid://bjb4tfvto4h2w" path="res://script/ui/combat/weapon/hit/marker/score/UI_GlobalTimeTracker.cs" id="51_5u5ld"]
 [ext_resource type="Script" uid="uid://c4yha4el5l40w" path="res://script/ui/combat/weapon/hit/marker/score/UI_GlobalScoreTracker.cs" id="51_kjcr2"]
+[ext_resource type="Script" uid="uid://djrjee7qnnptw" path="res://script/ui/combat/weapon/statistics/UIW_ArenaEnd.cs" id="53_00ph2"]
 [ext_resource type="LightmapGIData" uid="uid://d3cc8iupunnf1" path="res://scenes/arena.lmbake" id="112_hskjd"]
 [ext_resource type="PackedScene" uid="uid://bioysx8g5kih7" path="res://prefabs/mapping/lights/lightray2.tscn" id="113_ie87n"]
 [ext_resource type="Shader" uid="uid://db85ge55ambmc" path="res://assets/shaders/light_flare.gdshader" id="114_xy3ri"]
@@ -953,13 +955,13 @@ shader_parameter/fluctuation_strength = 0.6
 shader_parameter/fluctuation_sharpness = 1.0
 shader_parameter/fluctuation_speed = 0.4
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_5u5ld"]
-
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_00ph2"]
-
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_grxjf"]
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_6d1h2"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_ur278"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_q00cy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3mad5"]
 transparency = 1
@@ -1924,14 +1926,14 @@ spot_angle_attenuation = 0.15932
 [node name="VFX_GodsRay" parent="arena" unique_id=605019919 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.27160624, -0.9330127, 0.23604527, 0.017453581, 0.25000003, 0.9680885, -0.9622502, -0.2588191, 0.0841859, -22.38988, 5.6927605, 5.072876)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_5u5ld")
+mesh = SubResource("ImmediateMesh_grxjf")
 BaseRadius = 0.38
 InitialRotation = 45.0
 
 [node name="VFX_GodsRay3" parent="arena/VFX_GodsRay" unique_id=802324590 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.9999999, -1.4901161e-08, 7.450581e-09, -1.4901161e-08, 0.9999999, -3.1664968e-08, 0, 1.8626451e-09, 0.99999994, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_00ph2")
+mesh = SubResource("ImmediateMesh_6d1h2")
 skeleton = NodePath("../..")
 BaseRadius = 0.14
 InitialRotation = 45.0
@@ -1940,14 +1942,14 @@ FlareAngle = 6.0
 [node name="VFX_GodsRay2" parent="arena" unique_id=164366595 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.05200698, -0.25727454, -0.9649379, 0.9678007, 0.25127998, -0.0148357125, 0.24628639, -0.933096, 0.2620588, -25.830011, 7.2676578, 9.14106)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_grxjf")
+mesh = SubResource("ImmediateMesh_ur278")
 BaseRadius = 0.36
 InitialRotation = 45.0
 
 [node name="VFX_GodsRay3" parent="arena/VFX_GodsRay2" unique_id=294127740 instance=ExtResource("113_ie87n")]
 transform = Transform3D(1, 1.4901161e-08, 0, 1.4901161e-08, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_6d1h2")
+mesh = SubResource("ImmediateMesh_q00cy")
 skeleton = NodePath("../..")
 BaseRadius = 0.14
 InitialRotation = 45.0
@@ -2640,7 +2642,7 @@ shape = SubResource("BoxShape3D_rpd6q")
 script = ExtResource("118_tkrox")
 _initial = NodePath("SC_TestSpawner")
 _killRegen = 15.0
-_combatStats = NodePath("../../../CanvasLayer/UIW_CombatStats")
+_combatStats = NodePath("../../../CanvasLayer/CombatStats/UIW_CombatStats")
 _statsInput = NodePath("../../../CanvasLayer/PI_Stats")
 metadata/_custom_type_script = "uid://bwxdr2xchhkya"
 
@@ -2845,11 +2847,41 @@ _pauseGame = false
 script = ExtResource("47_6ubnd")
 metadata/_custom_type_script = "uid://bkkj6g5jwcpqc"
 
-[node name="UIW_CombatStats" parent="CanvasLayer" unique_id=815525186 node_paths=PackedStringArray("_statsInput") instance=ExtResource("46_nag6q")]
+[node name="CombatStats" type="BoxContainer" parent="CanvasLayer" unique_id=1068074049]
 visible = false
-offset_top = -390.0
-offset_bottom = -245.99982
-_statsInput = NodePath("../PI_Stats")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -225.0
+offset_top = -78.0
+offset_right = 225.0
+offset_bottom = 78.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("47_grxjf")
+theme_override_constants/separation = 40
+vertical = true
+
+[node name="LastResults" type="PanelContainer" parent="CanvasLayer/CombatStats" unique_id=382865329]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/CombatStats/LastResults" unique_id=868072571]
+layout_mode = 2
+text = "LAST_RESULTS_LABEL"
+horizontal_alignment = 1
+
+[node name="UIW_CombatStats" parent="CanvasLayer/CombatStats" unique_id=815525186 instance=ExtResource("46_nag6q")]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/CombatStats" unique_id=243623877]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+text = "RETURN_BUTTON"
 
 [node name="UI_ScoreMarkManager" type="Control" parent="CanvasLayer" unique_id=2128610115 node_paths=PackedStringArray("_scoreMark")]
 layout_mode = 3
@@ -2879,6 +2911,7 @@ metadata/_custom_type_script = "uid://baxgvm22qvjah"
 layout_mode = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer" unique_id=1454411771]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -2932,6 +2965,12 @@ script = ExtResource("51_kjcr2")
 _scoreTrans = 4
 _scoreTransTime = 0.8
 
+[node name="ShowScore" type="Node" parent="CanvasLayer" unique_id=252717910 node_paths=PackedStringArray("_escapeMenu", "_combatStats", "_statsInput")]
+script = ExtResource("53_00ph2")
+_escapeMenu = NodePath("../ColorRect")
+_combatStats = NodePath("../CombatStats")
+_statsInput = NodePath("../PI_Stats")
+
 [node name="MISC_TimeScaler" type="Node" parent="." unique_id=1895755438]
 script = ExtResource("46_femlh")
 metadata/_custom_type_script = "uid://ba04qst68odml"
@@ -2940,12 +2979,20 @@ metadata/_custom_type_script = "uid://ba04qst68odml"
 [connection signal="EarnScore" from="entities/AimArena/SC_GameManager" to="CanvasLayer/PanelContainer/BoxContainer/HBoxContainer/Score" method="OnEarnScore"]
 [connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/ColorRect" method="Open"]
 [connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/ColorRect" method="Enable"]
-[connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/PanelContainer/BoxContainer/HBoxContainer/Score" method="Reset"]
+[connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/ColorRect/VBoxContainer/Results" method="show"]
+[connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/CombatStats/LastResults" method="show"]
+[connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/CombatStats/Button" method="show"]
 [connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/PanelContainer" method="hide"]
 [connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/PanelContainer/BoxContainer/HBoxContainer2/Timer" method="OnGameEnd"]
+[connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/PanelContainer/BoxContainer/HBoxContainer/Score" method="Reset"]
+[connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/ShowScore" method="ShowScores"]
+[connection signal="StartGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/CombatStats/LastResults" method="hide"]
+[connection signal="StartGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/CombatStats/Button" method="hide"]
 [connection signal="StartGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/PanelContainer" method="show"]
 [connection signal="StartGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/PanelContainer/BoxContainer/HBoxContainer2/Timer" method="OnGameStart"]
 [connection signal="Stop" from="entities/AimArena/SC_GameManager/SC_TestSpawner" to="entities/AimArena/SC_GameManager" method="EndGame"]
 [connection signal="pressed" from="CanvasLayer/ColorRect/VBoxContainer/Play" to="SC_ArenaGameStarter" method="StartGame"]
+[connection signal="pressed" from="CanvasLayer/ColorRect/VBoxContainer/Results" to="CanvasLayer/ShowScore" method="ShowScores"]
+[connection signal="pressed" from="CanvasLayer/CombatStats/Button" to="CanvasLayer/ColorRect" method="ExitCurrent"]
 
 [editable path="CanvasLayer/ColorRect"]

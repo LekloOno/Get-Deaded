@@ -7,7 +7,7 @@ public partial class UIW_WeaponStat : UIW_Stats
     [Export] private UIW_FireStat _fireStatTemplate;
     private List<UIW_FireStat> _firesStat = [];
 
-    public void Initialize(STAT_Weapon weapon)
+    public void Initialize(STAT_Weapon weapon, bool staticBind = false)
     {
         if (_fireStatTemplate.GetParent() is Node parent)
             parent.RemoveChild(_fireStatTemplate);
@@ -20,7 +20,7 @@ public partial class UIW_WeaponStat : UIW_Stats
         foreach (STAT_Fire fire in weapon.Fires)
         {
             UIW_FireStat stat = (UIW_FireStat) _fireStatTemplate.Duplicate();
-            stat.Initialize(fire);
+            stat.Initialize(fire, staticBind);
             _firesStat.Add(stat);
             AddChild(stat);
         }

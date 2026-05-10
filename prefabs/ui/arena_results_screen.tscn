@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://0v6fx5kvo3ff"]
+
+[ext_resource type="Theme" uid="uid://cwy3efvgqscby" path="res://assets/ui/stats_theme.tres" id="1_s2gwr"]
+[ext_resource type="Script" uid="uid://bv13oqdudxna5" path="res://script/ui/combat/weapon/statistics/UIW_CombatStats.cs" id="2_lccc3"]
+[ext_resource type="PackedScene" uid="uid://di6ks47ucoai4" path="res://prefabs/ui/ui_playerstat.tscn" id="3_13osb"]
+[ext_resource type="Theme" uid="uid://ddkca4fk8kto5" path="res://assets/ui/menu_theme.tres" id="4_qtytk"]
+
+[node name="ArenaResultsScreen" type="Control" unique_id=71268006]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UIW_CombatStats" type="BoxContainer" parent="." unique_id=1777410882 node_paths=PackedStringArray("_uiPlayerStatTemplate", "_statsInput")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -225.0
+offset_top = -390.0
+offset_right = 225.0
+offset_bottom = -245.99982
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = ExtResource("1_s2gwr")
+vertical = true
+script = ExtResource("2_lccc3")
+_uiPlayerStatTemplate = NodePath("PanelContainer/UIW_PlayerStat")
+_statsInput = NodePath("")
+metadata/_custom_type_script = "uid://bv13oqdudxna5"
+
+[node name="PanelContainer" type="PanelContainer" parent="UIW_CombatStats" unique_id=363381016]
+layout_mode = 2
+
+[node name="UIW_PlayerStat" parent="UIW_CombatStats/PanelContainer" unique_id=236269413 instance=ExtResource("3_13osb")]
+layout_mode = 2
+theme = ExtResource("4_qtytk")

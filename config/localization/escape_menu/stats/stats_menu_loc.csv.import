@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://c1aj1knkb4481"
+
+[deps]
+
+files=["res://config/localization/escape_menu/stats/stats_menu_loc.en.translation", "res://config/localization/escape_menu/stats/stats_menu_loc.fr.translation"]
+
+source_file="res://config/localization/escape_menu/stats/stats_menu_loc.csv"
+dest_files=["res://config/localization/escape_menu/stats/stats_menu_loc.en.translation", "res://config/localization/escape_menu/stats/stats_menu_loc.fr.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

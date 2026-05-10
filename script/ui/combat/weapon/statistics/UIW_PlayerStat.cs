@@ -15,16 +15,21 @@ public partial class UIW_PlayerStat : UIW_Stats
 	private STAT_Combat _combatStats;
 	private Observable<uint> _score;
 	private bool _boundToData = false;
+	private bool _staticBind = true;
 
 	private void UpdateDamage(float value) {_damageLabel.Text = Mathf.Floor(value) + "";}
 	private void UpdateKills(int value) {_killsLabel.Text = value + "";}
 	private void UpdateDeaths(int value) {_deathsLabel.Text = value + "";}
 	private void UpdateScore(uint value) {_scoreLabel.Text = value + "";}
 
-	public void Initialize(STAT_Combat combat, Observable<uint> score)
+	public void Initialize(STAT_Combat combat, Observable<uint> score, bool staticBind = false)
 	{
 		_combatStats = combat;
 		_score = score;
+		_staticBind = staticBind;
+
+		if (staticBind)
+			StaticInitialize();
 		
 		Bind();
 
@@ -39,10 +44,18 @@ public partial class UIW_PlayerStat : UIW_Stats
 		foreach (STAT_Weapon weapon in combat.Weapons)
 		{
 			UIW_WeaponStat stat = (UIW_WeaponStat) _weaponStatTemplate.Duplicate();
-			stat.Initialize(weapon);
+			stat.Initialize(weapon, staticBind);
 			_weaponsStats.Add(stat);
 			AddChild(stat);
 		}
+	}
+
+	private void StaticInitialize()
+	{
+		UpdateKills(_combatStats.Kills);
+		UpdateDamage(_combatStats.Damage);
+		UpdateDeaths(_combatStats.Deaths);
+		UpdateScore(_score.Value);
 	}
 
 
@@ -59,6 +72,9 @@ public partial class UIW_PlayerStat : UIW_Stats
 
 	private void Bind()
 	{
+		if (_staticBind)
+			return;
+
 		if (_combatStats == null)
 			return;
 
@@ -74,6 +90,9 @@ public partial class UIW_PlayerStat : UIW_Stats
 
 	private void Unbind()
 	{
+		if (_staticBind)
+			return;
+
 		if (_combatStats == null)
 			return;
 

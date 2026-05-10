@@ -81,6 +81,12 @@ layout_mode = 2
 size_flags_vertical = 4
 text = "PLAY_BUTTON"
 
+[node name="Results" type="Button" parent="VBoxContainer" unique_id=1985240647]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+text = "RESULTS_BUTTON"
+
 [node name="Settings" type="Button" parent="VBoxContainer" unique_id=1799708557 node_paths=PackedStringArray("settings_menu")]
 layout_mode = 2
 size_flags_vertical = 4
