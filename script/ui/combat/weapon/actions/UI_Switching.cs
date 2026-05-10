@@ -14,6 +14,7 @@ public partial class UI_Switching : TextureProgressBar
     public override void _Ready()
     {
         Visible = false;
+        SetProcess(false);
         _weaponsHandler.SwitchIn += OnSwitchIn;
         _weaponsHandler.SwitchOut += OnSwitchOut;
         _weaponsHandler.SwitchCanceled += (_, _) => OnSwitchCancelled();
