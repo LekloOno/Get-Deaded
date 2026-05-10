@@ -11,7 +11,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
     [Export] private float _drag = 10f;
     [Export] private Color _hitColor = new(1f, 1f, 1f, 1f);
     [Export] private float _hitTime = 0.15f;
-    [Export] private uint _score = 0;
+    [Export] public uint Score {get; set;} = 50;
     [Export] private PhysicalBoneSimulator3D _ragdolSimulator;
     [Export] private Skeleton3D _skeleton;
     [Export] public PROTO_Mover Mover;
@@ -20,8 +20,8 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
     [Export] public PCT_SimpleTraumaData KillTraumaData {get; private set;}
     [Export] public PW_FireBis Fire;
     [Export] public Node3D AimPosition {get; private set;}
-    [Export] private float _speedSpreadFactor = 10f;
-    [Export] private double _reactionTime = 0.2f;
+    [Export] public float SpeedSpreadFactor = 10f;
+    [Export] public double ReactionTime = 0.2f;
     private double _timeOnSight = 0f;
     private bool _shooting = false;
 
@@ -59,8 +59,6 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
             _jointMeshMaterial.SetShaderParameter("albedo", jointColor);
         }
     }
-
-    public uint Score => _score;
 
     public GC_HealthManager HealthManager => _healthManager;
 
@@ -242,7 +240,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
         else
             _timeOnSight = 0;
 
-        bool nextShoot = _timeOnSight >= _reactionTime;
+        bool nextShoot = _timeOnSight >= ReactionTime;
 
         if (nextShoot)
             Aim();
@@ -258,7 +256,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 
     private void Aim()
     {
-        float spread = SpreadFromTarget() * _speedSpreadFactor;
+        float spread = SpreadFromTarget() * SpeedSpreadFactor;
         LookAtWithSpread(Fire, _target.Body.GlobalTransform.Origin, spread);
     }
 

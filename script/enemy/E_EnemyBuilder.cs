@@ -7,6 +7,9 @@ public partial class E_EnemyBuilder : Resource
     [Export] private PackedScene _fire;
     [Export] private GCD_Health _health;
     [Export] private PROTO_MoverData _moverData;
+    [Export] private uint _score = 50;
+    [Export] private float _speedSpreadFactor = 15f;
+    [Export] private double _reactionTime = 0.2f;
 
     public E_Enemy Build()
     {
@@ -31,6 +34,11 @@ public partial class E_EnemyBuilder : Resource
         enemy.Fire = fire;
 
         enemy.AimPosition.AddChild(fire);
+
+        // Stats
+        enemy.Score = _score;
+        enemy.SpeedSpreadFactor = _speedSpreadFactor;
+        enemy.ReactionTime = _reactionTime;
 
 
         return enemy;
