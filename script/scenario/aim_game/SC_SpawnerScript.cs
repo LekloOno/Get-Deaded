@@ -16,8 +16,8 @@ public abstract partial class SC_SpawnerScript : Node3D
 
     public void Start(GE_IActiveCombatEntity starter)
     {
-        _gameManager.Interrupt -= StopSpec;
-        _gameManager.Interrupt += StopSpec;
+        _gameManager.Interrupt -= Interrupt;
+        _gameManager.Interrupt += Interrupt;
         Starter = starter;
         StartSpec(starter);
     }
@@ -39,7 +39,12 @@ public abstract partial class SC_SpawnerScript : Node3D
     {   
         EmitSignal(SignalName.Stop);
         EmitSignal(SignalName.HandleNext, this);
-        _gameManager.Interrupt -= StopSpec;
+        Interrupt();
+    }
+
+    private void Interrupt()
+    {
+        _gameManager.Interrupt -= Interrupt;
         StopSpec();
     }
     
