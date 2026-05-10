@@ -138,6 +138,12 @@ public abstract partial class PW_Weapon : WeaponComponent
         foreach (PW_Fire fire in _fires)
             fire.RemoveDamageMultiplier(multiplier);
     }
+
+    public void ClearDamageMultiplier()
+    {
+        foreach (PW_Fire fire in _fires)
+            fire.ClearDamageMultiplier();
+    }
     
     /// <summary>
     /// Allows to retrieve existing fire modes for this weapon.

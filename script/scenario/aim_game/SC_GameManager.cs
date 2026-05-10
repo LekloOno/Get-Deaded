@@ -104,6 +104,7 @@ public partial class SC_GameManager : Node
 
     private void Reset()
     {
+        _player.WeaponsHandler.ClearDamageMultiplier();
         _statsInput.DisableAction();
         SC_EntitiesManager.DisablePickups();
         EmitSignal(SignalName.ResetGame);

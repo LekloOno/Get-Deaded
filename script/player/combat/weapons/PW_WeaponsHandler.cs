@@ -92,6 +92,12 @@ public partial class PW_WeaponsHandler : WeaponSystem
             weapon.RemoveDamageMultiplier(multiplier);
     }
 
+    public void ClearDamageMultiplier()
+    {
+        foreach (PW_Weapon weapon in _weapons)
+            weapon.ClearDamageMultiplier();
+    }
+
     public void Init(GE_IActiveCombatEntity owner)
     {
         OwnerEntity = owner;
