@@ -10,10 +10,11 @@ public partial class SC_GameManager : Node
     [Export] private float _killRegen = 10f;
     [Signal] public delegate void InitializeEventHandler(SC_GameManager manager);
     [Signal] public delegate void ResetGameEventHandler();
+    [Signal] public delegate void EarnScoreEventHandler(uint earned, uint score);
     [Export] private UIW_CombatStats _combatStats;
     [Export] private PI_Stats _statsInput;
     public STAT_Combat Stats {get; private set;}
-    private uint _score;
+    public Observable<uint> Score {get; private set;} = new();
     public SceneTreeTimer CountDownTimer;
     private GE_IActiveCombatEntity _player;
     private GC_Shield _shield;
@@ -41,7 +42,7 @@ public partial class SC_GameManager : Node
                 foreach (PW_Fire fire in weapon.Fires)
                     fire.Ammos.Initialize();
 
-        _score = 0;
+        Score.Value = 0;
 
         player.WeaponsHandler.DisableFire();
 
@@ -58,7 +59,7 @@ public partial class SC_GameManager : Node
 
         _combatStats.Clear();
         Stats = new(player);
-        _combatStats.AddStat(Stats);
+        _combatStats.AddStat(Stats, Score);
                     
         player.HealthManager.OnDie += DoInterrupt;
         _player = player;
@@ -86,7 +87,8 @@ public partial class SC_GameManager : Node
 
     public void HandleKill(E_IEnemy enemy, GC_Health senderLayer)
     {
-        _score += enemy.Score;
+        Score.Value += enemy.Score;
+        EmitSignal(SignalName.EarnScore, enemy.Score, Score.Value);
 
         if (_shield != null)
             _shield.Regen(_killRegen);

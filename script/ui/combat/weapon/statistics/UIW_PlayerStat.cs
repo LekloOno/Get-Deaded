@@ -9,18 +9,22 @@ public partial class UIW_PlayerStat : UIW_Stats
 	[Export] private Label _damageLabel;
 	[Export] private Label _killsLabel;
 	[Export] private Label _deathsLabel;
+	[Export] private Label _scoreLabel;
 
 	private List<UIW_WeaponStat> _weaponsStats = [];
 	private STAT_Combat _combatStats;
+	private Observable<uint> _score;
 	private bool _boundToData = false;
 
 	private void UpdateDamage(float value) {_damageLabel.Text = Mathf.Floor(value) + "";}
 	private void UpdateKills(int value) {_killsLabel.Text = value + "";}
 	private void UpdateDeaths(int value) {_deathsLabel.Text = value + "";}
+	private void UpdateScore(uint value) {_scoreLabel.Text = value + "";}
 
-	public void Initialize(STAT_Combat combat)
+	public void Initialize(STAT_Combat combat, Observable<uint> score)
 	{
 		_combatStats = combat;
+		_score = score;
 		
 		Bind();
 
@@ -64,6 +68,7 @@ public partial class UIW_PlayerStat : UIW_Stats
 		_combatStats.Damage.Subscribe(UpdateDamage);
 		_combatStats.Kills.Subscribe(UpdateKills);
 		_combatStats.Deaths.Subscribe(UpdateDeaths);
+		_score.Subscribe(UpdateScore);
 		_boundToData = true;
 	}
 
@@ -78,6 +83,7 @@ public partial class UIW_PlayerStat : UIW_Stats
 		_combatStats.Damage.Unsubscribe(UpdateDamage);
 		_combatStats.Kills.Unsubscribe(UpdateKills);
 		_combatStats.Deaths.Unsubscribe(UpdateDeaths);
+		_score.Unsubscribe(UpdateScore);
 		_boundToData = false;
 	}
 }
