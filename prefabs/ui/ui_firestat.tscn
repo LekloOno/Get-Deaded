@@ -35,19 +35,19 @@ columns = 4
 
 [node name="KillsLab" type="Label" parent="GridContainer" unique_id=1702083682]
 layout_mode = 2
-text = "Kills"
+text = "STATS_KILLS_LABEL"
 
 [node name="DamagesLab" type="Label" parent="GridContainer" unique_id=756227948]
 layout_mode = 2
-text = "Damages"
+text = "STATS_DAMAGES_LABEL"
 
 [node name="AccuracyLab" type="Label" parent="GridContainer" unique_id=416113270]
 layout_mode = 2
-text = "Accuracy"
+text = "STATS_ACCURACY_LABEL"
 
 [node name="CriticalLab" type="Label" parent="GridContainer" unique_id=70763874]
 layout_mode = 2
-text = "Critical"
+text = "STATS_CRITICAL_LABEL"
 
 [node name="Kills" type="Label" parent="GridContainer" unique_id=520342835]
 layout_mode = 2

@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://cxjvo2x7pgake"
+
+[deps]
+
+files=["res://config/localization/game/game_arena_loc.en.translation", "res://config/localization/game/game_arena_loc.fr.translation"]
+
+source_file="res://config/localization/game/game_arena_loc.csv"
+dest_files=["res://config/localization/game/game_arena_loc.en.translation", "res://config/localization/game/game_arena_loc.fr.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

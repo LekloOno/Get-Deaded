@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://c1kf3tm81mkov"
+
+[deps]
+
+files=["res://config/localization/stats/stats_track_loc.en.translation", "res://config/localization/stats/stats_track_loc.fr.translation"]
+
+source_file="res://config/localization/stats/stats_track_loc.csv"
+dest_files=["res://config/localization/stats/stats_track_loc.en.translation", "res://config/localization/stats/stats_track_loc.fr.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

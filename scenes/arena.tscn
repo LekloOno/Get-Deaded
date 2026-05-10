@@ -2911,7 +2911,6 @@ metadata/_custom_type_script = "uid://baxgvm22qvjah"
 layout_mode = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer" unique_id=1454411771]
-visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -2925,14 +2924,20 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_ur278")
 [node name="BoxContainer" type="BoxContainer" parent="CanvasLayer/PanelContainer" unique_id=1405906859]
 layout_mode = 2
 
+[node name="Sep2" type="Label" parent="CanvasLayer/PanelContainer/BoxContainer" unique_id=1576844868]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.91486377, 0.92964065, 0.9237171, 1)
+theme_override_font_sizes/font_size = 25
+
 [node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/PanelContainer/BoxContainer" unique_id=829331390]
 layout_mode = 2
+theme_override_constants/separation = 20
 
 [node name="TimerLab" type="Label" parent="CanvasLayer/PanelContainer/BoxContainer/HBoxContainer2" unique_id=1414548261]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.91486377, 0.92964065, 0.9237171, 1)
 theme_override_font_sizes/font_size = 25
-text = " TIME "
+text = "GAME_TIME"
 
 [node name="Timer" type="Label" parent="CanvasLayer/PanelContainer/BoxContainer/HBoxContainer2" unique_id=1308024103]
 custom_minimum_size = Vector2(50, 0)
@@ -2945,16 +2950,17 @@ script = ExtResource("51_5u5ld")
 layout_mode = 2
 theme_override_colors/font_color = Color(0.91486377, 0.92964065, 0.9237171, 1)
 theme_override_font_sizes/font_size = 25
-text = "|"
+text = "| "
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer/BoxContainer" unique_id=972770422]
 layout_mode = 2
+theme_override_constants/separation = 20
 
 [node name="ScoreLab" type="Label" parent="CanvasLayer/PanelContainer/BoxContainer/HBoxContainer" unique_id=1462776154]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.91486377, 0.92964065, 0.9237171, 1)
 theme_override_font_sizes/font_size = 25
-text = " SCORE "
+text = "STATS_SCORE_LABEL"
 
 [node name="Score" type="Label" parent="CanvasLayer/PanelContainer/BoxContainer/HBoxContainer" unique_id=1950786795]
 custom_minimum_size = Vector2(90, 0)
@@ -2964,6 +2970,11 @@ text = "000000"
 script = ExtResource("51_kjcr2")
 _scoreTrans = 4
 _scoreTransTime = 0.8
+
+[node name="Sep3" type="Label" parent="CanvasLayer/PanelContainer/BoxContainer" unique_id=1582495455]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.91486377, 0.92964065, 0.9237171, 1)
+theme_override_font_sizes/font_size = 25
 
 [node name="ShowScore" type="Node" parent="CanvasLayer" unique_id=252717910 node_paths=PackedStringArray("_escapeMenu", "_combatStats", "_statsInput")]
 script = ExtResource("53_00ph2")
