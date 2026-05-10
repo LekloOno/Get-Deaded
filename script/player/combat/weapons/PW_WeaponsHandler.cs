@@ -450,7 +450,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
         _switchingOut = false;
         _switchingIn = true;
 
-        float time = _targetWeapon.SwitchOutTime;
+        float time = _targetWeapon.SwitchInTime;
 
         _switchTimer = GetTree().CreateTimer(time, false, true);
         _switchTimer.Timeout += EndSwitch;
