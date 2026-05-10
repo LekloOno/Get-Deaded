@@ -3,18 +3,23 @@ using Godot;
 using System;
 
 [GlobalClass]
-public partial class SC_TestSpawner : SC_SpawnerScript
+public partial class SC_SequenceSpawner : SC_SpawnerScript
 {
-    // We could make an improved object pooling by having two lists, one for the pool, one for the 
-    [Export] private PackedScene _enemy;
+    [Export] private Godot.Collections.Array<E_EnemyBuilder> _enemyBuilders;
     [Export] private uint _count = 4;
     [Export] private float _spawnRadius = 20f;
     [Export] private float _spawnMinDistance = 7f;
     [Export] private float _respawnDelay = 0.52f;
     [Export] private float _roundTime = 30f;
-    private Dictionary<E_IEnemy, Timer> _respawnTimers = [];
+    private List<Timer> _respawnTimers = [];
+    private Dictionary<E_IEnemy, int> _enemyToPool = [];
     private Random _rng = new();
     public SceneTreeTimer RoundTimer;
+
+    private List<Queue<E_IEnemy>> _enemyPools = [];
+
+    private int _spawnPoolIndex;
+    private int _timerIndex;
 
     public override void _Ready()
     {
@@ -23,22 +28,57 @@ public partial class SC_TestSpawner : SC_SpawnerScript
 
     private void CreateBots()
     {
-        for (int i = 0; i < _count; i++)
+        for (int i = 0; i < _count; i ++)
         {
-            E_Enemy enemy = _enemy.Instantiate<E_Enemy>();
-            CreateEnemy(enemy);
+            Timer timer = new() {
+                OneShot = true,
+                ProcessMode = ProcessModeEnum.Pausable,
+                ProcessCallback = Timer.TimerProcessCallback.Physics
+            };
+            timer.Timeout += SpawnNextEnemy;
+
+            _respawnTimers.Add(timer);
+            AddChild(timer);
         }
+
+        for (int poolIndex = 0; poolIndex < _enemyBuilders.Count; poolIndex ++)
+        {
+            E_EnemyBuilder builder = _enemyBuilders[poolIndex];
+            Queue<E_IEnemy> pool = [];
+            _enemyPools.Add([]);
+            for (int i = 0; i < _count; i++)
+            {
+                E_Enemy enemy = builder.Build();
+                _enemyToPool.Add(enemy, poolIndex);
+                CreateEnemy(enemy);
+            }
+        }
+
+        
     }
 
     private void SpawnBots()
     {
-        foreach (E_IEnemy enemy in Enemies)
-            SpawnEnemy(enemy);
+        for (int i = 0; i < _count; i ++)
+            SpawnNextEnemy();
+    }
+
+    private void SpawnNextEnemy()
+    {
+        E_IEnemy enemy = _enemyPools[_spawnPoolIndex].Dequeue();
+        SpawnEnemy(enemy);
+
+        _spawnPoolIndex ++;
+        _spawnPoolIndex %= _enemyBuilders.Count;
     }
 
     private void Killed(E_IEnemy enemy)
     {
-        _respawnTimers[enemy].Start(_respawnDelay);
+        _respawnTimers[_timerIndex].Start(_respawnDelay);
+        
+        _timerIndex ++;
+        _timerIndex %= (int) _count;
+
         RemoveEnemy(enemy);
     }
 
@@ -46,8 +86,11 @@ public partial class SC_TestSpawner : SC_SpawnerScript
     {
         RoundTimer.Timeout -= DoStop;
         RoundTimer = null;
+
+        _timerIndex = 0;
+        _spawnPoolIndex = 0;
         
-        foreach (Timer timer in _respawnTimers.Values)
+        foreach (Timer timer in _respawnTimers)
             timer.Stop();
 
         ClearEnemies();
@@ -88,27 +131,22 @@ public partial class SC_TestSpawner : SC_SpawnerScript
 
     protected override void CreateEnemySpec(E_IEnemy enemy)
     {
+        int pool = _enemyToPool[enemy];
+        _enemyPools[pool].Enqueue(enemy);
+
         if (enemy is not Node node)
             return;
 
-        Timer timer = new() {
-            OneShot = true,
-            ProcessMode = ProcessModeEnum.Pausable,
-            ProcessCallback = Timer.TimerProcessCallback.Physics
-        };
-        timer.Timeout += () => SpawnEnemy(enemy);
-        _respawnTimers.Add(enemy, timer);
-        AddChild(timer);
         AddChild(node);
         enemy.Pool();
     }
 
     protected override void SpawnEnemy(E_IEnemy enemy)
     {
-        if (enemy is not E_Enemy node)
+        if (enemy is not Node3D node)
             return;
 
-        node.Spawn();
+        enemy.Spawn();
         node.Position = RandomPosition();
 
         Vector3 target = _player == null
@@ -124,16 +162,14 @@ public partial class SC_TestSpawner : SC_SpawnerScript
 
     protected override void RemoveEnemy(E_IEnemy enemy)
     {
-        if (!_respawnTimers.TryGetValue(enemy, out Timer timer))
-            return;
-
+        int pool = _enemyToPool[enemy];
+        _enemyPools[pool].Enqueue(enemy);
         enemy.Pool();
     }
 
     protected override void QueueFreeEnemySpec(E_IEnemy enemy)
     {
         enemy.OnDisable -= Killed;
-        _respawnTimers.Remove(enemy, out Timer timer);
-        timer?.QueueFree();
+        _enemyToPool.Remove(enemy);
     }
 }

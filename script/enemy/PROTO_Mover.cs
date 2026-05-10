@@ -4,6 +4,13 @@ using System;
 [GlobalClass]
 public partial class PROTO_Mover : Node
 {
+    public PROTO_Mover() {}
+    public PROTO_Mover(PROTO_MoverData data, Node3D dirNode) : this()
+    {
+        _data = data;
+        _dirNode = dirNode;
+    }
+
     [Export] private PROTO_MoverData _data;
     [Export] private Node3D _dirNode;
     public Node3D Target;

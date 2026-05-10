@@ -12,13 +12,14 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
     [Export] private Color _hitColor = new(1f, 1f, 1f, 1f);
     [Export] private float _hitTime = 0.15f;
     [Export] private uint _score = 0;
-    [Export] private GC_Health _healthOverride = null;
     [Export] private PhysicalBoneSimulator3D _ragdolSimulator;
     [Export] private Skeleton3D _skeleton;
-    [Export] private PROTO_Mover _mover;
+    [Export] public PROTO_Mover Mover;
+    [Export] public E_MoverWrapper MoverWrapper;
     [Export] private bool _aim;
     [Export] public PCT_SimpleTraumaData KillTraumaData {get; private set;}
-    [Export] private PW_FireBis _fire;
+    [Export] public PW_FireBis Fire;
+    [Export] public Node3D AimPosition {get; private set;}
     [Export] private float _speedSpreadFactor = 10f;
     [Export] private double _reactionTime = 0.2f;
     private double _timeOnSight = 0f;
@@ -43,7 +44,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
     private GE_ICombatEntity _target;
     private Node3D _targetNode;
 
-    public void SetTarget(Node3D target) => _mover.Target = target;
+    public void SetTarget(Node3D target) => Mover.Target = target;
 
     public float Alpha
     {
@@ -72,7 +73,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
         get => _target;
         set {
             if (value is Node3D node)
-                _mover.Target = node;
+                Mover.Target = node;
             _target = value;
         }
     }
@@ -81,10 +82,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
     public override void _Ready()
     {
         SetProcess(false);
-        _fire?.Initialize(this);
-
-        if (_healthOverride != null)
-            _healthManager.TopHealthLayer = _healthOverride;
+        Fire?.Initialize(this);
 
         _healthManager.TopHealthLayer.OnDie += (layer) => OnDie?.Invoke(this, layer);
         _healthManager.TopHealthLayer.OnDamage += (layer, damageArgs) => OnDamage?.Invoke(this, layer, damageArgs);
@@ -133,7 +131,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 
     public void Pool()
     {
-        _fire?.Disable();
+        Fire?.Disable();
         _shooting = false;
 
         if (!Enabled)
@@ -170,9 +168,9 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
         if (Enabled)
             return;
 
-        _fire?.Enable();
+        Fire?.Enable();
 
-        if (_mover != null)
+        if (Mover != null)
             SetProcess(true);
 
         Enabled = true;
@@ -201,8 +199,8 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
         {
             velocity = ApplyDrag(velocity, delta);
             
-            if (_mover != null)
-                velocity += _mover.GetAcceleration(velocity, delta);
+            if (Mover != null)
+                velocity += Mover.GetAcceleration(velocity, delta);
         }
         
         Velocity = velocity;
@@ -221,15 +219,15 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
     public override void _Process(double delta)
     {
         if (_aim)
-            _mover.Rotate(this);
+            Mover.Rotate(this);
     }
 
     public void Attack(double delta)
     {
-        if (_fire == null || _target == null)
+        if (Fire == null || _target == null)
             return;
 
-        Vector3 from = _fire.GlobalPosition;
+        Vector3 from = Fire.GlobalPosition;
         Vector3 to = _target.Body.GlobalTransform.Origin;
 
         var spaceState = GetWorld3D().DirectSpaceState;
@@ -253,15 +251,15 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
             return;
 
         if (nextShoot)
-            _shooting = _fire.Press();
+            _shooting = Fire.Press();
         else
-            _shooting = !_fire.Release();
+            _shooting = !Fire.Release();
     }
 
     private void Aim()
     {
         float spread = SpreadFromTarget() * _speedSpreadFactor;
-        LookAtWithSpread(_fire, _target.Body.GlobalTransform.Origin, spread);
+        LookAtWithSpread(Fire, _target.Body.GlobalTransform.Origin, spread);
     }
 
     public float SpreadFromTarget()

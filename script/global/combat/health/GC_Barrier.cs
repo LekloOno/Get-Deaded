@@ -3,6 +3,17 @@ using Godot;
 [GlobalClass]
 public partial class GC_Barrier : GC_Health
 {
+    public GC_Barrier(){}
+    public GC_Barrier(
+        float maxHealth,
+        GC_Health child,
+        float resistance,
+        ulong coolDown
+    ) : base(maxHealth, child) {
+        _resistance = resistance;
+        _coolDown = coolDown;
+    }
+
     [Export(PropertyHint.Range, "0.0,1.0")]
     private float _resistance;
     [Export(PropertyHint.Range, "0,1000")]

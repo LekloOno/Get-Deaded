@@ -1,0 +1,170 @@
+[gd_scene format=3 uid="uid://dpo37xs2mukfh"]
+
+[ext_resource type="Script" uid="uid://dfxf5gx573dd8" path="res://script/player/combat/weapons/fire/PWF_FullAutoBis.cs" id="1_sbode"]
+[ext_resource type="Script" uid="uid://d06gi2qjnjkyu" path="res://script/player/combat/weapons/shot/PWS_HitscanBis.cs" id="2_gbhdh"]
+[ext_resource type="Script" uid="uid://sujdlokcwnd6" path="res://script/global/combat/hit/GC_DamageModifier.cs" id="3_2o61a"]
+[ext_resource type="Script" uid="uid://cjmiash71uc7b" path="res://script/global/combat/hit/hit/GC_Hit.cs" id="4_q1nn4"]
+[ext_resource type="Script" uid="uid://cytkgtw0ebs3x" path="res://script/player/combat/weapons/trail/PW_Trail.cs" id="5_urkne"]
+[ext_resource type="Script" uid="uid://0w0m608ktkwu" path="res://script/vfx/combat/trail/moving_light/VFX_MovingLightTrail.cs" id="6_icvuv"]
+[ext_resource type="Script" uid="uid://cxiwvat6vddlp" path="res://script/player/combat/weapons/ammunition/PW_Ammunition.cs" id="7_6btbd"]
+[ext_resource type="Script" uid="uid://ck8fc665nx01w" path="res://script/player/audio/combat/weapons/fire/PAF_GenericBis.cs" id="8_hhgw5"]
+[ext_resource type="Script" uid="uid://dwg5mwrq18ow2" path="res://addons/GaudioProcessTree/nodes/modules/AUD_Layerer.cs" id="9_1jq3q"]
+[ext_resource type="Script" uid="uid://m0h486csofx4" path="res://addons/GaudioProcessTree/nodes/modules/AUD_Parallelizer.cs" id="10_voedh"]
+[ext_resource type="AudioStream" uid="uid://78knre50os6g" path="res://assets/sounds/combat/weapons/fires/oui.mp3" id="11_w72jt"]
+[ext_resource type="Script" uid="uid://dsv3ptnaeu18d" path="res://addons/GaudioProcessTree/nodes/stream_players/AUD_StreamPlayer3D.cs" id="12_6u4so"]
+[ext_resource type="AudioStream" uid="uid://bkilaxmf0setg" path="res://assets/sounds/combat/weapons/fires/revolver/pew_layer2_1.wav" id="13_wc1fi"]
+[ext_resource type="AudioStream" uid="uid://bas1dflcdofvu" path="res://assets/sounds/combat/weapons/fires/revolver/pew_layer2_2.wav" id="14_edyt1"]
+[ext_resource type="AudioStream" uid="uid://dghvyacggbmt3" path="res://assets/sounds/combat/weapons/fires/brrt/smg_fire_1.wav" id="15_c705d"]
+[ext_resource type="AudioStream" uid="uid://cc5jh18wdewdw" path="res://assets/sounds/combat/weapons/fires/expthing.wav" id="16_77ubq"]
+
+[sub_resource type="Resource" id="Resource_xwgbs"]
+script = ExtResource("3_2o61a")
+BodyPart = 0
+Modifier = 1.5
+metadata/_custom_type_script = "uid://sujdlokcwnd6"
+
+[sub_resource type="Resource" id="Resource_4u24w"]
+script = ExtResource("4_q1nn4")
+Damage = 1.0
+_inspectorModifiers = Array[Object]([SubResource("Resource_xwgbs")])
+metadata/_custom_type_script = "uid://cjmiash71uc7b"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pl05q"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(0.78782725, 0.3497283, 0, 0.5921569)
+emission_enabled = true
+emission = Color(1, 0.5254902, 0.29803923, 1)
+emission_energy_multiplier = 20.0
+
+[sub_resource type="Resource" id="Resource_b2nws"]
+resource_local_to_scene = true
+script = ExtResource("6_icvuv")
+_thickness = 0.04
+_bulletSpeed = 100.0
+_trailSpeed = 30.0
+_inclination = 45.0
+_material = SubResource("StandardMaterial3D_pl05q")
+metadata/_custom_type_script = "uid://0w0m608ktkwu"
+
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_14xey"]
+polyphony = 10
+
+[node name="PWF_FullAutoBis" type="Node3D" unique_id=687197906 node_paths=PackedStringArray("_shots", "_ammos")]
+script = ExtResource("1_sbode")
+_shots = [NodePath("PWS_HitscanBis")]
+_fireRate = 50
+_ammos = NodePath("PW_Ammunition")
+InfiniteMagazine = true
+metadata/_custom_type_script = "uid://dfxf5gx573dd8"
+
+[node name="PWS_HitscanBis" type="Node3D" parent="." unique_id=1814456107 node_paths=PackedStringArray("_trail")]
+script = ExtResource("2_gbhdh")
+_maxDistance = 30.0
+_hitData = SubResource("Resource_4u24w")
+EntitiesHitMask = 2
+_trail = NodePath("PW_Trail")
+metadata/_custom_type_script = "uid://d06gi2qjnjkyu"
+
+[node name="PW_Trail" type="Node3D" parent="PWS_HitscanBis" unique_id=1177287573]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.287, -0.225, -0.237)
+script = ExtResource("5_urkne")
+_trails = Array[Object]([SubResource("Resource_b2nws")])
+metadata/_custom_type_script = "uid://cytkgtw0ebs3x"
+
+[node name="PW_Ammunition" type="Node3D" parent="." unique_id=1933123422]
+script = ExtResource("7_6btbd")
+InfiniteAmmo = true
+metadata/_custom_type_script = "uid://cxiwvat6vddlp"
+
+[node name="PAF_GenericBis" type="Node3D" parent="." unique_id=525811590 node_paths=PackedStringArray("_fire", "_sound")]
+script = ExtResource("8_hhgw5")
+_fire = NodePath("..")
+_sound = NodePath("layers")
+metadata/_custom_type_script = "uid://ck8fc665nx01w"
+
+[node name="layers" type="Node" parent="PAF_GenericBis" unique_id=402255447]
+script = ExtResource("9_1jq3q")
+UseTimeScale = true
+BaseVolumeDb = -2.0
+
+[node name="tail" type="Node" parent="PAF_GenericBis/layers" unique_id=1931181941]
+script = ExtResource("10_voedh")
+PolyphonicStream = SubResource("AudioStreamPolyphonic_14xey")
+Sounds = Array[AudioStream]([ExtResource("11_w72jt")])
+MinPitch = 0.8
+MaxPitch = 1.2
+BaseVolumeDb = -5.0
+
+[node name="player" type="Node" parent="PAF_GenericBis/layers/tail" unique_id=773333172 node_paths=PackedStringArray("Player")]
+script = ExtResource("12_6u4so")
+Player = NodePath("../../../tail")
+
+[node name="layer1" type="Node" parent="PAF_GenericBis/layers" unique_id=24865626]
+script = ExtResource("10_voedh")
+PolyphonicStream = SubResource("AudioStreamPolyphonic_14xey")
+Sounds = Array[AudioStream]([ExtResource("13_wc1fi"), ExtResource("14_edyt1")])
+MaxPitch = 1.325
+BaseVolumeDb = -78.4
+BasePitchScale = 1.2
+
+[node name="player" type="Node" parent="PAF_GenericBis/layers/layer1" unique_id=717959219 node_paths=PackedStringArray("Player")]
+script = ExtResource("12_6u4so")
+Player = NodePath("../../../layer1")
+BaseVolumeDb = 2.0
+
+[node name="layer2" type="Node" parent="PAF_GenericBis/layers" unique_id=1486967124]
+script = ExtResource("10_voedh")
+PolyphonicStream = SubResource("AudioStreamPolyphonic_14xey")
+Sounds = Array[AudioStream]([ExtResource("15_c705d")])
+MinPitch = 0.7
+MaxPitch = 0.8
+BaseVolumeDb = -70.0
+
+[node name="player" type="Node" parent="PAF_GenericBis/layers/layer2" unique_id=1151464377 node_paths=PackedStringArray("Player")]
+script = ExtResource("12_6u4so")
+Player = NodePath("../../../layer2")
+BaseVolumeDb = 4.0
+
+[node name="layer3" type="Node" parent="PAF_GenericBis/layers" unique_id=742692019]
+script = ExtResource("10_voedh")
+PolyphonicStream = SubResource("AudioStreamPolyphonic_14xey")
+Sounds = Array[AudioStream]([ExtResource("16_77ubq")])
+MaxPitch = 1.1
+BaseVolumeDb = -14.0
+BasePitchScale = 2.0
+
+[node name="player" type="Node" parent="PAF_GenericBis/layers/layer3" unique_id=1570807412 node_paths=PackedStringArray("Player")]
+script = ExtResource("12_6u4so")
+Player = NodePath("../../../layer3")
+BaseVolumeDb = 2.0
+
+[node name="tail" type="AudioStreamPlayer3D" parent="PAF_GenericBis" unique_id=1058937035]
+stream = SubResource("AudioStreamPolyphonic_14xey")
+volume_db = -7.0
+unit_size = 20.0
+bus = &"Weapons"
+attenuation_filter_db = 0.0
+
+[node name="layer1" type="AudioStreamPlayer3D" parent="PAF_GenericBis" unique_id=1337805553]
+stream = SubResource("AudioStreamPolyphonic_14xey")
+volume_db = -78.4
+unit_size = 100.0
+bus = &"Weapons"
+attenuation_filter_db = 0.0
+
+[node name="layer2" type="AudioStreamPlayer3D" parent="PAF_GenericBis" unique_id=1924351919]
+stream = SubResource("AudioStreamPolyphonic_14xey")
+attenuation_model = 2
+volume_db = -68.0
+unit_size = 6.0
+bus = &"Weapons"
+attenuation_filter_db = 0.0
+
+[node name="layer3" type="AudioStreamPlayer3D" parent="PAF_GenericBis" unique_id=1671656138]
+stream = SubResource("AudioStreamPolyphonic_14xey")
+attenuation_model = 2
+volume_db = -14.0
+unit_size = 6.0
+bus = &"Weapons"
+attenuation_filter_db = 0.0

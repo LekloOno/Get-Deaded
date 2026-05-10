@@ -9,23 +9,37 @@ public abstract partial class SC_SpawnerScript : Node3D
     [Export] protected SC_GameManager _gameManager;
     protected PM_Controller _player;
     [Signal] public delegate void StopEventHandler();   // Called at the end of this scene script
+    [Signal] public delegate void HandleNextEventHandler(SC_SpawnerScript prev);
     public EventHandler<HitEventArgs> Hit;          // Report hits handled by bots spawned from this script
     public List<E_IEnemy> Enemies {get; private set;} = [];
+    public GE_IActiveCombatEntity Starter {get; private set;}
 
-    public override void _EnterTree()
+    public void Start(GE_IActiveCombatEntity starter)
     {
         _gameManager.Interrupt -= StopSpec;
         _gameManager.Interrupt += StopSpec;
+        Starter = starter;
+        StartSpec(starter);
+    }
+
+    public void TakeHandle(SC_SpawnerScript prev)
+    {
+        if (prev.Starter == null)
+            return;
+
+        Start(prev.Starter);
     }
 
     /// <summary>
     /// Called when starting this spawn script.
     /// Typically setup the dummies entities.
     /// </summary>
-    public abstract void Start(GE_ICombatEntity starter);
+    protected abstract void StartSpec(GE_ICombatEntity starter);
     public void DoStop()
     {   
         EmitSignal(SignalName.Stop);
+        EmitSignal(SignalName.HandleNext, this);
+        _gameManager.Interrupt -= StopSpec;
         StopSpec();
     }
     

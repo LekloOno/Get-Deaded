@@ -7,6 +7,14 @@ public delegate void HealthEventHandler(GC_Health senderLayer);
 [GlobalClass]
 public partial class GC_Health : Node
 {
+    public GC_Health(){}
+    public GC_Health(float maxHealth, GC_Health child)
+    {
+        _maxHealth = maxHealth;
+        Child = child;
+        CurrentHealth = 0f;     
+    }
+
     [Export] protected float _maxHealth;
     [Export] public GC_Health Child {get; private set;}
     public float CurrentHealth {get; protected set;}
