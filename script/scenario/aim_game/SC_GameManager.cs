@@ -5,7 +5,7 @@ using Godot;
 public partial class SC_GameManager : Node
 {
     [Export] private SC_SpawnerScript _initial;
-    [Export] private float _countDown = 2f;
+    [Export] public float CountDown {get; private set;} = 2f;
     [Export] private float _killRegen = 10f;
     [Signal] public delegate void InitializeEventHandler(SC_GameManager manager);
     [Signal] public delegate void StartGameEventHandler();
@@ -48,7 +48,7 @@ public partial class SC_GameManager : Node
 
         EmitSignal(SignalName.Initialize, this);
 
-        CountDownTimer = GetTree().CreateTimer(_countDown, false, true);
+        CountDownTimer = GetTree().CreateTimer(CountDown, false, true);
         CountDownTimer.Timeout += Start;
     }
 
