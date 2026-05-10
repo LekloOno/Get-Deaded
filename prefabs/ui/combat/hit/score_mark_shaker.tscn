@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://de3jqenk8anfs"]
+
+[ext_resource type="Script" uid="uid://jm2uxgk8o6m" path="res://script/ui/combat/weapon/hit/marker/score/UI_ScoreMarkShaker.cs" id="1_kya0r"]
+[ext_resource type="Script" uid="uid://foau1gurk2py" path="res://script/engine_tools/animation/shakes/ANIM_Vec2TraumaLayer.cs" id="2_dhaja"]
+[ext_resource type="Script" uid="uid://cub3t1dn8cotx" path="res://script/ui/combat/weapon/hit/marker/score/UI_ScoreMark.cs" id="3_arjes"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tqr8d"]
+frequency = 0.05
+fractal_octaves = 4
+fractal_gain = 0.8
+
+[sub_resource type="Resource" id="Resource_duqtr"]
+script = ExtResource("2_dhaja")
+_noise = SubResource("FastNoiseLite_tqr8d")
+metadata/_custom_type_script = "uid://foau1gurk2py"
+
+[node name="UI_ScoreMarkShaker" type="Control" unique_id=1609368157 node_paths=PackedStringArray("_scoreMark")]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(20, 20)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("1_kya0r")
+_scoreMark = NodePath("UI_ScoreMark")
+ShakeLayer = SubResource("Resource_duqtr")
+metadata/_custom_type_script = "uid://jm2uxgk8o6m"
+
+[node name="UI_ScoreMark" type="Label" parent="." unique_id=634662090]
+modulate = Color(1, 0.9607843, 0.20392157, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -17.5
+offset_right = 25.0
+offset_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(25, 17.5)
+theme_override_font_sizes/font_size = 25
+text = "100"
+vertical_alignment = 1
+script = ExtResource("3_arjes")
+_maxScale = 3.0
+_maxScaleTime = 0.1
+_scaleInTrans = 11
+_normalScale = 0.6
+_normalScaleTime = 0.18
+_scaleOutTrans = 10
+_offsetTime = 0.4
+_offsetTrans = 10
+_fadeOutTime = 0.25
+_fadeInTime = 0.25
+metadata/_custom_type_script = "uid://cub3t1dn8cotx"
