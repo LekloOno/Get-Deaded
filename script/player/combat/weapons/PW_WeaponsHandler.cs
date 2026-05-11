@@ -55,6 +55,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
     public Action ReloadCancelled;
     public Action ADSStarted;
     public Action ADSStopped;
+    public Action AmmosPicked;
     private Action Available;
 
     private PW_Weapon _activeWeapon;
@@ -494,7 +495,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
         SwitchEnded?.Invoke(this, _activeWeapon);
     }
 
-    public bool PickAmmo(GL_AmmoData data)
+    private bool DoPickAmmo(GL_AmmoData data)
     {
         // Distribute ammos among all weapons
         if (data.WeaponIndex == 0)
@@ -521,5 +522,15 @@ public partial class PW_WeaponsHandler : WeaponSystem
         // Distribute ammos to the target weapon
         int realIndex = data.WeaponIndex - 1;
         return _weapons.ElementAt(realIndex % _weapons.Count).PickAmmo(data.Amount, data.Magazine, data.FireIndex);
+    }
+
+    public bool PickAmmo(GL_AmmoData data)
+    {
+        bool picked = DoPickAmmo(data);
+        
+        if (picked && data.Amount > 0)
+            AmmosPicked?.Invoke();
+
+        return picked;
     }
 }

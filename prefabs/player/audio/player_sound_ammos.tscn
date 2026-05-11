@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://03w28px1sh6m"]
+
+[ext_resource type="Script" uid="uid://cq5at64t6y78s" path="res://script/player/audio/PA_PickAmmos.cs" id="1_a7phx"]
+[ext_resource type="Script" uid="uid://dmowaohx8nd7q" path="res://addons/GaudioProcessTree/nodes/modules/AUD_Randomizer.cs" id="2_xehn2"]
+[ext_resource type="AudioStream" uid="uid://3ds24lfw42fb" path="res://assets/sounds/combat/weapons/amos/cc-by-sa-40-warsow_sounds_items_ammo_pickup.ogg" id="3_pl2sk"]
+[ext_resource type="Script" uid="uid://dsv3ptnaeu18d" path="res://addons/GaudioProcessTree/nodes/stream_players/AUD_StreamPlayer3D.cs" id="4_k3t2c"]
+
+[node name="PA_PickAmmos" type="Node3D" unique_id=1257083449 node_paths=PackedStringArray("_sound")]
+script = ExtResource("1_a7phx")
+_sound = NodePath("sound/sound")
+
+[node name="sound" type="AudioStreamPlayer3D" parent="." unique_id=1671440570]
+pitch_scale = 0.85
+bus = &"Locomotion"
+attenuation_filter_cutoff_hz = 15000.0
+
+[node name="sound" type="Node" parent="sound" unique_id=1472592348]
+script = ExtResource("2_xehn2")
+Sounds = Array[AudioStream]([ExtResource("3_pl2sk")])
+MinPitch = 0.9
+MaxPitch = 1.1
+UseTimeScale = true
+BasePitchScale = 0.85
+
+[node name="player" type="Node" parent="sound/sound" unique_id=2047142555 node_paths=PackedStringArray("Player")]
+script = ExtResource("4_k3t2c")
+Player = NodePath("../..")
