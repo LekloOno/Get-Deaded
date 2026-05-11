@@ -33,6 +33,7 @@ public partial class SC_ArenaGameStarter : Node
         _player.GlobalPosition = _spawnPoint.GlobalPosition;
         _player.VelocityCache.DiscardCache();
         _player.Velocity = Vector3.Zero;
+        _player.RealVelocity = Vector3.Zero;
         _player.Camera.MakeCurrent();
         Input.MouseMode = Input.MouseModeEnum.Captured;
 
