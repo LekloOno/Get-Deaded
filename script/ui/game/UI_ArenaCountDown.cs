@@ -9,6 +9,7 @@ public partial class UI_ArenaCountDown : Node
     [Export] private float _scaleTime;
     [Export] private Tween.TransitionType _opacityTrans;
     [Export] private float _opacityTime;
+    private bool _subbed = false;
 
     private Tween _scaleTween;
     
@@ -32,8 +33,16 @@ public partial class UI_ArenaCountDown : Node
         CountDownTimer.Timeout += AnimNextSecond;
     }
 
-    public void OnGameInit(SC_GameManager manager) =>
+    public void OnGameInit(SC_GameManager manager)
+    {
+        if (!_subbed)
+        {
+            manager.Interrupt += CancelAnim;
+            _subbed = true;
+        }
+
         StartCountDown(manager.CountDown);
+    }
 
     private void StartCountDown(float countDown)
     {
@@ -44,6 +53,12 @@ public partial class UI_ArenaCountDown : Node
             CountDownTimer.Start(partSeconds);
         else
             AnimNextSecond();
+    }
+
+    private void CancelAnim()
+    {
+        CountDownTimer.Stop();
+        _num.Visible = false;
     }
 
     private void AnimNextSecond()

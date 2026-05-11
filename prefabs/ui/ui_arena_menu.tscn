@@ -94,6 +94,11 @@ text = "SETTINGS_BUTTON"
 script = ExtResource("3_vyhg5")
 settings_menu = NodePath("../../PanelContainer")
 
+[node name="Surrender" type="Button" parent="VBoxContainer" unique_id=2097849616]
+visible = false
+layout_mode = 2
+text = "SURRENDER_BUTTON"
+
 [node name="Quit" type="Button" parent="VBoxContainer" unique_id=311737932]
 layout_mode = 2
 size_flags_vertical = 4
@@ -788,7 +793,10 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 text = "BACK"
 
-[connection signal="pressed" from="VBoxContainer/Play" to="." method="Disable"]
+[connection signal="pressed" from="VBoxContainer/Play" to="." method="Close"]
+[connection signal="pressed" from="VBoxContainer/Play" to="." method="SetPausable"]
+[connection signal="pressed" from="VBoxContainer/Play" to="VBoxContainer/Results" method="hide"]
+[connection signal="pressed" from="VBoxContainer/Play" to="VBoxContainer/Surrender" method="show"]
 [connection signal="enter_settings" from="VBoxContainer/Settings" to="." method="Enter"]
 [connection signal="item_selected" from="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/DisplayModeInput" to="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/DisplayModeInput" method="_on_item_selected"]
 [connection signal="switched_mode" from="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/DisplayModeInput" to="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/ResolutionInput" method="set_window_size"]

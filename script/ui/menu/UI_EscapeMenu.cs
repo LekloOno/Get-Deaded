@@ -8,6 +8,7 @@ public partial class UI_EscapeMenu : Control, UI_IMenuStackManager
 	[Export] private bool _pauseGame = true;
 	[Export] private Control _baseMenu;
 	private bool _enabled = true;
+	private Input.MouseModeEnum _prevMouseMode;
 	public bool Enabled
 	{
 		get => _enabled;
@@ -28,6 +29,15 @@ public partial class UI_EscapeMenu : Control, UI_IMenuStackManager
 	public delegate void ClosedEventHandler();
 	[Signal]
 	public delegate void OpenedEventHandler();
+
+	public void SetPausable() =>
+		_pauseGame = true;
+
+	public void SetUnpausable()
+	{
+		GetTree().Paused = false;
+		_pauseGame = false;
+	}
 
 	public override void _Ready()
 	{
@@ -52,6 +62,8 @@ public partial class UI_EscapeMenu : Control, UI_IMenuStackManager
 
 	public void Open()
 	{
+		_prevMouseMode = Input.MouseMode;
+		Input.MouseMode = Input.MouseModeEnum.Visible;
 		Show();
 		Enter(_baseMenu);
 
@@ -63,6 +75,7 @@ public partial class UI_EscapeMenu : Control, UI_IMenuStackManager
 
 	public void Close()
 	{
+		Input.MouseMode = _prevMouseMode;
 		if (_pauseGame)
 			GetTree().Paused = false;
 

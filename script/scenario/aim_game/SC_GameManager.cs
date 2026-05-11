@@ -55,18 +55,29 @@ public partial class SC_GameManager : Node
     private void InitNewPlayer(GE_IActiveCombatEntity player)
     {
         if (_player != null)
-            _player.HealthManager.OnDie -= DoInterrupt;
+            _player.HealthManager.OnDie -= SendInterrupt;
 
         _combatStats.Clear();
         Stats = new(player);
         _combatStats.AddStat(Stats, Score);
                     
-        player.HealthManager.OnDie += DoInterrupt;
+        player.HealthManager.OnDie += SendInterrupt;
         _player = player;
     }
 
-    private void DoInterrupt(GC_Health _)
+    private void SendInterrupt(GC_Health _)
     {
+        DoInterrupt();
+    }
+
+    public void DoInterrupt()
+    {
+        if (CountDownTimer != null)
+        {
+            CountDownTimer.Timeout -= Start;
+            CountDownTimer = null;
+        }
+        
         Interrupt?.Invoke();
         Reset();
     }
@@ -74,6 +85,7 @@ public partial class SC_GameManager : Node
     private void Start()
     {
         CountDownTimer.Timeout -= Start;
+        CountDownTimer = null;
 
         EmitSignal(SignalName.StartGame);
 

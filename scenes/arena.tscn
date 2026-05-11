@@ -3427,7 +3427,8 @@ metadata/_custom_type_script = "uid://ccj8s5i765h4j"
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=168625791]
 layer = 3
 
-[node name="ColorRect" parent="CanvasLayer" unique_id=620824296 instance=ExtResource("44_yln86")]
+[node name="Menu" parent="CanvasLayer" unique_id=620824296 instance=ExtResource("44_yln86")]
+process_mode = 3
 color = Color(0, 0, 0, 0)
 _pauseGame = false
 
@@ -3567,7 +3568,7 @@ theme_override_font_sizes/font_size = 25
 
 [node name="ShowScore" type="Node" parent="CanvasLayer" unique_id=252717910 node_paths=PackedStringArray("_escapeMenu", "_combatStats", "_statsInput")]
 script = ExtResource("53_00ph2")
-_escapeMenu = NodePath("../ColorRect")
+_escapeMenu = NodePath("../Menu")
 _combatStats = NodePath("../CombatStats")
 _statsInput = NodePath("../PI_Stats")
 
@@ -3666,9 +3667,10 @@ metadata/_custom_type_script = "uid://ba04qst68odml"
 [connection signal="EarnScore" from="entities/AimArena/SC_GameManager" to="CanvasLayer/UI_ScoreMarkManager" method="OnEarnScore"]
 [connection signal="EarnScore" from="entities/AimArena/SC_GameManager" to="CanvasLayer/PanelContainer/BoxContainer/HBoxContainer/Score" method="OnEarnScore"]
 [connection signal="Initialize" from="entities/AimArena/SC_GameManager" to="CanvasLayer/CountDown" method="OnGameInit"]
-[connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/ColorRect" method="Open"]
-[connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/ColorRect" method="Enable"]
-[connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/ColorRect/VBoxContainer/Results" method="show"]
+[connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/Menu" method="Open"]
+[connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/Menu" method="SetUnpausable"]
+[connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/Menu/VBoxContainer/Results" method="show"]
+[connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/Menu/VBoxContainer/Surrender" method="hide"]
 [connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/CombatStats/LastResults" method="show"]
 [connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/CombatStats/Button" method="show"]
 [connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/PanelContainer" method="hide"]
@@ -3685,8 +3687,9 @@ metadata/_custom_type_script = "uid://ba04qst68odml"
 [connection signal="HandleNext" from="entities/AimArena/SC_GameManager/SC_SequenceSpawner2" to="entities/AimArena/SC_GameManager/SC_SequenceSpawner3" method="TakeHandle"]
 [connection signal="Stop" from="entities/AimArena/SC_GameManager/SC_SequenceSpawner3" to="entities/AimArena/SC_GameManager" method="EndGame"]
 [connection signal="Pick" from="entities/Pickups/DamageBuff" to="entities/Pickups/DamageBuff/AUD_StreamPlayer1D" method="Play"]
-[connection signal="pressed" from="CanvasLayer/ColorRect/VBoxContainer/Play" to="SC_ArenaGameStarter" method="StartGame"]
-[connection signal="pressed" from="CanvasLayer/ColorRect/VBoxContainer/Results" to="CanvasLayer/ShowScore" method="ShowScores"]
-[connection signal="pressed" from="CanvasLayer/CombatStats/Button" to="CanvasLayer/ColorRect" method="ExitCurrent"]
+[connection signal="pressed" from="CanvasLayer/Menu/VBoxContainer/Play" to="SC_ArenaGameStarter" method="StartGame"]
+[connection signal="pressed" from="CanvasLayer/Menu/VBoxContainer/Results" to="CanvasLayer/ShowScore" method="ShowScores"]
+[connection signal="pressed" from="CanvasLayer/Menu/VBoxContainer/Surrender" to="entities/AimArena/SC_GameManager" method="DoInterrupt"]
+[connection signal="pressed" from="CanvasLayer/CombatStats/Button" to="CanvasLayer/Menu" method="ExitCurrent"]
 
-[editable path="CanvasLayer/ColorRect"]
+[editable path="CanvasLayer/Menu"]
