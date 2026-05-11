@@ -4,6 +4,7 @@ using Godot;
 [GlobalClass]
 public partial class PickableSpawner : Node3D
 {
+    [Signal] delegate void PickEventHandler();
     public Action<GL_PickableData> PickedUp;
     [Export] private GL_PickableData _pickableData;
     private GL_PhysicsPickable _current;
@@ -116,6 +117,7 @@ public partial class PickableSpawner : Node3D
     private void OnFree()
     {
         PickedUp?.Invoke(_pickableData);
+        EmitSignal(SignalName.Pick);
         Clean();
         Respawn();
     }
