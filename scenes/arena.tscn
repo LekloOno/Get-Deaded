@@ -1005,13 +1005,13 @@ shader_parameter/fluctuation_strength = 0.6
 shader_parameter/fluctuation_sharpness = 1.0
 shader_parameter/fluctuation_speed = 0.4
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_nl0ap"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_1iiwa"]
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_i1shs"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_hboy2"]
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_3c444"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_spnam"]
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_88kq7"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_vfx8u"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3mad5"]
 transparency = 1
@@ -2140,14 +2140,14 @@ spot_angle_attenuation = 0.15932
 [node name="VFX_GodsRay" parent="arena" unique_id=605019919 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.27160624, -0.9330127, 0.23604527, 0.017453581, 0.25000003, 0.9680885, -0.9622502, -0.2588191, 0.0841859, -22.38988, 5.6927605, 5.072876)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_nl0ap")
+mesh = SubResource("ImmediateMesh_1iiwa")
 BaseRadius = 0.38
 InitialRotation = 45.0
 
 [node name="VFX_GodsRay3" parent="arena/VFX_GodsRay" unique_id=802324590 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.9999999, -1.4901161e-08, 7.450581e-09, -1.4901161e-08, 0.9999999, -3.1664968e-08, 0, 1.8626451e-09, 0.99999994, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_i1shs")
+mesh = SubResource("ImmediateMesh_hboy2")
 skeleton = NodePath("../..")
 BaseRadius = 0.14
 InitialRotation = 45.0
@@ -2156,14 +2156,14 @@ FlareAngle = 6.0
 [node name="VFX_GodsRay2" parent="arena" unique_id=164366595 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.05200698, -0.25727454, -0.9649379, 0.9678007, 0.25127998, -0.0148357125, 0.24628639, -0.933096, 0.2620588, -25.830011, 7.2676578, 9.14106)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_3c444")
+mesh = SubResource("ImmediateMesh_spnam")
 BaseRadius = 0.36
 InitialRotation = 45.0
 
 [node name="VFX_GodsRay3" parent="arena/VFX_GodsRay2" unique_id=294127740 instance=ExtResource("113_ie87n")]
 transform = Transform3D(1, 1.4901161e-08, 0, 1.4901161e-08, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_88kq7")
+mesh = SubResource("ImmediateMesh_vfx8u")
 skeleton = NodePath("../..")
 BaseRadius = 0.14
 InitialRotation = 45.0
@@ -3324,11 +3324,11 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer" unique_id=1146335516 node_paths=PackedStringArray("_damageSpawner", "_timerLabel", "_boostLabel", "_vignette")]
+[node name="DamageBuffTracker" type="BoxContainer" parent="CanvasLayer" unique_id=1146335516 node_paths=PackedStringArray("_damageSpawner", "_timerLabel", "_boostLabel", "_vignette")]
 modulate = Color(0.4745098, 0.46666667, 1, 0.79607844)
-offset_left = 929.0
+offset_left = 860.0
 offset_top = 512.0
-offset_right = 991.0
+offset_right = 922.0
 offset_bottom = 568.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -3342,39 +3342,39 @@ script = ExtResource("65_1iiwa")
 _damageSpawner = NodePath("../../entities/Pickups/DamageBuff")
 _timerLabel = NodePath("Label")
 _boostLabel = NodePath("BoxContainer/Buff")
-_vignette = NodePath("../PanelContainer2")
+_vignette = NodePath("../DamageBuffPulse")
 _vignetteStyle = SubResource("StyleBoxFlat_1iiwa")
 _lowBpm = 35.0
 _highBpm = 110.0
 _maxSize = 45
 _bpmTrans = 5
 
-[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer/BoxContainer" unique_id=1653111876]
+[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer/DamageBuffTracker" unique_id=1653111876]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 
-[node name="BuffLabel" type="Label" parent="CanvasLayer/BoxContainer/BoxContainer" unique_id=1527831092]
+[node name="BuffLabel" type="Label" parent="CanvasLayer/DamageBuffTracker/BoxContainer" unique_id=1527831092]
 self_modulate = Color(1, 1, 1, 0.72156864)
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "DMG X"
 vertical_alignment = 2
 
-[node name="Buff" type="Label" parent="CanvasLayer/BoxContainer/BoxContainer" unique_id=1031419206]
+[node name="Buff" type="Label" parent="CanvasLayer/DamageBuffTracker/BoxContainer" unique_id=1031419206]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "0"
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="CanvasLayer/BoxContainer" unique_id=1617057785]
+[node name="Label" type="Label" parent="CanvasLayer/DamageBuffTracker" unique_id=1617057785]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 20
 text = "0"
 horizontal_alignment = 2
 
-[node name="PanelContainer2" type="PanelContainer" parent="CanvasLayer" unique_id=1805293569]
+[node name="DamageBuffPulse" type="PanelContainer" parent="CanvasLayer" unique_id=1805293569]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -3399,7 +3399,7 @@ metadata/_custom_type_script = "uid://ba04qst68odml"
 [connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/PanelContainer/BoxContainer/HBoxContainer2/Timer" method="OnGameEnd"]
 [connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/PanelContainer/BoxContainer/HBoxContainer/Score" method="Reset"]
 [connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/ShowScore" method="ShowScores"]
-[connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/BoxContainer" method="EndBuff"]
+[connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/DamageBuffTracker" method="EndBuff"]
 [connection signal="StartGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/CombatStats/LastResults" method="hide"]
 [connection signal="StartGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/CombatStats/Button" method="hide"]
 [connection signal="StartGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/PanelContainer" method="show"]
