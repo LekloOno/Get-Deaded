@@ -72,6 +72,8 @@ public partial class PickableSpawner : Node3D
 
         _outOfRadiusTime = 0f;
         _current.GlobalPosition = GlobalPosition;
+        _current.LinearVelocity = Vector3.Zero;
+        _current.AngularVelocity = Vector3.Zero;
     }
 
     public void Enable()
