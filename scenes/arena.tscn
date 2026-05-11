@@ -56,6 +56,7 @@
 [ext_resource type="Script" uid="uid://c4yha4el5l40w" path="res://script/ui/combat/weapon/hit/marker/score/UI_GlobalScoreTracker.cs" id="51_kjcr2"]
 [ext_resource type="Script" uid="uid://djrjee7qnnptw" path="res://script/ui/combat/weapon/statistics/UIW_ArenaEnd.cs" id="53_00ph2"]
 [ext_resource type="Script" uid="uid://bnxb1ihj1snbq" path="res://script/ui/game/UI_ArenaCountDown.cs" id="55_6d1h2"]
+[ext_resource type="Script" uid="uid://d3x85bspwdnaw" path="res://script/ui/game/UI_DamageBuff.cs" id="65_1iiwa"]
 [ext_resource type="LightmapGIData" uid="uid://d3cc8iupunnf1" path="res://scenes/arena.lmbake" id="112_hskjd"]
 [ext_resource type="PackedScene" uid="uid://bioysx8g5kih7" path="res://prefabs/mapping/lights/lightray2.tscn" id="113_ie87n"]
 [ext_resource type="Shader" uid="uid://db85ge55ambmc" path="res://assets/shaders/light_flare.gdshader" id="114_xy3ri"]
@@ -965,13 +966,13 @@ shader_parameter/fluctuation_strength = 0.6
 shader_parameter/fluctuation_sharpness = 1.0
 shader_parameter/fluctuation_speed = 0.4
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_8nnyq"]
-
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_1iiwa"]
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_hboy2"]
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_spnam"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_vfx8u"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3mad5"]
 transparency = 1
@@ -1325,6 +1326,15 @@ metadata/_custom_type_script = "uid://foau1gurk2py"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ur278"]
 bg_color = Color(0, 0, 0, 0.28235295)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1iiwa"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 40
+border_width_top = 40
+border_width_right = 40
+border_width_bottom = 40
+border_color = Color(0.4745098, 0.46666667, 1, 0.42745098)
+border_blend = true
 
 [node name="Node3D" type="Node3D" unique_id=836354206]
 
@@ -2044,14 +2054,14 @@ spot_angle_attenuation = 0.15932
 [node name="VFX_GodsRay" parent="arena" unique_id=605019919 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.27160624, -0.9330127, 0.23604527, 0.017453581, 0.25000003, 0.9680885, -0.9622502, -0.2588191, 0.0841859, -22.38988, 5.6927605, 5.072876)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_8nnyq")
+mesh = SubResource("ImmediateMesh_1iiwa")
 BaseRadius = 0.38
 InitialRotation = 45.0
 
 [node name="VFX_GodsRay3" parent="arena/VFX_GodsRay" unique_id=802324590 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.9999999, -1.4901161e-08, 7.450581e-09, -1.4901161e-08, 0.9999999, -3.1664968e-08, 0, 1.8626451e-09, 0.99999994, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_1iiwa")
+mesh = SubResource("ImmediateMesh_hboy2")
 skeleton = NodePath("../..")
 BaseRadius = 0.14
 InitialRotation = 45.0
@@ -2060,14 +2070,14 @@ FlareAngle = 6.0
 [node name="VFX_GodsRay2" parent="arena" unique_id=164366595 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.05200698, -0.25727454, -0.9649379, 0.9678007, 0.25127998, -0.0148357125, 0.24628639, -0.933096, 0.2620588, -25.830011, 7.2676578, 9.14106)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_hboy2")
+mesh = SubResource("ImmediateMesh_spnam")
 BaseRadius = 0.36
 InitialRotation = 45.0
 
 [node name="VFX_GodsRay3" parent="arena/VFX_GodsRay2" unique_id=294127740 instance=ExtResource("113_ie87n")]
 transform = Transform3D(1, 1.4901161e-08, 0, 1.4901161e-08, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_spnam")
+mesh = SubResource("ImmediateMesh_vfx8u")
 skeleton = NodePath("../..")
 BaseRadius = 0.14
 InitialRotation = 45.0
@@ -3165,6 +3175,65 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer" unique_id=1146335516 node_paths=PackedStringArray("_damageSpawner", "_timerLabel", "_boostLabel", "_vignette")]
+modulate = Color(0.4745098, 0.46666667, 1, 0.79607844)
+offset_left = 929.0
+offset_top = 512.0
+offset_right = 991.0
+offset_bottom = 568.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(1, 0.5)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 0
+vertical = true
+script = ExtResource("65_1iiwa")
+_damageSpawner = NodePath("../../entities/Pickups/DamageBuff")
+_timerLabel = NodePath("Label")
+_boostLabel = NodePath("BoxContainer/Buff")
+_vignette = NodePath("../PanelContainer2")
+_vignetteStyle = SubResource("StyleBoxFlat_1iiwa")
+_lowBpm = 35.0
+_highBpm = 110.0
+_maxSize = 45
+_bpmTrans = 5
+
+[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer/BoxContainer" unique_id=1653111876]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="BuffLabel" type="Label" parent="CanvasLayer/BoxContainer/BoxContainer" unique_id=1527831092]
+self_modulate = Color(1, 1, 1, 0.72156864)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "DMG X"
+vertical_alignment = 2
+
+[node name="Buff" type="Label" parent="CanvasLayer/BoxContainer/BoxContainer" unique_id=1031419206]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "0"
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/BoxContainer" unique_id=1617057785]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 20
+text = "0"
+horizontal_alignment = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="CanvasLayer" unique_id=1805293569]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1iiwa")
+
 [node name="MISC_TimeScaler" type="Node" parent="." unique_id=1895755438]
 script = ExtResource("46_femlh")
 metadata/_custom_type_script = "uid://ba04qst68odml"
@@ -3181,6 +3250,7 @@ metadata/_custom_type_script = "uid://ba04qst68odml"
 [connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/PanelContainer/BoxContainer/HBoxContainer2/Timer" method="OnGameEnd"]
 [connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/PanelContainer/BoxContainer/HBoxContainer/Score" method="Reset"]
 [connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/ShowScore" method="ShowScores"]
+[connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/BoxContainer" method="EndBuff"]
 [connection signal="StartGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/CombatStats/LastResults" method="hide"]
 [connection signal="StartGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/CombatStats/Button" method="hide"]
 [connection signal="StartGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/PanelContainer" method="show"]

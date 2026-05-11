@@ -1,8 +1,10 @@
+using System;
 using Godot;
 
 [GlobalClass]
 public partial class PickableSpawner : Node3D
 {
+    public Action<GL_PickableData> PickedUp;
     [Export] private GL_PickableData _pickableData;
     private GL_PhysicsPickable _current;
     /// <summary>
@@ -111,6 +113,7 @@ public partial class PickableSpawner : Node3D
 
     private void OnFree()
     {
+        PickedUp?.Invoke(_pickableData);
         Clean();
         Respawn();
     }
