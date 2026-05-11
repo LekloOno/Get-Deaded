@@ -52,10 +52,13 @@
 [ext_resource type="Script" uid="uid://dbtsyp0hru7g" path="res://addons/GaudioProcessTree/nodes/stream_players/AUD_StreamPlayer1D.cs" id="47_spnam"]
 [ext_resource type="Script" uid="uid://baxgvm22qvjah" path="res://script/ui/combat/weapon/hit/marker/score/UI_ScoreMarkManager.cs" id="48_ikwpp"]
 [ext_resource type="AudioStream" uid="uid://cpqka36je1p3l" path="res://assets/sounds/combat/cc0_sounds_items_quad_fire.ogg" id="48_vfx8u"]
+[ext_resource type="Texture2D" uid="uid://dsma1lip7bvch" path="res://assets/sprites/dash/dash_cd_mid_shadow.png" id="49_4nhhj"]
 [ext_resource type="PackedScene" uid="uid://de3jqenk8anfs" path="res://prefabs/ui/combat/hit/score_mark_shaker.tscn" id="49_kjcr2"]
 [ext_resource type="Script" uid="uid://foau1gurk2py" path="res://script/engine_tools/animation/shakes/ANIM_Vec2TraumaLayer.cs" id="50_5u5ld"]
+[ext_resource type="Texture2D" uid="uid://cbh1opskekaqn" path="res://assets/sprites/dash/dash_cd_mid_fill.png" id="50_a7862"]
 [ext_resource type="Script" uid="uid://bjb4tfvto4h2w" path="res://script/ui/combat/weapon/hit/marker/score/UI_GlobalTimeTracker.cs" id="51_5u5ld"]
 [ext_resource type="Script" uid="uid://c4yha4el5l40w" path="res://script/ui/combat/weapon/hit/marker/score/UI_GlobalScoreTracker.cs" id="51_kjcr2"]
+[ext_resource type="Script" uid="uid://b6wuemumhi18m" path="res://script/ui/game/UI_PickupCooldown.cs" id="51_kjqme"]
 [ext_resource type="Script" uid="uid://djrjee7qnnptw" path="res://script/ui/combat/weapon/statistics/UIW_ArenaEnd.cs" id="53_00ph2"]
 [ext_resource type="Script" uid="uid://bnxb1ihj1snbq" path="res://script/ui/game/UI_ArenaCountDown.cs" id="55_6d1h2"]
 [ext_resource type="Script" uid="uid://d3x85bspwdnaw" path="res://script/ui/game/UI_DamageBuff.cs" id="65_1iiwa"]
@@ -1007,13 +1010,13 @@ shader_parameter/fluctuation_strength = 0.6
 shader_parameter/fluctuation_sharpness = 1.0
 shader_parameter/fluctuation_speed = 0.4
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_aup2b"]
-
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_4nhhj"]
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_a7862"]
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_kjqme"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_bmakn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3mad5"]
 transparency = 1
@@ -1319,6 +1322,9 @@ metadata/_custom_type_script = "uid://3y58gmwamc5s"
 [sub_resource type="BoxMesh" id="BoxMesh_nag6q"]
 size = Vector3(0.6, 0.1, 0.6)
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_a7862"]
+viewport_path = NodePath("entities/Pickups/DamageBuff/Sprite3D/SubViewport")
+
 [sub_resource type="Curve" id="Curve_q2sf5"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.713287, 0.328551), 1.58362, 1.58362, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 3
@@ -1345,6 +1351,9 @@ metadata/_custom_type_script = "uid://c5lwejv15n0lf"
 [sub_resource type="BoxMesh" id="BoxMesh_6ubnd"]
 size = Vector3(0.35, 0.1, 0.35)
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_4nhhj"]
+viewport_path = NodePath("entities/Pickups/ClickAmos/Sprite3D/SubViewport")
+
 [sub_resource type="Resource" id="Resource_wdrsa"]
 script = ExtResource("37_q2sf5")
 WeaponIndex = 2
@@ -1353,6 +1362,9 @@ Model = ExtResource("38_u80kj")
 _repulsionData = SubResource("Resource_ywx5l")
 metadata/_custom_type_script = "uid://c5lwejv15n0lf"
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_kjqme"]
+viewport_path = NodePath("entities/Pickups/TrackAmos/Sprite3D/SubViewport")
+
 [sub_resource type="Resource" id="Resource_7jf4w"]
 script = ExtResource("37_q2sf5")
 WeaponIndex = -1
@@ -1360,6 +1372,18 @@ Amount = 5
 Model = ExtResource("35_m44an")
 _repulsionData = SubResource("Resource_ywx5l")
 metadata/_custom_type_script = "uid://c5lwejv15n0lf"
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_bmakn"]
+viewport_path = NodePath("entities/Pickups/WildcardAmo/Sprite3D/SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_n5h7s"]
+viewport_path = NodePath("entities/Pickups/TrackAmos2/Sprite3D/SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_p3wad"]
+viewport_path = NodePath("entities/Pickups/ClickAmos2/Sprite3D/SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_6b7ou"]
+viewport_path = NodePath("entities/Pickups/WildcardAmo2/Sprite3D/SubViewport")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_4g8la"]
 frequency = 0.05
@@ -2142,14 +2166,14 @@ spot_angle_attenuation = 0.15932
 [node name="VFX_GodsRay" parent="arena" unique_id=605019919 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.27160624, -0.9330127, 0.23604527, 0.017453581, 0.25000003, 0.9680885, -0.9622502, -0.2588191, 0.0841859, -22.38988, 5.6927605, 5.072876)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_aup2b")
+mesh = SubResource("ImmediateMesh_4nhhj")
 BaseRadius = 0.38
 InitialRotation = 45.0
 
 [node name="VFX_GodsRay3" parent="arena/VFX_GodsRay" unique_id=802324590 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.9999999, -1.4901161e-08, 7.450581e-09, -1.4901161e-08, 0.9999999, -3.1664968e-08, 0, 1.8626451e-09, 0.99999994, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_4nhhj")
+mesh = SubResource("ImmediateMesh_a7862")
 skeleton = NodePath("../..")
 BaseRadius = 0.14
 InitialRotation = 45.0
@@ -2158,14 +2182,14 @@ FlareAngle = 6.0
 [node name="VFX_GodsRay2" parent="arena" unique_id=164366595 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.05200698, -0.25727454, -0.9649379, 0.9678007, 0.25127998, -0.0148357125, 0.24628639, -0.933096, 0.2620588, -25.830011, 7.2676578, 9.14106)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_a7862")
+mesh = SubResource("ImmediateMesh_kjqme")
 BaseRadius = 0.36
 InitialRotation = 45.0
 
 [node name="VFX_GodsRay3" parent="arena/VFX_GodsRay2" unique_id=294127740 instance=ExtResource("113_ie87n")]
 transform = Transform3D(1, 1.4901161e-08, 0, 1.4901161e-08, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_kjqme")
+mesh = SubResource("ImmediateMesh_bmakn")
 skeleton = NodePath("../..")
 BaseRadius = 0.14
 InitialRotation = 45.0
@@ -2994,7 +3018,7 @@ mesh = SubResource("BoxMesh_m44an")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.1, -7.9999995, 50.8)
 script = ExtResource("34_8jgwj")
 _pickableData = SubResource("Resource_yln86")
-_respawnDelay = 30.0
+RespawnDelay = 30.0
 metadata/_custom_type_script = "uid://dpsrelwawyisv"
 
 [node name="OmniLight3D" type="OmniLight3D" parent="entities/Pickups/DamageBuff" unique_id=1052145111]
@@ -3018,12 +3042,46 @@ metadata/_custom_type_script = "uid://dbtsyp0hru7g"
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="entities/Pickups/DamageBuff/AUD_StreamPlayer1D" unique_id=2137030289]
 stream = ExtResource("48_vfx8u")
 
+[node name="Sprite3D" type="Sprite3D" parent="entities/Pickups/DamageBuff" unique_id=137928399]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.099999905, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_a7862")
+
+[node name="SubViewport" type="SubViewport" parent="entities/Pickups/DamageBuff/Sprite3D" unique_id=1503628178]
+transparent_bg = true
+size = Vector2i(64, 64)
+
+[node name="UI_PickupCooldown" type="TextureProgressBar" parent="entities/Pickups/DamageBuff/Sprite3D/SubViewport" unique_id=1173418490 node_paths=PackedStringArray("_pickupSpawner")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+step = 0.1
+value = 50.0
+fill_mode = 4
+texture_under = ExtResource("49_4nhhj")
+texture_progress = ExtResource("50_a7862")
+tint_under = Color(1, 1, 1, 0.47058824)
+tint_progress = Color(0.4236506, 0.42365065, 0.42365053, 0.8117647)
+script = ExtResource("51_kjqme")
+_pickupSpawner = NodePath("../../..")
+metadata/_custom_type_script = "uid://b6wuemumhi18m"
+
 [node name="ClickAmos" type="Node3D" parent="entities/Pickups" unique_id=926148026]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.3, -3.7999997, 18.4)
 script = ExtResource("34_8jgwj")
 _pickableData = SubResource("Resource_q2sf5")
 _startSpawned = true
-_respawnDelay = 10.0
+RespawnDelay = 10.0
 _recenterRadius = 3.0
 metadata/_custom_type_script = "uid://dpsrelwawyisv"
 
@@ -3038,12 +3096,46 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
 material_override = ExtResource("38_7jf4w")
 mesh = SubResource("BoxMesh_6ubnd")
 
+[node name="Sprite3D" type="Sprite3D" parent="entities/Pickups/ClickAmos" unique_id=1591335217]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.099999905, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_4nhhj")
+
+[node name="SubViewport" type="SubViewport" parent="entities/Pickups/ClickAmos/Sprite3D" unique_id=1884013441]
+transparent_bg = true
+size = Vector2i(64, 64)
+
+[node name="UI_PickupCooldown" type="TextureProgressBar" parent="entities/Pickups/ClickAmos/Sprite3D/SubViewport" unique_id=651691542 node_paths=PackedStringArray("_pickupSpawner")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+step = 0.1
+value = 50.0
+fill_mode = 4
+texture_under = ExtResource("49_4nhhj")
+texture_progress = ExtResource("50_a7862")
+tint_under = Color(1, 1, 1, 0.47058824)
+tint_progress = Color(0.4236506, 0.42365065, 0.42365053, 0.8117647)
+script = ExtResource("51_kjqme")
+_pickupSpawner = NodePath("../../..")
+metadata/_custom_type_script = "uid://b6wuemumhi18m"
+
 [node name="TrackAmos" type="Node3D" parent="entities/Pickups" unique_id=1968445619]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.299999, -3.7999997, 18.4)
 script = ExtResource("34_8jgwj")
 _pickableData = SubResource("Resource_wdrsa")
 _startSpawned = true
-_respawnDelay = 10.0
+RespawnDelay = 10.0
 _recenterRadius = 3.0
 metadata/_custom_type_script = "uid://dpsrelwawyisv"
 
@@ -3058,12 +3150,46 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
 material_override = ExtResource("38_7jf4w")
 mesh = SubResource("BoxMesh_6ubnd")
 
+[node name="Sprite3D" type="Sprite3D" parent="entities/Pickups/TrackAmos" unique_id=801344752]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.099999905, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_kjqme")
+
+[node name="SubViewport" type="SubViewport" parent="entities/Pickups/TrackAmos/Sprite3D" unique_id=1989622976]
+transparent_bg = true
+size = Vector2i(64, 64)
+
+[node name="UI_PickupCooldown" type="TextureProgressBar" parent="entities/Pickups/TrackAmos/Sprite3D/SubViewport" unique_id=1857863008 node_paths=PackedStringArray("_pickupSpawner")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+step = 0.1
+value = 50.0
+fill_mode = 4
+texture_under = ExtResource("49_4nhhj")
+texture_progress = ExtResource("50_a7862")
+tint_under = Color(1, 1, 1, 0.47058824)
+tint_progress = Color(0.4236506, 0.42365065, 0.42365053, 0.8117647)
+script = ExtResource("51_kjqme")
+_pickupSpawner = NodePath("../../..")
+metadata/_custom_type_script = "uid://b6wuemumhi18m"
+
 [node name="WildcardAmo" type="Node3D" parent="entities/Pickups" unique_id=129014784]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.6, -6.9999995, 24.8)
 script = ExtResource("34_8jgwj")
 _pickableData = SubResource("Resource_7jf4w")
 _startSpawned = true
-_respawnDelay = 10.0
+RespawnDelay = 10.0
 metadata/_custom_type_script = "uid://dpsrelwawyisv"
 
 [node name="OmniLight3D" type="OmniLight3D" parent="entities/Pickups/WildcardAmo" unique_id=1997697888]
@@ -3077,12 +3203,46 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
 material_override = ExtResource("38_7jf4w")
 mesh = SubResource("BoxMesh_6ubnd")
 
+[node name="Sprite3D" type="Sprite3D" parent="entities/Pickups/WildcardAmo" unique_id=1438221008]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.099999905, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_bmakn")
+
+[node name="SubViewport" type="SubViewport" parent="entities/Pickups/WildcardAmo/Sprite3D" unique_id=1991431117]
+transparent_bg = true
+size = Vector2i(64, 64)
+
+[node name="UI_PickupCooldown" type="TextureProgressBar" parent="entities/Pickups/WildcardAmo/Sprite3D/SubViewport" unique_id=1465499925 node_paths=PackedStringArray("_pickupSpawner")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+step = 0.1
+value = 14.3
+fill_mode = 4
+texture_under = ExtResource("49_4nhhj")
+texture_progress = ExtResource("50_a7862")
+tint_under = Color(1, 1, 1, 0.47058824)
+tint_progress = Color(0.4236506, 0.42365065, 0.42365053, 0.8117647)
+script = ExtResource("51_kjqme")
+_pickupSpawner = NodePath("../../..")
+metadata/_custom_type_script = "uid://b6wuemumhi18m"
+
 [node name="TrackAmos2" type="Node3D" parent="entities/Pickups" unique_id=305618625]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29999924, -5.2999997, 34.4)
 script = ExtResource("34_8jgwj")
 _pickableData = SubResource("Resource_wdrsa")
 _startSpawned = true
-_respawnDelay = 10.0
+RespawnDelay = 10.0
 metadata/_custom_type_script = "uid://dpsrelwawyisv"
 
 [node name="OmniLight3D" type="OmniLight3D" parent="entities/Pickups/TrackAmos2" unique_id=1862612868]
@@ -3096,12 +3256,46 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
 material_override = ExtResource("38_7jf4w")
 mesh = SubResource("BoxMesh_6ubnd")
 
+[node name="Sprite3D" type="Sprite3D" parent="entities/Pickups/TrackAmos2" unique_id=1390855494]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.099999905, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_n5h7s")
+
+[node name="SubViewport" type="SubViewport" parent="entities/Pickups/TrackAmos2/Sprite3D" unique_id=419991265]
+transparent_bg = true
+size = Vector2i(64, 64)
+
+[node name="UI_PickupCooldown" type="TextureProgressBar" parent="entities/Pickups/TrackAmos2/Sprite3D/SubViewport" unique_id=659014110 node_paths=PackedStringArray("_pickupSpawner")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+step = 0.1
+value = 50.0
+fill_mode = 4
+texture_under = ExtResource("49_4nhhj")
+texture_progress = ExtResource("50_a7862")
+tint_under = Color(1, 1, 1, 0.47058824)
+tint_progress = Color(0.4236506, 0.42365065, 0.42365053, 0.8117647)
+script = ExtResource("51_kjqme")
+_pickupSpawner = NodePath("../../..")
+metadata/_custom_type_script = "uid://b6wuemumhi18m"
+
 [node name="ClickAmos2" type="Node3D" parent="entities/Pickups" unique_id=186775467]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.8, 0.20000029, -1.3000004)
 script = ExtResource("34_8jgwj")
 _pickableData = SubResource("Resource_q2sf5")
 _startSpawned = true
-_respawnDelay = 10.0
+RespawnDelay = 10.0
 _recenterDelay = 3.0
 metadata/_custom_type_script = "uid://dpsrelwawyisv"
 
@@ -3116,12 +3310,46 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
 material_override = ExtResource("38_7jf4w")
 mesh = SubResource("BoxMesh_6ubnd")
 
+[node name="Sprite3D" type="Sprite3D" parent="entities/Pickups/ClickAmos2" unique_id=1877111677]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.099999905, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_p3wad")
+
+[node name="SubViewport" type="SubViewport" parent="entities/Pickups/ClickAmos2/Sprite3D" unique_id=1904409588]
+transparent_bg = true
+size = Vector2i(64, 64)
+
+[node name="UI_PickupCooldown" type="TextureProgressBar" parent="entities/Pickups/ClickAmos2/Sprite3D/SubViewport" unique_id=506580445 node_paths=PackedStringArray("_pickupSpawner")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+step = 0.1
+value = 50.0
+fill_mode = 4
+texture_under = ExtResource("49_4nhhj")
+texture_progress = ExtResource("50_a7862")
+tint_under = Color(1, 1, 1, 0.47058824)
+tint_progress = Color(0.4236506, 0.42365065, 0.42365053, 0.8117647)
+script = ExtResource("51_kjqme")
+_pickupSpawner = NodePath("../../..")
+metadata/_custom_type_script = "uid://b6wuemumhi18m"
+
 [node name="WildcardAmo2" type="Node3D" parent="entities/Pickups" unique_id=1475832428]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.2, -7.9999995, 56.399998)
 script = ExtResource("34_8jgwj")
 _pickableData = SubResource("Resource_7jf4w")
 _startSpawned = true
-_respawnDelay = 10.0
+RespawnDelay = 10.0
 metadata/_custom_type_script = "uid://dpsrelwawyisv"
 
 [node name="OmniLight3D" type="OmniLight3D" parent="entities/Pickups/WildcardAmo2" unique_id=1687967215]
@@ -3134,6 +3362,40 @@ omni_range = 0.6
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
 material_override = ExtResource("38_7jf4w")
 mesh = SubResource("BoxMesh_6ubnd")
+
+[node name="Sprite3D" type="Sprite3D" parent="entities/Pickups/WildcardAmo2" unique_id=1019727046]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.099999905, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_6b7ou")
+
+[node name="SubViewport" type="SubViewport" parent="entities/Pickups/WildcardAmo2/Sprite3D" unique_id=286681326]
+transparent_bg = true
+size = Vector2i(64, 64)
+
+[node name="UI_PickupCooldown" type="TextureProgressBar" parent="entities/Pickups/WildcardAmo2/Sprite3D/SubViewport" unique_id=289640531 node_paths=PackedStringArray("_pickupSpawner")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+step = 0.1
+value = 50.0
+fill_mode = 4
+texture_under = ExtResource("49_4nhhj")
+texture_progress = ExtResource("50_a7862")
+tint_under = Color(1, 1, 1, 0.47058824)
+tint_progress = Color(0.4236506, 0.42365065, 0.42365053, 0.8117647)
+script = ExtResource("51_kjqme")
+_pickupSpawner = NodePath("../../..")
+metadata/_custom_type_script = "uid://b6wuemumhi18m"
 
 [node name="SpectatePivot" type="Node3D" parent="entities" unique_id=1473812994]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.2, -1, 14.9)

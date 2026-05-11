@@ -5,6 +5,7 @@ using Godot;
 public partial class PickableSpawner : Node3D
 {
     [Signal] delegate void PickEventHandler();
+    public Action StartLoading;
     public Action<GL_PickableData> PickedUp;
     [Export] private GL_PickableData _pickableData;
     private GL_PhysicsPickable _current;
@@ -24,7 +25,7 @@ public partial class PickableSpawner : Node3D
     /// <summary>
     /// The time for the spawner to spawn the pickup once it has been picked up.
     /// </summary>
-    [Export] private float _respawnDelay;
+    [Export] public float RespawnDelay {get; private set;}
     /// <summary>
     /// Whether the spawner is enabled by entering a scene
     /// or being triggered by an external actor, like a scenario script.
@@ -124,7 +125,8 @@ public partial class PickableSpawner : Node3D
 
     private void Respawn()
     {   
-        _respawnTimer = GetTree().CreateTimer(_respawnDelay, false, true);
+        StartLoading?.Invoke();
+        _respawnTimer = GetTree().CreateTimer(RespawnDelay, false, true);
         _respawnTimer.Timeout += Drop;
     }
 

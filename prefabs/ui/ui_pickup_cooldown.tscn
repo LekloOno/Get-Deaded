@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://c66pdtjpbj5s3"]
+
+[ext_resource type="Texture2D" uid="uid://dsma1lip7bvch" path="res://assets/sprites/dash/dash_cd_mid_shadow.png" id="1_d3igf"]
+[ext_resource type="Texture2D" uid="uid://cbh1opskekaqn" path="res://assets/sprites/dash/dash_cd_mid_fill.png" id="2_gfi5u"]
+[ext_resource type="Script" uid="uid://b6wuemumhi18m" path="res://script/ui/game/UI_PickupCooldown.cs" id="3_u45n2"]
+
+[node name="SubViewportContainer" type="SubViewportContainer" unique_id=1167326527]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=478251930]
+size = Vector2i(64, 64)
+
+[node name="UI_PickupCooldown" type="TextureProgressBar" parent="SubViewport" unique_id=1173418490]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+step = 0.1
+value = 50.0
+fill_mode = 4
+texture_under = ExtResource("1_d3igf")
+texture_progress = ExtResource("2_gfi5u")
+script = ExtResource("3_u45n2")
+metadata/_custom_type_script = "uid://b6wuemumhi18m"
