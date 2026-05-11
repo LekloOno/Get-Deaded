@@ -5,10 +5,12 @@ using Godot;
 public partial class PA_Dash : Node3D
 {
     [Export] private AUD_Sound _sound;
+    [Export] private AUD_Sound _thrusterSound;
     [Export] private PM_Dash _dash;
 
     public override void _Ready()
     {
         _dash.OnStart += _sound.Play;
+        _dash.OnThruster += _thrusterSound.Play;
     }
 }

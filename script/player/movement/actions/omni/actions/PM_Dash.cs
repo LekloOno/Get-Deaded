@@ -18,6 +18,8 @@ public partial class PM_Dash : PM_Action
     [Export] private float _slamCost = 60f;
     [Export] private float _doubleJumpCost = 60f;
 
+    public Action OnThruster;
+
     private bool _wasDoubleJump = false;
 
     private float _dashDistance = 6.5f;
@@ -107,6 +109,7 @@ public partial class PM_Dash : PM_Action
             _force = _doubleJumpStrength * Vector3.Up;
             duration = _doubleJumpDuration;
             _controller.AdditionalForces.AddPersistent(_force);
+            OnThruster?.Invoke();
         } else
         {
             _direction = GetDashDirection();
@@ -114,6 +117,7 @@ public partial class PM_Dash : PM_Action
             _force = appliedSpeed * _direction;
             duration = _dashDuration;
             _controller.TakeOverForces.AddPersistent(_force);
+            InvokeStart();
         }
 
         _endDashTimer = GetTree().CreateTimer(duration, false, true);
@@ -123,7 +127,7 @@ public partial class PM_Dash : PM_Action
         _lastDash = PHX_Time.ScaledTicksMsec;
 
         _controller.CollisionMask = CONF_Collision.Layers.Environment;
-        InvokeStart();
+        
     }
 
     private Vector3 GetDashDirection() =>
