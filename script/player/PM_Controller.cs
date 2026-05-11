@@ -19,6 +19,7 @@ public partial class PM_Controller : CharacterBody3D, GB_IExternalBodyManager, G
     [Export] public PW_WeaponsHandler WeaponsHandler {get; private set;}
     [Export] public PCT_SimpleTraumaData KillTraumaData {get; private set;}
     [Export] private Node3D _exposedBody;
+    [Export] private PM_OmniCharge _omniCharge;
 
     public Transform3D PrevGlobalTransform {get; protected set;}
     public Vector3 PrevVelocity {get; protected set;}
@@ -59,6 +60,7 @@ public partial class PM_Controller : CharacterBody3D, GB_IExternalBodyManager, G
     public void Revive()
     {
         _healthManager.Init(true);
+        _omniCharge.Current = _omniCharge.Max;
         WeaponsHandler.EnableFire();
         _onPhysicsProcess -= DeadBehavior;
         _onPhysicsProcess -= NormalBehavior;
