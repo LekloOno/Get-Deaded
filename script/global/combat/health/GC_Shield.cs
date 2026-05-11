@@ -7,15 +7,18 @@ public partial class GC_Shield : GC_Health
     [Export] private double _regenDelay;
     private ulong _lastActivate;
     private bool _active;
-    private Timer _regenTimer;
+    public Timer RegenTimer {get; private set;} = new()
+        {
+            ProcessMode = ProcessModeEnum.Pausable,
+            ProcessCallback = Timer.TimerProcessCallback.Physics
+        };
 
     public override float Heal(float healing, GC_Health parent) => Child.Heal(healing, this);
 
     public override void _Ready()
     {
-        _regenTimer = new();
-        AddChild(_regenTimer);
-        _regenTimer.Timeout += StartRegen;
+        AddChild(RegenTimer);
+        RegenTimer.Timeout += StartRegen;
         OnDamage += DamageStartTimer;
         SetPhysicsProcess(false);
     }
@@ -23,7 +26,7 @@ public partial class GC_Shield : GC_Health
     private void DamageStartTimer(GC_Health __, DamageEventArgs ___)
     {
         StopRegen();
-        _regenTimer.Start(_regenDelay);
+        RegenTimer.Start(_regenDelay);
     }
 
     public void StartRegen()
