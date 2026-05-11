@@ -3013,6 +3013,7 @@ script = ExtResource("34_8jgwj")
 _pickableData = SubResource("Resource_q2sf5")
 _startSpawned = true
 _respawnDelay = 10.0
+_recenterRadius = 3.0
 metadata/_custom_type_script = "uid://dpsrelwawyisv"
 
 [node name="OmniLight3D" type="OmniLight3D" parent="entities/Pickups/ClickAmos" unique_id=1708302657]
@@ -3032,6 +3033,7 @@ script = ExtResource("34_8jgwj")
 _pickableData = SubResource("Resource_wdrsa")
 _startSpawned = true
 _respawnDelay = 10.0
+_recenterRadius = 3.0
 metadata/_custom_type_script = "uid://dpsrelwawyisv"
 
 [node name="OmniLight3D" type="OmniLight3D" parent="entities/Pickups/TrackAmos" unique_id=1061773318]
@@ -3089,6 +3091,7 @@ script = ExtResource("34_8jgwj")
 _pickableData = SubResource("Resource_q2sf5")
 _startSpawned = true
 _respawnDelay = 10.0
+_recenterDelay = 3.0
 metadata/_custom_type_script = "uid://dpsrelwawyisv"
 
 [node name="OmniLight3D" type="OmniLight3D" parent="entities/Pickups/ClickAmos2" unique_id=558542216]
