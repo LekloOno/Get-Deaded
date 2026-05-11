@@ -4,6 +4,7 @@ using Godot;
 [GlobalClass, Tool]
 public partial class JumpPad : Node3D
 {
+    [Signal] public delegate void LaunchEventHandler();
     /// <summary>
     /// Strength of the impulsion. <br/>
     /// Multiplied with the direction of the Node to compute the force vector.
@@ -39,6 +40,7 @@ public partial class JumpPad : Node3D
         }
 
         bodyManager.HandleKnockBack(Transform.Basis.Z * _strength);
+        EmitSignal(SignalName.Launch);
     }
 
     // +-------------------+

@@ -23,9 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://davxi0uu1oao8" path="res://prefabs/mapping/lights/small_light.tscn" id="20_y6qpl"]
 [ext_resource type="Script" uid="uid://d1v62uw6r4omx" path="res://script/scenario/aim_game/spawners/SC_SequenceSpawner.cs" id="31_ur278"]
 [ext_resource type="PackedScene" uid="uid://d4j8qf3pcauhr" path="res://prefabs/simplebot/bot_builder_template.tscn" id="32_rvjci"]
-[ext_resource type="Script" uid="uid://cf20wgu2b4x38" path="res://script/entity/props/JumpPad.cs" id="32_sbyfl"]
 [ext_resource type="Script" uid="uid://6shwimir3xjv" path="res://script/enemy/E_EnemyBuilder.cs" id="33_7evfb"]
-[ext_resource type="Material" uid="uid://t2nvujbehqp3" path="res://assets/materials/greenGrid.tres" id="33_bt1tq"]
 [ext_resource type="PackedScene" uid="uid://dpo37xs2mukfh" path="res://prefabs/simplebot/bot_base_fire.tscn" id="33_s54cu"]
 [ext_resource type="Script" uid="uid://dpsrelwawyisv" path="res://script/entity/items/PickableSpawner.cs" id="34_8jgwj"]
 [ext_resource type="Script" uid="uid://123gwhhdyr3d" path="res://script/global/combat/health/data/GCD_Health.cs" id="34_8nnyq"]
@@ -41,6 +39,7 @@
 [ext_resource type="PackedScene" uid="uid://bpk6ns2xwoidb" path="res://prefabs/AmmoDropTrack.tscn" id="38_u80kj"]
 [ext_resource type="PackedScene" uid="uid://be05ifo8pj1df" path="res://prefabs/AmmoDropClick.tscn" id="38_wdrsa"]
 [ext_resource type="PackedScene" uid="uid://cidct5xad30oh" path="res://prefabs/simplebot/bot_light_fire.tscn" id="39_8nnyq"]
+[ext_resource type="PackedScene" uid="uid://s61f67g56vat" path="res://prefabs/mapping/interractible/jump_pad.tscn" id="40_aup2b"]
 [ext_resource type="Script" uid="uid://d32chyy6s3qb2" path="res://script/animation/AN_MenuCamera.cs" id="42_7jf4w"]
 [ext_resource type="Script" uid="uid://ccj8s5i765h4j" path="res://script/scenario/SC_ArenaGameStarter.cs" id="44_hn1ds"]
 [ext_resource type="PackedScene" uid="uid://b1xordtuuk7r1" path="res://prefabs/ui/ui_arena_menu.tscn" id="44_yln86"]
@@ -1010,13 +1009,13 @@ shader_parameter/fluctuation_strength = 0.6
 shader_parameter/fluctuation_sharpness = 1.0
 shader_parameter/fluctuation_speed = 0.4
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_4nhhj"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_n5h7s"]
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_a7862"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_p3wad"]
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_kjqme"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_6b7ou"]
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_bmakn"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_b76a6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3mad5"]
 transparency = 1
@@ -1289,12 +1288,6 @@ _score = 25
 _speedSpreadFactor = 10.0
 _reactionTime = 0.5
 metadata/_custom_type_script = "uid://6shwimir3xjv"
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_8jgwj"]
-size = Vector3(1, 0.3, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_m44an"]
-size = Vector3(1, 0.3, 1)
 
 [sub_resource type="Curve" id="Curve_mossj"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.713287, 0.328551), 1.58362, 1.58362, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -2166,14 +2159,14 @@ spot_angle_attenuation = 0.15932
 [node name="VFX_GodsRay" parent="arena" unique_id=605019919 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.27160624, -0.9330127, 0.23604527, 0.017453581, 0.25000003, 0.9680885, -0.9622502, -0.2588191, 0.0841859, -22.38988, 5.6927605, 5.072876)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_4nhhj")
+mesh = SubResource("ImmediateMesh_n5h7s")
 BaseRadius = 0.38
 InitialRotation = 45.0
 
 [node name="VFX_GodsRay3" parent="arena/VFX_GodsRay" unique_id=802324590 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.9999999, -1.4901161e-08, 7.450581e-09, -1.4901161e-08, 0.9999999, -3.1664968e-08, 0, 1.8626451e-09, 0.99999994, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_a7862")
+mesh = SubResource("ImmediateMesh_p3wad")
 skeleton = NodePath("../..")
 BaseRadius = 0.14
 InitialRotation = 45.0
@@ -2182,14 +2175,14 @@ FlareAngle = 6.0
 [node name="VFX_GodsRay2" parent="arena" unique_id=164366595 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.05200698, -0.25727454, -0.9649379, 0.9678007, 0.25127998, -0.0148357125, 0.24628639, -0.933096, 0.2620588, -25.830011, 7.2676578, 9.14106)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_kjqme")
+mesh = SubResource("ImmediateMesh_6b7ou")
 BaseRadius = 0.36
 InitialRotation = 45.0
 
 [node name="VFX_GodsRay3" parent="arena/VFX_GodsRay2" unique_id=294127740 instance=ExtResource("113_ie87n")]
 transform = Transform3D(1, 1.4901161e-08, 0, 1.4901161e-08, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_bmakn")
+mesh = SubResource("ImmediateMesh_b76a6")
 skeleton = NodePath("../..")
 BaseRadius = 0.14
 InitialRotation = 45.0
@@ -2976,41 +2969,12 @@ _roundTime = 20.0
 _gameManager = NodePath("..")
 metadata/_custom_type_script = "uid://d1v62uw6r4omx"
 
-[node name="JumpPad" type="Node3D" parent="entities" unique_id=1896830196]
-transform = Transform3D(-0.5735765, 0.40957594, -0.70940644, 0, 0.8660252, 0.5, 0.8191521, 0.28678817, -0.49673176, 24.4561, -8.250885, 48.205513)
-script = ExtResource("32_sbyfl")
-_strength = 19.0
-_momentum = 0.0
-metadata/_custom_type_script = "uid://cf20wgu2b4x38"
+[node name="JumpPad" parent="entities" unique_id=202375474 instance=ExtResource("40_aup2b")]
+transform = Transform3D(-0.5735765, 0.40957597, -0.7094064, 0, 0.8660252, 0.5, 0.8191521, 0.2867882, -0.49673173, 24.4561, -8.250885, 48.205513)
 
-[node name="Area3D" type="Area3D" parent="entities/JumpPad" unique_id=1387038162]
-transform = Transform3D(0.99999994, 1.4901167e-08, -8.940697e-08, 2.9802322e-08, 0.86602575, -0.50000024, -1.1920929e-07, 0.5000001, 0.8660254, 0, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="entities/JumpPad/Area3D" unique_id=725037251]
-transform = Transform3D(1, -2.431122e-09, 8.940697e-08, 1.3236761e-08, 0.9999999, 5.9604627e-08, 0, 7.446613e-08, 0.9999999, 0, 0.10000038, 0.29999542)
-shape = SubResource("BoxShape3D_8jgwj")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="entities/JumpPad/Area3D/CollisionShape3D" unique_id=332992212]
-material_override = ExtResource("33_bt1tq")
-mesh = SubResource("BoxMesh_m44an")
-
-[node name="JumpPad2" type="Node3D" parent="entities" unique_id=2126800573]
-transform = Transform3D(-0.08715582, 0.49809724, -0.8627299, -4.1895238e-08, 0.8660252, 0.49999994, 0.99619484, 0.043577924, -0.07547915, 10.4561, -0.550885, 17.205513)
-script = ExtResource("32_sbyfl")
+[node name="JumpPad3" parent="entities" unique_id=504435189 instance=ExtResource("40_aup2b")]
+transform = Transform3D(-0.0871558, 0.49809733, -0.8627298, -4.1895238e-08, 0.8660252, 0.5, 0.99619484, 0.043577928, -0.0754791, 10.4561, -0.550885, 17.205513)
 _strength = 15.0
-_momentum = 0.0
-metadata/_custom_type_script = "uid://cf20wgu2b4x38"
-
-[node name="Area3D" type="Area3D" parent="entities/JumpPad2" unique_id=300044389]
-transform = Transform3D(0.99999994, 1.4901167e-08, -8.940697e-08, 2.9802322e-08, 0.86602575, -0.50000024, -1.1920929e-07, 0.5000001, 0.8660254, 0, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="entities/JumpPad2/Area3D" unique_id=217893724]
-transform = Transform3D(1, -2.431122e-09, 8.940697e-08, 1.3236761e-08, 0.9999999, 5.9604627e-08, 0, 7.446613e-08, 0.9999999, 0, 0.10000038, 0.29999542)
-shape = SubResource("BoxShape3D_8jgwj")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="entities/JumpPad2/Area3D/CollisionShape3D" unique_id=1787266436]
-material_override = ExtResource("33_bt1tq")
-mesh = SubResource("BoxMesh_m44an")
 
 [node name="Pickups" type="Node" parent="entities" unique_id=1754368430]
 
