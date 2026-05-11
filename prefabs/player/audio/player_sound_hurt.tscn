@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://d2kyju7xixua6"]
+
+[ext_resource type="Script" uid="uid://tmqbah57jsfa" path="res://script/player/audio/combat/hit/PA_Hurt.cs" id="1_selta"]
+[ext_resource type="Script" uid="uid://m0h486csofx4" path="res://addons/GaudioProcessTree/nodes/modules/AUD_Parallelizer.cs" id="2_co4ri"]
+[ext_resource type="AudioStream" uid="uid://d0giqdcqg3fuy" path="res://assets/sounds/combat/hit/FlyBy/hit1.wav" id="3_hv20x"]
+[ext_resource type="AudioStream" uid="uid://dg5b8fw0tvyo0" path="res://assets/sounds/combat/hit/FlyBy/hit2.wav" id="4_5jt6o"]
+[ext_resource type="AudioStream" uid="uid://bqribn152jyr2" path="res://assets/sounds/combat/hit/FlyBy/hit3.wav" id="5_5d0v7"]
+[ext_resource type="AudioStream" uid="uid://dse4ecxuw857q" path="res://assets/sounds/combat/hit/FlyBy/hit4.wav" id="6_y77at"]
+[ext_resource type="AudioStream" uid="uid://bdmnibvat7qx3" path="res://assets/sounds/combat/hit/FlyBy/hit5.wav" id="7_oy7ma"]
+[ext_resource type="Script" uid="uid://dbtsyp0hru7g" path="res://addons/GaudioProcessTree/nodes/stream_players/AUD_StreamPlayer1D.cs" id="8_3axu1"]
+[ext_resource type="AudioStream" uid="uid://4ylptewrn1j2" path="res://assets/sounds/combat/hit/FlyBy/shield1.wav" id="9_j380b"]
+[ext_resource type="AudioStream" uid="uid://6hwufr7qy24g" path="res://assets/sounds/combat/hit/FlyBy/shield2.wav" id="10_kafal"]
+[ext_resource type="AudioStream" uid="uid://cmsyv0rh4cih0" path="res://assets/sounds/combat/hit/FlyBy/shield3.wav" id="11_2pewj"]
+[ext_resource type="AudioStream" uid="uid://bwfu6tstniwj" path="res://assets/sounds/combat/hit/FlyBy/shield4.wav" id="12_avh76"]
+[ext_resource type="AudioStream" uid="uid://d2t07j8wrup65" path="res://assets/sounds/combat/hit/FlyBy/shield5.wav" id="13_6o3hq"]
+
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_unsnm"]
+polyphony = 20
+
+[node name="PA_Hurt" type="Node" unique_id=688658773 node_paths=PackedStringArray("_meatHit", "_shieldHit")]
+script = ExtResource("1_selta")
+_meatHit = NodePath("meat/meat")
+_shieldHit = NodePath("shield/shield")
+_minimumVolume = -33.0
+_maximumVolume = -8.0
+
+[node name="meat" type="AudioStreamPlayer" parent="." unique_id=254543533]
+stream = SubResource("AudioStreamPolyphonic_unsnm")
+volume_db = 15.0
+bus = &"Hit"
+
+[node name="meat" type="Node" parent="meat" unique_id=954083193]
+script = ExtResource("2_co4ri")
+PolyphonicStream = SubResource("AudioStreamPolyphonic_unsnm")
+MaxPolyphony = 2
+UseTimeScale = true
+Sounds = Array[AudioStream]([ExtResource("3_hv20x"), ExtResource("4_5jt6o"), ExtResource("5_5d0v7"), ExtResource("6_y77at"), ExtResource("7_oy7ma")])
+MinPitch = 0.9
+MaxPitch = 1.1
+
+[node name="player" type="Node" parent="meat/meat" unique_id=1390455937 node_paths=PackedStringArray("Player")]
+script = ExtResource("8_3axu1")
+Player = NodePath("../..")
+BaseVolumeDb = 15.0
+
+[node name="shield" type="AudioStreamPlayer" parent="." unique_id=134264109]
+stream = SubResource("AudioStreamPolyphonic_unsnm")
+volume_db = 15.0
+bus = &"Hit"
+
+[node name="shield" type="Node" parent="shield" unique_id=946012112]
+script = ExtResource("2_co4ri")
+PolyphonicStream = SubResource("AudioStreamPolyphonic_unsnm")
+MaxPolyphony = 2
+UseTimeScale = true
+Sounds = Array[AudioStream]([ExtResource("9_j380b"), ExtResource("10_kafal"), ExtResource("11_2pewj"), ExtResource("12_avh76"), ExtResource("13_6o3hq")])
+MinPitch = 0.9
+MaxPitch = 1.1
+
+[node name="player" type="Node" parent="shield/shield" unique_id=1953986119 node_paths=PackedStringArray("Player")]
+script = ExtResource("8_3axu1")
+Player = NodePath("../..")
+BaseVolumeDb = 15.0

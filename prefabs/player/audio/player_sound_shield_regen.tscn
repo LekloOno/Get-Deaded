@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://c37do2lsxmmk"]
+
+[ext_resource type="Script" uid="uid://bcb2ors47lqc5" path="res://script/player/audio/PA_ShieldRegen.cs" id="1_irfjl"]
+[ext_resource type="Script" uid="uid://dbtsyp0hru7g" path="res://addons/GaudioProcessTree/nodes/stream_players/AUD_StreamPlayer1D.cs" id="2_c1myn"]
+[ext_resource type="AudioStream" uid="uid://blj0pjbxuuwdy" path="res://assets/sounds/combat/shield_up.mp3" id="3_galro"]
+
+[node name="PA_ShieldRegen" type="Node" unique_id=2093860208 node_paths=PackedStringArray("_sound", "_shield")]
+script = ExtResource("1_irfjl")
+_sound = NodePath("AUD_StreamPlayer1D")
+_shield = NodePath("")
+
+[node name="AUD_StreamPlayer1D" type="Node" parent="." unique_id=1568440508 node_paths=PackedStringArray("Player")]
+script = ExtResource("2_c1myn")
+Player = NodePath("AudioStreamPlayer")
+UseTimeScale = true
+metadata/_custom_type_script = "uid://dbtsyp0hru7g"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AUD_StreamPlayer1D" unique_id=760416941]
+stream = ExtResource("3_galro")
