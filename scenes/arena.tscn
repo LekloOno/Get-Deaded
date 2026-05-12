@@ -3470,6 +3470,26 @@ metadata/_custom_type_script = "uid://ccj8s5i765h4j"
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=168625791]
 layer = 3
 
+[node name="CountDownLabel" type="Label" parent="CanvasLayer" unique_id=445566248]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -70.0
+offset_right = 30.0
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(0.77899, 0.8940687, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.27058825)
+theme_override_font_sizes/font_size = 100
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Menu" parent="CanvasLayer" unique_id=620824296 instance=ExtResource("44_yln86")]
 process_mode = 3
 color = Color(0, 0, 0, 0)
@@ -3617,32 +3637,12 @@ _statsInput = NodePath("../PI_Stats")
 
 [node name="CountDown" type="Node" parent="CanvasLayer" unique_id=129147269 node_paths=PackedStringArray("_num")]
 script = ExtResource("55_6d1h2")
-_num = NodePath("../Label")
+_num = NodePath("../CountDownLabel")
 _scaleTrans = 6
 _maxScale = 15.0
 _scaleTime = 0.25
 _opacityTrans = 5
 _opacityTime = 0.2
-
-[node name="Label" type="Label" parent="CanvasLayer" unique_id=445566248]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -30.0
-offset_top = -70.0
-offset_right = 30.0
-offset_bottom = 70.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset_ratio = Vector2(0.5, 0.5)
-theme_override_colors/font_color = Color(0.77899, 0.8940687, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.27058825)
-theme_override_font_sizes/font_size = 100
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="DamageBuffTracker" type="BoxContainer" parent="CanvasLayer" unique_id=1146335516 node_paths=PackedStringArray("_damageSpawner", "_timerLabel", "_boostLabel", "_vignette")]
 modulate = Color(0.4745098, 0.46666667, 1, 0.79607844)
@@ -3707,7 +3707,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_1iiwa")
 script = ExtResource("46_femlh")
 metadata/_custom_type_script = "uid://ba04qst68odml"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1062950670]
+[node name="music" type="AudioStreamPlayer" parent="." unique_id=1062950670]
 stream = ExtResource("71_4nhhj")
 autoplay = true
 bus = &"Music"
@@ -3727,7 +3727,7 @@ parameters/looping = true
 [connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/PanelContainer/BoxContainer/HBoxContainer/Score" method="Reset"]
 [connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/ShowScore" method="ShowScores"]
 [connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/DamageBuffTracker" method="EndBuff"]
-[connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="AudioStreamPlayer" method="play"]
+[connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="music" method="play"]
 [connection signal="StartGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/CombatStats/LastResults" method="hide"]
 [connection signal="StartGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/CombatStats/Button" method="hide"]
 [connection signal="StartGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/PanelContainer" method="show"]
@@ -3738,9 +3738,11 @@ parameters/looping = true
 [connection signal="Stop" from="entities/AimArena/SC_GameManager/SC_SequenceSpawner3" to="entities/AimArena/SC_GameManager" method="EndGame"]
 [connection signal="Pick" from="entities/Pickups/DamageBuff" to="entities/Pickups/DamageBuff/AUD_StreamPlayer1D" method="Play"]
 [connection signal="pressed" from="CanvasLayer/Menu/VBoxContainer/Play" to="SC_ArenaGameStarter" method="StartGame"]
-[connection signal="pressed" from="CanvasLayer/Menu/VBoxContainer/Play" to="AudioStreamPlayer" method="stop"]
+[connection signal="pressed" from="CanvasLayer/Menu/VBoxContainer/Play" to="music" method="stop"]
 [connection signal="pressed" from="CanvasLayer/Menu/VBoxContainer/Results" to="CanvasLayer/ShowScore" method="ShowScores"]
 [connection signal="pressed" from="CanvasLayer/Menu/VBoxContainer/Surrender" to="entities/AimArena/SC_GameManager" method="DoInterrupt"]
+[connection signal="mouse_entered" from="CanvasLayer/CombatStats/Button" to="CanvasLayer/Menu/LightHover" method="tab_interract"]
 [connection signal="pressed" from="CanvasLayer/CombatStats/Button" to="CanvasLayer/Menu" method="ExitCurrent"]
+[connection signal="pressed" from="CanvasLayer/CombatStats/Button" to="CanvasLayer/Menu/LightClick" method="tab_interract"]
 
 [editable path="CanvasLayer/Menu"]

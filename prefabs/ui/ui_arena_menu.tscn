@@ -24,6 +24,11 @@
 [ext_resource type="Script" uid="uid://bpduowbhu517b" path="res://script/ui/menu/contexts/controls/ui_cm360.gd" id="21_3ngnl"]
 [ext_resource type="Script" uid="uid://b2gps3n30fk26" path="res://script/ui/menu/contexts/accessibility/ui_ennemies_color.gd" id="22_t61gj"]
 [ext_resource type="Script" uid="uid://d2oxuiywjinnd" path="res://script/ui/menu/contexts/accessibility/ui_language_option.gd" id="23_6me0n"]
+[ext_resource type="AudioStream" uid="uid://27jiestftcpo" path="res://assets/sounds/ui/hover2.wav" id="25_vel4l"]
+[ext_resource type="AudioStream" uid="uid://47cmnegdd1hq" path="res://assets/sounds/ui/click.wav" id="26_vel4l"]
+[ext_resource type="AudioStream" uid="uid://bp67lpqxgmfk3" path="res://assets/sounds/ui/hover3.wav" id="27_1fil8"]
+[ext_resource type="Script" uid="uid://bs7wd2ltt17dh" path="res://script/ui/menu/ui_tabs_sound.gd" id="28_no00x"]
+[ext_resource type="AudioStream" uid="uid://bshhncf67w1g1" path="res://assets/sounds/ui/click_lighter.wav" id="29_wigoj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wkf4o"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -59,6 +64,27 @@ theme = ExtResource("1_fb0qj")
 color = Color(0, 0, 0, 0.61300004)
 script = ExtResource("2_oanoi")
 _baseMenu = NodePath("VBoxContainer")
+
+[node name="Hover" type="AudioStreamPlayer" parent="." unique_id=1653450793]
+stream = ExtResource("25_vel4l")
+volume_db = 4.0
+bus = &"Sound effects"
+
+[node name="Click" type="AudioStreamPlayer" parent="." unique_id=183830194]
+stream = ExtResource("26_vel4l")
+volume_db = -4.0
+bus = &"Sound effects"
+
+[node name="LightHover" type="AudioStreamPlayer" parent="." unique_id=1920933772]
+stream = ExtResource("27_1fil8")
+bus = &"Sound effects"
+script = ExtResource("28_no00x")
+
+[node name="LightClick" type="AudioStreamPlayer" parent="." unique_id=1986882104]
+stream = ExtResource("29_wigoj")
+volume_db = 2.0
+bus = &"Sound effects"
+script = ExtResource("28_no00x")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1290205898]
 visible = false
@@ -828,11 +854,23 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 text = "BACK"
 
+[connection signal="mouse_entered" from="VBoxContainer/Play" to="Hover" method="play"]
 [connection signal="pressed" from="VBoxContainer/Play" to="." method="Close"]
 [connection signal="pressed" from="VBoxContainer/Play" to="." method="SetPausable"]
 [connection signal="pressed" from="VBoxContainer/Play" to="VBoxContainer/Results" method="hide"]
 [connection signal="pressed" from="VBoxContainer/Play" to="VBoxContainer/Surrender" method="show"]
+[connection signal="pressed" from="VBoxContainer/Play" to="Click" method="play"]
+[connection signal="mouse_entered" from="VBoxContainer/Results" to="Hover" method="play"]
+[connection signal="pressed" from="VBoxContainer/Results" to="Click" method="play"]
 [connection signal="enter_settings" from="VBoxContainer/Settings" to="." method="Enter"]
+[connection signal="mouse_entered" from="VBoxContainer/Settings" to="Hover" method="play"]
+[connection signal="pressed" from="VBoxContainer/Settings" to="Click" method="play"]
+[connection signal="mouse_entered" from="VBoxContainer/Surrender" to="Hover" method="play"]
+[connection signal="pressed" from="VBoxContainer/Surrender" to="Click" method="play"]
+[connection signal="mouse_entered" from="VBoxContainer/Quit" to="Hover" method="play"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="Click" method="play"]
+[connection signal="tab_changed" from="PanelContainer/TabContainer" to="LightClick" method="tab_interract"]
+[connection signal="tab_hovered" from="PanelContainer/TabContainer" to="LightHover" method="tab_interract"]
 [connection signal="item_selected" from="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/DisplayModeInput" to="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/DisplayModeInput" method="_on_item_selected"]
 [connection signal="switched_mode" from="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/DisplayModeInput" to="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/ResolutionInput" method="set_window_size"]
 [connection signal="visibility_changed" from="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/DisplayModeInput" to="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/DisplayModeInput" method="_on_visibility_changed"]
@@ -856,5 +894,9 @@ text = "BACK"
 [connection signal="cm_360_changed" from="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/cm360Input" to="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/cm360Input/LineEdit" method="apply_value_no_signal"]
 [connection signal="value_applied" from="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/cm360Input/LineEdit" to="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/cm360Input" method="_on_line_edit_value_applied"]
 [connection signal="value_changed" from="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/cm360Input/MasterSlider" to="PanelContainer/TabContainer/CONTROLS_TAB/GridContainer/cm360Input" method="_on_master_slider_value_changed"]
+[connection signal="mouse_entered" from="PanelContainer/HBoxContainer/APPLY" to="LightHover" method="tab_interract"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/APPLY" to="." method="ExitCurrent"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/APPLY" to="LightClick" method="tab_interract"]
+[connection signal="mouse_entered" from="PanelContainer/HBoxContainer/Back" to="LightHover" method="tab_interract"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/Back" to="." method="ExitCurrent"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/Back" to="LightClick" method="tab_interract"]
