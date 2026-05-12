@@ -505,6 +505,41 @@ value = 1.0
 script = ExtResource("18_o1fwb")
 bus_name = "Master"
 
+[node name="Music" type="PanelContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer" unique_id=2119402571]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Music" type="HBoxContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/Music" unique_id=626577069]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/Music/Music" unique_id=612898370]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="Music" type="Label" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/Music/Music" unique_id=1829380058]
+layout_mode = 2
+text = "MUSIC_VOLUME_LABEL"
+
+[node name="MusicInput" type="HSplitContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer" unique_id=964571913]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/MusicInput" unique_id=1877509383]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+virtual_keyboard_type = 2
+script = ExtResource("8_no00x")
+
+[node name="MusicSlider" type="HSlider" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer/MusicInput" unique_id=1112118816]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+script = ExtResource("18_o1fwb")
+bus_name = "Music"
+
 [node name="SFX" type="PanelContainer" parent="PanelContainer/TabContainer/SOUND_TAB/GridContainer" unique_id=202052235]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -812,6 +847,7 @@ text = "BACK"
 [connection signal="toggled" from="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/LimitFPSInput" to="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/MaxFPSInput" method="set_visible"]
 [connection signal="value_applied" from="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/MaxFPSInput/LineEdit" to="PanelContainer/TabContainer/VIDEO_TAB/GridContainer/MaxFPSInput" method="_on_value_changed"]
 [connection signal="value_applied" from="PanelContainer/TabContainer/SOUND_TAB/GridContainer/MasterInput/LineEdit" to="PanelContainer/TabContainer/SOUND_TAB/GridContainer/MasterInput/MasterSlider" method="_on_value_changed"]
+[connection signal="value_applied" from="PanelContainer/TabContainer/SOUND_TAB/GridContainer/MusicInput/LineEdit" to="PanelContainer/TabContainer/SOUND_TAB/GridContainer/MusicInput/MusicSlider" method="_on_value_changed"]
 [connection signal="value_applied" from="PanelContainer/TabContainer/SOUND_TAB/GridContainer/SFXInput/LineEdit" to="PanelContainer/TabContainer/SOUND_TAB/GridContainer/SFXInput/SFXSlider" method="_on_value_changed"]
 [connection signal="value_applied" from="PanelContainer/TabContainer/SOUND_TAB/GridContainer/EnvSFXInput/LineEdit" to="PanelContainer/TabContainer/SOUND_TAB/GridContainer/EnvSFXInput/EnvSFXSlider" method="_on_value_changed"]
 [connection signal="value_applied" from="PanelContainer/TabContainer/SOUND_TAB/GridContainer/FbSFXInput/LineEdit" to="PanelContainer/TabContainer/SOUND_TAB/GridContainer/FbSFXInput/FbSFXSlider" method="_on_value_changed"]
