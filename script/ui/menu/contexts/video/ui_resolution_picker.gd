@@ -20,16 +20,18 @@ func _ready() -> void:
 	for resolution in resolutions:
 		add_item(resolution)
 		
-	if DisplayServer.window_get_mode() == DisplayServer.WindowMode.WINDOW_MODE_WINDOWED:
-		curr_res = get_window().size
-	else:
-		curr_res = get_window().content_scale_size
+	curr_res = CONF_UserSettingsLoader.GetVideoSetting("resolution")
+	# if DisplayServer.window_get_mode() == DisplayServer.WindowMode.WINDOW_MODE_WINDOWED:
+	#	curr_res = get_window().size
+	#else:
+	#	curr_res = get_window().content_scale_size
 	
 
 func _on_visibility_changed() -> void:
 	if !visible:
 		return
-	
+		
+	curr_res = CONF_UserSettingsLoader.GetVideoSetting("resolution")
 	var window_size_str = str(
 		curr_res.x,
 		"x",
@@ -43,6 +45,7 @@ func set_window_size() :
 	if DisplayServer.window_get_mode() == DisplayServer.WindowMode.WINDOW_MODE_WINDOWED:
 		get_window().set_size(curr_res)
 	get_window().content_scale_size = curr_res
+	CONF_UserSettingsLoader.RegisterVideoSetting("resolution", curr_res)
 
 func _on_item_selected(index: int) -> void:
 	var key = get_item_text(index)

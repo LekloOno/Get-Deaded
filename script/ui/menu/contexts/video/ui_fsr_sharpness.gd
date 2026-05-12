@@ -23,8 +23,7 @@ func _on_visibility_changed() -> void:
 	if !visible:
 		return
 		
-	if !sharpness:
-		_initialize()
+	_initialize()
 	
 	slider.value = sharpness
 	slider.value_changed.emit(sharpness)
@@ -45,11 +44,9 @@ func show_scale() -> bool:
 func _on_value_changed(new_value: float) -> void:
 	sharpness = new_value
 	get_tree().root.fsr_sharpness = sharpness
+	CONF_UserSettingsLoader.RegisterVideoSetting("fsr_sharpness", sharpness)
 	
 func _on_render_scale_mode_changed(mode: int):
 	var do_show = mode == Viewport.SCALING_3D_MODE_FSR || mode == Viewport.SCALING_3D_MODE_FSR2
 	visible = do_show
 	label.visible = do_show
-	
-	if !do_show:
-		get_tree().root.fsr_sharpness = 1

@@ -26,6 +26,11 @@ func _on_item_selected(index: int) -> void:
 	else :
 		get_tree().root.scaling_3d_mode = mode
 		
+	CONF_UserSettingsLoader.RegisterVideoSetting(
+		"render_scale_mode",
+		get_tree().root.scaling_3d_mode
+	)
+		
 	mode_changed.emit(mode)
 
 func _on_visibility_changed() -> void:
@@ -34,6 +39,7 @@ func _on_visibility_changed() -> void:
 		
 	var curr_mode = get_current_mode()
 	selected = mode_to_idx(curr_mode)
+	mode_changed.emit(curr_mode)
 	
 func get_current_mode() :
 	var curr_mode = get_tree().root.scaling_3d_mode

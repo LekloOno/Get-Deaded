@@ -30,6 +30,7 @@ buses/default_bus_layout="uid://bggmflncdn26j"
 [autoload]
 
 Bootstrap="*res://config/bootstrap/Bootstrap.cs"
+ConfUserSettingsLoader="*uid://bargnkrglwn4c"
 ConfHitColors="*res://config/combat/hit/CONF_HitColors.cs"
 ConfHealthColors="*res://config/combat/health_colors/CONF_HealthColors.cs"
 ConfBodyModifiers="*res://config/combat/body_modifiers/CONF_BodyModifiers.cs"

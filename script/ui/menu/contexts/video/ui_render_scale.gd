@@ -44,6 +44,7 @@ func show_scale() -> bool:
 func _on_value_changed(new_value: float) -> void:
 	render_scale = new_value
 	get_tree().root.scaling_3d_scale = new_value
+	CONF_UserSettingsLoader.RegisterVideoSetting("render_scale_scale", new_value)
 	
 func _on_render_scale_mode_changed(mode: int):
 	var do_show = mode != -1
@@ -52,6 +53,7 @@ func _on_render_scale_mode_changed(mode: int):
 	
 	if !do_show:
 		get_tree().root.scaling_3d_scale = 1
+		CONF_UserSettingsLoader.RegisterVideoSetting("render_scale_scale", 1)
 		return
 	
 	if mode == Viewport.SCALING_3D_MODE_BILINEAR:

@@ -19,6 +19,7 @@ func mode_to_idx(mode) -> int:
 func _on_item_selected(index: int) -> void:
 	var mode = modes[get_item_text(index)]
 	DisplayServer.window_set_vsync_mode(mode)
+	CONF_UserSettingsLoader.RegisterVideoSetting("vsync_mode", mode)
 
 func _on_visibility_changed() -> void:
 	if !visible:

@@ -18,7 +18,9 @@ func aspect_ratio_to_idx(aspect_ratio) -> int:
 
 func _on_item_selected(index: int) -> void:
 	var key = get_item_text(index)
-	get_tree().root.content_scale_aspect = aspect_ratios[key]
+	var mode = aspect_ratios[key]
+	get_tree().root.content_scale_aspect = mode
+	CONF_UserSettingsLoader.RegisterVideoSetting("stretch_mode", mode)
 	
 
 

@@ -16,12 +16,14 @@ func display_mode_to_key(mode: DisplayServer.WindowMode) -> String:
 	return "BORDERLESS_DISPLAY_MODE"
 
 func _ready() -> void:
+	var a = CONF_UserSettingsLoader.GetVideoSetting("display_mode")
 	for mode in modes:
 		add_item(mode)
 
 func set_mode(mode: DisplayServer.WindowMode):
 	DisplayServer.window_set_mode(mode)
 	switched_mode.emit()
+	CONF_UserSettingsLoader.RegisterVideoSetting("display_mode", mode)
 
 func _on_item_selected(index: int) -> void:
 	var key = get_item_text(index)
@@ -31,7 +33,8 @@ func _on_item_selected(index: int) -> void:
 func _on_visibility_changed() -> void:
 	if !visible:
 		return
-		
-	var mode_str = display_mode_to_key(DisplayServer.window_get_mode())
+	
+	var mode = CONF_UserSettingsLoader.GetVideoSetting("display_mode")
+	var mode_str = display_mode_to_key(mode)
 	
 	selected = modes.keys().find(mode_str)

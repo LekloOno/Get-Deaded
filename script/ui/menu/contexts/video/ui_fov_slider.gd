@@ -10,9 +10,10 @@ func _ready() -> void:
 func _on_visibility_changed() -> void:
 	if !visible:
 		return
-		
+	
 	value = camera_settings.HorizontalFov
 	value_changed.emit(value)
 
 func _on_value_changed(new_value: float) -> void:
 	camera_settings.HorizontalFov = new_value
+	CONF_UserSettingsLoader.RegisterVideoSetting("fov", new_value)

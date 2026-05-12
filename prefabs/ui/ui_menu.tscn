@@ -21,7 +21,7 @@
 [ext_resource type="Script" uid="uid://b2gps3n30fk26" path="res://script/ui/menu/contexts/accessibility/ui_ennemies_color.gd" id="12_g471r"]
 [ext_resource type="Script" uid="uid://ctjmgs5r2eyrr" path="res://script/ui/menu/ui_line_edit_helper.gd" id="12_i4pqc"]
 [ext_resource type="Script" uid="uid://bpduowbhu517b" path="res://script/ui/menu/contexts/controls/ui_cm360.gd" id="14_t6rq5"]
-[ext_resource type="Resource" uid="uid://bntla2ivt7ykt" path="res://prefabs/player/player_camera_settings.tres" id="15_nvxak"]
+[ext_resource type="Resource" uid="uid://bntla2ivt7ykt" path="res://config/player/player_camera_settings.tres" id="15_nvxak"]
 [ext_resource type="Script" uid="uid://cg5dedg2yo8yj" path="res://script/ui/menu/contexts/video/ui_v_sync_mode.gd" id="15_poje1"]
 [ext_resource type="Script" uid="uid://d2oxuiywjinnd" path="res://script/ui/menu/contexts/accessibility/ui_language_option.gd" id="16_sith4"]
 
