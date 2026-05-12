@@ -18,7 +18,14 @@ config/name="Pew"
 run/main_scene="uid://c6m6ewnorjwbf"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 run/max_fps=165
+boot_splash/stretch_mode=4
+boot_splash/use_filter=false
+boot_splash/image="uid://ipln8knjadqa"
 config/icon="res://icon.svg"
+
+[audio]
+
+buses/default_bus_layout="uid://bggmflncdn26j"
 
 [autoload]
 
