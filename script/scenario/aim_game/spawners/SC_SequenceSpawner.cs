@@ -11,6 +11,11 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
     [Export] private float _spawnMinDistance = 7f;
     [Export] private float _respawnDelay = 0.52f;
     [Export] private float _roundTime = 30f;
+    /// <summary>
+    /// Multiple enemies might need to respawn at once.
+    /// At most, all enemies are dead, waiting for respawn, so we need _count different timers.
+    /// The timer are not tied to a specific enemy. They are only tied when they are active, but can be tied to any enemy.
+    /// </summary>
     private List<Timer> _respawnTimers = [];
     private Dictionary<E_IEnemy, int> _enemyToPool = [];
     private Random _rng = new();
@@ -26,6 +31,10 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
         CreateBots();
     }
 
+    /// <summary>
+    /// Preamble function. Not related to actual round/game.
+    /// It creates and preallocates the bots in pools, so they don't have to be on-the-go.
+    /// </summary>
     private void CreateBots()
     {
         for (int i = 0; i < _count; i ++)
@@ -74,12 +83,11 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
 
     private void Killed(E_IEnemy enemy)
     {
+        RemoveEnemy(enemy);
         _respawnTimers[_timerIndex].Start(_respawnDelay);
         
         _timerIndex ++;
         _timerIndex %= (int) _count;
-
-        RemoveEnemy(enemy);
     }
 
     protected override void StopSpec()
