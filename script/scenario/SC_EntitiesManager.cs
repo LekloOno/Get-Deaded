@@ -21,4 +21,10 @@ public static class SC_EntitiesManager
         foreach (PickableSpawner spawner in _pickupSpawners)
             spawner.Disable();
     }
+
+    public static void ForceSpawn()
+    {
+        foreach (PickableSpawner spawner in _pickupSpawners)
+            spawner.Drop();
+    }
 }

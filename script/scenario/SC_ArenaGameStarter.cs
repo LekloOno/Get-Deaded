@@ -17,10 +17,12 @@ public partial class SC_ArenaGameStarter : Node
         AddChild(_player);
         RemoveChild(_player);
         Input.MouseMode = Input.MouseModeEnum.Visible;
+        SC_EntitiesManager.ForceSpawn();
     }
 
     private void Reset()
     {
+        SC_EntitiesManager.ForceSpawn();
         _menuCamera.MakeCurrent();
         Input.MouseMode = Input.MouseModeEnum.Visible;
         RemoveChild(_player);
@@ -28,6 +30,7 @@ public partial class SC_ArenaGameStarter : Node
 
     public void StartGame()
     {
+        SC_EntitiesManager.DisablePickups();
         AddChild(_player);
         _player.Revive();
         _player.GlobalPosition = _spawnPoint.GlobalPosition;

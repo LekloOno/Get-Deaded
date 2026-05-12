@@ -60,6 +60,7 @@
 [ext_resource type="Script" uid="uid://b6wuemumhi18m" path="res://script/ui/game/UI_PickupCooldown.cs" id="51_kjqme"]
 [ext_resource type="Script" uid="uid://djrjee7qnnptw" path="res://script/ui/combat/weapon/statistics/UIW_ArenaEnd.cs" id="53_00ph2"]
 [ext_resource type="Script" uid="uid://bnxb1ihj1snbq" path="res://script/ui/game/UI_ArenaCountDown.cs" id="55_6d1h2"]
+[ext_resource type="Script" uid="uid://b0h6mwxwlnjj7" path="res://script/animation/an_menu_camera_swaps.gd" id="55_a7862"]
 [ext_resource type="Script" uid="uid://d3x85bspwdnaw" path="res://script/ui/game/UI_DamageBuff.cs" id="65_1iiwa"]
 [ext_resource type="AudioStream" uid="uid://cspq87nko4mud" path="res://assets/sounds/music/cacamenu.mp3" id="71_4nhhj"]
 [ext_resource type="LightmapGIData" uid="uid://d3cc8iupunnf1" path="res://scenes/arena.lmbake" id="112_hskjd"]
@@ -1049,13 +1050,13 @@ shader_parameter/fluctuation_strength = 0.6
 shader_parameter/fluctuation_sharpness = 1.0
 shader_parameter/fluctuation_speed = 0.4
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_4nhhj"]
-
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_a7862"]
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_kjqme"]
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_bmakn"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_n5h7s"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3mad5"]
 transparency = 1
@@ -1172,6 +1173,20 @@ turbulence_influence_max = 0.020000001
 [sub_resource type="PrismMesh" id="PrismMesh_6cq6o"]
 left_to_right = 0.2
 size = Vector3(0.05, 0.03, 0.05)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n5h7s"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 0.043137256)
+albedo_texture = ExtResource("115_13yth")
+texture_filter = 0
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+grow_amount = 1.988
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b7qr7"]
 albedo_color = Color(2.3464565, 2.3464565, 2.3464565, 1)
@@ -2238,14 +2253,14 @@ spot_angle_attenuation = 0.15932
 [node name="VFX_GodsRay" parent="arena" unique_id=605019919 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.27160624, -0.9330127, 0.23604527, 0.017453581, 0.25000003, 0.9680885, -0.9622502, -0.2588191, 0.0841859, -22.38988, 5.6927605, 5.072876)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_4nhhj")
+mesh = SubResource("ImmediateMesh_a7862")
 BaseRadius = 0.38
 InitialRotation = 45.0
 
 [node name="VFX_GodsRay3" parent="arena/VFX_GodsRay" unique_id=802324590 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.9999999, -1.4901161e-08, 7.450581e-09, -1.4901161e-08, 0.9999999, -3.1664968e-08, 0, 1.8626451e-09, 0.99999994, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_a7862")
+mesh = SubResource("ImmediateMesh_kjqme")
 skeleton = NodePath("../..")
 BaseRadius = 0.14
 InitialRotation = 45.0
@@ -2254,14 +2269,14 @@ FlareAngle = 6.0
 [node name="VFX_GodsRay2" parent="arena" unique_id=164366595 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.05200698, -0.25727454, -0.9649379, 0.9678007, 0.25127998, -0.0148357125, 0.24628639, -0.933096, 0.2620588, -25.830011, 7.2676578, 9.14106)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_kjqme")
+mesh = SubResource("ImmediateMesh_bmakn")
 BaseRadius = 0.36
 InitialRotation = 45.0
 
 [node name="VFX_GodsRay3" parent="arena/VFX_GodsRay2" unique_id=294127740 instance=ExtResource("113_ie87n")]
 transform = Transform3D(1, 1.4901161e-08, 0, 1.4901161e-08, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_bmakn")
+mesh = SubResource("ImmediateMesh_n5h7s")
 skeleton = NodePath("../..")
 BaseRadius = 0.14
 InitialRotation = 45.0
@@ -2280,6 +2295,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.119894, 0)
 material_override = SubResource("StandardMaterial3D_oga8r")
 amount = 30
 lifetime = 10.0
+process_material = SubResource("ParticleProcessMaterial_txr2l")
+draw_pass_1 = SubResource("PrismMesh_6cq6o")
+
+[node name="GPUParticles3D7" type="GPUParticles3D" parent="arena" unique_id=618604676]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.181097, -20.686626, 44.70638)
+material_override = SubResource("StandardMaterial3D_n5h7s")
+amount = 6
+lifetime = 10.0
+visibility_aabb = AABB(-4, -4, -8.56, 27.285, 9.855, 10.8)
+process_material = SubResource("ParticleProcessMaterial_xg6sr")
+draw_pass_1 = SubResource("QuadMesh_0easo")
+
+[node name="GPUParticles3D4" type="GPUParticles3D" parent="arena/GPUParticles3D7" unique_id=118022960]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.119894, 0)
+material_override = SubResource("StandardMaterial3D_oga8r")
+amount = 30
+lifetime = 10.0
+visibility_aabb = AABB(-1.365, -4, -7.255, 25.485, 11.805, 13.86)
 process_material = SubResource("ParticleProcessMaterial_txr2l")
 draw_pass_1 = SubResource("PrismMesh_6cq6o")
 
@@ -2316,7 +2349,7 @@ process_material = SubResource("ParticleProcessMaterial_txr2l")
 draw_pass_1 = SubResource("PrismMesh_6cq6o")
 
 [node name="GPUParticles3D4" type="GPUParticles3D" parent="arena" unique_id=746977647]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.313995, -0.5732508, 48.230545)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.313995, 2.4267492, 48.230545)
 material_override = SubResource("StandardMaterial3D_3mad5")
 amount = 6
 lifetime = 10.0
@@ -3440,16 +3473,42 @@ script = ExtResource("51_kjqme")
 _pickupSpawner = NodePath("../../..")
 metadata/_custom_type_script = "uid://b6wuemumhi18m"
 
-[node name="SpectatePivot" type="Node3D" parent="entities" unique_id=1473812994]
+[node name="Spectate" type="Node" parent="entities" unique_id=2083805772 node_paths=PackedStringArray("locations", "camera")]
+script = ExtResource("55_a7862")
+locations = {
+NodePath("SpectatePivot/Node3D/Arena"): 10.0,
+NodePath("DeepCave"): 5.0,
+NodePath("Quad"): 5.0,
+NodePath("Roofs"): 5.0,
+NodePath("Hole"): 5.0
+}
+camera = NodePath("Camera3D")
+
+[node name="Camera3D" type="Camera3D" parent="entities/Spectate" unique_id=1682594273]
+transform = Transform3D(1, 0, 0, 0, 0.8191521, 0.57357645, 0, -0.57357645, 0.8191521, -16.2, 11.045105, 32.102196)
+
+[node name="SpectatePivot" type="Node3D" parent="entities/Spectate" unique_id=1473812994]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.2, -1, 14.9)
 script = ExtResource("42_7jf4w")
 _degreePerSec = 5.0
 
-[node name="Node3D" type="Node3D" parent="entities/SpectatePivot" unique_id=737030657]
+[node name="Node3D" type="Node3D" parent="entities/Spectate/SpectatePivot" unique_id=737030657]
 transform = Transform3D(1, 0, 0, 0, 0.8191521, 0.57357645, 0, -0.57357645, 0.8191521, 0, 0, 0)
 
-[node name="Camera3D" type="Camera3D" parent="entities/SpectatePivot/Node3D" unique_id=1682594273]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 21)
+[node name="Arena" type="RemoteTransform3D" parent="entities/Spectate/SpectatePivot/Node3D" unique_id=987606769]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.9073486e-06, 21.000002)
+
+[node name="DeepCave" type="RemoteTransform3D" parent="entities/Spectate" unique_id=1652989101]
+transform = Transform3D(-0.17073506, 0.030881446, -0.98483294, 0, 0.9995086, 0.03134163, 0.98531693, 0.0053511155, -0.17065117, -10.899888, -16.378988, 44.215157)
+
+[node name="Quad" type="RemoteTransform3D" parent="entities/Spectate" unique_id=862070754]
+transform = Transform3D(0.56756306, 0.013708269, 0.82321566, 0, 0.99986136, -0.016649792, -0.8233298, 0.009449807, 0.5674844, 31.190876, -7.3409595, 55.987602)
+
+[node name="Roofs" type="RemoteTransform3D" parent="entities/Spectate" unique_id=1227756375]
+transform = Transform3D(-0.5250272, 0.13979538, 0.839526, 0, 0.98641783, -0.16425537, -0.8510854, -0.086238526, -0.5178961, -90.819565, 41.95442, -23.993193)
+
+[node name="Hole" type="RemoteTransform3D" parent="entities/Spectate" unique_id=1601252914]
+transform = Transform3D(0.83226436, 0.14305378, 0.53560406, 0, 0.96613336, -0.25804335, -0.5543789, 0.21476026, 0.8040784, 12.534887, -5.4781075, 30.534243)
 
 [node name="preload" type="Node" parent="." unique_id=963765076]
 
@@ -3463,7 +3522,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, -19, 40)
 script = ExtResource("44_hn1ds")
 _spawnPoint = NodePath("../entities/SpawnPoint")
 _playerPrefab = ExtResource("45_femlh")
-_menuCamera = NodePath("../entities/SpectatePivot/Node3D/Camera3D")
+_menuCamera = NodePath("../entities/Spectate/Camera3D")
 _gameManager = NodePath("../entities/AimArena/SC_GameManager")
 metadata/_custom_type_script = "uid://ccj8s5i765h4j"
 
