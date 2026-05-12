@@ -68,22 +68,22 @@ _baseMenu = NodePath("VBoxContainer")
 [node name="Hover" type="AudioStreamPlayer" parent="." unique_id=1653450793]
 stream = ExtResource("25_vel4l")
 volume_db = 4.0
-bus = &"Sound effects"
+bus = &"Feedback SFX"
 
 [node name="Click" type="AudioStreamPlayer" parent="." unique_id=183830194]
 stream = ExtResource("26_vel4l")
 volume_db = -4.0
-bus = &"Sound effects"
+bus = &"Feedback SFX"
 
 [node name="LightHover" type="AudioStreamPlayer" parent="." unique_id=1920933772]
 stream = ExtResource("27_1fil8")
-bus = &"Sound effects"
+bus = &"Feedback SFX"
 script = ExtResource("28_no00x")
 
 [node name="LightClick" type="AudioStreamPlayer" parent="." unique_id=1986882104]
 stream = ExtResource("29_wigoj")
 volume_db = 2.0
-bus = &"Sound effects"
+bus = &"Feedback SFX"
 script = ExtResource("28_no00x")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1290205898]
