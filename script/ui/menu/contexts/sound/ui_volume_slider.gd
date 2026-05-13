@@ -22,7 +22,9 @@ func _on_visibility_changed() -> void:
 		) * max_value
 
 func _on_value_changed(linear_value: float) -> void:
+	var volume_db = linear_to_db(linear_value/max_value)
 	AudioServer.set_bus_volume_db(
 		bus_index,
-		linear_to_db(linear_value/max_value)
+		volume_db
 	)
+	CONF_UserSettingsLoader.RegisterBusVolumeDb(bus_name, volume_db)

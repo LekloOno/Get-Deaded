@@ -69,22 +69,18 @@ _baseMenu = NodePath("VBoxContainer")
 [node name="Hover" type="AudioStreamPlayer" parent="." unique_id=1653450793]
 stream = ExtResource("25_vel4l")
 volume_db = 4.0
-bus = &"Feedback SFX"
 
 [node name="Click" type="AudioStreamPlayer" parent="." unique_id=183830194]
 stream = ExtResource("26_vel4l")
 volume_db = -4.0
-bus = &"Feedback SFX"
 
 [node name="LightHover" type="AudioStreamPlayer" parent="." unique_id=1920933772]
 stream = ExtResource("27_1fil8")
-bus = &"Feedback SFX"
 script = ExtResource("28_no00x")
 
 [node name="LightClick" type="AudioStreamPlayer" parent="." unique_id=1986882104]
 stream = ExtResource("29_wigoj")
 volume_db = 2.0
-bus = &"Feedback SFX"
 script = ExtResource("28_no00x")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1290205898]
@@ -601,7 +597,7 @@ size_flags_vertical = 4
 max_value = 1.0
 step = 0.01
 script = ExtResource("18_o1fwb")
-bus_name = "Sound effects"
+bus_name = "Sound Effects"
 
 [node name="EnvSFX" type="PanelContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer" unique_id=987994804]
 layout_mode = 2
@@ -639,7 +635,7 @@ max_value = 1.0
 step = 0.01
 value = 1.0
 script = ExtResource("18_o1fwb")
-bus_name = "Environment SFX"
+bus_name = "Environment Sfx"
 
 [node name="FbSFX" type="PanelContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer" unique_id=1564615723]
 layout_mode = 2
@@ -676,7 +672,7 @@ size_flags_vertical = 4
 max_value = 1.0
 step = 0.01
 script = ExtResource("18_o1fwb")
-bus_name = "Feedback SFX"
+bus_name = "Feedback Sfx"
 
 [node name="CONTROLS_TAB" type="TabBar" parent="Settings/TabContainer" unique_id=1802915093]
 visible = false
