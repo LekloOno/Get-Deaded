@@ -4,21 +4,24 @@ using Godot;
 
 public partial class CONF_UserSettingsLoader : Node
 {
+	public const string SoundSection = "sound";
+    private const string VolumeDbSuffix = "_volume_db";
+
     public static Variant GetSoundSetting(string key) =>
-		Instance.Config.GetValue("sound", key);
+		Instance.Config.GetValue(SoundSection, key);
 
 	public static void RegisterSoundSetting(string key, Variant value) =>
-		Instance.Config.SetValue("sound", key, value);
+		Instance.Config.SetValue(SoundSection, key, value);
 
 	public static string BusVolumeDbKey(string busName) =>
-		busName.ToSnakeCase() + "_volume_db";
+		busName.ToSnakeCase() + VolumeDbSuffix;
 
 	public static bool IsBusVolumeDb(string key, out string busName)
 	{
-		if (key.EndsWith("_volume_db"))
+		if (key.EndsWith(VolumeDbSuffix))
 		{
 			busName = key
-				.Replace("_volume_db", "")
+				.Replace(VolumeDbSuffix, "")
 				.Split("_")
 				.Join(" ");
 
@@ -33,7 +36,7 @@ public partial class CONF_UserSettingsLoader : Node
 	public static void RegisterBusVolumeDb(string busName, float volumeDb)
 	{
 		Instance.Config.SetValue(
-			"sound",
+			SoundSection,
 			BusVolumeDbKey(busName),
 			volumeDb.ToString()
 		);
@@ -42,16 +45,16 @@ public partial class CONF_UserSettingsLoader : Node
 	public static float GetBusVolumeDb(string busName)
 	{
 		return (float)Instance.Config.GetValue(
-			"sound",
+			SoundSection,
 			BusVolumeDbKey(busName)
 		);
 	}
         
     private void LoadSoundSettings()
 	{
-		foreach (string key in Config.GetSectionKeys("sound"))
+		foreach (string key in Config.GetSectionKeys(SoundSection))
 		{
-			var value = Config.GetValue("sound", key);
+			var value = Config.GetValue(SoundSection, key);
 
 			if (IsBusVolumeDb(key, out string busName))
 			{

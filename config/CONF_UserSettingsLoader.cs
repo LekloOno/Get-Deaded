@@ -3,7 +3,7 @@ using Godot;
 [GlobalClass]
 public partial class CONF_UserSettingsLoader : Node
 {
-	const string SETTINGS_FILE_PATH = "user://settings.ini";
+	const string SettingsFilePath = "user://settings.ini";
 	public ConfigFile Config {get; private set;}
 	public static CONF_UserSettingsLoader Instance {get; private set;}
 	private static PC_Settings _playerCameraSettings;
@@ -16,8 +16,8 @@ public partial class CONF_UserSettingsLoader : Node
 		// Not ideal
 		_playerCameraSettings = ResourceLoader.Load<PC_Settings>("res://config/player/player_camera_settings.tres");
 
-		if (FileAccess.FileExists(SETTINGS_FILE_PATH))
-			Config.Load(SETTINGS_FILE_PATH);
+		if (FileAccess.FileExists(SettingsFilePath))
+			Config.Load(SettingsFilePath);
 	}
 
 	// we could do some fancy stuffs with enums, but at the end of the day, we have to
@@ -31,15 +31,15 @@ public partial class CONF_UserSettingsLoader : Node
 
 	public static void Apply()
 	{
-		Instance.Config.Save(SETTINGS_FILE_PATH);
+		Instance.Config.Save(SettingsFilePath);
 	}
 
 	public static void Abort()
 	{
-		if (!FileAccess.FileExists(SETTINGS_FILE_PATH))
+		if (!FileAccess.FileExists(SettingsFilePath))
 			return;
 
-		Instance.Config.Load(SETTINGS_FILE_PATH);
+		Instance.Config.Load(SettingsFilePath);
 		Load();
 	}
 
