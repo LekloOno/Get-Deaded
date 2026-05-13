@@ -15,3 +15,4 @@ func _on_visibility_changed() -> void:
 
 func _on_color_changed(new_color: Color) -> void:
 	ConfHitColors.HitColors.Critical = new_color
+	CONF_UserSettingsLoader.RegisterAccessibilitySetting("enemies_color", new_color)

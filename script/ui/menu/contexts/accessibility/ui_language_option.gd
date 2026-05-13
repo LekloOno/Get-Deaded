@@ -36,5 +36,6 @@ func get_language_key(locale: String) -> int:
 			
 
 func _on_item_selected(index: int) -> void:
-	var key = get_item_text(index)
-	TranslationServer.set_locale(locales[key])
+	var locale = locales[get_item_text(index)]
+	TranslationServer.set_locale(locale)
+	CONF_UserSettingsLoader.RegisterAccessibilitySetting("language", locale)
