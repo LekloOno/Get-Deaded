@@ -4,7 +4,9 @@ using Godot;
 public partial class CONF_UserSettingsLoader : Node
 {
 	const string SettingsFilePath = "user://settings.ini";
+	const string DefaultSettingsFilePath = "res://config/user/default_settings.ini";
 	public ConfigFile Config {get; private set;}
+	public ConfigFile DefaultConfig {get; private set;}
 	public static CONF_UserSettingsLoader Instance {get; private set;}
 	private static PC_Settings _playerCameraSettings;
 
@@ -13,11 +15,16 @@ public partial class CONF_UserSettingsLoader : Node
 		Instance = this;
 
 		Config = new();
+		DefaultConfig = new();
 		// Not ideal
 		_playerCameraSettings = ResourceLoader.Load<PC_Settings>("res://config/player/player_camera_settings.tres");
 
+		DefaultConfig.Load(DefaultSettingsFilePath);
+
 		if (FileAccess.FileExists(SettingsFilePath))
 			Config.Load(SettingsFilePath);
+		else
+			Config.Load(DefaultSettingsFilePath);
 	}
 
 	// we could do some fancy stuffs with enums, but at the end of the day, we have to
@@ -41,6 +48,21 @@ public partial class CONF_UserSettingsLoader : Node
 
 		Instance.Config.Load(SettingsFilePath);
 		Load();
+	}
+
+	public static void Reset() =>
+		Instance.Config.Load(DefaultSettingsFilePath);
+
+	public static void ResetApply()
+	{
+		Reset();
+		Apply();
+	}
+
+	public static void Reset(string section, string key)
+	{
+		var value = Instance.DefaultConfig.GetValue(section, key);
+		Instance.Config.SetValue(section, key, value);
 	}
 
 	public static void Load()
