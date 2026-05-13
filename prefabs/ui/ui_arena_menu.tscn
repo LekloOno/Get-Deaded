@@ -840,17 +840,17 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 theme_override_constants/separation = 10
 
-[node name="APPLY" type="Button" parent="Settings/HBoxContainer" unique_id=1080423467]
+[node name="APPLY_BUTTON" type="Button" parent="Settings/HBoxContainer" unique_id=1080423467]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-text = "APPLY"
+text = "APPLY_BUTTON"
 
-[node name="Back" type="Button" parent="Settings/HBoxContainer" unique_id=1261773334]
+[node name="BACK_BUTTON" type="Button" parent="Settings/HBoxContainer" unique_id=1261773334]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-text = "BACK"
+text = "BACK_BUTTON"
 
 [connection signal="mouse_entered" from="VBoxContainer/Play" to="Hover" method="play"]
 [connection signal="pressed" from="VBoxContainer/Play" to="." method="Close"]
@@ -893,9 +893,9 @@ text = "BACK"
 [connection signal="cm_360_changed" from="Settings/TabContainer/CONTROLS_TAB/GridContainer/cm360Input" to="Settings/TabContainer/CONTROLS_TAB/GridContainer/cm360Input/LineEdit" method="apply_value_no_signal"]
 [connection signal="value_applied" from="Settings/TabContainer/CONTROLS_TAB/GridContainer/cm360Input/LineEdit" to="Settings/TabContainer/CONTROLS_TAB/GridContainer/cm360Input" method="set_cm_per_360"]
 [connection signal="value_changed" from="Settings/TabContainer/CONTROLS_TAB/GridContainer/cm360Input/MasterSlider" to="Settings/TabContainer/CONTROLS_TAB/GridContainer/cm360Input" method="set_cm_per_360"]
-[connection signal="mouse_entered" from="Settings/HBoxContainer/APPLY" to="LightHover" method="tab_interract"]
-[connection signal="pressed" from="Settings/HBoxContainer/APPLY" to="LightClick" method="tab_interract"]
-[connection signal="pressed" from="Settings/HBoxContainer/APPLY" to="Settings" method="_on_apply_pressed"]
-[connection signal="mouse_entered" from="Settings/HBoxContainer/Back" to="LightHover" method="tab_interract"]
-[connection signal="pressed" from="Settings/HBoxContainer/Back" to="." method="ExitCurrent"]
-[connection signal="pressed" from="Settings/HBoxContainer/Back" to="LightClick" method="tab_interract"]
+[connection signal="mouse_entered" from="Settings/HBoxContainer/APPLY_BUTTON" to="LightHover" method="tab_interract"]
+[connection signal="pressed" from="Settings/HBoxContainer/APPLY_BUTTON" to="LightClick" method="tab_interract"]
+[connection signal="pressed" from="Settings/HBoxContainer/APPLY_BUTTON" to="Settings" method="_on_apply_pressed"]
+[connection signal="mouse_entered" from="Settings/HBoxContainer/BACK_BUTTON" to="LightHover" method="tab_interract"]
+[connection signal="pressed" from="Settings/HBoxContainer/BACK_BUTTON" to="." method="ExitCurrent"]
+[connection signal="pressed" from="Settings/HBoxContainer/BACK_BUTTON" to="LightClick" method="tab_interract"]
