@@ -42,10 +42,15 @@ func _on_visibility_changed() -> void:
 		
 	dpi_edit.text = str(camera_settings.Dpi)
 
+func set_dpi(dpi: int):
+	camera_settings.Dpi = dpi
+	CONF_UserSettingsLoader.RegisterControlSetting("dpi", dpi)
+
+
 func _on_line_edit_value_applied(value: float) -> void:
-	camera_settings.Dpi = int(value)
+	set_dpi(int(value))
 
 func _on_option_button_item_selected(index: int) -> void:
 	var dpi_str = dpi_option.get_item_text(index)
 	if dpi_str.is_valid_float():
-		camera_settings.Dpi = int(dpi_str)
+		set_dpi(int(dpi_str))

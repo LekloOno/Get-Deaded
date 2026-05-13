@@ -31,8 +31,6 @@ func init_children():
 		if edit && slider:
 			return
 
-func _on_master_slider_value_changed(value: float) -> void:
+func set_cm_per_360(value: float):
 	camera_settings.CmPer360 = value
-
-func _on_line_edit_value_applied(value: float) -> void:
-	camera_settings.CmPer360 = value
+	CONF_UserSettingsLoader.RegisterControlSetting("cm_per_360", value)

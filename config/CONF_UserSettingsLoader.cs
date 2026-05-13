@@ -47,5 +47,6 @@ public partial class CONF_UserSettingsLoader : Node
 	{
 		Instance.LoadVideoSettings();
 		Instance.LoadSoundSettings();
+		Instance.LoadControlSettings();
 	}
 }
