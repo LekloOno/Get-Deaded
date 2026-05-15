@@ -20,18 +20,18 @@ func _ready() -> void:
 	for resolution in resolutions:
 		add_item(resolution)
 		
-	curr_res = CONF_UserSettingsLoader.GetVideoSetting("resolution")
+	UserSettingRes.Changed.connect(update_value)
+	curr_res = UserSettingRes.Value;
 	# if DisplayServer.window_get_mode() == DisplayServer.WindowMode.WINDOW_MODE_WINDOWED:
 	#	curr_res = get_window().size
 	#else:
 	#	curr_res = get_window().content_scale_size
 	
-
-func _on_visibility_changed() -> void:
-	if !visible:
-		return
+func update_value(sender, value):
+	if sender == self :
+		return;
 		
-	curr_res = CONF_UserSettingsLoader.GetVideoSetting("resolution")
+	curr_res = value
 	var window_size_str = str(
 		curr_res.x,
 		"x",
@@ -42,10 +42,12 @@ func _on_visibility_changed() -> void:
 	selected = resolution_id
 		
 func set_window_size() :
-	if DisplayServer.window_get_mode() == DisplayServer.WindowMode.WINDOW_MODE_WINDOWED:
-		get_window().set_size(curr_res)
-	get_window().content_scale_size = curr_res
-	CONF_UserSettingsLoader.RegisterVideoSetting("resolution", curr_res)
+	#if DisplayServer.window_get_mode() == DisplayServer.WindowMode.WINDOW_MODE_WINDOWED:
+	#	get_window().set_size(curr_res)
+	#get_window().content_scale_size = curr_res
+	#CONF_UserSettingsLoader.RegisterVideoSetting("resolution", curr_res)
+	#setting.UpdateValue(self, curr_res, )
+	UserSettingRes.GdTryUpdateValue(self, curr_res)	
 
 func _on_item_selected(index: int) -> void:
 	var key = get_item_text(index)

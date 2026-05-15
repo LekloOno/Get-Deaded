@@ -1,4 +1,7 @@
+using System;
+using System.Collections.Generic;
 using Godot;
+using TraGUS;
 
 [GlobalClass]
 public partial class CONF_UserSettingsLoader : Node
@@ -50,12 +53,12 @@ public partial class CONF_UserSettingsLoader : Node
 		Load();
 	}
 
-	public static void Reset() =>
+	public static void ResetAll() =>
 		Instance.Config.Load(DefaultSettingsFilePath);
 
 	public static void ResetApply()
 	{
-		Reset();
+		ResetAll();
 		Apply();
 	}
 
@@ -65,11 +68,32 @@ public partial class CONF_UserSettingsLoader : Node
 		Instance.Config.SetValue(section, key, value);
 	}
 
+	public static bool IsDefault(string section, string key)
+	{
+		var defaultValue = Instance.DefaultConfig.GetValue(section, key);
+		var value = Instance.Config.GetValue(section, key);
+
+		return defaultValue.Equals(value);
+	}
+
 	public static void Load()
 	{
-		Instance.LoadVideoSettings();
-		Instance.LoadSoundSettings();
-		Instance.LoadControlSettings();
-		Instance.LoadAccessibilitySettings();
+		//Instance.LoadVideoSettings();
+		//Instance.LoadSoundSettings();
+		//Instance.LoadControlSettings();
+		//Instance.LoadAccessibilitySettings();
+
+		foreach (string sectionKey in Instance.Config.GetSections())
+			foreach (string settingKey in Instance.Config.GetSectionKeys(sectionKey))
+			{
+				var value = Instance.Config.GetValue(sectionKey, settingKey);
+				if (!UserSettingsServer.TryLoadSetting(sectionKey, settingKey, value, out Variant prevValue))
+					GD.PrintErr(
+						"Could not load config value for:" +
+						"\n- section: " + sectionKey +
+						"\n - setting:" + settingKey +
+						"Value remained: " + prevValue
+					);
+			}
 	}
 }

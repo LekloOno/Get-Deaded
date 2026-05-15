@@ -4,6 +4,8 @@ public partial class CONF_UserSettingsLoader : Node
 {
     public const string VideoSection = "video";
 
+	public Observable<Variant> DisplayMode = new(0);
+
     public static class VideoSetting
     {
         public const string DisplayMode = "display_mode";

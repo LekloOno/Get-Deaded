@@ -32,6 +32,8 @@ buses/default_bus_layout="uid://bggmflncdn26j"
 Bootstrap="*res://config/bootstrap/Bootstrap.cs"
 ConfHitColors="*res://config/combat/hit/CONF_HitColors.cs"
 ConfHealthColors="*res://config/combat/health_colors/CONF_HealthColors.cs"
+UserSettingsServer="*uid://dft5uv8xtr767"
+UserSettingRes="*uid://bx474s3jas5qc"
 ConfUserSettingsLoader="*uid://bargnkrglwn4c"
 ConfBodyModifiers="*res://config/combat/body_modifiers/CONF_BodyModifiers.cs"
 ConfCollision="*res://config/physics/collision/CONF_Collision.cs"
@@ -51,7 +53,7 @@ project/assembly_name="Pew"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GaudioProcessTree/plugin.cfg", "res://addons/func_godot/plugin.cfg")
+enabled=PackedStringArray("res://addons/GaudioProcessTree/plugin.cfg", "res://addons/TraGUS/plugin.cfg", "res://addons/func_godot/plugin.cfg")
 
 [file_customization]
 

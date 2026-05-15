@@ -13,6 +13,8 @@
 [ext_resource type="Script" uid="uid://doqiy13nhuvvd" path="res://script/ui/menu/contexts/video/ui_strech_mode_picker.gd" id="10_rt8lt"]
 [ext_resource type="Script" uid="uid://2y4g11w6asxb" path="res://script/ui/menu/contexts/video/ui_render_scale_mode_picker.gd" id="11_vbkcm"]
 [ext_resource type="Script" uid="uid://dupm1u5o4d16c" path="res://script/ui/menu/contexts/video/ui_render_scale.gd" id="12_pbd3k"]
+[ext_resource type="Script" uid="uid://dwq3jckatvnq4" path="res://script/ui/menu/ui_reset_button.gd" id="12_rt8lt"]
+[ext_resource type="Texture2D" uid="uid://de5h1tbf4feoi" path="res://assets/ui/reset.png" id="12_wigoj"]
 [ext_resource type="Script" uid="uid://cxu4fexa05rwt" path="res://script/ui/menu/contexts/video/ui_fsr_sharpness.gd" id="13_dy8xp"]
 [ext_resource type="Script" uid="uid://tyihd8beo5j" path="res://script/ui/menu/contexts/video/ui_fov_slider.gd" id="14_jnufj"]
 [ext_resource type="Script" uid="uid://cg5dedg2yo8yj" path="res://script/ui/menu/contexts/video/ui_v_sync_mode.gd" id="15_b5eqi"]
@@ -33,6 +35,18 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wkf4o"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rt8lt"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0, 0, 0.29411766)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kqyci"]
 content_margin_left = 8.0
@@ -175,10 +189,31 @@ size_flags_horizontal = 3
 layout_mode = 2
 text = "DISPLAY_MODE_LABEL"
 
-[node name="DisplayModeInput" type="OptionButton" parent="Settings/TabContainer/VIDEO_TAB/GridContainer" unique_id=284364705]
+[node name="DisplayModeInput" type="HBoxContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer" unique_id=1407910560]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="DisplayModeInput" type="OptionButton" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/DisplayModeInput" unique_id=284364705]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 script = ExtResource("5_e0f17")
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/DisplayModeInput" unique_id=1156118595]
+layout_mode = 2
+size_flags_horizontal = 0
+stretch_mode = 1
+alignment_vertical = 2
+script = ExtResource("12_rt8lt")
+section = "video"
+key = "display_mode"
+
+[node name="Button" type="Button" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/DisplayModeInput/AspectRatioContainer" unique_id=774256116]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
+icon = ExtResource("12_wigoj")
+icon_alignment = 1
+expand_icon = true
 
 [node name="Resolution" type="PanelContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer" unique_id=505566934]
 layout_mode = 2
@@ -870,11 +905,10 @@ text = "BACK_BUTTON"
 [connection signal="hidden" from="Settings" to="Settings" method="_on_hidden"]
 [connection signal="tab_changed" from="Settings/TabContainer" to="LightClick" method="tab_interract"]
 [connection signal="tab_hovered" from="Settings/TabContainer" to="LightHover" method="tab_interract"]
-[connection signal="item_selected" from="Settings/TabContainer/VIDEO_TAB/GridContainer/DisplayModeInput" to="Settings/TabContainer/VIDEO_TAB/GridContainer/DisplayModeInput" method="_on_item_selected"]
-[connection signal="switched_mode" from="Settings/TabContainer/VIDEO_TAB/GridContainer/DisplayModeInput" to="Settings/TabContainer/VIDEO_TAB/GridContainer/ResolutionInput" method="set_window_size"]
-[connection signal="visibility_changed" from="Settings/TabContainer/VIDEO_TAB/GridContainer/DisplayModeInput" to="Settings/TabContainer/VIDEO_TAB/GridContainer/DisplayModeInput" method="_on_visibility_changed"]
+[connection signal="item_selected" from="Settings/TabContainer/VIDEO_TAB/GridContainer/DisplayModeInput/DisplayModeInput" to="Settings/TabContainer/VIDEO_TAB/GridContainer/DisplayModeInput/DisplayModeInput" method="_on_item_selected"]
+[connection signal="switched_mode" from="Settings/TabContainer/VIDEO_TAB/GridContainer/DisplayModeInput/DisplayModeInput" to="Settings/TabContainer/VIDEO_TAB/GridContainer/ResolutionInput" method="set_window_size"]
+[connection signal="visibility_changed" from="Settings/TabContainer/VIDEO_TAB/GridContainer/DisplayModeInput/DisplayModeInput" to="Settings/TabContainer/VIDEO_TAB/GridContainer/DisplayModeInput/DisplayModeInput" method="_on_visibility_changed"]
 [connection signal="item_selected" from="Settings/TabContainer/VIDEO_TAB/GridContainer/ResolutionInput" to="Settings/TabContainer/VIDEO_TAB/GridContainer/ResolutionInput" method="_on_item_selected"]
-[connection signal="visibility_changed" from="Settings/TabContainer/VIDEO_TAB/GridContainer/ResolutionInput" to="Settings/TabContainer/VIDEO_TAB/GridContainer/ResolutionInput" method="_on_visibility_changed"]
 [connection signal="mode_changed" from="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleModeInput" to="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleInput" method="_on_render_scale_mode_changed"]
 [connection signal="mode_changed" from="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleModeInput" to="Settings/TabContainer/VIDEO_TAB/GridContainer/FSRSharpnessInput" method="_on_render_scale_mode_changed"]
 [connection signal="value_applied" from="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleInput/LineEdit" to="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleInput" method="_on_value_changed"]
