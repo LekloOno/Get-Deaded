@@ -2,7 +2,7 @@ using System;
 using Godot;
 using TraGUS;
 
-public partial class StrechModeSetting : UserSetting
+public partial class StretchModeSetting : UserSetting
 {
     public override string Section => UserSettingsSection.Video;
     public override string Key => "stretch_mode";
@@ -18,15 +18,7 @@ public partial class StrechModeSetting : UserSetting
             return false;
         }
 
-        int id = (int)value;
-
-        if (!Enum.IsDefined(typeof(Window.ContentScaleAspectEnum), id))
-        {
-            effectiveValue = Value;
-            return false;
-        }
-        
-        var mode = (Window.ContentScaleAspectEnum)id;
+        var mode = (Window.ContentScaleAspectEnum)(int)value;
         GetTree().Root.ContentScaleAspect = mode;
         effectiveValue = value;
 

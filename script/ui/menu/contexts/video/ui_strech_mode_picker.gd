@@ -11,7 +11,23 @@ func _ready() -> void:
 	for ratio in aspect_ratios:
 		add_item(ratio)
 	item_selected.connect(_on_item_selected)
-	visibility_changed.connect(_on_visibility_changed)
+	StretchModeSetting.Changed.connect(_on_setting_value_changed)
+	update_ui(StretchModeSetting.Value)
+
+func set_mode(mode: Window.ContentScaleAspect):
+	StretchModeSetting.GdTryUpdateValue(self, mode)
+
+
+func _on_setting_value_changed(sender, value):
+	if sender == self:
+		return;
+	update_ui(value)
+	
+func update_ui(mode):
+	selected = aspect_ratio_to_idx(mode)
+	
+	
+	
 
 func aspect_ratio_to_idx(aspect_ratio) -> int:
 	return aspect_ratios.values().find(aspect_ratio)
@@ -19,13 +35,4 @@ func aspect_ratio_to_idx(aspect_ratio) -> int:
 func _on_item_selected(index: int) -> void:
 	var key = get_item_text(index)
 	var mode = aspect_ratios[key]
-	get_tree().root.content_scale_aspect = mode
-	CONF_UserSettingsLoader.RegisterVideoSetting("stretch_mode", mode)
-	
-
-
-func _on_visibility_changed() -> void:
-	if !visible:
-		return
-		
-	selected = aspect_ratio_to_idx(get_tree().root.content_scale_aspect)
+	StretchModeSetting.GdTryUpdateValue(self, mode)
