@@ -41,6 +41,7 @@ RenderScaleModeSetting="*uid://dqa8fo8vb46xr"
 ConfUserSettingsLoader="*uid://bargnkrglwn4c"
 ConfBodyModifiers="*res://config/combat/body_modifiers/CONF_BodyModifiers.cs"
 ConfCollision="*res://config/physics/collision/CONF_Collision.cs"
+FsrSharpnessSetting="*uid://4dus7ul2ls6v"
 PHX_Time="*res://script/engine_tools/physics/PHX_Time.cs"
 
 [display]
