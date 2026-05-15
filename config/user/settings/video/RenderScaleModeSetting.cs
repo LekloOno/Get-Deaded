@@ -1,13 +1,13 @@
 using Godot;
 using TraGUS;
 
-public partial class StretchModeSetting : UserSetting
+public partial class RenderScaleModeSetting : UserSetting
 {
     public override string Section => UserSettingsSection.Video;
-    public override string Key => "stretch_mode";
+    public override string Key => "render_scale_mode";
 
     public override Variant DefaultFallBack() =>
-        (int)Window.ContentScaleAspectEnum.Keep;
+        (int)Viewport.Scaling3DModeEnum.Bilinear;
 
     protected override bool ProcessValue(Variant value, out Variant effectiveValue)
     {
@@ -17,8 +17,8 @@ public partial class StretchModeSetting : UserSetting
             return false;
         }
 
-        var mode = (Window.ContentScaleAspectEnum)(int)value;
-        GetTree().Root.ContentScaleAspect = mode;
+        var mode = (Viewport.Scaling3DModeEnum)(int)value;
+        GetTree().Root.Scaling3DMode = mode;
         effectiveValue = value;
 
         return true;
