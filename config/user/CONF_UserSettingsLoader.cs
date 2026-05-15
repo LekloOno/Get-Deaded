@@ -87,7 +87,7 @@ public partial class CONF_UserSettingsLoader : Node
 			foreach (string settingKey in Instance.Config.GetSectionKeys(sectionKey))
 			{
 				var value = Instance.Config.GetValue(sectionKey, settingKey);
-				if (!UserSettingsServer.TryLoadSetting(sectionKey, settingKey, value, out Variant prevValue))
+				if (!UserSettingsServer.Instance.TryLoadSetting(sectionKey, settingKey, value, out Variant prevValue))
 					GD.PrintErr(
 						"Could not load config value for:" +
 						"\n- section: " + sectionKey +

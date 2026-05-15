@@ -20,8 +20,8 @@ func _ready() -> void:
 	for resolution in resolutions:
 		add_item(resolution)
 		
-	UserSettingRes.Changed.connect(update_value)
-	curr_res = UserSettingRes.Value;
+	ResolutionSetting.Changed.connect(update_value)
+	curr_res = ResolutionSetting.Value;
 	# if DisplayServer.window_get_mode() == DisplayServer.WindowMode.WINDOW_MODE_WINDOWED:
 	#	curr_res = get_window().size
 	#else:
@@ -47,7 +47,7 @@ func set_window_size() :
 	#get_window().content_scale_size = curr_res
 	#CONF_UserSettingsLoader.RegisterVideoSetting("resolution", curr_res)
 	#setting.UpdateValue(self, curr_res, )
-	UserSettingRes.GdTryUpdateValue(self, curr_res)	
+	ResolutionSetting.GdTryUpdateValue(self, curr_res)	
 
 func _on_item_selected(index: int) -> void:
 	var key = get_item_text(index)

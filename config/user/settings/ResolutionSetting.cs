@@ -1,13 +1,12 @@
 using Godot;
 using TraGUS;
 
-[GlobalClass]
-public partial class UserSettingResolution : UserSetting
+public partial class ResolutionSetting : UserSetting
 {
     public override string Section => UserSettingsSection.Video;
     public override string Key => "resolution";
 
-    public override Variant Default() =>
+    public override Variant DefaultFallBack() =>
         new Vector2I(1920, 1080);
 
     protected override bool ProcessValue(Variant value, out Variant effectiveValue)

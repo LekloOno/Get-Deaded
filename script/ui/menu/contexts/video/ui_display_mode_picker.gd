@@ -1,7 +1,5 @@
 extends OptionButton
 
-signal switched_mode()
-
 var modes = {
 	"FULLSCREEN_DISPLAY_MODE": DisplayServer.WindowMode.WINDOW_MODE_EXCLUSIVE_FULLSCREEN,
 	"BORDERLESS_DISPLAY_MODE": DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN,
@@ -16,25 +14,24 @@ func display_mode_to_key(mode: DisplayServer.WindowMode) -> String:
 	return "BORDERLESS_DISPLAY_MODE"
 
 func _ready() -> void:
-	var a = CONF_UserSettingsLoader.GetVideoSetting("display_mode")
 	for mode in modes:
 		add_item(mode)
+		
+	DisplayModeSetting.Changed.connect(_on_setting_value_changed)
+	update_ui(DisplayModeSetting.Value)
 
 func set_mode(mode: DisplayServer.WindowMode):
-	DisplayServer.window_set_mode(mode)
-	switched_mode.emit()
-	CONF_UserSettingsLoader.RegisterVideoSetting("display_mode", mode)
+	DisplayModeSetting.GdTryUpdateValue(self, mode)
 
 func _on_item_selected(index: int) -> void:
 	var key = get_item_text(index)
 	set_mode(modes[key])
 
-
-func _on_visibility_changed() -> void:
-	if !visible:
-		return
+func _on_setting_value_changed(sender, value):
+	if sender == self:
+		return;
+	update_ui(value)
 	
-	var mode = CONF_UserSettingsLoader.GetVideoSetting("display_mode")
+func update_ui(mode):
 	var mode_str = display_mode_to_key(mode)
-	
 	selected = modes.keys().find(mode_str)
