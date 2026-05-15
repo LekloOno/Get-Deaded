@@ -13,7 +13,12 @@ func _ready() -> void:
 	for mode in modes:
 		add_item(mode)
 	item_selected.connect(_on_item_selected)
-	visibility_changed.connect(_on_visibility_changed)
+	update_ui()
+	RenderScaleModeSetting.Changed.connect(_on_setting_value_changed)
+	
+func _on_setting_value_changed(sender, value):
+	if sender != self:
+		update_ui()
 
 func mode_to_idx(mode) -> int:
 	return modes.values().find(mode)
@@ -22,29 +27,21 @@ func _on_item_selected(index: int) -> void:
 	var mode = modes[get_item_text(index)]
 	
 	if mode == -1 :
-		get_tree().root.scaling_3d_mode = Viewport.SCALING_3D_MODE_BILINEAR
+		RenderScaleModeSetting.GdTryUpdateValue(self, Viewport.SCALING_3D_MODE_BILINEAR)
 	else :
-		get_tree().root.scaling_3d_mode = mode
-		
-	CONF_UserSettingsLoader.RegisterVideoSetting(
-		"render_scale_mode",
-		get_tree().root.scaling_3d_mode
-	)
+		RenderScaleModeSetting.GdTryUpdateValue(self, mode)
 		
 	mode_changed.emit(mode)
-
-func _on_visibility_changed() -> void:
-	if !visible:
-		return
-		
+	
+func update_ui():	
 	var curr_mode = get_current_mode()
 	selected = mode_to_idx(curr_mode)
 	mode_changed.emit(curr_mode)
 	
 func get_current_mode() :
-	var curr_mode = get_tree().root.scaling_3d_mode
+	var curr_mode = RenderScaleModeSetting.Value
 	if curr_mode == Viewport.SCALING_3D_MODE_BILINEAR:
-		if get_tree().root.scaling_3d_scale == 1:
+		if RenderScaleScaleSetting.Value == 1.0:
 			return -1
 	
 	return curr_mode
