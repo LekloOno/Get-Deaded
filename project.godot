@@ -44,6 +44,7 @@ ConfCollision="*res://config/physics/collision/CONF_Collision.cs"
 FsrSharpnessSetting="*uid://4dus7ul2ls6v"
 PHX_Time="*res://script/engine_tools/physics/PHX_Time.cs"
 FovSetting="*uid://oo1hgglok3hy"
+VsyncModeSetting="*uid://div7xlyn13eaa"
 
 [display]
 
