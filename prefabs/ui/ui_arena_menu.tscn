@@ -15,7 +15,6 @@
 [ext_resource type="Script" uid="uid://dupm1u5o4d16c" path="res://script/ui/menu/contexts/video/ui_render_scale.gd" id="12_pbd3k"]
 [ext_resource type="Texture2D" uid="uid://de5h1tbf4feoi" path="res://assets/ui/reset.png" id="12_wigoj"]
 [ext_resource type="Script" uid="uid://cxu4fexa05rwt" path="res://script/ui/menu/contexts/video/ui_fsr_sharpness.gd" id="13_dy8xp"]
-[ext_resource type="Script" uid="uid://tyihd8beo5j" path="res://script/ui/menu/contexts/video/ui_fov_slider.gd" id="14_jnufj"]
 [ext_resource type="Script" uid="uid://sarrqdn23het" path="res://addons/TraGUS/Nodes/SettingResetButton.cs" id="14_vbkcm"]
 [ext_resource type="Script" uid="uid://cg5dedg2yo8yj" path="res://script/ui/menu/contexts/video/ui_v_sync_mode.gd" id="15_b5eqi"]
 [ext_resource type="Resource" uid="uid://bntla2ivt7ykt" path="res://config/player/player_camera_settings.tres" id="15_oanoi"]
@@ -547,7 +546,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 virtual_keyboard_type = 2
-script = ExtResource("8_no00x")
+script = ExtResource("22_vbkcm")
 
 [node name="MasterSlider" type="HSlider" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/FovInput/FovInput" unique_id=377512449]
 layout_mode = 2
@@ -556,8 +555,9 @@ size_flags_vertical = 4
 min_value = 30.0
 max_value = 140.0
 value = 103.0
-script = ExtResource("14_jnufj")
-camera_settings = ExtResource("15_oanoi")
+script = ExtResource("23_pbd3k")
+Section = "video"
+Key = "fov"
 
 [node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/FovInput" unique_id=648117979]
 layout_mode = 2
@@ -1083,7 +1083,6 @@ text = "BACK_BUTTON"
 [connection signal="mode_changed" from="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleModeInput/RenderScaleModeInput" to="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleInput/RenderScaleInput" method="_on_render_scale_mode_changed"]
 [connection signal="mode_changed" from="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleModeInput/RenderScaleModeInput" to="Settings/TabContainer/VIDEO_TAB/GridContainer/FSRSharpnessInput/FSRSharpnessInput" method="_on_render_scale_mode_changed"]
 [connection signal="value_applied" from="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleInput/RenderScaleInput/LineEdit" to="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleInput/RenderScaleInput" method="_on_value_changed"]
-[connection signal="value_applied" from="Settings/TabContainer/VIDEO_TAB/GridContainer/FovInput/FovInput/LineEdit" to="Settings/TabContainer/VIDEO_TAB/GridContainer/FovInput/FovInput/MasterSlider" method="_on_value_changed"]
 [connection signal="toggled" from="Settings/TabContainer/VIDEO_TAB/GridContainer/LimitFPSInput" to="Settings/TabContainer/VIDEO_TAB/GridContainer/Max FPS" method="set_visible"]
 [connection signal="toggled" from="Settings/TabContainer/VIDEO_TAB/GridContainer/LimitFPSInput" to="Settings/TabContainer/VIDEO_TAB/GridContainer/MaxFPSInput2/MaxFPSInput" method="set_visible"]
 [connection signal="value_applied" from="Settings/TabContainer/VIDEO_TAB/GridContainer/MaxFPSInput2/MaxFPSInput/LineEdit" to="Settings/TabContainer/VIDEO_TAB/GridContainer/MaxFPSInput2/MaxFPSInput" method="_on_value_changed"]
