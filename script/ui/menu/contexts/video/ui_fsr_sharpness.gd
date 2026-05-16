@@ -16,5 +16,5 @@ func show_scale() -> bool:
 	var mode = RenderScaleModeSetting.Value
 	return mode == Viewport.SCALING_3D_MODE_FSR || mode == Viewport.SCALING_3D_MODE_FSR2
 	
-func _on_render_scale_mode_changed(sender, mode):
+func _on_render_scale_mode_changed(_sender, _mode):
 	update_ui()

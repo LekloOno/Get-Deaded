@@ -16,7 +16,7 @@ func _ready() -> void:
 	update_ui()
 	RenderScaleModeSetting.Changed.connect(_on_setting_value_changed)
 	
-func _on_setting_value_changed(sender, value):
+func _on_setting_value_changed(sender, _value):
 	if sender != self:
 		update_ui()
 
