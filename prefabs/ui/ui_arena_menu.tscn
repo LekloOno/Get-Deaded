@@ -574,14 +574,6 @@ script = ExtResource("14_vbkcm")
 Section = "video"
 Key = "fov"
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer" unique_id=1488945833]
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="HBoxContainer4" type="HBoxContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer" unique_id=709196979]
-layout_mode = 2
-theme_override_constants/separation = 15
-
 [node name="VSyncMode" type="PanelContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer" unique_id=1156529861]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -718,18 +710,23 @@ size_flags_horizontal = 3
 layout_mode = 2
 text = "MASTER_VOLUME_LABEL"
 
-[node name="MasterInput" type="HSplitContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer" unique_id=40031535]
+[node name="MasterInput" type="HBoxContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer" unique_id=1426378692]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="MasterInput" type="HSplitContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer/MasterInput" unique_id=40031535]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+dragging_enabled = false
 
-[node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/SOUND_TAB/GridContainer/MasterInput" unique_id=454875671]
+[node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/SOUND_TAB/GridContainer/MasterInput/MasterInput" unique_id=454875671]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("8_no00x")
 
-[node name="MasterSlider" type="HSlider" parent="Settings/TabContainer/SOUND_TAB/GridContainer/MasterInput" unique_id=579255155]
+[node name="MasterSlider" type="HSlider" parent="Settings/TabContainer/SOUND_TAB/GridContainer/MasterInput/MasterInput" unique_id=579255155]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -738,6 +735,22 @@ step = 0.01
 value = 1.0
 script = ExtResource("18_o1fwb")
 bus_name = "Master"
+
+[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer/MasterInput" unique_id=600574973]
+layout_mode = 2
+size_flags_horizontal = 0
+stretch_mode = 1
+alignment_vertical = 2
+
+[node name="Button" type="Button" parent="Settings/TabContainer/SOUND_TAB/GridContainer/MasterInput/Reset" unique_id=1392885773]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
+icon = ExtResource("12_wigoj")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("14_vbkcm")
+Section = "sound"
+Key = "master_volume_db"
 
 [node name="Music" type="PanelContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer" unique_id=2119402571]
 layout_mode = 2
@@ -754,18 +767,22 @@ layout_mode = 2
 layout_mode = 2
 text = "MUSIC_VOLUME_LABEL"
 
-[node name="MusicInput" type="HSplitContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer" unique_id=964571913]
+[node name="MusicInput" type="HBoxContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer" unique_id=91807239]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="MusicInput" type="HSplitContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer/MusicInput" unique_id=964571913]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/SOUND_TAB/GridContainer/MusicInput" unique_id=1877509383]
+[node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/SOUND_TAB/GridContainer/MusicInput/MusicInput" unique_id=1877509383]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("8_no00x")
 
-[node name="MusicSlider" type="HSlider" parent="Settings/TabContainer/SOUND_TAB/GridContainer/MusicInput" unique_id=1112118816]
+[node name="MusicSlider" type="HSlider" parent="Settings/TabContainer/SOUND_TAB/GridContainer/MusicInput/MusicInput" unique_id=1112118816]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -773,6 +790,22 @@ max_value = 1.0
 step = 0.01
 script = ExtResource("18_o1fwb")
 bus_name = "Music"
+
+[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer/MusicInput" unique_id=1744808908]
+layout_mode = 2
+size_flags_horizontal = 0
+stretch_mode = 1
+alignment_vertical = 2
+
+[node name="Button" type="Button" parent="Settings/TabContainer/SOUND_TAB/GridContainer/MusicInput/Reset" unique_id=1155513640]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
+icon = ExtResource("12_wigoj")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("14_vbkcm")
+Section = "sound"
+Key = "music_volume_db"
 
 [node name="SFX" type="PanelContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer" unique_id=202052235]
 layout_mode = 2
@@ -789,18 +822,22 @@ layout_mode = 2
 layout_mode = 2
 text = "SOUND_EFFECTS_VOLUME_LABEL"
 
-[node name="SFXInput" type="HSplitContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer" unique_id=584014289]
+[node name="SFXInput" type="HBoxContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer" unique_id=1104051820]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="SFXInput" type="HSplitContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer/SFXInput" unique_id=584014289]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/SOUND_TAB/GridContainer/SFXInput" unique_id=614309466]
+[node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/SOUND_TAB/GridContainer/SFXInput/SFXInput" unique_id=614309466]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("8_no00x")
 
-[node name="SFXSlider" type="HSlider" parent="Settings/TabContainer/SOUND_TAB/GridContainer/SFXInput" unique_id=1948578466]
+[node name="SFXSlider" type="HSlider" parent="Settings/TabContainer/SOUND_TAB/GridContainer/SFXInput/SFXInput" unique_id=1948578466]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -808,6 +845,22 @@ max_value = 1.0
 step = 0.01
 script = ExtResource("18_o1fwb")
 bus_name = "Sound Effects"
+
+[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer/SFXInput" unique_id=1971940829]
+layout_mode = 2
+size_flags_horizontal = 0
+stretch_mode = 1
+alignment_vertical = 2
+
+[node name="Button" type="Button" parent="Settings/TabContainer/SOUND_TAB/GridContainer/SFXInput/Reset" unique_id=871309509]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
+icon = ExtResource("12_wigoj")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("14_vbkcm")
+Section = "sound"
+Key = "sound_effects_volume_db"
 
 [node name="EnvSFX" type="PanelContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer" unique_id=987994804]
 layout_mode = 2
@@ -826,18 +879,22 @@ tooltip_text = "Diegetical sfx"
 mouse_filter = 1
 text = "ENVIRONMENT_SOUND_VOLUME_LABEL"
 
-[node name="EnvSFXInput" type="HSplitContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer" unique_id=1737280090]
+[node name="EnvSFXInput" type="HBoxContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer" unique_id=1031668763]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="EnvSFXInput" type="HSplitContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer/EnvSFXInput" unique_id=1737280090]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/SOUND_TAB/GridContainer/EnvSFXInput" unique_id=1085087615]
+[node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/SOUND_TAB/GridContainer/EnvSFXInput/EnvSFXInput" unique_id=1085087615]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("8_no00x")
 
-[node name="EnvSFXSlider" type="HSlider" parent="Settings/TabContainer/SOUND_TAB/GridContainer/EnvSFXInput" unique_id=2053001975]
+[node name="EnvSFXSlider" type="HSlider" parent="Settings/TabContainer/SOUND_TAB/GridContainer/EnvSFXInput/EnvSFXInput" unique_id=2053001975]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -846,6 +903,22 @@ step = 0.01
 value = 1.0
 script = ExtResource("18_o1fwb")
 bus_name = "Environment Sfx"
+
+[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer/EnvSFXInput" unique_id=1385725764]
+layout_mode = 2
+size_flags_horizontal = 0
+stretch_mode = 1
+alignment_vertical = 2
+
+[node name="Button" type="Button" parent="Settings/TabContainer/SOUND_TAB/GridContainer/EnvSFXInput/Reset" unique_id=511049077]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
+icon = ExtResource("12_wigoj")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("14_vbkcm")
+Section = "sound"
+Key = "environment_sfx_volume_db"
 
 [node name="FbSFX" type="PanelContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer" unique_id=1564615723]
 layout_mode = 2
@@ -864,18 +937,22 @@ tooltip_text = "Diegetical sfx"
 mouse_filter = 1
 text = "FEEDBACK_SOUND_VOLUME_LABEL"
 
-[node name="FbSFXInput" type="HSplitContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer" unique_id=1175098417]
+[node name="FbSFXInput" type="HBoxContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer" unique_id=2059207101]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="FbSFXInput" type="HSplitContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer/FbSFXInput" unique_id=1175098417]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/SOUND_TAB/GridContainer/FbSFXInput" unique_id=1019072894]
+[node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/SOUND_TAB/GridContainer/FbSFXInput/FbSFXInput" unique_id=1019072894]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("8_no00x")
 
-[node name="FbSFXSlider" type="HSlider" parent="Settings/TabContainer/SOUND_TAB/GridContainer/FbSFXInput" unique_id=156582395]
+[node name="FbSFXSlider" type="HSlider" parent="Settings/TabContainer/SOUND_TAB/GridContainer/FbSFXInput/FbSFXInput" unique_id=156582395]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -883,6 +960,22 @@ max_value = 1.0
 step = 0.01
 script = ExtResource("18_o1fwb")
 bus_name = "Feedback Sfx"
+
+[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer/FbSFXInput" unique_id=599894380]
+layout_mode = 2
+size_flags_horizontal = 0
+stretch_mode = 1
+alignment_vertical = 2
+
+[node name="Button" type="Button" parent="Settings/TabContainer/SOUND_TAB/GridContainer/FbSFXInput/Reset" unique_id=980386536]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
+icon = ExtResource("12_wigoj")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("14_vbkcm")
+Section = "sound"
+Key = "feedback_sfx_volume_db"
 
 [node name="CONTROLS_TAB" type="TabBar" parent="Settings/TabContainer" unique_id=1802915093]
 visible = false
@@ -1085,11 +1178,11 @@ text = "BACK_BUTTON"
 [connection signal="mode_changed" from="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleModeInput/RenderScaleModeInput" to="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleInput/RenderScaleInput" method="_on_render_scale_mode_changed"]
 [connection signal="mode_changed" from="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleModeInput/RenderScaleModeInput" to="Settings/TabContainer/VIDEO_TAB/GridContainer/FSRSharpnessInput/FSRSharpnessInput" method="_on_render_scale_mode_changed"]
 [connection signal="value_applied" from="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleInput/RenderScaleInput/LineEdit" to="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleInput/RenderScaleInput" method="_on_value_changed"]
-[connection signal="value_applied" from="Settings/TabContainer/SOUND_TAB/GridContainer/MasterInput/LineEdit" to="Settings/TabContainer/SOUND_TAB/GridContainer/MasterInput/MasterSlider" method="_on_value_changed"]
-[connection signal="value_applied" from="Settings/TabContainer/SOUND_TAB/GridContainer/MusicInput/LineEdit" to="Settings/TabContainer/SOUND_TAB/GridContainer/MusicInput/MusicSlider" method="_on_value_changed"]
-[connection signal="value_applied" from="Settings/TabContainer/SOUND_TAB/GridContainer/SFXInput/LineEdit" to="Settings/TabContainer/SOUND_TAB/GridContainer/SFXInput/SFXSlider" method="_on_value_changed"]
-[connection signal="value_applied" from="Settings/TabContainer/SOUND_TAB/GridContainer/EnvSFXInput/LineEdit" to="Settings/TabContainer/SOUND_TAB/GridContainer/EnvSFXInput/EnvSFXSlider" method="_on_value_changed"]
-[connection signal="value_applied" from="Settings/TabContainer/SOUND_TAB/GridContainer/FbSFXInput/LineEdit" to="Settings/TabContainer/SOUND_TAB/GridContainer/FbSFXInput/FbSFXSlider" method="_on_value_changed"]
+[connection signal="value_applied" from="Settings/TabContainer/SOUND_TAB/GridContainer/MasterInput/MasterInput/LineEdit" to="Settings/TabContainer/SOUND_TAB/GridContainer/MasterInput/MasterInput/MasterSlider" method="_on_value_changed"]
+[connection signal="value_applied" from="Settings/TabContainer/SOUND_TAB/GridContainer/MusicInput/MusicInput/LineEdit" to="Settings/TabContainer/SOUND_TAB/GridContainer/MusicInput/MusicInput/MusicSlider" method="_on_value_changed"]
+[connection signal="value_applied" from="Settings/TabContainer/SOUND_TAB/GridContainer/SFXInput/SFXInput/LineEdit" to="Settings/TabContainer/SOUND_TAB/GridContainer/SFXInput/SFXInput/SFXSlider" method="_on_value_changed"]
+[connection signal="value_applied" from="Settings/TabContainer/SOUND_TAB/GridContainer/EnvSFXInput/EnvSFXInput/LineEdit" to="Settings/TabContainer/SOUND_TAB/GridContainer/EnvSFXInput/EnvSFXInput/EnvSFXSlider" method="_on_value_changed"]
+[connection signal="value_applied" from="Settings/TabContainer/SOUND_TAB/GridContainer/FbSFXInput/FbSFXInput/LineEdit" to="Settings/TabContainer/SOUND_TAB/GridContainer/FbSFXInput/FbSFXInput/FbSFXSlider" method="_on_value_changed"]
 [connection signal="value_applied" from="Settings/TabContainer/CONTROLS_TAB/GridContainer/DPIInput/LineEdit" to="Settings/TabContainer/CONTROLS_TAB/GridContainer/DPIInput" method="_on_line_edit_value_applied"]
 [connection signal="item_selected" from="Settings/TabContainer/CONTROLS_TAB/GridContainer/DPIInput/OptionButton" to="Settings/TabContainer/CONTROLS_TAB/GridContainer/DPIInput" method="_on_option_button_item_selected"]
 [connection signal="cm_360_changed" from="Settings/TabContainer/CONTROLS_TAB/GridContainer/cm360Input" to="Settings/TabContainer/CONTROLS_TAB/GridContainer/cm360Input/LineEdit" method="apply_value_no_signal"]
