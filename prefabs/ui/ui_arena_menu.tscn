@@ -31,6 +31,7 @@
 [ext_resource type="AudioStream" uid="uid://bp67lpqxgmfk3" path="res://assets/sounds/ui/hover3.wav" id="27_1fil8"]
 [ext_resource type="Script" uid="uid://bs7wd2ltt17dh" path="res://script/ui/menu/ui_tabs_sound.gd" id="28_no00x"]
 [ext_resource type="AudioStream" uid="uid://bshhncf67w1g1" path="res://assets/sounds/ui/click_lighter.wav" id="29_wigoj"]
+[ext_resource type="Script" uid="uid://cgf1qqnlqvbs2" path="res://script/ui/menu/contexts/inputs/ui_input_setting_button.gd" id="30_rt8lt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wkf4o"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -1134,6 +1135,58 @@ Key = "cm_per_360"
 [node name="CONTROLS_BINDINGS_TAB" type="TabBar" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer" unique_id=541313611]
 layout_mode = 2
 metadata/_tab_index = 1
+
+[node name="GridContainer" type="GridContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB" unique_id=1827567637]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 217.0
+offset_top = 8.0
+offset_right = -228.0
+offset_bottom = -104.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 6
+columns = 2
+
+[node name="Movement" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/GridContainer" unique_id=8743021]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/GridContainer/Movement" unique_id=1315608497]
+layout_mode = 2
+text = "MOVEMENT_LABEL"
+
+[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/GridContainer" unique_id=24458153]
+layout_mode = 2
+
+[node name="Jump" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/GridContainer" unique_id=703488936]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/GridContainer/Jump" unique_id=1132608910]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/GridContainer/Jump/hbox" unique_id=1402550554]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/GridContainer/Jump/hbox" unique_id=454041128]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "JUMP_LABEL"
+
+[node name="DPIInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/GridContainer" unique_id=1220307215]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/GridContainer/DPIInput" unique_id=1609918144]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("30_rt8lt")
+action = "jump"
 
 [node name="ACCESSIBILITY_TAB" type="TabBar" parent="Settings/TabContainer" unique_id=1604114432]
 visible = false

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
@@ -22,26 +23,40 @@ public partial class KeyBindingSetting : UserSetting
             new(actionName, null),
         ];
 
-        GD.Print(actionName, " created");
+        foreach (EditableInputEvent bind in _keyBinds)
+            bind.Changed += Update;
+    }
+
+    private void Update(GodotObject sender, InputEvent value)
+    {
+        UserSettingsServer.Instance.Config.SetValue(
+            Section.ToSnakeCase(),
+            Key,
+            Serialized(_keyBinds)
+        );
+
+        EmitSignal(UserSetting.SignalName.Changed, sender, _keyBinds);
     }
 
     public override string Section => UserSettingsSection.Inputs;
     public override string Key {get;}
     private Array<EditableInputEvent> _keyBinds;
+    private Array<InputEvent> _initBinds;
     public override Variant DefaultFallBack() =>
-        InputMap.ActionGetEvents(Key);
+        _initBinds;
 
     public override Variant Serialized(Variant value)
     {
-        GD.Print("serializing");
+        if (value.VariantType != Variant.Type.Array)
+            return "[]";
 
-        if (value.Obj is not Array<EditableInputEvent> inputEvents)
+        Array<EditableInputEvent> inputEvents = value.AsGodotArray<EditableInputEvent>();
+        if (inputEvents == null)
             return "[]";
 
         if (inputEvents.TryToStringList(out string serialized))
             return serialized;
             
-
         return "[]";
     }
 
@@ -68,7 +83,6 @@ public partial class KeyBindingSetting : UserSetting
     {
         if (value.VariantType != Variant.Type.Array)
         {
-            GD.Print("prout");
             effectiveValue = Value;
             return false;
         }
@@ -76,7 +90,6 @@ public partial class KeyBindingSetting : UserSetting
         Array<InputEvent> inputEvents = value.AsGodotArray<InputEvent>();
         if (inputEvents == null)
         {
-            GD.Print("prout");
             effectiveValue = Value;
             return false;
         }
@@ -85,7 +98,6 @@ public partial class KeyBindingSetting : UserSetting
         for (int i = 0; i < count; i++)
             _keyBinds[i].TryUpdateValue(this, inputEvents[i]);
             
-        //effectiveValue = _keyBinds;
         effectiveValue = _keyBinds;
         return true;
     }
@@ -106,5 +118,11 @@ public partial class KeyBindingSetting : UserSetting
     {
         TryGetBind(index, out EditableInputEvent bind);
         return bind;
+    }
+
+    protected override void PreInitialize()
+    {
+        _initBinds = InputMap.ActionGetEvents(Key);
+        InputMap.ActionEraseEvents(Key);
     }
 }
