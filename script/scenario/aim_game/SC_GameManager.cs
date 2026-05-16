@@ -8,6 +8,7 @@ public partial class SC_GameManager : Node
     [Export] public float CountDown {get; private set;} = 2f;
     [Export] private float _killRegen = 10f;
     [Signal] public delegate void InitializeEventHandler(SC_GameManager manager);
+    [Signal] public delegate void InitializedEventHandler();
     [Signal] public delegate void StartGameEventHandler();
     [Signal] public delegate void ResetGameEventHandler();
     [Signal] public delegate void EarnScoreEventHandler(uint earned, uint score);
@@ -47,6 +48,8 @@ public partial class SC_GameManager : Node
         player.WeaponsHandler.DisableFire();
 
         EmitSignal(SignalName.Initialize, this);
+        EmitSignal(SignalName.Initialized);
+        Input.MouseMode = Input.MouseModeEnum.Captured;
 
         CountDownTimer = GetTree().CreateTimer(CountDown, false, true);
         CountDownTimer.Timeout += Start;

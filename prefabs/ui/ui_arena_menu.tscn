@@ -2093,11 +2093,7 @@ size_flags_vertical = 8
 text = "BACK_BUTTON"
 
 [connection signal="mouse_entered" from="VBoxContainer/Play" to="Hover" method="play"]
-[connection signal="pressed" from="VBoxContainer/Play" to="." method="Close"]
-[connection signal="pressed" from="VBoxContainer/Play" to="." method="SetPausable"]
 [connection signal="pressed" from="VBoxContainer/Play" to="Click" method="play"]
-[connection signal="pressed" from="VBoxContainer/Play" to="VBoxContainer/Results" method="hide"]
-[connection signal="pressed" from="VBoxContainer/Play" to="VBoxContainer/Surrender" method="show"]
 [connection signal="mouse_entered" from="VBoxContainer/Results" to="Hover" method="play"]
 [connection signal="pressed" from="VBoxContainer/Results" to="Click" method="play"]
 [connection signal="enter_settings" from="VBoxContainer/Settings" to="." method="Enter"]
