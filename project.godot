@@ -38,7 +38,6 @@ DisplayModeSetting="*uid://b8v53y3oal0on"
 StretchModeSetting="*uid://di33css68uobd"
 RenderScaleScaleSetting="*uid://btfsdtsp335hj"
 RenderScaleModeSetting="*uid://dqa8fo8vb46xr"
-ConfUserSettingsLoader="*uid://bargnkrglwn4c"
 ConfBodyModifiers="*res://config/combat/body_modifiers/CONF_BodyModifiers.cs"
 ConfCollision="*res://config/physics/collision/CONF_Collision.cs"
 FsrSharpnessSetting="*uid://4dus7ul2ls6v"
@@ -51,6 +50,7 @@ AudioBusSettingsManager="*uid://b25cusy00kogs"
 CmPer360Setting="*uid://bgibqbjrsni8j"
 DpiSetting="*uid://byloqygv2rg0a"
 EnemiesColorSetting="*uid://dd8ldclnrodr6"
+LanguageSetting="*uid://btg4lwahs32gg"
 
 [display]
 

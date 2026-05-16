@@ -5,18 +5,24 @@ var locales = {
 	"EN_LANGUAGE": "en",
 }
 
+var locale_str: String
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	for locale in locales:
 		add_item(locale)
-	visibility_changed.connect(_on_visibility_changed)
+	LanguageSetting.Changed.connect(_on_setting_value_changed)
+	locale_str = LanguageSetting.Value
+	update_ui()
 	item_selected.connect(_on_item_selected)
 
-func _on_visibility_changed() -> void:
-	if !visible:
+func _on_setting_value_changed(sender, value) -> void:
+	if sender == self:
 		return
-		
-	var locale_str = TranslationServer.get_locale()
+	locale_str = value
+	update_ui()
+	
+func update_ui():
 	selected = get_language_key(locale_str)
 
 func get_language_key(locale: String) -> int:
@@ -37,5 +43,4 @@ func get_language_key(locale: String) -> int:
 
 func _on_item_selected(index: int) -> void:
 	var locale = locales[get_item_text(index)]
-	TranslationServer.set_locale(locale)
-	CONF_UserSettingsLoader.RegisterAccessibilitySetting("language", locale)
+	LanguageSetting.GdTryUpdateValue(self, locale)
