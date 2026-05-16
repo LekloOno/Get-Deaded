@@ -980,58 +980,73 @@ Key = "feedback_sfx_volume_db"
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="GridContainer" type="GridContainer" parent="Settings/TabContainer/CONTROLS_TAB" unique_id=743131888]
+[node name="TabContainer" type="TabContainer" parent="Settings/TabContainer/CONTROLS_TAB" unique_id=1108500865]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 14
+current_tab = 1
+
+[node name="CONTROLS_GENERAL_TAB" type="TabBar" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer" unique_id=1062094710]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="GridContainer" type="GridContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB" unique_id=743131888]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 217.0
-offset_top = 39.0
+offset_top = 8.0
 offset_right = -228.0
-offset_bottom = -73.0
+offset_bottom = -104.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 6
 columns = 2
 
-[node name="Sensitivity" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer" unique_id=339619566]
+[node name="Sensitivity" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=339619566]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer/Sensitivity" unique_id=766337504]
+[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/Sensitivity" unique_id=766337504]
 layout_mode = 2
 text = "SENSITIVITY_LABEL"
 
-[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer" unique_id=148516088]
+[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=148516088]
 layout_mode = 2
 
-[node name="DPI" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer" unique_id=1254421273]
+[node name="DPI" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=1254421273]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer/DPI" unique_id=310470559]
+[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/DPI" unique_id=310470559]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer/DPI/hbox" unique_id=1306170388]
+[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/DPI/hbox" unique_id=1306170388]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer/DPI/hbox" unique_id=1310238737]
+[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/DPI/hbox" unique_id=1310238737]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "DPI_LABEL"
 
-[node name="DPIInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer" unique_id=531442733]
+[node name="DPIInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=531442733]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="DPIInput" type="HSplitContainer" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer/DPIInput" unique_id=1749834004]
+[node name="DPIInput" type="HSplitContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/DPIInput" unique_id=1749834004]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 script = ExtResource("19_4n7it")
 
-[node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer/DPIInput/DPIInput" unique_id=1719183017]
+[node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/DPIInput/DPIInput" unique_id=1719183017]
 layout_mode = 2
 size_flags_horizontal = 0
 alignment = 1
@@ -1039,17 +1054,17 @@ virtual_keyboard_type = 2
 script = ExtResource("8_no00x")
 allow_float = false
 
-[node name="OptionButton" type="OptionButton" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer/DPIInput/DPIInput" unique_id=1880304076]
+[node name="OptionButton" type="OptionButton" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/DPIInput/DPIInput" unique_id=1880304076]
 layout_mode = 2
 script = ExtResource("20_3fk1l")
 
-[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer/DPIInput" unique_id=1669338694]
+[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/DPIInput" unique_id=1669338694]
 layout_mode = 2
 size_flags_horizontal = 0
 stretch_mode = 1
 alignment_vertical = 2
 
-[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer/DPIInput/Reset" unique_id=2067077786]
+[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/DPIInput/Reset" unique_id=2067077786]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
 icon = ExtResource("12_wigoj")
@@ -1059,38 +1074,38 @@ script = ExtResource("14_vbkcm")
 Section = "controls"
 Key = "dpi"
 
-[node name="cm360" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer" unique_id=9756012]
+[node name="cm360" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=9756012]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer/cm360" unique_id=529052024]
+[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/cm360" unique_id=529052024]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer/cm360/hbox" unique_id=638248067]
+[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/cm360/hbox" unique_id=638248067]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer/cm360/hbox" unique_id=1857829317]
+[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/cm360/hbox" unique_id=1857829317]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "CM_360_LABEL"
 
-[node name="cm360Input" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer" unique_id=311228764]
+[node name="cm360Input" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=311228764]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="cm360Input" type="HSplitContainer" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer/cm360Input" unique_id=625440591]
+[node name="cm360Input" type="HSplitContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/cm360Input" unique_id=625440591]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer/cm360Input/cm360Input" unique_id=541891688]
+[node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/cm360Input/cm360Input" unique_id=541891688]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("22_vbkcm")
 
-[node name="MasterSlider" type="HSlider" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer/cm360Input/cm360Input" unique_id=685690882]
+[node name="MasterSlider" type="HSlider" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/cm360Input/cm360Input" unique_id=685690882]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -1100,13 +1115,13 @@ script = ExtResource("23_pbd3k")
 Section = "controls"
 Key = "cm_per_360"
 
-[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer/cm360Input" unique_id=1880264891]
+[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/cm360Input" unique_id=1880264891]
 layout_mode = 2
 size_flags_horizontal = 0
 stretch_mode = 1
 alignment_vertical = 2
 
-[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer/cm360Input/Reset" unique_id=1745273349]
+[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/cm360Input/Reset" unique_id=1745273349]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
 icon = ExtResource("12_wigoj")
@@ -1115,6 +1130,10 @@ expand_icon = true
 script = ExtResource("14_vbkcm")
 Section = "controls"
 Key = "cm_per_360"
+
+[node name="CONTROLS_BINDINGS_TAB" type="TabBar" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer" unique_id=541313611]
+layout_mode = 2
+metadata/_tab_index = 1
 
 [node name="ACCESSIBILITY_TAB" type="TabBar" parent="Settings/TabContainer" unique_id=1604114432]
 visible = false
@@ -1256,8 +1275,10 @@ text = "BACK_BUTTON"
 [connection signal="value_applied" from="Settings/TabContainer/SOUND_TAB/GridContainer/SFXInput/SFXInput/LineEdit" to="Settings/TabContainer/SOUND_TAB/GridContainer/SFXInput/SFXInput/SFXSlider" method="_on_value_changed"]
 [connection signal="value_applied" from="Settings/TabContainer/SOUND_TAB/GridContainer/EnvSFXInput/EnvSFXInput/LineEdit" to="Settings/TabContainer/SOUND_TAB/GridContainer/EnvSFXInput/EnvSFXInput/EnvSFXSlider" method="_on_value_changed"]
 [connection signal="value_applied" from="Settings/TabContainer/SOUND_TAB/GridContainer/FbSFXInput/FbSFXInput/LineEdit" to="Settings/TabContainer/SOUND_TAB/GridContainer/FbSFXInput/FbSFXInput/FbSFXSlider" method="_on_value_changed"]
-[connection signal="value_applied" from="Settings/TabContainer/CONTROLS_TAB/GridContainer/DPIInput/DPIInput/LineEdit" to="Settings/TabContainer/CONTROLS_TAB/GridContainer/DPIInput/DPIInput" method="_on_line_edit_value_applied"]
-[connection signal="item_selected" from="Settings/TabContainer/CONTROLS_TAB/GridContainer/DPIInput/DPIInput/OptionButton" to="Settings/TabContainer/CONTROLS_TAB/GridContainer/DPIInput/DPIInput" method="_on_option_button_item_selected"]
+[connection signal="tab_changed" from="Settings/TabContainer/CONTROLS_TAB/TabContainer" to="LightHover" method="tab_interract"]
+[connection signal="tab_hovered" from="Settings/TabContainer/CONTROLS_TAB/TabContainer" to="LightHover" method="tab_interract"]
+[connection signal="value_applied" from="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/DPIInput/DPIInput/LineEdit" to="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/DPIInput/DPIInput" method="_on_line_edit_value_applied"]
+[connection signal="item_selected" from="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/DPIInput/DPIInput/OptionButton" to="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/DPIInput/DPIInput" method="_on_option_button_item_selected"]
 [connection signal="mouse_entered" from="Settings/HBoxContainer/APPLY_BUTTON" to="LightHover" method="tab_interract"]
 [connection signal="pressed" from="Settings/HBoxContainer/APPLY_BUTTON" to="LightClick" method="tab_interract"]
 [connection signal="pressed" from="Settings/HBoxContainer/APPLY_BUTTON" to="Settings" method="_on_apply_pressed"]
