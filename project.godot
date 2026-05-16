@@ -47,6 +47,7 @@ FovSetting="*uid://oo1hgglok3hy"
 VsyncModeSetting="*uid://div7xlyn13eaa"
 MaxFpsSetting="*uid://i0q4elpse5eq"
 LimitFpsSetting="*uid://g0kw8m871fb6"
+AudioBusSettingsManager="*uid://b25cusy00kogs"
 
 [display]
 
