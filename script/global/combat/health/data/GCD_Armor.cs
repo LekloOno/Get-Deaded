@@ -8,6 +8,6 @@ public partial class GCD_Armor : GCD_Health
     [Export(PropertyHint.Range, "0.0,500.0")]
     private float _maxReduction;
 
-    public override GC_Health BuildNode() =>
-        new GC_Armor(MaxHealth, Child?.BuildNode(), _resistance, _maxReduction);
+    protected override GC_Health BuildSelf(GC_Health child) =>
+        new GC_Armor(MaxHealth, child, _resistance, _maxReduction);
 }

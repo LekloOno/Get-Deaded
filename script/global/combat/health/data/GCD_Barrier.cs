@@ -8,6 +8,6 @@ public partial class GCD_Barrier : GCD_Health
     [Export(PropertyHint.Range, "0,1000")]
     private ulong _coolDown;
 
-    public override GC_Health BuildNode() =>
-        new GC_Barrier(MaxHealth, Child?.BuildNode(), _resistance, _coolDown);
+    protected override GC_Health BuildSelf(GC_Health child) =>
+        new GC_Barrier(MaxHealth, child, _resistance, _coolDown);
 }

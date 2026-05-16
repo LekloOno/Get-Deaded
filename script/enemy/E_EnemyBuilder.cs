@@ -18,9 +18,7 @@ public partial class E_EnemyBuilder : Resource
         // Health
         GC_Health healthTree = _health.BuildNode();
         enemy.HealthManager.TopHealthLayer = healthTree;
-
-        for (GC_Health node = healthTree; node != null; node = node.Child)
-            enemy.HealthManager.AddChild(node);
+        enemy.HealthManager.AddChild(healthTree);
 
         // Mover
         PROTO_Mover mover = new(_moverData, enemy);
