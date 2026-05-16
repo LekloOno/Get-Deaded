@@ -17,13 +17,11 @@
 [ext_resource type="Script" uid="uid://cxu4fexa05rwt" path="res://script/ui/menu/contexts/video/ui_fsr_sharpness.gd" id="13_dy8xp"]
 [ext_resource type="Script" uid="uid://sarrqdn23het" path="res://addons/TraGUS/Nodes/SettingResetButton.cs" id="14_vbkcm"]
 [ext_resource type="Script" uid="uid://cg5dedg2yo8yj" path="res://script/ui/menu/contexts/video/ui_v_sync_mode.gd" id="15_b5eqi"]
-[ext_resource type="Resource" uid="uid://bntla2ivt7ykt" path="res://config/player/player_camera_settings.tres" id="15_oanoi"]
 [ext_resource type="Script" uid="uid://n62sbtg1xvbp" path="res://script/ui/menu/contexts/video/ui_fps_limit_checkbox.gd" id="16_yahvj"]
 [ext_resource type="Script" uid="uid://d2ws6gavso5wd" path="res://script/ui/menu/contexts/video/ui_fps_limiter.gd" id="17_8es5r"]
 [ext_resource type="Script" uid="uid://yone8b285x4t" path="res://script/ui/menu/contexts/sound/ui_volume_slider.gd" id="18_o1fwb"]
 [ext_resource type="Script" uid="uid://diq354ubrwntn" path="res://script/ui/menu/contexts/controls/ui_dpi.gd" id="19_4n7it"]
 [ext_resource type="Script" uid="uid://ctjmgs5r2eyrr" path="res://script/ui/menu/ui_line_edit_helper.gd" id="20_3fk1l"]
-[ext_resource type="Script" uid="uid://bpduowbhu517b" path="res://script/ui/menu/contexts/controls/ui_cm360.gd" id="21_3ngnl"]
 [ext_resource type="Script" uid="uid://b2gps3n30fk26" path="res://script/ui/menu/contexts/accessibility/ui_ennemies_color.gd" id="22_t61gj"]
 [ext_resource type="Script" uid="uid://b1yi7ydtb8exf" path="res://addons/TraGUS/Nodes/SettingLineEdit.cs" id="22_vbkcm"]
 [ext_resource type="Script" uid="uid://d2oxuiywjinnd" path="res://script/ui/menu/contexts/accessibility/ui_language_option.gd" id="23_6me0n"]
@@ -160,9 +158,10 @@ script = ExtResource("10_no00x")
 [node name="TabContainer" type="TabContainer" parent="Settings" unique_id=1418915951]
 layout_mode = 2
 mouse_filter = 0
-current_tab = 0
+current_tab = 2
 
 [node name="VIDEO_TAB" type="TabBar" parent="Settings/TabContainer" unique_id=1016175328]
+visible = false
 layout_mode = 2
 mouse_filter = 1
 metadata/_tab_index = 0
@@ -978,7 +977,6 @@ Section = "sound"
 Key = "feedback_sfx_volume_db"
 
 [node name="CONTROLS_TAB" type="TabBar" parent="Settings/TabContainer" unique_id=1802915093]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
@@ -1024,13 +1022,16 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "DPI_LABEL"
 
-[node name="DPIInput" type="HSplitContainer" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer" unique_id=1749834004]
+[node name="DPIInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer" unique_id=531442733]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="DPIInput" type="HSplitContainer" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer/DPIInput" unique_id=1749834004]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 script = ExtResource("19_4n7it")
-camera_settings = ExtResource("15_oanoi")
 
-[node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer/DPIInput" unique_id=1719183017]
+[node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer/DPIInput/DPIInput" unique_id=1719183017]
 layout_mode = 2
 size_flags_horizontal = 0
 alignment = 1
@@ -1038,9 +1039,25 @@ virtual_keyboard_type = 2
 script = ExtResource("8_no00x")
 allow_float = false
 
-[node name="OptionButton" type="OptionButton" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer/DPIInput" unique_id=1880304076]
+[node name="OptionButton" type="OptionButton" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer/DPIInput/DPIInput" unique_id=1880304076]
 layout_mode = 2
 script = ExtResource("20_3fk1l")
+
+[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer/DPIInput" unique_id=1669338694]
+layout_mode = 2
+size_flags_horizontal = 0
+stretch_mode = 1
+alignment_vertical = 2
+
+[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer/DPIInput/Reset" unique_id=2067077786]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
+icon = ExtResource("12_wigoj")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("14_vbkcm")
+Section = "controls"
+Key = "dpi"
 
 [node name="cm360" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer" unique_id=9756012]
 layout_mode = 2
@@ -1058,30 +1075,46 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "CM_360_LABEL"
 
-[node name="cm360Input" type="HSplitContainer" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer" unique_id=625440591]
+[node name="cm360Input" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer" unique_id=311228764]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="cm360Input" type="HSplitContainer" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer/cm360Input" unique_id=625440591]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-script = ExtResource("21_3ngnl")
-camera_settings = ExtResource("15_oanoi")
 
-[node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer/cm360Input" unique_id=541891688]
+[node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer/cm360Input/cm360Input" unique_id=541891688]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 virtual_keyboard_type = 2
-script = ExtResource("8_no00x")
-allow_negative = false
-clamp_to_slider = false
-clamp_value = true
-min_value = 0.1
-max_value = 10000.0
+script = ExtResource("22_vbkcm")
 
-[node name="MasterSlider" type="HSlider" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer/cm360Input" unique_id=685690882]
+[node name="MasterSlider" type="HSlider" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer/cm360Input/cm360Input" unique_id=685690882]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 min_value = 1.0
 value = 1.0
+script = ExtResource("23_pbd3k")
+Section = "controls"
+Key = "cm_per_360"
+
+[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer/cm360Input" unique_id=1880264891]
+layout_mode = 2
+size_flags_horizontal = 0
+stretch_mode = 1
+alignment_vertical = 2
+
+[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/GridContainer/cm360Input/Reset" unique_id=1745273349]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
+icon = ExtResource("12_wigoj")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("14_vbkcm")
+Section = "controls"
+Key = "cm_per_360"
 
 [node name="ACCESSIBILITY_TAB" type="TabBar" parent="Settings/TabContainer" unique_id=1604114432]
 visible = false
@@ -1137,6 +1170,30 @@ custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 script = ExtResource("23_6me0n")
 
+[node name="EnvSFXInput" type="HBoxContainer" parent="Settings/TabContainer/ACCESSIBILITY_TAB" unique_id=1979166165]
+visible = false
+layout_mode = 0
+offset_top = 31.0
+offset_right = 10.0
+offset_bottom = 41.0
+theme_override_constants/separation = 15
+
+[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/ACCESSIBILITY_TAB/EnvSFXInput" unique_id=856418389]
+layout_mode = 2
+size_flags_horizontal = 0
+stretch_mode = 1
+alignment_vertical = 2
+
+[node name="Button" type="Button" parent="Settings/TabContainer/ACCESSIBILITY_TAB/EnvSFXInput/Reset" unique_id=354741894]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
+icon = ExtResource("12_wigoj")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("14_vbkcm")
+Section = "controls"
+Key = "environment_sfx_volume_db"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="Settings" unique_id=1772757656]
 layout_mode = 2
 size_flags_horizontal = 8
@@ -1183,11 +1240,8 @@ text = "BACK_BUTTON"
 [connection signal="value_applied" from="Settings/TabContainer/SOUND_TAB/GridContainer/SFXInput/SFXInput/LineEdit" to="Settings/TabContainer/SOUND_TAB/GridContainer/SFXInput/SFXInput/SFXSlider" method="_on_value_changed"]
 [connection signal="value_applied" from="Settings/TabContainer/SOUND_TAB/GridContainer/EnvSFXInput/EnvSFXInput/LineEdit" to="Settings/TabContainer/SOUND_TAB/GridContainer/EnvSFXInput/EnvSFXInput/EnvSFXSlider" method="_on_value_changed"]
 [connection signal="value_applied" from="Settings/TabContainer/SOUND_TAB/GridContainer/FbSFXInput/FbSFXInput/LineEdit" to="Settings/TabContainer/SOUND_TAB/GridContainer/FbSFXInput/FbSFXInput/FbSFXSlider" method="_on_value_changed"]
-[connection signal="value_applied" from="Settings/TabContainer/CONTROLS_TAB/GridContainer/DPIInput/LineEdit" to="Settings/TabContainer/CONTROLS_TAB/GridContainer/DPIInput" method="_on_line_edit_value_applied"]
-[connection signal="item_selected" from="Settings/TabContainer/CONTROLS_TAB/GridContainer/DPIInput/OptionButton" to="Settings/TabContainer/CONTROLS_TAB/GridContainer/DPIInput" method="_on_option_button_item_selected"]
-[connection signal="cm_360_changed" from="Settings/TabContainer/CONTROLS_TAB/GridContainer/cm360Input" to="Settings/TabContainer/CONTROLS_TAB/GridContainer/cm360Input/LineEdit" method="apply_value_no_signal"]
-[connection signal="value_applied" from="Settings/TabContainer/CONTROLS_TAB/GridContainer/cm360Input/LineEdit" to="Settings/TabContainer/CONTROLS_TAB/GridContainer/cm360Input" method="set_cm_per_360"]
-[connection signal="value_changed" from="Settings/TabContainer/CONTROLS_TAB/GridContainer/cm360Input/MasterSlider" to="Settings/TabContainer/CONTROLS_TAB/GridContainer/cm360Input" method="set_cm_per_360"]
+[connection signal="value_applied" from="Settings/TabContainer/CONTROLS_TAB/GridContainer/DPIInput/DPIInput/LineEdit" to="Settings/TabContainer/CONTROLS_TAB/GridContainer/DPIInput/DPIInput" method="_on_line_edit_value_applied"]
+[connection signal="item_selected" from="Settings/TabContainer/CONTROLS_TAB/GridContainer/DPIInput/DPIInput/OptionButton" to="Settings/TabContainer/CONTROLS_TAB/GridContainer/DPIInput/DPIInput" method="_on_option_button_item_selected"]
 [connection signal="mouse_entered" from="Settings/HBoxContainer/APPLY_BUTTON" to="LightHover" method="tab_interract"]
 [connection signal="pressed" from="Settings/HBoxContainer/APPLY_BUTTON" to="LightClick" method="tab_interract"]
 [connection signal="pressed" from="Settings/HBoxContainer/APPLY_BUTTON" to="Settings" method="_on_apply_pressed"]

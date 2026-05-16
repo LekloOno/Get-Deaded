@@ -1,7 +1,5 @@
 extends HSplitContainer
 
-@export var camera_settings: PC_Settings
-
 var dpis = {
 	"400": 400,
 	"800": 800,
@@ -15,15 +13,26 @@ var dpis = {
 var dpi_option: OptionButton
 var dpi_edit: LineEdit
 
+var dpi: int
+
 func _ready() -> void:
 	init_children()
 	for dpi in dpis:
 		dpi_option.add_item(dpi)
 	
 	dpi_option.selected = -1
-		
-	visibility_changed.connect(_on_visibility_changed)
 	
+	DpiSetting.Changed.connect(_on_setting_value_changed)
+	dpi = DpiSetting.Value
+	update_ui()
+	
+func _on_setting_value_changed(sender, new_value):
+	dpi = new_value
+	update_ui()
+	
+func update_ui():
+	dpi_edit.text = str(dpi)
+
 func init_children():
 	for child in get_children():
 		if child is OptionButton:
@@ -36,21 +45,16 @@ func init_children():
 		if dpi_option && dpi_edit:
 			return
 
-func _on_visibility_changed() -> void:
-	if !visible:
-		return
-		
-	dpi_edit.text = str(camera_settings.Dpi)
-
-func set_dpi(dpi: int):
-	camera_settings.Dpi = dpi
-	CONF_UserSettingsLoader.RegisterControlSetting("dpi", dpi)
+func set_dpi():
+	DpiSetting.GdTryUpdateValue(self, dpi)
 
 
 func _on_line_edit_value_applied(value: float) -> void:
-	set_dpi(int(value))
+	dpi = int(value)
+	set_dpi()
 
 func _on_option_button_item_selected(index: int) -> void:
 	var dpi_str = dpi_option.get_item_text(index)
 	if dpi_str.is_valid_float():
-		set_dpi(int(dpi_str))
+		dpi = int(dpi_str)
+		set_dpi()

@@ -83,14 +83,14 @@ public partial class CONF_UserSettingsLoader : Node
 		//Instance.LoadControlSettings();
 		//Instance.LoadAccessibilitySettings();
 
-		foreach (string sectionKey in Instance.Config.GetSections())
-			foreach (string settingKey in Instance.Config.GetSectionKeys(sectionKey))
+		//foreach (string sectionKey in Instance.Config.GetSections())
+			foreach (string settingKey in Instance.Config.GetSectionKeys("accessibility"))
 			{
-				var value = Instance.Config.GetValue(sectionKey, settingKey);
-				if (!UserSettingsServer.Instance.TryLoadSetting(sectionKey, settingKey, value, out Variant prevValue))
+				var value = Instance.Config.GetValue("accessibility", settingKey);
+				if (!UserSettingsServer.Instance.TryLoadSetting("accessibility", settingKey, value, out Variant prevValue))
 					GD.PrintErr(
 						"Could not load config value for:" +
-						"\n- section: " + sectionKey +
+						"\n- section: " + "accessibility" +
 						"\n - setting:" + settingKey +
 						"Value remained: " + prevValue
 					);
