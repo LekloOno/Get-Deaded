@@ -39,7 +39,7 @@ public partial class PI_CrouchDispatcher : PI_ActionHandler<float>
         }
     }
 
-    public override void _UnhandledKeyInput(InputEvent @event) => HandleInput(@event);
+    public override void _UnhandledInput(InputEvent @event) => HandleInput(@event);
 
     private void TryStop()
     {
@@ -100,12 +100,12 @@ public partial class PI_CrouchDispatcher : PI_ActionHandler<float>
 
     protected override float GetInputValue(InputEvent @event) => 1f;
 
-    public override void EnableAction() => SetProcessUnhandledKeyInput(true);
+    public override void EnableAction() => SetProcessUnhandledInput(true);
 
     public override void DisableAction()
     {
         TryStop();
-        SetProcessUnhandledKeyInput(false);
+        SetProcessUnhandledInput(false);
     }
 
 }

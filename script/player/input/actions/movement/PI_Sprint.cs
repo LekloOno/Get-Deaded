@@ -25,16 +25,16 @@ public partial class PI_Sprint : PI_HoldableHandler<EmptyInput>
     private void HandleExternalStop() =>
         HandleExternal(PI_ActionState.STOPPED, new());
 
-    public override void _UnhandledKeyInput(InputEvent @event)
+    public override void _UnhandledInput(InputEvent @event)
     {
         if (!_crouchDispatcher.IsCrouched)
             HandleInput(@event);
     }
 
-    public override void EnableAction() => SetProcessUnhandledKeyInput(true);
+    public override void EnableAction() => SetProcessUnhandledInput(true);
     public override void DisableAction()
     {
-        SetProcessUnhandledKeyInput(false);
+        SetProcessUnhandledInput(false);
         HandleExternal(PI_ActionState.STOPPED, new());
     }
 }

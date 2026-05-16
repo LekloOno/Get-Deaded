@@ -5,11 +5,11 @@ public partial class PI_Reload : PI_BufferedHandler<EmptyInput>
 {
     protected override ACTIONS_Action Action => ACTIONS_Combat.RELOAD;
     
-    public override void _UnhandledKeyInput(InputEvent @event) => HandleInput(@event);
+    public override void _UnhandledInput(InputEvent @event) => HandleInput(@event);
 
-    public override void EnableAction() => SetProcessUnhandledKeyInput(true);
+    public override void EnableAction() => SetProcessUnhandledInput(true);
 
-    protected override void DisableBufferAction() => SetProcessUnhandledKeyInput(false);
+    protected override void DisableBufferAction() => SetProcessUnhandledInput(false);
 
     protected override EmptyInput GetInputValue(InputEvent @event) => EmptyInput.NONE;
 }
