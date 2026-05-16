@@ -17,8 +17,8 @@ var dpi: int
 
 func _ready() -> void:
 	init_children()
-	for dpi in dpis:
-		dpi_option.add_item(dpi)
+	for dpi_opts in dpis:
+		dpi_option.add_item(dpi_opts)
 	
 	dpi_option.selected = -1
 	
@@ -27,6 +27,9 @@ func _ready() -> void:
 	update_ui()
 	
 func _on_setting_value_changed(sender, new_value):
+	if (sender == self):
+		return
+		
 	dpi = new_value
 	update_ui()
 	
