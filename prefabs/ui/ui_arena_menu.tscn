@@ -1182,11 +1182,37 @@ text = "JUMP_LABEL"
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/GridContainer/DPIInput" unique_id=1609918144]
+[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/GridContainer/DPIInput" unique_id=309361264]
+custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "aaaa"
+clip_text = true
 script = ExtResource("30_rt8lt")
 action = "jump"
+
+[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/GridContainer/DPIInput" unique_id=1849016439]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "jump"
+input_index = 1
+
+[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/GridContainer/DPIInput" unique_id=857956330]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "jump"
+input_index = 2
 
 [node name="ACCESSIBILITY_TAB" type="TabBar" parent="Settings/TabContainer" unique_id=1604114432]
 visible = false

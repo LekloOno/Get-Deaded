@@ -31,6 +31,63 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ppmnc"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ukvur"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r3etb"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.225, 0.225, 0.225, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5byok"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0, 0, 0.29411766)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3oymq"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xadh"]
 content_margin_left = 15.0
 content_margin_top = 4.0
@@ -61,6 +118,12 @@ CheckBox/styles/hover = SubResource("StyleBoxFlat_jwr44")
 CheckBox/styles/normal = SubResource("StyleBoxFlat_8ll30")
 CheckBox/styles/pressed = SubResource("StyleBoxFlat_l6w15")
 ColorPickerButton/styles/normal = SubResource("StyleBoxEmpty_ppmnc")
+InputButton/base_type = &"Button"
+InputButton/font_sizes/font_size = 10
+InputButton/styles/focus = SubResource("StyleBoxFlat_ukvur")
+InputButton/styles/hover = SubResource("StyleBoxFlat_r3etb")
+InputButton/styles/normal = SubResource("StyleBoxFlat_5byok")
+InputButton/styles/pressed = SubResource("StyleBoxFlat_3oymq")
 Label/font_sizes/font_size = 14
 Label/styles/normal = SubResource("StyleBoxFlat_0xadh")
 LineEdit/font_sizes/font_size = 13

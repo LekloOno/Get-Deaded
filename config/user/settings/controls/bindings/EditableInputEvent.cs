@@ -29,6 +29,9 @@ public partial class EditableInputEvent : GodotObject
         if (InputEvent == value)
             return true;
 
+        if (InputEvent != null && InputEvent.IsMatch(value))
+            return true;
+
         if (InputEvent != null)
             InputMap.ActionEraseEvent(_action, InputEvent);
 

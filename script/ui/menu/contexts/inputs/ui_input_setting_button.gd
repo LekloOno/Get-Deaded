@@ -21,6 +21,7 @@ func _ready() -> void:
 		input_event = bind.InputEvent
 		update_ui()
 		pressed.connect(_on_pressed)
+		visibility_changed.connect(_on_visibility_change)
 
 func _on_bind_value_changed(sender, event: InputEvent):
 	input_event = event
@@ -31,6 +32,8 @@ func _on_bind_value_changed(sender, event: InputEvent):
 		return
 	
 func update_ui():
+	if !input_event:
+		text = "n/a"
 	if input_event is InputEventMouseButton:
 		text = "mouse_" + str(input_event.button_index)
 	elif input_event is InputEventKey:
@@ -40,13 +43,29 @@ func _on_pressed():
 	text = "listening ..."
 	waiting_release = true
 	set_process_input(true)
+	
+func _on_visibility_change():
+	if visible:
+		input_event = bind.InputEvent
+		update_ui()
+	else:
+		set_process_input(false)
+		set_pressed_no_signal(false)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if waiting_release && event.is_released() :
 			waiting_release = false
 			return
-		bind.TryUpdateValue(self, event)
+		send_bind(event)
 	
 	if event is InputEventKey :
+		send_bind(event)
+		
+func send_bind(event: InputEvent):
+	if input_event == event:
+		bind.TryUpdateValue(self, null)
+	elif input_event && input_event.is_match(event):
+		bind.TryUpdateValue(self, null)
+	else:
 		bind.TryUpdateValue(self, event)
