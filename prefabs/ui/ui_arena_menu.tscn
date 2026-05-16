@@ -644,25 +644,24 @@ layout_mode = 2
 layout_mode = 2
 text = "MAX_FPS_LABEL"
 
-[node name="MaxFPSInput2" type="HBoxContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer" unique_id=333949214]
+[node name="MaxFPSInput2" type="HBoxContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer" unique_id=333949214 node_paths=PackedStringArray("label")]
 layout_mode = 2
 theme_override_constants/separation = 15
+script = ExtResource("17_8es5r")
+label = NodePath("../Max FPS")
 
-[node name="MaxFPSInput" type="HSplitContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/MaxFPSInput2" unique_id=200510860 node_paths=PackedStringArray("label", "slider")]
+[node name="MaxFPSInput" type="HSplitContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/MaxFPSInput2" unique_id=200510860]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-script = ExtResource("17_8es5r")
-label = NodePath("../../Max FPS")
-slider = NodePath("MasterSlider")
 
 [node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/MaxFPSInput2/MaxFPSInput" unique_id=287369190]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 virtual_keyboard_type = 2
-script = ExtResource("8_no00x")
-allow_float = false
+script = ExtResource("22_vbkcm")
+_allowFloat = false
 
 [node name="MasterSlider" type="HSlider" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/MaxFPSInput2/MaxFPSInput" unique_id=740169268]
 layout_mode = 2
@@ -671,6 +670,9 @@ size_flags_vertical = 4
 min_value = 1.0
 max_value = 600.0
 value = 103.0
+script = ExtResource("23_pbd3k")
+Section = "video"
+Key = "max_fps"
 
 [node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/MaxFPSInput2" unique_id=1910168388]
 layout_mode = 2
@@ -1083,9 +1085,6 @@ text = "BACK_BUTTON"
 [connection signal="mode_changed" from="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleModeInput/RenderScaleModeInput" to="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleInput/RenderScaleInput" method="_on_render_scale_mode_changed"]
 [connection signal="mode_changed" from="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleModeInput/RenderScaleModeInput" to="Settings/TabContainer/VIDEO_TAB/GridContainer/FSRSharpnessInput/FSRSharpnessInput" method="_on_render_scale_mode_changed"]
 [connection signal="value_applied" from="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleInput/RenderScaleInput/LineEdit" to="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleInput/RenderScaleInput" method="_on_value_changed"]
-[connection signal="toggled" from="Settings/TabContainer/VIDEO_TAB/GridContainer/LimitFPSInput" to="Settings/TabContainer/VIDEO_TAB/GridContainer/Max FPS" method="set_visible"]
-[connection signal="toggled" from="Settings/TabContainer/VIDEO_TAB/GridContainer/LimitFPSInput" to="Settings/TabContainer/VIDEO_TAB/GridContainer/MaxFPSInput2/MaxFPSInput" method="set_visible"]
-[connection signal="value_applied" from="Settings/TabContainer/VIDEO_TAB/GridContainer/MaxFPSInput2/MaxFPSInput/LineEdit" to="Settings/TabContainer/VIDEO_TAB/GridContainer/MaxFPSInput2/MaxFPSInput" method="_on_value_changed"]
 [connection signal="value_applied" from="Settings/TabContainer/SOUND_TAB/GridContainer/MasterInput/LineEdit" to="Settings/TabContainer/SOUND_TAB/GridContainer/MasterInput/MasterSlider" method="_on_value_changed"]
 [connection signal="value_applied" from="Settings/TabContainer/SOUND_TAB/GridContainer/MusicInput/LineEdit" to="Settings/TabContainer/SOUND_TAB/GridContainer/MusicInput/MusicSlider" method="_on_value_changed"]
 [connection signal="value_applied" from="Settings/TabContainer/SOUND_TAB/GridContainer/SFXInput/LineEdit" to="Settings/TabContainer/SOUND_TAB/GridContainer/SFXInput/SFXSlider" method="_on_value_changed"]
