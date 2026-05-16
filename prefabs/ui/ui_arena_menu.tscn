@@ -1144,11 +1144,15 @@ size_flags_horizontal = 3
 layout_mode = 2
 text = "ENEMIES_COLOR_LABEL"
 
-[node name="Control" type="Control" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer" unique_id=943779440]
+[node name="EnnemiesColorInput" type="HBoxContainer" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer" unique_id=1140588573]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Control" type="Control" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer/EnnemiesColorInput" unique_id=943779440]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="EnnemiesColorInput" type="ColorPickerButton" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer/Control" unique_id=1658776687]
+[node name="EnnemiesColorInput" type="ColorPickerButton" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer/EnnemiesColorInput/Control" unique_id=1658776687]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 1
 anchors_preset = 9
@@ -1156,6 +1160,22 @@ anchor_bottom = 1.0
 offset_right = 8.0
 grow_vertical = 2
 script = ExtResource("22_t61gj")
+
+[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer/EnnemiesColorInput" unique_id=1000030588]
+layout_mode = 2
+size_flags_horizontal = 0
+stretch_mode = 1
+alignment_vertical = 2
+
+[node name="Button" type="Button" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer/EnnemiesColorInput/Reset" unique_id=1983243152]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
+icon = ExtResource("12_wigoj")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("14_vbkcm")
+Section = "accessibility"
+Key = "enemies_color"
 
 [node name="Language" type="PanelContainer" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer" unique_id=530958428]
 layout_mode = 2
@@ -1165,34 +1185,30 @@ size_flags_horizontal = 3
 layout_mode = 2
 text = "LANGUAGE_LABEL"
 
-[node name="DisplayModeInput" type="OptionButton" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer" unique_id=91011963]
+[node name="LanguageInput" type="HBoxContainer" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer" unique_id=1979166165]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="LanguageInput" type="OptionButton" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer/LanguageInput" unique_id=91011963]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 script = ExtResource("23_6me0n")
 
-[node name="EnvSFXInput" type="HBoxContainer" parent="Settings/TabContainer/ACCESSIBILITY_TAB" unique_id=1979166165]
-visible = false
-layout_mode = 0
-offset_top = 31.0
-offset_right = 10.0
-offset_bottom = 41.0
-theme_override_constants/separation = 15
-
-[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/ACCESSIBILITY_TAB/EnvSFXInput" unique_id=856418389]
+[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer/LanguageInput" unique_id=856418389]
 layout_mode = 2
 size_flags_horizontal = 0
 stretch_mode = 1
 alignment_vertical = 2
 
-[node name="Button" type="Button" parent="Settings/TabContainer/ACCESSIBILITY_TAB/EnvSFXInput/Reset" unique_id=354741894]
+[node name="Button" type="Button" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer/LanguageInput/Reset" unique_id=354741894]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
 icon = ExtResource("12_wigoj")
 icon_alignment = 1
 expand_icon = true
 script = ExtResource("14_vbkcm")
-Section = "controls"
-Key = "environment_sfx_volume_db"
+Section = "accessibility"
+Key = "language"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Settings" unique_id=1772757656]
 layout_mode = 2

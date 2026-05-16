@@ -1,18 +1,22 @@
 extends ColorPickerButton
 
+var enemies_color: Color
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	color_changed.connect(_on_color_changed)
-	visibility_changed.connect(_on_visibility_changed)
+	enemies_color = EnemiesColorSetting.Value
+	EnemiesColorSetting.Changed.connect(_on_setting_value_changed)
+	update_ui()
 
-func _on_visibility_changed() -> void:
-	if !visible:
+func _on_setting_value_changed(sender, value) -> void:
+	if sender == self:
 		return
-		
-	color = ConfHitColors.HitColors.Critical
-
+	
+	enemies_color = value
+	update_ui()
+	
+func update_ui():
+	color = enemies_color
 
 func _on_color_changed(new_color: Color) -> void:
-	ConfHitColors.HitColors.Critical = new_color
-	CONF_UserSettingsLoader.RegisterAccessibilitySetting("enemies_color", new_color)
+	EnemiesColorSetting.GdTryUpdateValue(self, new_color)
