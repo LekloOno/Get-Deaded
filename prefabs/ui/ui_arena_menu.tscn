@@ -1136,7 +1136,7 @@ Key = "cm_per_360"
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="GridContainer" type="GridContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB" unique_id=1827567637]
+[node name="ScrollContainer" type="ScrollContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB" unique_id=1428674498]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1147,42 +1147,255 @@ offset_right = -228.0
 offset_bottom = -104.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer" unique_id=1827567637]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 6
 columns = 2
 
-[node name="Movement" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/GridContainer" unique_id=8743021]
+[node name="Movement" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=8743021]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/GridContainer/Movement" unique_id=1315608497]
+[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Movement" unique_id=1315608497]
 layout_mode = 2
-text = "MOVEMENT_LABEL"
+text = "INPUTS_MOVEMENT_LABEL"
 
-[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/GridContainer" unique_id=24458153]
+[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=24458153]
 layout_mode = 2
 
-[node name="Jump" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/GridContainer" unique_id=703488936]
+[node name="Forward" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1130400359]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/GridContainer/Jump" unique_id=1132608910]
+[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Forward" unique_id=113156570]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/GridContainer/Jump/hbox" unique_id=1402550554]
+[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Forward/hbox" unique_id=516088346]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/GridContainer/Jump/hbox" unique_id=454041128]
+[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Forward/hbox" unique_id=164107759]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "JUMP_LABEL"
+text = "INPUTS_MOVE_FORWARD_LABEL"
 
-[node name="DPIInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/GridContainer" unique_id=1220307215]
+[node name="ForwardInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1342167168]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/GridContainer/DPIInput" unique_id=309361264]
+[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/ForwardInput" unique_id=235110594]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "aaaa"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "move_forward"
+
+[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/ForwardInput" unique_id=2007571832]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "move_forward"
+input_index = 1
+
+[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/ForwardInput" unique_id=1366356771]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "move_forward"
+input_index = 2
+
+[node name="Backward" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1492742774]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Backward" unique_id=385768564]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Backward/hbox" unique_id=1234403469]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Backward/hbox" unique_id=1239809709]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "INPUTS_MOVE_BACKWARD_LABEL"
+
+[node name="BackwardInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1855224175]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/BackwardInput" unique_id=1118095134]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "aaaa"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "move_backward"
+
+[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/BackwardInput" unique_id=2139415749]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "move_backward"
+input_index = 1
+
+[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/BackwardInput" unique_id=434582530]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "move_backward"
+input_index = 2
+
+[node name="Left" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1952062837]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Left" unique_id=108784637]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Left/hbox" unique_id=1887721098]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Left/hbox" unique_id=866363752]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "INPUTS_MOVE_LEFT_LABEL"
+
+[node name="LeftInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1504906887]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/LeftInput" unique_id=2065515868]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "aaaa"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "move_left"
+
+[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/LeftInput" unique_id=1073716544]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "move_left"
+input_index = 1
+
+[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/LeftInput" unique_id=1499593063]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "move_left"
+input_index = 2
+
+[node name="Right" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=966523107]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Right" unique_id=995385648]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Right/hbox" unique_id=484220521]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Right/hbox" unique_id=868672423]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "INPUTS_MOVE_RIGHT_LABEL"
+
+[node name="RightInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=834568813]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/RightInput" unique_id=575130671]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "aaaa"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "move_right"
+
+[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/RightInput" unique_id=27747553]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "move_right"
+input_index = 1
+
+[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/RightInput" unique_id=761599696]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "move_right"
+input_index = 2
+
+[node name="Jump" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=703488936]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Jump" unique_id=1132608910]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Jump/hbox" unique_id=1402550554]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Jump/hbox" unique_id=454041128]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "INPUTS_JUMP_LABEL"
+
+[node name="JumpInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1220307215]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/JumpInput" unique_id=309361264]
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1192,7 +1405,7 @@ clip_text = true
 script = ExtResource("30_rt8lt")
 action = "jump"
 
-[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/GridContainer/DPIInput" unique_id=1849016439]
+[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/JumpInput" unique_id=1849016439]
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1203,7 +1416,7 @@ script = ExtResource("30_rt8lt")
 action = "jump"
 input_index = 1
 
-[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/GridContainer/DPIInput" unique_id=857956330]
+[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/JumpInput" unique_id=857956330]
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1212,6 +1425,559 @@ text = "a"
 clip_text = true
 script = ExtResource("30_rt8lt")
 action = "jump"
+input_index = 2
+
+[node name="Sprint" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1196753457]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Sprint" unique_id=819070800]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Sprint/hbox" unique_id=1381100973]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Sprint/hbox" unique_id=245106236]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "INPUTS_SPRINT_LABEL"
+
+[node name="SprintInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1757397292]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/SprintInput" unique_id=277156241]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "aaaa"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "sprint"
+
+[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/SprintInput" unique_id=685281774]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "sprint"
+input_index = 1
+
+[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/SprintInput" unique_id=533287106]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "sprint"
+input_index = 2
+
+[node name="Crouch" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=307798834]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Crouch" unique_id=2393032]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Crouch/hbox" unique_id=1586321943]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Crouch/hbox" unique_id=1441275228]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "INPUTS_CROUCH_LABEL"
+
+[node name="CrouchInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=733761442]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/CrouchInput" unique_id=1487268756]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "aaaa"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "crouch"
+
+[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/CrouchInput" unique_id=83613420]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "crouch"
+input_index = 1
+
+[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/CrouchInput" unique_id=149806759]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "crouch"
+input_index = 2
+
+[node name="Omni" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1194110793]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Omni" unique_id=2133518966]
+layout_mode = 2
+text = "INPUTS_OMNI_LABEL"
+
+[node name="Control2" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1050532295]
+layout_mode = 2
+
+[node name="Dash" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=2015499158]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Dash" unique_id=435869099]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Dash/hbox" unique_id=525284692]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Dash/hbox" unique_id=2091937332]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "INPUTS_DASH_LABEL"
+
+[node name="DashInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1848354415]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/DashInput" unique_id=1753379959]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "aaaa"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "dash"
+
+[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/DashInput" unique_id=925240920]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "dash"
+input_index = 1
+
+[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/DashInput" unique_id=250504361]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "dash"
+input_index = 2
+
+[node name="Lurch" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1839973077]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Lurch" unique_id=1418228378]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Lurch/hbox" unique_id=1815408977]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Lurch/hbox" unique_id=879674177]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "INPUTS_LURCH_LABEL"
+
+[node name="LurchInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1543581789]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/LurchInput" unique_id=148892926]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "aaaa"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "lurch"
+
+[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/LurchInput" unique_id=289403271]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "lurch"
+input_index = 1
+
+[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/LurchInput" unique_id=1885596936]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "lurch"
+input_index = 2
+
+[node name="Combat" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1255192421]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Combat" unique_id=894779646]
+layout_mode = 2
+text = "INPUTS_COMBAT_LABEL"
+
+[node name="Control3" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=347676827]
+layout_mode = 2
+
+[node name="Primary" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=609656161]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Primary" unique_id=1667897654]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Primary/hbox" unique_id=148661358]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Primary/hbox" unique_id=1149138373]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "INPUTS_PRIMARY_LABEL"
+
+[node name="PrimaryInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1164134496]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/PrimaryInput" unique_id=434664863]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "aaaa"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "primary"
+
+[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/PrimaryInput" unique_id=762730118]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "primary"
+input_index = 1
+
+[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/PrimaryInput" unique_id=1616877207]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "primary"
+input_index = 2
+
+[node name="Secondary" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=51185587]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Secondary" unique_id=1682124915]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Secondary/hbox" unique_id=2078203400]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Secondary/hbox" unique_id=209649150]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "INPUTS_SECONDARY_LABEL"
+
+[node name="SecondaryInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=140823454]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/SecondaryInput" unique_id=1195388226]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "aaaa"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "secondary"
+
+[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/SecondaryInput" unique_id=74264883]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "secondary"
+input_index = 1
+
+[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/SecondaryInput" unique_id=1307881983]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "secondary"
+input_index = 2
+
+[node name="Switch" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=513595699]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Switch" unique_id=560067002]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Switch/hbox" unique_id=1277906366]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Switch/hbox" unique_id=1758036129]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "INPUTS_SWITCH_LABEL"
+
+[node name="SwitchInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=986226264]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/SwitchInput" unique_id=59070872]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "aaaa"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "switch"
+
+[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/SwitchInput" unique_id=1179648223]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "switch"
+input_index = 1
+
+[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/SwitchInput" unique_id=1095839421]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "switch"
+input_index = 2
+
+[node name="Holster" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=879299521]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Holster" unique_id=964707032]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Holster/hbox" unique_id=939963390]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Holster/hbox" unique_id=808788577]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "INPUTS_HOLSTER_LABEL"
+
+[node name="HolsterInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1210497577]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/HolsterInput" unique_id=845418020]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "aaaa"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "holster"
+
+[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/HolsterInput" unique_id=1974453477]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "holster"
+input_index = 1
+
+[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/HolsterInput" unique_id=932380736]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "holster"
+input_index = 2
+
+[node name="Melee" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1015002531]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Melee" unique_id=523085721]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Melee/hbox" unique_id=1855061770]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Melee/hbox" unique_id=2045976408]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "INPUTS_MELEE_LABEL"
+
+[node name="HolsterInput2" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=634315163]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/HolsterInput2" unique_id=964466261]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "aaaa"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "melee"
+
+[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/HolsterInput2" unique_id=924194696]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "melee"
+input_index = 1
+
+[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/HolsterInput2" unique_id=870402795]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "melee"
+input_index = 2
+
+[node name="Interface" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=2061790867]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Interface" unique_id=1951284595]
+layout_mode = 2
+text = "INPUTS_INTERFACE_LABEL"
+
+[node name="Control4" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=2101967858]
+layout_mode = 2
+
+[node name="Stats" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1243746980]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Stats" unique_id=539028723]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Stats/hbox" unique_id=1800473818]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Stats/hbox" unique_id=770481606]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "INPUTS_STATS_LABEL"
+
+[node name="StatsInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=923054328]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/StatsInput" unique_id=766403452]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "aaaa"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "stats"
+
+[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/StatsInput" unique_id=760613158]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "stats"
+input_index = 1
+
+[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/StatsInput" unique_id=2105938010]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "stats"
 input_index = 2
 
 [node name="ACCESSIBILITY_TAB" type="TabBar" parent="Settings/TabContainer" unique_id=1604114432]
