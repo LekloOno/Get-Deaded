@@ -63,7 +63,7 @@ window/vsync/vsync_mode=0
 
 [dotnet]
 
-project/assembly_name="ThirstForLime"
+project/assembly_name="Client"
 
 [editor_plugins]
 
