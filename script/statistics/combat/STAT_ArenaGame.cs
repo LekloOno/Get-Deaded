@@ -13,14 +13,14 @@ public partial class STAT_ArenaGame: IDisposable
 
     public STAT_ArenaGame() {}
 
-    public STAT_ArenaGame(SC_GameManager gameManager)
+    public STAT_ArenaGame(SC_GameManager gameManager, STAT_Combat combatStat)
     {
         Difficulty = E_DifficultyServer.Difficulty;
 
         _gameManager = gameManager;
 
         _gameManager.Score.Subscribe(UpdateScore);
-        CombatStat = _gameManager.Stats;
+        CombatStat = combatStat;
         _gameManager.StartGame += StartTimer;
         _gameManager.ResetGame += StopTimer;
     }
@@ -42,5 +42,13 @@ public partial class STAT_ArenaGame: IDisposable
         _gameManager.Score.Unsubscribe(UpdateScore);
         _gameManager.StartGame -= StartTimer;
         _gameManager.ResetGame -= StopTimer;
+    }
+
+    public void Reset()
+    {
+        CombatStat.Reset();
+        Difficulty = E_DifficultyServer.Difficulty;
+        Score = 0;
+        Time = 0;
     }
 }

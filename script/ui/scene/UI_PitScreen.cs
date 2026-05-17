@@ -7,6 +7,6 @@ public partial class UI_PitScreen : Control
 
     public void InitializeStat(SC_GameManager manager)
     {
-        _playerStat.Initialize(manager.Stats, manager.Score);
+        _playerStat.Initialize(manager.CombatStats, manager.Score);
     }
 }

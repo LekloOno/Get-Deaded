@@ -2975,12 +2975,12 @@ metadata/_custom_type_script = "uid://c1b6fea15qlys"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10000229, 1, -0.25)
 shape = SubResource("BoxShape3D_rpd6q")
 
-[node name="SC_GameManager" type="Node" parent="entities/AimArena" unique_id=1857231820 node_paths=PackedStringArray("_initial", "_combatStats", "_statsInput")]
+[node name="SC_GameManager" type="Node" parent="entities/AimArena" unique_id=1857231820 node_paths=PackedStringArray("_initial", "_uiCombatStats", "_statsInput")]
 script = ExtResource("118_tkrox")
 _initial = NodePath("SC_SequenceSpawner4")
 CountDown = 3.0
 _killRegen = 15.0
-_combatStats = NodePath("../../../CanvasLayer/CombatStats/UIW_CombatStats")
+_uiCombatStats = NodePath("../../../CanvasLayer/CombatStats/UIW_CombatStats")
 _statsInput = NodePath("../../../CanvasLayer/PI_Stats")
 metadata/_custom_type_script = "uid://bwxdr2xchhkya"
 

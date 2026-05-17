@@ -12,9 +12,10 @@ public partial class SC_GameManager : Node
     [Signal] public delegate void StartGameEventHandler();
     [Signal] public delegate void ResetGameEventHandler();
     [Signal] public delegate void EarnScoreEventHandler(uint earned, uint score);
-    [Export] private UIW_CombatStats _combatStats;
+    [Export] private UIW_CombatStats _uiCombatStats;
     [Export] private PI_Stats _statsInput;
-    public STAT_Combat Stats {get; private set;}
+    public STAT_Combat CombatStats => GameStats.CombatStat;
+    public STAT_ArenaGame GameStats {get; private set;}
     public Observable<uint> Score {get; private set;} = new();
     public SceneTreeTimer CountDownTimer;
     private GE_IActiveCombatEntity _player;
@@ -37,7 +38,7 @@ public partial class SC_GameManager : Node
         if (_player != player)
             InitNewPlayer(player);
         else
-            Stats.Reset();
+            GameStats.Reset();
 
         foreach (PW_Weapon weapon in player.WeaponsHandler.Weapons)
                 foreach (PW_Fire fire in weapon.Fires)
@@ -60,9 +61,9 @@ public partial class SC_GameManager : Node
         if (_player != null)
             _player.HealthManager.OnDie -= SendInterrupt;
 
-        _combatStats.Clear();
-        Stats = new(player);
-        _combatStats.AddStat(Stats, Score);
+        _uiCombatStats.Clear();
+        GameStats = new(this, new(player));
+        _uiCombatStats.AddStat(GameStats.CombatStat, Score);
                     
         player.HealthManager.OnDie += SendInterrupt;
         _player = player;
