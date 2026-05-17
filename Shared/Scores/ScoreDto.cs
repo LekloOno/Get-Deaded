@@ -3,8 +3,8 @@ namespace Shared.Scores;
 public record SubmitScoreRequest(
     string MapKey,
     int Difficulty,
-    int TimeSpentMs,
-    int TotalScore,
+    int TimeMs,
+    int Score,
     List<WeaponStatDto> WeaponStats
 );
 

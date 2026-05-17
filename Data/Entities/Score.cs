@@ -7,7 +7,7 @@ public class Score
     public Guid PlayerId { get; set; }
     public Player Player { get; set; } = null!;
 
-    public string MapId { get; set; } = null!;
+    public string MapKey { get; set; } = null!;
     public Map Map { get; set; } = null!;
 
     public int Value { get; set; }

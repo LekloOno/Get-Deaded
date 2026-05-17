@@ -16,7 +16,7 @@ public class WeaponStatConfiguration : IEntityTypeConfiguration<WeaponStat>
 
         builder.HasOne(x => x.Weapon)
             .WithMany(x => x.WeaponStats)
-            .HasForeignKey(x => x.WeaponId);
+            .HasForeignKey(x => x.WeaponKey);
 
         builder.Property(x => x.Accuracy).IsRequired();
         builder.Property(x => x.CriticalAccuracy).IsRequired();

@@ -16,7 +16,7 @@ public class ScoreConfiguration : IEntityTypeConfiguration<Score>
 
         builder.HasOne(x => x.Map)
             .WithMany(x => x.Scores)
-            .HasForeignKey(x => x.MapId);
+            .HasForeignKey(x => x.MapKey);
 
         builder.Property(x => x.Difficulty)
             .IsRequired();
