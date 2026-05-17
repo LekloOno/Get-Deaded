@@ -8,13 +8,10 @@ public class MapConfiguration : IEntityTypeConfiguration<Map>
     {
         builder.ToTable("maps");
 
-        builder.HasKey(x => x.Id);
+        builder.HasKey(x => x.MapKey);
 
         builder.Property(x => x.MapKey)
-            .IsRequired()
-            .HasMaxLength(64);
-
-        builder.HasIndex(x => x.MapKey)
-            .IsUnique();
+            .HasMaxLength(64)
+            .IsRequired();
     }
 }
