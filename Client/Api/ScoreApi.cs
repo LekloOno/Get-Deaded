@@ -4,6 +4,7 @@ using Shared.Scores;
 using Client.Auth;
 using System.Threading.Tasks;
 using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace Client.Api;
 
@@ -18,18 +19,22 @@ public class ScoreApi : ApiClient
     public async Task<bool> SubmitScoreAsync(
         SubmitScoreRequest score)
     {
-        ApplyAuthToken(Session.Token);
-
         var json = JsonSerializer.Serialize(
             score,
             JsonOptions);
 
-        var response = await Http.PostAsync(
-            "api/scores",
-            new StringContent(
+        var request = new HttpRequestMessage(HttpMethod.Post, "api/scores")
+        {
+            Content = new StringContent(
                 json,
                 Encoding.UTF8,
-                "application/json"));
+                "application/json")
+        };
+
+        request.Headers.Authorization =
+            new AuthenticationHeaderValue("Bearer", Session.Token);
+
+        var response = await Http.SendAsync(request);
 
         return response.IsSuccessStatusCode;
     }

@@ -11,10 +11,12 @@ namespace Api.Auth;
 public class AuthController : ControllerBase
 {
     private readonly GameDbContext _db;
+    private readonly JwtTokenService _jwt;
 
-    public AuthController(GameDbContext db)
+    public AuthController(GameDbContext db, JwtTokenService jwt)
     {
         _db = db;
+        _jwt = jwt;
     }
 
     [HttpPost("login")]
@@ -33,7 +35,7 @@ public class AuthController : ControllerBase
         if (!valid)
             return Unauthorized();
 
-        var token = "TODO_JWT";
+        var token = _jwt.CreateToken(player);
 
         return new AuthResponse(token, player.Username);
     }
@@ -68,7 +70,7 @@ public class AuthController : ControllerBase
 
         await _db.SaveChangesAsync();
 
-        var token = "TODO_JWT";
+        var token = _jwt.CreateToken(player);
 
         return Ok(new AuthResponse(
             token,

@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Data.Db;
 using Data.Entities;
 using Shared.Scores;
+using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Api.Scores;
 
@@ -22,10 +24,11 @@ public class ScoresController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Submit(SubmitScoreRequest req)
     {
-        var username = User.Identity!.Name!;
+        var playerId = Guid.Parse(
+            User.FindFirstValue(JwtRegisteredClaimNames.Sub)!);
 
         var player = await _db.Players
-            .FirstAsync(x => x.Username == username);
+            .FirstAsync(x => x.Id == playerId);
 
         var mapExists = await _db.Maps
             .AnyAsync(x => x.MapKey == req.MapKey);
