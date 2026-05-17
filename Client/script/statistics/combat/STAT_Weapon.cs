@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Godot;
+using Shared.Scores;
 
 public class STAT_Weapon: IDisposable
 {
@@ -81,4 +82,13 @@ public class STAT_Weapon: IDisposable
         foreach (STAT_Fire fire in Fires)
             fire.Reset();
     }
+
+    public WeaponStatDto ToDto() =>
+        new (
+            WeaponData.Id,
+            Damage,
+            Kills,
+            (float) Shots / (float) Hits,
+            Mathf.Round((float) LocalHits[(int)GC_BodyPart.Head] / Hits)
+        );
 }

@@ -1,4 +1,5 @@
 using System;
+using Client.Api;
 using Godot;
 
 [GlobalClass]
@@ -24,6 +25,8 @@ public partial class SC_GameManager : Node
     /// An "unexpected" stop, like the player manually stopping, or dying.
     /// </summary>
     public Action Interrupt;
+
+    private ScoreApi _scoreApi = new();
 
     public override void _Ready()
     {
@@ -124,5 +127,12 @@ public partial class SC_GameManager : Node
         _statsInput.DisableAction();
         SC_EntitiesManager.DisablePickups();
         EmitSignal(SignalName.ResetGame);
+
+        SendScore();
+    }
+
+    private async void SendScore()
+    {
+        await _scoreApi.SubmitScoreAsync(GameStats.ToScoreReq());
     }
 }

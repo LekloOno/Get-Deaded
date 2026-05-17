@@ -1,5 +1,7 @@
 
 using System;
+using System.Linq;
+using Shared.Scores;
 
 public partial class STAT_ArenaGame: IDisposable
 {
@@ -52,5 +54,19 @@ public partial class STAT_ArenaGame: IDisposable
         Difficulty = E_DifficultyServer.Difficulty;
         Score = 0;
         Time = 0;
+    }
+
+    public SubmitScoreRequest ToScoreReq()
+    {
+        return new SubmitScoreRequest(
+            MapData.Id,
+            (int)Difficulty,
+            (int)Time,
+            (int)Score,
+            [
+                CombatStat.MeleeWeapon.ToDto(),
+                ..CombatStat.Weapons.Select(x => x.ToDto())
+            ]
+        );
     }
 }
