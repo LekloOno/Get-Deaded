@@ -1,6 +1,6 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pew", "Pew.csproj", "{6B0DC8FD-B28C-4DFA-9E7B-A63A20B96D7D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pew", "Client/Pew.csproj", "{6B0DC8FD-B28C-4DFA-9E7B-A63A20B96D7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

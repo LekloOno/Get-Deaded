@@ -1,6 +1,0 @@
-[submodule "addons/GaudioProcessTree"]
-	path = addons/GaudioProcessTree
-	url = git@github.com:LekloOno/GaudioProcessTree.git
-[submodule "addons/TraGUS"]
-	path = addons/TraGUS
-	url = git@github.com:LekloOno/TraGUS.git
