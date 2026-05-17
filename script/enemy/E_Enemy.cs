@@ -4,6 +4,7 @@ using Godot;
 public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 {
     [Export] private GC_HealthManager _healthManager;
+    [Export] public E_EnemySettings Settings;
     [Export] private float _hideDelay;
     [Export] private MeshInstance3D _surfaceMesh;
     [Export] private MeshInstance3D _jointMesh;
@@ -11,7 +12,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
     [Export] private float _drag = 10f;
     [Export] private Color _hitColor = new(1f, 1f, 1f, 1f);
     [Export] private float _hitTime = 0.15f;
-    [Export] public uint Score {get; set;} = 50;
+    public uint Score => Settings.Score;
     [Export] private PhysicalBoneSimulator3D _ragdolSimulator;
     [Export] private Skeleton3D _skeleton;
     [Export] public PROTO_Mover Mover;
@@ -79,6 +80,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 
     public override void _Ready()
     {
+        UpdateSettings();
         SetProcess(false);
         Fire?.Initialize(this);
 
@@ -102,6 +104,40 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
         OnDie += PlayDeath;
         OnDamage += PlayHit;
     }
+
+    public void SetSettings(E_EnemySettings settings)
+    {
+        if (Settings != null)
+            Settings.Changed -= UpdateSettings;
+
+        Settings = settings;
+        Settings.Changed += UpdateSettings;
+        
+    }
+
+    private void UpdateSettings()
+    {
+        PW_FireBis fire = Settings.Fire.Instantiate<PW_FireBis>();
+        Fire?.QueueFree();
+        Fire = fire;
+        AimPosition.AddChild(Fire);
+        
+        GC_Health healthTree = Settings.Health.BuildNode();
+        HealthManager.TopHealthLayer?.QueueFree();
+        HealthManager.TopHealthLayer = healthTree;
+        HealthManager.AddChild(healthTree);
+
+        if (Mover == null)
+        {
+            PROTO_Mover mover = new(Settings.MoverData, this);
+            MoverWrapper.Mover = mover;
+            Mover = mover;
+            AddChild(mover);
+        }
+        else
+            Mover.Data = Settings.MoverData;
+    }
+
 
     private void PlayHit(E_IEnemy _, GC_Health senderLayer, DamageEventArgs e)
     {
