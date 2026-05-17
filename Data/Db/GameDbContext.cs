@@ -16,6 +16,17 @@ public class GameDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(GameDbContext).Assembly);
+
+        modelBuilder.Entity<Map>().HasData(
+            new Map { MapKey = "dust_pit" }
+        );
+
+        modelBuilder.Entity<Weapon>().HasData(
+            new Weapon { WeaponKey = "p3_w" },
+            new Weapon { WeaponKey = "g0z_brt" }
+        );
     }
 }
