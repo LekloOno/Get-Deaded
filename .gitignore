@@ -49,3 +49,6 @@ logs
 # OS junk
 .DS_Store
 Thumbs.db
+
+# Docker
+.env
