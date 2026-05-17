@@ -28,5 +28,14 @@ public class GameDbContext : DbContext
             new Weapon { WeaponKey = "p3_w" },
             new Weapon { WeaponKey = "g0z_brt" }
         );
+
+        modelBuilder.Entity<Player>().HasData(
+            new Player
+            {
+                Id = Guid.Parse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+                Username = "test",
+                PasswordHash = "$2a$12$dWEi/DtIMdGlLsLFirWgfOzsrPK8dFjWGPsexIZE3cUhW1Yqi/DmO"
+            }
+        );
     }
 }
