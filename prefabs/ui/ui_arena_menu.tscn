@@ -2109,13 +2109,17 @@ offset_right = 76.0
 offset_bottom = 35.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 18
 script = ExtResource("33_dy8xp")
 menu = NodePath("..")
 
-[node name="Brief" type="Label" parent="Difficulty" unique_id=100742434]
+[node name="PanelContainer" type="PanelContainer" parent="Difficulty" unique_id=1029611137]
+layout_mode = 2
+
+[node name="Brief" type="Label" parent="Difficulty/PanelContainer" unique_id=100742434]
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
-text = "Difficulty influences bots movements, accuracy, as well as the damages they inflict."
+text = "DIFFICULTY_DESCRIPTION_TEXT"
 horizontal_alignment = 1
 autowrap_mode = 2
 
