@@ -12,6 +12,9 @@ public static class PHX_Checks
 
         Vector3 motion = Vector3.Up * (halfDeltaScale + upSafeMargin);
 
+        if (!current.IsInsideTree())
+            return true;
+            
         return !current.TestMove(transform, motion, maxCollisions: 1, safeMargin: 0.1f, recoveryAsCollision: true);
     }
 
