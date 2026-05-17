@@ -19,3 +19,33 @@ mono_crash.*.json
 
 /android/
 .vscode
+.vs
+
+
+# .NET / ASP.NET Core
+bin/
+obj/
+
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+
+# Migrations snapshot build artifacts
+*.db
+*.db-shm
+*.db-wal
+
+# EF tooling temporary files
+Migrations/*.Designer.cs.bak
+
+
+# ASP.NET runtime / logs
+*.log
+logs
+
+
+# OS junk
+.DS_Store
+Thumbs.db
