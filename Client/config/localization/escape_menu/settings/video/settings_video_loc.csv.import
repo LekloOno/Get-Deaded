@@ -15,3 +15,5 @@ dest_files=["res://config/localization/escape_menu/settings/video/settings_video
 
 compress=true
 delimiter=0
+unescape_keys=false
+unescape_translations=true
