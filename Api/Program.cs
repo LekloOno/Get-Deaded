@@ -7,6 +7,8 @@ using Api.Auth;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.WebHost.UseUrls("http://0.0.0.0:8080");
+
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<GameDbContext>(options =>
@@ -47,5 +49,9 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+using var scope = app.Services.CreateScope();
+var db = scope.ServiceProvider.GetRequiredService<GameDbContext>();
+db.Database.Migrate();
 
 app.Run();
