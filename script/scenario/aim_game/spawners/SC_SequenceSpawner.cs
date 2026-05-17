@@ -180,4 +180,11 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
         enemy.OnDisable -= Killed;
         _enemyToPool.Remove(enemy);
     }
+
+    protected override void SetDifficultySpec(E_EnemyDifficulty difficulty)
+    {
+        foreach (E_EnemyBuilder builder in _enemyBuilders)
+            builder.SetDifficulty(difficulty);
+    }
+
 }

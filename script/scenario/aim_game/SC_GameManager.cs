@@ -51,6 +51,8 @@ public partial class SC_GameManager : Node
         EmitSignal(SignalName.Initialized);
         Input.MouseMode = Input.MouseModeEnum.Captured;
 
+        _initial.SetDifficulty(E_EnemyDifficulty.EASY);
+
         CountDownTimer = GetTree().CreateTimer(CountDown, false, true);
         CountDownTimer.Timeout += Start;
     }

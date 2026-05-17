@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="E_EnemySettings" format=3 uid="uid://dovpnbiiv8u6r"]
+
+[ext_resource type="PackedScene" uid="uid://dpo37xs2mukfh" path="res://prefabs/simplebot/bot_base_fire.tscn" id="1_dmw02"]
+[ext_resource type="Script" uid="uid://123gwhhdyr3d" path="res://script/global/combat/health/data/GCD_Health.cs" id="2_c0228"]
+[ext_resource type="Script" uid="uid://c26wx4mlc8qxy" path="res://script/global/combat/health/data/GCD_Armor.cs" id="3_iw747"]
+[ext_resource type="Script" uid="uid://duj8rxwj3bctp" path="res://script/enemy/PROTO_MoverData.cs" id="4_xaaud"]
+[ext_resource type="Script" uid="uid://bglhbt23nx4m7" path="res://script/enemy/E_EnemySettings.cs" id="5_le6oi"]
+
+[sub_resource type="Resource" id="Resource_vfx8u"]
+script = ExtResource("2_c0228")
+MaxHealth = 50.0
+metadata/_custom_type_script = "uid://123gwhhdyr3d"
+
+[sub_resource type="Resource" id="Resource_aup2b"]
+script = ExtResource("3_iw747")
+_resistance = 0.8
+_maxReduction = 10.0
+MaxHealth = 70.0
+Child = SubResource("Resource_vfx8u")
+metadata/_custom_type_script = "uid://c26wx4mlc8qxy"
+
+[sub_resource type="Resource" id="Resource_4nhhj"]
+script = ExtResource("4_xaaud")
+MinStraffe = 0.04
+MaxStraffe = 1.2
+WalkSpeed = 2.2
+metadata/_custom_type_script = "uid://duj8rxwj3bctp"
+
+[resource]
+script = ExtResource("5_le6oi")
+Fire = ExtResource("1_dmw02")
+Health = SubResource("Resource_aup2b")
+MoverData = SubResource("Resource_4nhhj")
+Score = 75
+metadata/_custom_type_script = "uid://bglhbt23nx4m7"

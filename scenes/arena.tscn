@@ -24,27 +24,33 @@
 [ext_resource type="Script" uid="uid://d1v62uw6r4omx" path="res://script/scenario/aim_game/spawners/SC_SequenceSpawner.cs" id="31_ur278"]
 [ext_resource type="PackedScene" uid="uid://d4j8qf3pcauhr" path="res://prefabs/simplebot/bot_builder_template.tscn" id="32_rvjci"]
 [ext_resource type="Script" uid="uid://6shwimir3xjv" path="res://script/enemy/E_EnemyBuilder.cs" id="33_7evfb"]
-[ext_resource type="PackedScene" uid="uid://dpo37xs2mukfh" path="res://prefabs/simplebot/bot_base_fire.tscn" id="33_s54cu"]
 [ext_resource type="Script" uid="uid://dpsrelwawyisv" path="res://script/entity/items/PickableSpawner.cs" id="34_8jgwj"]
-[ext_resource type="Script" uid="uid://123gwhhdyr3d" path="res://script/global/combat/health/data/GCD_Health.cs" id="34_8nnyq"]
-[ext_resource type="Script" uid="uid://c26wx4mlc8qxy" path="res://script/global/combat/health/data/GCD_Armor.cs" id="35_1iiwa"]
+[ext_resource type="Resource" uid="uid://dm3urpn2wilxb" path="res://assets/enemy/basic/armor/enemy_basic_armor_easy.tres" id="34_kjqme"]
 [ext_resource type="PackedScene" uid="uid://c0agsg2uxbklk" path="res://prefabs/damage_multiplier.tscn" id="35_8jgwj"]
+[ext_resource type="Resource" uid="uid://b8l0ex4tjeqh2" path="res://assets/enemy/basic/armor/enemy_basic_armor_normal.tres" id="35_bmakn"]
 [ext_resource type="PackedScene" uid="uid://bpaeqgg3f1ur3" path="res://prefabs/AmmoDrop.tscn" id="35_m44an"]
-[ext_resource type="Script" uid="uid://duj8rxwj3bctp" path="res://script/enemy/PROTO_MoverData.cs" id="36_hboy2"]
+[ext_resource type="Resource" uid="uid://dovpnbiiv8u6r" path="res://assets/enemy/basic/armor/enemy_basic_armor_hard.tres" id="36_n5h7s"]
 [ext_resource type="Script" uid="uid://c3akiwtfovofa" path="res://script/engine_tools/physics/bodies/objects/PHX_RepulsionField3DData.cs" id="36_u80kj"]
 [ext_resource type="Script" uid="uid://bglhbt23nx4m7" path="res://script/enemy/E_EnemySettings.cs" id="37_kjqme"]
 [ext_resource type="Script" uid="uid://3y58gmwamc5s" path="res://script/global/loot/pickable/data/GL_DamageBuffData.cs" id="37_m44an"]
 [ext_resource type="Script" uid="uid://c5lwejv15n0lf" path="res://script/global/loot/pickable/data/GL_AmmoData.cs" id="37_q2sf5"]
 [ext_resource type="Material" uid="uid://cmw5q7hnthw0u" path="res://assets/textures/grid/texture_01.tres" id="38_7jf4w"]
-[ext_resource type="Script" uid="uid://b06fsn7kd2vba" path="res://script/global/combat/health/data/GCD_Barrier.cs" id="38_spnam"]
+[ext_resource type="Resource" uid="uid://bugat6w3m4sh8" path="res://assets/enemy/basic/barrier/enemy_basic_barrier_easy.tres" id="38_p3wad"]
 [ext_resource type="PackedScene" uid="uid://bpk6ns2xwoidb" path="res://prefabs/AmmoDropTrack.tscn" id="38_u80kj"]
 [ext_resource type="PackedScene" uid="uid://be05ifo8pj1df" path="res://prefabs/AmmoDropClick.tscn" id="38_wdrsa"]
-[ext_resource type="PackedScene" uid="uid://cidct5xad30oh" path="res://prefabs/simplebot/bot_light_fire.tscn" id="39_8nnyq"]
+[ext_resource type="Resource" uid="uid://bn60i3u7jv1sw" path="res://assets/enemy/basic/barrier/enemy_basic_barrier_normal.tres" id="39_6b7ou"]
 [ext_resource type="PackedScene" uid="uid://s61f67g56vat" path="res://prefabs/mapping/interractible/jump_pad.tscn" id="40_aup2b"]
+[ext_resource type="Resource" uid="uid://bkqeu0esncx0y" path="res://assets/enemy/basic/barrier/enemy_basic_barrier_hard.tres" id="40_b76a6"]
+[ext_resource type="Resource" uid="uid://b2a7glgng1kkc" path="res://assets/enemy/basic/medium/enemy_basic_medium_easy.tres" id="41_p3wad"]
+[ext_resource type="Resource" uid="uid://d1kfaaqpsd51j" path="res://assets/enemy/basic/medium/enemy_basic_medium_normal.tres" id="42_6b7ou"]
 [ext_resource type="Script" uid="uid://d32chyy6s3qb2" path="res://script/animation/AN_MenuCamera.cs" id="42_7jf4w"]
+[ext_resource type="Resource" uid="uid://b6h4i21ywvlxu" path="res://assets/enemy/basic/medium/enemy_basic_medium_hard.tres" id="43_b76a6"]
 [ext_resource type="Script" uid="uid://ccj8s5i765h4j" path="res://script/scenario/SC_ArenaGameStarter.cs" id="44_hn1ds"]
+[ext_resource type="Resource" uid="uid://dwu6r2s3l2r7w" path="res://assets/enemy/basic/light/enemy_basic_light_easy.tres" id="44_ji5dc"]
 [ext_resource type="PackedScene" uid="uid://b1xordtuuk7r1" path="res://prefabs/ui/ui_arena_menu.tscn" id="44_yln86"]
+[ext_resource type="Resource" uid="uid://bsa2lcp4fy354" path="res://assets/enemy/basic/light/enemy_basic_light_normal.tres" id="45_1cjps"]
 [ext_resource type="PackedScene" uid="uid://b5w3ok85lmxgf" path="res://prefabs/player_camchanged.tscn" id="45_femlh"]
+[ext_resource type="Resource" uid="uid://d0j8b0pup2pkt" path="res://assets/enemy/basic/light/enemy_basic_light_hard.tres" id="46_83tba"]
 [ext_resource type="Script" uid="uid://ba04qst68odml" path="res://script/engine_tools/MISC_TimeScaler.cs" id="46_femlh"]
 [ext_resource type="PackedScene" uid="uid://bhafdiql2jopi" path="res://prefabs/ui/ui_weapons_stats.tscn" id="46_nag6q"]
 [ext_resource type="Script" uid="uid://bkkj6g5jwcpqc" path="res://script/player/input/actions/ui/PI_Stats.cs" id="47_6ubnd"]
@@ -1051,13 +1057,13 @@ shader_parameter/fluctuation_strength = 0.6
 shader_parameter/fluctuation_sharpness = 1.0
 shader_parameter/fluctuation_speed = 0.4
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_bmakn"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_ji5dc"]
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_n5h7s"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_1cjps"]
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_p3wad"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_83tba"]
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_6b7ou"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_3cr31"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3mad5"]
 transparency = 1
@@ -1237,145 +1243,44 @@ emission_energy_multiplier = 1.96
 [sub_resource type="BoxShape3D" id="BoxShape3D_rpd6q"]
 size = Vector3(24, 2.4, 20)
 
-[sub_resource type="Resource" id="Resource_vfx8u"]
-script = ExtResource("34_8nnyq")
-MaxHealth = 50.0
-metadata/_custom_type_script = "uid://123gwhhdyr3d"
-
-[sub_resource type="Resource" id="Resource_aup2b"]
-script = ExtResource("35_1iiwa")
-_resistance = 0.8
-_maxReduction = 10.0
-MaxHealth = 70.0
-Child = SubResource("Resource_vfx8u")
-metadata/_custom_type_script = "uid://c26wx4mlc8qxy"
-
-[sub_resource type="Resource" id="Resource_4nhhj"]
-script = ExtResource("36_hboy2")
-MinStraffe = 0.04
-MaxStraffe = 1.2
-WalkSpeed = 2.2
-metadata/_custom_type_script = "uid://duj8rxwj3bctp"
-
-[sub_resource type="Resource" id="Resource_83tba"]
-script = ExtResource("37_kjqme")
-Fire = ExtResource("33_s54cu")
-Health = SubResource("Resource_aup2b")
-MoverData = SubResource("Resource_4nhhj")
-Score = 75
-metadata/_custom_type_script = "uid://bglhbt23nx4m7"
-
 [sub_resource type="Resource" id="Resource_8nnyq"]
 script = ExtResource("33_7evfb")
-_settings = SubResource("Resource_83tba")
+_settingsByDifficulty = Dictionary[int, ExtResource("37_kjqme")]({
+0: ExtResource("34_kjqme"),
+1: ExtResource("35_bmakn"),
+2: ExtResource("36_n5h7s")
+})
 _enemyBase = ExtResource("32_rvjci")
-_score = 75
 metadata/_custom_type_script = "uid://6shwimir3xjv"
-
-[sub_resource type="Resource" id="Resource_a7862"]
-script = ExtResource("34_8nnyq")
-MaxHealth = 50.0
-metadata/_custom_type_script = "uid://123gwhhdyr3d"
-
-[sub_resource type="Resource" id="Resource_kjqme"]
-script = ExtResource("38_spnam")
-_resistance = 0.8
-_coolDown = 300
-MaxHealth = 70.0
-Child = SubResource("Resource_a7862")
-metadata/_custom_type_script = "uid://b06fsn7kd2vba"
-
-[sub_resource type="Resource" id="Resource_bmakn"]
-script = ExtResource("36_hboy2")
-MinStraffe = 0.04
-MaxStraffe = 1.2
-WalkSpeed = 2.2
-metadata/_custom_type_script = "uid://duj8rxwj3bctp"
-
-[sub_resource type="Resource" id="Resource_3cr31"]
-script = ExtResource("37_kjqme")
-Fire = ExtResource("33_s54cu")
-Health = SubResource("Resource_kjqme")
-MoverData = SubResource("Resource_bmakn")
-Score = 75
-metadata/_custom_type_script = "uid://bglhbt23nx4m7"
 
 [sub_resource type="Resource" id="Resource_n5h7s"]
 script = ExtResource("33_7evfb")
-_settings = SubResource("Resource_3cr31")
+_settingsByDifficulty = Dictionary[int, ExtResource("37_kjqme")]({
+0: ExtResource("38_p3wad"),
+1: ExtResource("39_6b7ou"),
+2: ExtResource("40_b76a6")
+})
 _enemyBase = ExtResource("32_rvjci")
-_score = 75
 metadata/_custom_type_script = "uid://6shwimir3xjv"
-
-[sub_resource type="Resource" id="Resource_spnam"]
-script = ExtResource("34_8nnyq")
-MaxHealth = 120.0
-metadata/_custom_type_script = "uid://123gwhhdyr3d"
-
-[sub_resource type="Resource" id="Resource_p3wad"]
-script = ExtResource("36_hboy2")
-MinStraffe = 0.04
-MaxStraffe = 1.2
-WalkSpeed = 2.2
-metadata/_custom_type_script = "uid://duj8rxwj3bctp"
-
-[sub_resource type="Resource" id="Resource_h82kt"]
-script = ExtResource("37_kjqme")
-Fire = ExtResource("33_s54cu")
-Health = SubResource("Resource_spnam")
-MoverData = SubResource("Resource_p3wad")
-SpreadFactor = 20.0
-ReactionTime = 0.4
-metadata/_custom_type_script = "uid://bglhbt23nx4m7"
 
 [sub_resource type="Resource" id="Resource_6b7ou"]
 script = ExtResource("33_7evfb")
-_settings = SubResource("Resource_h82kt")
+_settingsByDifficulty = Dictionary[int, ExtResource("37_kjqme")]({
+0: ExtResource("41_p3wad"),
+1: ExtResource("42_6b7ou"),
+2: ExtResource("43_b76a6")
+})
 _enemyBase = ExtResource("32_rvjci")
-_fire = ExtResource("33_s54cu")
-_health = SubResource("Resource_spnam")
-_moverData = SubResource("Resource_p3wad")
-_speedSpreadFactor = 20.0
-_reactionTime = 0.4
 metadata/_custom_type_script = "uid://6shwimir3xjv"
-
-[sub_resource type="Resource" id="Resource_b76a6"]
-script = ExtResource("34_8nnyq")
-MaxHealth = 60.0
-metadata/_custom_type_script = "uid://123gwhhdyr3d"
-
-[sub_resource type="Resource" id="Resource_ji5dc"]
-script = ExtResource("36_hboy2")
-MinStraffe = 0.2
-MaxStraffe = 2.0
-Acceleration = 16.0
-WalkSpeed = 2.2
-WalkWeight = 0.9
-SprintWeight = 0.1
-MinHold = 0.5
-MaxHold = 5.0
-metadata/_custom_type_script = "uid://duj8rxwj3bctp"
-
-[sub_resource type="Resource" id="Resource_h3ydh"]
-script = ExtResource("37_kjqme")
-Fire = ExtResource("39_8nnyq")
-Health = SubResource("Resource_b76a6")
-MoverData = SubResource("Resource_ji5dc")
-Score = 25
-SpreadFactor = 10.0
-ReactionTime = 0.5
-metadata/_custom_type_script = "uid://bglhbt23nx4m7"
 
 [sub_resource type="Resource" id="Resource_1cjps"]
 script = ExtResource("33_7evfb")
-_settings = SubResource("Resource_h3ydh")
+_settingsByDifficulty = Dictionary[int, ExtResource("37_kjqme")]({
+0: ExtResource("44_ji5dc"),
+1: ExtResource("45_1cjps"),
+2: ExtResource("46_83tba")
+})
 _enemyBase = ExtResource("32_rvjci")
-_fire = ExtResource("39_8nnyq")
-_health = SubResource("Resource_b76a6")
-_moverData = SubResource("Resource_ji5dc")
-_score = 25
-_speedSpreadFactor = 10.0
-_reactionTime = 0.5
 metadata/_custom_type_script = "uid://6shwimir3xjv"
 
 [sub_resource type="Curve" id="Curve_mossj"]
@@ -2287,14 +2192,14 @@ spot_angle_attenuation = 0.15932
 [node name="VFX_GodsRay" parent="arena" unique_id=605019919 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.27160624, -0.9330127, 0.23604527, 0.017453581, 0.25000003, 0.9680885, -0.9622502, -0.2588191, 0.0841859, -22.38988, 5.6927605, 5.072876)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_bmakn")
+mesh = SubResource("ImmediateMesh_ji5dc")
 BaseRadius = 0.38
 InitialRotation = 45.0
 
 [node name="VFX_GodsRay3" parent="arena/VFX_GodsRay" unique_id=802324590 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.9999999, -1.4901161e-08, 7.450581e-09, -1.4901161e-08, 0.9999999, -3.1664968e-08, 0, 1.8626451e-09, 0.99999994, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_n5h7s")
+mesh = SubResource("ImmediateMesh_1cjps")
 skeleton = NodePath("../..")
 BaseRadius = 0.14
 InitialRotation = 45.0
@@ -2303,14 +2208,14 @@ FlareAngle = 6.0
 [node name="VFX_GodsRay2" parent="arena" unique_id=164366595 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.05200698, -0.25727454, -0.9649379, 0.9678007, 0.25127998, -0.0148357125, 0.24628639, -0.933096, 0.2620588, -25.830011, 7.2676578, 9.14106)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_p3wad")
+mesh = SubResource("ImmediateMesh_83tba")
 BaseRadius = 0.36
 InitialRotation = 45.0
 
 [node name="VFX_GodsRay3" parent="arena/VFX_GodsRay2" unique_id=294127740 instance=ExtResource("113_ie87n")]
 transform = Transform3D(1, 1.4901161e-08, 0, 1.4901161e-08, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_6b7ou")
+mesh = SubResource("ImmediateMesh_3cr31")
 skeleton = NodePath("../..")
 BaseRadius = 0.14
 InitialRotation = 45.0
@@ -3830,8 +3735,11 @@ parameters/looping = true
 [connection signal="StartGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/PanelContainer" method="show"]
 [connection signal="StartGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/PanelContainer/BoxContainer/HBoxContainer2/Timer" method="OnGameStart"]
 [connection signal="HandleNext" from="entities/AimArena/SC_GameManager/SC_TestSpawner" to="entities/AimArena/SC_GameManager/SC_SequenceSpawner" method="TakeHandle"]
+[connection signal="PropagateDifficulty" from="entities/AimArena/SC_GameManager/SC_TestSpawner" to="entities/AimArena/SC_GameManager/SC_SequenceSpawner" method="SetDifficulty"]
 [connection signal="HandleNext" from="entities/AimArena/SC_GameManager/SC_SequenceSpawner" to="entities/AimArena/SC_GameManager/SC_SequenceSpawner2" method="TakeHandle"]
+[connection signal="PropagateDifficulty" from="entities/AimArena/SC_GameManager/SC_SequenceSpawner" to="entities/AimArena/SC_GameManager/SC_SequenceSpawner2" method="SetDifficulty"]
 [connection signal="HandleNext" from="entities/AimArena/SC_GameManager/SC_SequenceSpawner2" to="entities/AimArena/SC_GameManager/SC_SequenceSpawner3" method="TakeHandle"]
+[connection signal="PropagateDifficulty" from="entities/AimArena/SC_GameManager/SC_SequenceSpawner2" to="entities/AimArena/SC_GameManager/SC_SequenceSpawner3" method="SetDifficulty"]
 [connection signal="Stop" from="entities/AimArena/SC_GameManager/SC_SequenceSpawner3" to="entities/AimArena/SC_GameManager" method="EndGame"]
 [connection signal="Pick" from="entities/Pickups/DamageBuff" to="entities/Pickups/DamageBuff/AUD_StreamPlayer1D" method="Play"]
 [connection signal="pressed" from="CanvasLayer/Menu/VBoxContainer/Play" to="SC_ArenaGameStarter" method="StartGame"]

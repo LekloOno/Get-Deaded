@@ -10,6 +10,7 @@ public abstract partial class SC_SpawnerScript : Node3D
     protected PM_Controller _player;
     [Signal] public delegate void StopEventHandler();   // Called at the end of this scene script
     [Signal] public delegate void HandleNextEventHandler(SC_SpawnerScript prev);
+    [Signal] public delegate void PropagateDifficultyEventHandler(E_EnemyDifficulty difficulty);
     public EventHandler<HitEventArgs> Hit;          // Report hits handled by bots spawned from this script
     public List<E_IEnemy> Enemies {get; private set;} = [];
     public GE_IActiveCombatEntity Starter {get; private set;}
@@ -59,6 +60,14 @@ public abstract partial class SC_SpawnerScript : Node3D
     {
         enemy.Target = target;
     }
+
+    public void SetDifficulty(E_EnemyDifficulty difficulty)
+    {
+        SetDifficultySpec(difficulty);
+        EmitSignal(SignalName.PropagateDifficulty, (int)difficulty);
+    }
+
+    protected abstract void SetDifficultySpec(E_EnemyDifficulty difficulty);
 
     /// <summary>
     /// Define what should be done to enable an enemy that has been previously created through CreateEnemy. <br/>
