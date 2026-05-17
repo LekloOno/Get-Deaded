@@ -32,11 +32,14 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 	private ShaderMaterial _surfaceMeshMaterial;
 	private ShaderMaterial _jointMeshMaterial;
 	private SceneTreeTimer _hideTimer;
-	//public HealthEventHandler OnDie { get => _healthManager.TopHealthLayer.OnDie; set => _healthManager.TopHealthLayer.OnDie = value;}
-	//public HealthEventHandler<DamageEventArgs> OnDamage { get => _healthManager.TopHealthLayer.OnDamage; set => _healthManager.TopHealthLayer.OnDamage = value;}
 	public EnemyHealthEventHandler OnDie {get; set;}
+	private void PropagDie(GC_Health sender) =>
+		OnDie?.Invoke(this, sender);
+
 	public EnemyDisableEventHandler OnDisable {get; set;}
 	public EnemyHealthEventHandler<DamageEventArgs> OnDamage {get; set;}
+	private void PropagDamage(GC_Health sender, DamageEventArgs damage) =>
+		OnDamage?.Invoke(this, sender, damage);
 
 	private BaseMaterial3D.ShadingModeEnum _initialJointShadingMode;
 	private Color _initialColor;
@@ -82,10 +85,6 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 	{
 		UpdateSettings();
 		SetProcess(false);
-		Fire?.Initialize(this);
-
-		_healthManager.TopHealthLayer.OnDie += (layer) => OnDie?.Invoke(this, layer);
-		_healthManager.TopHealthLayer.OnDamage += (layer, damageArgs) => OnDamage?.Invoke(this, layer, damageArgs);
 
 		if(_surfaceMesh?.Mesh.SurfaceGetMaterial(0) is ShaderMaterial surfaceMat)
 		{
@@ -108,10 +107,10 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 	public void SetSettings(E_EnemySettings settings)
 	{
 		if (Settings != null)
-			Settings.Changed -= UpdateSettings;
+			Settings.Updated -= UpdateSettings;
 
 		Settings = settings;
-		Settings.Changed += UpdateSettings;
+		Settings.Updated += UpdateSettings;
 		
 	}
 
@@ -121,11 +120,20 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 		Fire?.QueueFree();
 		Fire = fire;
 		AimPosition.AddChild(Fire);
+		Fire?.Initialize(this);
 		
 		GC_Health healthTree = Settings.Health.BuildNode();
-		HealthManager.TopHealthLayer?.QueueFree();
+		if (HealthManager.TopHealthLayer != null)
+		{
+			HealthManager.TopHealthLayer.QueueFree();
+			HealthManager.TopHealthLayer.OnDie -= PropagDie;
+			HealthManager.TopHealthLayer.OnDamage -= PropagDamage;
+		}
 		HealthManager.TopHealthLayer = healthTree;
+		HealthManager.TopHealthLayer.OnDie += PropagDie;
+		HealthManager.TopHealthLayer.OnDamage += PropagDamage;
 		HealthManager.AddChild(healthTree);
+
 
 		if (Mover == null)
 		{
