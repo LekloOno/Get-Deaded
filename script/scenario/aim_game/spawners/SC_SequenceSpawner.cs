@@ -75,19 +75,22 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
     private void SpawnNextEnemy()
     {
         E_IEnemy enemy = _enemyPools[_spawnPoolIndex].Dequeue();
-        SpawnEnemy(enemy);
-
         _spawnPoolIndex ++;
         _spawnPoolIndex %= _enemyBuilders.Count;
+        
+        SpawnEnemy(enemy);
     }
 
     private void Killed(E_IEnemy enemy)
     {
         RemoveEnemy(enemy);
-        _respawnTimers[_timerIndex].Start(_respawnDelay);
-        
+
+        var index = _timerIndex;
+
         _timerIndex ++;
         _timerIndex %= (int) _count;
+        
+        _respawnTimers[index].Start(_respawnDelay);
     }
 
     protected override void StopSpec()
