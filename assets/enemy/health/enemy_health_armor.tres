@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="GCD_Armor" format=3 uid="uid://bgy3t44egnoe0"]
+
+[ext_resource type="Script" uid="uid://123gwhhdyr3d" path="res://script/global/combat/health/data/GCD_Health.cs" id="1_gs02p"]
+[ext_resource type="Script" uid="uid://c26wx4mlc8qxy" path="res://script/global/combat/health/data/GCD_Armor.cs" id="2_v01kq"]
+
+[sub_resource type="Resource" id="Resource_vfx8u"]
+script = ExtResource("1_gs02p")
+MaxHealth = 50.0
+metadata/_custom_type_script = "uid://123gwhhdyr3d"
+
+[resource]
+script = ExtResource("2_v01kq")
+_resistance = 0.8
+_maxReduction = 10.0
+MaxHealth = 70.0
+Child = SubResource("Resource_vfx8u")
+metadata/_custom_type_script = "uid://c26wx4mlc8qxy"

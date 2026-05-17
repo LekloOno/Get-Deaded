@@ -1,27 +1,15 @@
 [gd_resource type="Resource" script_class="E_EnemySettings" format=3 uid="uid://b2a7glgng1kkc"]
 
 [ext_resource type="PackedScene" uid="uid://dpo37xs2mukfh" path="res://prefabs/simplebot/bot_base_fire.tscn" id="1_yu7ll"]
-[ext_resource type="Script" uid="uid://123gwhhdyr3d" path="res://script/global/combat/health/data/GCD_Health.cs" id="2_xrnle"]
-[ext_resource type="Script" uid="uid://duj8rxwj3bctp" path="res://script/enemy/PROTO_MoverData.cs" id="3_5opf0"]
+[ext_resource type="Resource" uid="uid://tf5pbaoxcw3i" path="res://assets/enemy/health/enemy_health_medium.tres" id="2_yu7ll"]
+[ext_resource type="Resource" uid="uid://bdgssqoxwaby5" path="res://assets/enemy/movement/basic/enemy_movement_basic_easy.tres" id="3_xrnle"]
 [ext_resource type="Script" uid="uid://bglhbt23nx4m7" path="res://script/enemy/E_EnemySettings.cs" id="4_ywgjv"]
-
-[sub_resource type="Resource" id="Resource_spnam"]
-script = ExtResource("2_xrnle")
-MaxHealth = 120.0
-metadata/_custom_type_script = "uid://123gwhhdyr3d"
-
-[sub_resource type="Resource" id="Resource_p3wad"]
-script = ExtResource("3_5opf0")
-MinStraffe = 0.04
-MaxStraffe = 1.2
-WalkSpeed = 2.2
-metadata/_custom_type_script = "uid://duj8rxwj3bctp"
 
 [resource]
 script = ExtResource("4_ywgjv")
 Fire = ExtResource("1_yu7ll")
-Health = SubResource("Resource_spnam")
-MoverData = SubResource("Resource_p3wad")
+Health = ExtResource("2_yu7ll")
+MoverData = ExtResource("3_xrnle")
 SpreadFactor = 20.0
-ReactionTime = 0.4
+ReactionTime = 0.5
 metadata/_custom_type_script = "uid://bglhbt23nx4m7"

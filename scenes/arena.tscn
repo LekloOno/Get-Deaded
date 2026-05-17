@@ -77,8 +77,6 @@
 [ext_resource type="Texture2D" uid="uid://bios2r24in8oi" path="res://assets/textures/factory/factory_wall_grey.png" id="116_7py7c"]
 [ext_resource type="Script" uid="uid://c1b6fea15qlys" path="res://script/scenario/SC_AimArenaAmoConfig.cs" id="117_n15bx"]
 [ext_resource type="Script" uid="uid://bwxdr2xchhkya" path="res://script/scenario/aim_game/SC_GameManager.cs" id="118_tkrox"]
-[ext_resource type="Script" uid="uid://b361d5nxjt30o" path="res://script/scenario/aim_game/spawners/SC_TestSpawner.cs" id="119_6p37o"]
-[ext_resource type="PackedScene" uid="uid://cg6805jlx25is" path="res://prefabs/simplebot/simplebot_aim_arena.tscn" id="120_1fq7f"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6e0wu"]
 sky_top_color = Color(0.2834243, 0.7310117, 0.9131067, 1)
@@ -1057,13 +1055,13 @@ shader_parameter/fluctuation_strength = 0.6
 shader_parameter/fluctuation_sharpness = 1.0
 shader_parameter/fluctuation_speed = 0.4
 
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_6b7ou"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_b76a6"]
+
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_ji5dc"]
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_1cjps"]
-
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_83tba"]
-
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_3cr31"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3mad5"]
 transparency = 1
@@ -1242,6 +1240,16 @@ emission_energy_multiplier = 1.96
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rpd6q"]
 size = Vector3(24, 2.4, 20)
+
+[sub_resource type="Resource" id="Resource_83tba"]
+script = ExtResource("33_7evfb")
+_settingsByDifficulty = Dictionary[int, ExtResource("37_kjqme")]({
+0: ExtResource("41_p3wad"),
+1: ExtResource("42_6b7ou"),
+2: ExtResource("43_b76a6")
+})
+_enemyBase = ExtResource("32_rvjci")
+metadata/_custom_type_script = "uid://6shwimir3xjv"
 
 [sub_resource type="Resource" id="Resource_8nnyq"]
 script = ExtResource("33_7evfb")
@@ -2192,14 +2200,14 @@ spot_angle_attenuation = 0.15932
 [node name="VFX_GodsRay" parent="arena" unique_id=605019919 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.27160624, -0.9330127, 0.23604527, 0.017453581, 0.25000003, 0.9680885, -0.9622502, -0.2588191, 0.0841859, -22.38988, 5.6927605, 5.072876)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_ji5dc")
+mesh = SubResource("ImmediateMesh_6b7ou")
 BaseRadius = 0.38
 InitialRotation = 45.0
 
 [node name="VFX_GodsRay3" parent="arena/VFX_GodsRay" unique_id=802324590 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.9999999, -1.4901161e-08, 7.450581e-09, -1.4901161e-08, 0.9999999, -3.1664968e-08, 0, 1.8626451e-09, 0.99999994, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_1cjps")
+mesh = SubResource("ImmediateMesh_b76a6")
 skeleton = NodePath("../..")
 BaseRadius = 0.14
 InitialRotation = 45.0
@@ -2208,14 +2216,14 @@ FlareAngle = 6.0
 [node name="VFX_GodsRay2" parent="arena" unique_id=164366595 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.05200698, -0.25727454, -0.9649379, 0.9678007, 0.25127998, -0.0148357125, 0.24628639, -0.933096, 0.2620588, -25.830011, 7.2676578, 9.14106)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_83tba")
+mesh = SubResource("ImmediateMesh_ji5dc")
 BaseRadius = 0.36
 InitialRotation = 45.0
 
 [node name="VFX_GodsRay3" parent="arena/VFX_GodsRay2" unique_id=294127740 instance=ExtResource("113_ie87n")]
 transform = Transform3D(1, 1.4901161e-08, 0, 1.4901161e-08, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_3cr31")
+mesh = SubResource("ImmediateMesh_1cjps")
 skeleton = NodePath("../..")
 BaseRadius = 0.14
 InitialRotation = 45.0
@@ -2969,23 +2977,23 @@ shape = SubResource("BoxShape3D_rpd6q")
 
 [node name="SC_GameManager" type="Node" parent="entities/AimArena" unique_id=1857231820 node_paths=PackedStringArray("_initial", "_combatStats", "_statsInput")]
 script = ExtResource("118_tkrox")
-_initial = NodePath("SC_TestSpawner")
+_initial = NodePath("SC_SequenceSpawner4")
 CountDown = 3.0
 _killRegen = 15.0
 _combatStats = NodePath("../../../CanvasLayer/CombatStats/UIW_CombatStats")
 _statsInput = NodePath("../../../CanvasLayer/PI_Stats")
 metadata/_custom_type_script = "uid://bwxdr2xchhkya"
 
-[node name="SC_TestSpawner" type="Node3D" parent="entities/AimArena/SC_GameManager" unique_id=2050910851 node_paths=PackedStringArray("_gameManager")]
+[node name="SC_SequenceSpawner4" type="Node3D" parent="entities/AimArena/SC_GameManager" unique_id=1736623531 node_paths=PackedStringArray("_gameManager")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.8, -3.3, 14.3)
-script = ExtResource("119_6p37o")
-_enemy = ExtResource("120_1fq7f")
+script = ExtResource("31_ur278")
+_enemyBuilders = Array[Object]([SubResource("Resource_83tba")])
 _count = 2
 _spawnRadius = 10.0
 _respawnDelay = 0.0
 _roundTime = 20.0
 _gameManager = NodePath("..")
-metadata/_custom_type_script = "uid://b361d5nxjt30o"
+metadata/_custom_type_script = "uid://d1v62uw6r4omx"
 
 [node name="SC_SequenceSpawner" type="Node3D" parent="entities/AimArena/SC_GameManager" unique_id=1621837663 node_paths=PackedStringArray("_gameManager")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.8, -3.3, 14.3)
@@ -3718,6 +3726,7 @@ parameters/looping = true
 [connection signal="Initialized" from="entities/AimArena/SC_GameManager" to="CanvasLayer/Menu" method="SetPausable"]
 [connection signal="Initialized" from="entities/AimArena/SC_GameManager" to="CanvasLayer/Menu/VBoxContainer/Results" method="hide"]
 [connection signal="Initialized" from="entities/AimArena/SC_GameManager" to="CanvasLayer/Menu/VBoxContainer/Surrender" method="show"]
+[connection signal="Initialized" from="entities/AimArena/SC_GameManager" to="music" method="stop"]
 [connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/Menu" method="Open"]
 [connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/Menu" method="SetUnpausable"]
 [connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/Menu/VBoxContainer/Results" method="show"]
@@ -3734,15 +3743,14 @@ parameters/looping = true
 [connection signal="StartGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/CombatStats/Button" method="hide"]
 [connection signal="StartGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/PanelContainer" method="show"]
 [connection signal="StartGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/PanelContainer/BoxContainer/HBoxContainer2/Timer" method="OnGameStart"]
-[connection signal="HandleNext" from="entities/AimArena/SC_GameManager/SC_TestSpawner" to="entities/AimArena/SC_GameManager/SC_SequenceSpawner" method="TakeHandle"]
+[connection signal="HandleNext" from="entities/AimArena/SC_GameManager/SC_SequenceSpawner4" to="entities/AimArena/SC_GameManager/SC_SequenceSpawner" method="TakeHandle"]
 [connection signal="HandleNext" from="entities/AimArena/SC_GameManager/SC_SequenceSpawner" to="entities/AimArena/SC_GameManager/SC_SequenceSpawner2" method="TakeHandle"]
 [connection signal="HandleNext" from="entities/AimArena/SC_GameManager/SC_SequenceSpawner2" to="entities/AimArena/SC_GameManager/SC_SequenceSpawner3" method="TakeHandle"]
 [connection signal="Stop" from="entities/AimArena/SC_GameManager/SC_SequenceSpawner3" to="entities/AimArena/SC_GameManager" method="EndGame"]
 [connection signal="Pick" from="entities/Pickups/DamageBuff" to="entities/Pickups/DamageBuff/AUD_StreamPlayer1D" method="Play"]
-[connection signal="pressed" from="CanvasLayer/Menu/VBoxContainer/Play" to="SC_ArenaGameStarter" method="StartGame"]
-[connection signal="pressed" from="CanvasLayer/Menu/VBoxContainer/Play" to="music" method="stop"]
 [connection signal="pressed" from="CanvasLayer/Menu/VBoxContainer/Results" to="CanvasLayer/ShowScore" method="ShowScores"]
 [connection signal="pressed" from="CanvasLayer/Menu/VBoxContainer/Surrender" to="entities/AimArena/SC_GameManager" method="DoInterrupt"]
+[connection signal="difficulty_selected" from="CanvasLayer/Menu/Difficulty/Levels" to="SC_ArenaGameStarter" method="StartGame"]
 [connection signal="mouse_entered" from="CanvasLayer/CombatStats/Button" to="CanvasLayer/Menu/LightHover" method="tab_interract"]
 [connection signal="pressed" from="CanvasLayer/CombatStats/Button" to="CanvasLayer/Menu" method="ExitCurrent"]
 [connection signal="pressed" from="CanvasLayer/CombatStats/Button" to="CanvasLayer/Menu/LightClick" method="tab_interract"]

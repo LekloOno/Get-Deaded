@@ -32,6 +32,9 @@
 [ext_resource type="Script" uid="uid://bs7wd2ltt17dh" path="res://script/ui/menu/ui_tabs_sound.gd" id="28_no00x"]
 [ext_resource type="AudioStream" uid="uid://bshhncf67w1g1" path="res://assets/sounds/ui/click_lighter.wav" id="29_wigoj"]
 [ext_resource type="Script" uid="uid://cgf1qqnlqvbs2" path="res://script/ui/menu/contexts/inputs/ui_input_setting_button.gd" id="30_rt8lt"]
+[ext_resource type="Script" uid="uid://n4rlm4y7h70e" path="res://script/ui/menu/contexts/difficulty/ui_difficulty_menu.gd" id="33_dy8xp"]
+[ext_resource type="Script" uid="uid://bo56grycv8c2e" path="res://script/ui/menu/contexts/difficulty/ui_difficulty_buttons_manager.gd" id="33_pbd3k"]
+[ext_resource type="Script" uid="uid://cm1ny1ykjv5hy" path="res://script/ui/menu/contexts/difficulty/UI_DifficultyButton.cs" id="33_vbkcm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wkf4o"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -2093,13 +2096,58 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 text = "BACK_BUTTON"
 
-[node name="Difficulty" type="PanelContainer" parent="." unique_id=1283856098]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Difficulty" type="VBoxContainer" parent="." unique_id=340452415 node_paths=PackedStringArray("menu")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = -35.5
+offset_right = 76.0
+offset_bottom = 35.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("33_dy8xp")
+menu = NodePath("..")
+
+[node name="Brief" type="Label" parent="Difficulty" unique_id=100742434]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+text = "Difficulty influences bots movements, accuracy, as well as the damages they inflict."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Levels" type="VBoxContainer" parent="Difficulty" unique_id=867901666]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("33_pbd3k")
+
+[node name="Easy" type="Button" parent="Difficulty/Levels" unique_id=427343260]
+layout_mode = 2
+size_flags_vertical = 4
+text = "DIFFICULTY_EASY_BUTTON"
+script = ExtResource("33_vbkcm")
+
+[node name="Normal" type="Button" parent="Difficulty/Levels" unique_id=962570449]
+layout_mode = 2
+size_flags_vertical = 4
+text = "DIFFICULTY_EASY_BUTTON"
+script = ExtResource("33_vbkcm")
+_difficulty = 1
+
+[node name="Hard" type="Button" parent="Difficulty/Levels" unique_id=1730426591]
+layout_mode = 2
+size_flags_vertical = 4
+text = "DIFFICULTY_EASY_BUTTON"
+script = ExtResource("33_vbkcm")
+_difficulty = 2
 
 [connection signal="mouse_entered" from="VBoxContainer/Play" to="Hover" method="play"]
 [connection signal="pressed" from="VBoxContainer/Play" to="Click" method="play"]
+[connection signal="pressed" from="VBoxContainer/Play" to="Difficulty" method="enter"]
 [connection signal="mouse_entered" from="VBoxContainer/Results" to="Hover" method="play"]
 [connection signal="pressed" from="VBoxContainer/Results" to="Click" method="play"]
 [connection signal="enter_settings" from="VBoxContainer/Settings" to="." method="Enter"]
@@ -2132,3 +2180,9 @@ offset_bottom = 40.0
 [connection signal="mouse_entered" from="Settings/HBoxContainer/BACK_BUTTON" to="LightHover" method="tab_interract"]
 [connection signal="pressed" from="Settings/HBoxContainer/BACK_BUTTON" to="." method="ExitCurrent"]
 [connection signal="pressed" from="Settings/HBoxContainer/BACK_BUTTON" to="LightClick" method="tab_interract"]
+[connection signal="mouse_entered" from="Difficulty/Levels/Easy" to="Hover" method="play"]
+[connection signal="pressed" from="Difficulty/Levels/Easy" to="Click" method="play"]
+[connection signal="mouse_entered" from="Difficulty/Levels/Normal" to="Hover" method="play"]
+[connection signal="pressed" from="Difficulty/Levels/Normal" to="Click" method="play"]
+[connection signal="mouse_entered" from="Difficulty/Levels/Hard" to="Hover" method="play"]
+[connection signal="pressed" from="Difficulty/Levels/Hard" to="Click" method="play"]
