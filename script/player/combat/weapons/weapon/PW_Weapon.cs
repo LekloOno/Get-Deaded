@@ -34,6 +34,7 @@ Connections
 [GlobalClass, Icon("res://gd_icons/weapon_system/weapon_icon.svg")]
 public abstract partial class PW_Weapon : WeaponComponent
 {
+    [Export] public DATA_Weapon Data {get; private set;}
     [Export] public float MoveSpeedModifier {get; private set;} = 0f;   // An additive modifier to set. - is a malus + is a bonus
     [Export] public float SwitchInTime {get; private set;}
     [Export] public float SwitchOutTime {get; private set;}
@@ -46,8 +47,8 @@ public abstract partial class PW_Weapon : WeaponComponent
     private PM_SurfaceControl _surfaceControl;
 
     [ExportCategory("Visuals")]
-    [Export] public Texture2D Icon {get; private set;}
-    [Export] public Color IconColor {get; private set;}
+    public Texture2D Icon => Data.Icon;
+    public Color IconColor => Data.IconColor;
     public PW_WeaponsHandler Handler {get; private set;}
     
     public bool ADSActive => _ads == null ? false : _ads.Active;

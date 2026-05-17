@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dcmylvqsy66rj"]
 
 [ext_resource type="Script" uid="uid://c3are182lodyx" path="res://script/player/combat/weapons/weapon/PW_Simple.cs" id="1_5idl2"]
+[ext_resource type="Script" uid="uid://dljgtttuqopuf" path="res://script/player/combat/weapons/weapon/data/DATA_Weapon.cs" id="2_ely4n"]
 [ext_resource type="Texture2D" uid="uid://cll1rrqagufi2" path="res://assets/sprites/weapons/brrtpixel2.png" id="2_ykmm0"]
 [ext_resource type="Script" uid="uid://cu3n4oi1x76dl" path="res://script/player/combat/weapons/fire/PWF_FullAuto.cs" id="3_j06ou"]
 [ext_resource type="Script" uid="uid://djecalg7cxlvg" path="res://script/player/combat/weapons/recoil/PWR_ConstantRecoil.cs" id="4_8kujm"]
@@ -27,6 +28,14 @@
 [ext_resource type="Script" uid="uid://baygafcv8gr3s" path="res://script/player/audio/combat/weapons/fire/PAF_Generic.cs" id="25_4kard"]
 [ext_resource type="AudioStream" uid="uid://78knre50os6g" path="res://assets/sounds/combat/weapons/fires/oui.mp3" id="26_fu7vn"]
 
+[sub_resource type="Resource" id="Resource_4kard"]
+script = ExtResource("2_ely4n")
+Id = "g0z_brt"
+DisplayName = "G0Z-BRT"
+Icon = ExtResource("2_ykmm0")
+IconColor = Color(0.5058824, 0.22745098, 1, 0.69803923)
+metadata/_custom_type_script = "uid://dljgtttuqopuf"
+
 [sub_resource type="Resource" id="Resource_ad73j"]
 script = ExtResource("7_2b0g7")
 Damage = 11.0
@@ -47,6 +56,7 @@ polyphony = 10
 
 [node name="PW_Simple" type="Node3D" unique_id=1660127265 node_paths=PackedStringArray("_fires", "_ads")]
 script = ExtResource("1_5idl2")
+Data = SubResource("Resource_4kard")
 MoveSpeedModifier = -0.08
 SwitchInTime = 0.1
 SwitchOutTime = 0.18
@@ -55,8 +65,6 @@ TacticalReloadTime = 0.9
 ReloadReadyTime = 0.15
 _fires = [NodePath("PWF_FullAuto")]
 _ads = NodePath("PWA_SimpleADS")
-Icon = ExtResource("2_ykmm0")
-IconColor = Color(0.281, 0.697, 1, 0.8)
 metadata/_custom_type_script = "uid://c3are182lodyx"
 
 [node name="PWF_FullAuto" type="Node3D" parent="." unique_id=2005264963 node_paths=PackedStringArray("_shots", "_recoil", "_ammos", "_fireTraumaCauser")]

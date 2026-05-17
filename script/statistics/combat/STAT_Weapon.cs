@@ -27,6 +27,7 @@ public class STAT_Weapon: IDisposable
         }
     }
     */
+    public DATA_Weapon WeaponData {get; private set;}
     public STAT_Fire[] Fires {get; private set;}
 
     public Observable<int> Shots {get; private set;} = new(0);
@@ -47,6 +48,7 @@ public class STAT_Weapon: IDisposable
 
     public STAT_Weapon(PW_Weapon weapon)
     {
+        WeaponData = weapon.Data;
         Fires = weapon.GetFireModes()
             .Select(fire => {
                 STAT_Fire stat = new(fire, weapon.Icon, weapon.IconColor);

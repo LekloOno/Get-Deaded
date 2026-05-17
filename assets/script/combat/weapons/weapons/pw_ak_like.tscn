@@ -1,7 +1,8 @@
-[gd_scene load_steps=28 format=3 uid="uid://domkxcr07m1jd"]
+[gd_scene format=3 uid="uid://domkxcr07m1jd"]
 
 [ext_resource type="Script" uid="uid://c3are182lodyx" path="res://script/player/combat/weapons/weapon/PW_Simple.cs" id="1_jqekf"]
 [ext_resource type="Texture2D" uid="uid://cll1rrqagufi2" path="res://assets/sprites/weapons/brrtpixel2.png" id="2_kbg1w"]
+[ext_resource type="Script" uid="uid://dljgtttuqopuf" path="res://script/player/combat/weapons/weapon/data/DATA_Weapon.cs" id="3_l5b2w"]
 [ext_resource type="Script" uid="uid://cu3n4oi1x76dl" path="res://script/player/combat/weapons/fire/PWF_FullAuto.cs" id="3_v8jjb"]
 [ext_resource type="Script" uid="uid://djecalg7cxlvg" path="res://script/player/combat/weapons/recoil/PWR_ConstantRecoil.cs" id="4_l5b2w"]
 [ext_resource type="Script" uid="uid://cxiwvat6vddlp" path="res://script/player/combat/weapons/ammunition/PW_Ammunition.cs" id="5_y8hr8"]
@@ -23,6 +24,14 @@
 [ext_resource type="AudioStream" uid="uid://b8jop7b5xtx8c" path="res://assets/sounds/combat/weapons/fires/brrt/brrrt_tail.wav" id="20_ivdpx"]
 [ext_resource type="AudioStream" uid="uid://cc5jh18wdewdw" path="res://assets/sounds/combat/weapons/fires/expthing.wav" id="20_jqekf"]
 
+[sub_resource type="Resource" id="Resource_y8hr8"]
+script = ExtResource("3_l5b2w")
+Id = "kar_4"
+DisplayName = "KAR-4"
+Icon = ExtResource("2_kbg1w")
+IconColor = Color(0.28235292, 0.41130513, 1, 0.8)
+metadata/_custom_type_script = "uid://dljgtttuqopuf"
+
 [sub_resource type="Resource" id="Resource_hoxdg"]
 script = ExtResource("7_x86ej")
 Damage = 17.0
@@ -39,11 +48,11 @@ emission_energy_multiplier = 15.0
 
 [sub_resource type="Resource" id="Resource_v8jjb"]
 script = ExtResource("10_kbg1w")
-_material = SubResource("StandardMaterial3D_yciib")
 _thickness = 0.04
 _bulletSpeed = 300.0
 _trailSpeed = 6.0
 _inclination = 30.0
+_material = SubResource("StandardMaterial3D_yciib")
 metadata/_custom_type_script = "uid://0w0m608ktkwu"
 
 [sub_resource type="Resource" id="Resource_8jkby"]
@@ -55,8 +64,9 @@ metadata/_custom_type_script = "uid://c0vf7xmi1u8t4"
 [sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_x86ej"]
 polyphony = 10
 
-[node name="PW_Simple" type="Node3D" node_paths=PackedStringArray("_fires", "_ads")]
+[node name="PW_Simple" type="Node3D" unique_id=1164054221 node_paths=PackedStringArray("_fires", "_ads")]
 script = ExtResource("1_jqekf")
+Data = SubResource("Resource_y8hr8")
 MoveSpeedModifier = -0.12
 SwitchInTime = 0.1
 SwitchOutTime = 0.18
@@ -65,11 +75,9 @@ TacticalReloadTime = 1.65
 ReloadReadyTime = 0.15
 _fires = [NodePath("PWF_FullAuto")]
 _ads = NodePath("PWA_SimpleADS")
-Icon = ExtResource("2_kbg1w")
-IconColor = Color(0.28235292, 0.41130513, 1, 0.8)
 metadata/_custom_type_script = "uid://c3are182lodyx"
 
-[node name="PWF_FullAuto" type="Node3D" parent="." node_paths=PackedStringArray("_shots", "_recoil", "_ammos", "_fireTraumaCauser")]
+[node name="PWF_FullAuto" type="Node3D" parent="." unique_id=502885629 node_paths=PackedStringArray("_shots", "_recoil", "_ammos", "_fireTraumaCauser")]
 script = ExtResource("3_v8jjb")
 _shots = [NodePath("PWS_Hitscan")]
 _fireRate = 94
@@ -78,14 +86,14 @@ _ammos = NodePath("PW_Ammunition")
 _fireTraumaCauser = NodePath("PCT_ContinuousFire")
 metadata/_custom_type_script = "uid://cu3n4oi1x76dl"
 
-[node name="PWR_ConstantRecoil" type="Node3D" parent="PWF_FullAuto"]
+[node name="PWR_ConstantRecoil" type="Node3D" parent="PWF_FullAuto" unique_id=1238810033]
 script = ExtResource("4_l5b2w")
 _angle = Vector2(-0.25, 1.1)
 _time = 0.12
 _resetTime = 0.3
 metadata/_custom_type_script = "uid://djecalg7cxlvg"
 
-[node name="PW_Ammunition" type="Node3D" parent="PWF_FullAuto"]
+[node name="PW_Ammunition" type="Node3D" parent="PWF_FullAuto" unique_id=930980805]
 script = ExtResource("5_y8hr8")
 _magazineSize = 30
 _maxMagazines = 15
@@ -93,7 +101,7 @@ _baseAmmos = 60
 InfiniteAmmo = true
 metadata/_custom_type_script = "uid://cxiwvat6vddlp"
 
-[node name="PWS_Hitscan" type="Node3D" parent="PWF_FullAuto" node_paths=PackedStringArray("_trail")]
+[node name="PWS_Hitscan" type="Node3D" parent="PWF_FullAuto" unique_id=1938814929 node_paths=PackedStringArray("_trail")]
 script = ExtResource("6_4hyk1")
 _maxDistance = 100.0
 _hitData = SubResource("Resource_hoxdg")
@@ -102,20 +110,20 @@ _trail = NodePath("PW_Trail")
 _ragdollFactor = 1.5
 metadata/_custom_type_script = "uid://fc7gkofu3df7"
 
-[node name="PW_Trail" type="Node3D" parent="PWF_FullAuto/PWS_Hitscan"]
+[node name="PW_Trail" type="Node3D" parent="PWF_FullAuto/PWS_Hitscan" unique_id=2123933554]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.287, -0.225, -0.237)
 script = ExtResource("8_me5b4")
 _trails = Array[Object]([SubResource("Resource_v8jjb")])
 metadata/_custom_type_script = "uid://cytkgtw0ebs3x"
 
-[node name="PCT_ContinuousFire" type="Node" parent="PWF_FullAuto"]
+[node name="PCT_ContinuousFire" type="Node" parent="PWF_FullAuto" unique_id=869676162]
 script = ExtResource("10_pnc4h")
 _max = 0.35
 _traumaLayer = SubResource("Resource_8jkby")
 _amount = 0.3
 metadata/_custom_type_script = "uid://r8ad50yt78dm"
 
-[node name="PWA_SimpleADS" type="Node3D" parent="." node_paths=PackedStringArray("_fire")]
+[node name="PWA_SimpleADS" type="Node3D" parent="." unique_id=623506222 node_paths=PackedStringArray("_fire")]
 script = ExtResource("13_iomcx")
 _spreadMultiplier = -0.9
 _recoilMultiplier = -0.15
@@ -126,76 +134,76 @@ _fovMultiplier = 0.9
 _moveSpeedMultiplier = -0.35
 metadata/_custom_type_script = "uid://bxxmkegnq67qe"
 
-[node name="PAF_Generic" type="Node3D" parent="." node_paths=PackedStringArray("_fire", "_sound")]
+[node name="PAF_Generic" type="Node3D" parent="." unique_id=63300370 node_paths=PackedStringArray("_fire", "_sound")]
 script = ExtResource("14_hoxdg")
 _fire = NodePath("../PWF_FullAuto")
 _sound = NodePath("layers")
 metadata/_custom_type_script = "uid://baygafcv8gr3s"
 
-[node name="layers" type="Node" parent="PAF_Generic"]
+[node name="layers" type="Node" parent="PAF_Generic" unique_id=291609323]
 script = ExtResource("16_xke5c")
 UseTimeScale = true
 
-[node name="tail" type="Node" parent="PAF_Generic/layers"]
+[node name="tail" type="Node" parent="PAF_Generic/layers" unique_id=1191923995]
 script = ExtResource("17_l5b2w")
 PolyphonicStream = SubResource("AudioStreamPolyphonic_x86ej")
 Sounds = Array[AudioStream]([ExtResource("20_ivdpx")])
 MinPitch = 0.8
 MaxPitch = 0.9
 
-[node name="player" type="Node" parent="PAF_Generic/layers/tail" node_paths=PackedStringArray("Player")]
+[node name="player" type="Node" parent="PAF_Generic/layers/tail" unique_id=766007342 node_paths=PackedStringArray("Player")]
 script = ExtResource("16_v8jjb")
 Player = NodePath("../../../tail")
 
-[node name="layer1" type="Node" parent="PAF_Generic/layers"]
+[node name="layer1" type="Node" parent="PAF_Generic/layers" unique_id=1658695482]
 script = ExtResource("17_l5b2w")
 PolyphonicStream = SubResource("AudioStreamPolyphonic_x86ej")
 Sounds = Array[AudioStream]([ExtResource("17_yciib"), ExtResource("18_jqekf")])
 MaxPitch = 2.5
 
-[node name="player" type="Node" parent="PAF_Generic/layers/layer1" node_paths=PackedStringArray("Player")]
+[node name="player" type="Node" parent="PAF_Generic/layers/layer1" unique_id=438324277 node_paths=PackedStringArray("Player")]
 script = ExtResource("16_v8jjb")
 Player = NodePath("../../../layer1")
 BaseVolumeDb = 2.0
 
-[node name="layer2" type="Node" parent="PAF_Generic/layers"]
+[node name="layer2" type="Node" parent="PAF_Generic/layers" unique_id=1507520460]
 script = ExtResource("17_l5b2w")
 PolyphonicStream = SubResource("AudioStreamPolyphonic_x86ej")
 Sounds = Array[AudioStream]([ExtResource("16_3ruek")])
 MinPitch = 0.7
 MaxPitch = 0.8
 
-[node name="player" type="Node" parent="PAF_Generic/layers/layer2" node_paths=PackedStringArray("Player")]
+[node name="player" type="Node" parent="PAF_Generic/layers/layer2" unique_id=1236483590 node_paths=PackedStringArray("Player")]
 script = ExtResource("16_v8jjb")
 Player = NodePath("../../../layer2")
 BaseVolumeDb = 4.0
 
-[node name="layer3" type="Node" parent="PAF_Generic/layers"]
+[node name="layer3" type="Node" parent="PAF_Generic/layers" unique_id=1715052175]
 script = ExtResource("17_l5b2w")
 PolyphonicStream = SubResource("AudioStreamPolyphonic_x86ej")
 Sounds = Array[AudioStream]([ExtResource("20_jqekf")])
 MaxPitch = 1.1
 
-[node name="player" type="Node" parent="PAF_Generic/layers/layer3" node_paths=PackedStringArray("Player")]
+[node name="player" type="Node" parent="PAF_Generic/layers/layer3" unique_id=1215447002 node_paths=PackedStringArray("Player")]
 script = ExtResource("16_v8jjb")
 Player = NodePath("../../../layer3")
 BaseVolumeDb = 2.0
 
-[node name="tail" type="AudioStreamPlayer3D" parent="PAF_Generic"]
+[node name="tail" type="AudioStreamPlayer3D" parent="PAF_Generic" unique_id=595021676]
 stream = SubResource("AudioStreamPolyphonic_x86ej")
 attenuation_model = 3
 max_db = 6.0
 panning_strength = 0.0
 bus = &"Weapons"
 
-[node name="layer1" type="AudioStreamPlayer3D" parent="PAF_Generic"]
+[node name="layer1" type="AudioStreamPlayer3D" parent="PAF_Generic" unique_id=2115929395]
 stream = SubResource("AudioStreamPolyphonic_x86ej")
 attenuation_model = 3
 volume_db = 2.0
 panning_strength = 0.0
 bus = &"Weapons"
 
-[node name="layer2" type="AudioStreamPlayer3D" parent="PAF_Generic"]
+[node name="layer2" type="AudioStreamPlayer3D" parent="PAF_Generic" unique_id=785708697]
 stream = SubResource("AudioStreamPolyphonic_x86ej")
 attenuation_model = 3
 volume_db = 4.0
@@ -203,7 +211,7 @@ max_db = 6.0
 panning_strength = 0.0
 bus = &"Weapons"
 
-[node name="layer3" type="AudioStreamPlayer3D" parent="PAF_Generic"]
+[node name="layer3" type="AudioStreamPlayer3D" parent="PAF_Generic" unique_id=1042283152]
 stream = SubResource("AudioStreamPolyphonic_x86ej")
 attenuation_model = 3
 volume_db = 2.0
