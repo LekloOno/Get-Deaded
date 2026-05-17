@@ -3,6 +3,7 @@ using System;
 
 public partial class STAT_ArenaGame: IDisposable
 {
+    public readonly DATA_Map MapData;
     public E_EnemyDifficulty Difficulty {get; private set;}
     public STAT_Combat CombatStat {get; private set;}
     public uint Score {get; private set;}
@@ -15,6 +16,7 @@ public partial class STAT_ArenaGame: IDisposable
 
     public STAT_ArenaGame(SC_GameManager gameManager, STAT_Combat combatStat)
     {
+        MapData = new("dust_pit", "DUST_PIT");
         Difficulty = E_DifficultyServer.Difficulty;
 
         _gameManager = gameManager;
