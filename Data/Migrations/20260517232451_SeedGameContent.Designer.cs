@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Data.Migrations
 {
     [DbContext(typeof(GameDbContext))]
-    [Migration("20260517201853_SeedGameContent")]
+    [Migration("20260517232451_SeedGameContent")]
     partial class SeedGameContent
     {
         /// <inheritdoc />
@@ -63,6 +63,14 @@ namespace Data.Migrations
                         .IsUnique();
 
                     b.ToTable("players", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+                            PasswordHash = "$2a$12$dWEi/DtIMdGlLsLFirWgfOzsrPK8dFjWGPsexIZE3cUhW1Yqi/DmO",
+                            Username = "test"
+                        });
                 });
 
             modelBuilder.Entity("Data.Entities.Score", b =>
@@ -114,6 +122,10 @@ namespace Data.Migrations
                         new
                         {
                             WeaponKey = "g0z_brt"
+                        },
+                        new
+                        {
+                            WeaponKey = "fists"
                         });
                 });
 
@@ -129,8 +141,8 @@ namespace Data.Migrations
                     b.Property<float>("CriticalAccuracy")
                         .HasColumnType("real");
 
-                    b.Property<int>("Damage")
-                        .HasColumnType("integer");
+                    b.Property<float>("Damage")
+                        .HasColumnType("real");
 
                     b.Property<int>("Kills")
                         .HasColumnType("integer");

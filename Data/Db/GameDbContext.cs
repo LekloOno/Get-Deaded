@@ -26,7 +26,8 @@ public class GameDbContext : DbContext
 
         modelBuilder.Entity<Weapon>().HasData(
             new Weapon { WeaponKey = "p3_w" },
-            new Weapon { WeaponKey = "g0z_brt" }
+            new Weapon { WeaponKey = "g0z_brt" },
+            new Weapon { WeaponKey = "fists" }
         );
 
         modelBuilder.Entity<Player>().HasData(

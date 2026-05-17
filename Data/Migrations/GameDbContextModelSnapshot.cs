@@ -119,6 +119,10 @@ namespace Data.Migrations
                         new
                         {
                             WeaponKey = "g0z_brt"
+                        },
+                        new
+                        {
+                            WeaponKey = "fists"
                         });
                 });
 
@@ -134,8 +138,8 @@ namespace Data.Migrations
                     b.Property<float>("CriticalAccuracy")
                         .HasColumnType("real");
 
-                    b.Property<int>("Damage")
-                        .HasColumnType("integer");
+                    b.Property<float>("Damage")
+                        .HasColumnType("real");
 
                     b.Property<int>("Kills")
                         .HasColumnType("integer");

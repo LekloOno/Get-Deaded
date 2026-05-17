@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class SeedGameContent : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -81,7 +81,7 @@ namespace Data.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     WeaponKey = table.Column<string>(type: "character varying(64)", nullable: false),
                     ScoreId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Damage = table.Column<int>(type: "integer", nullable: false),
+                    Damage = table.Column<float>(type: "real", nullable: false),
                     Kills = table.Column<int>(type: "integer", nullable: false),
                     Accuracy = table.Column<float>(type: "real", nullable: false),
                     CriticalAccuracy = table.Column<float>(type: "real", nullable: false)
@@ -102,6 +102,26 @@ namespace Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Weapons",
+                column: "WeaponKey",
+                values: new object[]
+                {
+                    "fists",
+                    "g0z_brt",
+                    "p3_w"
+                });
+
+            migrationBuilder.InsertData(
+                table: "maps",
+                column: "MapKey",
+                value: "dust_pit");
+
+            migrationBuilder.InsertData(
+                table: "players",
+                columns: new[] { "Id", "PasswordHash", "Username" },
+                values: new object[] { new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "$2a$12$dWEi/DtIMdGlLsLFirWgfOzsrPK8dFjWGPsexIZE3cUhW1Yqi/DmO", "test" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_players_Username",
