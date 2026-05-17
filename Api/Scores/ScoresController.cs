@@ -24,8 +24,10 @@ public class ScoresController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Submit(SubmitScoreRequest req)
     {
-        var playerId = Guid.Parse(
-            User.FindFirstValue(JwtRegisteredClaimNames.Sub)!);
+        var sub = User.FindFirstValue(JwtRegisteredClaimNames.Sub);
+
+        if (!Guid.TryParse(sub, out var playerId))
+            return Unauthorized();
 
         var player = await _db.Players
             .FirstAsync(x => x.Id == playerId);

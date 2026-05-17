@@ -36,6 +36,7 @@ builder.Services
                 Encoding.UTF8.GetBytes(jwtKey)
             )
         };
+        options.MapInboundClaims = false;
     });
 
 builder.Services.AddAuthorization();
