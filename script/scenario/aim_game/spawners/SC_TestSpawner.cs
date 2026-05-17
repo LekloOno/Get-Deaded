@@ -136,6 +136,4 @@ public partial class SC_TestSpawner : SC_SpawnerScript
         _respawnTimers.Remove(enemy, out Timer timer);
         timer?.QueueFree();
     }
-
-    protected override void SetDifficultySpec(E_EnemyDifficulty difficulty){}
 }

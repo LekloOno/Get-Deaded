@@ -143,6 +143,7 @@ text = "QUIT_BUTTON"
 script = ExtResource("4_vel4l")
 
 [node name="Settings" type="PanelContainer" parent="." unique_id=570347893]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2091,6 +2092,11 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 text = "BACK_BUTTON"
+
+[node name="Difficulty" type="PanelContainer" parent="." unique_id=1283856098]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [connection signal="mouse_entered" from="VBoxContainer/Play" to="Hover" method="play"]
 [connection signal="pressed" from="VBoxContainer/Play" to="Click" method="play"]
