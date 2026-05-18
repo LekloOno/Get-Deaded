@@ -98,6 +98,7 @@ volume_db = 2.0
 script = ExtResource("28_no00x")
 
 [node name="MainMenu" type="PanelContainer" parent="." unique_id=2094783053]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2187,9 +2188,47 @@ placeholder_text = "PASSWORD_PLACEHOLDER_TEXT"
 [node name="Connect" type="Button" parent="LogingMenu/VBoxContainer" unique_id=444277580]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
-text = "CONNECT_BUTTON"
+text = "LOG_IN_BUTTON"
 
 [node name="Register" type="Button" parent="LogingMenu/VBoxContainer" unique_id=970472043]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "REGISTER_BUTTON"
+
+[node name="OfflineMenu" type="PanelContainer" parent="." unique_id=100958374]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OfflineMenu" unique_id=736991592]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="OfflineMenu/VBoxContainer" unique_id=63157952]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "OFFLINE_WARNING_MESSAGE_TEXT"
+autowrap_mode = 2
+
+[node name="Offline" type="Button" parent="OfflineMenu/VBoxContainer" unique_id=813429327]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "OFFLINE_BUTTON"
+
+[node name="Control" type="Control" parent="OfflineMenu/VBoxContainer" unique_id=1028271741]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Connect" type="Button" parent="OfflineMenu/VBoxContainer" unique_id=617021408]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "CONNECT_BUTTON"
+
+[node name="Register" type="Button" parent="OfflineMenu/VBoxContainer" unique_id=56886769]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 text = "REGISTER_BUTTON"
