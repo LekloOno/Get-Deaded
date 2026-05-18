@@ -9,7 +9,7 @@ namespace Client.Api.Godot;
 
 public partial class ApiGodotGlue : Node
 {
-    public ApiGodotGlue? Instance {get; private set;}
+    public static ApiGodotGlue? Instance {get; private set;}
     public AuthApi AuthApi {get; private set;} = new();
     public ScoreApi ScoreApi {get; private set;} = new();
 
