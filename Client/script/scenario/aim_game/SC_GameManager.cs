@@ -1,5 +1,6 @@
 using System;
 using Client.Api;
+using Client.Api.Auth;
 using Client.Api.Godot;
 using Godot;
 
@@ -76,8 +77,13 @@ public partial class SC_GameManager : Node
 		DoInterrupt();
 	}
 
-	public void DoInterrupt()
-	{
+	private void DoInterrupt(bool surrender = false)
+	{   
+		// We (try to) save if --
+		bool save = !surrender && // the player did not surrender
+					CountDownTimer == null ||
+					CountDownTimer.TimeLeft == 0; // the game and did start
+
 		if (CountDownTimer != null)
 		{
 			CountDownTimer.Timeout -= Start;
@@ -85,8 +91,12 @@ public partial class SC_GameManager : Node
 		}
 		
 		Interrupt?.Invoke();
-		Reset();
+
+		Reset(save);
 	}
+
+	public void Surrender() =>
+		DoInterrupt(true);
 
 	private void Start()
 	{
@@ -120,14 +130,16 @@ public partial class SC_GameManager : Node
 		Reset();
 	}
 
-	private void Reset()
+	private void Reset(bool save = true)
 	{
 		_player.WeaponsHandler.ClearDamageMultiplier();
 		_statsInput.DisableAction();
 		SC_EntitiesManager.DisablePickups();
-		EmitSignal(SignalName.ResetGame);
+		
+		if (save && Session.IsAuthenticated)
+			SendScore();
 
-		SendScore();
+		EmitSignal(SignalName.ResetGame);
 	}
 
 	private async void SendScore()

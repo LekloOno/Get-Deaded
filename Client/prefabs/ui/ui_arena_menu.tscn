@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://b73bupbbmrl8h" path="res://script/ui/menu/contexts/video/ui_display_mode_picker.gd" id="5_e0f17"]
 [ext_resource type="Script" uid="uid://b2joxofvmnjhi" path="res://script/ui/menu/contexts/ui_more_button.gd" id="6_xgshk"]
 [ext_resource type="Script" uid="uid://cxmv5fyashr30" path="res://script/ui/menu/contexts/video/ui_resolution_picker.gd" id="7_1fil8"]
+[ext_resource type="Script" uid="uid://c42mlqwha3sf7" path="res://script/ui/menu/contexts/login/UI_OfflineWarningGuard.cs" id="8_8es5r"]
 [ext_resource type="Script" uid="uid://bwag4h0e76hv" path="res://script/ui/menu/ui_num_input.gd" id="8_no00x"]
 [ext_resource type="Script" uid="uid://cfhceeirn71jg" path="res://script/ui/menu/contexts/video/ui_custom_resolution_button.gd" id="9_wigoj"]
 [ext_resource type="Script" uid="uid://dskx1sehclngr" path="res://script/ui/menu/contexts/login/UI_LoggingContext.cs" id="10_b5eqi"]
@@ -37,6 +38,7 @@
 [ext_resource type="Script" uid="uid://bo56grycv8c2e" path="res://script/ui/menu/contexts/difficulty/ui_difficulty_buttons_manager.gd" id="33_pbd3k"]
 [ext_resource type="Script" uid="uid://cm1ny1ykjv5hy" path="res://script/ui/menu/contexts/difficulty/UI_DifficultyButton.cs" id="33_vbkcm"]
 [ext_resource type="Script" uid="uid://bxtxa4abi20xv" path="res://script/ui/menu/ui_confirm_dialog.gd" id="36_jnufj"]
+[ext_resource type="Script" uid="uid://cgieu4ory4anu" path="res://script/ui/menu/contexts/login/UI_OfflineWarning.cs" id="38_o1fwb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rt8lt"]
 content_margin_left = 5.0
@@ -248,7 +250,6 @@ volume_db = 2.0
 script = ExtResource("28_no00x")
 
 [node name="MainMenu" type="PanelContainer" parent="." unique_id=2094783053]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -293,6 +294,13 @@ layout_mode = 2
 size_flags_vertical = 4
 text = "QUIT_BUTTON"
 script = ExtResource("4_vel4l")
+
+[node name="Node" type="Node" parent="MainMenu/Main" unique_id=1508343562 node_paths=PackedStringArray("_escapeMenu", "_difficultyMenu", "_offlineMenu", "_triggerButton")]
+script = ExtResource("8_8es5r")
+_escapeMenu = NodePath("../../..")
+_difficultyMenu = NodePath("../../../Difficulty")
+_offlineMenu = NodePath("../../../OfflineMenu")
+_triggerButton = NodePath("../Play")
 
 [node name="Log" type="VBoxContainer" parent="MainMenu" unique_id=1337512209]
 layout_mode = 2
@@ -2327,6 +2335,7 @@ script = ExtResource("33_vbkcm")
 _difficulty = 2
 
 [node name="LogingMenu" type="PanelContainer" parent="." unique_id=489348171 node_paths=PackedStringArray("menu", "confirm_dialog", "confirm_button", "login_field", "password_field", "logged_user_label", "error_label")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2371,7 +2380,7 @@ text = "LOG_IN_BUTTON"
 [node name="ErrorLabel" type="Label" parent="LogingMenu/VBoxContainer2" unique_id=315791211]
 layout_mode = 2
 
-[node name="OfflineMenu" type="PanelContainer" parent="." unique_id=100958374]
+[node name="OfflineMenu" type="PanelContainer" parent="." unique_id=100958374 node_paths=PackedStringArray("_escapeMenu", "_difficultyMenu", "_offlineButton", "_loginButton", "_registerButton")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -2379,6 +2388,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("38_o1fwb")
+_escapeMenu = NodePath("..")
+_difficultyMenu = NodePath("../Difficulty")
+_offlineButton = NodePath("VBoxContainer/Offline")
+_loginButton = NodePath("VBoxContainer/Login")
+_registerButton = NodePath("VBoxContainer/Register")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="OfflineMenu" unique_id=736991592]
 layout_mode = 2
@@ -2400,10 +2415,10 @@ text = "OFFLINE_BUTTON"
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="Connect" type="Button" parent="OfflineMenu/VBoxContainer" unique_id=617021408]
+[node name="Login" type="Button" parent="OfflineMenu/VBoxContainer" unique_id=617021408]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
-text = "CONNECT_BUTTON"
+text = "LOG_IN_BUTTON"
 
 [node name="Register" type="Button" parent="OfflineMenu/VBoxContainer" unique_id=56886769]
 custom_minimum_size = Vector2(250, 0)
@@ -2447,7 +2462,6 @@ text = "CANCEL_BUTTON"
 
 [connection signal="mouse_entered" from="MainMenu/Main/Play" to="Hover" method="play"]
 [connection signal="pressed" from="MainMenu/Main/Play" to="Click" method="play"]
-[connection signal="pressed" from="MainMenu/Main/Play" to="Difficulty" method="enter"]
 [connection signal="mouse_entered" from="MainMenu/Main/Results" to="Hover" method="play"]
 [connection signal="pressed" from="MainMenu/Main/Results" to="Click" method="play"]
 [connection signal="enter_settings" from="MainMenu/Main/Settings" to="." method="Enter"]
