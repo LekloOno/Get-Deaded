@@ -81,8 +81,8 @@ public partial class SC_GameManager : Node
 	{   
 		// We (try to) save if --
 		bool save = !surrender && // the player did not surrender
-					CountDownTimer == null ||
-					CountDownTimer.TimeLeft == 0; // the game and did start
+					(CountDownTimer == null ||
+					CountDownTimer.TimeLeft == 0); // the game and did start
 
 		if (CountDownTimer != null)
 		{

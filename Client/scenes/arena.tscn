@@ -3746,7 +3746,7 @@ parameters/looping = true
 [connection signal="HandleNext" from="entities/AimArena/SC_GameManager/SC_SequenceSpawner2" to="entities/AimArena/SC_GameManager/SC_SequenceSpawner3" method="TakeHandle"]
 [connection signal="Stop" from="entities/AimArena/SC_GameManager/SC_SequenceSpawner3" to="entities/AimArena/SC_GameManager" method="EndGame"]
 [connection signal="Pick" from="entities/Pickups/DamageBuff" to="entities/Pickups/DamageBuff/AUD_StreamPlayer1D" method="Play"]
-[connection signal="pressed" from="CanvasLayer/Menu/MainMenu/Main/Surrender" to="entities/AimArena/SC_GameManager" method="DoInterrupt"]
+[connection signal="pressed" from="CanvasLayer/Menu/MainMenu/Main/Surrender" to="entities/AimArena/SC_GameManager" method="Surrender"]
 [connection signal="difficulty_selected" from="CanvasLayer/Menu/Difficulty/Levels" to="SC_ArenaGameStarter" method="StartGame"]
 [connection signal="mouse_entered" from="CanvasLayer/CombatStats/Button" to="CanvasLayer/Menu/LightHover" method="tab_interract"]
 [connection signal="pressed" from="CanvasLayer/CombatStats/Button" to="CanvasLayer/Menu" method="ExitCurrent"]
