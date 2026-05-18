@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://b6t7cwmcqpgnj"]
+
+[ext_resource type="Theme" uid="uid://1b5txn2enhg6" path="res://assets/ui/scoreboard_theme.tres" id="1_ti6bm"]
+[ext_resource type="Texture2D" uid="uid://oc0nc17g5r1t" path="res://assets/sprites/weapons/brrtv3.png" id="2_xu6wl"]
+
+[node name="UiScoreBoardDetailEntry" type="PanelContainer" unique_id=1704363336]
+theme = ExtResource("1_ti6bm")
+theme_type_variation = &"EntryPanel"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1551961256]
+layout_mode = 2
+
+[node name="WeaponIcon" type="AspectRatioContainer" parent="HBoxContainer" unique_id=1663218186]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/WeaponIcon" unique_id=2094324229]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+texture = ExtResource("2_xu6wl")
+expand_mode = 4
+
+[node name="Kills" type="Label" parent="HBoxContainer" unique_id=738649599]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "00"
+autowrap_mode = 2
+
+[node name="Damage" type="Label" parent="HBoxContainer" unique_id=1519051012]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "000000000"
+autowrap_mode = 2
+
+[node name="Accuracy" type="Label" parent="HBoxContainer" unique_id=390896604]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "00%"
+autowrap_mode = 2
+
+[node name="CriticalAccuracy" type="Label" parent="HBoxContainer" unique_id=1868011427]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "00%"
+autowrap_mode = 2

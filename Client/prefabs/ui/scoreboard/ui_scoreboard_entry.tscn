@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://cjcw5h2phmx1d"]
+
+[ext_resource type="Theme" uid="uid://1b5txn2enhg6" path="res://assets/ui/scoreboard_theme.tres" id="1_rt4d8"]
+[ext_resource type="Texture2D" uid="uid://oc0nc17g5r1t" path="res://assets/sprites/weapons/brrtv3.png" id="2_rt4d8"]
+
+[node name="PanelContainer" type="PanelContainer" unique_id=529901829]
+offset_right = 943.0
+offset_bottom = 64.0
+theme = ExtResource("1_rt4d8")
+theme_type_variation = &"EntryPanel"
+
+[node name="UiScoreboardEntry" type="HBoxContainer" parent="." unique_id=188828960]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_rt4d8")
+
+[node name="Ranking" type="Label" parent="UiScoreboardEntry" unique_id=226856349]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "99"
+autowrap_mode = 2
+
+[node name="UserName" type="Label" parent="UiScoreboardEntry" unique_id=349431224]
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 2
+text = "user_name"
+autowrap_mode = 2
+
+[node name="Time" type="Label" parent="UiScoreboardEntry" unique_id=1779750077]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+text = "00"
+autowrap_mode = 2
+
+[node name="Kills" type="Label" parent="UiScoreboardEntry" unique_id=1868917372]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "00"
+autowrap_mode = 2
+
+[node name="Damage" type="Label" parent="UiScoreboardEntry" unique_id=1250465962]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "000000000"
+autowrap_mode = 2
+
+[node name="BestWeapon" type="AspectRatioContainer" parent="UiScoreboardEntry" unique_id=1988604791]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="UiScoreboardEntry/BestWeapon" unique_id=1246699044]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_rt4d8")
+expand_mode = 5
+
+[node name="Accuracy" type="Label" parent="UiScoreboardEntry" unique_id=265237123]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "00%"
+autowrap_mode = 2

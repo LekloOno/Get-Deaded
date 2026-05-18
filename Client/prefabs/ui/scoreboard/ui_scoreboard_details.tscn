@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://bgprfkb5sbil2"]
+
+[ext_resource type="PackedScene" uid="uid://b6t7cwmcqpgnj" path="res://prefabs/ui/scoreboard/ui_score_board_detail_entry.tscn" id="1_3vy2t"]
+[ext_resource type="Theme" uid="uid://1b5txn2enhg6" path="res://assets/ui/scoreboard_theme.tres" id="1_fjrko"]
+
+[node name="UiScoreboardDetails" type="PanelContainer" unique_id=832307226]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 64.0
+grow_horizontal = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("1_fjrko")
+theme_type_variation = &"DetailsPanel"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=228440819]
+layout_mode = 2
+
+[node name="Header" type="PanelContainer" parent="VBoxContainer" unique_id=1704363336]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_fjrko")
+theme_type_variation = &"EntryPanel"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Header" unique_id=1551961256]
+layout_mode = 2
+
+[node name="WeaponIcon" type="AspectRatioContainer" parent="VBoxContainer/Header/HBoxContainer" unique_id=1663218186]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control" type="Control" parent="VBoxContainer/Header/HBoxContainer/WeaponIcon" unique_id=1395371626]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+
+[node name="Kills" type="Label" parent="VBoxContainer/Header/HBoxContainer" unique_id=738649599]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "STATS_KILLS_LABEL"
+autowrap_mode = 2
+
+[node name="Damage" type="Label" parent="VBoxContainer/Header/HBoxContainer" unique_id=1519051012]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "STATS_DAMAGES_LABEL"
+autowrap_mode = 2
+
+[node name="Accuracy" type="Label" parent="VBoxContainer/Header/HBoxContainer" unique_id=390896604]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "STATS_ACCURACY_LABEL"
+autowrap_mode = 2
+
+[node name="CriticalAccuracy" type="Label" parent="VBoxContainer/Header/HBoxContainer" unique_id=1868011427]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "STATS_CRITICAL_LABEL"
+autowrap_mode = 2
+
+[node name="UiScoreBoardDetailEntry" parent="VBoxContainer" unique_id=1643186268 instance=ExtResource("1_3vy2t")]
+layout_mode = 2
+size_flags_horizontal = 0
