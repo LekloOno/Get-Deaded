@@ -41,7 +41,7 @@ public class AuthApi : ApiClient
             body,
             JsonOptions)!;
 
-        Session.Token = auth.Token;
+        Session.Token.Value = auth.Token;
 
         return true;
     }
@@ -72,7 +72,7 @@ public class AuthApi : ApiClient
             body,
             JsonOptions)!;
 
-        Session.Token = auth.Token;
+        Session.Token.Value = auth.Token;
 
         return true;
     }
