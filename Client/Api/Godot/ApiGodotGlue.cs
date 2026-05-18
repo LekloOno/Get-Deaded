@@ -35,6 +35,9 @@ public partial class ApiGodotGlue : Node
         EmitSignal(SignalName.LoginFinished, result.ToGdPayload());
     }
 
+    public void Logout() =>
+        Session.Logout();
+
     public async void Register(string username, string password)
     {
         AuthResult result = await AuthApi.RegisterAsync(username, password);

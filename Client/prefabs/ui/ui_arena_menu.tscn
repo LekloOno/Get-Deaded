@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://cxmv5fyashr30" path="res://script/ui/menu/contexts/video/ui_resolution_picker.gd" id="7_1fil8"]
 [ext_resource type="Script" uid="uid://bwag4h0e76hv" path="res://script/ui/menu/ui_num_input.gd" id="8_no00x"]
 [ext_resource type="Script" uid="uid://cfhceeirn71jg" path="res://script/ui/menu/contexts/video/ui_custom_resolution_button.gd" id="9_wigoj"]
+[ext_resource type="Script" uid="uid://dskx1sehclngr" path="res://script/ui/menu/contexts/login/UI_LoggingContext.cs" id="10_b5eqi"]
 [ext_resource type="Script" uid="uid://daf75j5tcox8d" path="res://script/ui/menu/contexts/ui_settings.gd" id="10_no00x"]
 [ext_resource type="Script" uid="uid://doqiy13nhuvvd" path="res://script/ui/menu/contexts/video/ui_strech_mode_picker.gd" id="10_rt8lt"]
 [ext_resource type="Script" uid="uid://2y4g11w6asxb" path="res://script/ui/menu/contexts/video/ui_render_scale_mode_picker.gd" id="11_vbkcm"]
@@ -35,7 +36,6 @@
 [ext_resource type="Script" uid="uid://n4rlm4y7h70e" path="res://script/ui/menu/contexts/difficulty/ui_difficulty_menu.gd" id="33_dy8xp"]
 [ext_resource type="Script" uid="uid://bo56grycv8c2e" path="res://script/ui/menu/contexts/difficulty/ui_difficulty_buttons_manager.gd" id="33_pbd3k"]
 [ext_resource type="Script" uid="uid://cm1ny1ykjv5hy" path="res://script/ui/menu/contexts/difficulty/UI_DifficultyButton.cs" id="33_vbkcm"]
-[ext_resource type="Script" uid="uid://bwnhka16k3cur" path="res://script/ui/menu/contexts/login/ui_loging_menu.gd" id="36_b5eqi"]
 [ext_resource type="Script" uid="uid://bxtxa4abi20xv" path="res://script/ui/menu/ui_confirm_dialog.gd" id="36_jnufj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rt8lt"]
@@ -71,6 +71,150 @@ bg_color = Color(1, 1, 1, 0.61960787)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lmot5"]
 
+[sub_resource type="GDScript" id="GDScript_yahvj"]
+script/source = "extends Control
+
+@export var menu: UI_EscapeMenu
+@export var confirm_dialog: UI_ConfirmDialog
+@export var confirm_button: Button
+@export var login_field: LineEdit
+@export var password_field: LineEdit
+@export var logged_user_label: Label
+@export var error_label: Label
+
+@export var login_text: String = \"LOG_IN_BUTTON\"
+@export var register_text: String = \"REGISTER_BUTTON\"
+
+enum LOGIN_MODE {
+	NONE,
+	LOGIN,
+	REGISTER,
+	CONFIRM,
+}
+
+var mode = LOGIN_MODE.NONE;
+var tried_mode = LOGIN_MODE.NONE;
+
+func _ready() -> void:
+	password_field.secret = true
+	confirm_button.pressed.connect(_on_confirm)
+	
+	login_field.text_submitted.connect(_on_submit)
+	password_field.text_submitted.connect(_on_submit)
+	
+	visibility_changed.connect(_on_visibility_changed)
+	
+	ApiGodotGlue.LoginFinished.connect(_on_login_finished)
+	ApiGodotGlue.RegisterFinished.connect(_on_register_finished)
+	
+func _on_visibility_changed():
+	if (is_visible_in_tree()):
+		return
+	if (mode == LOGIN_MODE.CONFIRM):
+		return
+		
+	mode = LOGIN_MODE.NONE
+	tried_mode = LOGIN_MODE.NONE
+		
+	
+func start_login():
+	menu.Enter(self)
+	mode = LOGIN_MODE.LOGIN
+	tried_mode = mode
+	update_ui()
+
+func start_register():
+	menu.Enter(self)
+	mode = LOGIN_MODE.REGISTER
+	tried_mode = mode
+	update_ui()
+	
+func update_ui():
+	confirm_button.text = button_text()
+	confirm_button.disabled = mode == LOGIN_MODE.NONE
+
+func button_text() -> String:
+	match mode:
+		LOGIN_MODE.LOGIN:
+			return \"LOG_IN_BUTTON\"
+		LOGIN_MODE.REGISTER, LOGIN_MODE.CONFIRM:
+			return \"REGISTER_BUTTON\"
+		_:
+			return \"...\"
+
+func _on_submit(_text: String):
+	_on_confirm()
+
+func _on_confirm():
+	match mode:
+		LOGIN_MODE.NONE:
+			pass
+		LOGIN_MODE.LOGIN:
+			login()
+		LOGIN_MODE.REGISTER, LOGIN_MODE.CONFIRM:
+			mode = LOGIN_MODE.CONFIRM
+			confirm_dialog.ask(\"CONFIRM_REGISTER_MESSAGE\", register)
+
+func login():
+	mode = LOGIN_MODE.NONE
+	update_ui()
+			
+	var username = login_field.text.strip_edges()
+	var password = password_field.text
+
+	if username.is_empty() or password.is_empty():
+		_show_error(\"Username or password missing\")
+		return
+
+	ApiGodotGlue.Login(username, password)
+
+
+func register():
+	mode = LOGIN_MODE.NONE
+	update_ui()
+	
+	var username = login_field.text.strip_edges()
+	var password = password_field.text
+
+	if username.is_empty() or password.is_empty():
+		_show_error(\"Username or password missing\")
+		return
+
+	ApiGodotGlue.Register(username, password)
+	
+func _on_login_finished(result: Dictionary) -> void:
+	_handle_auth_result(result, true)
+
+
+func _on_register_finished(result: Dictionary) -> void:
+	_handle_auth_result(result, false)
+
+
+func _handle_auth_result(result: Dictionary, is_login: bool) -> void:
+	var success: bool = result.get(\"success\", false)
+	var error: String = result.get(\"error\", \"Unknown\")
+	var message: String = result.get(\"message\", \"\")
+
+	password_field.text = \"\"
+	
+	if success:
+		error_label.text = \"\"
+		mode = LOGIN_MODE.NONE
+		logged_user_label.text = login_field.text
+		update_ui()
+		menu.ExitCurrent()
+	else:
+		_show_error(\"%s: %s\" % [error, message])
+
+func _show_error(msg: String) -> void:
+	error_label.text = \"ERROR: \" + msg
+	mode = tried_mode
+	update_ui()
+	
+func logout():
+	ApiGodotGlue.Logout()
+"
+
 [node name="ColorRect" type="ColorRect" unique_id=620824296 node_paths=PackedStringArray("_baseMenu")]
 anchors_preset = 15
 anchor_right = 1.0
@@ -100,7 +244,6 @@ volume_db = 2.0
 script = ExtResource("28_no00x")
 
 [node name="MainMenu" type="PanelContainer" parent="." unique_id=2094783053]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -154,14 +297,27 @@ size_flags_vertical = 8
 [node name="Login" type="Button" parent="MainMenu/Log" unique_id=1404385341]
 layout_mode = 2
 text = "LOG_IN_BUTTON"
+script = ExtResource("10_b5eqi")
 
 [node name="Register" type="Button" parent="MainMenu/Log" unique_id=1728633480]
 layout_mode = 2
 text = "REGISTER_BUTTON"
+script = ExtResource("10_b5eqi")
+
+[node name="PanelContainer" type="PanelContainer" parent="MainMenu/Log" unique_id=805806165]
+layout_mode = 2
+script = ExtResource("10_b5eqi")
+_logged = true
+
+[node name="LoggedUser" type="Label" parent="MainMenu/Log/PanelContainer" unique_id=747010864]
+layout_mode = 2
+text = "Pierre palmade"
 
 [node name="Logout" type="Button" parent="MainMenu/Log" unique_id=453923665]
 layout_mode = 2
 text = "LOG_OUT_BUTTON"
+script = ExtResource("10_b5eqi")
+_logged = true
 
 [node name="Settings" type="PanelContainer" parent="." unique_id=570347893]
 visible = false
@@ -2165,40 +2321,51 @@ text = "DIFFICULTY_EASY_BUTTON"
 script = ExtResource("33_vbkcm")
 _difficulty = 2
 
-[node name="LogingMenu" type="PanelContainer" parent="." unique_id=489348171 node_paths=PackedStringArray("menu", "confirm_dialog", "confirm_button", "login_field", "password_field")]
+[node name="LogingMenu" type="PanelContainer" parent="." unique_id=489348171 node_paths=PackedStringArray("menu", "confirm_dialog", "confirm_button", "login_field", "password_field", "logged_user_label", "error_label")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("36_b5eqi")
+script = SubResource("GDScript_yahvj")
 menu = NodePath("..")
 confirm_dialog = NodePath("../ConfirmDialog")
-confirm_button = NodePath("VBoxContainer/Confirm")
-login_field = NodePath("VBoxContainer/Login")
-password_field = NodePath("VBoxContainer/Password")
+confirm_button = NodePath("VBoxContainer2/VBoxContainer/Confirm")
+login_field = NodePath("VBoxContainer2/VBoxContainer/Login")
+password_field = NodePath("VBoxContainer2/VBoxContainer/Password")
+logged_user_label = NodePath("../MainMenu/Log/PanelContainer/LoggedUser")
+error_label = NodePath("VBoxContainer2/ErrorLabel")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="LogingMenu" unique_id=2081504540]
+[node name="VBoxContainer2" type="VBoxContainer" parent="LogingMenu" unique_id=2132392736]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Login" type="LineEdit" parent="LogingMenu/VBoxContainer" unique_id=816288192]
+[node name="VBoxContainer" type="VBoxContainer" parent="LogingMenu/VBoxContainer2" unique_id=2081504540]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Login" type="LineEdit" parent="LogingMenu/VBoxContainer2/VBoxContainer" unique_id=816288192]
 layout_mode = 2
 placeholder_text = "LOGIN_PLACEHOLDER_TEXT"
 context_menu_enabled = false
 emoji_menu_enabled = false
 
-[node name="Password" type="LineEdit" parent="LogingMenu/VBoxContainer" unique_id=1877571798]
+[node name="Password" type="LineEdit" parent="LogingMenu/VBoxContainer2/VBoxContainer" unique_id=1877571798]
 layout_mode = 2
 placeholder_text = "PASSWORD_PLACEHOLDER_TEXT"
 secret = true
 
-[node name="Confirm" type="Button" parent="LogingMenu/VBoxContainer" unique_id=444277580]
+[node name="Confirm" type="Button" parent="LogingMenu/VBoxContainer2/VBoxContainer" unique_id=444277580]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 text = "LOG_IN_BUTTON"
+
+[node name="ErrorLabel" type="Label" parent="LogingMenu/VBoxContainer2" unique_id=315791211]
+layout_mode = 2
 
 [node name="OfflineMenu" type="PanelContainer" parent="." unique_id=100958374]
 visible = false
@@ -2288,6 +2455,7 @@ text = "CANCEL_BUTTON"
 [connection signal="pressed" from="MainMenu/Main/Quit" to="Click" method="play"]
 [connection signal="pressed" from="MainMenu/Log/Login" to="LogingMenu" method="start_login"]
 [connection signal="pressed" from="MainMenu/Log/Register" to="LogingMenu" method="start_register"]
+[connection signal="pressed" from="MainMenu/Log/Logout" to="LogingMenu" method="logout"]
 [connection signal="hidden" from="Settings" to="Settings" method="_on_hidden"]
 [connection signal="tab_changed" from="Settings/TabContainer" to="LightClick" method="tab_interract"]
 [connection signal="tab_hovered" from="Settings/TabContainer" to="LightHover" method="tab_interract"]
