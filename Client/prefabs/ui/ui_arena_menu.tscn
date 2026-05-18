@@ -35,6 +35,7 @@
 [ext_resource type="Script" uid="uid://n4rlm4y7h70e" path="res://script/ui/menu/contexts/difficulty/ui_difficulty_menu.gd" id="33_dy8xp"]
 [ext_resource type="Script" uid="uid://bo56grycv8c2e" path="res://script/ui/menu/contexts/difficulty/ui_difficulty_buttons_manager.gd" id="33_pbd3k"]
 [ext_resource type="Script" uid="uid://cm1ny1ykjv5hy" path="res://script/ui/menu/contexts/difficulty/UI_DifficultyButton.cs" id="33_vbkcm"]
+[ext_resource type="Script" uid="uid://bwnhka16k3cur" path="res://script/ui/menu/contexts/login/ui_loging_menu.gd" id="36_b5eqi"]
 [ext_resource type="Script" uid="uid://bxtxa4abi20xv" path="res://script/ui/menu/ui_confirm_dialog.gd" id="36_jnufj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rt8lt"]
@@ -99,6 +100,7 @@ volume_db = 2.0
 script = ExtResource("28_no00x")
 
 [node name="MainMenu" type="PanelContainer" parent="." unique_id=2094783053]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2163,14 +2165,19 @@ text = "DIFFICULTY_EASY_BUTTON"
 script = ExtResource("33_vbkcm")
 _difficulty = 2
 
-[node name="LogingMenu" type="PanelContainer" parent="." unique_id=489348171]
-visible = false
+[node name="LogingMenu" type="PanelContainer" parent="." unique_id=489348171 node_paths=PackedStringArray("menu", "confirm_dialog", "confirm_button", "login_field", "password_field")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("36_b5eqi")
+menu = NodePath("..")
+confirm_dialog = NodePath("../ConfirmDialog")
+confirm_button = NodePath("VBoxContainer/Confirm")
+login_field = NodePath("VBoxContainer/Login")
+password_field = NodePath("VBoxContainer/Password")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="LogingMenu" unique_id=2081504540]
 layout_mode = 2
@@ -2180,20 +2187,18 @@ size_flags_vertical = 4
 [node name="Login" type="LineEdit" parent="LogingMenu/VBoxContainer" unique_id=816288192]
 layout_mode = 2
 placeholder_text = "LOGIN_PLACEHOLDER_TEXT"
+context_menu_enabled = false
+emoji_menu_enabled = false
 
 [node name="Password" type="LineEdit" parent="LogingMenu/VBoxContainer" unique_id=1877571798]
 layout_mode = 2
 placeholder_text = "PASSWORD_PLACEHOLDER_TEXT"
+secret = true
 
-[node name="Connect" type="Button" parent="LogingMenu/VBoxContainer" unique_id=444277580]
+[node name="Confirm" type="Button" parent="LogingMenu/VBoxContainer" unique_id=444277580]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 text = "LOG_IN_BUTTON"
-
-[node name="Register" type="Button" parent="LogingMenu/VBoxContainer" unique_id=970472043]
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-text = "REGISTER_BUTTON"
 
 [node name="OfflineMenu" type="PanelContainer" parent="." unique_id=100958374]
 visible = false
@@ -2234,7 +2239,7 @@ custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 text = "REGISTER_BUTTON"
 
-[node name="ConfirmDialog" type="PanelContainer" parent="." unique_id=1625242626]
+[node name="ConfirmDialog" type="PanelContainer" parent="." unique_id=1625242626 node_paths=PackedStringArray("menu", "label", "confirm_button", "cancel_button")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -2242,12 +2247,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("36_jnufj")
+menu = NodePath("..")
+label = NodePath("VBoxContainer/Label")
+confirm_button = NodePath("VBoxContainer/ConfirmButton")
+cancel_button = NodePath("VBoxContainer/CancelButton")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ConfirmDialog" unique_id=2138813368]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource("36_jnufj")
 
 [node name="Label" type="Label" parent="ConfirmDialog/VBoxContainer" unique_id=267849683]
 custom_minimum_size = Vector2(250, 0)
@@ -2277,6 +2286,8 @@ text = "CANCEL_BUTTON"
 [connection signal="pressed" from="MainMenu/Main/Surrender" to="Click" method="play"]
 [connection signal="mouse_entered" from="MainMenu/Main/Quit" to="Hover" method="play"]
 [connection signal="pressed" from="MainMenu/Main/Quit" to="Click" method="play"]
+[connection signal="pressed" from="MainMenu/Log/Login" to="LogingMenu" method="start_login"]
+[connection signal="pressed" from="MainMenu/Log/Register" to="LogingMenu" method="start_register"]
 [connection signal="hidden" from="Settings" to="Settings" method="_on_hidden"]
 [connection signal="tab_changed" from="Settings/TabContainer" to="LightClick" method="tab_interract"]
 [connection signal="tab_hovered" from="Settings/TabContainer" to="LightHover" method="tab_interract"]
