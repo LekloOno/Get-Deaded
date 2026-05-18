@@ -153,7 +153,11 @@ func _on_confirm():
 			login()
 		LOGIN_MODE.REGISTER, LOGIN_MODE.CONFIRM:
 			mode = LOGIN_MODE.CONFIRM
-			confirm_dialog.ask(\"CONFIRM_REGISTER_MESSAGE\", register)
+			var message = tr(\"CONFIRM_REGISTER_MESSAGE\").format({
+				\"username\": login_field.text
+			})
+			print(message)
+			confirm_dialog.ask(message, register)
 
 func login():
 	mode = LOGIN_MODE.NONE
@@ -244,6 +248,7 @@ volume_db = 2.0
 script = ExtResource("28_no00x")
 
 [node name="MainMenu" type="PanelContainer" parent="." unique_id=2094783053]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2322,7 +2327,6 @@ script = ExtResource("33_vbkcm")
 _difficulty = 2
 
 [node name="LogingMenu" type="PanelContainer" parent="." unique_id=489348171 node_paths=PackedStringArray("menu", "confirm_dialog", "confirm_button", "login_field", "password_field", "logged_user_label", "error_label")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

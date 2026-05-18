@@ -1,0 +1,7 @@
+key,en,fr
+LOG_IN_BUTTON,LOGIN,CONNEXION
+LOG_OUT_BUTTON,LOGOUT,DECONNEXION
+REGISTER_BUTTON,REGISTER,S'ENREGISTRER
+LOGIN_PLACEHOLDER_TEXT,login,identifiant
+PASSWORD_PLACEHOLDER_TEXT,password,mot de passe
+CONFIRM_REGISTER_MESSAGE,"Are you sure you want to register as {username} ?","Êtes vous sûr de vous enregistrer en tant que {username} ?"
