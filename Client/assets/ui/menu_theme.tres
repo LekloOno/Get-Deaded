@@ -1,5 +1,8 @@
 [gd_resource type="Theme" format=3 uid="uid://ddkca4fk8kto5"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0mmvv"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ppmnc"]
 content_margin_left = 20.0
 content_margin_top = 8.0
@@ -111,6 +114,8 @@ bg_color = Color(0, 0, 0, 0.38039216)
 bg_color = Color(0.18039216, 0.18039216, 0.18039216, 0)
 
 [resource]
+BlankPanel/base_type = &"PanelContainer"
+BlankPanel/styles/panel = SubResource("StyleBoxFlat_0mmvv")
 Button/colors/font_color = Color(1, 1, 1, 1)
 Button/styles/normal = SubResource("StyleBoxFlat_ppmnc")
 CheckBox/styles/focus = SubResource("StyleBoxEmpty_qvvi2")

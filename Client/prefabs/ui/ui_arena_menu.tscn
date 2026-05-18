@@ -36,9 +36,6 @@
 [ext_resource type="Script" uid="uid://bo56grycv8c2e" path="res://script/ui/menu/contexts/difficulty/ui_difficulty_buttons_manager.gd" id="33_pbd3k"]
 [ext_resource type="Script" uid="uid://cm1ny1ykjv5hy" path="res://script/ui/menu/contexts/difficulty/UI_DifficultyButton.cs" id="33_vbkcm"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wkf4o"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rt8lt"]
 content_margin_left = 5.0
 content_margin_top = 5.0
@@ -81,7 +78,7 @@ grow_vertical = 2
 theme = ExtResource("1_fb0qj")
 color = Color(0, 0, 0, 0.61300004)
 script = ExtResource("2_oanoi")
-_baseMenu = NodePath("VBoxContainer")
+_baseMenu = NodePath("MainMenu")
 
 [node name="Hover" type="AudioStreamPlayer" parent="." unique_id=1653450793]
 stream = ExtResource("25_vel4l")
@@ -100,50 +97,68 @@ stream = ExtResource("29_wigoj")
 volume_db = 2.0
 script = ExtResource("28_no00x")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1290205898]
-visible = false
+[node name="MainMenu" type="PanelContainer" parent="." unique_id=2094783053]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -57.0
-offset_top = -62.5
-offset_right = 57.0
-offset_bottom = 62.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.95, 0.95)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_type_variation = &"BlankPanel"
+
+[node name="Main" type="VBoxContainer" parent="MainMenu" unique_id=1290205898]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_constants/separation = 8
 
-[node name="Play" type="Button" parent="VBoxContainer" unique_id=804541913]
+[node name="Play" type="Button" parent="MainMenu/Main" unique_id=804541913]
 layout_mode = 2
 size_flags_vertical = 4
 text = "PLAY_BUTTON"
 
-[node name="Results" type="Button" parent="VBoxContainer" unique_id=1985240647]
+[node name="Results" type="Button" parent="MainMenu/Main" unique_id=1985240647]
 visible = false
 layout_mode = 2
 size_flags_vertical = 4
 text = "RESULTS_BUTTON"
 
-[node name="Settings" type="Button" parent="VBoxContainer" unique_id=1799708557 node_paths=PackedStringArray("settings_menu")]
+[node name="Settings" type="Button" parent="MainMenu/Main" unique_id=1799708557 node_paths=PackedStringArray("settings_menu")]
 layout_mode = 2
 size_flags_vertical = 4
 text = "SETTINGS_BUTTON"
 script = ExtResource("3_vyhg5")
-settings_menu = NodePath("../../Settings")
+settings_menu = NodePath("../../../Settings")
 
-[node name="Surrender" type="Button" parent="VBoxContainer" unique_id=2097849616]
+[node name="Surrender" type="Button" parent="MainMenu/Main" unique_id=2097849616]
 visible = false
 layout_mode = 2
 text = "SURRENDER_BUTTON"
 
-[node name="Quit" type="Button" parent="VBoxContainer" unique_id=311737932]
+[node name="Quit" type="Button" parent="MainMenu/Main" unique_id=311737932]
 layout_mode = 2
 size_flags_vertical = 4
 text = "QUIT_BUTTON"
 script = ExtResource("4_vel4l")
+
+[node name="Log" type="VBoxContainer" parent="MainMenu" unique_id=1337512209]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="Login" type="Button" parent="MainMenu/Log" unique_id=1404385341]
+layout_mode = 2
+text = "LOG_IN_BUTTON"
+
+[node name="Register" type="Button" parent="MainMenu/Log" unique_id=1728633480]
+layout_mode = 2
+text = "REGISTER_BUTTON"
+
+[node name="Logout" type="Button" parent="MainMenu/Log" unique_id=453923665]
+layout_mode = 2
+text = "LOG_OUT_BUTTON"
 
 [node name="Settings" type="PanelContainer" parent="." unique_id=570347893]
 visible = false
@@ -151,13 +166,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 45.0
-offset_top = 40.0
-offset_right = -70.0
-offset_bottom = -45.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_wkf4o")
+scale = Vector2(0.95, 0.95)
+pivot_offset_ratio = Vector2(0.5, 0.5)
 script = ExtResource("10_no00x")
 
 [node name="TabContainer" type="TabContainer" parent="Settings" unique_id=1418915951]
@@ -2097,6 +2109,7 @@ size_flags_vertical = 8
 text = "BACK_BUTTON"
 
 [node name="Difficulty" type="VBoxContainer" parent="." unique_id=340452415 node_paths=PackedStringArray("menu")]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2149,18 +2162,50 @@ text = "DIFFICULTY_EASY_BUTTON"
 script = ExtResource("33_vbkcm")
 _difficulty = 2
 
-[connection signal="mouse_entered" from="VBoxContainer/Play" to="Hover" method="play"]
-[connection signal="pressed" from="VBoxContainer/Play" to="Click" method="play"]
-[connection signal="pressed" from="VBoxContainer/Play" to="Difficulty" method="enter"]
-[connection signal="mouse_entered" from="VBoxContainer/Results" to="Hover" method="play"]
-[connection signal="pressed" from="VBoxContainer/Results" to="Click" method="play"]
-[connection signal="enter_settings" from="VBoxContainer/Settings" to="." method="Enter"]
-[connection signal="mouse_entered" from="VBoxContainer/Settings" to="Hover" method="play"]
-[connection signal="pressed" from="VBoxContainer/Settings" to="Click" method="play"]
-[connection signal="mouse_entered" from="VBoxContainer/Surrender" to="Hover" method="play"]
-[connection signal="pressed" from="VBoxContainer/Surrender" to="Click" method="play"]
-[connection signal="mouse_entered" from="VBoxContainer/Quit" to="Hover" method="play"]
-[connection signal="pressed" from="VBoxContainer/Quit" to="Click" method="play"]
+[node name="LogingMenu" type="PanelContainer" parent="." unique_id=489348171]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LogingMenu" unique_id=2081504540]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Login" type="LineEdit" parent="LogingMenu/VBoxContainer" unique_id=816288192]
+layout_mode = 2
+placeholder_text = "LOGIN_PLACEHOLDER_TEXT"
+
+[node name="Password" type="LineEdit" parent="LogingMenu/VBoxContainer" unique_id=1877571798]
+layout_mode = 2
+placeholder_text = "PASSWORD_PLACEHOLDER_TEXT"
+
+[node name="Connect" type="Button" parent="LogingMenu/VBoxContainer" unique_id=444277580]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "CONNECT_BUTTON"
+
+[node name="Register" type="Button" parent="LogingMenu/VBoxContainer" unique_id=970472043]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "REGISTER_BUTTON"
+
+[connection signal="mouse_entered" from="MainMenu/Main/Play" to="Hover" method="play"]
+[connection signal="pressed" from="MainMenu/Main/Play" to="Click" method="play"]
+[connection signal="pressed" from="MainMenu/Main/Play" to="Difficulty" method="enter"]
+[connection signal="mouse_entered" from="MainMenu/Main/Results" to="Hover" method="play"]
+[connection signal="pressed" from="MainMenu/Main/Results" to="Click" method="play"]
+[connection signal="enter_settings" from="MainMenu/Main/Settings" to="." method="Enter"]
+[connection signal="mouse_entered" from="MainMenu/Main/Settings" to="Hover" method="play"]
+[connection signal="pressed" from="MainMenu/Main/Settings" to="Click" method="play"]
+[connection signal="mouse_entered" from="MainMenu/Main/Surrender" to="Hover" method="play"]
+[connection signal="pressed" from="MainMenu/Main/Surrender" to="Click" method="play"]
+[connection signal="mouse_entered" from="MainMenu/Main/Quit" to="Hover" method="play"]
+[connection signal="pressed" from="MainMenu/Main/Quit" to="Click" method="play"]
 [connection signal="hidden" from="Settings" to="Settings" method="_on_hidden"]
 [connection signal="tab_changed" from="Settings/TabContainer" to="LightClick" method="tab_interract"]
 [connection signal="tab_hovered" from="Settings/TabContainer" to="LightHover" method="tab_interract"]
