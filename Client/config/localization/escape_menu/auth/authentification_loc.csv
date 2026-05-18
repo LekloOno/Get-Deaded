@@ -5,3 +5,4 @@ REGISTER_BUTTON,REGISTER,S'ENREGISTRER
 LOGIN_PLACEHOLDER_TEXT,login,identifiant
 PASSWORD_PLACEHOLDER_TEXT,password,mot de passe
 CONFIRM_REGISTER_MESSAGE,"Are you sure you want to register as {username} ?","Êtes vous sûr de vous enregistrer en tant que {username} ?"
+OFFLINE_WARNING_MESSAGE,"You are not logged in, your scores won't be submitted. You can keep playing offline, or login/register.","Vous n'êtes pas connecté, vos scores ne serons pas enregistrés. Vous pouvez continuer de jouer hors ligne, ou vous connecter/enregistrer."

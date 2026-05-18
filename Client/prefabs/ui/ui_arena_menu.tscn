@@ -250,6 +250,7 @@ volume_db = 2.0
 script = ExtResource("28_no00x")
 
 [node name="MainMenu" type="PanelContainer" parent="." unique_id=2094783053]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2381,7 +2382,6 @@ text = "LOG_IN_BUTTON"
 layout_mode = 2
 
 [node name="OfflineMenu" type="PanelContainer" parent="." unique_id=100958374 node_paths=PackedStringArray("_escapeMenu", "_difficultyMenu", "_offlineButton", "_loginButton", "_registerButton")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2391,9 +2391,9 @@ grow_vertical = 2
 script = ExtResource("38_o1fwb")
 _escapeMenu = NodePath("..")
 _difficultyMenu = NodePath("../Difficulty")
-_offlineButton = NodePath("VBoxContainer/Offline")
-_loginButton = NodePath("VBoxContainer/Login")
-_registerButton = NodePath("VBoxContainer/Register")
+_offlineButton = NodePath("VBoxContainer/VBoxContainer/Offline")
+_loginButton = NodePath("VBoxContainer/VBoxContainer/Login")
+_registerButton = NodePath("VBoxContainer/VBoxContainer/Register")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="OfflineMenu" unique_id=736991592]
 layout_mode = 2
@@ -2401,28 +2401,42 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="Label" type="Label" parent="OfflineMenu/VBoxContainer" unique_id=63157952]
-custom_minimum_size = Vector2(250, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
-text = "OFFLINE_WARNING_MESSAGE_TEXT"
+text = "OFFLINE_WARNING_MESSAGE"
+horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Offline" type="Button" parent="OfflineMenu/VBoxContainer" unique_id=813429327]
-custom_minimum_size = Vector2(250, 0)
+[node name="VBoxContainer" type="VBoxContainer" parent="OfflineMenu/VBoxContainer" unique_id=364810961]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Offline" type="Button" parent="OfflineMenu/VBoxContainer/VBoxContainer" unique_id=813429327]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "OFFLINE_BUTTON"
 
-[node name="Control" type="Control" parent="OfflineMenu/VBoxContainer" unique_id=1028271741]
-custom_minimum_size = Vector2(0, 20)
+[node name="Control" type="Control" parent="OfflineMenu/VBoxContainer/VBoxContainer" unique_id=1028271741]
+custom_minimum_size = Vector2(220, 20)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
-[node name="Login" type="Button" parent="OfflineMenu/VBoxContainer" unique_id=617021408]
-custom_minimum_size = Vector2(250, 0)
+[node name="Login" type="Button" parent="OfflineMenu/VBoxContainer/VBoxContainer" unique_id=617021408]
+custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "LOG_IN_BUTTON"
 
-[node name="Register" type="Button" parent="OfflineMenu/VBoxContainer" unique_id=56886769]
-custom_minimum_size = Vector2(250, 0)
+[node name="Register" type="Button" parent="OfflineMenu/VBoxContainer/VBoxContainer" unique_id=56886769]
+custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "REGISTER_BUTTON"
 
 [node name="ConfirmDialog" type="PanelContainer" parent="." unique_id=1625242626 node_paths=PackedStringArray("menu", "label", "confirm_button", "cancel_button")]
