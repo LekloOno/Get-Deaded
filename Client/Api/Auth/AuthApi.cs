@@ -1,7 +1,6 @@
 using System.Text;
 using System.Text.Json;
 using Shared.Auth;
-using Client.Auth;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System;

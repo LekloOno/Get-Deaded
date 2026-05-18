@@ -1,4 +1,4 @@
-namespace Client.Auth;
+namespace Client.Api.Auth;
 
 
 public static class Session

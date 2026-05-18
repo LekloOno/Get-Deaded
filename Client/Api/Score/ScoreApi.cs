@@ -1,7 +1,7 @@
 using System.Text;
 using System.Text.Json;
 using Shared.Scores;
-using Client.Auth;
+using Client.Api.Auth;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System.Net.Http.Headers;
