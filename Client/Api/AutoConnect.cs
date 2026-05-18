@@ -1,4 +1,5 @@
 using Godot;
+using Client.Api.Auth;
 
 namespace Client.Api;
 
