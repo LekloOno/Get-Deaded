@@ -18,7 +18,7 @@ public class WeaponStatConfiguration : IEntityTypeConfiguration<WeaponStat>
             .WithMany(x => x.WeaponStats)
             .HasForeignKey(x => x.WeaponKey);
 
-        builder.Property(x => x.Accuracy).IsRequired();
-        builder.Property(x => x.CriticalAccuracy).IsRequired();
+        builder.Property(x => x.Accuracy).IsRequired(false);
+        builder.Property(x => x.CriticalAccuracy).IsRequired(false);
     }
 }

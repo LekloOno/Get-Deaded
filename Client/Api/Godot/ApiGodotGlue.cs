@@ -42,6 +42,11 @@ public partial class ApiGodotGlue : Node
         EmitSignal(SignalName.RegisterFinished, result.ToGdPayload());
     }
 
-    public async Task<ScoreResult> SubmitScore(SubmitScoreRequest score) =>
-        await ScoreApi.SubmitScoreAsync(score);
+    public async Task<ScoreResult> SubmitScore(SubmitScoreRequest score)
+    {
+        
+        var a = await ScoreApi.SubmitScoreAsync(score);
+        GD.Print(a.Message);
+        return a;
+    }
 }

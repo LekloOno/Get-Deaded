@@ -88,7 +88,7 @@ public class STAT_Weapon: IDisposable
             WeaponData.Id,
             Damage,
             Kills,
-            (float) Shots / (float) Hits,
-            Mathf.Round((float) LocalHits[(int)GC_BodyPart.Head] / Hits)
+            Shots == 0 ? null : (float)Hits / Shots,
+            Hits == 0 ? null : Mathf.Round((float) LocalHits[(int)GC_BodyPart.Head] / Hits)
         );
 }

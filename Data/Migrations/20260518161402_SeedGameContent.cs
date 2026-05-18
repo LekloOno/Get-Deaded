@@ -83,8 +83,8 @@ namespace Data.Migrations
                     ScoreId = table.Column<Guid>(type: "uuid", nullable: false),
                     Damage = table.Column<float>(type: "real", nullable: false),
                     Kills = table.Column<int>(type: "integer", nullable: false),
-                    Accuracy = table.Column<float>(type: "real", nullable: false),
-                    CriticalAccuracy = table.Column<float>(type: "real", nullable: false)
+                    Accuracy = table.Column<float>(type: "real", nullable: true),
+                    CriticalAccuracy = table.Column<float>(type: "real", nullable: true)
                 },
                 constraints: table =>
                 {

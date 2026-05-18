@@ -12,6 +12,6 @@ public class WeaponStat
 
     public float Damage { get; set; }
     public int Kills { get; set; }
-    public float Accuracy { get; set; }
-    public float CriticalAccuracy { get; set; }
+    public float? Accuracy { get; set; }
+    public float? CriticalAccuracy { get; set; }
 }

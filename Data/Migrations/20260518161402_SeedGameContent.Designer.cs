@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Data.Migrations
 {
     [DbContext(typeof(GameDbContext))]
-    [Migration("20260517232451_SeedGameContent")]
+    [Migration("20260518161402_SeedGameContent")]
     partial class SeedGameContent
     {
         /// <inheritdoc />
@@ -135,10 +135,10 @@ namespace Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<float>("Accuracy")
+                    b.Property<float?>("Accuracy")
                         .HasColumnType("real");
 
-                    b.Property<float>("CriticalAccuracy")
+                    b.Property<float?>("CriticalAccuracy")
                         .HasColumnType("real");
 
                     b.Property<float>("Damage")
