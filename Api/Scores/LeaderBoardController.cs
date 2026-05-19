@@ -1,15 +1,8 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Data.Db;
-using Data.Entities;
 using Shared.Scores;
-using System.Security.Claims;
-using System.IdentityModel.Tokens.Jwt;
-
 namespace Api.Scores;
 
-[Route("api/scores")]
 public partial class ScoresController : ControllerBase
 {
     [HttpGet("leaderboard")]

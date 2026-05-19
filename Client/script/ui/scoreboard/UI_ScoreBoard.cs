@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
+using Client.Api;
 using Client.Api.Godot;
-using Client.Api.Score;
 using Godot;
 using Shared.Scores;
 
@@ -13,29 +12,33 @@ public partial class UI_ScoreBoard : Control
     [Export] private UI_ScoreBoardEntry _entryTemplate;
     [Export] private Control _container;
 
+    private List<UI_ScoreBoardEntry> _entries = [];
+
     public bool Initialized {get; private set;} = false;
 
     public override void _Ready()
     {
-        _container.RemoveChild(_container);
-        Clean();
+        _entryTemplate.Visible = false;
+        _entryTemplate.SetProcess(false);
     }
 
-    public async Task InitializeAsync(int Rank = 1)
+    public async Task InitializeAsync(E_EnemyDifficulty difficulty, int Rank = 1)
     {
         if (Initialized)
             return;
 
         Initialized = true;
         
-        List<LeaderboardRowDto>? rows = await ApiGodotGlue.Instance.ScoreApi.GetLeaderboardAsync(
+        ApiResult<List<LeaderboardRowDto>> result = await ApiGodotGlue.Instance.ScoreApi.GetLeaderboardAsync(
             "dust_pit",
-            (int)E_DifficultyServer.Difficulty,
+            (int)difficulty,
             Rank
         );
         
-        if (rows != null)
-            CreateEntries(rows);
+        if (result.Success && result.Data != null)
+            CreateEntries(result.Data);
+        else
+            GD.Print(result.ErrorMessage);
     }
 
     private void CreateEntries(List<LeaderboardRowDto> rows)
@@ -43,15 +46,23 @@ public partial class UI_ScoreBoard : Control
         foreach (LeaderboardRowDto row in rows)
         {
             UI_ScoreBoardEntry entry = (UI_ScoreBoardEntry) _entryTemplate.Duplicate();
+            entry.Visible = true;
+            entry.SetProcess(true);
             entry.Initialize(row);
             _container.AddChild(entry);
+            _entries.Add(entry);
         }
     }
 
     public void Clean()
     {
-        foreach (Node child in _container.GetChildren())
-            child.QueueFree();
+        foreach (UI_ScoreBoardEntry entry in _entries)
+        {
+            entry.Clean();
+            entry.QueueFree();
+        }
+
+        _entries.Clear();
         
         Initialized = false;
     }

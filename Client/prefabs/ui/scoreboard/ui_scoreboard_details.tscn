@@ -5,17 +5,16 @@
 [ext_resource type="Script" uid="uid://pbjmnbhugg0x" path="res://script/ui/scoreboard/UI_ScoreBoardDetails.cs" id="2_g4xpj"]
 
 [node name="UiScoreboardDetails" type="PanelContainer" unique_id=832307226 node_paths=PackedStringArray("_template", "_container")]
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
-offset_bottom = 64.0
+anchor_bottom = 1.0
 grow_horizontal = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
+grow_vertical = 2
 theme = ExtResource("1_fjrko")
 theme_type_variation = &"DetailsPanel"
 script = ExtResource("2_g4xpj")
 _template = NodePath("VBoxContainer/DetailsContainer/UiScoreBoardDetailEntry")
-_container = NodePath("VBoxContainer/DetailsContainer")
+_container = NodePath("VBoxContainer")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=228440819]
 layout_mode = 2
@@ -23,6 +22,7 @@ layout_mode = 2
 [node name="Header" type="PanelContainer" parent="VBoxContainer" unique_id=1704363336]
 layout_mode = 2
 size_flags_horizontal = 0
+size_flags_vertical = 0
 theme = ExtResource("1_fjrko")
 theme_type_variation = &"EntryPanel"
 
@@ -34,36 +34,41 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Control" type="Control" parent="VBoxContainer/Header/HBoxContainer/WeaponIcon" unique_id=1395371626]
-custom_minimum_size = Vector2(64, 0)
+custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 
 [node name="Kills" type="Label" parent="VBoxContainer/Header/HBoxContainer" unique_id=738649599]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
+theme_type_variation = &"DetailsLabel"
 text = "STATS_KILLS_LABEL"
-autowrap_mode = 2
+clip_text = true
 
 [node name="Damage" type="Label" parent="VBoxContainer/Header/HBoxContainer" unique_id=1519051012]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
+theme_type_variation = &"DetailsLabel"
 text = "STATS_DAMAGES_LABEL"
-autowrap_mode = 2
+clip_text = true
 
 [node name="Accuracy" type="Label" parent="VBoxContainer/Header/HBoxContainer" unique_id=390896604]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+theme_type_variation = &"DetailsLabel"
 text = "STATS_ACCURACY_LABEL"
-autowrap_mode = 2
+clip_text = true
 
 [node name="CriticalAccuracy" type="Label" parent="VBoxContainer/Header/HBoxContainer" unique_id=1868011427]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+theme_type_variation = &"DetailsLabel"
 text = "STATS_CRITICAL_LABEL"
-autowrap_mode = 2
+clip_text = true
 
 [node name="DetailsContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=265854832]
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="UiScoreBoardDetailEntry" parent="VBoxContainer/DetailsContainer" unique_id=1643186268 instance=ExtResource("1_3vy2t")]
+[node name="UiScoreBoardDetailEntry" parent="VBoxContainer/DetailsContainer" unique_id=1845340979 instance=ExtResource("1_3vy2t")]
 layout_mode = 2
 size_flags_horizontal = 0

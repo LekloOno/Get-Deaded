@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Godot;
 using Shared.Scores;
 
@@ -6,19 +7,25 @@ public partial class UI_ScoreBoardDetails : Control
 {
     // Should be the only child of _container.
     [Export] private UI_ScoreBoardDetailsEntry _template;
-    [Export] private Control _container;
+    [Export] private Container _container;
+
+    private List<UI_ScoreBoardDetailsEntry> _entries = [];
 
     public bool Initialized {get; private set;} = false;
 
     public override void _Ready()
     {
-        _container.RemoveChild(_container);
-        Clean();
+        _template.Visible = false;
+        _template.SetProcess(false);
     }
 
     public void Initialize(ScoreDto scoreDetails)
     {
-        Clean();
+        if (Initialized)
+            return;
+
+        Initialized = true;
+
         CreateEntries(scoreDetails);
     }
 
@@ -28,13 +35,41 @@ public partial class UI_ScoreBoardDetails : Control
         {
             UI_ScoreBoardDetailsEntry detailsEntry = (UI_ScoreBoardDetailsEntry) _template.Duplicate();
             detailsEntry.Initialize(weapon);
+            
+            detailsEntry.Visible = true;
+            detailsEntry.SetProcess(true);
+            detailsEntry.SizeFlagsHorizontal = Control.SizeFlags.Fill | Control.SizeFlags.Expand;
+            detailsEntry.SizeFlagsVertical = Control.SizeFlags.Fill | Control.SizeFlags.Expand;
+            detailsEntry.CustomMinimumSize = new Vector2(200, 40);
+            detailsEntry.Size = new Vector2(200, 40);
+            detailsEntry.CallDeferred(Container.MethodName.QueueSort);
+            _container.QueueSort();
+            _container.QueueRedraw();
+
+            GD.Print(detailsEntry.GetRect());
+
+            GD.Print("_container type: ", _container.GetType());
+            GD.Print("container rect: ", _container.GetRect());
+            GD.Print("container clip: ", _container.ClipContents);
+
+
+
+            _entries.Add(detailsEntry);
             _container.AddChild(detailsEntry);
+            GD.Print("et oui " + detailsEntry.Visible);
+
+            GD.Print("entry global pos: ", detailsEntry.GlobalPosition);
+            GD.Print("entry pos: ", detailsEntry.Position);
         }
     }
 
     public void Clean()
     {
-        foreach (Node child in _container.GetChildren())
-            child.QueueFree();
+        foreach (UI_ScoreBoardDetailsEntry entry in _entries)
+            entry.QueueFree();
+
+        _entries.Clear();
+
+        Initialized = false;
     }
 }

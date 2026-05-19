@@ -1,4 +1,5 @@
 using System;
+using Client.Api;
 using Client.Api.Godot;
 using Godot;
 using Shared.Scores;
@@ -6,7 +7,8 @@ using Shared.Scores;
 [GlobalClass]
 public partial class UI_ScoreBoardEntry : Control
 {
-    [Export] private UI_ScoreBoardDetails _detailsTemplate;
+    [Export] private UI_ScoreBoardDetails _details;
+    [Export] private Control _container;
     [Export] private Label _ranking;
     [Export] private Label _userName;
     [Export] private Label _time;
@@ -16,11 +18,10 @@ public partial class UI_ScoreBoardEntry : Control
     [Export] private Label _accuracy;
 
     private Guid _scoreId;
-    private UI_ScoreBoardDetails _details;
 
     public override void _Ready()
     {
-        _detailsTemplate.GetParent().RemoveChild(_detailsTemplate);
+        _details.Visible = false;
     }
 
     public override void _GuiInput(InputEvent @event)
@@ -32,25 +33,25 @@ public partial class UI_ScoreBoardEntry : Control
 
     private async void GetDetails()
     {
-        if (_details != null)
+        if (_details.Initialized)
         {
             _details.Visible = !_details.Visible;
             return;
         }
 
-        ScoreDto? scoreDetails = await ApiGodotGlue.Instance.ScoreApi.GetScoreDetailAsync(_scoreId);
-        if (scoreDetails == null)
+        ApiResult<ScoreDto> result = await ApiGodotGlue.Instance.ScoreApi.GetScoreDetailAsync(_scoreId);
+
+        if (result == null)
             return;
 
-        _details = (UI_ScoreBoardDetails) _detailsTemplate.Duplicate();
-        _details.Initialize(scoreDetails);
-        
+        if (!result.Success || result.Data == null)
+        {
+            GD.Print(result.ErrorMessage);
+            return;
+        }
 
-        int idx = GetIndex();
-        Node parent = GetParent();
-
-        parent.AddChild(_details);
-        parent.MoveChild(_details, idx + 1);
+        _details.Visible = true;
+        _details.Initialize(result.Data);
     }
 
     public void Initialize(LeaderboardRowDto scoreRow)
@@ -70,6 +71,6 @@ public partial class UI_ScoreBoardEntry : Control
 
     public void Clean()
     {
-        _details?.QueueFree();
+        _details?.Clean();
     }
 }

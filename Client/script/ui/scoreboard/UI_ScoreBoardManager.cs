@@ -3,26 +3,33 @@ using Client.Api.Score;
 using Godot;
 
 [GlobalClass]
-public partial class UI_ScoreBoardManager : Control
+public partial class UI_ScoreBoardManager : TabContainer
 {
-    [Export] private TabContainer _difficultiesTab;
     [Export] private UI_ScoreBoard _easyBoard;
     [Export] private UI_ScoreBoard _normalBoard;
     [Export] private UI_ScoreBoard _hardBoard;
 
     public override void _Ready()
     {
-        _difficultiesTab.TabChanged += OnTabChanged;
+        TabChanged += OnTabChanged;
     }
 
-    public async Task Init(ScoreResult result)
+    public void Init()
+    {
+        Init(null);
+    }
+
+    public async Task Init(ScoreResult? result)
     {
         _easyBoard.Clean();
         _normalBoard.Clean();
         _hardBoard.Clean();
 
-        UI_ScoreBoard initBoard = GetBoard(E_DifficultyServer.Difficulty);
-        await initBoard.InitializeAsync(result.Rank ?? 1);
+        GD.Print(E_DifficultyServer.Difficulty);
+
+        E_EnemyDifficulty difficulty = E_DifficultyServer.Difficulty;
+        UI_ScoreBoard initBoard = GetBoard(difficulty);
+        await initBoard.InitializeAsync(difficulty, result?.Rank ?? 1);
     }
 
     private UI_ScoreBoard GetBoard(E_EnemyDifficulty difficulty)
@@ -38,8 +45,9 @@ public partial class UI_ScoreBoardManager : Control
 
     private void OnTabChanged(long tab)
     {
+        GD.Print("change to " + tab);
         E_EnemyDifficulty difficulty = (E_EnemyDifficulty)tab;
 
-        GetBoard(difficulty).InitializeAsync();
+        GetBoard(difficulty).InitializeAsync(difficulty);
     }
 }

@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://b73bupbbmrl8h" path="res://script/ui/menu/contexts/video/ui_display_mode_picker.gd" id="5_e0f17"]
 [ext_resource type="Script" uid="uid://b2joxofvmnjhi" path="res://script/ui/menu/contexts/ui_more_button.gd" id="6_xgshk"]
 [ext_resource type="Script" uid="uid://cxmv5fyashr30" path="res://script/ui/menu/contexts/video/ui_resolution_picker.gd" id="7_1fil8"]
+[ext_resource type="Script" uid="uid://dgjvjal7yr0r6" path="res://script/ui/scoreboard/ui_scoreboard_button.gd" id="8_4n7it"]
 [ext_resource type="Script" uid="uid://c42mlqwha3sf7" path="res://script/ui/menu/contexts/login/UI_OfflineWarningGuard.cs" id="8_8es5r"]
 [ext_resource type="Script" uid="uid://bwag4h0e76hv" path="res://script/ui/menu/ui_num_input.gd" id="8_no00x"]
 [ext_resource type="Script" uid="uid://cfhceeirn71jg" path="res://script/ui/menu/contexts/video/ui_custom_resolution_button.gd" id="9_wigoj"]
@@ -39,6 +40,7 @@
 [ext_resource type="Script" uid="uid://cm1ny1ykjv5hy" path="res://script/ui/menu/contexts/difficulty/UI_DifficultyButton.cs" id="33_vbkcm"]
 [ext_resource type="Script" uid="uid://bxtxa4abi20xv" path="res://script/ui/menu/ui_confirm_dialog.gd" id="36_jnufj"]
 [ext_resource type="Script" uid="uid://cgieu4ory4anu" path="res://script/ui/menu/contexts/login/UI_OfflineWarning.cs" id="38_o1fwb"]
+[ext_resource type="PackedScene" uid="uid://xo68a11s7vj0" path="res://prefabs/ui/scoreboard/ui_scoreboard_manager.tscn" id="39_o1fwb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rt8lt"]
 content_margin_left = 5.0
@@ -250,7 +252,6 @@ volume_db = 2.0
 script = ExtResource("28_no00x")
 
 [node name="MainMenu" type="PanelContainer" parent="." unique_id=2094783053]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -277,6 +278,13 @@ visible = false
 layout_mode = 2
 size_flags_vertical = 4
 text = "RESULTS_BUTTON"
+
+[node name="ScoreBoard" type="Button" parent="MainMenu/Main" unique_id=557120396 node_paths=PackedStringArray("menu", "score_board")]
+layout_mode = 2
+text = "SCOREBOARD_BUTTON"
+script = ExtResource("8_4n7it")
+menu = NodePath("../../..")
+score_board = NodePath("../../../UiScoreboard")
 
 [node name="Settings" type="Button" parent="MainMenu/Main" unique_id=1799708557 node_paths=PackedStringArray("settings_menu")]
 layout_mode = 2
@@ -2382,6 +2390,7 @@ text = "LOG_IN_BUTTON"
 layout_mode = 2
 
 [node name="OfflineMenu" type="PanelContainer" parent="." unique_id=100958374 node_paths=PackedStringArray("_escapeMenu", "_difficultyMenu", "_offlineButton", "_loginButton", "_registerButton")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2438,6 +2447,10 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "REGISTER_BUTTON"
+
+[node name="UiScoreboard" parent="." unique_id=722862887 instance=ExtResource("39_o1fwb")]
+visible = false
+layout_mode = 0
 
 [node name="ConfirmDialog" type="PanelContainer" parent="." unique_id=1625242626 node_paths=PackedStringArray("menu", "label", "confirm_button", "cancel_button")]
 visible = false

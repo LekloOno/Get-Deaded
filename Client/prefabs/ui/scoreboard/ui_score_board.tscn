@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://iardi3jeijcc" path="res://script/ui/scoreboard/UI_ScoreBoard.cs" id="1_0onr6"]
 [ext_resource type="Theme" uid="uid://1b5txn2enhg6" path="res://assets/ui/scoreboard_theme.tres" id="2_lx2ug"]
 [ext_resource type="PackedScene" uid="uid://cjcw5h2phmx1d" path="res://prefabs/ui/scoreboard/ui_scoreboard_entry.tscn" id="3_mv7kc"]
-[ext_resource type="PackedScene" uid="uid://bgprfkb5sbil2" path="res://prefabs/ui/scoreboard/ui_scoreboard_details.tscn" id="4_14cbf"]
 
 [node name="UiScoreBoard" type="PanelContainer" unique_id=1179865850 node_paths=PackedStringArray("_entryTemplate", "_container")]
 anchors_preset = 15
@@ -33,31 +32,31 @@ theme = ExtResource("2_lx2ug")
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 text = "STATS_RANK_LABEL"
-autowrap_mode = 2
+clip_text = true
 
 [node name="UserName" type="Label" parent="VBoxContainer/Header/UiScoreboardEntry" unique_id=1819019997]
 custom_minimum_size = Vector2(280, 0)
 layout_mode = 2
 text = "STATS_USERNAME_LABEL"
-autowrap_mode = 2
+clip_text = true
 
 [node name="Time" type="Label" parent="VBoxContainer/Header/UiScoreboardEntry" unique_id=653747880]
 custom_minimum_size = Vector2(65, 0)
 layout_mode = 2
 text = "STATS_TIME_LABEL"
-autowrap_mode = 2
+clip_text = true
 
 [node name="Kills" type="Label" parent="VBoxContainer/Header/UiScoreboardEntry" unique_id=2037715455]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 text = "STATS_KILLS_LABEL"
-autowrap_mode = 2
+clip_text = true
 
 [node name="Damage" type="Label" parent="VBoxContainer/Header/UiScoreboardEntry" unique_id=20706637]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 text = "STATS_DAMAGES_LABEL"
-autowrap_mode = 2
+clip_text = true
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer/Header/UiScoreboardEntry" unique_id=651853841]
 layout_mode = 2
@@ -67,21 +66,16 @@ stretch_mode = 0
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 text = "STATS_BEST_WEAPON_LABEL"
-autowrap_mode = 2
+clip_text = true
 
 [node name="Accuracy" type="Label" parent="VBoxContainer/Header/UiScoreboardEntry" unique_id=108618987]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-text = "STATS_CRITICAL_LABEL"
-autowrap_mode = 2
+text = "STATS_ACCURACY_LABEL"
+clip_text = true
 
 [node name="EasyEntriesContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=840263538]
 layout_mode = 2
 
-[node name="UiScoreboardEntry" parent="VBoxContainer/EasyEntriesContainer" unique_id=529901829 node_paths=PackedStringArray("_detailsTemplate") instance=ExtResource("3_mv7kc")]
+[node name="UiScoreboardEntry" parent="VBoxContainer/EasyEntriesContainer" unique_id=529901829 instance=ExtResource("3_mv7kc")]
 layout_mode = 2
-_detailsTemplate = NodePath("../UiScoreboardDetails")
-
-[node name="UiScoreboardDetails" parent="VBoxContainer/EasyEntriesContainer" unique_id=832307226 instance=ExtResource("4_14cbf")]
-layout_mode = 2
-size_flags_horizontal = 1
