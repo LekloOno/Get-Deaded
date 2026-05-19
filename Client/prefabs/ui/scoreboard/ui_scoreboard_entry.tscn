@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://b4n8qmjwatmaw" path="res://script/ui/scoreboard/ui_row_hover.gd" id="3_o8nyi"]
 [ext_resource type="PackedScene" uid="uid://bgprfkb5sbil2" path="res://prefabs/ui/scoreboard/ui_scoreboard_details.tscn" id="4_j3ith"]
 
-[node name="PanelContainer" type="PanelContainer" unique_id=529901829 node_paths=PackedStringArray("_details", "_container", "_ranking", "_userName", "_time", "_kills", "_damage", "_weapon", "_accuracy")]
+[node name="PanelContainer" type="PanelContainer" unique_id=529901829 node_paths=PackedStringArray("_details", "_container", "_ranking", "_userName", "_score", "_time", "_kills", "_damage", "_weapon", "_accuracy")]
 offset_right = 943.0
 offset_bottom = 64.0
 theme = ExtResource("1_rt4d8")
@@ -16,6 +16,7 @@ _details = NodePath("VBoxContainer/UiScoreboardDetails")
 _container = NodePath("VBoxContainer/UiScoreboardDetails")
 _ranking = NodePath("VBoxContainer/PanelContainer/UiScoreboardEntry/Ranking")
 _userName = NodePath("VBoxContainer/PanelContainer/UiScoreboardEntry/UserName")
+_score = NodePath("VBoxContainer/PanelContainer/UiScoreboardEntry/Score")
 _time = NodePath("VBoxContainer/PanelContainer/UiScoreboardEntry/Time")
 _kills = NodePath("VBoxContainer/PanelContainer/UiScoreboardEntry/Kills")
 _damage = NodePath("VBoxContainer/PanelContainer/UiScoreboardEntry/Damage")
@@ -48,6 +49,12 @@ clip_text = true
 custom_minimum_size = Vector2(280, 0)
 layout_mode = 2
 text = "user_name"
+clip_text = true
+
+[node name="Score" type="Label" parent="VBoxContainer/PanelContainer/UiScoreboardEntry" unique_id=1696727076]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+text = "00"
 clip_text = true
 
 [node name="Time" type="Label" parent="VBoxContainer/PanelContainer/UiScoreboardEntry" unique_id=1779750077]

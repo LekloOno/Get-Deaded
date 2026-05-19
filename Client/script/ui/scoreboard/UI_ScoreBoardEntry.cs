@@ -11,6 +11,7 @@ public partial class UI_ScoreBoardEntry : Control
     [Export] private Control _container;
     [Export] private Label _ranking;
     [Export] private Label _userName;
+    [Export] private Label _score;
     [Export] private Label _time;
     [Export] private Label _kills;
     [Export] private Label _damage;
@@ -60,6 +61,7 @@ public partial class UI_ScoreBoardEntry : Control
 
         _ranking.Text = scoreRow.Rank.ToString();
         _userName.Text = scoreRow.Player;
+        _score.Text = scoreRow.Score.ToString();
         _time.Text = Mathf.RoundToInt((float) scoreRow.TimeMs / 1000).ToString();
         _kills.Text = scoreRow.Kills.ToString();
         _damage.Text = Mathf.RoundToInt(scoreRow.Damage).ToString();
