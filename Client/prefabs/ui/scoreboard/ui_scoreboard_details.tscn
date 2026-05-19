@@ -57,6 +57,9 @@ layout_mode = 2
 text = "STATS_CRITICAL_LABEL"
 autowrap_mode = 2
 
-[node name="UiScoreBoardDetailEntry" parent="VBoxContainer" unique_id=1643186268 instance=ExtResource("1_3vy2t")]
+[node name="DetailsContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=265854832]
+layout_mode = 2
+
+[node name="UiScoreBoardDetailEntry" parent="VBoxContainer/DetailsContainer" unique_id=1643186268 instance=ExtResource("1_3vy2t")]
 layout_mode = 2
 size_flags_horizontal = 0

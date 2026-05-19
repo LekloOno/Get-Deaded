@@ -84,10 +84,13 @@ layout_mode = 2
 text = "STATS_CRITICAL_LABEL"
 autowrap_mode = 2
 
-[node name="UiScoreboardEntry" parent="STATS_EASY_TAB/PanelContainer/VBoxContainer" unique_id=1572654805 instance=ExtResource("2_m3jme")]
+[node name="EasyEntriesContainer" type="VBoxContainer" parent="STATS_EASY_TAB/PanelContainer/VBoxContainer" unique_id=415705066]
 layout_mode = 2
 
-[node name="UiScoreboardDetails" parent="STATS_EASY_TAB/PanelContainer/VBoxContainer" unique_id=832307226 instance=ExtResource("3_m3jme")]
+[node name="UiScoreboardEntry" parent="STATS_EASY_TAB/PanelContainer/VBoxContainer/EasyEntriesContainer" unique_id=1572654805 instance=ExtResource("2_m3jme")]
+layout_mode = 2
+
+[node name="UiScoreboardDetails" parent="STATS_EASY_TAB/PanelContainer/VBoxContainer/EasyEntriesContainer" unique_id=832307226 instance=ExtResource("3_m3jme")]
 layout_mode = 2
 size_flags_horizontal = 1
 
@@ -164,6 +167,9 @@ layout_mode = 2
 text = "STATS_CRITICAL_LABEL"
 autowrap_mode = 2
 
+[node name="NormalEntriesContainer" type="VBoxContainer" parent="STATS_NORMAL_TAB/PanelContainer/VBoxContainer" unique_id=357832099]
+layout_mode = 2
+
 [node name="STATS_HARD_TAB" type="TabBar" parent="." unique_id=140533117]
 visible = false
 layout_mode = 2
@@ -236,3 +242,6 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "STATS_CRITICAL_LABEL"
 autowrap_mode = 2
+
+[node name="HardEntriesContainer" type="VBoxContainer" parent="STATS_HARD_TAB/PanelContainer/VBoxContainer" unique_id=1114486862]
+layout_mode = 2

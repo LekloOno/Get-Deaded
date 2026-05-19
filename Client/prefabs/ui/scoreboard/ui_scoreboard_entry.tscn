@@ -1,13 +1,22 @@
 [gd_scene format=3 uid="uid://cjcw5h2phmx1d"]
 
 [ext_resource type="Theme" uid="uid://1b5txn2enhg6" path="res://assets/ui/scoreboard_theme.tres" id="1_rt4d8"]
+[ext_resource type="Script" uid="uid://dp7tuqfpwj2j7" path="res://script/ui/scoreboard/UI_ScoreBoardEntry.cs" id="2_i3djf"]
 [ext_resource type="Texture2D" uid="uid://oc0nc17g5r1t" path="res://assets/sprites/weapons/brrtv3.png" id="2_rt4d8"]
 
-[node name="PanelContainer" type="PanelContainer" unique_id=529901829]
+[node name="PanelContainer" type="PanelContainer" unique_id=529901829 node_paths=PackedStringArray("_ranking", "_userName", "_time", "_kills", "_damage", "_weapon", "_accuracy")]
 offset_right = 943.0
 offset_bottom = 64.0
 theme = ExtResource("1_rt4d8")
 theme_type_variation = &"EntryPanel"
+script = ExtResource("2_i3djf")
+_ranking = NodePath("UiScoreboardEntry/Ranking")
+_userName = NodePath("UiScoreboardEntry/UserName")
+_time = NodePath("UiScoreboardEntry/Time")
+_kills = NodePath("UiScoreboardEntry/Kills")
+_damage = NodePath("UiScoreboardEntry/Damage")
+_weapon = NodePath("UiScoreboardEntry/BestWeapon/TextureRect")
+_accuracy = NodePath("UiScoreboardEntry/Accuracy")
 
 [node name="UiScoreboardEntry" type="HBoxContainer" parent="." unique_id=188828960]
 layout_mode = 2
