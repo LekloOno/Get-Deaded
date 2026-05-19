@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cjcw5h2phmx1d" path="res://prefabs/ui/scoreboard/ui_scoreboard_entry.tscn" id="2_m3jme"]
 [ext_resource type="PackedScene" uid="uid://bgprfkb5sbil2" path="res://prefabs/ui/scoreboard/ui_scoreboard_details.tscn" id="3_m3jme"]
 
-[node name="TabContainer" type="TabContainer" unique_id=722862887]
+[node name="UiScoreboard" type="TabContainer" unique_id=722862887]
 offset_right = 1920.0
 offset_bottom = 1080.0
 scale = Vector2(0.95, 0.95)
@@ -96,7 +96,143 @@ visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
+[node name="PanelContainer" type="PanelContainer" parent="STATS_NORMAL_TAB" unique_id=112036513]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="STATS_NORMAL_TAB/PanelContainer" unique_id=997573294]
+layout_mode = 2
+
+[node name="Header" type="PanelContainer" parent="STATS_NORMAL_TAB/PanelContainer/VBoxContainer" unique_id=1701367477]
+layout_mode = 2
+theme = ExtResource("1_4vetr")
+theme_type_variation = &"EntryPanel"
+
+[node name="UiScoreboardEntry" type="HBoxContainer" parent="STATS_NORMAL_TAB/PanelContainer/VBoxContainer/Header" unique_id=611090548]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_4vetr")
+
+[node name="Ranking" type="Label" parent="STATS_NORMAL_TAB/PanelContainer/VBoxContainer/Header/UiScoreboardEntry" unique_id=1833863574]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "STATS_RANK_LABEL"
+autowrap_mode = 2
+
+[node name="UserName" type="Label" parent="STATS_NORMAL_TAB/PanelContainer/VBoxContainer/Header/UiScoreboardEntry" unique_id=1687871074]
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 2
+text = "STATS_USERNAME_LABEL"
+autowrap_mode = 2
+
+[node name="Time" type="Label" parent="STATS_NORMAL_TAB/PanelContainer/VBoxContainer/Header/UiScoreboardEntry" unique_id=1729347029]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+text = "STATS_TIME_LABEL"
+autowrap_mode = 2
+
+[node name="Kills" type="Label" parent="STATS_NORMAL_TAB/PanelContainer/VBoxContainer/Header/UiScoreboardEntry" unique_id=352989596]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "STATS_KILLS_LABEL"
+autowrap_mode = 2
+
+[node name="Damage" type="Label" parent="STATS_NORMAL_TAB/PanelContainer/VBoxContainer/Header/UiScoreboardEntry" unique_id=518731242]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "STATS_DAMAGES_LABEL"
+autowrap_mode = 2
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="STATS_NORMAL_TAB/PanelContainer/VBoxContainer/Header/UiScoreboardEntry" unique_id=1927112087]
+layout_mode = 2
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="STATS_NORMAL_TAB/PanelContainer/VBoxContainer/Header/UiScoreboardEntry/AspectRatioContainer" unique_id=52833164]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+text = "STATS_BEST_WEAPON_LABEL"
+autowrap_mode = 2
+
+[node name="Accuracy" type="Label" parent="STATS_NORMAL_TAB/PanelContainer/VBoxContainer/Header/UiScoreboardEntry" unique_id=1703125620]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "STATS_CRITICAL_LABEL"
+autowrap_mode = 2
+
 [node name="STATS_HARD_TAB" type="TabBar" parent="." unique_id=140533117]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="STATS_HARD_TAB" unique_id=546291243]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="STATS_HARD_TAB/PanelContainer" unique_id=1088169277]
+layout_mode = 2
+
+[node name="Header" type="PanelContainer" parent="STATS_HARD_TAB/PanelContainer/VBoxContainer" unique_id=1682021314]
+layout_mode = 2
+theme = ExtResource("1_4vetr")
+theme_type_variation = &"EntryPanel"
+
+[node name="UiScoreboardEntry" type="HBoxContainer" parent="STATS_HARD_TAB/PanelContainer/VBoxContainer/Header" unique_id=427731276]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_4vetr")
+
+[node name="Ranking" type="Label" parent="STATS_HARD_TAB/PanelContainer/VBoxContainer/Header/UiScoreboardEntry" unique_id=372980136]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "STATS_RANK_LABEL"
+autowrap_mode = 2
+
+[node name="UserName" type="Label" parent="STATS_HARD_TAB/PanelContainer/VBoxContainer/Header/UiScoreboardEntry" unique_id=233955849]
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 2
+text = "STATS_USERNAME_LABEL"
+autowrap_mode = 2
+
+[node name="Time" type="Label" parent="STATS_HARD_TAB/PanelContainer/VBoxContainer/Header/UiScoreboardEntry" unique_id=1269342306]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+text = "STATS_TIME_LABEL"
+autowrap_mode = 2
+
+[node name="Kills" type="Label" parent="STATS_HARD_TAB/PanelContainer/VBoxContainer/Header/UiScoreboardEntry" unique_id=1843087644]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "STATS_KILLS_LABEL"
+autowrap_mode = 2
+
+[node name="Damage" type="Label" parent="STATS_HARD_TAB/PanelContainer/VBoxContainer/Header/UiScoreboardEntry" unique_id=372386943]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "STATS_DAMAGES_LABEL"
+autowrap_mode = 2
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="STATS_HARD_TAB/PanelContainer/VBoxContainer/Header/UiScoreboardEntry" unique_id=1196911849]
+layout_mode = 2
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="STATS_HARD_TAB/PanelContainer/VBoxContainer/Header/UiScoreboardEntry/AspectRatioContainer" unique_id=862046744]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+text = "STATS_BEST_WEAPON_LABEL"
+autowrap_mode = 2
+
+[node name="Accuracy" type="Label" parent="STATS_HARD_TAB/PanelContainer/VBoxContainer/Header/UiScoreboardEntry" unique_id=1168683007]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "STATS_CRITICAL_LABEL"
+autowrap_mode = 2

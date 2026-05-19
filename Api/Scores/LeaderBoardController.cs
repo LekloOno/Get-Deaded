@@ -56,6 +56,7 @@ public partial class ScoresController : ControllerBase
                     x.Rank,
                     x.Score.Id,
                     x.Score.Player.Username,
+                    x.Score.TimeMs,
                     x.Score.Value,
                     x.Score.WeaponStats.Sum(w => w.Kills),
                     x.Score.WeaponStats.Sum(w => w.Damage),
