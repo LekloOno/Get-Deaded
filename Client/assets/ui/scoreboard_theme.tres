@@ -113,6 +113,8 @@ bg_color = Color(0.18000486, 0.1800049, 0.1800048, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_34pu0"]
 bg_color = Color(0, 0, 0, 0.38039216)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b8kfe"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y3llb"]
 bg_color = Color(0.18039216, 0.18039216, 0.18039216, 0)
 
@@ -145,4 +147,7 @@ OptionButton/font_sizes/font_size = 11
 OptionButton/styles/normal = SubResource("StyleBoxFlat_bhpmc")
 Panel/styles/panel = SubResource("StyleBoxFlat_qvvi2")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_34pu0")
+ScoreRow/base_type = &"Button"
+ScoreRow/styles/normal = SubResource("StyleBoxFlat_nawe0")
+ScoreRow/styles/panel = SubResource("StyleBoxFlat_b8kfe")
 TabContainer/styles/panel = SubResource("StyleBoxFlat_y3llb")

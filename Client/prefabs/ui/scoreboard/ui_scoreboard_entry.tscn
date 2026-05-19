@@ -3,6 +3,7 @@
 [ext_resource type="Theme" uid="uid://1b5txn2enhg6" path="res://assets/ui/scoreboard_theme.tres" id="1_rt4d8"]
 [ext_resource type="Script" uid="uid://dp7tuqfpwj2j7" path="res://script/ui/scoreboard/UI_ScoreBoardEntry.cs" id="2_i3djf"]
 [ext_resource type="Texture2D" uid="uid://oc0nc17g5r1t" path="res://assets/sprites/weapons/brrtv3.png" id="2_rt4d8"]
+[ext_resource type="Script" uid="uid://b4n8qmjwatmaw" path="res://script/ui/scoreboard/ui_row_hover.gd" id="3_o8nyi"]
 [ext_resource type="PackedScene" uid="uid://bgprfkb5sbil2" path="res://prefabs/ui/scoreboard/ui_scoreboard_details.tscn" id="4_j3ith"]
 
 [node name="PanelContainer" type="PanelContainer" unique_id=529901829 node_paths=PackedStringArray("_details", "_container", "_ranking", "_userName", "_time", "_kills", "_damage", "_weapon", "_accuracy")]
@@ -13,60 +14,67 @@ theme_type_variation = &"EntryPanel"
 script = ExtResource("2_i3djf")
 _details = NodePath("VBoxContainer/UiScoreboardDetails")
 _container = NodePath("VBoxContainer/UiScoreboardDetails")
-_ranking = NodePath("VBoxContainer/UiScoreboardEntry/Ranking")
-_userName = NodePath("VBoxContainer/UiScoreboardEntry/UserName")
-_time = NodePath("VBoxContainer/UiScoreboardEntry/Time")
-_kills = NodePath("VBoxContainer/UiScoreboardEntry/Kills")
-_damage = NodePath("VBoxContainer/UiScoreboardEntry/Damage")
-_weapon = NodePath("VBoxContainer/UiScoreboardEntry/BestWeapon/TextureRect")
-_accuracy = NodePath("VBoxContainer/UiScoreboardEntry/Accuracy")
+_ranking = NodePath("VBoxContainer/PanelContainer/UiScoreboardEntry/Ranking")
+_userName = NodePath("VBoxContainer/PanelContainer/UiScoreboardEntry/UserName")
+_time = NodePath("VBoxContainer/PanelContainer/UiScoreboardEntry/Time")
+_kills = NodePath("VBoxContainer/PanelContainer/UiScoreboardEntry/Kills")
+_damage = NodePath("VBoxContainer/PanelContainer/UiScoreboardEntry/Damage")
+_weapon = NodePath("VBoxContainer/PanelContainer/UiScoreboardEntry/BestWeapon/TextureRect")
+_accuracy = NodePath("VBoxContainer/PanelContainer/UiScoreboardEntry/Accuracy")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1769343087]
 layout_mode = 2
 
-[node name="UiScoreboardEntry" type="HBoxContainer" parent="VBoxContainer" unique_id=188828960]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=680685864]
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("3_o8nyi")
+normal_color = Color(0.023529412, 0.023529412, 0.023529412, 0.26666668)
+hover_color = Color(0.23010615, 0.21858564, 0.53049016, 0.23921569)
+
+[node name="UiScoreboardEntry" type="HBoxContainer" parent="VBoxContainer/PanelContainer" unique_id=188828960]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("1_rt4d8")
 
-[node name="Ranking" type="Label" parent="VBoxContainer/UiScoreboardEntry" unique_id=226856349]
+[node name="Ranking" type="Label" parent="VBoxContainer/PanelContainer/UiScoreboardEntry" unique_id=226856349]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 text = "99"
 clip_text = true
 
-[node name="UserName" type="Label" parent="VBoxContainer/UiScoreboardEntry" unique_id=349431224]
+[node name="UserName" type="Label" parent="VBoxContainer/PanelContainer/UiScoreboardEntry" unique_id=349431224]
 custom_minimum_size = Vector2(280, 0)
 layout_mode = 2
 text = "user_name"
 clip_text = true
 
-[node name="Time" type="Label" parent="VBoxContainer/UiScoreboardEntry" unique_id=1779750077]
+[node name="Time" type="Label" parent="VBoxContainer/PanelContainer/UiScoreboardEntry" unique_id=1779750077]
 custom_minimum_size = Vector2(65, 0)
 layout_mode = 2
 text = "00"
 clip_text = true
 
-[node name="Kills" type="Label" parent="VBoxContainer/UiScoreboardEntry" unique_id=1868917372]
+[node name="Kills" type="Label" parent="VBoxContainer/PanelContainer/UiScoreboardEntry" unique_id=1868917372]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 text = "00"
 clip_text = true
 
-[node name="Damage" type="Label" parent="VBoxContainer/UiScoreboardEntry" unique_id=1250465962]
+[node name="Damage" type="Label" parent="VBoxContainer/PanelContainer/UiScoreboardEntry" unique_id=1250465962]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 text = "000000000"
 clip_text = true
 
-[node name="BestWeapon" type="AspectRatioContainer" parent="VBoxContainer/UiScoreboardEntry" unique_id=1988604791]
+[node name="BestWeapon" type="AspectRatioContainer" parent="VBoxContainer/PanelContainer/UiScoreboardEntry" unique_id=1988604791]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 stretch_mode = 0
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/UiScoreboardEntry/BestWeapon" unique_id=1246699044]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer/UiScoreboardEntry/BestWeapon" unique_id=1246699044]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -74,7 +82,7 @@ size_flags_vertical = 4
 texture = ExtResource("2_rt4d8")
 expand_mode = 5
 
-[node name="Accuracy" type="Label" parent="VBoxContainer/UiScoreboardEntry" unique_id=265237123]
+[node name="Accuracy" type="Label" parent="VBoxContainer/PanelContainer/UiScoreboardEntry" unique_id=265237123]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "00%"
