@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://bgprfkb5sbil2" path="res://prefabs/ui/scoreboard/ui_scoreboard_details.tscn" id="4_j3ith"]
 
 [node name="PanelContainer" type="PanelContainer" unique_id=529901829 node_paths=PackedStringArray("_details", "_container", "_ranking", "_userName", "_score", "_time", "_kills", "_damage", "_weapon", "_accuracy")]
-offset_right = 943.0
-offset_bottom = 64.0
+offset_right = 1163.0
+offset_bottom = 174.0
 theme = ExtResource("1_rt4d8")
 theme_type_variation = &"EntryPanel"
 script = ExtResource("2_i3djf")
@@ -20,7 +20,7 @@ _score = NodePath("VBoxContainer/PanelContainer/UiScoreboardEntry/Score")
 _time = NodePath("VBoxContainer/PanelContainer/UiScoreboardEntry/Time")
 _kills = NodePath("VBoxContainer/PanelContainer/UiScoreboardEntry/Kills")
 _damage = NodePath("VBoxContainer/PanelContainer/UiScoreboardEntry/Damage")
-_weapon = NodePath("VBoxContainer/PanelContainer/UiScoreboardEntry/BestWeapon/TextureRect")
+_weapon = NodePath("VBoxContainer/PanelContainer/UiScoreboardEntry/TextureRect")
 _accuracy = NodePath("VBoxContainer/PanelContainer/UiScoreboardEntry/Accuracy")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1769343087]
@@ -35,8 +35,6 @@ hover_color = Color(0.23010615, 0.21858564, 0.53049016, 0.23921569)
 
 [node name="UiScoreboardEntry" type="HBoxContainer" parent="VBoxContainer/PanelContainer" unique_id=188828960]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 theme = ExtResource("1_rt4d8")
 
 [node name="Ranking" type="Label" parent="VBoxContainer/PanelContainer/UiScoreboardEntry" unique_id=226856349]
@@ -75,19 +73,14 @@ layout_mode = 2
 text = "000000000"
 clip_text = true
 
-[node name="BestWeapon" type="AspectRatioContainer" parent="VBoxContainer/PanelContainer/UiScoreboardEntry" unique_id=1988604791]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-stretch_mode = 0
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer/UiScoreboardEntry/BestWeapon" unique_id=1246699044]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer/UiScoreboardEntry" unique_id=1246699044]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("2_rt4d8")
 expand_mode = 5
+stretch_mode = 4
 
 [node name="Accuracy" type="Label" parent="VBoxContainer/PanelContainer/UiScoreboardEntry" unique_id=265237123]
 custom_minimum_size = Vector2(100, 0)
@@ -97,4 +90,3 @@ clip_text = true
 
 [node name="UiScoreboardDetails" parent="VBoxContainer" unique_id=832307226 instance=ExtResource("4_j3ith")]
 layout_mode = 2
-size_flags_horizontal = 4

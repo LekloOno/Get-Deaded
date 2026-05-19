@@ -5,17 +5,17 @@
 [ext_resource type="PackedScene" uid="uid://cjcw5h2phmx1d" path="res://prefabs/ui/scoreboard/ui_scoreboard_entry.tscn" id="3_mv7kc"]
 
 [node name="UiScoreBoard" type="PanelContainer" unique_id=1179865850 node_paths=PackedStringArray("_entryTemplate", "_container")]
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
+offset_bottom = 221.0
 grow_horizontal = 2
-grow_vertical = 2
 script = ExtResource("1_0onr6")
 _entryTemplate = NodePath("VBoxContainer/EasyEntriesContainer/UiScoreboardEntry")
 _container = NodePath("VBoxContainer/EasyEntriesContainer")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1595028883]
 layout_mode = 2
+size_flags_horizontal = 4
 
 [node name="Header" type="PanelContainer" parent="VBoxContainer" unique_id=1017169349]
 layout_mode = 2
@@ -24,8 +24,6 @@ theme_type_variation = &"EntryPanel"
 
 [node name="UiScoreboardEntry" type="HBoxContainer" parent="VBoxContainer/Header" unique_id=1088715523]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 theme = ExtResource("2_lx2ug")
 
 [node name="Ranking" type="Label" parent="VBoxContainer/Header/UiScoreboardEntry" unique_id=1403752379]
