@@ -4,20 +4,20 @@
 [ext_resource type="Script" uid="uid://mnremws02rk4" path="res://script/ui/scoreboard/UI_ScoreBoardManager.cs" id="2_t2fg3"]
 [ext_resource type="PackedScene" uid="uid://bin4pdq453pre" path="res://prefabs/ui/scoreboard/ui_score_board.tscn" id="3_wxcr5"]
 
-[node name="UiScoreboard" type="TabContainer" unique_id=722862887 node_paths=PackedStringArray("_difficultiesTab", "_easyBoard", "_normalBoard", "_hardBoard")]
+[node name="UiScoreboard" type="TabContainer" unique_id=722862887 node_paths=PackedStringArray("_easyBoard", "_normalBoard", "_hardBoard")]
 offset_right = 1920.0
 offset_bottom = 1080.0
 scale = Vector2(0.95, 0.95)
 pivot_offset_ratio = Vector2(0.5, 0)
 theme = ExtResource("1_gf0mg")
-current_tab = 0
+current_tab = 2
 script = ExtResource("2_t2fg3")
-_difficultiesTab = NodePath(".")
 _easyBoard = NodePath("STATS_EASY_TAB/EasyBoard")
 _normalBoard = NodePath("STATS_NORMAL_TAB/NormalBoard")
 _hardBoard = NodePath("STATS_HARD_TAB/HardBoard")
 
 [node name="STATS_EASY_TAB" type="TabBar" parent="." unique_id=563876555]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -33,7 +33,6 @@ metadata/_tab_index = 1
 layout_mode = 1
 
 [node name="STATS_HARD_TAB" type="TabBar" parent="." unique_id=140533117]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
