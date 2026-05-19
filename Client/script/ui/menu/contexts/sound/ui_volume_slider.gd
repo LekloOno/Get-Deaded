@@ -9,16 +9,27 @@ var bus_setting: AudioBusSetting
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if AudioBusSettingsManager.IsInitialized:
+		_init_bus();
+	else:
+		await AudioBusSettingsManager.BusesInitialized
+		_init_bus();
+
+func _init_bus():
 	bus_setting = AudioBusSettingsManager.GetBus(bus_name)
 	bus_setting.Changed.connect(_on_setting_value_changed)
-	value = bus_setting.Value
-	update_ui()
 	
-	value_changed.connect(_on_value_changed)
+	if bus_setting == null:
+		print("caca")
 	
+	linear_volume = bus_setting.LinearDb
+		
 	if override_min_max_value:
 		min_value = 0
 		max_value = 100
+	
+	update_ui()
+	value_changed.connect(_on_value_changed)
 
 func _on_setting_value_changed(sender, new_value):
 	if (sender == self):

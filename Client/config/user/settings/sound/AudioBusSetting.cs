@@ -15,6 +15,7 @@ public partial class AudioBusSetting : UserSetting
     public override string Section => UserSettingsSection.Sound;
     public override string Key {get;}
     public override Variant DefaultFallBack() => 1f;
+    public float LinearDb => (float) Value;
     private int _busIndex;
 
     protected override bool ProcessValue(Variant value, out Variant effectiveValue)
