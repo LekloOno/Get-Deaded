@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://xo68a11s7vj0"]
+
+[ext_resource type="Theme" uid="uid://1b5txn2enhg6" path="res://assets/ui/scoreboard_theme.tres" id="1_gf0mg"]
+[ext_resource type="Script" uid="uid://mnremws02rk4" path="res://script/ui/scoreboard/UI_ScoreBoardManager.cs" id="2_t2fg3"]
+[ext_resource type="PackedScene" uid="uid://bin4pdq453pre" path="res://prefabs/ui/scoreboard/ui_score_board.tscn" id="3_wxcr5"]
+
+[node name="UiScoreboard" type="TabContainer" unique_id=722862887 node_paths=PackedStringArray("_difficultiesTab", "_easyBoard", "_normalBoard", "_hardBoard")]
+offset_right = 1920.0
+offset_bottom = 1080.0
+scale = Vector2(0.95, 0.95)
+pivot_offset_ratio = Vector2(0.5, 0)
+theme = ExtResource("1_gf0mg")
+current_tab = 0
+script = ExtResource("2_t2fg3")
+_difficultiesTab = NodePath(".")
+_easyBoard = NodePath("STATS_EASY_TAB/EasyBoard")
+_normalBoard = NodePath("STATS_NORMAL_TAB/NormalBoard")
+_hardBoard = NodePath("STATS_HARD_TAB/HardBoard")
+
+[node name="STATS_EASY_TAB" type="TabBar" parent="." unique_id=563876555]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="EasyBoard" parent="STATS_EASY_TAB" unique_id=1179865850 instance=ExtResource("3_wxcr5")]
+layout_mode = 1
+
+[node name="STATS_NORMAL_TAB" type="TabBar" parent="." unique_id=1851348497]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="NormalBoard" parent="STATS_NORMAL_TAB" unique_id=1721022394 instance=ExtResource("3_wxcr5")]
+layout_mode = 1
+
+[node name="STATS_HARD_TAB" type="TabBar" parent="." unique_id=140533117]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="HardBoard" parent="STATS_HARD_TAB" unique_id=108713819 instance=ExtResource("3_wxcr5")]
+layout_mode = 1

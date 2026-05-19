@@ -18,11 +18,7 @@ public partial class UI_ScoreBoardDetails : Control
 
     public void Initialize(ScoreDto scoreDetails)
     {
-        if (Initialized)
-            return;
-
-        Initialized = true;
-
+        Clean();
         CreateEntries(scoreDetails);
     }
 
@@ -32,13 +28,8 @@ public partial class UI_ScoreBoardDetails : Control
         {
             UI_ScoreBoardDetailsEntry detailsEntry = (UI_ScoreBoardDetailsEntry) _template.Duplicate();
             detailsEntry.Initialize(weapon);
+            _container.AddChild(detailsEntry);
         }
-    }
-
-    public void Repurpose(ScoreDto scoreDetails)
-    {
-        Clean();
-        CreateEntries(scoreDetails);
     }
 
     public void Clean()

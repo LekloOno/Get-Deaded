@@ -2,8 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://b6t7cwmcqpgnj" path="res://prefabs/ui/scoreboard/ui_score_board_detail_entry.tscn" id="1_3vy2t"]
 [ext_resource type="Theme" uid="uid://1b5txn2enhg6" path="res://assets/ui/scoreboard_theme.tres" id="1_fjrko"]
+[ext_resource type="Script" uid="uid://pbjmnbhugg0x" path="res://script/ui/scoreboard/UI_ScoreBoardDetails.cs" id="2_g4xpj"]
 
-[node name="UiScoreboardDetails" type="PanelContainer" unique_id=832307226]
+[node name="UiScoreboardDetails" type="PanelContainer" unique_id=832307226 node_paths=PackedStringArray("_template", "_container")]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 64.0
@@ -12,6 +13,9 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource("1_fjrko")
 theme_type_variation = &"DetailsPanel"
+script = ExtResource("2_g4xpj")
+_template = NodePath("VBoxContainer/DetailsContainer/UiScoreBoardDetailEntry")
+_container = NodePath("VBoxContainer/DetailsContainer")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=228440819]
 layout_mode = 2

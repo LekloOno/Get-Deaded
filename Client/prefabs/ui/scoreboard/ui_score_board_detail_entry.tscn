@@ -1,11 +1,18 @@
 [gd_scene format=3 uid="uid://b6t7cwmcqpgnj"]
 
 [ext_resource type="Theme" uid="uid://1b5txn2enhg6" path="res://assets/ui/scoreboard_theme.tres" id="1_ti6bm"]
+[ext_resource type="Script" uid="uid://b24tl1oha1as1" path="res://script/ui/scoreboard/UI_ScoreBoardDetailsEntry.cs" id="2_qemh8"]
 [ext_resource type="Texture2D" uid="uid://oc0nc17g5r1t" path="res://assets/sprites/weapons/brrtv3.png" id="2_xu6wl"]
 
-[node name="UiScoreBoardDetailEntry" type="PanelContainer" unique_id=1704363336]
+[node name="UiScoreBoardDetailEntry" type="PanelContainer" unique_id=1704363336 node_paths=PackedStringArray("_weapon", "_kills", "_damage", "_accuracy", "_critical")]
 theme = ExtResource("1_ti6bm")
 theme_type_variation = &"EntryPanel"
+script = ExtResource("2_qemh8")
+_weapon = NodePath("HBoxContainer/WeaponIcon/TextureRect")
+_kills = NodePath("HBoxContainer/Kills")
+_damage = NodePath("HBoxContainer/Damage")
+_accuracy = NodePath("HBoxContainer/Accuracy")
+_critical = NodePath("HBoxContainer/CriticalAccuracy")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1551961256]
 layout_mode = 2
