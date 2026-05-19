@@ -13,7 +13,7 @@ public class ApiClient
         _http = new HttpClient
         {
             // This is dev only eh
-            BaseAddress = new Uri("http://localhost:5000/")
+            BaseAddress = new Uri("https://thirstforlime.servequake.com:55555/")
         };
     }
 
