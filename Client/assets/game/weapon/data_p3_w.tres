@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="DATA_Weapon" format=3 uid="uid://qxle5i68xbyy"]
+
+[ext_resource type="Texture2D" uid="uid://c050onpc3r17u" path="res://assets/sprites/weapons/pewpixel.png" id="1_irwog"]
+[ext_resource type="Script" uid="uid://dljgtttuqopuf" path="res://script/player/combat/weapons/weapon/data/DATA_Weapon.cs" id="2_xuw0o"]
+
+[resource]
+script = ExtResource("2_xuw0o")
+Id = "p3_w"
+DisplayName = "P3-W"
+Icon = ExtResource("1_irwog")
+IconColor = Color(1, 0.569375, 0.152, 0.8)
+metadata/_custom_type_script = "uid://dljgtttuqopuf"

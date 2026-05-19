@@ -1,9 +1,8 @@
 [gd_scene format=3 uid="uid://bgfyi141ynhdb"]
 
 [ext_resource type="Script" uid="uid://c3are182lodyx" path="res://script/player/combat/weapons/weapon/PW_Simple.cs" id="1_ce3gq"]
-[ext_resource type="Texture2D" uid="uid://c050onpc3r17u" path="res://assets/sprites/weapons/pewpixel.png" id="2_odgi6"]
+[ext_resource type="Resource" uid="uid://qxle5i68xbyy" path="res://assets/game/weapon/data_p3_w.tres" id="2_jf62l"]
 [ext_resource type="Script" uid="uid://dmsklefspdvlw" path="res://script/player/combat/weapons/fire/PWF_SemiAuto.cs" id="3_25fv7"]
-[ext_resource type="Script" uid="uid://dljgtttuqopuf" path="res://script/player/combat/weapons/weapon/data/DATA_Weapon.cs" id="3_rebuq"]
 [ext_resource type="Script" uid="uid://djecalg7cxlvg" path="res://script/player/combat/weapons/recoil/PWR_ConstantRecoil.cs" id="4_odgi6"]
 [ext_resource type="Script" uid="uid://fc7gkofu3df7" path="res://script/player/combat/weapons/shot/PWS_Hitscan.cs" id="4_utu8p"]
 [ext_resource type="Script" uid="uid://cxiwvat6vddlp" path="res://script/player/combat/weapons/ammunition/PW_Ammunition.cs" id="5_25fv7"]
@@ -28,14 +27,6 @@
 [ext_resource type="AudioStream" uid="uid://dghvyacggbmt3" path="res://assets/sounds/combat/weapons/fires/brrt/smg_fire_1.wav" id="23_8w7py"]
 [ext_resource type="AudioStream" uid="uid://b45218olxwvgf" path="res://assets/sounds/combat/weapons/fires/revolver/whistle.wav" id="24_15h8q"]
 [ext_resource type="AudioStream" uid="uid://bo1rj54migyfy" path="res://assets/sounds/combat/weapons/fires/lg/lg_attack.wav" id="27_jf62l"]
-
-[sub_resource type="Resource" id="Resource_lkw52"]
-script = ExtResource("3_rebuq")
-Id = "p3_w"
-DisplayName = "P3-W"
-Icon = ExtResource("2_odgi6")
-IconColor = Color(1, 0.569375, 0.152, 0.8)
-metadata/_custom_type_script = "uid://dljgtttuqopuf"
 
 [sub_resource type="Resource" id="Resource_wj164"]
 script = ExtResource("5_d2gec")
@@ -81,7 +72,7 @@ polyphony = 10
 
 [node name="PW_Revolver" type="Node3D" unique_id=1663599436 node_paths=PackedStringArray("_fires")]
 script = ExtResource("1_ce3gq")
-Data = SubResource("Resource_lkw52")
+Data = ExtResource("2_jf62l")
 MoveSpeedModifier = -0.1
 SwitchInTime = 0.13
 SwitchOutTime = 0.18

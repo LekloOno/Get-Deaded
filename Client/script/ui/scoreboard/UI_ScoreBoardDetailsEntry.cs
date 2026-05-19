@@ -15,7 +15,11 @@ public partial class UI_ScoreBoardDetailsEntry : Control
         _kills.Text = weaponDetails.Kills.ToString();
         _damage.Text = weaponDetails.Damage.ToString();
 
-        //_weapon.Texture = //... need to implement a registry of weapons icons.
+        if(DATA_WeaponRegistry.Instance.Registry.TryGetValue(weaponDetails.WeaponKey, out DATA_Weapon weapon))
+        {
+            _weapon.Texture = weapon.Icon;
+            _weapon.Modulate = weapon.IconColor;
+        }
 
         _accuracy.Text = UI_ScoreBoardExtensions.DisplayAccuracy(weaponDetails.Accuracy);
         _critical.Text = UI_ScoreBoardExtensions.DisplayAccuracy(weaponDetails.CriticalAccuracy);

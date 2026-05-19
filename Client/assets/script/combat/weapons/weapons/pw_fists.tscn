@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://be54as36nebp4"]
 
 [ext_resource type="Script" uid="uid://c3are182lodyx" path="res://script/player/combat/weapons/weapon/PW_Simple.cs" id="1_k4qra"]
-[ext_resource type="Texture2D" uid="uid://8rrtqp0otyee" path="res://assets/sprites/weapons/meleepixel.png" id="2_sqc2j"]
-[ext_resource type="Script" uid="uid://dljgtttuqopuf" path="res://script/player/combat/weapons/weapon/data/DATA_Weapon.cs" id="3_ghv7x"]
+[ext_resource type="Resource" uid="uid://byurw34rhcw48" path="res://assets/game/weapon/data_pw_fists.tres" id="2_2xwjd"]
 [ext_resource type="Script" uid="uid://co06wv08f4cgo" path="res://script/player/combat/weapons/fire/special/PW_FistsFire.cs" id="3_k4qra"]
 [ext_resource type="Script" uid="uid://cxiwvat6vddlp" path="res://script/player/combat/weapons/ammunition/PW_Ammunition.cs" id="4_2xwjd"]
 [ext_resource type="Script" uid="uid://sujdlokcwnd6" path="res://script/global/combat/hit/GC_DamageModifier.cs" id="6_s0i7c"]
@@ -18,14 +17,6 @@
 [ext_resource type="Script" uid="uid://v03t7md2i0v8" path="res://script/player/combat/weapons/shot/PWS_SequenceHit.cs" id="15_2xwjd"]
 [ext_resource type="Script" uid="uid://b88xre8wsrllr" path="res://script/global/combat/hit/hit/GC_SequenceHitBox.cs" id="16_ghv7x"]
 [ext_resource type="Script" uid="uid://cw3m0ga8jfbw7" path="res://script/engine_tools/physics/bodies/objects/hitbox/PHX_ShapeSeqArea3D.cs" id="17_s0i7c"]
-
-[sub_resource type="Resource" id="Resource_s0i7c"]
-script = ExtResource("3_ghv7x")
-Id = "fists"
-DisplayName = "Fists"
-Icon = ExtResource("2_sqc2j")
-IconColor = Color(1, 1, 1, 0.8)
-metadata/_custom_type_script = "uid://dljgtttuqopuf"
 
 [sub_resource type="Resource" id="Resource_488s0"]
 script = ExtResource("6_s0i7c")
@@ -73,7 +64,7 @@ metadata/_custom_type_script = "uid://c0vf7xmi1u8t4"
 
 [node name="PW_BasicMelee" type="Node3D" unique_id=1849171425 node_paths=PackedStringArray("_fires")]
 script = ExtResource("1_k4qra")
-Data = SubResource("Resource_s0i7c")
+Data = ExtResource("2_2xwjd")
 SwitchInTime = 0.12
 SwitchOutTime = 0.12
 _fires = [NodePath("PW_FistsFire")]
