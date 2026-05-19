@@ -10,14 +10,14 @@ public partial class UI_ScoreBoardDetailsEntry : Control
     [Export] private Label _accuracy;
     [Export] private Label _critical;
 
-    public void Initialize(WeaponStatDto _weaponDetails)
+    public void Initialize(WeaponStatDto weaponDetails)
     {
-        _kills.Text = _weaponDetails.Kills.ToString();
-        _damage.Text = _weaponDetails.Damage.ToString();
+        _kills.Text = weaponDetails.Kills.ToString();
+        _damage.Text = weaponDetails.Damage.ToString();
 
         //_weapon.Texture = //... need to implement a registry of weapons icons.
 
-        _accuracy.Text = UI_ScoreBoardExtensions.DisplayAccuracy(_weaponDetails.Accuracy);
-        _critical.Text = UI_ScoreBoardExtensions.DisplayAccuracy(_weaponDetails.CriticalAccuracy);
+        _accuracy.Text = UI_ScoreBoardExtensions.DisplayAccuracy(weaponDetails.Accuracy);
+        _critical.Text = UI_ScoreBoardExtensions.DisplayAccuracy(weaponDetails.CriticalAccuracy);
     }
 }
