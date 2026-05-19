@@ -5,8 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://bin4pdq453pre" path="res://prefabs/ui/scoreboard/ui_score_board.tscn" id="3_wxcr5"]
 
 [node name="UiScoreboard" type="TabContainer" unique_id=722862887 node_paths=PackedStringArray("_easyBoard", "_normalBoard", "_hardBoard")]
-offset_right = 1920.0
-offset_bottom = 1080.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(0.95, 0.95)
 pivot_offset_ratio = Vector2(0.5, 0)
 theme = ExtResource("1_gf0mg")

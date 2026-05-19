@@ -14,7 +14,7 @@ theme = ExtResource("1_fjrko")
 theme_type_variation = &"DetailsPanel"
 script = ExtResource("2_g4xpj")
 _template = NodePath("VBoxContainer/DetailsContainer/UiScoreBoardDetailEntry")
-_container = NodePath("VBoxContainer")
+_container = NodePath("VBoxContainer/DetailsContainer")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=228440819]
 layout_mode = 2
@@ -29,12 +29,8 @@ theme_type_variation = &"EntryPanel"
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Header" unique_id=1551961256]
 layout_mode = 2
 
-[node name="WeaponIcon" type="AspectRatioContainer" parent="VBoxContainer/Header/HBoxContainer" unique_id=1663218186]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control" type="Control" parent="VBoxContainer/Header/HBoxContainer/WeaponIcon" unique_id=1395371626]
-custom_minimum_size = Vector2(40, 0)
+[node name="Control" type="Control" parent="VBoxContainer/Header/HBoxContainer" unique_id=1395371626]
+custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 
 [node name="Kills" type="Label" parent="VBoxContainer/Header/HBoxContainer" unique_id=738649599]
@@ -71,4 +67,3 @@ size_flags_vertical = 3
 
 [node name="UiScoreBoardDetailEntry" parent="VBoxContainer/DetailsContainer" unique_id=1845340979 instance=ExtResource("1_3vy2t")]
 layout_mode = 2
-size_flags_horizontal = 0

@@ -13,7 +13,7 @@ public partial class UI_ScoreBoardDetailsEntry : Control
     public void Initialize(WeaponStatDto weaponDetails)
     {
         _kills.Text = weaponDetails.Kills.ToString();
-        _damage.Text = weaponDetails.Damage.ToString();
+        _damage.Text = Mathf.RoundToInt(weaponDetails.Damage).ToString();
 
         if(DATA_WeaponRegistry.Instance.Registry.TryGetValue(weaponDetails.WeaponKey, out DATA_Weapon weapon))
         {

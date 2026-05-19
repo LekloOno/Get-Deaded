@@ -2450,7 +2450,7 @@ text = "REGISTER_BUTTON"
 
 [node name="UiScoreboard" parent="." unique_id=722862887 instance=ExtResource("39_o1fwb")]
 visible = false
-layout_mode = 0
+layout_mode = 1
 
 [node name="ConfirmDialog" type="PanelContainer" parent="." unique_id=1625242626 node_paths=PackedStringArray("menu", "label", "confirm_button", "cancel_button")]
 visible = false

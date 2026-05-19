@@ -62,7 +62,7 @@ public partial class UI_ScoreBoardEntry : Control
         _userName.Text = scoreRow.Player;
         _time.Text = Mathf.RoundToInt((float) scoreRow.TimeMs / 1000).ToString();
         _kills.Text = scoreRow.Kills.ToString();
-        _damage.Text = scoreRow.Damage.ToString();
+        _damage.Text = Mathf.RoundToInt(scoreRow.Damage).ToString();
 
         if(DATA_WeaponRegistry.Instance.Registry.TryGetValue(scoreRow.BestWeaponKey, out DATA_Weapon weapon))
         {

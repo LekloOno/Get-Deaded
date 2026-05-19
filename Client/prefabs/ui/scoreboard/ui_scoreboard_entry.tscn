@@ -67,7 +67,7 @@ size_flags_vertical = 4
 stretch_mode = 0
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/UiScoreboardEntry/BestWeapon" unique_id=1246699044]
-custom_minimum_size = Vector2(64, 0)
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -82,3 +82,4 @@ clip_text = true
 
 [node name="UiScoreboardDetails" parent="VBoxContainer" unique_id=832307226 instance=ExtResource("4_j3ith")]
 layout_mode = 2
+size_flags_horizontal = 4

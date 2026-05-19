@@ -37,6 +37,8 @@ public partial class UI_ScoreBoardDetails : Control
             detailsEntry.Initialize(weapon);
             _entries.Add(detailsEntry);
             _container.AddChild(detailsEntry);
+            detailsEntry.Visible = true;
+            detailsEntry.SetProcess(true);
         }
     }
 

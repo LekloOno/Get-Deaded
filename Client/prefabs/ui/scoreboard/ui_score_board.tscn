@@ -58,12 +58,8 @@ layout_mode = 2
 text = "STATS_DAMAGES_LABEL"
 clip_text = true
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer/Header/UiScoreboardEntry" unique_id=651853841]
-layout_mode = 2
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="VBoxContainer/Header/UiScoreboardEntry/AspectRatioContainer" unique_id=2011743660]
-custom_minimum_size = Vector2(64, 0)
+[node name="Label" type="Label" parent="VBoxContainer/Header/UiScoreboardEntry" unique_id=2011743660]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "STATS_BEST_WEAPON_LABEL"
 clip_text = true
