@@ -37,8 +37,6 @@ public partial class UI_ScoreBoard : Control
         
         if (result.Success && result.Data != null)
             CreateEntries(result.Data);
-        else
-            GD.Print(result.ErrorMessage);
     }
 
     private void CreateEntries(List<LeaderboardRowDto> rows)

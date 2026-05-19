@@ -70,6 +70,7 @@
 [ext_resource type="Script" uid="uid://b0h6mwxwlnjj7" path="res://script/animation/an_menu_camera_swaps.gd" id="55_a7862"]
 [ext_resource type="Script" uid="uid://d3x85bspwdnaw" path="res://script/ui/game/UI_DamageBuff.cs" id="65_1iiwa"]
 [ext_resource type="AudioStream" uid="uid://cspq87nko4mud" path="res://assets/sounds/music/cacamenu.mp3" id="71_4nhhj"]
+[ext_resource type="Script" uid="uid://njp2nejpe1bw" path="res://script/ui/scoreboard/UI_GameEndScoreBoardBind.cs" id="76_b76a6"]
 [ext_resource type="LightmapGIData" uid="uid://d3cc8iupunnf1" path="res://scenes/arena.lmbake" id="112_hskjd"]
 [ext_resource type="PackedScene" uid="uid://bioysx8g5kih7" path="res://prefabs/mapping/lights/lightray2.tscn" id="113_ie87n"]
 [ext_resource type="Shader" uid="uid://db85ge55ambmc" path="res://assets/shaders/light_flare.gdshader" id="114_xy3ri"]
@@ -1055,13 +1056,13 @@ shader_parameter/fluctuation_strength = 0.6
 shader_parameter/fluctuation_sharpness = 1.0
 shader_parameter/fluctuation_speed = 0.4
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_6b7ou"]
-
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_b76a6"]
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_ji5dc"]
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_1cjps"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_83tba"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3mad5"]
 transparency = 1
@@ -2200,14 +2201,14 @@ spot_angle_attenuation = 0.15932
 [node name="VFX_GodsRay" parent="arena" unique_id=605019919 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.27160624, -0.9330127, 0.23604527, 0.017453581, 0.25000003, 0.9680885, -0.9622502, -0.2588191, 0.0841859, -22.38988, 5.6927605, 5.072876)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_6b7ou")
+mesh = SubResource("ImmediateMesh_b76a6")
 BaseRadius = 0.38
 InitialRotation = 45.0
 
 [node name="VFX_GodsRay3" parent="arena/VFX_GodsRay" unique_id=802324590 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.9999999, -1.4901161e-08, 7.450581e-09, -1.4901161e-08, 0.9999999, -3.1664968e-08, 0, 1.8626451e-09, 0.99999994, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_b76a6")
+mesh = SubResource("ImmediateMesh_ji5dc")
 skeleton = NodePath("../..")
 BaseRadius = 0.14
 InitialRotation = 45.0
@@ -2216,14 +2217,14 @@ FlareAngle = 6.0
 [node name="VFX_GodsRay2" parent="arena" unique_id=164366595 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.05200698, -0.25727454, -0.9649379, 0.9678007, 0.25127998, -0.0148357125, 0.24628639, -0.933096, 0.2620588, -25.830011, 7.2676578, 9.14106)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_ji5dc")
+mesh = SubResource("ImmediateMesh_1cjps")
 BaseRadius = 0.36
 InitialRotation = 45.0
 
 [node name="VFX_GodsRay3" parent="arena/VFX_GodsRay2" unique_id=294127740 instance=ExtResource("113_ie87n")]
 transform = Transform3D(1, 1.4901161e-08, 0, 1.4901161e-08, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_1cjps")
+mesh = SubResource("ImmediateMesh_83tba")
 skeleton = NodePath("../..")
 BaseRadius = 0.14
 InitialRotation = 45.0
@@ -3635,11 +3636,13 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.91486377, 0.92964065, 0.9237171, 1)
 theme_override_font_sizes/font_size = 25
 
-[node name="ShowScore" type="Node" parent="CanvasLayer" unique_id=252717910 node_paths=PackedStringArray("_escapeMenu", "_combatStats", "_statsInput")]
+[node name="ShowScore" type="Node" parent="CanvasLayer" unique_id=252717910 node_paths=PackedStringArray("_escapeMenu", "_combatStats", "_statsInput", "_returnButton", "_lastResultLabel")]
 script = ExtResource("53_00ph2")
 _escapeMenu = NodePath("../Menu")
 _combatStats = NodePath("../CombatStats")
 _statsInput = NodePath("../PI_Stats")
+_returnButton = NodePath("../CombatStats/Button")
+_lastResultLabel = NodePath("../CombatStats/LastResults")
 
 [node name="CountDown" type="Node" parent="CanvasLayer" unique_id=129147269 node_paths=PackedStringArray("_num")]
 script = ExtResource("55_6d1h2")
@@ -3709,6 +3712,13 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_1iiwa")
 
+[node name="GameEndScoreBoardBind" type="Node" parent="CanvasLayer" unique_id=706415906 node_paths=PackedStringArray("_escapeMenu", "_scoreBoardManager", "_gameManager", "_briefScore")]
+script = ExtResource("76_b76a6")
+_escapeMenu = NodePath("../Menu")
+_scoreBoardManager = NodePath("../Menu/UiScoreboard")
+_gameManager = NodePath("../../entities/AimArena/SC_GameManager")
+_briefScore = NodePath("../ShowScore")
+
 [node name="MISC_TimeScaler" type="Node" parent="." unique_id=1895755438]
 script = ExtResource("46_femlh")
 metadata/_custom_type_script = "uid://ba04qst68odml"
@@ -3724,17 +3734,14 @@ parameters/looping = true
 [connection signal="Initialize" from="entities/AimArena/SC_GameManager" to="CanvasLayer/CountDown" method="OnGameInit"]
 [connection signal="Initialized" from="entities/AimArena/SC_GameManager" to="CanvasLayer/Menu" method="Close"]
 [connection signal="Initialized" from="entities/AimArena/SC_GameManager" to="CanvasLayer/Menu" method="SetPausable"]
+[connection signal="Initialized" from="entities/AimArena/SC_GameManager" to="CanvasLayer/Menu/MainMenu/Main/Results" method="hide"]
 [connection signal="Initialized" from="entities/AimArena/SC_GameManager" to="CanvasLayer/Menu/MainMenu/Main/Surrender" method="show"]
 [connection signal="Initialized" from="entities/AimArena/SC_GameManager" to="music" method="stop"]
-[connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/Menu" method="Open"]
-[connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/Menu" method="SetUnpausable"]
+[connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/Menu/MainMenu/Main/Results" method="show"]
 [connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/Menu/MainMenu/Main/Surrender" method="hide"]
-[connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/CombatStats/LastResults" method="show"]
-[connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/CombatStats/Button" method="show"]
 [connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/PanelContainer" method="hide"]
 [connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/PanelContainer/BoxContainer/HBoxContainer2/Timer" method="OnGameEnd"]
 [connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/PanelContainer/BoxContainer/HBoxContainer/Score" method="Reset"]
-[connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/ShowScore" method="ShowScores"]
 [connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/DamageBuffTracker" method="EndBuff"]
 [connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="music" method="play"]
 [connection signal="StartGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/CombatStats/LastResults" method="hide"]
@@ -3746,6 +3753,7 @@ parameters/looping = true
 [connection signal="HandleNext" from="entities/AimArena/SC_GameManager/SC_SequenceSpawner2" to="entities/AimArena/SC_GameManager/SC_SequenceSpawner3" method="TakeHandle"]
 [connection signal="Stop" from="entities/AimArena/SC_GameManager/SC_SequenceSpawner3" to="entities/AimArena/SC_GameManager" method="EndGame"]
 [connection signal="Pick" from="entities/Pickups/DamageBuff" to="entities/Pickups/DamageBuff/AUD_StreamPlayer1D" method="Play"]
+[connection signal="pressed" from="CanvasLayer/Menu/MainMenu/Main/Results" to="CanvasLayer/ShowScore" method="ShowBrief"]
 [connection signal="pressed" from="CanvasLayer/Menu/MainMenu/Main/Surrender" to="entities/AimArena/SC_GameManager" method="Surrender"]
 [connection signal="difficulty_selected" from="CanvasLayer/Menu/Difficulty/Levels" to="SC_ArenaGameStarter" method="StartGame"]
 [connection signal="mouse_entered" from="CanvasLayer/CombatStats/Button" to="CanvasLayer/Menu/LightHover" method="tab_interract"]

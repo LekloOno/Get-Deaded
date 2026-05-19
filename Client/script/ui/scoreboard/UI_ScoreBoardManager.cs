@@ -14,22 +14,30 @@ public partial class UI_ScoreBoardManager : TabContainer
         TabChanged += OnTabChanged;
     }
 
-    public void Init()
+    public void GdInit()
     {
-        Init(null);
+        Init();
     }
 
-    public async Task Init(ScoreResult? result)
+    public async Task Init(int rank = 1)
     {
         _easyBoard.Clean();
         _normalBoard.Clean();
         _hardBoard.Clean();
 
-        GD.Print(E_DifficultyServer.Difficulty);
-
         E_EnemyDifficulty difficulty = E_DifficultyServer.Difficulty;
         UI_ScoreBoard initBoard = GetBoard(difficulty);
-        await initBoard.InitializeAsync(difficulty, result?.Rank ?? 1);
+
+        int tab = (int) difficulty;
+        
+        if (CurrentTab != tab)
+        {
+            TabChanged -= OnTabChanged;
+            CurrentTab = tab;
+            TabChanged += OnTabChanged;
+        }
+        
+        initBoard.InitializeAsync(difficulty, rank);
     }
 
     private UI_ScoreBoard GetBoard(E_EnemyDifficulty difficulty)
@@ -45,7 +53,6 @@ public partial class UI_ScoreBoardManager : TabContainer
 
     private void OnTabChanged(long tab)
     {
-        GD.Print("change to " + tab);
         E_EnemyDifficulty difficulty = (E_EnemyDifficulty)tab;
 
         GetBoard(difficulty).InitializeAsync(difficulty);

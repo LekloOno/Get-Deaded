@@ -35,31 +35,8 @@ public partial class UI_ScoreBoardDetails : Control
         {
             UI_ScoreBoardDetailsEntry detailsEntry = (UI_ScoreBoardDetailsEntry) _template.Duplicate();
             detailsEntry.Initialize(weapon);
-            
-            detailsEntry.Visible = true;
-            detailsEntry.SetProcess(true);
-            detailsEntry.SizeFlagsHorizontal = Control.SizeFlags.Fill | Control.SizeFlags.Expand;
-            detailsEntry.SizeFlagsVertical = Control.SizeFlags.Fill | Control.SizeFlags.Expand;
-            detailsEntry.CustomMinimumSize = new Vector2(200, 40);
-            detailsEntry.Size = new Vector2(200, 40);
-            detailsEntry.CallDeferred(Container.MethodName.QueueSort);
-            _container.QueueSort();
-            _container.QueueRedraw();
-
-            GD.Print(detailsEntry.GetRect());
-
-            GD.Print("_container type: ", _container.GetType());
-            GD.Print("container rect: ", _container.GetRect());
-            GD.Print("container clip: ", _container.ClipContents);
-
-
-
             _entries.Add(detailsEntry);
             _container.AddChild(detailsEntry);
-            GD.Print("et oui " + detailsEntry.Visible);
-
-            GD.Print("entry global pos: ", detailsEntry.GlobalPosition);
-            GD.Print("entry pos: ", detailsEntry.Position);
         }
     }
 

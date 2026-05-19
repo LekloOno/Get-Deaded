@@ -61,26 +61,26 @@ public partial class ScoreApi : ApiClient
 
             if (!response.IsSuccessStatusCode)
             {
-                var successJson = await response.Content.ReadAsStringAsync();
-
-                var result = JsonSerializer.Deserialize<SubmitScoreResponse>(
-                    successJson,
-                    JsonOptions);
-
                 return new ScoreResult
                 {
-                    Success = true,
-                    Error = ScoreErrorType.None,
-                    ScoreId = result?.ScoreId,
-                    Rank = result?.Rank
+                    Success = false,
+                    Error = ScoreErrorType.Unknown,
+                    Message = await response.Content.ReadAsStringAsync()
                 };
             }
 
+            var responseJson = await response.Content.ReadAsStringAsync();
+
+            var result = JsonSerializer.Deserialize<SubmitScoreResponse>(
+                responseJson,
+                JsonOptions);
 
             return new ScoreResult
             {
                 Success = true,
-                Error = ScoreErrorType.None
+                Error = ScoreErrorType.None,
+                ScoreId = result?.ScoreId,
+                Rank = result?.Rank
             };
         }
         catch (TaskCanceledException)

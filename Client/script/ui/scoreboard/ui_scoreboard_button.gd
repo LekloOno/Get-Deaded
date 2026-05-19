@@ -9,4 +9,4 @@ func _ready() -> void:
 
 func _on_pressed():
 	menu.Enter(score_board)
-	score_board.Init()
+	score_board.GdInit()

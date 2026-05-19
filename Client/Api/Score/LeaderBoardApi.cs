@@ -60,7 +60,6 @@ public partial class ScoreApi : ApiClient
             result.Success = false;
             result.ExceptionType = nameof(HttpRequestException);
             result.ErrorMessage = ex.Message;
-            GD.PrintErr(ex);
             return result;
         }
         catch (Exception ex)
@@ -68,7 +67,6 @@ public partial class ScoreApi : ApiClient
             result.Success = false;
             result.ExceptionType = ex.GetType().Name;
             result.ErrorMessage = ex.Message;
-            GD.PrintErr(ex);
             return result;
         }
     }

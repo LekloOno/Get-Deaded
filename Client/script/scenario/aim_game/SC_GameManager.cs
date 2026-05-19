@@ -2,7 +2,9 @@ using System;
 using Client.Api;
 using Client.Api.Auth;
 using Client.Api.Godot;
+using Client.Api.Score;
 using Godot;
+using Shared.Scores;
 
 [GlobalClass]
 public partial class SC_GameManager : Node
@@ -27,6 +29,8 @@ public partial class SC_GameManager : Node
 	/// An "unexpected" stop, like the player manually stopping, or dying.
 	/// </summary>
 	public Action Interrupt;
+
+	public Action<Guid, int> ScoreSubmitted;
 
 	public override void _Ready()
 	{
@@ -136,14 +140,17 @@ public partial class SC_GameManager : Node
 		_statsInput.DisableAction();
 		SC_EntitiesManager.DisablePickups();
 		
-		if (save && Session.IsAuthenticated)
-			SendScore();
-
 		EmitSignal(SignalName.ResetGame);
+
+		if (save && Session.IsAuthenticated)
+			SendScore(GameStats.ToScoreReq());
 	}
 
-	private async void SendScore()
+	private async void SendScore(SubmitScoreRequest scoreReq)
 	{
-		await ApiGodotGlue.Instance.SubmitScore(GameStats.ToScoreReq());
+		ScoreResult result = await ApiGodotGlue.Instance.SubmitScore(scoreReq);
+
+		if (result.Success && result.ScoreId != null && result.Rank != null)
+			ScoreSubmitted?.Invoke((Guid)result.ScoreId, (int)result.Rank);
 	}
 }
