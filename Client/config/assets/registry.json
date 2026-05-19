@@ -1,0 +1,7 @@
+{
+  "weapons": [
+    "res://assets/game/weapon/data_g0z_brt.tres",
+    "res://assets/game/weapon/data_p3_w.tres",
+    "res://assets/game/weapon/data_pw_fists.tres"
+  ]
+}
