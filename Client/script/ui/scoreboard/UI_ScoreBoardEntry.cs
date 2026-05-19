@@ -22,9 +22,6 @@ public partial class UI_ScoreBoardEntry : Control
 
         //_weapon.Texture = //... need to implement a registry of weapons icons.
 
-        if (_scoreRow.BestWeaponAccuracy == null)
-            _accuracy.Text = "N/A";
-        else
-            _accuracy.Text = Mathf.RoundToInt((float)_scoreRow.BestWeaponAccuracy * 100f) + " %";
+        _accuracy.Text = UI_ScoreBoardExtensions.DisplayAccuracy(_scoreRow.BestWeaponAccuracy);
     }
 }
