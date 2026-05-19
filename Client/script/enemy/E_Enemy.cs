@@ -6,6 +6,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 	[Export] private GC_HealthManager _healthManager;
 	[Export] public E_EnemySettings Settings;
 	[Export] private float _hideDelay;
+	[Export] private AnimationTree _animationTree;
 	[Export] private MeshInstance3D _surfaceMesh;
 	[Export] private MeshInstance3D _jointMesh;
 	[Export] private GL_Dropper _lootDropper;
@@ -202,6 +203,11 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 		Hide();
 		
 		SetPhysicsProcess(false);
+		_animationTree.Active = false;
+		_ragdolSimulator.PhysicalBonesStopSimulation();
+		_ragdolSimulator.Active = false;
+		_ragdolSimulator.ProcessMode = ProcessModeEnum.Disabled;
+		_skeleton.ProcessMode = ProcessModeEnum.Disabled;
 		OnDisable?.Invoke(this);
 	}
 
@@ -222,6 +228,10 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 
 		Show();
 		SetPhysicsProcess(true);
+		_animationTree.Active = true;
+		_ragdolSimulator.Active = true;
+		_ragdolSimulator.ProcessMode = ProcessModeEnum.Inherit;
+		_skeleton.ProcessMode = ProcessModeEnum.Inherit;
 		_healthManager.EnableHurt(CONF_Collision.Layers.EnnemiesHurtBox);
 		_ragdolSimulator?.PhysicalBonesStopSimulation();
 		_skeleton?.ResetBonePoses();
