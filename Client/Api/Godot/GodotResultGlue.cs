@@ -23,7 +23,9 @@ public static class ResultExtensions
         {
             ["success"] = result.Success,
             ["error"] = result.Error.ToString(),
-            ["message"] = result.Message ?? ""
+            ["message"] = result.Message ?? "",
+            ["score_id"] = result.ScoreId?.ToString() ?? "",
+            ["rank"] = result.Rank ?? -1
         };
     }
 }

@@ -11,7 +11,7 @@ namespace Api.Scores;
 
 [ApiController]
 [Route("api/scores")]
-public class ScoresController : ControllerBase
+public partial class ScoresController : ControllerBase
 {
     private readonly GameDbContext _db;
 
@@ -59,7 +59,17 @@ public class ScoresController : ControllerBase
         _db.Scores.Add(score);
         await _db.SaveChangesAsync();
 
-        return Ok();
+        var rank = await _db.Scores
+            .Where(x =>
+                x.MapKey == req.MapKey &&
+                x.Difficulty == req.Difficulty &&
+                x.Value > req.Score)
+            .CountAsync() + 1;
+
+        return Ok(new SubmitScoreResponse(
+            score.Id,
+            rank
+        ));
     }
 
     [HttpGet("map/{mapKey}")]

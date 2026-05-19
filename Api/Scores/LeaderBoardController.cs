@@ -1,0 +1,99 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Data.Db;
+using Data.Entities;
+using Shared.Scores;
+using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
+
+namespace Api.Scores;
+
+[Route("api/scores")]
+public partial class ScoresController : ControllerBase
+{
+    [HttpGet("leaderboard")]
+    public async Task<ActionResult<List<LeaderboardRowDto>>> GetLeaderboard(
+        string mapKey,
+        int difficulty,
+        int centerRank,
+        int take = 20)
+    {
+        var query = _db.Scores
+            .Include(x => x.Player)
+            .Include(x => x.WeaponStats)
+            .ThenInclude(ws => ws.Weapon)
+            .Where(x => x.Map.MapKey == mapKey && x.Difficulty == difficulty)
+            .OrderByDescending(x => x.Value);
+
+        var list = await query.ToListAsync();
+
+        var ranked = list
+            .Select((s, index) => new { Score = s, Rank = index + 1 })
+            .ToList();
+
+        int betterCount = (take + 1) / 2;
+        int worseCount = take / 2;
+
+        var topRank = centerRank - betterCount;
+        var overhead = Math.Min(topRank, 0);
+
+        topRank = Math.Max(0, topRank);
+        var botRank = centerRank + worseCount - overhead;
+
+        var window = ranked
+            .Where(x => x.Rank > topRank &&
+                        x.Rank <= botRank)
+            .ToList();
+
+        var result = window.Select(x =>
+        {
+            var bestWeapon = x.Score.WeaponStats
+                .OrderByDescending(w => w.Damage)
+                .FirstOrDefault();
+
+            return new LeaderboardRowDto(
+                    x.Rank,
+                    x.Score.Id,
+                    x.Score.Player.Username,
+                    x.Score.Value,
+                    x.Score.WeaponStats.Sum(w => w.Kills),
+                    x.Score.WeaponStats.Sum(w => w.Damage),
+                    bestWeapon?.Weapon.WeaponKey ?? "Unknown",
+                    bestWeapon?.Accuracy
+                );
+        });
+
+        return Ok(result);
+    }
+
+    [HttpGet("{id:guid}")]
+    public async Task<ActionResult<ScoreDto>> GetScore(Guid id)
+    {
+        var score = await _db.Scores
+            .Include(x => x.Player)
+            .Include(x => x.Map)
+            .Include(x => x.WeaponStats)
+            .ThenInclude(ws => ws.Weapon)
+            .FirstOrDefaultAsync(x => x.Id == id);
+
+        if (score == null)
+            return NotFound();
+
+        return new ScoreDto(
+            score.Id,
+            score.Player.Username,
+            score.Map.MapKey,
+            score.Difficulty,
+            score.Value,
+            score.TimeMs,
+            score.WeaponStats.Select(ws => new WeaponStatDto(
+                ws.Weapon.WeaponKey,
+                ws.Damage,
+                ws.Kills,
+                ws.Accuracy,
+                ws.CriticalAccuracy
+            )).ToList()
+        );
+    }
+}

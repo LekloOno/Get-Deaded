@@ -9,7 +9,7 @@ using System;
 
 namespace Client.Api.Score;
 
-public class ScoreApi : ApiClient
+public partial class ScoreApi : ApiClient
 {
     private static readonly JsonSerializerOptions JsonOptions =
         new()
@@ -61,11 +61,18 @@ public class ScoreApi : ApiClient
 
             if (!response.IsSuccessStatusCode)
             {
+                var successJson = await response.Content.ReadAsStringAsync();
+
+                var result = JsonSerializer.Deserialize<SubmitScoreResponse>(
+                    successJson,
+                    JsonOptions);
+
                 return new ScoreResult
                 {
-                    Success = false,
-                    Error = ScoreErrorType.ServerError,
-                    Message = $"Server error: {(int)response.StatusCode}"
+                    Success = true,
+                    Error = ScoreErrorType.None,
+                    ScoreId = result?.ScoreId,
+                    Rank = result?.Rank
                 };
             }
 

@@ -1,3 +1,5 @@
+using System;
+
 namespace Client.Api.Score;
 
 // Quite redundant, gotta figure out a way to abstract api errors from domain specific errors later
@@ -17,4 +19,7 @@ public class ScoreResult
     public bool Success { get; set; }
     public ScoreErrorType Error { get; set; }
     public string? Message { get; set; }
+
+    public Guid? ScoreId { get; set; }
+    public int? Rank { get; set; }
 }
