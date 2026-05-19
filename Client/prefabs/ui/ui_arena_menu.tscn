@@ -191,14 +191,14 @@ func register():
 	ApiGodotGlue.Register(username, password)
 	
 func _on_login_finished(result: Dictionary) -> void:
-	_handle_auth_result(result, true)
+	_handle_auth_result(result)
 
 
 func _on_register_finished(result: Dictionary) -> void:
-	_handle_auth_result(result, false)
+	_handle_auth_result(result)
 
 
-func _handle_auth_result(result: Dictionary, is_login: bool) -> void:
+func _handle_auth_result(result: Dictionary) -> void:
 	var success: bool = result.get(\"success\", false)
 	var error: String = result.get(\"error\", \"Unknown\")
 	var message: String = result.get(\"message\", \"\")
