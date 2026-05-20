@@ -32,6 +32,8 @@ public partial class SC_GameManager : Node
 
 	public Action<Guid, int> ScoreSubmitted;
 
+	private bool _active;
+
 	public override void _Ready()
 	{
 		_statsInput.DisableAction();
@@ -39,8 +41,13 @@ public partial class SC_GameManager : Node
 
 	public void Init(GE_IActiveCombatEntity player)
 	{
+		if (_active)
+			return;
+
 		if (player == null)
 			return;
+
+		_active = true;
 
 		if (_player != player)
 			InitNewPlayer(player);
@@ -144,6 +151,9 @@ public partial class SC_GameManager : Node
 
 		if (save && Session.IsAuthenticated)
 			SendScore(GameStats.ToScoreReq());
+
+		
+		_active = false;
 	}
 
 	private async void SendScore(SubmitScoreRequest scoreReq)

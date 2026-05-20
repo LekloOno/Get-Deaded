@@ -304,7 +304,7 @@ size_flags_vertical = 4
 text = "QUIT_BUTTON"
 script = ExtResource("4_vel4l")
 
-[node name="Node" type="Node" parent="MainMenu/Main" unique_id=1508343562 node_paths=PackedStringArray("_escapeMenu", "_difficultyMenu", "_offlineMenu", "_triggerButton")]
+[node name="PlayOfflineWarning" type="Node" parent="MainMenu/Main" unique_id=1508343562 node_paths=PackedStringArray("_escapeMenu", "_difficultyMenu", "_offlineMenu", "_triggerButton")]
 script = ExtResource("8_8es5r")
 _escapeMenu = NodePath("../../..")
 _difficultyMenu = NodePath("../../../Difficulty")

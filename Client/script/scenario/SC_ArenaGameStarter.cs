@@ -10,6 +10,8 @@ public partial class SC_ArenaGameStarter : Node
     [Export] private SC_GameManager _gameManager;
     private PM_Controller _player;
 
+    private bool _started;
+
     public override void _Ready()
     {
         _player = _playerPrefab.Instantiate<PM_Controller>();
@@ -26,10 +28,15 @@ public partial class SC_ArenaGameStarter : Node
         _menuCamera.MakeCurrent();
         Input.MouseMode = Input.MouseModeEnum.Visible;
         RemoveChild(_player);
+        _started = false;
     }
 
     public void StartGame()
     {
+        if (_started)
+            return;
+
+        _started = true;
         SC_EntitiesManager.DisablePickups();
         AddChild(_player);
         _player.Revive();
