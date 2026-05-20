@@ -56,7 +56,10 @@ public partial class GL_SlowMoProcess : Node
     private async void FadeIn()
     {
         if (_fadeInTimer != null)
+        {
             _fadeInTimer.Timeout -= FadeIn;
+            _fadeInTimer = null;
+        }
 
         _fadeTween?.Kill();
         _fadeTween = CreateTween();
@@ -74,7 +77,10 @@ public partial class GL_SlowMoProcess : Node
     private async void FadeOut()
     {
         if (_fadeOutTimer != null)
+        {
             _fadeOutTimer.Timeout -= FadeOut;
+            _fadeOutTimer = null;
+        }
 
         _fadeTween?.Kill();
         _fadeTween = CreateTween();
