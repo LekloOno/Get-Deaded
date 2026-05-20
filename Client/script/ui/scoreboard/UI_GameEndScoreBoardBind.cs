@@ -43,6 +43,6 @@ public partial class UI_GameEndScoreBoardBind : Node
     private void OnScoreSubmitted(Guid guid, int rank)
     {
         if (_entered)
-            _scoreBoardManager.Init(rank);
+            _scoreBoardManager.Init(guid, rank);
     }
 }

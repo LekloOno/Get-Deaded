@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Client.Api;
@@ -22,7 +23,7 @@ public partial class UI_ScoreBoard : Control
         _entryTemplate.SetProcess(false);
     }
 
-    public async Task InitializeAsync(E_EnemyDifficulty difficulty, int Rank = 1)
+    public async Task InitializeAsync(E_EnemyDifficulty difficulty, Guid? guid = null, int Rank = 1)
     {
         if (Initialized)
             return;
@@ -36,14 +37,20 @@ public partial class UI_ScoreBoard : Control
         );
         
         if (result.Success && result.Data != null)
-            CreateEntries(result.Data);
+            CreateEntries(result.Data, guid);
     }
 
-    private void CreateEntries(List<LeaderboardRowDto> rows)
+    private void CreateEntries(List<LeaderboardRowDto> rows, Guid? guid)
     {
         foreach (LeaderboardRowDto row in rows)
         {
             UI_ScoreBoardEntry entry = (UI_ScoreBoardEntry) _entryTemplate.Duplicate();
+            
+            if (row.ScoreId == guid)
+                entry.ThemeTypeVariation = "NewEntryPannel";
+            else
+                entry.ThemeTypeVariation = "EntryPannel";
+
             entry.Visible = true;
             entry.SetProcess(true);
             entry.Initialize(row);

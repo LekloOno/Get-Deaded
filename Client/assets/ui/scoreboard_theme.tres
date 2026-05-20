@@ -104,6 +104,9 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sd0c1"]
 bg_color = Color(0, 0, 0, 0.30980393)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qbtdp"]
+bg_color = Color(0.22669435, 0.37108883, 0.59655994, 0.7529412)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bhpmc"]
 bg_color = Color(0, 0, 0, 0.12156863)
 
@@ -143,6 +146,8 @@ Label/font_sizes/font_size = 25
 Label/styles/normal = SubResource("StyleBoxFlat_0xadh")
 LineEdit/font_sizes/font_size = 13
 LineEdit/styles/normal = SubResource("StyleBoxFlat_sd0c1")
+NewEntryPannel/base_type = &"PanelContainer"
+NewEntryPannel/styles/panel = SubResource("StyleBoxFlat_qbtdp")
 OptionButton/font_sizes/font_size = 11
 OptionButton/styles/normal = SubResource("StyleBoxFlat_bhpmc")
 Panel/styles/panel = SubResource("StyleBoxFlat_qvvi2")

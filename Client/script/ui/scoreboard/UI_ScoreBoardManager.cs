@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Client.Api.Score;
 using Godot;
@@ -19,7 +20,7 @@ public partial class UI_ScoreBoardManager : TabContainer
         Init();
     }
 
-    public async Task Init(int rank = 1)
+    public async Task Init(Guid? guid = null, int rank = 1)
     {
         _easyBoard.Clean();
         _normalBoard.Clean();
@@ -37,7 +38,7 @@ public partial class UI_ScoreBoardManager : TabContainer
             TabChanged += OnTabChanged;
         }
         
-        initBoard.InitializeAsync(difficulty, rank);
+        initBoard.InitializeAsync(difficulty, guid, rank);
     }
 
     private UI_ScoreBoard GetBoard(E_EnemyDifficulty difficulty)
