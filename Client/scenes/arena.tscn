@@ -76,7 +76,6 @@
 [ext_resource type="Shader" uid="uid://db85ge55ambmc" path="res://assets/shaders/light_flare.gdshader" id="114_xy3ri"]
 [ext_resource type="Texture2D" uid="uid://hq7k3p7jfrlm" path="res://assets/sprites/particles/smoke_particle.png" id="115_13yth"]
 [ext_resource type="Texture2D" uid="uid://bios2r24in8oi" path="res://assets/textures/factory/factory_wall_grey.png" id="116_7py7c"]
-[ext_resource type="Script" uid="uid://c1b6fea15qlys" path="res://script/scenario/SC_AimArenaAmoConfig.cs" id="117_n15bx"]
 [ext_resource type="Script" uid="uid://bwxdr2xchhkya" path="res://script/scenario/aim_game/SC_GameManager.cs" id="118_tkrox"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6e0wu"]
@@ -1238,9 +1237,6 @@ size = Vector3(0.2, 0.2, 0.6)
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 1.96
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_rpd6q"]
-size = Vector3(24, 2.4, 20)
 
 [sub_resource type="Resource" id="Resource_83tba"]
 script = ExtResource("33_7evfb")
@@ -2964,18 +2960,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.834246, -3.7062, 16.53397
 
 [node name="AimArena" type="Node" parent="entities" unique_id=1666434107]
 
-[node name="SC_AimArenaAmoConfig" type="Area3D" parent="entities/AimArena" unique_id=1803232225 node_paths=PackedStringArray("_gameManager")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.800001, -2.9, 14.8)
-collision_layer = 0
-collision_mask = 2
-script = ExtResource("117_n15bx")
-_gameManager = NodePath("../SC_GameManager")
-metadata/_custom_type_script = "uid://c1b6fea15qlys"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="entities/AimArena/SC_AimArenaAmoConfig" unique_id=780060227]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10000229, 1, -0.25)
-shape = SubResource("BoxShape3D_rpd6q")
-
 [node name="SC_GameManager" type="Node" parent="entities/AimArena" unique_id=1857231820 node_paths=PackedStringArray("_initial", "_uiCombatStats", "_statsInput")]
 script = ExtResource("118_tkrox")
 _initial = NodePath("SC_SequenceSpawner4")
@@ -3735,9 +3719,11 @@ parameters/looping = true
 [connection signal="Initialize" from="entities/AimArena/SC_GameManager" to="CanvasLayer/CountDown" method="OnGameInit"]
 [connection signal="Initialized" from="entities/AimArena/SC_GameManager" to="CanvasLayer/Menu" method="Close"]
 [connection signal="Initialized" from="entities/AimArena/SC_GameManager" to="CanvasLayer/Menu" method="SetPausable"]
+[connection signal="Initialized" from="entities/AimArena/SC_GameManager" to="CanvasLayer/Menu/MainMenu/Main/Play" method="hide"]
 [connection signal="Initialized" from="entities/AimArena/SC_GameManager" to="CanvasLayer/Menu/MainMenu/Main/Results" method="hide"]
 [connection signal="Initialized" from="entities/AimArena/SC_GameManager" to="CanvasLayer/Menu/MainMenu/Main/Surrender" method="show"]
 [connection signal="Initialized" from="entities/AimArena/SC_GameManager" to="music" method="stop"]
+[connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/Menu/MainMenu/Main/Play" method="show"]
 [connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/Menu/MainMenu/Main/Results" method="show"]
 [connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/Menu/MainMenu/Main/Surrender" method="hide"]
 [connection signal="ResetGame" from="entities/AimArena/SC_GameManager" to="CanvasLayer/PanelContainer" method="hide"]
