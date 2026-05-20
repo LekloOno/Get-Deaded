@@ -59,7 +59,7 @@ func end_buff():
 	if (bpm_tween):
 		bpm_tween.kill()
 		
-	if (buff_timer):
+	if (buff_timer && buff_timer.timeout.is_connected(end_buff)):
 		buff_timer.timeout.disconnect(end_buff)
 		
 	visible = false
