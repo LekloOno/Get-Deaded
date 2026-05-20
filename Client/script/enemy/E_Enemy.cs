@@ -208,6 +208,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 		_ragdolSimulator.Active = false;
 		_ragdolSimulator.ProcessMode = ProcessModeEnum.Disabled;
 		_skeleton.ProcessMode = ProcessModeEnum.Disabled;
+		ProcessMode = ProcessModeEnum.Disabled;
 		OnDisable?.Invoke(this);
 	}
 
@@ -228,10 +229,11 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 
 		Show();
 		SetPhysicsProcess(true);
-		_animationTree.Active = true;
-		_ragdolSimulator.Active = true;
-		_ragdolSimulator.ProcessMode = ProcessModeEnum.Inherit;
+		ProcessMode = ProcessModeEnum.Inherit;
 		_skeleton.ProcessMode = ProcessModeEnum.Inherit;
+		_ragdolSimulator.Active = true;
+		_animationTree.Active = true;
+		_ragdolSimulator.ProcessMode = ProcessModeEnum.Inherit;
 		_healthManager.EnableHurt(CONF_Collision.Layers.EnnemiesHurtBox);
 		_ragdolSimulator?.PhysicalBonesStopSimulation();
 		_skeleton?.ResetBonePoses();
