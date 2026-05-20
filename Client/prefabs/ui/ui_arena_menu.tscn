@@ -297,7 +297,7 @@ settings_menu = NodePath("../../../Settings")
 [node name="Leave" type="Button" parent="MainMenu/Main" unique_id=1742876575]
 visible = false
 layout_mode = 2
-text = "LEAVE_BUTTON"
+text = "MAIN_MENU_BUTTON"
 
 [node name="Surrender" type="Button" parent="MainMenu/Main" unique_id=2097849616]
 visible = false
