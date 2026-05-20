@@ -42,7 +42,7 @@ public partial class GL_Picker : Area3D
         CollisionMask = CONF_Collision.Masks.Picker;
     }
 
-    public void CleansEffects()
+    public void CleanseEffects()
     {
         if (GL_SlowMoProcess.Active != null)
             GL_SlowMoProcess.Active.Abort(true);

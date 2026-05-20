@@ -40,6 +40,7 @@ public partial class SC_ArenaGameStarter : Node
         SC_EntitiesManager.ForceSpawn();
         _menuCamera.MakeCurrent();
         Input.MouseMode = Input.MouseModeEnum.Visible;
+        _player.Picker.CleanseEffects();
         RemoveChild(_player);
 
         _started = false;
