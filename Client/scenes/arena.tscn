@@ -80,7 +80,6 @@
 [ext_resource type="Script" uid="uid://djrjee7qnnptw" path="res://script/ui/combat/weapon/statistics/UIW_ArenaEnd.cs" id="53_00ph2"]
 [ext_resource type="Script" uid="uid://bnxb1ihj1snbq" path="res://script/ui/game/UI_ArenaCountDown.cs" id="55_6d1h2"]
 [ext_resource type="Script" uid="uid://b0h6mwxwlnjj7" path="res://script/animation/an_menu_camera_swaps.gd" id="55_a7862"]
-[ext_resource type="Script" uid="uid://d3x85bspwdnaw" path="res://script/ui/game/UI_DamageBuff.cs" id="65_1iiwa"]
 [ext_resource type="Script" uid="uid://d0oi05of1hh7a" path="res://script/global/loot/pickable/data/GL_SlowMoData.cs" id="67_2ktue"]
 [ext_resource type="PackedScene" uid="uid://cwgob6v5teuxx" path="res://prefabs/mapping/pickups/slowmo/slowmo_pickup.tscn" id="67_p36uw"]
 [ext_resource type="PackedScene" uid="uid://sjskj611j41x" path="res://prefabs/mapping/pickups/slowmo/slomo_process.tscn" id="68_tq647"]
@@ -2513,13 +2512,13 @@ shader_parameter/fluctuation_strength = 0.6
 shader_parameter/fluctuation_sharpness = 1.0
 shader_parameter/fluctuation_speed = 0.4
 
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_p36uw"]
+
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_tq647"]
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_pwta3"]
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_32wy6"]
-
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_scwkl"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_80xvo"]
 size = Vector3(0.2, 0.2, 0.6)
@@ -2886,15 +2885,6 @@ metadata/_custom_type_script = "uid://foau1gurk2py"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ur278"]
 bg_color = Color(0, 0, 0, 0.28235295)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1iiwa"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 40
-border_width_top = 40
-border_width_right = 40
-border_width_bottom = 40
-border_color = Color(0.4745098, 0.46666667, 1, 0.42745098)
-border_blend = true
 
 [node name="Node3D" type="Node3D" unique_id=836354206]
 
@@ -4418,7 +4408,7 @@ spot_angle_attenuation = 0.15932
 [node name="VFX_GodsRay" parent="arena/Lights/Projector" unique_id=605019919 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.27160624, -0.9330127, 0.23604527, 0.017453581, 0.25000003, 0.9680885, -0.9622502, -0.2588191, 0.0841859, -22.38988, 5.6927605, 5.072876)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_tq647")
+mesh = SubResource("ImmediateMesh_p36uw")
 skeleton = NodePath("../../..")
 BaseRadius = 0.38
 InitialRotation = 45.0
@@ -4426,7 +4416,7 @@ InitialRotation = 45.0
 [node name="VFX_GodsRay3" parent="arena/Lights/Projector/VFX_GodsRay" unique_id=802324590 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.9999999, -1.4901161e-08, 7.450581e-09, -1.4901161e-08, 0.9999999, -3.1664968e-08, 0, 1.8626451e-09, 0.99999994, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_pwta3")
+mesh = SubResource("ImmediateMesh_tq647")
 skeleton = NodePath("../../../..")
 BaseRadius = 0.14
 InitialRotation = 45.0
@@ -4435,7 +4425,7 @@ FlareAngle = 6.0
 [node name="VFX_GodsRay2" parent="arena/Lights/Projector" unique_id=164366595 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.05200698, -0.25727454, -0.9649379, 0.9678007, 0.25127998, -0.0148357125, 0.24628639, -0.933096, 0.2620588, -25.830011, 7.2676578, 9.14106)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_32wy6")
+mesh = SubResource("ImmediateMesh_pwta3")
 skeleton = NodePath("../../..")
 BaseRadius = 0.36
 InitialRotation = 45.0
@@ -4443,7 +4433,7 @@ InitialRotation = 45.0
 [node name="VFX_GodsRay3" parent="arena/Lights/Projector/VFX_GodsRay2" unique_id=294127740 instance=ExtResource("113_ie87n")]
 transform = Transform3D(1, 1.4901161e-08, 0, 1.4901161e-08, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_scwkl")
+mesh = SubResource("ImmediateMesh_32wy6")
 skeleton = NodePath("../../../..")
 BaseRadius = 0.14
 InitialRotation = 45.0
@@ -5959,65 +5949,6 @@ _scaleTime = 0.25
 _opacityTrans = 5
 _opacityTime = 0.2
 
-[node name="DamageBuffTracker" type="BoxContainer" parent="CanvasLayer" unique_id=1146335516 node_paths=PackedStringArray("_damageSpawner", "_timerLabel", "_boostLabel", "_vignette")]
-modulate = Color(0.4745098, 0.46666667, 1, 0.79607844)
-offset_left = 860.0
-offset_top = 512.0
-offset_right = 922.0
-offset_bottom = 568.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset_ratio = Vector2(1, 0.5)
-size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_filter = 2
-theme_override_constants/separation = 0
-vertical = true
-script = ExtResource("65_1iiwa")
-_damageSpawner = NodePath("../../entities/Pickups/DamageBuff")
-_timerLabel = NodePath("Label")
-_boostLabel = NodePath("BoxContainer/Buff")
-_vignette = NodePath("../DamageBuffPulse")
-_vignetteStyle = SubResource("StyleBoxFlat_1iiwa")
-_lowBpm = 35.0
-_highBpm = 110.0
-_maxSize = 45
-_bpmTrans = 5
-
-[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer/DamageBuffTracker" unique_id=1653111876]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 4
-
-[node name="BuffLabel" type="Label" parent="CanvasLayer/DamageBuffTracker/BoxContainer" unique_id=1527831092]
-self_modulate = Color(1, 1, 1, 0.72156864)
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "DMG X"
-vertical_alignment = 2
-
-[node name="Buff" type="Label" parent="CanvasLayer/DamageBuffTracker/BoxContainer" unique_id=1031419206]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "0"
-vertical_alignment = 1
-
-[node name="Label" type="Label" parent="CanvasLayer/DamageBuffTracker" unique_id=1617057785]
-layout_mode = 2
-size_flags_horizontal = 8
-theme_override_font_sizes/font_size = 20
-text = "0"
-horizontal_alignment = 2
-
-[node name="DamageBuffPulse" type="PanelContainer" parent="CanvasLayer" unique_id=1805293569]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_1iiwa")
-
 [node name="GameEndScoreBoardBind" type="Node" parent="CanvasLayer" unique_id=706415906 node_paths=PackedStringArray("_escapeMenu", "_scoreBoardManager", "_gameManager", "_briefScore")]
 script = ExtResource("76_b76a6")
 _escapeMenu = NodePath("../Menu")
@@ -6059,7 +5990,6 @@ parameters/looping = true
 [connection signal="Reseted" from="SC_ArenaGameStarter" to="CanvasLayer/Menu/MainMenu/Main/ScoreBoard" method="show"]
 [connection signal="Reseted" from="SC_ArenaGameStarter" to="CanvasLayer/Menu/MainMenu/Main/Leave" method="hide"]
 [connection signal="Reseted" from="SC_ArenaGameStarter" to="CanvasLayer/Menu/MainMenu/Main/Surrender" method="hide"]
-[connection signal="Reseted" from="SC_ArenaGameStarter" to="CanvasLayer/DamageBuffTracker" method="EndBuff"]
 [connection signal="Reseted" from="SC_ArenaGameStarter" to="music" method="play"]
 [connection signal="RoamingStarted" from="SC_ArenaGameStarter" to="CanvasLayer/Menu/MainMenu/Main/Leave" method="show"]
 [connection signal="SceneInitialized" from="SC_ArenaGameStarter" to="CanvasLayer/Menu" method="Close"]

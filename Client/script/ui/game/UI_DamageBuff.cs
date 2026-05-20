@@ -3,7 +3,7 @@ using Godot;
 [GlobalClass]
 public partial class UI_DamageBuff : Control
 {
-    [Export] private PickableSpawner _damageSpawner;
+    [Export] private GL_Picker _picker;
     [Export] private Label _timerLabel;
     [Export] private Label _boostLabel;
     [Export] private Control _vignette;
@@ -38,14 +38,12 @@ public partial class UI_DamageBuff : Control
     public override void _Ready()
     {
         EndBuff();
-        _damageSpawner.PickedUp += PickedUp;
+        _picker.DamageBuffPicked += PickedUp;
+        _picker.EffectsCleansed += EndBuff;
     }
 
-    private void PickedUp(GL_PickableData pickable)
+    private void PickedUp(GL_DamageBuffData buffData)
     {
-        if (pickable is not GL_DamageBuffData buffData)
-            return;
-
         if (_buffTimer != null)
             _buffTimer.Timeout -= EndBuff;
 

@@ -6,6 +6,7 @@ public class GL_SlowMoPickHandler(GL_SlowMoData data) : GL_IPickHandler
         GL_SlowMoProcess process = _data.SlowMoProcess.Instantiate<GL_SlowMoProcess>();
         process.InitData(_data);
         picker.AddChild(process);
+        picker.PickSlowMo(_data);
         return true;
     }
 }

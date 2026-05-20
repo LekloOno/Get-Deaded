@@ -5,6 +5,7 @@
 
 [node name="SlomoProcess" type="Node" unique_id=682648230 node_paths=PackedStringArray("_sound")]
 script = ExtResource("1_ryhah")
+_fadeInTime = 0.8
 _sound = NodePath("AudioStreamPlayer")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=249288541]
