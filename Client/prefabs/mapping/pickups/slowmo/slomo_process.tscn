@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://sjskj611j41x"]
+
+[ext_resource type="Script" uid="uid://co51burjcgdie" path="res://script/global/loot/pickable/core/handlers/slowmo/GL_SlowMoProcess.cs" id="1_ryhah"]
+[ext_resource type="AudioStream" uid="uid://jrwt3jrp4o52" path="res://assets/sounds/world/slowmo_pickup.wav" id="2_adt1t"]
+
+[node name="SlomoProcess" type="Node" unique_id=682648230 node_paths=PackedStringArray("_sound")]
+script = ExtResource("1_ryhah")
+_sound = NodePath("AudioStreamPlayer")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=249288541]
+stream = ExtResource("2_adt1t")
+volume_db = 2.0
+bus = &"Environment Sfx"

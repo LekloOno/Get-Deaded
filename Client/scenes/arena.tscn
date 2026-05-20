@@ -81,6 +81,9 @@
 [ext_resource type="Script" uid="uid://bnxb1ihj1snbq" path="res://script/ui/game/UI_ArenaCountDown.cs" id="55_6d1h2"]
 [ext_resource type="Script" uid="uid://b0h6mwxwlnjj7" path="res://script/animation/an_menu_camera_swaps.gd" id="55_a7862"]
 [ext_resource type="Script" uid="uid://d3x85bspwdnaw" path="res://script/ui/game/UI_DamageBuff.cs" id="65_1iiwa"]
+[ext_resource type="Script" uid="uid://d0oi05of1hh7a" path="res://script/global/loot/pickable/data/GL_SlowMoData.cs" id="67_2ktue"]
+[ext_resource type="PackedScene" uid="uid://cwgob6v5teuxx" path="res://prefabs/mapping/pickups/slowmo/slowmo_pickup.tscn" id="67_p36uw"]
+[ext_resource type="PackedScene" uid="uid://sjskj611j41x" path="res://prefabs/mapping/pickups/slowmo/slomo_process.tscn" id="68_tq647"]
 [ext_resource type="AudioStream" uid="uid://cspq87nko4mud" path="res://assets/sounds/music/cacamenu.mp3" id="71_4nhhj"]
 [ext_resource type="Script" uid="uid://njp2nejpe1bw" path="res://script/ui/scoreboard/UI_GameEndScoreBoardBind.cs" id="76_b76a6"]
 [ext_resource type="LightmapGIData" uid="uid://d3cc8iupunnf1" path="res://scenes/arena.lmbake" id="112_hskjd"]
@@ -2510,13 +2513,13 @@ shader_parameter/fluctuation_strength = 0.6
 shader_parameter/fluctuation_sharpness = 1.0
 shader_parameter/fluctuation_speed = 0.4
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_xplsa"]
-
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_2ktue"]
-
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_p36uw"]
-
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_tq647"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_pwta3"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_32wy6"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_scwkl"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_80xvo"]
 size = Vector3(0.2, 0.2, 0.6)
@@ -2791,6 +2794,23 @@ size = Vector3(0.6, 0.1, 0.6)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_a7862"]
 viewport_path = NodePath("entities/Pickups/DamageBuff/Sprite3D/SubViewport")
+
+[sub_resource type="Resource" id="Resource_scwkl"]
+script = ExtResource("36_u80kj")
+RepulsingStrength = 50.0
+RepulsingCurve = SubResource("Curve_mossj")
+SphereShape = SubResource("SphereShape3D_8jgwj")
+CollisionMask = 1
+metadata/_custom_type_script = "uid://c3akiwtfovofa"
+
+[sub_resource type="Resource" id="Resource_xbiqi"]
+script = ExtResource("67_2ktue")
+SlowMoProcess = ExtResource("68_tq647")
+Factor = 0.4
+Duration = 5.0
+Model = ExtResource("67_p36uw")
+_repulsionData = SubResource("Resource_scwkl")
+metadata/_custom_type_script = "uid://d0oi05of1hh7a"
 
 [sub_resource type="Curve" id="Curve_q2sf5"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.713287, 0.328551), 1.58362, 1.58362, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -4398,7 +4418,7 @@ spot_angle_attenuation = 0.15932
 [node name="VFX_GodsRay" parent="arena/Lights/Projector" unique_id=605019919 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.27160624, -0.9330127, 0.23604527, 0.017453581, 0.25000003, 0.9680885, -0.9622502, -0.2588191, 0.0841859, -22.38988, 5.6927605, 5.072876)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_xplsa")
+mesh = SubResource("ImmediateMesh_tq647")
 skeleton = NodePath("../../..")
 BaseRadius = 0.38
 InitialRotation = 45.0
@@ -4406,7 +4426,7 @@ InitialRotation = 45.0
 [node name="VFX_GodsRay3" parent="arena/Lights/Projector/VFX_GodsRay" unique_id=802324590 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.9999999, -1.4901161e-08, 7.450581e-09, -1.4901161e-08, 0.9999999, -3.1664968e-08, 0, 1.8626451e-09, 0.99999994, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_2ktue")
+mesh = SubResource("ImmediateMesh_pwta3")
 skeleton = NodePath("../../../..")
 BaseRadius = 0.14
 InitialRotation = 45.0
@@ -4415,7 +4435,7 @@ FlareAngle = 6.0
 [node name="VFX_GodsRay2" parent="arena/Lights/Projector" unique_id=164366595 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.05200698, -0.25727454, -0.9649379, 0.9678007, 0.25127998, -0.0148357125, 0.24628639, -0.933096, 0.2620588, -25.830011, 7.2676578, 9.14106)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_p36uw")
+mesh = SubResource("ImmediateMesh_32wy6")
 skeleton = NodePath("../../..")
 BaseRadius = 0.36
 InitialRotation = 45.0
@@ -4423,7 +4443,7 @@ InitialRotation = 45.0
 [node name="VFX_GodsRay3" parent="arena/Lights/Projector/VFX_GodsRay2" unique_id=294127740 instance=ExtResource("113_ie87n")]
 transform = Transform3D(1, 1.4901161e-08, 0, 1.4901161e-08, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_tq647")
+mesh = SubResource("ImmediateMesh_scwkl")
 skeleton = NodePath("../../../..")
 BaseRadius = 0.14
 InitialRotation = 45.0
@@ -5287,10 +5307,12 @@ mesh = SubResource("BoxMesh_nag6q")
 script = ExtResource("47_spnam")
 Player = NodePath("AudioStreamPlayer")
 UseTimeScale = true
+BasePitchScale = 1.05
 metadata/_custom_type_script = "uid://dbtsyp0hru7g"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="entities/Pickups/DamageBuff/AUD_StreamPlayer1D" unique_id=2137030289]
 stream = ExtResource("48_vfx8u")
+pitch_scale = 1.05
 
 [node name="Sprite3D" type="Sprite3D" parent="entities/Pickups/DamageBuff" unique_id=137928399]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.099999905, 0)
@@ -5302,6 +5324,60 @@ transparent_bg = true
 size = Vector2i(64, 64)
 
 [node name="UI_PickupCooldown" type="TextureProgressBar" parent="entities/Pickups/DamageBuff/Sprite3D/SubViewport" unique_id=1173418490 node_paths=PackedStringArray("_pickupSpawner")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+step = 0.1
+value = 50.0
+fill_mode = 4
+texture_under = ExtResource("49_4nhhj")
+texture_progress = ExtResource("50_a7862")
+tint_under = Color(1, 1, 1, 0.47058824)
+tint_progress = Color(0.4236506, 0.42365065, 0.42365053, 0.8117647)
+script = ExtResource("51_kjqme")
+_pickupSpawner = NodePath("../../..")
+metadata/_custom_type_script = "uid://b6wuemumhi18m"
+
+[node name="SlowMo" type="Node3D" parent="entities/Pickups" unique_id=1739654681]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.100002, 0.30000046, 14.9)
+script = ExtResource("34_8jgwj")
+_pickableData = SubResource("Resource_xbiqi")
+_startSpawned = true
+RespawnDelay = 10.0
+metadata/_custom_type_script = "uid://dpsrelwawyisv"
+
+[node name="OmniLight3D" type="OmniLight3D" parent="entities/Pickups/SlowMo" unique_id=593385061]
+light_color = Color(0, 0.66469324, 0.16627505, 1)
+light_energy = 2.5
+distance_fade_enabled = true
+omni_range = 2.0
+omni_attenuation = 2.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="entities/Pickups/SlowMo" unique_id=438174181]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+material_override = ExtResource("38_7jf4w")
+mesh = SubResource("BoxMesh_nag6q")
+
+[node name="Sprite3D" type="Sprite3D" parent="entities/Pickups/SlowMo" unique_id=650176717]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.099999905, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_a7862")
+
+[node name="SubViewport" type="SubViewport" parent="entities/Pickups/SlowMo/Sprite3D" unique_id=807321201]
+transparent_bg = true
+size = Vector2i(64, 64)
+
+[node name="UI_PickupCooldown" type="TextureProgressBar" parent="entities/Pickups/SlowMo/Sprite3D/SubViewport" unique_id=1586764789 node_paths=PackedStringArray("_pickupSpawner")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -5687,7 +5763,10 @@ transform = Transform3D(0.83226436, 0.14305378, 0.53560406, 0, 0.96613336, -0.25
 
 [node name="preload" type="Node" parent="." unique_id=963765076]
 
-[node name="DamageMultiplier" parent="preload" unique_id=518475886 instance=ExtResource("35_8jgwj")]
+[node name="DamageMultiplier2" parent="preload" unique_id=518475886 instance=ExtResource("67_p36uw")]
+transform = Transform3D(0.54327995, 0.2726967, -0.7940299, 0, 0.9457785, 0.3248123, 0.8395517, -0.176464, 0.51382244, -17.314505, -19.432741, 42.298172)
+
+[node name="DamageMultiplier" parent="preload" unique_id=82937833 instance=ExtResource("35_8jgwj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, -19.5, 41)
 
 [node name="CollisionShape3D" parent="preload" unique_id=1612844673 instance=ExtResource("35_m44an")]
