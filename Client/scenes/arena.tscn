@@ -5278,6 +5278,7 @@ top_level = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.1, -7.9999995, 50.8)
 script = ExtResource("34_8jgwj")
 _pickableData = SubResource("Resource_yln86")
+_startSpawned = true
 RespawnDelay = 30.0
 metadata/_custom_type_script = "uid://dpsrelwawyisv"
 
