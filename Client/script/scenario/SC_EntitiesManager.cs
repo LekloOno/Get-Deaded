@@ -1,8 +1,11 @@
+using System;
 using System.Collections.Generic;
 
 public static class SC_EntitiesManager
 {
     private static List<PickableSpawner> _pickupSpawners = [];
+
+    public static Action PickupsDisabled;
 
     public static void Register(PickableSpawner spawner) =>
         _pickupSpawners.Add(spawner);
@@ -20,6 +23,8 @@ public static class SC_EntitiesManager
     {
         foreach (PickableSpawner spawner in _pickupSpawners)
             spawner.Disable();
+
+        PickupsDisabled?.Invoke();
     }
 
     public static void ForceSpawn()

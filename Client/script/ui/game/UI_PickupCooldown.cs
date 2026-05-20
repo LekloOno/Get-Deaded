@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 [GlobalClass]
@@ -16,9 +17,21 @@ public partial class UI_PickupCooldown : TextureProgressBar
         mod.A = 0f;
         Modulate = mod;
         Value = MinValue;
+
+        SC_EntitiesManager.PickupsDisabled += OnPickupsDisabled;
     }
 
-    private void OnStartLoading()
+    private void OnPickupsDisabled()
+    {
+        _loadTween?.Kill();
+        _fadeInTween?.Kill();
+
+        _loadTween = CreateTween();
+        _loadTween.TweenProperty(this, "modulate:a", 0f, _fadeOutTime);
+    }
+
+
+    private void OnStartLoading(float delay)
     {
         Value = MinValue;
 
@@ -29,7 +42,7 @@ public partial class UI_PickupCooldown : TextureProgressBar
         _fadeInTween = CreateTween();
 
         _fadeInTween.TweenProperty(this, "modulate:a", 1f, _fadeInTime);
-        _loadTween.TweenProperty(this, "value", MaxValue, _pickupSpawner.RespawnDelay);
+        _loadTween.TweenProperty(this, "value", MaxValue, delay);
         _loadTween.TweenProperty(this, "modulate:a", 0f, _fadeOutTime);
     }
 }

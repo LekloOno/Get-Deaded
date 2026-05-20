@@ -5,7 +5,7 @@ using Godot;
 public partial class PickableSpawner : Node3D
 {
     [Signal] delegate void PickEventHandler();
-    public Action StartLoading;
+    public Action<float> StartLoading;
     public Action<GL_PickableData> PickedUp;
     [Export] private GL_PickableData _pickableData;
     private GL_PhysicsPickable _current;
@@ -22,6 +22,17 @@ public partial class PickableSpawner : Node3D
     /// Or if it first spawns it after its spawning delay.
     /// </summary>
     [Export] private bool _startSpawned;
+    /// <summary>
+    /// Spawns only once
+    /// </summary>
+    [Export] private bool _oneShot = false;
+    /// <summary>
+    /// If startSpawned is false, this is the first delay for the item to spawn,
+    /// then it will be respawn delay.
+    /// 
+    /// If it is 0, the initial delay is RespawnDelay.
+    /// </summary>
+    [Export] private float _initialDelay = 0f;
     /// <summary>
     /// The time for the spawner to spawn the pickup once it has been picked up.
     /// </summary>
@@ -41,6 +52,7 @@ public partial class PickableSpawner : Node3D
     /// </summary>
     [Export] private float _recenterDelay = 5f;
     private float _outOfRadiusTime = 0f;
+    private bool _dropped = false;
     private SceneTreeTimer _respawnTimer;
 
     public override void _Ready()
@@ -80,8 +92,12 @@ public partial class PickableSpawner : Node3D
 
     public void Enable()
     {
+        _dropped = false;
+
         if (_startSpawned)
             Drop();
+        else if (_initialDelay > 0)
+            RespawnIn(_initialDelay);
         else
             Respawn();
     }
@@ -106,6 +122,11 @@ public partial class PickableSpawner : Node3D
         if (_current != null)
             return;
 
+        if (_oneShot && _dropped)
+            return;
+
+        _dropped = true;
+
         _current = _pickableData.GeneratePhysics(_horizontalDamp, _lifeTime);
         _current.TreeExiting += OnFree;
         AddChild(_current);
@@ -123,12 +144,15 @@ public partial class PickableSpawner : Node3D
         Respawn();
     }
 
-    private void Respawn()
-    {   
-        StartLoading?.Invoke();
-        _respawnTimer = GetTree().CreateTimer(RespawnDelay, false, true);
+    private void RespawnIn(float delay)
+    {
+        StartLoading?.Invoke(delay);
+        _respawnTimer = GetTree().CreateTimer(delay, false, true);
         _respawnTimer.Timeout += Drop;
     }
+
+    private void Respawn() =>
+        RespawnIn(RespawnDelay);
 
     private void Clean()
     {
