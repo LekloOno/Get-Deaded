@@ -21,7 +21,7 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
     private Random _rng = new();
     public SceneTreeTimer RoundTimer;
 
-    private List<Queue<E_IEnemy>> _enemyPools = [];
+    private List<Stack<E_IEnemy>> _enemyPools = [];
 
     private int _spawnPoolIndex;
     private int _timerIndex;
@@ -53,13 +53,15 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
         for (int poolIndex = 0; poolIndex < _enemyBuilders.Count; poolIndex ++)
         {
             E_EnemyBuilder builder = _enemyBuilders[poolIndex];
-            Queue<E_IEnemy> pool = [];
+            Stack<E_IEnemy> pool = [];
             _enemyPools.Add([]);
             for (int i = 0; i < _count; i++)
             {
                 E_Enemy enemy = builder.Build();
                 _enemyToPool.Add(enemy, poolIndex);
+                _enemyPools[poolIndex].Push(enemy);
                 CreateEnemy(enemy);
+                
             }
         }
 
@@ -74,17 +76,30 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
 
     private void SpawnNextEnemy()
     {
-        E_IEnemy enemy = _enemyPools[_spawnPoolIndex].Dequeue();
+        int index = _spawnPoolIndex;
         _spawnPoolIndex ++;
         _spawnPoolIndex %= _enemyBuilders.Count;
+
+        if (!_enemyPools[index].TryPop(out E_IEnemy? enemy))
+        {
+            E_IEnemy newEnemy = _enemyBuilders[index].Build();
+            _enemyToPool.Add(newEnemy, index);
+            CreateEnemy(newEnemy);
+            enemy = newEnemy;
+        }
+
         
         SpawnEnemy(enemy);
     }
 
-    private void Killed(E_IEnemy enemy)
+    private void OnDisabled(E_IEnemy enemy)
     {
-        RemoveEnemy(enemy);
+        int pool = _enemyToPool[enemy];
+        _enemyPools[pool].Push(enemy);
+    }
 
+    private void Killed(E_IEnemy enemy, GC_Health _)
+    {
         var index = _timerIndex;
 
         _timerIndex ++;
@@ -106,7 +121,10 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
 
         ClearEnemies();
         foreach (E_IEnemy enemy in Enemies)
-            enemy.OnDisable -= Killed;
+        {
+            enemy.OnDisable -= OnDisabled;
+            enemy.OnDie -= Killed;
+        }
     }
 
 
@@ -135,16 +153,14 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
         SpawnBots();
         foreach (E_IEnemy enemy in Enemies)
         {
-            enemy.OnDisable += Killed;
+            enemy.OnDisable += OnDisabled;
+            enemy.OnDie += Killed;
             enemy.Target = starter;
         }
     }
 
     protected override void CreateEnemySpec(E_IEnemy enemy)
     {
-        int pool = _enemyToPool[enemy];
-        _enemyPools[pool].Enqueue(enemy);
-
         if (enemy is not Node node)
             return;
 
@@ -174,13 +190,14 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
     protected override void RemoveEnemy(E_IEnemy enemy)
     {
         int pool = _enemyToPool[enemy];
-        _enemyPools[pool].Enqueue(enemy);
+        _enemyPools[pool].Push(enemy);
         enemy.Pool();
     }
 
     protected override void QueueFreeEnemySpec(E_IEnemy enemy)
     {
-        enemy.OnDisable -= Killed;
+        enemy.OnDisable -= OnDisabled;
+        enemy.OnDie -= Killed;
         _enemyToPool.Remove(enemy);
     }
 }

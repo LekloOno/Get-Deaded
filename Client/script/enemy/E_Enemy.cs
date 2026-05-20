@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Godot;
 
 public partial class E_Enemy : GB_CharacterBody, E_IEnemy
@@ -165,14 +166,34 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 		_jointMeshMaterial.SetShaderParameter("albedo", _initialJointColor);
 	}
 
-	public void PlayDeath(E_IEnemy _, GC_Health health)
+	public async void PlayDeath(E_IEnemy _, GC_Health health)
 	{
 		_lootDropper.Drop();
 		_ragdolSimulator?.PhysicalBonesStartSimulation();
-		Pool();
+		await DeathDisable();
 	}
 
-	public void Pool()
+	public async Task DeathDisable()
+	{
+		DisableActions();
+		await HideMesh();
+		DisableBase();
+		OnDisable?.Invoke(this);
+	}
+
+	private void DisableBase()
+	{
+		Hide();
+		SetPhysicsProcess(false);
+		_animationTree.Active = false;
+		_ragdolSimulator.PhysicalBonesStopSimulation();
+		_ragdolSimulator.Active = false;
+		_ragdolSimulator.ProcessMode = ProcessModeEnum.Disabled;
+		_skeleton.ProcessMode = ProcessModeEnum.Disabled;
+		ProcessMode = ProcessModeEnum.Disabled;
+	}
+
+	private void DisableActions()
 	{
 		Fire?.Disable();
 		_shooting = false;
@@ -187,29 +208,23 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 		Enabled = false;
 		CollisionLayer = 0;
 		_healthManager.DisableHurt();
+	}
+
+	public void Pool()
+	{
+		DisableActions();
+		DisableBase();
 
 		//_hideTimer = GetTree().CreateTimer(_hideDelay);
 		//_hideTimer.Timeout += Hide;
-		HideMesh();
 	}
 
-	public async void HideMesh()
+	public async Task HideMesh()
 	{
 		Tween opacityTween = CreateTween();
 		opacityTween.TweenProperty(this, "Alpha", 0f, _hideDelay);
 
 		await ToSignal(opacityTween, "finished");
-		
-		Hide();
-		
-		SetPhysicsProcess(false);
-		_animationTree.Active = false;
-		_ragdolSimulator.PhysicalBonesStopSimulation();
-		_ragdolSimulator.Active = false;
-		_ragdolSimulator.ProcessMode = ProcessModeEnum.Disabled;
-		_skeleton.ProcessMode = ProcessModeEnum.Disabled;
-		ProcessMode = ProcessModeEnum.Disabled;
-		OnDisable?.Invoke(this);
 	}
 
 	public void Spawn()
