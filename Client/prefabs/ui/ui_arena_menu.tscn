@@ -252,6 +252,7 @@ volume_db = 2.0
 script = ExtResource("28_no00x")
 
 [node name="MainMenu" type="PanelContainer" parent="." unique_id=2094783053]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -292,6 +293,11 @@ size_flags_vertical = 4
 text = "SETTINGS_BUTTON"
 script = ExtResource("3_vyhg5")
 settings_menu = NodePath("../../../Settings")
+
+[node name="Leave" type="Button" parent="MainMenu/Main" unique_id=1742876575]
+visible = false
+layout_mode = 2
+text = "LEAVE_BUTTON"
 
 [node name="Surrender" type="Button" parent="MainMenu/Main" unique_id=2097849616]
 visible = false
@@ -2290,7 +2296,6 @@ size_flags_vertical = 8
 text = "BACK_BUTTON"
 
 [node name="Difficulty" type="VBoxContainer" parent="." unique_id=340452415 node_paths=PackedStringArray("menu")]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2316,6 +2321,11 @@ layout_mode = 2
 text = "DIFFICULTY_DESCRIPTION_TEXT"
 horizontal_alignment = 1
 autowrap_mode = 2
+
+[node name="Roaming" type="Button" parent="Difficulty" unique_id=1695223881]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "DIFFICULTY_ROAMING_BUTTON"
 
 [node name="Levels" type="VBoxContainer" parent="Difficulty" unique_id=867901666]
 layout_mode = 2
@@ -2449,6 +2459,7 @@ size_flags_vertical = 4
 text = "REGISTER_BUTTON"
 
 [node name="UiScoreboard" parent="." unique_id=722862887 instance=ExtResource("39_o1fwb")]
+visible = false
 layout_mode = 1
 scale = Vector2(0.95, 0.95)
 pivot_offset_ratio = Vector2(0.5, 0.5)
@@ -2497,6 +2508,8 @@ text = "CANCEL_BUTTON"
 [connection signal="enter_settings" from="MainMenu/Main/Settings" to="." method="Enter"]
 [connection signal="mouse_entered" from="MainMenu/Main/Settings" to="Hover" method="play"]
 [connection signal="pressed" from="MainMenu/Main/Settings" to="Click" method="play"]
+[connection signal="mouse_entered" from="MainMenu/Main/Leave" to="Hover" method="play"]
+[connection signal="pressed" from="MainMenu/Main/Leave" to="Click" method="play"]
 [connection signal="mouse_entered" from="MainMenu/Main/Surrender" to="Hover" method="play"]
 [connection signal="pressed" from="MainMenu/Main/Surrender" to="Click" method="play"]
 [connection signal="mouse_entered" from="MainMenu/Main/Quit" to="Hover" method="play"]
