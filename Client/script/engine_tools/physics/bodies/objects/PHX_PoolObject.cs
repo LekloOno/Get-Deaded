@@ -1,3 +1,5 @@
+using System;
+
 public interface PHX_PoolObject
 {
     /// <summary>
@@ -10,4 +12,5 @@ public interface PHX_PoolObject
     /// Typically enabling physics process, showing, etc.
     /// </summary>
     void Spawn();
+    public event Action Spawned;
 }

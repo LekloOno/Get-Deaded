@@ -43,6 +43,9 @@ public partial class GC_HealthManager : Node3D
 	public HealthInitEventArgs InitState {get; private set;} = null;
 
 	public EventHandler<HealthInitEventArgs> OnLayerInit;
+	public event Action<Vector3, HitEventArgs>? HitReceived;
+	public void OnHurtBoxHitReceived(Vector3 pos, HitEventArgs args) =>
+		HitReceived?.Invoke(pos, args);
 
 	public virtual bool Damage(
 		GC_IHitDealer hitDealer,
@@ -78,13 +81,19 @@ public partial class GC_HealthManager : Node3D
 	public void EnableHurt(uint collisionLayer)
 	{
 		foreach (GC_HurtBox hurtBox in _hurtBoxes)
+		{
 			hurtBox.CollisionLayer = collisionLayer;
+			hurtBox.HitReceived += OnHurtBoxHitReceived;
+		}
 	}
 
 	public void DisableHurt()
 	{
 		foreach (GC_HurtBox hurtBox in _hurtBoxes)
+		{
 			hurtBox.CollisionLayer = 0;
+			hurtBox.HitReceived -= OnHurtBoxHitReceived;
+		}
 	}
 
 	public void HandleKnockBack(Vector3 force)

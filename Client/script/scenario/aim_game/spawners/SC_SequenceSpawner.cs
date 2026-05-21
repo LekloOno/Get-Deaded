@@ -122,8 +122,8 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
         ClearEnemies();
         foreach (E_IEnemy enemy in Enemies)
         {
-            enemy.OnDisable -= OnDisabled;
-            enemy.OnDie -= Killed;
+            enemy.Disabled -= OnDisabled;
+            enemy.Died -= Killed;
         }
     }
 
@@ -153,8 +153,8 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
         SpawnBots();
         foreach (E_IEnemy enemy in Enemies)
         {
-            enemy.OnDisable += OnDisabled;
-            enemy.OnDie += Killed;
+            enemy.Disabled += OnDisabled;
+            enemy.Died += Killed;
             enemy.Target = starter;
         }
     }
@@ -166,6 +166,12 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
 
         AddChild(node);
         enemy.Pool();
+
+        if (_running)
+        {
+            enemy.Died += Killed;
+            enemy.Target = Starter;
+        }
     }
 
     protected override void SpawnEnemy(E_IEnemy enemy)
@@ -176,9 +182,9 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
         enemy.Spawn();
         node.Position = RandomPosition();
 
-        Vector3 target = _player == null
+        Vector3 target = Starter == null
             ? GlobalPosition
-            : _player.GlobalPosition;
+            : Starter.Body.GlobalTransform.Origin;
         
         target.Y = node.GlobalPosition.Y;
 
@@ -196,8 +202,8 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
 
     protected override void QueueFreeEnemySpec(E_IEnemy enemy)
     {
-        enemy.OnDisable -= OnDisabled;
-        enemy.OnDie -= Killed;
+        enemy.Disabled -= OnDisabled;
+        enemy.Died -= Killed;
         _enemyToPool.Remove(enemy);
     }
 }

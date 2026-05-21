@@ -52,7 +52,7 @@ public partial class SC_TestSpawner : SC_SpawnerScript
 
         ClearEnemies();
         foreach (E_IEnemy enemy in Enemies)
-            enemy.OnDisable -= Killed;
+            enemy.Disabled -= Killed;
     }
 
 
@@ -81,7 +81,7 @@ public partial class SC_TestSpawner : SC_SpawnerScript
         SpawnBots();
         foreach (E_IEnemy enemy in Enemies)
         {
-            enemy.OnDisable += Killed;
+            enemy.Disabled += Killed;
             enemy.Target = starter;
         }
     }
@@ -111,9 +111,9 @@ public partial class SC_TestSpawner : SC_SpawnerScript
         node.Spawn();
         node.Position = RandomPosition();
 
-        Vector3 target = _player == null
+        Vector3 target = Starter == null
             ? GlobalPosition
-            : _player.GlobalPosition;
+            : Starter.Body.GlobalTransform.Origin;
         
         target.Y = node.GlobalPosition.Y;
 
@@ -132,7 +132,7 @@ public partial class SC_TestSpawner : SC_SpawnerScript
 
     protected override void QueueFreeEnemySpec(E_IEnemy enemy)
     {
-        enemy.OnDisable -= Killed;
+        enemy.Disabled -= Killed;
         _respawnTimers.Remove(enemy, out Timer timer);
         timer?.QueueFree();
     }

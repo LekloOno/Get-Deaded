@@ -4,12 +4,11 @@ using Godot;
 
 public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 {
+	[Export] private E_EnemyMaterial _mat;
 	[Export] private GC_HealthManager _healthManager;
 	[Export] public E_EnemySettings Settings;
 	[Export] private float _hideDelay;
 	[Export] private AnimationTree _animationTree;
-	[Export] private MeshInstance3D _surfaceMesh;
-	[Export] private MeshInstance3D _jointMesh;
 	[Export] private GL_Dropper _lootDropper;
 	[Export] private float _drag = 10f;
 	[Export] private Color _hitColor = new(1f, 1f, 1f, 1f);
@@ -30,18 +29,15 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 
 
 	public bool Enabled {get; private set;} = false;
-
-	private ShaderMaterial _surfaceMeshMaterial;
-	private ShaderMaterial _jointMeshMaterial;
 	private SceneTreeTimer _hideTimer;
-	public EnemyHealthEventHandler OnDie {get; set;}
+	public EnemyHealthEventHandler Died {get; set;}
 	private void PropagDie(GC_Health sender) =>
-		OnDie?.Invoke(this, sender);
+		Died?.Invoke(this, sender);
 
-	public EnemyDisableEventHandler OnDisable {get; set;}
-	public EnemyHealthEventHandler<DamageEventArgs> OnDamage {get; set;}
+	public EnemyDisableEventHandler Disabled {get; set;}
+	public EnemyHealthEventHandler<DamageEventArgs> Damaged {get; set;}
 	private void PropagDamage(GC_Health sender, DamageEventArgs damage) =>
-		OnDamage?.Invoke(this, sender, damage);
+		Damaged?.Invoke(this, sender, damage);
 
 	private BaseMaterial3D.ShadingModeEnum _initialJointShadingMode;
 	private Color _initialColor;
@@ -50,21 +46,9 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 	private GE_ICombatEntity _target;
 	private Node3D _targetNode;
 
-	public void SetTarget(Node3D target) => Mover.Target = target;
+	public event Action Spawned;
 
-	public float Alpha
-	{
-		get => ((Color) _surfaceMeshMaterial.GetShaderParameter("albedo")).A;
-		set
-		{
-			Color color = (Color) _surfaceMeshMaterial.GetShaderParameter("albedo");
-			color.A = value;
-			_surfaceMeshMaterial.SetShaderParameter("albedo", color);
-			Color jointColor = (Color) _jointMeshMaterial.GetShaderParameter("albedo");
-			jointColor.A = value;
-			_jointMeshMaterial.SetShaderParameter("albedo", jointColor);
-		}
-	}
+	public void SetTarget(Node3D target) => Mover.Target = target;
 
 	public GC_HealthManager HealthManager => _healthManager;
 
@@ -88,22 +72,9 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 		UpdateSettings();
 		SetProcess(false);
 
-		if(_surfaceMesh?.Mesh.SurfaceGetMaterial(0) is ShaderMaterial surfaceMat)
-		{
-			_surfaceMeshMaterial = surfaceMat;
-			_initialColor = (Color) surfaceMat.GetShaderParameter("albedo");
-		}
-
-		if(_jointMesh?.Mesh.SurfaceGetMaterial(0) is ShaderMaterial jointMat)
-		{
-			_jointMeshMaterial = jointMat;
-			_initialJointColor = (Color) jointMat.GetShaderParameter("albedo");
-		}
-
 		Spawn();
 
-		OnDie += PlayDeath;
-		OnDamage += PlayHit;
+		Died += PlayDeath;
 	}
 
 	public void SetSettings(E_EnemySettings settings)
@@ -148,24 +119,6 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 			Mover.Data = Settings.MoverData;
 	}
 
-
-	private void PlayHit(E_IEnemy _, GC_Health senderLayer, DamageEventArgs e)
-	{
-		_surfaceMeshMaterial.SetShaderParameter("albedo", _hitColor);
-
-		if (_hitResetTimer != null)
-			_hitResetTimer.Timeout -= ResetHitMaterial;
-
-		_hitResetTimer = GetTree().CreateTimer(_hitTime, false, true);
-		_hitResetTimer.Timeout += ResetHitMaterial;
-	}
-
-	private void ResetHitMaterial()
-	{
-		_surfaceMeshMaterial.SetShaderParameter("albedo", _initialColor);
-		_jointMeshMaterial.SetShaderParameter("albedo", _initialJointColor);
-	}
-
 	public async void PlayDeath(E_IEnemy _, GC_Health health)
 	{
 		_lootDropper.Drop();
@@ -176,9 +129,9 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 	public async Task DeathDisable()
 	{
 		DisableActions();
-		await HideMesh();
+		await _mat.SmoothDisable();
 		DisableBase();
-		OnDisable?.Invoke(this);
+		Disabled?.Invoke(this);
 	}
 
 	private void DisableBase()
@@ -219,14 +172,6 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 		//_hideTimer.Timeout += Hide;
 	}
 
-	public async Task HideMesh()
-	{
-		Tween opacityTween = CreateTween();
-		opacityTween.TweenProperty(this, "Alpha", 0f, _hideDelay);
-
-		await ToSignal(opacityTween, "finished");
-	}
-
 	public void Spawn()
 	{
 		if (Enabled)
@@ -239,9 +184,8 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 
 		Enabled = true;
 		CollisionLayer = CONF_Collision.Layers.EnvironmentEntity;
-		Tween surfaceTween = CreateTween();
-		surfaceTween.TweenProperty(this, "Alpha", 1f, 0.2f);
 
+		_mat.Oui();
 		Show();
 		SetPhysicsProcess(true);
 		ProcessMode = ProcessModeEnum.Inherit;
@@ -254,6 +198,8 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 		_skeleton?.ResetBonePoses();
 	
 		_healthManager.Init(true);
+
+		//Spawned?.Invoke();
 	}
 
 	protected override void PhysicsProcessSpec(double delta)

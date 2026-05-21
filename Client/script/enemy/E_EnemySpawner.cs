@@ -10,7 +10,7 @@ public partial class E_EnemySpawner : Node3D
 
     public override void _Ready()
     {
-        _ennemy.OnDie += Die;
+        _ennemy.Died += Die;
     }
 
     public void Die(E_IEnemy _, GC_Health senderLayer)

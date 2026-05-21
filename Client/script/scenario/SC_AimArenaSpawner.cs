@@ -56,7 +56,7 @@ public partial class SC_AimArenaSpawner : Node3D
             AddChild(enemy);
 
             Spawn(enemy);
-            enemy.OnDie += (_, _) => Killed(id);
+            enemy.Died += (_, _) => Killed(id);
 
             _enemies.Add(enemy);
         }

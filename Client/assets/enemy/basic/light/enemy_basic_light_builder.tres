@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="E_EnemyBuilder" format=3 uid="uid://d2dxmfgxxjn1u"]
+
+[ext_resource type="PackedScene" uid="uid://bqyefwwoasotl" path="res://prefabs/simplebot/bot_builder_template_norm.tscn" id="1_1rlxk"]
+[ext_resource type="Script" uid="uid://bglhbt23nx4m7" path="res://script/enemy/E_EnemySettings.cs" id="2_m6wlt"]
+[ext_resource type="Resource" uid="uid://dwu6r2s3l2r7w" path="res://assets/enemy/basic/light/enemy_basic_light_easy.tres" id="3_yo5h5"]
+[ext_resource type="Resource" uid="uid://bsa2lcp4fy354" path="res://assets/enemy/basic/light/enemy_basic_light_normal.tres" id="4_ag1vf"]
+[ext_resource type="Resource" uid="uid://d0j8b0pup2pkt" path="res://assets/enemy/basic/light/enemy_basic_light_hard.tres" id="5_puump"]
+[ext_resource type="Script" uid="uid://6shwimir3xjv" path="res://script/enemy/E_EnemyBuilder.cs" id="6_pelge"]
+
+[resource]
+script = ExtResource("6_pelge")
+_settingsByDifficulty = Dictionary[int, ExtResource("2_m6wlt")]({
+0: ExtResource("3_yo5h5"),
+1: ExtResource("4_ag1vf"),
+2: ExtResource("5_puump")
+})
+_enemyBase = ExtResource("1_1rlxk")
+metadata/_custom_type_script = "uid://6shwimir3xjv"

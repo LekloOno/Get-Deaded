@@ -1,0 +1,103 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://b3tgge30w7af5"]
+
+[ext_resource type="Material" uid="uid://p3eec2qq26pg" path="res://assets/shaders/packed/enemy_outlines.tres" id="1_hpq2i"]
+
+[sub_resource type="Shader" id="Shader_hauau"]
+resource_local_to_scene = true
+code = "// NOTE: Shader automatically converted from Godot Engine 4.4.stable.mono's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix, depth_draw_always, cull_back, diffuse_toon, specular_toon;
+
+instance uniform float alpha_override = 1.;
+instance uniform float outlines_alpha_override = 1.;
+
+uniform vec4 albedo : source_color;
+uniform bool hit = false;
+uniform sampler2D color_gradient;
+uniform sampler2D fresnel_gradient;
+
+uniform float alpha_hash_scale : hint_range(0.0, 2.0, 0.01);
+uniform float point_size : hint_range(0.1, 128.0, 0.1);
+
+uniform float roughness : hint_range(0.0, 1.0);
+uniform sampler2D texture_metallic : hint_default_white, filter_linear_mipmap, repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_r, filter_linear_mipmap, repeat_enable;
+
+uniform float specular : hint_range(0.0, 1.0, 0.01);
+uniform float metallic : hint_range(0.0, 1.0, 0.01);
+
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+float fresnel(float amount, vec3 normal, vec3 view) {
+	return pow((1.0 - clamp(dot(normalize(normal), normalize(view)), 0.0, 1.0)), amount);
+}
+
+void vertex() {
+	UV = UV * uv1_scale.xy + uv1_offset.xy;
+}
+
+void fragment() {
+	vec2 base_uv = UV;
+
+	float metallic_tex = dot(texture(texture_metallic, base_uv), metallic_texture_channel);
+	METALLIC = metallic_tex * metallic;
+	SPECULAR = specular;
+
+	vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
+	float roughness_tex = dot(texture(texture_roughness, base_uv), roughness_texture_channel);
+	
+	float basic_fresnel = fresnel(4.0, NORMAL, VIEW);
+	ALBEDO = albedo.rgb + (basic_fresnel * texture(fresnel_gradient, vec2(basic_fresnel, 0.0)).rgb * 1.0);
+	
+	ROUGHNESS = roughness_tex * roughness;
+	ALPHA *= albedo.a * alpha_override;
+	ALPHA_HASH_SCALE = alpha_hash_scale;
+}
+
+void light() {
+	float dotproduct = clamp(dot(NORMAL, LIGHT), -0.9, 0.9);
+	float sample = clamp((dotproduct + 1.0) * ATTENUATION / 2.1, 0.05, 0.95);
+	vec4 shaded = texture(color_gradient, vec2(sample, 0.0));
+	DIFFUSE_LIGHT += (shaded.rgb * LIGHT_COLOR);
+}
+"
+
+[sub_resource type="Gradient" id="Gradient_ob18s"]
+offsets = PackedFloat32Array(0, 0.372822, 0.383275, 0.696864, 0.703833)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, 0.5, 1, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1)
+metadata/_snap_count = 8
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2plgk"]
+gradient = SubResource("Gradient_ob18s")
+
+[sub_resource type="Gradient" id="Gradient_hauau"]
+offsets = PackedFloat32Array(0, 0.445993)
+colors = PackedColorArray(0, 0, 0, 1, 0.980469, 0.570903, 0.0919189, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ob18s"]
+gradient = SubResource("Gradient_hauau")
+
+[resource]
+resource_name = "Alpha_Body_MAT"
+render_priority = 0
+next_pass = ExtResource("1_hpq2i")
+shader = SubResource("Shader_hauau")
+shader_parameter/albedo = Color(0.53333336, 0.5254902, 0.49019608, 1)
+shader_parameter/hit = false
+shader_parameter/color_gradient = SubResource("GradientTexture1D_2plgk")
+shader_parameter/fresnel_gradient = SubResource("GradientTexture1D_ob18s")
+shader_parameter/alpha_hash_scale = 1.0
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 0.5
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.5
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)

@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://p3eec2qq26pg"]
+
+[ext_resource type="Shader" uid="uid://psh3g0wdvwan" path="res://assets/shaders/through_walls.gdshader" id="1_wlyef"]
+[ext_resource type="Shader" uid="uid://dgd1ejo3k6jr5" path="res://assets/shaders/enemy_outlines.gdshader" id="2_c6bya"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5uxug"]
+render_priority = 0
+shader = ExtResource("1_wlyef")
+
+[resource]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_5uxug")
+shader = ExtResource("2_c6bya")

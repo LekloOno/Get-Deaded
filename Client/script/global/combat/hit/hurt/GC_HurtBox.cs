@@ -17,6 +17,7 @@ public partial class GC_HurtBox : Area3D
     [Export] public GE_CombatEntity Entity {get; private set;}
     public static float BackAngle = 135;
     public PHX_ActiveRagdollBone RagdollBone {get; private set;}
+    public event Action<Vector3, HitEventArgs>? HitReceived;
     
     public override void _Ready()
     {
@@ -141,7 +142,7 @@ public partial class GC_HurtBox : Area3D
 
         TriggerDamageParticles(hitPosition, from); // Experimental from position, to check.
 
-        return new(
+        HitEventArgs args = new(
             Entity, deepest, this,           // Target infos
             takenDamage, killed,                    // Hit infos
             hitDealer, author,                      // Author infos
@@ -149,5 +150,9 @@ public partial class GC_HurtBox : Area3D
             backStab, critical,                     // Optional infos
             false, subHitSize                       // Optional infos
         );
+
+        HitReceived?.Invoke(hitPosition, args);
+
+        return args;
     }
 }

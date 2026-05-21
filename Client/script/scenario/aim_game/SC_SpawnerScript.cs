@@ -7,15 +7,20 @@ using Godot;
 public abstract partial class SC_SpawnerScript : Node3D
 {
     [Export] protected SC_GameManager _gameManager;
-    protected PM_Controller _player;
     [Signal] public delegate void StopEventHandler();   // Called at the end of this scene script
     [Signal] public delegate void HandleNextEventHandler(SC_SpawnerScript prev);
     public EventHandler<HitEventArgs> Hit;          // Report hits handled by bots spawned from this script
     public List<E_IEnemy> Enemies {get; private set;} = [];
     public GE_IActiveCombatEntity Starter {get; private set;}
 
+    protected bool _running;
+
     public void Start(GE_IActiveCombatEntity starter)
     {
+        if (_running)
+            return;
+
+        _running = true;
         _gameManager.Interrupt -= Interrupt;
         _gameManager.Interrupt += Interrupt;
         Starter = starter;
@@ -46,15 +51,11 @@ public abstract partial class SC_SpawnerScript : Node3D
     {
         _gameManager.Interrupt -= Interrupt;
         StopSpec();
+        _running = false;
     }
     
     protected abstract void StopSpec();
     
-    public void Init(PM_Controller player)
-    {
-        _player = player;
-    }
-
     protected void SetTarget(E_IEnemy enemy, GE_ICombatEntity target)
     {
         enemy.Target = target;
@@ -90,7 +91,7 @@ public abstract partial class SC_SpawnerScript : Node3D
     protected void CreateEnemy(E_IEnemy enemy)
     {
         Enemies.Add(enemy);
-        enemy.OnDie += _gameManager.HandleKill;
+        enemy.Died += _gameManager.HandleKill;
         
         CreateEnemySpec(enemy);
     }
@@ -101,7 +102,7 @@ public abstract partial class SC_SpawnerScript : Node3D
 
         if (!Enemies.Remove(enemy))
             return;
-        enemy.OnDie -= _gameManager.HandleKill;
+        enemy.Died -= _gameManager.HandleKill;
         
         QueueFreeEnemySpec(enemy);
 
