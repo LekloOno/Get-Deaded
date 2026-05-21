@@ -348,7 +348,6 @@ script = ExtResource("10_b5eqi")
 _logged = true
 
 [node name="Settings" type="PanelContainer" parent="." unique_id=570347893]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -362,9 +361,10 @@ script = ExtResource("10_no00x")
 [node name="TabContainer" type="TabContainer" parent="Settings" unique_id=1418915951]
 layout_mode = 2
 mouse_filter = 0
-current_tab = 0
+current_tab = 2
 
 [node name="VIDEO_TAB" type="TabBar" parent="Settings/TabContainer" unique_id=1016175328]
+visible = false
 layout_mode = 2
 mouse_filter = 1
 metadata/_tab_index = 0
@@ -1180,7 +1180,6 @@ Section = "sound"
 Key = "feedback_sfx_volume_db"
 
 [node name="CONTROLS_TAB" type="TabBar" parent="Settings/TabContainer" unique_id=1802915093]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
@@ -1192,9 +1191,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 14
-current_tab = 0
+current_tab = 1
 
 [node name="CONTROLS_GENERAL_TAB" type="TabBar" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer" unique_id=1062094710]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -1335,7 +1335,6 @@ Section = "controls"
 Key = "cm_per_360"
 
 [node name="CONTROLS_BINDINGS_TAB" type="TabBar" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer" unique_id=541313611]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
@@ -1964,6 +1963,58 @@ script = ExtResource("30_rt8lt")
 action = "secondary"
 input_index = 2
 
+[node name="Reload" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1288421465]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Reload" unique_id=1093068622]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Reload/hbox" unique_id=1221901504]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Reload/hbox" unique_id=146101473]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "INPUTS_RELOAD_LABEL"
+
+[node name="ReloadInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1296176603]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/ReloadInput" unique_id=1832482001]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "aaaa"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "reload"
+
+[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/ReloadInput" unique_id=519386705]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "reload"
+input_index = 1
+
+[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/ReloadInput" unique_id=1126398807]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "reload"
+input_index = 2
+
 [node name="Switch" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=513595699]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -2296,6 +2347,7 @@ size_flags_vertical = 8
 text = "BACK_BUTTON"
 
 [node name="Difficulty" type="VBoxContainer" parent="." unique_id=340452415 node_paths=PackedStringArray("menu")]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
