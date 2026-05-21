@@ -221,13 +221,13 @@ lights_and_shadows/positional_shadow/atlas_size=2048
 
 enemy_color={
 "type": "color",
-"value": Color(1, 0, 0.05490196, 1)
+"value": Color(1, 0, 0.20784314, 1)
 }
 enemy_outlines_opacity={
 "type": "float",
-"value": 0.9
+"value": 1.0
 }
 enemy_outlines_thickness={
 "type": "float",
-"value": 1.5
+"value": 3.0
 }

@@ -18,6 +18,7 @@ public partial class EnemiesColorSetting : UserSetting
 
         effectiveValue = value;
         CONF_HitColors.Colors.Critical = (Color)value;
+        RenderingServer.GlobalShaderParameterSet("enemy_color", value);
 
         return true;
     }
