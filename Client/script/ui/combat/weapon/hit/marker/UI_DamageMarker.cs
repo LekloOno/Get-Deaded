@@ -65,6 +65,7 @@ public partial class UI_DamageMarker : Control
     private ulong _lastHit = 0;
 
     private StyleBoxFlat _hitStyle;
+    private bool _lastHitCrit;
     private Tween opacityTween;
     private Tween offsetTween;
     private Tween sizeTween;
@@ -108,7 +109,16 @@ public partial class UI_DamageMarker : Control
         mod.A = 0f;
         Modulate = mod;
         Offset = _baseTightOffset;
+
+        EnemiesColorSetting.Instance.Changed += OnChanged;
     }
+
+    private void OnChanged(GodotObject sender, Variant value)
+    {
+        if (_lastHitCrit)
+            _hitStyle.BgColor = EnemiesColorSetting.Color;
+    }
+
 
     private double _time = 0;
 
@@ -194,8 +204,10 @@ public partial class UI_DamageMarker : Control
 
     private void SetColor(HitEventArgs e)
     {
+        _lastHitCrit = e.Critical;
+
         if (e.Critical)
-            _hitStyle.BgColor = CONF_HitColors.Colors.Critical;
+            _hitStyle.BgColor = EnemiesColorSetting.Color;
         else
             _hitStyle.BgColor = CONF_HitColors.Colors.Normal;
     }

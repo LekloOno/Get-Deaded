@@ -41,7 +41,7 @@ public partial class UI_KillSkullManager : Control
         if (critical)
         {
             newSkull.Texture = _criticalTexture;
-            newSkull.Modulate = CONF_HitColors.Colors.Critical;
+            newSkull.Modulate = EnemiesColorSetting.Color;
         } else
         {
             newSkull.Texture = _normalTexture;
@@ -52,7 +52,7 @@ public partial class UI_KillSkullManager : Control
         newSkull.MaxScaleReached += Push;
 
         AddChild(newSkull);
-        newSkull.Init(this);
+        newSkull.Init(this, critical);
     }
 
     public void Push() => PushSkull?.Invoke();
