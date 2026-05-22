@@ -41,7 +41,7 @@ public partial class UI_KillSkullManager : Control
         if (critical)
         {
             newSkull.Texture = _criticalTexture;
-            newSkull.Modulate = EnemiesColorSetting.Color;
+            newSkull.Modulate = EnemyColorSetting.Color;
         } else
         {
             newSkull.Texture = _normalTexture;

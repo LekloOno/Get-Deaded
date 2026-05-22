@@ -54,6 +54,8 @@ LanguageSetting="*uid://btg4lwahs32gg"
 KeyBindingSettingsManager="*uid://c4b7cffu6mime"
 ApiGodotGlue="*uid://2u55af6ilwft"
 DataWeaponRegistry="*uid://brtg6oq42t416"
+EnemyOutlinesOpacitySettings="*uid://dey6uy28w8rpg"
+EnemyOutlinesThicknessSetting="*uid://qktve2vw1q7t"
 
 [display]
 

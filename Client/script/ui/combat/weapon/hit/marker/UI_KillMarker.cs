@@ -30,7 +30,7 @@ public partial class UI_KillMarker : Control
 
     public override void _Ready()
     {
-        Color mod = EnemiesColorSetting.Color;
+        Color mod = EnemyColorSetting.Color;
         mod.A = 0f;
         Modulate = mod;
         Offset = _baseStartOffset;
@@ -38,7 +38,7 @@ public partial class UI_KillMarker : Control
 
     public void StartAnim()
     {
-        Color mod = EnemiesColorSetting.Color;
+        Color mod = EnemyColorSetting.Color;
         mod.A = 1f;
         Modulate = mod;
 

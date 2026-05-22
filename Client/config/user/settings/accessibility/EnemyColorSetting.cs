@@ -1,7 +1,7 @@
 using Godot;
 using TraGUS;
 
-public partial class EnemiesColorSetting : UserSetting
+public partial class EnemyColorSetting : UserSetting
 {
     public override string Section => UserSettingsSection.Accessibility;
     public override string Key => "enemies_color";

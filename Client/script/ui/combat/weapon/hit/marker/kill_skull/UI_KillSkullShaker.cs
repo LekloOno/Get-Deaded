@@ -33,13 +33,13 @@ public partial class UI_KillSkullShaker : Control
         ShakeLayer.AddTrauma(Trauma);
 
         if (_critical)
-            EnemiesColorSetting.Instance.Changed += OnChanged;
+            EnemyColorSetting.Instance.Changed += OnChanged;
     }
 
     private void OnSkullRemoved()
     {
         if (_critical)
-            EnemiesColorSetting.Instance.Changed -= OnChanged;
+            EnemyColorSetting.Instance.Changed -= OnChanged;
 
         QueueFree();
     }
@@ -47,7 +47,7 @@ public partial class UI_KillSkullShaker : Control
 
     private void OnChanged(GodotObject sender, Variant value)
     {
-        Modulate = EnemiesColorSetting.Color;
+        Modulate = EnemyColorSetting.Color;
     }
 
 

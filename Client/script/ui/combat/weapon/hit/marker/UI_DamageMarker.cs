@@ -110,13 +110,13 @@ public partial class UI_DamageMarker : Control
         Modulate = mod;
         Offset = _baseTightOffset;
 
-        EnemiesColorSetting.Instance.Changed += OnChanged;
+        EnemyColorSetting.Instance.Changed += OnChanged;
     }
 
     private void OnChanged(GodotObject sender, Variant value)
     {
         if (_lastHitCrit)
-            _hitStyle.BgColor = EnemiesColorSetting.Color;
+            _hitStyle.BgColor = EnemyColorSetting.Color;
     }
 
 
@@ -207,7 +207,7 @@ public partial class UI_DamageMarker : Control
         _lastHitCrit = e.Critical;
 
         if (e.Critical)
-            _hitStyle.BgColor = EnemiesColorSetting.Color;
+            _hitStyle.BgColor = EnemyColorSetting.Color;
         else
             _hitStyle.BgColor = CONF_HitColors.Colors.Normal;
     }
