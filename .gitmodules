@@ -1,6 +1,6 @@
 [submodule "Client/addons/GaudioProcessTree"]
 	path = Client/addons/GaudioProcessTree
-	url = git@github.com:LekloOno/GaudioProcessTree.git
+	url = https://github.com/LekloOno/GaudioProcessTree.git
 [submodule "Client/addons/TraGUS"]
 	path = Client/addons/TraGUS
-	url = git@github.com:LekloOno/TraGUS.git
+	url = https://github.com/LekloOno/TraGUS.git
