@@ -4,7 +4,7 @@ render_mode cull_front, unshaded, depth_test_disabled;
 stencil_mode read, compare_not_equal, 1;
 
 // GLOBAL
-global uniform vec4 enemy_color : source_color;
+global uniform vec4 enemy_color;
 global uniform float enemy_outlines_thickness;
 global uniform float enemy_outlines_opacity;
 
@@ -20,6 +20,9 @@ void vertex() {
 }
 
 void fragment() {
-    ALBEDO = enemy_color.rgb;
+    vec3 c = enemy_color.rgb;
+    // manual sRGB -> linear
+    ALBEDO = mix(c / 12.92, pow((c + 0.055) / 1.055, vec3(2.4)), step(0.04045, c));
+		
     ALPHA = enemy_outlines_opacity * outlines_alpha_override * 0.;
 }
