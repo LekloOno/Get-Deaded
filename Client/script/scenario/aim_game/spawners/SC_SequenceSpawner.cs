@@ -166,9 +166,10 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
 
         AddChild(node);
         enemy.Pool();
-
+        
         if (_running)
         {
+            enemy.Disabled += OnDisabled;
             enemy.Died += Killed;
             enemy.Target = Starter;
         }

@@ -66,7 +66,6 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 		}
 	}
 
-
 	public override void _Ready()
 	{
 		UpdateSettings();
@@ -84,7 +83,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 
 		Settings = settings;
 		Settings.Updated += UpdateSettings;
-		
+		UpdateSettings();		
 	}
 
 	private void UpdateSettings()
