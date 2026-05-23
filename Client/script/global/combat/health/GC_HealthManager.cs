@@ -43,9 +43,9 @@ public partial class GC_HealthManager : Node3D
 	public HealthInitEventArgs InitState {get; private set;} = null;
 
 	public EventHandler<HealthInitEventArgs> OnLayerInit;
-	public event Action<Vector3, HitEventArgs>? HitReceived;
-	public void OnHurtBoxHitReceived(Vector3 pos, HitEventArgs args) =>
-		HitReceived?.Invoke(pos, args);
+	public event Action<Vector3, Vector3, HitEventArgs>? HitReceived;
+	public void OnHurtBoxHitReceived(Vector3 from, Vector3 to, HitEventArgs args) =>
+		HitReceived?.Invoke(from, to, args);
 
 	public virtual bool Damage(
 		GC_IHitDealer hitDealer,

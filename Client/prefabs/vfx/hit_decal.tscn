@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://37s55lj7jlad"]
+
+[ext_resource type="Shader" uid="uid://68f7ctigse2q" path="res://assets/shaders/hit_flash.gdshader" id="1_o1pkb"]
+[ext_resource type="Script" uid="uid://bxnun2jif0b8x" path="res://script/vfx/combat/VFX_HitFlash.cs" id="2_3gojd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_47srj"]
+render_priority = 0
+shader = ExtResource("1_o1pkb")
+shader_parameter/sharpening = 2.00000007125
+shader_parameter/grid_scale = 6.0
+shader_parameter/line_width = 0.08
+shader_parameter/core_radius = 0.2
+
+[sub_resource type="QuadMesh" id="QuadMesh_1gj31"]
+size = Vector2(0.2, 0.2)
+
+[node name="HitDecal" type="MeshInstance3D" unique_id=2068327322]
+transform = Transform3D(-0.99999326, 0.0033333972, -0.0015280992, -0.0026969984, -0.95092076, -0.3094223, -0.002484534, -0.3094162, 0.95092326, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_47srj")
+mesh = SubResource("QuadMesh_1gj31")
+skeleton = NodePath("../../../Physical Bone Chest/H_Chest")
+script = ExtResource("2_3gojd")
+_decayTime = 0.5
+_maxIntensity = 1.3
+_minIntensity = 0.6
+_decayTrans = 7
+_flashWhiteRatio = 0.15
+_maxScale = 0.7
+_minScale = 0.15
+_maxChainedDamage = 160.0
