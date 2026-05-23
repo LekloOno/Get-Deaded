@@ -361,10 +361,9 @@ script = ExtResource("10_no00x")
 [node name="TabContainer" type="TabContainer" parent="Settings" unique_id=1418915951]
 layout_mode = 2
 mouse_filter = 0
-current_tab = 3
+current_tab = 0
 
 [node name="VIDEO_TAB" type="TabBar" parent="Settings/TabContainer" unique_id=1016175328]
-visible = false
 layout_mode = 2
 mouse_filter = 1
 metadata/_tab_index = 0
@@ -2236,6 +2235,7 @@ action = "stats"
 input_index = 2
 
 [node name="ACCESSIBILITY_TAB" type="TabBar" parent="Settings/TabContainer" unique_id=1604114432]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 3
 

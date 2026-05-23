@@ -6,6 +6,7 @@ public partial class PA_Hit : Node
 {
     [Export] private PW_WeaponsHandler _weaponsHandler;
     [Export] private AUD_Sound _criticalHit;
+    [Export] private AUD_Sound _criticalDing;
     [Export] private AUD_Sound _kill;
     [Export] private AUD_Sound _meatHit;
     [Export] private AUD_Sound _barrierHit;
@@ -16,6 +17,8 @@ public partial class PA_Hit : Node
     [Export] private float _minimumVolume = -20f;
     [Export] private float _maximumVolume = 0f;
     [Export] private float _damageDispersion = 150f; 
+    [Export] private float _minimumDingPitch = 0.4f;
+    [Export] private float _maximumDingPitch = 1f;
     private ulong _lastBarrier = 0;
     private ulong _lastArmor = 0;
     private ulong _lastMeat = 0;
@@ -35,16 +38,25 @@ public partial class PA_Hit : Node
             _kill?.Play();
 
         if (!hit.OverrideBodyPart && hit.HurtBox.BodyPart == GC_BodyPart.Head)
-            PlayHit(_criticalHit, ref _lastCritical, _criticalMinimumDelay, hit.Damage);
+        {
+            PitchDing(hit.TotalDamage);
+            PlayHit(_criticalHit, ref _lastCritical, _criticalMinimumDelay, hit.TotalDamage);
+        }
         
         GC_Health layer = hit.SenderLayer;
 
         if (layer is GC_Barrier)
-            PlayHit(_barrierHit, ref _lastBarrier, _minimumDelay, hit.Damage);
+            PlayHit(_barrierHit, ref _lastBarrier, _minimumDelay, hit.TotalDamage);
         else if (layer is GC_Armor)
-            PlayHit(_armorHit, ref _lastArmor, _minimumDelay, hit.Damage);
+            PlayHit(_armorHit, ref _lastArmor, _minimumDelay, hit.TotalDamage);
         else
-            PlayHit(_meatHit, ref _lastMeat, _minimumDelay, hit.Damage);
+            PlayHit(_meatHit, ref _lastMeat, _minimumDelay, hit.TotalDamage);
+    }
+
+    private void PitchDing(float damage)
+    {
+        float pitchRatio = 1 - Mathf.Tanh(damage/_damageDispersion);
+        _criticalDing.RelativePitchScale = Mathf.Lerp(_minimumDingPitch, _maximumDingPitch, pitchRatio);
     }
 
     private void PlayHit(AUD_Sound type, ref ulong lastProc, ulong delay, float damage)

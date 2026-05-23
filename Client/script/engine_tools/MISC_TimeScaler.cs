@@ -28,7 +28,10 @@ public partial class MISC_TimeScaler : Node
 
         if (_slowMo)
             Engine.TimeScale = 1;
-        
+        else
+            GD.Print("slow mo !");
+
         _slowMo = !_slowMo;
+
     }
 }
