@@ -1,28 +1,52 @@
-[gd_scene load_steps=2 format=3 uid="uid://bj3ck4u2xa8hu"]
+[gd_scene format=3 uid="uid://bj3ck4u2xa8hu"]
 
 [ext_resource type="Script" uid="uid://cx80c77bqsp8x" path="res://script/ui/combat/weapon/hit/number/UI_DamageIndicator.cs" id="1_5mgnj"]
+[ext_resource type="FontFile" uid="uid://cj74ygch2v2tj" path="res://assets/fonts/Poppins/Poppins-Bold.ttf" id="1_i3t20"]
 
-[node name="UI_DamageIndicator" type="Label"]
+[sub_resource type="LabelSettings" id="LabelSettings_i3t20"]
+resource_local_to_scene = true
+font = ExtResource("1_i3t20")
+font_size = 33
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 16
+shadow_color = Color(1, 0, 0, 1)
+shadow_offset = Vector2(0, 0)
+
+[node name="UI_DamageIndicator" type="Label" unique_id=2004893211]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -20.0
-offset_top = -11.5
+offset_top = -13.0
 offset_right = 20.0
-offset_bottom = 11.5
+offset_bottom = 13.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset_ratio = Vector2(0.5, 0.5)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(1, 0, 0, 0.784314)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 0.392157)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 0.69411767)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
 theme_override_constants/outline_size = 2
-theme_override_constants/shadow_outline_size = 4
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = ExtResource("1_i3t20")
+theme_override_font_sizes/font_size = 25
 text = "69"
+label_settings = SubResource("LabelSettings_i3t20")
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
 script = ExtResource("1_5mgnj")
 _maxHeightOffset = 0.5
 _fadeTime = 1.5
+_maxScale = 1.4
+_maxScaleTime = 0.07
+_scaleInTrans = 7
+_normalScaleTime = 0.06
+_scaleOutTrans = 7
 metadata/_custom_type_script = "uid://cx80c77bqsp8x"
