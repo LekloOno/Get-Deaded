@@ -1,7 +1,12 @@
 [gd_resource type="AudioBusLayout" format=3 uid="uid://bggmflncdn26j"]
 
+[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_j3pel"]
+resource_name = "Compressor"
+ratio = 2.0
+gain = 3.0
+
 [resource]
-bus/0/volume_db = 0.06726074
+bus/0/volume_db = -0.13049698
 bus/1/name = &"Music"
 bus/1/solo = false
 bus/1/mute = false
@@ -30,17 +35,19 @@ bus/5/name = &"Weapons"
 bus/5/solo = false
 bus/5/mute = false
 bus/5/bypass_fx = false
-bus/5/volume_db = -8.009033
+bus/5/volume_db = -4.247226
 bus/5/send = &"Environment Sfx"
 bus/6/name = &"Hit"
 bus/6/solo = false
 bus/6/mute = false
 bus/6/bypass_fx = false
-bus/6/volume_db = 6.0199986
+bus/6/volume_db = 2.2492638
 bus/6/send = &"Feedback Sfx"
+bus/6/effect/0/effect = SubResource("AudioEffectCompressor_j3pel")
+bus/6/effect/0/enabled = true
 bus/7/name = &"Locomotion"
 bus/7/solo = false
 bus/7/mute = false
 bus/7/bypass_fx = false
-bus/7/volume_db = -4.2500257
+bus/7/volume_db = -3.1173582
 bus/7/send = &"Environment Sfx"

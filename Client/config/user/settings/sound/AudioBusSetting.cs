@@ -14,14 +14,18 @@ public partial class AudioBusSetting : UserSetting
 
     public override string Section => UserSettingsSection.Sound;
     public override string Key {get;}
-    public override Variant DefaultFallBack() => 1f;
+    
+    // Stick to default bus values to fall back, -1 is simply a marker to notify
+    // we should let godot initialize bus volume. 
+    public override Variant DefaultFallBack() => -1;
     public float LinearDb => (float) Value;
     private int _busIndex;
 
     protected override bool ProcessValue(Variant value, out Variant effectiveValue)
     {
         if (value.VariantType != Variant.Type.Int
-        && value.VariantType != Variant.Type.Float)
+        && value.VariantType != Variant.Type.Float
+        || (float) value == -1)
         {
             effectiveValue = Value;
             return false;
