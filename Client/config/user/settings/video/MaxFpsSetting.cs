@@ -7,31 +7,40 @@ public partial class MaxFpsSetting : UserSetting
     public override string Key => "max_fps";
 
     public override Variant DefaultFallBack() => 165;
+    public static int MaxFps { get; private set; }
 
     protected override bool ProcessValue(Variant value, out Variant effectiveValue)
     {
-        if (value.VariantType != Variant.Type.Int
-        && value.VariantType != Variant.Type.Float
-        )
+        int fps;
+        if (value.VariantType == Variant.Type.Int)
+            fps = (int)value;
+        else if (value.VariantType == Variant.Type.Float)
+            fps = Mathf.RoundToInt((float)value);
+        else
         {
             effectiveValue = Value;
             return false;
         }
 
-        int fps = (int)value;
-
         if (fps < 20)
         {
+            Apply(20);
             effectiveValue = 20;
-            Engine.MaxFps = 20;
             return false;
         }
-        //GD.Print(Value);
 
-        Engine.MaxFps = fps;
-        effectiveValue = value;
+        Apply(fps);
+        effectiveValue = fps;
 
-        //GD.Print(Engine.MaxFps);
         return true;
+    }
+
+    private void Apply(int maxFps)
+    {
+        if (LimitFpsSetting.LimitFps)
+        {
+            MaxFps = maxFps;
+            Engine.MaxFps = maxFps;
+        }
     }
 }

@@ -7,8 +7,7 @@ public partial class LimitFpsSetting : UserSetting
     public override string Key => "limit_fps";
 
     public override Variant DefaultFallBack() => true;
-
-    private UserSetting _maxFps;
+    public static bool LimitFps { get; private set; }
 
     protected override bool ProcessValue(Variant value, out Variant effectiveValue)
     {
@@ -19,17 +18,12 @@ public partial class LimitFpsSetting : UserSetting
         }
 
         if ((bool)value)
-            Engine.MaxFps = (int) _maxFps.Value;
+            Engine.MaxFps = MaxFpsSetting.MaxFps;
         else
             Engine.MaxFps = 0;
 
+        LimitFps = (bool)value;
         effectiveValue = value;
         return true;
-    }
-
-    protected override void PreInitialize()
-    {
-        if (UserSettingsServer.GetSetting(UserSettingsSection.Video, "max_fps", out UserSetting maxFps))
-            _maxFps = maxFps;
     }
 }
