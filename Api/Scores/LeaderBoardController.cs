@@ -21,6 +21,68 @@ public partial class ScoresController : ControllerBase
 
         var list = await query.ToListAsync();
 
+        var bestPerPlayer = list
+            .GroupBy(s => s.Player.Id)
+            .Select(g => g.First())
+            .OrderByDescending(s => s.Value)
+            .ToList();
+
+        var ranked = list
+            .Select((s, index) => new { Score = s, Rank = index + 1 })
+            .ToList();
+
+        int betterCount = (take + 1) / 2;
+        int worseCount = take / 2;
+
+        var topRank = centerRank - betterCount;
+        var overhead = Math.Min(topRank, 0);
+
+        topRank = Math.Max(0, topRank);
+        var botRank = centerRank + worseCount - overhead;
+
+        var window = ranked
+            .Where(x => x.Rank > topRank &&
+                        x.Rank <= botRank)
+            .ToList();
+
+        var result = window.Select(x =>
+        {
+            var bestWeapon = x.Score.WeaponStats
+                .OrderByDescending(w => w.Damage)
+                .FirstOrDefault();
+
+            return new LeaderboardRowDto(
+                    x.Rank,
+                    x.Score.Id,
+                    x.Score.Player.Username,
+                    x.Score.TimeMs,
+                    x.Score.Value,
+                    x.Score.WeaponStats.Sum(w => w.Kills),
+                    x.Score.WeaponStats.Sum(w => w.Damage),
+                    bestWeapon?.Weapon.WeaponKey ?? "Unknown",
+                    bestWeapon?.Accuracy
+                );
+        });
+
+        return Ok(result);
+    }
+
+    [HttpGet("leaderboard/unique")]
+    public async Task<ActionResult<List<LeaderboardRowDto>>> GetLeaderboardUnique(
+        string mapKey,
+        int difficulty,
+        int centerRank,
+        int take = 20)
+    {
+        var query = _db.Scores
+            .Include(x => x.Player)
+            .Include(x => x.WeaponStats)
+            .ThenInclude(ws => ws.Weapon)
+            .Where(x => x.Map.MapKey == mapKey && x.Difficulty == difficulty)
+            .OrderByDescending(x => x.Value);
+
+        var list = await query.ToListAsync();
+
         var ranked = list
             .Select((s, index) => new { Score = s, Rank = index + 1 })
             .ToList();
