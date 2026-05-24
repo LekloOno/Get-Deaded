@@ -17,6 +17,7 @@ public partial class UI_DamageIndicator : Label
     [Export] private ulong _chainLifetime = 150;
     [Export] private float _maxChainedDamage = 100f;
     [Export] private float _minScaleDelta = 0.15f;
+    [Export] private float _horizontalOffsetLength = 0.5f;
     private float _chainedDamage;
     private Tween _scaleTween;
 
@@ -108,8 +109,17 @@ public partial class UI_DamageIndicator : Label
 
         if (_target != null && IsInstanceValid(_target) && _target.IsInsideTree())
         {
-            worldPosition += _target.GlobalPosition;
-            _prevTargetPosition = _target.GlobalPosition;
+            Vector3 targetDisplayPos = _target.GlobalPosition;
+
+            Vector3 horizontalOffset = ((_camera.GlobalPosition - _target.GlobalPosition)
+                * new Vector3(1f, 0f, 1f))
+                .Normalized()
+                .Rotated(Vector3.Up, 0.5f * Mathf.Pi);
+
+            targetDisplayPos += horizontalOffset * _horizontalOffsetLength;
+
+            worldPosition += targetDisplayPos;
+            _prevTargetPosition = targetDisplayPos;
         }
         else
             worldPosition += _prevTargetPosition;

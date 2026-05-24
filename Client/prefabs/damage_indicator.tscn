@@ -49,4 +49,5 @@ _maxScaleTime = 0.07
 _scaleInTrans = 7
 _normalScaleTime = 0.06
 _scaleOutTrans = 7
+_horizontalOffsetLength = 0.35
 metadata/_custom_type_script = "uid://cx80c77bqsp8x"
