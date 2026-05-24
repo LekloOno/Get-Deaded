@@ -7,6 +7,7 @@ public record LoginRequest(
 
 public record AuthResponse(
     string Token,
+    Guid UserId,
     string Username
 );
 

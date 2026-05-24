@@ -22,6 +22,7 @@ public record LeaderboardRowDto(
     int Rank,
     Guid ScoreId,
     string Player,
+    Guid PlayerId,
     int TimeMs,
     int Score,
     int Kills,

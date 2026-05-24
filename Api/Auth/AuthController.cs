@@ -37,7 +37,7 @@ public class AuthController : ControllerBase
 
         var token = _jwt.CreateToken(player);
 
-        return new AuthResponse(token, player.Username);
+        return new AuthResponse(token, player.Id, player.Username);
     }
 
     [HttpPost("register")]
@@ -74,6 +74,7 @@ public class AuthController : ControllerBase
 
         return Ok(new AuthResponse(
             token,
+            player.Id,
             player.Username
         ));
     }
