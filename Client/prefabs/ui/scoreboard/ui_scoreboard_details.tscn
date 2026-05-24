@@ -8,7 +8,7 @@
 offset_right = 626.0
 offset_bottom = 95.0
 theme = ExtResource("1_fjrko")
-theme_type_variation = &"DetailsPanel"
+theme_type_variation = &"PanelDetails"
 script = ExtResource("2_g4xpj")
 _template = NodePath("VBoxContainer/DetailsContainer/UiScoreBoardDetailEntry")
 _container = NodePath("VBoxContainer/DetailsContainer")
@@ -19,7 +19,7 @@ layout_mode = 2
 [node name="Header" type="PanelContainer" parent="VBoxContainer" unique_id=1704363336]
 layout_mode = 2
 theme = ExtResource("1_fjrko")
-theme_type_variation = &"EntryPanel"
+theme_type_variation = &"PanelEntry"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Header" unique_id=1551961256]
 layout_mode = 2
@@ -61,3 +61,4 @@ layout_mode = 2
 
 [node name="UiScoreBoardDetailEntry" parent="VBoxContainer/DetailsContainer" unique_id=1845340979 instance=ExtResource("1_3vy2t")]
 layout_mode = 2
+theme_type_variation = &"PanelEntry"

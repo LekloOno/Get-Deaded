@@ -23,7 +23,66 @@ public partial class ScoreApi : ApiClient
         try
         {
             var url =
-                $"api/scores/leaderboard?mapKey={mapKey}&difficulty={difficulty}&centerRank={centerRank}&take={take}";
+                $"api/scores/leaderboard/unique?mapKey={mapKey}&difficulty={difficulty}&centerRank={centerRank}&take={take}";
+
+            var request = new HttpRequestMessage(HttpMethod.Get, url);
+            request.Headers.Authorization =
+                new AuthenticationHeaderValue("Bearer", Session.Token);
+
+            var response = await Http.SendAsync(request);
+
+            result.StatusCode = (int)response.StatusCode;
+
+            var body = await response.Content.ReadAsStringAsync();
+            result.RawBody = body;
+
+            if (!response.IsSuccessStatusCode)
+            {
+                result.Success = false;
+                result.ErrorMessage = $"HTTP {(int)response.StatusCode}";
+                return result;
+            }
+
+            result.Data = JsonSerializer.Deserialize<List<LeaderboardRowDto>>(body, JsonOptions);
+            result.Success = true;
+            return result;
+        }
+        catch (TaskCanceledException ex)
+        {
+            result.Success = false;
+            result.ExceptionType = nameof(TaskCanceledException);
+            result.ErrorMessage = "Timeout";
+            GD.PrintErr(ex);
+            return result;
+        }
+        catch (HttpRequestException ex)
+        {
+            result.Success = false;
+            result.ExceptionType = nameof(HttpRequestException);
+            result.ErrorMessage = ex.Message;
+            return result;
+        }
+        catch (Exception ex)
+        {
+            result.Success = false;
+            result.ExceptionType = ex.GetType().Name;
+            result.ErrorMessage = ex.Message;
+            return result;
+        }
+    }
+
+    public async Task<ApiResult<List<LeaderboardRowDto>>> GetLeaderboardNewScoreAsync(
+    string mapKey,
+    int difficulty,
+    Guid scoreId,
+    int take = 20)
+    {
+        var result = new ApiResult<List<LeaderboardRowDto>>();
+
+        try
+        {
+            var url =
+                $"api/scores/leaderboard/unique/around-score?mapKey={mapKey}&difficulty={difficulty}&scoreId={scoreId}&take={take}";
 
             var request = new HttpRequestMessage(HttpMethod.Get, url);
             request.Headers.Authorization =

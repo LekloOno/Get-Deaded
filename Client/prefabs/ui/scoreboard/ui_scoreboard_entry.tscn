@@ -10,7 +10,7 @@
 offset_right = 1163.0
 offset_bottom = 174.0
 theme = ExtResource("1_rt4d8")
-theme_type_variation = &"EntryPanel"
+theme_type_variation = &"PanelEntry"
 script = ExtResource("2_i3djf")
 _details = NodePath("VBoxContainer/UiScoreboardDetails")
 _container = NodePath("VBoxContainer/UiScoreboardDetails")

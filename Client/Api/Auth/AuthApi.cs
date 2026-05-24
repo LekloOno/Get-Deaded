@@ -62,6 +62,7 @@ public class AuthApi : ApiClient
                 JsonOptions)!;
 
             Session.Token.Value = auth.Token;
+            Session.PlayerId = auth.UserId;
 
             return new AuthResult
             {
@@ -155,6 +156,7 @@ public class AuthApi : ApiClient
             }
 
             Session.Token.Value = auth.Token;
+            Session.PlayerId = auth.UserId;
 
             return new AuthResult
             {

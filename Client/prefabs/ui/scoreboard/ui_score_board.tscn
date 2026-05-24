@@ -20,7 +20,7 @@ size_flags_horizontal = 4
 [node name="Header" type="PanelContainer" parent="VBoxContainer" unique_id=1017169349]
 layout_mode = 2
 theme = ExtResource("2_lx2ug")
-theme_type_variation = &"EntryPanel"
+theme_type_variation = &"PanelEntry"
 
 [node name="UiScoreboardEntry" type="HBoxContainer" parent="VBoxContainer/Header" unique_id=1088715523]
 layout_mode = 2

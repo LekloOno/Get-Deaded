@@ -8,7 +8,7 @@
 offset_right = 626.0
 offset_bottom = 60.0
 theme = ExtResource("1_ti6bm")
-theme_type_variation = &"EntryPanel"
+theme_type_variation = &"PanelEntry"
 script = ExtResource("2_qemh8")
 _weapon = NodePath("HBoxContainer/TextureRect")
 _kills = NodePath("HBoxContainer/Kills")

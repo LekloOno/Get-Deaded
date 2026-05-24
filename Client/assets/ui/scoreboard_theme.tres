@@ -34,9 +34,6 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ppmnc"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nawe0"]
-bg_color = Color(0, 0.03529412, 0.06666667, 0.05490196)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ukvur"]
 content_margin_left = 4.0
 content_margin_top = 4.0
@@ -104,9 +101,6 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sd0c1"]
 bg_color = Color(0, 0, 0, 0.30980393)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qbtdp"]
-bg_color = Color(0.22669435, 0.37108883, 0.59655994, 0.7529412)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bhpmc"]
 bg_color = Color(0, 0, 0, 0.12156863)
 
@@ -115,6 +109,18 @@ bg_color = Color(0.18000486, 0.1800049, 0.1800048, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_34pu0"]
 bg_color = Color(0, 0, 0, 0.38039216)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nawe0"]
+bg_color = Color(0, 0.03529412, 0.06666667, 0.05490196)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qbtdp"]
+bg_color = Color(0.22669435, 0.37108883, 0.59655994, 0.7529412)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xu23"]
+bg_color = Color(0.7745268, 0.48261994, 0.09435091, 0.53333336)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ml4jb"]
+bg_color = Color(0.52662206, 0.36951157, 0.18365398, 0.6313726)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b8kfe"]
 
@@ -133,9 +139,6 @@ CheckBox/styles/pressed = SubResource("StyleBoxFlat_l6w15")
 ColorPickerButton/styles/normal = SubResource("StyleBoxEmpty_ppmnc")
 DetailsLabel/base_type = &"Label"
 DetailsLabel/font_sizes/font_size = 16
-DetailsPanel/base_type = &"PanelContainer"
-EntryPanel/base_type = &"PanelContainer"
-EntryPanel/styles/panel = SubResource("StyleBoxFlat_nawe0")
 InputButton/base_type = &"Button"
 InputButton/font_sizes/font_size = 10
 InputButton/styles/focus = SubResource("StyleBoxFlat_ukvur")
@@ -146,12 +149,19 @@ Label/font_sizes/font_size = 25
 Label/styles/normal = SubResource("StyleBoxFlat_0xadh")
 LineEdit/font_sizes/font_size = 13
 LineEdit/styles/normal = SubResource("StyleBoxFlat_sd0c1")
-NewEntryPannel/base_type = &"PanelContainer"
-NewEntryPannel/styles/panel = SubResource("StyleBoxFlat_qbtdp")
 OptionButton/font_sizes/font_size = 11
 OptionButton/styles/normal = SubResource("StyleBoxFlat_bhpmc")
 Panel/styles/panel = SubResource("StyleBoxFlat_qvvi2")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_34pu0")
+PanelDetails/base_type = &"PanelContainer"
+PanelEntry/base_type = &"PanelContainer"
+PanelEntry/styles/panel = SubResource("StyleBoxFlat_nawe0")
+PanelNewEntry/base_type = &"PanelContainer"
+PanelNewEntry/styles/panel = SubResource("StyleBoxFlat_qbtdp")
+PanelNewPB/base_type = &"Panel"
+PanelNewPB/styles/panel = SubResource("StyleBoxFlat_0xu23")
+PanelPB/base_type = &"Panel"
+PanelPB/styles/panel = SubResource("StyleBoxFlat_ml4jb")
 ScoreRow/base_type = &"Button"
 ScoreRow/styles/normal = SubResource("StyleBoxFlat_nawe0")
 ScoreRow/styles/panel = SubResource("StyleBoxFlat_b8kfe")

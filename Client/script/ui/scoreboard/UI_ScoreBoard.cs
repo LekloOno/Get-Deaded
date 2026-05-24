@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Client.Api;
+using Client.Api.Auth;
 using Client.Api.Godot;
 using Godot;
 using Shared.Scores;
@@ -23,33 +24,50 @@ public partial class UI_ScoreBoard : Control
         _entryTemplate.SetProcess(false);
     }
 
-    public async Task InitializeAsync(E_EnemyDifficulty difficulty, Guid? guid = null, int Rank = 1)
+    public async Task InitializeAsync(E_EnemyDifficulty difficulty, Guid? optScoreId = null, int Rank = 1)
     {
         if (Initialized)
             return;
 
         Initialized = true;
-        
-        ApiResult<List<LeaderboardRowDto>> result = await ApiGodotGlue.Instance.ScoreApi.GetLeaderboardAsync(
-            "dust_pit",
-            (int)difficulty,
-            Rank
-        );
+
+        ApiResult<List<LeaderboardRowDto>> result;
+        if (optScoreId is Guid scoreId)
+            result = await ApiGodotGlue.Instance.ScoreApi.GetLeaderboardNewScoreAsync(
+                "dust_pit",
+                (int)difficulty,
+                scoreId
+            );
+        else
+            result = await ApiGodotGlue.Instance.ScoreApi.GetLeaderboardAsync(
+                "dust_pit",
+                (int)difficulty,
+                Rank
+            );
         
         if (result.Success && result.Data != null)
-            CreateEntries(result.Data, guid);
+            CreateEntries(result.Data, optScoreId);
     }
 
-    private void CreateEntries(List<LeaderboardRowDto> rows, Guid? guid)
+    private void CreateEntries(List<LeaderboardRowDto> rows, Guid? scoreId)
     {
+        bool foundPB = false;
+
         foreach (LeaderboardRowDto row in rows)
         {
             UI_ScoreBoardEntry entry = (UI_ScoreBoardEntry) _entryTemplate.Duplicate();
-            
-            if (row.ScoreId == guid)
-                entry.ThemeTypeVariation = "NewEntryPannel";
+            if (!foundPB && row.PlayerId == Session.PlayerId)
+            {
+                foundPB = true;
+                if (row.ScoreId == scoreId)
+                    entry.ThemeTypeVariation = "PanelNewPB";
+                else
+                    entry.ThemeTypeVariation = "PanelPB";
+            }
+            else if (row.ScoreId == scoreId)
+                entry.ThemeTypeVariation = "PanelNewEntry";
             else
-                entry.ThemeTypeVariation = "EntryPannel";
+                entry.ThemeTypeVariation = "PanelEntry";
 
             entry.Visible = true;
             entry.SetProcess(true);
