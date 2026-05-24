@@ -27,7 +27,7 @@ public partial class ScoresController : ControllerBase
             .OrderByDescending(s => s.Value)
             .ToList();
 
-        var ranked = list
+        var ranked = bestPerPlayer
             .Select((s, index) => new { Score = s, Rank = index + 1 })
             .ToList();
 
