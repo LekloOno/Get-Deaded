@@ -24,6 +24,26 @@ public partial class PHX_BodyScale : CollisionShape3D
 
     private EventHandler OnPhysicsProcess;
 
+    
+    public override void _ExitTree()
+    {
+        ForceResetScale();
+    }
+
+    private void ForceResetScale()
+    {
+        Vector3 size = _box.Size;
+        size.Y = _colliderInitScale;
+        _box.Size = size;
+
+        Vector3 modelScale = _spatialAnchor.Scale;
+        modelScale.Y = _modelInitScale;
+        _spatialAnchor.Scale = modelScale;
+
+        _bodyHitShape.Height = _bodyHitBoxInitScale;
+        OnPhysicsProcess -= ProcessResetScale;
+        OnPhysicsProcess -= ProcessScale;
+    }
 
     public override void _Ready()
     {
@@ -73,19 +93,7 @@ public partial class PHX_BodyScale : CollisionShape3D
         ProcessScale(sender, e);
 
         if (ScaleDelta < 0.01f)
-        {
-            Vector3 size = _box.Size;
-            size.Y = _colliderInitScale;
-            _box.Size = size;
-
-            Vector3 modelScale = _spatialAnchor.Scale;
-            modelScale.Y = _modelInitScale;
-            _spatialAnchor.Scale = modelScale;
-
-            _bodyHitShape.Height = _bodyHitBoxInitScale;
-            
-            OnPhysicsProcess -= ProcessResetScale;
-        }
+            ForceResetScale();
     }
 
     private void ProcessScale(object sender, EventArgs e)
