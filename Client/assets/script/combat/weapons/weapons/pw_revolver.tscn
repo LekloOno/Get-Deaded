@@ -49,6 +49,7 @@ albedo_color = Color(0.529412, 0.529412, 0.529412, 0.109804)
 script = ExtResource("8_86tae")
 _fadeTime = 1.0
 _lineType = SubResource("Resource_86tae")
+_mMaterial = SubResource("StandardMaterial3D_rhime")
 _material = SubResource("StandardMaterial3D_rhime")
 metadata/_custom_type_script = "uid://ddcjrbuymtie4"
 

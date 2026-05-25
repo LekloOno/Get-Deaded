@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="VFX_MovingLightTrail" format=3 uid="uid://xv7qynkco77o"]
 
 [ext_resource type="Script" uid="uid://0w0m608ktkwu" path="res://script/vfx/combat/trail/moving_light/VFX_MovingLightTrail.cs" id="1_3e6wd"]
+[ext_resource type="Shader" uid="uid://dowm7je5diycf" path="res://assets/shaders/moving_trail.gdshader" id="1_jk2ta"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sbode"]
 transparency = 1
@@ -10,11 +11,19 @@ emission_enabled = true
 emission = Color(1, 0.5254902, 0.29803923, 1)
 emission_energy_multiplier = 20.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l42hc"]
+render_priority = 0
+shader = ExtResource("1_jk2ta")
+shader_parameter/trail_color = Color(0.78782725, 0.3497283, 0, 0.5921569)
+shader_parameter/emission_color = Color(1, 0.5254902, 0.29803923, 1)
+shader_parameter/emission_strength = 20.00000095
+
 [resource]
 script = ExtResource("1_3e6wd")
 _thickness = 0.04
 _bulletSpeed = 100.0
 _trailSpeed = 30.0
 _inclination = 45.0
+_movingTrailMat = SubResource("ShaderMaterial_l42hc")
 _material = SubResource("StandardMaterial3D_sbode")
 metadata/_custom_type_script = "uid://0w0m608ktkwu"

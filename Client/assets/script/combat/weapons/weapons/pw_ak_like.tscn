@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://cytkgtw0ebs3x" path="res://script/player/combat/weapons/trail/PW_Trail.cs" id="8_me5b4"]
 [ext_resource type="Script" uid="uid://0w0m608ktkwu" path="res://script/vfx/combat/trail/moving_light/VFX_MovingLightTrail.cs" id="10_kbg1w"]
 [ext_resource type="Script" uid="uid://r8ad50yt78dm" path="res://script/player/camera/annimation/trauma/causers/direct/PCT_ContinuousFire.cs" id="10_pnc4h"]
+[ext_resource type="Shader" uid="uid://dowm7je5diycf" path="res://assets/shaders/moving_trail.gdshader" id="10_y8hr8"]
 [ext_resource type="FastNoiseLite" uid="uid://dcqwnhaim8ock" path="res://assets/misc/shake_noise.tres" id="11_efcj5"]
 [ext_resource type="Script" uid="uid://c0vf7xmi1u8t4" path="res://script/player/camera/annimation/trauma/PC_TraumaLayer.cs" id="12_5k40v"]
 [ext_resource type="Script" uid="uid://bxxmkegnq67qe" path="res://script/player/combat/weapons/ads/PWA_SimpleADS.cs" id="13_iomcx"]
@@ -46,12 +47,20 @@ emission_enabled = true
 emission = Color(0.99607843, 0.46164218, 0.22745106, 1)
 emission_energy_multiplier = 15.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4hyk1"]
+render_priority = 0
+shader = ExtResource("10_y8hr8")
+shader_parameter/trail_color = Color(1, 0.46845925, 0, 0.149)
+shader_parameter/emission_color = Color(0.99607843, 0.46164218, 0.22745106, 1)
+shader_parameter/emission_strength = 15.0000007125
+
 [sub_resource type="Resource" id="Resource_v8jjb"]
 script = ExtResource("10_kbg1w")
 _thickness = 0.04
 _bulletSpeed = 300.0
 _trailSpeed = 6.0
 _inclination = 30.0
+_movingTrailMat = SubResource("ShaderMaterial_4hyk1")
 _material = SubResource("StandardMaterial3D_yciib")
 metadata/_custom_type_script = "uid://0w0m608ktkwu"
 

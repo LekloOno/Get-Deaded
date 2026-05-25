@@ -3,7 +3,6 @@ using Godot;
 [GlobalClass]
 public abstract partial class VFX_HitscanTrail : VFX_Trail
 {
-    [Export] protected Material _material;
     //protected Stack<VFX_ITrailMesh> _meshesPool = new();
 
     private bool _preloaded = false;
@@ -14,7 +13,7 @@ public abstract partial class VFX_HitscanTrail : VFX_Trail
             return;
         
         _preloaded = true;
-        VFX_TrailMesh newMesh = CreateTrail((Material)_material.Duplicate());
+        VFX_TrailMesh newMesh = CreateTrail();
         manager.AddChild(newMesh);
         manager.RemoveChild(newMesh);
         /*
@@ -39,12 +38,12 @@ public abstract partial class VFX_HitscanTrail : VFX_Trail
             return;
         }*/
 
-        VFX_TrailMesh newMesh = CreateTrail((Material)_material.Duplicate());
+        VFX_TrailMesh newMesh = CreateTrail();
         //newMesh.Pooled += _meshesPool.Push;
         newMesh.Pooled += (_) => newMesh.QueueFree();
         manager.AddChild(newMesh);
         newMesh.Shoot(origin, hit);
     }
 
-    public abstract VFX_TrailMesh CreateTrail(Material material);
+    public abstract VFX_TrailMesh CreateTrail();
 }

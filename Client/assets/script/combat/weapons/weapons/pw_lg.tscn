@@ -65,6 +65,7 @@ emission_energy_multiplier = 14.1
 script = ExtResource("10_eksov")
 _fadeTime = 0.05
 _lineType = SubResource("Resource_i06g8")
+_mMaterial = SubResource("StandardMaterial3D_eksov")
 _material = SubResource("StandardMaterial3D_eksov")
 metadata/_custom_type_script = "uid://ddcjrbuymtie4"
 
@@ -85,6 +86,7 @@ emission_energy_multiplier = 14.1
 script = ExtResource("10_eksov")
 _fadeTime = 0.05
 _lineType = SubResource("Resource_u7yby")
+_mMaterial = SubResource("StandardMaterial3D_u7yby")
 _material = SubResource("StandardMaterial3D_u7yby")
 metadata/_custom_type_script = "uid://ddcjrbuymtie4"
 
