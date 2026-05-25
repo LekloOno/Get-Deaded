@@ -56,6 +56,7 @@ ApiGodotGlue="*uid://2u55af6ilwft"
 DataWeaponRegistry="*uid://brtg6oq42t416"
 EnemyOutlinesOpacitySettings="*uid://dey6uy28w8rpg"
 EnemyOutlinesThicknessSetting="*uid://qktve2vw1q7t"
+VfxTrailPoolLoader="*uid://buxkqi6mk3jc7"
 
 [display]
 

@@ -12,8 +12,8 @@ public abstract partial class VFX_TrailMesh : MeshInstance3D, VFX_ITrailMesh
         MaterialOverride = material;
     }
 
-    public event Action<VFX_ITrailMesh> Pooled;
-    public event Action Spawned;
+    public event Action<VFX_ITrailMesh>? Pooled;
+    public event Action? Spawned;
 
     public void Shoot(Vector3 origin, Vector3 hit)
     {

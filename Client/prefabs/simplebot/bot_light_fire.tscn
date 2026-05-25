@@ -30,14 +30,6 @@ Damage = 0.5
 _inspectorModifiers = Array[Object]([SubResource("Resource_xwgbs")])
 metadata/_custom_type_script = "uid://cjmiash71uc7b"
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_34n62"]
-transparency = 1
-cull_mode = 2
-albedo_color = Color(0.7882353, 0.34901962, 0, 0.41568628)
-emission_enabled = true
-emission = Color(0.9999998, 0.4942124, 0.21576351, 1)
-emission_energy_multiplier = 8.06
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oj6wp"]
 render_priority = 0
 shader = ExtResource("6_2y1h8")
@@ -52,7 +44,6 @@ _bulletSpeed = 100.0
 _trailSpeed = 30.0
 _inclination = 20.0
 _movingTrailMat = SubResource("ShaderMaterial_oj6wp")
-_material = SubResource("StandardMaterial3D_34n62")
 metadata/_custom_type_script = "uid://0w0m608ktkwu"
 
 [sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_14xey"]
