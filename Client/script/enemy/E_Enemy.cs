@@ -205,6 +205,8 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 	{
 		if (!Enabled)
 			return;
+		
+		Mover.Rotate(this);
 
 		Vector3 velocity = Velocity;
 		if (!IsOnFloor())
@@ -228,12 +230,6 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 	{
 		float dragFactor = 1f/(1f+(float)deltaTime*_drag);    // Transform the drag to a velocity coeficient
 		return velocity * dragFactor;
-	}
-
-	public override void _Process(double delta)
-	{
-		if (_aim)
-			Mover.Rotate(this);
 	}
 
 	public void Attack(double delta)
