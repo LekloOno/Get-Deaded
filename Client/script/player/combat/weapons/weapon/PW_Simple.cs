@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using Godot;
 
 [GlobalClass]
@@ -21,8 +22,7 @@ public partial class PW_Simple : PW_Weapon
 	protected override void SpecStartADS(){}
 	protected override void SpecStopADS(){}
 
-	protected override bool SpecCanReload(out bool tactical) => Fire.CanReload(out tactical);
-
 	public override bool PickAmmo(int amount, bool magazine, int targetFireIndex) => Fire.PickAmmo(amount, magazine);
 
+	public override bool CanReload() => Fire.CanReload();
 }

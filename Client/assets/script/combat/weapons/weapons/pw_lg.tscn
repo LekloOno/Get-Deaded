@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cll1rrqagufi2" path="res://assets/sprites/weapons/brrtpixel2.png" id="2_eksov"]
 [ext_resource type="Script" uid="uid://cu3n4oi1x76dl" path="res://script/player/combat/weapons/fire/PWF_FullAuto.cs" id="3_u7yby"]
 [ext_resource type="Script" uid="uid://dljgtttuqopuf" path="res://script/player/combat/weapons/weapon/data/DATA_Weapon.cs" id="3_xla6f"]
+[ext_resource type="Script" uid="uid://d3tt26idh481" path="res://script/player/combat/weapons/weapon/PW_WeaponReloaderData.cs" id="4_dau1f"]
 [ext_resource type="Script" uid="uid://djecalg7cxlvg" path="res://script/player/combat/weapons/recoil/PWR_ConstantRecoil.cs" id="4_shr1g"]
 [ext_resource type="Script" uid="uid://cxiwvat6vddlp" path="res://script/player/combat/weapons/ammunition/PW_Ammunition.cs" id="5_olywm"]
 [ext_resource type="Script" uid="uid://fc7gkofu3df7" path="res://script/player/combat/weapons/shot/PWS_Hitscan.cs" id="6_o6dp4"]
@@ -35,6 +36,14 @@ Icon = ExtResource("2_eksov")
 IconColor = Color(0.28235292, 0.98318017, 1, 0.8)
 metadata/_custom_type_script = "uid://dljgtttuqopuf"
 
+[sub_resource type="Resource" id="Resource_0hh6b"]
+script = ExtResource("4_dau1f")
+UnloadTime = 0.7
+InsertTime = 0.9
+ChamberTime = 0.15
+RecoverTime = 0.15
+metadata/_custom_type_script = "uid://d3tt26idh481"
+
 [sub_resource type="Resource" id="Resource_o6dp4"]
 script = ExtResource("7_eksov")
 BodyPart = 0
@@ -65,7 +74,6 @@ emission_energy_multiplier = 14.1
 script = ExtResource("10_eksov")
 _fadeTime = 0.05
 _lineType = SubResource("Resource_i06g8")
-_mMaterial = SubResource("StandardMaterial3D_eksov")
 _material = SubResource("StandardMaterial3D_eksov")
 metadata/_custom_type_script = "uid://ddcjrbuymtie4"
 
@@ -86,7 +94,6 @@ emission_energy_multiplier = 14.1
 script = ExtResource("10_eksov")
 _fadeTime = 0.05
 _lineType = SubResource("Resource_u7yby")
-_mMaterial = SubResource("StandardMaterial3D_u7yby")
 _material = SubResource("StandardMaterial3D_u7yby")
 metadata/_custom_type_script = "uid://ddcjrbuymtie4"
 
@@ -102,6 +109,7 @@ polyphony = 10
 [node name="PW_Simple" type="Node3D" unique_id=1441637096 node_paths=PackedStringArray("_fires")]
 script = ExtResource("1_i06g8")
 Data = SubResource("Resource_dau1f")
+ReloaderData = SubResource("Resource_0hh6b")
 MoveSpeedModifier = -0.05
 SwitchInTime = 0.1
 SwitchOutTime = 0.18

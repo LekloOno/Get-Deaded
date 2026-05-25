@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c3are182lodyx" path="res://script/player/combat/weapons/weapon/PW_Simple.cs" id="1_5idl2"]
 [ext_resource type="Resource" uid="uid://c3jstfir1cnlq" path="res://assets/game/weapon/data_g0z_brt.tres" id="2_br4sg"]
+[ext_resource type="Script" uid="uid://d3tt26idh481" path="res://script/player/combat/weapons/weapon/PW_WeaponReloaderData.cs" id="3_ely4n"]
 [ext_resource type="Script" uid="uid://cu3n4oi1x76dl" path="res://script/player/combat/weapons/fire/PWF_FullAuto.cs" id="3_j06ou"]
 [ext_resource type="Script" uid="uid://djecalg7cxlvg" path="res://script/player/combat/weapons/recoil/PWR_ConstantRecoil.cs" id="4_8kujm"]
 [ext_resource type="Script" uid="uid://cxiwvat6vddlp" path="res://script/player/combat/weapons/ammunition/PW_Ammunition.cs" id="5_akysb"]
@@ -27,6 +28,14 @@
 [ext_resource type="Script" uid="uid://baygafcv8gr3s" path="res://script/player/audio/combat/weapons/fire/PAF_Generic.cs" id="25_4kard"]
 [ext_resource type="AudioStream" uid="uid://78knre50os6g" path="res://assets/sounds/combat/weapons/fires/oui.mp3" id="26_fu7vn"]
 
+[sub_resource type="Resource" id="Resource_4kard"]
+script = ExtResource("3_ely4n")
+UnloadTime = 0.3
+InsertTime = 0.6
+ChamberTime = 0.3
+RecoverTime = 0.15
+metadata/_custom_type_script = "uid://d3tt26idh481"
+
 [sub_resource type="Resource" id="Resource_ad73j"]
 script = ExtResource("7_2b0g7")
 Damage = 11.0
@@ -48,6 +57,7 @@ polyphony = 10
 [node name="PW_Simple" type="Node3D" unique_id=1660127265 node_paths=PackedStringArray("_fires", "_ads")]
 script = ExtResource("1_5idl2")
 Data = ExtResource("2_br4sg")
+ReloaderData = SubResource("Resource_4kard")
 MoveSpeedModifier = -0.08
 SwitchInTime = 0.1
 SwitchOutTime = 0.18

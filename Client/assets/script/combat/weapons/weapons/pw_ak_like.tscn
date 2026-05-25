@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cll1rrqagufi2" path="res://assets/sprites/weapons/brrtpixel2.png" id="2_kbg1w"]
 [ext_resource type="Script" uid="uid://dljgtttuqopuf" path="res://script/player/combat/weapons/weapon/data/DATA_Weapon.cs" id="3_l5b2w"]
 [ext_resource type="Script" uid="uid://cu3n4oi1x76dl" path="res://script/player/combat/weapons/fire/PWF_FullAuto.cs" id="3_v8jjb"]
+[ext_resource type="Script" uid="uid://d3tt26idh481" path="res://script/player/combat/weapons/weapon/PW_WeaponReloaderData.cs" id="4_4hyk1"]
 [ext_resource type="Script" uid="uid://djecalg7cxlvg" path="res://script/player/combat/weapons/recoil/PWR_ConstantRecoil.cs" id="4_l5b2w"]
 [ext_resource type="Script" uid="uid://cxiwvat6vddlp" path="res://script/player/combat/weapons/ammunition/PW_Ammunition.cs" id="5_y8hr8"]
 [ext_resource type="Script" uid="uid://fc7gkofu3df7" path="res://script/player/combat/weapons/shot/PWS_Hitscan.cs" id="6_4hyk1"]
@@ -33,19 +34,19 @@ Icon = ExtResource("2_kbg1w")
 IconColor = Color(0.28235292, 0.41130513, 1, 0.8)
 metadata/_custom_type_script = "uid://dljgtttuqopuf"
 
+[sub_resource type="Resource" id="Resource_x86ej"]
+script = ExtResource("4_4hyk1")
+UnloadTime = 0.6
+InsertTime = 1.0
+ChamberTime = 0.3
+RecoverTime = 0.15
+metadata/_custom_type_script = "uid://d3tt26idh481"
+
 [sub_resource type="Resource" id="Resource_hoxdg"]
 script = ExtResource("7_x86ej")
 Damage = 17.0
 _inspectorModifiers = Array[Object]([])
 metadata/_custom_type_script = "uid://cjmiash71uc7b"
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yciib"]
-transparency = 1
-cull_mode = 2
-albedo_color = Color(1, 0.46845925, 0, 0.149)
-emission_enabled = true
-emission = Color(0.99607843, 0.46164218, 0.22745106, 1)
-emission_energy_multiplier = 15.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4hyk1"]
 render_priority = 0
@@ -61,7 +62,6 @@ _bulletSpeed = 300.0
 _trailSpeed = 6.0
 _inclination = 30.0
 _movingTrailMat = SubResource("ShaderMaterial_4hyk1")
-_material = SubResource("StandardMaterial3D_yciib")
 metadata/_custom_type_script = "uid://0w0m608ktkwu"
 
 [sub_resource type="Resource" id="Resource_8jkby"]
@@ -76,6 +76,7 @@ polyphony = 10
 [node name="PW_Simple" type="Node3D" unique_id=1164054221 node_paths=PackedStringArray("_fires", "_ads")]
 script = ExtResource("1_jqekf")
 Data = SubResource("Resource_y8hr8")
+ReloaderData = SubResource("Resource_x86ej")
 MoveSpeedModifier = -0.12
 SwitchInTime = 0.1
 SwitchOutTime = 0.18

@@ -20,12 +20,14 @@ public partial class PW_Ammunition : WeaponComponent
     [Export] private uint _maxMagazines;
     [Export] protected uint _baseAmmos;
     [Export] public bool InfiniteAmmo = false;
+    public bool IsDeloaded {get; private set;} = false;
     public bool IsReloading {get; private set;} = false;
     private uint _maxAmmos;
     private uint _unloadedAmmos;
     private uint _loadedAmmos;
 
     public EventHandler ReloadCompleted;
+    public Action Deloaded;
     public AmmunitionEvent LoadedChanged;
     public AmmunitionEvent UnloadedChanged;
 
@@ -131,6 +133,32 @@ public partial class PW_Ammunition : WeaponComponent
     public bool CanReload() => LoadedAmmos < _magazineSize && (InfiniteAmmo || UnloadedAmmos > 0);
 
     /// <summary>
+    /// Empties currently loaded amunitions and fill the unloaded capacity with them.
+    /// UnloadedAmmos can thus temporarily exceed _maxAmmos.
+    /// </summary>
+    /// <returns></returns>
+    public uint Unload()
+    {
+        uint deloaded;
+
+        if (LoadedAmmos == 0)
+            deloaded = 0;
+        else    // Leave one in chamber
+            deloaded = LoadedAmmos - 1;
+
+        LoadedAmmos -= deloaded;
+        UnloadedAmmos += deloaded;    
+        IsDeloaded = true;
+        return deloaded;
+    }
+
+    public uint Insert()
+    {
+        // For now, just simple reload, we'll tackle round formats in the overhaul
+        return Reload();
+    }
+
+    /// <summary>
     /// Reloads the loaded ammos with the unloaded ammos.
     /// </summary>
     /// <returns>The ammos reloaded. 0 if there's no unloaded ammos left.</returns>
@@ -142,6 +170,7 @@ public partial class PW_Ammunition : WeaponComponent
             UnloadedAmmos -= reloaded;
         
         LoadedAmmos += reloaded;
+        IsDeloaded = false;
         IsReloading = false;
         ReloadCompleted?.Invoke(this, EventArgs.Empty);
         return reloaded;

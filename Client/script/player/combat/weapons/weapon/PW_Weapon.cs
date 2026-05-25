@@ -35,12 +35,11 @@ Connections
 public abstract partial class PW_Weapon : WeaponComponent
 {
     [Export] public DATA_Weapon Data {get; private set;}
+    [Export] public PW_WeaponReloaderData ReloaderData {get; private set;}
+    public PW_WeaponReloader Reloader { get; private set; }
     [Export] public float MoveSpeedModifier {get; private set;} = 0f;   // An additive modifier to set. - is a malus + is a bonus
     [Export] public float SwitchInTime {get; private set;}
     [Export] public float SwitchOutTime {get; private set;}
-    [Export] public float ReloadTime {get; private set;}
-    [Export] public float TacticalReloadTime {get; private set;}
-    [Export] public float ReloadReadyTime {get; private set;}            // Additionnal time before the weapon is ready once it's reloaded, allow annimation cancels
     [Export] protected Array<PW_Fire> _fires;
     public Array<PW_Fire> Fires => _fires;
     [Export] protected PW_ADS _ads;
@@ -99,6 +98,16 @@ public abstract partial class PW_Weapon : WeaponComponent
         _currentFire = InitCurrentFire();
     }
 
+    public override void _Ready()
+    {
+        Reloader = new(ReloaderData);
+        AddChild(Reloader);
+
+        Reloader.Unloaded += Unload;
+        Reloader.Inserted += Insert;
+        Reloader.Recovered += SpecEnable;
+    }
+
     public virtual void Sleep() =>
         _currentFire.Sleep();
 
@@ -121,11 +130,17 @@ public abstract partial class PW_Weapon : WeaponComponent
     {
         _ads?.Disable();
         SpecDisable();
+
+        if (!Reloader.IsReady)
+            TryCancelReload();
     }
 
     public void Enable()
     {
         SpecEnable();
+
+        if (!Reloader.IsReady)
+            TryReload();
     }
 
     public void AddDamageMultiplier(float multiplier)
@@ -158,33 +173,31 @@ public abstract partial class PW_Weapon : WeaponComponent
             fire.ResetBuffer();
     }
 
-    public void SecondaryPress()
+    public bool SecondaryPress()
     {
-        if (_ads == null)
-            SpecSecondaryPress();
+        if (_ads != null)
+            return _ads.Press();
+        
+        if (!Reloader.IsReady)
+            return false;
+        
         else
-            _ads.Press();
+            return SpecSecondaryPress();
     }
 
-    public void SecondaryRelease()
+    public bool SecondaryRelease()
     {
-        if (_ads == null)
-            SpecSecondaryRelease();
+        if (_ads != null)
+            return _ads.Release();
+        
+        if (!Reloader.IsReady)
+            return false;
+
         else
-            _ads.Release();
+            return SpecSecondaryRelease();
     }
 
-    /// <summary>
-    /// Check if this weapon can start realoading.
-    /// </summary>
-    /// <param name="reloadTime">The expected reload time. Typically corresponds either to the weapon tactical or normal reload time.</param>
-    /// <returns>true if the weapon can reload, false otherwise.</returns>
-    public bool CanReload(out float reloadTime)
-    {
-        bool canReload = SpecCanReload(out bool tactical);
-        reloadTime = tactical ? TacticalReloadTime : ReloadTime;
-        return canReload;
-    }
+    public abstract bool CanReload();
 
     private void StartADS()
     {
@@ -195,6 +208,19 @@ public abstract partial class PW_Weapon : WeaponComponent
     {
         SpecStopADS();
         ADSStopped?.Invoke();
+    }
+
+    public bool TryCancelReload() =>
+        Reloader.Cancel();
+
+    public bool TryReload()
+    {
+        if (Reloader.CurrentStep != PW_ReloadStep.Chamber &&
+            !CanReload())
+            return false;
+
+        Interrupt();
+        return Reloader.StartReload();
     }
 
     #endregion
@@ -229,11 +255,23 @@ public abstract partial class PW_Weapon : WeaponComponent
     /// <summary>
     /// Called when the primary input is pressed down. Will typically handle shooting process.
     /// </summary>
-    public virtual bool PrimaryPress() => _currentFire.Press();
+    public bool PrimaryPress()
+    {
+        if (Reloader.IsReady)
+            return _currentFire.Press();
+        else
+            return false;
+    } 
     /// <summary>
     /// Called when the primary input is released up. Could handle some special behaviors, or shooting.
     /// </summary>
-    public virtual bool PrimaryRelease() => _currentFire.Release();
+    public bool PrimaryRelease()
+    {
+        if (Reloader.IsReady)
+            return _currentFire.Release();
+        else
+            return false;   
+    }
     /// <summary>
     /// Called if the ADS handler didn't consume the incoming secondary press input.
     /// </summary>
@@ -253,24 +291,22 @@ public abstract partial class PW_Weapon : WeaponComponent
     /// </summary>
     protected abstract void SpecStopADS();
 
-    /// <summary>
-    /// Specialize the reload check using the weapon's fire(s).
-    /// </summary>
-    /// <param name="tactical">Secondary output to indicate if a tactical or normal reload should be applied.</param>
-    /// <returns>true if the weapon can reload, false otherwise.</returns>
-    protected virtual bool SpecCanReload(out bool tactical)
-    {
-        foreach (PW_Fire fire in _fires)
-            if (fire.CanReload(out tactical)) return true;
-        
-        tactical = false;
-        return false;
-    }
-
     public virtual void Reload()
     {
         foreach (PW_Fire fire in _fires)
             fire.Reload();
+    }
+
+    public virtual void Unload()
+    {
+        foreach (PW_Fire fire in _fires)
+            fire.Unload();
+    }
+
+    public virtual void Insert()
+    {
+        foreach (PW_Fire fire in _fires)
+            fire.Insert();
     }
 
     public virtual void Interrupt()

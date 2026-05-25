@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://c3are182lodyx" path="res://script/player/combat/weapons/weapon/PW_Simple.cs" id="1_ce3gq"]
 [ext_resource type="Resource" uid="uid://qxle5i68xbyy" path="res://assets/game/weapon/data_p3_w.tres" id="2_jf62l"]
 [ext_resource type="Script" uid="uid://dmsklefspdvlw" path="res://script/player/combat/weapons/fire/PWF_SemiAuto.cs" id="3_25fv7"]
+[ext_resource type="Script" uid="uid://d3tt26idh481" path="res://script/player/combat/weapons/weapon/PW_WeaponReloaderData.cs" id="3_rebuq"]
 [ext_resource type="Script" uid="uid://djecalg7cxlvg" path="res://script/player/combat/weapons/recoil/PWR_ConstantRecoil.cs" id="4_odgi6"]
 [ext_resource type="Script" uid="uid://fc7gkofu3df7" path="res://script/player/combat/weapons/shot/PWS_Hitscan.cs" id="4_utu8p"]
 [ext_resource type="Script" uid="uid://cxiwvat6vddlp" path="res://script/player/combat/weapons/ammunition/PW_Ammunition.cs" id="5_25fv7"]
@@ -28,6 +29,13 @@
 [ext_resource type="AudioStream" uid="uid://b45218olxwvgf" path="res://assets/sounds/combat/weapons/fires/revolver/whistle.wav" id="24_15h8q"]
 [ext_resource type="AudioStream" uid="uid://bo1rj54migyfy" path="res://assets/sounds/combat/weapons/fires/lg/lg_attack.wav" id="27_jf62l"]
 
+[sub_resource type="Resource" id="Resource_lkw52"]
+script = ExtResource("3_rebuq")
+UnloadTime = 0.35
+InsertTime = 0.75
+RecoverTime = 0.15
+metadata/_custom_type_script = "uid://d3tt26idh481"
+
 [sub_resource type="Resource" id="Resource_wj164"]
 script = ExtResource("5_d2gec")
 Damage = 50.0
@@ -49,7 +57,6 @@ albedo_color = Color(0.529412, 0.529412, 0.529412, 0.109804)
 script = ExtResource("8_86tae")
 _fadeTime = 1.0
 _lineType = SubResource("Resource_86tae")
-_mMaterial = SubResource("StandardMaterial3D_rhime")
 _material = SubResource("StandardMaterial3D_rhime")
 metadata/_custom_type_script = "uid://ddcjrbuymtie4"
 
@@ -74,6 +81,7 @@ polyphony = 10
 [node name="PW_Revolver" type="Node3D" unique_id=1663599436 node_paths=PackedStringArray("_fires")]
 script = ExtResource("1_ce3gq")
 Data = ExtResource("2_jf62l")
+ReloaderData = SubResource("Resource_lkw52")
 MoveSpeedModifier = -0.1
 SwitchInTime = 0.13
 SwitchOutTime = 0.18

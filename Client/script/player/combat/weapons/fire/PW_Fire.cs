@@ -154,10 +154,10 @@ public abstract partial class PW_Fire : WeaponComponent
         return false;
     }
 
-    public void Reload()
-    {
-        _ammos.Reload();
-    }
+    public void Reload() => _ammos.Reload();
+    public void Unload() => _ammos.Unload();
+    public void Insert() => _ammos.Insert();
+    public bool CanReload() => _ammos.CanReload();
 
     public void ResetBuffer()
     {
@@ -208,12 +208,6 @@ public abstract partial class PW_Fire : WeaponComponent
     {
         _releaseBuffered = false;
         SpecRelease();
-    }
-
-    public bool CanReload(out bool tactical)
-    {
-        tactical = _ammos.LoadedAmmos > 0;
-        return _ammos.CanReload();
     }
 
     public void AddSpread(float multiplier)

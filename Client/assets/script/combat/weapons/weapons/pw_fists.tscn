@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://c3are182lodyx" path="res://script/player/combat/weapons/weapon/PW_Simple.cs" id="1_k4qra"]
 [ext_resource type="Resource" uid="uid://byurw34rhcw48" path="res://assets/game/weapon/data_pw_fists.tres" id="2_2xwjd"]
 [ext_resource type="Script" uid="uid://co06wv08f4cgo" path="res://script/player/combat/weapons/fire/special/PW_FistsFire.cs" id="3_k4qra"]
+[ext_resource type="Script" uid="uid://d3tt26idh481" path="res://script/player/combat/weapons/weapon/PW_WeaponReloaderData.cs" id="3_s0i7c"]
 [ext_resource type="Script" uid="uid://cxiwvat6vddlp" path="res://script/player/combat/weapons/ammunition/PW_Ammunition.cs" id="4_2xwjd"]
 [ext_resource type="Script" uid="uid://sujdlokcwnd6" path="res://script/global/combat/hit/GC_DamageModifier.cs" id="6_s0i7c"]
 [ext_resource type="Script" uid="uid://cjmiash71uc7b" path="res://script/global/combat/hit/hit/GC_Hit.cs" id="7_g68l2"]
@@ -19,6 +20,10 @@
 [ext_resource type="Script" uid="uid://b88xre8wsrllr" path="res://script/global/combat/hit/hit/GC_SequenceHitBox.cs" id="16_ghv7x"]
 [ext_resource type="Script" uid="uid://cw3m0ga8jfbw7" path="res://script/engine_tools/physics/bodies/objects/hitbox/PHX_ShapeSeqArea3D.cs" id="17_s0i7c"]
 
+[sub_resource type="Resource" id="Resource_g68l2"]
+script = ExtResource("3_s0i7c")
+metadata/_custom_type_script = "uid://d3tt26idh481"
+
 [sub_resource type="Resource" id="Resource_488s0"]
 script = ExtResource("6_s0i7c")
 BodyPart = 0
@@ -34,11 +39,6 @@ metadata/_custom_type_script = "uid://cjmiash71uc7b"
 [sub_resource type="BoxShape3D" id="BoxShape3D_2xwjd"]
 size = Vector3(0.9, 1, 1.1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4osp6"]
-transparency = 1
-cull_mode = 2
-albedo_color = Color(1, 1, 1, 0.138)
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s0i7c"]
 render_priority = 0
 shader = ExtResource("12_ghv7x")
@@ -53,7 +53,6 @@ _bulletSpeed = 12.0
 _trailSpeed = 5.0
 _inclination = 87.0
 _movingTrailMat = SubResource("ShaderMaterial_s0i7c")
-_material = SubResource("StandardMaterial3D_4osp6")
 metadata/_custom_type_script = "uid://0w0m608ktkwu"
 
 [sub_resource type="Resource" id="Resource_38m5i"]
@@ -74,6 +73,7 @@ metadata/_custom_type_script = "uid://c0vf7xmi1u8t4"
 [node name="PW_BasicMelee" type="Node3D" unique_id=1849171425 node_paths=PackedStringArray("_fires")]
 script = ExtResource("1_k4qra")
 Data = ExtResource("2_2xwjd")
+ReloaderData = SubResource("Resource_g68l2")
 SwitchInTime = 0.12
 SwitchOutTime = 0.12
 _fires = [NodePath("PW_FistsFire")]

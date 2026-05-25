@@ -50,7 +50,6 @@ public partial class PW_WeaponsHandler : WeaponSystem
     public EventHandler<PW_Weapon> SwitchEnded;
     public bool ADSactive => _activeWeapon.ADSActive;
     public Action ReloadReady;
-    public Action Reloaded;
     public Action<float> ReloadStarted;
     public Action ReloadCancelled;
     public Action ADSStarted;
@@ -67,12 +66,10 @@ public partial class PW_WeaponsHandler : WeaponSystem
     private bool _bufferedPrimary = false;
     private bool _bufferedSecondary = false;
 
-    private bool _reloading = false;
     private bool _reloadQueued = false;
     private bool _ready = true;
     private bool _externalReady = true;
 
-    private SceneTreeTimer _reloadTimer;
     private SceneTreeTimer _meleeRecoverTimer;
     
     public bool Initialized {get; private set;} = false;
@@ -112,6 +109,8 @@ public partial class PW_WeaponsHandler : WeaponSystem
             weapon.Hit += (o, e) => Hit?.Invoke(o, e);
             weapon.ADSStarted += () => ADSStarted?.Invoke();
             weapon.ADSStopped += () => ADSStopped?.Invoke();
+            weapon.Reloader.Recovered += CompleteReload;
+            weapon.Reloader.Started += TransmitReloadStarted;
         }
 
         Melee.Initialize(_shakeableCamera, _camera, _surfaceControl, _recoilController, _ownerBody, this);
@@ -141,6 +140,11 @@ public partial class PW_WeaponsHandler : WeaponSystem
         int nextIndex = (_weaponIndex + 1) % _weapons.Count;
         GotInitialized?.Invoke(Melee, _weapons[_weaponIndex], nextIndex, _weapons);
         Initialized = true;
+    }
+
+    private void TransmitReloadStarted(PW_ReloadStep prev, PW_ReloadStep current, float time)
+    {
+        ReloadStarted.Invoke(time);
     }
 
     private void SendAvailable()
@@ -216,7 +220,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
         weapons = _weapons;
     }
 
-    public bool ActiveWeaponHalted() => !_ready || !_externalReady || IsSwitching();
+    public bool ActiveWeaponHalted() => !_ready || !_externalReady || IsSwitching() || !_activeWeapon.Reloader.IsReady;
     public bool IsSwitching() => _switchingIn || _switchingOut;
 
     // Very redondant way to define the buffers, could use a little rework !
@@ -346,15 +350,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
         if (!_weaponsInput.ReloadUseBuffer())
             return;
 
-        if(!_activeWeapon.CanReload(out float reloadTime))
-            return;
-
-        _reloading = true;
-        _ready = false;
-        _activeWeapon.Interrupt();
-        _reloadTimer = GetTree().CreateTimer(reloadTime, false, true);
-        _reloadTimer.Timeout += DoReload;
-        ReloadStarted.Invoke(reloadTime);
+        _activeWeapon.TryReload();    
     }
 
     // Maybe later make a new PI class which handles auto buffering
@@ -364,7 +360,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
     //      subscribe to the buffer consuming event that has been set previously or on the fly  
     public void Reload(object sender, EventArgs e)
     {
-        if (_reloading)
+        if (!_activeWeapon.Reloader.IsReady)
         {
             _weaponsInput.ReloadUseBuffer();
             return;
@@ -383,36 +379,13 @@ public partial class PW_WeaponsHandler : WeaponSystem
         }
     }
 
-    private void DoReload()
-    {
-        _activeWeapon.Reload();
-        _reloadTimer = GetTree().CreateTimer(_activeWeapon.ReloadReadyTime, false, true);
-        _reloadTimer.Timeout += CompleteReload;
-        _reloading = false;
-    }
-
-    private void CompleteReload()
-    {
-        _ready = true;
-        _activeWeapon.Enable();
+    private void CompleteReload() =>
         ReloadReady?.Invoke();
-    }
 
     private void CancelReload()
     {
-        if (_reloadTimer == null)
-            return;
-        
-        if (_reloading)
-            _reloadTimer.Timeout -= DoReload;
-        else
-            _reloadTimer.Timeout -= CompleteReload;
-
-        _reloadTimer = null;
-        _reloading = false;
-        _ready = true;
-
-        ReloadCancelled?.Invoke();
+        if (_activeWeapon.TryCancelReload())
+            ReloadCancelled?.Invoke();
     }
 
     public void StartSwitch()
@@ -488,7 +461,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
 
         _surfaceControl.SpeedModifiers.Remove(_activeWeapon.MoveSpeedModifier);
         _surfaceControl.SpeedModifiers.Add(_targetWeapon.MoveSpeedModifier);
-        _activeWeapon.Enable();
+        Melee.Enable();
         _targetWeapon.Enable();
         _activeWeapon = _targetWeapon;
 
