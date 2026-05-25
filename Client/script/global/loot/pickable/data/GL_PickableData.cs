@@ -11,7 +11,8 @@ public abstract partial class GL_PickableData : Resource
         GL_PhysicsPickable pickable = GetPhysicsPickable(horizontalDamp, lifeTime);
         pickable.TopLevel = true;
         pickable.CollisionLayer = CONF_Collision.Layers.Pickup;
-        pickable.CollisionMask = CONF_Collision.Masks.Environment;
+        // Use enviornment layer as mask, not env mask, as we ignore enemies/player
+        pickable.CollisionMask = CONF_Collision.Layers.Environment;
         pickable.AddChild(Model.Instantiate());
         if (_repulsionData == null)
             return pickable;

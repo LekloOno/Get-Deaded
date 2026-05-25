@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://xsspxxm8en30" path="res://assets/models/low_poly_soda_can.glb" id="1_v4ji6"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_v4ji6"]
-radius = 0.4
+radius = 0.24
 
 [node name="DamageMultiplier" type="CollisionShape3D" unique_id=518475886]
 shape = SubResource("SphereShape3D_v4ji6")

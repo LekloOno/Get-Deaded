@@ -12,7 +12,7 @@ public partial class PickableSpawner : Node3D
     /// <summary>
     /// Horizontal dampening of the pickup
     /// </summary>
-    [Export] private float _horizontalDamp;
+    [Export] private float _horizontalDamp = 2.5f;
     /// <summary>
     /// Life time of the pickup
     /// </summary>
