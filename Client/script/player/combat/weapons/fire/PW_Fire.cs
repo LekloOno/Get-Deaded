@@ -74,6 +74,12 @@ public abstract partial class PW_Fire : WeaponComponent
         DisableSpec();
     }
 
+    public Action? DryShot;
+    public void ForwardDryShot() => DryShot?.Invoke();
+    public override void _Ready()
+    {
+        _ammos.DryShot += ForwardDryShot;
+    }
 
     public void Initialize(PC_Shakeable shakeableCamera, PC_Recoil recoilController, GB_ExternalBodyManagerWrapper ownerBody, PW_Weapon weapon)
     {
@@ -158,6 +164,8 @@ public abstract partial class PW_Fire : WeaponComponent
     public void Unload() => _ammos.Unload();
     public void Insert() => _ammos.Insert();
     public bool CanReload() => _ammos.CanReload();
+    public bool Chamber() => _ammos.Chamber();
+    public bool Chambered => _ammos.Chambered;
 
     public void ResetBuffer()
     {

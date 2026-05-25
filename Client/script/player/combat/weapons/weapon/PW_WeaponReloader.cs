@@ -38,10 +38,13 @@ public partial class PW_WeaponReloader : Node
         _acc = 0f;
     }
 
-    public bool StartReload()
+    private bool _chambered;
+    public bool StartReload(bool chambered)
     {
         if (IsPhysicsProcessing())
             return false;
+
+        _chambered = chambered;
 
         PW_ReloadStep prev = CurrentStep;
 
@@ -52,13 +55,13 @@ public partial class PW_WeaponReloader : Node
         {
             PW_ReloadStep.Unload => _data.UnloadTime,
             PW_ReloadStep.Insert => _data.InsertTime,
-            PW_ReloadStep.Chamber => _data.ChamberTime,
+            PW_ReloadStep.Chamber => _data.ChamberTime, // It is not possible that CurrentStep is Chamber if the weapon was already chambered.
             _ => throw new NotImplementedException(), // Ready becomes unload, recover should be skipped by previous cancel
         };
 
         SetPhysicsProcess(true);
 
-        Started?.Invoke(prev, CurrentStep, CurrentStep.ReloadTime(_data));
+        Started?.Invoke(prev, CurrentStep, CurrentStep.ReloadTime(_data, _chambered));
         return true;
     }
 
@@ -107,7 +110,6 @@ public partial class PW_WeaponReloader : Node
 
     private float Unload()
     {
-        GD.Print("---- unload");
         CurrentStep = PW_ReloadStep.Insert;
         Unloaded?.Invoke();
         return _data.InsertTime;
@@ -117,10 +119,15 @@ public partial class PW_WeaponReloader : Node
     {
         float time;
 
-        if (_data.ChamberTime > 0f)
+        if (!_chambered)
         {
-            CurrentStep = PW_ReloadStep.Chamber;
-            time = _data.ChamberTime;
+            if (_data.ChamberTime > 0f)
+            {
+                CurrentStep = PW_ReloadStep.Chamber;
+                time = _data.ChamberTime;
+            }
+            else
+                time = Chamber();
         }
         else
         {
@@ -149,7 +156,7 @@ public partial class PW_WeaponReloader : Node
     
     public float ReloadTime()
     {
-        float time = CurrentStep.ReloadTime(_data);
+        float time = CurrentStep.ReloadTime(_data, _chambered);
 
         if (_timer?.TimeLeft > 0f)
             time += (float)_timer.TimeLeft - CurrentStep.StepTime(_data);

@@ -9,7 +9,7 @@ public enum PW_ReloadStep
 
 public static class PW_ReloadStepExtensions
 {
-    public static float ReloadTime(this PW_ReloadStep step, PW_WeaponReloaderData data)
+    public static float ReloadTime(this PW_ReloadStep step, PW_WeaponReloaderData data, bool chambered)
     {
         float time = 0f;
         
@@ -24,7 +24,8 @@ public static class PW_ReloadStepExtensions
                 goto case PW_ReloadStep.Chamber;
 
             case PW_ReloadStep.Chamber:
-                time += data.ChamberTime;
+                if (!chambered)
+                    time += data.ChamberTime;
                 goto case PW_ReloadStep.Recover;
 
             case PW_ReloadStep.Recover:

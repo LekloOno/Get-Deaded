@@ -106,7 +106,13 @@ public abstract partial class PW_Weapon : WeaponComponent
         Reloader.Unloaded += Unload;
         Reloader.Inserted += Insert;
         Reloader.Recovered += SpecEnable;
+        Reloader.Chambered += Chamber;
+
+        foreach (PW_Fire fire in _fires)
+            fire.DryShot += DryTryReload;
     }
+
+    private void DryTryReload() => TryReload();
 
     public virtual void Sleep() =>
         _currentFire.Sleep();
@@ -181,8 +187,7 @@ public abstract partial class PW_Weapon : WeaponComponent
         if (!Reloader.IsReady)
             return false;
         
-        else
-            return SpecSecondaryPress();
+        return SpecSecondaryPress();
     }
 
     public bool SecondaryRelease()
@@ -197,7 +202,12 @@ public abstract partial class PW_Weapon : WeaponComponent
             return SpecSecondaryRelease();
     }
 
-    public abstract bool CanReload();
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="chambered">whether it is needed to chamber the bullet or not.</param>
+    /// <returns></returns>
+    public abstract bool CanReload(out bool chambered);
 
     private void StartADS()
     {
@@ -215,12 +225,11 @@ public abstract partial class PW_Weapon : WeaponComponent
 
     public bool TryReload()
     {
-        if (Reloader.CurrentStep != PW_ReloadStep.Chamber &&
-            !CanReload())
+        if (!CanReload(out bool chambered))
             return false;
 
         Interrupt();
-        return Reloader.StartReload();
+        return Reloader.StartReload(chambered);
     }
 
     #endregion
@@ -291,22 +300,22 @@ public abstract partial class PW_Weapon : WeaponComponent
     /// </summary>
     protected abstract void SpecStopADS();
 
-    public virtual void Reload()
-    {
-        foreach (PW_Fire fire in _fires)
-            fire.Reload();
-    }
-
-    public virtual void Unload()
+    public void Unload()
     {
         foreach (PW_Fire fire in _fires)
             fire.Unload();
     }
 
-    public virtual void Insert()
+    public void Insert()
     {
         foreach (PW_Fire fire in _fires)
             fire.Insert();
+    }
+
+    public void Chamber()
+    {
+        foreach (PW_Fire fire in _fires)
+            fire.Chamber();
     }
 
     public virtual void Interrupt()

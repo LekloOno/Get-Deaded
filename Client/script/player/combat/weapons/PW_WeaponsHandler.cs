@@ -110,7 +110,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
             weapon.ADSStarted += () => ADSStarted?.Invoke();
             weapon.ADSStopped += () => ADSStopped?.Invoke();
             weapon.Reloader.Recovered += CompleteReload;
-            weapon.Reloader.Started += TransmitReloadStarted;
+            weapon.Reloader.Started += ForwardReloadStarted;
         }
 
         Melee.Initialize(_shakeableCamera, _camera, _surfaceControl, _recoilController, _ownerBody, this);
@@ -142,7 +142,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
         Initialized = true;
     }
 
-    private void TransmitReloadStarted(PW_ReloadStep prev, PW_ReloadStep current, float time)
+    private void ForwardReloadStarted(PW_ReloadStep prev, PW_ReloadStep current, float time)
     {
         ReloadStarted.Invoke(time);
     }

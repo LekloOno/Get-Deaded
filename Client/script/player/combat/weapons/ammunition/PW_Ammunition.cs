@@ -26,11 +26,13 @@ public partial class PW_Ammunition : WeaponComponent
     private uint _unloadedAmmos;
     private uint _loadedAmmos;
 
-    public EventHandler ReloadCompleted;
-    public Action Deloaded;
-    public AmmunitionEvent LoadedChanged;
-    public AmmunitionEvent UnloadedChanged;
+    public EventHandler? ReloadCompleted;
+    public Action? Deloaded;
+    public AmmunitionEvent? LoadedChanged;
+    public AmmunitionEvent? UnloadedChanged;
+    public Action? DryShot;
 
+    public bool Chambered { get; private set; } = false;
     public uint UnloadedAmmos
     {
         get => _unloadedAmmos;
@@ -56,6 +58,10 @@ public partial class PW_Ammunition : WeaponComponent
                             : - (int) (_loadedAmmos - value);
 
             _loadedAmmos = value;
+            // if _loadedAmmos > 0, it does not necessarily mean it is chambered
+            if (_loadedAmmos == 0)
+                Chambered = false;
+
             LoadedChanged?.Invoke(difference, LoadedAmmos);
         }
     }
@@ -69,8 +75,12 @@ public partial class PW_Ammunition : WeaponComponent
     {
         _maxAmmos = _maxMagazines * _magazineSize;
         uint ammos = Math.Min(_baseAmmos, _maxAmmos);
+        
         if (load)
+        {
             LoadedAmmos = Math.Min(_magazineSize, ammos);
+            Chamber();
+        }
         else
             LoadedAmmos = 0;
 
@@ -107,7 +117,10 @@ public partial class PW_Ammunition : WeaponComponent
             return true;
         
         if (LoadedAmmos == 0)
+        {
+            DryShot?.Invoke();
             return false;
+        }
         
         LoadedAmmos -= ammos;
         return true;
@@ -130,7 +143,7 @@ public partial class PW_Ammunition : WeaponComponent
         return true;
     }
 
-    public bool CanReload() => LoadedAmmos < _magazineSize && (InfiniteAmmo || UnloadedAmmos > 0);
+    public bool CanReload() => (!Chambered || LoadedAmmos < _magazineSize) && (InfiniteAmmo || UnloadedAmmos > 0);
 
     /// <summary>
     /// Empties currently loaded amunitions and fill the unloaded capacity with them.
@@ -156,6 +169,18 @@ public partial class PW_Ammunition : WeaponComponent
     {
         // For now, just simple reload, we'll tackle round formats in the overhaul
         return Reload();
+    }
+
+    public bool Chamber()
+    {
+        if (Chambered)
+            return false;
+
+        if (LoadedAmmos < 1)
+            return false;
+        
+        Chambered = true;
+        return true;
     }
 
     /// <summary>

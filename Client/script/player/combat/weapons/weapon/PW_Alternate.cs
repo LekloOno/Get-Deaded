@@ -50,7 +50,10 @@ public partial class PW_Alternate : PW_Weapon
         return SecondaryFire.PickAmmo(amount, magazine);
     }
 
-    public override bool CanReload() =>
-        PrimaryFire.CanReload() || SecondaryFire.CanReload(); 
+    public override bool CanReload(out bool chambered)
+    {
+        chambered = PrimaryFire.Chambered || SecondaryFire.Chambered;
+        return PrimaryFire.CanReload() || SecondaryFire.CanReload(); 
+    }
 
 }
