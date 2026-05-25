@@ -51,7 +51,7 @@ public partial class PI_Slide : Node, PI_CrouchDerived
             // Notify crouch to start
             IsActive = false;
             OnSlowSlide?.Invoke(this, EventArgs.Empty);
-            _sprintInput.Reset();
+            //_sprintInput.Reset();
 
             OnPhysics -= CheckSpeed;
 

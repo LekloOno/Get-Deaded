@@ -18,7 +18,7 @@ public partial class PI_Sprint : PI_HoldableHandler<EmptyInput>
 
     protected override void HandlerReady()
     {
-        _jump.OnStart += HandleExternalStop;
+        //_jump.OnStart += HandleExternalStop;
         _walkInput.OnStopOrBackward += (o, f) => HandleExternalStop();
     }
 

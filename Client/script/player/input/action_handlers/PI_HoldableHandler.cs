@@ -12,6 +12,7 @@ public abstract partial class PI_HoldableHandler<T> : PI_PressHandler<T>
     [Export] public bool Hold = false;
     
     protected bool _active = false;
+    public bool Active => _active;
 
     /// <summary>
     /// Allows to reset state from an external source without casting Stop event.

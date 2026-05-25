@@ -14,7 +14,7 @@ public interface PI_CrouchDerived
     {
         IsActive = true;
         OnStartInput?.Invoke(this, EventArgs.Empty);
-        SprintInput.Reset();
+        //SprintInput.Reset();
     }
 
     public void StopAction()

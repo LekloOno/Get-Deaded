@@ -20,14 +20,30 @@ public partial class PM_SurfaceState : Node
     {
         _currentData = _stateData.Normal;
         _sprintInput.Start += (o, e) => SetData(_stateData.Sprint);
-        _sprintInput.Stop += (o, e) => SetData(_stateData.Normal);
+        _sprintInput.Stop += ResetSprint;
         
         _crouch.OnStart += SetDataCrouch;
-        _crouch.OnStop += SetDataNormal;
+        _crouch.OnStop += ResetData;
 
         _slide.OnStart += SetDataSlide;
-        _slide.OnStop += SetDataNormal;
+        _slide.OnStop += ResetData;
     }
+
+    private void ResetSprint(object sender, EmptyInput args)
+    {
+        if (!IsCrouch() && !IsSlide())
+            SetData(_stateData.Normal);
+    }
+
+
+    private void ResetData()
+    {
+        if (_sprintInput.Active)
+            SetData(_stateData.Sprint);
+        else
+            SetData(_stateData.Normal);
+    }
+
 
     private void SetDataCrouch() => SetData(_stateData.Crouch);
     private void SetDataNormal() => SetData(_stateData.Normal);
