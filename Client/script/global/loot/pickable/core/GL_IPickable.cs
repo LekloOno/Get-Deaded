@@ -1,4 +1,4 @@
 public interface GL_IPickable
 {
-    void GetPicked(GL_Picker picker);
+    bool GetPicked(GL_Picker picker);
 }

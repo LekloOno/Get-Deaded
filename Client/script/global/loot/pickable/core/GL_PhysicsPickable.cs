@@ -18,9 +18,12 @@ public partial class GL_PhysicsPickable(GL_IPickHandler handler, float horizonta
         Vector3 damp = new Vector3(-LinearVelocity.X * _horizontalDamp, 0, -LinearVelocity.Z * _horizontalDamp);
         ApplyForce(damp);
     }
-    public void GetPicked(GL_Picker picker)
+    public bool GetPicked(GL_Picker picker)
     {
-        if (Handler.HandlePick(picker))
+        bool handled = Handler.HandlePick(picker); 
+        if (handled)
             QueueFree();
+
+        return handled;
     }
 }
