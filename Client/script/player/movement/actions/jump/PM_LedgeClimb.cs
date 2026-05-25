@@ -100,17 +100,20 @@ public partial class PM_LedgeClimb : PM_Action
 
         Vector3 minOut = new(_direction.X, 1f, _direction.Z);
 
-        Vector3 outVelocity = _prevVelocity;
-        outVelocity.Y = Mathf.Max(0f, outVelocity.Y);
-        
-        if(minOut.Length() > outVelocity.Length())
-            outVelocity = minOut;
+        Vector3 outVelocity;
         
         if (PHX_Time.ScaledTicksMsec - _crouchInput.LastCrouchDown < _superGlideWindow)
         {
+            outVelocity = _prevVelocity;
+            outVelocity.Y = Mathf.Max(0f, outVelocity.Y);
+            
+            if(minOut.Length() > outVelocity.Length())
+                outVelocity = minOut;
+                
             outVelocity += _direction * _superGlideXStrength;
             outVelocity.Y = _superGlideYStrength;
-        }
+        } else
+            outVelocity = minOut;
 
         _controller.Velocity = outVelocity;
         _controller.RealVelocity = outVelocity;
