@@ -54,10 +54,6 @@ public partial class SC_GameManager : Node
 		else
 			GameStats.Reset();
 
-		foreach (PW_Weapon weapon in player.WeaponsHandler.Weapons)
-				foreach (PW_Fire fire in weapon.Fires)
-					fire.Ammos.Initialize();
-
 		Score.Value = 0;
 
 		player.WeaponsHandler.DisableFire();

@@ -30,12 +30,18 @@ public partial class PW_WeaponReloader : Node
 
     public bool IsReady => CurrentStep == PW_ReloadStep.Ready;
 
-    public override void _Ready() => Reset();
+    public override void _Ready() => ResetCurrent();
 
-    public void Reset()
+    private void ResetCurrent()
     {
         SetPhysicsProcess(false);
         _acc = 0f;
+    }
+
+    public void Reset()
+    {
+        ResetCurrent();
+        CurrentStep = PW_ReloadStep.Ready;
     }
 
     private bool _chambered;
@@ -78,7 +84,7 @@ public partial class PW_WeaponReloader : Node
             Recovered?.Invoke();
         }
         
-        Reset();
+        ResetCurrent();
 
         Canceled?.Invoke(prev, CurrentStep);
 
@@ -150,7 +156,7 @@ public partial class PW_WeaponReloader : Node
     {
         CurrentStep = PW_ReloadStep.Ready;
         Recovered?.Invoke();
-        Reset();
+        ResetCurrent();
         return 0f;
     }
     

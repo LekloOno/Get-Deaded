@@ -61,6 +61,7 @@ public partial class SC_ArenaGameStarter : Node
             return;
 
         SC_EntitiesManager.EnablePickups();
+        _player.WeaponsHandler.EnableFire();
 
         EmitSignal(SignalName.RoamingStarted);
     }
@@ -77,6 +78,10 @@ public partial class SC_ArenaGameStarter : Node
 
         AddChild(_player);
         _player.Revive();
+
+        foreach (PW_Weapon weapon in _player.WeaponsHandler.Weapons)
+			weapon.InitializeAmmos();
+
         _player.GlobalPosition = _spawnPoint.GlobalPosition;
         _player.ResetPhysicsInterpolation();
         _player.VelocityCache.DiscardCache();
