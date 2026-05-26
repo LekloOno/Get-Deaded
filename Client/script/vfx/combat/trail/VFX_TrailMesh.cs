@@ -19,8 +19,8 @@ public abstract partial class VFX_TrailMesh : MeshInstance3D, VFX_ITrailMesh
     {
         Origin = origin;
         Hit = hit;
-        Spawn();
         SpecShoot(origin, hit);
+        Spawn();
     }
 
     protected abstract void SpecShoot(Vector3 origin, Vector3 hit);

@@ -14,6 +14,10 @@ public partial class VFX_MovingLightObject : VFX_TrailMesh
         _trailSpeed = trailSpeed;
         Mesh = new QuadMesh(){Size = new Vector2(1f, thickness)};
         Rotation = new Vector3(Mathf.DegToRad(_inclination), 0f, 0f);
+
+        // Animation is done on the mesh deformation, not its position.
+        // it's purely gpu
+        PhysicsInterpolationMode = PhysicsInterpolationModeEnum.Off;
     }
     
     public Vector2 EdgesDistance
@@ -43,7 +47,7 @@ public partial class VFX_MovingLightObject : VFX_TrailMesh
 
     protected override void SpecShoot(Vector3 origin, Vector3 hit)
     {
-        Position = origin;   
+        GlobalPosition = origin;
         _distance = origin.DistanceTo(hit);
         EdgesDistance = Vector2.Zero;
         LookAt(hit, Vector3.Up);

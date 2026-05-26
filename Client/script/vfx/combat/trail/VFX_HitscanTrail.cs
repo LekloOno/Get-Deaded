@@ -20,7 +20,7 @@ public abstract partial class VFX_HitscanTrail : VFX_Trail
                 return;
             
             VFX_TrailPoolLoader.Instance.AddChild(newMesh);
-            newMesh.Shoot(origin, hit);    
+            newMesh.Shoot(origin, hit);
         }
 
     }
