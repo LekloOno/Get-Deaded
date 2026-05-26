@@ -101,6 +101,11 @@ public partial class PW_WeaponsHandler : WeaponSystem
         OwnerEntity = owner;
     }
 
+    public override void _EnterTree()
+    {
+        base._EnterTree();
+    }
+
     public override void _Ready()
     {
         foreach(PW_Weapon weapon in _weapons)
@@ -220,7 +225,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
         weapons = _weapons;
     }
 
-    public bool ActiveWeaponHalted() => !_ready || !_externalReady || IsSwitching() || !_activeWeapon.Reloader.IsReady;
+    public bool ActiveWeaponHalted() => !_ready || !_externalReady || IsSwitching();
     public bool IsSwitching() => _switchingIn || _switchingOut;
 
     // Very redondant way to define the buffers, could use a little rework !
@@ -293,7 +298,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
     }
     private void HandleStartSecondary(object sender, EventArgs e)
     {
-        if (ActiveWeaponHalted())
+        if (ActiveWeaponHalted() || !_activeWeapon.Reloader.IsReady)
         {
             if (_bufferedSecondary)
                 return;

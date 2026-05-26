@@ -126,6 +126,14 @@ public abstract partial class PW_Weapon : WeaponComponent
             fire.InfiniteAmmo = active;
     }
 
+    public void InitializeAmmos()
+    {
+        foreach (PW_Fire fire in Fires)
+            fire.Ammos.Initialize();
+
+        Reloader.Reset();
+    }
+
     public void SetInfiniteMagazine(bool active)
     {
         foreach (PW_Fire fire in _fires)
