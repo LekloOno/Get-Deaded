@@ -31,7 +31,11 @@ public partial class UI_Reloading : TextureProgressBar
 
     public override void _Process(double delta)
     {
-        _elapsedTime += (float) delta;
+        if (PW_WeaponReloader.IgnoreTimeScale)
+            _elapsedTime += (float) delta / (float) Engine.TimeScale;
+        else
+            _elapsedTime += (float) delta;
+
         Value = _elapsedTime / _reloadTime;
 
         if (_elapsedTime >= _reloadTime)

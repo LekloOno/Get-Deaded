@@ -8,7 +8,7 @@ using Godot;
 /// </summary>
 public partial class PW_WeaponReloader : Node
 {
-    const bool IgnoreTimeScale = true;
+    public const bool IgnoreTimeScale = true;
 
     public PW_WeaponReloader() {}
 
@@ -90,9 +90,9 @@ public partial class PW_WeaponReloader : Node
     public override void _PhysicsProcess(double delta)
     {
         if (IgnoreTimeScale)
-            _acc += delta;
+            _acc += delta / Engine.TimeScale;
         else
-            _acc += delta * Engine.TimeScale;
+            _acc += delta;
 
         if (_acc < _actionLength)
             return;
