@@ -256,7 +256,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
     private void HandleStartPrimary(object sender, EventArgs e)
     {
         Melee.ResetBuffer();
-        if (ActiveWeaponHalted())
+        if (ActiveWeaponHalted() || !_activeWeapon.Reloader.IsReady)
         {
             BufferPrimary();
             return;
