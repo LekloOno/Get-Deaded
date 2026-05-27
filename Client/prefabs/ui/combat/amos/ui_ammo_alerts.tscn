@@ -4,6 +4,70 @@
 [ext_resource type="Script" uid="uid://dpehjxsd262f4" path="res://script/ui/combat/weapon/loadout/ammo/UIW_AmmoAlerts.cs" id="2_5yygr"]
 [ext_resource type="Script" uid="uid://bw3ueknacp1ns" path="res://script/ui/combat/weapon/loadout/ammo/UIW_LowLoaded.cs" id="3_o2jrq"]
 [ext_resource type="Script" uid="uid://2mj7j41evwvw" path="res://script/ui/combat/weapon/loadout/ammo/UIW_LowUnloaded.cs" id="4_5yygr"]
+[ext_resource type="Script" uid="uid://ci08w5aakbl7k" path="res://script/engine_tools/animation/shakes/tween/value/ANIM_FloatTweenValue.cs" id="5_ef7wh"]
+[ext_resource type="Script" uid="uid://bjbcijbwg0h0v" path="res://script/engine_tools/animation/shakes/tween/ANIM_InOutTweenSetting.cs" id="5_o2jrq"]
+[ext_resource type="Script" uid="uid://2ud817ngo5tn" path="res://script/engine_tools/animation/shakes/tween/ANIM_TweenSetting.cs" id="5_qb63b"]
+[ext_resource type="Script" uid="uid://bwa8h16qqo5c7" path="res://script/engine_tools/animation/shakes/tween/value/ANIM_Vector2TweenValue.cs" id="8_5a7h3"]
+
+[sub_resource type="Resource" id="Resource_5a7h3"]
+script = ExtResource("5_ef7wh")
+_value = 1.0
+metadata/_custom_type_script = "uid://ci08w5aakbl7k"
+
+[sub_resource type="Resource" id="Resource_ef7wh"]
+script = ExtResource("5_qb63b")
+AnimationTime = 0.05
+PropertyPath = "modulate:a"
+Value = SubResource("Resource_5a7h3")
+metadata/_custom_type_script = "uid://2ud817ngo5tn"
+
+[sub_resource type="Resource" id="Resource_am783"]
+script = ExtResource("5_ef7wh")
+metadata/_custom_type_script = "uid://ci08w5aakbl7k"
+
+[sub_resource type="Resource" id="Resource_8qhk5"]
+script = ExtResource("5_qb63b")
+AnimationTime = 0.05
+PropertyPath = "modulate:a"
+Value = SubResource("Resource_am783")
+metadata/_custom_type_script = "uid://2ud817ngo5tn"
+
+[sub_resource type="Resource" id="Resource_qb63b"]
+script = ExtResource("5_o2jrq")
+FadeIn = SubResource("Resource_ef7wh")
+FadeOut = SubResource("Resource_8qhk5")
+metadata/_custom_type_script = "uid://bjbcijbwg0h0v"
+
+[sub_resource type="Resource" id="Resource_lk1km"]
+script = ExtResource("8_5a7h3")
+_value = Vector2(1, 1)
+metadata/_custom_type_script = "uid://bwa8h16qqo5c7"
+
+[sub_resource type="Resource" id="Resource_71q87"]
+script = ExtResource("5_qb63b")
+AnimationTime = 0.05
+TransitionType = 10
+PropertyPath = "scale"
+Value = SubResource("Resource_lk1km")
+metadata/_custom_type_script = "uid://2ud817ngo5tn"
+
+[sub_resource type="Resource" id="Resource_muii7"]
+script = ExtResource("8_5a7h3")
+_value = Vector2(2, 1.2)
+metadata/_custom_type_script = "uid://bwa8h16qqo5c7"
+
+[sub_resource type="Resource" id="Resource_6xb0c"]
+script = ExtResource("5_qb63b")
+AnimationTime = 0.05
+PropertyPath = "scale"
+Value = SubResource("Resource_muii7")
+metadata/_custom_type_script = "uid://2ud817ngo5tn"
+
+[sub_resource type="Resource" id="Resource_101r8"]
+script = ExtResource("5_o2jrq")
+FadeIn = SubResource("Resource_71q87")
+FadeOut = SubResource("Resource_6xb0c")
+metadata/_custom_type_script = "uid://bjbcijbwg0h0v"
 
 [node name="UiAmmoAlerts" type="VBoxContainer" unique_id=599796795 node_paths=PackedStringArray("_lowUnloaded", "_lowLoaded")]
 anchors_preset = 8
@@ -22,7 +86,44 @@ size_flags_vertical = 4
 theme = ExtResource("1_jwjyt")
 script = ExtResource("2_5yygr")
 _lowUnloaded = NodePath("LowUnloaded")
-_lowLoaded = NodePath("LowLoaded")
+_lowLoaded = NodePath("Control/LowLoaded")
+
+[node name="Control" type="Control" parent="." unique_id=509790260]
+custom_minimum_size = Vector2(0, 17)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="LowLoaded" type="HBoxContainer" parent="Control" unique_id=57139608 node_paths=PackedStringArray("_label", "_key")]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -9.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("3_o2jrq")
+_label = NodePath("Label")
+_key = NodePath("Key")
+_opacityTweenSettings = SubResource("Resource_qb63b")
+_scaleTweenSettings = SubResource("Resource_101r8")
+_startScale = Vector2(2, 1.5)
+
+[node name="Key" type="Label" parent="Control/LowLoaded" unique_id=699378888]
+layout_mode = 2
+theme_type_variation = &"KeyLabel"
+text = "R"
+
+[node name="Label" type="Label" parent="Control/LowLoaded" unique_id=1990218848]
+layout_mode = 2
+text = "INPUTS_RELOAD_LABEL"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="LowUnloaded" type="VBoxContainer" parent="." unique_id=1887724526 node_paths=PackedStringArray("_label", "_emptyLabel")]
 layout_mode = 2
@@ -41,23 +142,5 @@ vertical_alignment = 1
 layout_mode = 2
 theme_type_variation = &"EmptyAmmunitions"
 text = "GAME_EMPTY_AMMUNITION"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="LowLoaded" type="HBoxContainer" parent="." unique_id=57139608 node_paths=PackedStringArray("_label", "_key")]
-layout_mode = 2
-size_flags_horizontal = 4
-script = ExtResource("3_o2jrq")
-_label = NodePath("Label")
-_key = NodePath("Key")
-
-[node name="Key" type="Label" parent="LowLoaded" unique_id=699378888]
-layout_mode = 2
-theme_type_variation = &"KeyLabel"
-text = "R"
-
-[node name="Label" type="Label" parent="LowLoaded" unique_id=1990218848]
-layout_mode = 2
-text = "INPUTS_RELOAD_LABEL"
 horizontal_alignment = 1
 vertical_alignment = 1
