@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://d1mr14jv0uaf"]
+
+[ext_resource type="Theme" uid="uid://b1ml5yd7k1yjc" path="res://assets/ui/ammo_alerts_theme.tres" id="1_jwjyt"]
+[ext_resource type="Script" uid="uid://dpehjxsd262f4" path="res://script/ui/combat/weapon/loadout/ammo/UIW_AmmoAlerts.cs" id="2_5yygr"]
+[ext_resource type="Script" uid="uid://bw3ueknacp1ns" path="res://script/ui/combat/weapon/loadout/ammo/UIW_LowLoaded.cs" id="3_o2jrq"]
+[ext_resource type="Script" uid="uid://2mj7j41evwvw" path="res://script/ui/combat/weapon/loadout/ammo/UIW_LowUnloaded.cs" id="4_5yygr"]
+
+[node name="UiAmmoAlerts" type="VBoxContainer" unique_id=599796795 node_paths=PackedStringArray("_lowUnloaded", "_lowLoaded")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -109.5
+offset_top = -25.0
+offset_right = 109.5
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_jwjyt")
+script = ExtResource("2_5yygr")
+_lowUnloaded = NodePath("LowUnloaded")
+_lowLoaded = NodePath("LowLoaded")
+
+[node name="LowLoaded" type="HBoxContainer" parent="." unique_id=57139608 node_paths=PackedStringArray("_label", "_key")]
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("3_o2jrq")
+_label = NodePath("Label")
+_key = NodePath("Key")
+
+[node name="Key" type="Label" parent="LowLoaded" unique_id=699378888]
+layout_mode = 2
+theme_type_variation = &"KeyLabel"
+text = "R"
+
+[node name="Label" type="Label" parent="LowLoaded" unique_id=1990218848]
+layout_mode = 2
+text = "INPUTS_RELOAD_LABEL"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LowUnloaded" type="VBoxContainer" parent="." unique_id=1887724526 node_paths=PackedStringArray("_label", "_emptyLabel")]
+layout_mode = 2
+script = ExtResource("4_5yygr")
+_label = NodePath("LowUnloaded")
+_emptyLabel = NodePath("EmptyAmmos")
+
+[node name="LowUnloaded" type="Label" parent="LowUnloaded" unique_id=1368537751]
+layout_mode = 2
+theme_type_variation = &"LowUnloaded"
+text = "GAME_LOW_AMMUNITION"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EmptyAmmos" type="Label" parent="LowUnloaded" unique_id=1532872433]
+layout_mode = 2
+theme_type_variation = &"LowUnloadedCritical"
+text = "GAME_EMPTY_AMMUNITION"
+horizontal_alignment = 1
+vertical_alignment = 1

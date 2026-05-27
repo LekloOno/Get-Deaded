@@ -3,7 +3,7 @@ using Godot;
 
 public partial class KeyBindingSettingsManager: Node
 {
-    public KeyBindingSettingsManager Instance {get; private set;}
+    public static KeyBindingSettingsManager Instance {get; private set;}
     private static Dictionary<StringName, KeyBindingSetting> _keyBindings = [];
 
     public override void _EnterTree()

@@ -17,6 +17,7 @@ public partial class PW_Ammunition : WeaponComponent
     /// Typically, there might be weapons with no magazine, and lots of ammunitions, but we don't want to load the entire ammunitions from one "magazine pickup".
     /// </summary>
     [Export] private uint _magazinePick;
+    public uint MagazinePick => _magazinePick == 0 ? _magazineSize : _magazinePick;
     [Export] private uint _maxMagazines;
     [Export] protected uint _baseAmmos;
     [Export] public bool InfiniteAmmo = false;
