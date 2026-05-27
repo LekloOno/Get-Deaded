@@ -28,7 +28,27 @@
 [ext_resource type="Script" uid="uid://baygafcv8gr3s" path="res://script/player/audio/combat/weapons/fire/PAF_Generic.cs" id="25_4kard"]
 [ext_resource type="AudioStream" uid="uid://78knre50os6g" path="res://assets/sounds/combat/weapons/fires/oui.mp3" id="26_fu7vn"]
 [ext_resource type="AudioStream" uid="uid://b1os0ps03h7sm" path="res://assets/sounds/combat/weapons/fires/dry/low_ammos_2.wav" id="28_pgayp"]
+[ext_resource type="Script" uid="uid://cr75wra1y34lt" path="res://script/player/audio/combat/weapons/PA_Reload.cs" id="30_1q4ty"]
 [ext_resource type="AudioStream" uid="uid://d1ou3cfh5vvr2" path="res://assets/sounds/combat/weapons/fires/dry/dry.wav" id="30_6p5y0"]
+[ext_resource type="AudioStream" uid="uid://dk3u8uell0iab" path="res://assets/sounds/combat/weapons/goz_brt/goz_brt_reload_start.wav" id="31_2amic"]
+[ext_resource type="Script" uid="uid://dmowaohx8nd7q" path="res://addons/GaudioProcessTree/nodes/modules/AUD_Randomizer.cs" id="32_77xwf"]
+[ext_resource type="AudioStream" uid="uid://b2kdveelvaqd" path="res://assets/sounds/combat/weapons/goz_brt/goz_brt_reload_unload.wav" id="32_s0tc7"]
+[ext_resource type="AudioStream" uid="uid://tcngi0vi4o48" path="res://assets/sounds/combat/weapons/goz_brt/goz_brt_reload_unload_3.wav" id="33_n3efp"]
+[ext_resource type="AudioStream" uid="uid://crc63cmdcw1m5" path="res://assets/sounds/combat/weapons/goz_brt/goz_brt_reload_chamber.wav" id="34_lh5f7"]
+[ext_resource type="AudioStream" uid="uid://bxj3vtwjqfasd" path="res://assets/sounds/combat/weapons/goz_brt/goz_brt_reload_unload_2.wav" id="34_r6rrx"]
+[ext_resource type="AudioStream" uid="uid://u2mqjmw5dacm" path="res://assets/sounds/combat/weapons/goz_brt/goz_brt_reload_recover.wav" id="35_5xcst"]
+[ext_resource type="AudioStream" uid="uid://d0a6bgjoxppnh" path="res://assets/sounds/combat/weapons/goz_brt/goz_brt_reload_insert_start_1.wav" id="36_2aauf"]
+[ext_resource type="AudioStream" uid="uid://cvc3jtik8ywmn" path="res://assets/sounds/combat/weapons/goz_brt/goz_brt_reload_insert_1.wav" id="36_fqrlw"]
+[ext_resource type="AudioStream" uid="uid://bufwlsbuscbqq" path="res://assets/sounds/combat/weapons/goz_brt/goz_brt_reload_unload_4.wav" id="36_qsbr4"]
+[ext_resource type="AudioStream" uid="uid://be4nf7hsst736" path="res://assets/sounds/combat/weapons/goz_brt/goz_brt_reload_insert_2.wav" id="37_2aauf"]
+[ext_resource type="AudioStream" uid="uid://cao7lxxq8erl7" path="res://assets/sounds/combat/weapons/goz_brt/goz_brt_reload_insert_start_2.wav" id="37_bmm6i"]
+[ext_resource type="AudioStream" uid="uid://c6k7lt7e6psqx" path="res://assets/sounds/combat/weapons/goz_brt/goz_brt_reload_insert_3.wav" id="38_bmm6i"]
+[ext_resource type="AudioStream" uid="uid://djcje78rl7ath" path="res://assets/sounds/combat/weapons/goz_brt/goz_brt_reload_insert_start_3.wav" id="38_hicg3"]
+[ext_resource type="AudioStream" uid="uid://85l4smgql2qg" path="res://assets/sounds/combat/weapons/goz_brt/goz_brt_reload_insert_4.wav" id="39_hicg3"]
+[ext_resource type="AudioStream" uid="uid://dnp0688kok0fd" path="res://assets/sounds/combat/weapons/goz_brt/goz_brt_reload_chamber_2.wav" id="41_xp8k4"]
+[ext_resource type="AudioStream" uid="uid://bb5jqj03ftbxo" path="res://assets/sounds/combat/weapons/goz_brt/goz_brt_reload_chamber_start_1.wav" id="44_nc2v3"]
+[ext_resource type="AudioStream" uid="uid://be0wq723dqrdh" path="res://assets/sounds/combat/weapons/goz_brt/goz_brt_reload_chamber_start_2.wav" id="45_xoch2"]
+[ext_resource type="AudioStream" uid="uid://cswohfquvamk7" path="res://assets/sounds/combat/weapons/goz_brt/goz_brt_reload_chamber_start_3.wav" id="46_tniwk"]
 
 [sub_resource type="Resource" id="Resource_4kard"]
 script = ExtResource("3_ely4n")
@@ -332,3 +352,127 @@ volume_db = -14.0
 unit_size = 6.0
 bus = &"Weapons"
 attenuation_filter_db = 0.0
+
+[node name="PA_Reload" type="Node3D" parent="." unique_id=1350259938 node_paths=PackedStringArray("_weapon", "_startUnloadSound", "_unloadSound", "_startInsertSound", "_insertSound", "_startChamberSound", "_chamberSound", "_recoverSound")]
+script = ExtResource("30_1q4ty")
+_weapon = NodePath("..")
+_startUnloadSound = NodePath("start_unload")
+_unloadSound = NodePath("unload")
+_startInsertSound = NodePath("start_insert")
+_insertSound = NodePath("insert")
+_startChamberSound = NodePath("start_chamber")
+_chamberSound = NodePath("chamber")
+_recoverSound = NodePath("recover")
+
+[node name="start_unload" type="Node" parent="PA_Reload" unique_id=1126863859 node_paths=PackedStringArray("Player")]
+script = ExtResource("22_1bp4h")
+Player = NodePath("start_unload")
+UseTimeScale = true
+metadata/_custom_type_script = "uid://dbtsyp0hru7g"
+
+[node name="start_unload" type="AudioStreamPlayer" parent="PA_Reload/start_unload" unique_id=724088651]
+stream = ExtResource("31_2amic")
+bus = &"Weapons"
+
+[node name="unload" type="Node" parent="PA_Reload" unique_id=1941060174]
+script = ExtResource("32_77xwf")
+Sounds = Array[AudioStream]([ExtResource("32_s0tc7"), ExtResource("34_r6rrx"), ExtResource("33_n3efp"), ExtResource("36_qsbr4")])
+MinPitch = 0.9
+MaxPitch = 1.1
+UseTimeScale = true
+BaseVolumeDb = 10.0
+metadata/_custom_type_script = "uid://dmowaohx8nd7q"
+
+[node name="unload" type="Node" parent="PA_Reload/unload" unique_id=197521988 node_paths=PackedStringArray("Player")]
+script = ExtResource("22_1bp4h")
+Player = NodePath("unload")
+metadata/_custom_type_script = "uid://dbtsyp0hru7g"
+
+[node name="unload" type="AudioStreamPlayer" parent="PA_Reload/unload/unload" unique_id=1019579322]
+volume_db = 10.0
+bus = &"Weapons"
+
+[node name="start_insert" type="Node" parent="PA_Reload" unique_id=1515063601]
+script = ExtResource("32_77xwf")
+Sounds = Array[AudioStream]([ExtResource("36_2aauf"), ExtResource("37_bmm6i"), ExtResource("38_hicg3")])
+MinPitch = 0.9
+MaxPitch = 1.1
+UseTimeScale = true
+BaseVolumeDb = 5.0
+metadata/_custom_type_script = "uid://dmowaohx8nd7q"
+
+[node name="start_insert" type="Node" parent="PA_Reload/start_insert" unique_id=1958004423 node_paths=PackedStringArray("Player")]
+script = ExtResource("22_1bp4h")
+Player = NodePath("start_insert")
+metadata/_custom_type_script = "uid://dbtsyp0hru7g"
+
+[node name="start_insert" type="AudioStreamPlayer" parent="PA_Reload/start_insert/start_insert" unique_id=1624764812]
+volume_db = 5.0
+bus = &"Weapons"
+
+[node name="insert" type="Node" parent="PA_Reload" unique_id=1814737897]
+script = ExtResource("32_77xwf")
+Sounds = Array[AudioStream]([ExtResource("36_fqrlw"), ExtResource("37_2aauf"), ExtResource("38_bmm6i"), ExtResource("39_hicg3")])
+MinPitch = 0.9
+MaxPitch = 1.1
+UseTimeScale = true
+BaseVolumeDb = 10.0
+metadata/_custom_type_script = "uid://dmowaohx8nd7q"
+
+[node name="insert" type="Node" parent="PA_Reload/insert" unique_id=632227710 node_paths=PackedStringArray("Player")]
+script = ExtResource("22_1bp4h")
+Player = NodePath("insert")
+metadata/_custom_type_script = "uid://dbtsyp0hru7g"
+
+[node name="insert" type="AudioStreamPlayer" parent="PA_Reload/insert/insert" unique_id=555678465]
+stream = ExtResource("33_n3efp")
+volume_db = 10.0
+bus = &"Weapons"
+
+[node name="start_chamber" type="Node" parent="PA_Reload" unique_id=262878298]
+script = ExtResource("32_77xwf")
+Sounds = [ExtResource("44_nc2v3"), ExtResource("45_xoch2"), ExtResource("46_tniwk")]
+MinPitch = 0.9
+MaxPitch = 1.1
+UseTimeScale = true
+BaseVolumeDb = 5.0
+metadata/_custom_type_script = "uid://dmowaohx8nd7q"
+
+[node name="start_chamber" type="Node" parent="PA_Reload/start_chamber" unique_id=487735172 node_paths=PackedStringArray("Player")]
+script = ExtResource("22_1bp4h")
+Player = NodePath("start_chamber")
+metadata/_custom_type_script = "uid://dbtsyp0hru7g"
+
+[node name="start_chamber" type="AudioStreamPlayer" parent="PA_Reload/start_chamber/start_chamber" unique_id=1717204248]
+bus = &"Weapons"
+
+[node name="chamber" type="Node" parent="PA_Reload" unique_id=592347575]
+script = ExtResource("32_77xwf")
+Sounds = Array[AudioStream]([ExtResource("34_lh5f7"), ExtResource("41_xp8k4")])
+MinPitch = 0.9
+MaxPitch = 1.1
+UseTimeScale = true
+BaseVolumeDb = 1.0
+metadata/_custom_type_script = "uid://dmowaohx8nd7q"
+
+[node name="chamber" type="Node" parent="PA_Reload/chamber" unique_id=214883091 node_paths=PackedStringArray("Player")]
+script = ExtResource("22_1bp4h")
+Player = NodePath("chamber")
+metadata/_custom_type_script = "uid://dbtsyp0hru7g"
+
+[node name="chamber" type="AudioStreamPlayer" parent="PA_Reload/chamber/chamber" unique_id=2010858673]
+stream = ExtResource("34_lh5f7")
+volume_db = 1.0
+bus = &"Weapons"
+
+[node name="recover" type="Node" parent="PA_Reload" unique_id=1977773434 node_paths=PackedStringArray("Player")]
+script = ExtResource("22_1bp4h")
+Player = NodePath("recover")
+UseTimeScale = true
+BaseVolumeDb = 4.0
+metadata/_custom_type_script = "uid://dbtsyp0hru7g"
+
+[node name="recover" type="AudioStreamPlayer" parent="PA_Reload/recover" unique_id=1561227068]
+stream = ExtResource("35_5xcst")
+volume_db = 4.0
+bus = &"Weapons"
