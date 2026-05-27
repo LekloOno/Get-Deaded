@@ -77,7 +77,7 @@ public partial class UIW_AmmoAlerts : Control
         }
 
         _currentAmmos.LoadedChanged += OnLoadedChanged;
-        _lowLoadedThreshold = magPick * 10 / 36;
+        _lowLoadedThreshold = (magPick * 10 + 35) / 36;
 
         _currentAmmos.UnloadedChanged += OnUnloadedChanged;
         _lowUnloadedThreshold = magPick * 3;
@@ -91,7 +91,6 @@ public partial class UIW_AmmoAlerts : Control
         if (_currentAmmos == null)
             return;
 
-        //OnUnloadedChanged(0, _currentAmmos.UnloadedAmmos);
         OnLoadedChanged(0, _currentAmmos.LoadedAmmos);
     }
 
@@ -127,7 +126,7 @@ public partial class UIW_AmmoAlerts : Control
         if (_reloading)
             return;
 
-        if (finalAmount <= _lowLoadedThreshold)
+        if (finalAmount <= _lowLoadedThreshold && _currentAmmos?.UnloadedAmmos != 0)
             _lowLoaded?.Show();
         else
             _lowLoaded?.Hide();

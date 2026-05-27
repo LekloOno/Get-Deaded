@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://dwtu8dycsbx6b"
+
+[deps]
+
+files=["res://config/localization/game/game_notifications.en.translation", "res://config/localization/game/game_notifications.fr.translation"]
+
+source_file="res://config/localization/game/game_notifications.csv"
+dest_files=["res://config/localization/game/game_notifications.en.translation", "res://config/localization/game/game_notifications.fr.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

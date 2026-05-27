@@ -24,24 +24,6 @@ script = ExtResource("2_5yygr")
 _lowUnloaded = NodePath("LowUnloaded")
 _lowLoaded = NodePath("LowLoaded")
 
-[node name="LowLoaded" type="HBoxContainer" parent="." unique_id=57139608 node_paths=PackedStringArray("_label", "_key")]
-layout_mode = 2
-size_flags_horizontal = 4
-script = ExtResource("3_o2jrq")
-_label = NodePath("Label")
-_key = NodePath("Key")
-
-[node name="Key" type="Label" parent="LowLoaded" unique_id=699378888]
-layout_mode = 2
-theme_type_variation = &"KeyLabel"
-text = "R"
-
-[node name="Label" type="Label" parent="LowLoaded" unique_id=1990218848]
-layout_mode = 2
-text = "INPUTS_RELOAD_LABEL"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="LowUnloaded" type="VBoxContainer" parent="." unique_id=1887724526 node_paths=PackedStringArray("_label", "_emptyLabel")]
 layout_mode = 2
 script = ExtResource("4_5yygr")
@@ -57,7 +39,25 @@ vertical_alignment = 1
 
 [node name="EmptyAmmos" type="Label" parent="LowUnloaded" unique_id=1532872433]
 layout_mode = 2
-theme_type_variation = &"LowUnloadedCritical"
+theme_type_variation = &"EmptyAmmunitions"
 text = "GAME_EMPTY_AMMUNITION"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LowLoaded" type="HBoxContainer" parent="." unique_id=57139608 node_paths=PackedStringArray("_label", "_key")]
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("3_o2jrq")
+_label = NodePath("Label")
+_key = NodePath("Key")
+
+[node name="Key" type="Label" parent="LowLoaded" unique_id=699378888]
+layout_mode = 2
+theme_type_variation = &"KeyLabel"
+text = "R"
+
+[node name="Label" type="Label" parent="LowLoaded" unique_id=1990218848]
+layout_mode = 2
+text = "INPUTS_RELOAD_LABEL"
 horizontal_alignment = 1
 vertical_alignment = 1

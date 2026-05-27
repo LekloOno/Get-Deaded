@@ -5,6 +5,11 @@
 [ext_resource type="FontFile" uid="uid://d3ac4pqeddv6u" path="res://assets/fonts/Poppins/Poppins-MediumItalic.ttf" id="3_6j17h"]
 
 [resource]
+EmptyAmmunitions/base_type = &"Label"
+EmptyAmmunitions/colors/font_color = Color(1, 0.13333334, 0.11372549, 0.6039216)
+EmptyAmmunitions/colors/font_outline_color = Color(1, 0.62352943, 0.5568628, 0.40392157)
+EmptyAmmunitions/constants/outline_size = 5
+EmptyAmmunitions/fonts/font = ExtResource("3_6j17h")
 KeyLabel/base_type = &"Label"
 KeyLabel/constants/shadow_outline_size = 0
 KeyLabel/fonts/font = ExtResource("1_elwtu")
@@ -12,12 +17,12 @@ Label/colors/font_shadow_color = Color(0.89411765, 0.12941177, 0, 0.5176471)
 Label/constants/shadow_offset_x = 1
 Label/constants/shadow_offset_y = 0
 Label/constants/shadow_outline_size = 2
-Label/font_sizes/font_size = 13
+Label/font_sizes/font_size = 12
 Label/fonts/font = ExtResource("2_gdtjr")
 LowUnloaded/base_type = &"Label"
-LowUnloaded/fonts/font = ExtResource("3_6j17h")
+LowUnloaded/fonts/font = ExtResource("2_gdtjr")
 LowUnloadedCritical/base_type = &"Label"
 LowUnloadedCritical/colors/font_color = Color(1, 0.13333334, 0.11372549, 0.6039216)
 LowUnloadedCritical/colors/font_outline_color = Color(1, 0.6217334, 0.5581843, 0.40392157)
-LowUnloadedCritical/constants/outline_size = 5
-LowUnloadedCritical/fonts/font = ExtResource("3_6j17h")
+LowUnloadedCritical/constants/outline_size = 3
+LowUnloadedCritical/fonts/font = ExtResource("2_gdtjr")
