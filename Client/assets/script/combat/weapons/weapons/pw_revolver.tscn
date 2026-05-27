@@ -33,6 +33,26 @@
 [ext_resource type="AudioStream" uid="uid://b45218olxwvgf" path="res://assets/sounds/combat/weapons/fires/revolver/whistle.wav" id="24_15h8q"]
 [ext_resource type="AudioStream" uid="uid://d1ou3cfh5vvr2" path="res://assets/sounds/combat/weapons/fires/dry/dry.wav" id="24_naawj"]
 [ext_resource type="AudioStream" uid="uid://bo1rj54migyfy" path="res://assets/sounds/combat/weapons/fires/lg/lg_attack.wav" id="27_jf62l"]
+[ext_resource type="Script" uid="uid://cr75wra1y34lt" path="res://script/player/audio/combat/weapons/PA_Reload.cs" id="34_ouor0"]
+[ext_resource type="Script" uid="uid://dmowaohx8nd7q" path="res://addons/GaudioProcessTree/nodes/modules/AUD_Randomizer.cs" id="35_hivvg"]
+[ext_resource type="AudioStream" uid="uid://bccwe0x52hb5k" path="res://assets/sounds/combat/weapons/P3-W/p3_w_reload_start_1.wav" id="36_1ux3c"]
+[ext_resource type="AudioStream" uid="uid://cmnf67ixrw46m" path="res://assets/sounds/combat/weapons/P3-W/p3_w_reload_start_2.wav" id="37_akjsx"]
+[ext_resource type="AudioStream" uid="uid://cadvd7yv2ujxh" path="res://assets/sounds/combat/weapons/P3-W/p3_w_reload_start_3.wav" id="38_dvj4n"]
+[ext_resource type="AudioStream" uid="uid://bgsgothvslgre" path="res://assets/sounds/combat/weapons/P3-W/p3_w_reload_unload_1.wav" id="39_ym4h3"]
+[ext_resource type="AudioStream" uid="uid://tjc3lp02qwqo" path="res://assets/sounds/combat/weapons/P3-W/p3_w_reload_unload_2.wav" id="40_mbycc"]
+[ext_resource type="AudioStream" uid="uid://dottcdgl5ienh" path="res://assets/sounds/combat/weapons/P3-W/p3_w_reload_unload_3.wav" id="41_0wrsm"]
+[ext_resource type="AudioStream" uid="uid://bh2a0rwkc8lkr" path="res://assets/sounds/combat/weapons/P3-W/p3_w_reload_insert_start_1.wav" id="42_awjs0"]
+[ext_resource type="AudioStream" uid="uid://cluh2d0phpj56" path="res://assets/sounds/combat/weapons/P3-W/p3_w_reload_insert_start_2.wav" id="43_67gid"]
+[ext_resource type="AudioStream" uid="uid://ba3oc6cj4cdvr" path="res://assets/sounds/combat/weapons/P3-W/p3_w_reload_insert_start_3.wav" id="44_vegsu"]
+[ext_resource type="AudioStream" uid="uid://d2r41s1unnhfu" path="res://assets/sounds/combat/weapons/P3-W/p3_w_reload_insert_1.wav" id="45_mf8ea"]
+[ext_resource type="AudioStream" uid="uid://swpjeqx7s8vp" path="res://assets/sounds/combat/weapons/P3-W/p3_w_reload_insert_2.wav" id="46_tmjj0"]
+[ext_resource type="AudioStream" uid="uid://dx2itct06wmme" path="res://assets/sounds/combat/weapons/P3-W/p3_w_reload_insert_3.wav" id="47_cueml"]
+[ext_resource type="AudioStream" uid="uid://tcngi0vi4o48" path="res://assets/sounds/combat/weapons/goz_brt/goz_brt_reload_unload_3.wav" id="48_6srx7"]
+[ext_resource type="AudioStream" uid="uid://cdajbarrvgmxx" path="res://assets/sounds/combat/weapons/P3-W/p3_w_reload_recover_start_2.wav" id="49_8r6ts"]
+[ext_resource type="AudioStream" uid="uid://ccfxs1jp222if" path="res://assets/sounds/combat/weapons/P3-W/p3_w_reload_recover_start_3.wav" id="50_1k10m"]
+[ext_resource type="AudioStream" uid="uid://sh6fl7ul2wt0" path="res://assets/sounds/combat/weapons/P3-W/p3_w_reload_recover_1.wav" id="51_t3i1m"]
+[ext_resource type="AudioStream" uid="uid://ctm4bj2gcpd4" path="res://assets/sounds/combat/weapons/P3-W/p3_w_reload_recover_2.wav" id="52_f1mug"]
+[ext_resource type="AudioStream" uid="uid://duxnq0n7h5y2e" path="res://assets/sounds/combat/weapons/P3-W/p3_w_reload_recover_3.wav" id="53_s33h5"]
 
 [sub_resource type="Resource" id="Resource_lkw52"]
 script = ExtResource("3_rebuq")
@@ -321,3 +341,120 @@ max_db = 6.0
 panning_strength = 0.0
 bus = &"Weapons"
 attenuation_filter_db = 0.0
+
+[node name="PA_Reload" type="Node3D" parent="." unique_id=1995402417 node_paths=PackedStringArray("_weapon", "_startUnloadSound", "_unloadSound", "_startInsertSound", "_insertSound", "_startChamberSound", "_chamberSound", "_recoverSound")]
+script = ExtResource("34_ouor0")
+_weapon = NodePath("..")
+_startUnloadSound = NodePath("start_unload")
+_unloadSound = NodePath("unload")
+_startInsertSound = NodePath("start_insert")
+_insertSound = NodePath("insert")
+_startChamberSound = NodePath("start_chamber")
+_chamberSound = NodePath("")
+_recoverSound = NodePath("recover")
+
+[node name="start_unload" type="Node" parent="PA_Reload" unique_id=725407347]
+script = ExtResource("35_hivvg")
+Sounds = Array[AudioStream]([ExtResource("36_1ux3c"), ExtResource("37_akjsx"), ExtResource("38_dvj4n")])
+UseTimeScale = true
+BaseVolumeDb = 8.0
+metadata/_custom_type_script = "uid://dmowaohx8nd7q"
+
+[node name="start_unload" type="Node" parent="PA_Reload/start_unload" unique_id=1319067000 node_paths=PackedStringArray("Player")]
+script = ExtResource("19_bljuv")
+Player = NodePath("start_unload")
+metadata/_custom_type_script = "uid://dbtsyp0hru7g"
+
+[node name="start_unload" type="AudioStreamPlayer" parent="PA_Reload/start_unload/start_unload" unique_id=1803466960]
+volume_db = 8.0
+bus = &"Weapons"
+
+[node name="unload" type="Node" parent="PA_Reload" unique_id=1446873865]
+script = ExtResource("35_hivvg")
+Sounds = [ExtResource("39_ym4h3"), ExtResource("40_mbycc"), ExtResource("41_0wrsm")]
+MinPitch = 0.9
+MaxPitch = 1.1
+UseTimeScale = true
+BaseVolumeDb = 8.0
+metadata/_custom_type_script = "uid://dmowaohx8nd7q"
+
+[node name="unload" type="Node" parent="PA_Reload/unload" unique_id=1765402707 node_paths=PackedStringArray("Player")]
+script = ExtResource("19_bljuv")
+Player = NodePath("unload")
+metadata/_custom_type_script = "uid://dbtsyp0hru7g"
+
+[node name="unload" type="AudioStreamPlayer" parent="PA_Reload/unload/unload" unique_id=33940376]
+volume_db = 8.0
+bus = &"Weapons"
+
+[node name="start_insert" type="Node" parent="PA_Reload" unique_id=504464890]
+script = ExtResource("35_hivvg")
+Sounds = [ExtResource("42_awjs0"), ExtResource("43_67gid"), ExtResource("44_vegsu")]
+MinPitch = 0.9
+MaxPitch = 1.1
+UseTimeScale = true
+BaseVolumeDb = 8.0
+metadata/_custom_type_script = "uid://dmowaohx8nd7q"
+
+[node name="start_insert" type="Node" parent="PA_Reload/start_insert" unique_id=1860909766 node_paths=PackedStringArray("Player")]
+script = ExtResource("19_bljuv")
+Player = NodePath("start_insert")
+metadata/_custom_type_script = "uid://dbtsyp0hru7g"
+
+[node name="start_insert" type="AudioStreamPlayer" parent="PA_Reload/start_insert/start_insert" unique_id=766452883]
+volume_db = 8.0
+bus = &"Weapons"
+
+[node name="insert" type="Node" parent="PA_Reload" unique_id=859396384]
+script = ExtResource("35_hivvg")
+Sounds = [ExtResource("45_mf8ea"), ExtResource("46_tmjj0"), ExtResource("47_cueml")]
+MinPitch = 0.9
+MaxPitch = 1.1
+UseTimeScale = true
+BaseVolumeDb = 8.0
+metadata/_custom_type_script = "uid://dmowaohx8nd7q"
+
+[node name="insert" type="Node" parent="PA_Reload/insert" unique_id=513612727 node_paths=PackedStringArray("Player")]
+script = ExtResource("19_bljuv")
+Player = NodePath("insert")
+metadata/_custom_type_script = "uid://dbtsyp0hru7g"
+
+[node name="insert" type="AudioStreamPlayer" parent="PA_Reload/insert/insert" unique_id=453981168]
+stream = ExtResource("48_6srx7")
+volume_db = 8.0
+bus = &"Weapons"
+
+[node name="start_chamber" type="Node" parent="PA_Reload" unique_id=971327241]
+script = ExtResource("35_hivvg")
+Sounds = [ExtResource("49_8r6ts"), ExtResource("50_1k10m")]
+MinPitch = 0.9
+MaxPitch = 1.1
+UseTimeScale = true
+BaseVolumeDb = 8.0
+metadata/_custom_type_script = "uid://dmowaohx8nd7q"
+
+[node name="start_chamber" type="Node" parent="PA_Reload/start_chamber" unique_id=743813758 node_paths=PackedStringArray("Player")]
+script = ExtResource("19_bljuv")
+Player = NodePath("start_chamber")
+metadata/_custom_type_script = "uid://dbtsyp0hru7g"
+
+[node name="start_chamber" type="AudioStreamPlayer" parent="PA_Reload/start_chamber/start_chamber" unique_id=1882757957]
+volume_db = 8.0
+bus = &"Weapons"
+
+[node name="recover" type="Node" parent="PA_Reload" unique_id=2111705267]
+script = ExtResource("35_hivvg")
+Sounds = Array[AudioStream]([ExtResource("51_t3i1m"), ExtResource("52_f1mug"), ExtResource("53_s33h5")])
+UseTimeScale = true
+BaseVolumeDb = 8.0
+metadata/_custom_type_script = "uid://dmowaohx8nd7q"
+
+[node name="recover" type="Node" parent="PA_Reload/recover" unique_id=807064131 node_paths=PackedStringArray("Player")]
+script = ExtResource("19_bljuv")
+Player = NodePath("recover")
+BaseVolumeDb = 4.0
+metadata/_custom_type_script = "uid://dbtsyp0hru7g"
+
+[node name="recover" type="AudioStreamPlayer" parent="PA_Reload/recover/recover" unique_id=1937854608]
+volume_db = 12.0
+bus = &"Weapons"
