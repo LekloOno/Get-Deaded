@@ -23,7 +23,7 @@ public partial class UIW_AmmoAlerts : Control
             return;
         }
 
-        _lowLoaded?.Hide();
+        _lowLoaded?.StartHide();
         _lowUnloaded?.Hide();
 
         _weaponsHandler.GotInitialized += OnInitialized;
@@ -42,7 +42,7 @@ public partial class UIW_AmmoAlerts : Control
     private void OnReloadStarted(float obj)
     {
         _reloading = true;
-        _lowLoaded?.Hide();
+        _lowLoaded?.StartHide();
     }
 
     private void OnSwitchEnded(object? sender, PW_Weapon e)
@@ -61,8 +61,8 @@ public partial class UIW_AmmoAlerts : Control
         {
             // Not compatible with alternate fire .. we'll figure it out later
             // The weapon system will go through a rework anyways
-            _currentAmmos.LoadedChanged -= OnLoadedChanged;
-            _currentAmmos.UnloadedChanged -= OnUnloadedChanged;
+            _currentAmmos.LoadedChanged -= OnTotalChanged;
+            _currentAmmos.UnloadedChanged -= OnTotalChanged;
         }
 
         _currentAmmos = e.Fires[0].Ammos;
@@ -71,15 +71,15 @@ public partial class UIW_AmmoAlerts : Control
 
         if (magPick == 0)
         {
-            _lowLoaded?.Hide();
+            _lowLoaded?.StartHide();
             _lowUnloaded?.Hide();
             return;
         }
 
-        _currentAmmos.LoadedChanged += OnLoadedChanged;
+        _currentAmmos.LoadedChanged += OnTotalChanged;
         _lowLoadedThreshold = (magPick * 10 + 35) / 36;
 
-        _currentAmmos.UnloadedChanged += OnUnloadedChanged;
+        _currentAmmos.UnloadedChanged += OnTotalChanged;
         _lowUnloadedThreshold = magPick * 3;
         _criticalLowUnloadedThreshold = magPick;
 
@@ -91,10 +91,16 @@ public partial class UIW_AmmoAlerts : Control
         if (_currentAmmos == null)
             return;
 
-        OnLoadedChanged(0, _currentAmmos.LoadedAmmos);
+        OnTotalChanged(0, 0);
     }
 
-    private void OnUnloadedChanged(int amount, uint finalAmount)
+    private void OnTotalChanged(int amount, uint finalAmount)
+    {
+        OnUnloadedChanged();
+        OnLoadedChanged();
+    }
+
+    private void OnUnloadedChanged()
     {
         if (_currentAmmos == null)
             return;
@@ -120,15 +126,20 @@ public partial class UIW_AmmoAlerts : Control
             _lowUnloaded.SetNormal();
     }
 
-    private void OnLoadedChanged(int amount, uint finalAmount)
+    private void OnLoadedChanged()
     {
-        OnUnloadedChanged(0, 0);
+        if (_currentAmmos == null)
+            return;
+
+        if (_lowLoaded == null)
+            return;
+
         if (_reloading)
             return;
 
-        if (finalAmount <= _lowLoadedThreshold && _currentAmmos?.UnloadedAmmos != 0)
-            _lowLoaded?.Show();
+        if (_currentAmmos.LoadedAmmos <= _lowLoadedThreshold && _currentAmmos?.UnloadedAmmos != 0)
+            _lowLoaded.StartShow();
         else
-            _lowLoaded?.Hide();
+            _lowLoaded.StartHide();
     }
 }
