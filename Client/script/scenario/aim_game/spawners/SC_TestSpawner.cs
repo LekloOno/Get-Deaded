@@ -100,15 +100,13 @@ public partial class SC_TestSpawner : SC_SpawnerScript
         _respawnTimers.Add(enemy, timer);
         AddChild(timer);
         AddChild(node);
-        enemy.Pool();
     }
 
-    protected override void SpawnEnemy(E_IEnemy enemy)
+    protected override void SpawnEnemySpec(E_IEnemy enemy)
     {
         if (enemy is not E_Enemy node)
             return;
 
-        node.Spawn();
         node.Position = RandomPosition();
 
         Vector3 target = Starter == null
@@ -122,13 +120,7 @@ public partial class SC_TestSpawner : SC_SpawnerScript
         node.ResetPhysicsInterpolation();
     }
 
-    protected override void RemoveEnemy(E_IEnemy enemy)
-    {
-        if (!_respawnTimers.TryGetValue(enemy, out Timer timer))
-            return;
-
-        enemy.Pool();
-    }
+    protected override void RemoveEnemySpec(E_IEnemy enemy) {}
 
     protected override void QueueFreeEnemySpec(E_IEnemy enemy)
     {

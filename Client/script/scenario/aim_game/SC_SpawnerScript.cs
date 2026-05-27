@@ -11,6 +11,7 @@ public abstract partial class SC_SpawnerScript : Node3D
     [Signal] public delegate void HandleNextEventHandler(SC_SpawnerScript prev);
     public EventHandler<HitEventArgs> Hit;          // Report hits handled by bots spawned from this script
     public List<E_IEnemy> Enemies {get; private set;} = [];
+    public List<E_IEnemy> SpawnedEnemies {get; private set;} = [];
     public GE_IActiveCombatEntity Starter {get; private set;}
 
     protected bool _running;
@@ -66,7 +67,7 @@ public abstract partial class SC_SpawnerScript : Node3D
     /// Typically, adding it to the tree.
     /// </summary>
     /// <param name="enemy"></param>
-    protected abstract void SpawnEnemy(E_IEnemy enemy);
+    protected abstract void SpawnEnemySpec(E_IEnemy enemy);
     /// <summary>
     /// Define further specific behavior when creating a new enemy, like subscribing to some events.
     /// </summary>
@@ -74,19 +75,35 @@ public abstract partial class SC_SpawnerScript : Node3D
     protected abstract void CreateEnemySpec(E_IEnemy enemy);
 
     /// <summary>
-    /// Define what should be done to disable an enemy that has previously been created through CreateEnemy.
+    /// Define what should be done to disable an enemy that has previously been spawned through SpawnEnemy.
     /// For example - removing it from the tree, unsubscribing some events, etc. <br/>
     /// <br/>
     /// This is not specific to a queue free of the enemy but it is also called when freeing. <br/>
     /// For free specifics, see QueueFreeEnemy and QueueFreeEnemySpec.
     /// </summary>
     /// <param name="enemy"></param>
-    protected abstract void RemoveEnemy(E_IEnemy enemy);
+    protected abstract void RemoveEnemySpec(E_IEnemy enemy);
     /// <summary>
     /// Define further specific behavior when destroying an existing enemy, like freeing external associated nodes.
     /// </summary>
     /// <param name="enemy"></param>
     protected abstract void QueueFreeEnemySpec(E_IEnemy enemy);
+
+    protected void SpawnEnemy(E_IEnemy enemy)
+    {
+        SpawnedEnemies.Add(enemy);
+        SpawnEnemySpec(enemy);
+        enemy.Spawn();
+    }
+
+    protected void RemoveEnemy(E_IEnemy enemy)
+    {
+        if (!SpawnedEnemies.Remove(enemy))
+            return;
+
+        RemoveEnemySpec(enemy);
+        enemy.Pool();
+    }
 
     protected void CreateEnemy(E_IEnemy enemy)
     {
@@ -94,6 +111,7 @@ public abstract partial class SC_SpawnerScript : Node3D
         enemy.Died += _gameManager.HandleKill;
         
         CreateEnemySpec(enemy);
+        enemy.Pool();
     }
 
     protected void QueueFreeEnemy(E_IEnemy enemy)
@@ -114,7 +132,7 @@ public abstract partial class SC_SpawnerScript : Node3D
 
     protected void ClearEnemies()
     {
-        foreach (E_IEnemy enemy in Enemies.ToList())
+        foreach (E_IEnemy enemy in SpawnedEnemies.ToList())
             RemoveEnemy(enemy);
     }
 

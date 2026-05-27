@@ -92,12 +92,6 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
         SpawnEnemy(enemy);
     }
 
-    private void OnDisabled(E_IEnemy enemy)
-    {
-        int pool = _enemyToPool[enemy];
-        _enemyPools[pool].Push(enemy);
-    }
-
     private void Killed(E_IEnemy enemy, GC_Health _)
     {
         var index = _timerIndex;
@@ -119,12 +113,12 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
         foreach (Timer timer in _respawnTimers)
             timer.Stop();
 
-        ClearEnemies();
         foreach (E_IEnemy enemy in Enemies)
         {
-            enemy.Disabled -= OnDisabled;
+            enemy.Disabled -= RemoveEnemy;
             enemy.Died -= Killed;
         }
+        ClearEnemies();
     }
 
 
@@ -153,7 +147,7 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
         SpawnBots();
         foreach (E_IEnemy enemy in Enemies)
         {
-            enemy.Disabled += OnDisabled;
+            enemy.Disabled += RemoveEnemy;
             enemy.Died += Killed;
             enemy.Target = starter;
         }
@@ -165,22 +159,20 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
             return;
 
         AddChild(node);
-        enemy.Pool();
         
         if (_running)
         {
-            enemy.Disabled += OnDisabled;
+            enemy.Disabled += RemoveEnemy;
             enemy.Died += Killed;
             enemy.Target = Starter;
         }
     }
 
-    protected override void SpawnEnemy(E_IEnemy enemy)
+    protected override void SpawnEnemySpec(E_IEnemy enemy)
     {
         if (enemy is not Node3D node)
             return;
 
-        enemy.Spawn();
         node.Position = RandomPosition();
 
         Vector3 target = Starter == null
@@ -194,16 +186,15 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
         node.ResetPhysicsInterpolation();
     }
 
-    protected override void RemoveEnemy(E_IEnemy enemy)
+    protected override void RemoveEnemySpec(E_IEnemy enemy)
     {
         int pool = _enemyToPool[enemy];
         _enemyPools[pool].Push(enemy);
-        enemy.Pool();
     }
 
     protected override void QueueFreeEnemySpec(E_IEnemy enemy)
     {
-        enemy.Disabled -= OnDisabled;
+        enemy.Disabled -= RemoveEnemy;
         enemy.Died -= Killed;
         _enemyToPool.Remove(enemy);
     }
