@@ -159,7 +159,7 @@ _sound = NodePath("layers")
 _lowAmmosSound = NodePath("low_sound")
 _drySound = NodePath("dry_sound")
 _lowAmmosEndPitch = 0.9
-_lowAmmosStartVolume = -5.0
+_lowAmmosStartVolume = -8.0
 metadata/_custom_type_script = "uid://bwuyvfcylptdk"
 
 [node name="low_sound" type="Node" parent="Sound" unique_id=2000540578]
@@ -167,8 +167,8 @@ script = ExtResource("19_438kg")
 PolyphonicStream = SubResource("AudioStreamPolyphonic_xmfiq")
 UseTimeScale = true
 Sounds = Array[AudioStream]([ExtResource("20_100ed"), ExtResource("21_o5f2u"), ExtResource("22_mtvyq")])
-BaseVolumeDb = 4.0
-BasePitchScale = 0.9
+BaseVolumeDb = 5.5
+BasePitchScale = 0.75
 metadata/_custom_type_script = "uid://m0h486csofx4"
 
 [node name="low_sound" type="Node" parent="Sound/low_sound" unique_id=2030734010 node_paths=PackedStringArray("Player")]
@@ -178,7 +178,7 @@ metadata/_custom_type_script = "uid://dbtsyp0hru7g"
 
 [node name="low_sound" type="AudioStreamPlayer" parent="Sound/low_sound/low_sound" unique_id=175038531]
 stream = SubResource("AudioStreamPolyphonic_7aysp")
-volume_db = 4.0
+volume_db = 5.5
 bus = &"Weapons"
 
 [node name="dry_sound" type="Node" parent="Sound" unique_id=890951737]
@@ -186,7 +186,7 @@ script = ExtResource("19_438kg")
 PolyphonicStream = SubResource("AudioStreamPolyphonic_xmfiq")
 UseTimeScale = true
 Sounds = [ExtResource("24_naawj")]
-BaseVolumeDb = -8.0
+BaseVolumeDb = -7.0
 metadata/_custom_type_script = "uid://m0h486csofx4"
 
 [node name="dry_sound" type="Node" parent="Sound/dry_sound" unique_id=1143832646 node_paths=PackedStringArray("Player")]
@@ -198,7 +198,7 @@ metadata/_custom_type_script = "uid://dbtsyp0hru7g"
 
 [node name="dry_sound" type="AudioStreamPlayer" parent="Sound/dry_sound/dry_sound" unique_id=344895072]
 stream = SubResource("AudioStreamPolyphonic_7aysp")
-volume_db = -4.0
+volume_db = -3.0
 pitch_scale = 0.9
 bus = &"Weapons"
 
