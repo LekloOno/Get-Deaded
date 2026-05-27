@@ -6,6 +6,19 @@ public partial class UIW_LowUnloaded : Control
     [Export] private Label? _label;
     [Export] private Label? _emptyLabel;
 
+    [Export] private ANIM_InOutTweenSetting? _opacityTweenSettings;
+    private Tween? _opacityTween;
+
+    private bool _shown;
+
+    public override void _Ready()
+    {
+        Color mod = Modulate;
+        mod.A = 0f;
+        Modulate = mod;
+        _shown = false;
+    }
+
     public void SetCritical()
     {
         _emptyLabel?.Hide();
@@ -41,5 +54,33 @@ public partial class UIW_LowUnloaded : Control
             return;
         }
         _emptyLabel?.Show();
-    } 
+    }
+
+    public void StartShow()
+    {
+        if (_shown)
+            return;
+
+        _shown = true;
+
+        Color mod = Modulate;
+        mod.A = 0f;
+        Modulate = mod;
+        
+        _opacityTween?.Kill();
+        _opacityTween = CreateTween();
+        _opacityTweenSettings?.FadeIn?.TweenProperty(_opacityTween, this);
+    }
+
+    public void StartHide()
+    {
+        if (!_shown)
+            return;
+
+        _shown = false;
+
+        _opacityTween?.Kill();
+        _opacityTween = CreateTween();
+        _opacityTweenSettings?.FadeOut?.TweenProperty(_opacityTween, this);
+    }
 }

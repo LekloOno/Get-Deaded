@@ -69,6 +69,35 @@ FadeIn = SubResource("Resource_71q87")
 FadeOut = SubResource("Resource_6xb0c")
 metadata/_custom_type_script = "uid://bjbcijbwg0h0v"
 
+[sub_resource type="Resource" id="Resource_oefhn"]
+script = ExtResource("5_ef7wh")
+_value = 1.0
+metadata/_custom_type_script = "uid://ci08w5aakbl7k"
+
+[sub_resource type="Resource" id="Resource_xoeyl"]
+script = ExtResource("5_qb63b")
+AnimationTime = 0.04
+PropertyPath = "modulate:a"
+Value = SubResource("Resource_oefhn")
+metadata/_custom_type_script = "uid://2ud817ngo5tn"
+
+[sub_resource type="Resource" id="Resource_rw18a"]
+script = ExtResource("5_ef7wh")
+metadata/_custom_type_script = "uid://ci08w5aakbl7k"
+
+[sub_resource type="Resource" id="Resource_bvkx3"]
+script = ExtResource("5_qb63b")
+AnimationTime = 0.04
+PropertyPath = "modulate:a"
+Value = SubResource("Resource_rw18a")
+metadata/_custom_type_script = "uid://2ud817ngo5tn"
+
+[sub_resource type="Resource" id="Resource_xkvdx"]
+script = ExtResource("5_o2jrq")
+FadeIn = SubResource("Resource_xoeyl")
+FadeOut = SubResource("Resource_bvkx3")
+metadata/_custom_type_script = "uid://bjbcijbwg0h0v"
+
 [node name="UiAmmoAlerts" type="VBoxContainer" unique_id=599796795 node_paths=PackedStringArray("_lowUnloaded", "_lowLoaded")]
 anchors_preset = 8
 anchor_left = 0.5
@@ -130,6 +159,7 @@ layout_mode = 2
 script = ExtResource("4_5yygr")
 _label = NodePath("LowUnloaded")
 _emptyLabel = NodePath("EmptyAmmos")
+_opacityTweenSettings = SubResource("Resource_xkvdx")
 
 [node name="LowUnloaded" type="Label" parent="LowUnloaded" unique_id=1368537751]
 layout_mode = 2

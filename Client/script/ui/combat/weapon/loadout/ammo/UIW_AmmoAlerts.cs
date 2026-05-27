@@ -23,9 +23,6 @@ public partial class UIW_AmmoAlerts : Control
             return;
         }
 
-        _lowLoaded?.StartHide();
-        _lowUnloaded?.Hide();
-
         _weaponsHandler.GotInitialized += OnInitialized;
         _weaponsHandler.SwitchEnded += OnSwitchEnded;
         _weaponsHandler.ReloadStarted += OnReloadStarted;
@@ -72,7 +69,7 @@ public partial class UIW_AmmoAlerts : Control
         if (magPick == 0)
         {
             _lowLoaded?.StartHide();
-            _lowUnloaded?.Hide();
+            _lowUnloaded?.StartHide();
             return;
         }
 
@@ -112,11 +109,11 @@ public partial class UIW_AmmoAlerts : Control
 
         if (totalAmmos > _lowUnloadedThreshold)
         {
-            _lowUnloaded.Hide();
+            _lowUnloaded.StartHide();
             return;
         }
 
-        _lowUnloaded.Show();
+        _lowUnloaded.StartShow();
 
         if (totalAmmos == 0)
             _lowUnloaded.SetEmpty();

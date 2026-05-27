@@ -30,6 +30,8 @@ public partial class UIW_LowLoaded : Control
         Color mod = Modulate;
         mod.A = 0f;
         Modulate = mod;
+
+        _shown = false;
     }
 
     private void OnBindChanged(GodotObject sender, Variant value)
