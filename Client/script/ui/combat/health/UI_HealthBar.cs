@@ -15,6 +15,8 @@ public partial class UI_HealthBar : Control
 
     public void InitBar(float _maxHealth, float _initHealth, CONFD_IBarColors barColors)
     {
+        _tailTween?.Kill();
+        
         _body.MinValue = _tail.MinValue = 0f;
         _body.MaxValue = _tail.MaxValue = _maxHealth;
         _body.Value = _tail.Value = _initHealth;
