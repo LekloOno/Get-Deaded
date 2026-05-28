@@ -78,17 +78,11 @@ public partial class SC_ArenaGameStarter : Node
 
         AddChild(_player);
         _player.Revive();
-
-        //foreach (PW_Weapon weapon in _player.WeaponsHandler.Weapons)
-		//	weapon.InitializeAmmos();
+        
         _player.WeaponsHandler.ResetLoadOut();
 
-        _player.GlobalPosition = _spawnPoint.GlobalPosition;
         _player.InitRotation(_spawnPoint.Rotation);
-        _player.ResetPhysicsInterpolation();
-        _player.VelocityCache.DiscardCache();
-        _player.Velocity = Vector3.Zero;
-        _player.RealVelocity = Vector3.Zero;
+        _player.Teleport(_spawnPoint.GlobalPosition);
         _player.Camera.MakeCurrent();
 
         EmitSignal(SignalName.SceneInitialized);

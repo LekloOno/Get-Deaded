@@ -38,6 +38,12 @@ public abstract partial class ANIM_TraumaLayer<T> : Resource
 
     public float GetShakeIntensity() => _trauma * _trauma;
 
+    public void ResetTrauma()
+    {
+        _trauma = 0f;
+        _active = false;
+    }
+
     public void AddTrauma(float amount)
     {
         _trauma = Mathf.Clamp(_trauma + amount, 0f, 1f);

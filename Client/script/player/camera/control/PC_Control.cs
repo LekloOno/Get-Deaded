@@ -56,6 +56,16 @@ public partial class PC_Control : Node3D
         Rotation = rotation;
     }
 
+    public void InitRotation(Vector3 rotation)
+    {
+        _flatDir.Rotation = rotation * new Vector3(0f, 1f, 0f);
+
+        Rotation = new (
+            Mathf.Clamp(rotation.X, Mathf.DegToRad(-90), Mathf.DegToRad(90)),
+            0f, 0f
+        );
+    }
+
     public void RotateFlatDir(float theta) => _flatDir.RotateY(theta);
     public Vector2 CurrentRotation() => new(_flatDir.Rotation.Y, Rotation.X);
 

@@ -41,6 +41,12 @@ public partial class PC_Bobbing : Node3D
         _groundSurfaceState.Normal.OnStart += OnStartWalk;
         _groundSurfaceState.Normal.OnStop += OnStopWalk;
     }
+
+    public override void _ExitTree()
+    {
+        Position = Vector3.Zero;
+    }
+
     public override void _Process(double delta)
     {
         if(TooSlow() || !_active || !_groundState.IsGrounded())

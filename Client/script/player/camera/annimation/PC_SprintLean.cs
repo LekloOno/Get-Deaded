@@ -30,6 +30,13 @@ public partial class PC_SprintLean : Node3D
         _groundSurfaceState.Sprint.OnStart += OnStartSprint;
         _groundSurfaceState.Sprint.OnStop += OnStopSprint;
     }
+
+    public override void _ExitTree()
+    {
+        OnStopSprint();
+        Position = Vector3.Zero;
+    }
+
     public override void _Process(double delta)
     {
         Position = Position.Lerp(_targetPosition, _currentSpeed * (float)delta);

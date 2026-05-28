@@ -32,11 +32,13 @@ public partial class PC_Spring : Node3D
     
     private Vector3 _springPosition;
     private Vector3 _springVelocity;
-    public override void _Ready()
+    
+    public void Reset()
     {
         _springPosition = GlobalPosition;
         _springVelocity = Vector3.Zero;
     }
+
     public override void _Process(double delta)
     {
         Position = Vector3.Zero;

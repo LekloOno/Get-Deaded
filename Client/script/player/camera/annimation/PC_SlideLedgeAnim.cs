@@ -34,6 +34,13 @@ public partial class PC_SlideLedgeAnim : Node3D
         SetProcess(false);
     }
 
+    public override void _ExitTree()
+    {
+        SetProcess(false);
+        RotationDegrees = Vector3.Zero;
+        Transform = Transform.Orthonormalized();
+    }
+
     private void OnStartSlide()
     {
        

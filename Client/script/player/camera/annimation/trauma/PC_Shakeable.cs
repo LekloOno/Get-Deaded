@@ -22,6 +22,14 @@ public partial class PC_Shakeable : Area3D
         CollisionMask = 0;
     }
 
+    public override void _ExitTree()
+    {
+        foreach (PC_TraumaLayer layer in _traumaLayers)
+            layer.ResetTrauma();
+
+        _baseLayer?.ResetTrauma();
+    }
+
     public override void _Process(double delta)
     {
         _time += (float)delta;

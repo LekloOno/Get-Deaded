@@ -19,6 +19,11 @@ public partial class PC_Recoil : Node3D
         CameraControl.MouseMove += ResetBufferFromMouse;
     }
 
+    public override void _ExitTree()
+    {
+        _recoilHandlers.Clear();
+    }
+
     public override void _Process(double delta)
     {
         Vector2 appliedVel = Vector2.Zero;

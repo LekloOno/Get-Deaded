@@ -26,6 +26,15 @@ public partial class PC_SlideTilt : Node3D
         _surfaceGroundState.Slide.OnStart += OnStartSlide;
         _surfaceGroundState.Slide.OnStop += OnStopSlide;
     }
+
+    public override void _ExitTree()
+    {
+        Rotation = Vector3.Zero;
+        Transform = Transform.Orthonormalized();
+
+        _active = false;
+    }
+
     public void OnStartSlide() => _active = true;
     public void OnStopSlide() => _active = false;
 

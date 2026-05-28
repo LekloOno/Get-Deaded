@@ -21,7 +21,7 @@ public partial class PM_Controller : CharacterBody3D, GB_IExternalBodyManager, G
     [Export] private Node3D _exposedBody;
     [Export] private PM_OmniCharge _omniCharge;
     [Export] public GL_Picker Picker {get; private set;}
-    [Export] public PC_FlatDir _flatDir;
+    [Export] public PC_SpatialAnimManager? _cameraSpatialAnimManager;
 
     public Transform3D PrevGlobalTransform {get; protected set;}
     public Vector3 PrevVelocity {get; protected set;}
@@ -54,7 +54,18 @@ public partial class PM_Controller : CharacterBody3D, GB_IExternalBodyManager, G
 
     public void InitRotation(Vector3 rotation)
     {
-        _flatDir.Rotation = rotation;
+        _cameraControl.InitRotation(rotation);
+    }
+
+    public void Teleport(Vector3 position)
+    {
+        GlobalPosition = position;
+        ResetPhysicsInterpolation();
+        VelocityCache.DiscardCache();
+        Velocity = Vector3.Zero;
+        RealVelocity = Vector3.Zero;
+
+        _cameraSpatialAnimManager?.Reset();
     }
 
     public void ResetGravity()

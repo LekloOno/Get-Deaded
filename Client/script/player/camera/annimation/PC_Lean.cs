@@ -20,6 +20,12 @@ public partial class PC_Lean : Node3D
     private Vector3 _dampedAcceleration;
     private Vector3 _dampedAccelerationVel;
 
+    public void Reset()
+    {
+        _dampedAcceleration = Vector3.Zero;
+        _dampedAccelerationVel = Vector3.Zero;
+    }
+
     public override void _Process(double delta)
     {
         Vector3 planeAccel = MATH_Vector3Ext.Flat(_controller.Acceleration);
