@@ -79,8 +79,9 @@ public partial class SC_ArenaGameStarter : Node
         AddChild(_player);
         _player.Revive();
 
-        foreach (PW_Weapon weapon in _player.WeaponsHandler.Weapons)
-			weapon.InitializeAmmos();
+        //foreach (PW_Weapon weapon in _player.WeaponsHandler.Weapons)
+		//	weapon.InitializeAmmos();
+        _player.WeaponsHandler.ResetLoadOut();
 
         _player.GlobalPosition = _spawnPoint.GlobalPosition;
         _player.ResetPhysicsInterpolation();

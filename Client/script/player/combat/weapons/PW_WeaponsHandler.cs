@@ -148,6 +148,24 @@ public partial class PW_WeaponsHandler : WeaponSystem
         Initialized = true;
     }
 
+    public void ResetLoadOut()
+    {
+        _surfaceControl.SpeedModifiers.Remove(_activeWeapon.MoveSpeedModifier);
+        
+        _weaponIndex = 0;
+        _activeWeapon = _weapons[_weaponIndex];
+        _targetWeapon = _activeWeapon;
+
+        _surfaceControl.SpeedModifiers.Add(_activeWeapon.MoveSpeedModifier);
+        
+        foreach (PW_Weapon weapon in Weapons)
+			weapon.InitializeAmmos();
+
+        int nextIndex = (_weaponIndex + 1) % _weapons.Count;
+        SwitchStarted?.Invoke(_activeWeapon, Melee, nextIndex, _weapons);
+        SwitchEnded?.Invoke(this, _activeWeapon);
+    }
+
     private void ForwardReloadStarted(PW_ReloadStep prev, PW_ReloadStep current, float time)
     {
         ReloadStarted.Invoke(time);
