@@ -2766,7 +2766,7 @@ metadata/_custom_type_script = "uid://c3akiwtfovofa"
 
 [sub_resource type="Resource" id="Resource_q2sf5"]
 script = ExtResource("37_q2sf5")
-WeaponIndex = 1
+WeaponIndex = 2
 Amount = 5
 Model = ExtResource("38_wdrsa")
 _repulsionData = SubResource("Resource_ywx5l")
@@ -2780,7 +2780,7 @@ viewport_path = NodePath("entities/Pickups/ClickAmos/Sprite3D/SubViewport")
 
 [sub_resource type="Resource" id="Resource_wdrsa"]
 script = ExtResource("37_q2sf5")
-WeaponIndex = 2
+WeaponIndex = 1
 Amount = 5
 Model = ExtResource("38_u80kj")
 _repulsionData = SubResource("Resource_ywx5l")
@@ -5799,6 +5799,7 @@ _scoreMark = NodePath("UI_ScoreMarkShaker")
 _scoreTrans = 5
 _scoreTransTime = 0.8
 metadata/_custom_type_script = "uid://baxgvm22qvjah"
+metadata/_edit_use_anchors_ = true
 
 [node name="UI_ScoreMarkShaker" parent="CanvasLayer/UI_ScoreMarkManager" unique_id=1609368157 instance=ExtResource("49_kjcr2")]
 layout_mode = 1
@@ -5924,6 +5925,7 @@ parameters/looping = true
 [connection signal="Reseted" from="SC_ArenaGameStarter" to="CanvasLayer/Menu/MainMenu/Main/ScoreBoard" method="show"]
 [connection signal="Reseted" from="SC_ArenaGameStarter" to="CanvasLayer/Menu/MainMenu/Main/Leave" method="hide"]
 [connection signal="Reseted" from="SC_ArenaGameStarter" to="CanvasLayer/Menu/MainMenu/Main/Surrender" method="hide"]
+[connection signal="Reseted" from="SC_ArenaGameStarter" to="CanvasLayer/UI_ScoreMarkManager" method="Reset"]
 [connection signal="Reseted" from="SC_ArenaGameStarter" to="music" method="play"]
 [connection signal="RoamingStarted" from="SC_ArenaGameStarter" to="CanvasLayer/Menu/MainMenu/Main/Leave" method="show"]
 [connection signal="SceneInitialized" from="SC_ArenaGameStarter" to="CanvasLayer/Menu" method="Close"]
