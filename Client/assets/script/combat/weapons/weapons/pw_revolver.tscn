@@ -342,7 +342,7 @@ panning_strength = 0.0
 bus = &"Weapons"
 attenuation_filter_db = 0.0
 
-[node name="PA_Reload" type="Node3D" parent="." unique_id=1995402417 node_paths=PackedStringArray("_weapon", "_startUnloadSound", "_unloadSound", "_startInsertSound", "_insertSound", "_startChamberSound", "_chamberSound", "_recoverSound")]
+[node name="PA_Reload" type="Node3D" parent="." unique_id=1995402417 node_paths=PackedStringArray("_weapon", "_startUnloadSound", "_unloadSound", "_startInsertSound", "_insertSound", "_startChamberSound", "_recoverSound")]
 script = ExtResource("34_ouor0")
 _weapon = NodePath("..")
 _startUnloadSound = NodePath("start_unload")
@@ -350,7 +350,6 @@ _unloadSound = NodePath("unload")
 _startInsertSound = NodePath("start_insert")
 _insertSound = NodePath("insert")
 _startChamberSound = NodePath("start_chamber")
-_chamberSound = NodePath("")
 _recoverSound = NodePath("recover")
 
 [node name="start_unload" type="Node" parent="PA_Reload" unique_id=725407347]

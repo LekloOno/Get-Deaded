@@ -30,7 +30,8 @@ public partial class PW_WeaponReloader : Node
 
     public bool IsReady => CurrentStep == PW_ReloadStep.Ready;
 
-    public override void _Ready() => ResetCurrent();
+    public override void _EnterTree() => Reset();
+    public override void _ExitTree() => Reset();
 
     private void ResetCurrent()
     {

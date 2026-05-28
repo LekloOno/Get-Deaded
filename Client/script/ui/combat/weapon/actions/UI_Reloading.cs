@@ -15,6 +15,11 @@ public partial class UI_Reloading : TextureProgressBar
         _weaponsHandler.ReloadCancelled += OnReloadCancelled;
     }
 
+    public override void _ExitTree()
+    {
+        OnReloadCancelled();
+    }
+
     private void OnReloadCancelled()
     {
         Visible = false;

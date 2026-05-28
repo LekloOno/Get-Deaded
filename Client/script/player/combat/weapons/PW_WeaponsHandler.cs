@@ -101,9 +101,10 @@ public partial class PW_WeaponsHandler : WeaponSystem
         OwnerEntity = owner;
     }
 
-    public override void _EnterTree()
+    public override void _ExitTree()
     {
-        base._EnterTree();
+        if (_switchingIn || _switchingOut)
+            EndSwitch();
     }
 
     public override void _Ready()
