@@ -7,11 +7,37 @@ public partial class CNT_SprintWeapon : Node
     [Export] private PI_Sprint _sprintInput;
     [Export] private PW_WeaponsHandler _weaponsHandler;
     private bool _buffered = false;
+    private bool _enabled;
     public override void _Ready()
     {
-        _weaponsHandler.ADSStarted += () => _sprintInput.HandleExternal(PI_ActionState.STOPPED, new());
+        Enable();
+    }
+
+    public void Enable()
+    {
+        if (_enabled)
+            return;
+
+        _enabled = true;
+        _weaponsHandler.ADSStarted += StopSprint;
         _weaponsHandler.ADSStopped += CheckBuffer;
         _sprintInput.Start += CheckSprintStart;
+    }
+
+    public void Disable()
+    {
+        if (!_enabled)
+            return;
+
+        _enabled = false;
+        _weaponsHandler.ADSStarted -= StopSprint;
+        _weaponsHandler.ADSStopped -= CheckBuffer;
+        _sprintInput.Start -= CheckSprintStart; 
+    }
+
+    private void StopSprint()
+    {
+        _sprintInput.HandleExternal(PI_ActionState.STOPPED, new());
     }
 
     private void CheckSprintStart(object sender, EmptyInput args)
@@ -19,7 +45,7 @@ public partial class CNT_SprintWeapon : Node
         if (!_weaponsHandler.ADSactive)
             return;
         
-        _sprintInput.HandleExternal(PI_ActionState.STOPPED, new());
+        StopSprint();
         _buffered = !_buffered;
     }
 

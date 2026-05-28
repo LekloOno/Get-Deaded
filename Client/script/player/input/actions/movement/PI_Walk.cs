@@ -19,8 +19,8 @@ public partial class PI_Walk : PI_ActionHandler<Vector2>
     public override void _UnhandledInput(InputEvent @event) => WishDir = ComputeWishDir();
     public override void _UnhandledKeyInput(InputEvent @event) => HandleInput(@event);
 
-    public bool IsStopped() => WalkAxis.X == 0 && WalkAxis.Y == 0;
-    public bool IsBacking() => WalkAxis.Y > 0;
+    public bool IsStopped() => WalkAxis.IsStopped();
+    public bool IsBacking() => WalkAxis.IsBacking();
     public bool IsForwarding() => WalkAxis.Y < 0; // Not just !IsBacking, walk axis can't be 0
     public bool FowardDown() => Input.IsActionPressed(FORWARD);
     public bool BackwardDown() => Input.IsActionPressed(BACKWARD);

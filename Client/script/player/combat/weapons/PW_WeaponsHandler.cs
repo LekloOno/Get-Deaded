@@ -29,6 +29,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
     [Export] private float _meleeRecover;
     public GE_IActiveCombatEntity OwnerEntity {get; private set;}
     public EventHandler<HitEventArgs> Hit;
+    public event Action? Shot;
 
     public SwitchEvent SwitchStarted;
     public SwitchEvent GotInitialized;
@@ -107,12 +108,15 @@ public partial class PW_WeaponsHandler : WeaponSystem
             EndSwitch();
     }
 
+    private void ForwardShot() => Shot?.Invoke();
+
     public override void _Ready()
     {
         foreach(PW_Weapon weapon in _weapons)
         {
             weapon.Initialize(_shakeableCamera, _camera, _surfaceControl, _recoilController, _ownerBody, this);
             weapon.Hit += (o, e) => Hit?.Invoke(o, e);
+            weapon.Shot += ForwardShot;
             weapon.ADSStarted += () => ADSStarted?.Invoke();
             weapon.ADSStopped += () => ADSStopped?.Invoke();
             weapon.Reloader.Recovered += CompleteReload;

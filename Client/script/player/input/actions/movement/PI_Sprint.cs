@@ -31,6 +31,12 @@ public partial class PI_Sprint : PI_HoldableHandler<EmptyInput>
             HandleInput(@event);
     }
 
+    public override void HandleExternal(PI_ActionState actionState, EmptyInput value)
+    {
+        if (!_crouchDispatcher.IsCrouched)
+            base.HandleExternal(actionState, value);
+    }
+
     public override void EnableAction() => SetProcessUnhandledInput(true);
     public override void DisableAction()
     {
