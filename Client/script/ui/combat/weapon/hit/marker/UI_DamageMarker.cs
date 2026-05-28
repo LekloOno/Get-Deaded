@@ -105,6 +105,10 @@ public partial class UI_DamageMarker : Control
     public override void _Ready()
     {
         _hitStyle = (StyleBoxFlat) _markerSticks.ElementAt(0).GetThemeStylebox("panel");
+    }
+
+    public override void _EnterTree()
+    {
         Color mod = Modulate;
         mod.A = 0f;
         Modulate = mod;
@@ -113,13 +117,15 @@ public partial class UI_DamageMarker : Control
         EnemyColorSetting.Instance.Changed += OnChanged;
     }
 
+
     public override void _ExitTree()
     {
         opacityTween?.Kill();
         offsetTween?.Kill();
         sizeTween?.Kill();
 
-        Color mod = EnemyColorSetting.Color;
+        EnemyColorSetting.Instance.Changed -= OnChanged;
+        Color mod = Modulate;
         mod.A = 0f;
         Modulate = mod;
         Offset = _baseTightOffset;

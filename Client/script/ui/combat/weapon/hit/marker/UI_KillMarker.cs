@@ -44,6 +44,7 @@ public partial class UI_KillMarker : Control
         Color mod = EnemyColorSetting.Color;
         mod.A = 0f;
         Modulate = mod;
+        Offset = _baseStartOffset;
     }
 
     public void StartAnim()
