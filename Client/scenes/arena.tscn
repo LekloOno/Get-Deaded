@@ -5128,7 +5128,7 @@ mesh = SubResource("QuadMesh_tq647")
 [node name="entities" type="Node" parent="." unique_id=1554073272]
 
 [node name="SpawnPoint" type="Node3D" parent="entities" unique_id=1269759277]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.834246, -3.7062, 16.533974)
+transform = Transform3D(-0.50000006, 0, -0.8660253, 0, 1, 0, 0.8660253, 0, -0.50000006, -18.089949, -3.7062, 16.19751)
 
 [node name="AimArena" type="Node" parent="entities" unique_id=1666434107]
 

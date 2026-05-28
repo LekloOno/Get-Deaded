@@ -84,6 +84,7 @@ public partial class SC_ArenaGameStarter : Node
         _player.WeaponsHandler.ResetLoadOut();
 
         _player.GlobalPosition = _spawnPoint.GlobalPosition;
+        _player.InitRotation(_spawnPoint.Rotation);
         _player.ResetPhysicsInterpolation();
         _player.VelocityCache.DiscardCache();
         _player.Velocity = Vector3.Zero;

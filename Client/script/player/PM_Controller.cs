@@ -21,6 +21,7 @@ public partial class PM_Controller : CharacterBody3D, GB_IExternalBodyManager, G
     [Export] private Node3D _exposedBody;
     [Export] private PM_OmniCharge _omniCharge;
     [Export] public GL_Picker Picker {get; private set;}
+    [Export] public PC_FlatDir _flatDir;
 
     public Transform3D PrevGlobalTransform {get; protected set;}
     public Vector3 PrevVelocity {get; protected set;}
@@ -51,7 +52,10 @@ public partial class PM_Controller : CharacterBody3D, GB_IExternalBodyManager, G
     public GB_IExternalBodyManager Body => this;
     Transform3D GB_IExternalBodyManager.GlobalTransform => _exposedBody.GlobalTransform;
 
-
+    public void InitRotation(Vector3 rotation)
+    {
+        _flatDir.Rotation = rotation;
+    }
 
     public void ResetGravity()
     {
