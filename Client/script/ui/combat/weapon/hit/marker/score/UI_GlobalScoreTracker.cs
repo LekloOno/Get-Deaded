@@ -19,6 +19,11 @@ public partial class UI_GlobalScoreTracker : Label
 		}
 	}
 
+    public override void _ExitTree()
+    {
+        Reset();
+    }
+
 	public void Reset()
 	{
 		LerpedScore = 0;

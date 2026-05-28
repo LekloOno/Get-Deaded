@@ -17,7 +17,7 @@ public partial class UI_KillSkullManager : Control
     [Export] public uint MaxChainSize {get; private set;} = 8;
 
 
-    public Action PushSkull;
+    public event Action? PushSkull;
     public Timer FadeTimer;
 
     public override void _Ready()
@@ -29,6 +29,11 @@ public partial class UI_KillSkullManager : Control
         };
         
         AddChild(FadeTimer);
+    }
+
+    public override void _ExitTree()
+    {
+        FadeTimer?.Stop();
     }
 
     public void PopSkull(bool critical)

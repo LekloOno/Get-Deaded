@@ -14,7 +14,7 @@ public partial class UI_KillSkullShaker : Control
         set => _killSkull.Texture = value;
     }
 
-    public Action MaxScaleReached
+    public Action? MaxScaleReached
     {
         get => _killSkull.MaxScaleReached;
         set => _killSkull.MaxScaleReached = value;
@@ -33,19 +33,30 @@ public partial class UI_KillSkullShaker : Control
         ShakeLayer.AddTrauma(Trauma);
 
         if (_critical)
-            EnemyColorSetting.Instance.Changed += OnChanged;
+            EnemyColorSetting.Instance.Changed += OnCritColorChanged;
+    }
+
+    
+    public override void _ExitTree()
+    {
+        if (_killSkull == null)
+            return;
+
+        _killSkull.Removed -= OnSkullRemoved;
+        _killSkull.Remove();
+        OnSkullRemoved();
     }
 
     private void OnSkullRemoved()
     {
         if (_critical)
-            EnemyColorSetting.Instance.Changed -= OnChanged;
+            EnemyColorSetting.Instance.Changed -= OnCritColorChanged;
 
         QueueFree();
     }
 
 
-    private void OnChanged(GodotObject sender, Variant value)
+    private void OnCritColorChanged(GodotObject sender, Variant value)
     {
         Modulate = EnemyColorSetting.Color;
     }

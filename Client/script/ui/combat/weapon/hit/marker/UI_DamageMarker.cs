@@ -113,6 +113,18 @@ public partial class UI_DamageMarker : Control
         EnemyColorSetting.Instance.Changed += OnChanged;
     }
 
+    public override void _ExitTree()
+    {
+        opacityTween?.Kill();
+        offsetTween?.Kill();
+        sizeTween?.Kill();
+
+        Color mod = EnemyColorSetting.Color;
+        mod.A = 0f;
+        Modulate = mod;
+        Offset = _baseTightOffset;
+    }
+
     private void OnChanged(GodotObject sender, Variant value)
     {
         if (_lastHitCrit)

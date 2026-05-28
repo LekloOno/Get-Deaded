@@ -45,6 +45,11 @@ public partial class UI_DamageIndicator : Label
         StartAnim(damage);
     }
 
+    public override void _ExitTree()
+    {
+        QueueFree();
+    }
+
     private void UpdateColor(Color layerColor, bool critical)
     {
         LabelSettings.ShadowColor = layerColor;

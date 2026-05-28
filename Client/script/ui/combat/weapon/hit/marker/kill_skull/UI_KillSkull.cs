@@ -16,11 +16,11 @@ public partial class UI_KillSkull : TextureRect
     [Export] private float _fadeOutTime;
     [Export] private float _fadeInTime;
 
-    public Action MaxScaleReached;
-    public Action Removed;
-    private Tween _opacityTween;
-    private Tween _scaleTween;
-    private Tween _offsetTween;
+    public Action? MaxScaleReached;
+    public event Action? Removed;
+    private Tween? _opacityTween;
+    private Tween? _scaleTween;
+    private Tween? _offsetTween;
     private UI_KillSkullManager _manager;
     private uint _successors = 0;
     private Vector2 _targetPos;
@@ -113,6 +113,7 @@ public partial class UI_KillSkull : TextureRect
     {
         _manager.PushSkull -= OverflowFade;
         _manager.FadeTimer.Timeout -= Fade;
+        _isFading = true;
         _opacityTween = CreateTween();
         _opacityTween.TweenProperty(this, "modulate:a", .0f, _fadeOutTime);
         _opacityTween.Finished += Remove;
@@ -124,7 +125,21 @@ public partial class UI_KillSkull : TextureRect
     /// </summary>
     public void Remove()
     {
+        _offsetTween?.Kill();
+        _scaleTween?.Kill();
+
         _manager.PushSkull -= Push;
+
+        if (!_isFading)
+        {
+            _manager.FadeTimer.Timeout -= Fade;
+            _manager.PushSkull -= OverflowFade;
+        }
+        else if (_opacityTween != null && _opacityTween.IsValid())
+            _opacityTween.Finished -= Remove;
+
+        _opacityTween?.Kill();
+
         Removed?.Invoke();
         QueueFree();
     }

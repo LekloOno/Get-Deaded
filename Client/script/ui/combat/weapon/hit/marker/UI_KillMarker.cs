@@ -36,6 +36,16 @@ public partial class UI_KillMarker : Control
         Offset = _baseStartOffset;
     }
 
+    public override void _ExitTree()
+    {
+        opacityTween?.Kill();
+        offsetTween?.Kill();
+
+        Color mod = EnemyColorSetting.Color;
+        mod.A = 0f;
+        Modulate = mod;
+    }
+
     public void StartAnim()
     {
         Color mod = EnemyColorSetting.Color;

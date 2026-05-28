@@ -49,6 +49,13 @@ public partial class UI_ScoreMarkManager : Control
         FadeTimer.Timeout += Reset;
     }
 
+    public override void _ExitTree()
+    {
+        _accumulatedScore = 0;
+        _scoreMark.Visible = false;
+    }
+
+
     private void Reset()
     {
         _scoreMark.Fade();
