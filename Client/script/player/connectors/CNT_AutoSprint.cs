@@ -1,6 +1,47 @@
 using System;
 using Godot;
 
+/// <summary>
+/// Little brief of the behavior of the auto sprint -
+/// 
+/// The auto sprint tries* to tigger whenever -
+/// - The "forward" key is pressed down
+/// - The "forward" key is already pressed, and -
+///     - any other key is pressed
+///     - The ADS is stopped
+///     - The slide is stopped
+///     - The crouch is stopped
+///     - The grace period is over
+/// 
+/// Besides, the auto sprint automatically stops the sprint on fire.
+/// It is not a rule inherent to sprint, but to auto sprint specifically,
+/// as it could feel awkward to shoot while sprinting for some players, and is
+/// a substantial buff for the player that manage to handle it.
+/// 
+/// However, there's further rules to allow the player to sprint and shoot, even
+/// with auto sprint, explained in GRACE PERIOD.
+/// 
+/// *By "tries", it means, it will always fire under these conditions
+/// but some other conditions might forbid the sprint.
+/// For example, if the "forward" key is pressed, the auto sprint fires, but
+/// if it the mean time, the player is crouched, the final input won't fire.
+/// 
+/// GRACE PERIOD
+/// 
+/// When the player shoots, the auto sprint fires a stop sprint event.
+/// At this first shot, the grace period begins.
+/// 
+/// During this period, no sprint can be triggered anymore
+/// 
+/// *Unless the player has _gracePressKeyToSprint enabled, in which case, pressing
+/// any key while the forward is pressed can retrigger a sprint, that won't be called by
+/// further shots during the grace period.
+///
+/// The grace period is restarted for each new shot during the grace.
+/// 
+/// At the end of the grace period, the keypressed, ADS, slide & crouch triggers are
+/// re-enabled and the sprint is automatically restarted if the "forward" key is pressed.
+/// </summary>
 [GlobalClass]
 public partial class CNT_AutoSprint : Node
 {
@@ -74,25 +115,61 @@ public partial class CNT_AutoSprint : Node
         CheckSprint();
 
     private ulong _lastGraceShot = 0;
-    [Export] private ulong _graceShotWindow = 1200;
+    [Export] private ulong _graceShotWindow = 800;
+    [Export] private bool _gracePressKeyToSprint = false;
+    // Ensures if _gracePressKeyToSprint is changed during the grace period,
+    // The key pressed event isn't double-added
+    private bool _gracePressKeyToSprintBuffer = false;
     private void HandleShot()
     {
         StopSprint();
         _weaponsHandler.Shot -= HandleShot;
-        _weaponsHandler.Shot += GraceShot;
+        StartGrace();
     }
 
-    private void GraceShot()
+    private void StartGrace()
     {
-        ulong now = PHX_Time.ScaledTicksMsec;
-        
-        if ((now - _lastGraceShot) >= _graceShotWindow)
-        {
-            _weaponsHandler.Shot -= GraceShot;
-            _weaponsHandler.Shot += HandleShot;
-        }
+        GraceShot();
+        SetPhysicsProcess(true);
 
-        _lastGraceShot = now;
+        _weaponsHandler.Shot += GraceShot;
+
+        _gracePressKeyToSprintBuffer = _gracePressKeyToSprint;
+        if (!_gracePressKeyToSprintBuffer)
+            _walkInput.KeyPressed -= OnKeyPressed;
+        
+        _weaponsHandler.ADSStopped -= CheckSprint;
+        _crouchInput.OnStopInput -= OnCrouchStopped;
+        _slideInput.OnStopInput -= OnCrouchStopped;
+    }
+
+    
+
+    private void ResetGrace()
+    {
+        SetPhysicsProcess(false);
+        _weaponsHandler.Shot -= GraceShot;
+
+        if (!_gracePressKeyToSprintBuffer)
+            _walkInput.KeyPressed += OnKeyPressed;
+
+        _weaponsHandler.Shot += HandleShot;
+
+        _weaponsHandler.ADSStopped += CheckSprint;
+        _crouchInput.OnStopInput += OnCrouchStopped;
+        _slideInput.OnStopInput += OnCrouchStopped;
+    }
+
+    private void GraceShot() =>
+        _lastGraceShot = PHX_Time.ScaledTicksMsec;
+
+    public override void _PhysicsProcess(double delta)
+    {
+        if ((PHX_Time.ScaledTicksMsec - _lastGraceShot) >= _graceShotWindow)
+        {
+            ResetGrace();
+            CheckSprint();
+        }
     }
 
     private void StartSprint() =>
