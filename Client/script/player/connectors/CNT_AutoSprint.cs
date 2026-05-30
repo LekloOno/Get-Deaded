@@ -73,6 +73,10 @@ public partial class CNT_AutoSprint : Node
 
         _enabled = true;
         AddChild(_sprintInput);
+        
+        SetProcessUnhandledInput(false);
+        SetPhysicsProcess(false);
+
         _weaponsHandler.Shot -= HandleShot;
         _weaponsHandler.Shot -= GraceShot;
 
@@ -131,6 +135,7 @@ public partial class CNT_AutoSprint : Node
     {
         GraceShot();
         SetPhysicsProcess(true);
+        SetProcessUnhandledInput(true);
 
         _weaponsHandler.Shot += GraceShot;
 
@@ -148,6 +153,7 @@ public partial class CNT_AutoSprint : Node
     private void ResetGrace()
     {
         SetPhysicsProcess(false);
+        SetProcessUnhandledInput(false);
         _weaponsHandler.Shot -= GraceShot;
 
         if (!_gracePressKeyToSprintBuffer)
@@ -177,4 +183,13 @@ public partial class CNT_AutoSprint : Node
     
     private void StopSprint() =>
         _sprintInput.HandleExternal(PI_ActionState.STOPPED, new());
+
+    public override void _UnhandledInput(InputEvent @event)
+    {
+        if (@event.IsActionPressed("auto_sprint_quick_start"))
+        {
+            ResetGrace();
+            CheckSprint();
+        }
+    }
 }
