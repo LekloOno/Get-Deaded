@@ -55,7 +55,24 @@ public partial class CNT_AutoSprint : Node
 
     public override void _Ready()
     {
-        Enable();
+        if (SprintModeSetting.Mode == SprintMode.Auto)
+            Enable();
+
+        SprintModeSetting.Instance.Changed += OnModeSettingChanged;
+        AutoSprintDelaySetting.Instance.Changed += OnDelaySettingChanged;
+    }
+
+    private void OnDelaySettingChanged(GodotObject sender, Variant value)
+    {
+        _graceShotWindow = AutoSprintDelaySetting.Delay;
+    }
+
+    private void OnModeSettingChanged(GodotObject sender, Variant value)
+    {
+        if (SprintModeSetting.Mode == SprintMode.Auto)
+            Enable();
+        else
+            Disable();
     }
 
     private void OnSettingChanged(GodotObject sender, Variant value)
@@ -71,7 +88,7 @@ public partial class CNT_AutoSprint : Node
         if (!_enabled)
             return;
 
-        _enabled = true;
+        _enabled = false;
         AddChild(_sprintInput);
         
         SetProcessUnhandledInput(false);
@@ -94,7 +111,7 @@ public partial class CNT_AutoSprint : Node
         if (_enabled)
             return;
 
-        _enabled = false;
+        _enabled = true;
         _sprintInput.GetParent().RemoveChild(_sprintInput);
         
         _weaponsHandler.Shot += HandleShot;

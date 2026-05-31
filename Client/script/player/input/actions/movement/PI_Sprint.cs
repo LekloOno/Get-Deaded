@@ -20,7 +20,26 @@ public partial class PI_Sprint : PI_HoldableHandler<EmptyInput>
     {
         //_jump.OnStart += HandleExternalStop;
         _walkInput.OnStopOrBackward += (o, f) => HandleExternalStop();
+        SprintModeSetting.Instance.Changed += OnModeSettingChanged;
     }
+
+    private void OnModeSettingChanged(GodotObject sender, Variant value)
+    {
+        switch (SprintModeSetting.Mode)
+        {
+            case SprintMode.Auto :
+                return;
+            
+            case SprintMode.Hold :
+                Hold = true;
+                break;
+            
+            case SprintMode.Toggle :
+                Hold = false;
+                break;
+        }
+    }
+
 
     private void HandleExternalStop() =>
         HandleExternal(PI_ActionState.STOPPED, new());

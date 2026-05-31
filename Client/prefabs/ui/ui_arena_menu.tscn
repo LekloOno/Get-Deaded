@@ -35,6 +35,7 @@
 [ext_resource type="Script" uid="uid://bs7wd2ltt17dh" path="res://script/ui/menu/ui_tabs_sound.gd" id="28_no00x"]
 [ext_resource type="AudioStream" uid="uid://bshhncf67w1g1" path="res://assets/sounds/ui/click_lighter.wav" id="29_wigoj"]
 [ext_resource type="Script" uid="uid://cgf1qqnlqvbs2" path="res://script/ui/menu/contexts/inputs/ui_input_setting_button.gd" id="30_rt8lt"]
+[ext_resource type="Script" uid="uid://ckfv7ogd6di80" path="res://script/ui/menu/contexts/controls/ui_sprint_mode.gd" id="33_3fk1l"]
 [ext_resource type="Script" uid="uid://n4rlm4y7h70e" path="res://script/ui/menu/contexts/difficulty/ui_difficulty_menu.gd" id="33_dy8xp"]
 [ext_resource type="Script" uid="uid://bo56grycv8c2e" path="res://script/ui/menu/contexts/difficulty/ui_difficulty_buttons_manager.gd" id="33_pbd3k"]
 [ext_resource type="Script" uid="uid://cm1ny1ykjv5hy" path="res://script/ui/menu/contexts/difficulty/UI_DifficultyButton.cs" id="33_vbkcm"]
@@ -74,6 +75,8 @@ bg_color = Color(1, 1, 1, 0.61960787)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rlv2r"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lmot5"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_4n7it"]
 
 [sub_resource type="GDScript" id="GDScript_yahvj"]
 script/source = "extends Control
@@ -361,9 +364,10 @@ script = ExtResource("10_no00x")
 [node name="TabContainer" type="TabContainer" parent="Settings" unique_id=1418915951]
 layout_mode = 2
 mouse_filter = 0
-current_tab = 0
+current_tab = 2
 
 [node name="VIDEO_TAB" type="TabBar" parent="Settings/TabContainer" unique_id=1016175328]
+visible = false
 layout_mode = 2
 mouse_filter = 1
 metadata/_tab_index = 0
@@ -1179,7 +1183,6 @@ Section = "sound"
 Key = "feedback_sfx_volume_db"
 
 [node name="CONTROLS_TAB" type="TabBar" parent="Settings/TabContainer" unique_id=1802915093]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
@@ -1214,7 +1217,6 @@ columns = 2
 
 [node name="Sensitivity" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=339619566]
 layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/Sensitivity" unique_id=766337504]
 layout_mode = 2
@@ -1225,7 +1227,6 @@ layout_mode = 2
 
 [node name="DPI" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=1254421273]
 layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/DPI" unique_id=310470559]
 layout_mode = 2
@@ -1246,6 +1247,7 @@ theme_override_constants/separation = 15
 [node name="DPIInput" type="HSplitContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/DPIInput" unique_id=1749834004]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+size_flags_horizontal = 0
 script = ExtResource("19_4n7it")
 
 [node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/DPIInput/DPIInput" unique_id=1719183017]
@@ -1278,7 +1280,6 @@ Key = "dpi"
 
 [node name="cm360" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=9756012]
 layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/cm360" unique_id=529052024]
 layout_mode = 2
@@ -1332,6 +1333,140 @@ expand_icon = true
 script = ExtResource("14_vbkcm")
 Section = "controls"
 Key = "cm_per_360"
+
+[node name="Sprint" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=986146610]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/Sprint" unique_id=155763591]
+layout_mode = 2
+text = "SPRINT_LABEL"
+
+[node name="Control2" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=2060325388]
+layout_mode = 2
+
+[node name="SprintMode" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=529244289]
+layout_mode = 2
+
+[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/SprintMode" unique_id=1613149933]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/SprintMode/hbox" unique_id=203972600]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/SprintMode/hbox" unique_id=1097687335]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "SPRINT_MODE_LABEL"
+
+[node name="SprintModeInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=1508569865]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="SprintModeOptions" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/SprintModeInput" unique_id=1551105526]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_constants/separation = 12
+script = ExtResource("33_3fk1l")
+
+[node name="ToggleButton" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/SprintModeInput/SprintModeOptions" unique_id=1068157058]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+toggle_mode = true
+button_group = SubResource("ButtonGroup_4n7it")
+text = "SPRINT_TOGGLE_BUTTON"
+
+[node name="HoldButton" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/SprintModeInput/SprintModeOptions" unique_id=762629877]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+toggle_mode = true
+button_group = SubResource("ButtonGroup_4n7it")
+text = "SPRINT_HOLD_BUTTON"
+
+[node name="AutoButton" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/SprintModeInput/SprintModeOptions" unique_id=1891605939]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+toggle_mode = true
+button_group = SubResource("ButtonGroup_4n7it")
+text = "SPRINT_AUTO_BUTTON"
+
+[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/SprintModeInput" unique_id=1702663425]
+layout_mode = 2
+size_flags_horizontal = 0
+stretch_mode = 1
+alignment_vertical = 2
+
+[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/SprintModeInput/Reset" unique_id=100617711]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
+icon = ExtResource("12_wigoj")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("14_vbkcm")
+Section = "controls"
+Key = "sprint_mode"
+
+[node name="AutoSprintDelay" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=330451066]
+layout_mode = 2
+
+[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/AutoSprintDelay" unique_id=914727608]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/AutoSprintDelay/hbox" unique_id=1203584835]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/AutoSprintDelay/hbox" unique_id=1147219863]
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "AUTO_SPRINT_DELAY_TOOLTIP"
+mouse_filter = 1
+text = "AUTO_SPRINT_DELAY_LABEL"
+
+[node name="AutoSprintDelayInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=1088349548]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="cm360Input" type="HSplitContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/AutoSprintDelayInput" unique_id=149039997]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/AutoSprintDelayInput/cm360Input" unique_id=720304704]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+virtual_keyboard_type = 2
+script = ExtResource("22_vbkcm")
+_allowFloat = false
+_allowNegatives = false
+
+[node name="MasterSlider" type="HSlider" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/AutoSprintDelayInput/cm360Input" unique_id=1765512201]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 300.0
+max_value = 1500.0
+value = 500.0
+rounded = true
+script = ExtResource("23_pbd3k")
+Section = "controls"
+Key = "auto_sprint_delay"
+
+[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/AutoSprintDelayInput" unique_id=1581609789]
+layout_mode = 2
+size_flags_horizontal = 0
+stretch_mode = 1
+alignment_vertical = 2
+
+[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/AutoSprintDelayInput/Reset" unique_id=840458389]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
+icon = ExtResource("12_wigoj")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("14_vbkcm")
+Section = "controls"
+Key = "auto_sprint_delay"
 
 [node name="CONTROLS_BINDINGS_TAB" type="TabBar" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer" unique_id=541313611]
 visible = false
