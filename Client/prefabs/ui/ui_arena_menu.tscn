@@ -360,10 +360,9 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
 mouse_filter = 0
-current_tab = 2
+current_tab = 0
 
 [node name="VIDEO_TAB" type="MarginContainer" parent="Settings/VBoxContainer/TabContainer" unique_id=299629799]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 30
@@ -873,6 +872,7 @@ Section = "sound"
 Key = "feedback_sfx_volume_db"
 
 [node name="CONTROLS_TAB" type="MarginContainer" parent="Settings/VBoxContainer/TabContainer" unique_id=2137857519]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 20

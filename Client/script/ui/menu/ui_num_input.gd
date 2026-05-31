@@ -33,6 +33,7 @@ func get_slider() -> Slider:
 	return null
 	
 func init_to_slider() -> void:
+	_on_slider_value_changed(slider.value)
 	value_applied.connect(slider.set_value_no_signal)
 	slider.value_changed.connect(_on_slider_value_changed)
 
