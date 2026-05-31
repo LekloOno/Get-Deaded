@@ -16,8 +16,6 @@
 [ext_resource type="Script" uid="uid://doqiy13nhuvvd" path="res://script/ui/menu/contexts/video/ui_strech_mode_picker.gd" id="10_rt8lt"]
 [ext_resource type="Script" uid="uid://2y4g11w6asxb" path="res://script/ui/menu/contexts/video/ui_render_scale_mode_picker.gd" id="11_vbkcm"]
 [ext_resource type="Script" uid="uid://dupm1u5o4d16c" path="res://script/ui/menu/contexts/video/ui_render_scale.gd" id="12_pbd3k"]
-[ext_resource type="Texture2D" uid="uid://de5h1tbf4feoi" path="res://assets/ui/reset.png" id="12_wigoj"]
-[ext_resource type="Script" uid="uid://sarrqdn23het" path="res://addons/TraGUS/Nodes/SettingResetButton.cs" id="14_vbkcm"]
 [ext_resource type="Script" uid="uid://cg5dedg2yo8yj" path="res://script/ui/menu/contexts/video/ui_v_sync_mode.gd" id="15_b5eqi"]
 [ext_resource type="Script" uid="uid://n62sbtg1xvbp" path="res://script/ui/menu/contexts/video/ui_fps_limit_checkbox.gd" id="16_yahvj"]
 [ext_resource type="Script" uid="uid://d2ws6gavso5wd" path="res://script/ui/menu/contexts/video/ui_fps_limiter.gd" id="17_8es5r"]
@@ -69,18 +67,6 @@ bg_color = Color(1, 1, 1, 0.61960787)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lmot5"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_4n7it"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rt8lt"]
-content_margin_left = 5.0
-content_margin_top = 5.0
-content_margin_right = 5.0
-content_margin_bottom = 5.0
-bg_color = Color(0, 0, 0, 0.29411766)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 1, 1, 1)
 
 [sub_resource type="GDScript" id="GDScript_yahvj"]
 script/source = "extends Control
@@ -1527,112 +1513,102 @@ action = "stats"
 [node name="Button3" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Stats/Input" parent_id_path=PackedInt32Array(866021764, 702567657) index="2" unique_id=2060705678]
 action = "stats"
 
-[node name="ACCESSIBILITY_TAB" type="GridContainer" parent="Settings/VBoxContainer/TabContainer" unique_id=1859667621]
+[node name="ACCESSIBILITY_TAB" type="MarginContainer" parent="Settings/VBoxContainer/TabContainer" unique_id=176065705]
 visible = false
 layout_mode = 2
-theme_override_constants/h_separation = 20
-theme_override_constants/v_separation = 6
-columns = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 30
 metadata/_tab_index = 3
 
-[node name="Language" type="PanelContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB" unique_id=530958428]
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB" unique_id=868596581]
 layout_mode = 2
-size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/Language" unique_id=1241670685]
+[node name="Language" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer" unique_id=2057517837 instance=ExtResource("38_squjd")]
 layout_mode = 2
+
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/Language" index="0" unique_id=366278316]
 text = "LANGUAGE_LABEL"
 
-[node name="LanguageInput" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB" unique_id=1979166165]
+[node name="LanguageSettings" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer" unique_id=1424443616]
 layout_mode = 2
-theme_override_constants/separation = 15
 
-[node name="LanguageInput" type="OptionButton" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/LanguageInput" unique_id=91011963]
+[node name="Language" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/LanguageSettings" unique_id=1802492809 instance=ExtResource("31_t61gj")]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/LanguageSettings/Language/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1802492809, 109094902, 172764845) index="0" unique_id=1465678305]
+text = "LANGUAGE_LABEL"
+
+[node name="LanguageInput" type="OptionButton" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/LanguageSettings/Language" unique_id=91011963]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+size_flags_horizontal = 10
 script = ExtResource("23_6me0n")
 
-[node name="Reset" type="AspectRatioContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/LanguageInput" unique_id=856418389]
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/LanguageSettings/Language" unique_id=1886902857 instance=ExtResource("34_6me0n")]
 layout_mode = 2
-size_flags_horizontal = 0
-stretch_mode = 1
-alignment_vertical = 2
 
-[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/LanguageInput/Reset" unique_id=354741894]
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
-icon = ExtResource("12_wigoj")
-icon_alignment = 1
-expand_icon = true
-script = ExtResource("14_vbkcm")
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/LanguageSettings/Language/Reset" index="0" unique_id=286523834]
 Section = "accessibility"
 Key = "language"
 
-[node name="EnemyColor" type="PanelContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB" unique_id=1601037487]
+[node name="Enemies" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer" unique_id=535949191 instance=ExtResource("38_squjd")]
+layout_mode = 2
+
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/Enemies" index="0" unique_id=366278316]
+text = "ENEMIES_LABEL"
+
+[node name="EnemiesSettings" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer" unique_id=210078862]
+layout_mode = 2
+
+[node name="EnemyColor" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings" unique_id=2047791150 instance=ExtResource("31_t61gj")]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyColor/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(2047791150, 109094902, 172764845) index="0" unique_id=1465678305]
+text = "ENEMY_COLOR_LABEL"
+
+[node name="Input" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyColor" unique_id=1140588573]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 15
+
+[node name="Control" type="Control" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyColor/Input" unique_id=943779440]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyColor" unique_id=883603373]
-layout_mode = 2
-text = "ENEMY_COLOR_LABEL"
-
-[node name="EnemyColorInput" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB" unique_id=1140588573]
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="Control" type="Control" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyColorInput" unique_id=943779440]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-
-[node name="EnnemiesColorInput" type="ColorPickerButton" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyColorInput/Control" unique_id=1658776687]
-custom_minimum_size = Vector2(50, 0)
+[node name="EnnemiesColorInput" type="ColorPickerButton" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyColor/Input/Control" unique_id=1658776687]
+custom_minimum_size = Vector2(58, 0)
 layout_mode = 1
-anchors_preset = 9
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 8.0
+grow_horizontal = 0
 grow_vertical = 2
 script = ExtResource("22_t61gj")
 
-[node name="Reset" type="AspectRatioContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyColorInput" unique_id=1000030588]
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyColor" unique_id=1107026991 instance=ExtResource("34_6me0n")]
 layout_mode = 2
-size_flags_horizontal = 0
-stretch_mode = 1
-alignment_vertical = 2
 
-[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyColorInput/Reset" unique_id=1983243152]
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
-icon = ExtResource("12_wigoj")
-icon_alignment = 1
-expand_icon = true
-script = ExtResource("14_vbkcm")
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyColor/Reset" index="0" unique_id=286523834]
 Section = "accessibility"
 Key = "enemies_color"
 
-[node name="EnemyOutlinesThickness" type="PanelContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB" unique_id=1517539777]
+[node name="EnemyOutlinesThickness" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings" unique_id=1856201992 instance=ExtResource("31_t61gj")]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_vertical = 0
 
-[node name="Label" type="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyOutlinesThickness" unique_id=2086147389]
-layout_mode = 2
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesThickness/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1856201992, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "ENEMY_OUTLINES_THICKNESS_LABEL"
 
-[node name="EnemyOutlinesThicknessInput" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB" unique_id=535062135]
+[node name="Input" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesThickness" unique_id=982839402]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 15
 
-[node name="cm360Input" type="HSplitContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyOutlinesThicknessInput" unique_id=1838847801]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-
-[node name="LineEdit" type="LineEdit" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyOutlinesThicknessInput/cm360Input" unique_id=1998538385]
-layout_mode = 2
-size_flags_horizontal = 4
-alignment = 1
-virtual_keyboard_type = 2
-script = ExtResource("22_vbkcm")
-
-[node name="MasterSlider" type="HSlider" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyOutlinesThicknessInput/cm360Input" unique_id=718675431]
+[node name="MasterSlider" type="HSlider" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesThickness/Input" unique_id=718675431]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -1643,46 +1619,35 @@ script = ExtResource("23_pbd3k")
 Section = "accessibility"
 Key = "enemy_outlines_thickness"
 
-[node name="Reset" type="AspectRatioContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyOutlinesThicknessInput" unique_id=695296098]
+[node name="LineEdit" type="LineEdit" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesThickness/Input" unique_id=1998538385]
+clip_contents = true
+custom_minimum_size = Vector2(58, 0)
 layout_mode = 2
-size_flags_horizontal = 0
-stretch_mode = 1
-alignment_vertical = 2
-
-[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyOutlinesThicknessInput/Reset" unique_id=387868458]
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
-icon = ExtResource("12_wigoj")
-icon_alignment = 1
-expand_icon = true
-script = ExtResource("14_vbkcm")
-Section = "accessibility"
-Key = "enemy_outlines_thickness"
-
-[node name="EnemyOutlinesOpacity" type="PanelContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB" unique_id=529974393]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyOutlinesOpacity" unique_id=1433589141]
-layout_mode = 2
-text = "ENEMY_OUTLINES_OPACITY_LABEL"
-
-[node name="EnemyOutlinesOpacityInput" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB" unique_id=572139638]
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="cm360Input" type="HSplitContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyOutlinesOpacityInput" unique_id=657556823]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-
-[node name="LineEdit" type="LineEdit" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyOutlinesOpacityInput/cm360Input" unique_id=1085731956]
-layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 8
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("22_vbkcm")
 
-[node name="MasterSlider" type="HSlider" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyOutlinesOpacityInput/cm360Input" unique_id=317884518]
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesThickness" unique_id=1415646131 instance=ExtResource("34_6me0n")]
+layout_mode = 2
+
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesThickness/Reset" index="0" unique_id=286523834]
+Section = "accessibility"
+Key = "enemy_outlines_thickness"
+
+[node name="EnemyOutlinesOpacity" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings" unique_id=1635426381 instance=ExtResource("31_t61gj")]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesOpacity/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1635426381, 109094902, 172764845) index="0" unique_id=1465678305]
+text = "ENEMY_OUTLINES_OPACITY_LABEL"
+
+[node name="Input" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesOpacity" unique_id=250854377]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 15
+
+[node name="MasterSlider" type="HSlider" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesOpacity/Input" unique_id=317884518]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -1693,19 +1658,18 @@ script = ExtResource("23_pbd3k")
 Section = "accessibility"
 Key = "enemy_outlines_opacity"
 
-[node name="Reset" type="AspectRatioContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyOutlinesOpacityInput" unique_id=224944065]
+[node name="LineEdit" type="LineEdit" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesOpacity/Input" unique_id=1085731956]
+custom_minimum_size = Vector2(58, 0)
 layout_mode = 2
-size_flags_horizontal = 0
-stretch_mode = 1
-alignment_vertical = 2
+size_flags_horizontal = 8
+alignment = 1
+virtual_keyboard_type = 2
+script = ExtResource("22_vbkcm")
 
-[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyOutlinesOpacityInput/Reset" unique_id=377998392]
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesOpacity" unique_id=496489738 instance=ExtResource("34_6me0n")]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
-icon = ExtResource("12_wigoj")
-icon_alignment = 1
-expand_icon = true
-script = ExtResource("14_vbkcm")
+
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesOpacity/Reset" index="0" unique_id=286523834]
 Section = "accessibility"
 Key = "enemy_outlines_opacity"
 
@@ -2105,3 +2069,17 @@ text = "CANCEL_BUTTON"
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Interface"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Stats"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Stats/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/Language"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/LanguageSettings/Language"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/LanguageSettings/Language/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/LanguageSettings/Language/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/Enemies"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyColor"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyColor/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyColor/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesThickness"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesThickness/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesThickness/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesOpacity"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesOpacity/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesOpacity/Reset"]
