@@ -1373,6 +1373,7 @@ script = ExtResource("33_3fk1l")
 [node name="ToggleButton" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/SprintModeInput/SprintModeOptions" unique_id=1068157058]
 custom_minimum_size = Vector2(65, 0)
 layout_mode = 2
+theme_type_variation = &"InputButton"
 theme_override_font_sizes/font_size = 8
 toggle_mode = true
 button_group = SubResource("ButtonGroup_4n7it")
@@ -1382,6 +1383,7 @@ clip_text = true
 [node name="HoldButton" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/SprintModeInput/SprintModeOptions" unique_id=762629877]
 custom_minimum_size = Vector2(65, 0)
 layout_mode = 2
+theme_type_variation = &"InputButton"
 theme_override_font_sizes/font_size = 8
 toggle_mode = true
 button_group = SubResource("ButtonGroup_4n7it")
@@ -1391,6 +1393,7 @@ clip_text = true
 [node name="AutoButton" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/SprintModeInput/SprintModeOptions" unique_id=1891605939]
 custom_minimum_size = Vector2(65, 0)
 layout_mode = 2
+theme_type_variation = &"InputButton"
 theme_override_font_sizes/font_size = 8
 toggle_mode = true
 button_group = SubResource("ButtonGroup_4n7it")
@@ -1491,7 +1494,9 @@ layout_mode = 2
 [node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/AutoSprintQuickStart/hbox" unique_id=2095386402]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "AUTO_SPRINT_QUICK_START_LABEL"
+tooltip_text = "AUTO_SPRINT_QUICK_START_TOOLTIP"
+mouse_filter = 1
+text = "INPUTS_AUTO_SPRINT_QUICK_START_LABEL"
 
 [node name="AutoSprintQuickStartInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=645414442]
 layout_mode = 2
