@@ -67,12 +67,12 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5byok"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ams4q"]
 content_margin_left = 5.0
 content_margin_top = 5.0
 content_margin_right = 5.0
 content_margin_bottom = 5.0
-bg_color = Color(0, 0, 0, 0.29411766)
+bg_color = Color(0, 0, 0, 0.14901961)
 border_color = Color(1, 1, 1, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3oymq"]
@@ -86,6 +86,14 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5byok"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0, 0, 0.29411766)
+border_color = Color(1, 1, 1, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xadh"]
 content_margin_left = 15.0
@@ -119,6 +127,13 @@ CheckBox/styles/hover = SubResource("StyleBoxFlat_jwr44")
 CheckBox/styles/normal = SubResource("StyleBoxFlat_8ll30")
 CheckBox/styles/pressed = SubResource("StyleBoxFlat_l6w15")
 ColorPickerButton/styles/normal = SubResource("StyleBoxEmpty_ppmnc")
+DisabledInputButton/base_type = &"Button"
+DisabledInputButton/colors/font_color = Color(0.19215687, 0.19215687, 0.19215687, 0.4392157)
+DisabledInputButton/font_sizes/font_size = 10
+DisabledInputButton/styles/focus = SubResource("StyleBoxFlat_ukvur")
+DisabledInputButton/styles/hover = SubResource("StyleBoxFlat_r3etb")
+DisabledInputButton/styles/normal = SubResource("StyleBoxFlat_ams4q")
+DisabledInputButton/styles/pressed = SubResource("StyleBoxFlat_3oymq")
 InputButton/base_type = &"Button"
 InputButton/font_sizes/font_size = 10
 InputButton/styles/focus = SubResource("StyleBoxFlat_ukvur")

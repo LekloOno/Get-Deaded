@@ -360,9 +360,10 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
 mouse_filter = 0
-current_tab = 0
+current_tab = 2
 
 [node name="VIDEO_TAB" type="MarginContainer" parent="Settings/VBoxContainer/TabContainer" unique_id=299629799]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 30
@@ -872,7 +873,6 @@ Section = "sound"
 Key = "feedback_sfx_volume_db"
 
 [node name="CONTROLS_TAB" type="MarginContainer" parent="Settings/VBoxContainer/TabContainer" unique_id=2137857519]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 20
@@ -1079,7 +1079,7 @@ input_index = 1
 [node name="Button3" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/AutoSprintQuickStartInput/AutoSprintQuickStartInput" unique_id=604586339]
 custom_minimum_size = Vector2(58, 0)
 layout_mode = 2
-theme_type_variation = &"InputButton"
+theme_type_variation = &"DisabledInputButton"
 text = "a"
 clip_text = true
 script = ExtResource("30_rt8lt")

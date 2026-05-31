@@ -33,6 +33,11 @@ func _on_bind_value_changed(sender, event: InputEvent):
 func update_ui():
 	if !input_event:
 		text = "n/a"
+		theme_type_variation = "DisabledInputButton"
+		return
+		
+	theme_type_variation = "InputButton"
+	
 	if input_event is InputEventMouseButton:
 		text = "m" + str(input_event.button_index)
 	elif input_event is InputEventKey:
