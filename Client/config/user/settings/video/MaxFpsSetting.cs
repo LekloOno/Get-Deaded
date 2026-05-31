@@ -37,10 +37,8 @@ public partial class MaxFpsSetting : UserSetting
 
     private void Apply(int maxFps)
     {
+        MaxFps = maxFps;
         if (LimitFpsSetting.LimitFps)
-        {
-            MaxFps = maxFps;
             Engine.MaxFps = maxFps;
-        }
     }
 }
