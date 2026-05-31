@@ -39,6 +39,7 @@
 [ext_resource type="Script" uid="uid://n4rlm4y7h70e" path="res://script/ui/menu/contexts/difficulty/ui_difficulty_menu.gd" id="33_dy8xp"]
 [ext_resource type="Script" uid="uid://bo56grycv8c2e" path="res://script/ui/menu/contexts/difficulty/ui_difficulty_buttons_manager.gd" id="33_pbd3k"]
 [ext_resource type="Script" uid="uid://cm1ny1ykjv5hy" path="res://script/ui/menu/contexts/difficulty/UI_DifficultyButton.cs" id="33_vbkcm"]
+[ext_resource type="Script" uid="uid://dqn6rchl42ffc" path="res://script/ui/menu/contexts/controls/ui_auto_sprint_derived.gd" id="34_3ngnl"]
 [ext_resource type="Script" uid="uid://bxtxa4abi20xv" path="res://script/ui/menu/ui_confirm_dialog.gd" id="36_jnufj"]
 [ext_resource type="Script" uid="uid://cgieu4ory4anu" path="res://script/ui/menu/contexts/login/UI_OfflineWarning.cs" id="38_o1fwb"]
 [ext_resource type="PackedScene" uid="uid://xo68a11s7vj0" path="res://prefabs/ui/scoreboard/ui_scoreboard_manager.tscn" id="39_o1fwb"]
@@ -1366,29 +1367,35 @@ theme_override_constants/separation = 15
 [node name="SprintModeOptions" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/SprintModeInput" unique_id=1551105526]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-theme_override_constants/separation = 12
+theme_override_constants/separation = 15
 script = ExtResource("33_3fk1l")
 
 [node name="ToggleButton" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/SprintModeInput/SprintModeOptions" unique_id=1068157058]
+custom_minimum_size = Vector2(65, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 8
 toggle_mode = true
 button_group = SubResource("ButtonGroup_4n7it")
 text = "SPRINT_TOGGLE_BUTTON"
+clip_text = true
 
 [node name="HoldButton" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/SprintModeInput/SprintModeOptions" unique_id=762629877]
+custom_minimum_size = Vector2(65, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 8
 toggle_mode = true
 button_group = SubResource("ButtonGroup_4n7it")
 text = "SPRINT_HOLD_BUTTON"
+clip_text = true
 
 [node name="AutoButton" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/SprintModeInput/SprintModeOptions" unique_id=1891605939]
+custom_minimum_size = Vector2(65, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 8
 toggle_mode = true
 button_group = SubResource("ButtonGroup_4n7it")
 text = "SPRINT_AUTO_BUTTON"
+clip_text = true
 
 [node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/SprintModeInput" unique_id=1702663425]
 layout_mode = 2
@@ -1408,6 +1415,7 @@ Key = "sprint_mode"
 
 [node name="AutoSprintDelay" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=330451066]
 layout_mode = 2
+script = ExtResource("34_3ngnl")
 
 [node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/AutoSprintDelay" unique_id=914727608]
 layout_mode = 2
@@ -1426,6 +1434,7 @@ text = "AUTO_SPRINT_DELAY_LABEL"
 [node name="AutoSprintDelayInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=1088349548]
 layout_mode = 2
 theme_override_constants/separation = 15
+script = ExtResource("34_3ngnl")
 
 [node name="cm360Input" type="HSplitContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/AutoSprintDelayInput" unique_id=149039997]
 custom_minimum_size = Vector2(150, 0)
@@ -1467,6 +1476,56 @@ expand_icon = true
 script = ExtResource("14_vbkcm")
 Section = "controls"
 Key = "auto_sprint_delay"
+
+[node name="AutoSprintQuickStart" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=53228370]
+layout_mode = 2
+script = ExtResource("34_3ngnl")
+
+[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/AutoSprintQuickStart" unique_id=1749341680]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/AutoSprintQuickStart/hbox" unique_id=918833022]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/AutoSprintQuickStart/hbox" unique_id=2095386402]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "AUTO_SPRINT_QUICK_START_LABEL"
+
+[node name="AutoSprintQuickStartInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=645414442]
+layout_mode = 2
+theme_override_constants/separation = 15
+script = ExtResource("34_3ngnl")
+
+[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/AutoSprintQuickStartInput" unique_id=1771344251]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "auto_sprint_quick_start"
+
+[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/AutoSprintQuickStartInput" unique_id=1664802033]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "auto_sprint_quick_start"
+input_index = 1
+
+[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/AutoSprintQuickStartInput" unique_id=1433904488]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "auto_sprint_quick_start"
+input_index = 2
 
 [node name="CONTROLS_BINDINGS_TAB" type="TabBar" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer" unique_id=541313611]
 visible = false
