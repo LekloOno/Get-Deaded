@@ -638,6 +638,12 @@ layout_mode = 2
 size_flags_vertical = 0
 script = ExtResource("17_8es5r")
 
+[node name="Control" type="Control" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/MaxFps" unique_id=1343195881]
+layout_mode = 2
+
+[node name="UiSettingsLabel" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/MaxFps" index="1" unique_id=109094902]
+custom_minimum_size = Vector2(385, 0)
+
 [node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/MaxFps/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1188530566, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "LIMIT_FPS_LABEL"
 
@@ -707,6 +713,12 @@ Key = "render_scale_mode"
 layout_mode = 2
 size_flags_vertical = 0
 
+[node name="Control" type="Control" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/RenderScaleScale" unique_id=252535952]
+layout_mode = 2
+
+[node name="UiSettingsLabel" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/RenderScaleScale" index="1" unique_id=109094902]
+custom_minimum_size = Vector2(385, 0)
+
 [node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/RenderScaleScale/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1701202201, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "RENDER_SCALE_LABEL"
 
@@ -742,6 +754,12 @@ Key = "render_scale_scale"
 [node name="FSRSharpness" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings" unique_id=351842520 instance=ExtResource("31_t61gj")]
 layout_mode = 2
 size_flags_vertical = 0
+
+[node name="Control" type="Control" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/FSRSharpness" unique_id=1121809195]
+layout_mode = 2
+
+[node name="UiSettingsLabel" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/FSRSharpness" index="1" unique_id=109094902]
+custom_minimum_size = Vector2(385, 0)
 
 [node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/FSRSharpness/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(351842520, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "FSR_SHARPNESS_LABEL"
