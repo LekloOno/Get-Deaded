@@ -1,7 +1,8 @@
-extends Node
+extends Control
 
 func _ready():
 	# a quirky fix, to fix for real later
+	hidden.connect(_on_hidden)
 	UserSettingsServer.Abort()
 
 func _on_hidden() -> void:

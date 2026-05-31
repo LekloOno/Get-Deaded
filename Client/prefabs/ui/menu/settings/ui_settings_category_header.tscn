@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://qqvt3ahu2l65"]
+
+[node name="Movement" type="MarginContainer" unique_id=1338812726]
+theme_override_constants/margin_top = 10
+
+[node name="Label" type="Label" parent="." unique_id=366278316]
+layout_mode = 2
+text = "_LABEL"

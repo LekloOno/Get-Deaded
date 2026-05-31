@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://d3ffncssg3j2l"]
+
+[ext_resource type="PackedScene" uid="uid://b1ulaco5ohrsr" path="res://prefabs/ui/menu/settings/ui_settings_label.tscn" id="1_qm3pm"]
+
+[node name="UiSettingsRow" type="HBoxContainer" unique_id=996697259]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="UiSettingsLabel" parent="." unique_id=109094902 instance=ExtResource("1_qm3pm")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[editable path="UiSettingsLabel"]

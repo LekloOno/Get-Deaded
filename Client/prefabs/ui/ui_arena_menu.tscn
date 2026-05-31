@@ -35,13 +35,17 @@
 [ext_resource type="Script" uid="uid://bs7wd2ltt17dh" path="res://script/ui/menu/ui_tabs_sound.gd" id="28_no00x"]
 [ext_resource type="AudioStream" uid="uid://bshhncf67w1g1" path="res://assets/sounds/ui/click_lighter.wav" id="29_wigoj"]
 [ext_resource type="Script" uid="uid://cgf1qqnlqvbs2" path="res://script/ui/menu/contexts/inputs/ui_input_setting_button.gd" id="30_rt8lt"]
+[ext_resource type="PackedScene" uid="uid://d3ffncssg3j2l" path="res://prefabs/ui/menu/settings/ui_settings_row.tscn" id="31_t61gj"]
 [ext_resource type="Script" uid="uid://ckfv7ogd6di80" path="res://script/ui/menu/contexts/controls/ui_sprint_mode.gd" id="33_3fk1l"]
 [ext_resource type="Script" uid="uid://n4rlm4y7h70e" path="res://script/ui/menu/contexts/difficulty/ui_difficulty_menu.gd" id="33_dy8xp"]
 [ext_resource type="Script" uid="uid://bo56grycv8c2e" path="res://script/ui/menu/contexts/difficulty/ui_difficulty_buttons_manager.gd" id="33_pbd3k"]
 [ext_resource type="Script" uid="uid://cm1ny1ykjv5hy" path="res://script/ui/menu/contexts/difficulty/UI_DifficultyButton.cs" id="33_vbkcm"]
 [ext_resource type="Script" uid="uid://dqn6rchl42ffc" path="res://script/ui/menu/contexts/controls/ui_auto_sprint_derived.gd" id="34_3ngnl"]
+[ext_resource type="PackedScene" uid="uid://dk27q4c5hpy5n" path="res://prefabs/ui/menu/settings/ui_reset_button.tscn" id="34_6me0n"]
 [ext_resource type="Script" uid="uid://bxtxa4abi20xv" path="res://script/ui/menu/ui_confirm_dialog.gd" id="36_jnufj"]
 [ext_resource type="Script" uid="uid://cgieu4ory4anu" path="res://script/ui/menu/contexts/login/UI_OfflineWarning.cs" id="38_o1fwb"]
+[ext_resource type="PackedScene" uid="uid://12cbeu5f6b1j" path="res://prefabs/ui/menu/settings/ui_settings_inputs_row.tscn" id="38_pwonq"]
+[ext_resource type="PackedScene" uid="uid://qqvt3ahu2l65" path="res://prefabs/ui/menu/settings/ui_settings_category_header.tscn" id="38_squjd"]
 [ext_resource type="PackedScene" uid="uid://xo68a11s7vj0" path="res://prefabs/ui/scoreboard/ui_scoreboard_manager.tscn" id="39_o1fwb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rt8lt"]
@@ -351,7 +355,7 @@ text = "LOG_OUT_BUTTON"
 script = ExtResource("10_b5eqi")
 _logged = true
 
-[node name="Settings" type="PanelContainer" parent="." unique_id=570347893]
+[node name="Settings" type="PanelContainer" parent="." unique_id=1980157602]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -360,59 +364,53 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.95, 0.95)
 pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_horizontal = 3
 script = ExtResource("10_no00x")
 
-[node name="TabContainer" type="TabContainer" parent="Settings" unique_id=1418915951]
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings" unique_id=701505072]
 layout_mode = 2
-mouse_filter = 0
-current_tab = 3
 
-[node name="VIDEO_TAB" type="TabBar" parent="Settings/TabContainer" unique_id=1016175328]
+[node name="TabContainer" type="TabContainer" parent="Settings/VBoxContainer" unique_id=1418915951]
+custom_minimum_size = Vector2(750, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+mouse_filter = 0
+current_tab = 2
+
+[node name="VIDEO_TAB" type="GridContainer" parent="Settings/VBoxContainer/TabContainer" unique_id=467749202]
 visible = false
 layout_mode = 2
-mouse_filter = 1
-metadata/_tab_index = 0
-
-[node name="GridContainer" type="GridContainer" parent="Settings/TabContainer/VIDEO_TAB" unique_id=467749202]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 217.0
-offset_top = 39.0
-offset_right = -228.0
-offset_bottom = -73.0
-grow_horizontal = 2
-grow_vertical = 2
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 6
 columns = 2
+metadata/_tab_index = 0
 
-[node name="DisplayMode" type="PanelContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer" unique_id=1073550987]
+[node name="DisplayMode" type="PanelContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB" unique_id=1073550987]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/DisplayMode" unique_id=2056722953]
+[node name="Label" type="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/DisplayMode" unique_id=2056722953]
 layout_mode = 2
 text = "DISPLAY_MODE_LABEL"
 
-[node name="DisplayModeInput" type="HBoxContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer" unique_id=1407910560]
+[node name="DisplayModeInput" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB" unique_id=1407910560]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="DisplayModeInput" type="OptionButton" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/DisplayModeInput" unique_id=284364705]
+[node name="DisplayModeInput" type="OptionButton" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/DisplayModeInput" unique_id=284364705]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("5_e0f17")
 
-[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/DisplayModeInput" unique_id=1156118595]
+[node name="Reset" type="AspectRatioContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/DisplayModeInput" unique_id=1156118595]
 layout_mode = 2
 size_flags_horizontal = 0
 stretch_mode = 1
 alignment_vertical = 2
 
-[node name="Button" type="Button" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/DisplayModeInput/Reset" unique_id=774256116]
+[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/DisplayModeInput/Reset" unique_id=774256116]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
 icon = ExtResource("12_wigoj")
@@ -422,15 +420,15 @@ script = ExtResource("14_vbkcm")
 Section = "video"
 Key = "display_mode"
 
-[node name="Resolution" type="PanelContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer" unique_id=505566934]
+[node name="Resolution" type="PanelContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB" unique_id=505566934]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/Resolution" unique_id=861503562]
+[node name="Label" type="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/Resolution" unique_id=861503562]
 layout_mode = 2
 text = "RESOLUTION_LABEL"
 
-[node name="Button" type="Button" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/Resolution" unique_id=1606864734 node_paths=PackedStringArray("label", "input")]
+[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/Resolution" unique_id=1606864734 node_paths=PackedStringArray("label", "input")]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -455,22 +453,22 @@ script = ExtResource("6_xgshk")
 label = NodePath("../../CustomResolution")
 input = NodePath("../../CustomResolutionInput")
 
-[node name="ResolutionInput" type="HBoxContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer" unique_id=907361402]
+[node name="ResolutionInput" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB" unique_id=907361402]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="ResolutionInput" type="OptionButton" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/ResolutionInput" unique_id=284882439]
+[node name="ResolutionInput" type="OptionButton" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ResolutionInput" unique_id=284882439]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("7_1fil8")
 
-[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/ResolutionInput" unique_id=2112690372]
+[node name="Reset" type="AspectRatioContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ResolutionInput" unique_id=2112690372]
 layout_mode = 2
 stretch_mode = 1
 alignment_vertical = 2
 
-[node name="Button" type="Button" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/ResolutionInput/Reset" unique_id=2009491737]
+[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ResolutionInput/Reset" unique_id=2009491737]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
 icon = ExtResource("12_wigoj")
@@ -480,35 +478,35 @@ script = ExtResource("14_vbkcm")
 Section = "video"
 Key = "resolution"
 
-[node name="CustomResolution" type="PanelContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer" unique_id=1246781225]
+[node name="CustomResolution" type="PanelContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB" unique_id=1246781225]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/CustomResolution" unique_id=689296919]
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/CustomResolution" unique_id=689296919]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/CustomResolution/HBoxContainer" unique_id=260935377]
+[node name="Control" type="Control" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/CustomResolution/HBoxContainer" unique_id=260935377]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/CustomResolution/HBoxContainer" unique_id=657640523]
+[node name="Label" type="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/CustomResolution/HBoxContainer" unique_id=657640523]
 layout_mode = 2
 text = "CUSTOM_RESOLUTION_LABEL"
 
-[node name="CustomResolutionInput" type="HBoxContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer" unique_id=678480054]
+[node name="CustomResolutionInput" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB" unique_id=678480054]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 6
 
-[node name="PanelContainer" type="PanelContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/CustomResolutionInput" unique_id=366277941]
+[node name="PanelContainer" type="PanelContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/CustomResolutionInput" unique_id=366277941]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxEmpty_rlv2r")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/CustomResolutionInput/PanelContainer" unique_id=1889884128]
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/CustomResolutionInput/PanelContainer" unique_id=1889884128]
 layout_mode = 2
 
-[node name="XEdit" type="LineEdit" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/CustomResolutionInput/PanelContainer/HBoxContainer" unique_id=405642882]
+[node name="XEdit" type="LineEdit" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/CustomResolutionInput/PanelContainer/HBoxContainer" unique_id=405642882]
 layout_mode = 2
 size_flags_horizontal = 4
 placeholder_text = "1280"
@@ -520,13 +518,13 @@ allow_negative = false
 link_to_slider = false
 clamp_to_slider = false
 
-[node name="Label" type="Label" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/CustomResolutionInput/PanelContainer/HBoxContainer" unique_id=782447020]
+[node name="Label" type="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/CustomResolutionInput/PanelContainer/HBoxContainer" unique_id=782447020]
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 theme_override_styles/normal = SubResource("StyleBoxEmpty_lmot5")
 text = "x"
 
-[node name="YEdit" type="LineEdit" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/CustomResolutionInput/PanelContainer/HBoxContainer" unique_id=1012057868]
+[node name="YEdit" type="LineEdit" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/CustomResolutionInput/PanelContainer/HBoxContainer" unique_id=1012057868]
 layout_mode = 2
 placeholder_text = "720"
 alignment = 1
@@ -537,7 +535,7 @@ allow_negative = false
 link_to_slider = false
 clamp_to_slider = false
 
-[node name="Button" type="Button" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/CustomResolutionInput" unique_id=1511255841 node_paths=PackedStringArray("resolution_options", "x_value", "y_value")]
+[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/CustomResolutionInput" unique_id=1511255841 node_paths=PackedStringArray("resolution_options", "x_value", "y_value")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -548,30 +546,30 @@ resolution_options = NodePath("../../ResolutionInput/ResolutionInput")
 x_value = NodePath("../PanelContainer/HBoxContainer/XEdit")
 y_value = NodePath("../PanelContainer/HBoxContainer/YEdit")
 
-[node name="StretchMode" type="PanelContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer" unique_id=1561456838]
+[node name="StretchMode" type="PanelContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB" unique_id=1561456838]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/StretchMode" unique_id=2049148071]
+[node name="Label" type="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/StretchMode" unique_id=2049148071]
 layout_mode = 2
 text = "ASPECT_RATIO_LABEL"
 
-[node name="StrechModeInput" type="HBoxContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer" unique_id=5338506]
+[node name="StrechModeInput" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB" unique_id=5338506]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="StretchModeInput" type="OptionButton" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/StrechModeInput" unique_id=262313874]
+[node name="StretchModeInput" type="OptionButton" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/StrechModeInput" unique_id=262313874]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("10_rt8lt")
 
-[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/StrechModeInput" unique_id=66417708]
+[node name="Reset" type="AspectRatioContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/StrechModeInput" unique_id=66417708]
 layout_mode = 2
 stretch_mode = 1
 alignment_vertical = 2
 
-[node name="Button" type="Button" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/StrechModeInput/Reset" unique_id=1265933495]
+[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/StrechModeInput/Reset" unique_id=1265933495]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
 icon = ExtResource("12_wigoj")
@@ -581,30 +579,30 @@ script = ExtResource("14_vbkcm")
 Section = "video"
 Key = "stretch_mode"
 
-[node name="RenderScaleMode" type="PanelContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer" unique_id=1589191822]
+[node name="RenderScaleMode" type="PanelContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB" unique_id=1589191822]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleMode" unique_id=258747564]
+[node name="Label" type="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/RenderScaleMode" unique_id=258747564]
 layout_mode = 2
 text = "RENDER_SCALE_MODE_LABEL"
 
-[node name="RenderScaleModeInput" type="HBoxContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer" unique_id=807061563]
+[node name="RenderScaleModeInput" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB" unique_id=807061563]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="RenderScaleModeInput" type="OptionButton" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleModeInput" unique_id=2074574351]
+[node name="RenderScaleModeInput" type="OptionButton" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/RenderScaleModeInput" unique_id=2074574351]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("11_vbkcm")
 
-[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleModeInput" unique_id=224296078]
+[node name="Reset" type="AspectRatioContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/RenderScaleModeInput" unique_id=224296078]
 layout_mode = 2
 stretch_mode = 1
 alignment_vertical = 2
 
-[node name="Button" type="Button" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleModeInput/Reset" unique_id=530106954]
+[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/RenderScaleModeInput/Reset" unique_id=530106954]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
 icon = ExtResource("12_wigoj")
@@ -614,40 +612,40 @@ script = ExtResource("14_vbkcm")
 Section = "video"
 Key = "render_scale_mode"
 
-[node name="RenderScale" type="PanelContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer" unique_id=643163651]
+[node name="RenderScale" type="PanelContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB" unique_id=643163651]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScale" unique_id=1075253005]
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/RenderScale" unique_id=1075253005]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScale/HBoxContainer" unique_id=1621890631]
+[node name="Control" type="Control" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/RenderScale/HBoxContainer" unique_id=1621890631]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScale/HBoxContainer" unique_id=649807272]
+[node name="Label" type="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/RenderScale/HBoxContainer" unique_id=649807272]
 layout_mode = 2
 text = "RENDER_SCALE_LABEL"
 
-[node name="RenderScaleInput" type="HBoxContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer" unique_id=1623677921]
+[node name="RenderScaleInput" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB" unique_id=1623677921]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="RenderScaleInput" type="HSplitContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleInput" unique_id=133607224 node_paths=PackedStringArray("label")]
+[node name="RenderScaleInput" type="HSplitContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/RenderScaleInput" unique_id=133607224 node_paths=PackedStringArray("label")]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("12_pbd3k")
 label = NodePath("../../RenderScale")
 
-[node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleInput/RenderScaleInput" unique_id=322371036]
+[node name="LineEdit" type="LineEdit" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/RenderScaleInput/RenderScaleInput" unique_id=322371036]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("8_no00x")
 
-[node name="Slider" type="HSlider" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleInput/RenderScaleInput" unique_id=651980179]
+[node name="Slider" type="HSlider" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/RenderScaleInput/RenderScaleInput" unique_id=651980179]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -656,12 +654,12 @@ max_value = 5.0
 step = 0.05
 value = 1.0
 
-[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleInput" unique_id=90140859]
+[node name="Reset" type="AspectRatioContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/RenderScaleInput" unique_id=90140859]
 layout_mode = 2
 stretch_mode = 1
 alignment_vertical = 2
 
-[node name="Button" type="Button" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleInput/Reset" unique_id=776917097]
+[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/RenderScaleInput/Reset" unique_id=776917097]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
 icon = ExtResource("12_wigoj")
@@ -671,40 +669,40 @@ script = ExtResource("14_vbkcm")
 Section = "video"
 Key = "render_scale_scale"
 
-[node name="FSRSharpness" type="PanelContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer" unique_id=1844912128]
+[node name="FSRSharpness" type="PanelContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB" unique_id=1844912128]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/FSRSharpness" unique_id=952713138]
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/FSRSharpness" unique_id=952713138]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/FSRSharpness/HBoxContainer" unique_id=1280838656]
+[node name="Control" type="Control" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/FSRSharpness/HBoxContainer" unique_id=1280838656]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/FSRSharpness/HBoxContainer" unique_id=1525091786]
+[node name="Label" type="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/FSRSharpness/HBoxContainer" unique_id=1525091786]
 layout_mode = 2
 text = "FSR_SHARPNESS_LABEL"
 
-[node name="FSRSharpnessInput" type="HBoxContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer" unique_id=1655796952 node_paths=PackedStringArray("label")]
+[node name="FSRSharpnessInput" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB" unique_id=1655796952 node_paths=PackedStringArray("label")]
 layout_mode = 2
 theme_override_constants/separation = 15
 script = ExtResource("13_dy8xp")
 label = NodePath("../FSRSharpness")
 
-[node name="FSRSharpnessInput" type="HSplitContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/FSRSharpnessInput" unique_id=1387150490]
+[node name="FSRSharpnessInput" type="HSplitContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/FSRSharpnessInput" unique_id=1387150490]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/FSRSharpnessInput/FSRSharpnessInput" unique_id=309780970]
+[node name="LineEdit" type="LineEdit" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/FSRSharpnessInput/FSRSharpnessInput" unique_id=309780970]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("22_vbkcm")
 
-[node name="Slider" type="HSlider" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/FSRSharpnessInput/FSRSharpnessInput" unique_id=458367339]
+[node name="Slider" type="HSlider" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/FSRSharpnessInput/FSRSharpnessInput" unique_id=458367339]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -715,12 +713,12 @@ script = ExtResource("23_pbd3k")
 Section = "video"
 Key = "fsr_sharpness"
 
-[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/FSRSharpnessInput" unique_id=1567502877]
+[node name="Reset" type="AspectRatioContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/FSRSharpnessInput" unique_id=1567502877]
 layout_mode = 2
 stretch_mode = 1
 alignment_vertical = 2
 
-[node name="Button" type="Button" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/FSRSharpnessInput/Reset" unique_id=929447457]
+[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/FSRSharpnessInput/Reset" unique_id=929447457]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
 icon = ExtResource("12_wigoj")
@@ -730,31 +728,31 @@ script = ExtResource("14_vbkcm")
 Section = "video"
 Key = "fsr_sharpness"
 
-[node name="Fov" type="PanelContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer" unique_id=1691916117]
+[node name="Fov" type="PanelContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB" unique_id=1691916117]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/Fov" unique_id=1855568504]
+[node name="Label" type="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/Fov" unique_id=1855568504]
 layout_mode = 2
 text = "FOV_LABEL"
 
-[node name="FovInput" type="HBoxContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer" unique_id=886482317]
+[node name="FovInput" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB" unique_id=886482317]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="FovInput" type="HSplitContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/FovInput" unique_id=1182128613]
+[node name="FovInput" type="HSplitContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/FovInput" unique_id=1182128613]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/FovInput/FovInput" unique_id=1258682356]
+[node name="LineEdit" type="LineEdit" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/FovInput/FovInput" unique_id=1258682356]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("22_vbkcm")
 
-[node name="MasterSlider" type="HSlider" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/FovInput/FovInput" unique_id=377512449]
+[node name="MasterSlider" type="HSlider" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/FovInput/FovInput" unique_id=377512449]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -765,12 +763,12 @@ script = ExtResource("23_pbd3k")
 Section = "video"
 Key = "fov"
 
-[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/FovInput" unique_id=648117979]
+[node name="Reset" type="AspectRatioContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/FovInput" unique_id=648117979]
 layout_mode = 2
 stretch_mode = 1
 alignment_vertical = 2
 
-[node name="Button" type="Button" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/FovInput/Reset" unique_id=988681893]
+[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/FovInput/Reset" unique_id=988681893]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
 icon = ExtResource("12_wigoj")
@@ -780,30 +778,30 @@ script = ExtResource("14_vbkcm")
 Section = "video"
 Key = "fov"
 
-[node name="VSyncMode" type="PanelContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer" unique_id=1156529861]
+[node name="VSyncMode" type="PanelContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB" unique_id=1156529861]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/VSyncMode" unique_id=251505509]
+[node name="Label" type="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VSyncMode" unique_id=251505509]
 layout_mode = 2
 text = "VSYNC_MODE_LABEL"
 
-[node name="VSyncModeInput" type="HBoxContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer" unique_id=405697193]
+[node name="VSyncModeInput" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB" unique_id=405697193]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="VSyncModeInput" type="OptionButton" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/VSyncModeInput" unique_id=651100663]
+[node name="VSyncModeInput" type="OptionButton" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VSyncModeInput" unique_id=651100663]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("15_b5eqi")
 
-[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/VSyncModeInput" unique_id=1772138322]
+[node name="Reset" type="AspectRatioContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VSyncModeInput" unique_id=1772138322]
 layout_mode = 2
 stretch_mode = 1
 alignment_vertical = 2
 
-[node name="Button" type="Button" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/VSyncModeInput/Reset" unique_id=1086633106]
+[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VSyncModeInput/Reset" unique_id=1086633106]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
 icon = ExtResource("12_wigoj")
@@ -813,47 +811,47 @@ script = ExtResource("14_vbkcm")
 Section = "video"
 Key = "vsync_mode"
 
-[node name="Limit FPS" type="PanelContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer" unique_id=209066531]
+[node name="Limit FPS" type="PanelContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB" unique_id=209066531]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/Limit FPS" unique_id=1464707941]
+[node name="Label" type="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/Limit FPS" unique_id=1464707941]
 layout_mode = 2
 text = "LIMIT_FPS_LABEL"
 
-[node name="LimitFPSInput" type="CheckBox" parent="Settings/TabContainer/VIDEO_TAB/GridContainer" unique_id=643868184]
+[node name="LimitFPSInput" type="CheckBox" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB" unique_id=643868184]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 script = ExtResource("16_yahvj")
 
-[node name="Max FPS" type="PanelContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer" unique_id=383498415]
+[node name="Max FPS" type="PanelContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB" unique_id=383498415]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/Max FPS" unique_id=1790355594]
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/Max FPS" unique_id=1790355594]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/Max FPS/HBoxContainer" unique_id=147621708]
+[node name="Control" type="Control" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/Max FPS/HBoxContainer" unique_id=147621708]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/Max FPS/HBoxContainer" unique_id=1231829591]
+[node name="Label" type="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/Max FPS/HBoxContainer" unique_id=1231829591]
 layout_mode = 2
 text = "MAX_FPS_LABEL"
 
-[node name="MaxFPSInput2" type="HBoxContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer" unique_id=333949214 node_paths=PackedStringArray("label")]
+[node name="MaxFPSInput2" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB" unique_id=333949214 node_paths=PackedStringArray("label")]
 layout_mode = 2
 theme_override_constants/separation = 15
 script = ExtResource("17_8es5r")
 label = NodePath("../Max FPS")
 
-[node name="MaxFPSInput" type="HSplitContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/MaxFPSInput2" unique_id=200510860]
+[node name="MaxFPSInput" type="HSplitContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/MaxFPSInput2" unique_id=200510860]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/MaxFPSInput2/MaxFPSInput" unique_id=287369190]
+[node name="LineEdit" type="LineEdit" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/MaxFPSInput2/MaxFPSInput" unique_id=287369190]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
@@ -861,7 +859,7 @@ virtual_keyboard_type = 2
 script = ExtResource("22_vbkcm")
 _allowFloat = false
 
-[node name="MasterSlider" type="HSlider" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/MaxFPSInput2/MaxFPSInput" unique_id=740169268]
+[node name="MasterSlider" type="HSlider" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/MaxFPSInput2/MaxFPSInput" unique_id=740169268]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -872,12 +870,12 @@ script = ExtResource("23_pbd3k")
 Section = "video"
 Key = "max_fps"
 
-[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/MaxFPSInput2" unique_id=1910168388]
+[node name="Reset" type="AspectRatioContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/MaxFPSInput2" unique_id=1910168388]
 layout_mode = 2
 stretch_mode = 1
 alignment_vertical = 2
 
-[node name="Button" type="Button" parent="Settings/TabContainer/VIDEO_TAB/GridContainer/MaxFPSInput2/Reset" unique_id=278739588]
+[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/MaxFPSInput2/Reset" unique_id=278739588]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
 icon = ExtResource("12_wigoj")
@@ -887,52 +885,39 @@ script = ExtResource("14_vbkcm")
 Section = "video"
 Key = "max_fps"
 
-[node name="SOUND_TAB" type="TabBar" parent="Settings/TabContainer" unique_id=1970779605]
+[node name="SOUND_TAB" type="GridContainer" parent="Settings/VBoxContainer/TabContainer" unique_id=1831171880]
 visible = false
 layout_mode = 2
-mouse_filter = 1
-metadata/_tab_index = 1
-
-[node name="GridContainer" type="GridContainer" parent="Settings/TabContainer/SOUND_TAB" unique_id=1831171880]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 217.0
-offset_top = 39.0
-offset_right = -228.0
-offset_bottom = -73.0
-grow_horizontal = 2
-grow_vertical = 2
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 6
 columns = 2
+metadata/_tab_index = 1
 
-[node name="Master" type="PanelContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer" unique_id=668396671]
+[node name="Master" type="PanelContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB" unique_id=668396671]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Master" type="Label" parent="Settings/TabContainer/SOUND_TAB/GridContainer/Master" unique_id=1825706116]
+[node name="Master" type="Label" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/Master" unique_id=1825706116]
 layout_mode = 2
 text = "MASTER_VOLUME_LABEL"
 
-[node name="MasterInput" type="HBoxContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer" unique_id=1426378692]
+[node name="MasterInput" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB" unique_id=1426378692]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="MasterInput" type="HSplitContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer/MasterInput" unique_id=40031535]
+[node name="MasterInput" type="HSplitContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/MasterInput" unique_id=40031535]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 dragging_enabled = false
 
-[node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/SOUND_TAB/GridContainer/MasterInput/MasterInput" unique_id=454875671]
+[node name="LineEdit" type="LineEdit" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/MasterInput/MasterInput" unique_id=454875671]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("8_no00x")
 
-[node name="MasterSlider" type="HSlider" parent="Settings/TabContainer/SOUND_TAB/GridContainer/MasterInput/MasterInput" unique_id=579255155]
+[node name="MasterSlider" type="HSlider" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/MasterInput/MasterInput" unique_id=579255155]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -942,13 +927,13 @@ value = 1.0
 script = ExtResource("18_o1fwb")
 bus_name = "Master"
 
-[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer/MasterInput" unique_id=600574973]
+[node name="Reset" type="AspectRatioContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/MasterInput" unique_id=600574973]
 layout_mode = 2
 size_flags_horizontal = 0
 stretch_mode = 1
 alignment_vertical = 2
 
-[node name="Button" type="Button" parent="Settings/TabContainer/SOUND_TAB/GridContainer/MasterInput/Reset" unique_id=1392885773]
+[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/MasterInput/Reset" unique_id=1392885773]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
 icon = ExtResource("12_wigoj")
@@ -958,37 +943,37 @@ script = ExtResource("14_vbkcm")
 Section = "sound"
 Key = "master_volume_db"
 
-[node name="Music" type="PanelContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer" unique_id=2119402571]
+[node name="Music" type="PanelContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB" unique_id=2119402571]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Music" type="HBoxContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer/Music" unique_id=626577069]
+[node name="Music" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/Music" unique_id=626577069]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="Settings/TabContainer/SOUND_TAB/GridContainer/Music/Music" unique_id=612898370]
+[node name="Control" type="Control" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/Music/Music" unique_id=612898370]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 
-[node name="Music" type="Label" parent="Settings/TabContainer/SOUND_TAB/GridContainer/Music/Music" unique_id=1829380058]
+[node name="Music" type="Label" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/Music/Music" unique_id=1829380058]
 layout_mode = 2
 text = "MUSIC_VOLUME_LABEL"
 
-[node name="MusicInput" type="HBoxContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer" unique_id=91807239]
+[node name="MusicInput" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB" unique_id=91807239]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="MusicInput" type="HSplitContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer/MusicInput" unique_id=964571913]
+[node name="MusicInput" type="HSplitContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/MusicInput" unique_id=964571913]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/SOUND_TAB/GridContainer/MusicInput/MusicInput" unique_id=1877509383]
+[node name="LineEdit" type="LineEdit" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/MusicInput/MusicInput" unique_id=1877509383]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("8_no00x")
 
-[node name="MusicSlider" type="HSlider" parent="Settings/TabContainer/SOUND_TAB/GridContainer/MusicInput/MusicInput" unique_id=1112118816]
+[node name="MusicSlider" type="HSlider" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/MusicInput/MusicInput" unique_id=1112118816]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -997,13 +982,13 @@ step = 0.01
 script = ExtResource("18_o1fwb")
 bus_name = "Music"
 
-[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer/MusicInput" unique_id=1744808908]
+[node name="Reset" type="AspectRatioContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/MusicInput" unique_id=1744808908]
 layout_mode = 2
 size_flags_horizontal = 0
 stretch_mode = 1
 alignment_vertical = 2
 
-[node name="Button" type="Button" parent="Settings/TabContainer/SOUND_TAB/GridContainer/MusicInput/Reset" unique_id=1155513640]
+[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/MusicInput/Reset" unique_id=1155513640]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
 icon = ExtResource("12_wigoj")
@@ -1013,37 +998,37 @@ script = ExtResource("14_vbkcm")
 Section = "sound"
 Key = "music_volume_db"
 
-[node name="SFX" type="PanelContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer" unique_id=202052235]
+[node name="SFX" type="PanelContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB" unique_id=202052235]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SFX" type="HBoxContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer/SFX" unique_id=1987128875]
+[node name="SFX" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/SFX" unique_id=1987128875]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="Settings/TabContainer/SOUND_TAB/GridContainer/SFX/SFX" unique_id=238393180]
+[node name="Control" type="Control" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/SFX/SFX" unique_id=238393180]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 
-[node name="SFX" type="Label" parent="Settings/TabContainer/SOUND_TAB/GridContainer/SFX/SFX" unique_id=1525017805]
+[node name="SFX" type="Label" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/SFX/SFX" unique_id=1525017805]
 layout_mode = 2
 text = "SOUND_EFFECTS_VOLUME_LABEL"
 
-[node name="SFXInput" type="HBoxContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer" unique_id=1104051820]
+[node name="SFXInput" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB" unique_id=1104051820]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="SFXInput" type="HSplitContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer/SFXInput" unique_id=584014289]
+[node name="SFXInput" type="HSplitContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/SFXInput" unique_id=584014289]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/SOUND_TAB/GridContainer/SFXInput/SFXInput" unique_id=614309466]
+[node name="LineEdit" type="LineEdit" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/SFXInput/SFXInput" unique_id=614309466]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("8_no00x")
 
-[node name="SFXSlider" type="HSlider" parent="Settings/TabContainer/SOUND_TAB/GridContainer/SFXInput/SFXInput" unique_id=1948578466]
+[node name="SFXSlider" type="HSlider" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/SFXInput/SFXInput" unique_id=1948578466]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -1052,13 +1037,13 @@ step = 0.01
 script = ExtResource("18_o1fwb")
 bus_name = "Sound Effects"
 
-[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer/SFXInput" unique_id=1971940829]
+[node name="Reset" type="AspectRatioContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/SFXInput" unique_id=1971940829]
 layout_mode = 2
 size_flags_horizontal = 0
 stretch_mode = 1
 alignment_vertical = 2
 
-[node name="Button" type="Button" parent="Settings/TabContainer/SOUND_TAB/GridContainer/SFXInput/Reset" unique_id=871309509]
+[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/SFXInput/Reset" unique_id=871309509]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
 icon = ExtResource("12_wigoj")
@@ -1068,39 +1053,39 @@ script = ExtResource("14_vbkcm")
 Section = "sound"
 Key = "sound_effects_volume_db"
 
-[node name="EnvSFX" type="PanelContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer" unique_id=987994804]
+[node name="EnvSFX" type="PanelContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB" unique_id=987994804]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="EnvSFX" type="HBoxContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer/EnvSFX" unique_id=1806066076]
+[node name="EnvSFX" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/EnvSFX" unique_id=1806066076]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="Settings/TabContainer/SOUND_TAB/GridContainer/EnvSFX/EnvSFX" unique_id=787532775]
+[node name="Control" type="Control" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/EnvSFX/EnvSFX" unique_id=787532775]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
-[node name="EnvSFX" type="Label" parent="Settings/TabContainer/SOUND_TAB/GridContainer/EnvSFX/EnvSFX" unique_id=609931347]
+[node name="EnvSFX" type="Label" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/EnvSFX/EnvSFX" unique_id=609931347]
 layout_mode = 2
 tooltip_text = "Diegetical sfx"
 mouse_filter = 1
 text = "ENVIRONMENT_SOUND_VOLUME_LABEL"
 
-[node name="EnvSFXInput" type="HBoxContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer" unique_id=1031668763]
+[node name="EnvSFXInput" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB" unique_id=1031668763]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="EnvSFXInput" type="HSplitContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer/EnvSFXInput" unique_id=1737280090]
+[node name="EnvSFXInput" type="HSplitContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/EnvSFXInput" unique_id=1737280090]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/SOUND_TAB/GridContainer/EnvSFXInput/EnvSFXInput" unique_id=1085087615]
+[node name="LineEdit" type="LineEdit" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/EnvSFXInput/EnvSFXInput" unique_id=1085087615]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("8_no00x")
 
-[node name="EnvSFXSlider" type="HSlider" parent="Settings/TabContainer/SOUND_TAB/GridContainer/EnvSFXInput/EnvSFXInput" unique_id=2053001975]
+[node name="EnvSFXSlider" type="HSlider" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/EnvSFXInput/EnvSFXInput" unique_id=2053001975]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -1110,13 +1095,13 @@ value = 1.0
 script = ExtResource("18_o1fwb")
 bus_name = "Environment Sfx"
 
-[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer/EnvSFXInput" unique_id=1385725764]
+[node name="Reset" type="AspectRatioContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/EnvSFXInput" unique_id=1385725764]
 layout_mode = 2
 size_flags_horizontal = 0
 stretch_mode = 1
 alignment_vertical = 2
 
-[node name="Button" type="Button" parent="Settings/TabContainer/SOUND_TAB/GridContainer/EnvSFXInput/Reset" unique_id=511049077]
+[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/EnvSFXInput/Reset" unique_id=511049077]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
 icon = ExtResource("12_wigoj")
@@ -1126,39 +1111,39 @@ script = ExtResource("14_vbkcm")
 Section = "sound"
 Key = "environment_sfx_volume_db"
 
-[node name="FbSFX" type="PanelContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer" unique_id=1564615723]
+[node name="FbSFX" type="PanelContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB" unique_id=1564615723]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="FbSFX" type="HBoxContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer/FbSFX" unique_id=1557153651]
+[node name="FbSFX" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/FbSFX" unique_id=1557153651]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="Settings/TabContainer/SOUND_TAB/GridContainer/FbSFX/FbSFX" unique_id=117353232]
+[node name="Control" type="Control" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/FbSFX/FbSFX" unique_id=117353232]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
-[node name="FbSFX" type="Label" parent="Settings/TabContainer/SOUND_TAB/GridContainer/FbSFX/FbSFX" unique_id=461225099]
+[node name="FbSFX" type="Label" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/FbSFX/FbSFX" unique_id=461225099]
 layout_mode = 2
 tooltip_text = "Diegetical sfx"
 mouse_filter = 1
 text = "FEEDBACK_SOUND_VOLUME_LABEL"
 
-[node name="FbSFXInput" type="HBoxContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer" unique_id=2059207101]
+[node name="FbSFXInput" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB" unique_id=2059207101]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="FbSFXInput" type="HSplitContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer/FbSFXInput" unique_id=1175098417]
+[node name="FbSFXInput" type="HSplitContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/FbSFXInput" unique_id=1175098417]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/SOUND_TAB/GridContainer/FbSFXInput/FbSFXInput" unique_id=1019072894]
+[node name="LineEdit" type="LineEdit" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/FbSFXInput/FbSFXInput" unique_id=1019072894]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("8_no00x")
 
-[node name="FbSFXSlider" type="HSlider" parent="Settings/TabContainer/SOUND_TAB/GridContainer/FbSFXInput/FbSFXInput" unique_id=156582395]
+[node name="FbSFXSlider" type="HSlider" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/FbSFXInput/FbSFXInput" unique_id=156582395]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -1167,13 +1152,13 @@ step = 0.01
 script = ExtResource("18_o1fwb")
 bus_name = "Feedback Sfx"
 
-[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/SOUND_TAB/GridContainer/FbSFXInput" unique_id=599894380]
+[node name="Reset" type="AspectRatioContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/FbSFXInput" unique_id=599894380]
 layout_mode = 2
 size_flags_horizontal = 0
 stretch_mode = 1
 alignment_vertical = 2
 
-[node name="Button" type="Button" parent="Settings/TabContainer/SOUND_TAB/GridContainer/FbSFXInput/Reset" unique_id=980386536]
+[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/FbSFXInput/Reset" unique_id=980386536]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
 icon = ExtResource("12_wigoj")
@@ -1183,134 +1168,81 @@ script = ExtResource("14_vbkcm")
 Section = "sound"
 Key = "feedback_sfx_volume_db"
 
-[node name="CONTROLS_TAB" type="TabBar" parent="Settings/TabContainer" unique_id=1802915093]
-visible = false
+[node name="CONTROLS_TAB" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer" unique_id=876746731]
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="TabContainer" type="TabContainer" parent="Settings/TabContainer/CONTROLS_TAB" unique_id=1108500865]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="MarginContainer" type="MarginContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB" unique_id=2137857519]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 30
+
+[node name="CONTROLS_TAB" type="TabContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer" unique_id=1108500865]
+layout_mode = 2
+size_flags_vertical = 3
 theme_override_font_sizes/font_size = 14
 current_tab = 0
 
-[node name="CONTROLS_GENERAL_TAB" type="TabBar" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer" unique_id=1062094710]
+[node name="CONTROLS_GENERAL_TAB" type="ScrollContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB" unique_id=1030432552]
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="GridContainer" type="GridContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB" unique_id=743131888]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 217.0
-offset_top = 8.0
-offset_right = -228.0
-offset_bottom = -104.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/h_separation = 20
-theme_override_constants/v_separation = 6
-columns = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB" unique_id=1543116992]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Sensitivity" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=339619566]
+[node name="Sensitivity" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer" unique_id=1338812726 instance=ExtResource("38_squjd")]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/Sensitivity" unique_id=766337504]
-layout_mode = 2
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/Sensitivity" index="0" unique_id=366278316]
 text = "SENSITIVITY_LABEL"
 
-[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=148516088]
+[node name="DPI" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer" unique_id=1931073715 instance=ExtResource("31_t61gj")]
 layout_mode = 2
 
-[node name="DPI" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=1254421273]
-layout_mode = 2
-
-[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/DPI" unique_id=310470559]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/DPI/hbox" unique_id=1306170388]
-custom_minimum_size = Vector2(25, 0)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/DPI/hbox" unique_id=1310238737]
-layout_mode = 2
-size_flags_horizontal = 4
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DPI/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1931073715, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "DPI_LABEL"
 
-[node name="DPIInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=531442733]
+[node name="DPIInput" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DPI" unique_id=1507879825]
 layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="DPIInput" type="HSplitContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/DPIInput" unique_id=1749834004]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 10
 script = ExtResource("19_4n7it")
 
-[node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/DPIInput/DPIInput" unique_id=1719183017]
+[node name="OptionButton" type="OptionButton" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DPI/DPIInput" unique_id=359190263]
+custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 8
+script = ExtResource("20_3fk1l")
+
+[node name="LineEdit" type="LineEdit" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DPI/DPIInput" unique_id=1748054996]
+layout_mode = 2
+size_flags_horizontal = 2
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("8_no00x")
 allow_float = false
 
-[node name="OptionButton" type="OptionButton" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/DPIInput/DPIInput" unique_id=1880304076]
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DPI" unique_id=1501950459 instance=ExtResource("34_6me0n")]
 layout_mode = 2
-script = ExtResource("20_3fk1l")
 
-[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/DPIInput" unique_id=1669338694]
-layout_mode = 2
-size_flags_horizontal = 0
-stretch_mode = 1
-alignment_vertical = 2
-
-[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/DPIInput/Reset" unique_id=2067077786]
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
-icon = ExtResource("12_wigoj")
-icon_alignment = 1
-expand_icon = true
-script = ExtResource("14_vbkcm")
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DPI/Reset" index="0" unique_id=286523834]
 Section = "controls"
 Key = "dpi"
 
-[node name="cm360" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=9756012]
+[node name="cm360" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer" unique_id=125880128 instance=ExtResource("31_t61gj")]
 layout_mode = 2
 
-[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/cm360" unique_id=529052024]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/cm360/hbox" unique_id=638248067]
-custom_minimum_size = Vector2(25, 0)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/cm360/hbox" unique_id=1857829317]
-layout_mode = 2
-size_flags_horizontal = 4
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/cm360/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(125880128, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "CM_360_LABEL"
 
-[node name="cm360Input" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=311228764]
+[node name="cm360Input" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/cm360" unique_id=1988280646]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 15
 
-[node name="cm360Input" type="HSplitContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/cm360Input" unique_id=625440591]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-
-[node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/cm360Input/cm360Input" unique_id=541891688]
-layout_mode = 2
-size_flags_horizontal = 4
-alignment = 1
-virtual_keyboard_type = 2
-script = ExtResource("22_vbkcm")
-
-[node name="MasterSlider" type="HSlider" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/cm360Input/cm360Input" unique_id=685690882]
+[node name="MasterSlider" type="HSlider" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/cm360/cm360Input" unique_id=835136390]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -1320,59 +1252,40 @@ script = ExtResource("23_pbd3k")
 Section = "controls"
 Key = "cm_per_360"
 
-[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/cm360Input" unique_id=1880264891]
+[node name="LineEdit" type="LineEdit" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/cm360/cm360Input" unique_id=911941418]
 layout_mode = 2
-size_flags_horizontal = 0
-stretch_mode = 1
-alignment_vertical = 2
+alignment = 1
+virtual_keyboard_type = 2
+script = ExtResource("22_vbkcm")
 
-[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/cm360Input/Reset" unique_id=1745273349]
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/cm360" unique_id=577786999 instance=ExtResource("34_6me0n")]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
-icon = ExtResource("12_wigoj")
-icon_alignment = 1
-expand_icon = true
-script = ExtResource("14_vbkcm")
+
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/cm360/Reset" index="0" unique_id=286523834]
 Section = "controls"
 Key = "cm_per_360"
 
-[node name="Sprint" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=986146610]
+[node name="Sprint" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer" unique_id=2127044850 instance=ExtResource("38_squjd")]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/Sprint" unique_id=155763591]
-layout_mode = 2
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/Sprint" index="0" unique_id=366278316]
 text = "SPRINT_LABEL"
 
-[node name="Control2" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=2060325388]
+[node name="SprintMode" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer" unique_id=453903773 instance=ExtResource("31_t61gj")]
 layout_mode = 2
 
-[node name="SprintMode" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=529244289]
-layout_mode = 2
-
-[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/SprintMode" unique_id=1613149933]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/SprintMode/hbox" unique_id=203972600]
-custom_minimum_size = Vector2(25, 0)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/SprintMode/hbox" unique_id=1097687335]
-layout_mode = 2
-size_flags_horizontal = 4
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintMode/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(453903773, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "SPRINT_MODE_LABEL"
 
-[node name="SprintModeInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=1508569865]
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="SprintModeOptions" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/SprintModeInput" unique_id=1551105526]
+[node name="SprintModeOptions" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintMode" unique_id=1093197233]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-theme_override_constants/separation = 15
+size_flags_horizontal = 10
+theme_override_constants/separation = 5
 script = ExtResource("33_3fk1l")
 
-[node name="ToggleButton" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/SprintModeInput/SprintModeOptions" unique_id=1068157058]
-custom_minimum_size = Vector2(65, 0)
+[node name="ToggleButton" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintMode/SprintModeOptions" unique_id=1111186385]
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme_type_variation = &"InputButton"
 theme_override_font_sizes/font_size = 8
@@ -1381,8 +1294,8 @@ button_group = SubResource("ButtonGroup_4n7it")
 text = "SPRINT_TOGGLE_BUTTON"
 clip_text = true
 
-[node name="HoldButton" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/SprintModeInput/SprintModeOptions" unique_id=762629877]
-custom_minimum_size = Vector2(65, 0)
+[node name="HoldButton" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintMode/SprintModeOptions" unique_id=942347926]
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme_type_variation = &"InputButton"
 theme_override_font_sizes/font_size = 8
@@ -1391,8 +1304,8 @@ button_group = SubResource("ButtonGroup_4n7it")
 text = "SPRINT_HOLD_BUTTON"
 clip_text = true
 
-[node name="AutoButton" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/SprintModeInput/SprintModeOptions" unique_id=1891605939]
-custom_minimum_size = Vector2(65, 0)
+[node name="AutoButton" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintMode/SprintModeOptions" unique_id=1516286433]
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme_type_variation = &"InputButton"
 theme_override_font_sizes/font_size = 8
@@ -1401,59 +1314,26 @@ button_group = SubResource("ButtonGroup_4n7it")
 text = "SPRINT_AUTO_BUTTON"
 clip_text = true
 
-[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/SprintModeInput" unique_id=1702663425]
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintMode" unique_id=1814355694 instance=ExtResource("34_6me0n")]
 layout_mode = 2
-size_flags_horizontal = 0
-stretch_mode = 1
-alignment_vertical = 2
 
-[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/SprintModeInput/Reset" unique_id=100617711]
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
-icon = ExtResource("12_wigoj")
-icon_alignment = 1
-expand_icon = true
-script = ExtResource("14_vbkcm")
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintMode/Reset" index="0" unique_id=286523834]
 Section = "controls"
 Key = "sprint_mode"
 
-[node name="AutoSprintDelay" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=330451066]
+[node name="AutoSprintDelay" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer" unique_id=1143250679 instance=ExtResource("31_t61gj")]
 layout_mode = 2
 script = ExtResource("34_3ngnl")
 
-[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/AutoSprintDelay" unique_id=914727608]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/AutoSprintDelay/hbox" unique_id=1203584835]
-custom_minimum_size = Vector2(25, 0)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/AutoSprintDelay/hbox" unique_id=1147219863]
-layout_mode = 2
-size_flags_horizontal = 4
-tooltip_text = "AUTO_SPRINT_DELAY_TOOLTIP"
-mouse_filter = 1
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/AutoSprintDelay/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1143250679, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "AUTO_SPRINT_DELAY_LABEL"
 
-[node name="AutoSprintDelayInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=1088349548]
+[node name="Input" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/AutoSprintDelay" unique_id=1152408584]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 15
-script = ExtResource("34_3ngnl")
 
-[node name="cm360Input" type="HSplitContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/AutoSprintDelayInput" unique_id=149039997]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-
-[node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/AutoSprintDelayInput/cm360Input" unique_id=720304704]
-layout_mode = 2
-size_flags_horizontal = 4
-alignment = 1
-virtual_keyboard_type = 2
-script = ExtResource("22_vbkcm")
-_allowFloat = false
-_allowNegatives = false
-
-[node name="MasterSlider" type="HSlider" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/AutoSprintDelayInput/cm360Input" unique_id=1765512201]
+[node name="MasterSlider" type="HSlider" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/AutoSprintDelay/Input" unique_id=2018865185]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -1465,47 +1345,36 @@ script = ExtResource("23_pbd3k")
 Section = "controls"
 Key = "auto_sprint_delay"
 
-[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/AutoSprintDelayInput" unique_id=1581609789]
+[node name="LineEdit" type="LineEdit" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/AutoSprintDelay/Input" unique_id=69037411]
 layout_mode = 2
-size_flags_horizontal = 0
-stretch_mode = 1
-alignment_vertical = 2
+size_flags_horizontal = 4
+alignment = 1
+virtual_keyboard_type = 2
+script = ExtResource("22_vbkcm")
+_allowFloat = false
+_allowNegatives = false
 
-[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/AutoSprintDelayInput/Reset" unique_id=840458389]
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/AutoSprintDelay" unique_id=1937964935 instance=ExtResource("34_6me0n")]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
-icon = ExtResource("12_wigoj")
-icon_alignment = 1
-expand_icon = true
-script = ExtResource("14_vbkcm")
+
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/AutoSprintDelay/Reset" index="0" unique_id=286523834]
 Section = "controls"
 Key = "auto_sprint_delay"
 
-[node name="AutoSprintQuickStart" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=53228370]
+[node name="AutoSprintQuickStartInput" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer" unique_id=1200406574 instance=ExtResource("31_t61gj")]
 layout_mode = 2
 script = ExtResource("34_3ngnl")
 
-[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/AutoSprintQuickStart" unique_id=1749341680]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/AutoSprintQuickStart/hbox" unique_id=918833022]
-custom_minimum_size = Vector2(25, 0)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/AutoSprintQuickStart/hbox" unique_id=2095386402]
-layout_mode = 2
-size_flags_horizontal = 4
-tooltip_text = "AUTO_SPRINT_QUICK_START_TOOLTIP"
-mouse_filter = 1
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/AutoSprintQuickStartInput/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1200406574, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "INPUTS_AUTO_SPRINT_QUICK_START_LABEL"
 
-[node name="AutoSprintQuickStartInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer" unique_id=645414442]
+[node name="AutoSprintQuickStartInput" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/AutoSprintQuickStartInput" unique_id=1157846365]
 layout_mode = 2
-theme_override_constants/separation = 15
-script = ExtResource("34_3ngnl")
+size_flags_horizontal = 10
+theme_override_constants/separation = 5
 
-[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/AutoSprintQuickStartInput" unique_id=1771344251]
-custom_minimum_size = Vector2(65, 0)
+[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/AutoSprintQuickStartInput/AutoSprintQuickStartInput" unique_id=394470402]
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme_type_variation = &"InputButton"
 text = "a"
@@ -1513,8 +1382,8 @@ clip_text = true
 script = ExtResource("30_rt8lt")
 action = "auto_sprint_quick_start"
 
-[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/AutoSprintQuickStartInput" unique_id=1664802033]
-custom_minimum_size = Vector2(65, 0)
+[node name="Button2" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/AutoSprintQuickStartInput/AutoSprintQuickStartInput" unique_id=886988197]
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme_type_variation = &"InputButton"
 text = "a"
@@ -1523,8 +1392,8 @@ script = ExtResource("30_rt8lt")
 action = "auto_sprint_quick_start"
 input_index = 1
 
-[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/AutoSprintQuickStartInput" unique_id=1433904488]
-custom_minimum_size = Vector2(65, 0)
+[node name="Button3" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/AutoSprintQuickStartInput/AutoSprintQuickStartInput" unique_id=604586339]
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme_type_variation = &"InputButton"
 text = "a"
@@ -1533,950 +1402,305 @@ script = ExtResource("30_rt8lt")
 action = "auto_sprint_quick_start"
 input_index = 2
 
-[node name="CONTROLS_BINDINGS_TAB" type="TabBar" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer" unique_id=541313611]
+[node name="Control" type="Control" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/AutoSprintQuickStartInput" unique_id=369645871]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+
+[node name="CONTROLS_BINDINGS_TAB" type="ScrollContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB" unique_id=1428674498]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB" unique_id=1428674498]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 217.0
-offset_top = 8.0
-offset_right = -228.0
-offset_bottom = -104.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="GridContainer" type="GridContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer" unique_id=1827567637]
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB" unique_id=1935353457]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-theme_override_constants/h_separation = 20
-theme_override_constants/v_separation = 6
-columns = 2
 
-[node name="Movement" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=8743021]
+[node name="Movement" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer" unique_id=2047568688 instance=ExtResource("38_squjd")]
 layout_mode = 2
-size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Movement" unique_id=1315608497]
-layout_mode = 2
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Movement" index="0" unique_id=366278316]
 text = "INPUTS_MOVEMENT_LABEL"
 
-[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=24458153]
+[node name="Forward" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer" unique_id=900548155 instance=ExtResource("38_pwonq")]
 layout_mode = 2
 
-[node name="Forward" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1130400359]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Forward" unique_id=113156570]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Forward/hbox" unique_id=516088346]
-custom_minimum_size = Vector2(25, 0)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Forward/hbox" unique_id=164107759]
-layout_mode = 2
-size_flags_horizontal = 4
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Forward/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(900548155, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "INPUTS_MOVE_FORWARD_LABEL"
 
-[node name="ForwardInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1342167168]
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/ForwardInput" unique_id=235110594]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "aaaa"
-clip_text = true
-script = ExtResource("30_rt8lt")
-action = "move_forward"
-
-[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/ForwardInput" unique_id=2007571832]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "a"
-clip_text = true
-script = ExtResource("30_rt8lt")
-action = "move_forward"
-input_index = 1
-
-[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/ForwardInput" unique_id=1366356771]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "a"
-clip_text = true
-script = ExtResource("30_rt8lt")
-action = "move_forward"
-input_index = 2
-
-[node name="Backward" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1492742774]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Backward" unique_id=385768564]
+[node name="Backward" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer" unique_id=1628815063 instance=ExtResource("38_pwonq")]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Backward/hbox" unique_id=1234403469]
-custom_minimum_size = Vector2(25, 0)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Backward/hbox" unique_id=1239809709]
-layout_mode = 2
-size_flags_horizontal = 4
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Backward/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1628815063, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "INPUTS_MOVE_BACKWARD_LABEL"
 
-[node name="BackwardInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1855224175]
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/BackwardInput" unique_id=1118095134]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "aaaa"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Backward/Input" parent_id_path=PackedInt32Array(1628815063, 702567657) index="0" unique_id=1880162874]
 action = "move_backward"
 
-[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/BackwardInput" unique_id=2139415749]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "a"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button2" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Backward/Input" parent_id_path=PackedInt32Array(1628815063, 702567657) index="1" unique_id=874213555]
 action = "move_backward"
-input_index = 1
 
-[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/BackwardInput" unique_id=434582530]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "a"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button3" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Backward/Input" parent_id_path=PackedInt32Array(1628815063, 702567657) index="2" unique_id=2060705678]
 action = "move_backward"
-input_index = 2
 
-[node name="Left" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1952062837]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Left" unique_id=108784637]
+[node name="Left" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer" unique_id=1339245547 instance=ExtResource("38_pwonq")]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Left/hbox" unique_id=1887721098]
-custom_minimum_size = Vector2(25, 0)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Left/hbox" unique_id=866363752]
-layout_mode = 2
-size_flags_horizontal = 4
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Left/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1339245547, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "INPUTS_MOVE_LEFT_LABEL"
 
-[node name="LeftInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1504906887]
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/LeftInput" unique_id=2065515868]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "aaaa"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Left/Input" parent_id_path=PackedInt32Array(1339245547, 702567657) index="0" unique_id=1880162874]
 action = "move_left"
 
-[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/LeftInput" unique_id=1073716544]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "a"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button2" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Left/Input" parent_id_path=PackedInt32Array(1339245547, 702567657) index="1" unique_id=874213555]
 action = "move_left"
-input_index = 1
 
-[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/LeftInput" unique_id=1499593063]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "a"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button3" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Left/Input" parent_id_path=PackedInt32Array(1339245547, 702567657) index="2" unique_id=2060705678]
 action = "move_left"
-input_index = 2
 
-[node name="Right" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=966523107]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Right" unique_id=995385648]
+[node name="Right" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer" unique_id=362612851 instance=ExtResource("38_pwonq")]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Right/hbox" unique_id=484220521]
-custom_minimum_size = Vector2(25, 0)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Right/hbox" unique_id=868672423]
-layout_mode = 2
-size_flags_horizontal = 4
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Right/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(362612851, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "INPUTS_MOVE_RIGHT_LABEL"
 
-[node name="RightInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=834568813]
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/RightInput" unique_id=575130671]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "aaaa"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Right/Input" parent_id_path=PackedInt32Array(362612851, 702567657) index="0" unique_id=1880162874]
 action = "move_right"
 
-[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/RightInput" unique_id=27747553]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "a"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button2" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Right/Input" parent_id_path=PackedInt32Array(362612851, 702567657) index="1" unique_id=874213555]
 action = "move_right"
-input_index = 1
 
-[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/RightInput" unique_id=761599696]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "a"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button3" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Right/Input" parent_id_path=PackedInt32Array(362612851, 702567657) index="2" unique_id=2060705678]
 action = "move_right"
-input_index = 2
 
-[node name="Jump" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=703488936]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Jump" unique_id=1132608910]
+[node name="Jump" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer" unique_id=1376145635 instance=ExtResource("38_pwonq")]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Jump/hbox" unique_id=1402550554]
-custom_minimum_size = Vector2(25, 0)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Jump/hbox" unique_id=454041128]
-layout_mode = 2
-size_flags_horizontal = 4
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Jump/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1376145635, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "INPUTS_JUMP_LABEL"
 
-[node name="JumpInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1220307215]
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/JumpInput" unique_id=309361264]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "aaaa"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Jump/Input" parent_id_path=PackedInt32Array(1376145635, 702567657) index="0" unique_id=1880162874]
 action = "jump"
 
-[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/JumpInput" unique_id=1849016439]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "a"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button2" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Jump/Input" parent_id_path=PackedInt32Array(1376145635, 702567657) index="1" unique_id=874213555]
 action = "jump"
-input_index = 1
 
-[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/JumpInput" unique_id=857956330]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "a"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button3" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Jump/Input" parent_id_path=PackedInt32Array(1376145635, 702567657) index="2" unique_id=2060705678]
 action = "jump"
-input_index = 2
 
-[node name="Sprint" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1196753457]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Sprint" unique_id=819070800]
+[node name="Sprint" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer" unique_id=1185294045 instance=ExtResource("38_pwonq")]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Sprint/hbox" unique_id=1381100973]
-custom_minimum_size = Vector2(25, 0)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Sprint/hbox" unique_id=245106236]
-layout_mode = 2
-size_flags_horizontal = 4
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Sprint/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1185294045, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "INPUTS_SPRINT_LABEL"
 
-[node name="SprintInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1757397292]
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/SprintInput" unique_id=277156241]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "aaaa"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Sprint/Input" parent_id_path=PackedInt32Array(1185294045, 702567657) index="0" unique_id=1880162874]
 action = "sprint"
 
-[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/SprintInput" unique_id=685281774]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "a"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button2" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Sprint/Input" parent_id_path=PackedInt32Array(1185294045, 702567657) index="1" unique_id=874213555]
 action = "sprint"
-input_index = 1
 
-[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/SprintInput" unique_id=533287106]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "a"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button3" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Sprint/Input" parent_id_path=PackedInt32Array(1185294045, 702567657) index="2" unique_id=2060705678]
 action = "sprint"
-input_index = 2
 
-[node name="Crouch" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=307798834]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Crouch" unique_id=2393032]
+[node name="Crouch" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer" unique_id=539336767 instance=ExtResource("38_pwonq")]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Crouch/hbox" unique_id=1586321943]
-custom_minimum_size = Vector2(25, 0)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Crouch/hbox" unique_id=1441275228]
-layout_mode = 2
-size_flags_horizontal = 4
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Crouch/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(539336767, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "INPUTS_CROUCH_LABEL"
 
-[node name="CrouchInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=733761442]
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/CrouchInput" unique_id=1487268756]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "aaaa"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Crouch/Input" parent_id_path=PackedInt32Array(539336767, 702567657) index="0" unique_id=1880162874]
 action = "crouch"
 
-[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/CrouchInput" unique_id=83613420]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "a"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button2" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Crouch/Input" parent_id_path=PackedInt32Array(539336767, 702567657) index="1" unique_id=874213555]
 action = "crouch"
-input_index = 1
 
-[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/CrouchInput" unique_id=149806759]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "a"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button3" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Crouch/Input" parent_id_path=PackedInt32Array(539336767, 702567657) index="2" unique_id=2060705678]
 action = "crouch"
-input_index = 2
 
-[node name="Omni" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1194110793]
+[node name="Omni" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer" unique_id=759433417 instance=ExtResource("38_squjd")]
 layout_mode = 2
-size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Omni" unique_id=2133518966]
-layout_mode = 2
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Omni" index="0" unique_id=366278316]
 text = "INPUTS_OMNI_LABEL"
 
-[node name="Control2" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1050532295]
+[node name="Dash" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer" unique_id=373288923 instance=ExtResource("38_pwonq")]
 layout_mode = 2
 
-[node name="Dash" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=2015499158]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Dash" unique_id=435869099]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Dash/hbox" unique_id=525284692]
-custom_minimum_size = Vector2(25, 0)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Dash/hbox" unique_id=2091937332]
-layout_mode = 2
-size_flags_horizontal = 4
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Dash/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(373288923, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "INPUTS_DASH_LABEL"
 
-[node name="DashInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1848354415]
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/DashInput" unique_id=1753379959]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "aaaa"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Dash/Input" parent_id_path=PackedInt32Array(373288923, 702567657) index="0" unique_id=1880162874]
 action = "dash"
 
-[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/DashInput" unique_id=925240920]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "a"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button2" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Dash/Input" parent_id_path=PackedInt32Array(373288923, 702567657) index="1" unique_id=874213555]
 action = "dash"
-input_index = 1
 
-[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/DashInput" unique_id=250504361]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "a"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button3" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Dash/Input" parent_id_path=PackedInt32Array(373288923, 702567657) index="2" unique_id=2060705678]
 action = "dash"
-input_index = 2
 
-[node name="Lurch" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1839973077]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Lurch" unique_id=1418228378]
+[node name="Lurch" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer" unique_id=1667754836 instance=ExtResource("38_pwonq")]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Lurch/hbox" unique_id=1815408977]
-custom_minimum_size = Vector2(25, 0)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Lurch/hbox" unique_id=879674177]
-layout_mode = 2
-size_flags_horizontal = 4
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Lurch/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1667754836, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "INPUTS_LURCH_LABEL"
 
-[node name="LurchInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1543581789]
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/LurchInput" unique_id=148892926]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "aaaa"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Lurch/Input" parent_id_path=PackedInt32Array(1667754836, 702567657) index="0" unique_id=1880162874]
 action = "lurch"
 
-[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/LurchInput" unique_id=289403271]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "a"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button2" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Lurch/Input" parent_id_path=PackedInt32Array(1667754836, 702567657) index="1" unique_id=874213555]
 action = "lurch"
-input_index = 1
 
-[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/LurchInput" unique_id=1885596936]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "a"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button3" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Lurch/Input" parent_id_path=PackedInt32Array(1667754836, 702567657) index="2" unique_id=2060705678]
 action = "lurch"
-input_index = 2
 
-[node name="Combat" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1255192421]
+[node name="Combat" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer" unique_id=697038032 instance=ExtResource("38_squjd")]
 layout_mode = 2
-size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Combat" unique_id=894779646]
-layout_mode = 2
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Combat" index="0" unique_id=366278316]
 text = "INPUTS_COMBAT_LABEL"
 
-[node name="Control3" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=347676827]
+[node name="Primary" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer" unique_id=1863523614 instance=ExtResource("38_pwonq")]
 layout_mode = 2
 
-[node name="Primary" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=609656161]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Primary" unique_id=1667897654]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Primary/hbox" unique_id=148661358]
-custom_minimum_size = Vector2(25, 0)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Primary/hbox" unique_id=1149138373]
-layout_mode = 2
-size_flags_horizontal = 4
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Primary/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1863523614, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "INPUTS_PRIMARY_LABEL"
 
-[node name="PrimaryInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1164134496]
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/PrimaryInput" unique_id=434664863]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "aaaa"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Primary/Input" parent_id_path=PackedInt32Array(1863523614, 702567657) index="0" unique_id=1880162874]
 action = "primary"
 
-[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/PrimaryInput" unique_id=762730118]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "a"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button2" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Primary/Input" parent_id_path=PackedInt32Array(1863523614, 702567657) index="1" unique_id=874213555]
 action = "primary"
-input_index = 1
 
-[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/PrimaryInput" unique_id=1616877207]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "a"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button3" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Primary/Input" parent_id_path=PackedInt32Array(1863523614, 702567657) index="2" unique_id=2060705678]
 action = "primary"
-input_index = 2
 
-[node name="Secondary" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=51185587]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Secondary" unique_id=1682124915]
+[node name="Secondary" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer" unique_id=1843709310 instance=ExtResource("38_pwonq")]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Secondary/hbox" unique_id=2078203400]
-custom_minimum_size = Vector2(25, 0)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Secondary/hbox" unique_id=209649150]
-layout_mode = 2
-size_flags_horizontal = 4
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Secondary/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1843709310, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "INPUTS_SECONDARY_LABEL"
 
-[node name="SecondaryInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=140823454]
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/SecondaryInput" unique_id=1195388226]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "aaaa"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Secondary/Input" parent_id_path=PackedInt32Array(1843709310, 702567657) index="0" unique_id=1880162874]
 action = "secondary"
 
-[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/SecondaryInput" unique_id=74264883]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "a"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button2" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Secondary/Input" parent_id_path=PackedInt32Array(1843709310, 702567657) index="1" unique_id=874213555]
 action = "secondary"
-input_index = 1
 
-[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/SecondaryInput" unique_id=1307881983]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "a"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button3" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Secondary/Input" parent_id_path=PackedInt32Array(1843709310, 702567657) index="2" unique_id=2060705678]
 action = "secondary"
-input_index = 2
 
-[node name="Reload" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1288421465]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Reload" unique_id=1093068622]
+[node name="Reload" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer" unique_id=754080459 instance=ExtResource("38_pwonq")]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Reload/hbox" unique_id=1221901504]
-custom_minimum_size = Vector2(25, 0)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Reload/hbox" unique_id=146101473]
-layout_mode = 2
-size_flags_horizontal = 4
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Reload/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(754080459, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "INPUTS_RELOAD_LABEL"
 
-[node name="ReloadInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1296176603]
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/ReloadInput" unique_id=1832482001]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "aaaa"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Reload/Input" parent_id_path=PackedInt32Array(754080459, 702567657) index="0" unique_id=1880162874]
 action = "reload"
 
-[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/ReloadInput" unique_id=519386705]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "a"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button2" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Reload/Input" parent_id_path=PackedInt32Array(754080459, 702567657) index="1" unique_id=874213555]
 action = "reload"
-input_index = 1
 
-[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/ReloadInput" unique_id=1126398807]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "a"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button3" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Reload/Input" parent_id_path=PackedInt32Array(754080459, 702567657) index="2" unique_id=2060705678]
 action = "reload"
-input_index = 2
 
-[node name="Switch" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=513595699]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Switch" unique_id=560067002]
+[node name="Switch" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer" unique_id=1227688453 instance=ExtResource("38_pwonq")]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Switch/hbox" unique_id=1277906366]
-custom_minimum_size = Vector2(25, 0)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Switch/hbox" unique_id=1758036129]
-layout_mode = 2
-size_flags_horizontal = 4
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Switch/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1227688453, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "INPUTS_SWITCH_LABEL"
 
-[node name="SwitchInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=986226264]
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/SwitchInput" unique_id=59070872]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "aaaa"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Switch/Input" parent_id_path=PackedInt32Array(1227688453, 702567657) index="0" unique_id=1880162874]
 action = "switch"
 
-[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/SwitchInput" unique_id=1179648223]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "a"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button2" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Switch/Input" parent_id_path=PackedInt32Array(1227688453, 702567657) index="1" unique_id=874213555]
 action = "switch"
-input_index = 1
 
-[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/SwitchInput" unique_id=1095839421]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "a"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button3" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Switch/Input" parent_id_path=PackedInt32Array(1227688453, 702567657) index="2" unique_id=2060705678]
 action = "switch"
-input_index = 2
 
-[node name="Holster" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=879299521]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Holster" unique_id=964707032]
+[node name="Holster" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer" unique_id=1881842466 instance=ExtResource("38_pwonq")]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Holster/hbox" unique_id=939963390]
-custom_minimum_size = Vector2(25, 0)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Holster/hbox" unique_id=808788577]
-layout_mode = 2
-size_flags_horizontal = 4
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Holster/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1881842466, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "INPUTS_HOLSTER_LABEL"
 
-[node name="HolsterInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1210497577]
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/HolsterInput" unique_id=845418020]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "aaaa"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Holster/Input" parent_id_path=PackedInt32Array(1881842466, 702567657) index="0" unique_id=1880162874]
 action = "holster"
 
-[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/HolsterInput" unique_id=1974453477]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "a"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button2" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Holster/Input" parent_id_path=PackedInt32Array(1881842466, 702567657) index="1" unique_id=874213555]
 action = "holster"
-input_index = 1
 
-[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/HolsterInput" unique_id=932380736]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "a"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button3" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Holster/Input" parent_id_path=PackedInt32Array(1881842466, 702567657) index="2" unique_id=2060705678]
 action = "holster"
-input_index = 2
 
-[node name="Melee" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1015002531]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Melee" unique_id=523085721]
+[node name="Melee" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer" unique_id=542611261 instance=ExtResource("38_pwonq")]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Melee/hbox" unique_id=1855061770]
-custom_minimum_size = Vector2(25, 0)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Melee/hbox" unique_id=2045976408]
-layout_mode = 2
-size_flags_horizontal = 4
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Melee/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(542611261, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "INPUTS_MELEE_LABEL"
 
-[node name="HolsterInput2" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=634315163]
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/HolsterInput2" unique_id=964466261]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "aaaa"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Melee/Input" parent_id_path=PackedInt32Array(542611261, 702567657) index="0" unique_id=1880162874]
 action = "melee"
 
-[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/HolsterInput2" unique_id=924194696]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "a"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button2" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Melee/Input" parent_id_path=PackedInt32Array(542611261, 702567657) index="1" unique_id=874213555]
 action = "melee"
-input_index = 1
 
-[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/HolsterInput2" unique_id=870402795]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "a"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button3" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Melee/Input" parent_id_path=PackedInt32Array(542611261, 702567657) index="2" unique_id=2060705678]
 action = "melee"
-input_index = 2
 
-[node name="Interface" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=2061790867]
+[node name="Interface" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer" unique_id=1093949745 instance=ExtResource("38_squjd")]
 layout_mode = 2
-size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Interface" unique_id=1951284595]
-layout_mode = 2
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Interface" index="0" unique_id=366278316]
 text = "INPUTS_INTERFACE_LABEL"
 
-[node name="Control4" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=2101967858]
+[node name="Stats" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer" unique_id=866021764 instance=ExtResource("38_pwonq")]
 layout_mode = 2
 
-[node name="Stats" type="PanelContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=1243746980]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="hbox" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Stats" unique_id=539028723]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Stats/hbox" unique_id=1800473818]
-custom_minimum_size = Vector2(25, 0)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/Stats/hbox" unique_id=770481606]
-layout_mode = 2
-size_flags_horizontal = 4
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Stats/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(866021764, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "INPUTS_STATS_LABEL"
 
-[node name="StatsInput" type="HBoxContainer" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer" unique_id=923054328]
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="Button" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/StatsInput" unique_id=766403452]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "aaaa"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Stats/Input" parent_id_path=PackedInt32Array(866021764, 702567657) index="0" unique_id=1880162874]
 action = "stats"
 
-[node name="Button2" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/StatsInput" unique_id=760613158]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "a"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button2" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Stats/Input" parent_id_path=PackedInt32Array(866021764, 702567657) index="1" unique_id=874213555]
 action = "stats"
-input_index = 1
 
-[node name="Button3" type="Button" parent="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_BINDINGS_TAB/ScrollContainer/GridContainer/StatsInput" unique_id=2105938010]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"InputButton"
-text = "a"
-clip_text = true
-script = ExtResource("30_rt8lt")
+[node name="Button3" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Stats/Input" parent_id_path=PackedInt32Array(866021764, 702567657) index="2" unique_id=2060705678]
 action = "stats"
-input_index = 2
 
-[node name="ACCESSIBILITY_TAB" type="TabBar" parent="Settings/TabContainer" unique_id=1604114432]
+[node name="ACCESSIBILITY_TAB" type="GridContainer" parent="Settings/VBoxContainer/TabContainer" unique_id=1859667621]
+visible = false
 layout_mode = 2
-metadata/_tab_index = 3
-
-[node name="GridContainer" type="GridContainer" parent="Settings/TabContainer/ACCESSIBILITY_TAB" unique_id=1859667621]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 217.0
-offset_top = 39.0
-offset_right = -228.0
-offset_bottom = -73.0
-grow_horizontal = 2
-grow_vertical = 2
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 6
 columns = 2
+metadata/_tab_index = 3
 
-[node name="Language" type="PanelContainer" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer" unique_id=530958428]
+[node name="Language" type="PanelContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB" unique_id=530958428]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer/Language" unique_id=1241670685]
+[node name="Label" type="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/Language" unique_id=1241670685]
 layout_mode = 2
 text = "LANGUAGE_LABEL"
 
-[node name="LanguageInput" type="HBoxContainer" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer" unique_id=1979166165]
+[node name="LanguageInput" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB" unique_id=1979166165]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="LanguageInput" type="OptionButton" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer/LanguageInput" unique_id=91011963]
+[node name="LanguageInput" type="OptionButton" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/LanguageInput" unique_id=91011963]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 script = ExtResource("23_6me0n")
 
-[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer/LanguageInput" unique_id=856418389]
+[node name="Reset" type="AspectRatioContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/LanguageInput" unique_id=856418389]
 layout_mode = 2
 size_flags_horizontal = 0
 stretch_mode = 1
 alignment_vertical = 2
 
-[node name="Button" type="Button" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer/LanguageInput/Reset" unique_id=354741894]
+[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/LanguageInput/Reset" unique_id=354741894]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
 icon = ExtResource("12_wigoj")
@@ -2486,23 +1710,23 @@ script = ExtResource("14_vbkcm")
 Section = "accessibility"
 Key = "language"
 
-[node name="EnemyColor" type="PanelContainer" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer" unique_id=1601037487]
+[node name="EnemyColor" type="PanelContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB" unique_id=1601037487]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer/EnemyColor" unique_id=883603373]
+[node name="Label" type="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyColor" unique_id=883603373]
 layout_mode = 2
 text = "ENEMY_COLOR_LABEL"
 
-[node name="EnemyColorInput" type="HBoxContainer" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer" unique_id=1140588573]
+[node name="EnemyColorInput" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB" unique_id=1140588573]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Control" type="Control" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer/EnemyColorInput" unique_id=943779440]
+[node name="Control" type="Control" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyColorInput" unique_id=943779440]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="EnnemiesColorInput" type="ColorPickerButton" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer/EnemyColorInput/Control" unique_id=1658776687]
+[node name="EnnemiesColorInput" type="ColorPickerButton" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyColorInput/Control" unique_id=1658776687]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 1
 anchors_preset = 9
@@ -2511,13 +1735,13 @@ offset_right = 8.0
 grow_vertical = 2
 script = ExtResource("22_t61gj")
 
-[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer/EnemyColorInput" unique_id=1000030588]
+[node name="Reset" type="AspectRatioContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyColorInput" unique_id=1000030588]
 layout_mode = 2
 size_flags_horizontal = 0
 stretch_mode = 1
 alignment_vertical = 2
 
-[node name="Button" type="Button" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer/EnemyColorInput/Reset" unique_id=1983243152]
+[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyColorInput/Reset" unique_id=1983243152]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
 icon = ExtResource("12_wigoj")
@@ -2527,30 +1751,30 @@ script = ExtResource("14_vbkcm")
 Section = "accessibility"
 Key = "enemies_color"
 
-[node name="EnemyOutlinesThickness" type="PanelContainer" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer" unique_id=1517539777]
+[node name="EnemyOutlinesThickness" type="PanelContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB" unique_id=1517539777]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer/EnemyOutlinesThickness" unique_id=2086147389]
+[node name="Label" type="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyOutlinesThickness" unique_id=2086147389]
 layout_mode = 2
 text = "ENEMY_OUTLINES_THICKNESS_LABEL"
 
-[node name="EnemyOutlinesThicknessInput" type="HBoxContainer" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer" unique_id=535062135]
+[node name="EnemyOutlinesThicknessInput" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB" unique_id=535062135]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="cm360Input" type="HSplitContainer" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer/EnemyOutlinesThicknessInput" unique_id=1838847801]
+[node name="cm360Input" type="HSplitContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyOutlinesThicknessInput" unique_id=1838847801]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer/EnemyOutlinesThicknessInput/cm360Input" unique_id=1998538385]
+[node name="LineEdit" type="LineEdit" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyOutlinesThicknessInput/cm360Input" unique_id=1998538385]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("22_vbkcm")
 
-[node name="MasterSlider" type="HSlider" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer/EnemyOutlinesThicknessInput/cm360Input" unique_id=718675431]
+[node name="MasterSlider" type="HSlider" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyOutlinesThicknessInput/cm360Input" unique_id=718675431]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -2561,13 +1785,13 @@ script = ExtResource("23_pbd3k")
 Section = "accessibility"
 Key = "enemy_outlines_thickness"
 
-[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer/EnemyOutlinesThicknessInput" unique_id=695296098]
+[node name="Reset" type="AspectRatioContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyOutlinesThicknessInput" unique_id=695296098]
 layout_mode = 2
 size_flags_horizontal = 0
 stretch_mode = 1
 alignment_vertical = 2
 
-[node name="Button" type="Button" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer/EnemyOutlinesThicknessInput/Reset" unique_id=387868458]
+[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyOutlinesThicknessInput/Reset" unique_id=387868458]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
 icon = ExtResource("12_wigoj")
@@ -2577,30 +1801,30 @@ script = ExtResource("14_vbkcm")
 Section = "accessibility"
 Key = "enemy_outlines_thickness"
 
-[node name="EnemyOutlinesOpacity" type="PanelContainer" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer" unique_id=529974393]
+[node name="EnemyOutlinesOpacity" type="PanelContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB" unique_id=529974393]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer/EnemyOutlinesOpacity" unique_id=1433589141]
+[node name="Label" type="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyOutlinesOpacity" unique_id=1433589141]
 layout_mode = 2
 text = "ENEMY_OUTLINES_OPACITY_LABEL"
 
-[node name="EnemyOutlinesOpacityInput" type="HBoxContainer" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer" unique_id=572139638]
+[node name="EnemyOutlinesOpacityInput" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB" unique_id=572139638]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="cm360Input" type="HSplitContainer" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer/EnemyOutlinesOpacityInput" unique_id=657556823]
+[node name="cm360Input" type="HSplitContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyOutlinesOpacityInput" unique_id=657556823]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="LineEdit" type="LineEdit" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer/EnemyOutlinesOpacityInput/cm360Input" unique_id=1085731956]
+[node name="LineEdit" type="LineEdit" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyOutlinesOpacityInput/cm360Input" unique_id=1085731956]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("22_vbkcm")
 
-[node name="MasterSlider" type="HSlider" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer/EnemyOutlinesOpacityInput/cm360Input" unique_id=317884518]
+[node name="MasterSlider" type="HSlider" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyOutlinesOpacityInput/cm360Input" unique_id=317884518]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -2611,13 +1835,13 @@ script = ExtResource("23_pbd3k")
 Section = "accessibility"
 Key = "enemy_outlines_opacity"
 
-[node name="Reset" type="AspectRatioContainer" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer/EnemyOutlinesOpacityInput" unique_id=224944065]
+[node name="Reset" type="AspectRatioContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyOutlinesOpacityInput" unique_id=224944065]
 layout_mode = 2
 size_flags_horizontal = 0
 stretch_mode = 1
 alignment_vertical = 2
 
-[node name="Button" type="Button" parent="Settings/TabContainer/ACCESSIBILITY_TAB/GridContainer/EnemyOutlinesOpacityInput/Reset" unique_id=377998392]
+[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/EnemyOutlinesOpacityInput/Reset" unique_id=377998392]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
 icon = ExtResource("12_wigoj")
@@ -2627,19 +1851,19 @@ script = ExtResource("14_vbkcm")
 Section = "accessibility"
 Key = "enemy_outlines_opacity"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Settings" unique_id=1772757656]
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings/VBoxContainer" unique_id=1772757656]
 layout_mode = 2
-size_flags_horizontal = 8
+size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_constants/separation = 10
 
-[node name="APPLY_BUTTON" type="Button" parent="Settings/HBoxContainer" unique_id=1080423467]
+[node name="APPLY_BUTTON" type="Button" parent="Settings/VBoxContainer/HBoxContainer" unique_id=1080423467]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 text = "APPLY_BUTTON"
 
-[node name="BACK_BUTTON" type="Button" parent="Settings/HBoxContainer" unique_id=1261773334]
+[node name="BACK_BUTTON" type="Button" parent="Settings/VBoxContainer/HBoxContainer" unique_id=1261773334]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
@@ -2874,29 +2098,26 @@ text = "CANCEL_BUTTON"
 [connection signal="mouse_entered" from="MainMenu/Log/Logout" to="LightHover" method="play"]
 [connection signal="pressed" from="MainMenu/Log/Logout" to="LightClick" method="play"]
 [connection signal="pressed" from="MainMenu/Log/Logout" to="LogingMenu" method="logout"]
-[connection signal="hidden" from="Settings" to="Settings" method="_on_hidden"]
-[connection signal="tab_changed" from="Settings/TabContainer" to="LightClick" method="tab_interract"]
-[connection signal="tab_hovered" from="Settings/TabContainer" to="LightHover" method="tab_interract"]
-[connection signal="item_selected" from="Settings/TabContainer/VIDEO_TAB/GridContainer/DisplayModeInput/DisplayModeInput" to="Settings/TabContainer/VIDEO_TAB/GridContainer/DisplayModeInput/DisplayModeInput" method="_on_item_selected"]
-[connection signal="item_selected" from="Settings/TabContainer/VIDEO_TAB/GridContainer/ResolutionInput/ResolutionInput" to="Settings/TabContainer/VIDEO_TAB/GridContainer/ResolutionInput/ResolutionInput" method="_on_item_selected"]
-[connection signal="mode_changed" from="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleModeInput/RenderScaleModeInput" to="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleInput/RenderScaleInput" method="_on_render_scale_mode_changed"]
-[connection signal="mode_changed" from="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleModeInput/RenderScaleModeInput" to="Settings/TabContainer/VIDEO_TAB/GridContainer/FSRSharpnessInput/FSRSharpnessInput" method="_on_render_scale_mode_changed"]
-[connection signal="value_applied" from="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleInput/RenderScaleInput/LineEdit" to="Settings/TabContainer/VIDEO_TAB/GridContainer/RenderScaleInput/RenderScaleInput" method="_on_value_changed"]
-[connection signal="value_applied" from="Settings/TabContainer/SOUND_TAB/GridContainer/MasterInput/MasterInput/LineEdit" to="Settings/TabContainer/SOUND_TAB/GridContainer/MasterInput/MasterInput/MasterSlider" method="_on_value_changed"]
-[connection signal="value_applied" from="Settings/TabContainer/SOUND_TAB/GridContainer/MusicInput/MusicInput/LineEdit" to="Settings/TabContainer/SOUND_TAB/GridContainer/MusicInput/MusicInput/MusicSlider" method="_on_value_changed"]
-[connection signal="value_applied" from="Settings/TabContainer/SOUND_TAB/GridContainer/SFXInput/SFXInput/LineEdit" to="Settings/TabContainer/SOUND_TAB/GridContainer/SFXInput/SFXInput/SFXSlider" method="_on_value_changed"]
-[connection signal="value_applied" from="Settings/TabContainer/SOUND_TAB/GridContainer/EnvSFXInput/EnvSFXInput/LineEdit" to="Settings/TabContainer/SOUND_TAB/GridContainer/EnvSFXInput/EnvSFXInput/EnvSFXSlider" method="_on_value_changed"]
-[connection signal="value_applied" from="Settings/TabContainer/SOUND_TAB/GridContainer/FbSFXInput/FbSFXInput/LineEdit" to="Settings/TabContainer/SOUND_TAB/GridContainer/FbSFXInput/FbSFXInput/FbSFXSlider" method="_on_value_changed"]
-[connection signal="tab_changed" from="Settings/TabContainer/CONTROLS_TAB/TabContainer" to="LightHover" method="tab_interract"]
-[connection signal="tab_hovered" from="Settings/TabContainer/CONTROLS_TAB/TabContainer" to="LightHover" method="tab_interract"]
-[connection signal="value_applied" from="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/DPIInput/DPIInput/LineEdit" to="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/DPIInput/DPIInput" method="_on_line_edit_value_applied"]
-[connection signal="item_selected" from="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/DPIInput/DPIInput/OptionButton" to="Settings/TabContainer/CONTROLS_TAB/TabContainer/CONTROLS_GENERAL_TAB/GridContainer/DPIInput/DPIInput" method="_on_option_button_item_selected"]
-[connection signal="mouse_entered" from="Settings/HBoxContainer/APPLY_BUTTON" to="LightHover" method="tab_interract"]
-[connection signal="pressed" from="Settings/HBoxContainer/APPLY_BUTTON" to="LightClick" method="tab_interract"]
-[connection signal="pressed" from="Settings/HBoxContainer/APPLY_BUTTON" to="Settings" method="_on_apply_pressed"]
-[connection signal="mouse_entered" from="Settings/HBoxContainer/BACK_BUTTON" to="LightHover" method="tab_interract"]
-[connection signal="pressed" from="Settings/HBoxContainer/BACK_BUTTON" to="." method="ExitCurrent"]
-[connection signal="pressed" from="Settings/HBoxContainer/BACK_BUTTON" to="LightClick" method="tab_interract"]
+[connection signal="tab_changed" from="Settings/VBoxContainer/TabContainer" to="LightClick" method="tab_interract"]
+[connection signal="tab_hovered" from="Settings/VBoxContainer/TabContainer" to="LightHover" method="tab_interract"]
+[connection signal="item_selected" from="Settings/VBoxContainer/TabContainer/VIDEO_TAB/DisplayModeInput/DisplayModeInput" to="Settings/VBoxContainer/TabContainer/VIDEO_TAB/DisplayModeInput/DisplayModeInput" method="_on_item_selected"]
+[connection signal="item_selected" from="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ResolutionInput/ResolutionInput" to="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ResolutionInput/ResolutionInput" method="_on_item_selected"]
+[connection signal="mode_changed" from="Settings/VBoxContainer/TabContainer/VIDEO_TAB/RenderScaleModeInput/RenderScaleModeInput" to="Settings/VBoxContainer/TabContainer/VIDEO_TAB/RenderScaleInput/RenderScaleInput" method="_on_render_scale_mode_changed"]
+[connection signal="mode_changed" from="Settings/VBoxContainer/TabContainer/VIDEO_TAB/RenderScaleModeInput/RenderScaleModeInput" to="Settings/VBoxContainer/TabContainer/VIDEO_TAB/FSRSharpnessInput/FSRSharpnessInput" method="_on_render_scale_mode_changed"]
+[connection signal="value_applied" from="Settings/VBoxContainer/TabContainer/VIDEO_TAB/RenderScaleInput/RenderScaleInput/LineEdit" to="Settings/VBoxContainer/TabContainer/VIDEO_TAB/RenderScaleInput/RenderScaleInput" method="_on_value_changed"]
+[connection signal="value_applied" from="Settings/VBoxContainer/TabContainer/SOUND_TAB/MasterInput/MasterInput/LineEdit" to="Settings/VBoxContainer/TabContainer/SOUND_TAB/MasterInput/MasterInput/MasterSlider" method="_on_value_changed"]
+[connection signal="value_applied" from="Settings/VBoxContainer/TabContainer/SOUND_TAB/MusicInput/MusicInput/LineEdit" to="Settings/VBoxContainer/TabContainer/SOUND_TAB/MusicInput/MusicInput/MusicSlider" method="_on_value_changed"]
+[connection signal="value_applied" from="Settings/VBoxContainer/TabContainer/SOUND_TAB/SFXInput/SFXInput/LineEdit" to="Settings/VBoxContainer/TabContainer/SOUND_TAB/SFXInput/SFXInput/SFXSlider" method="_on_value_changed"]
+[connection signal="value_applied" from="Settings/VBoxContainer/TabContainer/SOUND_TAB/EnvSFXInput/EnvSFXInput/LineEdit" to="Settings/VBoxContainer/TabContainer/SOUND_TAB/EnvSFXInput/EnvSFXInput/EnvSFXSlider" method="_on_value_changed"]
+[connection signal="value_applied" from="Settings/VBoxContainer/TabContainer/SOUND_TAB/FbSFXInput/FbSFXInput/LineEdit" to="Settings/VBoxContainer/TabContainer/SOUND_TAB/FbSFXInput/FbSFXInput/FbSFXSlider" method="_on_value_changed"]
+[connection signal="tab_changed" from="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB" to="LightHover" method="tab_interract"]
+[connection signal="tab_hovered" from="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB" to="LightHover" method="tab_interract"]
+[connection signal="mouse_entered" from="Settings/VBoxContainer/HBoxContainer/APPLY_BUTTON" to="LightHover" method="tab_interract"]
+[connection signal="pressed" from="Settings/VBoxContainer/HBoxContainer/APPLY_BUTTON" to="LightClick" method="tab_interract"]
+[connection signal="pressed" from="Settings/VBoxContainer/HBoxContainer/APPLY_BUTTON" to="Settings" method="_on_apply_pressed"]
+[connection signal="mouse_entered" from="Settings/VBoxContainer/HBoxContainer/BACK_BUTTON" to="LightHover" method="tab_interract"]
+[connection signal="pressed" from="Settings/VBoxContainer/HBoxContainer/BACK_BUTTON" to="." method="ExitCurrent"]
+[connection signal="pressed" from="Settings/VBoxContainer/HBoxContainer/BACK_BUTTON" to="LightClick" method="tab_interract"]
 [connection signal="mouse_entered" from="Difficulty/Levels/Easy" to="Hover" method="play"]
 [connection signal="pressed" from="Difficulty/Levels/Easy" to="Click" method="play"]
 [connection signal="mouse_entered" from="Difficulty/Levels/Normal" to="Hover" method="play"]
@@ -2917,3 +2138,56 @@ text = "CANCEL_BUTTON"
 [connection signal="pressed" from="ConfirmDialog/VBoxContainer/ConfirmButton" to="Click" method="play"]
 [connection signal="mouse_entered" from="ConfirmDialog/VBoxContainer/CancelButton" to="Hover" method="play"]
 [connection signal="pressed" from="ConfirmDialog/VBoxContainer/CancelButton" to="Click" method="play"]
+
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/Sensitivity"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DPI"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DPI/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DPI/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/cm360"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/cm360/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/cm360/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/Sprint"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintMode"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintMode/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintMode/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/AutoSprintDelay"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/AutoSprintDelay/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/AutoSprintDelay/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/AutoSprintQuickStartInput"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/AutoSprintQuickStartInput/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Movement"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Forward"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Forward/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Backward"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Backward/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Left"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Left/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Right"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Right/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Jump"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Jump/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Sprint"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Sprint/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Crouch"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Crouch/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Omni"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Dash"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Dash/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Lurch"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Lurch/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Combat"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Primary"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Primary/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Secondary"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Secondary/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Reload"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Reload/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Switch"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Switch/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Holster"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Holster/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Melee"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Melee/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Interface"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Stats"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/MarginContainer/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Stats/UiSettingsLabel"]

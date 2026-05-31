@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://dk27q4c5hpy5n"]
+
+[ext_resource type="Texture2D" uid="uid://de5h1tbf4feoi" path="res://assets/ui/reset.png" id="1_ewshx"]
+[ext_resource type="Script" uid="uid://sarrqdn23het" path="res://addons/TraGUS/Nodes/SettingResetButton.cs" id="2_7tfvu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rt8lt"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0, 0, 0.29411766)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[node name="Reset" type="AspectRatioContainer" unique_id=1501950459]
+custom_minimum_size = Vector2(28, 0)
+size_flags_horizontal = 0
+stretch_mode = 1
+alignment_vertical = 2
+
+[node name="Button" type="Button" parent="." unique_id=286523834]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rt8lt")
+icon = ExtResource("1_ewshx")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("2_7tfvu")

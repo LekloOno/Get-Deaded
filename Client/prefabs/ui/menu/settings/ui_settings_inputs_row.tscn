@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://12cbeu5f6b1j"]
+
+[ext_resource type="PackedScene" uid="uid://b1ulaco5ohrsr" path="res://prefabs/ui/menu/settings/ui_settings_label.tscn" id="1_cp1qn"]
+[ext_resource type="Script" uid="uid://cgf1qqnlqvbs2" path="res://script/ui/menu/contexts/inputs/ui_input_setting_button.gd" id="2_ckplc"]
+
+[node name="UiSettingsInputRow" type="HBoxContainer" unique_id=900548155]
+theme_override_constants/separation = 15
+
+[node name="UiSettingsLabel" parent="." unique_id=109094902 instance=ExtResource("1_cp1qn")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Input" type="HBoxContainer" parent="." unique_id=702567657]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Button" type="Button" parent="Input" unique_id=1880162874]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "aaaa"
+clip_text = true
+script = ExtResource("2_ckplc")
+action = "move_forward"
+
+[node name="Button2" type="Button" parent="Input" unique_id=874213555]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("2_ckplc")
+action = "move_forward"
+input_index = 1
+
+[node name="Button3" type="Button" parent="Input" unique_id=2060705678]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("2_ckplc")
+action = "move_forward"
+input_index = 2
+
+[editable path="UiSettingsLabel"]

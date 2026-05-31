@@ -1,4 +1,4 @@
-extends HSplitContainer
+extends Control
 
 var dpis = {
 	"400": 400,

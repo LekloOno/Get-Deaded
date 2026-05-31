@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://b1ulaco5ohrsr"]
+
+[node name="UiSettingsLabel" type="PanelContainer" unique_id=109094902]
+custom_minimum_size = Vector2(400, 0)
+offset_left = 20.0
+offset_right = 420.0
+offset_bottom = 23.0
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=172764845]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="MarginContainer" unique_id=1465678305]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "_LABEL"
