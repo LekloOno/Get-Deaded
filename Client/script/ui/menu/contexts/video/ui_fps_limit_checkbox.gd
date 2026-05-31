@@ -14,4 +14,4 @@ func _on_setting_value_changed(sender, value):
 	update_ui(value)
 
 func _on_toggled(val: bool):
-	LimitFpsSetting.GdTryUpdateValue(self, val)
+		LimitFpsSetting.GdTryUpdateValue(self, val)

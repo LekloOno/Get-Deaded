@@ -11,9 +11,8 @@ public partial class RenderScaleScaleSetting : UserSetting
 
     protected override bool ProcessValue(Variant value, out Variant effectiveValue)
     {
-        if (RenderScaleModeSetting.Mode == -1 || ( 
-            value.VariantType != Variant.Type.Int &&
-            value.VariantType != Variant.Type.Float))
+        if (value.VariantType != Variant.Type.Int &&
+            value.VariantType != Variant.Type.Float)
         {
             effectiveValue = Value;
             return false;
@@ -22,7 +21,9 @@ public partial class RenderScaleScaleSetting : UserSetting
         var scale = (float)value;
         Scale = scale;
         effectiveValue = value;
-        GetTree().Root.Scaling3DScale = scale;
+
+        if (RenderScaleModeSetting.Mode != -1)
+            GetTree().Root.Scaling3DScale = scale;
 
         return true;
     }
