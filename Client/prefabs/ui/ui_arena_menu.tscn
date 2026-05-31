@@ -368,46 +368,51 @@ theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 30
 metadata/_tab_index = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB" unique_id=627748786]
+[node name="ScrollContainer" type="ScrollContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB" unique_id=351361884]
 layout_mode = 2
 
-[node name="Application" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer" unique_id=1338812726 instance=ExtResource("38_squjd")]
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer" unique_id=627748786]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Application" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer" unique_id=1338812726 instance=ExtResource("38_squjd")]
 layout_mode = 2
 
-[node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/Application" index="0" unique_id=366278316]
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/Application" index="0" unique_id=366278316]
 text = "APPLICATION_LABEL"
 
-[node name="ApplicationSettings" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer" unique_id=1797497996]
+[node name="ApplicationSettings" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer" unique_id=1797497996]
 layout_mode = 2
 
-[node name="Display" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings" unique_id=996697259 instance=ExtResource("31_t61gj")]
+[node name="Display" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings" unique_id=996697259 instance=ExtResource("31_t61gj")]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/Display/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(996697259, 109094902, 172764845) index="0" unique_id=1465678305]
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/Display/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(996697259, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "DISPLAY_MODE_LABEL"
 
-[node name="DisplayModeInput2" type="OptionButton" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/Display" unique_id=1667678356]
+[node name="DisplayModeInput2" type="OptionButton" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/Display" unique_id=1667678356]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("5_e0f17")
 
-[node name="Reset" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/Display" unique_id=1501950459 instance=ExtResource("34_6me0n")]
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/Display" unique_id=1501950459 instance=ExtResource("34_6me0n")]
 layout_mode = 2
 
-[node name="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/Display/Reset" index="0" unique_id=286523834]
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/Display/Reset" index="0" unique_id=286523834]
 Section = "video"
 Key = "display_mode"
 
-[node name="Resolution" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings" unique_id=2008237064 instance=ExtResource("31_t61gj")]
+[node name="Resolution" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings" unique_id=2008237064 instance=ExtResource("31_t61gj")]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/Resolution/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(2008237064, 109094902, 172764845) index="0" unique_id=1465678305]
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/Resolution/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(2008237064, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "RESOLUTION_LABEL"
 
-[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/Resolution/MarginContainer/UiSettingsLabel" parent_id_path=PackedInt32Array(2008237064, 109094902) index="1" unique_id=258955887 node_paths=PackedStringArray("custom_res")]
+[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/Resolution/MarginContainer/UiSettingsLabel" parent_id_path=PackedInt32Array(2008237064, 109094902) index="1" unique_id=258955887 node_paths=PackedStringArray("custom_res")]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -431,41 +436,41 @@ text = "+"
 script = ExtResource("6_xgshk")
 custom_res = NodePath("../../../../CustomResolution")
 
-[node name="ResolutionInput" type="OptionButton" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/Resolution" unique_id=661312669]
+[node name="ResolutionInput" type="OptionButton" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/Resolution" unique_id=661312669]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("7_1fil8")
 
-[node name="Reset" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/Resolution" unique_id=1925187197 instance=ExtResource("34_6me0n")]
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/Resolution" unique_id=1925187197 instance=ExtResource("34_6me0n")]
 layout_mode = 2
 
-[node name="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/Resolution/Reset" index="0" unique_id=286523834]
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/Resolution/Reset" index="0" unique_id=286523834]
 Section = "video"
 Key = "resolution"
 
-[node name="CustomResolution" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings" unique_id=563120301 instance=ExtResource("31_t61gj")]
+[node name="CustomResolution" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings" unique_id=563120301 instance=ExtResource("31_t61gj")]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="MarginContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/CustomResolution" index="0" unique_id=1908736311]
+[node name="MarginContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/CustomResolution" index="0" unique_id=1908736311]
 theme_override_constants/margin_left = 15
 
-[node name="UiSettingsLabel" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/CustomResolution/MarginContainer" index="0" unique_id=109094902]
+[node name="UiSettingsLabel" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/CustomResolution/MarginContainer" index="0" unique_id=109094902]
 custom_minimum_size = Vector2(385, 0)
 
-[node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/CustomResolution/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(563120301, 109094902, 172764845) index="0" unique_id=1465678305]
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/CustomResolution/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(563120301, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "CUSTOM_RESOLUTION_LABEL"
 
-[node name="PanelContainer" type="PanelContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/CustomResolution" unique_id=1313818074]
+[node name="PanelContainer" type="PanelContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/CustomResolution" unique_id=1313818074]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_rlv2r")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/CustomResolution/PanelContainer" unique_id=1442059161]
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/CustomResolution/PanelContainer" unique_id=1442059161]
 layout_mode = 2
 
-[node name="XEdit" type="LineEdit" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/CustomResolution/PanelContainer/HBoxContainer" unique_id=1072932910]
+[node name="XEdit" type="LineEdit" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/CustomResolution/PanelContainer/HBoxContainer" unique_id=1072932910]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "1280"
@@ -477,13 +482,13 @@ allow_negative = false
 link_to_slider = false
 clamp_to_slider = false
 
-[node name="Label" type="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/CustomResolution/PanelContainer/HBoxContainer" unique_id=1273881347]
+[node name="Label" type="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/CustomResolution/PanelContainer/HBoxContainer" unique_id=1273881347]
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 theme_override_styles/normal = SubResource("StyleBoxEmpty_lmot5")
 text = "x"
 
-[node name="YEdit" type="LineEdit" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/CustomResolution/PanelContainer/HBoxContainer" unique_id=1788320029]
+[node name="YEdit" type="LineEdit" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/CustomResolution/PanelContainer/HBoxContainer" unique_id=1788320029]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "720"
@@ -495,7 +500,7 @@ allow_negative = false
 link_to_slider = false
 clamp_to_slider = false
 
-[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/CustomResolution" unique_id=955028665 node_paths=PackedStringArray("resolution_options", "x_value", "y_value")]
+[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/CustomResolution" unique_id=955028665 node_paths=PackedStringArray("resolution_options", "x_value", "y_value")]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -506,214 +511,214 @@ resolution_options = NodePath("../../Resolution/ResolutionInput")
 x_value = NodePath("../PanelContainer/HBoxContainer/XEdit")
 y_value = NodePath("../PanelContainer/HBoxContainer/YEdit")
 
-[node name="Reset" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/CustomResolution" unique_id=13791690 instance=ExtResource("34_6me0n")]
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/CustomResolution" unique_id=13791690 instance=ExtResource("34_6me0n")]
 layout_mode = 2
 
-[node name="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/CustomResolution/Reset" index="0" unique_id=286523834]
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/CustomResolution/Reset" index="0" unique_id=286523834]
 visible = false
 script = null
 
-[node name="StrechMode" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings" unique_id=1445673872 instance=ExtResource("31_t61gj")]
+[node name="StrechMode" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings" unique_id=1445673872 instance=ExtResource("31_t61gj")]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/StrechMode/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1445673872, 109094902, 172764845) index="0" unique_id=1465678305]
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/StrechMode/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1445673872, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "ASPECT_RATIO_LABEL"
 
-[node name="AspectRatioInput" type="OptionButton" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/StrechMode" unique_id=630316310]
+[node name="AspectRatioInput" type="OptionButton" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/StrechMode" unique_id=630316310]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("10_rt8lt")
 
-[node name="Reset" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/StrechMode" unique_id=964403637 instance=ExtResource("34_6me0n")]
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/StrechMode" unique_id=964403637 instance=ExtResource("34_6me0n")]
 layout_mode = 2
 
-[node name="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/StrechMode/Reset" index="0" unique_id=286523834]
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/StrechMode/Reset" index="0" unique_id=286523834]
 Section = "video"
 Key = "stretch_mode"
 
-[node name="Rendering" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer" unique_id=1424130420 instance=ExtResource("38_squjd")]
+[node name="Rendering" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer" unique_id=1424130420 instance=ExtResource("38_squjd")]
 layout_mode = 2
 
-[node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/Rendering" index="0" unique_id=366278316]
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/Rendering" index="0" unique_id=366278316]
 text = "RENDERING_LABEL"
 
-[node name="RenderingSettings" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer" unique_id=702890439]
+[node name="RenderingSettings" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer" unique_id=702890439]
 layout_mode = 2
 
-[node name="Fov" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings" unique_id=1391896784 instance=ExtResource("31_t61gj")]
+[node name="Fov" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings" unique_id=1391896784 instance=ExtResource("31_t61gj")]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/Fov/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1391896784, 109094902, 172764845) index="0" unique_id=1465678305]
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/Fov/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1391896784, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "FOV_LABEL"
 
-[node name="NumericInput" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/Fov" unique_id=89397296 instance=ExtResource("23_pwonq")]
+[node name="NumericInput" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/Fov" unique_id=89397296 instance=ExtResource("23_pwonq")]
 layout_mode = 2
 
-[node name="MasterSlider" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/Fov/NumericInput" index="0" unique_id=393378731]
+[node name="MasterSlider" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/Fov/NumericInput" index="0" unique_id=393378731]
 Section = "video"
 Key = "fov"
 
-[node name="Reset" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/Fov" unique_id=106519350 instance=ExtResource("34_6me0n")]
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/Fov" unique_id=106519350 instance=ExtResource("34_6me0n")]
 layout_mode = 2
 
-[node name="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/Fov/Reset" index="0" unique_id=286523834]
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/Fov/Reset" index="0" unique_id=286523834]
 Section = "video"
 Key = "fov"
 
-[node name="VsyncMode" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings" unique_id=1930499447 instance=ExtResource("31_t61gj")]
+[node name="VsyncMode" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings" unique_id=1930499447 instance=ExtResource("31_t61gj")]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/VsyncMode/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1930499447, 109094902, 172764845) index="0" unique_id=1465678305]
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/VsyncMode/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1930499447, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "VSYNC_MODE_LABEL"
 
-[node name="VSyncModeInput" type="OptionButton" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/VsyncMode" unique_id=1240897292]
+[node name="VSyncModeInput" type="OptionButton" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/VsyncMode" unique_id=1240897292]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("15_b5eqi")
 
-[node name="Reset" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/VsyncMode" unique_id=1034334608 instance=ExtResource("34_6me0n")]
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/VsyncMode" unique_id=1034334608 instance=ExtResource("34_6me0n")]
 layout_mode = 2
 
-[node name="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/VsyncMode/Reset" index="0" unique_id=286523834]
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/VsyncMode/Reset" index="0" unique_id=286523834]
 Section = "video"
 Key = "vsync_mode"
 
-[node name="LimitFps" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings" unique_id=402673384 instance=ExtResource("31_t61gj")]
+[node name="LimitFps" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings" unique_id=402673384 instance=ExtResource("31_t61gj")]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/LimitFps/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(402673384, 109094902, 172764845) index="0" unique_id=1465678305]
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/LimitFps/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(402673384, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "LIMIT_FPS_LABEL"
 
-[node name="LimitFPSInput" type="CheckBox" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/LimitFps" unique_id=2053243504]
+[node name="LimitFPSInput" type="CheckBox" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/LimitFps" unique_id=2053243504]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 4
 script = ExtResource("16_yahvj")
 
-[node name="Reset" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/LimitFps" unique_id=2006887455 instance=ExtResource("34_6me0n")]
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/LimitFps" unique_id=2006887455 instance=ExtResource("34_6me0n")]
 layout_mode = 2
 
-[node name="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/LimitFps/Reset" index="0" unique_id=286523834]
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/LimitFps/Reset" index="0" unique_id=286523834]
 Section = "video"
 Key = "limit_fps"
 
-[node name="MaxFps" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings" unique_id=1188530566 instance=ExtResource("31_t61gj")]
+[node name="MaxFps" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings" unique_id=1188530566 instance=ExtResource("31_t61gj")]
 layout_mode = 2
 size_flags_vertical = 0
 script = ExtResource("17_8es5r")
 
-[node name="MarginContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/MaxFps" index="0" unique_id=1908736311]
+[node name="MarginContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/MaxFps" index="0" unique_id=1908736311]
 theme_override_constants/margin_left = 15
 
-[node name="UiSettingsLabel" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/MaxFps/MarginContainer" index="0" unique_id=109094902]
+[node name="UiSettingsLabel" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/MaxFps/MarginContainer" index="0" unique_id=109094902]
 custom_minimum_size = Vector2(385, 0)
 
-[node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/MaxFps/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1188530566, 109094902, 172764845) index="0" unique_id=1465678305]
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/MaxFps/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1188530566, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "MAX_FPS_LABEL"
 
-[node name="NumericInput" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/MaxFps" unique_id=913548175 instance=ExtResource("23_pwonq")]
+[node name="NumericInput" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/MaxFps" unique_id=913548175 instance=ExtResource("23_pwonq")]
 layout_mode = 2
 
-[node name="MasterSlider" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/MaxFps/NumericInput" index="0" unique_id=393378731]
+[node name="MasterSlider" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/MaxFps/NumericInput" index="0" unique_id=393378731]
 min_value = 20.0
 max_value = 600.0
 value = 165.0
 Section = "video"
 Key = "max_fps"
 
-[node name="Reset" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/MaxFps" unique_id=803376718 instance=ExtResource("34_6me0n")]
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/MaxFps" unique_id=803376718 instance=ExtResource("34_6me0n")]
 layout_mode = 2
 
-[node name="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/MaxFps/Reset" index="0" unique_id=286523834]
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/MaxFps/Reset" index="0" unique_id=286523834]
 Section = "video"
 Key = "max_fps"
 
-[node name="Scaling" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer" unique_id=1914585827 instance=ExtResource("38_squjd")]
+[node name="Scaling" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer" unique_id=1914585827 instance=ExtResource("38_squjd")]
 layout_mode = 2
 
-[node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/Scaling" index="0" unique_id=366278316]
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/Scaling" index="0" unique_id=366278316]
 text = "SCALING_LABEL"
 
-[node name="ScalingSettings" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer" unique_id=1459710001 node_paths=PackedStringArray("render_scale", "render_scale_slider", "fsr_sharpness")]
+[node name="ScalingSettings" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer" unique_id=1459710001 node_paths=PackedStringArray("render_scale", "render_scale_slider", "fsr_sharpness")]
 layout_mode = 2
 script = ExtResource("12_pbd3k")
 render_scale = NodePath("RenderScaleScale")
 render_scale_slider = NodePath("RenderScaleScale/NumericInput/MasterSlider")
 fsr_sharpness = NodePath("FSRSharpness")
 
-[node name="RenderScaleMode" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings" unique_id=1701697688 instance=ExtResource("31_t61gj")]
+[node name="RenderScaleMode" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings" unique_id=1701697688 instance=ExtResource("31_t61gj")]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/RenderScaleMode/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1701697688, 109094902, 172764845) index="0" unique_id=1465678305]
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/RenderScaleMode/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1701697688, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "RENDER_SCALE_MODE_LABEL"
 
-[node name="RenderScaleModeInput" type="OptionButton" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/RenderScaleMode" unique_id=76584469]
+[node name="RenderScaleModeInput" type="OptionButton" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/RenderScaleMode" unique_id=76584469]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("11_vbkcm")
 
-[node name="Reset" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/RenderScaleMode" unique_id=1665124848 instance=ExtResource("34_6me0n")]
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/RenderScaleMode" unique_id=1665124848 instance=ExtResource("34_6me0n")]
 layout_mode = 2
 
-[node name="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/RenderScaleMode/Reset" index="0" unique_id=286523834]
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/RenderScaleMode/Reset" index="0" unique_id=286523834]
 Section = "video"
 Key = "render_scale_mode"
 
-[node name="RenderScaleScale" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings" unique_id=1701202201 instance=ExtResource("31_t61gj")]
+[node name="RenderScaleScale" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings" unique_id=1701202201 instance=ExtResource("31_t61gj")]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="MarginContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/RenderScaleScale" index="0" unique_id=1908736311]
+[node name="MarginContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/RenderScaleScale" index="0" unique_id=1908736311]
 theme_override_constants/margin_left = 15
 
-[node name="UiSettingsLabel" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/RenderScaleScale/MarginContainer" index="0" unique_id=109094902]
+[node name="UiSettingsLabel" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/RenderScaleScale/MarginContainer" index="0" unique_id=109094902]
 custom_minimum_size = Vector2(385, 0)
 
-[node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/RenderScaleScale/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1701202201, 109094902, 172764845) index="0" unique_id=1465678305]
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/RenderScaleScale/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1701202201, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "RENDER_SCALE_LABEL"
 
-[node name="NumericInput" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/RenderScaleScale" unique_id=244400019 instance=ExtResource("23_pwonq")]
+[node name="NumericInput" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/RenderScaleScale" unique_id=244400019 instance=ExtResource("23_pwonq")]
 layout_mode = 2
 
-[node name="MasterSlider" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/RenderScaleScale/NumericInput" index="0" unique_id=393378731]
+[node name="MasterSlider" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/RenderScaleScale/NumericInput" index="0" unique_id=393378731]
 min_value = 0.2
 step = 0.05
 value = 60.2
 Section = "video"
 Key = "render_scale_scale"
 
-[node name="Reset" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/RenderScaleScale" unique_id=344877054 instance=ExtResource("34_6me0n")]
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/RenderScaleScale" unique_id=344877054 instance=ExtResource("34_6me0n")]
 layout_mode = 2
 
-[node name="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/RenderScaleScale/Reset" index="0" unique_id=286523834]
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/RenderScaleScale/Reset" index="0" unique_id=286523834]
 Section = "video"
 Key = "render_scale_scale"
 
-[node name="FSRSharpness" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings" unique_id=351842520 instance=ExtResource("31_t61gj")]
+[node name="FSRSharpness" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings" unique_id=351842520 instance=ExtResource("31_t61gj")]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="MarginContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/FSRSharpness" index="0" unique_id=1908736311]
+[node name="MarginContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/FSRSharpness" index="0" unique_id=1908736311]
 theme_override_constants/margin_left = 15
 
-[node name="UiSettingsLabel" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/FSRSharpness/MarginContainer" index="0" unique_id=109094902]
+[node name="UiSettingsLabel" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/FSRSharpness/MarginContainer" index="0" unique_id=109094902]
 custom_minimum_size = Vector2(385, 0)
 
-[node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/FSRSharpness/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(351842520, 109094902, 172764845) index="0" unique_id=1465678305]
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/FSRSharpness/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(351842520, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "FSR_SHARPNESS_LABEL"
 
-[node name="NumericInput" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/FSRSharpness" unique_id=1799231666 instance=ExtResource("23_pwonq")]
+[node name="NumericInput" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/FSRSharpness" unique_id=1799231666 instance=ExtResource("23_pwonq")]
 layout_mode = 2
 
-[node name="MasterSlider" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/FSRSharpness/NumericInput" index="0" unique_id=393378731]
+[node name="MasterSlider" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/FSRSharpness/NumericInput" index="0" unique_id=393378731]
 min_value = 0.0
 max_value = 2.0
 step = 0.05
@@ -721,10 +726,10 @@ value = 0.3
 Section = "video"
 Key = "fsr_sharpness"
 
-[node name="Reset" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/FSRSharpness" unique_id=706049551 instance=ExtResource("34_6me0n")]
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/FSRSharpness" unique_id=706049551 instance=ExtResource("34_6me0n")]
 layout_mode = 2
 
-[node name="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/FSRSharpness/Reset" index="0" unique_id=286523834]
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/FSRSharpness/Reset" index="0" unique_id=286523834]
 Section = "video"
 Key = "fsr_sharpness"
 
@@ -735,139 +740,144 @@ theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 30
 metadata/_tab_index = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB" unique_id=1998817595]
+[node name="ScrollContainer" type="ScrollContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB" unique_id=1041261157]
 layout_mode = 2
 
-[node name="Volume" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer" unique_id=970477467 instance=ExtResource("38_squjd")]
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer" unique_id=1998817595]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Volume" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer" unique_id=970477467 instance=ExtResource("38_squjd")]
 layout_mode = 2
 
-[node name="Label" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/Volume" index="0" unique_id=366278316]
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/Volume" index="0" unique_id=366278316]
 text = "VOLUME_LABEL"
 
-[node name="VolumeSettings" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer" unique_id=1691757031]
+[node name="VolumeSettings" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer" unique_id=1691757031]
 layout_mode = 2
 
-[node name="Master" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings" unique_id=179821081 instance=ExtResource("31_t61gj")]
+[node name="Master" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings" unique_id=179821081 instance=ExtResource("31_t61gj")]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Label" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/Master/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(179821081, 109094902, 172764845) index="0" unique_id=1465678305]
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Master/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(179821081, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "MASTER_VOLUME_LABEL"
 
-[node name="BusVolumeInput" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/Master" unique_id=229711704 instance=ExtResource("29_pwonq")]
+[node name="BusVolumeInput" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Master" unique_id=229711704 instance=ExtResource("29_pwonq")]
 layout_mode = 2
 
-[node name="MasterSlider" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/Master/BusVolumeInput" index="0" unique_id=631872558]
+[node name="MasterSlider" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Master/BusVolumeInput" index="0" unique_id=631872558]
 bus_name = "Master"
 
-[node name="Reset" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/Master" unique_id=1518791041 instance=ExtResource("34_6me0n")]
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Master" unique_id=1518791041 instance=ExtResource("34_6me0n")]
 layout_mode = 2
 
-[node name="Button" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/Master/Reset" index="0" unique_id=286523834]
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Master/Reset" index="0" unique_id=286523834]
 Section = "sound"
 Key = "master_volume_db"
 
-[node name="Music" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings" unique_id=246351622 instance=ExtResource("31_t61gj")]
+[node name="Music" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings" unique_id=246351622 instance=ExtResource("31_t61gj")]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="MarginContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/Music" index="0" unique_id=1908736311]
+[node name="MarginContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Music" index="0" unique_id=1908736311]
 theme_override_constants/margin_left = 15
 
-[node name="UiSettingsLabel" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/Music/MarginContainer" index="0" unique_id=109094902]
+[node name="UiSettingsLabel" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Music/MarginContainer" index="0" unique_id=109094902]
 custom_minimum_size = Vector2(385, 0)
 
-[node name="Label" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/Music/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(246351622, 109094902, 172764845) index="0" unique_id=1465678305]
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Music/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(246351622, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "MUSIC_VOLUME_LABEL"
 
-[node name="BusVolumeInput" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/Music" unique_id=1190893437 instance=ExtResource("29_pwonq")]
+[node name="BusVolumeInput" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Music" unique_id=1190893437 instance=ExtResource("29_pwonq")]
 layout_mode = 2
 
-[node name="MasterSlider" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/Music/BusVolumeInput" index="0" unique_id=631872558]
+[node name="MasterSlider" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Music/BusVolumeInput" index="0" unique_id=631872558]
 bus_name = "Music"
 
-[node name="Reset" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/Music" unique_id=351895887 instance=ExtResource("34_6me0n")]
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Music" unique_id=351895887 instance=ExtResource("34_6me0n")]
 layout_mode = 2
 
-[node name="Button" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/Music/Reset" index="0" unique_id=286523834]
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Music/Reset" index="0" unique_id=286523834]
 Section = "sound"
 Key = "music_volume_db"
 
-[node name="SFX" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings" unique_id=1015980276 instance=ExtResource("31_t61gj")]
+[node name="SFX" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings" unique_id=1015980276 instance=ExtResource("31_t61gj")]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="MarginContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/SFX" index="0" unique_id=1908736311]
+[node name="MarginContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/SFX" index="0" unique_id=1908736311]
 theme_override_constants/margin_left = 15
 
-[node name="UiSettingsLabel" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/SFX/MarginContainer" index="0" unique_id=109094902]
+[node name="UiSettingsLabel" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/SFX/MarginContainer" index="0" unique_id=109094902]
 custom_minimum_size = Vector2(385, 0)
 
-[node name="Label" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/SFX/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1015980276, 109094902, 172764845) index="0" unique_id=1465678305]
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/SFX/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1015980276, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "SOUND_EFFECTS_VOLUME_LABEL"
 
-[node name="BusVolumeInput" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/SFX" unique_id=1909898382 instance=ExtResource("29_pwonq")]
+[node name="BusVolumeInput" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/SFX" unique_id=1909898382 instance=ExtResource("29_pwonq")]
 layout_mode = 2
 
-[node name="MasterSlider" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/SFX/BusVolumeInput" index="0" unique_id=631872558]
+[node name="MasterSlider" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/SFX/BusVolumeInput" index="0" unique_id=631872558]
 bus_name = "Sound Effects"
 
-[node name="Reset" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/SFX" unique_id=371861481 instance=ExtResource("34_6me0n")]
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/SFX" unique_id=371861481 instance=ExtResource("34_6me0n")]
 layout_mode = 2
 
-[node name="Button" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/SFX/Reset" index="0" unique_id=286523834]
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/SFX/Reset" index="0" unique_id=286523834]
 Section = "sound"
 Key = "sound_effects_volume_db"
 
-[node name="EnvSFX" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings" unique_id=2012313070 instance=ExtResource("31_t61gj")]
+[node name="EnvSFX" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings" unique_id=2012313070 instance=ExtResource("31_t61gj")]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="MarginContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/EnvSFX" index="0" unique_id=1908736311]
+[node name="MarginContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/EnvSFX" index="0" unique_id=1908736311]
 theme_override_constants/margin_left = 30
 
-[node name="UiSettingsLabel" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/EnvSFX/MarginContainer" index="0" unique_id=109094902]
+[node name="UiSettingsLabel" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/EnvSFX/MarginContainer" index="0" unique_id=109094902]
 custom_minimum_size = Vector2(370, 0)
 
-[node name="Label" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/EnvSFX/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(2012313070, 109094902, 172764845) index="0" unique_id=1465678305]
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/EnvSFX/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(2012313070, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "ENVIRONMENT_SOUND_VOLUME_LABEL"
 
-[node name="BusVolumeInput" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/EnvSFX" unique_id=1582211491 instance=ExtResource("29_pwonq")]
+[node name="BusVolumeInput" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/EnvSFX" unique_id=1582211491 instance=ExtResource("29_pwonq")]
 layout_mode = 2
 
-[node name="MasterSlider" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/EnvSFX/BusVolumeInput" index="0" unique_id=631872558]
+[node name="MasterSlider" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/EnvSFX/BusVolumeInput" index="0" unique_id=631872558]
 bus_name = "Environment Sfx"
 
-[node name="Reset" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/EnvSFX" unique_id=987957395 instance=ExtResource("34_6me0n")]
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/EnvSFX" unique_id=987957395 instance=ExtResource("34_6me0n")]
 layout_mode = 2
 
-[node name="Button" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/EnvSFX/Reset" index="0" unique_id=286523834]
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/EnvSFX/Reset" index="0" unique_id=286523834]
 Section = "sound"
 Key = "environment_sfx_volume_db"
 
-[node name="FbSFX" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings" unique_id=680225974 instance=ExtResource("31_t61gj")]
+[node name="FbSFX" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings" unique_id=680225974 instance=ExtResource("31_t61gj")]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="MarginContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/FbSFX" index="0" unique_id=1908736311]
+[node name="MarginContainer" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/FbSFX" index="0" unique_id=1908736311]
 theme_override_constants/margin_left = 30
 
-[node name="UiSettingsLabel" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/FbSFX/MarginContainer" index="0" unique_id=109094902]
+[node name="UiSettingsLabel" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/FbSFX/MarginContainer" index="0" unique_id=109094902]
 custom_minimum_size = Vector2(370, 0)
 
-[node name="Label" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/FbSFX/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(680225974, 109094902, 172764845) index="0" unique_id=1465678305]
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/FbSFX/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(680225974, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "FEEDBACK_SOUND_VOLUME_LABEL"
 
-[node name="BusVolumeInput" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/FbSFX" unique_id=476663591 instance=ExtResource("29_pwonq")]
+[node name="BusVolumeInput" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/FbSFX" unique_id=476663591 instance=ExtResource("29_pwonq")]
 layout_mode = 2
 
-[node name="MasterSlider" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/FbSFX/BusVolumeInput" index="0" unique_id=631872558]
+[node name="MasterSlider" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/FbSFX/BusVolumeInput" index="0" unique_id=631872558]
 bus_name = "Feedback Sfx"
 
-[node name="Reset" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/FbSFX" unique_id=465072286 instance=ExtResource("34_6me0n")]
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/FbSFX" unique_id=465072286 instance=ExtResource("34_6me0n")]
 layout_mode = 2
 
-[node name="Button" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/FbSFX/Reset" index="0" unique_id=286523834]
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/FbSFX/Reset" index="0" unique_id=286523834]
 Section = "sound"
 Key = "feedback_sfx_volume_db"
 
@@ -1360,65 +1370,70 @@ theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 30
 metadata/_tab_index = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB" unique_id=868596581]
+[node name="ScrollContainer" type="ScrollContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB" unique_id=1335429938]
 layout_mode = 2
 
-[node name="Language" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer" unique_id=2057517837 instance=ExtResource("38_squjd")]
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer" unique_id=868596581]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Language" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer" unique_id=2057517837 instance=ExtResource("38_squjd")]
 layout_mode = 2
 
-[node name="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/Language" index="0" unique_id=366278316]
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/Language" index="0" unique_id=366278316]
 text = "LANGUAGE_LABEL"
 
-[node name="LanguageSettings" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer" unique_id=1424443616]
+[node name="LanguageSettings" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer" unique_id=1424443616]
 layout_mode = 2
 
-[node name="Language" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/LanguageSettings" unique_id=1802492809 instance=ExtResource("31_t61gj")]
+[node name="Language" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/LanguageSettings" unique_id=1802492809 instance=ExtResource("31_t61gj")]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/LanguageSettings/Language/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1802492809, 109094902, 172764845) index="0" unique_id=1465678305]
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/LanguageSettings/Language/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1802492809, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "LANGUAGE_LABEL"
 
-[node name="LanguageInput" type="OptionButton" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/LanguageSettings/Language" unique_id=91011963]
+[node name="LanguageInput" type="OptionButton" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/LanguageSettings/Language" unique_id=91011963]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 script = ExtResource("23_6me0n")
 
-[node name="Reset" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/LanguageSettings/Language" unique_id=1886902857 instance=ExtResource("34_6me0n")]
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/LanguageSettings/Language" unique_id=1886902857 instance=ExtResource("34_6me0n")]
 layout_mode = 2
 
-[node name="Button" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/LanguageSettings/Language/Reset" index="0" unique_id=286523834]
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/LanguageSettings/Language/Reset" index="0" unique_id=286523834]
 Section = "accessibility"
 Key = "language"
 
-[node name="Enemies" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer" unique_id=535949191 instance=ExtResource("38_squjd")]
+[node name="Enemies" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer" unique_id=535949191 instance=ExtResource("38_squjd")]
 layout_mode = 2
 
-[node name="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/Enemies" index="0" unique_id=366278316]
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/Enemies" index="0" unique_id=366278316]
 text = "ENEMIES_LABEL"
 
-[node name="EnemiesSettings" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer" unique_id=210078862]
+[node name="EnemiesSettings" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer" unique_id=210078862]
 layout_mode = 2
 
-[node name="EnemyColor" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings" unique_id=2047791150 instance=ExtResource("31_t61gj")]
+[node name="EnemyColor" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings" unique_id=2047791150 instance=ExtResource("31_t61gj")]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyColor/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(2047791150, 109094902, 172764845) index="0" unique_id=1465678305]
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings/EnemyColor/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(2047791150, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "ENEMY_COLOR_LABEL"
 
-[node name="Input" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyColor" unique_id=1140588573]
+[node name="Input" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings/EnemyColor" unique_id=1140588573]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 15
 
-[node name="Control" type="Control" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyColor/Input" unique_id=943779440]
+[node name="Control" type="Control" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings/EnemyColor/Input" unique_id=943779440]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="EnnemiesColorInput" type="ColorPickerButton" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyColor/Input/Control" unique_id=1658776687]
+[node name="EnnemiesColorInput" type="ColorPickerButton" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings/EnemyColor/Input/Control" unique_id=1658776687]
 custom_minimum_size = Vector2(58, 0)
 layout_mode = 1
 anchors_preset = 11
@@ -1430,33 +1445,33 @@ grow_horizontal = 0
 grow_vertical = 2
 script = ExtResource("22_t61gj")
 
-[node name="Reset" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyColor" unique_id=1107026991 instance=ExtResource("34_6me0n")]
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings/EnemyColor" unique_id=1107026991 instance=ExtResource("34_6me0n")]
 layout_mode = 2
 
-[node name="Button" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyColor/Reset" index="0" unique_id=286523834]
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings/EnemyColor/Reset" index="0" unique_id=286523834]
 Section = "accessibility"
 Key = "enemies_color"
 
-[node name="Outlines" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer" unique_id=4223760 instance=ExtResource("38_squjd")]
+[node name="Outlines" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer" unique_id=4223760 instance=ExtResource("38_squjd")]
 layout_mode = 2
 
-[node name="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/Outlines" index="0" unique_id=366278316]
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/Outlines" index="0" unique_id=366278316]
 text = "ENEMY_OUTLINES_LABEL"
 
-[node name="EnemiesSettings2" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer" unique_id=2093655129]
+[node name="EnemiesSettings2" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer" unique_id=2093655129]
 layout_mode = 2
 
-[node name="EnemyOutlinesThickness" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2" unique_id=992300064 instance=ExtResource("31_t61gj")]
+[node name="EnemyOutlinesThickness" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2" unique_id=992300064 instance=ExtResource("31_t61gj")]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesThickness/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(992300064, 109094902, 172764845) index="0" unique_id=1465678305]
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2/EnemyOutlinesThickness/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(992300064, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "ENEMY_OUTLINES_THICKNESS_LABEL"
 
-[node name="NumericInput" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesThickness" unique_id=241719576 instance=ExtResource("23_pwonq")]
+[node name="NumericInput" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2/EnemyOutlinesThickness" unique_id=241719576 instance=ExtResource("23_pwonq")]
 layout_mode = 2
 
-[node name="MasterSlider" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesThickness/NumericInput" index="0" unique_id=393378731]
+[node name="MasterSlider" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2/EnemyOutlinesThickness/NumericInput" index="0" unique_id=393378731]
 min_value = 0.0
 max_value = 10.0
 step = 0.2
@@ -1464,24 +1479,24 @@ value = 10.0
 Section = "accessibility"
 Key = "enemy_outlines_thickness"
 
-[node name="Reset" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesThickness" unique_id=2116499800 instance=ExtResource("34_6me0n")]
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2/EnemyOutlinesThickness" unique_id=2116499800 instance=ExtResource("34_6me0n")]
 layout_mode = 2
 
-[node name="Button" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesThickness/Reset" index="0" unique_id=286523834]
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2/EnemyOutlinesThickness/Reset" index="0" unique_id=286523834]
 Section = "accessibility"
 Key = "enemy_outlines_thickness"
 
-[node name="EnemyOutlinesOpacity" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2" unique_id=1084763405 instance=ExtResource("31_t61gj")]
+[node name="EnemyOutlinesOpacity" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2" unique_id=1084763405 instance=ExtResource("31_t61gj")]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1084763405, 109094902, 172764845) index="0" unique_id=1465678305]
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1084763405, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "ENEMY_OUTLINES_OPACITY_LABEL"
 
-[node name="NumericInput" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity" unique_id=156961441 instance=ExtResource("23_pwonq")]
+[node name="NumericInput" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity" unique_id=156961441 instance=ExtResource("23_pwonq")]
 layout_mode = 2
 
-[node name="MasterSlider" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity/NumericInput" index="0" unique_id=393378731]
+[node name="MasterSlider" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity/NumericInput" index="0" unique_id=393378731]
 min_value = 0.0
 max_value = 1.0
 step = 0.05
@@ -1489,10 +1504,10 @@ value = 1.0
 Section = "accessibility"
 Key = "enemy_outlines_opacity"
 
-[node name="Reset" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity" unique_id=679106125 instance=ExtResource("34_6me0n")]
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity" unique_id=679106125 instance=ExtResource("34_6me0n")]
 layout_mode = 2
 
-[node name="Button" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity/Reset" index="0" unique_id=286523834]
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity/Reset" index="0" unique_id=286523834]
 Section = "accessibility"
 Key = "enemy_outlines_opacity"
 
@@ -1752,8 +1767,8 @@ text = "CANCEL_BUTTON"
 [connection signal="pressed" from="MainMenu/Log/Logout" to="LogingMenu" method="logout"]
 [connection signal="tab_changed" from="Settings/VBoxContainer/TabContainer" to="LightClick" method="tab_interract"]
 [connection signal="tab_hovered" from="Settings/VBoxContainer/TabContainer" to="LightHover" method="tab_interract"]
-[connection signal="item_selected" from="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/Display/DisplayModeInput2" to="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/Display/DisplayModeInput2" method="_on_item_selected"]
-[connection signal="item_selected" from="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/Resolution/ResolutionInput" to="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/Resolution/ResolutionInput" method="_on_item_selected"]
+[connection signal="item_selected" from="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/Display/DisplayModeInput2" to="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/Display/DisplayModeInput2" method="_on_item_selected"]
+[connection signal="item_selected" from="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/Resolution/ResolutionInput" to="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/Resolution/ResolutionInput" method="_on_item_selected"]
 [connection signal="tab_changed" from="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB" to="LightHover" method="tab_interract"]
 [connection signal="tab_hovered" from="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB" to="LightHover" method="tab_interract"]
 [connection signal="mouse_entered" from="Settings/VBoxContainer/MarginContainer/HBoxContainer/APPLY_BUTTON" to="LightHover" method="tab_interract"]
@@ -1783,67 +1798,67 @@ text = "CANCEL_BUTTON"
 [connection signal="mouse_entered" from="ConfirmDialog/VBoxContainer/CancelButton" to="Hover" method="play"]
 [connection signal="pressed" from="ConfirmDialog/VBoxContainer/CancelButton" to="Click" method="play"]
 
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/Application"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/Display"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/Display/MarginContainer/UiSettingsLabel"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/Display/Reset"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/Resolution"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/Resolution/MarginContainer/UiSettingsLabel"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/Resolution/Reset"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/CustomResolution"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/CustomResolution/MarginContainer/UiSettingsLabel"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/CustomResolution/Reset"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/StrechMode"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/StrechMode/MarginContainer/UiSettingsLabel"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ApplicationSettings/StrechMode/Reset"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/Rendering"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/Fov"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/Fov/MarginContainer/UiSettingsLabel"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/Fov/NumericInput"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/Fov/Reset"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/VsyncMode"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/VsyncMode/MarginContainer/UiSettingsLabel"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/VsyncMode/Reset"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/LimitFps"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/LimitFps/MarginContainer/UiSettingsLabel"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/LimitFps/Reset"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/MaxFps"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/MaxFps/MarginContainer/UiSettingsLabel"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/MaxFps/NumericInput"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/RenderingSettings/MaxFps/Reset"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/Scaling"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/RenderScaleMode"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/RenderScaleMode/MarginContainer/UiSettingsLabel"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/RenderScaleMode/Reset"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/RenderScaleScale"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/RenderScaleScale/MarginContainer/UiSettingsLabel"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/RenderScaleScale/NumericInput"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/RenderScaleScale/Reset"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/FSRSharpness"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/FSRSharpness/MarginContainer/UiSettingsLabel"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/FSRSharpness/NumericInput"]
-[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/VBoxContainer/ScalingSettings/FSRSharpness/Reset"]
-[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/Volume"]
-[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/Master"]
-[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/Master/MarginContainer/UiSettingsLabel"]
-[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/Master/BusVolumeInput"]
-[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/Master/Reset"]
-[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/Music"]
-[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/Music/MarginContainer/UiSettingsLabel"]
-[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/Music/BusVolumeInput"]
-[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/Music/Reset"]
-[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/SFX"]
-[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/SFX/MarginContainer/UiSettingsLabel"]
-[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/SFX/BusVolumeInput"]
-[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/SFX/Reset"]
-[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/EnvSFX"]
-[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/EnvSFX/MarginContainer/UiSettingsLabel"]
-[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/EnvSFX/BusVolumeInput"]
-[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/EnvSFX/Reset"]
-[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/FbSFX"]
-[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/FbSFX/MarginContainer/UiSettingsLabel"]
-[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/FbSFX/BusVolumeInput"]
-[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/VBoxContainer/VolumeSettings/FbSFX/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/Application"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/Display"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/Display/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/Display/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/Resolution"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/Resolution/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/Resolution/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/CustomResolution"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/CustomResolution/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/CustomResolution/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/StrechMode"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/StrechMode/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/StrechMode/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/Rendering"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/Fov"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/Fov/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/Fov/NumericInput"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/Fov/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/VsyncMode"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/VsyncMode/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/VsyncMode/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/LimitFps"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/LimitFps/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/LimitFps/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/MaxFps"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/MaxFps/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/MaxFps/NumericInput"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/MaxFps/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/Scaling"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/RenderScaleMode"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/RenderScaleMode/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/RenderScaleMode/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/RenderScaleScale"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/RenderScaleScale/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/RenderScaleScale/NumericInput"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/RenderScaleScale/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/FSRSharpness"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/FSRSharpness/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/FSRSharpness/NumericInput"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/FSRSharpness/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/Volume"]
+[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Master"]
+[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Master/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Master/BusVolumeInput"]
+[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Master/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Music"]
+[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Music/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Music/BusVolumeInput"]
+[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Music/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/SFX"]
+[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/SFX/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/SFX/BusVolumeInput"]
+[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/SFX/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/EnvSFX"]
+[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/EnvSFX/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/EnvSFX/BusVolumeInput"]
+[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/EnvSFX/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/FbSFX"]
+[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/FbSFX/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/FbSFX/BusVolumeInput"]
+[editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/FbSFX/Reset"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/Sensitivity"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SensitivitySettings/DPI"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SensitivitySettings/DPI/MarginContainer/UiSettingsLabel"]
@@ -1898,20 +1913,20 @@ text = "CANCEL_BUTTON"
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Interface"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Stats"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Stats/UiSettingsLabel"]
-[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/Language"]
-[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/LanguageSettings/Language"]
-[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/LanguageSettings/Language/MarginContainer/UiSettingsLabel"]
-[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/LanguageSettings/Language/Reset"]
-[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/Enemies"]
-[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyColor"]
-[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyColor/MarginContainer/UiSettingsLabel"]
-[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyColor/Reset"]
-[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/Outlines"]
-[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesThickness"]
-[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesThickness/MarginContainer/UiSettingsLabel"]
-[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesThickness/NumericInput"]
-[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesThickness/Reset"]
-[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity"]
-[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity/MarginContainer/UiSettingsLabel"]
-[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity/NumericInput"]
-[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/Language"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/LanguageSettings/Language"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/LanguageSettings/Language/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/LanguageSettings/Language/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/Enemies"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings/EnemyColor"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings/EnemyColor/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings/EnemyColor/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/Outlines"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2/EnemyOutlinesThickness"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2/EnemyOutlinesThickness/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2/EnemyOutlinesThickness/NumericInput"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2/EnemyOutlinesThickness/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity/NumericInput"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity/Reset"]
