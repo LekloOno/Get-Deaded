@@ -360,9 +360,10 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
 mouse_filter = 0
-current_tab = 0
+current_tab = 2
 
 [node name="VIDEO_TAB" type="MarginContainer" parent="Settings/VBoxContainer/TabContainer" unique_id=299629799]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 30
@@ -882,7 +883,6 @@ Section = "sound"
 Key = "feedback_sfx_volume_db"
 
 [node name="CONTROLS_TAB" type="MarginContainer" parent="Settings/VBoxContainer/TabContainer" unique_id=2137857519]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 20
@@ -989,35 +989,38 @@ text = "SPRINT_MODE_LABEL"
 [node name="SprintModeOptions" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/SprintMode" unique_id=1093197233]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 3
 theme_override_constants/separation = 5
 script = ExtResource("33_3fk1l")
 
 [node name="ToggleButton" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/SprintMode/SprintModeOptions" unique_id=1111186385]
-custom_minimum_size = Vector2(58, 0)
+custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_type_variation = &"InputButton"
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 11
 toggle_mode = true
 button_group = SubResource("ButtonGroup_4n7it")
 text = "SPRINT_TOGGLE_BUTTON"
 clip_text = true
 
 [node name="HoldButton" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/SprintMode/SprintModeOptions" unique_id=942347926]
-custom_minimum_size = Vector2(58, 0)
+custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_type_variation = &"InputButton"
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 11
 toggle_mode = true
 button_group = SubResource("ButtonGroup_4n7it")
 text = "SPRINT_HOLD_BUTTON"
 clip_text = true
 
 [node name="AutoButton" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/SprintMode/SprintModeOptions" unique_id=1516286433]
-custom_minimum_size = Vector2(58, 0)
+custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_type_variation = &"InputButton"
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 11
 toggle_mode = true
 button_group = SubResource("ButtonGroup_4n7it")
 text = "SPRINT_AUTO_BUTTON"
