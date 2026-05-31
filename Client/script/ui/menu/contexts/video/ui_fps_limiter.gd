@@ -1,7 +1,5 @@
 extends Control
 
-@export var label: Control
-
 func _ready() -> void:
 	LimitFpsSetting.Changed.connect(_on_setting_value_changed)
 	update_ui(LimitFpsSetting.Value)
@@ -13,6 +11,3 @@ func _on_setting_value_changed(sender, value):
 	
 func update_ui(value):
 	visible = value
-	
-	if label:
-		label.visible = value

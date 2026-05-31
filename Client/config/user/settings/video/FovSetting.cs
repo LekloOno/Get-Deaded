@@ -20,6 +20,13 @@ public partial class FovSetting : UserSetting
         }
 
         float fov = (float)value;
+        if (fov < 60f)
+        {
+            effectiveValue = 60f;
+            _playerCameraSettings.HorizontalFov = 60f;
+            return false;
+        }
+
         _playerCameraSettings.HorizontalFov = fov;
         effectiveValue = value;
 

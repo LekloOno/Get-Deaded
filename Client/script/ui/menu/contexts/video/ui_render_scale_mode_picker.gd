@@ -25,11 +25,7 @@ func mode_to_idx(mode) -> int:
 
 func _on_item_selected(index: int) -> void:
 	var mode = modes[get_item_text(index)]
-	
-	if mode == -1 :
-		RenderScaleModeSetting.GdTryUpdateValue(self, Viewport.SCALING_3D_MODE_BILINEAR)
-	else :
-		RenderScaleModeSetting.GdTryUpdateValue(self, mode)
+	RenderScaleModeSetting.GdTryUpdateValue(self, mode)
 		
 	mode_changed.emit(mode)
 	
@@ -40,8 +36,4 @@ func update_ui():
 	
 func get_current_mode() :
 	var curr_mode = RenderScaleModeSetting.Value
-	if curr_mode == Viewport.SCALING_3D_MODE_BILINEAR:
-		if RenderScaleScaleSetting.Value == 1.0:
-			return -1
-	
 	return curr_mode
