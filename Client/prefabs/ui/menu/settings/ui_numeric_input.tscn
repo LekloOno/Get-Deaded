@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://o226khbqw71v"]
+
+[ext_resource type="Script" uid="uid://bs8xu4w27kxwp" path="res://addons/TraGUS/Nodes/SettingRange.cs" id="1_fkee0"]
+[ext_resource type="Script" uid="uid://b1yi7ydtb8exf" path="res://addons/TraGUS/Nodes/SettingLineEdit.cs" id="2_alau8"]
+
+[node name="NumericInput" type="HBoxContainer" unique_id=89397296]
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="MasterSlider" type="HSlider" parent="." unique_id=393378731]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 60.0
+max_value = 140.0
+value = 60.0
+script = ExtResource("1_fkee0")
+
+[node name="LineEdit2" type="LineEdit" parent="." unique_id=460282415]
+custom_minimum_size = Vector2(58, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+alignment = 1
+virtual_keyboard_type = 2
+script = ExtResource("2_alau8")

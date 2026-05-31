@@ -15,7 +15,7 @@ layout_mode = 2
 theme_override_constants/separation = 5
 
 [node name="Button" type="Button" parent="Input" unique_id=1880162874]
-custom_minimum_size = Vector2(60, 0)
+custom_minimum_size = Vector2(58, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"InputButton"
@@ -25,7 +25,7 @@ script = ExtResource("2_ckplc")
 action = "move_forward"
 
 [node name="Button2" type="Button" parent="Input" unique_id=874213555]
-custom_minimum_size = Vector2(60, 0)
+custom_minimum_size = Vector2(58, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"InputButton"
@@ -36,7 +36,7 @@ action = "move_forward"
 input_index = 1
 
 [node name="Button3" type="Button" parent="Input" unique_id=2060705678]
-custom_minimum_size = Vector2(60, 0)
+custom_minimum_size = Vector2(58, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"InputButton"

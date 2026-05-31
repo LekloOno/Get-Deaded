@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://cossntbqo23u2"]
+
+[ext_resource type="Script" uid="uid://yone8b285x4t" path="res://script/ui/menu/contexts/sound/ui_volume_slider.gd" id="1_gbcb0"]
+[ext_resource type="Script" uid="uid://bwag4h0e76hv" path="res://script/ui/menu/ui_num_input.gd" id="2_3anpm"]
+
+[node name="BusVolumeInput" type="HBoxContainer" unique_id=229711704]
+size_flags_horizontal = 3
+theme_override_constants/separation = 15
+
+[node name="MasterSlider" type="HSlider" parent="." unique_id=631872558]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.1
+value = 1.0
+script = ExtResource("1_gbcb0")
+
+[node name="LineEdit" type="LineEdit" parent="." unique_id=2069920691]
+custom_minimum_size = Vector2(58, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+alignment = 1
+virtual_keyboard_type = 2
+script = ExtResource("2_3anpm")
+
+[connection signal="value_applied" from="LineEdit" to="MasterSlider" method="_on_value_changed"]
