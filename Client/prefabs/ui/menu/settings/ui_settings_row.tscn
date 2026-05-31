@@ -10,9 +10,13 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 15
 
-[node name="UiSettingsLabel" parent="." unique_id=109094902 instance=ExtResource("1_qm3pm")]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1908736311]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="UiSettingsLabel" parent="MarginContainer" unique_id=109094902 instance=ExtResource("1_qm3pm")]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[editable path="UiSettingsLabel"]
+[editable path="MarginContainer/UiSettingsLabel"]
