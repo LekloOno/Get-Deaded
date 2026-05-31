@@ -360,10 +360,9 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
 mouse_filter = 0
-current_tab = 3
+current_tab = 0
 
 [node name="VIDEO_TAB" type="MarginContainer" parent="Settings/VBoxContainer/TabContainer" unique_id=299629799]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 30
@@ -1355,6 +1354,7 @@ action = "stats"
 action = "stats"
 
 [node name="ACCESSIBILITY_TAB" type="MarginContainer" parent="Settings/VBoxContainer/TabContainer" unique_id=176065705]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 30
@@ -1437,17 +1437,26 @@ layout_mode = 2
 Section = "accessibility"
 Key = "enemies_color"
 
-[node name="EnemyOutlinesThickness" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings" unique_id=1856201992 instance=ExtResource("31_t61gj")]
+[node name="Outlines" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer" unique_id=4223760 instance=ExtResource("38_squjd")]
+layout_mode = 2
+
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/Outlines" index="0" unique_id=366278316]
+text = "ENEMY_OUTLINES_LABEL"
+
+[node name="EnemiesSettings2" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer" unique_id=2093655129]
+layout_mode = 2
+
+[node name="EnemyOutlinesThickness" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2" unique_id=992300064 instance=ExtResource("31_t61gj")]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesThickness/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1856201992, 109094902, 172764845) index="0" unique_id=1465678305]
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesThickness/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(992300064, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "ENEMY_OUTLINES_THICKNESS_LABEL"
 
-[node name="NumericInput" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesThickness" unique_id=772766132 instance=ExtResource("23_pwonq")]
+[node name="NumericInput" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesThickness" unique_id=241719576 instance=ExtResource("23_pwonq")]
 layout_mode = 2
 
-[node name="MasterSlider" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesThickness/NumericInput" index="0" unique_id=393378731]
+[node name="MasterSlider" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesThickness/NumericInput" index="0" unique_id=393378731]
 min_value = 0.0
 max_value = 10.0
 step = 0.2
@@ -1455,24 +1464,24 @@ value = 10.0
 Section = "accessibility"
 Key = "enemy_outlines_thickness"
 
-[node name="Reset" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesThickness" unique_id=1415646131 instance=ExtResource("34_6me0n")]
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesThickness" unique_id=2116499800 instance=ExtResource("34_6me0n")]
 layout_mode = 2
 
-[node name="Button" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesThickness/Reset" index="0" unique_id=286523834]
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesThickness/Reset" index="0" unique_id=286523834]
 Section = "accessibility"
 Key = "enemy_outlines_thickness"
 
-[node name="EnemyOutlinesOpacity" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings" unique_id=1635426381 instance=ExtResource("31_t61gj")]
+[node name="EnemyOutlinesOpacity" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2" unique_id=1084763405 instance=ExtResource("31_t61gj")]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesOpacity/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1635426381, 109094902, 172764845) index="0" unique_id=1465678305]
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1084763405, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "ENEMY_OUTLINES_OPACITY_LABEL"
 
-[node name="NumericInput" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesOpacity" unique_id=152661337 instance=ExtResource("23_pwonq")]
+[node name="NumericInput" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity" unique_id=156961441 instance=ExtResource("23_pwonq")]
 layout_mode = 2
 
-[node name="MasterSlider" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesOpacity/NumericInput" index="0" unique_id=393378731]
+[node name="MasterSlider" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity/NumericInput" index="0" unique_id=393378731]
 min_value = 0.0
 max_value = 1.0
 step = 0.05
@@ -1480,10 +1489,10 @@ value = 1.0
 Section = "accessibility"
 Key = "enemy_outlines_opacity"
 
-[node name="Reset" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesOpacity" unique_id=496489738 instance=ExtResource("34_6me0n")]
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity" unique_id=679106125 instance=ExtResource("34_6me0n")]
 layout_mode = 2
 
-[node name="Button" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesOpacity/Reset" index="0" unique_id=286523834]
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity/Reset" index="0" unique_id=286523834]
 Section = "accessibility"
 Key = "enemy_outlines_opacity"
 
@@ -1897,11 +1906,12 @@ text = "CANCEL_BUTTON"
 [editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyColor"]
 [editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyColor/MarginContainer/UiSettingsLabel"]
 [editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyColor/Reset"]
-[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesThickness"]
-[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesThickness/MarginContainer/UiSettingsLabel"]
-[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesThickness/NumericInput"]
-[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesThickness/Reset"]
-[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesOpacity"]
-[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesOpacity/MarginContainer/UiSettingsLabel"]
-[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesOpacity/NumericInput"]
-[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings/EnemyOutlinesOpacity/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/Outlines"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesThickness"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesThickness/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesThickness/NumericInput"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesThickness/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity/NumericInput"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity/Reset"]
