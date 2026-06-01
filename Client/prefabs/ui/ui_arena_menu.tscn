@@ -29,6 +29,7 @@
 [ext_resource type="AudioStream" uid="uid://bp67lpqxgmfk3" path="res://assets/sounds/ui/hover3.wav" id="27_1fil8"]
 [ext_resource type="Script" uid="uid://bs7wd2ltt17dh" path="res://script/ui/menu/ui_tabs_sound.gd" id="28_no00x"]
 [ext_resource type="PackedScene" uid="uid://cossntbqo23u2" path="res://prefabs/ui/menu/settings/values/ui_bus_volume_input.tscn" id="29_pwonq"]
+[ext_resource type="Script" uid="uid://dfn3brhy5f8m7" path="res://script/ui/menu/contexts/video/UI_QualityOptionButton.cs" id="29_t61gj"]
 [ext_resource type="AudioStream" uid="uid://bshhncf67w1g1" path="res://assets/sounds/ui/click_lighter.wav" id="29_wigoj"]
 [ext_resource type="Script" uid="uid://cgf1qqnlqvbs2" path="res://script/ui/menu/contexts/inputs/ui_input_setting_button.gd" id="30_rt8lt"]
 [ext_resource type="PackedScene" uid="uid://d3ffncssg3j2l" path="res://prefabs/ui/menu/settings/ui_settings_row.tscn" id="31_t61gj"]
@@ -360,10 +361,9 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
 mouse_filter = 0
-current_tab = 2
+current_tab = 0
 
 [node name="VIDEO_TAB" type="MarginContainer" parent="Settings/VBoxContainer/TabContainer" unique_id=299629799]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 30
@@ -734,6 +734,57 @@ layout_mode = 2
 Section = "video"
 Key = "fsr_sharpness"
 
+[node name="Quality" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer" unique_id=379187419 instance=ExtResource("38_squjd")]
+layout_mode = 2
+
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/Quality" index="0" unique_id=366278316]
+text = "QUALITY_LABEL"
+
+[node name="QualitySettings" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer" unique_id=1817700962]
+layout_mode = 2
+
+[node name="PositionalShadows" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings" unique_id=721084738 instance=ExtResource("31_t61gj")]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/PositionalShadows/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(721084738, 109094902, 172764845) index="0" unique_id=1465678305]
+text = "POSITIONAL_SHADOWS_QUALITY_LABEL"
+
+[node name="UI_QualityOptionButton" type="OptionButton" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/PositionalShadows" unique_id=1237667425]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("29_t61gj")
+_settingKey = "positional_shadows_quality"
+metadata/_custom_type_script = "uid://dfn3brhy5f8m7"
+
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/PositionalShadows" unique_id=2028005202 instance=ExtResource("34_6me0n")]
+layout_mode = 2
+
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/PositionalShadows/Reset" index="0" unique_id=286523834]
+Section = "video"
+Key = "positional_shadows_quality"
+
+[node name="DirectionalShadows" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings" unique_id=435261633 instance=ExtResource("31_t61gj")]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/DirectionalShadows/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(435261633, 109094902, 172764845) index="0" unique_id=1465678305]
+text = "DIRECTIONAL_SHADOWS_QUALITY_LABEL"
+
+[node name="UI_QualityOptionButton" type="OptionButton" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/DirectionalShadows" unique_id=282089342]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("29_t61gj")
+_settingKey = "directional_shadows_quality"
+metadata/_custom_type_script = "uid://dfn3brhy5f8m7"
+
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/DirectionalShadows" unique_id=1008955707 instance=ExtResource("34_6me0n")]
+layout_mode = 2
+
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/DirectionalShadows/Reset" index="0" unique_id=286523834]
+Section = "video"
+Key = "directional_shadows_quality"
+
 [node name="SOUND_TAB" type="MarginContainer" parent="Settings/VBoxContainer/TabContainer" unique_id=1703747841]
 visible = false
 layout_mode = 2
@@ -883,6 +934,7 @@ Section = "sound"
 Key = "feedback_sfx_volume_db"
 
 [node name="CONTROLS_TAB" type="MarginContainer" parent="Settings/VBoxContainer/TabContainer" unique_id=2137857519]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 20
@@ -1841,6 +1893,13 @@ text = "CANCEL_BUTTON"
 [editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/FSRSharpness/MarginContainer/UiSettingsLabel"]
 [editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/FSRSharpness/NumericInput"]
 [editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/FSRSharpness/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/Quality"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/PositionalShadows"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/PositionalShadows/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/PositionalShadows/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/DirectionalShadows"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/DirectionalShadows/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/DirectionalShadows/Reset"]
 [editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/Volume"]
 [editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Master"]
 [editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Master/MarginContainer/UiSettingsLabel"]
