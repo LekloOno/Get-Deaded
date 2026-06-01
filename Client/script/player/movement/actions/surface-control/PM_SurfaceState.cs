@@ -19,7 +19,7 @@ public partial class PM_SurfaceState : Node
     public override void _Ready()
     {
         _currentData = _stateData.Normal;
-        _sprintInput.Start += (o, e) => SetData(_stateData.Sprint);
+        _sprintInput.Start += StartSprint;
         _sprintInput.Stop += ResetSprint;
         
         _crouch.OnStart += SetDataCrouch;
@@ -27,6 +27,12 @@ public partial class PM_SurfaceState : Node
 
         _slide.OnStart += SetDataSlide;
         _slide.OnStop += ResetData;
+    }
+
+    private void StartSprint(object sender, EmptyInput args)
+    {
+        if (!IsCrouch() && !IsSlide())
+            SetData(_stateData.Sprint);
     }
 
     private void ResetSprint(object sender, EmptyInput args)

@@ -55,6 +55,8 @@ public partial class CNT_AutoSprint : Node
 
     public override void _Ready()
     {
+        SetPhysicsProcess(false);
+        SetProcessUnhandledInput(false);
         if (SprintModeSetting.Mode == SprintMode.Auto)
             Enable();
 
