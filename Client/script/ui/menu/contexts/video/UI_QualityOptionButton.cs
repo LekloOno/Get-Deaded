@@ -36,7 +36,7 @@ public partial class UI_QualityOptionButton : OptionButton
 
         Populate();
 
-        SetQuality((VideoQualitySetting) (int) _userSetting.Value);
+        SetQuality((VideoQuality) (int) _userSetting.Value);
         _userSetting.Changed += OnSettingChanged;
         
         ItemSelected += OnItemSelected;
@@ -47,14 +47,14 @@ public partial class UI_QualityOptionButton : OptionButton
         if (sender == this)
             return;
 
-        SetQuality((VideoQualitySetting) (int) value);
+        SetQuality((VideoQuality) (int) value);
     }
 
     private void Populate()
     {
         Clear();
 
-        foreach (VideoQualitySetting quality in Enum.GetValues<VideoQualitySetting>())
+        foreach (VideoQuality quality in Enum.GetValues<VideoQuality>())
         {
             var mask = quality.ToMask();
 
@@ -68,11 +68,11 @@ public partial class UI_QualityOptionButton : OptionButton
         }
     }
 
-    private void SetQuality(VideoQualitySetting quality)
+    private void SetQuality(VideoQuality quality)
     {
         for (int i = 0; i < ItemCount; i++)
         {
-            var itemQuality = (VideoQualitySetting)(int)GetItemMetadata(i);
+            var itemQuality = (VideoQuality)(int)GetItemMetadata(i);
 
             if (itemQuality == quality)
             {
@@ -89,9 +89,9 @@ public partial class UI_QualityOptionButton : OptionButton
         if (_userSetting == null)
             return;
 
-        var quality = (VideoQualitySetting)(int)GetItemMetadata((int)index);
+        var quality = (VideoQuality)(int)GetItemMetadata((int)index);
         
         if (!_userSetting.TryUpdateValue(this, (int) quality, out Variant effectiveValue))
-            SetQuality((VideoQualitySetting) (int) effectiveValue);
+            SetQuality((VideoQuality) (int) effectiveValue);
     }
 }

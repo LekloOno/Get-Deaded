@@ -60,6 +60,7 @@ VfxTrailPoolLoader="*uid://buxkqi6mk3jc7"
 AutoSprintDelaySetting="*uid://dxba231bx6nx6"
 SprintModeSetting="*uid://7qrx0umpxvjd"
 PositionalShadowsSetting="*uid://cthb76ai6603k"
+DirectionalShadowsSetting="*uid://copbu2peq2f7f"
 
 [display]
 
