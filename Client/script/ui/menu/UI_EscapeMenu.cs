@@ -94,6 +94,9 @@ public partial class UI_EscapeMenu : Control, UI_IMenuStackManager
 
 		_menuStack.Push(menu);
 		menu.Show();
+
+		if (menu.HasMethod("open_menu"))
+			menu.Call("open_menu");
 	}
 
 	/// <summary>
@@ -101,7 +104,14 @@ public partial class UI_EscapeMenu : Control, UI_IMenuStackManager
 	/// </summary>
 	public void ExitCurrent()
 	{
-		Control current = _menuStack.Pop();
+		Control current = _menuStack.Peek();
+		
+		if (current.HasMethod("close_menu") &&
+			!(bool) current.Call("close_menu"))
+			return;
+
+		_menuStack.Pop();
+
 		current.Hide();
 
 		if (_menuStack.TryPeek(out Control next))
