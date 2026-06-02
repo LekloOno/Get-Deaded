@@ -5,9 +5,14 @@ public partial class SsrSetting : VideoQualitySetting
     public const string KeyString = "screen_space_reflection";
     public override string Key => KeyString;
 
-    protected override void UpdateFrom(VideoQuality quality)
+    protected override void UpdateFrom(VideoQuality quality, out VideoQuality effectiveQuality)
     {
         Environment? env = GetViewport()?.World3D?.Environment;
+
+        if (quality == VideoQuality.Minimal)
+            effectiveQuality = VideoQuality.Disabled;
+        else
+            effectiveQuality = quality;
 
         if (env == null)
         {
@@ -15,7 +20,7 @@ public partial class SsrSetting : VideoQualitySetting
             return;
         }
 
-        UpdateEnvironment(env);
+        UpdateEnvironmentFrom(env, effectiveQuality);
     }
     
     private static SsrQuality From(VideoQuality quality)
@@ -30,11 +35,11 @@ public partial class SsrSetting : VideoQualitySetting
         };
     }
 
-    public static void UpdateEnvironment(Environment env)
-    {
-        SsrQuality settings = From(Quality);
+    private static void UpdateEnvironmentFrom(Environment env, VideoQuality quality)
+    {   
+        SsrQuality settings = From(quality);
 
-        if (Quality == VideoQuality.Disabled)
+        if (quality == VideoQuality.Disabled)
         {
             env.SsrEnabled = false;
             GD.Print("disable");
@@ -45,6 +50,9 @@ public partial class SsrSetting : VideoQualitySetting
 
         env.SsrMaxSteps = settings.MaxSteps;
     }
+
+    public static void UpdateEnvironment(Environment env)
+        => UpdateEnvironmentFrom(env, Quality);
 
     private readonly static SsrQuality Low     = new(32);
     private readonly static SsrQuality Medium  = new(64);

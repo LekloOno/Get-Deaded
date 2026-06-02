@@ -5,9 +5,11 @@ public partial class SsilSetting : VideoQualitySetting
     public const string KeyString = "screen_space_indirect_lighting";
     public override string Key => KeyString;
 
-    protected override void UpdateFrom(VideoQuality quality)
+    protected override void UpdateFrom(VideoQuality quality, out VideoQuality effectiveQuality)
     {
         Environment? env = GetViewport()?.World3D?.Environment;
+
+        effectiveQuality = quality;
 
         if (env == null)
         {
@@ -15,7 +17,7 @@ public partial class SsilSetting : VideoQualitySetting
             return;
         }
 
-        UpdateEnvironment(env);
+        UpdateEnvironmentFrom(env, effectiveQuality);
     }
     
     private static SsilQuality From(VideoQuality quality)
@@ -31,9 +33,9 @@ public partial class SsilSetting : VideoQualitySetting
         };
     }
 
-    public static void UpdateEnvironment(Environment env)
-    {        
-        if (Quality == VideoQuality.Disabled)
+    private static void UpdateEnvironmentFrom(Environment env, VideoQuality quality)
+    {       
+        if (quality == VideoQuality.Disabled)
         {
             env.SsilEnabled = false;
             return;
@@ -41,7 +43,7 @@ public partial class SsilSetting : VideoQualitySetting
 
         env.SsilEnabled = true;
 
-        SsilQuality settings = From(Quality);
+        SsilQuality settings = From(quality);
         
         RenderingServer.EnvironmentSetSsilQuality(
             settings.Quality,
@@ -51,6 +53,9 @@ public partial class SsilSetting : VideoQualitySetting
             50f,
             300f);
     }
+
+    public static void UpdateEnvironment(Environment env)
+        => UpdateEnvironmentFrom(env, Quality);
 
     private readonly static SsilQuality Minimal = new(
         RenderingServer.EnvironmentSsilQuality.VeryLow);

@@ -5,7 +5,7 @@ public partial class DirectionalShadowsSetting : VideoQualitySetting
     public const string KeyString = "directional_shadows_quality";
     public override string Key => KeyString;
 
-    protected override void UpdateFrom(VideoQuality quality)
+    protected override void UpdateFrom(VideoQuality quality, out VideoQuality effectiveQuality)
     {
         DirectionalShadowsQuality settings = From(Quality);
 
@@ -14,24 +14,29 @@ public partial class DirectionalShadowsSetting : VideoQualitySetting
 
         DirectionalLight3D? sun = GetTree().GetFirstNodeInGroup("Sun") as DirectionalLight3D;
 
+        effectiveQuality = quality;
+
         if (sun == null)
         {
             GD.PrintErr("[DirectionalShadowsSetting] no DirectionalLight3D found in group 'Sun'.");
             return;
         }
 
-        UpdateLight(sun);
+        UpdateLightFrom(sun, effectiveQuality);
     }
 
-    public static void UpdateLight(DirectionalLight3D light)
-    {
-        DirectionalShadowsQuality settings = From(Quality);
+    private static void UpdateLightFrom(DirectionalLight3D light, VideoQuality quality)
+    {   
+        DirectionalShadowsQuality settings = From(quality);
 
         light.DirectionalShadowMode = settings.ShadowMode;
         light.DirectionalShadowMaxDistance = settings.MaxDistance;
         light.DirectionalShadowSplit1 = settings.Split1;
         light.ShadowBlur = settings.Blur;  
     }
+
+    public static void UpdateLight(DirectionalLight3D light) =>
+        UpdateLightFrom(light, Quality);
 
     private static DirectionalShadowsQuality From(VideoQuality quality)
     {

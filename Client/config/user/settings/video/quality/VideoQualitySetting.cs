@@ -25,13 +25,14 @@ public abstract partial class VideoQualitySetting : UserSetting
             return false;
         }
 
-        effectiveValue = value;
-        Quality = (VideoQuality) intVal;
-
-        UpdateFrom(Quality);
+        VideoQuality quality = (VideoQuality) intVal;
+        UpdateFrom(quality, out VideoQuality effectiveQuality);
+        
+        effectiveValue = (int) effectiveQuality;
+        Quality = effectiveQuality;
 
         return true;
     }
 
-    protected abstract void UpdateFrom(VideoQuality quality);
+    protected abstract void UpdateFrom(VideoQuality quality, out VideoQuality effectiveQuality);
 }

@@ -4,9 +4,14 @@ public partial class GlowSetting : VideoQualitySetting
 {
     public const string KeyString = "glow_quality";
     public override string Key => KeyString;
-    protected override void UpdateFrom(VideoQuality quality)
+    protected override void UpdateFrom(VideoQuality quality, out VideoQuality effectiveQuality)
     {
         Environment? env = GetViewport()?.World3D?.Environment;
+
+        if (quality == VideoQuality.Disabled)
+            effectiveQuality = VideoQuality.Minimal;
+        else
+            effectiveQuality = quality;
 
         if (env == null)
         {
@@ -14,7 +19,7 @@ public partial class GlowSetting : VideoQualitySetting
             return;
         }
 
-        UpdateEnvironment(env);
+        UpdateEnvironmentFrom(env, effectiveQuality);
     }
     
     private static GlowQuality From(VideoQuality quality)
@@ -30,15 +35,18 @@ public partial class GlowSetting : VideoQualitySetting
         };
     }
 
-    public static void UpdateEnvironment(Environment env)
+    private static void UpdateEnvironmentFrom(Environment env, VideoQuality quality)
     {
-        GlowQuality settings = From(Quality);
+        GlowQuality settings = From(quality);
 
         RenderingServer.EnvironmentGlowSetUseBicubicUpscale(settings.BicubicUpScale);
 
         for (int i = 0; i < 7; i++)
             env.SetGlowLevel(i, settings.Levels[i]);
     }
+
+    public static void UpdateEnvironment(Environment env)
+        => UpdateEnvironmentFrom(env, Quality);
 
     private readonly static GlowQuality Minimal = new(false, [0.0f, 1.5f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f]);
     private readonly static GlowQuality Low     = new(false, [0.0f, 1.0f, 0.5f, 0.0f, 0.0f, 0.0f, 0.0f]);

@@ -95,8 +95,18 @@ public partial class UI_QualityPresetOptionButton : OptionButton
         
         int intQuality = (int) quality;
         _ssao?.TryUpdateValue(this, intQuality, out _);
-        _ssil?.TryUpdateValue(this, intQuality, out _);
-        _ssr?.TryUpdateValue(this, intQuality, out _);
+
+        if (quality == VideoQuality.Minimal || quality == VideoQuality.Low)
+        {
+            _ssil?.TryUpdateValue(this, (int) VideoQuality.Disabled, out _);
+            _ssr?.TryUpdateValue(this, (int) VideoQuality.Disabled, out _);
+        }
+        else
+        {
+            _ssil?.TryUpdateValue(this, intQuality, out _);
+            _ssr?.TryUpdateValue(this, intQuality, out _);
+        }
+        
         _glow?.TryUpdateValue(this, intQuality, out _);
         
         _dirShadows?.TryUpdateValue(this, intQuality, out _);

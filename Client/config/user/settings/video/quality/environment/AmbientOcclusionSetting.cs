@@ -5,9 +5,11 @@ public partial class AmbientOcclusionSetting : VideoQualitySetting
     public const string KeyString = "ambient_occlusion";
     public override string Key => KeyString;
 
-    protected override void UpdateFrom(VideoQuality quality)
+    protected override void UpdateFrom(VideoQuality quality, out VideoQuality effectiveQuality)
     {
         Environment? env = GetViewport()?.World3D?.Environment;
+
+        effectiveQuality = quality;
 
         if (env == null)
         {
@@ -15,7 +17,7 @@ public partial class AmbientOcclusionSetting : VideoQualitySetting
             return;
         }
 
-        UpdateEnvironment(env);
+        UpdateEnvironmentFrom(env, effectiveQuality);
     }
     
     private static AmbientOcclusionQuality From(VideoQuality quality)
@@ -31,9 +33,9 @@ public partial class AmbientOcclusionSetting : VideoQualitySetting
         };
     }
 
-    public static void UpdateEnvironment(Environment env)
+    private static void UpdateEnvironmentFrom(Environment env, VideoQuality quality)
     {
-        if (Quality == VideoQuality.Disabled)
+        if (quality == VideoQuality.Disabled)
         {
             env.SsaoEnabled = false;
             return;
@@ -41,7 +43,7 @@ public partial class AmbientOcclusionSetting : VideoQualitySetting
 
         env.SsaoEnabled = true;
 
-        AmbientOcclusionQuality settings = From(Quality);
+        AmbientOcclusionQuality settings = From(quality);
         
         RenderingServer.EnvironmentSetSsaoQuality(
             settings.Quality,
@@ -51,6 +53,9 @@ public partial class AmbientOcclusionSetting : VideoQualitySetting
             50f,
             300f);
     }
+
+    public static void UpdateEnvironment(Environment env)
+        => UpdateEnvironmentFrom(env, Quality);
 
     private readonly static AmbientOcclusionQuality Minimal = new(
         RenderingServer.EnvironmentSsaoQuality.VeryLow);

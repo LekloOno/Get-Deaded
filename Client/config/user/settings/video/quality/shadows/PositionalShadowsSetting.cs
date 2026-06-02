@@ -5,9 +5,14 @@ public partial class PositionalShadowsSetting : VideoQualitySetting
     public const string KeyString = "positional_shadows_quality";
     public override string Key => KeyString;
 
-    protected override void UpdateFrom(VideoQuality quality)
+    protected override void UpdateFrom(VideoQuality quality, out VideoQuality effectiveQuality)
     {
-        ShadowsQuality settings = From(Quality);
+        if (quality == VideoQuality.Disabled)
+            effectiveQuality = VideoQuality.Minimal;
+        else
+            effectiveQuality = quality;
+
+        ShadowsQuality settings = From(effectiveQuality);
 
         RenderingServer.PositionalSoftShadowFilterSetQuality(settings.FilterQuality);
         RenderingServer.ViewportSetPositionalShadowAtlasSize(GetViewport().GetViewportRid(), settings.Size, true);
