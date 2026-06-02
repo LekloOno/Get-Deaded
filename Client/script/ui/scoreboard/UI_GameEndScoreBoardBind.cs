@@ -5,6 +5,7 @@ using Godot;
 public partial class UI_GameEndScoreBoardBind : Node
 {
     [Export] private UI_EscapeMenu _escapeMenu;
+    [Export] private Control _scoreBoardMenu;
     [Export] private UI_ScoreBoardManager _scoreBoardManager;
     [Export] private SC_GameManager _gameManager;
     [Export] private UIW_ArenaEnd _briefScore;
@@ -36,7 +37,7 @@ public partial class UI_GameEndScoreBoardBind : Node
 
     public void OpenScoreBoard()
     {
-        _escapeMenu.Enter(_scoreBoardManager);
+        _escapeMenu.Enter(_scoreBoardMenu);
         _entered = true;
     }
 

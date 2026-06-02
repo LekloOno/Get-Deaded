@@ -271,18 +271,25 @@ layout_mode = 2
 size_flags_vertical = 4
 text = "PLAY_BUTTON"
 
+[node name="Resume" type="Button" parent="MainMenu/Main" unique_id=861058745]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+text = "RESUME_BUTTON"
+
 [node name="Results" type="Button" parent="MainMenu/Main" unique_id=1985240647]
 visible = false
 layout_mode = 2
 size_flags_vertical = 4
 text = "RESULTS_BUTTON"
 
-[node name="ScoreBoard" type="Button" parent="MainMenu/Main" unique_id=557120396 node_paths=PackedStringArray("menu", "score_board")]
+[node name="ScoreBoard" type="Button" parent="MainMenu/Main" unique_id=557120396 node_paths=PackedStringArray("menu", "score_board_menu", "score_board")]
 layout_mode = 2
 text = "SCOREBOARD_BUTTON"
 script = ExtResource("8_4n7it")
 menu = NodePath("../../..")
-score_board = NodePath("../../../UiScoreboard")
+score_board_menu = NodePath("../../../ScoreBoardMenu")
+score_board = NodePath("../../../ScoreBoardMenu/UiScoreboard")
 
 [node name="Settings" type="Button" parent="MainMenu/Main" unique_id=1799708557 node_paths=PackedStringArray("settings_menu")]
 layout_mode = 2
@@ -350,6 +357,7 @@ script = ExtResource("10_b5eqi")
 _logged = true
 
 [node name="Settings" type="PanelContainer" parent="." unique_id=1980157602 node_paths=PackedStringArray("confirm_dialog")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1792,6 +1800,17 @@ text = "DIFFICULTY_EASY_BUTTON"
 script = ExtResource("33_vbkcm")
 _difficulty = 2
 
+[node name="PanelContainer2" type="PanelContainer" parent="Difficulty" unique_id=1195494103]
+custom_minimum_size = Vector2(50, 2)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="BACK_BUTTON" type="Button" parent="Difficulty" unique_id=2121779761]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "BACK_BUTTON"
+
 [node name="LogingMenu" type="PanelContainer" parent="." unique_id=489348171 node_paths=PackedStringArray("menu", "confirm_dialog", "confirm_button", "login_field", "password_field", "logged_user_label", "error_label")]
 visible = false
 layout_mode = 1
@@ -1837,6 +1856,17 @@ text = "LOG_IN_BUTTON"
 
 [node name="ErrorLabel" type="Label" parent="LogingMenu/VBoxContainer2" unique_id=315791211]
 layout_mode = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="LogingMenu/VBoxContainer2" unique_id=335560677]
+custom_minimum_size = Vector2(50, 2)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="BACK_BUTTON" type="Button" parent="LogingMenu/VBoxContainer2" unique_id=287507696]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "BACK_BUTTON"
 
 [node name="OfflineMenu" type="PanelContainer" parent="." unique_id=100958374 node_paths=PackedStringArray("_escapeMenu", "_difficultyMenu", "_offlineButton", "_loginButton", "_registerButton")]
 visible = false
@@ -1897,11 +1927,43 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "REGISTER_BUTTON"
 
-[node name="UiScoreboard" parent="." unique_id=722862887 instance=ExtResource("39_o1fwb")]
+[node name="MarginContainer" type="MarginContainer" parent="OfflineMenu/VBoxContainer" unique_id=1201284618]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+
+[node name="BACK_BUTTON" type="Button" parent="OfflineMenu/VBoxContainer/MarginContainer" unique_id=152188111]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "BACK_BUTTON"
+
+[node name="ScoreBoardMenu" type="VBoxContainer" parent="." unique_id=198902842]
 visible = false
 layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(0.95, 0.95)
 pivot_offset_ratio = Vector2(0.5, 0.5)
+
+[node name="UiScoreboard" parent="ScoreBoardMenu" unique_id=722862887 instance=ExtResource("39_o1fwb")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="ScoreBoardMenu" unique_id=728899643]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="BACK_BUTTON" type="Button" parent="ScoreBoardMenu/MarginContainer" unique_id=1200386006]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "BACK_BUTTON"
 
 [node name="ConfirmDialog" type="PanelContainer" parent="." unique_id=1625242626 node_paths=PackedStringArray("menu", "label", "confirm_button", "cancel_button")]
 visible = false
@@ -1947,6 +2009,9 @@ clip_text = true
 
 [connection signal="mouse_entered" from="MainMenu/Main/Play" to="Hover" method="play"]
 [connection signal="pressed" from="MainMenu/Main/Play" to="Click" method="play"]
+[connection signal="mouse_entered" from="MainMenu/Main/Resume" to="Hover" method="play"]
+[connection signal="pressed" from="MainMenu/Main/Resume" to="." method="Close"]
+[connection signal="pressed" from="MainMenu/Main/Resume" to="Click" method="play"]
 [connection signal="mouse_entered" from="MainMenu/Main/Results" to="Hover" method="play"]
 [connection signal="pressed" from="MainMenu/Main/Results" to="Click" method="play"]
 [connection signal="mouse_entered" from="MainMenu/Main/ScoreBoard" to="Hover" method="play"]
@@ -1987,8 +2052,14 @@ clip_text = true
 [connection signal="pressed" from="Difficulty/Levels/Normal" to="Click" method="play"]
 [connection signal="mouse_entered" from="Difficulty/Levels/Hard" to="Hover" method="play"]
 [connection signal="pressed" from="Difficulty/Levels/Hard" to="Click" method="play"]
+[connection signal="mouse_entered" from="Difficulty/BACK_BUTTON" to="LightHover" method="tab_interract"]
+[connection signal="pressed" from="Difficulty/BACK_BUTTON" to="." method="ExitCurrent"]
+[connection signal="pressed" from="Difficulty/BACK_BUTTON" to="LightClick" method="tab_interract"]
 [connection signal="mouse_entered" from="LogingMenu/VBoxContainer2/VBoxContainer/Confirm" to="Hover" method="play"]
 [connection signal="pressed" from="LogingMenu/VBoxContainer2/VBoxContainer/Confirm" to="Click" method="play"]
+[connection signal="mouse_entered" from="LogingMenu/VBoxContainer2/BACK_BUTTON" to="LightHover" method="tab_interract"]
+[connection signal="pressed" from="LogingMenu/VBoxContainer2/BACK_BUTTON" to="." method="ExitCurrent"]
+[connection signal="pressed" from="LogingMenu/VBoxContainer2/BACK_BUTTON" to="LightClick" method="tab_interract"]
 [connection signal="Login" from="OfflineMenu" to="LogingMenu" method="start_login"]
 [connection signal="Register" from="OfflineMenu" to="LogingMenu" method="start_register"]
 [connection signal="mouse_entered" from="OfflineMenu/VBoxContainer/VBoxContainer/Offline" to="LightHover" method="play"]
@@ -1997,6 +2068,12 @@ clip_text = true
 [connection signal="pressed" from="OfflineMenu/VBoxContainer/VBoxContainer/Login" to="LightClick" method="play"]
 [connection signal="mouse_entered" from="OfflineMenu/VBoxContainer/VBoxContainer/Register" to="LightHover" method="play"]
 [connection signal="pressed" from="OfflineMenu/VBoxContainer/VBoxContainer/Register" to="LightClick" method="play"]
+[connection signal="mouse_entered" from="OfflineMenu/VBoxContainer/MarginContainer/BACK_BUTTON" to="LightHover" method="tab_interract"]
+[connection signal="pressed" from="OfflineMenu/VBoxContainer/MarginContainer/BACK_BUTTON" to="." method="ExitCurrent"]
+[connection signal="pressed" from="OfflineMenu/VBoxContainer/MarginContainer/BACK_BUTTON" to="LightClick" method="tab_interract"]
+[connection signal="mouse_entered" from="ScoreBoardMenu/MarginContainer/BACK_BUTTON" to="LightHover" method="tab_interract"]
+[connection signal="pressed" from="ScoreBoardMenu/MarginContainer/BACK_BUTTON" to="." method="ExitCurrent"]
+[connection signal="pressed" from="ScoreBoardMenu/MarginContainer/BACK_BUTTON" to="LightClick" method="tab_interract"]
 [connection signal="mouse_entered" from="ConfirmDialog/VBoxContainer/HBoxContainer/ConfirmButton" to="Hover" method="play"]
 [connection signal="pressed" from="ConfirmDialog/VBoxContainer/HBoxContainer/ConfirmButton" to="Click" method="play"]
 [connection signal="mouse_entered" from="ConfirmDialog/VBoxContainer/HBoxContainer/CancelButton" to="Hover" method="play"]

@@ -5907,10 +5907,11 @@ _scaleTime = 0.25
 _opacityTrans = 5
 _opacityTime = 0.2
 
-[node name="GameEndScoreBoardBind" type="Node" parent="CanvasLayer" unique_id=706415906 node_paths=PackedStringArray("_escapeMenu", "_scoreBoardManager", "_gameManager", "_briefScore")]
+[node name="GameEndScoreBoardBind" type="Node" parent="CanvasLayer" unique_id=706415906 node_paths=PackedStringArray("_escapeMenu", "_scoreBoardMenu", "_scoreBoardManager", "_gameManager", "_briefScore")]
 script = ExtResource("76_b76a6")
 _escapeMenu = NodePath("../Menu")
-_scoreBoardManager = NodePath("../Menu/UiScoreboard")
+_scoreBoardMenu = NodePath("../Menu/ScoreBoardMenu")
+_scoreBoardManager = NodePath("../Menu/ScoreBoardMenu/UiScoreboard")
 _gameManager = NodePath("../../entities/AimArena/SC_GameManager")
 _briefScore = NodePath("../ShowScore")
 
@@ -5941,6 +5942,7 @@ parameters/looping = true
 [connection signal="Pick" from="entities/Pickups/DamageBuff" to="entities/Pickups/DamageBuff/AUD_StreamPlayer1D" method="Play"]
 [connection signal="Reseted" from="SC_ArenaGameStarter" to="CanvasLayer/Menu" method="SetUnpausable"]
 [connection signal="Reseted" from="SC_ArenaGameStarter" to="CanvasLayer/Menu/MainMenu/Main/Play" method="show"]
+[connection signal="Reseted" from="SC_ArenaGameStarter" to="CanvasLayer/Menu/MainMenu/Main/Resume" method="hide"]
 [connection signal="Reseted" from="SC_ArenaGameStarter" to="CanvasLayer/Menu/MainMenu/Main/ScoreBoard" method="show"]
 [connection signal="Reseted" from="SC_ArenaGameStarter" to="CanvasLayer/Menu/MainMenu/Main/Leave" method="hide"]
 [connection signal="Reseted" from="SC_ArenaGameStarter" to="CanvasLayer/Menu/MainMenu/Main/Surrender" method="hide"]
@@ -5950,6 +5952,7 @@ parameters/looping = true
 [connection signal="SceneInitialized" from="SC_ArenaGameStarter" to="CanvasLayer/Menu" method="Close"]
 [connection signal="SceneInitialized" from="SC_ArenaGameStarter" to="CanvasLayer/Menu" method="SetPausable"]
 [connection signal="SceneInitialized" from="SC_ArenaGameStarter" to="CanvasLayer/Menu/MainMenu/Main/Play" method="hide"]
+[connection signal="SceneInitialized" from="SC_ArenaGameStarter" to="CanvasLayer/Menu/MainMenu/Main/Resume" method="show"]
 [connection signal="SceneInitialized" from="SC_ArenaGameStarter" to="CanvasLayer/Menu/MainMenu/Main/ScoreBoard" method="hide"]
 [connection signal="SceneInitialized" from="SC_ArenaGameStarter" to="music" method="stop"]
 [connection signal="pressed" from="CanvasLayer/Menu/MainMenu/Main/Results" to="CanvasLayer/ShowScore" method="ShowBrief"]
