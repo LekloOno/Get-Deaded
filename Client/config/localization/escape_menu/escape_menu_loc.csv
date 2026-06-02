@@ -12,3 +12,7 @@ SCOREBOARD_BUTTON,SCOREBOARD,SCORES
 OFFLINE_BUTTON,"STAY OFFLINE","RESTER HORS LIGNE"
 MAIN_MENU_BUTTON,"MAIN MENU","MENU PRINCIPAL"
 QUIT_BUTTON,QUIT,QUITTER
+
+CONFIRM_QUIT_MESSAGE,"Do you want to leave the game and exit to desktop ?","Voulez vous vraiment quitter le jeu et retourner au bureau ?"
+CONFIRM_LEAVE_MESSAGE,"Do you want to leave roaming and exit to main menu ?","Voulez vous vraiment quitter l'exploration et retourner au menu principal ?"
+CONFIRM_SURRENDER_MESSAGE,"Your score won't be registered, and you will lose any progression if you leave.","Votre score ne sera pas enregistré, et vous perdrez toute progression si vous quittez."
