@@ -42,7 +42,6 @@ public partial class SsrSetting : VideoQualitySetting
         if (quality == VideoQuality.Disabled)
         {
             env.SsrEnabled = false;
-            GD.Print("disable");
             return;
         }
 
