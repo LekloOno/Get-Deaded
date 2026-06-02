@@ -32,8 +32,6 @@ public partial class AmbientOcclusionSetting : VideoQualitySetting
 
     public static void UpdateEnvironment(Environment env)
     {
-        env.SsaoEnabled = Quality != VideoQuality.Disabled;
-        
         if (Quality == VideoQuality.Disabled)
         {
             env.SsaoEnabled = false;
@@ -53,19 +51,19 @@ public partial class AmbientOcclusionSetting : VideoQualitySetting
             300f);
     }
 
-    private static AmbientOcclusionQuality Minimal = new(
+    private readonly static AmbientOcclusionQuality Minimal = new(
         RenderingServer.EnvironmentSsaoQuality.VeryLow);
 
-    private static AmbientOcclusionQuality Low = new(
+    private readonly static AmbientOcclusionQuality Low = new(
         RenderingServer.EnvironmentSsaoQuality.Low);
 
-    private static AmbientOcclusionQuality Medium = new(
+    private readonly static AmbientOcclusionQuality Medium = new(
         RenderingServer.EnvironmentSsaoQuality.Medium);
 
-    private static AmbientOcclusionQuality High = new(
+    private readonly static AmbientOcclusionQuality High = new(
         RenderingServer.EnvironmentSsaoQuality.High);
 
-    private static AmbientOcclusionQuality Ultra = new(
+    private readonly static AmbientOcclusionQuality Ultra = new(
         RenderingServer.EnvironmentSsaoQuality.Ultra);
 }
 
