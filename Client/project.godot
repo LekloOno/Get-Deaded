@@ -88,6 +88,10 @@ folder_colors={
 "res://script/": "purple"
 }
 
+[global_group]
+
+Sun=""
+
 [input]
 
 move_left={
@@ -226,6 +230,8 @@ jolt_physics_3d/simulation/areas_detect_static_bodies=true
 [rendering]
 
 shader_compiler/shader_cache/enabled=false
+environment/ssao/quality=0
+environment/ssao/adaptive_target=1.0
 occlusion_culling/use_occlusion_culling=true
 lights_and_shadows/positional_shadow/atlas_size=2048
 

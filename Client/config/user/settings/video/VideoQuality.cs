@@ -2,6 +2,7 @@ using System;
 
 public enum VideoQuality
 {
+    Disabled,
     Minimal,
     Low,
     Medium,
@@ -12,12 +13,12 @@ public enum VideoQuality
 [Flags]
 public enum VideoQualityMask
 {
-    None = 0,
-    Minimal = 1 << 0,
-    Low     = 1 << 1,
-    Medium  = 1 << 2,
-    High    = 1 << 3,
-    Ultra   = 1 << 4
+    Disabled = 1 << 0,
+    Minimal = 1 << 1,
+    Low     = 1 << 2,
+    Medium  = 1 << 3,
+    High    = 1 << 4,
+    Ultra   = 1 << 5
 }
 
 public static class VideoQualitySettingExt
@@ -26,12 +27,13 @@ public static class VideoQualitySettingExt
     {
         return quality switch
         {
+            VideoQuality.Disabled => VideoQualityMask.Disabled,
             VideoQuality.Minimal => VideoQualityMask.Minimal,
             VideoQuality.Low     => VideoQualityMask.Low,
             VideoQuality.Medium  => VideoQualityMask.Medium,
             VideoQuality.High    => VideoQualityMask.High,
             VideoQuality.Ultra   => VideoQualityMask.Ultra,
-            _                           => VideoQualityMask.None
+            _                           => VideoQualityMask.Disabled
         };
     }
 }

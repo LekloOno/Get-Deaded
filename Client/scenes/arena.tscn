@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://c6m6ewnorjwbf"]
 
+[ext_resource type="Script" uid="uid://cgxin6pjueqdl" path="res://config/user/settings/video/quality/VideoQualitySettingBinder.cs" id="1_1cjps"]
 [ext_resource type="Shader" uid="uid://cgvs2rofqr7fc" path="res://assets/shaders/toon_post_process.gdshader" id="1_xsx6r"]
 [ext_resource type="Script" uid="uid://b8ob8d1uxja85" path="res://addons/func_godot/src/map/func_godot_map.gd" id="3_a43o1"]
 [ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="4_ow1aj"]
@@ -2500,13 +2501,13 @@ shader_parameter/fluctuation_strength = 0.6
 shader_parameter/fluctuation_sharpness = 1.0
 shader_parameter/fluctuation_speed = 0.4
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_ji5dc"]
-
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_1cjps"]
-
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_83tba"]
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_3cr31"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_h82kt"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_h3ydh"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_80xvo"]
 size = Vector3(0.2, 0.2, 0.6)
@@ -2809,6 +2810,8 @@ viewport_path = NodePath("entities/Pickups/ClickAmos2/Sprite3D/SubViewport")
 [sub_resource type="ViewportTexture" id="ViewportTexture_6b7ou"]
 viewport_path = NodePath("entities/Pickups/WildcardAmo2/Sprite3D/SubViewport")
 
+[sub_resource type="ButtonGroup" id="ButtonGroup_h82kt"]
+
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_4g8la"]
 frequency = 0.05
 fractal_octaves = 4
@@ -2826,13 +2829,19 @@ bg_color = Color(0, 0, 0, 0.28235295)
 
 [node name="Node3D" type="Node3D" unique_id=836354206]
 
+[node name="VideoQualitySettingBinder" type="Node" parent="." unique_id=256544301 node_paths=PackedStringArray("_environment", "_mainLight")]
+script = ExtResource("1_1cjps")
+_environment = NodePath("../WorldEnvironment")
+_mainLight = NodePath("../DirectionalLight3D")
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2130600115]
 environment = SubResource("Environment_r2kh7")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=164120679]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=164120679 groups=["Sun"]]
 transform = Transform3D(-0.9995599, -0.024362026, 0.016932026, 0, 0.57071304, 0.8211495, -0.029668197, 0.82078815, -0.57046175, 0, 0, 0)
 light_energy = 2.3
 shadow_enabled = true
+shadow_caster_mask = 4294967294
 
 [node name="PostProcessing" type="MeshInstance3D" parent="." unique_id=1962750915]
 sorting_offset = -5000.0
@@ -4291,6 +4300,7 @@ mesh = SubResource("ArrayMesh_ebu67")
 shape = SubResource("ConcavePolygonShape3D_3uyym")
 
 [node name="LightmapGI" type="LightmapGI" parent="." unique_id=236475014]
+shadowmask_mode = 2
 light_data = ExtResource("112_hskjd")
 
 [node name="arena" type="Node" parent="." unique_id=315868818]
@@ -4346,7 +4356,7 @@ spot_angle_attenuation = 0.15932
 [node name="VFX_GodsRay" parent="arena/Lights/Projector" unique_id=605019919 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.27160624, -0.9330127, 0.23604527, 0.017453581, 0.25000003, 0.9680885, -0.9622502, -0.2588191, 0.0841859, -22.38988, 5.6927605, 5.072876)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_ji5dc")
+mesh = SubResource("ImmediateMesh_83tba")
 skeleton = NodePath("../../..")
 BaseRadius = 0.38
 InitialRotation = 45.0
@@ -4354,7 +4364,7 @@ InitialRotation = 45.0
 [node name="VFX_GodsRay3" parent="arena/Lights/Projector/VFX_GodsRay" unique_id=802324590 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.9999999, -1.4901161e-08, 7.450581e-09, -1.4901161e-08, 0.9999999, -3.1664968e-08, 0, 1.8626451e-09, 0.99999994, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_1cjps")
+mesh = SubResource("ImmediateMesh_3cr31")
 skeleton = NodePath("../../../..")
 BaseRadius = 0.14
 InitialRotation = 45.0
@@ -4363,7 +4373,7 @@ FlareAngle = 6.0
 [node name="VFX_GodsRay2" parent="arena/Lights/Projector" unique_id=164366595 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.05200698, -0.25727454, -0.9649379, 0.9678007, 0.25127998, -0.0148357125, 0.24628639, -0.933096, 0.2620588, -25.830011, 7.2676578, 9.14106)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_83tba")
+mesh = SubResource("ImmediateMesh_h82kt")
 skeleton = NodePath("../../..")
 BaseRadius = 0.36
 InitialRotation = 45.0
@@ -4371,7 +4381,7 @@ InitialRotation = 45.0
 [node name="VFX_GodsRay3" parent="arena/Lights/Projector/VFX_GodsRay2" unique_id=294127740 instance=ExtResource("113_ie87n")]
 transform = Transform3D(1, 1.4901161e-08, 0, 1.4901161e-08, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_3cr31")
+mesh = SubResource("ImmediateMesh_h3ydh")
 skeleton = NodePath("../../../..")
 BaseRadius = 0.14
 InitialRotation = 45.0
@@ -5736,6 +5746,15 @@ process_mode = 3
 color = Color(0, 0, 0, 0)
 _pauseGame = false
 
+[node name="ToggleButton" parent="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/SprintMode/SprintModeOptions" parent_id_path=PackedInt32Array(620824296, 1093197233) index="0" unique_id=1111186385]
+button_group = SubResource("ButtonGroup_h82kt")
+
+[node name="HoldButton" parent="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/SprintMode/SprintModeOptions" parent_id_path=PackedInt32Array(620824296, 1093197233) index="1" unique_id=942347926]
+button_group = SubResource("ButtonGroup_h82kt")
+
+[node name="AutoButton" parent="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/SprintMode/SprintModeOptions" parent_id_path=PackedInt32Array(620824296, 1093197233) index="2" unique_id=1516286433]
+button_group = SubResource("ButtonGroup_h82kt")
+
 [node name="PI_Stats" type="Node" parent="CanvasLayer" unique_id=1532279642]
 script = ExtResource("47_6ubnd")
 metadata/_custom_type_script = "uid://bkkj6g5jwcpqc"
@@ -5947,3 +5966,142 @@ parameters/looping = true
 [editable path="entities/JumpPad4"]
 [editable path="entities/JumpPad3"]
 [editable path="CanvasLayer/Menu"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/Application"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/Display"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/Display/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/Display/Reset"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/Resolution"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/Resolution/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/Resolution/Reset"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/CustomResolution"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/CustomResolution/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/CustomResolution/Reset"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/StrechMode"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/StrechMode/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/StrechMode/Reset"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/Rendering"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/Fov"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/Fov/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/Fov/NumericInput"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/Fov/Reset"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/VsyncMode"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/VsyncMode/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/VsyncMode/Reset"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/LimitFps"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/LimitFps/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/LimitFps/Reset"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/MaxFps"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/MaxFps/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/MaxFps/NumericInput"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/RenderingSettings/MaxFps/Reset"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/Scaling"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/RenderScaleMode"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/RenderScaleMode/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/RenderScaleMode/Reset"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/RenderScaleScale"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/RenderScaleScale/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/RenderScaleScale/NumericInput"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/RenderScaleScale/Reset"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/FSRSharpness"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/FSRSharpness/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/FSRSharpness/NumericInput"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ScalingSettings/FSRSharpness/Reset"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/Quality"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/PositionalShadows"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/PositionalShadows/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/PositionalShadows/Reset"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/DirectionalShadows"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/DirectionalShadows/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/DirectionalShadows/Reset"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/Volume"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Master"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Master/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Master/BusVolumeInput"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Master/Reset"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Music"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Music/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Music/BusVolumeInput"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Music/Reset"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/SFX"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/SFX/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/SFX/BusVolumeInput"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/SFX/Reset"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/EnvSFX"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/EnvSFX/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/EnvSFX/BusVolumeInput"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/EnvSFX/Reset"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/FbSFX"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/FbSFX/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/FbSFX/BusVolumeInput"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/FbSFX/Reset"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/Sensitivity"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SensitivitySettings/DPI"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SensitivitySettings/DPI/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SensitivitySettings/DPI/Reset"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SensitivitySettings/cm360"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SensitivitySettings/cm360/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SensitivitySettings/cm360/NumericInput"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SensitivitySettings/cm360/Reset"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/Sprint"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/SprintMode"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/SprintMode/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/SprintMode/Reset"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/AutoSprintDelay"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/AutoSprintDelay/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/AutoSprintDelay/NumericInput"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/AutoSprintDelay/Reset"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/AutoSprintQuickStartInput"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/AutoSprintQuickStartInput/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Movement"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Forward"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Forward/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Backward"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Backward/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Left"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Left/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Right"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Right/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Jump"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Jump/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Sprint"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Sprint/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Crouch"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Crouch/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Omni"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Dash"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Dash/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Lurch"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Lurch/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Combat"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Primary"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Primary/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Secondary"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Secondary/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Reload"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Reload/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Switch"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Switch/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Holster"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Holster/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Melee"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Melee/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Interface"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Stats"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Stats/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/Language"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/LanguageSettings/Language"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/LanguageSettings/Language/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/LanguageSettings/Language/Reset"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/Enemies"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings/EnemyColor"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings/EnemyColor/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings/EnemyColor/Reset"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/Outlines"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2/EnemyOutlinesThickness"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2/EnemyOutlinesThickness/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2/EnemyOutlinesThickness/NumericInput"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2/EnemyOutlinesThickness/Reset"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity/NumericInput"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity/Reset"]

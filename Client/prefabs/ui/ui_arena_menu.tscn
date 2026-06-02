@@ -775,6 +775,7 @@ text = "DIRECTIONAL_SHADOWS_QUALITY_LABEL"
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("29_t61gj")
+_allowedQualities = 63
 _settingKey = "directional_shadows_quality"
 metadata/_custom_type_script = "uid://dfn3brhy5f8m7"
 
