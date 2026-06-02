@@ -10,7 +10,7 @@ public partial class GlowSetting : VideoQualitySetting
 
         if (env == null)
         {
-            GD.PrintErr("[AmbientOcclusionSetting] no Environment found.");
+            GD.PrintErr("[GlowSetting] no Environment found.");
             return;
         }
 

@@ -10,7 +10,7 @@ public partial class SsilSetting : VideoQualitySetting
 
         if (env == null)
         {
-            GD.PrintErr("[ScreenSpaceIndirectLighting] no Environment found.");
+            GD.PrintErr("[SsilSetting] no Environment found.");
             return;
         }
 
