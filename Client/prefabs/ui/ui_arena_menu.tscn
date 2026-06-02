@@ -1914,8 +1914,8 @@ grow_vertical = 2
 script = ExtResource("36_jnufj")
 menu = NodePath("..")
 label = NodePath("VBoxContainer/Label")
-confirm_button = NodePath("VBoxContainer/ConfirmButton")
-cancel_button = NodePath("VBoxContainer/CancelButton")
+confirm_button = NodePath("VBoxContainer/HBoxContainer/ConfirmButton")
+cancel_button = NodePath("VBoxContainer/HBoxContainer/CancelButton")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ConfirmDialog" unique_id=2138813368]
 layout_mode = 2
@@ -1926,17 +1926,24 @@ size_flags_vertical = 4
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 text = "Are you sure you want chocolate flavoured concrete ?"
+horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="ConfirmButton" type="Button" parent="ConfirmDialog/VBoxContainer" unique_id=2060029133]
-custom_minimum_size = Vector2(250, 0)
+[node name="HBoxContainer" type="HBoxContainer" parent="ConfirmDialog/VBoxContainer" unique_id=1363877308]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ConfirmButton" type="Button" parent="ConfirmDialog/VBoxContainer/HBoxContainer" unique_id=2060029133]
+custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 text = "CONFIRM_BUTTON"
+clip_text = true
 
-[node name="CancelButton" type="Button" parent="ConfirmDialog/VBoxContainer" unique_id=1883010997]
-custom_minimum_size = Vector2(250, 0)
+[node name="CancelButton" type="Button" parent="ConfirmDialog/VBoxContainer/HBoxContainer" unique_id=1883010997]
+custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 text = "CANCEL_BUTTON"
+clip_text = true
 
 [connection signal="mouse_entered" from="MainMenu/Main/Play" to="Hover" method="play"]
 [connection signal="pressed" from="MainMenu/Main/Play" to="Click" method="play"]
@@ -1990,10 +1997,10 @@ text = "CANCEL_BUTTON"
 [connection signal="pressed" from="OfflineMenu/VBoxContainer/VBoxContainer/Login" to="LightClick" method="play"]
 [connection signal="mouse_entered" from="OfflineMenu/VBoxContainer/VBoxContainer/Register" to="LightHover" method="play"]
 [connection signal="pressed" from="OfflineMenu/VBoxContainer/VBoxContainer/Register" to="LightClick" method="play"]
-[connection signal="mouse_entered" from="ConfirmDialog/VBoxContainer/ConfirmButton" to="Hover" method="play"]
-[connection signal="pressed" from="ConfirmDialog/VBoxContainer/ConfirmButton" to="Click" method="play"]
-[connection signal="mouse_entered" from="ConfirmDialog/VBoxContainer/CancelButton" to="Hover" method="play"]
-[connection signal="pressed" from="ConfirmDialog/VBoxContainer/CancelButton" to="Click" method="play"]
+[connection signal="mouse_entered" from="ConfirmDialog/VBoxContainer/HBoxContainer/ConfirmButton" to="Hover" method="play"]
+[connection signal="pressed" from="ConfirmDialog/VBoxContainer/HBoxContainer/ConfirmButton" to="Click" method="play"]
+[connection signal="mouse_entered" from="ConfirmDialog/VBoxContainer/HBoxContainer/CancelButton" to="Hover" method="play"]
+[connection signal="pressed" from="ConfirmDialog/VBoxContainer/HBoxContainer/CancelButton" to="Click" method="play"]
 
 [editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/Application"]
 [editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/Display"]
