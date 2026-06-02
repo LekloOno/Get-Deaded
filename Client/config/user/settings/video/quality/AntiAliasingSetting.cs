@@ -39,10 +39,7 @@ public partial class AntiAliasingSetting : UserSetting
     {
         Rid? vpRid = GetViewport()?.GetViewportRid();
         if (vpRid is not Rid rid)
-        {
-            GD.Print("prout");
             return;
-        }
 
         RenderingServer.ViewportSetMsaa3D(rid, RenderingServer.ViewportMsaa.Disabled);
         RenderingServer.ViewportSetScreenSpaceAA(rid, RenderingServer.ViewportScreenSpaceAA.Disabled);

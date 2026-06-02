@@ -31,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://cossntbqo23u2" path="res://prefabs/ui/menu/settings/values/ui_bus_volume_input.tscn" id="29_pwonq"]
 [ext_resource type="Script" uid="uid://dfn3brhy5f8m7" path="res://script/ui/menu/contexts/video/UI_QualityOptionButton.cs" id="29_t61gj"]
 [ext_resource type="AudioStream" uid="uid://bshhncf67w1g1" path="res://assets/sounds/ui/click_lighter.wav" id="29_wigoj"]
+[ext_resource type="Script" uid="uid://ddfqurfeicp08" path="res://script/ui/menu/contexts/video/UI_AntiAliasingOptionButton.cs" id="30_6me0n"]
 [ext_resource type="Script" uid="uid://cgf1qqnlqvbs2" path="res://script/ui/menu/contexts/inputs/ui_input_setting_button.gd" id="30_rt8lt"]
 [ext_resource type="PackedScene" uid="uid://d3ffncssg3j2l" path="res://prefabs/ui/menu/settings/ui_settings_row.tscn" id="31_t61gj"]
 [ext_resource type="Script" uid="uid://ckfv7ogd6di80" path="res://script/ui/menu/contexts/controls/ui_sprint_mode.gd" id="33_3fk1l"]
@@ -872,6 +873,26 @@ layout_mode = 2
 [node name="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/Ssr/Reset" index="0" unique_id=286523834]
 Section = "video"
 Key = "screen_space_reflection"
+
+[node name="AntiAliasing" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings" unique_id=1086742042 instance=ExtResource("31_t61gj")]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/AntiAliasing/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1086742042, 109094902, 172764845) index="0" unique_id=1465678305]
+text = "ANTI_ALIASING_LABEL"
+
+[node name="UI_AntiAliasingOptionButton" type="OptionButton" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/AntiAliasing" unique_id=93317669]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("30_6me0n")
+metadata/_custom_type_script = "uid://ddfqurfeicp08"
+
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/AntiAliasing" unique_id=724045943 instance=ExtResource("34_6me0n")]
+layout_mode = 2
+
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/AntiAliasing/Reset" index="0" unique_id=286523834]
+Section = "video"
+Key = "anti_aliasing"
 
 [node name="SOUND_TAB" type="MarginContainer" parent="Settings/VBoxContainer/TabContainer" unique_id=1703747841]
 visible = false
@@ -2000,6 +2021,9 @@ text = "CANCEL_BUTTON"
 [editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/Ssr"]
 [editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/Ssr/MarginContainer/UiSettingsLabel"]
 [editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/Ssr/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/AntiAliasing"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/AntiAliasing/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/AntiAliasing/Reset"]
 [editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/Volume"]
 [editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Master"]
 [editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Master/MarginContainer/UiSettingsLabel"]

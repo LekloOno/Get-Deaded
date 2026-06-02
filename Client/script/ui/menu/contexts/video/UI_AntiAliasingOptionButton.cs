@@ -30,7 +30,7 @@ public partial class UI_AntiAliasingOptionButton : OptionButton
         {
             int index = ItemCount;
 
-            AddItem($"{aliasing.ToString().ToUpperInvariant()}_AA_OPTION");
+            AddItem($"{aliasing.ToString().ToUpperInvariant()}");
             SetItemMetadata(index, (int)aliasing);
         }
     }
