@@ -61,6 +61,7 @@ AutoSprintDelaySetting="*uid://dxba231bx6nx6"
 SprintModeSetting="*uid://7qrx0umpxvjd"
 PositionalShadowsSetting="*uid://cthb76ai6603k"
 DirectionalShadowsSetting="*uid://copbu2peq2f7f"
+AmbientOcclusionSetting="*uid://bhkoqxysi4hfw"
 
 [display]
 
@@ -231,7 +232,6 @@ jolt_physics_3d/simulation/areas_detect_static_bodies=true
 
 shader_compiler/shader_cache/enabled=false
 environment/ssao/quality=0
-environment/ssao/adaptive_target=1.0
 occlusion_culling/use_occlusion_culling=true
 lights_and_shadows/positional_shadow/atlas_size=2048
 
