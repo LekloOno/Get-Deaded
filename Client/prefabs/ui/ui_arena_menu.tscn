@@ -11,9 +11,11 @@
 [ext_resource type="Script" uid="uid://c42mlqwha3sf7" path="res://script/ui/menu/contexts/login/UI_OfflineWarningGuard.cs" id="8_8es5r"]
 [ext_resource type="Script" uid="uid://bwag4h0e76hv" path="res://script/ui/menu/ui_num_input.gd" id="8_no00x"]
 [ext_resource type="Script" uid="uid://cfhceeirn71jg" path="res://script/ui/menu/contexts/video/ui_custom_resolution_button.gd" id="9_wigoj"]
+[ext_resource type="Script" uid="uid://c4wr0vq4imj85" path="res://script/ui/menu/contexts/ui_leave_button.gd" id="10_2erbp"]
 [ext_resource type="Script" uid="uid://dskx1sehclngr" path="res://script/ui/menu/contexts/login/UI_LoggingContext.cs" id="10_b5eqi"]
 [ext_resource type="Script" uid="uid://daf75j5tcox8d" path="res://script/ui/menu/contexts/ui_settings.gd" id="10_no00x"]
 [ext_resource type="Script" uid="uid://doqiy13nhuvvd" path="res://script/ui/menu/contexts/video/ui_strech_mode_picker.gd" id="10_rt8lt"]
+[ext_resource type="Script" uid="uid://x7ile7wu2jmo" path="res://script/ui/menu/contexts/ui_surrender_button.gd" id="10_squjd"]
 [ext_resource type="Script" uid="uid://2y4g11w6asxb" path="res://script/ui/menu/contexts/video/ui_render_scale_mode_picker.gd" id="11_vbkcm"]
 [ext_resource type="Script" uid="uid://dupm1u5o4d16c" path="res://script/ui/menu/contexts/video/ui_render_scale.gd" id="12_pbd3k"]
 [ext_resource type="Script" uid="uid://cg5dedg2yo8yj" path="res://script/ui/menu/contexts/video/ui_v_sync_mode.gd" id="15_b5eqi"]
@@ -289,21 +291,26 @@ text = "SETTINGS_BUTTON"
 script = ExtResource("3_vyhg5")
 settings_menu = NodePath("../../../Settings")
 
-[node name="Leave" type="Button" parent="MainMenu/Main" unique_id=1742876575]
+[node name="Leave" type="Button" parent="MainMenu/Main" unique_id=1742876575 node_paths=PackedStringArray("confirm_dialog")]
 visible = false
 layout_mode = 2
 text = "MAIN_MENU_BUTTON"
+script = ExtResource("10_2erbp")
+confirm_dialog = NodePath("../../../ConfirmDialog")
 
-[node name="Surrender" type="Button" parent="MainMenu/Main" unique_id=2097849616]
+[node name="Surrender" type="Button" parent="MainMenu/Main" unique_id=2097849616 node_paths=PackedStringArray("confirm_dialog")]
 visible = false
 layout_mode = 2
 text = "SURRENDER_BUTTON"
+script = ExtResource("10_squjd")
+confirm_dialog = NodePath("../../../ConfirmDialog")
 
-[node name="Quit" type="Button" parent="MainMenu/Main" unique_id=311737932]
+[node name="Quit" type="Button" parent="MainMenu/Main" unique_id=311737932 node_paths=PackedStringArray("confirm_dialog")]
 layout_mode = 2
 size_flags_vertical = 4
 text = "QUIT_BUTTON"
 script = ExtResource("4_vel4l")
+confirm_dialog = NodePath("../../../ConfirmDialog")
 
 [node name="PlayOfflineWarning" type="Node" parent="MainMenu/Main" unique_id=1508343562 node_paths=PackedStringArray("_escapeMenu", "_difficultyMenu", "_offlineMenu", "_triggerButton")]
 script = ExtResource("8_8es5r")
