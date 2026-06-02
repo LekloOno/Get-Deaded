@@ -4,8 +4,9 @@ using TraGUS;
 
 public partial class AntiAliasingSetting : UserSetting
 {
+    public const string KeyString = "anti_aliasing";
     public override string Section => UserSettingsSection.Video;
-    public override string Key => "anti_aliasing";
+    public override string Key => KeyString;
 
     public override Variant DefaultFallBack() => (int) AntiAliasing.Disabled;
     public static AntiAliasing Method { get; protected set; } = AntiAliasing.Disabled;

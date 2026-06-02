@@ -2,7 +2,8 @@ using Godot;
 
 public partial class SsrSetting : VideoQualitySetting
 {
-    public override string Key => "screen_space_reflection";
+    public const string KeyString = "screen_space_reflection";
+    public override string Key => KeyString;
 
     protected override void UpdateFrom(VideoQuality quality)
     {
@@ -36,6 +37,7 @@ public partial class SsrSetting : VideoQualitySetting
         if (Quality == VideoQuality.Disabled)
         {
             env.SsrEnabled = false;
+            GD.Print("disable");
             return;
         }
 

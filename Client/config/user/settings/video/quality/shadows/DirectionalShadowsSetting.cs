@@ -2,7 +2,8 @@ using Godot;
 
 public partial class DirectionalShadowsSetting : VideoQualitySetting
 {
-    public override string Key => "directional_shadows_quality";
+    public const string KeyString = "directional_shadows_quality";
+    public override string Key => KeyString;
 
     protected override void UpdateFrom(VideoQuality quality)
     {
@@ -42,7 +43,7 @@ public partial class DirectionalShadowsSetting : VideoQualitySetting
             VideoQuality.Medium => Medium,
             VideoQuality.High => High,
             VideoQuality.Ultra => Ultra,
-            _ => Low,
+            _ => Disabled,
         };
     }
 

@@ -2,8 +2,8 @@ using Godot;
 
 public partial class GlowSetting : VideoQualitySetting
 {
-    public override string Key => "glow_quality";
-
+    public const string KeyString = "glow_quality";
+    public override string Key => KeyString;
     protected override void UpdateFrom(VideoQuality quality)
     {
         Environment? env = GetViewport()?.World3D?.Environment;

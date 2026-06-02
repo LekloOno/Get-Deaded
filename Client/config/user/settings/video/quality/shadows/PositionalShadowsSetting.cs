@@ -2,7 +2,8 @@ using Godot;
 
 public partial class PositionalShadowsSetting : VideoQualitySetting
 {
-    public override string Key => "positional_shadows_quality";
+    public const string KeyString = "positional_shadows_quality";
+    public override string Key => KeyString;
 
     protected override void UpdateFrom(VideoQuality quality)
     {
@@ -21,7 +22,7 @@ public partial class PositionalShadowsSetting : VideoQualitySetting
             VideoQuality.Medium => Medium,
             VideoQuality.High => High,
             VideoQuality.Ultra => Ultra,
-            _ => Low,
+            _ => Minimal,
         };
     }
 

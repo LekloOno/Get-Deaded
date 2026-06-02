@@ -2,7 +2,8 @@ using Godot;
 
 public partial class AmbientOcclusionSetting : VideoQualitySetting
 {
-    public override string Key => "ambient_occlusion";
+    public const string KeyString = "ambient_occlusion";
+    public override string Key => KeyString;
 
     protected override void UpdateFrom(VideoQuality quality)
     {
