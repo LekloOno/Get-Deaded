@@ -7,22 +7,18 @@ public partial class DirectionalShadowsSetting : VideoQualitySetting
 
     protected override void UpdateFrom(VideoQuality quality, out VideoQuality effectiveQuality)
     {
-        DirectionalShadowsQuality settings = From(Quality);
+        DirectionalShadowsQuality settings = From(quality);
 
         RenderingServer.DirectionalSoftShadowFilterSetQuality(settings.FilterQuality);
         RenderingServer.DirectionalShadowAtlasSetSize(settings.Size, true);
 
-        DirectionalLight3D? sun = GetTree().GetFirstNodeInGroup("Sun") as DirectionalLight3D;
-
         effectiveQuality = quality;
 
-        if (sun == null)
+        foreach (Node node in GetTree().GetNodesInGroup("Sun"))
         {
-            GD.PrintErr("[DirectionalShadowsSetting] no DirectionalLight3D found in group 'Sun'.");
-            return;
+            if (node is DirectionalLight3D sun)
+                UpdateLightFrom(sun, effectiveQuality);
         }
-
-        UpdateLightFrom(sun, effectiveQuality);
     }
 
     private static void UpdateLightFrom(DirectionalLight3D light, VideoQuality quality)

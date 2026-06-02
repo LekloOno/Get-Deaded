@@ -2829,19 +2829,29 @@ bg_color = Color(0, 0, 0, 0.28235295)
 
 [node name="Node3D" type="Node3D" unique_id=836354206]
 
-[node name="VideoQualitySettingBinder" type="Node" parent="." unique_id=256544301 node_paths=PackedStringArray("_environment", "_mainLight")]
+[node name="VideoQualitySettingBinder" type="Node" parent="." unique_id=256544301 node_paths=PackedStringArray("_environment", "_terrainLight", "_dynamicLight")]
 script = ExtResource("1_1cjps")
 _environment = NodePath("../WorldEnvironment")
-_mainLight = NodePath("../DirectionalLight3D")
+_terrainLight = NodePath("../TerrainLight")
+_dynamicLight = NodePath("../DynamicLight")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2130600115]
 environment = SubResource("Environment_r2kh7")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=164120679 groups=["Sun"]]
+[node name="TerrainLight" type="DirectionalLight3D" parent="." unique_id=164120679 groups=["Sun"]]
 transform = Transform3D(-0.9995599, -0.024362026, 0.016932026, 0, 0.57071304, 0.8211495, -0.029668197, 0.82078815, -0.57046175, 0, 0, 0)
 light_energy = 2.3
+light_cull_mask = 4294967294
+shadow_enabled = true
+shadow_caster_mask = 4293918721
+
+[node name="DynamicLight" type="DirectionalLight3D" parent="." unique_id=683800646 groups=["Sun"]]
+transform = Transform3D(-0.9995599, -0.024362026, 0.016932026, 0, 0.57071304, 0.8211495, -0.029668197, 0.82078815, -0.57046175, 0, 0, 0)
+light_energy = 2.3
+light_cull_mask = 4293918721
 shadow_enabled = true
 shadow_caster_mask = 4294967294
+directional_shadow_mode = 0
 
 [node name="PostProcessing" type="MeshInstance3D" parent="." unique_id=1962750915]
 sorting_offset = -5000.0

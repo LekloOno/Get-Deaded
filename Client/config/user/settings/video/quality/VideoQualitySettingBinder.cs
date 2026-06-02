@@ -3,12 +3,16 @@ using Godot;
 public partial class VideoQualitySettingBinder : Node
 {
     [Export] private WorldEnvironment? _environment;
-    [Export] private DirectionalLight3D? _mainLight;
+    [Export] private DirectionalLight3D? _terrainLight;
+    [Export] private DirectionalLight3D? _dynamicLight;
 
     public override void _Ready()
     {
-        if (_mainLight != null)
-            DirectionalShadowsSetting.UpdateLight(_mainLight);
+        if (_dynamicLight != null)
+            DirectionalShadowsSetting.UpdateLight(_dynamicLight);
+
+        if (_terrainLight != null)
+            DirectionalShadowsSetting.UpdateLight(_terrainLight);
 
         if (_environment != null)
         {
