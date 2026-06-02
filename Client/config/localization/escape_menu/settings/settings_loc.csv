@@ -6,3 +6,6 @@ ACCESSIBILITY_TAB,ACCESSIBILITY,ACCESSIBILITÉ
 ADD_BUTTON,ADD,AJOUTER
 APPLY_BUTTON,APPLY,APPLIQUER
 BACK_BUTTON,BACK,RETOUR
+
+CONFIRM_ABORT_SETTINGS_MESSAGE,"You have unsaved changes to your settings. Do you want to abort them ?","Vous avez apporté des modifications non enregistrées à vos paramètres. Voulez-vous les abandonner ?"
+CONFIRM_SAVE_SETTINGS_MESSAGE,"Are you sure you want to save these settings ?","Confirmez-vous la sauvegarde de ces paramètres ?"
