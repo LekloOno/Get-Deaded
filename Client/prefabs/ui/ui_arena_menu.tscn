@@ -1934,13 +1934,13 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="ConfirmButton" type="Button" parent="ConfirmDialog/VBoxContainer/HBoxContainer" unique_id=2060029133]
-custom_minimum_size = Vector2(128, 0)
+custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 text = "CONFIRM_BUTTON"
 clip_text = true
 
 [node name="CancelButton" type="Button" parent="ConfirmDialog/VBoxContainer/HBoxContainer" unique_id=1883010997]
-custom_minimum_size = Vector2(128, 0)
+custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 text = "CANCEL_BUTTON"
 clip_text = true
