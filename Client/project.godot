@@ -96,6 +96,8 @@ folder_colors={
 [global_group]
 
 Sun=""
+EntitiesLight=""
+TerrainLight=""
 
 [input]
 

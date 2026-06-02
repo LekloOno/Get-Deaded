@@ -2833,24 +2833,24 @@ bg_color = Color(0, 0, 0, 0.28235295)
 script = ExtResource("1_1cjps")
 _environment = NodePath("../WorldEnvironment")
 _terrainLight = NodePath("../TerrainLight")
-_dynamicLight = NodePath("../DynamicLight")
+_dynamicLight = NodePath("../EntitiesLight")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2130600115]
 environment = SubResource("Environment_r2kh7")
 
-[node name="TerrainLight" type="DirectionalLight3D" parent="." unique_id=164120679 groups=["Sun"]]
-transform = Transform3D(-0.9995599, -0.024362026, 0.016932026, 0, 0.57071304, 0.8211495, -0.029668197, 0.82078815, -0.57046175, 0, 0, 0)
-light_energy = 2.3
-light_cull_mask = 4294967294
-shadow_enabled = true
-shadow_caster_mask = 4293918721
-
-[node name="DynamicLight" type="DirectionalLight3D" parent="." unique_id=683800646 groups=["Sun"]]
+[node name="TerrainLight" type="DirectionalLight3D" parent="." unique_id=164120679 groups=["Sun", "TerrainLight"]]
 transform = Transform3D(-0.9995599, -0.024362026, 0.016932026, 0, 0.57071304, 0.8211495, -0.029668197, 0.82078815, -0.57046175, 0, 0, 0)
 light_energy = 2.3
 light_cull_mask = 4293918721
 shadow_enabled = true
 shadow_caster_mask = 4294967294
+
+[node name="EntitiesLight" type="DirectionalLight3D" parent="." unique_id=683800646 groups=["EntitiesLight", "Sun"]]
+transform = Transform3D(-0.9995599, -0.024362026, 0.016932026, 0, 0.57071304, 0.8211495, -0.029668197, 0.82078815, -0.57046175, 0, 0, 0)
+light_energy = 2.3
+light_cull_mask = 4294967294
+shadow_enabled = true
+shadow_caster_mask = 4293918721
 directional_shadow_mode = 0
 
 [node name="PostProcessing" type="MeshInstance3D" parent="." unique_id=1962750915]
@@ -4479,6 +4479,7 @@ skeleton = NodePath("../../../FuncGodotMap")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="arena/Particles" unique_id=256157107]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.181097, -4.7866254, 5.706379)
+layers = 8
 material_override = SubResource("StandardMaterial3D_3mad5")
 amount = 6
 lifetime = 10.0
@@ -4487,6 +4488,7 @@ draw_pass_1 = SubResource("QuadMesh_0easo")
 
 [node name="GPUParticles3D4" type="GPUParticles3D" parent="arena/Particles/GPUParticles3D" unique_id=205558132]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.119894, 0)
+layers = 8
 material_override = SubResource("StandardMaterial3D_oga8r")
 amount = 30
 lifetime = 10.0
@@ -4495,6 +4497,7 @@ draw_pass_1 = SubResource("PrismMesh_6cq6o")
 
 [node name="GPUParticles3D7" type="GPUParticles3D" parent="arena/Particles" unique_id=618604676]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.181097, -20.686626, 44.70638)
+layers = 8
 material_override = SubResource("StandardMaterial3D_n5h7s")
 amount = 6
 lifetime = 10.0
@@ -4504,6 +4507,7 @@ draw_pass_1 = SubResource("QuadMesh_0easo")
 
 [node name="GPUParticles3D4" type="GPUParticles3D" parent="arena/Particles/GPUParticles3D7" unique_id=118022960]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.119894, 0)
+layers = 8
 material_override = SubResource("StandardMaterial3D_oga8r")
 amount = 30
 lifetime = 10.0
@@ -4513,6 +4517,7 @@ draw_pass_1 = SubResource("PrismMesh_6cq6o")
 
 [node name="GPUParticles3D2" type="GPUParticles3D" parent="arena/Particles" unique_id=2099125817]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.44242, -4.7866254, 21.662106)
+layers = 8
 material_override = SubResource("StandardMaterial3D_3mad5")
 amount = 6
 lifetime = 10.0
@@ -4521,6 +4526,7 @@ draw_pass_1 = SubResource("QuadMesh_0easo")
 
 [node name="GPUParticles3D4" type="GPUParticles3D" parent="arena/Particles/GPUParticles3D2" unique_id=1594956626]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.119894, 0)
+layers = 8
 material_override = SubResource("StandardMaterial3D_oga8r")
 amount = 30
 lifetime = 10.0
@@ -4529,6 +4535,7 @@ draw_pass_1 = SubResource("PrismMesh_6cq6o")
 
 [node name="GPUParticles3D5" type="GPUParticles3D" parent="arena/Particles" unique_id=1985151138]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55.62799, -1.1465015, 2.46109)
+layers = 8
 material_override = SubResource("StandardMaterial3D_3mad5")
 amount = 6
 lifetime = 10.0
@@ -4537,6 +4544,7 @@ draw_pass_1 = SubResource("QuadMesh_0easo")
 
 [node name="GPUParticles3D4" type="GPUParticles3D" parent="arena/Particles/GPUParticles3D5" unique_id=1954186687]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.119894, 0)
+layers = 8
 material_override = SubResource("StandardMaterial3D_oga8r")
 amount = 30
 lifetime = 10.0
@@ -4545,6 +4553,7 @@ draw_pass_1 = SubResource("PrismMesh_6cq6o")
 
 [node name="GPUParticles3D4" type="GPUParticles3D" parent="arena/Particles" unique_id=746977647]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.313995, 2.4267492, 48.230545)
+layers = 8
 material_override = SubResource("StandardMaterial3D_3mad5")
 amount = 6
 lifetime = 10.0
@@ -4553,6 +4562,7 @@ draw_pass_1 = SubResource("QuadMesh_0easo")
 
 [node name="GPUParticles3D4" type="GPUParticles3D" parent="arena/Particles/GPUParticles3D4" unique_id=1897800726]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.119894, 0)
+layers = 8
 material_override = SubResource("StandardMaterial3D_oga8r")
 amount = 30
 lifetime = 10.0
@@ -4561,6 +4571,7 @@ draw_pass_1 = SubResource("PrismMesh_6cq6o")
 
 [node name="GPUParticles3D3" type="GPUParticles3D" parent="arena/Particles" unique_id=1644760883]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.656998, -4.7866254, 21.115273)
+layers = 8
 material_override = SubResource("StandardMaterial3D_3mad5")
 amount = 6
 lifetime = 10.0
@@ -4569,6 +4580,7 @@ draw_pass_1 = SubResource("QuadMesh_0easo")
 
 [node name="GPUParticles3D4" type="GPUParticles3D" parent="arena/Particles/GPUParticles3D3" unique_id=1358995060]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.119894, 0)
+layers = 8
 material_override = SubResource("StandardMaterial3D_oga8r")
 amount = 30
 lifetime = 10.0
@@ -4577,6 +4589,7 @@ draw_pass_1 = SubResource("PrismMesh_6cq6o")
 
 [node name="GPUParticles3D6" type="GPUParticles3D" parent="arena/Particles" unique_id=213249814]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.372009, -1.1465015, -8.53891)
+layers = 8
 material_override = SubResource("StandardMaterial3D_3mad5")
 amount = 6
 lifetime = 10.0
@@ -4585,6 +4598,7 @@ draw_pass_1 = SubResource("QuadMesh_0easo")
 
 [node name="GPUParticles3D4" type="GPUParticles3D" parent="arena/Particles/GPUParticles3D6" unique_id=2053083955]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.119894, 0)
+layers = 8
 material_override = SubResource("StandardMaterial3D_oga8r")
 amount = 30
 lifetime = 10.0

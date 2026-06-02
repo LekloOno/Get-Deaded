@@ -23,6 +23,13 @@ public partial class DirectionalShadowsSetting : VideoQualitySetting
 
     private static void UpdateLightFrom(DirectionalLight3D light, VideoQuality quality)
     {   
+        if (quality == VideoQuality.Disabled)
+            light.ShadowCasterMask = 0;
+        else if (light.IsInGroup("EntitiesLight"))
+            light.ShadowCasterMask = 1;
+        else if (light.IsInGroup("TerrainLight"))
+            light.ShadowCasterMask = ~(1u << 0) & ((1u << 20) - 1);
+
         DirectionalShadowsQuality settings = From(quality);
 
         light.DirectionalShadowMode = settings.ShadowMode;
