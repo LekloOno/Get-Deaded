@@ -14,6 +14,7 @@ public partial class VideoQualitySettingBinder : Node
         {
             AmbientOcclusionSetting.UpdateEnvironment(_environment.Environment);
             SsilSetting.UpdateEnvironment(_environment.Environment);
+            GlowSetting.UpdateEnvironment(_environment.Environment);
         }
     }
 }
