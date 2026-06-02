@@ -11,6 +11,9 @@ public partial class VideoQualitySettingBinder : Node
             DirectionalShadowsSetting.UpdateLight(_mainLight);
 
         if (_environment != null)
+        {
             AmbientOcclusionSetting.UpdateEnvironment(_environment.Environment);
+            SsilSetting.UpdateEnvironment(_environment.Environment);
+        }
     }
 }

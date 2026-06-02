@@ -2,7 +2,7 @@ using Godot;
 
 public partial class SsilSetting : VideoQualitySetting
 {
-    public override string Key => "dynamic_indirect_lighting";
+    public override string Key => "screen_space_indirect_lighting";
 
     protected override void UpdateFrom(VideoQuality quality)
     {
