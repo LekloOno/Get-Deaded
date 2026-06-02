@@ -64,6 +64,7 @@ DirectionalShadowsSetting="*uid://copbu2peq2f7f"
 AmbientOcclusionSetting="*uid://bhkoqxysi4hfw"
 SsilSetting="*uid://3cnm0jmceegn"
 GlowSetting="*uid://m5y5x3l0yb4s"
+SsrSetting="*uid://kyivpi4yiqru"
 
 [display]
 
