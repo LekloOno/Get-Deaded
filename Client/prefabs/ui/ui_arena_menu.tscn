@@ -851,6 +851,28 @@ layout_mode = 2
 Section = "video"
 Key = "glow_quality"
 
+[node name="Ssr" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings" unique_id=1772110207 instance=ExtResource("31_t61gj")]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/Ssr/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1772110207, 109094902, 172764845) index="0" unique_id=1465678305]
+text = "SSR_QUALITY_LABEL"
+
+[node name="UI_QualityOptionButton" type="OptionButton" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/Ssr" unique_id=297130265]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("29_t61gj")
+_allowedQualities = 61
+_settingKey = "screen_space_reflection"
+metadata/_custom_type_script = "uid://dfn3brhy5f8m7"
+
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/Ssr" unique_id=1216583820 instance=ExtResource("34_6me0n")]
+layout_mode = 2
+
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/Ssr/Reset" index="0" unique_id=286523834]
+Section = "video"
+Key = "screen_space_reflection"
+
 [node name="SOUND_TAB" type="MarginContainer" parent="Settings/VBoxContainer/TabContainer" unique_id=1703747841]
 visible = false
 layout_mode = 2
@@ -1975,6 +1997,9 @@ text = "CANCEL_BUTTON"
 [editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/Glow"]
 [editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/Glow/MarginContainer/UiSettingsLabel"]
 [editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/Glow/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/Ssr"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/Ssr/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/QualitySettings/Ssr/Reset"]
 [editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/Volume"]
 [editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Master"]
 [editable path="Settings/VBoxContainer/TabContainer/SOUND_TAB/ScrollContainer/VBoxContainer/VolumeSettings/Master/MarginContainer/UiSettingsLabel"]
