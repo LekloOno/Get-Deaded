@@ -135,6 +135,8 @@ public partial class PW_WeaponsHandler : WeaponSystem
         _weaponsInput.OnStartSecondary += HandleStartSecondary;
         _weaponsInput.OnStopSecondary += HandleStopSecondary;
         _weaponsInput.OnSwitch += Switch;
+        _weaponsInput.SwitchedTo += SwitchTo;
+        _weaponsInput.SwitchedToMelee += SwitchToMelee;
         _weaponsInput.OnHolster += Holster;
         _weaponsInput.OnReload += Reload;
         _weaponsInput.OnStartMelee += DirectMeleeStart;
@@ -351,6 +353,33 @@ public partial class PW_WeaponsHandler : WeaponSystem
         _targetWeapon = _weapons[_weaponIndex];
 
         SwitchStarted?.Invoke(_targetWeapon, Melee, (_weaponIndex + 1) % _weapons.Count, _weapons);
+        StartSwitch();
+    }
+
+    public void SwitchTo(int index)
+    {
+        if (_weaponIndex == index)
+            return;
+
+        if (index >= _weapons.Count)
+            return;
+
+        _weaponIndex = index;
+        _targetWeapon = _weapons[_weaponIndex];
+
+        SwitchStarted?.Invoke(_targetWeapon, Melee, (_weaponIndex + 1) % _weapons.Count, _weapons);
+        StartSwitch();
+    }
+
+    public void SwitchToMelee()
+    {
+        if (_targetWeapon == Melee)
+            return;
+
+        PW_Weapon targetPrev = _targetWeapon;
+
+        _targetWeapon = Melee;
+        SwitchStarted?.Invoke(_targetWeapon, targetPrev, (_weaponIndex + 1) % _weapons.Count, _weapons);
         StartSwitch();
     }
 

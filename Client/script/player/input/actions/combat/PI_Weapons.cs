@@ -14,6 +14,8 @@ public partial class PI_Weapons : PI_InputGlobalAction
     public EventHandler OnStopPrimary;
     public EventHandler OnStopSecondary;
     public EventHandler OnSwitch;
+    public event Action<int>? SwitchedTo;
+    public event Action? SwitchedToMelee;
     public EventHandler OnHolster;
     public EventHandler OnReload;
     public EventHandler OnStartMelee;
@@ -31,10 +33,19 @@ public partial class PI_Weapons : PI_InputGlobalAction
             OnStopPrimary?.Invoke(this, EventArgs.Empty);
         else if (@event.IsActionReleased(ACTIONS_Combat.SECONDARY))
             OnStopSecondary?.Invoke(this, EventArgs.Empty);
+
         else if (@event.IsActionPressed(ACTIONS_Combat.SWITCH))
             OnSwitch?.Invoke(this, EventArgs.Empty);
         else if (@event.IsActionPressed(ACTIONS_Combat.HOLSTER))
             OnHolster?.Invoke(this, EventArgs.Empty);
+
+        else if (@event.IsActionPressed(ACTIONS_Combat.SwitchTo0))
+            SwitchedTo?.Invoke(0);
+        else if (@event.IsActionPressed(ACTIONS_Combat.SwitchTo1))
+            SwitchedTo?.Invoke(1);
+        else if (@event.IsActionPressed(ACTIONS_Combat.SwitchToMelee))
+            SwitchedToMelee?.Invoke();
+
         else if (@event.IsActionPressed(ACTIONS_Combat.MELEE))
             OnStartMelee?.Invoke(this, EventArgs.Empty);
         else if (@event.IsActionReleased(ACTIONS_Combat.MELEE))
