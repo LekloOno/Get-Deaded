@@ -10,149 +10,149 @@ using Godot;
 [GlobalClass]
 public partial class GC_HurtBox : Area3D
 {
-    [Export] public GC_BodyPart BodyPart {get; private set;} = GC_BodyPart.Chest;
-    [Export] private bool _useSpecialModifier = false;
-    [Export] private float _modifier = 1f;
-    [Export] public GpuParticles3D DamageSplatter;
-    [Export] public GE_CombatEntity Entity {get; private set;}
-    public static float BackAngle = 135;
-    public PHX_ActiveRagdollBone RagdollBone {get; private set;}
-    public event Action<Vector3, Vector3, HitEventArgs>? HitReceived;
-    
-    public override void _Ready()
-    {
-        // Defaults out the damage modifier of the hurtbox.
-        if (!_useSpecialModifier)
-            _modifier = CONF_BodyModifiers.GetDefaultModifier(BodyPart);
-    }
+	[Export] public GC_BodyPart BodyPart {get; private set;} = GC_BodyPart.Chest;
+	[Export] private bool _useSpecialModifier = false;
+	[Export] private float _modifier = 1f;
+	[Export] public GpuParticles3D DamageSplatter;
+	[Export] public GE_CombatEntity Entity {get; private set;}
+	public static float BackAngle = 135;
+	public PHX_ActiveRagdollBone RagdollBone {get; private set;}
+	public event Action<Vector3, Vector3, HitEventArgs>? HitReceived;
+	
+	public override void _Ready()
+	{
+		// Defaults out the damage modifier of the hurtbox.
+		if (!_useSpecialModifier)
+			_modifier = CONF_BodyModifiers.GetDefaultModifier(BodyPart);
+	}
 
-    // Instead of a direct set access, to make it explicity it should not be modified exepct for initialization.
-    public void InitRagdollBone(PHX_ActiveRagdollBone bone) => RagdollBone = bone;
+	// Instead of a direct set access, to make it explicity it should not be modified exepct for initialization.
+	public void InitRagdollBone(PHX_ActiveRagdollBone bone) => RagdollBone = bone;
 
-    public static float RealHitModifier(GC_DamageModifier damageModifier) =>
-        damageModifier / CONF_BodyModifiers.GetDefaultModifier(damageModifier.BodyPart);
+	public static float RealHitModifier(GC_DamageModifier damageModifier) =>
+		damageModifier / CONF_BodyModifiers.GetDefaultModifier(damageModifier.BodyPart);
 
-    public bool Damage(
-        GC_IHitDealer hitDealer,
-        out float takenDamage,
-        out float overflow,
-        out bool backStab,
-        out bool critical,
-        out GC_Health deepest,
-        bool overrideBodyPart = false,
-        float dmgMultiplier = 1f,
-        float subHitSize = 1f
-    ) {
-        float expectedDamage = BaseDamage(hitDealer.HitData, overrideBodyPart);
-        expectedDamage *= subHitSize;
-        expectedDamage *= dmgMultiplier;
+	public bool Damage(
+		GC_IHitDealer hitDealer,
+		out float takenDamage,
+		out float overflow,
+		out bool backStab,
+		out bool critical,
+		out GC_Health deepest,
+		bool overrideBodyPart = false,
+		float dmgMultiplier = 1f,
+		float subHitSize = 1f
+	) {
+		float expectedDamage = BaseDamage(hitDealer.HitData, overrideBodyPart);
+		expectedDamage *= subHitSize;
+		expectedDamage *= dmgMultiplier;
 
-        float dirMultiplier = DirMultiplier(hitDealer, out backStab);
-        expectedDamage *= dirMultiplier;
-        
-        critical = IsCritical(overrideBodyPart, backStab, dirMultiplier);
+		float dirMultiplier = DirMultiplier(hitDealer, out backStab);
+		expectedDamage *= dirMultiplier;
+		
+		critical = IsCritical(overrideBodyPart, backStab, dirMultiplier);
 
-        return Entity.HealthManager.Damage(hitDealer, expectedDamage, out takenDamage, out overflow, out deepest);
-    }
+		return Entity.HealthManager.Damage(hitDealer, expectedDamage, out takenDamage, out overflow, out deepest);
+	}
 
-    private bool IsCritical(bool overrideBodyPart, bool backStab, float dirMultiplier) =>
-        (!overrideBodyPart && BodyPart == GC_BodyPart.Head) ||
-        (backStab && dirMultiplier > 1.0f);
+	private bool IsCritical(bool overrideBodyPart, bool backStab, float dirMultiplier) =>
+		(!overrideBodyPart && BodyPart == GC_BodyPart.Head) ||
+		(backStab && dirMultiplier > 1.0f);
 
-    private float DirMultiplier(GC_IHitDealer hitDealer, out bool backStab)
-    {
-        if (backStab = IsHittingFront(hitDealer))
-            return hitDealer.HitData.BackModifier;
+	private float DirMultiplier(GC_IHitDealer hitDealer, out bool backStab)
+	{
+		if (backStab = IsHittingFront(hitDealer))
+			return hitDealer.HitData.BackModifier;
 
-        return 1f;
-    }
+		return 1f;
+	}
 
 
-    private float BaseDamage(GC_Hit hitData, bool overrideBodyPart)
-    {
-        if (overrideBodyPart)
-            return hitData.GetDamage(GC_BodyPart.Chest);
-        
-        return hitData.GetDamage(BodyPart) * _modifier;
-    }
+	private float BaseDamage(GC_Hit hitData, bool overrideBodyPart)
+	{
+		if (overrideBodyPart)
+			return hitData.GetDamage(GC_BodyPart.Chest);
+		
+		return hitData.GetDamage(BodyPart) * _modifier;
+	}
 
-    private bool IsHittingFront(GC_IHitDealer hitDealer)
-    {
-        if (hitDealer.OwnerEntity == GE_Environment.Instance)
-            return true;
+	private bool IsHittingFront(GC_IHitDealer hitDealer)
+	{
+		if (hitDealer.OwnerEntity == GE_Environment.Instance)
+			return true;
 
-        Vector3 selfDir = -Entity.Body.GlobalTransform.Basis.Z;
-        Vector3 hitDealerPos = hitDealer.OwnerEntity.Body.PrevGlobalTransform.Origin;
-        Vector3 direction = hitDealerPos - Entity.Body.GlobalTransform.Origin;
+		Vector3 selfDir = -Entity.Body.GlobalTransform.Basis.Z;
+		Vector3 hitDealerPos = hitDealer.OwnerEntity.Body.PrevGlobalTransform.Origin;
+		Vector3 direction = hitDealerPos - Entity.Body.GlobalTransform.Origin;
 
-        float hitAngle = MATH_Vector3Ext.FlatAngle(selfDir, direction);
-        return Mathf.RadToDeg(hitAngle) > BackAngle;
-    }
+		float hitAngle = MATH_Vector3Ext.FlatAngle(selfDir, direction);
+		return Mathf.RadToDeg(hitAngle) > BackAngle;
+	}
 
-    public float Heal(float heal) => Entity.HealthManager.Heal(heal);
+	public float Heal(float heal) => Entity.HealthManager.Heal(heal);
 
-    public bool TriggerDamageParticles(Vector3 hitPosition, Vector3 from)
-    {
-        if (DamageSplatter == null)
-            return false;
+	public bool TriggerDamageParticles(Vector3 hitPosition, Vector3 from)
+	{
+		if (DamageSplatter == null)
+			return false;
 
-        DamageSplatter.GlobalPosition = hitPosition;
-        DamageSplatter.LookAt(from);
-        DamageSplatter.Emitting = true;
-        return true;
-    }
+		DamageSplatter.GlobalPosition = hitPosition;
+		DamageSplatter.LookAt(from);
+		DamageSplatter.Emitting = true;
+		return true;
+	}
 
-    public void HandleKnockBack(Vector3 force) =>
-        Entity.HealthManager.HandleKnockBack(force);
+	public void HandleKnockBack(Vector3 force) =>
+		Entity.HealthManager.HandleKnockBack(force);
 
-    public HitEventArgs HandleHit(
-        GE_IActiveCombatEntity author,
-        GC_IHitDealer hitDealer,
-        Vector3 hitPosition,
-        Vector3 from,
-        Vector3? localKnockback,    // used for ragdoll physics
-        Vector3? globalKnockBack,   // Global KnockBack, actually influences the entity position
-        bool overrideBodyPart = false,
-        float dmgMultiplier = 1f,
-        float subHitSize = 1f       // used to emulate sub-tick continuous fire. 
-    ) {
-        bool killed = Damage(
-            hitDealer,
-            out float takenDamage,
-            out float overflow,
-            out bool backStab,
-            out bool critical,
-            out GC_Health deepest,
-            overrideBodyPart,
-            dmgMultiplier,
-            subHitSize
-        );
+	public HitEventArgs HandleHit(
+		GE_IActiveCombatEntity author,
+		GC_IHitDealer hitDealer,
+		Vector3 hitPosition,
+		Vector3 from,
+		Vector3? localKnockback,    // used for ragdoll physics
+		Vector3? globalKnockBack,   // Global KnockBack, actually influences the entity position
+		bool overrideBodyPart = false,
+		float dmgMultiplier = 1f,
+		float subHitSize = 1f       // used to emulate sub-tick continuous fire. 
+	) {
+		bool killed = Damage(
+			hitDealer,
+			out float takenDamage,
+			out float overflow,
+			out bool backStab,
+			out bool critical,
+			out GC_Health deepest,
+			overrideBodyPart,
+			dmgMultiplier,
+			subHitSize
+		);
 
-        if (globalKnockBack is Vector3 knockBack)
-            HandleKnockBack(knockBack);
+		if (globalKnockBack is Vector3 knockBack)
+			HandleKnockBack(knockBack);
 
-        if (killed && RagdollBone is PHX_ActiveRagdollBone bone)
-        {
-            if (localKnockback is Vector3 localImpulse)
-                bone.Hit(localImpulse, hitPosition);
-            
-            if (globalKnockBack is Vector3 globalImpulse)
-                bone.GlobalHit(globalImpulse, hitPosition);
-        }
+		if (killed && RagdollBone is PHX_ActiveRagdollBone bone)
+		{
+			if (localKnockback is Vector3 localImpulse)
+				bone.Hit(localImpulse, hitPosition);
+			
+			if (globalKnockBack is Vector3 globalImpulse)
+				bone.GlobalHit(globalImpulse, hitPosition);
+		}
 
-        TriggerDamageParticles(hitPosition, from); // Experimental from position, to check.
+		TriggerDamageParticles(hitPosition, from); // Experimental from position, to check.
 
-        HitEventArgs args = new(
-            Entity, deepest, this,           // Target infos
-            takenDamage, killed,                    // Hit infos
-            hitDealer, author,                      // Author infos
-            overflow, overrideBodyPart,             // Optional infos
-            backStab, critical,                     // Optional infos
-            false, subHitSize                       // Optional infos
-        );
+		HitEventArgs args = new(
+			Entity, deepest, this,           // Target infos
+			takenDamage, killed,                    // Hit infos
+			hitDealer, author,                      // Author infos
+			overflow, overrideBodyPart,             // Optional infos
+			backStab, critical,                     // Optional infos
+			false, subHitSize                       // Optional infos
+		);
 
-        HitReceived?.Invoke(from, hitPosition, args);
+		HitReceived?.Invoke(from, hitPosition, args);
 
-        return args;
-    }
+		return args;
+	}
 }

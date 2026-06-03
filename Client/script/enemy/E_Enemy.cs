@@ -4,6 +4,9 @@ using Godot;
 
 public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 {
+	private static ulong Count;
+	private readonly ulong _id = Count ++;
+
 	[Export] private E_EnemyMaterial _mat;
 	[Export] private GC_HealthManager _healthManager;
 	[Export] public E_EnemySettings Settings;
@@ -232,22 +235,20 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 		return velocity * dragFactor;
 	}
 
+	private bool _onSight;
+	private bool _processTick;
 	public void Attack(double delta)
 	{
 		if (Fire == null || _target == null)
 			return;
 
-		Vector3 from = Fire.GlobalPosition;
-		Vector3 to = _target.Body.GlobalTransform.Origin;
+		ulong tick = Engine.GetPhysicsFrames();
 
-		var spaceState = GetWorld3D().DirectSpaceState;
+		_processTick = (tick & 15) == (_id & 15);
+		if (_processTick)
+			_onSight = DetectSight();
 
-		var query = PhysicsRayQueryParameters3D.Create(from, to);
-
-		query.CollisionMask = 1;
-		var result = spaceState.IntersectRay(query);
-		
-		if (result.Count == 0)
+		if (_onSight)
 			_timeOnSight += delta;
 		else
 			_timeOnSight = 0;
@@ -266,21 +267,43 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 			_shooting = !Fire.Release();
 	}
 
+	private bool DetectSight()
+	{
+		Vector3 from = Fire.GlobalPosition;
+		Vector3 to = _target.Body.GlobalTransform.Origin;
+
+		var spaceState = GetWorld3D().DirectSpaceState;
+
+		var query = PhysicsRayQueryParameters3D.Create(from, to);
+
+		query.CollisionMask = 1;
+		var result = spaceState.IntersectRay(query);
+
+		return result.Count == 0;
+	}
+
 	private void Aim()
 	{
 		float spread = SpreadFromTarget() * SpeedSpreadFactor;
 		LookAtWithSpread(Fire, _target.Body.GlobalTransform.Origin, spread);
 	}
 
+	private float _cachedSpread = 0f;
 	public float SpreadFromTarget()
 	{
+		if (!_processTick)
+			return _cachedSpread;
+
 		Vector3 delta = GlobalPosition - _target.Body.GlobalTransform.Origin;
 		Vector3 direction = delta.Normalized();
 		Vector3 targetVel = _target.Body.Velocity();
 
 		float lateralSpeed = (targetVel - targetVel.Dot(direction) * direction).Length();
-		return lateralSpeed / delta.Length();
+		_cachedSpread = lateralSpeed / delta.Length();
+		return _cachedSpread;
 	}
+
+	private static RandomNumberGenerator _rng = new();
 
 	public static void LookAtWithSpread(
 		Node3D node,
@@ -301,18 +324,16 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 		if (spreadDegrees <= 0f)
 			return direction;
 
-		var rng = new RandomNumberGenerator();
-
 		Vector3 randomAxis = direction.Cross(
 			new Vector3(
-				rng.RandfRange(-1f, 1f),
-				rng.RandfRange(-1f, 1f),
-				rng.RandfRange(-1f, 1f)
+				_rng.RandfRange(-1f, 1f),
+				_rng.RandfRange(-1f, 1f),
+				_rng.RandfRange(-1f, 1f)
 			).Normalized()
 		).Normalized();
 
 		float angle = Mathf.DegToRad(
-			rng.RandfRange(-spreadDegrees, spreadDegrees)
+			_rng.RandfRange(-spreadDegrees, spreadDegrees)
 		);
 
 		return direction.Rotated(randomAxis, angle).Normalized();
