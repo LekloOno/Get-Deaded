@@ -11,8 +11,8 @@ public partial class PM_LedgeClimb : PM_Action
     [Export(PropertyHint.Range, "  0,1000")] private ulong _superGlideWindow = 80;
     [Export(PropertyHint.Range, "0.0,10.0")] private float _superGlideYStrength = 4f;
     [Export(PropertyHint.Range, "0.0,10.0")] private float _superGlideXStrength = 8f;
-    [Export] private float _minSpace = 0.3f;    // The minimum space considered as a valid platform to climb to.
-    [Export] private float _minHeight = 0.4f;  // Obstacles lower than this can't be ledgeclimbed.
+    [Export] private float _minSpace = 0.2f;    // The minimum space considered as a valid platform to climb to.
+    [Export] private float _minHeight = 0.25f;  // Obstacles lower than this can't be ledgeclimbed.
     
     [ExportCategory("Setup")]
     [Export] private PI_Jump _jumpInput;
@@ -34,6 +34,7 @@ public partial class PM_LedgeClimb : PM_Action
     private Vector3 _force = Vector3.Zero;
     private Vector3 _prevVelocity = Vector3.Zero;
     private Vector3 _direction = Vector3.Zero;
+    private Vector3 _directionFlat = Vector3.Zero;
     private KinematicCollision3D _lastCollision;
 
     public override void _Ready()
@@ -66,7 +67,7 @@ public partial class PM_LedgeClimb : PM_Action
     }
 
     public bool CanLedgeClimb() => CheckPhysics() && !_isClimbing;
-    private bool CheckPhysics() => PHX_Checks.CanLedgeClimb(_controller, _bodyScale.Collider, _pivot, _minSpace, _minHeight, _ledgeCast, out _lastCollision);
+    private bool CheckPhysics() => PHX_Checks.CanLedgeClimb(_controller, _bodyScale.Collider, _pivot, _minSpace, _minHeight, _ledgeCast.GlobalPosition, out _lastCollision);
 
     public void DoLedgeClimb()
     {
@@ -75,7 +76,12 @@ public partial class PM_LedgeClimb : PM_Action
         _dash.AbortDash();
 
         _direction = -_lastCollision.GetNormal();
-        _force = new Vector3(_direction.X*1.5f, _climbSpeed, _direction.Z*1.5f);
+        
+        _directionFlat = _direction;
+        _directionFlat.Y = 0f;
+        _directionFlat = _directionFlat.Normalized();
+
+        _force = new Vector3(_directionFlat.X*1.5f, _climbSpeed, _directionFlat.Z*1.5f);
         
         _controller.TakeOverForces.AddPersistent(_force);
         _isClimbing = true;
@@ -89,7 +95,7 @@ public partial class PM_LedgeClimb : PM_Action
     private void Climb()
     {
         float timeElapsed = (PHX_Time.ScaledTicksMsec - _startTime)/1000f;
-        if (timeElapsed > _maxClimbTime || PHX_Checks.CanMoveForward(_controller, _bodyScale.Collider, _pivot, 0.5f, out _lastCollision))
+        if (timeElapsed > _maxClimbTime || PHX_Checks.CanMoveAlong(_controller, _bodyScale.Collider, _directionFlat, 0.15f, out _lastCollision))
             StopClimb();
     }
 
@@ -98,7 +104,7 @@ public partial class PM_LedgeClimb : PM_Action
         _startTime = 0;
         _controller.TakeOverForces.RemovePersistent(_force);
 
-        Vector3 minOut = new(_direction.X, 1f, _direction.Z);
+        Vector3 minOut = new(_directionFlat.X, 1f, _directionFlat.Z);
 
         Vector3 outVelocity;
         
