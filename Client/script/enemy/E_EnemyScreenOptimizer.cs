@@ -6,7 +6,7 @@ public partial class E_EnemyScreenOptimizer : Node3D
 
     public override void _PhysicsProcess(double delta)
     {
-        if ((Engine.GetPhysicsFrames() & 0b1000) != 0b1000)
+        if ((Engine.GetPhysicsFrames() & 7) != 7)
             return;
 
         if (GetViewport().GetCamera3D() is not Camera3D camera)
