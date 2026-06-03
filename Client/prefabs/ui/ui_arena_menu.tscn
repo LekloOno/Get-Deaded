@@ -1532,20 +1532,71 @@ action = "holster"
 [node name="Button3" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Holster/Input" parent_id_path=PackedInt32Array(1881842466, 702567657) index="2" unique_id=2060705678]
 action = "holster"
 
-[node name="Melee" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer" unique_id=542611261 instance=ExtResource("38_pwonq")]
+[node name="QuickMelee" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer" unique_id=542611261 instance=ExtResource("38_pwonq")]
 layout_mode = 2
 
-[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Melee/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(542611261, 109094902, 172764845) index="0" unique_id=1465678305]
-text = "INPUTS_MELEE_LABEL"
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/QuickMelee/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(542611261, 109094902, 172764845) index="0" unique_id=1465678305]
+text = "INPUTS_QUICK_MELEE_LABEL"
 
-[node name="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Melee/Input" parent_id_path=PackedInt32Array(542611261, 702567657) index="0" unique_id=1880162874]
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/QuickMelee/Input" parent_id_path=PackedInt32Array(542611261, 702567657) index="0" unique_id=1880162874]
 action = "melee"
 
-[node name="Button2" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Melee/Input" parent_id_path=PackedInt32Array(542611261, 702567657) index="1" unique_id=874213555]
+[node name="Button2" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/QuickMelee/Input" parent_id_path=PackedInt32Array(542611261, 702567657) index="1" unique_id=874213555]
 action = "melee"
 
-[node name="Button3" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Melee/Input" parent_id_path=PackedInt32Array(542611261, 702567657) index="2" unique_id=2060705678]
+[node name="Button3" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/QuickMelee/Input" parent_id_path=PackedInt32Array(542611261, 702567657) index="2" unique_id=2060705678]
 action = "melee"
+
+[node name="Weapons" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer" unique_id=468379316 instance=ExtResource("38_squjd")]
+layout_mode = 2
+
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Weapons" index="0" unique_id=366278316]
+text = "INPUTS_WEAPONS_LABEL"
+
+[node name="Weapon0" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer" unique_id=1085151284 instance=ExtResource("38_pwonq")]
+layout_mode = 2
+
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Weapon0/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1085151284, 109094902, 172764845) index="0" unique_id=1465678305]
+text = "INPUTS_WEAPON_0_LABEL"
+
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Weapon0/Input" parent_id_path=PackedInt32Array(1085151284, 702567657) index="0" unique_id=1880162874]
+action = "switch_to_0"
+
+[node name="Button2" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Weapon0/Input" parent_id_path=PackedInt32Array(1085151284, 702567657) index="1" unique_id=874213555]
+action = "switch_to_0"
+
+[node name="Button3" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Weapon0/Input" parent_id_path=PackedInt32Array(1085151284, 702567657) index="2" unique_id=2060705678]
+action = "switch_to_0"
+
+[node name="Weapon1" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer" unique_id=2018547791 instance=ExtResource("38_pwonq")]
+layout_mode = 2
+
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Weapon1/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(2018547791, 109094902, 172764845) index="0" unique_id=1465678305]
+text = "INPUTS_WEAPON_1_LABEL"
+
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Weapon1/Input" parent_id_path=PackedInt32Array(2018547791, 702567657) index="0" unique_id=1880162874]
+action = "switch_to_1"
+
+[node name="Button2" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Weapon1/Input" parent_id_path=PackedInt32Array(2018547791, 702567657) index="1" unique_id=874213555]
+action = "switch_to_1"
+
+[node name="Button3" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Weapon1/Input" parent_id_path=PackedInt32Array(2018547791, 702567657) index="2" unique_id=2060705678]
+action = "switch_to_1"
+
+[node name="WeaponMelee" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer" unique_id=1746975788 instance=ExtResource("38_pwonq")]
+layout_mode = 2
+
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/WeaponMelee/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1746975788, 109094902, 172764845) index="0" unique_id=1465678305]
+text = "INPUTS_WEAPON_MELEE_LABEL"
+
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/WeaponMelee/Input" parent_id_path=PackedInt32Array(1746975788, 702567657) index="0" unique_id=1880162874]
+action = "switch_to_melee"
+
+[node name="Button2" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/WeaponMelee/Input" parent_id_path=PackedInt32Array(1746975788, 702567657) index="1" unique_id=874213555]
+action = "switch_to_melee"
+
+[node name="Button3" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/WeaponMelee/Input" parent_id_path=PackedInt32Array(1746975788, 702567657) index="2" unique_id=2060705678]
+action = "switch_to_melee"
 
 [node name="Interface" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer" unique_id=1093949745 instance=ExtResource("38_squjd")]
 layout_mode = 2
@@ -2214,8 +2265,15 @@ clip_text = true
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Switch/UiSettingsLabel"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Holster"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Holster/UiSettingsLabel"]
-[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Melee"]
-[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Melee/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/QuickMelee"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/QuickMelee/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Weapons"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Weapon0"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Weapon0/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Weapon1"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Weapon1/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/WeaponMelee"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/WeaponMelee/UiSettingsLabel"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Interface"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Stats"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Stats/UiSettingsLabel"]
