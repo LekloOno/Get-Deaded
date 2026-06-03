@@ -9,6 +9,8 @@ public partial class SprintModeSetting : UserSetting
     public static SprintMode Mode {get; private set;} = SprintMode.Auto;
     public override Variant DefaultFallBack() => (int) SprintMode.Auto;
 
+    public static event Action<SprintMode>? SprintModeChanged;
+
     protected override bool ProcessValue(Variant value, out Variant effectiveValue)
     {
         if (value.VariantType is not Variant.Type.Int)
@@ -26,6 +28,9 @@ public partial class SprintModeSetting : UserSetting
 
         Mode = (SprintMode) intVal;
         effectiveValue = intVal;
+
+        SprintModeChanged?.Invoke(Mode);
+
         return true;
     }
 }

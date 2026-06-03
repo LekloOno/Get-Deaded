@@ -1,4 +1,5 @@
 
+using System;
 using Godot;
 using TraGUS;
 
@@ -10,6 +11,8 @@ public partial class AutoSprintDelaySetting : UserSetting
     public override Variant DefaultFallBack() => (ulong) 800;
     public const ulong MinimumDelay = 300;
     public ulong Minimum => MinimumDelay;
+
+    public static event Action<ulong>? DelayChanged;
 
     protected override bool ProcessValue(Variant value, out Variant effectiveValue)
     {
@@ -31,6 +34,8 @@ public partial class AutoSprintDelaySetting : UserSetting
 
         Delay = ulongVal;
         effectiveValue = ulongVal;
+
+        DelayChanged?.Invoke(Delay);
         return true;
     }
 }
