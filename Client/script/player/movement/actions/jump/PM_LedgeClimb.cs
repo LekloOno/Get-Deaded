@@ -41,7 +41,15 @@ public partial class PM_LedgeClimb : PM_Action
     {
         _ledgeCast.Enabled = false;
         SetPhysicsProcess(false);
+        _walkInput.BackwardPressed += OnBackwardPressed;
     }
+
+    private void OnBackwardPressed()
+    {
+        if (_isClimbing)
+            StopClimb();
+    }
+
     public override void _PhysicsProcess(double delta) => Climb();
 
     public Vector3 LedgeClimb(Vector3 velocity)

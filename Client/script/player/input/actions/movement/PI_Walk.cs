@@ -9,6 +9,7 @@ public partial class PI_Walk : PI_ActionHandler<Vector2>
     public Vector3 FlatDir => - _flatDirNode.Transform.Basis.Z;
 
     public EventHandler OnStopOrBackward;
+    public event Action BackwardPressed;
     public EventHandler<KeyPressedArgs> KeyPressed;
     public Vector3 SpaceWishDir {get; private set;}
     public Vector3 WishDir {get; private set;}
@@ -56,7 +57,10 @@ public partial class PI_Walk : PI_ActionHandler<Vector2>
             SetStart();
 
         if(IsBacking())
+        {
             OnStopOrBackward?.Invoke(this, EventArgs.Empty);
+            BackwardPressed?.Invoke();
+        }
     }
     public override void HandleExternal(PI_ActionState actionState, Vector2 value)
     {
