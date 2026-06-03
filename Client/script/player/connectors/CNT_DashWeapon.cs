@@ -21,7 +21,8 @@ public partial class CNT_DashWeapon : Node
 
     private void DisableWeapons()
     {
-        _weaponsHandler.DisableFire();
-        _weaponsHandler.Melee.Sleep();   
+        if (!_weaponsHandler.IsOnMelee())
+            _weaponsHandler.DisableFire();
+        _weaponsHandler.Melee.Sleep();
     }
 }

@@ -183,6 +183,8 @@ public partial class PW_WeaponsHandler : WeaponSystem
             Available?.Invoke();
     }
 
+    public bool IsOnMelee() => _activeWeapon == Melee;
+
     public void DisableFire()
     {
         _externalReady = false;
