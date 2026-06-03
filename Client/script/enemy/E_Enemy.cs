@@ -5,7 +5,7 @@ using Godot;
 public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 {
 	private static ulong Count;
-	private readonly ulong _id = Count ++;
+	public readonly ulong Id = Count ++;
 
 	[Export] private E_EnemyMaterial _mat;
 	[Export] private GC_HealthManager _healthManager;
@@ -27,8 +27,6 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 	[Export] public Node3D AimPosition {get; private set;}
 	[Export] public float SpeedSpreadFactor = 10f;
 	[Export] public double ReactionTime = 0.2f;
-	private double _timeOnSight = 0f;
-	private bool _shooting = false;
 
 
 	public bool Enabled {get; private set;} = false;
@@ -151,7 +149,6 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 	private void DisableActions()
 	{
 		Fire?.Disable();
-		_shooting = false;
 
 		if (!Enabled)
 			return;
@@ -187,7 +184,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 		Enabled = true;
 		CollisionLayer = CONF_Collision.Layers.EnvironmentEntity;
 
-		_mat.Oui();
+		//_mat.Oui();
 		Show();
 		SetPhysicsProcess(true);
 		ProcessMode = ProcessModeEnum.Inherit;
@@ -201,15 +198,13 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 	
 		_healthManager.Init(true);
 
-		//Spawned?.Invoke();
+		Spawned?.Invoke();
 	}
 
 	protected override void PhysicsProcessSpec(double delta)
 	{
 		if (!Enabled)
 			return;
-		
-		Mover.Rotate(this);
 
 		Vector3 velocity = Velocity;
 		if (!IsOnFloor())
@@ -225,117 +220,11 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 		Velocity = velocity;
 		
 		MoveAndSlide();
-
-		Attack(delta);
 	}
 
 	public Vector3 ApplyDrag(Vector3 velocity, double deltaTime)
 	{
 		float dragFactor = 1f/(1f+(float)deltaTime*_drag);    // Transform the drag to a velocity coeficient
 		return velocity * dragFactor;
-	}
-
-	private bool _onSight;
-	private bool _processTick;
-	public void Attack(double delta)
-	{
-		if (Fire == null || _target == null)
-			return;
-
-		ulong tick = Engine.GetPhysicsFrames();
-
-		_processTick = (tick & 15) == (_id & 15);
-		if (_processTick)
-			_onSight = DetectSight();
-
-		if (_onSight)
-			_timeOnSight += delta;
-		else
-			_timeOnSight = 0;
-
-		bool nextShoot = _timeOnSight >= ReactionTime;
-
-		if (nextShoot)
-			Aim();
-
-		if (_shooting == nextShoot)
-			return;
-
-		if (nextShoot)
-			_shooting = Fire.Press();
-		else
-			_shooting = !Fire.Release();
-	}
-
-	private bool DetectSight()
-	{
-		Vector3 from = Fire.GlobalPosition;
-		Vector3 to = _target.Body.GlobalTransform.Origin;
-
-		var spaceState = GetWorld3D().DirectSpaceState;
-
-		var query = PhysicsRayQueryParameters3D.Create(from, to);
-
-		query.CollisionMask = 1;
-		var result = spaceState.IntersectRay(query);
-
-		return result.Count == 0;
-	}
-
-	private void Aim()
-	{
-		float spread = SpreadFromTarget() * SpeedSpreadFactor;
-		LookAtWithSpread(Fire, _target.Body.GlobalTransform.Origin, spread);
-	}
-
-	private float _cachedSpread = 0f;
-	public float SpreadFromTarget()
-	{
-		if (!_processTick)
-			return _cachedSpread;
-
-		Vector3 delta = GlobalPosition - _target.Body.GlobalTransform.Origin;
-		Vector3 direction = delta.Normalized();
-		Vector3 targetVel = _target.Body.Velocity();
-
-		float lateralSpeed = (targetVel - targetVel.Dot(direction) * direction).Length();
-		_cachedSpread = lateralSpeed / delta.Length();
-		return _cachedSpread;
-	}
-
-	private static RandomNumberGenerator _rng = new();
-
-	public static void LookAtWithSpread(
-		Node3D node,
-		Vector3 targetPosition,
-		float spreadDegrees,
-		Vector3? up = null)
-	{
-		Vector3 upVector = up ?? Vector3.Up;
-		Vector3 direction = (targetPosition - node.GlobalPosition).Normalized();
-		Vector3 spreadDirection = ApplySpread(direction, spreadDegrees);
-		Vector3 lookPoint = node.GlobalPosition + spreadDirection;
-
-		node.LookAt(lookPoint, upVector);
-	}
-
-	private static Vector3 ApplySpread(Vector3 direction, float spreadDegrees)
-	{
-		if (spreadDegrees <= 0f)
-			return direction;
-
-		Vector3 randomAxis = direction.Cross(
-			new Vector3(
-				_rng.RandfRange(-1f, 1f),
-				_rng.RandfRange(-1f, 1f),
-				_rng.RandfRange(-1f, 1f)
-			).Normalized()
-		).Normalized();
-
-		float angle = Mathf.DegToRad(
-			_rng.RandfRange(-spreadDegrees, spreadDegrees)
-		);
-
-		return direction.Rotated(randomAxis, angle).Normalized();
 	}
 }
