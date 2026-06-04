@@ -360,14 +360,16 @@ public partial class PW_WeaponsHandler : WeaponSystem
 
     public void SwitchTo(int index)
     {
-        if (_weaponIndex == index)
-            return;
-
         if (index >= _weapons.Count)
             return;
 
         _weaponIndex = index;
-        _targetWeapon = _weapons[_weaponIndex];
+        PW_Weapon target = _weapons[_weaponIndex];
+
+        if (_targetWeapon == target)
+            return;
+
+        _targetWeapon = target;
 
         SwitchStarted?.Invoke(_targetWeapon, Melee, (_weaponIndex + 1) % _weapons.Count, _weapons);
         StartSwitch();
