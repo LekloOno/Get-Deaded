@@ -1,22 +1,21 @@
-using System;
 using System.Collections.Generic;
 using Godot;
 
 [GlobalClass]
 public partial class PC_Recoil : Node3D
 {
-    [Export] public PC_Control CameraControl {get; private set;}
+    [Export] public PC_Control CameraControl {get; private set;} = null!;
     [Export] private Vector2 _mouseThreshold;
     [Export] private Vector2 _mouseMovementThreshold;
     public Vector2 _initialRotation;
     private Vector2 _bufferedRecoil;
     private Vector2 _bufferedMovement;
 
-    private List<PCR_BaseHandler> _recoilHandlers = [];
+    private readonly List<PCR_BaseHandler> _recoilHandlers = [];
 
     public override void _Ready()
     {
-        CameraControl.MouseMove += ResetBufferFromMouse;
+        CameraControl.MouseMoved += ResetBufferFromMouse;
     }
 
     public override void _ExitTree()
@@ -24,7 +23,7 @@ public partial class PC_Recoil : Node3D
         _recoilHandlers.Clear();
     }
 
-    public override void _Process(double delta)
+    public override void _PhysicsProcess(double delta)
     {
         Vector2 appliedVel = Vector2.Zero;
 
@@ -37,11 +36,12 @@ public partial class PC_Recoil : Node3D
             _bufferedRecoil += velocity;
         }
 
-        CameraControl.RotateXClamped(appliedVel.Y);
-        CameraControl.RotateFlatDir(appliedVel.X);
+        CameraControl.AddRecoilState(appliedVel);
+        //CameraControl.RotateXClamped(appliedVel.Y);
+        //CameraControl.RotateFlatDir(appliedVel.X);
     }
 
-    public void ResetBufferFromMouse(object sender, Vector2 motion)
+    public void ResetBufferFromMouse(Vector2 motion)
     {
         if (Mathf.Abs(motion.X) > _mouseThreshold.X)
             _bufferedRecoil.X = 0;

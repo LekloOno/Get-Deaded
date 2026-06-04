@@ -1,79 +1,107 @@
 using Godot;
 using System;
-using System.Runtime;
 
 [GlobalClass]
 public partial class PC_Control : Node3D
 {
-    [Export] private PC_Settings _settings;
-
-    [ExportCategory("Settings")]
-    [Export(PropertyHint.Range, "0,100,0.1")]
-    public float CmPer360 = 32f;
-    [Export(PropertyHint.Range, "0,64000,1")]
-    public uint Dpi = 1600;
+    [Export] private PC_Settings _settings = null!;
     
     [ExportCategory("Setup")]
-    [Export] private Node3D _flatDir;
-    private Vector3 _eulerAngles;
+    [Export] private Node3D _flatDir = null!;
 
-    private float _realSens;
+    private float _rawPitch = 0f;
+    private float _rawYaw   = 0f;
 
-    public EventHandler<Vector2> MouseMove;
+    private Vector2 _recoilPrevious = Vector2.Zero; // X = yaw, Y = pitch
+    private Vector2 _recoilCurrent  = Vector2.Zero;
+
+    public event Action<Vector2>? MouseMoved;
 
     public override void _Ready()
     {
         Input.MouseMode = Input.MouseModeEnum.Captured;
-        Rotation = _eulerAngles = Vector3.Zero;
     }
 
     public override void _UnhandledInput(InputEvent @event)
     {
         if (@event is InputEventMouseMotion mouseMotion)
         {
-            //_flatDir.RotateY(-mouseMotion.Relative.X * _realSens);
-
-            //_eulerAngles += new Vector3(-mouseMotion.Relative.Y * _realSens, -mouseMotion.Relative.X * _realSens, 0f);
-            //_eulerAngles.X = Mathf.Clamp(_eulerAngles.X, Mathf.DegToRad(-90), Mathf.DegToRad(90));
-            //Rotation = _eulerAngles;
-            //Vector2 cmMotion = (-mouseMotion.ScreenRelative / Dpi) * 2.54f;
-            //Vector2 sensMotion = cmMotion * 2 * Mathf.Pi / CmPer360;
-
             Vector2 sensMotion = - mouseMotion.ScreenRelative * _settings.Sensitivity;
-            RotateFlatDir(sensMotion.X);
-            RotateXClamped(sensMotion.Y);
-            MouseMove.Invoke(this, sensMotion);
-            Transform = Transform.Orthonormalized();
+            _rawYaw += sensMotion.X;
+            _rawPitch += sensMotion.Y;
+
+            MouseMoved?.Invoke(sensMotion);
         }
     }
 
-    // Might be clamping the value an unecessary amount of time ... to improve.
-    public void RotateXClamped(float theta)
-    {
-        RotateX(theta);
-        Vector3 rotation = Rotation;
-        rotation.X = Mathf.Clamp(rotation.X, Mathf.DegToRad(-90), Mathf.DegToRad(90));
-        Rotation = rotation;
-    }
+    public override void _Process(double delta) =>
+        ApplyTransforms();
 
     public void InitRotation(Vector3 rotation)
     {
-        _flatDir.Rotation = rotation * new Vector3(0f, 1f, 0f);
-
-        Rotation = new (
-            Mathf.Clamp(rotation.X, Mathf.DegToRad(-90), Mathf.DegToRad(90)),
-            0f, 0f
-        );
+        ResetRecoil();
+        _rawYaw = rotation.Y;
+        _rawPitch = rotation.X;
     }
 
-    public void RotateFlatDir(float theta) => _flatDir.RotateY(theta);
-    public Vector2 CurrentRotation() => new(_flatDir.Rotation.Y, Rotation.X);
+    public void RotateXClamped(float theta) => _rawPitch += theta;
+    public void RotateFlatDir(float theta) => _rawYaw += theta;
+    public Vector2 CurrentRotation() => new(_rawYaw, _rawPitch);
 
-    // Classic method .. if the manual euler method ever breaks
+    public void SetRecoilState(Vector2 recoil)
+    {
+        _recoilPrevious = _recoilCurrent;
+        _recoilCurrent = recoil;
+    }
 
-    //CameraY.RotateY(-mouseMotion.Relative.X * _realSens);
-    //RotateX(-mouseMotion.Relative.Y * _realSens);
-    //Vector3 rotation = Rotation;
-    //rotation.X = Mathf.Clamp(rotation.X, Mathf.DegToRad(-90), Mathf.DegToRad(90));
-    //Rotation = rotation;
+    public void AddRecoilState(Vector2 recoil) =>
+        SetRecoilState(_recoilCurrent + recoil);
+    
+    private const uint ResetMask = 63;
+    /// <summary>
+    /// Recoil and pitch can drift away at high values
+    /// I simply want to ensure we don't get in floating precision hell territory
+    /// thus periodically recenter yaw, pitch and recoil.
+    /// </summary>
+    public override void _PhysicsProcess(double delta)
+    {
+        if ((Engine.GetPhysicsFrames() & ResetMask) == ResetMask)
+            ResetRecoil();
+    }
+
+    private void ResetRecoil()
+    {
+        _rawPitch = Mathf.Clamp(
+            _rawPitch + _recoilCurrent.Y,
+            Mathf.DegToRad(-90f),
+            Mathf.DegToRad(90f)
+        );
+
+        _rawYaw += _recoilCurrent.X;
+        _rawYaw = WrapAngle(_rawYaw);
+
+        _recoilPrevious -= _recoilCurrent;
+        _recoilCurrent  = Vector2.Zero;
+    }
+
+    private static float WrapAngle(float angle) =>
+        ((angle + Mathf.Pi) % Mathf.Tau + Mathf.Tau) % Mathf.Tau - Mathf.Pi;
+
+    private void ApplyTransforms()
+    {
+        float alpha = (float)Engine.GetPhysicsInterpolationFraction();
+        Vector2 recoil = _recoilPrevious.Lerp(_recoilCurrent, alpha);
+
+        _rawPitch = Mathf.Clamp(
+            _rawPitch,
+            Mathf.DegToRad(-90f) - recoil.Y,
+            Mathf.DegToRad(90f) - recoil.Y
+        );
+
+        _flatDir.Rotation = new Vector3(0f, _rawYaw + recoil.X, 0f);
+
+        float finalPitch = _rawPitch + recoil.Y;
+
+        Rotation = new Vector3(finalPitch, 0f, 0f);
+    }
 }
