@@ -57,7 +57,7 @@ public partial class PC_Control : Node3D
     public void AddRecoilState(Vector2 recoil) =>
         SetRecoilState(_recoilCurrent + recoil);
     
-    private const uint ResetMask = 63;
+    private const uint ResetMask = 255;
     /// <summary>
     /// Recoil and pitch can drift away at high values
     /// I simply want to ensure we don't get in floating precision hell territory
