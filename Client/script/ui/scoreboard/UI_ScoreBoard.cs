@@ -13,6 +13,8 @@ public partial class UI_ScoreBoard : Control
     // Should be the only child of _easyContainer.
     [Export] private UI_ScoreBoardEntry _entryTemplate;
     [Export] private Control _container;
+    [Export] private AudioStreamPlayer _entryHover = null!;
+    [Export] private AudioStreamPlayer _entryClick = null!;
 
     private List<UI_ScoreBoardEntry> _entries = [];
 
@@ -72,10 +74,26 @@ public partial class UI_ScoreBoard : Control
             entry.Visible = true;
             entry.SetProcess(true);
             entry.Initialize(row);
+
+            entry.MouseEntered += EntryOnMouseEntered;
+            entry.GuiInput += EntryOnGuiInput;
+
             _container.AddChild(entry);
             _entries.Add(entry);
         }
     }
+
+    private void EntryOnGuiInput(InputEvent @event)
+    {
+        if (@event is InputEventMouseButton mb &&
+            mb.ButtonIndex == MouseButton.Left &&
+            mb.Pressed)
+        {
+            _entryClick.Play(0);
+        }
+    }
+
+    private void EntryOnMouseEntered() => _entryHover.Play(0);
 
     public void Clean()
     {

@@ -3,8 +3,10 @@
 [ext_resource type="Script" uid="uid://iardi3jeijcc" path="res://script/ui/scoreboard/UI_ScoreBoard.cs" id="1_0onr6"]
 [ext_resource type="Theme" uid="uid://1b5txn2enhg6" path="res://assets/ui/scoreboard_theme.tres" id="2_lx2ug"]
 [ext_resource type="PackedScene" uid="uid://cjcw5h2phmx1d" path="res://prefabs/ui/scoreboard/ui_scoreboard_entry.tscn" id="3_mv7kc"]
+[ext_resource type="AudioStream" uid="uid://bt8tyy4wp4w16" path="res://assets/sounds/ui/minimal_hover.wav" id="4_lx2ug"]
+[ext_resource type="AudioStream" uid="uid://bshhncf67w1g1" path="res://assets/sounds/ui/click_lighter.wav" id="5_mv7kc"]
 
-[node name="UiScoreBoard" type="PanelContainer" unique_id=1179865850 node_paths=PackedStringArray("_entryTemplate", "_container")]
+[node name="UiScoreBoard" type="PanelContainer" unique_id=1179865850 node_paths=PackedStringArray("_entryTemplate", "_container", "_entryHover", "_entryClick")]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 221.0
@@ -12,6 +14,8 @@ grow_horizontal = 2
 script = ExtResource("1_0onr6")
 _entryTemplate = NodePath("VBoxContainer/EasyEntriesContainer/UiScoreboardEntry")
 _container = NodePath("VBoxContainer/EasyEntriesContainer")
+_entryHover = NodePath("Hover")
+_entryClick = NodePath("Click")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1595028883]
 layout_mode = 2
@@ -79,3 +83,13 @@ layout_mode = 2
 
 [node name="UiScoreboardEntry" parent="VBoxContainer/EasyEntriesContainer" unique_id=529901829 instance=ExtResource("3_mv7kc")]
 layout_mode = 2
+
+[node name="Hover" type="AudioStreamPlayer" parent="." unique_id=521921143]
+stream = ExtResource("4_lx2ug")
+volume_db = 4.0
+pitch_scale = 1.2
+
+[node name="Click" type="AudioStreamPlayer" parent="." unique_id=1879163499]
+stream = ExtResource("5_mv7kc")
+volume_db = -5.0
+pitch_scale = 1.8
