@@ -15,7 +15,7 @@ public partial class GC_HurtBox : Area3D
 	[Export] private float _modifier = 1f;
 	[Export] public GpuParticles3D DamageSplatter;
 	[Export] public GE_CombatEntity Entity {get; private set;}
-	public static float BackAngle = 135;
+	public static float BackAngle = 120;
 	public PHX_ActiveRagdollBone RagdollBone {get; private set;}
 	public event Action<Vector3, Vector3, HitEventArgs>? HitReceived;
 	
