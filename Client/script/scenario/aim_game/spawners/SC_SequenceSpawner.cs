@@ -121,6 +121,36 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
         ClearEnemies();
     }
 
+    private Vector3 IterateRandomPosition(float maxAttempts)
+    {
+        var spaceState = GetWorld3D().DirectSpaceState;
+        var shape = new SphereShape3D { Radius = 0.5f };
+
+        Vector3 candidate;
+        int attempts = 0;
+
+        do
+        {
+            candidate = RandomPosition();
+            Vector3 globalCandidate = ToGlobal(candidate);
+            attempts++;
+
+            var query = new PhysicsShapeQueryParameters3D
+            {
+                Shape = shape,
+                Transform = new Transform3D(Basis.Identity, globalCandidate),
+                CollisionMask = 1
+            };
+
+            var overlaps = spaceState.IntersectShape(query);
+            if (overlaps.Count == 0)
+                return candidate;
+
+        } while (attempts < maxAttempts);
+
+        GD.PushWarning($"[SC_SequenceSpawner] Could not find a free position in {maxAttempts} attemps. Spawning inside collisions.");
+        return candidate; 
+    }
 
     private Vector3 RandomPosition()
     {
@@ -168,12 +198,13 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
         }
     }
 
+    private const uint MaxSpawnAttempts = 6;
     protected override void SpawnEnemySpec(E_IEnemy enemy)
     {
         if (enemy is not Node3D node)
             return;
 
-        node.Position = RandomPosition();
+        node.Position = IterateRandomPosition(MaxSpawnAttempts);
 
         Vector3 target = Starter == null
             ? GlobalPosition
