@@ -1,5 +1,8 @@
 [gd_resource type="AudioBusLayout" format=3 uid="uid://bggmflncdn26j"]
 
+[ext_resource type="AudioEffectLowPassFilter" uid="uid://kmha38gvs238" path="res://assets/sounds/effects/sfx_low_pass.tres" id="1_g28q7"]
+[ext_resource type="AudioEffectReverb" uid="uid://bqtt6mrl1agv3" path="res://assets/sounds/effects/sfx_reverb.tres" id="2_n8wo2"]
+
 [sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_j3pel"]
 resource_name = "Compressor"
 ratio = 2.0
@@ -19,6 +22,10 @@ bus/2/mute = false
 bus/2/bypass_fx = false
 bus/2/volume_db = 0.0
 bus/2/send = &"Master"
+bus/2/effect/0/effect = ExtResource("2_n8wo2")
+bus/2/effect/0/enabled = true
+bus/2/effect/1/effect = ExtResource("1_g28q7")
+bus/2/effect/1/enabled = true
 bus/3/name = &"Environment Sfx"
 bus/3/solo = false
 bus/3/mute = false

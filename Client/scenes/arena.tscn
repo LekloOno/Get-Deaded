@@ -3762,7 +3762,7 @@ viewport_path = NodePath("entities/Pickups/ClickAmos2/Sprite3D/SubViewport")
 [sub_resource type="ViewportTexture" id="ViewportTexture_6b7ou"]
 viewport_path = NodePath("entities/Pickups/WildcardAmo2/Sprite3D/SubViewport")
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_lju4b"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_27x07"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_4g8la"]
 frequency = 0.05
@@ -6958,13 +6958,13 @@ color = Color(0, 0, 0, 0)
 _pauseGame = false
 
 [node name="ToggleButton" parent="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/SprintMode/SprintModeOptions" parent_id_path=PackedInt32Array(620824296, 1093197233) index="0" unique_id=1111186385]
-button_group = SubResource("ButtonGroup_lju4b")
+button_group = SubResource("ButtonGroup_27x07")
 
 [node name="HoldButton" parent="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/SprintMode/SprintModeOptions" parent_id_path=PackedInt32Array(620824296, 1093197233) index="1" unique_id=942347926]
-button_group = SubResource("ButtonGroup_lju4b")
+button_group = SubResource("ButtonGroup_27x07")
 
 [node name="AutoButton" parent="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/SprintMode/SprintModeOptions" parent_id_path=PackedInt32Array(620824296, 1093197233) index="2" unique_id=1516286433]
-button_group = SubResource("ButtonGroup_lju4b")
+button_group = SubResource("ButtonGroup_27x07")
 
 [node name="PI_Stats" type="Node" parent="CanvasLayer" unique_id=1532279642]
 script = ExtResource("47_6ubnd")
@@ -7136,6 +7136,7 @@ parameters/looping = true
 stream = ExtResource("81_83tba")
 volume_db = -8.0
 autoplay = true
+bus = &"Environment Sfx"
 
 [connection signal="EarnScore" from="entities/AimArena/SC_GameManager" to="CanvasLayer/UI_ScoreMarkManager" method="OnEarnScore"]
 [connection signal="EarnScore" from="entities/AimArena/SC_GameManager" to="CanvasLayer/ScoreTracker/BoxContainer/HBoxContainer/Score" method="OnEarnScore"]

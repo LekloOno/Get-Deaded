@@ -1,0 +1,5 @@
+[gd_resource type="AudioEffectReverb" format=3 uid="uid://bqtt6mrl1agv3"]
+
+[resource]
+resource_name = "Reverb"
+wet = 0.0

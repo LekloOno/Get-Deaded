@@ -3,8 +3,8 @@ using Godot;
 public partial class VFX_LowHealth : ColorRect
 {
 	[Export] private GC_HealthManager _healthManager = null!;
-	[Export] private float _healthThreshold = 50f;
-	[Export] private float _maxIntensity = 6f;
+	[Export] private float _healthThreshold = 70f;
+	[Export] private float _maxIntensity = 0.7f;
 	[Export] private Curve _interpolationCurve = null!;
 	[Export] private ANIM_InOutTweenSetting _hitTweenSetting = null!;
 
