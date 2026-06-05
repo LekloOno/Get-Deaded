@@ -80,6 +80,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
     {
         foreach (PW_Weapon weapon in _weapons)
             weapon.AddDamageMultiplier(data.Multiplier);
+        Melee.AddDamageMultiplier(data.Multiplier);
 
         _damageBuffTimer = GetTree().CreateTimer(data.Duration, false, true);
         _damageBuffTimer.Timeout += () => RemoveDamageMultiplier(data.Multiplier);
@@ -89,12 +90,14 @@ public partial class PW_WeaponsHandler : WeaponSystem
     {
         foreach (PW_Weapon weapon in _weapons)
             weapon.RemoveDamageMultiplier(multiplier);
+        Melee.RemoveDamageMultiplier(multiplier);
     }
 
     public void ClearDamageMultiplier()
     {
         foreach (PW_Weapon weapon in _weapons)
             weapon.ClearDamageMultiplier();
+        Melee.ClearDamageMultiplier();
     }
 
     public void Init(GE_IActiveCombatEntity owner)
