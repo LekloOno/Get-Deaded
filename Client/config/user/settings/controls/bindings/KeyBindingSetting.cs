@@ -1,7 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
 using Godot;
 using Godot.Collections;
 using TraGUS;
@@ -34,6 +31,8 @@ public partial class KeyBindingSetting : UserSetting
             Key,
             Serialized(_keyBinds)
         );
+
+        UserSettingsServer.Instance.HasBeenModified = true;
 
         EmitSignal(UserSetting.SignalName.Changed, sender, _keyBinds);
     }
