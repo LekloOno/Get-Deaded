@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 [GlobalClass]
@@ -9,15 +10,23 @@ public partial class ANIM_TweenSetting : Resource
     [Export] public string? PropertyPath {get; private set;}
     [Export] public ANIM_TweenValue? Value {get; private set;}
 
-    public PropertyTweener? TweenProperty(Tween tween, GodotObject target)
+    public PropertyTweener? TweenProperty(Tween tween, GodotObject target, Variant? value = null)
     {
         tween.SetTrans(TransitionType);
         tween.SetEase(EaseType);
 
-        if (Value == null)
+        Variant effectiveValue;
+        if (value is Variant givenValue)
+            effectiveValue = givenValue;
+        else
         {
-            GD.PrintErr("[ANIM_TweenSetting] missing Value.");
-            return null;
+            if (Value != null)
+                effectiveValue = Value.Value;
+            else
+            {
+                GD.PrintErr("[ANIM_TweenSetting] missing Value.");
+                return null;
+            }            
         }
 
         if (PropertyPath == null)
@@ -29,7 +38,7 @@ public partial class ANIM_TweenSetting : Resource
         return tween.TweenProperty(
             target,
             PropertyPath,
-            Value.Value,
+            effectiveValue,
             AnimationTime
         );
     }
