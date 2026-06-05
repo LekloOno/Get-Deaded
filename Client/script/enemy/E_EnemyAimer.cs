@@ -2,7 +2,7 @@ using Godot;
 
 public partial class E_EnemyAimer : Node
 {
-    [Export] private E_Enemy? _owner;
+    [Export] private E_Enemy _owner = null!;
 
     private bool _shooting;
     private double _timeOnSight = 0f;
@@ -12,8 +12,6 @@ public partial class E_EnemyAimer : Node
     public override void _Ready()
     {
         SetPhysicsProcess(false);
-        if (_owner == null)
-            return;
 
         _owner.Died += OnDied;
         _owner.Disabled += OnDisabled;
@@ -32,7 +30,8 @@ public partial class E_EnemyAimer : Node
 
         Enabled = false;
         SetPhysicsProcess(false);
-        _owner?.Fire.Disable();
+		_owner.Fire.Disable();
+		_shooting = false;
     }
 
     public void Enable()
@@ -42,14 +41,8 @@ public partial class E_EnemyAimer : Node
 
         Enabled = true;
         SetPhysicsProcess(true);
-        
-        if (_owner == null)
-            return;
 
         _owner.Fire.Enable();
-
-        if (_shooting)
-            _shooting = _owner.Fire.Press();
     }
 
 	public void Attack(E_Enemy owner, double delta)
@@ -156,9 +149,6 @@ public partial class E_EnemyAimer : Node
 
     public override void _PhysicsProcess(double delta)
     {
-        if (_owner == null)
-            return;
-
         Attack(_owner, delta);
     }
 }
