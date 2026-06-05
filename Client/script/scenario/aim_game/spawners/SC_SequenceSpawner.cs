@@ -6,6 +6,7 @@ using System;
 public partial class SC_SequenceSpawner : SC_SpawnerScript
 {
     [Export] private Godot.Collections.Array<E_EnemyBuilder> _enemyBuilders;
+    [Export] private Godot.Collections.Array<Node3D> _spawnPoints = [];
     [Export] private uint _count = 4;
     [Export] private float _spawnRadius = 20f;
     [Export] private float _spawnMinDistance = 7f;
@@ -124,7 +125,7 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
     private Vector3 IterateRandomPosition(float maxAttempts)
     {
         var spaceState = GetWorld3D().DirectSpaceState;
-        var shape = new SphereShape3D { Radius = 0.5f };
+        var shape = new SphereShape3D { Radius = 1f };
 
         Vector3 candidate;
         int attempts = 0;
@@ -132,13 +133,12 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
         do
         {
             candidate = RandomPosition();
-            Vector3 globalCandidate = ToGlobal(candidate);
             attempts++;
 
             var query = new PhysicsShapeQueryParameters3D
             {
                 Shape = shape,
-                Transform = new Transform3D(Basis.Identity, globalCandidate),
+                Transform = new Transform3D(Basis.Identity, candidate + new Vector3(0f, 0.5f, 0f)),
                 CollisionMask = 1
             };
 
@@ -164,7 +164,7 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
         
         RotationDegrees = initRot;
 
-        return rnd;
+        return ToGlobal(rnd);
     }
 
     protected override void StartSpec(GE_ICombatEntity starter)
@@ -198,13 +198,27 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
         }
     }
 
+    private Vector3 GetRandomSpawnPoint()
+    {
+        int idx = _rng.Next(_spawnPoints.Count);
+        return _spawnPoints[idx].GlobalPosition;
+    }
+
+    private Vector3 GetSpawnPosition()
+    {
+        if (_spawnPoints.Count == 0)
+            return IterateRandomPosition(MaxSpawnAttempts);
+        return GetRandomSpawnPoint();
+    }
+
     private const uint MaxSpawnAttempts = 6;
     protected override void SpawnEnemySpec(E_IEnemy enemy)
     {
         if (enemy is not Node3D node)
             return;
 
-        node.Position = IterateRandomPosition(MaxSpawnAttempts);
+        
+        node.GlobalPosition = GetSpawnPosition();
 
         Vector3 target = Starter == null
             ? GlobalPosition

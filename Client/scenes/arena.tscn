@@ -6362,10 +6362,11 @@ _uiCombatStats = NodePath("../../../CanvasLayer/CombatStats/UIW_CombatStats")
 _statsInput = NodePath("../../../CanvasLayer/PI_Stats")
 metadata/_custom_type_script = "uid://bwxdr2xchhkya"
 
-[node name="SC_SequenceSpawner4" type="Node3D" parent="entities/AimArena/SC_GameManager" unique_id=1736623531 node_paths=PackedStringArray("_gameManager")]
+[node name="SC_SequenceSpawner4" type="Node3D" parent="entities/AimArena/SC_GameManager" unique_id=1736623531 node_paths=PackedStringArray("_spawnPoints", "_gameManager")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.8, -3.3, 14.3)
 script = ExtResource("31_ur278")
 _enemyBuilders = Array[Object]([ExtResource("42_ji5dc")])
+_spawnPoints = [NodePath("../SpawnPoints/Node3D"), NodePath("../SpawnPoints/Node3D2"), NodePath("../SpawnPoints/Node3D3"), NodePath("../SpawnPoints/Node3D4"), NodePath("../SpawnPoints/Node3D5"), NodePath("../SpawnPoints/Node3D6"), NodePath("../SpawnPoints/Node3D7"), NodePath("../SpawnPoints/Node3D8"), NodePath("../SpawnPoints/Node3D9"), NodePath("../SpawnPoints/Node3D10"), NodePath("../SpawnPoints/Node3D11"), NodePath("../SpawnPoints/Node3D12"), NodePath("../SpawnPoints/Node3D13")]
 _count = 2
 _spawnRadius = 10.0
 _respawnDelay = 0.0
@@ -6373,10 +6374,11 @@ _roundTime = 20.0
 _gameManager = NodePath("..")
 metadata/_custom_type_script = "uid://d1v62uw6r4omx"
 
-[node name="SC_SequenceSpawner" type="Node3D" parent="entities/AimArena/SC_GameManager" unique_id=1621837663 node_paths=PackedStringArray("_gameManager")]
+[node name="SC_SequenceSpawner" type="Node3D" parent="entities/AimArena/SC_GameManager" unique_id=1621837663 node_paths=PackedStringArray("_spawnPoints", "_gameManager")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.8, -3.3, 14.3)
 script = ExtResource("31_ur278")
 _enemyBuilders = Array[Resource]([ExtResource("43_1cjps"), ExtResource("44_83tba")])
+_spawnPoints = [NodePath("../SpawnPoints/Node3D"), NodePath("../SpawnPoints/Node3D2"), NodePath("../SpawnPoints/Node3D3"), NodePath("../SpawnPoints/Node3D4"), NodePath("../SpawnPoints/Node3D5"), NodePath("../SpawnPoints/Node3D6"), NodePath("../SpawnPoints/Node3D7"), NodePath("../SpawnPoints/Node3D8"), NodePath("../SpawnPoints/Node3D9"), NodePath("../SpawnPoints/Node3D10"), NodePath("../SpawnPoints/Node3D11"), NodePath("../SpawnPoints/Node3D12"), NodePath("../SpawnPoints/Node3D13")]
 _count = 2
 _spawnRadius = 10.0
 _respawnDelay = 0.0
@@ -6384,10 +6386,11 @@ _roundTime = 20.0
 _gameManager = NodePath("..")
 metadata/_custom_type_script = "uid://d1v62uw6r4omx"
 
-[node name="SC_SequenceSpawner2" type="Node3D" parent="entities/AimArena/SC_GameManager" unique_id=751680677 node_paths=PackedStringArray("_gameManager")]
+[node name="SC_SequenceSpawner2" type="Node3D" parent="entities/AimArena/SC_GameManager" unique_id=751680677 node_paths=PackedStringArray("_spawnPoints", "_gameManager")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.8, -3.3, 14.3)
 script = ExtResource("31_ur278")
 _enemyBuilders = Array[Object]([ExtResource("42_ji5dc")])
+_spawnPoints = [NodePath("../SpawnPoints/Node3D"), NodePath("../SpawnPoints/Node3D2"), NodePath("../SpawnPoints/Node3D3"), NodePath("../SpawnPoints/Node3D4"), NodePath("../SpawnPoints/Node3D5"), NodePath("../SpawnPoints/Node3D6"), NodePath("../SpawnPoints/Node3D7"), NodePath("../SpawnPoints/Node3D8"), NodePath("../SpawnPoints/Node3D9"), NodePath("../SpawnPoints/Node3D10"), NodePath("../SpawnPoints/Node3D11"), NodePath("../SpawnPoints/Node3D12"), NodePath("../SpawnPoints/Node3D13")]
 _count = 3
 _spawnRadius = 10.0
 _respawnDelay = 0.0
@@ -6395,16 +6398,58 @@ _roundTime = 20.0
 _gameManager = NodePath("..")
 metadata/_custom_type_script = "uid://d1v62uw6r4omx"
 
-[node name="SC_SequenceSpawner3" type="Node3D" parent="entities/AimArena/SC_GameManager" unique_id=1135951858 node_paths=PackedStringArray("_gameManager")]
+[node name="SC_SequenceSpawner3" type="Node3D" parent="entities/AimArena/SC_GameManager" unique_id=1135951858 node_paths=PackedStringArray("_spawnPoints", "_gameManager")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.8, -3.3, 14.3)
 script = ExtResource("31_ur278")
 _enemyBuilders = Array[Resource]([ExtResource("45_3cr31")])
+_spawnPoints = [NodePath("../SpawnPoints/Node3D"), NodePath("../SpawnPoints/Node3D2"), NodePath("../SpawnPoints/Node3D3"), NodePath("../SpawnPoints/Node3D4"), NodePath("../SpawnPoints/Node3D5"), NodePath("../SpawnPoints/Node3D6"), NodePath("../SpawnPoints/Node3D7"), NodePath("../SpawnPoints/Node3D8"), NodePath("../SpawnPoints/Node3D9"), NodePath("../SpawnPoints/Node3D10"), NodePath("../SpawnPoints/Node3D11"), NodePath("../SpawnPoints/Node3D12"), NodePath("../SpawnPoints/Node3D13")]
 _count = 5
 _spawnRadius = 10.0
 _respawnDelay = 0.0
 _roundTime = 20.0
 _gameManager = NodePath("..")
 metadata/_custom_type_script = "uid://d1v62uw6r4omx"
+
+[node name="SpawnPoints" type="Node" parent="entities/AimArena/SC_GameManager" unique_id=882324022]
+
+[node name="Node3D" type="Node3D" parent="entities/AimArena/SC_GameManager/SpawnPoints" unique_id=1154487932]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.1, -3.8, 25)
+
+[node name="Node3D2" type="Node3D" parent="entities/AimArena/SC_GameManager/SpawnPoints" unique_id=63128615]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.1000004, -3.8, 19)
+
+[node name="Node3D3" type="Node3D" parent="entities/AimArena/SC_GameManager/SpawnPoints" unique_id=2040409373]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.1000004, -3.8, 8)
+
+[node name="Node3D4" type="Node3D" parent="entities/AimArena/SC_GameManager/SpawnPoints" unique_id=2055333755]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.1, -3.8, 3)
+
+[node name="Node3D5" type="Node3D" parent="entities/AimArena/SC_GameManager/SpawnPoints" unique_id=1820758004]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.1, -3.8, 6)
+
+[node name="Node3D6" type="Node3D" parent="entities/AimArena/SC_GameManager/SpawnPoints" unique_id=1879440347]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.1, -3.8, 15)
+
+[node name="Node3D7" type="Node3D" parent="entities/AimArena/SC_GameManager/SpawnPoints" unique_id=152997826]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.1, -3.8, 22)
+
+[node name="Node3D8" type="Node3D" parent="entities/AimArena/SC_GameManager/SpawnPoints" unique_id=842441671]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.1, -3.8, 15)
+
+[node name="Node3D9" type="Node3D" parent="entities/AimArena/SC_GameManager/SpawnPoints" unique_id=154238359]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.9, -1.9, 6.7)
+
+[node name="Node3D10" type="Node3D" parent="entities/AimArena/SC_GameManager/SpawnPoints" unique_id=1438903082]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9, 0.1, 15.400001)
+
+[node name="Node3D11" type="Node3D" parent="entities/AimArena/SC_GameManager/SpawnPoints" unique_id=1161355388]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.2, 0.4, 15.300001)
+
+[node name="Node3D12" type="Node3D" parent="entities/AimArena/SC_GameManager/SpawnPoints" unique_id=1298318195]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23, -2.8000002, 16.900002)
+
+[node name="Node3D13" type="Node3D" parent="entities/AimArena/SC_GameManager/SpawnPoints" unique_id=1464195112]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.50000036, 0.3000005, 13.100001)
 
 [node name="JumpPad" parent="entities" unique_id=202375474 instance=ExtResource("40_aup2b")]
 transform = Transform3D(-0.5735765, 0.40957597, -0.7094064, 0, 0.8660252, 0.5, 0.8191521, 0.2867882, -0.49673173, 24.4561, -8.250885, 48.205513)
