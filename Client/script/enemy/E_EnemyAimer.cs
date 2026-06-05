@@ -29,6 +29,8 @@ public partial class E_EnemyAimer : Node
             return;
 
         Enabled = false;
+		_timeOnSight = 0;
+    	_onSight = false;
         SetPhysicsProcess(false);
 		_owner.Fire.Disable();
 		_shooting = false;
@@ -45,6 +47,7 @@ public partial class E_EnemyAimer : Node
         _owner.Fire.Enable();
     }
 
+	private bool _targetBehind;
 	public void Attack(E_Enemy owner, double delta)
 	{
 		if (owner.Fire == null || owner.Target == null)
@@ -54,14 +57,18 @@ public partial class E_EnemyAimer : Node
 
 		_processTick = (tick & 7) == (owner.Id & 7);
 		if (_processTick)
+		{
+			_targetBehind = DetectBehind(owner);
 			_onSight = DetectSight(owner);
+		}
 
-		if (_onSight)
-			_timeOnSight += delta;
-		else
+		if (!_onSight)
 			_timeOnSight = 0;
+		else if (!_targetBehind)
+			_timeOnSight += delta;
 
-		bool nextShoot = _timeOnSight >= owner.Settings.ReactionTime;
+		bool nextShoot = !_targetBehind &&
+			_timeOnSight >= owner.Settings.ReactionTime;
 
 		if (nextShoot)
 			Aim(owner);
@@ -73,6 +80,20 @@ public partial class E_EnemyAimer : Node
 			_shooting = owner.Fire.Press();
 		else
 			_shooting = !owner.Fire.Release();
+	}
+
+	private bool DetectBehind(E_Enemy owner)
+	{
+		Vector3 targetPos = owner.Target.Body.GlobalTransform.Origin;
+		Vector3 dir = targetPos - owner.GlobalPosition;
+        dir.Y = 0;
+
+        if (dir.LengthSquared() < 0.0001f)
+            return false;
+
+        Vector3 selfDir = - owner.GlobalTransform.Basis.Z;
+		float hitAngle = MATH_Vector3Ext.FlatAngle(selfDir, dir);
+        return Mathf.RadToDeg(hitAngle) > 120;
 	}
 
 	private bool DetectSight(E_Enemy owner)

@@ -3,7 +3,6 @@ using Godot;
 public partial class E_EnemyRotator : Node
 {
     [Export] private E_Enemy? _owner;
-    [Export] private E_EnemyAimer? _aimer;
     [Export] private float TurnSpeed
 	{
 		get => _turnSpeed;
@@ -59,17 +58,13 @@ public partial class E_EnemyRotator : Node
         if (dir.LengthSquared() < 0.0001f)
             return;
 
-        dir = -dir.Normalized();
+        Vector3 selfDir = - owner.GlobalTransform.Basis.Z;
+		float hitAngle = MATH_Vector3Ext.FlatAngle(selfDir, dir);
+        
+        Vector3 yawDir = -dir.Normalized();
+        float targetYaw = Mathf.Atan2(yawDir.X, yawDir.Z);
 
-        float targetYaw = Mathf.Atan2(dir.X, dir.Z);
-
-		float angleDifference = Mathf.AngleDifference(owner.Rotation.Y, targetYaw);
-		float absDifference = Mathf.Abs(angleDifference);
-
-        bool wasBehind = _isBehind;
-        _isBehind = absDifference > Mathf.DegToRad(120f);
-
-        UpdateAimer(_isBehind, wasBehind);
+		_isBehind = Mathf.RadToDeg(hitAngle) > 120;
 
         if (!_isBehind)
             _turningAround = false;
@@ -93,17 +88,6 @@ public partial class E_EnemyRotator : Node
             owner.Rotation.Z
         );
 	}
-
-    private void UpdateAimer(bool isBehind, bool wasBehind)
-    {
-        if (isBehind == wasBehind)
-            return;
-
-        if (isBehind)
-            _aimer?.Disable();
-        else
-            _aimer?.Enable();
-    }
 
     public override void _PhysicsProcess(double delta)
     {
