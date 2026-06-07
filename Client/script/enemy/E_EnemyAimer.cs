@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class E_EnemyAimer : Node
@@ -16,6 +17,7 @@ public partial class E_EnemyAimer : Node
         _owner.Died += OnDied;
         _owner.Disabled += OnDisabled;
         _owner.Spawned += Enable;
+        _owner.Pooled += OnDisabled;
     }
 
     private void OnDisabled(E_IEnemy enemy) => Disable();

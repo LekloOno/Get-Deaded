@@ -48,6 +48,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 	private Node3D _targetNode;
 
 	public event Action Spawned;
+	public event Action<E_IEnemy>? Pooled;
 
 	public void SetTarget(Node3D target) => Mover.Target = target;
 
@@ -166,7 +167,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 	{
 		DisableActions();
 		DisableBase();
-
+		Pooled?.Invoke(this);
 		//_hideTimer = GetTree().CreateTimer(_hideDelay);
 		//_hideTimer.Timeout += Hide;
 	}
