@@ -34,8 +34,11 @@ func get_slider() -> Slider:
 	
 func init_to_slider() -> void:
 	_on_slider_value_changed(slider.value)
-	value_applied.connect(slider.set_value_no_signal)
+	value_applied.connect(set_slider_value)
 	slider.value_changed.connect(_on_slider_value_changed)
+
+func set_slider_value(value):
+	slider.value = value
 
 func _on_text_changed(new_text: String) -> void:
 	var new_value = formated_value(new_text)
@@ -75,6 +78,9 @@ func round_to_decimals(value: float) -> float:
 	return round(value*offset)/offset
 
 func _on_slider_value_changed(value: float):
+	if last_value == value:
+		return
+		
 	last_value = value
 	match allow_float:
 		true: text = str(value)
