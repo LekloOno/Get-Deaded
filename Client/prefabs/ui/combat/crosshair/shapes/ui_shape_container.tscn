@@ -7,19 +7,21 @@
 [ext_resource type="PackedScene" uid="uid://cryipu8esplu" path="res://prefabs/ui/combat/crosshair/shapes/ui_crosshair_shape_circle.tscn" id="4_4vi6a"]
 [ext_resource type="PackedScene" uid="uid://db5oo7mqsrrq3" path="res://prefabs/ui/combat/crosshair/shapes/ui_crosshair_shape_cross.tscn" id="5_ntme4"]
 [ext_resource type="PackedScene" uid="uid://bls5cj65hmxdb" path="res://prefabs/ui/combat/crosshair/shapes/ui_crosshair_shape_square.tscn" id="6_6ok8g"]
+[ext_resource type="Script" uid="uid://dm5ioj0ce04yu" path="res://script/ui/combat/crosshair/ui/UI_CrosshairLayerOptionButton.cs" id="7_ntme4"]
 
-[node name="UiShapeContainer" type="PanelContainer" unique_id=1420064005 node_paths=PackedStringArray("_deleteButton", "_shapeSettingsContainer", "_rotation", "_fill", "_outlines")]
+[node name="UiShapeContainer" type="PanelContainer" unique_id=1420064005 node_paths=PackedStringArray("_deleteButton", "_shapeSettingsContainer", "_rotation", "_fill", "_outlines", "_typeOption")]
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 748.0
 offset_bottom = 356.0
 theme = ExtResource("1_8xgmu")
 script = ExtResource("2_ffaoh")
-_deleteButton = NodePath("UiShapeContainer2/UiShapeContainer/Delete")
-_shapeSettingsContainer = NodePath("UiShapeContainer2/UiShapeContainer/Settings/ShapeSettings")
-_rotation = NodePath("UiShapeContainer2/UiShapeContainer/Settings/UiCrosshairShapeCommon/Rotation/NumericInput/MasterSlider")
-_fill = NodePath("UiShapeContainer2/UiShapeContainer/Settings/UiCrosshairShapeCommon/UiCrosshairFill")
-_outlines = NodePath("UiShapeContainer2/UiShapeContainer/Settings/UiCrosshairShapeCommon/UiCrosshairOutline")
+_deleteButton = NodePath("UiShapeContainer2/Settings/MarginContainer/HBoxContainer/Delete")
+_shapeSettingsContainer = NodePath("UiShapeContainer2/Settings/ShapeSettings")
+_rotation = NodePath("UiShapeContainer2/Settings/UiCrosshairShapeCommon/Rotation/NumericInput/MasterSlider")
+_fill = NodePath("UiShapeContainer2/Settings/UiCrosshairShapeCommon/UiCrosshairFill")
+_outlines = NodePath("UiShapeContainer2/Settings/UiCrosshairShapeCommon/UiCrosshairOutline")
+_typeOption = NodePath("UiShapeContainer2/Settings/MarginContainer/HBoxContainer/AddLayer")
 _dotScene = ExtResource("1_jcegv")
 _circleScene = ExtResource("4_4vi6a")
 _crossScene = ExtResource("5_ntme4")
@@ -32,29 +34,48 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="UiShapeContainer" type="BoxContainer" parent="UiShapeContainer2" unique_id=848993815]
-layout_mode = 2
-
-[node name="Settings" type="VBoxContainer" parent="UiShapeContainer2/UiShapeContainer" unique_id=800277225]
+[node name="Settings" type="VBoxContainer" parent="UiShapeContainer2" unique_id=800277225]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_8xgmu")
 
-[node name="ShapeSettings" type="MarginContainer" parent="UiShapeContainer2/UiShapeContainer/Settings" unique_id=37829046]
+[node name="MarginContainer" type="MarginContainer" parent="UiShapeContainer2/Settings" unique_id=1995366173]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UiShapeContainer2/Settings/MarginContainer" unique_id=493206323]
 layout_mode = 2
 
-[node name="UiCrosshairShapeDot" parent="UiShapeContainer2/UiShapeContainer/Settings/ShapeSettings" unique_id=1442914400 instance=ExtResource("1_jcegv")]
+[node name="PanelContainer" type="PanelContainer" parent="UiShapeContainer2/Settings/MarginContainer/HBoxContainer" unique_id=187064706]
 layout_mode = 2
 
-[node name="UiCrosshairShapeCommon" parent="UiShapeContainer2/UiShapeContainer/Settings" unique_id=411231659 instance=ExtResource("3_ffaoh")]
+[node name="Label" type="Label" parent="UiShapeContainer2/Settings/MarginContainer/HBoxContainer/PanelContainer" unique_id=1745371045]
 layout_mode = 2
+text = "CROSSHAIR_LAYER_TYPE_LABEL"
 
-[node name="Delete" type="Button" parent="UiShapeContainer2/UiShapeContainer" unique_id=1146155705]
+[node name="AddLayer" type="OptionButton" parent="UiShapeContainer2/Settings/MarginContainer/HBoxContainer" unique_id=276847428]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("7_ntme4")
+
+[node name="Delete" type="Button" parent="UiShapeContainer2/Settings/MarginContainer/HBoxContainer" unique_id=1146155705]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "DELETE_BUTTON"
 
-[editable path="UiShapeContainer2/UiShapeContainer/Settings/UiCrosshairShapeCommon"]
-[editable path="UiShapeContainer2/UiShapeContainer/Settings/UiCrosshairShapeCommon/Rotation"]
-[editable path="UiShapeContainer2/UiShapeContainer/Settings/UiCrosshairShapeCommon/Rotation/MarginContainer/UiSettingsLabel"]
+[node name="ShapeSettings" type="MarginContainer" parent="UiShapeContainer2/Settings" unique_id=37829046]
+layout_mode = 2
+
+[node name="UiCrosshairShapeDot" parent="UiShapeContainer2/Settings/ShapeSettings" unique_id=1442914400 instance=ExtResource("1_jcegv")]
+layout_mode = 2
+
+[node name="UiCrosshairShapeCommon" parent="UiShapeContainer2/Settings" unique_id=411231659 instance=ExtResource("3_ffaoh")]
+layout_mode = 2
+
+[editable path="UiShapeContainer2/Settings/UiCrosshairShapeCommon"]
+[editable path="UiShapeContainer2/Settings/UiCrosshairShapeCommon/Rotation"]
+[editable path="UiShapeContainer2/Settings/UiCrosshairShapeCommon/Rotation/MarginContainer/UiSettingsLabel"]

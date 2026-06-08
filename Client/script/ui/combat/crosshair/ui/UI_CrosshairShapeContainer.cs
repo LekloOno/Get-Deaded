@@ -9,8 +9,9 @@ public partial class UI_CrosshairShapeContainer : Control
     [Export] private Button     _deleteButton = null!;
     [Export] private Container  _shapeSettingsContainer = null!;
     [Export] private Range      _rotation = null!;
-    [Export] private UI_CrosshairFillData    _fill = null!;
-    [Export] private UI_CrosshairOutlineData _outlines = null!;
+    [Export] private UI_CrosshairFillData          _fill = null!;
+    [Export] private UI_CrosshairOutlineData       _outlines = null!;
+    [Export] private UI_CrosshairLayerOptionButton _typeOption = null!;
 
     [Export] private PackedScene _dotScene      = null!;
     [Export] private PackedScene _circleScene   = null!;
@@ -19,28 +20,52 @@ public partial class UI_CrosshairShapeContainer : Control
 
     public override void _Ready()
     {
+        _rotation.MaxValue = 360f;
+        _rotation.MinValue = 0f;
+
         _rotation.ValueChanged += OnRotationChanged;
-        _deleteButton.Pressed += OnDeletePressed;
+        _deleteButton.Pressed  += OnDeletePressed;
+
+        _typeOption.NewTypeRequested += OnNewTypeRequested;
+    }
+
+    private void OnNewTypeRequested(CrosshairShapeData shape)
+    {
+        if (_shape == shape)
+            return;
+
+        if (_shape != null)
+            _crosshair.RemoveShape(_shape);
+        
+        _shape = shape;
+
+        if (_shape != null)
+            _crosshair.AddShape(_shape);
+
+        SetShape(shape);
     }
 
     public void SetData(CrosshairData crosshair, CrosshairShapeData shape)
     {
+        SetCrosshair(crosshair);
+        SetShape(shape);
+    }
+
+    private void SetShape(CrosshairShapeData shape)
+    {
         _shape = shape;
 
         _rotation.Value = _shape.RotationDegrees;
-        _rotation.MaxValue = 360f;
-        _rotation.MinValue = 0f;
 
         _fill.SetData(_shape.FillData);
         _outlines.SetOutlineData(_shape.OutlineData);
-
-
-        SetCrosshair(crosshair);
 
         Clear();
 
         Control shapeSettings = CreateShapeSettings(shape);
         _shapeSettingsContainer.AddChild(shapeSettings);
+
+        _typeOption.Initialize(shape);
     }
 
     private void SetCrosshair(CrosshairData crosshair)

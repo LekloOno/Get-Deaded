@@ -14,16 +14,27 @@ public partial class UI_CrosshairLayerOptionButton : OptionButton
 
     public event Action<CrosshairShapeData>? NewTypeRequested;
 
+    private bool _populated = false;
+
     public override void _Ready()
     {
         Populate();
-        Select(-1);
-        
         ItemSelected += OnItemSelected;
+    }
+
+    public void Initialize(CrosshairShapeData shape)
+    {
+        Populate();
+        SetType(From(shape));
     }
 
     private void Populate()
     {
+        if (_populated)
+            return;
+
+        _populated = true;
+
         Clear();
 
         foreach (CrosshairLayerTypes type in Enum.GetValues<CrosshairLayerTypes>())
@@ -38,8 +49,23 @@ public partial class UI_CrosshairLayerOptionButton : OptionButton
     private void OnItemSelected(long index)
     {
         var type = (CrosshairLayerTypes)(int)GetItemMetadata((int)index);
-        Select(-1);
         NewTypeRequested?.Invoke(From(type));
+    }
+
+    private void SetType(CrosshairLayerTypes type)
+    {
+        for (int i = 0; i < ItemCount; i++)
+        {
+            var item = (CrosshairLayerTypes)(int)GetItemMetadata(i);
+
+            if (item == type)
+            {
+                Select(i);
+                return;
+            }
+        }
+
+        GD.PushWarning($"[UI_CrosshairLayerOptionButton] Type {type} is not available in this OptionButton.");
     }
 
     private static CrosshairShapeData From(CrosshairLayerTypes type)
@@ -51,6 +77,18 @@ public partial class UI_CrosshairLayerOptionButton : OptionButton
             CrosshairLayerTypes.Circle  => new CrosshairCircleData(),
             CrosshairLayerTypes.Square  => new CrosshairSquareData(),
             _ => new CrosshairDotData(),
+        };
+    }
+
+    private static CrosshairLayerTypes From(CrosshairShapeData shape)
+    {
+        return shape switch
+        {
+            CrosshairDotData _ => CrosshairLayerTypes.Dot,
+            CrosshairCrossData _ => CrosshairLayerTypes.Cross,
+            CrosshairCircleData _ => CrosshairLayerTypes.Circle,
+            CrosshairSquareData _ => CrosshairLayerTypes.Square,
+            _ => CrosshairLayerTypes.Dot,
         };
     }
 }

@@ -24,6 +24,7 @@ public partial class UI_CrosshairEditor : Control
         CombineOutlines.Toggled += OnCombineOutlinesToggled;
 
         _addLayerOption.NewTypeRequested += OnNewLayerRequested;
+        _addLayerOption.Select(-1);
     }
 
     private void OnStructureChanged()
@@ -51,6 +52,7 @@ public partial class UI_CrosshairEditor : Control
 
     private void OnNewLayerRequested(CrosshairShapeData shape)
     {
+        _addLayerOption.Select(-1);
         _data.AddShape(shape);
         AddNewLayerUi(shape);
     }
