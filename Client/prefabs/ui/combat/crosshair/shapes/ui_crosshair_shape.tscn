@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://b4i6u1b3hiufe"]
+
+[ext_resource type="Theme" uid="uid://ddkca4fk8kto5" path="res://assets/ui/menu_theme.tres" id="1_i6p3v"]
+[ext_resource type="PackedScene" uid="uid://dkwskgfqsp7mv" path="res://prefabs/ui/combat/crosshair/fill/ui_crosshair_shape_common.tscn" id="2_pmgfe"]
+
+[node name="UiCrosshairShape" type="ScrollContainer" unique_id=1552377313]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1246.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_i6p3v")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1442914400]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=983097298]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "DELETE"
+
+[node name="UiCrosshairFillOutline" parent="VBoxContainer" unique_id=1072813084 instance=ExtResource("2_pmgfe")]
+layout_mode = 2
+size_flags_vertical = 0

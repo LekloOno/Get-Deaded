@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://dkwskgfqsp7mv"]
+
+[ext_resource type="PackedScene" uid="uid://daqn7hrxhhr7r" path="res://prefabs/ui/menu/settings/ui_settings_category_toggle_header.tscn" id="1_l7n5q"]
+[ext_resource type="PackedScene" uid="uid://dryjjuu0mr3dt" path="res://prefabs/ui/combat/crosshair/fill/ui_crosshair_fill_common.tscn" id="2_i4fml"]
+[ext_resource type="PackedScene" uid="uid://d3ffncssg3j2l" path="res://prefabs/ui/menu/settings/ui_settings_row.tscn" id="3_yoy03"]
+[ext_resource type="Script" uid="uid://bwag4h0e76hv" path="res://script/ui/menu/ui_num_input.gd" id="4_bya3f"]
+
+[node name="UiCrosshairShapeCommon" type="VBoxContainer" unique_id=1442914400]
+offset_right = 659.0
+offset_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Rotation" parent="." unique_id=996697259 instance=ExtResource("3_yoy03")]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" parent="Rotation/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(996697259, 109094902, 172764845) index="0" unique_id=1465678305]
+text = "CROSSHAIR_ROTATION_LABEL"
+
+[node name="NumericInput" type="HBoxContainer" parent="Rotation" unique_id=1394217062]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="MasterSlider" type="HSlider" parent="Rotation/NumericInput" unique_id=863520805]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 10.0
+step = 0.2
+value = 10.0
+
+[node name="LineEdit" type="LineEdit" parent="Rotation/NumericInput" unique_id=1228999981]
+custom_minimum_size = Vector2(58, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+alignment = 1
+virtual_keyboard_type = 2
+script = ExtResource("4_bya3f")
+
+[node name="Fill" parent="." unique_id=1338812726 instance=ExtResource("1_l7n5q")]
+layout_mode = 2
+
+[node name="Label" parent="Fill/UiCategoryHeaderToggle" parent_id_path=PackedInt32Array(1338812726, 2053164535) index="0" unique_id=366278316]
+text = "CROSSHAIR_FILL_LABEL"
+
+[node name="FillSettings" parent="." unique_id=1485850965 instance=ExtResource("2_i4fml")]
+layout_mode = 2
+
+[node name="Outline" parent="." unique_id=2053164535 instance=ExtResource("1_l7n5q")]
+layout_mode = 2
+
+[node name="Label" parent="Outline/UiCategoryHeaderToggle" parent_id_path=PackedInt32Array(2053164535, 2053164535) index="0" unique_id=366278316]
+text = "CROSSHAIR_OUTLINE_LABEL"
+
+[node name="OutlineSettings" parent="." unique_id=1267376928 instance=ExtResource("2_i4fml")]
+layout_mode = 2
+
+[node name="OutlineWidth" parent="OutlineSettings" unique_id=143979763 instance=ExtResource("3_yoy03")]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" parent="OutlineSettings/OutlineWidth/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(143979763, 109094902, 172764845) index="0" unique_id=1465678305]
+text = "CROSSHAIR_OUTLINE_WIDTH_LABEL"
+
+[node name="NumericInput" type="HBoxContainer" parent="OutlineSettings/OutlineWidth" unique_id=89397296]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="MasterSlider" type="HSlider" parent="OutlineSettings/OutlineWidth/NumericInput" unique_id=393378731]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 10.0
+step = 0.2
+value = 10.0
+
+[node name="LineEdit" type="LineEdit" parent="OutlineSettings/OutlineWidth/NumericInput" unique_id=460282415]
+custom_minimum_size = Vector2(58, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+alignment = 1
+virtual_keyboard_type = 2
+script = ExtResource("4_bya3f")
+
+[editable path="Rotation"]
+[editable path="Rotation/MarginContainer/UiSettingsLabel"]
+[editable path="Fill"]
+[editable path="Outline"]
+[editable path="OutlineSettings"]
+[editable path="OutlineSettings/FillColor"]
+[editable path="OutlineSettings/FillColor/MarginContainer/UiSettingsLabel"]
+[editable path="OutlineSettings/FillAntiAlias"]
+[editable path="OutlineSettings/FillAntiAlias/MarginContainer/UiSettingsLabel"]
+[editable path="OutlineSettings/OutlineWidth"]
+[editable path="OutlineSettings/OutlineWidth/MarginContainer/UiSettingsLabel"]

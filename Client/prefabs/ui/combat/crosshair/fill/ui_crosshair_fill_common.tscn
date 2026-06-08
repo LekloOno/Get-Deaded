@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://dryjjuu0mr3dt"]
+
+[ext_resource type="PackedScene" uid="uid://d3ffncssg3j2l" path="res://prefabs/ui/menu/settings/ui_settings_row.tscn" id="1_lx2b2"]
+
+[node name="FillSettings" type="VBoxContainer" unique_id=1485850965]
+
+[node name="FillColor" parent="." unique_id=426240471 instance=ExtResource("1_lx2b2")]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" parent="FillColor/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(426240471, 109094902, 172764845) index="0" unique_id=1465678305]
+text = "CROSSHAIR_FILL_COLOR_LABEL"
+
+[node name="Input" type="HBoxContainer" parent="FillColor" unique_id=653106576]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 15
+
+[node name="Control" type="Control" parent="FillColor/Input" unique_id=934471125]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EnnemiesColorInput" type="ColorPickerButton" parent="FillColor/Input/Control" unique_id=813123049]
+custom_minimum_size = Vector2(58, 0)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="FillAntiAlias" parent="." unique_id=2057843957 instance=ExtResource("1_lx2b2")]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" parent="FillAntiAlias/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(2057843957, 109094902, 172764845) index="0" unique_id=1465678305]
+text = "CROSSHAIR_FILL_ANTI_ALIAS_LABEL"
+
+[node name="Input" type="HBoxContainer" parent="FillAntiAlias" unique_id=878241928]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 15
+
+[node name="CheckBox" type="CheckBox" parent="FillAntiAlias/Input" unique_id=683749056]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[editable path="FillColor"]
+[editable path="FillColor/MarginContainer/UiSettingsLabel"]
+[editable path="FillAntiAlias"]
+[editable path="FillAntiAlias/MarginContainer/UiSettingsLabel"]

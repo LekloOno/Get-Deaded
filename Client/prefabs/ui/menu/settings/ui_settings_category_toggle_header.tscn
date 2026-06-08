@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://daqn7hrxhhr7r"]
+
+[node name="Header" type="MarginContainer" unique_id=1338812726]
+custom_minimum_size = Vector2(400, 0)
+offset_right = 400.0
+offset_bottom = 34.0
+theme_override_constants/margin_top = 10
+
+[node name="UiCategoryHeaderToggle" type="HBoxContainer" parent="." unique_id=2053164535]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="UiCategoryHeaderToggle" unique_id=366278316]
+layout_mode = 2
+text = "_LABEL"
+
+[node name="CheckBox" type="CheckBox" parent="UiCategoryHeaderToggle" unique_id=71703101]
+layout_mode = 2
+size_flags_horizontal = 10

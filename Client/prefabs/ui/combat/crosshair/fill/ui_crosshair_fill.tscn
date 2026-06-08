@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://ca431v4hraw8w"]
+
+[ext_resource type="PackedScene" uid="uid://daqn7hrxhhr7r" path="res://prefabs/ui/menu/settings/ui_settings_category_toggle_header.tscn" id="1_oxa0m"]
+[ext_resource type="PackedScene" uid="uid://dryjjuu0mr3dt" path="res://prefabs/ui/combat/crosshair/fill/ui_crosshair_fill_common.tscn" id="3_8ukis"]
+
+[node name="UiCrosshairFill" type="VBoxContainer" unique_id=1442914400]
+offset_right = 659.0
+offset_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Header" parent="." unique_id=1338812726 instance=ExtResource("1_oxa0m")]
+layout_mode = 2
+
+[node name="Label" parent="Header/UiCategoryHeaderToggle" parent_id_path=PackedInt32Array(1338812726, 2053164535) index="0" unique_id=366278316]
+text = "CROSSHAIR_FILL_LABEL"
+
+[node name="FillSettings" parent="." unique_id=1485850965 instance=ExtResource("3_8ukis")]
+layout_mode = 2
+
+[editable path="Header"]

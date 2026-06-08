@@ -1,0 +1,211 @@
+[gd_scene format=3 uid="uid://cryipu8esplu"]
+
+[ext_resource type="Theme" uid="uid://ddkca4fk8kto5" path="res://assets/ui/menu_theme.tres" id="1_uphpf"]
+[ext_resource type="PackedScene" uid="uid://qqvt3ahu2l65" path="res://prefabs/ui/menu/settings/ui_settings_category_header.tscn" id="2_t2rdc"]
+[ext_resource type="PackedScene" uid="uid://d3ffncssg3j2l" path="res://prefabs/ui/menu/settings/ui_settings_row.tscn" id="3_lr34l"]
+[ext_resource type="Script" uid="uid://bwag4h0e76hv" path="res://script/ui/menu/ui_num_input.gd" id="4_8lfn6"]
+[ext_resource type="PackedScene" uid="uid://dkwskgfqsp7mv" path="res://prefabs/ui/combat/crosshair/fill/ui_crosshair_shape_common.tscn" id="5_75k45"]
+
+[node name="UiCrosshairShapeCircle" type="ScrollContainer" unique_id=1552377313]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1246.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_uphpf")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1442914400]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Circle" parent="VBoxContainer" unique_id=1338812726 instance=ExtResource("2_t2rdc")]
+layout_mode = 2
+
+[node name="Label" parent="VBoxContainer/Circle" index="0" unique_id=366278316]
+text = "CROSSHAIR_CIRCLE_LABEL"
+
+[node name="CircleSettings" type="VBoxContainer" parent="VBoxContainer" unique_id=1485850965]
+layout_mode = 2
+
+[node name="CircleRadius" parent="VBoxContainer/CircleSettings" unique_id=996697259 instance=ExtResource("3_lr34l")]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" parent="VBoxContainer/CircleSettings/CircleRadius/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(996697259, 109094902, 172764845) index="0" unique_id=1465678305]
+text = "CROSSHAIR_CIRCLE_RADIUS_LABEL"
+
+[node name="NumericInput" type="HBoxContainer" parent="VBoxContainer/CircleSettings/CircleRadius" unique_id=106269762]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="MasterSlider" type="HSlider" parent="VBoxContainer/CircleSettings/CircleRadius/NumericInput" unique_id=67880812]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 10.0
+step = 0.2
+value = 10.0
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/CircleSettings/CircleRadius/NumericInput" unique_id=1015139021]
+custom_minimum_size = Vector2(58, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+alignment = 1
+virtual_keyboard_type = 2
+script = ExtResource("4_8lfn6")
+
+[node name="Thickness" parent="VBoxContainer/CircleSettings" unique_id=1482331195 instance=ExtResource("3_lr34l")]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" parent="VBoxContainer/CircleSettings/Thickness/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1482331195, 109094902, 172764845) index="0" unique_id=1465678305]
+text = "CROSSHAIR_CIRCLE_THICKNESS_LABEL"
+
+[node name="NumericInput" type="HBoxContainer" parent="VBoxContainer/CircleSettings/Thickness" unique_id=205319717]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="MasterSlider" type="HSlider" parent="VBoxContainer/CircleSettings/Thickness/NumericInput" unique_id=847962642]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 10.0
+step = 0.2
+value = 10.0
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/CircleSettings/Thickness/NumericInput" unique_id=1718031218]
+custom_minimum_size = Vector2(58, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+alignment = 1
+virtual_keyboard_type = 2
+script = ExtResource("4_8lfn6")
+
+[node name="Points" parent="VBoxContainer/CircleSettings" unique_id=1444642031 instance=ExtResource("3_lr34l")]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" parent="VBoxContainer/CircleSettings/Points/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1444642031, 109094902, 172764845) index="0" unique_id=1465678305]
+text = "CROSSHAIR_CIRCLE_POINTS_LABEL"
+
+[node name="NumericInput" type="HBoxContainer" parent="VBoxContainer/CircleSettings/Points" unique_id=1215733784]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="MasterSlider" type="HSlider" parent="VBoxContainer/CircleSettings/Points/NumericInput" unique_id=408183807]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 10.0
+step = 0.2
+value = 10.0
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/CircleSettings/Points/NumericInput" unique_id=1496971104]
+custom_minimum_size = Vector2(58, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+alignment = 1
+virtual_keyboard_type = 2
+script = ExtResource("4_8lfn6")
+
+[node name="CustomArc" parent="VBoxContainer/CircleSettings" unique_id=1081251970 instance=ExtResource("3_lr34l")]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" parent="VBoxContainer/CircleSettings/CustomArc/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1081251970, 109094902, 172764845) index="0" unique_id=1465678305]
+text = "CROSSHAIR_CIRCLE_CUSTOM_ARC_LABEL"
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/CircleSettings/CustomArc" unique_id=575427768]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="StartAngle" parent="VBoxContainer/CircleSettings" unique_id=469396036 instance=ExtResource("3_lr34l")]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="MarginContainer" parent="VBoxContainer/CircleSettings/StartAngle" index="0" unique_id=1908736311]
+theme_override_constants/margin_left = 15
+
+[node name="UiSettingsLabel" parent="VBoxContainer/CircleSettings/StartAngle/MarginContainer" index="0" unique_id=109094902]
+custom_minimum_size = Vector2(385, 0)
+
+[node name="Label" parent="VBoxContainer/CircleSettings/StartAngle/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(469396036, 109094902, 172764845) index="0" unique_id=1465678305]
+text = "CROSSHAIR_CIRCLE_START_ANGLE_LABEL"
+
+[node name="NumericInput" type="HBoxContainer" parent="VBoxContainer/CircleSettings/StartAngle" unique_id=388438543]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="MasterSlider" type="HSlider" parent="VBoxContainer/CircleSettings/StartAngle/NumericInput" unique_id=385648719]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 10.0
+step = 0.2
+value = 10.0
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/CircleSettings/StartAngle/NumericInput" unique_id=1775239861]
+custom_minimum_size = Vector2(58, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+alignment = 1
+virtual_keyboard_type = 2
+script = ExtResource("4_8lfn6")
+
+[node name="EndAngle" parent="VBoxContainer/CircleSettings" unique_id=1239931948 instance=ExtResource("3_lr34l")]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="MarginContainer" parent="VBoxContainer/CircleSettings/EndAngle" index="0" unique_id=1908736311]
+theme_override_constants/margin_left = 15
+
+[node name="UiSettingsLabel" parent="VBoxContainer/CircleSettings/EndAngle/MarginContainer" index="0" unique_id=109094902]
+custom_minimum_size = Vector2(385, 0)
+
+[node name="Label" parent="VBoxContainer/CircleSettings/EndAngle/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1239931948, 109094902, 172764845) index="0" unique_id=1465678305]
+text = "CROSSHAIR_CIRCLE_END_ANGLE_LABEL"
+
+[node name="NumericInput" type="HBoxContainer" parent="VBoxContainer/CircleSettings/EndAngle" unique_id=198797718]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="MasterSlider" type="HSlider" parent="VBoxContainer/CircleSettings/EndAngle/NumericInput" unique_id=2000920283]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 10.0
+step = 0.2
+value = 10.0
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/CircleSettings/EndAngle/NumericInput" unique_id=548226522]
+custom_minimum_size = Vector2(58, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+alignment = 1
+virtual_keyboard_type = 2
+script = ExtResource("4_8lfn6")
+
+[node name="UiCrosshairFillOutline" parent="VBoxContainer" unique_id=1261656329 instance=ExtResource("5_75k45")]
+layout_mode = 2
+size_flags_vertical = 0
+
+[editable path="VBoxContainer/Circle"]
+[editable path="VBoxContainer/CircleSettings/CircleRadius"]
+[editable path="VBoxContainer/CircleSettings/CircleRadius/MarginContainer/UiSettingsLabel"]
+[editable path="VBoxContainer/CircleSettings/Thickness"]
+[editable path="VBoxContainer/CircleSettings/Thickness/MarginContainer/UiSettingsLabel"]
+[editable path="VBoxContainer/CircleSettings/Points"]
+[editable path="VBoxContainer/CircleSettings/Points/MarginContainer/UiSettingsLabel"]
+[editable path="VBoxContainer/CircleSettings/CustomArc"]
+[editable path="VBoxContainer/CircleSettings/CustomArc/MarginContainer/UiSettingsLabel"]
+[editable path="VBoxContainer/CircleSettings/StartAngle"]
+[editable path="VBoxContainer/CircleSettings/StartAngle/MarginContainer/UiSettingsLabel"]
+[editable path="VBoxContainer/CircleSettings/EndAngle"]
+[editable path="VBoxContainer/CircleSettings/EndAngle/MarginContainer/UiSettingsLabel"]

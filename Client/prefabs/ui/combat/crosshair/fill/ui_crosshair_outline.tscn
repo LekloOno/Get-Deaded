@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://brj3cyh0inqyy"]
+
+[ext_resource type="PackedScene" uid="uid://daqn7hrxhhr7r" path="res://prefabs/ui/menu/settings/ui_settings_category_toggle_header.tscn" id="1_6nxya"]
+[ext_resource type="PackedScene" uid="uid://dryjjuu0mr3dt" path="res://prefabs/ui/combat/crosshair/fill/ui_crosshair_fill_common.tscn" id="3_ycoxf"]
+[ext_resource type="PackedScene" uid="uid://d3ffncssg3j2l" path="res://prefabs/ui/menu/settings/ui_settings_row.tscn" id="4_ijd5w"]
+[ext_resource type="Script" uid="uid://bwag4h0e76hv" path="res://script/ui/menu/ui_num_input.gd" id="5_k2cgq"]
+
+[node name="UiCrosshairOutline" type="VBoxContainer" unique_id=1442914400]
+offset_right = 659.0
+offset_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Header" parent="." unique_id=2053164535 instance=ExtResource("1_6nxya")]
+layout_mode = 2
+
+[node name="Label" parent="Header/UiCategoryHeaderToggle" parent_id_path=PackedInt32Array(2053164535, 2053164535) index="0" unique_id=366278316]
+text = "CROSSHAIR_OUTLINE_LABEL"
+
+[node name="FillSettings" parent="." unique_id=1485850965 instance=ExtResource("3_ycoxf")]
+layout_mode = 2
+
+[node name="OutlineWidth" parent="FillSettings" unique_id=996697259 instance=ExtResource("4_ijd5w")]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" parent="FillSettings/OutlineWidth/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(996697259, 109094902, 172764845) index="0" unique_id=1465678305]
+text = "CROSSHAIR_OUTLINE_WIDTH_LABEL"
+
+[node name="NumericInput" type="HBoxContainer" parent="FillSettings/OutlineWidth" unique_id=89397296]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="MasterSlider" type="HSlider" parent="FillSettings/OutlineWidth/NumericInput" unique_id=393378731]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 10.0
+step = 0.2
+value = 10.0
+
+[node name="LineEdit" type="LineEdit" parent="FillSettings/OutlineWidth/NumericInput" unique_id=460282415]
+custom_minimum_size = Vector2(58, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+alignment = 1
+virtual_keyboard_type = 2
+script = ExtResource("5_k2cgq")
+
+[editable path="Header"]
+[editable path="FillSettings"]
+[editable path="FillSettings/FillColor"]
+[editable path="FillSettings/FillColor/MarginContainer/UiSettingsLabel"]
+[editable path="FillSettings/FillAntiAlias"]
+[editable path="FillSettings/FillAntiAlias/MarginContainer/UiSettingsLabel"]
+[editable path="FillSettings/OutlineWidth"]
+[editable path="FillSettings/OutlineWidth/MarginContainer/UiSettingsLabel"]

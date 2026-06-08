@@ -1,0 +1,172 @@
+[gd_scene format=3 uid="uid://db5oo7mqsrrq3"]
+
+[ext_resource type="Theme" uid="uid://ddkca4fk8kto5" path="res://assets/ui/menu_theme.tres" id="1_pfcjs"]
+[ext_resource type="PackedScene" uid="uid://qqvt3ahu2l65" path="res://prefabs/ui/menu/settings/ui_settings_category_header.tscn" id="2_qb4v5"]
+[ext_resource type="PackedScene" uid="uid://d3ffncssg3j2l" path="res://prefabs/ui/menu/settings/ui_settings_row.tscn" id="3_as8ns"]
+[ext_resource type="Script" uid="uid://bwag4h0e76hv" path="res://script/ui/menu/ui_num_input.gd" id="4_1pkne"]
+[ext_resource type="PackedScene" uid="uid://dkwskgfqsp7mv" path="res://prefabs/ui/combat/crosshair/fill/ui_crosshair_shape_common.tscn" id="5_j10nk"]
+
+[node name="UiCrosshairShapeCross" type="ScrollContainer" unique_id=2021028535]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1246.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_pfcjs")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1919879679]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Cross" parent="VBoxContainer" unique_id=1338812726 instance=ExtResource("2_qb4v5")]
+layout_mode = 2
+
+[node name="Label" parent="VBoxContainer/Cross" index="0" unique_id=366278316]
+text = "CROSSHAIR_CROSS_LABEL"
+
+[node name="CrossSettings" type="VBoxContainer" parent="VBoxContainer" unique_id=865058010]
+layout_mode = 2
+
+[node name="Length" parent="VBoxContainer/CrossSettings" unique_id=996697259 instance=ExtResource("3_as8ns")]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" parent="VBoxContainer/CrossSettings/Length/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(996697259, 109094902, 172764845) index="0" unique_id=1465678305]
+text = "CROSSHAIR_CROSS_LENGTH_LABEL"
+
+[node name="NumericInput" type="HBoxContainer" parent="VBoxContainer/CrossSettings/Length" unique_id=1168291719]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="MasterSlider" type="HSlider" parent="VBoxContainer/CrossSettings/Length/NumericInput" unique_id=307761506]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 10.0
+step = 0.2
+value = 10.0
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/CrossSettings/Length/NumericInput" unique_id=179210460]
+custom_minimum_size = Vector2(58, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+alignment = 1
+virtual_keyboard_type = 2
+script = ExtResource("4_1pkne")
+
+[node name="Thickness" parent="VBoxContainer/CrossSettings" unique_id=1422726296 instance=ExtResource("3_as8ns")]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" parent="VBoxContainer/CrossSettings/Thickness/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1422726296, 109094902, 172764845) index="0" unique_id=1465678305]
+text = "CROSSHAIR_CROSS_THICKNESS_LABEL"
+
+[node name="NumericInput" type="HBoxContainer" parent="VBoxContainer/CrossSettings/Thickness" unique_id=2097132883]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="MasterSlider" type="HSlider" parent="VBoxContainer/CrossSettings/Thickness/NumericInput" unique_id=803157175]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 10.0
+step = 0.2
+value = 10.0
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/CrossSettings/Thickness/NumericInput" unique_id=1622143223]
+custom_minimum_size = Vector2(58, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+alignment = 1
+virtual_keyboard_type = 2
+script = ExtResource("4_1pkne")
+
+[node name="Gap" parent="VBoxContainer/CrossSettings" unique_id=763254217 instance=ExtResource("3_as8ns")]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" parent="VBoxContainer/CrossSettings/Gap/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(763254217, 109094902, 172764845) index="0" unique_id=1465678305]
+text = "CROSSHAIR_CROSS_GAP_LABEL"
+
+[node name="NumericInput" type="HBoxContainer" parent="VBoxContainer/CrossSettings/Gap" unique_id=300180298]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="MasterSlider" type="HSlider" parent="VBoxContainer/CrossSettings/Gap/NumericInput" unique_id=833193327]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 10.0
+step = 0.2
+value = 10.0
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/CrossSettings/Gap/NumericInput" unique_id=277129963]
+custom_minimum_size = Vector2(58, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+alignment = 1
+virtual_keyboard_type = 2
+script = ExtResource("4_1pkne")
+
+[node name="Arms" parent="VBoxContainer/CrossSettings" unique_id=2001218732 instance=ExtResource("3_as8ns")]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" parent="VBoxContainer/CrossSettings/Arms/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(2001218732, 109094902, 172764845) index="0" unique_id=1465678305]
+text = "CROSSHAIR_CROSS_ARMS_LABEL"
+
+[node name="Input" type="HBoxContainer" parent="VBoxContainer/CrossSettings/Arms" unique_id=1645784566]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="TOP" type="Button" parent="VBoxContainer/CrossSettings/Arms/Input" unique_id=808339314]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+toggle_mode = true
+text = "CROSSHAIR_CROSS_ARMS_TOP"
+clip_text = true
+
+[node name="BOTTOM" type="Button" parent="VBoxContainer/CrossSettings/Arms/Input" unique_id=358702739]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+toggle_mode = true
+text = "CROSSHAIR_CROSS_ARMS_BOTTOM"
+clip_text = true
+
+[node name="LEFT" type="Button" parent="VBoxContainer/CrossSettings/Arms/Input" unique_id=290427973]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+toggle_mode = true
+text = "CROSSHAIR_CROSS_ARMS_LEFT"
+clip_text = true
+
+[node name="RIGHT" type="Button" parent="VBoxContainer/CrossSettings/Arms/Input" unique_id=1527661674]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+toggle_mode = true
+text = "CROSSHAIR_CROSS_ARMS_RIGHT"
+clip_text = true
+
+[node name="UiCrosshairFillOutline" parent="VBoxContainer" unique_id=1442914400 instance=ExtResource("5_j10nk")]
+layout_mode = 2
+size_flags_vertical = 0
+
+[editable path="VBoxContainer/Cross"]
+[editable path="VBoxContainer/CrossSettings/Length"]
+[editable path="VBoxContainer/CrossSettings/Length/MarginContainer/UiSettingsLabel"]
+[editable path="VBoxContainer/CrossSettings/Thickness"]
+[editable path="VBoxContainer/CrossSettings/Thickness/MarginContainer/UiSettingsLabel"]
+[editable path="VBoxContainer/CrossSettings/Gap"]
+[editable path="VBoxContainer/CrossSettings/Gap/MarginContainer/UiSettingsLabel"]
+[editable path="VBoxContainer/CrossSettings/Arms"]
+[editable path="VBoxContainer/CrossSettings/Arms/MarginContainer/UiSettingsLabel"]
