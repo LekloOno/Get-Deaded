@@ -23,7 +23,7 @@ public partial class UI_CrosshairEditor : Control
         CombineShapes.Toggled   += OnCombineShapesToggled;
         CombineOutlines.Toggled += OnCombineOutlinesToggled;
 
-        _addLayerOption.NewLayerRequested += OnNewLayerRequested;
+        _addLayerOption.NewTypeRequested += OnNewLayerRequested;
     }
 
     private void OnStructureChanged()

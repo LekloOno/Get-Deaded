@@ -12,11 +12,12 @@ public partial class UI_CrosshairLayerOptionButton : OptionButton
         Square,
     }
 
-    public event Action<CrosshairShapeData>? NewLayerRequested;
+    public event Action<CrosshairShapeData>? NewTypeRequested;
 
     public override void _Ready()
     {
         Populate();
+        Select(-1);
         
         ItemSelected += OnItemSelected;
     }
@@ -37,10 +38,11 @@ public partial class UI_CrosshairLayerOptionButton : OptionButton
     private void OnItemSelected(long index)
     {
         var type = (CrosshairLayerTypes)(int)GetItemMetadata((int)index);
-        NewLayerRequested?.Invoke(From(type));
+        Select(-1);
+        NewTypeRequested?.Invoke(From(type));
     }
 
-    private CrosshairShapeData From(CrosshairLayerTypes type)
+    private static CrosshairShapeData From(CrosshairLayerTypes type)
     {
         return type switch
         {
