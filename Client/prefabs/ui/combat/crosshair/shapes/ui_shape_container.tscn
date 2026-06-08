@@ -1,15 +1,38 @@
 [gd_scene format=3 uid="uid://cctd2edpm42m8"]
 
+[ext_resource type="Theme" uid="uid://ddkca4fk8kto5" path="res://assets/ui/menu_theme.tres" id="1_8xgmu"]
 [ext_resource type="PackedScene" uid="uid://be743kejrovaq" path="res://prefabs/ui/combat/crosshair/shapes/ui_crosshair_shape_dot.tscn" id="1_jcegv"]
+[ext_resource type="PackedScene" uid="uid://dkwskgfqsp7mv" path="res://prefabs/ui/combat/crosshair/shapes/ui_crosshair_shape_common.tscn" id="3_ffaoh"]
 
-[node name="UiShapeContainer" type="VBoxContainer" unique_id=800277225]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="UiShapeContainer" type="PanelContainer" unique_id=1420064005]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 748.0
+offset_bottom = 356.0
+theme = ExtResource("1_8xgmu")
 
-[node name="Button" type="Button" parent="." unique_id=1146155705]
+[node name="UiShapeContainer2" type="MarginContainer" parent="." unique_id=1791727878]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="UiShapeContainer" type="BoxContainer" parent="UiShapeContainer2" unique_id=848993815]
+layout_mode = 2
+
+[node name="Settings" type="VBoxContainer" parent="UiShapeContainer2/UiShapeContainer" unique_id=800277225]
+layout_mode = 2
+theme = ExtResource("1_8xgmu")
+
+[node name="UiCrosshairShapeDot" parent="UiShapeContainer2/UiShapeContainer/Settings" unique_id=1442914400 instance=ExtResource("1_jcegv")]
+layout_mode = 2
+
+[node name="UiCrosshairShapeCommon" parent="UiShapeContainer2/UiShapeContainer/Settings" unique_id=411231659 instance=ExtResource("3_ffaoh")]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="UiShapeContainer2/UiShapeContainer" unique_id=1146155705]
 layout_mode = 2
 size_flags_horizontal = 0
+size_flags_vertical = 0
 text = "DELETE_BUTTON"
-
-[node name="UiCrosshairShapeDot" parent="." unique_id=1442914400 instance=ExtResource("1_jcegv")]
-layout_mode = 2

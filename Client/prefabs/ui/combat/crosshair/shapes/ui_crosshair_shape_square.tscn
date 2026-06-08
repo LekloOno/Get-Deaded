@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://qqvt3ahu2l65" path="res://prefabs/ui/menu/settings/ui_settings_category_header.tscn" id="2_xlpnm"]
 [ext_resource type="PackedScene" uid="uid://d3ffncssg3j2l" path="res://prefabs/ui/menu/settings/ui_settings_row.tscn" id="3_ibni4"]
 [ext_resource type="Script" uid="uid://bwag4h0e76hv" path="res://script/ui/menu/ui_num_input.gd" id="4_0p3yh"]
-[ext_resource type="PackedScene" uid="uid://dkwskgfqsp7mv" path="res://prefabs/ui/combat/crosshair/shapes/ui_crosshair_shape_common.tscn" id="5_eapo4"]
 
 [node name="UiCrosshairShapeSquare" type="VBoxContainer" unique_id=1442914400]
 offset_right = 674.0
@@ -92,10 +91,6 @@ size_flags_horizontal = 8
 alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("4_0p3yh")
-
-[node name="UiCrosshairFillOutline" parent="." unique_id=1261656329 instance=ExtResource("5_eapo4")]
-layout_mode = 2
-size_flags_vertical = 0
 
 [editable path="Square"]
 [editable path="CircleSettings/Size"]

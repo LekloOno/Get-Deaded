@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://qqvt3ahu2l65" path="res://prefabs/ui/menu/settings/ui_settings_category_header.tscn" id="2_qb4v5"]
 [ext_resource type="PackedScene" uid="uid://d3ffncssg3j2l" path="res://prefabs/ui/menu/settings/ui_settings_row.tscn" id="3_as8ns"]
 [ext_resource type="Script" uid="uid://bwag4h0e76hv" path="res://script/ui/menu/ui_num_input.gd" id="4_1pkne"]
-[ext_resource type="PackedScene" uid="uid://dkwskgfqsp7mv" path="res://prefabs/ui/combat/crosshair/shapes/ui_crosshair_shape_common.tscn" id="5_j10nk"]
 
 [node name="UiCrosshairShapeCross" type="VBoxContainer" unique_id=1919879679]
 offset_right = 674.0
@@ -147,10 +146,6 @@ theme_type_variation = &"InputButton"
 toggle_mode = true
 text = "CROSSHAIR_CROSS_ARMS_RIGHT"
 clip_text = true
-
-[node name="UiCrosshairFillOutline" parent="." unique_id=1442914400 instance=ExtResource("5_j10nk")]
-layout_mode = 2
-size_flags_vertical = 0
 
 [editable path="Cross"]
 [editable path="CrossSettings/Length"]

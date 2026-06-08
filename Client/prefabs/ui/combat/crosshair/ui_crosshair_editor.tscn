@@ -5,8 +5,15 @@
 [ext_resource type="PackedScene" uid="uid://cctd2edpm42m8" path="res://prefabs/ui/combat/crosshair/shapes/ui_shape_container.tscn" id="3_nn6dc"]
 
 [node name="UiCrosshairEditor" type="HBoxContainer" unique_id=1661831078]
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -925.0
+offset_bottom = -380.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = ExtResource("1_nn6dc")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=463732239]
@@ -26,6 +33,7 @@ size_flags_vertical = 1
 
 [node name="Edit" type="VBoxContainer" parent="." unique_id=1049714343]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="Edit" unique_id=1690635358]
 layout_mode = 2
@@ -52,14 +60,14 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Layers" type="ScrollContainer" parent="Edit" unique_id=872904453]
-custom_minimum_size = Vector2(620, 800)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Layers" type="VBoxContainer" parent="Edit/Layers" unique_id=1546903289]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/separation = 15
 
 [node name="UiShapeContainer" parent="Edit/Layers/Layers" unique_id=800277225 instance=ExtResource("3_nn6dc")]
 layout_mode = 2
