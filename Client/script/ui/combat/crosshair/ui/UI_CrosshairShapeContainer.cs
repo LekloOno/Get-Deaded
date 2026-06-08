@@ -19,8 +19,6 @@ public partial class UI_CrosshairShapeContainer : Control
 
     public override void _Ready()
     {
-        Clear();
-
         _rotation.ValueChanged += OnRotationChanged;
         _deleteButton.Pressed += OnDeletePressed;
     }
@@ -34,12 +32,33 @@ public partial class UI_CrosshairShapeContainer : Control
         _fill.SetData(_shape.FillData);
         _outlines.SetOutlineData(_shape.OutlineData);
 
-        _crosshair = crosshair;
+
+        SetCrosshair(crosshair);
 
         Clear();
 
         Control shapeSettings = CreateShapeSettings(shape);
         _shapeSettingsContainer.AddChild(shapeSettings);
+    }
+
+    private void SetCrosshair(CrosshairData crosshair)
+    {
+        if (crosshair == _crosshair)
+            return;
+
+        if (_crosshair != null)
+            _crosshair.PropertyChanged -= UpdateVisibility;
+        
+        _crosshair = crosshair;
+        
+        UpdateVisibility();
+        _crosshair.PropertyChanged += UpdateVisibility;
+    }
+
+    private void UpdateVisibility()
+    {
+        _outlines.Visible = !_crosshair.CombineOutlines;
+        _fill.Visible = !_crosshair.CombineShapes;
     }
 
     private Control CreateShapeSettings(CrosshairShapeData shape)
