@@ -1,9 +1,68 @@
 [gd_scene format=3 uid="uid://cdpwp7sk0b76d"]
 
-[node name="UiCrosshairEditor" type="Control" unique_id=559904114]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[ext_resource type="PackedScene" uid="uid://bw66qfkpceudk" path="res://prefabs/ui/combat/ui_crosshair_renderer.tscn" id="1_llgqg"]
+[ext_resource type="Theme" uid="uid://ddkca4fk8kto5" path="res://assets/ui/menu_theme.tres" id="1_nn6dc"]
+[ext_resource type="PackedScene" uid="uid://cctd2edpm42m8" path="res://prefabs/ui/combat/crosshair/shapes/ui_shape_container.tscn" id="3_nn6dc"]
+
+[node name="UiCrosshairEditor" type="HBoxContainer" unique_id=1661831078]
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("1_nn6dc")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=463732239]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer" unique_id=966593573]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="CrosshairRenderer" parent="PanelContainer/CenterContainer" unique_id=387137826 instance=ExtResource("1_llgqg")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+
+[node name="Edit" type="VBoxContainer" parent="." unique_id=1049714343]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Edit" unique_id=1690635358]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Edit/PanelContainer" unique_id=2120967673]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Edit/PanelContainer/MarginContainer" unique_id=1499799294]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Edit/PanelContainer/MarginContainer/HBoxContainer" unique_id=1146858795]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Edit/PanelContainer/MarginContainer/HBoxContainer/PanelContainer" unique_id=282981069]
+layout_mode = 2
+text = "CROSSHAIR_ADD_LAYER_LABEL"
+
+[node name="AddLayer" type="OptionButton" parent="Edit/PanelContainer/MarginContainer/HBoxContainer" unique_id=975477122]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Layers" type="ScrollContainer" parent="Edit" unique_id=872904453]
+custom_minimum_size = Vector2(620, 800)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Layers" type="VBoxContainer" parent="Edit/Layers" unique_id=1546903289]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="UiShapeContainer" parent="Edit/Layers/Layers" unique_id=800277225 instance=ExtResource("3_nn6dc")]
+layout_mode = 2
+
+[node name="UiShapeContainer2" parent="Edit/Layers/Layers" unique_id=2097027033 instance=ExtResource("3_nn6dc")]
+layout_mode = 2

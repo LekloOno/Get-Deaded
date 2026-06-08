@@ -10,15 +10,16 @@
 
 [sub_resource type="Resource" id="Resource_8unib"]
 script = ExtResource("2_p2ejn")
+Color = Color(0, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_p2ejn"]
 script = ExtResource("2_8unib")
 Width = 0.76
+Visible = false
 Color = Color(0, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_4csa1"]
 script = ExtResource("2_p2ejn")
-Color = Color(1, 0.24705882, 1, 1)
 
 [sub_resource type="Resource" id="Resource_jf0pm"]
 script = ExtResource("2_8unib")
@@ -26,7 +27,7 @@ Color = Color(0, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_112t3"]
 script = ExtResource("4_u4f6t")
-StartAngle = 157.5
+Radius = 5.0
 FillData = SubResource("Resource_4csa1")
 OutlineData = SubResource("Resource_jf0pm")
 metadata/_custom_type_script = "uid://fglyc4kbi3lx"

@@ -1,47 +1,38 @@
 [gd_scene format=3 uid="uid://bls5cj65hmxdb"]
 
-[ext_resource type="Theme" uid="uid://ddkca4fk8kto5" path="res://assets/ui/menu_theme.tres" id="1_i3prd"]
 [ext_resource type="PackedScene" uid="uid://qqvt3ahu2l65" path="res://prefabs/ui/menu/settings/ui_settings_category_header.tscn" id="2_xlpnm"]
 [ext_resource type="PackedScene" uid="uid://d3ffncssg3j2l" path="res://prefabs/ui/menu/settings/ui_settings_row.tscn" id="3_ibni4"]
 [ext_resource type="Script" uid="uid://bwag4h0e76hv" path="res://script/ui/menu/ui_num_input.gd" id="4_0p3yh"]
-[ext_resource type="PackedScene" uid="uid://dkwskgfqsp7mv" path="res://prefabs/ui/combat/crosshair/fill/ui_crosshair_shape_common.tscn" id="5_eapo4"]
+[ext_resource type="PackedScene" uid="uid://dkwskgfqsp7mv" path="res://prefabs/ui/combat/crosshair/shapes/ui_crosshair_shape_common.tscn" id="5_eapo4"]
 
-[node name="UiCrosshairShapeSquare" type="ScrollContainer" unique_id=1552377313]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -1246.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("1_i3prd")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1442914400]
-layout_mode = 2
+[node name="UiCrosshairShapeSquare" type="VBoxContainer" unique_id=1442914400]
+offset_right = 674.0
+offset_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Square" parent="VBoxContainer" unique_id=1338812726 instance=ExtResource("2_xlpnm")]
+[node name="Square" parent="." unique_id=1338812726 instance=ExtResource("2_xlpnm")]
 layout_mode = 2
 
-[node name="Label" parent="VBoxContainer/Square" index="0" unique_id=366278316]
+[node name="Label" parent="Square" index="0" unique_id=366278316]
 text = "CROSSHAIR_SQUARE_LABEL"
 
-[node name="CircleSettings" type="VBoxContainer" parent="VBoxContainer" unique_id=1485850965]
+[node name="CircleSettings" type="VBoxContainer" parent="." unique_id=1485850965]
 layout_mode = 2
 
-[node name="Size" parent="VBoxContainer/CircleSettings" unique_id=996697259 instance=ExtResource("3_ibni4")]
+[node name="Size" parent="CircleSettings" unique_id=996697259 instance=ExtResource("3_ibni4")]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Label" parent="VBoxContainer/CircleSettings/Size/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(996697259, 109094902, 172764845) index="0" unique_id=1465678305]
+[node name="Label" parent="CircleSettings/Size/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(996697259, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "CROSSHAIR_SQUARE_SIZE_LABEL"
 
-[node name="NumericInput" type="HBoxContainer" parent="VBoxContainer/CircleSettings/Size" unique_id=106269762]
+[node name="NumericInput" type="HBoxContainer" parent="CircleSettings/Size" unique_id=106269762]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 5
 
-[node name="MasterSlider" type="HSlider" parent="VBoxContainer/CircleSettings/Size/NumericInput" unique_id=67880812]
+[node name="MasterSlider" type="HSlider" parent="CircleSettings/Size/NumericInput" unique_id=67880812]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -49,7 +40,7 @@ max_value = 10.0
 step = 0.2
 value = 10.0
 
-[node name="LineEdit" type="LineEdit" parent="VBoxContainer/CircleSettings/Size/NumericInput" unique_id=1015139021]
+[node name="LineEdit" type="LineEdit" parent="CircleSettings/Size/NumericInput" unique_id=1015139021]
 custom_minimum_size = Vector2(58, 0)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -57,36 +48,36 @@ alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("4_0p3yh")
 
-[node name="Filled" parent="VBoxContainer/CircleSettings" unique_id=1081251970 instance=ExtResource("3_ibni4")]
+[node name="Filled" parent="CircleSettings" unique_id=1081251970 instance=ExtResource("3_ibni4")]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Label" parent="VBoxContainer/CircleSettings/Filled/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1081251970, 109094902, 172764845) index="0" unique_id=1465678305]
+[node name="Label" parent="CircleSettings/Filled/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1081251970, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "CROSSHAIR_SQUARE_FILLED_LABEL"
 
-[node name="CheckBox" type="CheckBox" parent="VBoxContainer/CircleSettings/Filled" unique_id=575427768]
+[node name="CheckBox" type="CheckBox" parent="CircleSettings/Filled" unique_id=575427768]
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="Thickness" parent="VBoxContainer/CircleSettings" unique_id=1239931948 instance=ExtResource("3_ibni4")]
+[node name="Thickness" parent="CircleSettings" unique_id=1239931948 instance=ExtResource("3_ibni4")]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="MarginContainer" parent="VBoxContainer/CircleSettings/Thickness" index="0" unique_id=1908736311]
+[node name="MarginContainer" parent="CircleSettings/Thickness" index="0" unique_id=1908736311]
 theme_override_constants/margin_left = 15
 
-[node name="UiSettingsLabel" parent="VBoxContainer/CircleSettings/Thickness/MarginContainer" index="0" unique_id=109094902]
+[node name="UiSettingsLabel" parent="CircleSettings/Thickness/MarginContainer" index="0" unique_id=109094902]
 custom_minimum_size = Vector2(385, 0)
 
-[node name="Label" parent="VBoxContainer/CircleSettings/Thickness/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1239931948, 109094902, 172764845) index="0" unique_id=1465678305]
+[node name="Label" parent="CircleSettings/Thickness/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1239931948, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "CROSSHAIR_SQUARE_THICKNESS_LABEL"
 
-[node name="NumericInput" type="HBoxContainer" parent="VBoxContainer/CircleSettings/Thickness" unique_id=198797718]
+[node name="NumericInput" type="HBoxContainer" parent="CircleSettings/Thickness" unique_id=198797718]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 5
 
-[node name="MasterSlider" type="HSlider" parent="VBoxContainer/CircleSettings/Thickness/NumericInput" unique_id=2000920283]
+[node name="MasterSlider" type="HSlider" parent="CircleSettings/Thickness/NumericInput" unique_id=2000920283]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -94,7 +85,7 @@ max_value = 10.0
 step = 0.2
 value = 10.0
 
-[node name="LineEdit" type="LineEdit" parent="VBoxContainer/CircleSettings/Thickness/NumericInput" unique_id=548226522]
+[node name="LineEdit" type="LineEdit" parent="CircleSettings/Thickness/NumericInput" unique_id=548226522]
 custom_minimum_size = Vector2(58, 0)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -102,14 +93,14 @@ alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("4_0p3yh")
 
-[node name="UiCrosshairFillOutline" parent="VBoxContainer" unique_id=1261656329 instance=ExtResource("5_eapo4")]
+[node name="UiCrosshairFillOutline" parent="." unique_id=1261656329 instance=ExtResource("5_eapo4")]
 layout_mode = 2
 size_flags_vertical = 0
 
-[editable path="VBoxContainer/Square"]
-[editable path="VBoxContainer/CircleSettings/Size"]
-[editable path="VBoxContainer/CircleSettings/Size/MarginContainer/UiSettingsLabel"]
-[editable path="VBoxContainer/CircleSettings/Filled"]
-[editable path="VBoxContainer/CircleSettings/Filled/MarginContainer/UiSettingsLabel"]
-[editable path="VBoxContainer/CircleSettings/Thickness"]
-[editable path="VBoxContainer/CircleSettings/Thickness/MarginContainer/UiSettingsLabel"]
+[editable path="Square"]
+[editable path="CircleSettings/Size"]
+[editable path="CircleSettings/Size/MarginContainer/UiSettingsLabel"]
+[editable path="CircleSettings/Filled"]
+[editable path="CircleSettings/Filled/MarginContainer/UiSettingsLabel"]
+[editable path="CircleSettings/Thickness"]
+[editable path="CircleSettings/Thickness/MarginContainer/UiSettingsLabel"]
