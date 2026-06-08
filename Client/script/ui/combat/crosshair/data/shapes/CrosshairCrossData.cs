@@ -25,7 +25,7 @@ public partial class CrosshairCrossData : CrosshairShapeData
     }
 
     [Export(PropertyHint.Range, "0,30,or_greater")]
-    public float Size
+    public float Length
     {
         get => _size;
         set { _size = value; EmitPropertyChanged(); }
@@ -46,10 +46,10 @@ public partial class CrosshairCrossData : CrosshairShapeData
     }
 
     public override void DrawFill(Control canvas, Vector2 center, FillData fill) =>
-        DrawLines(canvas, center, Size, Gap, fill.Color, Thickness, fill.AntiAlias);
+        DrawLines(canvas, center, Length, Gap, fill.Color, Thickness, fill.AntiAlias);
 
     public override void DrawOutline(Control canvas, Vector2 center, OutlineData outline) =>
-        DrawLines(canvas, center, Size + outline.Width * 2f, Gap - outline.Width, outline.Color, Thickness + outline.Width * 2f, outline.AntiAlias);
+        DrawLines(canvas, center, Length + outline.Width * 2f, Gap - outline.Width, outline.Color, Thickness + outline.Width * 2f, outline.AntiAlias);
 
     private void DrawLines(Control canvas, Vector2 c, float s, float g, Color color, float thick, bool antiAlias)
     {

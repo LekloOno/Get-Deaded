@@ -48,4 +48,16 @@ public partial class CrosshairData : Resource
         else if ((name == nameof(OutlineData)) && !_combineOutlines)
             property["usage"] = (int)PropertyUsageFlags.Storage;
     }
+
+    public void RemoveShape(CrosshairShapeData shape)
+    {
+        if (_shapes.Remove(shape))
+            EmitSignal(SignalName.StructureChanged);
+    }
+
+    public void AddShape(CrosshairShapeData shape)
+    {
+        _shapes.Add(shape);
+        EmitSignal(SignalName.StructureChanged);
+    }
 }

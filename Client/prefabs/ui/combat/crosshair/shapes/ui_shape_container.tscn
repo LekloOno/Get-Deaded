@@ -25,7 +25,10 @@ layout_mode = 2
 layout_mode = 2
 theme = ExtResource("1_8xgmu")
 
-[node name="UiCrosshairShapeDot" parent="UiShapeContainer2/UiShapeContainer/Settings" unique_id=1442914400 instance=ExtResource("1_jcegv")]
+[node name="ShapeSettings" type="MarginContainer" parent="UiShapeContainer2/UiShapeContainer/Settings" unique_id=37829046]
+layout_mode = 2
+
+[node name="UiCrosshairShapeDot" parent="UiShapeContainer2/UiShapeContainer/Settings/ShapeSettings" unique_id=1442914400 instance=ExtResource("1_jcegv")]
 layout_mode = 2
 
 [node name="UiCrosshairShapeCommon" parent="UiShapeContainer2/UiShapeContainer/Settings" unique_id=411231659 instance=ExtResource("3_ffaoh")]
