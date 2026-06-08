@@ -1,14 +1,38 @@
 using Godot;
 using Godot.Collections;
 
+[Tool]
 [GlobalClass]
 public partial class CrosshairCircleData : CrosshairShapeData
 {
-    [Export] public float Radius    { get; set; } = 12f;
-    [Export] public float Thickness { get; set; } = 1.5f;
-    [Export] public int   Points    { get; set; } = 64;
+    public float _radius     = 12f;
+    public float _thickness  = 1f;
+    public int   _points     = 64;
+    public bool  _customArc  = false;
+    public float _startAngle = 0f;
+    public float _endAngle   = 360f;
 
-    private bool _customArc = false;
+    [Export(PropertyHint.Range, "0,30,or_greater")]
+    public float Radius
+    {
+        get => _radius;
+        set { _radius = value; EmitPropertyChanged(); }
+    }
+
+    [Export(PropertyHint.Range, "0,10,or_greater")]
+    public float Thickness
+    {
+        get => _thickness;
+        set { _thickness = value; EmitPropertyChanged(); }
+    }
+
+    [Export(PropertyHint.Range, "4,128,1")]
+    public int Points
+    {
+        get => _points;
+        set { _points = value; EmitPropertyChanged(); }
+    }
+
     [Export] public bool CustomArc
     {
         get => _customArc;
@@ -16,13 +40,23 @@ public partial class CrosshairCircleData : CrosshairShapeData
         {
             _customArc = value;
             NotifyPropertyListChanged();
+            EmitPropertyChanged();
         }
     }
 
     [Export(PropertyHint.Range, "-360,360,0.5,degrees")]
-    public float StartAngle { get; set; } = 0f;
+    public float StartAngle
+    {
+        get => _startAngle;
+        set { _startAngle = value; EmitPropertyChanged(); }
+    }
+
     [Export(PropertyHint.Range, "-360,360,0.5,degrees")]
-    public float EndAngle   { get; set; } = 360f;
+    public float EndAngle
+    {
+        get => _endAngle;
+        set { _endAngle = value; EmitPropertyChanged(); }
+    }
 
     public override void _ValidateProperty(Dictionary property)
     {
@@ -34,13 +68,13 @@ public partial class CrosshairCircleData : CrosshairShapeData
     private float ResolvedStart => _customArc ? Mathf.DegToRad(StartAngle) : 0f;
     private float ResolvedEnd   => _customArc ? Mathf.DegToRad(EndAngle)   : Mathf.Tau;
 
-    public override void DrawFill(Control canvas, Vector2 center, Color color) =>
+    public override void DrawFill(Control canvas, Vector2 center, FillData fill) =>
         canvas.DrawArc(center,
             Radius, ResolvedStart, ResolvedEnd, Points,
-            color, Thickness, true);
+            fill.Color, Thickness, fill.AntiAlias);
 
     public override void DrawOutline(Control canvas, Vector2 center, OutlineData outline) =>
         canvas.DrawArc(center,
             Radius, ResolvedStart, ResolvedEnd, Points,
-            outline.Color, Thickness + outline.Width * 2f, true);
+            outline.Color, Thickness + outline.Width * 2f, outline.AntiAlias);
 }

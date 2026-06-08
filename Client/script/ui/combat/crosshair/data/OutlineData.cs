@@ -1,13 +1,15 @@
 using Godot;
 
+[Tool]
 [GlobalClass]
-public partial class OutlineData : Resource
+public partial class OutlineData : FillData
 {
-    [Export] public bool  Visible { get; set; } = true;
-    [Export] public Color Color   { get; set; } = Colors.Black;
-    [Export] public float Width   { get; set; } = 1f;
+    public OutlineData() { _color = Colors.Black; }
+    private float _width = 1f;
 
-    public OutlineData(){}
-    public OutlineData(bool visible, Color color, float width)
-        => (Visible, Color, Width) = (visible, color, width);
+    [Export] public float Width
+    {
+        get => _width;
+        set { _width = value; EmitPropertyChanged(); }
+    }
 }

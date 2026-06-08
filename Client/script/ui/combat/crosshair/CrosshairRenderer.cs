@@ -1,10 +1,13 @@
 using System;
 using Godot;
 
+[Tool]
 [GlobalClass]
 public partial class CrosshairRenderer : Control
 {
     private CrosshairData _data = null!;
+
+    public event Action<CrosshairData, CrosshairData>? DataSwapped;
 
     [Export] public CrosshairData Data
     {
@@ -14,16 +17,21 @@ public partial class CrosshairRenderer : Control
             if (value == _data)
                 return;
             
+            var previous = _data;
             _data = value;
+            DataSwapped?.Invoke(previous, value);
             QueueRedraw();
         }
     }
 
     public override void _Draw()
     {
+        if (Data == null)
+            return;
+               
         Vector2 center = Size / 2f;
 
-        if (_data.CombineShapes)
+        if (_data != null && _data.CombineShapes)
             DrawCombined(center);
         else
             DrawIndependant(center);
@@ -49,22 +57,31 @@ public partial class CrosshairRenderer : Control
             DrawFill(shape, this, center);
     }
 
-    private Color ResolveFillColor(CrosshairShapeData shape) =>
-        _data.CombineShapes ? _data.FillColor : shape.FillColor;
+    private FillData ResolveFill(CrosshairShapeData shape) =>
+        _data.CombineShapes ? _data.FillData : shape.FillData;
 
     private OutlineData ResolveOutline(CrosshairShapeData shape) => 
         _data.CombineOutlines ? _data.OutlineData : shape.OutlineData;
 
     private void DrawFill(CrosshairShapeData shape, Control canvas, Vector2 center)
     {
-        var color = ResolveFillColor(shape);
+        if (shape == null)
+            return;
+
+        var fill = ResolveFill(shape);
+        if (!fill.Visible)
+            return;
+
         ApplyRotated(shape, canvas, center,
-            () => shape.DrawFill(canvas, center, color)
+            () => shape.DrawFill(canvas, center, fill)
         );
     }
 
     private void DrawOutline(CrosshairShapeData shape, Control canvas, Vector2 center)
     {
+        if (shape == null)
+            return;
+
         var outline = ResolveOutline(shape);
         
         if (!outline.Visible)
@@ -77,6 +94,9 @@ public partial class CrosshairRenderer : Control
 
     private static void ApplyRotated(CrosshairShapeData shape, Control canvas, Vector2 center, Action draw)
     {
+        if (shape == null)
+            return;
+
         if (shape.RotationDegrees == 0f)
         {
             draw();

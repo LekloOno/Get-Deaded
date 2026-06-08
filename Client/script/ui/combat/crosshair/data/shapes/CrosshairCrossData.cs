@@ -1,6 +1,7 @@
 using System;
 using Godot;
 
+[Tool]
 [GlobalClass]
 public partial class CrosshairCrossData : CrosshairShapeData
 {
@@ -12,23 +13,49 @@ public partial class CrosshairCrossData : CrosshairShapeData
         Right = 8
     }
 
-    [Export] public ArmMask Arms      { get; set; } = ArmMask.Top | ArmMask.Bottom | ArmMask.Left | ArmMask.Right;
-    [Export] public float   Size      { get; set; } = 10f;
-    [Export] public float   Gap       { get; set; } = 4f;
-    [Export] public float   Thickness { get; set; } = 2f;
+    private float _size      = 8f;
+    private float _gap       = 4f;
+    private float _thickness = 1f;
+    private ArmMask _arms = ArmMask.Top | ArmMask.Bottom | ArmMask.Left | ArmMask.Right;
 
-    public override void DrawFill(Control canvas, Vector2 center, Color color) =>
-        DrawLines(canvas, center, color, Thickness);
+    [Export] public ArmMask Arms
+    {
+        get => _arms;
+        set { _arms = value; EmitPropertyChanged(); }
+    }
+
+    [Export(PropertyHint.Range, "0,30,or_greater")]
+    public float Size
+    {
+        get => _size;
+        set { _size = value; EmitPropertyChanged(); }
+    }
+
+    [Export(PropertyHint.Range, "0,10,or_greater")]
+    public float Gap
+    {
+        get => _gap;
+        set { _gap = value; EmitPropertyChanged(); }
+    }
+
+    [Export(PropertyHint.Range, "0,10,or_greater")]
+    public float Thickness
+    {
+        get => _thickness;
+        set { _thickness = value; EmitPropertyChanged(); }
+    }
+
+    public override void DrawFill(Control canvas, Vector2 center, FillData fill) =>
+        DrawLines(canvas, center, Size, Gap, fill.Color, Thickness, fill.AntiAlias);
 
     public override void DrawOutline(Control canvas, Vector2 center, OutlineData outline) =>
-        DrawLines(canvas, center, outline.Color, Thickness + outline.Width * 2f);
+        DrawLines(canvas, center, Size + outline.Width * 2f, Gap - outline.Width, outline.Color, Thickness + outline.Width * 2f, outline.AntiAlias);
 
-    private void DrawLines(Control canvas, Vector2 c, Color color, float thick)
+    private void DrawLines(Control canvas, Vector2 c, float s, float g, Color color, float thick, bool antiAlias)
     {
-        float g = Gap, s = Size;
-        if ((Arms & ArmMask.Top)    != 0) canvas.DrawLine(c + new Vector2(0,  -g), c + new Vector2(0,  -g - s), color, thick, true);
-        if ((Arms & ArmMask.Bottom) != 0) canvas.DrawLine(c + new Vector2(0,   g), c + new Vector2(0,   g + s), color, thick, true);
-        if ((Arms & ArmMask.Left)   != 0) canvas.DrawLine(c + new Vector2(-g,  0), c + new Vector2(-g - s,  0), color, thick, true);
-        if ((Arms & ArmMask.Right)  != 0) canvas.DrawLine(c + new Vector2( g,  0), c + new Vector2( g + s,  0), color, thick, true);
+        if ((Arms & ArmMask.Top)    != 0) canvas.DrawLine(c + new Vector2(0,  -g), c + new Vector2(0,  -g - s), color, thick, antiAlias);
+        if ((Arms & ArmMask.Bottom) != 0) canvas.DrawLine(c + new Vector2(0,   g), c + new Vector2(0,   g + s), color, thick, antiAlias);
+        if ((Arms & ArmMask.Left)   != 0) canvas.DrawLine(c + new Vector2(-g,  0), c + new Vector2(-g - s,  0), color, thick, antiAlias);
+        if ((Arms & ArmMask.Right)  != 0) canvas.DrawLine(c + new Vector2( g,  0), c + new Vector2( g + s,  0), color, thick, antiAlias);
     }
 }
