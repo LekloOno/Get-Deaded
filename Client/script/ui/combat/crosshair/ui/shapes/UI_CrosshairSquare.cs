@@ -9,6 +9,7 @@ public partial class UI_CrosshairSquare : Control
 
     [Export] private CheckBox _filled = null!;
     [Export] private Range _thickness = null!;
+    [Export] private Control _thicknessSetting = null!;
 
     public override void _Ready()
     {
@@ -36,7 +37,7 @@ public partial class UI_CrosshairSquare : Control
     }
 
     private void UpdateVisibility() =>
-        _thickness.Visible = !_data.Filled;
+        _thicknessSetting.Visible = !_data.Filled;
 
     private void OnSizeChanged(double value) =>
         _data.Size = (float) value;

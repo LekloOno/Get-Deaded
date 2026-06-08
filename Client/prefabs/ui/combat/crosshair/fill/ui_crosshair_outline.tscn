@@ -6,13 +6,16 @@
 [ext_resource type="PackedScene" uid="uid://d3ffncssg3j2l" path="res://prefabs/ui/menu/settings/ui_settings_row.tscn" id="4_ijd5w"]
 [ext_resource type="Script" uid="uid://bwag4h0e76hv" path="res://script/ui/menu/ui_num_input.gd" id="5_k2cgq"]
 
-[node name="UiCrosshairOutline" type="VBoxContainer" unique_id=1442914400 node_paths=PackedStringArray("_widthRange", "_visible", "_colorPicker", "_antiAlias")]
+[node name="UiCrosshairOutline" type="VBoxContainer" unique_id=1442914400 node_paths=PackedStringArray("_widthSetting", "_widthRange", "_colorSetting", "_antiAliasSetting", "_visible", "_colorPicker", "_antiAlias")]
 offset_right = 659.0
 offset_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_k2cgq")
+_widthSetting = NodePath("FillSettings/OutlineWidth")
 _widthRange = NodePath("FillSettings/OutlineWidth/NumericInput/MasterSlider")
+_colorSetting = NodePath("FillSettings/FillColor")
+_antiAliasSetting = NodePath("FillSettings/FillAntiAlias")
 _visible = NodePath("Header/UiCategoryHeaderToggle/CheckBox")
 _colorPicker = NodePath("FillSettings/FillColor/Input/Control/EnnemiesColorInput")
 _antiAlias = NodePath("FillSettings/FillAntiAlias/Input/CheckBox")

@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://qqvt3ahu2l65" path="res://prefabs/ui/menu/settings/ui_settings_category_header.tscn" id="4_glece"]
 [ext_resource type="PackedScene" uid="uid://ca431v4hraw8w" path="res://prefabs/ui/combat/crosshair/fill/ui_crosshair_fill.tscn" id="5_glece"]
 [ext_resource type="Script" uid="uid://dm5ioj0ce04yu" path="res://script/ui/combat/crosshair/ui/UI_CrosshairLayerOptionButton.cs" id="6_01c6s"]
+[ext_resource type="Script" uid="uid://bt8dp3nqvckqm" path="res://script/ui/menu/contexts/accessibility/ui_crosshair_background_color.gd" id="6_4w3m4"]
 [ext_resource type="PackedScene" uid="uid://brj3cyh0inqyy" path="res://prefabs/ui/combat/crosshair/fill/ui_crosshair_outline.tscn" id="6_l3n8h"]
 
 [node name="UiCrosshairEditor" type="HBoxContainer" unique_id=1661831078 node_paths=PackedStringArray("CombineShapes", "CombineOutlines", "_fill", "_outline", "_layersContainer", "_addLayerOption")]
@@ -31,20 +32,48 @@ _layersContainer = NodePath("Edit/Layers/LayersContainer")
 _addLayerOption = NodePath("Edit/PanelContainer/MarginContainer/HBoxContainer/AddLayer")
 _shapeContainer = ExtResource("3_nn6dc")
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=463732239]
+[node name="CrosshairBackground" type="PanelContainer" parent="." unique_id=463732239]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="PanelContainer" unique_id=966593573]
+[node name="VBoxContainer" type="VBoxContainer" parent="CrosshairBackground" unique_id=379621684]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="CrosshairBackground/VBoxContainer" unique_id=966593573]
 custom_minimum_size = Vector2(250, 250)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 
-[node name="CrosshairRenderer" parent="PanelContainer/CenterContainer" unique_id=387137826 instance=ExtResource("1_llgqg")]
+[node name="CrosshairRenderer" parent="CrosshairBackground/VBoxContainer/CenterContainer" unique_id=387137826 instance=ExtResource("1_llgqg")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="CrosshairBackground/VBoxContainer" unique_id=1239263938]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CrosshairBackground/VBoxContainer/PanelContainer" unique_id=1611424463]
+layout_mode = 2
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="UiSettingsRow" type="HBoxContainer" parent="CrosshairBackground/VBoxContainer/PanelContainer/MarginContainer" unique_id=996697259]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="CrosshairBackground/VBoxContainer/PanelContainer/MarginContainer/UiSettingsRow" unique_id=150757181]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "CROSSHAIR_BACKGROUND_LABEL"
+clip_text = true
+
+[node name="CrosshairBackgroundColor" type="ColorPickerButton" parent="CrosshairBackground/VBoxContainer/PanelContainer/MarginContainer/UiSettingsRow" unique_id=477079991 node_paths=PackedStringArray("crosshair_background")]
+custom_minimum_size = Vector2(58, 0)
+layout_mode = 2
+script = ExtResource("6_4w3m4")
+crosshair_background = NodePath("../../../../..")
 
 [node name="Edit" type="VBoxContainer" parent="." unique_id=1049714343]
 layout_mode = 2

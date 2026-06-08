@@ -5,7 +5,8 @@ public partial class UI_CrosshairOutlineData : UI_CrosshairFillData
 {
     private OutlineData _outlineData = null!;
 
-    [Export] private Range _widthRange = null!;
+    [Export] private Control _widthSetting = null!;
+    [Export] private Range   _widthRange = null!;
 
     public override void _Ready()
     {
@@ -15,18 +16,19 @@ public partial class UI_CrosshairOutlineData : UI_CrosshairFillData
 
     public void SetOutlineData(OutlineData outline)
     {
-        SetData(outline);
-
         _outlineData = outline;
         
         _widthRange.Value = outline.Width;
 
-        UpdateWidthVisibility();
+        SetData(outline);
     }
 
     private void OnWidthChanged(double value) =>
         _outlineData.Width = (float) value;
 
-    private void UpdateWidthVisibility() =>
-        _widthRange.Visible = _outlineData.Visible;
+    protected override void UpdateVisibility()
+    {
+        base.UpdateVisibility();
+        _widthSetting.Visible = _outlineData.Visible;
+    }
 }

@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://d3ffncssg3j2l" path="res://prefabs/ui/menu/settings/ui_settings_row.tscn" id="3_ibni4"]
 [ext_resource type="Script" uid="uid://bwag4h0e76hv" path="res://script/ui/menu/ui_num_input.gd" id="4_0p3yh"]
 
-[node name="UiCrosshairShapeSquare" type="VBoxContainer" unique_id=1442914400 node_paths=PackedStringArray("_size", "_filled", "_thickness")]
+[node name="UiCrosshairShapeSquare" type="VBoxContainer" unique_id=1442914400 node_paths=PackedStringArray("_size", "_filled", "_thickness", "_thicknessSetting")]
 offset_right = 674.0
 offset_bottom = 1080.0
 size_flags_horizontal = 3
@@ -14,6 +14,7 @@ script = ExtResource("1_n83mo")
 _size = NodePath("CircleSettings/Size/NumericInput/SizeSlider")
 _filled = NodePath("CircleSettings/Filled/FilledCheckBox")
 _thickness = NodePath("CircleSettings/Thickness/NumericInput/ThicknessSlider")
+_thicknessSetting = NodePath("CircleSettings/Thickness")
 
 [node name="Square" parent="." unique_id=1338812726 instance=ExtResource("2_xlpnm")]
 layout_mode = 2

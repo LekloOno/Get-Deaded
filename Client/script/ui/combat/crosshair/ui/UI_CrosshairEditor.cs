@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using Godot;
 
 [GlobalClass]
@@ -18,18 +16,7 @@ public partial class UI_CrosshairEditor : Control
 
     public override void _Ready()
     {
-        Clear();
-
-        CombineShapes.ButtonPressed    = _data.CombineShapes;
-        CombineOutlines.ButtonPressed  = _data.CombineOutlines;
-
-        _fill.SetData(_data.FillData);
-        _outline.SetData(_data.OutlineData);
-
-        UpdateVisibility();
-
-        foreach (CrosshairShapeData shape in _data.Shapes)
-            AddNewLayerUi(shape);
+        OnStructureChanged();
 
         _data.StructureChanged  += OnStructureChanged; 
 
@@ -42,17 +29,18 @@ public partial class UI_CrosshairEditor : Control
     private void OnStructureChanged()
     {
         Clear();
+
         foreach (CrosshairShapeData shape in _data.Shapes)
             AddNewLayerUi(shape);
 
-        _fill.SetData(_data.FillData);
-        _outline.SetData(_data.OutlineData);
-    }
+        CombineShapes.ButtonPressed    = _data.CombineShapes;
+        CombineOutlines.ButtonPressed  = _data.CombineOutlines;
 
-    private void UpdateVisibility()
-    {
-        _fill.Visible = _data.CombineShapes;
-        _outline.Visible = _data.CombineOutlines;
+        _data.OutlineData.Visible = _data.CombineOutlines;
+        _data.FillData.Visible = _data.CombineShapes;
+
+        _outline.SetOutlineData(_data.OutlineData);
+        _fill.SetData(_data.FillData);
     }
 
     private void OnCombineShapesToggled(bool toggledOn) =>

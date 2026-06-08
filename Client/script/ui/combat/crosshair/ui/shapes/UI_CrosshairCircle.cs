@@ -12,6 +12,8 @@ public partial class UI_CrosshairCircle : Control
     [Export] private CheckBox _customArc = null!;
     [Export] private Range    _startAngle = null!;
     [Export] private Range    _endAngle = null!;
+    [Export] private Control  _startAngleSetting = null!;
+    [Export] private Control  _endAngleSetting = null!;
 
     public override void _Ready()
     {
@@ -50,7 +52,7 @@ public partial class UI_CrosshairCircle : Control
     }
 
     private void UpdateVisibility() =>
-        _startAngle.Visible = _endAngle.Visible = _data.CustomArc;
+        _startAngleSetting.Visible = _endAngleSetting.Visible = _data.CustomArc;
 
     private void OnRadiusChanged(double value) =>
         _data.Radius = (float) value;

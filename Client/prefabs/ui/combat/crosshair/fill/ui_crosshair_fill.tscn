@@ -4,12 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://daqn7hrxhhr7r" path="res://prefabs/ui/menu/settings/ui_settings_category_toggle_header.tscn" id="1_oxa0m"]
 [ext_resource type="PackedScene" uid="uid://dryjjuu0mr3dt" path="res://prefabs/ui/combat/crosshair/fill/ui_crosshair_fill_common.tscn" id="3_8ukis"]
 
-[node name="UiCrosshairFill" type="VBoxContainer" unique_id=1442914400 node_paths=PackedStringArray("_visible", "_colorPicker", "_antiAlias")]
+[node name="UiCrosshairFill" type="VBoxContainer" unique_id=1442914400 node_paths=PackedStringArray("_colorSetting", "_antiAliasSetting", "_visible", "_colorPicker", "_antiAlias")]
 offset_right = 659.0
 offset_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_lfqio")
+_colorSetting = NodePath("FillSettings/FillColor")
+_antiAliasSetting = NodePath("FillSettings/FillAntiAlias")
 _visible = NodePath("Header/UiCategoryHeaderToggle/CheckBox")
 _colorPicker = NodePath("FillSettings/FillColor/Input/Control/EnnemiesColorInput")
 _antiAlias = NodePath("FillSettings/FillAntiAlias/Input/CheckBox")

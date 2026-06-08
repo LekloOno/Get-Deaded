@@ -28,6 +28,8 @@ public partial class UI_CrosshairShapeContainer : Control
         _shape = shape;
 
         _rotation.Value = _shape.RotationDegrees;
+        _rotation.MaxValue = 360f;
+        _rotation.MinValue = 0f;
 
         _fill.SetData(_shape.FillData);
         _outlines.SetOutlineData(_shape.OutlineData);
@@ -106,6 +108,7 @@ public partial class UI_CrosshairShapeContainer : Control
 
     private void OnDeletePressed()
     {
+        _crosshair.PropertyChanged -= UpdateVisibility;
         _crosshair.RemoveShape(_shape);
         QueueFree();
     }

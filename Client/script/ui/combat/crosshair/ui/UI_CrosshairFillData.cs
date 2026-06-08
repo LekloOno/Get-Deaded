@@ -5,15 +5,17 @@ public partial class UI_CrosshairFillData : Control
 {
     private FillData _data = null!;
 
+    [Export] private Control           _colorSetting = null!;
+    [Export] private Control           _antiAliasSetting = null!;
     [Export] private CheckBox          _visible = null!;
     [Export] private ColorPickerButton _colorPicker = null!;
     [Export] private CheckBox          _antiAlias = null!;
 
     public override void _Ready()
     {
-        _visible.Toggled += OnVisibleToggled;
+        _visible.Toggled          += OnVisibleToggled;
         _colorPicker.ColorChanged += OnColorChanged;
-        _antiAlias.Toggled += OnAntiAliasToggled;
+        _antiAlias.Toggled        += OnAntiAliasToggled;
     }
 
     public void SetData(FillData data)
@@ -31,13 +33,13 @@ public partial class UI_CrosshairFillData : Control
     {
         if (_data == null)
             return;
-            
+
         _data.Visible = toggledOn;
         UpdateVisibility();
     }
 
-    private void UpdateVisibility() =>
-        _colorPicker.Visible = _antiAlias.Visible = _data.Visible;
+    protected virtual void UpdateVisibility() =>
+        _colorSetting.Visible = _antiAliasSetting.Visible = _data.Visible;
 
     private void OnAntiAliasToggled(bool toggledOn) =>
         _data.AntiAlias = toggledOn;
