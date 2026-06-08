@@ -7,69 +7,34 @@
 [ext_resource type="Script" uid="uid://fglyc4kbi3lx" path="res://script/ui/combat/crosshair/data/shapes/CrosshairCircleData.cs" id="4_u4f6t"]
 [ext_resource type="Script" uid="uid://bhtx8cussadvf" path="res://script/ui/combat/crosshair/data/CrosshairData.cs" id="5_4csa1"]
 [ext_resource type="Script" uid="uid://b45rnq4hbdav5" path="res://script/ui/combat/crosshair/CrosshairDataSyncer.cs" id="6_jf0pm"]
-[ext_resource type="Script" uid="uid://dt4qqlsmskj4a" path="res://script/ui/combat/crosshair/data/shapes/CrosshairCrossData.cs" id="6_u4f6t"]
-[ext_resource type="Script" uid="uid://cjidj5mcqa74u" path="res://script/ui/combat/crosshair/data/shapes/CrosshairSquareData.cs" id="7_u4f6t"]
 
 [sub_resource type="Resource" id="Resource_8unib"]
 script = ExtResource("2_p2ejn")
-Color = Color(0.25490198, 1, 1, 1)
 
 [sub_resource type="Resource" id="Resource_p2ejn"]
 script = ExtResource("2_8unib")
+Width = 0.76
 Color = Color(0, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_4csa1"]
 script = ExtResource("2_p2ejn")
-Color = Color(1, 0.34117648, 1, 1)
+Color = Color(1, 0.24705882, 1, 1)
 
 [sub_resource type="Resource" id="Resource_jf0pm"]
 script = ExtResource("2_8unib")
 Color = Color(0, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_112t3"]
-script = ExtResource("6_u4f6t")
+script = ExtResource("4_u4f6t")
+StartAngle = 157.5
 FillData = SubResource("Resource_4csa1")
 OutlineData = SubResource("Resource_jf0pm")
-metadata/_custom_type_script = "uid://dt4qqlsmskj4a"
-
-[sub_resource type="Resource" id="Resource_14fs2"]
-script = ExtResource("2_p2ejn")
-
-[sub_resource type="Resource" id="Resource_djlke"]
-script = ExtResource("2_8unib")
-Color = Color(0.58431375, 0, 0, 1)
-
-[sub_resource type="Resource" id="Resource_2dppv"]
-script = ExtResource("4_u4f6t")
-Radius = 10.0
-Thickness = 0.44
-FillData = SubResource("Resource_14fs2")
-OutlineData = SubResource("Resource_djlke")
 metadata/_custom_type_script = "uid://fglyc4kbi3lx"
-
-[sub_resource type="Resource" id="Resource_82lvg"]
-script = ExtResource("2_p2ejn")
-Color = Color(1, 1, 0.3372549, 0.52156866)
-
-[sub_resource type="Resource" id="Resource_btaec"]
-script = ExtResource("2_8unib")
-Visible = false
-Color = Color(0, 0, 0, 1)
-
-[sub_resource type="Resource" id="Resource_svnx3"]
-script = ExtResource("7_u4f6t")
-Size = 7.391
-Filled = true
-FillData = SubResource("Resource_82lvg")
-OutlineData = SubResource("Resource_btaec")
-metadata/_custom_type_script = "uid://cjidj5mcqa74u"
 
 [sub_resource type="Resource" id="Resource_u4f6t"]
 script = ExtResource("5_4csa1")
-Shapes = Array[ExtResource("3_p2ejn")]([SubResource("Resource_112t3"), SubResource("Resource_2dppv"), SubResource("Resource_svnx3")])
-CombineShapes = false
+Shapes = Array[ExtResource("3_p2ejn")]([SubResource("Resource_112t3")])
 FillData = SubResource("Resource_8unib")
-CombineOutlines = false
 OutlineData = SubResource("Resource_p2ejn")
 metadata/_custom_type_script = "uid://bhtx8cussadvf"
 
@@ -80,13 +45,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_horizontal = 4
+size_flags_vertical = 4
 script = ExtResource("1_7fjre")
 Data = SubResource("Resource_u4f6t")
 metadata/_custom_type_script = "uid://pclxvax0j3ba"

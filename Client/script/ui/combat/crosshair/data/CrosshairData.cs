@@ -22,7 +22,7 @@ public partial class CrosshairData : Resource
     [Export] public bool CombineShapes
     {
         get => _combineShapes;
-        set { _combineShapes = value; EmitSignal(SignalName.PropertyChanged); }
+        set { _combineShapes = value; NotifyPropertyListChanged(); EmitSignal(SignalName.PropertyChanged); }
     }
     [Export] public FillData FillData
     {
@@ -32,11 +32,20 @@ public partial class CrosshairData : Resource
     [Export] public bool CombineOutlines
     {
         get => _combineOutlines;
-        set { _combineOutlines = value; EmitSignal(SignalName.PropertyChanged); }
+        set { _combineOutlines = value; NotifyPropertyListChanged(); EmitSignal(SignalName.PropertyChanged); }
     }
     [Export] public OutlineData OutlineData
     {
         get => _outlineData;
         set { _outlineData = value; EmitSignal(SignalName.StructureChanged); }
+    }
+
+    public override void _ValidateProperty(Dictionary property)
+    {
+        var name = property["name"].AsString();
+        if ((name == nameof(FillData)) && !_combineShapes)
+            property["usage"] = (int)PropertyUsageFlags.Storage;
+        else if ((name == nameof(OutlineData)) && !_combineOutlines)
+            property["usage"] = (int)PropertyUsageFlags.Storage;
     }
 }
