@@ -1,13 +1,18 @@
 [gd_scene format=3 uid="uid://ca431v4hraw8w"]
 
+[ext_resource type="Script" uid="uid://c4fjgi8v4obpw" path="res://script/ui/combat/crosshair/ui/UI_CrosshairFillData.cs" id="1_lfqio"]
 [ext_resource type="PackedScene" uid="uid://daqn7hrxhhr7r" path="res://prefabs/ui/menu/settings/ui_settings_category_toggle_header.tscn" id="1_oxa0m"]
 [ext_resource type="PackedScene" uid="uid://dryjjuu0mr3dt" path="res://prefabs/ui/combat/crosshair/fill/ui_crosshair_fill_common.tscn" id="3_8ukis"]
 
-[node name="UiCrosshairFill" type="VBoxContainer" unique_id=1442914400]
+[node name="UiCrosshairFill" type="VBoxContainer" unique_id=1442914400 node_paths=PackedStringArray("_visible", "_colorPicker", "_antiAlias")]
 offset_right = 659.0
 offset_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("1_lfqio")
+_visible = NodePath("Header/UiCategoryHeaderToggle/CheckBox")
+_colorPicker = NodePath("FillSettings/FillColor/Input/Control/EnnemiesColorInput")
+_antiAlias = NodePath("FillSettings/FillAntiAlias/Input/CheckBox")
 
 [node name="Header" parent="." unique_id=1338812726 instance=ExtResource("1_oxa0m")]
 layout_mode = 2
@@ -19,3 +24,8 @@ text = "CROSSHAIR_FILL_LABEL"
 layout_mode = 2
 
 [editable path="Header"]
+[editable path="FillSettings"]
+[editable path="FillSettings/FillColor"]
+[editable path="FillSettings/FillColor/MarginContainer/UiSettingsLabel"]
+[editable path="FillSettings/FillAntiAlias"]
+[editable path="FillSettings/FillAntiAlias/MarginContainer/UiSettingsLabel"]

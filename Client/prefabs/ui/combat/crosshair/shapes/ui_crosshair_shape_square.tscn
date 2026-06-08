@@ -1,14 +1,19 @@
 [gd_scene format=3 uid="uid://bls5cj65hmxdb"]
 
+[ext_resource type="Script" uid="uid://dgyia0fu7pvdp" path="res://script/ui/combat/crosshair/ui/shapes/UI_CrosshairSquare.cs" id="1_n83mo"]
 [ext_resource type="PackedScene" uid="uid://qqvt3ahu2l65" path="res://prefabs/ui/menu/settings/ui_settings_category_header.tscn" id="2_xlpnm"]
 [ext_resource type="PackedScene" uid="uid://d3ffncssg3j2l" path="res://prefabs/ui/menu/settings/ui_settings_row.tscn" id="3_ibni4"]
 [ext_resource type="Script" uid="uid://bwag4h0e76hv" path="res://script/ui/menu/ui_num_input.gd" id="4_0p3yh"]
 
-[node name="UiCrosshairShapeSquare" type="VBoxContainer" unique_id=1442914400]
+[node name="UiCrosshairShapeSquare" type="VBoxContainer" unique_id=1442914400 node_paths=PackedStringArray("_size", "_filled", "_thickness")]
 offset_right = 674.0
 offset_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("1_n83mo")
+_size = NodePath("CircleSettings/Size/NumericInput/SizeSlider")
+_filled = NodePath("CircleSettings/Filled/FilledCheckBox")
+_thickness = NodePath("CircleSettings/Thickness/NumericInput/ThicknessSlider")
 
 [node name="Square" parent="." unique_id=1338812726 instance=ExtResource("2_xlpnm")]
 layout_mode = 2
@@ -31,7 +36,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 5
 
-[node name="MasterSlider" type="HSlider" parent="CircleSettings/Size/NumericInput" unique_id=67880812]
+[node name="SizeSlider" type="HSlider" parent="CircleSettings/Size/NumericInput" unique_id=67880812]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -54,7 +59,7 @@ size_flags_vertical = 0
 [node name="Label" parent="CircleSettings/Filled/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1081251970, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "CROSSHAIR_SQUARE_FILLED_LABEL"
 
-[node name="CheckBox" type="CheckBox" parent="CircleSettings/Filled" unique_id=575427768]
+[node name="FilledCheckBox" type="CheckBox" parent="CircleSettings/Filled" unique_id=575427768]
 layout_mode = 2
 size_flags_horizontal = 10
 
@@ -76,7 +81,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 5
 
-[node name="MasterSlider" type="HSlider" parent="CircleSettings/Thickness/NumericInput" unique_id=2000920283]
+[node name="ThicknessSlider" type="HSlider" parent="CircleSettings/Thickness/NumericInput" unique_id=2000920283]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4

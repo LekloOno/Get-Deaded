@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="CrosshairData" format=3 uid="uid://bsn4rv6lv607o"]
+
+[ext_resource type="Script" uid="uid://cs156ekicr4wx" path="res://script/ui/combat/crosshair/data/FillData.cs" id="1_8q0ux"]
+[ext_resource type="Script" uid="uid://7p23u4uadeak" path="res://script/ui/combat/crosshair/data/OutlineData.cs" id="2_nf0kr"]
+[ext_resource type="Script" uid="uid://b2xr5m0xlncca" path="res://script/ui/combat/crosshair/data/CrosshairShapeData.cs" id="3_5jkj0"]
+[ext_resource type="Script" uid="uid://fglyc4kbi3lx" path="res://script/ui/combat/crosshair/data/shapes/CrosshairCircleData.cs" id="4_j548t"]
+[ext_resource type="Script" uid="uid://bhtx8cussadvf" path="res://script/ui/combat/crosshair/data/CrosshairData.cs" id="5_x13py"]
+
+[sub_resource type="Resource" id="Resource_8unib"]
+script = ExtResource("1_8q0ux")
+Color = Color(0, 0, 0, 1)
+
+[sub_resource type="Resource" id="Resource_p2ejn"]
+script = ExtResource("2_nf0kr")
+Width = 0.76
+Visible = false
+Color = Color(0, 0, 0, 1)
+
+[sub_resource type="Resource" id="Resource_4csa1"]
+script = ExtResource("1_8q0ux")
+
+[sub_resource type="Resource" id="Resource_jf0pm"]
+script = ExtResource("2_nf0kr")
+Color = Color(0, 0, 0, 1)
+
+[sub_resource type="Resource" id="Resource_112t3"]
+script = ExtResource("4_j548t")
+Radius = 5.0
+FillData = SubResource("Resource_4csa1")
+OutlineData = SubResource("Resource_jf0pm")
+metadata/_custom_type_script = "uid://fglyc4kbi3lx"
+
+[resource]
+script = ExtResource("5_x13py")
+Shapes = Array[ExtResource("3_5jkj0")]([SubResource("Resource_112t3")])
+FillData = SubResource("Resource_8unib")
+OutlineData = SubResource("Resource_p2ejn")
+metadata/_custom_type_script = "uid://bhtx8cussadvf"

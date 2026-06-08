@@ -48,6 +48,8 @@
 [ext_resource type="PackedScene" uid="uid://12cbeu5f6b1j" path="res://prefabs/ui/menu/settings/ui_settings_inputs_row.tscn" id="38_pwonq"]
 [ext_resource type="PackedScene" uid="uid://qqvt3ahu2l65" path="res://prefabs/ui/menu/settings/ui_settings_category_header.tscn" id="38_squjd"]
 [ext_resource type="PackedScene" uid="uid://xo68a11s7vj0" path="res://prefabs/ui/scoreboard/ui_scoreboard_manager.tscn" id="39_o1fwb"]
+[ext_resource type="Script" uid="uid://cie6ww774f8b" path="res://script/ui/menu/contexts/accessibility/ui_open_crosshair_editor.gd" id="41_fcw2i"]
+[ext_resource type="PackedScene" uid="uid://cdpwp7sk0b76d" path="res://prefabs/ui/combat/crosshair/ui_crosshair_editor.tscn" id="49_fbh7i"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kqyci"]
 content_margin_left = 8.0
@@ -357,7 +359,6 @@ script = ExtResource("10_b5eqi")
 _logged = true
 
 [node name="Settings" type="PanelContainer" parent="." unique_id=1980157602 node_paths=PackedStringArray("confirm_dialog")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -379,9 +380,10 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
 mouse_filter = 0
-current_tab = 0
+current_tab = 3
 
 [node name="VIDEO_TAB" type="MarginContainer" parent="Settings/VBoxContainer/TabContainer" unique_id=299629799]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 30
@@ -1620,7 +1622,6 @@ action = "stats"
 action = "stats"
 
 [node name="ACCESSIBILITY_TAB" type="MarginContainer" parent="Settings/VBoxContainer/TabContainer" unique_id=176065705]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 30
@@ -1633,6 +1634,38 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="Crosshair" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer" unique_id=271954246 instance=ExtResource("38_squjd")]
+layout_mode = 2
+
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/Crosshair" index="0" unique_id=366278316]
+text = "CROSSHAIR_LABEL"
+
+[node name="CrosshairSettings" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer" unique_id=339775611]
+layout_mode = 2
+
+[node name="CrosshairEditor" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/CrosshairSettings" unique_id=537897574 instance=ExtResource("31_t61gj")]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/CrosshairSettings/CrosshairEditor/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(537897574, 109094902, 172764845) index="0" unique_id=1465678305]
+text = "CROSSHAIR_LABEL"
+
+[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/CrosshairSettings/CrosshairEditor" unique_id=1077189667 node_paths=PackedStringArray("menu", "editor")]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_type_variation = &"InputButton"
+text = "CROSSHAIR_OPEN_EDITOR_BUTTON"
+script = ExtResource("41_fcw2i")
+menu = NodePath("../../../../../../../../..")
+editor = NodePath("../../../../../../../../../CrosshairEditorMenu")
+
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/CrosshairSettings/CrosshairEditor" unique_id=334941812 instance=ExtResource("34_6me0n")]
+layout_mode = 2
+
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/CrosshairSettings/CrosshairEditor/Reset" index="0" unique_id=286523834]
+visible = false
+script = null
 
 [node name="Language" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer" unique_id=2057517837 instance=ExtResource("38_squjd")]
 layout_mode = 2
@@ -2016,6 +2049,48 @@ size_flags_horizontal = 0
 size_flags_vertical = 8
 text = "BACK_BUTTON"
 
+[node name="CrosshairEditorMenu" type="MarginContainer" parent="." unique_id=727793884]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="PanelContainer2" type="PanelContainer" parent="CrosshairEditorMenu" unique_id=209385728]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CrosshairEditorMenu/PanelContainer2" unique_id=88738541]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="CrosshairEditorMenu/PanelContainer2/VBoxContainer" unique_id=634232151]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="UiCrosshairEditor" parent="CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer" unique_id=1661831078 instance=ExtResource("49_fbh7i")]
+custom_minimum_size = Vector2(1015, 0)
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="CrosshairEditorMenu/PanelContainer2/VBoxContainer" unique_id=1444862659]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Confirm" type="Button" parent="CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer2" unique_id=2097292199]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "CONFIRM_BUTTON"
+
 [node name="ConfirmDialog" type="PanelContainer" parent="." unique_id=1625242626 node_paths=PackedStringArray("menu", "label", "confirm_button", "cancel_button")]
 visible = false
 layout_mode = 1
@@ -2091,6 +2166,8 @@ clip_text = true
 [connection signal="item_selected" from="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/Resolution/ResolutionInput" to="Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/Resolution/ResolutionInput" method="_on_item_selected"]
 [connection signal="tab_changed" from="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB" to="LightHover" method="tab_interract"]
 [connection signal="tab_hovered" from="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB" to="LightHover" method="tab_interract"]
+[connection signal="mouse_entered" from="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/CrosshairSettings/CrosshairEditor/Button" to="LightHover" method="tab_interract"]
+[connection signal="pressed" from="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/CrosshairSettings/CrosshairEditor/Button" to="LightClick" method="tab_interract"]
 [connection signal="mouse_entered" from="Settings/VBoxContainer/MarginContainer/HBoxContainer/APPLY_BUTTON" to="LightHover" method="tab_interract"]
 [connection signal="pressed" from="Settings/VBoxContainer/MarginContainer/HBoxContainer/APPLY_BUTTON" to="LightClick" method="tab_interract"]
 [connection signal="pressed" from="Settings/VBoxContainer/MarginContainer/HBoxContainer/APPLY_BUTTON" to="Settings" method="_on_apply_pressed"]
@@ -2129,6 +2206,9 @@ clip_text = true
 [connection signal="mouse_entered" from="ScoreBoardMenu/MarginContainer/BACK_BUTTON" to="LightHover" method="tab_interract"]
 [connection signal="pressed" from="ScoreBoardMenu/MarginContainer/BACK_BUTTON" to="." method="ExitCurrent"]
 [connection signal="pressed" from="ScoreBoardMenu/MarginContainer/BACK_BUTTON" to="LightClick" method="tab_interract"]
+[connection signal="mouse_entered" from="CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer2/Confirm" to="Hover" method="play"]
+[connection signal="pressed" from="CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer2/Confirm" to="." method="ExitCurrent"]
+[connection signal="pressed" from="CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer2/Confirm" to="Click" method="play"]
 [connection signal="mouse_entered" from="ConfirmDialog/VBoxContainer/HBoxContainer/ConfirmButton" to="Hover" method="play"]
 [connection signal="pressed" from="ConfirmDialog/VBoxContainer/HBoxContainer/ConfirmButton" to="Click" method="play"]
 [connection signal="mouse_entered" from="ConfirmDialog/VBoxContainer/HBoxContainer/CancelButton" to="Hover" method="play"]
@@ -2281,6 +2361,10 @@ clip_text = true
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Interface"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Stats"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Stats/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/Crosshair"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/CrosshairSettings/CrosshairEditor"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/CrosshairSettings/CrosshairEditor/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/CrosshairSettings/CrosshairEditor/Reset"]
 [editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/Language"]
 [editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/LanguageSettings/Language"]
 [editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/LanguageSettings/Language/MarginContainer/UiSettingsLabel"]

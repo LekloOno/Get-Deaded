@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 [Tool]
@@ -38,6 +39,8 @@ public partial class CrosshairDataSyncer : Node
     {
         data.PropertyChanged  += OnPropertyChanged;
         data.StructureChanged += OnStructureChanged;
+        data.ShapeAdded       += OnShapeAdded;
+        data.ShapeRemoved     += OnShapeRemoved;
 
         SubscribeOutline(data.OutlineData);
         SubscribeFill(data.FillData);
@@ -54,6 +57,8 @@ public partial class CrosshairDataSyncer : Node
     {
         data.PropertyChanged  -= OnPropertyChanged;
         data.StructureChanged -= OnStructureChanged;
+        data.ShapeAdded       -= OnShapeAdded;
+        data.ShapeRemoved     -= OnShapeRemoved;
         
         UnsubscribeOutline(data.OutlineData);
         UnsubscribeFill(data.FillData);
@@ -102,6 +107,18 @@ public partial class CrosshairDataSyncer : Node
     {
         if (fill != null)
             fill.PropertyChanged -= OnPropertyChanged;
+    }
+
+    private void OnShapeAdded(CrosshairShapeData shape)
+    {
+        SubscribeShape(shape);
+        _renderer?.QueueRedraw();
+    }
+
+    private void OnShapeRemoved(CrosshairShapeData shape)
+    {
+        UnsubscribeShape(shape);
+        _renderer?.QueueRedraw();
     }
 
     private void OnPropertyChanged() => _renderer?.QueueRedraw();

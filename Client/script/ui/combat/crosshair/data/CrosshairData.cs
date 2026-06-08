@@ -7,6 +7,8 @@ public partial class CrosshairData : Resource
 {
     [Signal] public delegate void PropertyChangedEventHandler();
     [Signal] public delegate void StructureChangedEventHandler();
+    [Signal] public delegate void ShapeAddedEventHandler(CrosshairShapeData shape);
+    [Signal] public delegate void ShapeRemovedEventHandler(CrosshairShapeData shape);
 
     private bool        _combineShapes   = true;
     private FillData    _fillData        = new();
@@ -52,12 +54,12 @@ public partial class CrosshairData : Resource
     public void RemoveShape(CrosshairShapeData shape)
     {
         if (_shapes.Remove(shape))
-            EmitSignal(SignalName.StructureChanged);
+            EmitSignal(SignalName.ShapeRemoved, shape);
     }
 
     public void AddShape(CrosshairShapeData shape)
     {
         _shapes.Add(shape);
-        EmitSignal(SignalName.StructureChanged);
+        EmitSignal(SignalName.ShapeAdded, shape);
     }
 }

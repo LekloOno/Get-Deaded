@@ -5,9 +5,9 @@ public partial class UI_CrosshairFillData : Control
 {
     private FillData _data = null!;
 
-    [Export] private CheckBox       _visible = null!;
-    [Export] private ColorPicker    _colorPicker = null!;
-    [Export] private CheckBox       _antiAlias = null!;
+    [Export] private CheckBox          _visible = null!;
+    [Export] private ColorPickerButton _colorPicker = null!;
+    [Export] private CheckBox          _antiAlias = null!;
 
     public override void _Ready()
     {
@@ -29,6 +29,9 @@ public partial class UI_CrosshairFillData : Control
 
     private void OnVisibleToggled(bool toggledOn)
     {
+        if (_data == null)
+            return;
+            
         _data.Visible = toggledOn;
         UpdateVisibility();
     }

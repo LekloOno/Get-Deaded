@@ -2,14 +2,28 @@
 
 [ext_resource type="Theme" uid="uid://ddkca4fk8kto5" path="res://assets/ui/menu_theme.tres" id="1_8xgmu"]
 [ext_resource type="PackedScene" uid="uid://be743kejrovaq" path="res://prefabs/ui/combat/crosshair/shapes/ui_crosshair_shape_dot.tscn" id="1_jcegv"]
+[ext_resource type="Script" uid="uid://vnu2416emujx" path="res://script/ui/combat/crosshair/ui/UI_CrosshairShapeContainer.cs" id="2_ffaoh"]
 [ext_resource type="PackedScene" uid="uid://dkwskgfqsp7mv" path="res://prefabs/ui/combat/crosshair/shapes/ui_crosshair_shape_common.tscn" id="3_ffaoh"]
+[ext_resource type="PackedScene" uid="uid://cryipu8esplu" path="res://prefabs/ui/combat/crosshair/shapes/ui_crosshair_shape_circle.tscn" id="4_4vi6a"]
+[ext_resource type="PackedScene" uid="uid://db5oo7mqsrrq3" path="res://prefabs/ui/combat/crosshair/shapes/ui_crosshair_shape_cross.tscn" id="5_ntme4"]
+[ext_resource type="PackedScene" uid="uid://bls5cj65hmxdb" path="res://prefabs/ui/combat/crosshair/shapes/ui_crosshair_shape_square.tscn" id="6_6ok8g"]
 
-[node name="UiShapeContainer" type="PanelContainer" unique_id=1420064005]
+[node name="UiShapeContainer" type="PanelContainer" unique_id=1420064005 node_paths=PackedStringArray("_deleteButton", "_shapeSettingsContainer", "_rotation", "_fill", "_outlines")]
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 748.0
 offset_bottom = 356.0
 theme = ExtResource("1_8xgmu")
+script = ExtResource("2_ffaoh")
+_deleteButton = NodePath("UiShapeContainer2/UiShapeContainer/Delete")
+_shapeSettingsContainer = NodePath("UiShapeContainer2/UiShapeContainer/Settings/ShapeSettings")
+_rotation = NodePath("UiShapeContainer2/UiShapeContainer/Settings/UiCrosshairShapeCommon/Rotation/NumericInput/MasterSlider")
+_fill = NodePath("UiShapeContainer2/UiShapeContainer/Settings/UiCrosshairShapeCommon/UiCrosshairFill")
+_outlines = NodePath("UiShapeContainer2/UiShapeContainer/Settings/UiCrosshairShapeCommon/UiCrosshairOutline")
+_dotScene = ExtResource("1_jcegv")
+_circleScene = ExtResource("4_4vi6a")
+_crossScene = ExtResource("5_ntme4")
+_squareScene = ExtResource("6_6ok8g")
 
 [node name="UiShapeContainer2" type="MarginContainer" parent="." unique_id=1791727878]
 layout_mode = 2
@@ -23,6 +37,7 @@ layout_mode = 2
 
 [node name="Settings" type="VBoxContainer" parent="UiShapeContainer2/UiShapeContainer" unique_id=800277225]
 layout_mode = 2
+size_flags_horizontal = 3
 theme = ExtResource("1_8xgmu")
 
 [node name="ShapeSettings" type="MarginContainer" parent="UiShapeContainer2/UiShapeContainer/Settings" unique_id=37829046]
@@ -34,8 +49,12 @@ layout_mode = 2
 [node name="UiCrosshairShapeCommon" parent="UiShapeContainer2/UiShapeContainer/Settings" unique_id=411231659 instance=ExtResource("3_ffaoh")]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="UiShapeContainer2/UiShapeContainer" unique_id=1146155705]
+[node name="Delete" type="Button" parent="UiShapeContainer2/UiShapeContainer" unique_id=1146155705]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "DELETE_BUTTON"
+
+[editable path="UiShapeContainer2/UiShapeContainer/Settings/UiCrosshairShapeCommon"]
+[editable path="UiShapeContainer2/UiShapeContainer/Settings/UiCrosshairShapeCommon/Rotation"]
+[editable path="UiShapeContainer2/UiShapeContainer/Settings/UiCrosshairShapeCommon/Rotation/MarginContainer/UiSettingsLabel"]

@@ -89,14 +89,14 @@ public partial class UI_CrosshairShapeContainer : Control
 
     private UI_CrosshairCircle CreateCircleSettings(CrosshairCircleData data)
     {
-        UI_CrosshairCircle circle = _crossScene.Instantiate<UI_CrosshairCircle>();
+        UI_CrosshairCircle circle = _circleScene.Instantiate<UI_CrosshairCircle>();
         circle.SetData(data);
         return circle;
     }
 
     private UI_CrosshairSquare CreateSquareSettings(CrosshairSquareData data)
     {
-        UI_CrosshairSquare square = _crossScene.Instantiate<UI_CrosshairSquare>();
+        UI_CrosshairSquare square = _squareScene.Instantiate<UI_CrosshairSquare>();
         square.SetData(data);
         return square;
     }

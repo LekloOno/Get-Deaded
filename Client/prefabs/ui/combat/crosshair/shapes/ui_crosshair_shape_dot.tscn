@@ -1,14 +1,17 @@
 [gd_scene format=3 uid="uid://be743kejrovaq"]
 
+[ext_resource type="Script" uid="uid://dkbw3npqqfxdy" path="res://script/ui/combat/crosshair/ui/shapes/UI_CrosshairDot.cs" id="1_2lqu7"]
 [ext_resource type="PackedScene" uid="uid://qqvt3ahu2l65" path="res://prefabs/ui/menu/settings/ui_settings_category_header.tscn" id="2_6oty5"]
 [ext_resource type="PackedScene" uid="uid://d3ffncssg3j2l" path="res://prefabs/ui/menu/settings/ui_settings_row.tscn" id="3_elqo0"]
 [ext_resource type="Script" uid="uid://bwag4h0e76hv" path="res://script/ui/menu/ui_num_input.gd" id="4_ppbbq"]
 
-[node name="UiCrosshairShapeDot" type="VBoxContainer" unique_id=1442914400]
+[node name="UiCrosshairShapeDot" type="VBoxContainer" unique_id=1442914400 node_paths=PackedStringArray("_radius")]
 offset_right = 674.0
 offset_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("1_2lqu7")
+_radius = NodePath("DotSettings/OutlineWidth/NumericInput/MasterSlider")
 
 [node name="Dot" parent="." unique_id=1338812726 instance=ExtResource("2_6oty5")]
 layout_mode = 2

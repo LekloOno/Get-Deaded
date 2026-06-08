@@ -1,14 +1,21 @@
 [gd_scene format=3 uid="uid://db5oo7mqsrrq3"]
 
+[ext_resource type="Script" uid="uid://ccio0i3l4334t" path="res://script/ui/combat/crosshair/ui/shapes/UI_CrosshairCross.cs" id="1_j10nk"]
 [ext_resource type="PackedScene" uid="uid://qqvt3ahu2l65" path="res://prefabs/ui/menu/settings/ui_settings_category_header.tscn" id="2_qb4v5"]
 [ext_resource type="PackedScene" uid="uid://d3ffncssg3j2l" path="res://prefabs/ui/menu/settings/ui_settings_row.tscn" id="3_as8ns"]
 [ext_resource type="Script" uid="uid://bwag4h0e76hv" path="res://script/ui/menu/ui_num_input.gd" id="4_1pkne"]
+[ext_resource type="Script" uid="uid://bchhqks1mogj8" path="res://script/ui/combat/crosshair/ui/shapes/cross/UI_CrosshairCrossArms.cs" id="5_pfcjs"]
 
-[node name="UiCrosshairShapeCross" type="VBoxContainer" unique_id=1919879679]
+[node name="UiCrosshairShapeCross" type="VBoxContainer" unique_id=1919879679 node_paths=PackedStringArray("_length", "_thickness", "_gap", "_arms")]
 offset_right = 674.0
 offset_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("1_j10nk")
+_length = NodePath("CrossSettings/Length/NumericInput/LengthSlider")
+_thickness = NodePath("CrossSettings/Thickness/NumericInput/ThicknessSlider")
+_gap = NodePath("CrossSettings/Gap/NumericInput/GapSlider")
+_arms = NodePath("CrossSettings/Arms")
 
 [node name="Cross" parent="." unique_id=1338812726 instance=ExtResource("2_qb4v5")]
 layout_mode = 2
@@ -31,7 +38,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 5
 
-[node name="MasterSlider" type="HSlider" parent="CrossSettings/Length/NumericInput" unique_id=307761506]
+[node name="LengthSlider" type="HSlider" parent="CrossSettings/Length/NumericInput" unique_id=307761506]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -59,7 +66,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 5
 
-[node name="MasterSlider" type="HSlider" parent="CrossSettings/Thickness/NumericInput" unique_id=803157175]
+[node name="ThicknessSlider" type="HSlider" parent="CrossSettings/Thickness/NumericInput" unique_id=803157175]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -87,7 +94,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 5
 
-[node name="MasterSlider" type="HSlider" parent="CrossSettings/Gap/NumericInput" unique_id=833193327]
+[node name="GapSlider" type="HSlider" parent="CrossSettings/Gap/NumericInput" unique_id=833193327]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -103,9 +110,14 @@ alignment = 1
 virtual_keyboard_type = 2
 script = ExtResource("4_1pkne")
 
-[node name="Arms" parent="CrossSettings" unique_id=2001218732 instance=ExtResource("3_as8ns")]
+[node name="Arms" parent="CrossSettings" unique_id=2001218732 node_paths=PackedStringArray("_top", "_bottom", "_right", "_left") instance=ExtResource("3_as8ns")]
 layout_mode = 2
 size_flags_vertical = 0
+script = ExtResource("5_pfcjs")
+_top = NodePath("Input/TOP")
+_bottom = NodePath("Input/BOTTOM")
+_right = NodePath("Input/RIGHT")
+_left = NodePath("Input/LEFT")
 
 [node name="Label" parent="CrossSettings/Arms/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(2001218732, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "CROSSHAIR_CROSS_ARMS_LABEL"

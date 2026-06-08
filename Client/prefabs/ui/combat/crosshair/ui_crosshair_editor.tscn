@@ -2,9 +2,15 @@
 
 [ext_resource type="PackedScene" uid="uid://bw66qfkpceudk" path="res://prefabs/ui/combat/ui_crosshair_renderer.tscn" id="1_llgqg"]
 [ext_resource type="Theme" uid="uid://ddkca4fk8kto5" path="res://assets/ui/menu_theme.tres" id="1_nn6dc"]
+[ext_resource type="Script" uid="uid://c4ox6ngvsjkth" path="res://script/ui/combat/crosshair/ui/UI_CrosshairEditor.cs" id="2_gc7y1"]
+[ext_resource type="Resource" uid="uid://bsn4rv6lv607o" path="res://config/user/user_crosshair.tres" id="3_l3n8h"]
 [ext_resource type="PackedScene" uid="uid://cctd2edpm42m8" path="res://prefabs/ui/combat/crosshair/shapes/ui_shape_container.tscn" id="3_nn6dc"]
+[ext_resource type="PackedScene" uid="uid://qqvt3ahu2l65" path="res://prefabs/ui/menu/settings/ui_settings_category_header.tscn" id="4_glece"]
+[ext_resource type="PackedScene" uid="uid://ca431v4hraw8w" path="res://prefabs/ui/combat/crosshair/fill/ui_crosshair_fill.tscn" id="5_glece"]
+[ext_resource type="Script" uid="uid://dm5ioj0ce04yu" path="res://script/ui/combat/crosshair/ui/UI_CrosshairLayerOptionButton.cs" id="6_01c6s"]
+[ext_resource type="PackedScene" uid="uid://brj3cyh0inqyy" path="res://prefabs/ui/combat/crosshair/fill/ui_crosshair_outline.tscn" id="6_l3n8h"]
 
-[node name="UiCrosshairEditor" type="HBoxContainer" unique_id=1661831078]
+[node name="UiCrosshairEditor" type="HBoxContainer" unique_id=1661831078 node_paths=PackedStringArray("CombineShapes", "CombineOutlines", "_fill", "_outline", "_layersContainer", "_addLayerOption")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -15,6 +21,15 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_nn6dc")
+script = ExtResource("2_gc7y1")
+_data = ExtResource("3_l3n8h")
+CombineShapes = NodePath("Edit/EditorMain/UiCrosshairFill/Header/UiCategoryHeaderToggle/CheckBox")
+CombineOutlines = NodePath("Edit/EditorMain/UiCrosshairOutline/Header/UiCategoryHeaderToggle/CheckBox")
+_fill = NodePath("Edit/EditorMain/UiCrosshairFill")
+_outline = NodePath("Edit/EditorMain/UiCrosshairOutline")
+_layersContainer = NodePath("Edit/Layers/LayersContainer")
+_addLayerOption = NodePath("Edit/PanelContainer/MarginContainer/HBoxContainer/AddLayer")
+_shapeContainer = ExtResource("3_nn6dc")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=463732239]
 custom_minimum_size = Vector2(250, 0)
@@ -34,6 +49,27 @@ size_flags_vertical = 1
 [node name="Edit" type="VBoxContainer" parent="." unique_id=1049714343]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="EditorMain" type="VBoxContainer" parent="Edit" unique_id=1434046469]
+layout_mode = 2
+
+[node name="Header" parent="Edit/EditorMain" unique_id=1338812726 instance=ExtResource("4_glece")]
+layout_mode = 2
+
+[node name="Label" parent="Edit/EditorMain/Header" index="0" unique_id=366278316]
+text = "CROSSHAIR_EDITOR_LABEL"
+
+[node name="UiCrosshairFill" parent="Edit/EditorMain" unique_id=1442914400 instance=ExtResource("5_glece")]
+layout_mode = 2
+
+[node name="Label" parent="Edit/EditorMain/UiCrosshairFill/Header/UiCategoryHeaderToggle" parent_id_path=PackedInt32Array(1442914400, 1338812726, 2053164535) index="0" unique_id=366278316]
+text = "CROSSHAIR_COMBINE_SHAPES_LABEL"
+
+[node name="UiCrosshairOutline" parent="Edit/EditorMain" unique_id=489020013 instance=ExtResource("6_l3n8h")]
+layout_mode = 2
+
+[node name="Label" parent="Edit/EditorMain/UiCrosshairOutline/Header/UiCategoryHeaderToggle" parent_id_path=PackedInt32Array(489020013, 2053164535, 2053164535) index="0" unique_id=366278316]
+text = "CROSSHAIR_COMBINE_OUTLINES_LABEL"
 
 [node name="PanelContainer" type="PanelContainer" parent="Edit" unique_id=1690635358]
 layout_mode = 2
@@ -58,19 +94,38 @@ text = "CROSSHAIR_ADD_LAYER_LABEL"
 [node name="AddLayer" type="OptionButton" parent="Edit/PanelContainer/MarginContainer/HBoxContainer" unique_id=975477122]
 layout_mode = 2
 size_flags_horizontal = 3
+script = ExtResource("6_01c6s")
 
 [node name="Layers" type="ScrollContainer" parent="Edit" unique_id=872904453]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Layers" type="VBoxContainer" parent="Edit/Layers" unique_id=1546903289]
+[node name="LayersContainer" type="VBoxContainer" parent="Edit/Layers" unique_id=1546903289]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 15
 
-[node name="UiShapeContainer" parent="Edit/Layers/Layers" unique_id=800277225 instance=ExtResource("3_nn6dc")]
+[node name="UiShapeContainer" parent="Edit/Layers/LayersContainer" unique_id=800277225 instance=ExtResource("3_nn6dc")]
 layout_mode = 2
 
-[node name="UiShapeContainer2" parent="Edit/Layers/Layers" unique_id=2097027033 instance=ExtResource("3_nn6dc")]
+[node name="UiShapeContainer2" parent="Edit/Layers/LayersContainer" unique_id=2097027033 instance=ExtResource("3_nn6dc")]
 layout_mode = 2
+
+[editable path="Edit/EditorMain/Header"]
+[editable path="Edit/EditorMain/UiCrosshairFill"]
+[editable path="Edit/EditorMain/UiCrosshairFill/Header"]
+[editable path="Edit/EditorMain/UiCrosshairFill/FillSettings"]
+[editable path="Edit/EditorMain/UiCrosshairFill/FillSettings/FillColor"]
+[editable path="Edit/EditorMain/UiCrosshairFill/FillSettings/FillColor/MarginContainer/UiSettingsLabel"]
+[editable path="Edit/EditorMain/UiCrosshairFill/FillSettings/FillAntiAlias"]
+[editable path="Edit/EditorMain/UiCrosshairFill/FillSettings/FillAntiAlias/MarginContainer/UiSettingsLabel"]
+[editable path="Edit/EditorMain/UiCrosshairOutline"]
+[editable path="Edit/EditorMain/UiCrosshairOutline/Header"]
+[editable path="Edit/EditorMain/UiCrosshairOutline/FillSettings"]
+[editable path="Edit/EditorMain/UiCrosshairOutline/FillSettings/FillColor"]
+[editable path="Edit/EditorMain/UiCrosshairOutline/FillSettings/FillColor/MarginContainer/UiSettingsLabel"]
+[editable path="Edit/EditorMain/UiCrosshairOutline/FillSettings/FillAntiAlias"]
+[editable path="Edit/EditorMain/UiCrosshairOutline/FillSettings/FillAntiAlias/MarginContainer/UiSettingsLabel"]
+[editable path="Edit/EditorMain/UiCrosshairOutline/FillSettings/OutlineWidth"]
+[editable path="Edit/EditorMain/UiCrosshairOutline/FillSettings/OutlineWidth/MarginContainer/UiSettingsLabel"]

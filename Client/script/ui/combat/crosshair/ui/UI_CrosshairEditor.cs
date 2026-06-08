@@ -27,9 +27,26 @@ public partial class UI_CrosshairEditor : Control
         _outline.SetData(_data.OutlineData);
 
         UpdateVisibility();
-        _data.PropertyChanged += UpdateVisibility;
+
+        foreach (CrosshairShapeData shape in _data.Shapes)
+            AddNewLayerUi(shape);
+
+        _data.StructureChanged  += OnStructureChanged; 
+
+        CombineShapes.Toggled   += OnCombineShapesToggled;
+        CombineOutlines.Toggled += OnCombineOutlinesToggled;
 
         _addLayerOption.NewLayerRequested += OnNewLayerRequested;
+    }
+
+    private void OnStructureChanged()
+    {
+        Clear();
+        foreach (CrosshairShapeData shape in _data.Shapes)
+            AddNewLayerUi(shape);
+
+        _fill.SetData(_data.FillData);
+        _outline.SetData(_data.OutlineData);
     }
 
     private void UpdateVisibility()
@@ -38,12 +55,22 @@ public partial class UI_CrosshairEditor : Control
         _outline.Visible = _data.CombineOutlines;
     }
 
+    private void OnCombineShapesToggled(bool toggledOn) =>
+        _data.CombineShapes = toggledOn;
+
+    private void OnCombineOutlinesToggled(bool toggledOn) =>
+        _data.CombineOutlines = toggledOn;
+
     private void OnNewLayerRequested(CrosshairShapeData shape)
     {
         _data.AddShape(shape);
+        AddNewLayerUi(shape);
+    }
+
+    private void AddNewLayerUi(CrosshairShapeData shape)
+    {
         UI_CrosshairShapeContainer shapeContainer = _shapeContainer.Instantiate<UI_CrosshairShapeContainer>();
         shapeContainer.SetData(_data, shape);
-
         _layersContainer.AddChild(shapeContainer);
     }
 

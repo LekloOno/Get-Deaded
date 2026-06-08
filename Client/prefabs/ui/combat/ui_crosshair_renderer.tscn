@@ -1,43 +1,8 @@
 [gd_scene format=3 uid="uid://bw66qfkpceudk"]
 
 [ext_resource type="Script" uid="uid://pclxvax0j3ba" path="res://script/ui/combat/crosshair/CrosshairRenderer.cs" id="1_7fjre"]
-[ext_resource type="Script" uid="uid://7p23u4uadeak" path="res://script/ui/combat/crosshair/data/OutlineData.cs" id="2_8unib"]
-[ext_resource type="Script" uid="uid://cs156ekicr4wx" path="res://script/ui/combat/crosshair/data/FillData.cs" id="2_p2ejn"]
-[ext_resource type="Script" uid="uid://b2xr5m0xlncca" path="res://script/ui/combat/crosshair/data/CrosshairShapeData.cs" id="3_p2ejn"]
-[ext_resource type="Script" uid="uid://fglyc4kbi3lx" path="res://script/ui/combat/crosshair/data/shapes/CrosshairCircleData.cs" id="4_u4f6t"]
-[ext_resource type="Script" uid="uid://bhtx8cussadvf" path="res://script/ui/combat/crosshair/data/CrosshairData.cs" id="5_4csa1"]
+[ext_resource type="Resource" uid="uid://bsn4rv6lv607o" path="res://config/user/user_crosshair.tres" id="2_hibwd"]
 [ext_resource type="Script" uid="uid://b45rnq4hbdav5" path="res://script/ui/combat/crosshair/CrosshairDataSyncer.cs" id="6_jf0pm"]
-
-[sub_resource type="Resource" id="Resource_8unib"]
-script = ExtResource("2_p2ejn")
-Color = Color(0, 0, 0, 1)
-
-[sub_resource type="Resource" id="Resource_p2ejn"]
-script = ExtResource("2_8unib")
-Width = 0.76
-Visible = false
-Color = Color(0, 0, 0, 1)
-
-[sub_resource type="Resource" id="Resource_4csa1"]
-script = ExtResource("2_p2ejn")
-
-[sub_resource type="Resource" id="Resource_jf0pm"]
-script = ExtResource("2_8unib")
-Color = Color(0, 0, 0, 1)
-
-[sub_resource type="Resource" id="Resource_112t3"]
-script = ExtResource("4_u4f6t")
-Radius = 5.0
-FillData = SubResource("Resource_4csa1")
-OutlineData = SubResource("Resource_jf0pm")
-metadata/_custom_type_script = "uid://fglyc4kbi3lx"
-
-[sub_resource type="Resource" id="Resource_u4f6t"]
-script = ExtResource("5_4csa1")
-Shapes = Array[ExtResource("3_p2ejn")]([SubResource("Resource_112t3")])
-FillData = SubResource("Resource_8unib")
-OutlineData = SubResource("Resource_p2ejn")
-metadata/_custom_type_script = "uid://bhtx8cussadvf"
 
 [node name="CrosshairRenderer" type="Control" unique_id=387137826]
 layout_mode = 3
@@ -51,7 +16,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_7fjre")
-Data = SubResource("Resource_u4f6t")
+Data = ExtResource("2_hibwd")
 metadata/_custom_type_script = "uid://pclxvax0j3ba"
 
 [node name="CrosshairDataSyncer" type="Node" parent="." unique_id=1453920898]
