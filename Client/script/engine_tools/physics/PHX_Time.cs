@@ -33,10 +33,20 @@ public partial class PHX_Time : Node
         ProcessMode = ProcessModeEnum.Pausable;
     }
 
+    private double _unaccumulatedDeltaMsec = 0;
+    private double _unaccumulatedDeltaUsec = 0;
     public override void _PhysicsProcess(double delta)
     {
         double deltaMsec = delta * 1000;
+        double deltaUsec = deltaMsec * 1000;
+
+        deltaMsec += _unaccumulatedDeltaMsec;
+        deltaUsec += _unaccumulatedDeltaUsec;
+
         _scaledTicksMsec += (ulong) deltaMsec;
-        _scaledTicksUsec += (ulong) deltaMsec * 1000;;
+        _scaledTicksUsec += (ulong) deltaUsec;
+
+        _unaccumulatedDeltaMsec = deltaMsec % 1;
+        _unaccumulatedDeltaUsec = deltaUsec % 1;
     }
 }
