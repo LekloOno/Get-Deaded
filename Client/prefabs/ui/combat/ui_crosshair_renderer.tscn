@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bw66qfkpceudk"]
 
 [ext_resource type="Script" uid="uid://pclxvax0j3ba" path="res://script/ui/combat/crosshair/CrosshairRenderer.cs" id="1_7fjre"]
-[ext_resource type="Resource" uid="uid://bsn4rv6lv607o" path="res://config/user/user_crosshair.tres" id="2_hibwd"]
+[ext_resource type="Resource" uid="uid://bsn4rv6lv607o" path="res://default_crosshair.tres" id="2_hibwd"]
 [ext_resource type="Script" uid="uid://b45rnq4hbdav5" path="res://script/ui/combat/crosshair/CrosshairDataSyncer.cs" id="6_jf0pm"]
 
 [node name="CrosshairRenderer" type="Control" unique_id=387137826]

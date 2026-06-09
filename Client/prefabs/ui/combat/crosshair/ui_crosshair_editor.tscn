@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://bw66qfkpceudk" path="res://prefabs/ui/combat/ui_crosshair_renderer.tscn" id="1_llgqg"]
 [ext_resource type="Theme" uid="uid://ddkca4fk8kto5" path="res://assets/ui/menu_theme.tres" id="1_nn6dc"]
 [ext_resource type="Script" uid="uid://c4ox6ngvsjkth" path="res://script/ui/combat/crosshair/ui/UI_CrosshairEditor.cs" id="2_gc7y1"]
-[ext_resource type="Resource" uid="uid://bsn4rv6lv607o" path="res://config/user/user_crosshair.tres" id="3_l3n8h"]
 [ext_resource type="PackedScene" uid="uid://cctd2edpm42m8" path="res://prefabs/ui/combat/crosshair/shapes/ui_shape_container.tscn" id="3_nn6dc"]
 [ext_resource type="PackedScene" uid="uid://qqvt3ahu2l65" path="res://prefabs/ui/menu/settings/ui_settings_category_header.tscn" id="4_glece"]
 [ext_resource type="PackedScene" uid="uid://ca431v4hraw8w" path="res://prefabs/ui/combat/crosshair/fill/ui_crosshair_fill.tscn" id="5_glece"]
@@ -23,7 +22,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_nn6dc")
 script = ExtResource("2_gc7y1")
-_data = ExtResource("3_l3n8h")
 CombineShapes = NodePath("Edit/EditorMain/UiCrosshairFill/Header/UiCategoryHeaderToggle/CheckBox")
 CombineOutlines = NodePath("Edit/EditorMain/UiCrosshairOutline/Header/UiCategoryHeaderToggle/CheckBox")
 _fill = NodePath("Edit/EditorMain/UiCrosshairFill")

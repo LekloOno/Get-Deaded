@@ -5,6 +5,7 @@ using Godot;
 [GlobalClass]
 public partial class CrosshairRenderer : Control
 {
+    [Export] private CrosshairData _defaultData = null!;
     private CrosshairData _data = null!;
 
     public event Action<CrosshairData, CrosshairData>? DataSwapped;
@@ -23,6 +24,18 @@ public partial class CrosshairRenderer : Control
             QueueRedraw();
         }
     }
+
+    public override void _Ready()
+    {
+        if (Engine.IsEditorHint())
+            return;
+
+        Data = CrosshairSetting.Instance.Data;
+        CrosshairSetting.Instance.DataSwapped += SetData;
+    }
+
+    private void SetData(CrosshairData prev, CrosshairData current) =>
+        Data = current;
 
     public override void _Draw()
     {

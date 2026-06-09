@@ -3,7 +3,7 @@ using Godot;
 [GlobalClass]
 public partial class UI_CrosshairEditor : Control
 {
-    [Export] private CrosshairData _data = null!;
+    private CrosshairData _data = null!;
 
     [Export] public CheckBox CombineShapes   { get; private set; } = null!;
     [Export] public CheckBox CombineOutlines { get; private set; } = null!;
@@ -16,15 +16,40 @@ public partial class UI_CrosshairEditor : Control
 
     public override void _Ready()
     {
-        OnStructureChanged();
-
-        _data.StructureChanged  += OnStructureChanged; 
+        SetData(CrosshairSetting.Instance.Data);
 
         CombineShapes.Toggled   += OnCombineShapesToggled;
         CombineOutlines.Toggled += OnCombineOutlinesToggled;
 
         _addLayerOption.NewTypeRequested += OnNewLayerRequested;
         _addLayerOption.Select(-1);
+
+        VisibilityChanged += OnVisibilityChanged;
+    }
+
+    private void SetData(CrosshairData data)
+    {
+        if (_data == data)
+            return;
+
+        if (_data != null)
+            _data.StructureChanged -= OnStructureChanged;
+
+        _data = data;
+
+        if (_data == null)
+            return;
+
+        OnStructureChanged();
+        _data.StructureChanged += OnStructureChanged;
+    }
+
+    private void OnVisibilityChanged()
+    {
+        if (IsVisibleInTree())
+            SetData(CrosshairSetting.Instance.Data);
+        else
+            CrosshairSetting.Instance.Save(_data);
     }
 
     private void OnStructureChanged()
