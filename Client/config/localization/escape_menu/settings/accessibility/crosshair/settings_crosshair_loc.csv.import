@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bano4w8t70f4h"
+
+[deps]
+
+files=["res://config/localization/escape_menu/settings/accessibility/crosshair/settings_crosshair_loc.en.translation", "res://config/localization/escape_menu/settings/accessibility/crosshair/settings_crosshair_loc.fr.translation"]
+
+source_file="res://config/localization/escape_menu/settings/accessibility/crosshair/settings_crosshair_loc.csv"
+dest_files=["res://config/localization/escape_menu/settings/accessibility/crosshair/settings_crosshair_loc.en.translation", "res://config/localization/escape_menu/settings/accessibility/crosshair/settings_crosshair_loc.fr.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

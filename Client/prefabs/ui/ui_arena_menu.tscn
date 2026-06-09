@@ -359,6 +359,7 @@ script = ExtResource("10_b5eqi")
 _logged = true
 
 [node name="Settings" type="PanelContainer" parent="." unique_id=1980157602 node_paths=PackedStringArray("confirm_dialog")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -380,10 +381,9 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
 mouse_filter = 0
-current_tab = 3
+current_tab = 0
 
 [node name="VIDEO_TAB" type="MarginContainer" parent="Settings/VBoxContainer/TabContainer" unique_id=299629799]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 30
@@ -1622,6 +1622,7 @@ action = "stats"
 action = "stats"
 
 [node name="ACCESSIBILITY_TAB" type="MarginContainer" parent="Settings/VBoxContainer/TabContainer" unique_id=176065705]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 30
@@ -1653,7 +1654,7 @@ text = "CROSSHAIR_LABEL"
 
 [node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/CrosshairSettings/CrosshairEditor" unique_id=1077189667 node_paths=PackedStringArray("menu", "editor")]
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 2
 theme_type_variation = &"InputButton"
 text = "CROSSHAIR_OPEN_EDITOR_BUTTON"
 script = ExtResource("41_fcw2i")
@@ -2050,7 +2051,6 @@ size_flags_vertical = 8
 text = "BACK_BUTTON"
 
 [node name="CrosshairEditorMenu" type="MarginContainer" parent="." unique_id=727793884]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2076,7 +2076,7 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_bottom = 10
 
 [node name="UiCrosshairEditor" parent="CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer" unique_id=1661831078 instance=ExtResource("49_fbh7i")]
-custom_minimum_size = Vector2(1015, 0)
+custom_minimum_size = Vector2(1000, 0)
 layout_mode = 2
 
 [node name="MarginContainer2" type="MarginContainer" parent="CrosshairEditorMenu/PanelContainer2/VBoxContainer" unique_id=1444862659]

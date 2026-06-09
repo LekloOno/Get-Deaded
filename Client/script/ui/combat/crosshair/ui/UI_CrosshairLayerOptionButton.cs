@@ -41,7 +41,7 @@ public partial class UI_CrosshairLayerOptionButton : OptionButton
         {
             int index = ItemCount;
 
-            AddItem($"{type.ToString().ToUpperInvariant()}");
+            AddItem($"CROSSHAIR_{type.ToString().ToUpperInvariant()}_LABEL");
             SetItemMetadata(index, (int)type);
         }
     }
