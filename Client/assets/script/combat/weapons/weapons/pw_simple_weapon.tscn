@@ -444,6 +444,7 @@ Player = NodePath("start_chamber")
 metadata/_custom_type_script = "uid://dbtsyp0hru7g"
 
 [node name="start_chamber" type="AudioStreamPlayer" parent="PA_Reload/start_chamber/start_chamber" unique_id=1717204248]
+volume_db = 5.0
 bus = &"Weapons"
 
 [node name="chamber" type="Node" parent="PA_Reload" unique_id=592347575]

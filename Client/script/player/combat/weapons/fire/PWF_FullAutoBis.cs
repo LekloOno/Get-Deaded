@@ -4,13 +4,15 @@ using Godot;
 [GlobalClass]
 public partial class PWF_FullAutoBis : PW_FireBis
 {
-    private SceneTreeTimer _timer;
-    public Action Stopped;
-    private ulong _lastExpectedTime;
+    public event Action? Stopped;
     protected override void DisableSpec() => StopShoot();
+    protected override void SpecInitialize(GE_IActiveCombatEntity owner) {}
 
-    protected override void SpecInitialize(GE_IActiveCombatEntity owner){}
-
+    public override void _Ready()
+    {
+        base._Ready();
+        SetPhysicsProcess(false);
+    }
 
     protected override bool SpecPress()
     {
@@ -19,11 +21,10 @@ public partial class PWF_FullAutoBis : PW_FireBis
         if (!CanShoot())
             return false;
         
-        _lastExpectedTime = _fireRate;
         Shoot();
 
-        _timer = GetTree().CreateTimer(_fireRate/1000f, false, true);
-        _timer.Timeout += ReShoot;
+        _autoAccumulator = 0;
+        SetPhysicsProcess(true);
         return true;
     }
     protected override bool SpecRelease()
@@ -35,34 +36,36 @@ public partial class PWF_FullAutoBis : PW_FireBis
     private bool CanReShoot() =>
         _enabled &&
         (InfiniteMagazine || _ammos.DidConsume(_ammosPerShot));
-        
 
-    private void ReShoot()
+    private double _autoAccumulator = 0;
+    public override void _PhysicsProcess(double delta)
     {
-        if (!CanReShoot())
-        {
-            StopShoot();
-            return;
-        }
+        _autoAccumulator += delta;
 
-        ulong exactElapsedTime = PHX_Time.ScaledTicksMsec - _lastShot;
-
-        Shoot();
-
-        long timeUnaccuracy = (long) (exactElapsedTime - _lastExpectedTime);
-        _lastExpectedTime = _fireRate - (ulong) timeUnaccuracy;
+        double fireRateSec = _fireRate / 1000.0;
         
-        _timer = GetTree().CreateTimer(_lastExpectedTime/1000f, false, true);
-        _timer.Timeout += ReShoot;
+        while (_autoAccumulator >= fireRateSec)
+        {
+            _autoAccumulator -= fireRateSec;
+
+            if (!CanReShoot())
+            {
+                StopShoot();
+                return;
+            }
+
+            Shoot();
+        }
     }
 
     private void StopShoot()
     {
-        if (_timer != null)
-        {
-            _timer.Timeout -= ReShoot;
-            _timer = null;
-            Stopped?.Invoke();
-        }
+        if (!IsPhysicsProcessing())
+            return;
+
+        SetPhysicsProcess(false);
+
+        _autoAccumulator = 0;
+        Stopped?.Invoke();
     }
 }
