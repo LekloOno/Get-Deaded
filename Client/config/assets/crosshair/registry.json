@@ -1,0 +1,6 @@
+{
+  "crosshairs": [
+    "res://assets/game/crosshair/hollow_white_cross.tres",
+    "res://assets/game/crosshair/simple_sharp_white_cross.tres"
+  ]
+}
