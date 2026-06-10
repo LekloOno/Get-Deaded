@@ -2052,14 +2052,10 @@ size_flags_horizontal = 0
 size_flags_vertical = 8
 text = "BACK_BUTTON"
 
-[node name="UiCrosshairGalery" parent="." unique_id=1212751295 instance=ExtResource("49_r1886")]
+[node name="UiCrosshairGalery" parent="." unique_id=1212751295 node_paths=PackedStringArray("_menu") instance=ExtResource("49_r1886")]
 visible = false
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
+layout_mode = 1
+_menu = NodePath("..")
 
 [node name="CrosshairEditorMenu" type="MarginContainer" parent="." unique_id=727793884]
 layout_mode = 1

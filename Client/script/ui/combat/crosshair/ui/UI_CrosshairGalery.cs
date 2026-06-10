@@ -4,7 +4,8 @@ using Godot;
 [GlobalClass]
 public partial class UI_CrosshairGalery : Container
 {
-    [Export] private PackedScene _crosshairStaticPreview = null!;
+    [Export] private UI_EscapeMenu _menu = null!;
+    [Export] private PackedScene   _crosshairStaticPreview = null!;
 
     public void Init(List<CrosshairData> crosshairs)
     {
@@ -15,6 +16,7 @@ public partial class UI_CrosshairGalery : Container
         {
             CrosshairPreview preview = _crosshairStaticPreview.Instantiate<CrosshairPreview>();
             preview.Data = crosshair;
+            preview.Selected += (_) => _menu.ExitCurrent();
             AddChild(preview);  
         }
     }
