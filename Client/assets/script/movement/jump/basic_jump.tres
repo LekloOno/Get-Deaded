@@ -4,10 +4,7 @@
 
 [resource]
 script = ExtResource("1_knt1g")
-Force = 4.0
-FatigueForce = 2.0
-FatigueMsec = 1200
-FatigueFloorMsec = 950
+CoyoteTime = 150
 JumpHeight = 1.2
 JumpPeakTime = 0.38
 FatigueJumpHeight = 0.35
