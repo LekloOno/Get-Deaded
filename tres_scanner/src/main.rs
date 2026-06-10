@@ -4,8 +4,6 @@ use clap::Parser;
 
 use walkdir::WalkDir;
 
-const OUTPUT_FILE: &str = "../Client/config/assets/registry.json";
-
 #[derive(Parser, Debug)]
 struct Args {
     /// Root used to generate res:// paths
@@ -19,6 +17,10 @@ struct Args {
     /// JSON key to write/update
     #[arg(short, long, default_value="weapons")]
     key: String,
+
+    /// JSON path of the registry to save in
+    #[arg(short, long, default_value="../Client/config/assets/registry.json")]
+    output: String,
 }
 
 fn to_res_path(path: &str, root: &str) -> Option<String> {
@@ -67,7 +69,7 @@ fn main() {
 
     let files = scan_tres(&args.scan, &args.root);
 
-    let mut json = load_json(OUTPUT_FILE);
+    let mut json = load_json(&args.output);
 
     let obj = json.as_object_mut().expect("JSON root must be object");
 
@@ -77,10 +79,10 @@ fn main() {
     );
 
     fs::write(
-        OUTPUT_FILE,
+        &args.output,
         serde_json::to_string_pretty(&json).unwrap(),
     )
     .expect("Failed to write JSON");
 
-    println!("Updated {}", OUTPUT_FILE);
+    println!("Updated {}", &args.output);
 }

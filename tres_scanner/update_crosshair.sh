@@ -1,0 +1,1 @@
+cargo run --release -- -r "../Client" -s "../Client/assets/game/crosshair" -k "crosshairs" -o "../Client/config/assets/crosshair/registry.json"

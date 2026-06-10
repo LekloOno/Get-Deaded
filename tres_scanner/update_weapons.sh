@@ -1,0 +1,1 @@
+cargo run --release -- -r "../Client" -s "../Client/assets/game/weapon" -k "weapons" -o "../Client/config/assets/registry.json"
