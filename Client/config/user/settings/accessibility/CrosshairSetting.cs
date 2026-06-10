@@ -28,12 +28,12 @@ public partial class CrosshairSetting : Node
     public void Save(CrosshairData data)
     {
         CrosshairData prev = Data;
-        Data = data;
+        Data = (CrosshairData) data.Duplicate();
 
         EnsureSavedDirectoryExists();
 
         ResourceSaver.Save(Data, UserCrosshairPath);
-        GD.Print("saved!");
+
         DataSwapped?.Invoke(prev, Data);
     }
 

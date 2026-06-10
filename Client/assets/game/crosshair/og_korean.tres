@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="CrosshairData" format=3]
+
+[ext_resource type="Script" path="res://script/ui/combat/crosshair/data/FillData.cs" id="1_68g5g"]
+[ext_resource type="Script" path="res://script/ui/combat/crosshair/data/OutlineData.cs" id="2_2xsek"]
+[ext_resource type="Script" path="res://script/ui/combat/crosshair/data/CrosshairShapeData.cs" id="3_4qmxm"]
+[ext_resource type="Script" path="res://script/ui/combat/crosshair/data/shapes/CrosshairCircleData.cs" id="4_68g5g"]
+[ext_resource type="Script" path="res://script/ui/combat/crosshair/data/CrosshairData.cs" id="5_gsf2r"]
+
+[sub_resource type="Resource" id="Resource_8unib"]
+script = ExtResource("1_68g5g")
+Color = Color(0, 0, 0, 1)
+
+[sub_resource type="Resource" id="Resource_p2ejn"]
+script = ExtResource("2_2xsek")
+Color = Color(0, 0, 0, 0)
+
+[sub_resource type="Resource" id="Resource_2xsek"]
+script = ExtResource("1_68g5g")
+
+[sub_resource type="Resource" id="Resource_4qmxm"]
+script = ExtResource("2_2xsek")
+Color = Color(0, 0, 0, 1)
+
+[sub_resource type="Resource" id="Resource_7x352"]
+script = ExtResource("4_68g5g")
+Radius = 5.0
+FillData = SubResource("Resource_2xsek")
+OutlineData = SubResource("Resource_4qmxm")
+
+[resource]
+script = ExtResource("5_gsf2r")
+Shapes = Array[ExtResource("3_4qmxm")]([SubResource("Resource_7x352")])
+FillData = SubResource("Resource_8unib")
+OutlineData = SubResource("Resource_p2ejn")
+metadata/_custom_type_script = "uid://bhtx8cussadvf"

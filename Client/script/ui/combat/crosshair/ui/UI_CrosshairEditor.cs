@@ -67,8 +67,8 @@ public partial class UI_CrosshairEditor : Control
         foreach (CrosshairShapeData shape in _data.Shapes)
             AddNewLayerUi(shape);
 
-        CombineShapes.ButtonPressed    = _data.CombineShapes;
-        CombineOutlines.ButtonPressed  = _data.CombineOutlines;
+        CombineShapes.SetPressedNoSignal(_data.CombineShapes);
+        CombineOutlines.SetPressedNoSignal(_data.CombineOutlines);
 
         _data.OutlineData.Visible = _data.CombineOutlines;
         _data.FillData.Visible = _data.CombineShapes;

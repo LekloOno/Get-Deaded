@@ -70,7 +70,7 @@ public partial class UI_CrosshairPresets : Node
             if (string.IsNullOrEmpty(path))
                 continue;
 
-            var crosshair = GD.Load<CrosshairData>(path);
+            var crosshair = ResourceLoader.Load<CrosshairData>(path);
 
             if (crosshair == null)
             {

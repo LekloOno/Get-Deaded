@@ -33,6 +33,12 @@ public partial class UI_CrosshairShapeContainer : Control
         _typeOption.NewTypeRequested += OnNewTypeRequested;
     }
 
+    public override void _ExitTree()
+    {
+        if (_crosshair != null)
+            _crosshair.PropertyChanged -= UpdateVisibility;
+    }
+
     private void OnNewTypeRequested(CrosshairShapeData shape)
     {
         if (_shape == shape)
@@ -137,7 +143,6 @@ public partial class UI_CrosshairShapeContainer : Control
 
     private void OnDeletePressed()
     {
-        _crosshair.PropertyChanged -= UpdateVisibility;
         _crosshair.RemoveShape(_shape);
         QueueFree();
     }
