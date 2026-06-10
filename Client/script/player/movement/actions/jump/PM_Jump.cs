@@ -31,11 +31,14 @@ public partial class PM_Jump : PM_Action
 
     public Vector3 Jump(Vector3 velocity)
     {
-        if (_groundState.IsGrounded() && _jumpInput.UseBuffer())
+        if (IsCoyoteGrounded() && _jumpInput.UseBuffer())
             return DoJump(velocity);
 
         return velocity;
     }
+
+    private bool IsCoyoteGrounded()
+        => _groundState.MsecSinceLastGrounded() <= _data.CoyoteTime;
 
     private Vector3 DoJump(Vector3 velocity)
     {

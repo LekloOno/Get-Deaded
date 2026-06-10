@@ -70,7 +70,7 @@ public partial class PS_Grounded : Node
     }
 
     public float MsecSinceLastGrounded() {
-        return PHX_Time.ScaledTicksMsec - _lastGrounded;
+        return IsGrounded() ? 0 : PHX_Time.ScaledTicksMsec - _lastGrounded;
     }
 
     public bool IsGrounded() {
