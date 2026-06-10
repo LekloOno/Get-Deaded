@@ -14,6 +14,7 @@ public partial class PI_Jump : PI_BufferedHandler<float>
     public override void _UnhandledInput(InputEvent @event) => HandleInput(@event);
     protected override float GetInputValue(InputEvent @event) => 1f;
     public void SetLastJumped() => LastJumped = PHX_Time.ScaledTicksMsec;
+    public void ResetLastJumped() => LastJumped = 0;
 
     public override void EnableAction() => SetProcessUnhandledInput(true);
     protected override void DisableBufferAction() => SetProcessUnhandledInput(false);

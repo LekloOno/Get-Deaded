@@ -131,6 +131,7 @@ public partial class PM_LedgeClimb : PM_Action
 
         _controller.Velocity = outVelocity;
         _controller.RealVelocity = outVelocity;
+        _jumpInput.ResetLastJumped();
         SetPhysicsProcess(false);
         _isClimbing = false;
     }
