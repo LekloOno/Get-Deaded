@@ -9,6 +9,9 @@ public partial class CrosshairData : Resource
     [Signal] public delegate void StructureChangedEventHandler();
     [Signal] public delegate void ShapeAddedEventHandler(CrosshairShapeData shape);
     [Signal] public delegate void ShapeRemovedEventHandler(CrosshairShapeData shape);
+    [Signal] public delegate void LayerMovedUpEventHandler(CrosshairShapeData shape, int from, int to);
+    [Signal] public delegate void LayerMovedDownEventHandler(CrosshairShapeData shape, int from, int to);
+    [Signal] public delegate void LayerMovedToEventHandler(CrosshairShapeData shape, int from, int to);
 
     private bool        _combineShapes   = true;
     private FillData    _fillData        = new();
@@ -61,5 +64,41 @@ public partial class CrosshairData : Resource
     {
         _shapes.Add(shape);
         EmitSignal(SignalName.ShapeAdded, shape);
+    }
+
+    public void MoveLayerUp(int from)
+    {
+        int to = from - 1;
+        if (to < 0 || from >= _shapes.Count)
+            return;
+
+        (_shapes[to], _shapes[from]) =
+            (_shapes[from], _shapes[to]);
+
+        EmitSignal(SignalName.LayerMovedUp, _shapes[to], from, to);
+    }
+
+    public void MoveLayerDown(int from)
+    {
+        int to = from + 1;
+        if (from < 0 || to >= _shapes.Count)
+            return;
+
+        (_shapes[from], _shapes[to]) =
+            (_shapes[to], _shapes[from]);
+
+        EmitSignal(SignalName.LayerMovedDown, _shapes[to], from, to);
+    }
+
+    public void MoveLayerTo(int from, int to)
+    {
+        if (from == to)
+            return;
+
+        CrosshairShapeData layer = _shapes[from];
+        _shapes.RemoveAt(from);
+        _shapes.Insert(to, layer);
+
+        EmitSignal(SignalName.LayerMovedTo, layer, from, to);
     }
 }
