@@ -3,7 +3,7 @@ using Godot;
 
 public partial class CrosshairSetting : Node
 {
-    public const string UserCrosshairPath = "user://crosshair.tres";
+    public const string UserCrosshairPath = "user://crosshair/crosshair.tres";
     public const string DefaultCrosshairPath = "res://default_crosshair.tres";
     public static CrosshairSetting Instance = null!;
     public CrosshairData Data {get; private set;} = null!;

@@ -65,7 +65,7 @@ public partial class CrosshairRenderer : Control
     {
         // We could early skip outline draw if combined + not visible, but it's a riddiculous gain
         // Might as well just keep the code super easy to read
-        
+
         // Iterate from end so the first layer in the resource inspector is rendered on top.
         for (int i = _data.Shapes.Count - 1; i >= 0; i--)
             DrawOutline(_data.Shapes[i], this, center);
