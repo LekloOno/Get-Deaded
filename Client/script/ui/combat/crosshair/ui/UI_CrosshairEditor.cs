@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 [GlobalClass]
@@ -33,7 +34,12 @@ public partial class UI_CrosshairEditor : Control
             return;
 
         if (_data != null)
+        {
             _data.StructureChanged -= OnStructureChanged;
+            _data.LayerMovedUp     -= OnLayerMoved;
+            _data.LayerMovedDown   -= OnLayerMoved;
+            _data.LayerMovedTo     -= OnLayerMoved;
+        }
 
         _data = data;
 
@@ -42,6 +48,9 @@ public partial class UI_CrosshairEditor : Control
 
         OnStructureChanged();
         _data.StructureChanged += OnStructureChanged;
+        _data.LayerMovedUp     += OnLayerMoved;
+        _data.LayerMovedDown   += OnLayerMoved;
+        _data.LayerMovedTo     += OnLayerMoved;
     }
 
     private void OnVisibilityChanged()
@@ -87,6 +96,12 @@ public partial class UI_CrosshairEditor : Control
         UI_CrosshairShapeContainer shapeContainer = _shapeContainer.Instantiate<UI_CrosshairShapeContainer>();
         shapeContainer.SetData(_data, shape);
         _layersContainer.AddChild(shapeContainer);
+    }
+
+    private void OnLayerMoved(CrosshairShapeData shape, int from, int to)
+    {
+        Node shapeContainer = _layersContainer.GetChild(from);
+        _layersContainer.MoveChild(shapeContainer, to);
     }
 
     private void Clear()

@@ -1,3 +1,4 @@
+using System.Linq;
 using Godot;
 using Godot.Collections;
 
@@ -65,6 +66,13 @@ public partial class CrosshairData : Resource
         _shapes.Add(shape);
         EmitSignal(SignalName.ShapeAdded, shape);
     }
+
+    public void MoveLayerUp(CrosshairShapeData shape) =>
+        MoveLayerUp(_shapes.IndexOf(shape));
+    public void MoveLayerDown(CrosshairShapeData shape) =>
+        MoveLayerDown(_shapes.IndexOf(shape));
+    public void MoveLayerTo(CrosshairShapeData shape, int to) =>
+        MoveLayerTo(_shapes.IndexOf(shape), to);
 
     public void MoveLayerUp(int from)
     {

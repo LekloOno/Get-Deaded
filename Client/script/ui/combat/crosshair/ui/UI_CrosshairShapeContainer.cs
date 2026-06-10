@@ -7,6 +7,8 @@ public partial class UI_CrosshairShapeContainer : Control
     private CrosshairShapeData _shape = null!;
 
     [Export] private Button     _deleteButton = null!;
+    [Export] private Button     _moveUpButton = null!;
+    [Export] private Button     _moveDownButton = null!;
     [Export] private Container  _shapeSettingsContainer = null!;
     [Export] private Range      _rotation = null!;
     [Export] private UI_CrosshairFillData          _fill = null!;
@@ -23,8 +25,10 @@ public partial class UI_CrosshairShapeContainer : Control
         _rotation.MaxValue = 360f;
         _rotation.MinValue = 0f;
 
-        _rotation.ValueChanged += OnRotationChanged;
-        _deleteButton.Pressed  += OnDeletePressed;
+        _rotation.ValueChanged  += OnRotationChanged;
+        _deleteButton.Pressed   += OnDeletePressed;
+        _moveUpButton.Pressed   += OnMoveUpPressed;
+        _moveDownButton.Pressed += OnMoveDownPressed;
 
         _typeOption.NewTypeRequested += OnNewTypeRequested;
     }
@@ -137,6 +141,12 @@ public partial class UI_CrosshairShapeContainer : Control
         _crosshair.RemoveShape(_shape);
         QueueFree();
     }
+
+    private void OnMoveDownPressed() =>
+        _crosshair.MoveLayerDown(_shape);
+
+    private void OnMoveUpPressed() =>
+        _crosshair.MoveLayerUp(_shape);
 
     private void Clear()
     {
