@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://4ny2ij141sta"]
+
+[ext_resource type="Script" uid="uid://cobrnlkwpnu1g" path="res://script/ui/combat/crosshair/ui/UI_CrosshairGalery.cs" id="1_2he5i"]
+[ext_resource type="PackedScene" uid="uid://dlmkrbfhtlqi2" path="res://prefabs/ui/combat/crosshair/ui_crosshair_preview.tscn" id="2_1lcp4"]
+
+[node name="UiCrosshairGalery" type="HFlowContainer" unique_id=1212751295]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2he5i")
+_crosshairStaticPreview = ExtResource("2_1lcp4")
+
+[node name="Button" parent="." unique_id=1509024584 instance=ExtResource("2_1lcp4")]
+layout_mode = 2
+
+[node name="Button2" parent="." unique_id=1471458156 instance=ExtResource("2_1lcp4")]
+layout_mode = 2
+
+[node name="Button3" parent="." unique_id=1163148157 instance=ExtResource("2_1lcp4")]
+layout_mode = 2
+
+[node name="Button4" parent="." unique_id=2120856970 instance=ExtResource("2_1lcp4")]
+layout_mode = 2
+
+[node name="Button5" parent="." unique_id=770027048 instance=ExtResource("2_1lcp4")]
+layout_mode = 2

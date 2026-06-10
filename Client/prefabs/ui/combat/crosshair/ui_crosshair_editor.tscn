@@ -73,6 +73,30 @@ layout_mode = 2
 script = ExtResource("6_4w3m4")
 crosshair_background = NodePath("../../../../..")
 
+[node name="Browse" type="MarginContainer" parent="CrosshairBackground/VBoxContainer" unique_id=1476823239]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CrosshairBackground/VBoxContainer/Browse" unique_id=505775248]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "CROSSHAIR_BROWSE_LABEL"
+clip_text = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CrosshairBackground/VBoxContainer" unique_id=331459499]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Presets" type="Button" parent="CrosshairBackground/VBoxContainer/HBoxContainer" unique_id=895315862]
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "PRESETS_BUTTON"
+
+[node name="Saved" type="Button" parent="CrosshairBackground/VBoxContainer/HBoxContainer" unique_id=155371670]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_font_sizes/font_size = 9
+text = "SAVED_BUTTON"
+
 [node name="Edit" type="VBoxContainer" parent="." unique_id=1049714343]
 layout_mode = 2
 size_flags_horizontal = 3

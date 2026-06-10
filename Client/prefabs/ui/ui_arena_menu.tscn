@@ -50,6 +50,8 @@
 [ext_resource type="PackedScene" uid="uid://xo68a11s7vj0" path="res://prefabs/ui/scoreboard/ui_scoreboard_manager.tscn" id="39_o1fwb"]
 [ext_resource type="Script" uid="uid://cie6ww774f8b" path="res://script/ui/menu/contexts/accessibility/ui_open_crosshair_editor.gd" id="41_fcw2i"]
 [ext_resource type="PackedScene" uid="uid://cdpwp7sk0b76d" path="res://prefabs/ui/combat/crosshair/ui_crosshair_editor.tscn" id="49_fbh7i"]
+[ext_resource type="PackedScene" uid="uid://4ny2ij141sta" path="res://prefabs/ui/combat/crosshair/ui_crosshair_galery.tscn" id="49_r1886"]
+[ext_resource type="Script" uid="uid://coaccjbrhle5v" path="res://script/ui/combat/crosshair/ui/UI_CrosshairPresets.cs" id="50_yj8ne"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kqyci"]
 content_margin_left = 8.0
@@ -2050,6 +2052,15 @@ size_flags_horizontal = 0
 size_flags_vertical = 8
 text = "BACK_BUTTON"
 
+[node name="UiCrosshairGalery" parent="." unique_id=1212751295 instance=ExtResource("49_r1886")]
+visible = false
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
 [node name="CrosshairEditorMenu" type="MarginContainer" parent="." unique_id=727793884]
 layout_mode = 1
 anchors_preset = 15
@@ -2074,6 +2085,13 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_bottom = 10
+
+[node name="Node" type="Node" parent="CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer" unique_id=1238707711 node_paths=PackedStringArray("_menu", "_galery", "_presetsButton", "_savedButton")]
+script = ExtResource("50_yj8ne")
+_menu = NodePath("../../../../..")
+_galery = NodePath("../../../../../UiCrosshairGalery")
+_presetsButton = NodePath("../UiCrosshairEditor/CrosshairBackground/VBoxContainer/HBoxContainer/Presets")
+_savedButton = NodePath("../UiCrosshairEditor/CrosshairBackground/VBoxContainer/HBoxContainer/Saved")
 
 [node name="UiCrosshairEditor" parent="CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer" unique_id=1661831078 instance=ExtResource("49_fbh7i")]
 custom_minimum_size = Vector2(1000, 0)
@@ -2382,3 +2400,21 @@ clip_text = true
 [editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity/MarginContainer/UiSettingsLabel"]
 [editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity/NumericInput"]
 [editable path="Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity/Reset"]
+[editable path="CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor"]
+[editable path="CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/Header"]
+[editable path="CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/UiCrosshairFill"]
+[editable path="CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/UiCrosshairFill/Header"]
+[editable path="CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/UiCrosshairFill/FillSettings"]
+[editable path="CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/UiCrosshairFill/FillSettings/FillColor"]
+[editable path="CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/UiCrosshairFill/FillSettings/FillColor/MarginContainer/UiSettingsLabel"]
+[editable path="CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/UiCrosshairFill/FillSettings/FillAntiAlias"]
+[editable path="CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/UiCrosshairFill/FillSettings/FillAntiAlias/MarginContainer/UiSettingsLabel"]
+[editable path="CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/UiCrosshairOutline"]
+[editable path="CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/UiCrosshairOutline/Header"]
+[editable path="CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/UiCrosshairOutline/FillSettings"]
+[editable path="CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/UiCrosshairOutline/FillSettings/FillColor"]
+[editable path="CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/UiCrosshairOutline/FillSettings/FillColor/MarginContainer/UiSettingsLabel"]
+[editable path="CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/UiCrosshairOutline/FillSettings/FillAntiAlias"]
+[editable path="CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/UiCrosshairOutline/FillSettings/FillAntiAlias/MarginContainer/UiSettingsLabel"]
+[editable path="CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/UiCrosshairOutline/FillSettings/OutlineWidth"]
+[editable path="CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/UiCrosshairOutline/FillSettings/OutlineWidth/MarginContainer/UiSettingsLabel"]

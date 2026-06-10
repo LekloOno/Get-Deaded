@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Godot;
 
-public partial class UI_CrosshairPresets : Control
+public partial class UI_CrosshairPresets : Node
 {
     [Export] private UI_EscapeMenu      _menu   = null!;
     [Export] private UI_CrosshairGalery _galery = null!;

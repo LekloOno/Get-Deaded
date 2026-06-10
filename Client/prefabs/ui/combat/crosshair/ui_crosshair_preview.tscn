@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dlmkrbfhtlqi2"]
+
+[ext_resource type="Theme" uid="uid://ddkca4fk8kto5" path="res://assets/ui/menu_theme.tres" id="1_dbnx4"]
+[ext_resource type="Script" uid="uid://bsbiwlvr5cwme" path="res://script/ui/combat/crosshair/CrosshairPreview.cs" id="2_rj87x"]
+[ext_resource type="Resource" uid="uid://bjcqei1u0hnt6" path="res://default_crosshair.tres" id="3_5bt3f"]
+
+[node name="Button" type="Button" unique_id=1509024584]
+custom_minimum_size = Vector2(40, 40)
+offset_right = 40.0
+offset_bottom = 30.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("1_dbnx4")
+script = ExtResource("2_rj87x")
+Data = ExtResource("3_5bt3f")
