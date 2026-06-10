@@ -3,7 +3,9 @@ using Godot;
 
 public partial class CrosshairSetting : Node
 {
-    public const string UserCrosshairPath = "user://crosshair/crosshair.tres";
+    public const string UserCrosshairDir = "user://crosshair";
+    public const string UserCrosshair = "crosshair.tres";
+    public const string UserCrosshairPath = UserCrosshairDir + "/" + UserCrosshair;
     public const string DefaultCrosshairPath = "res://default_crosshair.tres";
     public static CrosshairSetting Instance = null!;
     public CrosshairData Data {get; private set;} = null!;
@@ -28,8 +30,21 @@ public partial class CrosshairSetting : Node
         CrosshairData prev = Data;
         Data = data;
 
+        EnsureSavedDirectoryExists();
+
         ResourceSaver.Save(Data, UserCrosshairPath);
         GD.Print("saved!");
         DataSwapped?.Invoke(prev, Data);
+    }
+
+    private static void EnsureSavedDirectoryExists()
+    {
+        if (DirAccess.DirExistsAbsolute(UserCrosshairDir))
+            return;
+
+        var error = DirAccess.MakeDirRecursiveAbsolute(UserCrosshairDir);
+
+        if (error != Error.Ok)
+            GD.PushError($"Failed to create directory '{UserCrosshairDir}': {error}");
     }
 }
