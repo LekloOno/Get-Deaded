@@ -28,7 +28,7 @@ public partial class CrosshairSetting : Node
     public void Save(CrosshairData data)
     {
         CrosshairData prev = Data;
-        Data = (CrosshairData) data.Duplicate();
+        Data = (CrosshairData) data.Duplicate(true);
 
         EnsureSavedDirectoryExists();
 
