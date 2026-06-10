@@ -41,6 +41,9 @@ public partial class CrosshairDataSyncer : Node
         data.StructureChanged += OnStructureChanged;
         data.ShapeAdded       += OnShapeAdded;
         data.ShapeRemoved     += OnShapeRemoved;
+        data.LayerMovedUp     += OnLayerMoved;
+        data.LayerMovedDown   += OnLayerMoved;
+        data.LayerMovedTo     += OnLayerMoved;
 
         SubscribeOutline(data.OutlineData);
         SubscribeFill(data.FillData);
@@ -59,6 +62,9 @@ public partial class CrosshairDataSyncer : Node
         data.StructureChanged -= OnStructureChanged;
         data.ShapeAdded       -= OnShapeAdded;
         data.ShapeRemoved     -= OnShapeRemoved;
+        data.LayerMovedUp     -= OnLayerMoved;
+        data.LayerMovedDown   -= OnLayerMoved;
+        data.LayerMovedTo     -= OnLayerMoved;
         
         UnsubscribeOutline(data.OutlineData);
         UnsubscribeFill(data.FillData);
@@ -120,6 +126,9 @@ public partial class CrosshairDataSyncer : Node
         UnsubscribeShape(shape);
         _renderer?.QueueRedraw();
     }
+    
+    private void OnLayerMoved(CrosshairShapeData shape, int from, int to) =>
+        _renderer?.QueueRedraw();
 
     private void OnPropertyChanged() => _renderer?.QueueRedraw();
 
