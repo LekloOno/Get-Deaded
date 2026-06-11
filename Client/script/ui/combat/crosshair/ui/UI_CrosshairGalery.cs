@@ -35,6 +35,7 @@ public partial class UI_CrosshairGalery : Control
     {
         _closeButton.Pressed    += _menu.ExitCurrent;
         _fileEdit.TextChanged   += OnFileEditTextChanged;
+        _fileEdit.TextSubmitted += OnFileEditTextSubmitted;
         _confirmButton.Pressed  += OnConfirmButtonPressed;
         _exportButton.Pressed   += OnExportButtonPressed;
         _importButton.Pressed   += OnImportButtonPressed;
@@ -176,6 +177,9 @@ public partial class UI_CrosshairGalery : Control
     {
         CrosshairSetting.SaveAs(CrosshairSetting.Instance.Data, _fileEdit.Text);
     }
+
+    private void OnFileEditTextSubmitted(string newText) =>
+        OnConfirmButtonPressed();
 
     private void OnFileEditTextChanged(string search)
     {
