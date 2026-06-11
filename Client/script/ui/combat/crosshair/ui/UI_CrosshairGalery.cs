@@ -41,7 +41,8 @@ public partial class UI_CrosshairGalery : Control
         _exportDialog.FileSelected  += OnExportFileSelected;
         _importDialog.FilesSelected += OnImportFilesSelected;
 
-        _exportDialog.Theme = _importDialog.Theme = ThemeDB.GetDefaultTheme();
+        _exportDialog.MinSize = _importDialog.MinSize = new Vector2I(780, 580);
+        _exportDialog.Theme   = _importDialog.Theme   = ThemeDB.GetDefaultTheme();
     }
 
     public void Init(List<CrosshairData> crosshairs, Mode mode)
