@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://coaccjbrhle5v" path="res://script/ui/combat/crosshair/ui/UI_CrosshairPresets.cs" id="4_4w3m4"]
 [ext_resource type="PackedScene" uid="uid://qqvt3ahu2l65" path="res://prefabs/ui/menu/settings/ui_settings_category_header.tscn" id="4_glece"]
 [ext_resource type="PackedScene" uid="uid://ca431v4hraw8w" path="res://prefabs/ui/combat/crosshair/fill/ui_crosshair_fill.tscn" id="5_glece"]
+[ext_resource type="StyleBox" uid="uid://brbwsymgu7vwi" path="res://prefabs/ui/combat/crosshair/ui_crosshair_background_style.tres" id="5_w2oog"]
 [ext_resource type="Script" uid="uid://dm5ioj0ce04yu" path="res://script/ui/combat/crosshair/ui/UI_CrosshairLayerOptionButton.cs" id="6_01c6s"]
 [ext_resource type="Script" uid="uid://bt8dp3nqvckqm" path="res://script/ui/menu/contexts/accessibility/ui_crosshair_background_color.gd" id="6_4w3m4"]
 [ext_resource type="PackedScene" uid="uid://brj3cyh0inqyy" path="res://prefabs/ui/combat/crosshair/fill/ui_crosshair_outline.tscn" id="6_l3n8h"]
@@ -41,6 +42,7 @@ _saveButton = NodePath("../CrosshairBackground/VBoxContainer/BrowseButtons/HBoxC
 [node name="CrosshairBackground" type="PanelContainer" parent="." unique_id=463732239]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
+theme_override_styles/panel = ExtResource("5_w2oog")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CrosshairBackground" unique_id=379621684]
 layout_mode = 2
@@ -75,11 +77,11 @@ size_flags_horizontal = 3
 text = "CROSSHAIR_BACKGROUND_LABEL"
 clip_text = true
 
-[node name="CrosshairBackgroundColor" type="ColorPickerButton" parent="CrosshairBackground/VBoxContainer/PanelContainer/MarginContainer/UiSettingsRow" unique_id=477079991 node_paths=PackedStringArray("crosshair_background")]
+[node name="CrosshairBackgroundColor" type="ColorPickerButton" parent="CrosshairBackground/VBoxContainer/PanelContainer/MarginContainer/UiSettingsRow" unique_id=477079991]
 custom_minimum_size = Vector2(58, 0)
 layout_mode = 2
 script = ExtResource("6_4w3m4")
-crosshair_background = NodePath("../../../../..")
+crosshair_background = ExtResource("5_w2oog")
 
 [node name="Browse" type="MarginContainer" parent="CrosshairBackground/VBoxContainer" unique_id=1476823239]
 layout_mode = 2
