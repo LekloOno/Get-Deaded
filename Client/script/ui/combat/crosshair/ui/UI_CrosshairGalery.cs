@@ -15,8 +15,8 @@ public partial class UI_CrosshairGalery : Control
 
         foreach (CrosshairData crosshair in crosshairs)
         {
-            CrosshairPreview preview = _crosshairStaticPreview.Instantiate<CrosshairPreview>();
-            preview.Data = crosshair;
+            UI_CrosshairPreviewContainer preview = _crosshairStaticPreview.Instantiate<UI_CrosshairPreviewContainer>();
+            preview.Init(crosshair);
             preview.Selected += (_) => _menu.ExitCurrent();
             _container.AddChild(preview);  
         }

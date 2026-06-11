@@ -1,15 +1,48 @@
 [gd_scene format=3 uid="uid://dlmkrbfhtlqi2"]
 
+[ext_resource type="Script" uid="uid://daq6ddn6j40yw" path="res://script/ui/combat/crosshair/ui/UI_CrosshairPreviewContainer.cs" id="1_5bt3f"]
 [ext_resource type="Theme" uid="uid://ddkca4fk8kto5" path="res://assets/ui/menu_theme.tres" id="1_dbnx4"]
 [ext_resource type="Script" uid="uid://bsbiwlvr5cwme" path="res://script/ui/combat/crosshair/CrosshairPreview.cs" id="2_rj87x"]
 [ext_resource type="Resource" uid="uid://bjcqei1u0hnt6" path="res://default_crosshair.tres" id="3_5bt3f"]
+[ext_resource type="FontFile" uid="uid://7kpvxbogh0tx" path="res://assets/fonts/Poppins/Poppins-Light.ttf" id="5_5w8mo"]
 
-[node name="Button" type="Button" unique_id=1509024584]
-custom_minimum_size = Vector2(80, 80)
+[sub_resource type="LabelSettings" id="LabelSettings_tg3pb"]
+font = ExtResource("5_5w8mo")
+font_size = 8
+
+[node name="UiCrosshairPreset" type="VBoxContainer" unique_id=887801053 node_paths=PackedStringArray("_preview", "_selectButton", "_title")]
 offset_right = 40.0
-offset_bottom = 30.0
+offset_bottom = 40.0
+script = ExtResource("1_5bt3f")
+_preview = NodePath("Control")
+_selectButton = NodePath("Control/Button")
+_title = NodePath("Label")
+
+[node name="Control" type="Control" parent="." unique_id=2047887807]
+z_index = 1
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+script = ExtResource("2_rj87x")
+_defaultData = ExtResource("3_5bt3f")
+
+[node name="Button" type="Button" parent="Control" unique_id=1509024584]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource("1_dbnx4")
-script = ExtResource("2_rj87x")
-Data = ExtResource("3_5bt3f")
+
+[node name="Label" type="Label" parent="." unique_id=2022060682]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "super_cool_crosshair.tscn"
+label_settings = SubResource("LabelSettings_tg3pb")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
