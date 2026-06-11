@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Godot;
 
 public partial class UI_CrosshairPresets : Node
@@ -17,18 +16,18 @@ public partial class UI_CrosshairPresets : Node
             _presetsButton.Pressed += OnPresetsPressed;
             
         if (_savedButton != null)
-            _savedButton.Pressed += OnSavedPressed;
+            _savedButton.Pressed += OnCustomPressed;
     }
 
     private void OnPresetsPressed()
     {
-        _galery.Init(CrosshairSetting.OpenPresets());
+        _galery.Init(CrosshairSetting.OpenPresets(), UI_CrosshairGalery.Mode.BrowsePresets);
         _menu.Enter(_galery);
     }
 
-    private void OnSavedPressed()
+    private void OnCustomPressed()
     {
-        _galery.Init(CrosshairSetting.OpenSaved());
+        _galery.Init(CrosshairSetting.OpenSaved(), UI_CrosshairGalery.Mode.BrowseCustom);
         _menu.Enter(_galery);
     }
 }

@@ -11,7 +11,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2he5i"]
 bg_color = Color(0, 0, 0, 0.29411766)
 
-[node name="UiCrosshairGalery" type="PanelContainer" unique_id=1211138445 node_paths=PackedStringArray("_container")]
+[node name="UiCrosshairGalery" type="PanelContainer" unique_id=1211138445 node_paths=PackedStringArray("_container", "_titleLabel", "_closeButton", "_fileEdit", "_confirmButton", "_exportButton", "_importButton")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -23,6 +23,12 @@ theme = ExtResource("1_8kb17")
 script = ExtResource("1_2he5i")
 _container = NodePath("VBoxContainer/ScrollContainer/MarginContainer/UiCrosshairGalery")
 _crosshairStaticPreview = ExtResource("2_1lcp4")
+_titleLabel = NodePath("VBoxContainer/Header/MarginContainer/Header/TitleLabel")
+_closeButton = NodePath("VBoxContainer/Header/MarginContainer/Header/Close")
+_fileEdit = NodePath("VBoxContainer/InputOptions/HBoxContainer/FileEdit")
+_confirmButton = NodePath("VBoxContainer/InputOptions/HBoxContainer/Confirm")
+_exportButton = NodePath("VBoxContainer/InputOptions/HBoxContainer/HBoxContainer/Export")
+_importButton = NodePath("VBoxContainer/InputOptions/HBoxContainer/HBoxContainer/Import")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1276602379]
 layout_mode = 2
@@ -38,29 +44,18 @@ layout_mode = 2
 [node name="Header" type="HBoxContainer" parent="VBoxContainer/Header/MarginContainer" unique_id=58201577]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/Header/MarginContainer/Header" unique_id=294959157]
+[node name="TitleLabel" type="Label" parent="VBoxContainer/Header/MarginContainer/Header" unique_id=294959157]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "CROSSHAIR_PRESETS_LABEL"
 
-[node name="Button" type="Button" parent="VBoxContainer/Header/MarginContainer/Header" unique_id=1538691127]
+[node name="Close" type="Button" parent="VBoxContainer/Header/MarginContainer/Header" unique_id=1538691127]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 theme_type_variation = &"TightButton"
 icon = ExtResource("4_snegu")
 icon_alignment = 1
 expand_icon = true
-
-[node name="SavedTitle" type="PanelContainer" parent="VBoxContainer" unique_id=1474069663]
-visible = false
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/SavedTitle" unique_id=1603489955]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="VBoxContainer/SavedTitle/MarginContainer" unique_id=248532334]
-layout_mode = 2
-text = "CROSSHAIR_SAVED_LABEL"
 
 [node name="InputOptions" type="MarginContainer" parent="VBoxContainer" unique_id=1341397478]
 layout_mode = 2
@@ -73,12 +68,12 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="LineEdit" type="LineEdit" parent="VBoxContainer/InputOptions/HBoxContainer" unique_id=194517788]
+[node name="FileEdit" type="LineEdit" parent="VBoxContainer/InputOptions/HBoxContainer" unique_id=194517788]
 custom_minimum_size = Vector2(555, 0)
 layout_mode = 2
 text = "zaezaeaze"
 
-[node name="Use" type="Button" parent="VBoxContainer/InputOptions/HBoxContainer" unique_id=1031837238]
+[node name="Confirm" type="Button" parent="VBoxContainer/InputOptions/HBoxContainer" unique_id=1031837238]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 theme_type_variation = &"TightButton"
@@ -91,7 +86,7 @@ expand_icon = true
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/InputOptions/HBoxContainer" unique_id=349933777]
 layout_mode = 2
 
-[node name="SaveCurrent" type="Button" parent="VBoxContainer/InputOptions/HBoxContainer/HBoxContainer" unique_id=509643395]
+[node name="Export" type="Button" parent="VBoxContainer/InputOptions/HBoxContainer/HBoxContainer" unique_id=509643395]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 theme_type_variation = &"TightButton"
@@ -100,7 +95,7 @@ clip_text = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="Load" type="Button" parent="VBoxContainer/InputOptions/HBoxContainer/HBoxContainer" unique_id=668591668]
+[node name="Import" type="Button" parent="VBoxContainer/InputOptions/HBoxContainer/HBoxContainer" unique_id=668591668]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 theme_type_variation = &"TightButton"

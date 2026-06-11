@@ -21,9 +21,6 @@ public partial class UI_CrosshairPreviewContainer : Container
         _title.Text = data.ResourcePath.GetFile().GetBaseName();
     }
 
-    private void OnSelected()
-    {
-        CrosshairSetting.Instance.Save(_preview.Data);
+    private void OnSelected() =>
         Selected?.Invoke(_preview.Data);
-    }
 }
