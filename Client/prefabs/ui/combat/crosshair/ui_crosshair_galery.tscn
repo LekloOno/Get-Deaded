@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dlmkrbfhtlqi2" path="res://prefabs/ui/combat/crosshair/ui_crosshair_preview.tscn" id="2_1lcp4"]
 [ext_resource type="Texture2D" uid="uid://db4ckoccjd1sm" path="res://assets/sprites/ui_general/check.png" id="4_c8h47"]
 [ext_resource type="Texture2D" uid="uid://bck07v22m17n8" path="res://assets/sprites/ui_general/save.png" id="4_mv6gy"]
+[ext_resource type="Texture2D" uid="uid://dx6of1oi2ic54" path="res://assets/sprites/ui_general/x-mark.png" id="4_snegu"]
 [ext_resource type="Texture2D" uid="uid://er6efe8m3pwd" path="res://assets/sprites/ui_general/load.png" id="5_c8h47"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2he5i"]
@@ -28,18 +29,30 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="PresetsTitle" type="PanelContainer" parent="VBoxContainer" unique_id=1599655453]
-visible = false
+[node name="Header" type="PanelContainer" parent="VBoxContainer" unique_id=1599655453]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PresetsTitle" unique_id=155747984]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Header" unique_id=155747984]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/PresetsTitle/MarginContainer" unique_id=294959157]
+[node name="Header" type="HBoxContainer" parent="VBoxContainer/Header/MarginContainer" unique_id=58201577]
 layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Header/MarginContainer/Header" unique_id=294959157]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "CROSSHAIR_PRESETS_LABEL"
 
+[node name="Button" type="Button" parent="VBoxContainer/Header/MarginContainer/Header" unique_id=1538691127]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_type_variation = &"TightButton"
+icon = ExtResource("4_snegu")
+icon_alignment = 1
+expand_icon = true
+
 [node name="SavedTitle" type="PanelContainer" parent="VBoxContainer" unique_id=1474069663]
+visible = false
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/SavedTitle" unique_id=1603489955]
