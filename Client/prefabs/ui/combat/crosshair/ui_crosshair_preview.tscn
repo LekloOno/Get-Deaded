@@ -15,30 +15,32 @@ font_size = 8
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_5bt3f")
-_preview = NodePath("Control")
-_selectButton = NodePath("Control/Button")
+_preview = NodePath("CenterContainer/Control")
+_selectButton = NodePath("CenterContainer/Button")
 _title = NodePath("Label")
 
-[node name="Control" type="Control" parent="." unique_id=2047887807]
-z_index = 1
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1074308827]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Button" type="Button" parent="CenterContainer" unique_id=1509024584]
+z_index = -1
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
-script = ExtResource("2_rj87x")
-_defaultData = ExtResource("3_5bt3f")
-
-[node name="Button" type="Button" parent="Control" unique_id=1509024584]
-z_index = -1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource("1_dbnx4")
 toggle_mode = true
 button_group = ExtResource("5_tg3pb")
+
+[node name="Control" type="Control" parent="CenterContainer" unique_id=2047887807]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_rj87x")
+_defaultData = ExtResource("3_5bt3f")
 
 [node name="Label" type="Label" parent="." unique_id=2022060682]
 layout_mode = 2
