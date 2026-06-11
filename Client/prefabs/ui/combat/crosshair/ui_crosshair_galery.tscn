@@ -4,14 +4,14 @@
 [ext_resource type="Theme" uid="uid://ddkca4fk8kto5" path="res://assets/ui/menu_theme.tres" id="1_8kb17"]
 [ext_resource type="PackedScene" uid="uid://dlmkrbfhtlqi2" path="res://prefabs/ui/combat/crosshair/ui_crosshair_preview.tscn" id="2_1lcp4"]
 [ext_resource type="Texture2D" uid="uid://db4ckoccjd1sm" path="res://assets/sprites/ui_general/check.png" id="4_c8h47"]
-[ext_resource type="Texture2D" uid="uid://bck07v22m17n8" path="res://assets/sprites/ui_general/save.png" id="4_mv6gy"]
 [ext_resource type="Texture2D" uid="uid://dx6of1oi2ic54" path="res://assets/sprites/ui_general/x-mark.png" id="4_snegu"]
-[ext_resource type="Texture2D" uid="uid://er6efe8m3pwd" path="res://assets/sprites/ui_general/load.png" id="5_c8h47"]
+[ext_resource type="Texture2D" uid="uid://pp5hy1kfhcqd" path="res://assets/sprites/ui_general/export.png" id="6_c8h47"]
+[ext_resource type="Texture2D" uid="uid://cr02kwtgqpnc4" path="res://assets/sprites/ui_general/import.png" id="7_snegu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2he5i"]
 bg_color = Color(0, 0, 0, 0.29411766)
 
-[node name="UiCrosshairGalery" type="PanelContainer" unique_id=1211138445 node_paths=PackedStringArray("_container", "_titleLabel", "_closeButton", "_fileEdit", "_confirmButton", "_exportButton", "_importButton")]
+[node name="UiCrosshairGalery" type="PanelContainer" unique_id=1211138445 node_paths=PackedStringArray("_container", "_titleLabel", "_closeButton", "_fileEdit", "_confirmButton", "_exportButton", "_importButton", "_exportDialog", "_importDialog")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -29,6 +29,8 @@ _fileEdit = NodePath("VBoxContainer/InputOptions/HBoxContainer/FileEdit")
 _confirmButton = NodePath("VBoxContainer/InputOptions/HBoxContainer/Confirm")
 _exportButton = NodePath("VBoxContainer/InputOptions/HBoxContainer/HBoxContainer/Export")
 _importButton = NodePath("VBoxContainer/InputOptions/HBoxContainer/HBoxContainer/Import")
+_exportDialog = NodePath("ExportDialog")
+_importDialog = NodePath("ImportDialog")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1276602379]
 layout_mode = 2
@@ -91,7 +93,7 @@ custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 tooltip_text = "CROSSHAIR_EXPORT_TOOLTIP"
 theme_type_variation = &"TightButton"
-icon = ExtResource("4_mv6gy")
+icon = ExtResource("6_c8h47")
 clip_text = true
 icon_alignment = 1
 expand_icon = true
@@ -101,7 +103,7 @@ custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 tooltip_text = "CROSSHAIR_IMPORT_TOOLTIP"
 theme_type_variation = &"TightButton"
-icon = ExtResource("5_c8h47")
+icon = ExtResource("7_snegu")
 clip_text = true
 icon_alignment = 1
 expand_icon = true
@@ -136,3 +138,15 @@ layout_mode = 2
 
 [node name="Button3" parent="VBoxContainer/ScrollContainer/MarginContainer/UiCrosshairGalery" unique_id=1163148157 instance=ExtResource("2_1lcp4")]
 layout_mode = 2
+
+[node name="ExportDialog" type="FileDialog" parent="." unique_id=531875960]
+oversampling_override = 1.0
+size = Vector2i(684, 360)
+access = 2
+
+[node name="ImportDialog" type="FileDialog" parent="." unique_id=1662248017]
+oversampling_override = 1.0
+title = "Open File(s)"
+size = Vector2i(684, 360)
+file_mode = 1
+access = 2

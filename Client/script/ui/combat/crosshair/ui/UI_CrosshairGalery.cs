@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using Godot;
 
 [GlobalClass]
@@ -21,6 +22,8 @@ public partial class UI_CrosshairGalery : Control
     [Export] private Button        _exportButton = null!;
     [Export] private Button        _importButton = null!;
     [Export] private ButtonGroup   _previewSelectGroup = null!;
+    [Export] private FileDialog    _exportDialog = null!;
+    [Export] private FileDialog    _importDialog = null!;
 
     private readonly Dictionary<UI_CrosshairPreviewContainer, string> _dataNameMap = [];
 
@@ -34,6 +37,11 @@ public partial class UI_CrosshairGalery : Control
         _confirmButton.Pressed  += ConfirmButtonPressed;
         _exportButton.Pressed   += ExportButtonPressed;
         _importButton.Pressed   += ImportButtonPressed;
+
+        _exportDialog.FileSelected  += OnExportFileSelected;
+        _importDialog.FilesSelected += OnImportFilesSelected;
+
+        _exportDialog.Theme = _importDialog.Theme = ThemeDB.GetDefaultTheme();
     }
 
     public void Init(List<CrosshairData> crosshairs, Mode mode)
@@ -101,9 +109,17 @@ public partial class UI_CrosshairGalery : Control
 
     private void SetMode(Mode mode)
     {
-        _exportButton.Disabled
-        = _importButton.Disabled
-        = mode != Mode.BrowseCustom;
+        if (mode != Mode.BrowseCustom)
+        {
+            _exportButton.Disabled
+            = _importButton.Disabled
+            = true;
+        }
+        else
+        {
+            _exportButton.Disabled = _selectedData == null;
+            _importButton.Disabled = false;
+        }
 
 
 
@@ -121,15 +137,19 @@ public partial class UI_CrosshairGalery : Control
         if (_currentMode != Mode.BrowseCustom)
             return;
         
-        // TODO - open file dialog to import
+        _importDialog.PopupCentered();
     }
 
     private void ExportButtonPressed()
     {
         if (_currentMode != Mode.BrowseCustom)
             return;
-        
-        // TODO - open file dialog to export 
+
+        if (_selectedData == null)
+            return;
+
+        _exportDialog.CurrentFile = _fileEdit.Text + ".tres";
+        _exportDialog.PopupCentered(); 
     }
 
     private void ConfirmButtonPressed()
@@ -190,15 +210,50 @@ public partial class UI_CrosshairGalery : Control
     {
         _selectedData = data;
 
-        if (_selectedData != null)
+        bool selected = _selectedData != null;
+        _exportButton.Disabled = _currentMode != Mode.BrowseCustom || !selected;
+
+        if (selected)
         {
-            _fileEdit.Text = _selectedData.ResourcePath.GetFile().GetBaseName();
+            _fileEdit.Text = _selectedData!.ResourcePath.GetFile().GetBaseName();
             _fileEdit.CaretColumn = _fileEdit.Text.Length;
         }
 
         if (_currentMode == Mode.Save)
             _confirmButton.Disabled = _fileEdit.Text.StripEdges() == string.Empty;
         else
-            _confirmButton.Disabled = _selectedData == null;
+            _confirmButton.Disabled = !selected;
+    }
+
+    private void OnExportFileSelected(string path)
+    {
+        if (string.IsNullOrWhiteSpace(Path.GetExtension(path)))
+            path += ".tres";
+
+        var error = ResourceSaver.Save(_selectedData, path);
+
+        if (error != Error.Ok)
+            GD.PrintErr($"Failed to export crosshair at {path}: {error}");
+        else
+            GD.Print($"Exported to {path}");
+    }
+
+    private void OnImportFilesSelected(string[] paths)
+    {
+        foreach (var path in paths)
+        {
+            var crosshairData = ResourceLoader.Load<CrosshairData>(path);
+
+            if (crosshairData != null)
+            {
+                GD.Print($"Imported crosshair: {path}");
+                var name = Path.GetFileNameWithoutExtension(path);
+                CrosshairSetting.SaveAs(crosshairData, name);
+            }
+            else
+                GD.PrintErr($"Invalid crosshair file: {path}");
+        }
+
+        Init(CrosshairSetting.OpenSaved(), Mode.BrowseCustom);
     }
 }
