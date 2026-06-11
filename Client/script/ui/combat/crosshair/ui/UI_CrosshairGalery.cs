@@ -18,6 +18,8 @@ public partial class UI_CrosshairGalery : Control
     [Export] private Button        _exportButton = null!;
     [Export] private Button        _importButton = null!;
 
+    private readonly Dictionary<UI_CrosshairPreviewContainer, string> _dataNameMap = [];
+
     private Mode _currentMode;
     private CrosshairData? _selectedData;
 
@@ -32,6 +34,8 @@ public partial class UI_CrosshairGalery : Control
 
     public void Init(List<CrosshairData> crosshairs, Mode mode)
     {
+        _dataNameMap.Clear();
+
         SetMode(mode);
 
         _fileEdit.Text = "";
@@ -44,7 +48,9 @@ public partial class UI_CrosshairGalery : Control
             UI_CrosshairPreviewContainer preview = _crosshairStaticPreview.Instantiate<UI_CrosshairPreviewContainer>();
             preview.Init(crosshair);
             preview.Selected += OnCrosshairSelected;
-            _container.AddChild(preview);  
+            
+            _dataNameMap.Add(preview, crosshair.ResourcePath.GetFile().GetBaseName());
+            _container.AddChild(preview);
         }
     }
 
@@ -114,9 +120,10 @@ public partial class UI_CrosshairGalery : Control
         // TODO - save CrosshairSetting.Instance.Data to _fileEdit name
     }
 
-    private void FileEditTextChanged(string newText)
+    private void FileEditTextChanged(string search)
     {
-        // TODO - filter displayed crosshair
+        foreach ((UI_CrosshairPreviewContainer preview, string name) in _dataNameMap)
+            preview.Visible = name.Contains(search, System.StringComparison.CurrentCultureIgnoreCase);
     }
 
     private void OnCrosshairSelected(CrosshairData data) =>
