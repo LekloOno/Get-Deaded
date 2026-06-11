@@ -9,10 +9,11 @@ public partial class UI_CrosshairPreviewContainer : Container
     [Export] private Label            _title = null!;
 
     public event Action<CrosshairData>? Selected;
+    public event Action? Unselected;
 
     public override void _Ready()
     {
-        _selectButton.Pressed += OnSelected;
+        _selectButton.Toggled += OnToggled;
     }
 
     public void Init(CrosshairData data)
@@ -21,6 +22,14 @@ public partial class UI_CrosshairPreviewContainer : Container
         _title.Text = data.ResourcePath.GetFile().GetBaseName();
     }
 
-    private void OnSelected() =>
-        Selected?.Invoke(_preview.Data);
+    public void SetSelected() =>
+        _selectButton.ButtonPressed = true;
+
+    private void OnToggled(bool pressed)
+    {
+        if (pressed)
+            Selected?.Invoke(_preview.Data);
+        else if (_selectButton.ButtonGroup.GetPressedButton() == null)
+            Unselected?.Invoke();
+    }
 }

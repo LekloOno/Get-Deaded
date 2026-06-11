@@ -17,6 +17,7 @@ public partial class UI_CrosshairGalery : Control
     [Export] private Button        _confirmButton = null!;
     [Export] private Button        _exportButton = null!;
     [Export] private Button        _importButton = null!;
+    [Export] private ButtonGroup   _previewSelectGroup = null!;
 
     private readonly Dictionary<UI_CrosshairPreviewContainer, string> _dataNameMap = [];
 
@@ -47,7 +48,8 @@ public partial class UI_CrosshairGalery : Control
         {
             UI_CrosshairPreviewContainer preview = _crosshairStaticPreview.Instantiate<UI_CrosshairPreviewContainer>();
             preview.Init(crosshair);
-            preview.Selected += OnCrosshairSelected;
+            preview.Selected    += OnCrosshairSelected;
+            preview.Unselected  += OnCrosshairUnselected;
             
             _dataNameMap.Add(preview, crosshair.ResourcePath.GetFile().GetBaseName());
             _container.AddChild(preview);
@@ -122,24 +124,40 @@ public partial class UI_CrosshairGalery : Control
 
     private void FileEditTextChanged(string search)
     {
+        bool found = false;
+
         foreach ((UI_CrosshairPreviewContainer preview, string name) in _dataNameMap)
+        {
+            if (!found && name.Equals(search))
+            {
+                found = true;
+                preview.Visible = true;
+                preview.SetSelected();
+                continue;
+            }
+            
             preview.Visible = name.Contains(search, System.StringComparison.CurrentCultureIgnoreCase);
+        }
+
+        if (!found && _currentMode == Mode.Save)
+            _previewSelectGroup.GetPressedButton().ButtonPressed = false;
     }
 
     private void OnCrosshairSelected(CrosshairData data) =>
         SetSelectedData(data);
 
-    private void SetSelectedData(CrosshairData data)
+    private void OnCrosshairUnselected() => SetSelectedData(null);
+
+    private void SetSelectedData(CrosshairData? data)
     {
         if (data == _selectedData)
             return;
 
         _selectedData = data;
-        _fileEdit.Text = data.ResourcePath.GetFile().GetBaseName();
 
-        if (_currentMode == Mode.Save)
-            return;
-
-        _confirmButton.Disabled = _selectedData == null;
+        if (_selectedData != null)
+            _fileEdit.Text = _selectedData.ResourcePath.GetFile().GetBaseName();
+        else if (_currentMode != Mode.Save)
+            _confirmButton.Disabled = true;
     }
 }
