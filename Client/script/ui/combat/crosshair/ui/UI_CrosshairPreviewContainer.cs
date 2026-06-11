@@ -11,13 +11,24 @@ public partial class UI_CrosshairPreviewContainer : Container
     [Export] private ConfirmationDialog _confirmDeleteDialog = null!;
 
     public event Action<CrosshairData>? Selected;
+    public event Action<CrosshairData>? ConfirmSelected;
     public event Action? Unselected;
 
     public override void _Ready()
     {
         _selectButton.Toggled += OnToggled;
+        _selectButton.GuiInput += OnSelectGuiGuiInput;
         _deleteButton.Pressed += OnDeletePressed;
         _confirmDeleteDialog.Confirmed += DeleteCrosshair;
+    }
+
+    private void OnSelectGuiGuiInput(InputEvent @event)
+    {
+        if (@event is not InputEventMouseButton mb)
+            return;
+
+        if (mb.ButtonIndex == MouseButton.Left && mb.DoubleClick)
+            ConfirmSelected?.Invoke(_preview.Data);
     }
 
     public void Init(CrosshairData data, bool custom = false)

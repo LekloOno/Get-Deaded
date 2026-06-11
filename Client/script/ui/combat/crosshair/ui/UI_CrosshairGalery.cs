@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Godot;
@@ -33,10 +34,10 @@ public partial class UI_CrosshairGalery : Control
     public override void _Ready()
     {
         _closeButton.Pressed    += _menu.ExitCurrent;
-        _fileEdit.TextChanged   += FileEditTextChanged;
-        _confirmButton.Pressed  += ConfirmButtonPressed;
-        _exportButton.Pressed   += ExportButtonPressed;
-        _importButton.Pressed   += ImportButtonPressed;
+        _fileEdit.TextChanged   += OnFileEditTextChanged;
+        _confirmButton.Pressed  += OnConfirmButtonPressed;
+        _exportButton.Pressed   += OnExportButtonPressed;
+        _importButton.Pressed   += OnImportButtonPressed;
 
         _exportDialog.FileSelected  += OnExportFileSelected;
         _importDialog.FilesSelected += OnImportFilesSelected;
@@ -60,8 +61,9 @@ public partial class UI_CrosshairGalery : Control
         {
             UI_CrosshairPreviewContainer preview = _crosshairStaticPreview.Instantiate<UI_CrosshairPreviewContainer>();
             preview.Init(crosshair, mode == Mode.BrowseCustom);
-            preview.Selected    += OnCrosshairSelected;
-            preview.Unselected  += OnCrosshairUnselected;
+            preview.Selected        += OnCrosshairSelected;
+            preview.Unselected      += OnCrosshairUnselected;
+            preview.ConfirmSelected += OnCrosshairConfirmSelected;
             
             _dataNameMap.Add(preview, crosshair.ResourcePath.GetFile().GetBaseName());
             _container.AddChild(preview);
@@ -133,7 +135,7 @@ public partial class UI_CrosshairGalery : Control
         _fileEdit.PlaceholderText = ModeToEditPlaceHolder(mode);
     }
 
-    private void ImportButtonPressed()
+    private void OnImportButtonPressed()
     {
         if (_currentMode != Mode.BrowseCustom)
             return;
@@ -141,7 +143,7 @@ public partial class UI_CrosshairGalery : Control
         _importDialog.PopupCentered();
     }
 
-    private void ExportButtonPressed()
+    private void OnExportButtonPressed()
     {
         if (_currentMode != Mode.BrowseCustom)
             return;
@@ -153,7 +155,7 @@ public partial class UI_CrosshairGalery : Control
         _exportDialog.PopupCentered(); 
     }
 
-    private void ConfirmButtonPressed()
+    private void OnConfirmButtonPressed()
     {
         if (_currentMode == Mode.Save)
             ConfirmSave();
@@ -175,7 +177,7 @@ public partial class UI_CrosshairGalery : Control
         CrosshairSetting.SaveAs(CrosshairSetting.Instance.Data, _fileEdit.Text);
     }
 
-    private void FileEditTextChanged(string search)
+    private void OnFileEditTextChanged(string search)
     {
         bool found = false;
 
@@ -206,6 +208,12 @@ public partial class UI_CrosshairGalery : Control
         SetSelectedData(data);
 
     private void OnCrosshairUnselected() => SetSelectedData(null);
+
+    private void OnCrosshairConfirmSelected(CrosshairData data)
+    {
+        _selectedData = data;
+        OnConfirmButtonPressed();
+    }
 
     private void SetSelectedData(CrosshairData? data)
     {
