@@ -157,7 +157,7 @@ public partial class CrosshairSetting : Node
 
             string path = $"{UserSavedCrosshairDirPath}/{fileName}";
 
-            var resource = ResourceLoader.Load<CrosshairData>(path, cacheMode: ResourceLoader.CacheMode.ReplaceDeep);
+            var resource = ResourceLoader.Load<CrosshairData>(path, cacheMode: ResourceLoader.CacheMode.IgnoreDeep);
 
             if (resource == null)
             {
