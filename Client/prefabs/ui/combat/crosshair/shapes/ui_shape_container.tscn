@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://db5oo7mqsrrq3" path="res://prefabs/ui/combat/crosshair/shapes/ui_crosshair_shape_cross.tscn" id="5_ntme4"]
 [ext_resource type="PackedScene" uid="uid://bls5cj65hmxdb" path="res://prefabs/ui/combat/crosshair/shapes/ui_crosshair_shape_square.tscn" id="6_6ok8g"]
 [ext_resource type="Script" uid="uid://dm5ioj0ce04yu" path="res://script/ui/combat/crosshair/ui/UI_CrosshairLayerOptionButton.cs" id="7_ntme4"]
+[ext_resource type="Texture2D" uid="uid://bx2gkkmom4wen" path="res://assets/sprites/ui_general/delete.png" id="8_6ok8g"]
 
 [node name="UiShapeContainer" type="PanelContainer" unique_id=1420064005 node_paths=PackedStringArray("_deleteButton", "_moveUpButton", "_moveDownButton", "_shapeSettingsContainer", "_rotation", "_fill", "_outlines", "_typeOption")]
 offset_left = 10.0
@@ -77,17 +78,19 @@ layout_mode = 2
 size_flags_horizontal = 8
 
 [node name="MoveUp" type="Button" parent="UiShapeContainer2/Settings/MarginContainer/HBoxContainer/MarginContainer/HBoxContainer" unique_id=621408849]
-custom_minimum_size = Vector2(35, 0)
+custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_type_variation = &"InputButton"
+theme_override_font_sizes/font_size = 13
 text = "⤊"
 
 [node name="MoveDown" type="Button" parent="UiShapeContainer2/Settings/MarginContainer/HBoxContainer/MarginContainer/HBoxContainer" unique_id=1429692700]
-custom_minimum_size = Vector2(35, 0)
+custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_type_variation = &"InputButton"
+theme_override_font_sizes/font_size = 13
 text = "⤋"
 
 [node name="MarginContainer" type="MarginContainer" parent="UiShapeContainer2/Settings/MarginContainer/HBoxContainer/MarginContainer/HBoxContainer" unique_id=762539692]
@@ -96,10 +99,13 @@ size_flags_horizontal = 8
 theme_override_constants/margin_left = 15
 
 [node name="Delete" type="Button" parent="UiShapeContainer2/Settings/MarginContainer/HBoxContainer/MarginContainer/HBoxContainer/MarginContainer" unique_id=1146155705]
+custom_minimum_size = Vector2(29, 29)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-text = "DELETE_BUTTON"
+theme_type_variation = &"TightButton"
+icon = ExtResource("8_6ok8g")
+expand_icon = true
 
 [node name="ShapeSettings" type="MarginContainer" parent="UiShapeContainer2/Settings" unique_id=37829046]
 layout_mode = 2
