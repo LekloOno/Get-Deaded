@@ -71,7 +71,7 @@ theme_override_constants/separation = 15
 [node name="FileEdit" type="LineEdit" parent="VBoxContainer/InputOptions/HBoxContainer" unique_id=194517788]
 custom_minimum_size = Vector2(555, 0)
 layout_mode = 2
-text = "zaezaeaze"
+placeholder_text = "search..."
 
 [node name="Confirm" type="Button" parent="VBoxContainer/InputOptions/HBoxContainer" unique_id=1031837238]
 custom_minimum_size = Vector2(32, 32)

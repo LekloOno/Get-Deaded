@@ -8,6 +8,9 @@ public partial class UI_CrosshairGalery : Control
     const string TitleCustom    = "CROSSHAIR_BROWSE_CUSTOM";
     const string TitlePresets   = "CROSSHAIR_BROWSE_PRESETS";
 
+    const string FileEditSave   = "CROSSHAIR_FILE_EDIT_SAVE_PLACEHOLDER";
+    const string FileEditSearch = "CROSSHAIR_FILE_EDIT_SEARCH_PLACEHOLDER";
+
     [Export] private UI_EscapeMenu _menu = null!;
     [Export] private Container     _container = null!;
     [Export] private PackedScene   _crosshairStaticPreview = null!;
@@ -85,11 +88,24 @@ public partial class UI_CrosshairGalery : Control
         };
     }
 
+    private string ModeToEditPlaceHolder(Mode mode)
+    {
+        return mode switch
+        {
+            Mode.BrowsePresets  => FileEditSearch,
+            Mode.BrowseCustom   => FileEditSearch,
+            Mode.Save           => FileEditSave,
+            _ => throw new System.NotImplementedException(),
+        };
+    }
+
     private void SetMode(Mode mode)
     {
         _exportButton.Disabled
         = _importButton.Disabled
         = mode != Mode.BrowseCustom;
+
+
 
         _confirmButton.Disabled = mode == Mode.Save
             && _fileEdit.Text.StripEdges() == string.Empty;
@@ -97,6 +113,7 @@ public partial class UI_CrosshairGalery : Control
         _currentMode = mode;
 
         _titleLabel.Text = ModeToTitle(mode);
+        _fileEdit.PlaceholderText = ModeToEditPlaceHolder(mode);
     }
 
     private void ImportButtonPressed()

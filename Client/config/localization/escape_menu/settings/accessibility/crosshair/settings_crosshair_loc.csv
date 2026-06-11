@@ -56,3 +56,6 @@ CROSSHAIR_BROWSE_PRESETS,PRESETS,PRÉRÉGLAGES
 CROSSHAIR_SAVE_CURRENT_TOOLTIP,Save crosshair,Sauvegarder réticule
 CROSSHAIR_EXPORT_TOOLTIP,Export selected,Exporter sélection
 CROSSHAIR_IMPORT_TOOLTIP,Import crosshair,Importer réticule
+
+CROSSHAIR_FILE_EDIT_SAVE_PLACEHOLDER,save to ...,enregistrer sous ...
+CROSSHAIR_FILE_EDIT_SEARCH_PLACEHOLDER,search ...,rechercher ...
