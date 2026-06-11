@@ -89,6 +89,7 @@ layout_mode = 2
 [node name="Export" type="Button" parent="VBoxContainer/InputOptions/HBoxContainer/HBoxContainer" unique_id=509643395]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+tooltip_text = "CROSSHAIR_EXPORT_TOOLTIP"
 theme_type_variation = &"TightButton"
 icon = ExtResource("4_mv6gy")
 clip_text = true
@@ -98,6 +99,7 @@ expand_icon = true
 [node name="Import" type="Button" parent="VBoxContainer/InputOptions/HBoxContainer/HBoxContainer" unique_id=668591668]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+tooltip_text = "CROSSHAIR_IMPORT_TOOLTIP"
 theme_type_variation = &"TightButton"
 icon = ExtResource("5_c8h47")
 clip_text = true
