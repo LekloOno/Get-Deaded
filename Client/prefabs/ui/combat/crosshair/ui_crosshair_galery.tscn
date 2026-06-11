@@ -1,23 +1,108 @@
 [gd_scene format=3 uid="uid://4ny2ij141sta"]
 
 [ext_resource type="Script" uid="uid://cobrnlkwpnu1g" path="res://script/ui/combat/crosshair/ui/UI_CrosshairGalery.cs" id="1_2he5i"]
+[ext_resource type="Theme" uid="uid://ddkca4fk8kto5" path="res://assets/ui/menu_theme.tres" id="1_8kb17"]
 [ext_resource type="PackedScene" uid="uid://dlmkrbfhtlqi2" path="res://prefabs/ui/combat/crosshair/ui_crosshair_preview.tscn" id="2_1lcp4"]
+[ext_resource type="Texture2D" uid="uid://db4ckoccjd1sm" path="res://assets/sprites/ui_general/check.png" id="4_c8h47"]
+[ext_resource type="Texture2D" uid="uid://bck07v22m17n8" path="res://assets/sprites/ui_general/save.png" id="4_mv6gy"]
+[ext_resource type="Texture2D" uid="uid://er6efe8m3pwd" path="res://assets/sprites/ui_general/load.png" id="5_c8h47"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2he5i"]
 bg_color = Color(0, 0, 0, 0.29411766)
 
-[node name="ScrollContainer" type="ScrollContainer" unique_id=415053649 node_paths=PackedStringArray("_container")]
+[node name="UiCrosshairGalery" type="PanelContainer" unique_id=1211138445 node_paths=PackedStringArray("_container")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -1194.0
+offset_bottom = -460.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_2he5i")
+theme = ExtResource("1_8kb17")
 script = ExtResource("1_2he5i")
-_container = NodePath("MarginContainer/UiCrosshairGalery")
+_container = NodePath("VBoxContainer/ScrollContainer/MarginContainer/UiCrosshairGalery")
 _crosshairStaticPreview = ExtResource("2_1lcp4")
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=369275869]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1276602379]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="PresetsTitle" type="PanelContainer" parent="VBoxContainer" unique_id=1599655453]
+visible = false
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PresetsTitle" unique_id=155747984]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/PresetsTitle/MarginContainer" unique_id=294959157]
+layout_mode = 2
+text = "CROSSHAIR_PRESETS_LABEL"
+
+[node name="SavedTitle" type="PanelContainer" parent="VBoxContainer" unique_id=1474069663]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/SavedTitle" unique_id=1603489955]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/SavedTitle/MarginContainer" unique_id=248532334]
+layout_mode = 2
+text = "CROSSHAIR_SAVED_LABEL"
+
+[node name="InputOptions" type="MarginContainer" parent="VBoxContainer" unique_id=1341397478]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/InputOptions" unique_id=2141036495]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/InputOptions/HBoxContainer" unique_id=194517788]
+custom_minimum_size = Vector2(555, 0)
+layout_mode = 2
+text = "zaezaeaze"
+
+[node name="Use" type="Button" parent="VBoxContainer/InputOptions/HBoxContainer" unique_id=1031837238]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_type_variation = &"TightButton"
+theme_override_font_sizes/font_size = 11
+icon = ExtResource("4_c8h47")
+clip_text = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/InputOptions/HBoxContainer" unique_id=349933777]
+layout_mode = 2
+
+[node name="SaveCurrent" type="Button" parent="VBoxContainer/InputOptions/HBoxContainer/HBoxContainer" unique_id=509643395]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_type_variation = &"TightButton"
+icon = ExtResource("4_mv6gy")
+clip_text = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Load" type="Button" parent="VBoxContainer/InputOptions/HBoxContainer/HBoxContainer" unique_id=668591668]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_type_variation = &"TightButton"
+icon = ExtResource("5_c8h47")
+clip_text = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer" unique_id=415053649]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/scrollbar_h_separation = -15
+theme_override_styles/panel = SubResource("StyleBoxFlat_2he5i")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ScrollContainer" unique_id=369275869]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -26,24 +111,18 @@ theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="UiCrosshairGalery" type="HFlowContainer" parent="MarginContainer" unique_id=1212751295]
+[node name="UiCrosshairGalery" type="HFlowContainer" parent="VBoxContainer/ScrollContainer/MarginContainer" unique_id=1212751295]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/h_separation = 8
-theme_override_constants/v_separation = 8
+theme_override_constants/h_separation = 14
+theme_override_constants/v_separation = 14
 
-[node name="Button" parent="MarginContainer/UiCrosshairGalery" unique_id=1509024584 instance=ExtResource("2_1lcp4")]
+[node name="Button" parent="VBoxContainer/ScrollContainer/MarginContainer/UiCrosshairGalery" unique_id=1509024584 instance=ExtResource("2_1lcp4")]
 layout_mode = 2
 
-[node name="Button2" parent="MarginContainer/UiCrosshairGalery" unique_id=1471458156 instance=ExtResource("2_1lcp4")]
+[node name="Button2" parent="VBoxContainer/ScrollContainer/MarginContainer/UiCrosshairGalery" unique_id=1471458156 instance=ExtResource("2_1lcp4")]
 layout_mode = 2
 
-[node name="Button3" parent="MarginContainer/UiCrosshairGalery" unique_id=1163148157 instance=ExtResource("2_1lcp4")]
-layout_mode = 2
-
-[node name="Button4" parent="MarginContainer/UiCrosshairGalery" unique_id=2120856970 instance=ExtResource("2_1lcp4")]
-layout_mode = 2
-
-[node name="Button5" parent="MarginContainer/UiCrosshairGalery" unique_id=770027048 instance=ExtResource("2_1lcp4")]
+[node name="Button3" parent="VBoxContainer/ScrollContainer/MarginContainer/UiCrosshairGalery" unique_id=1163148157 instance=ExtResource("2_1lcp4")]
 layout_mode = 2

@@ -117,6 +117,21 @@ bg_color = Color(0, 0, 0, 0.38039216)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y3llb"]
 bg_color = Color(0.18039216, 0.18039216, 0.18039216, 0)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0lbdi"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0, 0, 0, 0.29411766)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_py673"]
+bg_color = Color(0, 0, 0, 0.30980393)
+
 [resource]
 BlankPanel/base_type = &"PanelContainer"
 BlankPanel/styles/panel = SubResource("StyleBoxFlat_0mmvv")
@@ -149,3 +164,7 @@ OptionButton/styles/normal = SubResource("StyleBoxFlat_bhpmc")
 Panel/styles/panel = SubResource("StyleBoxFlat_qvvi2")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_34pu0")
 TabContainer/styles/panel = SubResource("StyleBoxFlat_y3llb")
+TightButton/base_type = &"Button"
+TightButton/styles/normal = SubResource("StyleBoxFlat_0lbdi")
+TightLineEdit/base_type = &"LineEdit"
+TightLineEdit/styles/normal = SubResource("StyleBoxFlat_py673")

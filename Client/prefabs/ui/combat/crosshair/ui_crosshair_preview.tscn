@@ -6,6 +6,10 @@
 [ext_resource type="Resource" uid="uid://bjcqei1u0hnt6" path="res://default_crosshair.tres" id="3_5bt3f"]
 [ext_resource type="FontFile" uid="uid://7kpvxbogh0tx" path="res://assets/fonts/Poppins/Poppins-Light.ttf" id="5_5w8mo"]
 
+[sub_resource type="ButtonGroup" id="ButtonGroup_5bt3f"]
+resource_local_to_scene = false
+allow_unpress = true
+
 [sub_resource type="LabelSettings" id="LabelSettings_tg3pb"]
 font = ExtResource("5_5w8mo")
 font_size = 8
@@ -36,6 +40,8 @@ grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource("1_dbnx4")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_5bt3f")
 
 [node name="Label" type="Label" parent="." unique_id=2022060682]
 layout_mode = 2
