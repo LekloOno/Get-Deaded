@@ -59,7 +59,7 @@ public partial class UI_CrosshairGalery : Control
         foreach (CrosshairData crosshair in crosshairs)
         {
             UI_CrosshairPreviewContainer preview = _crosshairStaticPreview.Instantiate<UI_CrosshairPreviewContainer>();
-            preview.Init(crosshair);
+            preview.Init(crosshair, mode == Mode.BrowseCustom);
             preview.Selected    += OnCrosshairSelected;
             preview.Unselected  += OnCrosshairUnselected;
             

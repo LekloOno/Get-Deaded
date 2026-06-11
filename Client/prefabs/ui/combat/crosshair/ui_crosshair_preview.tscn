@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://bsbiwlvr5cwme" path="res://script/ui/combat/crosshair/CrosshairPreview.cs" id="2_rj87x"]
 [ext_resource type="StyleBox" uid="uid://brbwsymgu7vwi" path="res://prefabs/ui/combat/crosshair/ui_crosshair_background_style.tres" id="2_tg3pb"]
 [ext_resource type="Resource" uid="uid://bjcqei1u0hnt6" path="res://default_crosshair.tres" id="3_5bt3f"]
+[ext_resource type="Texture2D" uid="uid://bx2gkkmom4wen" path="res://assets/sprites/ui_general/delete.png" id="4_2k40s"]
 [ext_resource type="FontFile" uid="uid://7kpvxbogh0tx" path="res://assets/fonts/Poppins/Poppins-Light.ttf" id="5_5w8mo"]
 [ext_resource type="ButtonGroup" uid="uid://dqni2wnmrs3ln" path="res://prefabs/ui/combat/crosshair/ui_crosshair_preview_button_group.tres" id="5_tg3pb"]
 
@@ -39,25 +40,21 @@ corner_detail = 5
 font = ExtResource("5_5w8mo")
 font_size = 8
 
-[node name="UiCrosshairPreset" type="VBoxContainer" unique_id=887801053 node_paths=PackedStringArray("_preview", "_selectButton", "_title")]
+[node name="UiCrosshairPreset" type="VBoxContainer" unique_id=887801053 node_paths=PackedStringArray("_preview", "_selectButton", "_title", "_deleteButton", "_confirmDeleteDialog")]
 offset_right = 40.0
 offset_bottom = 40.0
+theme = ExtResource("1_dbnx4")
 script = ExtResource("1_5bt3f")
 _preview = NodePath("CenterContainer/Control")
 _selectButton = NodePath("CenterContainer/Button")
 _title = NodePath("Label")
+_deleteButton = NodePath("CenterContainer/PanelContainer/Delete")
+_confirmDeleteDialog = NodePath("ConfirmationDialog")
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=1074308827]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-
-[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=1262575556]
-z_index = 1
-custom_minimum_size = Vector2(128, 128)
-layout_mode = 2
-mouse_filter = 2
-theme_override_styles/panel = ExtResource("2_tg3pb")
 
 [node name="Button" type="Button" parent="CenterContainer" unique_id=1509024584]
 z_index = 2
@@ -80,6 +77,23 @@ size_flags_vertical = 4
 script = ExtResource("2_rj87x")
 _defaultData = ExtResource("3_5bt3f")
 
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=1262575556]
+z_index = 1
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("2_tg3pb")
+
+[node name="Delete" type="Button" parent="CenterContainer/PanelContainer" unique_id=1916057761]
+z_index = 4
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_type_variation = &"TightButton"
+icon = ExtResource("4_2k40s")
+expand_icon = true
+
 [node name="Label" type="Label" parent="." unique_id=2022060682]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -89,3 +103,11 @@ label_settings = SubResource("LabelSettings_tg3pb")
 horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="." unique_id=990001596]
+oversampling_override = 1.0
+title = "CROSSHAIR_CONFIRM_DELETE"
+initial_position = 2
+size = Vector2i(393, 100)
+ok_button_text = "CONFIRM_BUTTON"
+cancel_button_text = "CANCEL_BUTTON"
