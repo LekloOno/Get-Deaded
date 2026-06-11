@@ -191,7 +191,10 @@ public partial class UI_CrosshairGalery : Control
         _selectedData = data;
 
         if (_selectedData != null)
+        {
             _fileEdit.Text = _selectedData.ResourcePath.GetFile().GetBaseName();
+            _fileEdit.CaretColumn = _fileEdit.Text.Length;
+        }
 
         if (_currentMode == Mode.Save)
             _confirmButton.Disabled = _fileEdit.Text.StripEdges() == string.Empty;
