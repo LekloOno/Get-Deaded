@@ -31,19 +31,19 @@ public partial class CrosshairSetting : Node
         CrosshairData prev = Data;
         Data = (CrosshairData) data.Duplicate(true);
 
-        EnsureSavedDirectoryExists();
+        EnsureDirectoriesExists();
 
         ResourceSaver.Save(Data, UserCrosshairPath);
 
         DataSwapped?.Invoke(prev, Data);
     }
 
-    private static void EnsureSavedDirectoryExists()
+    private static void EnsureDirectoriesExists()
     {
-        if (DirAccess.DirExistsAbsolute(UserCrosshairDir))
+        if (DirAccess.DirExistsAbsolute(UserSavedCrosshairDirPath))
             return;
-
-        var error = DirAccess.MakeDirRecursiveAbsolute(UserCrosshairDir);
+        
+        var error = DirAccess.MakeDirRecursiveAbsolute(UserSavedCrosshairDirPath);
 
         if (error != Error.Ok)
             GD.PushError($"Failed to create directory '{UserCrosshairDir}': {error}");
@@ -56,8 +56,13 @@ public partial class CrosshairSetting : Node
     public static CrosshairData SaveAs(CrosshairData data, string name)
     {
         CrosshairData cachedData = (CrosshairData) data.Duplicate(true);
-        EnsureSavedDirectoryExists();
-        ResourceSaver.Save(cachedData, UserSavedCrosshairDirPath + "/" + name);
+        EnsureDirectoriesExists();
+        string filePath = UserSavedCrosshairDirPath + "/" + name + ".tres";
+        var error = ResourceSaver.Save(cachedData, filePath);
+
+        if (error != Error.Ok)
+            GD.PushError($"Failed to save crosshair '{filePath}': {error}");
+
         return cachedData;
     }
 
@@ -115,6 +120,8 @@ public partial class CrosshairSetting : Node
 
     public static List<CrosshairData> OpenSaved()
     {
+        EnsureDirectoriesExists();
+        
         List<CrosshairData> crosshairs = [];
 
         if (!DirAccess.DirExistsAbsolute(UserSavedCrosshairDirPath))
@@ -150,7 +157,7 @@ public partial class CrosshairSetting : Node
 
             string path = $"{UserSavedCrosshairDirPath}/{fileName}";
 
-            var resource = ResourceLoader.Load<CrosshairData>(path);
+            var resource = ResourceLoader.Load<CrosshairData>(path, cacheMode: ResourceLoader.CacheMode.ReplaceDeep);
 
             if (resource == null)
             {

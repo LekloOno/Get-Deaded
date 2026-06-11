@@ -51,7 +51,7 @@
 [ext_resource type="Script" uid="uid://cie6ww774f8b" path="res://script/ui/menu/contexts/accessibility/ui_open_crosshair_editor.gd" id="41_fcw2i"]
 [ext_resource type="PackedScene" uid="uid://cdpwp7sk0b76d" path="res://prefabs/ui/combat/crosshair/ui_crosshair_editor.tscn" id="49_fbh7i"]
 [ext_resource type="PackedScene" uid="uid://4ny2ij141sta" path="res://prefabs/ui/combat/crosshair/ui_crosshair_galery.tscn" id="49_r1886"]
-[ext_resource type="Script" uid="uid://coaccjbrhle5v" path="res://script/ui/combat/crosshair/ui/UI_CrosshairPresets.cs" id="50_yj8ne"]
+[ext_resource type="ButtonGroup" uid="uid://dqni2wnmrs3ln" path="res://prefabs/ui/combat/crosshair/ui_crosshair_preview_button_group.tres" id="50_r1886"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kqyci"]
 content_margin_left = 8.0
@@ -2059,6 +2059,7 @@ offset_top = 230.0
 offset_right = -597.0
 offset_bottom = -230.0
 _menu = NodePath("..")
+_previewSelectGroup = ExtResource("50_r1886")
 
 [node name="CrosshairEditorMenu" type="MarginContainer" parent="." unique_id=727793884]
 layout_mode = 1
@@ -2085,16 +2086,13 @@ size_flags_vertical = 3
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Node" type="Node" parent="CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer" unique_id=1238707711 node_paths=PackedStringArray("_menu", "_galery", "_presetsButton", "_savedButton")]
-script = ExtResource("50_yj8ne")
-_menu = NodePath("../../../../..")
-_galery = NodePath("../../../../../UiCrosshairGalery")
-_presetsButton = NodePath("../UiCrosshairEditor/CrosshairBackground/VBoxContainer/HBoxContainer/Presets")
-_savedButton = NodePath("../UiCrosshairEditor/CrosshairBackground/VBoxContainer/HBoxContainer/Saved")
-
 [node name="UiCrosshairEditor" parent="CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer" unique_id=1661831078 instance=ExtResource("49_fbh7i")]
 custom_minimum_size = Vector2(1000, 0)
 layout_mode = 2
+
+[node name="UiCrosshairBrowse" parent="CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor" index="0" unique_id=1049941170 node_paths=PackedStringArray("_menu", "_galery")]
+_menu = NodePath("../../../../../..")
+_galery = NodePath("../../../../../../UiCrosshairGalery")
 
 [node name="MarginContainer2" type="MarginContainer" parent="CrosshairEditorMenu/PanelContainer2/VBoxContainer" unique_id=1444862659]
 layout_mode = 2

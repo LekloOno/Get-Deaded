@@ -90,6 +90,9 @@ public partial class UI_CrosshairGalery : Control
         _exportButton.Disabled
         = _importButton.Disabled
         = mode != Mode.BrowseCustom;
+
+        _confirmButton.Disabled = mode == Mode.Save
+            && _fileEdit.Text.StripEdges() == string.Empty;
         
         _currentMode = mode;
 
@@ -114,12 +117,24 @@ public partial class UI_CrosshairGalery : Control
 
     private void ConfirmButtonPressed()
     {
-        if (_currentMode != Mode.Save && _selectedData != null)
-        {
-            CrosshairSetting.Instance.Save(_selectedData);
-            _menu.ExitCurrent();
-        }
-        // TODO - save CrosshairSetting.Instance.Data to _fileEdit name
+        if (_currentMode == Mode.Save)
+            ConfirmSave();
+        else if (_selectedData != null)
+            ConfirmUse(_selectedData);
+        else
+            return;
+
+        _menu.ExitCurrent();
+    }
+
+    private void ConfirmUse(CrosshairData data)
+    {
+        CrosshairSetting.Instance.Save(data);
+    }
+
+    private void ConfirmSave()
+    {
+        CrosshairSetting.SaveAs(CrosshairSetting.Instance.Data, _fileEdit.Text);
     }
 
     private void FileEditTextChanged(string search)
@@ -139,8 +154,14 @@ public partial class UI_CrosshairGalery : Control
             preview.Visible = name.Contains(search, System.StringComparison.CurrentCultureIgnoreCase);
         }
 
-        if (!found && _currentMode == Mode.Save)
-            _previewSelectGroup.GetPressedButton().ButtonPressed = false;
+        if (found || _currentMode != Mode.Save)
+            return;
+
+        _confirmButton.Disabled = search.StripEdges() == string.Empty;
+
+        BaseButton button = _previewSelectGroup.GetPressedButton();
+        if (button != null)
+            button.ButtonPressed = false;
     }
 
     private void OnCrosshairSelected(CrosshairData data) =>
@@ -150,14 +171,14 @@ public partial class UI_CrosshairGalery : Control
 
     private void SetSelectedData(CrosshairData? data)
     {
-        if (data == _selectedData)
-            return;
-
         _selectedData = data;
 
         if (_selectedData != null)
             _fileEdit.Text = _selectedData.ResourcePath.GetFile().GetBaseName();
-        else if (_currentMode != Mode.Save)
-            _confirmButton.Disabled = true;
+
+        if (_currentMode == Mode.Save)
+            _confirmButton.Disabled = _fileEdit.Text.StripEdges() == string.Empty;
+        else
+            _confirmButton.Disabled = _selectedData == null;
     }
 }

@@ -4,11 +4,13 @@
 [ext_resource type="Theme" uid="uid://ddkca4fk8kto5" path="res://assets/ui/menu_theme.tres" id="1_nn6dc"]
 [ext_resource type="Script" uid="uid://c4ox6ngvsjkth" path="res://script/ui/combat/crosshair/ui/UI_CrosshairEditor.cs" id="2_gc7y1"]
 [ext_resource type="PackedScene" uid="uid://cctd2edpm42m8" path="res://prefabs/ui/combat/crosshair/shapes/ui_shape_container.tscn" id="3_nn6dc"]
+[ext_resource type="Script" uid="uid://coaccjbrhle5v" path="res://script/ui/combat/crosshair/ui/UI_CrosshairPresets.cs" id="4_4w3m4"]
 [ext_resource type="PackedScene" uid="uid://qqvt3ahu2l65" path="res://prefabs/ui/menu/settings/ui_settings_category_header.tscn" id="4_glece"]
 [ext_resource type="PackedScene" uid="uid://ca431v4hraw8w" path="res://prefabs/ui/combat/crosshair/fill/ui_crosshair_fill.tscn" id="5_glece"]
 [ext_resource type="Script" uid="uid://dm5ioj0ce04yu" path="res://script/ui/combat/crosshair/ui/UI_CrosshairLayerOptionButton.cs" id="6_01c6s"]
 [ext_resource type="Script" uid="uid://bt8dp3nqvckqm" path="res://script/ui/menu/contexts/accessibility/ui_crosshair_background_color.gd" id="6_4w3m4"]
 [ext_resource type="PackedScene" uid="uid://brj3cyh0inqyy" path="res://prefabs/ui/combat/crosshair/fill/ui_crosshair_outline.tscn" id="6_l3n8h"]
+[ext_resource type="Texture2D" uid="uid://bck07v22m17n8" path="res://assets/sprites/ui_general/save.png" id="6_w2oog"]
 
 [node name="UiCrosshairEditor" type="HBoxContainer" unique_id=1661831078 node_paths=PackedStringArray("CombineShapes", "CombineOutlines", "_fill", "_outline", "_layersContainer", "_addLayerOption")]
 anchors_preset = 15
@@ -29,6 +31,12 @@ _outline = NodePath("Edit/EditorMain/UiCrosshairOutline")
 _layersContainer = NodePath("Edit/Layers/LayersContainer")
 _addLayerOption = NodePath("Edit/PanelContainer/MarginContainer/HBoxContainer/AddLayer")
 _shapeContainer = ExtResource("3_nn6dc")
+
+[node name="UiCrosshairBrowse" type="Node" parent="." unique_id=1049941170 node_paths=PackedStringArray("_presetsButton", "_savedButton", "_saveButton")]
+script = ExtResource("4_4w3m4")
+_presetsButton = NodePath("../CrosshairBackground/VBoxContainer/MarginContainer/HBoxContainer/Presets")
+_savedButton = NodePath("../CrosshairBackground/VBoxContainer/MarginContainer/HBoxContainer/Saved")
+_saveButton = NodePath("../CrosshairBackground/VBoxContainer/MarginContainer/HBoxContainer/Save")
 
 [node name="CrosshairBackground" type="PanelContainer" parent="." unique_id=463732239]
 custom_minimum_size = Vector2(250, 0)
@@ -82,20 +90,37 @@ size_flags_horizontal = 3
 text = "CROSSHAIR_BROWSE_LABEL"
 clip_text = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CrosshairBackground/VBoxContainer" unique_id=331459499]
+[node name="MarginContainer" type="MarginContainer" parent="CrosshairBackground/VBoxContainer" unique_id=1425241280]
 layout_mode = 2
-size_flags_horizontal = 4
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_right = 15
 
-[node name="Presets" type="Button" parent="CrosshairBackground/VBoxContainer/HBoxContainer" unique_id=895315862]
+[node name="HBoxContainer" type="HBoxContainer" parent="CrosshairBackground/VBoxContainer/MarginContainer" unique_id=331459499]
 layout_mode = 2
+
+[node name="Presets" type="Button" parent="CrosshairBackground/VBoxContainer/MarginContainer/HBoxContainer" unique_id=895315862]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"TightButton"
 theme_override_font_sizes/font_size = 9
 text = "PRESETS_BUTTON"
 
-[node name="Saved" type="Button" parent="CrosshairBackground/VBoxContainer/HBoxContainer" unique_id=155371670]
+[node name="Saved" type="Button" parent="CrosshairBackground/VBoxContainer/MarginContainer/HBoxContainer" unique_id=155371670]
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 3
+theme_type_variation = &"TightButton"
 theme_override_font_sizes/font_size = 9
 text = "SAVED_BUTTON"
+
+[node name="Save" type="Button" parent="CrosshairBackground/VBoxContainer/MarginContainer/HBoxContainer" unique_id=1706881670]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+tooltip_text = "CROSSHAIR_SAVE_CURRENT_TOOLTIP"
+theme_type_variation = &"TightButton"
+icon = ExtResource("6_w2oog")
+clip_text = true
+icon_alignment = 1
+expand_icon = true
 
 [node name="Edit" type="VBoxContainer" parent="." unique_id=1049714343]
 layout_mode = 2
