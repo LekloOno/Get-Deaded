@@ -45,6 +45,19 @@ public partial class UI_CrosshairGalery : Control
 
         _exportDialog.MinSize = _importDialog.MinSize = new Vector2I(780, 580);
         _exportDialog.Theme   = _importDialog.Theme   = ThemeDB.GetDefaultTheme();
+
+        VisibilityChanged += OnVisibilityChanged;
+    }
+
+    private void OnVisibilityChanged()
+    {
+        if (IsVisibleInTree())
+            return;
+            
+        _dataNameMap.Clear();
+        _fileEdit.Text = "";
+        foreach (Node node in _container.GetChildren())
+            node.QueueFree();
     }
 
     public void Init(List<CrosshairData> crosshairs, Mode mode)
