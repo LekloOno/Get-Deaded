@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dx40tec6r17nl"]
+
+[ext_resource type="Script" uid="uid://cwd4qbpx2ltxc" path="res://script/player/audio/PA_InstantAction.cs" id="1_s755o"]
+[ext_resource type="Script" uid="uid://dmowaohx8nd7q" path="res://addons/GaudioProcessTree/nodes/modules/AUD_Randomizer.cs" id="3_ph06i"]
+[ext_resource type="Script" uid="uid://dsv3ptnaeu18d" path="res://addons/GaudioProcessTree/nodes/stream_players/AUD_StreamPlayer3D.cs" id="6_h25ik"]
+[ext_resource type="AudioStream" uid="uid://b1uhtjytwlb14" path="res://assets/sounds/thruster.wav" id="13_wvp15"]
+
+[node name="PA_DoubleJump" type="Node3D" unique_id=309468291 node_paths=PackedStringArray("_sound")]
+script = ExtResource("1_s755o")
+_sound = NodePath("AUD_Randomizer")
+metadata/_custom_type_script = "uid://cwd4qbpx2ltxc"
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=869279642]
+
+[node name="AUD_Randomizer" type="Node" parent="." unique_id=1982962666]
+script = ExtResource("3_ph06i")
+Sounds = Array[AudioStream]([ExtResource("13_wvp15")])
+MinPitch = 0.9
+MaxPitch = 1.1
+UseTimeScale = true
+metadata/_custom_type_script = "uid://dmowaohx8nd7q"
+
+[node name="Thruster" type="Node" parent="AUD_Randomizer" unique_id=1479550007 node_paths=PackedStringArray("Player")]
+script = ExtResource("6_h25ik")
+Player = NodePath("../../AudioStreamPlayer3D")
+metadata/_custom_type_script = "uid://dsv3ptnaeu18d"
