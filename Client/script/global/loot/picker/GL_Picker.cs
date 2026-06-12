@@ -67,6 +67,8 @@ public partial class GL_Picker : Area3D
         if (GL_SlowMoProcess.Active != null)
             GL_SlowMoProcess.Active.Abort(true);
 
+        _weaponsHandler.ClearDamageMultiplier();
+
         EmitSignal(SignalName.EffectsCleansed);
     }
 
