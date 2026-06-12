@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using Godot;
@@ -6,13 +5,6 @@ using Godot;
 [GlobalClass]
 public partial class UI_CrosshairGalery : Control
 {
-    const string TitleSave      = "CROSSHAIR_BROWSE_SAVE";
-    const string TitleCustom    = "CROSSHAIR_BROWSE_CUSTOM";
-    const string TitlePresets   = "CROSSHAIR_BROWSE_PRESETS";
-
-    const string FileEditSave   = "CROSSHAIR_FILE_EDIT_SAVE_PLACEHOLDER";
-    const string FileEditSearch = "CROSSHAIR_FILE_EDIT_SEARCH_PLACEHOLDER";
-
     [Export] private UI_EscapeMenu _menu = null!;
     [Export] private Container     _container = null!;
     [Export] private PackedScene   _crosshairStaticPreview = null!;
@@ -54,22 +46,23 @@ public partial class UI_CrosshairGalery : Control
         if (IsVisibleInTree())
             return;
             
+        Clear();
+    }
+
+    public void Clear()
+    {
         _dataNameMap.Clear();
         _fileEdit.Text = "";
         foreach (Node node in _container.GetChildren())
             node.QueueFree();
+
+        _selectedData = null;
     }
 
     public void Init(List<CrosshairData> crosshairs, Mode mode)
     {
-        _dataNameMap.Clear();
-
+        Clear();
         SetMode(mode);
-
-        _fileEdit.Text = "";
-
-        foreach (Node node in _container.GetChildren())
-            node.QueueFree();
 
         foreach (CrosshairData crosshair in crosshairs)
         {
@@ -102,51 +95,18 @@ public partial class UI_CrosshairGalery : Control
         Save,
     }
 
-    private string ModeToTitle(Mode mode)
-    {
-        return mode switch
-        {
-            Mode.BrowsePresets  => TitlePresets,
-            Mode.BrowseCustom   => TitleCustom,
-            Mode.Save           => TitleSave,
-            _ => throw new System.NotImplementedException(),
-        };
-    }
-
-    private string ModeToEditPlaceHolder(Mode mode)
-    {
-        return mode switch
-        {
-            Mode.BrowsePresets  => FileEditSearch,
-            Mode.BrowseCustom   => FileEditSearch,
-            Mode.Save           => FileEditSave,
-            _ => throw new System.NotImplementedException(),
-        };
-    }
-
     private void SetMode(Mode mode)
     {
-        if (mode != Mode.BrowseCustom)
-        {
-            _exportButton.Disabled
-            = _importButton.Disabled
-            = true;
-        }
-        else
-        {
-            _exportButton.Disabled = _selectedData == null;
-            _importButton.Disabled = false;
-        }
+        _importButton.Disabled = mode.ToImportButtonDisabled();
+        _exportButton.Disabled = mode.ToExportButtonDisabled(_selectedData);
 
-
-
-        _confirmButton.Disabled = mode == Mode.Save
-            && _fileEdit.Text.StripEdges() == string.Empty;
+        _confirmButton.Disabled = mode
+            .ToConfirmButtonDisabled(_fileEdit.Text, _selectedData);
         
         _currentMode = mode;
 
-        _titleLabel.Text = ModeToTitle(mode);
-        _fileEdit.PlaceholderText = ModeToEditPlaceHolder(mode);
+        _titleLabel.Text = mode.ToTitle();
+        _fileEdit.PlaceholderText = mode.ToEditPlaceHolder();
     }
 
     private void OnImportButtonPressed()
@@ -214,7 +174,8 @@ public partial class UI_CrosshairGalery : Control
         if (found || _currentMode != Mode.Save)
             return;
 
-        _confirmButton.Disabled = search.StripEdges() == string.Empty;
+        _confirmButton.Disabled = _currentMode
+            .ToConfirmButtonDisabled(search, _selectedData);
 
         BaseButton button = _previewSelectGroup.GetPressedButton();
         if (button != null)
@@ -236,19 +197,17 @@ public partial class UI_CrosshairGalery : Control
     {
         _selectedData = data;
 
-        bool selected = _selectedData != null;
-        _exportButton.Disabled = _currentMode != Mode.BrowseCustom || !selected;
+        _exportButton.Disabled = _currentMode
+            .ToExportButtonDisabled(_selectedData);
 
-        if (selected)
+        if (_selectedData != null)
         {
             _fileEdit.Text = _selectedData!.ResourcePath.GetFile().GetBaseName();
             _fileEdit.CaretColumn = _fileEdit.Text.Length;
         }
 
-        if (_currentMode == Mode.Save)
-            _confirmButton.Disabled = _fileEdit.Text.StripEdges() == string.Empty;
-        else
-            _confirmButton.Disabled = !selected;
+        _confirmButton.Disabled = _currentMode
+            .ToConfirmButtonDisabled(_fileEdit.Text, _selectedData);
     }
 
     private void OnExportFileSelected(string path)
