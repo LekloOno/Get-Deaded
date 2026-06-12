@@ -7,7 +7,7 @@ public partial class CNT_DoubleJumpInput : Node
     [Export] private PI_Jump        _jumpInput = null!;
     [Export] private PI_Dash        _dashInput = null!;
     [Export] private PS_Grounded    _groundState = null!;
-    [Export] private float _minHeight       = 0.35f;
+    [Export] private float _minHeight       = 0.28f;
     [Export] private ulong _dashJumpWindow  = 100; 
 
     private readonly PI_Dash _internalDashInput = new();
@@ -19,7 +19,7 @@ public partial class CNT_DoubleJumpInput : Node
     public override void _Ready()
     {
         _dashInput.GetParent().RemoveChild(_dashInput);
-        AddChild(_internalDashInput);
+        AddChild(_dashInput);
         _internalDashInput.OnStartInput += OnInternalDashStart;
 
         SetMode(DoubleJumpModeSetting.Mode);
@@ -57,13 +57,13 @@ public partial class CNT_DoubleJumpInput : Node
 
         if (nextDash)
         {
-            RemoveChild(_internalDashInput);
-            AddChild(_dashInput);
+            AddChild(_internalDashInput);
+            RemoveChild(_dashInput);
         }
         else
         {
-            AddChild(_internalDashInput);
-            RemoveChild(_dashInput);
+            RemoveChild(_internalDashInput);
+            AddChild(_dashInput);
         }
     }
 
@@ -75,7 +75,7 @@ public partial class CNT_DoubleJumpInput : Node
 
     private void OnInternalDashStart(object? sender, EventArgs e)
     {
-        if (PHX_Time.ScaledTicksMsec - _jumpInput.LastInput < _dashJumpWindow)
+        if (PHX_Time.ScaledTicksMsec - _jumpInput.LastInput > _dashJumpWindow)
             _dashInput.KeyDown();
         else
             Started?.Invoke();
