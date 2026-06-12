@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://bh2y34rim2pm"]
+
+[ext_resource type="Shader" uid="uid://dsprymks0rfsy" path="res://assets/shaders/speed_wind_vfx.gdshader" id="1_7fjth"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ypuw6"]
+shader = ExtResource("1_7fjth")
+shader_parameter/vignette_color = Color(0.6, 0, 0, 1)
+shader_parameter/tightness = 1.00000004424012
+shader_parameter/trails = 500.00002356
+shader_parameter/speed = 0.350000016625
+shader_parameter/frequency = 0.08000000310148
+shader_parameter/start_radius = 0.6800000323
+shader_parameter/softness = 0.10000000405148
+shader_parameter/trail_length = 0.0250000011875
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1vfp3"]
+shader = ExtResource("1_7fjth")
+shader_parameter/vignette_color = Color(0.6, 0, 0, 1)
+shader_parameter/tightness = 1.00000004424012
+shader_parameter/trails = 300.00001406
+shader_parameter/speed = 0.250000011875
+shader_parameter/frequency = 0.10000000405148
+shader_parameter/start_radius = 0.6000000285
+shader_parameter/softness = 0.04100000124898
+shader_parameter/trail_length = 0.034000001615
+
+[node name="SpeedVfx" type="ColorRect" unique_id=1194191449]
+material = SubResource("ShaderMaterial_ypuw6")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="ColorRect" parent="." unique_id=1031012456]
+material = SubResource("ShaderMaterial_1vfp3")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
