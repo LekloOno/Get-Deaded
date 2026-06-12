@@ -1,6 +1,6 @@
 using Godot;
 
-[Tool]
+[GlobalClass, Tool]
 public partial class VFX_SpeedWindLayer : Control
 {
     [Export] private float _speed = 4f;

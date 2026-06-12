@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Godot;
 
-[Tool]
+[GlobalClass, Tool]
 public partial class VFX_SpeedWindController : Control
 {
     [Export(PropertyHint.Range, "0,1")]
