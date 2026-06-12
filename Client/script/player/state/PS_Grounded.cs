@@ -32,10 +32,10 @@ public partial class PS_Grounded : Node
         if (_groundCast.IsColliding())
         {
             Vector3 collisionPoint = _groundCast.GetCollisionPoint(0);
-            DistanceToGround = _groundCast.GlobalPosition.DistanceTo(collisionPoint) - _bodyScale.Collider.Size.Y / 2f;
+            DistanceToGround = _groundCast.GlobalPosition.Y - collisionPoint.Y - _bodyScale.Collider.Size.Y / 2f;
         }
         else
-            DistanceToGround = Math.Abs(_groundCast.TargetPosition.Y) - _bodyScale.Collider.Size.Y / 2f;
+            DistanceToGround = Math.Abs(_groundCast.TargetPosition.Y);
         
         UpdateGrounded();
     }

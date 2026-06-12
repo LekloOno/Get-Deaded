@@ -4,10 +4,11 @@ using Godot;
 [GlobalClass]
 public partial class PM_Jump : PM_Action
 {
-    [Export] private PI_Jump _jumpInput;
-    [Export] private PM_JumpData _data;
-    [Export] private PS_Grounded _groundState;
-    [Export] private PM_Controller _controller;
+    [Export] private PI_Jump        _jumpInput = null!;
+    [Export] private PM_JumpData    _data = null!;
+    [Export] private PS_Grounded    _groundState = null!;
+    [Export] private PM_Controller  _controller = null!;
+    [Export] private CNT_DoubleJumpInput? _doubleJumpInput;
     
     private float _jumpGravity;
     private float _fallGravity;
@@ -33,6 +34,8 @@ public partial class PM_Jump : PM_Action
     {
         if (IsCoyoteGrounded() && _jumpInput.UseBuffer())
             return DoJump(velocity);
+
+        _doubleJumpInput?.TryHeightDoubleJump();
 
         return velocity;
     }

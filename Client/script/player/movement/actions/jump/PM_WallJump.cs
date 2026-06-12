@@ -67,34 +67,11 @@ public partial class PM_WallJump : PM_Action
         return velocity;
     }
 
-    public bool CanWallJump(Vector3 velocity)
-    {
-        Vector3 normal = new();
-        if (!IsCollidingWall(ref normal, out GB_IExternalBodyManager _))
-            return false;
-
-        if (!IsWall(normal))
-            return false;
-
-
-        Vector3 flatVel = MATH_Vector3Ext.Flat(velocity);
-        if (_ledgeClimb.CanLedgeClimb() && TooSlow(flatVel, normal))
-            return false;
-        
-        Vector3 wallJumpVel = _controller.VelocityCache.UseCacheOr(velocity);
-        Vector3 wallFlatVel = MATH_Vector3Ext.Flat(wallJumpVel);
-
-        if (TooSlow(wallFlatVel, normal))
-            return false;
-
-        return true;
-    }
-
     private bool IsCollidingWall(ref Vector3 normal, out GB_IExternalBodyManager entity)
     {
         entity = null;
 
-        RayCast3D cast = _wallCastLow.IsColliding() ? _wallCastLow
+        RayCast3D? cast = _wallCastLow.IsColliding() ? _wallCastLow
                         : _wallCastHigh.IsColliding() ? _wallCastHigh
                         : null;
 

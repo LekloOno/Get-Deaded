@@ -10,11 +10,6 @@ public partial class CNT_DoubleJumpInput : Node
     [Export] private float _minHeight       = 0.28f;
     [Export] private ulong _dashJumpWindow  = 100;
 
-    // Additionnal checks with conflicting abilities
-    [Export] private PM_Controller  _controller = null!;
-    [Export] private PM_LedgeClimb  _ledgeClimb = null!;
-    [Export] private PM_WallJump    _wallJump = null!;
-
     private readonly PI_Dash _internalDashInput = new();
 
     public event Action? Started;
@@ -35,21 +30,8 @@ public partial class CNT_DoubleJumpInput : Node
     {
         SetProcessUnhandledInput(mode.HasFlag(DoubleJumpMode.Defined));
         SetDashJump(mode);
-        SetHeightJump(mode);
-    }
 
-    private void SetHeightJump(DoubleJumpMode mode)
-    {
-        bool prevHeight = _mode.HasFlag(DoubleJumpMode.HeightJump);
-        bool nextHeight =  mode.HasFlag(DoubleJumpMode.HeightJump);
-
-        if (prevHeight == nextHeight)
-            return;
-
-        if (nextHeight)
-            _jumpInput.Start += TryHeightDoubleJump;
-        else
-            _jumpInput.Start -= TryHeightDoubleJump;
+        _mode = mode;
     }
 
     private void SetDashJump(DoubleJumpMode mode)
@@ -86,15 +68,15 @@ public partial class CNT_DoubleJumpInput : Node
             Started?.Invoke();
     }
 
-    private void TryHeightDoubleJump(object sender, float args)
+    public void TryHeightDoubleJump()
     {
+        if (!_mode.HasFlag(DoubleJumpMode.HeightJump))
+            return;
+        
         if (_groundState.DistanceToGround < _minHeight)
             return;
-
-        if (_wallJump.CanWallJump(_controller.RealVelocity))
-            return;
-
-        if (_ledgeClimb.CanLedgeClimb())
+            
+        if (!_jumpInput.UseBuffer())
             return;
 
         Started?.Invoke();
