@@ -140,6 +140,13 @@ public partial class PM_Dash : PM_Action
 
     private float GetChargeCost()
     {
+        // DOUBLE JUMP COST BUG SPOTTED
+        // we get charge, if grounded - cost is dash cost
+        // but later, to determine whether the force applied is dash or double jump
+        // we use IsDoubleJump()
+        // Both _groundState.IsGrounded() and IsDoubleJump() might be true
+        // resulting in - the cost of dash, the force of double jump.
+        // - Kinda fun as is, so i'm not fixing it yet.
         if (_groundState.IsGrounded())
             return _dashCost;
 

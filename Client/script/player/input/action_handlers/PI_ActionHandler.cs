@@ -8,9 +8,9 @@ public delegate void ActionInputEvent<T>(object sender, T args);
 
 public abstract partial class PI_ActionHandler<T> : Node, PI_InputAction
 {
-    public ActionInputEvent<T> Start;
-    public ActionInputEvent<T> Stop;
-    public ActionInputEvent<T> Perform;
+    public ActionInputEvent<T>? Start;
+    public ActionInputEvent<T>? Stop;
+    public ActionInputEvent<T>? Perform;
 
     /// <summary>
     /// Action Input Handler disables the input handling by default.
