@@ -37,6 +37,8 @@ public partial class PM_LedgeClimb : PM_Action
     private Vector3 _directionFlat = Vector3.Zero;
     private KinematicCollision3D _lastCollision;
 
+    public event Action? SuperGlideStarted;
+
     public override void _Ready()
     {
         _ledgeCast.Enabled = false;
@@ -126,6 +128,7 @@ public partial class PM_LedgeClimb : PM_Action
                 
             outVelocity += _direction * _superGlideXStrength;
             outVelocity.Y = _superGlideYStrength;
+            SuperGlideStarted?.Invoke();
         } else
             outVelocity = minOut;
 

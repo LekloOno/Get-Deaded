@@ -1,6 +1,5 @@
 using Godot;
 
-[GlobalClass]
 public partial class VFX_SpeedWind : Node
 {
     [ExportCategory("Settings")]
