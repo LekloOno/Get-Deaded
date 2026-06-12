@@ -7,7 +7,20 @@ public partial class VFX_SpeedWindLayer : Control
     [Export] private float _frequency = 0.1f;
 
     [Export(PropertyHint.Range, "0,1")]
-    public  float Intensity;
+    public  float Intensity
+    {
+        get => _intensity;
+        set
+        {
+            if (_intensity == value)
+                return;
+
+            Visible = value > 0.001f;
+            _intensity = value;
+        }
+    }
+
+    private float _intensity;
     
     private double _phase = 0.0;
 
