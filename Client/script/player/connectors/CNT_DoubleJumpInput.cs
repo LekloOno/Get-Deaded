@@ -8,7 +8,12 @@ public partial class CNT_DoubleJumpInput : Node
     [Export] private PI_Dash        _dashInput = null!;
     [Export] private PS_Grounded    _groundState = null!;
     [Export] private float _minHeight       = 0.28f;
-    [Export] private ulong _dashJumpWindow  = 100; 
+    [Export] private ulong _dashJumpWindow  = 100;
+
+    // Additionnal checks with conflicting abilities
+    [Export] private PM_Controller  _controller = null!;
+    [Export] private PM_LedgeClimb  _ledgeClimb = null!;
+    [Export] private PM_WallJump    _wallJump = null!;
 
     private readonly PI_Dash _internalDashInput = new();
 
@@ -83,7 +88,15 @@ public partial class CNT_DoubleJumpInput : Node
 
     private void TryHeightDoubleJump(object sender, float args)
     {
-        if (_groundState.DistanceToGround > _minHeight)
-            Started?.Invoke();
+        if (_groundState.DistanceToGround < _minHeight)
+            return;
+
+        if (_wallJump.CanWallJump(_controller.RealVelocity))
+            return;
+
+        if (_ledgeClimb.CanLedgeClimb())
+            return;
+
+        Started?.Invoke();
     }
 }
