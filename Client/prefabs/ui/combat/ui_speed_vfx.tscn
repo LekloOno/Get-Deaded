@@ -1,42 +1,70 @@
 [gd_scene format=3 uid="uid://bh2y34rim2pm"]
 
+[ext_resource type="Script" uid="uid://ebgvic8skevb" path="res://script/vfx/combat/speed/VFX_SpeedWindController.cs" id="1_1vfp3"]
 [ext_resource type="Shader" uid="uid://dsprymks0rfsy" path="res://assets/shaders/speed_wind_vfx.gdshader" id="1_7fjth"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ypuw6"]
-shader = ExtResource("1_7fjth")
-shader_parameter/vignette_color = Color(0.6, 0, 0, 1)
-shader_parameter/tightness = 1.00000004424012
-shader_parameter/trails = 500.00002356
-shader_parameter/speed = 0.350000016625
-shader_parameter/frequency = 0.08000000310148
-shader_parameter/start_radius = 0.6800000323
-shader_parameter/softness = 0.10000000405148
-shader_parameter/trail_length = 0.0250000011875
+[ext_resource type="Script" uid="uid://dho6up4qf6bbm" path="res://script/vfx/combat/speed/VFX_SpeedWindLayer.cs" id="3_8s2o3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1vfp3"]
 shader = ExtResource("1_7fjth")
+shader_parameter/auto = false
 shader_parameter/vignette_color = Color(0.6, 0, 0, 1)
-shader_parameter/tightness = 1.00000004424012
-shader_parameter/trails = 300.00001406
-shader_parameter/speed = 0.250000011875
+shader_parameter/count = 250.000011685
+shader_parameter/speed = 3.50000016625
 shader_parameter/frequency = 0.10000000405148
 shader_parameter/start_radius = 0.6000000285
 shader_parameter/softness = 0.04100000124898
-shader_parameter/trail_length = 0.034000001615
+shader_parameter/trail_length = 0.50000002375
 
-[node name="SpeedVfx" type="ColorRect" unique_id=1194191449]
-material = SubResource("ShaderMaterial_ypuw6")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ypuw6"]
+shader = ExtResource("1_7fjth")
+shader_parameter/auto = false
+shader_parameter/vignette_color = Color(0.6, 0, 0, 1)
+shader_parameter/count = 500.00002356
+shader_parameter/speed = 5.0000002375
+shader_parameter/frequency = 0.20000000880148
+shader_parameter/start_radius = 0.6800000323
+shader_parameter/softness = 0.10000000405148
+shader_parameter/trail_length = 0.400000019
+
+[node name="SpeedVfx" type="Control" unique_id=1533984996]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_1vfp3")
+Intensity = 1.0
 
-[node name="Control" type="ColorRect" parent="." unique_id=1031012456]
+[node name="Wide" type="ColorRect" parent="." unique_id=1031012456]
 material = SubResource("ShaderMaterial_1vfp3")
+instance_shader_parameters/intensity = 1.0
+instance_shader_parameters/manual_frequency = 0.1
+instance_shader_parameters/phase = 13.345663
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_8s2o3")
+_speed = 5.0
+Intensity = 1.0
+
+[node name="Tight" type="ColorRect" parent="." unique_id=1194191449]
+material = SubResource("ShaderMaterial_ypuw6")
+instance_shader_parameters/intensity = 1.0
+instance_shader_parameters/manual_frequency = 0.2
+instance_shader_parameters/phase = 32.02959
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("3_8s2o3")
+_speed = 6.0
+_frequency = 0.2
+Intensity = 1.0
