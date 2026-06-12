@@ -16,11 +16,6 @@ public partial class PM_Dash : PM_Action
     [Export] private PM_OmniCharge _charge;
     [Export] private float _dashCost = 90f;
     [Export] private float _slamCost = 60f;
-    [Export] private float _doubleJumpCost = 60f;
-
-    public Action OnThruster;
-
-    private bool _wasDoubleJump = false;
 
     private float _dashDistance = 6.5f;
     [Export(PropertyHint.Range, "0.0, 10.0, or_greater")] public float Distance
@@ -45,11 +40,6 @@ public partial class PM_Dash : PM_Action
         }
     }
     [Export] private float _slamWindow;
-
-    [Export] private float _doubleJumpStrength = 5f;
-    [Export] private float _doubleJumpPenalty = 0.1f;
-    [Export] private float _doubleJumpVerticalPenalty = 0.5f;
-    [Export] private float _doubleJumpDuration;
 
     public EventHandler OnUnavailable;
 
@@ -88,37 +78,13 @@ public partial class PM_Dash : PM_Action
 
         _prevRealVelocity = _controller.RealVelocity;
         Vector3 velocity = _prevRealVelocity;
-        float duration;
 
-        _wasDoubleJump = IsDoubleJump();
-
-        if (_wasDoubleJump)
-        {
-            float horPenalty = 1 - _doubleJumpPenalty;
-            float vertPenalty = 1 - _doubleJumpVerticalPenalty;
-            
-            velocity *= new Vector3(horPenalty, vertPenalty, horPenalty);
-
-            //velocity.Y = _doubleJumpStrength;
-            _prevRealVelocity = velocity;
-
-            _controller.RealVelocity = velocity;
-            _controller.Velocity = velocity;
-
-            _direction = velocity.Normalized();
-            _force = _doubleJumpStrength * Vector3.Up;
-            duration = _doubleJumpDuration;
-            _controller.AdditionalForces.AddPersistent(_force);
-            OnThruster?.Invoke();
-        } else
-        {
-            _direction = GetDashDirection();
-            float appliedSpeed = Mathf.Max(_dashSpeed, velocity.Length());
-            _force = appliedSpeed * _direction;
-            duration = _dashDuration;
-            _controller.TakeOverForces.AddPersistent(_force);
-            InvokeStart();
-        }
+        _direction = GetDashDirection();
+        float appliedSpeed = Mathf.Max(_dashSpeed, velocity.Length());
+        _force = appliedSpeed * _direction;
+        float duration = _dashDuration;
+        _controller.TakeOverForces.AddPersistent(_force);
+        InvokeStart();
 
         _endDashTimer = GetTree().CreateTimer(duration, false, true);
         _endDashTimer.Timeout += EndDash;
@@ -140,21 +106,11 @@ public partial class PM_Dash : PM_Action
 
     private float GetChargeCost()
     {
-        // DOUBLE JUMP COST BUG SPOTTED
-        // we get charge, if grounded - cost is dash cost
-        // but later, to determine whether the force applied is dash or double jump
-        // we use IsDoubleJump()
-        // Both _groundState.IsGrounded() and IsDoubleJump() might be true
-        // resulting in - the cost of dash, the force of double jump.
-        // - Kinda fun as is, so i'm not fixing it yet.
         if (_groundState.IsGrounded())
             return _dashCost;
 
         if (IsSlam())
             return _slamCost;
-
-        if (IsDoubleJump())
-            return _doubleJumpCost;
 
         return _dashCost;
     }
@@ -170,18 +126,12 @@ public partial class PM_Dash : PM_Action
         return flatDir;
     }
 
-    private bool IsDoubleJump() =>
-        PHX_Time.ScaledTicksMsec - _jumpInput.LastInput <= _slamWindow;
-
     private bool IsSlam() =>
         PHX_Time.ScaledTicksMsec - _crouchDispatcher.LastCrouchDown <= _slamWindow;
 
     public void AbortDash()
     {
-        if (_wasDoubleJump)
-            _controller.AdditionalForces.RemovePersistent(_force);
-        else
-            _controller.TakeOverForces.RemovePersistent(_force);
+        _controller.TakeOverForces.RemovePersistent(_force);
 
         _isDashing = false;
         _controller.CollisionMask = CONF_Collision.Masks.Environment;
@@ -196,12 +146,6 @@ public partial class PM_Dash : PM_Action
 
     private void EndDash()
     {
-        if (_wasDoubleJump)
-        {
-            AbortDash();
-            return;
-        }
-
         Vector3 outVelocity = OutVelocity();
 
         _controller.Velocity = outVelocity;

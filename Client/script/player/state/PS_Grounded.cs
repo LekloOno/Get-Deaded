@@ -8,11 +8,12 @@ public partial class PS_Grounded : Node
     [Export] private float _maxVerticalSpeed = 4.76f;
     
     [ExportCategory("Setup")]
-    [Export] private PM_Controller _characterBody3D;
-    [Export] private ShapeCast3D _groundCast;
+    [Export] private PM_Controller  _characterBody3D = null!;
+    [Export] private ShapeCast3D    _groundCast = null!;
+    [Export] private PHX_BodyScale  _bodyScale = null!;
 
-    public event Action<LandingEventArgs> OnLanding;
-    public event Action OnLeaving;
+    public event Action<LandingEventArgs>? OnLanding;
+    public event Action? OnLeaving;
 
     public float DistanceToGround { get; private set; } // Capped to abs(_groundCast.TargetPosition.Y)
 
@@ -31,10 +32,10 @@ public partial class PS_Grounded : Node
         if (_groundCast.IsColliding())
         {
             Vector3 collisionPoint = _groundCast.GetCollisionPoint(0);
-            DistanceToGround = _groundCast.GlobalPosition.DistanceTo(collisionPoint);
+            DistanceToGround = _groundCast.GlobalPosition.DistanceTo(collisionPoint) - _bodyScale.Collider.Size.Y / 2f;
         }
         else
-            DistanceToGround = Math.Abs(_groundCast.TargetPosition.Y);
+            DistanceToGround = Math.Abs(_groundCast.TargetPosition.Y) - _bodyScale.Collider.Size.Y / 2f;
         
         UpdateGrounded();
     }

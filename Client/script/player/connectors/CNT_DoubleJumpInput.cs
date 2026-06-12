@@ -1,6 +1,7 @@
 using System;
 using Godot;
 
+[GlobalClass]
 public partial class CNT_DoubleJumpInput : Node
 {
     [Export] private PI_Jump        _jumpInput = null!;

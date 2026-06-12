@@ -11,6 +11,6 @@ public partial class PA_Dash : Node3D
     public override void _Ready()
     {
         _dash.Started += _sound.Play;
-        _dash.OnThruster += _thrusterSound.Play;
+        //_dash.OnThruster += _thrusterSound.Play;
     }
 }
