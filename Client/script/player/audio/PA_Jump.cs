@@ -22,9 +22,9 @@ public partial class PA_Jump : Node3D
 
     public override void _Ready()
     {
-        _jump.OnStart += PlaySound;
-        _wallJump.OnStart += PlaySoundWall;
-        _wallClimb.OnStart += PlaySoundWallClimb;
+        _jump.Started += PlaySound;
+        _wallJump.Started += PlaySoundWall;
+        _wallClimb.Started += PlaySoundWallClimb;
         _wallClimb.OnKick += PlaySoundKick;
         _wallClimb.OnHopStart += PlaySoundHop;
     }

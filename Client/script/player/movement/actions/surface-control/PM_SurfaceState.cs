@@ -22,11 +22,11 @@ public partial class PM_SurfaceState : Node
         _sprintInput.Start += StartSprint;
         _sprintInput.Stop += ResetSprint;
         
-        _crouch.OnStart += SetDataCrouch;
-        _crouch.OnStop += ResetData;
+        _crouch.Started += SetDataCrouch;
+        _crouch.Stopped += ResetData;
 
-        _slide.OnStart += SetDataSlide;
-        _slide.OnStop += ResetData;
+        _slide.Started += SetDataSlide;
+        _slide.Stopped += ResetData;
     }
 
     private void StartSprint(object sender, EmptyInput args)

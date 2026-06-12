@@ -21,8 +21,8 @@ public partial class PA_Slide : Node3D
     {
         //_slideHold.VolumeDb = -80;
 
-        _slide.OnStart += StartPlaySound;
-        _slide.OnStop += _slideHold.Stop;
+        _slide.Started += StartPlaySound;
+        _slide.Stopped += _slideHold.Stop;
         _slide.OnSlowStop +=  _slideHold.Stop;
 
         _groundState.OnLeaving += StopPlaySound;

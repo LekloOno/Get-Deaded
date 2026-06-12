@@ -9,8 +9,8 @@ public partial class CNT_DashWeapon : Node
     private bool _buffered = false;
     public override void _Ready()
     {
-        _dash.OnStart += DisableWeapons;
-        _dash.OnStop += EnableWeapons;
+        _dash.Started += DisableWeapons;
+        _dash.Stopped += EnableWeapons;
     }
 
     private void EnableWeapons()

@@ -3,12 +3,12 @@ using Godot;
 
 public abstract partial class PM_Action : Node
 {
-    public event Action OnStart;
-    public event Action OnStop;
+    public event Action? Started;
+    public event Action? Stopped;
 
     protected void InvokeStart() =>
-        OnStart?.Invoke();
+        Started?.Invoke();
 
     protected void InvokeStop() =>
-        OnStop?.Invoke();
+        Stopped?.Invoke();
 }

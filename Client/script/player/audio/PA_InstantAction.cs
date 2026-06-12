@@ -8,5 +8,5 @@ public partial class PA_InstantAction : Node3D
     [Export] private PM_Action _action;
 
     public override void _Ready() =>
-        _action.OnStart += _sound.Play;
+        _action.Started += _sound.Play;
 }

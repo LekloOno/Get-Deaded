@@ -30,7 +30,7 @@ public partial class PC_SlideLedgeAnim : Node3D
     public override void _Ready()
     {
         _groundSurfaceState.Slide.OnStart += OnStartSlide;
-        _ledgeClimb.OnStart += OnStartLedge;
+        _ledgeClimb.Started += OnStartLedge;
         SetProcess(false);
     }
 
