@@ -1326,7 +1326,7 @@ layout_mode = 2
 [node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/SprintMode/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1718353719, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "DOUBLE_JUMP_MODE_LABEL"
 
-[node name="DoubleJumpModeOptions" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/SprintMode" unique_id=1656238650 node_paths=PackedStringArray("_dediButton", "_jumpButton", "_dashButton")]
+[node name="DoubleJumpModeOptions" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/SprintMode" unique_id=1656238650 node_paths=PackedStringArray("_dediButton", "_jumpButton", "_dashButton", "_dediInput")]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1335,6 +1335,7 @@ script = ExtResource("40_yj8ne")
 _dediButton = NodePath("DedicatedButton")
 _jumpButton = NodePath("JumpButton")
 _dashButton = NodePath("DashButton")
+_dediInput = NodePath("../../DoubleJump")
 
 [node name="DedicatedButton" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/SprintMode/DoubleJumpModeOptions" unique_id=2067767519]
 custom_minimum_size = Vector2(70, 0)
@@ -1343,7 +1344,6 @@ size_flags_horizontal = 3
 theme_type_variation = &"InputButton"
 theme_override_font_sizes/font_size = 11
 toggle_mode = true
-button_pressed = true
 text = "DOUBLE_JUMP_DEDICATED_BUTTON"
 clip_text = true
 
@@ -1378,7 +1378,6 @@ Key = "double_jump_mode"
 
 [node name="DoubleJump" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2" unique_id=499313513 instance=ExtResource("31_t61gj")]
 layout_mode = 2
-script = ExtResource("34_3ngnl")
 
 [node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/DoubleJump/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(499313513, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "INPUTS_DOUBLE_JUMP_LABEL"

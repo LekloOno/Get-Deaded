@@ -5,6 +5,7 @@ public partial class UI_DoubleJumpMode : Node
     [Export] private Button _dediButton = null!;
     [Export] private Button _jumpButton = null!;
     [Export] private Button _dashButton = null!;
+    [Export] private Control _dediInput = null!;
 
     public override void _Ready()
     {
@@ -12,21 +13,23 @@ public partial class UI_DoubleJumpMode : Node
         _jumpButton.Pressed += OnButtonPressed;
         _dashButton.Pressed += OnButtonPressed;
 
-        SyncButtons(DoubleJumpModeSetting.Mode);
-        DoubleJumpModeSetting.ModeChanged += SyncButtons;
+        Sync(DoubleJumpModeSetting.Mode);
+        DoubleJumpModeSetting.ModeChanged += Sync;
     }
 
     private void OnButtonPressed()
     {
         if (!DoubleJumpModeSetting.Instance.TryUpdateValue(this, (int) SelectedMode(), out _))
-            SyncButtons(DoubleJumpModeSetting.Mode);
+            Sync(DoubleJumpModeSetting.Mode);
     }
 
-    private void SyncButtons(DoubleJumpMode mode)
+    private void Sync(DoubleJumpMode mode)
     {
         _dediButton.SetPressedNoSignal(mode.HasFlag(DoubleJumpMode.Defined));
         _dashButton.SetPressedNoSignal(mode.HasFlag(DoubleJumpMode.DashJump));
         _jumpButton.SetPressedNoSignal(mode.HasFlag(DoubleJumpMode.HeightJump));
+
+        _dediInput.Visible = mode.HasFlag(DoubleJumpMode.Defined);
     }
 
     private DoubleJumpMode SelectedMode()
