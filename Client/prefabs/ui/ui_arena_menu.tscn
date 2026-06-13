@@ -385,10 +385,9 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
 mouse_filter = 0
-current_tab = 2
+current_tab = 0
 
 [node name="VIDEO_TAB" type="MarginContainer" parent="Settings/VBoxContainer/TabContainer" unique_id=299629799]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 30
@@ -1091,6 +1090,7 @@ Section = "sound"
 Key = "feedback_sfx_volume_db"
 
 [node name="CONTROLS_TAB" type="MarginContainer" parent="Settings/VBoxContainer/TabContainer" unique_id=2137857519]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 20
@@ -1245,6 +1245,12 @@ Key = "sprint_mode"
 layout_mode = 2
 script = ExtResource("34_3ngnl")
 
+[node name="MarginContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/AutoSprintDelay" index="0" unique_id=1908736311]
+theme_override_constants/margin_left = 15
+
+[node name="UiSettingsLabel" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/AutoSprintDelay/MarginContainer" index="0" unique_id=109094902]
+custom_minimum_size = Vector2(385, 0)
+
 [node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/AutoSprintDelay/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1143250679, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "AUTO_SPRINT_DELAY_LABEL"
 
@@ -1269,6 +1275,12 @@ Key = "auto_sprint_delay"
 [node name="AutoSprintQuickStartInput" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings" unique_id=1200406574 instance=ExtResource("31_t61gj")]
 layout_mode = 2
 script = ExtResource("34_3ngnl")
+
+[node name="MarginContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/AutoSprintQuickStartInput" index="0" unique_id=1908736311]
+theme_override_constants/margin_left = 15
+
+[node name="UiSettingsLabel" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/AutoSprintQuickStartInput/MarginContainer" index="0" unique_id=109094902]
+custom_minimum_size = Vector2(385, 0)
 
 [node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/AutoSprintQuickStartInput/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1200406574, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "INPUTS_AUTO_SPRINT_QUICK_START_LABEL"
@@ -1317,16 +1329,16 @@ layout_mode = 2
 [node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJump" index="0" unique_id=366278316]
 text = "DOUBLE_JUMP_LABEL"
 
-[node name="SprintSettings2" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer" unique_id=1825990953]
+[node name="DoubleJumpSettings" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer" unique_id=1825990953]
 layout_mode = 2
 
-[node name="SprintMode" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2" unique_id=1718353719 instance=ExtResource("31_t61gj")]
+[node name="SprintMode" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings" unique_id=1718353719 instance=ExtResource("31_t61gj")]
 layout_mode = 2
 
-[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/SprintMode/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1718353719, 109094902, 172764845) index="0" unique_id=1465678305]
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/SprintMode/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1718353719, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "DOUBLE_JUMP_MODE_LABEL"
 
-[node name="DoubleJumpModeOptions" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/SprintMode" unique_id=1656238650 node_paths=PackedStringArray("_dediButton", "_jumpButton", "_dashButton", "_dediInput")]
+[node name="DoubleJumpModeOptions" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/SprintMode" unique_id=1656238650 node_paths=PackedStringArray("_dediButton", "_jumpButton", "_dashButton", "_dediInput")]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1337,7 +1349,7 @@ _jumpButton = NodePath("JumpButton")
 _dashButton = NodePath("DashButton")
 _dediInput = NodePath("../../DoubleJump")
 
-[node name="DedicatedButton" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/SprintMode/DoubleJumpModeOptions" unique_id=2067767519]
+[node name="DedicatedButton" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/SprintMode/DoubleJumpModeOptions" unique_id=2067767519]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1348,7 +1360,7 @@ toggle_mode = true
 text = "DOUBLE_JUMP_DEDICATED_BUTTON"
 clip_text = true
 
-[node name="JumpButton" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/SprintMode/DoubleJumpModeOptions" unique_id=1208751115]
+[node name="JumpButton" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/SprintMode/DoubleJumpModeOptions" unique_id=1208751115]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1360,7 +1372,7 @@ button_group = SubResource("ButtonGroup_iq7bh")
 text = "DOUBLE_JUMP_JUMP_BUTTON"
 clip_text = true
 
-[node name="DashButton" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/SprintMode/DoubleJumpModeOptions" unique_id=1495829461]
+[node name="DashButton" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/SprintMode/DoubleJumpModeOptions" unique_id=1495829461]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1372,25 +1384,31 @@ button_group = SubResource("ButtonGroup_iq7bh")
 text = "DOUBLE_JUMP_DASH_BUTTON"
 clip_text = true
 
-[node name="Reset" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/SprintMode" unique_id=1453634883 instance=ExtResource("34_6me0n")]
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/SprintMode" unique_id=1453634883 instance=ExtResource("34_6me0n")]
 layout_mode = 2
 
-[node name="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/SprintMode/Reset" index="0" unique_id=286523834]
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/SprintMode/Reset" index="0" unique_id=286523834]
 Section = "controls"
 Key = "double_jump_mode"
 
-[node name="DoubleJump" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2" unique_id=499313513 instance=ExtResource("31_t61gj")]
+[node name="DoubleJump" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings" unique_id=499313513 instance=ExtResource("31_t61gj")]
 layout_mode = 2
 
-[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/DoubleJump/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(499313513, 109094902, 172764845) index="0" unique_id=1465678305]
+[node name="MarginContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/DoubleJump" index="0" unique_id=1908736311]
+theme_override_constants/margin_left = 15
+
+[node name="UiSettingsLabel" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/DoubleJump/MarginContainer" index="0" unique_id=109094902]
+custom_minimum_size = Vector2(385, 0)
+
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/DoubleJump/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(499313513, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "INPUTS_DOUBLE_JUMP_LABEL"
 
-[node name="DoubleJumpInput" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/DoubleJump" unique_id=1570423548]
+[node name="DoubleJumpInput" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/DoubleJump" unique_id=1570423548]
 layout_mode = 2
 size_flags_horizontal = 10
 theme_override_constants/separation = 5
 
-[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/DoubleJump/DoubleJumpInput" unique_id=348956794]
+[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/DoubleJump/DoubleJumpInput" unique_id=348956794]
 custom_minimum_size = Vector2(58, 0)
 layout_mode = 2
 theme_type_variation = &"InputButton"
@@ -1399,7 +1417,7 @@ clip_text = true
 script = ExtResource("30_rt8lt")
 action = "double_jump"
 
-[node name="Button2" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/DoubleJump/DoubleJumpInput" unique_id=1597256439]
+[node name="Button2" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/DoubleJump/DoubleJumpInput" unique_id=1597256439]
 custom_minimum_size = Vector2(58, 0)
 layout_mode = 2
 theme_type_variation = &"InputButton"
@@ -1409,7 +1427,7 @@ script = ExtResource("30_rt8lt")
 action = "double_jump"
 input_index = 1
 
-[node name="Button3" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/DoubleJump/DoubleJumpInput" unique_id=2068198064]
+[node name="Button3" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/DoubleJump/DoubleJumpInput" unique_id=2068198064]
 custom_minimum_size = Vector2(58, 0)
 layout_mode = 2
 theme_type_variation = &"DisabledInputButton"
@@ -1419,7 +1437,7 @@ script = ExtResource("30_rt8lt")
 action = "double_jump"
 input_index = 2
 
-[node name="Control" type="Control" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/DoubleJump" unique_id=655396858]
+[node name="Control" type="Control" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/DoubleJump" unique_id=655396858]
 custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
 
@@ -2450,11 +2468,11 @@ clip_text = true
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/AutoSprintQuickStartInput"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/AutoSprintQuickStartInput/MarginContainer/UiSettingsLabel"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJump"]
-[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/SprintMode"]
-[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/SprintMode/MarginContainer/UiSettingsLabel"]
-[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/SprintMode/Reset"]
-[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/DoubleJump"]
-[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/DoubleJump/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/SprintMode"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/SprintMode/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/SprintMode/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/DoubleJump"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/DoubleJump/MarginContainer/UiSettingsLabel"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Movement"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Forward"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Forward/UiSettingsLabel"]
