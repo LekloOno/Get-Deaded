@@ -18,3 +18,16 @@ AUTO_SPRINT_DELAY_LABEL,SHOOT GRACE DELAY,DELAI DE TIR
 INPUTS_AUTO_SPRINT_QUICK_START_LABEL,QUICK START,DEMARRAGE RAPIDE
 AUTO_SPRINT_DELAY_TOOLTIP,"The delay before the auto sprint restart when cancelled by shooting.","Le délai avant que la course automatique redémarre après avoir été annulée par un tir."
 AUTO_SPRINT_QUICK_START_TOOLTIP,"Allows to restart the auto sprint early during grace delay.","Permet de redémarrer la course automatique avant que le délai de tir soit complété."
+
+DOUBLE_JUMP_LABEL,DOUBLE JUMP (PROPELLER),DOUBLE SAUT (PROPULSEUR)
+DOUBLE_JUMP_MODE_LABEL,INPUT MODE,MODE DE DÉCLENCHEMENT
+INPUTS_DOUBLE_JUMP_LABEL,DEDICATED INPUT,TOUCHE DÉDIÉE
+
+DOUBLE_JUMP_DEDICATED_BUTTON,INPUT,TOUCHE
+DOUBLE_JUMP_DEDICATED_TOOLTIP,Use a dedicated input.,Utiliser une touche dédiée.
+
+DOUBLE_JUMP_JUMP_BUTTON,AIR JUMP,SAUT AÉRIEN
+DOUBLE_JUMP_JUMP_TOOLTIP,Triggers when the player inputs a normal jump as he's high enough in air.,Se déclenche lorsque le joueur réalise un saut alors qu'il est suffisamment haut dans les airs.
+
+DOUBLE_JUMP_DASH_BUTTON,JUMP-DASH,SAUT-DASH
+DOUBLE_JUMP_DASH_TOOLTIP,Triggers when the player performs a jump mid-air right before dashing.,Se déclenche lorsque le joueur réalise un saut aérien juste avant de déclencher un dash.
