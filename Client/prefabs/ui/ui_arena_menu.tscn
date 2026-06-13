@@ -48,6 +48,7 @@
 [ext_resource type="PackedScene" uid="uid://12cbeu5f6b1j" path="res://prefabs/ui/menu/settings/ui_settings_inputs_row.tscn" id="38_pwonq"]
 [ext_resource type="PackedScene" uid="uid://qqvt3ahu2l65" path="res://prefabs/ui/menu/settings/ui_settings_category_header.tscn" id="38_squjd"]
 [ext_resource type="PackedScene" uid="uid://xo68a11s7vj0" path="res://prefabs/ui/scoreboard/ui_scoreboard_manager.tscn" id="39_o1fwb"]
+[ext_resource type="Script" uid="uid://dacwr5elg2sb2" path="res://script/ui/menu/contexts/controls/UI_DoubleJumpMode.cs" id="40_yj8ne"]
 [ext_resource type="Script" uid="uid://cie6ww774f8b" path="res://script/ui/menu/contexts/accessibility/ui_open_crosshair_editor.gd" id="41_fcw2i"]
 [ext_resource type="PackedScene" uid="uid://cdpwp7sk0b76d" path="res://prefabs/ui/combat/crosshair/ui_crosshair_editor.tscn" id="49_fbh7i"]
 [ext_resource type="PackedScene" uid="uid://4ny2ij141sta" path="res://prefabs/ui/combat/crosshair/ui_crosshair_galery.tscn" id="49_r1886"]
@@ -75,6 +76,8 @@ bg_color = Color(1, 1, 1, 0.61960787)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lmot5"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_4n7it"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_iq7bh"]
 
 [sub_resource type="GDScript" id="GDScript_yahvj"]
 script/source = "extends Control
@@ -361,7 +364,6 @@ script = ExtResource("10_b5eqi")
 _logged = true
 
 [node name="Settings" type="PanelContainer" parent="." unique_id=1980157602 node_paths=PackedStringArray("confirm_dialog")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -383,9 +385,10 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
 mouse_filter = 0
-current_tab = 0
+current_tab = 2
 
 [node name="VIDEO_TAB" type="MarginContainer" parent="Settings/VBoxContainer/TabContainer" unique_id=299629799]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 30
@@ -1088,7 +1091,6 @@ Section = "sound"
 Key = "feedback_sfx_volume_db"
 
 [node name="CONTROLS_TAB" type="MarginContainer" parent="Settings/VBoxContainer/TabContainer" unique_id=2137857519]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 20
@@ -1306,6 +1308,116 @@ action = "auto_sprint_quick_start"
 input_index = 2
 
 [node name="Control" type="Control" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/AutoSprintQuickStartInput" unique_id=369645871]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+
+[node name="DoubleJump" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer" unique_id=856828597 instance=ExtResource("38_squjd")]
+layout_mode = 2
+
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJump" index="0" unique_id=366278316]
+text = "DOUBLE_JUMP_LABEL"
+
+[node name="SprintSettings2" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer" unique_id=1825990953]
+layout_mode = 2
+
+[node name="SprintMode" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2" unique_id=1718353719 instance=ExtResource("31_t61gj")]
+layout_mode = 2
+
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/SprintMode/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1718353719, 109094902, 172764845) index="0" unique_id=1465678305]
+text = "DOUBLE_JUMP_MODE_LABEL"
+
+[node name="DoubleJumpModeOptions" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/SprintMode" unique_id=1656238650 node_paths=PackedStringArray("_dediButton", "_jumpButton", "_dashButton")]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+script = ExtResource("40_yj8ne")
+_dediButton = NodePath("DedicatedButton")
+_jumpButton = NodePath("JumpButton")
+_dashButton = NodePath("DashButton")
+
+[node name="DedicatedButton" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/SprintMode/DoubleJumpModeOptions" unique_id=2067767519]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+theme_override_font_sizes/font_size = 11
+toggle_mode = true
+button_pressed = true
+text = "DOUBLE_JUMP_DEDICATED_BUTTON"
+clip_text = true
+
+[node name="JumpButton" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/SprintMode/DoubleJumpModeOptions" unique_id=1208751115]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+theme_override_font_sizes/font_size = 11
+toggle_mode = true
+button_group = SubResource("ButtonGroup_iq7bh")
+text = "DOUBLE_JUMP_JUMP_BUTTON"
+clip_text = true
+
+[node name="DashButton" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/SprintMode/DoubleJumpModeOptions" unique_id=1495829461]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+theme_override_font_sizes/font_size = 11
+toggle_mode = true
+button_group = SubResource("ButtonGroup_iq7bh")
+text = "DOUBLE_JUMP_DASH_BUTTON"
+clip_text = true
+
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/SprintMode" unique_id=1453634883 instance=ExtResource("34_6me0n")]
+layout_mode = 2
+
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/SprintMode/Reset" index="0" unique_id=286523834]
+Section = "controls"
+Key = "double_jump_mode"
+
+[node name="DoubleJump" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2" unique_id=499313513 instance=ExtResource("31_t61gj")]
+layout_mode = 2
+script = ExtResource("34_3ngnl")
+
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/DoubleJump/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(499313513, 109094902, 172764845) index="0" unique_id=1465678305]
+text = "INPUTS_DOUBLE_JUMP_LABEL"
+
+[node name="DoubleJumpInput" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/DoubleJump" unique_id=1570423548]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/separation = 5
+
+[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/DoubleJump/DoubleJumpInput" unique_id=348956794]
+custom_minimum_size = Vector2(58, 0)
+layout_mode = 2
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "double_jump"
+
+[node name="Button2" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/DoubleJump/DoubleJumpInput" unique_id=1597256439]
+custom_minimum_size = Vector2(58, 0)
+layout_mode = 2
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "double_jump"
+input_index = 1
+
+[node name="Button3" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/DoubleJump/DoubleJumpInput" unique_id=2068198064]
+custom_minimum_size = Vector2(58, 0)
+layout_mode = 2
+theme_type_variation = &"DisabledInputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "double_jump"
+input_index = 2
+
+[node name="Control" type="Control" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/DoubleJump" unique_id=655396858]
 custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
 
@@ -2053,6 +2165,7 @@ size_flags_vertical = 8
 text = "BACK_BUTTON"
 
 [node name="UiCrosshairGalery" parent="." unique_id=1212751295 node_paths=PackedStringArray("_menu") instance=ExtResource("49_r1886")]
+visible = false
 layout_mode = 1
 offset_left = 597.0
 offset_top = 230.0
@@ -2062,6 +2175,7 @@ _menu = NodePath("..")
 _previewSelectGroup = ExtResource("50_r1886")
 
 [node name="CrosshairEditorMenu" type="MarginContainer" parent="." unique_id=727793884]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2333,6 +2447,12 @@ clip_text = true
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/AutoSprintDelay/Reset"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/AutoSprintQuickStartInput"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/AutoSprintQuickStartInput/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJump"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/SprintMode"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/SprintMode/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/SprintMode/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/DoubleJump"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings2/DoubleJump/MarginContainer/UiSettingsLabel"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Movement"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Forward"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Forward/UiSettingsLabel"]

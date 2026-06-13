@@ -20,11 +20,6 @@ public partial class DoubleJumpModeSetting : UserSetting
         }
 
         int intVal = (int) value;
-        if (!Enum.IsDefined(typeof(DoubleJumpMode), intVal))
-        {
-            effectiveValue = Value;
-            return false;
-        }
 
         Mode = (DoubleJumpMode) intVal;
         effectiveValue = intVal;
