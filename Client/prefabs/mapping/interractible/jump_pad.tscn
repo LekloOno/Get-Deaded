@@ -4,7 +4,7 @@
 [ext_resource type="Material" uid="uid://t2nvujbehqp3" path="res://assets/materials/greenGrid.tres" id="2_pyfmt"]
 [ext_resource type="Script" uid="uid://dmowaohx8nd7q" path="res://addons/GaudioProcessTree/nodes/modules/AUD_Randomizer.cs" id="3_2ndc8"]
 [ext_resource type="AudioStream" uid="uid://eayxu2jy4mcr" path="res://assets/sounds/world/cc0_sounds_world_launchpad.ogg" id="4_o2ic1"]
-[ext_resource type="Script" uid="uid://dbtsyp0hru7g" path="res://addons/GaudioProcessTree/nodes/stream_players/AUD_StreamPlayer1D.cs" id="5_5slex"]
+[ext_resource type="Script" uid="uid://dsv3ptnaeu18d" path="res://addons/GaudioProcessTree/nodes/stream_players/AUD_StreamPlayer3D.cs" id="5_nxjxh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8jgwj"]
 size = Vector3(1, 0.3, 1)
@@ -14,25 +14,23 @@ lightmap_size_hint = Vector2i(14, 14)
 add_uv2 = true
 size = Vector3(1, 0.3, 1)
 
-[node name="JumpPad" type="Node3D" unique_id=202375474]
-transform = Transform3D(-0.5735765, 0.40957594, -0.70940644, 0, 0.8660252, 0.5, 0.8191521, 0.28678817, -0.49673176, 0, 0, 0)
+[node name="JumpPad" type="Area3D" unique_id=2017063124]
+transform = Transform3D(0.99999994, 0, 0, 0, 1.0000004, 0, 0, 0, 1.0000001, 0, 0, 0)
 script = ExtResource("1_nxjxh")
-_strength = 19.0
-_momentum = 0.0
-metadata/_custom_type_script = "uid://cf20wgu2b4x38"
 
-[node name="Area3D" type="Area3D" parent="." unique_id=2017063124]
-transform = Transform3D(0.99999994, 1.4901167e-08, -8.940697e-08, 2.9802322e-08, 0.86602575, -0.50000024, -1.1920929e-07, 0.5000001, 0.8660254, 0, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1728528303]
-transform = Transform3D(1, -2.431122e-09, 8.940697e-08, 1.3236761e-08, 0.9999999, 5.9604627e-08, 0, 7.446613e-08, 0.9999999, 0, 0.10000038, 0.29999542)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1728528303]
+transform = Transform3D(1, -2.431122e-09, 8.940697e-08, 1.3236761e-08, 0.9999999, 5.9604623e-08, 0, 7.446613e-08, 0.9999999, 0, 0, 0)
 shape = SubResource("BoxShape3D_8jgwj")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D/CollisionShape3D" unique_id=611584805]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D" unique_id=611584805]
 material_override = ExtResource("2_pyfmt")
 mesh = SubResource("BoxMesh_m44an")
 
-[node name="AUD_Randomizer" type="Node" parent="." unique_id=1342116402]
+[node name="Sound" type="AudioStreamPlayer3D" parent="." unique_id=1576646345]
+transform = Transform3D(-0.57357645, 1.6874631e-07, 0.8191522, 0.40957603, 0.8660251, 0.28678805, -0.7094064, 0.5, -0.49673173, 0, 0, 0)
+unit_size = 20.0
+
+[node name="Randomizer" type="Node" parent="Sound" unique_id=1342116402]
 script = ExtResource("3_2ndc8")
 Sounds = Array[AudioStream]([ExtResource("4_o2ic1")])
 MinPitch = 0.8
@@ -40,11 +38,9 @@ MaxPitch = 1.2
 UseTimeScale = true
 metadata/_custom_type_script = "uid://dmowaohx8nd7q"
 
-[node name="AUD_StreamPlayer1D" type="Node" parent="AUD_Randomizer" unique_id=972022531 node_paths=PackedStringArray("Player")]
-script = ExtResource("5_5slex")
-Player = NodePath("AudioStreamPlayer")
-metadata/_custom_type_script = "uid://dbtsyp0hru7g"
+[node name="Player" type="Node" parent="Sound/Randomizer" unique_id=395596279 node_paths=PackedStringArray("Player")]
+script = ExtResource("5_nxjxh")
+Player = NodePath("../..")
+metadata/_custom_type_script = "uid://dsv3ptnaeu18d"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AUD_Randomizer/AUD_StreamPlayer1D" unique_id=1874722650]
-
-[connection signal="Launch" from="." to="AUD_Randomizer" method="Play"]
+[connection signal="Launch" from="." to="Sound/Randomizer" method="Play"]

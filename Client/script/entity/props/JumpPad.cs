@@ -1,8 +1,7 @@
-using System.Collections.Generic;
 using Godot;
 
 [GlobalClass, Tool]
-public partial class JumpPad : Node3D
+public partial class JumpPad : Area3D
 {
 	[Signal] public delegate void LaunchEventHandler();
 	/// <summary>
@@ -16,16 +15,31 @@ public partial class JumpPad : Node3D
 	/// - 1 means direction*_strength will be simply added to the target's current velocity.
 	/// </summary>
 	[Export] private float _momentum = 1f;
-	/// <summary>
-	/// The hitbox used to detect target entities. <br/>
-	/// Should be set as the child of this node, it is auto-assigned at runtime.
-	/// </summary>
-	private Area3D _hitbox;
+	[Export] public float AngleDegrees
+	{
+		get => _angleDegrees;
+		set
+		{
+			if (value == _angleDegrees)
+				return;
+
+			_angleDegrees = value;
+			UpdateDir();
+		}
+	}
+	
+	
+	private float _angleDegrees = 30f;
+	private Vector3 _dir;
+
+	private void UpdateDir() =>
+		_dir = (-Transform.Basis.Z).Rotated(Transform.Basis.X, Mathf.DegToRad(_angleDegrees));
 
 	public override void _Ready()
 	{
-		if (_hitbox != null)
-			_hitbox.CollisionMask = CONF_Collision.Layers.EnvironmentEntity;
+		CollisionMask = CONF_Collision.Layers.EnvironmentEntity;
+		BodyEntered += OnBodyEntered;
+		UpdateDir();
 	}
 
 	private void OnBodyEntered(Node3D body)
@@ -39,73 +53,7 @@ public partial class JumpPad : Node3D
 			bodyManager.HandleKnockBack(-vel);
 		}
 
-		bodyManager.HandleKnockBack(Transform.Basis.Z * _strength);
+		bodyManager.HandleKnockBack(_dir * _strength);
 		EmitSignal(SignalName.Launch);
-	}
-
-	// +-------------------+
-	// |      EDITOR       |
-	// +-------------------+
-	// _____________________
-	private void SetHitbox(Area3D hitbox)
-	{
-		if (_hitbox != null)
-			_hitbox.BodyEntered -= OnBodyEntered;
-
-		_hitbox = hitbox;
-		_hitbox.BodyEntered += OnBodyEntered;
-		if (!Engine.IsEditorHint() && CONF_Collision.Instance != null)
-			_hitbox.CollisionMask = CONF_Collision.Layers.EnvironmentEntity;
-	}
-
-	public override void _EnterTree()
-	{
-		if (RetrieveHitbox(out Area3D hitbox))
-			SetHitbox(hitbox);
-
-		UpdateConfigurationWarnings();
-	}
-
-	public override void _Notification(int what)
-	{
-		if (what != NotificationChildOrderChanged)
-			return;
-		
-		if (RetrieveHitbox(out Area3D hitbox))
-			SetHitbox(hitbox);
-
-		UpdateConfigurationWarnings();
-	}
-
-	/// <summary>
-	/// Tries to retrieve a hitbox node from children.
-	/// </summary>
-	/// <param name="hitbox">A valid Area3D node, might be null.</param>
-	/// <returns>Whether a valid hitbox was found.</returns>
-	private bool RetrieveHitbox(out Area3D hitbox)
-	{
-		foreach(Node node in GetChildren())
-			if (node is Area3D area)
-			{
-				hitbox = area;
-				return true;
-			}
-
-		hitbox = null;
-		return false;
-	}
-
-	// +-------------------+
-	// |  CONFIG WARNINGS  |
-	// +-------------------+
-	// _____________________
-	public override string[] _GetConfigurationWarnings()
-	{
-		List<string> warnings = [];
-
-		if (_hitbox == null)
-			warnings.Add("This node has no attached hitbox.\nConsider adding an Area3D children.");
-
-		return [.. warnings];
 	}
 }

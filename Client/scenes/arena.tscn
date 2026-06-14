@@ -3764,6 +3764,8 @@ viewport_path = NodePath("entities/Pickups/WildcardAmo2/Sprite3D/SubViewport")
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_27x07"]
 
+[sub_resource type="ButtonGroup" id="ButtonGroup_lju4b"]
+
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_4g8la"]
 frequency = 0.05
 fractal_octaves = 4
@@ -6451,30 +6453,28 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23, -2.8000002, 16.900002)
 [node name="Node3D13" type="Node3D" parent="entities/AimArena/SC_GameManager/SpawnPoints" unique_id=1464195112]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.50000036, 0.3000005, 13.100001)
 
-[node name="JumpPad" parent="entities" unique_id=202375474 instance=ExtResource("40_aup2b")]
-transform = Transform3D(-0.5735765, 0.40957597, -0.7094064, 0, 0.8660252, 0.5, 0.8191521, 0.2867882, -0.49673173, 24.4561, -8.250885, 48.205513)
+[node name="JumpPadQuad" parent="entities" unique_id=2017063124 instance=ExtResource("40_aup2b")]
+transform = Transform3D(0.5735764, 0, 0.8191522, 0, 1.0000004, 0, -0.819152, 0, 0.5735765, 24.4561, -8.250885, 48.205513)
+_strength = 19.0
+_momentum = 0.0
 
-[node name="JumpPad2" parent="entities" unique_id=2126977648 instance=ExtResource("40_aup2b")]
-transform = Transform3D(-0.5735764, 0.81603473, -0.07139373, -2.9802322e-08, 0.087155625, 0.99619454, 0.81915206, 0.5713937, -0.04999047, 12.893742, -20.129326, 30.44551)
+[node name="JumpPadLow" parent="entities" unique_id=1869822625 instance=ExtResource("40_aup2b")]
+transform = Transform3D(0.5735764, 0, 0.8191522, 0, 1.0000004, 0, -0.819152, 0, 0.5735765, 12.893742, -20.029325, 30.44551)
 _strength = 16.0
+_momentum = 0.0
+AngleDegrees = 85.0
 
-[node name="Area3D" parent="entities/JumpPad2" index="0" unique_id=2017063124]
-transform = Transform3D(1, 3.595876e-08, -8.940697e-08, 0, 0.0871558, -0.99619484, -7.450581e-09, 0.9961951, 0.08715553, 0, 0, 0)
-
-[node name="JumpPad4" parent="entities" unique_id=674195469 instance=ExtResource("40_aup2b")]
-transform = Transform3D(-0.0034907064, 0.6262597, 0.7796063, 5.122274e-08, -0.7796112, 0.6262635, 0.9999939, 0.0021861421, 0.0027213611, -30.526829, 0.040753927, 13.881125)
+[node name="JumpPadHouse" parent="entities" unique_id=2041046904 instance=ExtResource("40_aup2b")]
+transform = Transform3D(-4.3711385e-08, 0, -1.0000001, 0, 1.0000004, 0, 0.99999994, 0, -4.3711392e-08, -30.82683, 0.14075397, 13.881125)
 _strength = 16.0
+_momentum = 0.0
+AngleDegrees = 38.8
 
-[node name="Area3D" parent="entities/JumpPad4" index="0" unique_id=2017063124]
-transform = Transform3D(1.0000001, 7.0853275e-08, -1.4901161e-07, 4.8894435e-09, -0.76967853, -0.63843215, -2.561137e-09, 0.6384323, -0.76967865, 0, 0, 0)
-
-[node name="JumpPad3" parent="entities" unique_id=504435189 instance=ExtResource("40_aup2b")]
-transform = Transform3D(-0.0871558, 0.54059637, -0.83675516, -4.2142347e-08, 0.8399513, 0.5426614, 0.99619484, 0.047296125, -0.07320661, 10.4561, -0.550885, 17.205513)
+[node name="JumpPadRift" parent="entities" unique_id=936189834 instance=ExtResource("40_aup2b")]
+transform = Transform3D(0.08715567, 0, 0.99619484, 0, 1.0000004, 0, -0.99619466, 0, 0.087155685, 10.3561, -0.550885, 17.205513)
 _strength = 15.2
-
-[node name="Area3D" parent="entities/JumpPad3" index="0" unique_id=2017063124]
-transform = Transform3D(-0.08715567, 1.1920929e-07, -0.99619466, -7.5690316e-08, 1.0000002, -1.1920929e-07, 0.9961948, 6.7055225e-08, -0.08715588, 10.4561, -0.550885, 17.205513)
-top_level = true
+_momentum = 0.0
+AngleDegrees = 33.0
 
 [node name="Pickups" type="Node" parent="entities" unique_id=1754368430]
 
@@ -7011,6 +7011,12 @@ button_group = SubResource("ButtonGroup_27x07")
 [node name="AutoButton" parent="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/SprintMode/SprintModeOptions" parent_id_path=PackedInt32Array(620824296, 1093197233) index="2" unique_id=1516286433]
 button_group = SubResource("ButtonGroup_27x07")
 
+[node name="JumpButton" parent="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/SprintMode/DoubleJumpModeOptions" parent_id_path=PackedInt32Array(620824296, 1656238650) index="1" unique_id=1208751115]
+button_group = SubResource("ButtonGroup_lju4b")
+
+[node name="DashButton" parent="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/SprintMode/DoubleJumpModeOptions" parent_id_path=PackedInt32Array(620824296, 1656238650) index="2" unique_id=1495829461]
+button_group = SubResource("ButtonGroup_lju4b")
+
 [node name="PI_Stats" type="Node" parent="CanvasLayer" unique_id=1532279642]
 script = ExtResource("47_6ubnd")
 metadata/_custom_type_script = "uid://bkkj6g5jwcpqc"
@@ -7226,10 +7232,6 @@ bus = &"Environment Sfx"
 [connection signal="pressed" from="CanvasLayer/CombatStats/Button" to="CanvasLayer/Menu" method="ExitCurrent"]
 [connection signal="pressed" from="CanvasLayer/CombatStats/Button" to="CanvasLayer/Menu/LightClick" method="tab_interract"]
 
-[editable path="entities/JumpPad"]
-[editable path="entities/JumpPad2"]
-[editable path="entities/JumpPad4"]
-[editable path="entities/JumpPad3"]
 [editable path="CanvasLayer/Menu"]
 [editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/Application"]
 [editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/VIDEO_TAB/ScrollContainer/VBoxContainer/ApplicationSettings/Display"]
@@ -7335,6 +7337,12 @@ bus = &"Environment Sfx"
 [editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/AutoSprintDelay/Reset"]
 [editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/AutoSprintQuickStartInput"]
 [editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/AutoSprintQuickStartInput/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJump"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/SprintMode"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/SprintMode/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/SprintMode/Reset"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/DoubleJump"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/DoubleJump/MarginContainer/UiSettingsLabel"]
 [editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Movement"]
 [editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Forward"]
 [editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Forward/UiSettingsLabel"]
@@ -7378,6 +7386,10 @@ bus = &"Environment Sfx"
 [editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Interface"]
 [editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Stats"]
 [editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Stats/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/Crosshair"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/CrosshairSettings/CrosshairEditor"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/CrosshairSettings/CrosshairEditor/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/CrosshairSettings/CrosshairEditor/Reset"]
 [editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/Language"]
 [editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/LanguageSettings/Language"]
 [editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/LanguageSettings/Language/MarginContainer/UiSettingsLabel"]
@@ -7395,3 +7407,21 @@ bus = &"Environment Sfx"
 [editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity/MarginContainer/UiSettingsLabel"]
 [editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity/NumericInput"]
 [editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/ACCESSIBILITY_TAB/ScrollContainer/VBoxContainer/EnemiesSettings2/EnemyOutlinesOpacity/Reset"]
+[editable path="CanvasLayer/Menu/CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor"]
+[editable path="CanvasLayer/Menu/CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/Header"]
+[editable path="CanvasLayer/Menu/CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/UiCrosshairFill"]
+[editable path="CanvasLayer/Menu/CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/UiCrosshairFill/Header"]
+[editable path="CanvasLayer/Menu/CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/UiCrosshairFill/FillSettings"]
+[editable path="CanvasLayer/Menu/CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/UiCrosshairFill/FillSettings/FillColor"]
+[editable path="CanvasLayer/Menu/CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/UiCrosshairFill/FillSettings/FillColor/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/UiCrosshairFill/FillSettings/FillAntiAlias"]
+[editable path="CanvasLayer/Menu/CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/UiCrosshairFill/FillSettings/FillAntiAlias/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/UiCrosshairOutline"]
+[editable path="CanvasLayer/Menu/CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/UiCrosshairOutline/Header"]
+[editable path="CanvasLayer/Menu/CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/UiCrosshairOutline/FillSettings"]
+[editable path="CanvasLayer/Menu/CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/UiCrosshairOutline/FillSettings/FillColor"]
+[editable path="CanvasLayer/Menu/CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/UiCrosshairOutline/FillSettings/FillColor/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/UiCrosshairOutline/FillSettings/FillAntiAlias"]
+[editable path="CanvasLayer/Menu/CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/UiCrosshairOutline/FillSettings/FillAntiAlias/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/UiCrosshairOutline/FillSettings/OutlineWidth"]
+[editable path="CanvasLayer/Menu/CrosshairEditorMenu/PanelContainer2/VBoxContainer/MarginContainer/UiCrosshairEditor/Edit/EditorMain/UiCrosshairOutline/FillSettings/OutlineWidth/MarginContainer/UiSettingsLabel"]
