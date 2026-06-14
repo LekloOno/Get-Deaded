@@ -7,12 +7,14 @@ public abstract partial class GB_ExternalBodyManagerWrapper : Node, GB_IExternal
 {
     public abstract GB_IExternalBodyManager Body {get;}
 
-    public void HandleKnockBack(Vector3 force)
-    {
+    public void HandleKnockBack(Vector3 force) =>
         Body.HandleKnockBack(force);
-    }
+    public void ResetVelocity(Vector3 velocity) =>
+        Body.ResetVelocity(velocity);
 
     public Vector3 Velocity() => Body.Velocity();
+
+
     public Vector3 PrevVelocity => Body.PrevVelocity;
 
     public Transform3D GlobalTransform => Body.GlobalTransform;

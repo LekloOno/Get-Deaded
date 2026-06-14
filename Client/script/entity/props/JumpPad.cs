@@ -48,10 +48,7 @@ public partial class JumpPad : Area3D
 			return;
 
 		if (_momentum != 1f)
-		{
-			Vector3 vel = bodyManager.Velocity() * (1f - _momentum);
-			bodyManager.HandleKnockBack(-vel);
-		}
+			bodyManager.ResetVelocity(_momentum * bodyManager.Velocity());
 
 		bodyManager.HandleKnockBack(_dir * _strength);
 		EmitSignal(SignalName.Launch);

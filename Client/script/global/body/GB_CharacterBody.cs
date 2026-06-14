@@ -1,4 +1,3 @@
-using System;
 using Godot;
 
 public abstract partial class GB_CharacterBody : CharacterBody3D, GB_IExternalBodyManager
@@ -6,6 +5,11 @@ public abstract partial class GB_CharacterBody : CharacterBody3D, GB_IExternalBo
     public void HandleKnockBack(Vector3 force)
     {
         Velocity += force;
+    }
+
+    public void ResetVelocity(Vector3 velocity)
+    {
+        Velocity = velocity;
     }
 
     Vector3 GB_IExternalBodyManager.Velocity() => Velocity;
