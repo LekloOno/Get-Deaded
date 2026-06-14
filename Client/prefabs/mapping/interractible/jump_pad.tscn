@@ -18,6 +18,14 @@ size = Vector3(1, 0.3, 1)
 transform = Transform3D(0.99999994, 0, 0, 0, 1.0000004, 0, 0, 0, 1.0000001, 0, 0, 0)
 script = ExtResource("1_nxjxh")
 
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=2053854548]
+transform = Transform3D(1.0000001, 0, 0, 0, 0.99999964, 0, 0, 0, 0.9999999, 0, 0.7999997, 0)
+light_color = Color(0.714888, 0.9999998, 0.81355506, 1)
+light_energy = 0.3
+distance_fade_enabled = true
+omni_range = 1.5
+omni_attenuation = 2.0
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1728528303]
 transform = Transform3D(1, -2.431122e-09, 8.940697e-08, 1.3236761e-08, 0.9999999, 5.9604623e-08, 0, 7.446613e-08, 0.9999999, 0, 0, 0)
 shape = SubResource("BoxShape3D_8jgwj")
