@@ -148,7 +148,6 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
             var overlaps = spaceState.IntersectShape(query);
             if (overlaps.Count == 0 && !OverlapsReservation(candidate, radius))
             {
-                GD.Print(attempts);
                 _reservedPositions.Add(candidate);
                 return candidate;
             }
