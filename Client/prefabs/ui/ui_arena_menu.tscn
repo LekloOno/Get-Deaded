@@ -50,6 +50,7 @@
 [ext_resource type="PackedScene" uid="uid://xo68a11s7vj0" path="res://prefabs/ui/scoreboard/ui_scoreboard_manager.tscn" id="39_o1fwb"]
 [ext_resource type="Script" uid="uid://dacwr5elg2sb2" path="res://script/ui/menu/contexts/controls/UI_DoubleJumpMode.cs" id="40_yj8ne"]
 [ext_resource type="Script" uid="uid://cie6ww774f8b" path="res://script/ui/menu/contexts/accessibility/ui_open_crosshair_editor.gd" id="41_fcw2i"]
+[ext_resource type="ButtonGroup" uid="uid://b48mroxgecuo1" path="res://prefabs/ui/menu/settings/double_jump_button_group.tres" id="41_iq7bh"]
 [ext_resource type="PackedScene" uid="uid://cdpwp7sk0b76d" path="res://prefabs/ui/combat/crosshair/ui_crosshair_editor.tscn" id="49_fbh7i"]
 [ext_resource type="PackedScene" uid="uid://4ny2ij141sta" path="res://prefabs/ui/combat/crosshair/ui_crosshair_galery.tscn" id="49_r1886"]
 [ext_resource type="ButtonGroup" uid="uid://dqni2wnmrs3ln" path="res://prefabs/ui/combat/crosshair/ui_crosshair_preview_button_group.tres" id="50_r1886"]
@@ -76,8 +77,6 @@ bg_color = Color(1, 1, 1, 0.61960787)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lmot5"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_4n7it"]
-
-[sub_resource type="ButtonGroup" id="ButtonGroup_iq7bh"]
 
 [sub_resource type="GDScript" id="GDScript_yahvj"]
 script/source = "extends Control
@@ -385,9 +384,10 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
 mouse_filter = 0
-current_tab = 0
+current_tab = 2
 
 [node name="VIDEO_TAB" type="MarginContainer" parent="Settings/VBoxContainer/TabContainer" unique_id=299629799]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 30
@@ -1090,7 +1090,6 @@ Section = "sound"
 Key = "feedback_sfx_volume_db"
 
 [node name="CONTROLS_TAB" type="MarginContainer" parent="Settings/VBoxContainer/TabContainer" unique_id=2137857519]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 20
@@ -1338,7 +1337,7 @@ layout_mode = 2
 [node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/SprintMode/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1718353719, 109094902, 172764845) index="0" unique_id=1465678305]
 text = "DOUBLE_JUMP_MODE_LABEL"
 
-[node name="DoubleJumpModeOptions" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/SprintMode" unique_id=1656238650 node_paths=PackedStringArray("_dediButton", "_jumpButton", "_dashButton", "_dediInput")]
+[node name="DoubleJumpModeOptions2" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/SprintMode" unique_id=1447214904 node_paths=PackedStringArray("_dediButton", "_jumpButton", "_dashButton", "_dediInput")]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1349,7 +1348,7 @@ _jumpButton = NodePath("JumpButton")
 _dashButton = NodePath("DashButton")
 _dediInput = NodePath("../../DoubleJump")
 
-[node name="DedicatedButton" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/SprintMode/DoubleJumpModeOptions" unique_id=2067767519]
+[node name="DedicatedButton" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/SprintMode/DoubleJumpModeOptions2" unique_id=1221370462]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1360,7 +1359,7 @@ toggle_mode = true
 text = "DOUBLE_JUMP_DEDICATED_BUTTON"
 clip_text = true
 
-[node name="JumpButton" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/SprintMode/DoubleJumpModeOptions" unique_id=1208751115]
+[node name="JumpButton" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/SprintMode/DoubleJumpModeOptions2" unique_id=1718559431]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1368,11 +1367,11 @@ tooltip_text = "DOUBLE_JUMP_JUMP_TOOLTIP"
 theme_type_variation = &"InputButton"
 theme_override_font_sizes/font_size = 11
 toggle_mode = true
-button_group = SubResource("ButtonGroup_iq7bh")
+button_group = ExtResource("41_iq7bh")
 text = "DOUBLE_JUMP_JUMP_BUTTON"
 clip_text = true
 
-[node name="DashButton" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/SprintMode/DoubleJumpModeOptions" unique_id=1495829461]
+[node name="DashButton" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/SprintMode/DoubleJumpModeOptions2" unique_id=550128839]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1380,7 +1379,7 @@ tooltip_text = "DOUBLE_JUMP_DASH_TOOLTIP"
 theme_type_variation = &"InputButton"
 theme_override_font_sizes/font_size = 11
 toggle_mode = true
-button_group = SubResource("ButtonGroup_iq7bh")
+button_group = ExtResource("41_iq7bh")
 text = "DOUBLE_JUMP_DASH_BUTTON"
 clip_text = true
 
