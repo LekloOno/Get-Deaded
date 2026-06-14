@@ -171,10 +171,11 @@ public partial class PM_Controller : CharacterBody3D, GB_IExternalBodyManager, G
 
     public void ResetVelocity(Vector3 velocity)
     {
+        Vector3 diff = velocity - RealVelocity;
+
         TakeOverForces.Clear();
         AdditionalForces.Clear();
-        Velocity = velocity;
-        _velocityCache.DiscardCache();
+        AdditionalForces.AddImpulse(diff);
     }
 
     Vector3 GB_IExternalBodyManager.Velocity() => RealVelocity;
