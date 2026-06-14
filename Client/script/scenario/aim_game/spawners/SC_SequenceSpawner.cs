@@ -125,24 +125,24 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
         ClearEnemies();
     }
 
-    private Vector3 IterateRandomPosition(float maxAttempts)
+    private Vector3 IterateRandomPosition(Func<Vector3> randomPositionFunc, float maxAttempts, uint mask, float radius)
     {
         var spaceState = GetWorld3D().DirectSpaceState;
-        var shape = new SphereShape3D { Radius = 1f };
+        var shape = new SphereShape3D { Radius = radius };
 
         Vector3 candidate;
         int attempts = 0;
 
         do
         {
-            candidate = RandomPosition();
+            candidate = randomPositionFunc();
             attempts++;
 
             var query = new PhysicsShapeQueryParameters3D
             {
                 Shape = shape,
                 Transform = new Transform3D(Basis.Identity, candidate + new Vector3(0f, 0.5f, 0f)),
-                CollisionMask = 1
+                CollisionMask = mask
             };
 
             var overlaps = spaceState.IntersectShape(query);
@@ -209,9 +209,17 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
 
     private Vector3 GetSpawnPosition()
     {
-        if (_spawnPoints.Count == 0)
-            return IterateRandomPosition(MaxSpawnAttempts);
-        return GetRandomSpawnPoint();
+        bool useRadius = _spawnPoints.Count == 0;
+
+        Func<Vector3> randomFunc = useRadius
+            ? RandomPosition
+            : GetRandomSpawnPoint;
+        
+        uint mask = useRadius
+            ? CONF_Collision.Layers.Environment
+            : CONF_Collision.Layers.EnvironmentEntity;
+
+        return IterateRandomPosition(randomFunc, MaxSpawnAttempts, mask, 1f);
     }
 
     private const uint MaxSpawnAttempts = 6;
