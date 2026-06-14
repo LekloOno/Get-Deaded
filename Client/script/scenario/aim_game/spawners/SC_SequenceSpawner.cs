@@ -29,6 +29,7 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
 
     public override void _Ready()
     {
+        _availableNodes.AddRange([.._spawnPoints]);
         CreateBots();
     }
 
@@ -62,7 +63,6 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
                 _enemyToPool.Add(enemy, poolIndex);
                 _enemyPools[poolIndex].Push(enemy);
                 CreateEnemy(enemy);
-                
             }
         }
 
@@ -146,8 +146,12 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
             };
 
             var overlaps = spaceState.IntersectShape(query);
-            if (overlaps.Count == 0)
+            if (overlaps.Count == 0 && !OverlapsReservation(candidate, radius))
+            {
+                GD.Print(attempts);
+                _reservedPositions.Add(candidate);
                 return candidate;
+            }
 
         } while (attempts < maxAttempts);
 
@@ -203,12 +207,42 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
 
     private Vector3 GetRandomSpawnPoint()
     {
-        int idx = _rng.Next(_spawnPoints.Count);
-        return _spawnPoints[idx].GlobalPosition;
+        int idx = _rng.Next(_availableNodes.Count);
+        Node3D node = _availableNodes[idx];
+        _reservedNodes.Add(node);
+        _availableNodes.RemoveAt(idx);
+        return node.GlobalPosition;
+    }
+
+    private readonly List<Vector3> _reservedPositions = [];
+    private readonly List<Node3D>  _reservedNodes = [];
+    private readonly List<Node3D>  _availableNodes = [];
+    private int _reservedFlushFrame = -1;
+
+    private void FlushReservations()
+    {
+        int frame = (int)Engine.GetPhysicsFrames();
+        if (frame != _reservedFlushFrame)
+        {
+            _reservedPositions.Clear();
+            _availableNodes.AddRange([.._reservedNodes]);
+            _reservedNodes.Clear();
+            _reservedFlushFrame = frame;
+        }
+    }
+
+    private bool OverlapsReservation(Vector3 candidate, float radius)
+    {
+        foreach (var pos in _reservedPositions)
+            if (pos.DistanceTo(candidate) < radius * 2f)
+                return true;
+        return false;
     }
 
     private Vector3 GetSpawnPosition()
     {
+        FlushReservations();
+
         bool useRadius = _spawnPoints.Count == 0;
 
         Func<Vector3> randomFunc = useRadius
