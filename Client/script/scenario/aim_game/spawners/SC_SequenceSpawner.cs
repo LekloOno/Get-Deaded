@@ -5,7 +5,7 @@ using System;
 [GlobalClass]
 public partial class SC_SequenceSpawner : SC_SpawnerScript
 {
-    [Export] private Godot.Collections.Array<E_EnemyBuilder> _enemyBuilders;
+    [Export] private Godot.Collections.Array<E_EnemyBuilder> _enemyBuilders = [];
     [Export] private Godot.Collections.Array<Node3D> _spawnPoints = [];
     [Export] private uint _count = 4;
     [Export] private float _spawnRadius = 20f;
@@ -17,12 +17,12 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
     /// At most, all enemies are dead, waiting for respawn, so we need _count different timers.
     /// The timer are not tied to a specific enemy. They are only tied when they are active, but can be tied to any enemy.
     /// </summary>
-    private List<Timer> _respawnTimers = [];
-    private Dictionary<E_IEnemy, int> _enemyToPool = [];
-    private Random _rng = new();
-    public SceneTreeTimer RoundTimer;
+    private readonly List<Timer> _respawnTimers = [];
+    private readonly Dictionary<E_IEnemy, int> _enemyToPool = [];
+    private readonly Random _rng = new();
+    public SceneTreeTimer? RoundTimer;
 
-    private List<Stack<E_IEnemy>> _enemyPools = [];
+    private readonly List<Stack<E_IEnemy>> _enemyPools = [];
 
     private int _spawnPoolIndex;
     private int _timerIndex;
@@ -105,8 +105,11 @@ public partial class SC_SequenceSpawner : SC_SpawnerScript
 
     protected override void StopSpec()
     {
-        RoundTimer.Timeout -= DoStop;
-        RoundTimer = null;
+        if (RoundTimer != null)
+        {
+            RoundTimer.Timeout -= DoStop;
+            RoundTimer = null;
+        }
 
         _timerIndex = 0;
         _spawnPoolIndex = 0;
