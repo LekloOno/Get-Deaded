@@ -3764,8 +3764,6 @@ viewport_path = NodePath("entities/Pickups/WildcardAmo2/Sprite3D/SubViewport")
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_27x07"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_lju4b"]
-
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_4g8la"]
 frequency = 0.05
 fractal_octaves = 4
@@ -7010,12 +7008,6 @@ button_group = SubResource("ButtonGroup_27x07")
 
 [node name="AutoButton" parent="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/SprintMode/SprintModeOptions" parent_id_path=PackedInt32Array(620824296, 1093197233) index="2" unique_id=1516286433]
 button_group = SubResource("ButtonGroup_27x07")
-
-[node name="JumpButton" parent="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/SprintMode/DoubleJumpModeOptions" parent_id_path=PackedInt32Array(620824296, 1656238650) index="1" unique_id=1052733353]
-button_group = SubResource("ButtonGroup_lju4b")
-
-[node name="DashButton" parent="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/SprintMode/DoubleJumpModeOptions" parent_id_path=PackedInt32Array(620824296, 1656238650) index="2" unique_id=208075892]
-button_group = SubResource("ButtonGroup_lju4b")
 
 [node name="PI_Stats" type="Node" parent="CanvasLayer" unique_id=1532279642]
 script = ExtResource("47_6ubnd")
