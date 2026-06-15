@@ -11,13 +11,10 @@ using Godot;
 [GlobalClass]
 public partial class PI_CrouchDispatcher : PI_ActionHandler<float>
 {
-    [ExportCategory("User Settings")]
-    [Export] public bool Hold = true;
-
     [ExportCategory("Setup")]
-    [Export] private PM_Controller _controller;
-    [Export] private PHX_BodyScale _body;
-    [Export] private PI_Slide _slideInput;
+    [Export] private PM_Controller _controller = null!;
+    [Export] private PHX_BodyScale _body       = null!;
+    [Export] private PI_Slide      _slideInput = null!;
 
     public bool IsCrouched => _active || _tryingUncrouch;
     public ulong LastCrouchDown {get; private set;} = 0; 
@@ -55,10 +52,12 @@ public partial class PI_CrouchDispatcher : PI_ActionHandler<float>
         }
     }
 
+    private static bool Hold() => CrouchModeSetting.Mode == CrouchMode.Hold;
+
     private void TryStart()
     {
         LastCrouchDown = PHX_Time.ScaledTicksMsec;
-        if (_active && !Hold)
+        if (_active && !Hold())
             TryStop();
         else 
         {
@@ -78,7 +77,7 @@ public partial class PI_CrouchDispatcher : PI_ActionHandler<float>
         if (@event.IsActionPressed("crouch"))
             TryStart();
 
-        else if(@event.IsActionReleased("crouch") && Hold)
+        else if(@event.IsActionReleased("crouch") && Hold())
             TryStop();
     }
 
