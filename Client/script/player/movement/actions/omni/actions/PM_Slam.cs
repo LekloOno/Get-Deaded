@@ -7,6 +7,9 @@ public partial class PM_Slam : PM_Action
     [Export] private CNT_SlamInput  _input = null!;
     [Export] private PM_OmniCharge  _charge = null!;
     [Export] private DATA_Slam      _data = null!;
+
+    // Guards
+    [Export] private PS_Grounded    _groundState = null!;
     [Export] private PM_LedgeClimb  _ledgeClimb    = null!;
 
     [Export] private ulong _superGlideGraceWindow = 80;
@@ -25,6 +28,9 @@ public partial class PM_Slam : PM_Action
             return;
 
         if (_ledgeClimb.IsClimbing)
+            return;
+
+        if (_groundState.IsGrounded())
             return;
 
         if (PHX_Time.ScaledTicksMsec - _ledgeClimb.LastSuperGlide < _superGlideGraceWindow)

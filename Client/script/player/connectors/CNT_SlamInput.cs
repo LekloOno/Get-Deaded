@@ -6,7 +6,6 @@ public partial class CNT_SlamInput : Node
 {
     [Export] private CNT_InternalDashInput  _dashInput = null!;
     [Export] private PI_CrouchDispatcher    _crouchDispatcher = null!;
-    [Export] private PS_Grounded            _groundState = null!;
     [Export] private ulong _dashCrouchWindow  = 100;
     [Export] private ulong _quickCrouchWindow = 50;
 
@@ -80,9 +79,6 @@ public partial class CNT_SlamInput : Node
 
     private void TryQuickCrouchSlam(object sender, float args)
     {
-        if (_groundState.IsGrounded())
-            return;
-
         if (!IsQuickCrouch())
             return;
 
