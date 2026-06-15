@@ -48,6 +48,7 @@
 [ext_resource type="PackedScene" uid="uid://12cbeu5f6b1j" path="res://prefabs/ui/menu/settings/ui_settings_inputs_row.tscn" id="38_pwonq"]
 [ext_resource type="PackedScene" uid="uid://qqvt3ahu2l65" path="res://prefabs/ui/menu/settings/ui_settings_category_header.tscn" id="38_squjd"]
 [ext_resource type="PackedScene" uid="uid://xo68a11s7vj0" path="res://prefabs/ui/scoreboard/ui_scoreboard_manager.tscn" id="39_o1fwb"]
+[ext_resource type="Script" uid="uid://bhd0so4g6ggh1" path="res://script/ui/menu/contexts/controls/ui_crouch_mode.gd" id="40_p0n87"]
 [ext_resource type="Script" uid="uid://dacwr5elg2sb2" path="res://script/ui/menu/contexts/controls/UI_DoubleJumpMode.cs" id="40_yj8ne"]
 [ext_resource type="Script" uid="uid://cie6ww774f8b" path="res://script/ui/menu/contexts/accessibility/ui_open_crosshair_editor.gd" id="41_fcw2i"]
 [ext_resource type="ButtonGroup" uid="uid://b48mroxgecuo1" path="res://prefabs/ui/menu/settings/double_jump_button_group.tres" id="41_iq7bh"]
@@ -1322,6 +1323,55 @@ input_index = 2
 custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
 
+[node name="Crouch" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer" unique_id=693852590 instance=ExtResource("38_squjd")]
+layout_mode = 2
+
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/Crouch" index="0" unique_id=366278316]
+text = "CROUCH_SLIDE_LABEL"
+
+[node name="CrouchSettings" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer" unique_id=2130108523]
+layout_mode = 2
+
+[node name="CrouchMode" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/CrouchSettings" unique_id=1295488117 instance=ExtResource("31_t61gj")]
+layout_mode = 2
+
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/CrouchSettings/CrouchMode/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1295488117, 109094902, 172764845) index="0" unique_id=1465678305]
+text = "CROUCH_SLIDE_MODE_LABEL"
+
+[node name="CrouchModeOptions" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/CrouchSettings/CrouchMode" unique_id=1599291941]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+script = ExtResource("40_p0n87")
+
+[node name="ToggleButton" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/CrouchSettings/CrouchMode/CrouchModeOptions" unique_id=662571429]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+theme_override_font_sizes/font_size = 11
+toggle_mode = true
+text = "CROUCH_SLIDE_TOGGLE_BUTTON"
+clip_text = true
+
+[node name="HoldButton" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/CrouchSettings/CrouchMode/CrouchModeOptions" unique_id=216591746]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InputButton"
+theme_override_font_sizes/font_size = 11
+toggle_mode = true
+text = "CROUCH_SLIDE_HOLD_BUTTON"
+clip_text = true
+
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/CrouchSettings/CrouchMode" unique_id=919463011 instance=ExtResource("34_6me0n")]
+layout_mode = 2
+
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/CrouchSettings/CrouchMode/Reset" index="0" unique_id=286523834]
+Section = "controls"
+Key = "crouch_mode"
+
 [node name="DoubleJump" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer" unique_id=856828597 instance=ExtResource("38_squjd")]
 layout_mode = 2
 
@@ -2466,6 +2516,10 @@ clip_text = true
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/AutoSprintDelay/Reset"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/AutoSprintQuickStartInput"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/AutoSprintQuickStartInput/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/Crouch"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/CrouchSettings/CrouchMode"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/CrouchSettings/CrouchMode/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/CrouchSettings/CrouchMode/Reset"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJump"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/SprintMode"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/SprintMode/MarginContainer/UiSettingsLabel"]

@@ -19,6 +19,11 @@ INPUTS_AUTO_SPRINT_QUICK_START_LABEL,QUICK START,DEMARRAGE RAPIDE
 AUTO_SPRINT_DELAY_TOOLTIP,"The delay before the auto sprint restart when cancelled by shooting.","Le délai avant que la course automatique redémarre après avoir été annulée par un tir."
 AUTO_SPRINT_QUICK_START_TOOLTIP,"Allows to restart the auto sprint early during grace delay.","Permet de redémarrer la course automatique avant que le délai de tir soit complété."
 
+CROUCH_SLIDE_LABEL,CROUCH/SLIDE,S'ACCROUPIR/GLISSADE
+CROUCH_SLIDE_MODE_LABEL,MODE,MODE
+CROUCH_SLIDE_TOGGLE_BUTTON,TOGGLE,(DES)ACTIVER
+CROUCH_SLIDE_HOLD_BUTTON,HOLD,MAINTENIR
+
 DOUBLE_JUMP_LABEL,DOUBLE JUMP (PROPELLER),DOUBLE SAUT (PROPULSEUR)
 DOUBLE_JUMP_MODE_LABEL,INPUT MODE,MODE DE DÉCLENCHEMENT
 INPUTS_DOUBLE_JUMP_LABEL,DEDICATED INPUT,TOUCHE DÉDIÉE
