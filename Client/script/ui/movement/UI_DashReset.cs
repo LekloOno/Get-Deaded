@@ -81,7 +81,7 @@ public partial class UI_DashReset : TextureProgressBar
         SetPhysicsProcess(true);
     }
 
-    public void Unavailable(object sender, EventArgs e)
+    public void Unavailable()
     {
         _progressTween?.Kill();
         _progressTween = CreateTween();

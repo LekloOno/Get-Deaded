@@ -4,18 +4,13 @@ using Godot;
 [GlobalClass]
 public partial class PM_Dash : PM_Action
 {
-    [Export] private PI_CrouchDispatcher _crouchDispatcher;
-    [Export] private PI_Dash _dashInput;
-    [Export] private PI_Walk _walkInput;
-    [Export] private PI_Jump _jumpInput;
-    [Export] private PC_Control _cameraControl;
-    [Export] private PM_Controller _controller;
-    [Export] private PS_Grounded _groundState;
-    [Export] private PM_LedgeClimb _ledgeClimb;
-    [Export] private PM_WallJump _wallJump;
-    [Export] private PM_OmniCharge _charge;
-    [Export] private float _dashCost = 90f;
-    [Export] private float _slamCost = 60f;
+    [Export] private PI_Dash       _dashInput     = null!;
+    [Export] private PI_Walk       _walkInput     = null!;
+    [Export] private PC_Control    _cameraControl = null!;
+    [Export] private PM_Controller _controller    = null!;
+    [Export] private PM_LedgeClimb _ledgeClimb    = null!;
+    [Export] private PM_OmniCharge _charge        = null!;
+    [Export] private float         _dashCost      = 90f;
 
     private float _dashDistance = 6.5f;
     [Export(PropertyHint.Range, "0.0, 10.0, or_greater")] public float Distance
@@ -39,9 +34,8 @@ public partial class PM_Dash : PM_Action
             SetDashSpeed();
         }
     }
-    [Export] private float _slamWindow;
 
-    public EventHandler OnUnavailable;
+    public event Action? OnUnavailable;
 
     private bool _available = true;
     private bool _isDashing = false;
@@ -51,7 +45,7 @@ public partial class PM_Dash : PM_Action
     private Vector3 _prevRealVelocity = Vector3.Zero;
     private Vector3 _force = Vector3.Zero;
     private Vector3 _direction = Vector3.Zero;
-    private SceneTreeTimer _endDashTimer;
+    private SceneTreeTimer? _endDashTimer;
 
 
     public override void _Ready()
@@ -71,10 +65,11 @@ public partial class PM_Dash : PM_Action
         if (_isDashing)
             return;
 
-        float cost = GetChargeCost();
-
-        if (!_charge.TryConsume(cost))
+        if (!_charge.TryConsume(_dashCost))
+        {
+            OnUnavailable?.Invoke();
             return;
+        }
 
         _prevRealVelocity = _controller.RealVelocity;
         Vector3 velocity = _prevRealVelocity;
@@ -103,31 +98,14 @@ public partial class PM_Dash : PM_Action
             -_cameraControl.GlobalBasis.Z,
             _walkInput.FlatDir
         );
-
-    private float GetChargeCost()
-    {
-        if (_groundState.IsGrounded())
-            return _dashCost;
-
-        if (IsSlam())
-            return _slamCost;
-
-        return _dashCost;
-    }
         
     private Vector3 GetDashDirection(Vector2 walkAxis, Vector3 wishDir, Vector3 dir, Vector3 flatDir)
     {
-        if (!_groundState.IsGrounded() && IsSlam())
-            return Vector3.Down;
-        
         if (walkAxis != Vector2.Zero)
             return wishDir;
 
         return flatDir;
     }
-
-    private bool IsSlam() =>
-        PHX_Time.ScaledTicksMsec - _crouchDispatcher.LastCrouchDown <= _slamWindow;
 
     public void AbortDash()
     {
