@@ -4,13 +4,11 @@ using Godot;
 [GlobalClass]
 public partial class CNT_DoubleJumpInput : Node
 {
-    [Export] private PI_Jump        _jumpInput = null!;
-    [Export] private PI_Dash        _dashInput = null!;
-    [Export] private PS_Grounded    _groundState = null!;
+    [Export] private CNT_InternalDashInput _dashInput  = null!;
+    [Export] private PI_Jump               _jumpInput  = null!;
+    [Export] private PS_Grounded           _groundState = null!;
     [Export] private float _minHeight       = 0.28f;
     [Export] private ulong _dashJumpWindow  = 100;
-
-    private readonly PI_Dash _internalDashInput = new();
 
     public event Action? Started;
 
@@ -18,10 +16,6 @@ public partial class CNT_DoubleJumpInput : Node
 
     public override void _Ready()
     {
-        _dashInput.GetParent().RemoveChild(_dashInput);
-        AddChild(_dashInput);
-        _internalDashInput.OnStartInput += OnInternalDashStart;
-
         SetMode(this, DoubleJumpModeSetting.Mode);
         DoubleJumpModeSetting.ValueChanged += SetMode;
     }
@@ -43,15 +37,9 @@ public partial class CNT_DoubleJumpInput : Node
             return;
 
         if (nextDash)
-        {
-            AddChild(_internalDashInput);
-            RemoveChild(_dashInput);
-        }
+            _dashInput.Dashed += OnInternalDashStart;
         else
-        {
-            RemoveChild(_internalDashInput);
-            AddChild(_dashInput);
-        }
+            _dashInput.Dashed -= OnInternalDashStart;
     }
 
     public override void _UnhandledInput(InputEvent @event)
@@ -60,12 +48,13 @@ public partial class CNT_DoubleJumpInput : Node
             Started?.Invoke();
     }
 
-    private void OnInternalDashStart(object? sender, EventArgs e)
+    private bool OnInternalDashStart()
     {
         if (PHX_Time.ScaledTicksMsec - _jumpInput.LastInput > _dashJumpWindow)
-            _dashInput.KeyDown();
-        else
-            Started?.Invoke();
+            return false;
+            
+        Started?.Invoke();
+        return true;
     }
 
     public void TryHeightDoubleJump()

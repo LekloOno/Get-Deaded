@@ -50,6 +50,8 @@ public partial class PI_CrouchDispatcher : PI_ActionHandler<float>
             _tryingUncrouch = true;
             SetPhysicsProcess(true);
         }
+        
+        Stop?.Invoke(this, 1f);
     }
 
     private static bool Hold() => CrouchModeSetting.Mode == CrouchMode.Hold;
@@ -69,6 +71,8 @@ public partial class PI_CrouchDispatcher : PI_ActionHandler<float>
             }
             else
                 _slideInput.InputStart();
+
+            Start?.Invoke(this, 1f);
         }
     }
 
@@ -106,5 +110,4 @@ public partial class PI_CrouchDispatcher : PI_ActionHandler<float>
         TryStop();
         SetProcessUnhandledInput(false);
     }
-
 }

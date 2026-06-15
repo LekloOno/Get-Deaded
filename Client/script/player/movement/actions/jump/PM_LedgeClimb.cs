@@ -38,6 +38,7 @@ public partial class PM_LedgeClimb : PM_Action
     private KinematicCollision3D _lastCollision;
 
     public event Action? SuperGlideStarted;
+    public ulong LastSuperGlide { get; private set; }
 
     public override void _Ready()
     {
@@ -128,6 +129,7 @@ public partial class PM_LedgeClimb : PM_Action
                 
             outVelocity += _direction * _superGlideXStrength;
             outVelocity.Y = _superGlideYStrength;
+            LastSuperGlide = PHX_Time.ScaledTicksMsec;
             SuperGlideStarted?.Invoke();
         } else
             outVelocity = minOut;

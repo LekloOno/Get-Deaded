@@ -8,7 +8,6 @@ public partial class PI_Sprint : PI_HoldableHandler<EmptyInput>
     [ExportCategory("Setup")]
     [Export] private PM_Jump _jump;
     [Export] private PI_Walk _walkInput;
-    [Export] private PI_CrouchDispatcher _crouchDispatcher;
 
     public EventHandler OnStartSprinting;
     public EventHandler OnStopSprinting;
