@@ -48,10 +48,11 @@
 [ext_resource type="PackedScene" uid="uid://12cbeu5f6b1j" path="res://prefabs/ui/menu/settings/ui_settings_inputs_row.tscn" id="38_pwonq"]
 [ext_resource type="PackedScene" uid="uid://qqvt3ahu2l65" path="res://prefabs/ui/menu/settings/ui_settings_category_header.tscn" id="38_squjd"]
 [ext_resource type="PackedScene" uid="uid://xo68a11s7vj0" path="res://prefabs/ui/scoreboard/ui_scoreboard_manager.tscn" id="39_o1fwb"]
-[ext_resource type="Script" uid="uid://bhd0so4g6ggh1" path="res://script/ui/menu/contexts/controls/ui_crouch_mode.gd" id="40_p0n87"]
+[ext_resource type="Script" path="res://script/ui/menu/contexts/controls/ui_crouch_mode.gd" id="40_p0n87"]
 [ext_resource type="Script" uid="uid://dacwr5elg2sb2" path="res://script/ui/menu/contexts/controls/UI_DoubleJumpMode.cs" id="40_yj8ne"]
 [ext_resource type="Script" uid="uid://cie6ww774f8b" path="res://script/ui/menu/contexts/accessibility/ui_open_crosshair_editor.gd" id="41_fcw2i"]
 [ext_resource type="ButtonGroup" uid="uid://b48mroxgecuo1" path="res://prefabs/ui/menu/settings/double_jump_button_group.tres" id="41_iq7bh"]
+[ext_resource type="Script" uid="uid://cjnyhg7l86tiw" path="res://script/ui/menu/contexts/controls/UI_SlamMode.cs" id="43_ww4kb"]
 [ext_resource type="PackedScene" uid="uid://cdpwp7sk0b76d" path="res://prefabs/ui/combat/crosshair/ui_crosshair_editor.tscn" id="49_fbh7i"]
 [ext_resource type="PackedScene" uid="uid://4ny2ij141sta" path="res://prefabs/ui/combat/crosshair/ui_crosshair_galery.tscn" id="49_r1886"]
 [ext_resource type="ButtonGroup" uid="uid://dqni2wnmrs3ln" path="res://prefabs/ui/combat/crosshair/ui_crosshair_preview_button_group.tres" id="50_r1886"]
@@ -78,6 +79,9 @@ bg_color = Color(1, 1, 1, 0.61960787)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lmot5"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_4n7it"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_ww4kb"]
+allow_unpress = true
 
 [sub_resource type="GDScript" id="GDScript_yahvj"]
 script/source = "extends Control
@@ -1490,6 +1494,124 @@ input_index = 2
 custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
 
+[node name="Slam" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer" unique_id=635169085 instance=ExtResource("38_squjd")]
+layout_mode = 2
+
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/Slam" index="0" unique_id=366278316]
+text = "SLAM_LABEL"
+
+[node name="SlamSettings" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer" unique_id=1611094398]
+layout_mode = 2
+
+[node name="SlamMode" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SlamSettings" unique_id=209218649 instance=ExtResource("31_t61gj")]
+layout_mode = 2
+
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SlamSettings/SlamMode/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(209218649, 109094902, 172764845) index="0" unique_id=1465678305]
+text = "SLAM_MODE_LABEL"
+
+[node name="SlamModeOptions2" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SlamSettings/SlamMode" unique_id=1388370610 node_paths=PackedStringArray("_dediButton", "_crouchButton", "_dashButton", "_dediInput")]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+script = ExtResource("43_ww4kb")
+_dediButton = NodePath("DedicatedButton")
+_crouchButton = NodePath("CrouchButton")
+_dashButton = NodePath("DashButton")
+_dediInput = NodePath("../../Slam")
+
+[node name="DedicatedButton" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SlamSettings/SlamMode/SlamModeOptions2" unique_id=1990187039]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "SLAM_DEDICATED_TOOLTIP"
+theme_type_variation = &"InputButton"
+theme_override_font_sizes/font_size = 11
+toggle_mode = true
+text = "SLAM_DEDICATED_BUTTON"
+clip_text = true
+
+[node name="CrouchButton" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SlamSettings/SlamMode/SlamModeOptions2" unique_id=1170561654]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "SLAM_CROUCH_TOOLTIP"
+theme_type_variation = &"InputButton"
+theme_override_font_sizes/font_size = 11
+toggle_mode = true
+button_group = SubResource("ButtonGroup_ww4kb")
+text = "SLAM_CROUCH_BUTTON"
+clip_text = true
+
+[node name="DashButton" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SlamSettings/SlamMode/SlamModeOptions2" unique_id=342133101]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "SLAM_DASH_TOOLTIP"
+theme_type_variation = &"InputButton"
+theme_override_font_sizes/font_size = 11
+toggle_mode = true
+button_group = SubResource("ButtonGroup_ww4kb")
+text = "SLAM_DASH_BUTTON"
+clip_text = true
+
+[node name="Reset" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SlamSettings/SlamMode" unique_id=1707851998 instance=ExtResource("34_6me0n")]
+layout_mode = 2
+
+[node name="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SlamSettings/SlamMode/Reset" index="0" unique_id=286523834]
+Section = "controls"
+Key = "slam_mode"
+
+[node name="Slam" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SlamSettings" unique_id=1899806951 instance=ExtResource("31_t61gj")]
+layout_mode = 2
+
+[node name="MarginContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SlamSettings/Slam" index="0" unique_id=1908736311]
+theme_override_constants/margin_left = 15
+
+[node name="UiSettingsLabel" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SlamSettings/Slam/MarginContainer" index="0" unique_id=109094902]
+custom_minimum_size = Vector2(385, 0)
+
+[node name="Label" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SlamSettings/Slam/MarginContainer/UiSettingsLabel/MarginContainer" parent_id_path=PackedInt32Array(1899806951, 109094902, 172764845) index="0" unique_id=1465678305]
+text = "INPUTS_SLAM_LABEL"
+
+[node name="DoubleJumpInput" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SlamSettings/Slam" unique_id=130220156]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/separation = 5
+
+[node name="Button" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SlamSettings/Slam/DoubleJumpInput" unique_id=30383720]
+custom_minimum_size = Vector2(58, 0)
+layout_mode = 2
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "slam"
+
+[node name="Button2" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SlamSettings/Slam/DoubleJumpInput" unique_id=1219353529]
+custom_minimum_size = Vector2(58, 0)
+layout_mode = 2
+theme_type_variation = &"InputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "slam"
+input_index = 1
+
+[node name="Button3" type="Button" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SlamSettings/Slam/DoubleJumpInput" unique_id=477531358]
+custom_minimum_size = Vector2(58, 0)
+layout_mode = 2
+theme_type_variation = &"DisabledInputButton"
+text = "a"
+clip_text = true
+script = ExtResource("30_rt8lt")
+action = "slam"
+input_index = 2
+
+[node name="Control" type="Control" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SlamSettings/Slam" unique_id=557673095]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+
 [node name="CONTROLS_BINDINGS_TAB" type="ScrollContainer" parent="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB" unique_id=1428674498]
 visible = false
 layout_mode = 2
@@ -2526,6 +2648,12 @@ clip_text = true
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/SprintMode/Reset"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/DoubleJump"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/DoubleJump/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/Slam"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SlamSettings/SlamMode"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SlamSettings/SlamMode/MarginContainer/UiSettingsLabel"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SlamSettings/SlamMode/Reset"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SlamSettings/Slam"]
+[editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SlamSettings/Slam/MarginContainer/UiSettingsLabel"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Movement"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Forward"]
 [editable path="Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Forward/UiSettingsLabel"]

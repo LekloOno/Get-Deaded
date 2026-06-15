@@ -29,10 +29,23 @@ DOUBLE_JUMP_MODE_LABEL,INPUT MODE,MODE DE DÉCLENCHEMENT
 INPUTS_DOUBLE_JUMP_LABEL,DEDICATED INPUT,TOUCHE DÉDIÉE
 
 DOUBLE_JUMP_DEDICATED_BUTTON,INPUT,TOUCHE
-DOUBLE_JUMP_DEDICATED_TOOLTIP,Use a dedicated input.,Utiliser une touche dédiée.
+DOUBLE_JUMP_DEDICATED_TOOLTIP,"Use a dedicated input.","Utiliser une touche dédiée."
 
 DOUBLE_JUMP_JUMP_BUTTON,AIR JUMP,SAUT AÉRIEN
-DOUBLE_JUMP_JUMP_TOOLTIP,Triggers when the player inputs a normal jump as he's high enough in air.,Se déclenche lorsque le joueur réalise un saut alors qu'il est suffisamment haut dans les airs.
+DOUBLE_JUMP_JUMP_TOOLTIP,"Triggers when the player inputs a normal jump as he's high enough in air.","Se déclenche lorsque le joueur réalise un saut alors qu'il est suffisamment haut dans les airs."
 
 DOUBLE_JUMP_DASH_BUTTON,JUMP-DASH,SAUT-DASH
-DOUBLE_JUMP_DASH_TOOLTIP,Triggers when the player performs a jump mid-air right before dashing.,Se déclenche lorsque le joueur réalise un saut aérien juste avant de déclencher un dash.
+DOUBLE_JUMP_DASH_TOOLTIP,"Triggers when the player performs a jump mid-air right before dashing.","Se déclenche lorsque le joueur réalise un saut aérien juste avant de déclencher un dash."
+
+SLAM_LABEL,SLAM,ÉCRASEMENT
+SLAM_MODE_LABEL,INPUT MODE,MODE DE DÉCLENCHEMENT
+INPUTS_SLAM_LABEL,DEDICATED INPUT,TOUCHE DÉDIÉE
+
+SLAM_DEDICATED_BUTTON,INPUT,TOUCHE
+SLAM_DEDICATED_TOOLTIP,"Use a dedicated input.","Utiliser une touche dédiée."
+
+SLAM_CROUCH_BUTTON,TAP CROUCH,ACCROUPI RAPIDE
+SLAM_CROUCH_TOOLTIP,"Triggers when the player inputs a crouch and quickly release it.\n- On hold crouch mode, that is tapping the crouch.\n- On toggle mode, that is double tapping the crouch.","Se déclenche lorsque le joueur s'accroupit puis se relâche rapidement.\n- En mode maintenir, cela correspond à un rapide touché et relâché de la touche\n- En mode (dés)activer, à appuyer deux fois."
+
+SLAM_DASH_BUTTON,SLAM-DASH,ÉCRASEMENT-DASH
+SLAM_DASH_TOOLTIP,Triggers when the player performs a crouch mid-air right before dashing.,Se déclenche lorsque le joueur s'accroupit juste avant de déclencher un dash.
