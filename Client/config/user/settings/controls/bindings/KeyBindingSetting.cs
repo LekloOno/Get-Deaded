@@ -2,12 +2,13 @@ using System.Collections.Generic;
 using Godot;
 using Godot.Collections;
 using TraGUS;
+using TraGUS.DotNet;
 
 /// <summary>
 /// This setting's inner variant value is a string representative of its _keyBinds list.
 /// </summary>
 [GlobalClass]
-public partial class KeyBindingSetting : UserSetting
+public partial class KeyBindingSetting : UserSetting<KeyBindingSetting>
 {
     public KeyBindingSetting(){}
 

@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class SsilSetting : VideoQualitySetting
+public partial class SsilSetting : VideoQualitySetting<SsilSetting>
 {
     public const string KeyString = "screen_space_indirect_lighting";
     public override string Key => KeyString;

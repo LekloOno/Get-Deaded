@@ -1,41 +1,26 @@
-
-using System;
 using Godot;
-using TraGUS;
+using TraGUS.DotNet.Conversion.Numeric;
 
-public partial class AutoSprintDelaySetting : UserSetting
+public partial class AutoSprintDelaySetting : UserSettingUlong<AutoSprintDelaySetting>
 {
-    public override string Section => UserSettingsSection.Controls;
-    public override string Key => "auto_sprint_delay";
-    public static ulong Delay {get; private set;} = 800;
-    public override Variant DefaultFallBack() => (ulong) 800;
     public const ulong MinimumDelay = 300;
     public ulong Minimum => MinimumDelay;
 
-    public static event Action<ulong>? DelayChanged;
+    public override string Section => UserSettingsSection.Controls;
+    public override string Key => "auto_sprint_delay";
 
-    protected override bool ProcessValue(Variant value, out Variant effectiveValue)
+    public override Variant DefaultFallBack() => (ulong) 800;
+    public static ulong Delay => Tval;
+    
+    protected override bool ProcessTypedValue(ulong typedValue, out ulong effectiveTypedValue)
     {
-        if (value.VariantType is not Variant.Type.Int &&
-            value.VariantType is not Variant.Type.Float)
+        if (typedValue < MinimumDelay)
         {
-            effectiveValue = Value;
+            effectiveTypedValue = MinimumDelay;
             return false;
         }
 
-        ulong ulongVal = (ulong) value;
-
-        if (ulongVal < MinimumDelay)
-        {
-            Delay = MinimumDelay;
-            effectiveValue = MinimumDelay;
-            return false;
-        }
-
-        Delay = ulongVal;
-        effectiveValue = ulongVal;
-
-        DelayChanged?.Invoke(Delay);
+        effectiveTypedValue = typedValue;
         return true;
     }
 }

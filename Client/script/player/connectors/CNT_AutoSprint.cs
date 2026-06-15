@@ -60,16 +60,16 @@ public partial class CNT_AutoSprint : Node
         if (SprintModeSetting.Mode == SprintMode.Auto)
             Enable();
 
-        SprintModeSetting.SprintModeChanged += OnModeSettingChanged;
-        AutoSprintDelaySetting.DelayChanged += OnDelaySettingChanged;
+        SprintModeSetting.ValueChanged += OnModeSettingChanged;
+        AutoSprintDelaySetting.ValueChanged += OnDelaySettingChanged;
     }
 
-    private void OnDelaySettingChanged(ulong value)
+    private void OnDelaySettingChanged(GodotObject sender, ulong value)
     {
         _graceShotWindow = value;
     }
 
-    private void OnModeSettingChanged(SprintMode value)
+    private void OnModeSettingChanged(GodotObject? _, SprintMode value)
     {
         if (value == SprintMode.Auto)
             Enable();

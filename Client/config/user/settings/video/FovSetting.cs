@@ -1,34 +1,26 @@
 using Godot;
-using TraGUS;
+using TraGUS.DotNet.Conversion.Numeric;
 
-public partial class FovSetting : UserSetting
+public partial class FovSetting : UserSettingFloat<FovSetting>
 {
     public override string Section => UserSettingsSection.Video;
     public override string Key => "fov";
 
-    private PC_Settings _playerCameraSettings;
+    private PC_Settings _playerCameraSettings = null!;
 
     public override Variant DefaultFallBack() => 115f;
 
-    protected override bool ProcessValue(Variant value, out Variant effectiveValue)
+    protected override bool ProcessTypedValue(float typedValue, out float effectiveTypedValue)
     {
-        if (value.VariantType != Variant.Type.Int
-        && value.VariantType != Variant.Type.Float)
+        if (typedValue < 60f)
         {
-            effectiveValue = Value;
-            return false;
-        }
-
-        float fov = (float)value;
-        if (fov < 60f)
-        {
-            effectiveValue = 60f;
+            effectiveTypedValue = 60f;
             _playerCameraSettings.HorizontalFov = 60f;
             return false;
         }
 
-        _playerCameraSettings.HorizontalFov = fov;
-        effectiveValue = value;
+        _playerCameraSettings.HorizontalFov = typedValue;
+        effectiveTypedValue = typedValue;
 
         return true;
     }

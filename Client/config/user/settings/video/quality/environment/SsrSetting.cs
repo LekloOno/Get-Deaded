@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class SsrSetting : VideoQualitySetting
+public partial class SsrSetting : VideoQualitySetting<SsrSetting>
 {
     public const string KeyString = "screen_space_reflection";
     public override string Key => KeyString;

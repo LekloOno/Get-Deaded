@@ -1,30 +1,24 @@
 using Godot;
-using TraGUS;
+using TraGUS.DotNet.Conversion.Numeric;
 
-public partial class EnemyOutlinesOpacitySetting : UserSetting
+public partial class EnemyOutlinesOpacitySetting : UserSettingFloat<EnemyOutlinesOpacitySetting>
 {
     public override string Section => UserSettingsSection.Accessibility;
     public override string Key => "enemy_outlines_opacity";
 
     public override Variant DefaultFallBack() => 1f;
+    public static float Opacity => Tval;
 
-    // Explicit static wrapper for c# binding
-    public static float Opacity;
-
-    protected override bool ProcessValue(Variant value, out Variant effectiveValue)
+    protected override bool ProcessTypedValue(float typedValue, out float effectiveTypedValue)
     {
-        if (value.VariantType != Variant.Type.Float &&
-            value.VariantType != Variant.Type.Int)
+        if (typedValue < 0f)
         {
-            effectiveValue = Value;
+            effectiveTypedValue = 0f;
             return false;
         }
 
-        float opacity = (float) value;
-        effectiveValue = opacity;
-        Opacity = opacity;
-        RenderingServer.GlobalShaderParameterSet("enemy_outlines_opacity", opacity);
-
+        effectiveTypedValue = typedValue;
+        RenderingServer.GlobalShaderParameterSet("enemy_outlines_opacity", typedValue);
         return true;
     }
 }

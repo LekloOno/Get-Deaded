@@ -1,36 +1,16 @@
-using System;
 using Godot;
-using TraGUS;
+using TraGUS.DotNet.Conversion;
 
-public partial class CrouchModeSetting : UserSetting
+public partial class CrouchModeSetting : UserSettingEnum<CrouchModeSetting, CrouchMode>
 {
     public override string Section => UserSettingsSection.Controls;
     public override string Key => "crouch_mode";
-    public static CrouchMode Mode {get; private set;} = CrouchMode.Hold;
+    public static CrouchMode Mode => Tval;
     public override Variant DefaultFallBack() => (int) CrouchMode.Hold;
 
-    public static event Action<CrouchMode>? ModeChanged;
-
-    protected override bool ProcessValue(Variant value, out Variant effectiveValue)
+    protected override bool ProcessTypedValue(CrouchMode typedValue, out CrouchMode effectiveTypedValue)
     {
-        if (value.VariantType is not Variant.Type.Int)
-        {
-            effectiveValue = Value;
-            return false;
-        }
-
-        int intVal = (int) value;
-        if (!Enum.IsDefined(typeof(CrouchMode), intVal))
-        {
-            effectiveValue = Value;
-            return false;
-        }
-
-        Mode = (CrouchMode) intVal;
-        effectiveValue = intVal;
-
-        ModeChanged?.Invoke(Mode);
-
+        effectiveTypedValue = typedValue;
         return true;
     }
 }

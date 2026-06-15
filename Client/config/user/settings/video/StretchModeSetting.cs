@@ -1,7 +1,7 @@
 using Godot;
-using TraGUS;
+using TraGUS.DotNet.Conversion;
 
-public partial class StretchModeSetting : UserSetting
+public partial class StretchModeSetting : UserSettingEnum<StretchModeSetting, Window.ContentScaleAspectEnum>
 {
     public override string Section => UserSettingsSection.Video;
     public override string Key => "stretch_mode";
@@ -9,18 +9,10 @@ public partial class StretchModeSetting : UserSetting
     public override Variant DefaultFallBack() =>
         (int)Window.ContentScaleAspectEnum.Keep;
 
-    protected override bool ProcessValue(Variant value, out Variant effectiveValue)
+    protected override bool ProcessTypedValue(Window.ContentScaleAspectEnum typedValue, out Window.ContentScaleAspectEnum effectiveTypedValue)
     {
-        if (value.VariantType != Variant.Type.Int)
-        {
-            effectiveValue = Value;
-            return false;
-        }
-
-        var mode = (Window.ContentScaleAspectEnum)(int)value;
-        GetTree().Root.ContentScaleAspect = mode;
-        effectiveValue = value;
-
+        GetTree().Root.ContentScaleAspect = typedValue;
+        effectiveTypedValue = typedValue;
         return true;
     }
 }

@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class GlowSetting : VideoQualitySetting
+public partial class GlowSetting : VideoQualitySetting<GlowSetting>
 {
     public const string KeyString = "glow_quality";
     public override string Key => KeyString;

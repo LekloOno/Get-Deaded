@@ -1,36 +1,17 @@
-using System;
+using System.Diagnostics.CodeAnalysis;
 using Godot;
-using TraGUS;
+using TraGUS.DotNet.Conversion;
 
-public partial class SprintModeSetting : UserSetting
+public partial class SprintModeSetting : UserSettingFlag<SprintModeSetting, SprintMode>
 {
     public override string Section => UserSettingsSection.Controls;
     public override string Key => "sprint_mode";
-    public static SprintMode Mode {get; private set;} = SprintMode.Auto;
+    public static SprintMode Mode => Tval;
     public override Variant DefaultFallBack() => (int) SprintMode.Auto;
 
-    public static event Action<SprintMode>? SprintModeChanged;
-
-    protected override bool ProcessValue(Variant value, out Variant effectiveValue)
+    protected override bool ProcessTypedValue(SprintMode typedValue, out SprintMode effectiveTypedValue)
     {
-        if (value.VariantType is not Variant.Type.Int)
-        {
-            effectiveValue = Value;
-            return false;
-        }
-
-        int intVal = (int) value;
-        if (!Enum.IsDefined(typeof(SprintMode), intVal))
-        {
-            effectiveValue = Value;
-            return false;
-        }
-
-        Mode = (SprintMode) intVal;
-        effectiveValue = intVal;
-
-        SprintModeChanged?.Invoke(Mode);
-
+        effectiveTypedValue = typedValue;
         return true;
     }
 }

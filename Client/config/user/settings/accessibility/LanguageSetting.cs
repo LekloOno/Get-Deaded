@@ -1,31 +1,23 @@
 using Godot;
-using TraGUS;
+using TraGUS.DotNet.Conversion;
 
-public partial class LanguageSetting : UserSetting
+public partial class LanguageSetting : UserSettingString<LanguageSetting>
 {
     public override string Section => UserSettingsSection.Accessibility;
     public override string Key => "language";
 
     public override Variant DefaultFallBack() => "en";
 
-    protected override bool ProcessValue(Variant value, out Variant effectiveValue)
+    protected override bool ProcessTypedValue(string typedValue, out string effectiveTypedValue)
     {
-        if (value.VariantType != Variant.Type.String)
+        if (!TranslationServer.HasTranslationForLocale(typedValue, true))
         {
-            effectiveValue = Value;
+            effectiveTypedValue = Tval;
             return false;
         }
 
-        string locale = (string) value;
-        if (!TranslationServer.HasTranslationForLocale(locale, true))
-        {
-            effectiveValue = value;
-            return false;
-        }
-
-        effectiveValue = value;
-        TranslationServer.SetLocale(locale);
-
+        effectiveTypedValue = typedValue;
+        TranslationServer.SetLocale(typedValue);
         return true;
     }
 }

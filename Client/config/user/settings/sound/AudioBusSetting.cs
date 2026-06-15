@@ -1,8 +1,9 @@
+using System;
 using Godot;
-using TraGUS;
+using TraGUS.DotNet.Conversion.Numeric;
 
 [GlobalClass]
-public partial class AudioBusSetting : UserSetting
+public partial class AudioBusSetting : UserSettingFloat<AudioBusSetting>
 {
     public AudioBusSetting(){}
 
@@ -21,34 +22,32 @@ public partial class AudioBusSetting : UserSetting
     public float LinearDb => (float) Value;
     private int _busIndex;
 
-    protected override bool ProcessValue(Variant value, out Variant effectiveValue)
-    {
-        if (value.VariantType != Variant.Type.Int
-        && value.VariantType != Variant.Type.Float
-        || (float) value == -1)
-        {
-            effectiveValue = Value;
-            return false;
-        }
-
-        float linearDb = (float)value;
-
-        if (linearDb > 1f || linearDb < 0f)
-        {
-            linearDb = Mathf.Clamp(linearDb, 0f, 1f);
-            effectiveValue = linearDb;
-            SetLinearDb(linearDb);
-            return false;
-        }
-
-        effectiveValue = linearDb;
-        SetLinearDb(linearDb);
-        return true;
-    }
-
     private void SetLinearDb(float linearDb)
     {
         float volumeDb = Mathf.LinearToDb(linearDb);
         AudioServer.SetBusVolumeDb(_busIndex, volumeDb);
     }
+
+    protected override bool ProcessTypedValue(float typedValue, out float effectiveTypedValue)
+    {
+        // Godot init
+        if (typedValue == -1)
+        {
+            effectiveTypedValue = Tval;
+            return false;
+        }
+
+        if (typedValue > 1f || typedValue < 0f)
+        {
+            typedValue = Mathf.Clamp(typedValue, 0f, 1f);
+            effectiveTypedValue = typedValue;
+            SetLinearDb(typedValue);
+            return false;
+        }
+
+        effectiveTypedValue = typedValue;
+        SetLinearDb(typedValue);
+        return true;
+    }
+
 }

@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class AmbientOcclusionSetting : VideoQualitySetting
+public partial class AmbientOcclusionSetting : VideoQualitySetting<AmbientOcclusionSetting>
 {
     public const string KeyString = "ambient_occlusion";
     public override string Key => KeyString;

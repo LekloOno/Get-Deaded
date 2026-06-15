@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class DirectionalShadowsSetting : VideoQualitySetting
+public partial class DirectionalShadowsSetting : VideoQualitySetting<DirectionalShadowsSetting>
 {
     public const string KeyString = "directional_shadows_quality";
     public override string Key => KeyString;

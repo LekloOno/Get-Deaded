@@ -1,26 +1,17 @@
 using Godot;
-using TraGUS;
+using TraGUS.DotNet.Conversion.Numeric;
 
-public partial class FsrSharpnessSetting : UserSetting
+public partial class FsrSharpnessSetting : UserSettingFloat<FsrSharpnessSetting>
 {
     public override string Section => UserSettingsSection.Video;
     public override string Key => "fsr_sharpness";
 
     public override Variant DefaultFallBack() => 0.5f;
 
-    protected override bool ProcessValue(Variant value, out Variant effectiveValue)
+    protected override bool ProcessTypedValue(float typedValue, out float effectiveTypedValue)
     {
-        if (value.VariantType != Variant.Type.Int
-        && value.VariantType != Variant.Type.Float)
-        {
-            effectiveValue = Value;
-            return false;
-        }
-
-        var scale = (float)value;
-        GetTree().Root.FsrSharpness = scale;
-        effectiveValue = value;
-
+        GetTree().Root.FsrSharpness = typedValue;
+        effectiveTypedValue = typedValue;
         return true;
     }
 }

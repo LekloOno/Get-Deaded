@@ -1,31 +1,17 @@
 using System;
 using Godot;
-using TraGUS;
+using TraGUS.DotNet.Conversion;
 
-public partial class DoubleJumpModeSetting : UserSetting
+public partial class DoubleJumpModeSetting : UserSettingFlag<DoubleJumpModeSetting, DoubleJumpMode>
 {
     public override string Section => UserSettingsSection.Controls;
     public override string Key => "double_jump_mode";
-    public static DoubleJumpMode Mode {get; private set;} = DoubleJumpMode.HeightJump;
+    public static DoubleJumpMode Mode => Tval;
     public override Variant DefaultFallBack() => (int) DoubleJumpMode.HeightJump;
 
-    public static event Action<DoubleJumpMode>? ModeChanged;
-
-    protected override bool ProcessValue(Variant value, out Variant effectiveValue)
+    protected override bool ProcessTypedValue(DoubleJumpMode typedValue, out DoubleJumpMode effectiveTypedValue)
     {
-        if (value.VariantType is not Variant.Type.Int)
-        {
-            effectiveValue = Value;
-            return false;
-        }
-
-        int intVal = (int) value;
-
-        Mode = (DoubleJumpMode) intVal;
-        effectiveValue = intVal;
-
-        ModeChanged?.Invoke(Mode);
-
+        effectiveTypedValue = typedValue;
         return true;
     }
 }

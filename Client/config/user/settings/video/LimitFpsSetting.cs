@@ -1,29 +1,22 @@
 using Godot;
-using TraGUS;
+using TraGUS.DotNet.Conversion;
 
-public partial class LimitFpsSetting : UserSetting
+public partial class LimitFpsSetting : UserSettingBool<LimitFpsSetting>
 {
     public override string Section => UserSettingsSection.Video;
     public override string Key => "limit_fps";
 
     public override Variant DefaultFallBack() => true;
-    public static bool LimitFps { get; private set; }
+    public static bool LimitFps => Tval;
 
-    protected override bool ProcessValue(Variant value, out Variant effectiveValue)
+    protected override bool ProcessTypedValue(bool typedValue, out bool effectiveTypedValue)
     {
-        if (value.VariantType != Variant.Type.Bool)
-        {
-            effectiveValue = Value;
-            return false;
-        }
-
-        if ((bool)value)
+        if (typedValue)
             Engine.MaxFps = MaxFpsSetting.MaxFps;
         else
             Engine.MaxFps = 0;
 
-        LimitFps = (bool)value;
-        effectiveValue = value;
+        effectiveTypedValue = typedValue;
         return true;
     }
 }

@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class PositionalShadowsSetting : VideoQualitySetting
+public partial class PositionalShadowsSetting : VideoQualitySetting<PositionalShadowsSetting>
 {
     public const string KeyString = "positional_shadows_quality";
     public override string Key => KeyString;

@@ -1,36 +1,17 @@
-using System;
 using Godot;
-using TraGUS;
+using TraGUS.DotNet.Conversion;
 
-public abstract partial class VideoQualitySetting : UserSetting
+public abstract partial class VideoQualitySetting<T> : UserSettingEnum<T, VideoQuality> where T: VideoQualitySetting<T>
 {
     public override string Section => UserSettingsSection.Video;
 
     public override Variant DefaultFallBack() => (int) VideoQuality.Medium;
-    public static VideoQuality Quality { get; protected set; } = VideoQuality.Medium;
+    public static VideoQuality Quality => Tval;
 
-    protected override bool ProcessValue(Variant value, out Variant effectiveValue)
+    protected override bool ProcessTypedValue(VideoQuality typedValue, out VideoQuality effectiveTypedValue)
     {
-        if (value.VariantType != Variant.Type.Int)
-        {
-            effectiveValue = Value;
-            return false;
-        }
-
-        var intVal = (int) value;
-
-        if (!Enum.IsDefined(typeof(VideoQuality), intVal))
-        {
-            effectiveValue = Value;
-            return false;
-        }
-
-        VideoQuality quality = (VideoQuality) intVal;
-        UpdateFrom(quality, out VideoQuality effectiveQuality);
-        
-        effectiveValue = (int) effectiveQuality;
-        Quality = effectiveQuality;
-
+        UpdateFrom(typedValue, out VideoQuality effectiveQuality);
+        effectiveTypedValue = effectiveQuality;
         return true;
     }
 

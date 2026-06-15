@@ -1,7 +1,8 @@
 using Godot;
 using TraGUS;
+using TraGUS.DotNet.Conversion;
 
-public partial class DisplayModeSetting : UserSetting
+public partial class DisplayModeSetting : UserSettingEnum<DisplayModeSetting, DisplayServer.WindowMode>
 {
     public override string Section => UserSettingsSection.Video;
     public override string Key => "display_mode";
@@ -9,27 +10,10 @@ public partial class DisplayModeSetting : UserSetting
     public override Variant DefaultFallBack() =>
         (int)DisplayServer.WindowMode.Fullscreen;
 
-    protected override bool ProcessValue(Variant value, out Variant effectiveValue)
+    protected override bool ProcessTypedValue(DisplayServer.WindowMode typedValue, out DisplayServer.WindowMode effectiveTypedValue)
     {
-        if (value.VariantType != Variant.Type.Int)
-        {
-            effectiveValue = Value;
-            return false;
-        }
-
-        int id = (int)value;
-
-/*
-        if (!Enum.IsDefined(typeof(DisplayServer.WindowMode), id))
-        {
-            effectiveValue = Value;
-            return false;
-        }
-*/  
-        var mode = (DisplayServer.WindowMode)id;
-        DisplayServer.WindowSetMode(mode);
-        effectiveValue = value;
-
+        DisplayServer.WindowSetMode(typedValue);
+        effectiveTypedValue = typedValue;
         return true;
     }
 }

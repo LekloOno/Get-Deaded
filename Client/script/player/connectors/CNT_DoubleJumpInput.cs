@@ -22,11 +22,11 @@ public partial class CNT_DoubleJumpInput : Node
         AddChild(_dashInput);
         _internalDashInput.OnStartInput += OnInternalDashStart;
 
-        SetMode(DoubleJumpModeSetting.Mode);
-        DoubleJumpModeSetting.ModeChanged += SetMode;
+        SetMode(this, DoubleJumpModeSetting.Mode);
+        DoubleJumpModeSetting.ValueChanged += SetMode;
     }
 
-    private void SetMode(DoubleJumpMode mode)
+    private void SetMode(GodotObject _, DoubleJumpMode mode)
     {
         SetProcessUnhandledInput(mode.HasFlag(DoubleJumpMode.Defined));
         SetDashJump(mode);

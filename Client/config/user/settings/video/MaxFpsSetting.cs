@@ -1,43 +1,31 @@
 using Godot;
-using TraGUS;
+using TraGUS.DotNet.Conversion.Numeric;
 
-public partial class MaxFpsSetting : UserSetting
+public partial class MaxFpsSetting : UserSettingInt<MaxFpsSetting>
 {
     public override string Section => UserSettingsSection.Video;
     public override string Key => "max_fps";
 
     public override Variant DefaultFallBack() => 165;
-    public static int MaxFps { get; private set; }
+    public static int MaxFps => Tval;
 
-    protected override bool ProcessValue(Variant value, out Variant effectiveValue)
+    protected override bool ProcessTypedValue(int typedValue, out int effectiveTypedValue)
     {
-        int fps;
-        if (value.VariantType == Variant.Type.Int)
-            fps = (int)value;
-        else if (value.VariantType == Variant.Type.Float)
-            fps = Mathf.RoundToInt((float)value);
-        else
-        {
-            effectiveValue = Value;
-            return false;
-        }
-
-        if (fps < 20)
+        if (typedValue < 20)
         {
             Apply(20);
-            effectiveValue = 20;
+            effectiveTypedValue = 20;
             return false;
         }
 
-        Apply(fps);
-        effectiveValue = fps;
+        Apply(typedValue);
+        effectiveTypedValue = typedValue;
 
         return true;
     }
 
     private void Apply(int maxFps)
     {
-        MaxFps = maxFps;
         if (LimitFpsSetting.LimitFps)
             Engine.MaxFps = maxFps;
     }

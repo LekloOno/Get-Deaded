@@ -1,7 +1,7 @@
 using Godot;
-using TraGUS;
+using TraGUS.DotNet.Conversion;
 
-public partial class ResolutionSetting : UserSetting
+public partial class ResolutionSetting : UserSettingVector2I<ResolutionSetting>
 {
     public override string Section => UserSettingsSection.Video;
     public override string Key => "resolution";
@@ -9,21 +9,20 @@ public partial class ResolutionSetting : UserSetting
     public override Variant DefaultFallBack() =>
         new Vector2I(1920, 1080);
 
-    protected override bool ProcessValue(Variant value, out Variant effectiveValue)
+    protected override bool ProcessTypedValue(Vector2I typedValue, out Vector2I effectiveTypedValue)
     {
-        if (value.VariantType != Variant.Type.Vector2I)
+        if (typedValue.X < 200 ||
+            typedValue.Y < 150)
         {
-            effectiveValue = Value;
+            effectiveTypedValue = new(800, 600);
             return false;
         }
 
-        Vector2I res = (Vector2I)value;
-        effectiveValue = value;
-        
         if (DisplayServer.WindowGetMode() == DisplayServer.WindowMode.Windowed)
-            GetWindow().Size = res;
-        GetWindow().ContentScaleSize = res;
+            GetWindow().Size = typedValue;
+        GetWindow().ContentScaleSize = typedValue;
 
+        effectiveTypedValue = typedValue;
         return true;
     }
 }

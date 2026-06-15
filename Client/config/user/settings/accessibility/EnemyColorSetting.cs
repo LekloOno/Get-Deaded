@@ -1,29 +1,19 @@
 using Godot;
-using TraGUS;
+using TraGUS.DotNet.Conversion;
 
-public partial class EnemyColorSetting : UserSetting
+public partial class EnemyColorSetting : UserSettingColor<EnemyColorSetting>
 {
     public override string Section => UserSettingsSection.Accessibility;
     public override string Key => "enemies_color";
 
     public override Variant DefaultFallBack() => new Color(1f, 0f, 72f/255f);
+    public static Color Color => Tval;
 
-    // Explicit static wrapper for c# binding
-    public static Color Color;
-
-    protected override bool ProcessValue(Variant value, out Variant effectiveValue)
+    protected override bool ProcessTypedValue(Color typedValue, out Color effectiveTypedValue)
     {
-        if (value.VariantType != Variant.Type.Color)
-        {
-            effectiveValue = Value;
-            return false;
-        }
-        effectiveValue = value;
-        //GD.Print(value + " " + Value);
-        CONF_HitColors.Colors.Critical = (Color)value;
-        Color = (Color) value;
-        RenderingServer.GlobalShaderParameterSet("enemy_color", value);
-
+        effectiveTypedValue = typedValue;
+        CONF_HitColors.Colors.Critical = typedValue;
+        RenderingServer.GlobalShaderParameterSet("enemy_color", typedValue);
         return true;
     }
 }
