@@ -1,0 +1,92 @@
+[gd_scene format=3 uid="uid://d23iyttuooclt"]
+
+[ext_resource type="Script" uid="uid://cwd4qbpx2ltxc" path="res://script/player/audio/PA_InstantAction.cs" id="1_t0m5c"]
+[ext_resource type="Script" uid="uid://dwg5mwrq18ow2" path="res://addons/GaudioProcessTree/nodes/modules/AUD_Layerer.cs" id="2_8idfk"]
+[ext_resource type="Script" uid="uid://dmowaohx8nd7q" path="res://addons/GaudioProcessTree/nodes/modules/AUD_Randomizer.cs" id="3_8lxp5"]
+[ext_resource type="Script" uid="uid://mimyug33qwtk" path="res://addons/GaudioProcessTree/nodes/modules/AUD_Delayer.cs" id="3_ri2vg"]
+[ext_resource type="AudioStream" uid="uid://cu1u2w60ckhi7" path="res://assets/sounds/vault.wav" id="4_ri2vg"]
+[ext_resource type="Script" uid="uid://dbtsyp0hru7g" path="res://addons/GaudioProcessTree/nodes/stream_players/AUD_StreamPlayer1D.cs" id="5_wd3y7"]
+[ext_resource type="AudioStream" uid="uid://bnck0lo2ewye5" path="res://assets/sounds/woosh/woosh2.wav" id="6_ui2xw"]
+[ext_resource type="AudioStream" uid="uid://cdo61fljcs0xo" path="res://assets/sounds/slides/slide_4.wav" id="7_8idfk"]
+[ext_resource type="AudioStream" uid="uid://bfoha2oj2ts6j" path="res://assets/sounds/clothes/clothes.wav" id="7_f8x7j"]
+[ext_resource type="AudioStream" uid="uid://cbgjk066ugfoy" path="res://assets/sounds/clothes/clothes_2.wav" id="8_i3f57"]
+[ext_resource type="AudioStream" uid="uid://cv7hf0tm8n6mw" path="res://assets/sounds/clothes/clothes_5.wav" id="9_sxryc"]
+[ext_resource type="AudioStream" uid="uid://byvkie35nxxfe" path="res://assets/sounds/clothes/clothes_6.wav" id="10_8aua5"]
+
+[node name="PA_Slam" type="Node3D" unique_id=696085199 node_paths=PackedStringArray("_sound")]
+script = ExtResource("1_t0m5c")
+_sound = NodePath("AUD_Layerer")
+
+[node name="AUD_Layerer" type="Node" parent="." unique_id=710155995]
+script = ExtResource("2_8idfk")
+UseTimeScale = true
+metadata/_custom_type_script = "uid://dwg5mwrq18ow2"
+
+[node name="AUD_Delayer" type="Node" parent="AUD_Layerer" unique_id=264422795]
+script = ExtResource("3_ri2vg")
+_delay = 0.05
+BasePitchScale = 0.65
+metadata/_custom_type_script = "uid://mimyug33qwtk"
+
+[node name="woosh1" type="Node" parent="AUD_Layerer/AUD_Delayer" unique_id=1084432497]
+script = ExtResource("3_8lxp5")
+Sounds = Array[AudioStream]([ExtResource("4_ri2vg")])
+BaseVolumeDb = -5.0
+metadata/_custom_type_script = "uid://dmowaohx8nd7q"
+
+[node name="player" type="Node" parent="AUD_Layerer/AUD_Delayer/woosh1" unique_id=356314368 node_paths=PackedStringArray("Player")]
+script = ExtResource("5_wd3y7")
+Player = NodePath("woosh1")
+metadata/_custom_type_script = "uid://dbtsyp0hru7g"
+
+[node name="woosh1" type="AudioStreamPlayer" parent="AUD_Layerer/AUD_Delayer/woosh1/player" unique_id=1200147347]
+volume_db = -5.0
+pitch_scale = 0.65
+bus = &"Locomotion"
+
+[node name="woosh2" type="Node" parent="AUD_Layerer" unique_id=1414502383]
+script = ExtResource("3_8lxp5")
+Sounds = [ExtResource("6_ui2xw")]
+MinPitch = 0.9
+MaxPitch = 1.1
+BaseVolumeDb = -3.0
+BasePitchScale = 1.5
+metadata/_custom_type_script = "uid://dmowaohx8nd7q"
+
+[node name="player" type="Node" parent="AUD_Layerer/woosh2" unique_id=986374483 node_paths=PackedStringArray("Player")]
+script = ExtResource("5_wd3y7")
+Player = NodePath("woosh2")
+metadata/_custom_type_script = "uid://dbtsyp0hru7g"
+
+[node name="woosh2" type="AudioStreamPlayer" parent="AUD_Layerer/woosh2/player" unique_id=1135072693]
+volume_db = -3.0
+pitch_scale = 1.5
+bus = &"Locomotion"
+
+[node name="woosh3" type="Node" parent="AUD_Layerer" unique_id=1681264003]
+script = ExtResource("3_8lxp5")
+Sounds = Array[AudioStream]([ExtResource("7_8idfk")])
+MaxPitch = 1.7
+
+[node name="player" type="Node" parent="AUD_Layerer/woosh3" unique_id=590072631 node_paths=PackedStringArray("Player")]
+script = ExtResource("5_wd3y7")
+Player = NodePath("woosh3")
+metadata/_custom_type_script = "uid://dbtsyp0hru7g"
+
+[node name="woosh3" type="AudioStreamPlayer" parent="AUD_Layerer/woosh3/player" unique_id=243656782]
+volume_db = -3.0
+pitch_scale = 1.5
+bus = &"Locomotion"
+
+[node name="clothes" type="Node" parent="AUD_Layerer" unique_id=807280553]
+script = ExtResource("3_8lxp5")
+Sounds = Array[AudioStream]([ExtResource("7_f8x7j"), ExtResource("8_i3f57"), ExtResource("9_sxryc"), ExtResource("10_8aua5")])
+MaxPitch = 2.0
+
+[node name="player" type="Node" parent="AUD_Layerer/clothes" unique_id=1938436206 node_paths=PackedStringArray("Player")]
+script = ExtResource("5_wd3y7")
+Player = NodePath("clothes")
+metadata/_custom_type_script = "uid://dbtsyp0hru7g"
+
+[node name="clothes" type="AudioStreamPlayer" parent="AUD_Layerer/clothes/player" unique_id=674949390]
+bus = &"Locomotion"
