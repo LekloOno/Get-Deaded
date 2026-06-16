@@ -10,7 +10,7 @@ public partial class ANIM_TweenSetting : Resource
     [Export] public string? PropertyPath {get; private set;}
     [Export] public ANIM_TweenValue? Value {get; private set;}
 
-    public PropertyTweener? TweenProperty(Tween tween, GodotObject target, Variant? value = null)
+    public PropertyTweener? TweenProperty(Tween tween, GodotObject target, Variant? value = null, string? propertyPath = null)
     {
         tween.SetTrans(TransitionType);
         tween.SetEase(EaseType);
@@ -29,15 +29,23 @@ public partial class ANIM_TweenSetting : Resource
             }            
         }
 
-        if (PropertyPath == null)
+        string effectivePath;
+        if (propertyPath != null)
+            effectivePath = propertyPath;
+        else
         {
-            GD.PrintErr("[ANIM_TweenSetting] missing PropertyPath.");
-            return null;
+            if (PropertyPath != null)
+                effectivePath = PropertyPath;
+            else
+            {
+                GD.PrintErr("[ANIM_TweenSetting] missing PropertyPath.");
+                return null;
+            }
         }
 
         return tween.TweenProperty(
             target,
-            PropertyPath,
+            effectivePath,
             effectiveValue,
             AnimationTime
         );

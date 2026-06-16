@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 [GlobalClass]
@@ -6,7 +7,9 @@ public partial class PW_FistsFire : PW_Fire
     [Export] private float _chargedKbMultiplier;
     [Export] private float _chargedDmgMultiplier;
     [Export] private ulong _chargeTime;
-    private GB_ExternalBodyManagerWrapper _ownerBody;
+    public event Action<ulong>? ChargeStarted;
+    public event Action? ChargeCancelled;
+    private GB_ExternalBodyManagerWrapper _ownerBody = null!;
     private ulong _chargeStartTime;
 
     public override void DisableSpec() {}
@@ -19,6 +22,7 @@ public partial class PW_FistsFire : PW_Fire
     protected override bool SpecPress()
     {
         _chargeStartTime = PHX_Time.ScaledTicksMsec;
+        ChargeStarted?.Invoke(_chargeTime);
         return true;
     }
 
@@ -33,6 +37,8 @@ public partial class PW_FistsFire : PW_Fire
         bool didShoot = TryShoot();
         if (didShoot)
             _recoil?.Start();
+        else
+            ChargeCancelled?.Invoke();
 
         return didShoot;
     }

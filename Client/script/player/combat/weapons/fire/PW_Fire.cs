@@ -19,6 +19,7 @@ public abstract partial class PW_Fire : WeaponComponent
     [Export] protected PW_Recoil _recoil;
     [Export] protected PW_Ammunition _ammos;
     [Export] protected uint _ammosPerShot = 1;
+    public ulong FireRate => _fireRate;
 
     [ExportCategory("Visuals")]
     [Export] public bool IsDerived;     // To indicate that this fire should be considered as a derived fire mode. Only usefull for ui, to not display this fire mode.
@@ -68,10 +69,13 @@ public abstract partial class PW_Fire : WeaponComponent
     {
         _enabled = true;
     }
+
+    public event Action? Disabled;
     public void Disable()
     {
         _enabled = false;
         DisableSpec();
+        Disabled?.Invoke();
     }
 
     public Action? DryShot;
