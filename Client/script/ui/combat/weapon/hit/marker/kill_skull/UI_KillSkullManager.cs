@@ -5,10 +5,10 @@ using Godot;
 [GlobalClass]
 public partial class UI_KillSkullManager : Control
 {
+    public static readonly float FadeTime = 2f;
     [Export] private PackedScene _killTemplate;
     [Export] private Texture2D _normalTexture;
     [Export] private Texture2D _criticalTexture;
-    [Export] private float _fadeTime;
     
     // Live edit - should later be removed, it's purely to live-tweak the values of _killTemplate
     [Export] private float _trauma = 1f;
@@ -53,7 +53,7 @@ public partial class UI_KillSkullManager : Control
             newSkull.Modulate = CONF_HitColors.Colors.Normal;
         }
 
-        FadeTimer.Start(_fadeTime);
+        FadeTimer.Start(FadeTime);
         newSkull.MaxScaleReached += Push;
 
         AddChild(newSkull);
