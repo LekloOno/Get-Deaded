@@ -3,7 +3,7 @@ using Godot;
 [GlobalClass]
 public partial class GL_SlowMoData : GL_PickableData
 {
-    [Export] public PackedScene? SlowMoProcess;
+    [Export] public PackedScene SlowMoProcess = null!;
     [Export] public float Factor {get; private set;}
     [Export] public float Duration {get; private set;}
 

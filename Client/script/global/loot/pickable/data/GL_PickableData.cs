@@ -3,8 +3,8 @@ using Godot;
 [GlobalClass]
 public abstract partial class GL_PickableData : Resource 
 {
-    [Export] public PackedScene Model {get; private set;}
-    [Export] private PHX_RepulsionField3DData _repulsionData;
+    [Export] public PackedScene Model {get; private set;} = null!;
+    [Export] private PHX_RepulsionField3DData? _repulsionData;
     protected abstract GL_PhysicsPickable GetPhysicsPickable(float horizontalDamp, float lifeTime);
     public GL_PhysicsPickable GeneratePhysics(float horizontalDamp, float lifeTime)
     {

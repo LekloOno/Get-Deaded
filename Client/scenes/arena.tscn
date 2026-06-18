@@ -3704,6 +3704,9 @@ Model = ExtResource("67_p36uw")
 _repulsionData = SubResource("Resource_scwkl")
 metadata/_custom_type_script = "uid://d0oi05of1hh7a"
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_wl1om"]
+viewport_path = NodePath("entities/Pickups/SlowMo/Sprite3D/SubViewport")
+
 [sub_resource type="Curve" id="Curve_q2sf5"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.713287, 0.328551), 1.58362, 1.58362, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 3
@@ -3765,6 +3768,9 @@ viewport_path = NodePath("entities/Pickups/ClickAmos2/Sprite3D/SubViewport")
 viewport_path = NodePath("entities/Pickups/WildcardAmo2/Sprite3D/SubViewport")
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_wl1om"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_caedn"]
+allow_unpress = true
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_4g8la"]
 frequency = 0.05
@@ -6538,7 +6544,7 @@ fill_mode = 4
 texture_under = ExtResource("49_4nhhj")
 texture_progress = ExtResource("50_a7862")
 tint_under = Color(1, 1, 1, 0.47058824)
-tint_progress = Color(0.4236506, 0.42365065, 0.42365053, 0.8117647)
+tint_progress = Color(0.8388973, 0.83889693, 0.8388971, 0.8117647)
 script = ExtResource("51_kjqme")
 _pickupSpawner = NodePath("../../..")
 metadata/_custom_type_script = "uid://b6wuemumhi18m"
@@ -6547,7 +6553,8 @@ metadata/_custom_type_script = "uid://b6wuemumhi18m"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.100002, 0.30000046, 14.9)
 script = ExtResource("34_8jgwj")
 _pickableData = SubResource("Resource_xbiqi")
-RespawnDelay = 30.0
+_initialDelay = 30.0
+RespawnDelay = 60.0
 metadata/_custom_type_script = "uid://dpsrelwawyisv"
 
 [node name="OmniLight3D" type="OmniLight3D" parent="entities/Pickups/SlowMo" unique_id=593385061]
@@ -6565,7 +6572,7 @@ mesh = SubResource("BoxMesh_nag6q")
 [node name="Sprite3D" type="Sprite3D" parent="entities/Pickups/SlowMo" unique_id=650176717]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.099999905, 0)
 billboard = 1
-texture = SubResource("ViewportTexture_a7862")
+texture = SubResource("ViewportTexture_wl1om")
 
 [node name="SubViewport" type="SubViewport" parent="entities/Pickups/SlowMo/Sprite3D" unique_id=807321201]
 transparent_bg = true
@@ -6591,7 +6598,7 @@ fill_mode = 4
 texture_under = ExtResource("49_4nhhj")
 texture_progress = ExtResource("50_a7862")
 tint_under = Color(1, 1, 1, 0.47058824)
-tint_progress = Color(0.4236506, 0.42365065, 0.42365053, 0.8117647)
+tint_progress = Color(0.8388973, 0.83889693, 0.8388971, 0.8117647)
 script = ExtResource("51_kjqme")
 _pickupSpawner = NodePath("../../..")
 metadata/_custom_type_script = "uid://b6wuemumhi18m"
@@ -6645,7 +6652,7 @@ fill_mode = 4
 texture_under = ExtResource("49_4nhhj")
 texture_progress = ExtResource("50_a7862")
 tint_under = Color(1, 1, 1, 0.47058824)
-tint_progress = Color(0.4236506, 0.42365065, 0.42365053, 0.8117647)
+tint_progress = Color(0.8388973, 0.83889693, 0.8388971, 0.8117647)
 script = ExtResource("51_kjqme")
 _pickupSpawner = NodePath("../../..")
 metadata/_custom_type_script = "uid://b6wuemumhi18m"
@@ -6699,7 +6706,7 @@ fill_mode = 4
 texture_under = ExtResource("49_4nhhj")
 texture_progress = ExtResource("50_a7862")
 tint_under = Color(1, 1, 1, 0.47058824)
-tint_progress = Color(0.4236506, 0.42365065, 0.42365053, 0.8117647)
+tint_progress = Color(0.8388973, 0.83889693, 0.8388971, 0.8117647)
 script = ExtResource("51_kjqme")
 _pickupSpawner = NodePath("../../..")
 metadata/_custom_type_script = "uid://b6wuemumhi18m"
@@ -6752,7 +6759,7 @@ fill_mode = 4
 texture_under = ExtResource("49_4nhhj")
 texture_progress = ExtResource("50_a7862")
 tint_under = Color(1, 1, 1, 0.47058824)
-tint_progress = Color(0.4236506, 0.42365065, 0.42365053, 0.8117647)
+tint_progress = Color(0.8388973, 0.83889693, 0.8388971, 0.8117647)
 script = ExtResource("51_kjqme")
 _pickupSpawner = NodePath("../../..")
 metadata/_custom_type_script = "uid://b6wuemumhi18m"
@@ -6805,7 +6812,7 @@ fill_mode = 4
 texture_under = ExtResource("49_4nhhj")
 texture_progress = ExtResource("50_a7862")
 tint_under = Color(1, 1, 1, 0.47058824)
-tint_progress = Color(0.4236506, 0.42365065, 0.42365053, 0.8117647)
+tint_progress = Color(0.8388973, 0.83889693, 0.8388971, 0.8117647)
 script = ExtResource("51_kjqme")
 _pickupSpawner = NodePath("../../..")
 metadata/_custom_type_script = "uid://b6wuemumhi18m"
@@ -6859,7 +6866,7 @@ fill_mode = 4
 texture_under = ExtResource("49_4nhhj")
 texture_progress = ExtResource("50_a7862")
 tint_under = Color(1, 1, 1, 0.47058824)
-tint_progress = Color(0.4236506, 0.42365065, 0.42365053, 0.8117647)
+tint_progress = Color(0.8388973, 0.83889693, 0.8388971, 0.8117647)
 script = ExtResource("51_kjqme")
 _pickupSpawner = NodePath("../../..")
 metadata/_custom_type_script = "uid://b6wuemumhi18m"
@@ -6912,7 +6919,7 @@ fill_mode = 4
 texture_under = ExtResource("49_4nhhj")
 texture_progress = ExtResource("50_a7862")
 tint_under = Color(1, 1, 1, 0.47058824)
-tint_progress = Color(0.4236506, 0.42365065, 0.42365053, 0.8117647)
+tint_progress = Color(0.8388973, 0.83889693, 0.8388971, 0.8117647)
 script = ExtResource("51_kjqme")
 _pickupSpawner = NodePath("../../..")
 metadata/_custom_type_script = "uid://b6wuemumhi18m"
@@ -7010,6 +7017,12 @@ button_group = SubResource("ButtonGroup_wl1om")
 
 [node name="AutoButton" parent="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/SprintMode/SprintModeOptions" parent_id_path=PackedInt32Array(620824296, 1093197233) index="2" unique_id=1516286433]
 button_group = SubResource("ButtonGroup_wl1om")
+
+[node name="CrouchButton" parent="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SlamSettings/SlamMode/SlamModeOptions2" parent_id_path=PackedInt32Array(620824296, 1388370610) index="1" unique_id=1170561654]
+button_group = SubResource("ButtonGroup_caedn")
+
+[node name="DashButton" parent="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SlamSettings/SlamMode/SlamModeOptions2" parent_id_path=PackedInt32Array(620824296, 1388370610) index="2" unique_id=342133101]
+button_group = SubResource("ButtonGroup_caedn")
 
 [node name="PI_Stats" type="Node" parent="CanvasLayer" unique_id=1532279642]
 script = ExtResource("47_6ubnd")
@@ -7336,12 +7349,22 @@ metadata/_custom_type_script = "uid://ba04qst68odml"
 [editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/AutoSprintDelay/Reset"]
 [editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/AutoSprintQuickStartInput"]
 [editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/AutoSprintQuickStartInput/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/Crouch"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/CrouchSettings/CrouchMode"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/CrouchSettings/CrouchMode/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/CrouchSettings/CrouchMode/Reset"]
 [editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJump"]
 [editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/SprintMode"]
 [editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/SprintMode/MarginContainer/UiSettingsLabel"]
 [editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/SprintMode/Reset"]
 [editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/DoubleJump"]
 [editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/DoubleJumpSettings/DoubleJump/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/Slam"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SlamSettings/SlamMode"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SlamSettings/SlamMode/MarginContainer/UiSettingsLabel"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SlamSettings/SlamMode/Reset"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SlamSettings/Slam"]
+[editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SlamSettings/Slam/MarginContainer/UiSettingsLabel"]
 [editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Movement"]
 [editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Forward"]
 [editable path="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_BINDINGS_TAB/VBoxContainer/Forward/UiSettingsLabel"]

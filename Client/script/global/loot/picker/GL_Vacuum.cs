@@ -3,9 +3,9 @@ using Godot;
 [GlobalClass]
 public partial class GL_Vacuum : Area3D
 {
-    [Export] private Curve _vacuumCurve;
+    [Export] private Curve _vacuumCurve = null!;
     [Export] private float _vacuumStrength;
-    private SphereShape3D _sphere;
+    private SphereShape3D _sphere = null!;
     public override void _Ready()
     {
         CollisionShape3D collisionShape = GetChild<CollisionShape3D>(0);

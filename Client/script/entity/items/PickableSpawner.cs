@@ -5,10 +5,10 @@ using Godot;
 public partial class PickableSpawner : Node3D
 {
     [Signal] delegate void PickEventHandler();
-    public Action<float> StartLoading;
-    public Action<GL_PickableData> PickedUp;
-    [Export] private GL_PickableData _pickableData;
-    private GL_PhysicsPickable _current;
+    public event Action<float>? StartLoading;
+    public event Action<GL_PickableData>? PickedUp;
+    [Export] private GL_PickableData _pickableData = null!;
+    private GL_PhysicsPickable? _current;
     /// <summary>
     /// Horizontal dampening of the pickup
     /// </summary>
@@ -53,7 +53,7 @@ public partial class PickableSpawner : Node3D
     [Export] private float _recenterDelay = 5f;
     private float _outOfRadiusTime = 0f;
     private bool _dropped = false;
-    private SceneTreeTimer _respawnTimer;
+    private SceneTreeTimer? _respawnTimer;
 
     public override void _Ready()
     {
@@ -156,8 +156,12 @@ public partial class PickableSpawner : Node3D
 
     private void Clean()
     {
-        _current.TreeExiting -= OnFree;
-        _current = null;
+        if (_current != null)
+        {
+            _current.TreeExiting -= OnFree;
+            _current = null;
+        }
+
         SetPhysicsProcess(false);
     }
 }
