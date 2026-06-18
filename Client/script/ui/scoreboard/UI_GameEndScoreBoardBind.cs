@@ -4,11 +4,11 @@ using Godot;
 
 public partial class UI_GameEndScoreBoardBind : Node
 {
-    [Export] private UI_EscapeMenu _escapeMenu;
-    [Export] private Control _scoreBoardMenu;
-    [Export] private UI_ScoreBoardManager _scoreBoardManager;
-    [Export] private SC_GameManager _gameManager;
-    [Export] private UIW_ArenaEnd _briefScore;
+    [Export] private UI_EscapeMenu          _escapeMenu = null!;
+    [Export] private Control                _scoreBoardMenu = null!;
+    [Export] private UI_ScoreBoardManager   _scoreBoardManager = null!;
+    [Export] private SC_GameManager         _gameManager = null!;
+    [Export] private UIW_ArenaEnd           _briefScore = null!;
 
     private bool _entered = false;
 

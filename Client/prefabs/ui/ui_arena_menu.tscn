@@ -368,6 +368,7 @@ script = ExtResource("10_b5eqi")
 _logged = true
 
 [node name="Settings" type="PanelContainer" parent="." unique_id=1980157602 node_paths=PackedStringArray("confirm_dialog")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -389,10 +390,9 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
 mouse_filter = 0
-current_tab = 2
+current_tab = 0
 
 [node name="VIDEO_TAB" type="MarginContainer" parent="Settings/VBoxContainer/TabContainer" unique_id=299629799]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 30
@@ -1095,6 +1095,7 @@ Section = "sound"
 Key = "feedback_sfx_volume_db"
 
 [node name="CONTROLS_TAB" type="MarginContainer" parent="Settings/VBoxContainer/TabContainer" unique_id=2137857519]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 20
@@ -2328,7 +2329,6 @@ size_flags_vertical = 8
 text = "BACK_BUTTON"
 
 [node name="ScoreBoardMenu" type="VBoxContainer" parent="." unique_id=198902842]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

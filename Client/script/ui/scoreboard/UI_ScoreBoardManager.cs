@@ -1,14 +1,12 @@
 using System;
-using System.Threading.Tasks;
-using Client.Api.Score;
 using Godot;
 
 [GlobalClass]
 public partial class UI_ScoreBoardManager : TabContainer
 {
-	[Export] private UI_ScoreBoard _easyBoard;
-	[Export] private UI_ScoreBoard _normalBoard;
-	[Export] private UI_ScoreBoard _hardBoard;
+	[Export] private UI_ScoreBoard _easyBoard 	= null!;
+	[Export] private UI_ScoreBoard _normalBoard = null!;
+	[Export] private UI_ScoreBoard _hardBoard 	= null!;
 
 	public override void _Ready()
 	{
@@ -20,7 +18,7 @@ public partial class UI_ScoreBoardManager : TabContainer
 		Init();
 	}
 
-	public async Task Init(Guid? guid = null, int rank = 1)
+	public void Init(Guid? guid = null, int rank = 1)
 	{
 		_easyBoard.Clean();
 		_normalBoard.Clean();

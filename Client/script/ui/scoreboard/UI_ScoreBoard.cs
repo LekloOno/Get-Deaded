@@ -11,10 +11,12 @@ using Shared.Scores;
 public partial class UI_ScoreBoard : Control
 {
     // Should be the only child of _easyContainer.
-    [Export] private UI_ScoreBoardEntry _entryTemplate;
-    [Export] private Control _container;
+    [Export] private UI_ScoreBoardEntry _entryTemplate = null!;
+    [Export] private Control _container = null!;
     [Export] private AudioStreamPlayer _entryHover = null!;
     [Export] private AudioStreamPlayer _entryClick = null!;
+
+    [Export] private UI_Loading? _loading;
 
     private List<UI_ScoreBoardEntry> _entries = [];
 
@@ -32,6 +34,7 @@ public partial class UI_ScoreBoard : Control
             return;
 
         Initialized = true;
+        _loading?.StartLoading();
 
         ApiResult<List<LeaderboardRowDto>> result;
         if (optScoreId is Guid scoreId)
@@ -49,6 +52,8 @@ public partial class UI_ScoreBoard : Control
         
         if (result.Success && result.Data != null)
             CreateEntries(result.Data, optScoreId);
+        
+        _loading?.StopLoading();
     }
 
     private void CreateEntries(List<LeaderboardRowDto> rows, Guid? scoreId)

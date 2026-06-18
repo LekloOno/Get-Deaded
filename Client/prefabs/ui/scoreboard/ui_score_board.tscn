@@ -2,11 +2,13 @@
 
 [ext_resource type="Script" uid="uid://iardi3jeijcc" path="res://script/ui/scoreboard/UI_ScoreBoard.cs" id="1_0onr6"]
 [ext_resource type="Theme" uid="uid://1b5txn2enhg6" path="res://assets/ui/scoreboard_theme.tres" id="2_lx2ug"]
+[ext_resource type="Script" uid="uid://c60je67hm5qkf" path="res://script/ui/general/UI_Loading.cs" id="3_4q17y"]
+[ext_resource type="Texture2D" uid="uid://dgwy8bd6bi5rf" path="res://assets/sprites/ui_general/loading.png" id="3_14cbf"]
 [ext_resource type="PackedScene" uid="uid://cjcw5h2phmx1d" path="res://prefabs/ui/scoreboard/ui_scoreboard_entry.tscn" id="3_mv7kc"]
 [ext_resource type="AudioStream" uid="uid://bt8tyy4wp4w16" path="res://assets/sounds/ui/minimal_hover.wav" id="4_lx2ug"]
 [ext_resource type="AudioStream" uid="uid://bshhncf67w1g1" path="res://assets/sounds/ui/click_lighter.wav" id="5_mv7kc"]
 
-[node name="UiScoreBoard" type="PanelContainer" unique_id=1179865850 node_paths=PackedStringArray("_entryTemplate", "_container", "_entryHover", "_entryClick")]
+[node name="UiScoreBoard" type="PanelContainer" unique_id=1179865850 node_paths=PackedStringArray("_entryTemplate", "_container", "_entryHover", "_entryClick", "_loading")]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 221.0
@@ -16,6 +18,7 @@ _entryTemplate = NodePath("VBoxContainer/EasyEntriesContainer/UiScoreboardEntry"
 _container = NodePath("VBoxContainer/EasyEntriesContainer")
 _entryHover = NodePath("Hover")
 _entryClick = NodePath("Click")
+_loading = NodePath("VBoxContainer/Loading")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1595028883]
 layout_mode = 2
@@ -78,10 +81,32 @@ layout_mode = 2
 text = "STATS_ACCURACY_LABEL"
 clip_text = true
 
+[node name="Loading" type="CenterContainer" parent="VBoxContainer" unique_id=1315552554 node_paths=PackedStringArray("_icon")]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("3_4q17y")
+_icon = NodePath("LoadingPivot/LoadingIcon")
+_degreesPerSec = 160.0
+
+[node name="LoadingPivot" type="Control" parent="VBoxContainer/Loading" unique_id=2032824233]
+layout_mode = 2
+
+[node name="LoadingIcon" type="TextureRect" parent="VBoxContainer/Loading/LoadingPivot" unique_id=702588293]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("3_14cbf")
+expand_mode = 1
+
 [node name="EasyEntriesContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=840263538]
 layout_mode = 2
 
 [node name="UiScoreboardEntry" parent="VBoxContainer/EasyEntriesContainer" unique_id=529901829 instance=ExtResource("3_mv7kc")]
+visible = false
 layout_mode = 2
 
 [node name="Hover" type="AudioStreamPlayer" parent="." unique_id=521921143]

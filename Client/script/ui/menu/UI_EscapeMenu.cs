@@ -95,6 +95,9 @@ public partial class UI_EscapeMenu : Control, UI_IMenuStackManager
 		_menuStack.Push(menu);
 		menu.Show();
 
+		if (menu is UI_ISubMenu subMenu)
+			subMenu.Open();
+
 		if (menu.HasMethod("open_menu"))
 			menu.Call("open_menu");
 	}
