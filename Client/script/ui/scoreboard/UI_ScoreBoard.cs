@@ -17,6 +17,7 @@ public partial class UI_ScoreBoard : Control
     [Export] private AudioStreamPlayer _entryClick = null!;
 
     [Export] private UI_Loading? _loading;
+    [Export] private Label? _errorMessage;
 
     private List<UI_ScoreBoardEntry> _entries = [];
 
@@ -24,6 +25,7 @@ public partial class UI_ScoreBoard : Control
 
     public override void _Ready()
     {
+        _errorMessage?.Hide();
         _entryTemplate.Visible = false;
         _entryTemplate.SetProcess(false);
     }
@@ -34,6 +36,7 @@ public partial class UI_ScoreBoard : Control
             return;
 
         Initialized = true;
+        _errorMessage?.Hide();
         _loading?.StartLoading();
 
         ApiResult<List<LeaderboardRowDto>> result;
@@ -52,6 +55,12 @@ public partial class UI_ScoreBoard : Control
         
         if (result.Success && result.Data != null)
             CreateEntries(result.Data, optScoreId);
+
+        else if (_errorMessage != null)
+        {
+            _errorMessage.Show();
+            _errorMessage.Text = result.ErrorMessage;
+        }
         
         _loading?.StopLoading();
     }
