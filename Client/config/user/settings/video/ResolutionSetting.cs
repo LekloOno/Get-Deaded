@@ -15,14 +15,25 @@ public partial class ResolutionSetting : UserSettingVector2I<ResolutionSetting>
             typedValue.Y < 150)
         {
             effectiveTypedValue = new(800, 600);
+            SetResolution(DisplayModeSetting.Tval, effectiveTypedValue);
             return false;
         }
 
-        if (DisplayServer.WindowGetMode() == DisplayServer.WindowMode.Windowed)
-            GetWindow().Size = typedValue;
-        GetWindow().ContentScaleSize = typedValue;
+        SetResolution(DisplayModeSetting.Tval, typedValue);
 
         effectiveTypedValue = typedValue;
         return true;
+    }
+
+    public static void SetResolution(DisplayServer.WindowMode windowMode, Vector2I resolution)
+    {
+        if (windowMode == DisplayServer.WindowMode.Windowed)
+        {
+            Instance.GetWindow().Position = new(0, 25);
+            Instance.GetWindow().Size = resolution;
+            Instance.GetWindow().ContentScaleSize = resolution;
+        }
+        else
+            Instance.GetWindow().ContentScaleSize = resolution;
     }
 }

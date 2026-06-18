@@ -1,5 +1,5 @@
+using System.Threading.Tasks;
 using Godot;
-using TraGUS;
 using TraGUS.DotNet.Conversion;
 
 public partial class DisplayModeSetting : UserSettingEnum<DisplayModeSetting, DisplayServer.WindowMode>
@@ -12,8 +12,13 @@ public partial class DisplayModeSetting : UserSettingEnum<DisplayModeSetting, Di
 
     protected override bool ProcessTypedValue(DisplayServer.WindowMode typedValue, out DisplayServer.WindowMode effectiveTypedValue)
     {
+        DisplayServer.WindowSetFlag(DisplayServer.WindowFlags.Borderless, typedValue != DisplayServer.WindowMode.Windowed);
         DisplayServer.WindowSetMode(typedValue);
+
+        ResolutionSetting.SetResolution(typedValue, ResolutionSetting.Tval);
+        
         effectiveTypedValue = typedValue;
+
         return true;
     }
 }
