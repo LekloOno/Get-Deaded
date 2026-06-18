@@ -82,9 +82,10 @@ func _on_slider_value_changed(value: float):
 		return
 		
 	last_value = value
+	var rounded = round_to_decimals(value)
 	match allow_float:
-		true: text = str(value)
-		false: text = str(int(value))
+		true: text = str(rounded)
+		false: text = str(int(rounded))
 			
 func apply_value(value: float):
 	last_value = value
