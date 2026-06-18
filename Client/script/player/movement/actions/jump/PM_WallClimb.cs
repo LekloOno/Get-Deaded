@@ -64,11 +64,15 @@ public partial class PM_WallClimb : PM_Action
         Vector3 wallClimbVel = _controller.VelocityCache.UseCacheOr(velocity);
         float inWallSpeed = wallClimbVel.Dot(-normal);
 
-        if (TooSlow(inWallSpeed) || _controller.RealVelocity.Y < 0)
+
+        StartWallClimb();
+
+        if (TooSlow(inWallSpeed))
             return _jump.Jump(velocity);
 
-        StartWallClimb(inWallSpeed);
-        return velocity - new Vector3(velocity.X, .0f, velocity.Z) * _speedDebuff;
+        Vector3 jumpForce = Vector3.Up * (_jumpMinStrength + inWallSpeed*_jumpSpeedCoef);
+        Vector3 debuff = new Vector3(velocity.X, .0f, velocity.Z) * _speedDebuff;
+        return velocity - debuff + jumpForce;
     }
 
     private bool TooSlow(float inWallSpeed) => inWallSpeed < _minInWallSpeed;
@@ -85,11 +89,8 @@ public partial class PM_WallClimb : PM_Action
         return false;
     }
 
-    public void StartWallClimb(float inWallSpeed)
-    {        
-        Vector3 jumpForce = Vector3.Up * (_jumpMinStrength + inWallSpeed*_jumpSpeedCoef);
-        _controller.AdditionalForces.AddImpulse(jumpForce);
-
+    public void StartWallClimb()
+    {
         _currentHop = 0;
         _startHopTimer.Start(_betweenHopsTime);
         
