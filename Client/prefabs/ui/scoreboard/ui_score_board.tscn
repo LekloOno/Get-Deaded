@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cjcw5h2phmx1d" path="res://prefabs/ui/scoreboard/ui_scoreboard_entry.tscn" id="3_mv7kc"]
 [ext_resource type="AudioStream" uid="uid://bt8tyy4wp4w16" path="res://assets/sounds/ui/minimal_hover.wav" id="4_lx2ug"]
 [ext_resource type="AudioStream" uid="uid://bshhncf67w1g1" path="res://assets/sounds/ui/click_lighter.wav" id="5_mv7kc"]
+[ext_resource type="Script" uid="uid://bfd3jwtrcer76" path="res://script/ui/general/UI_Error.cs" id="6_4q17y"]
 
 [node name="UiScoreBoard" type="PanelContainer" unique_id=1179865850 node_paths=PackedStringArray("_entryTemplate", "_container", "_entryHover", "_entryClick", "_loading", "_errorMessage")]
 anchors_preset = 10
@@ -14,12 +15,12 @@ anchor_right = 1.0
 offset_bottom = 221.0
 grow_horizontal = 2
 script = ExtResource("1_0onr6")
-_entryTemplate = NodePath("VBoxContainer/EasyEntriesContainer/UiScoreboardEntry")
-_container = NodePath("VBoxContainer/EasyEntriesContainer")
+_entryTemplate = NodePath("VBoxContainer/ScrollContainer/EasyEntriesContainer/UiScoreboardEntry")
+_container = NodePath("VBoxContainer/ScrollContainer/EasyEntriesContainer")
 _entryHover = NodePath("Hover")
 _entryClick = NodePath("Click")
 _loading = NodePath("VBoxContainer/Loading")
-_errorMessage = NodePath("VBoxContainer/Error/ErrorLabel")
+_errorMessage = NodePath("VBoxContainer/Error")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1595028883]
 layout_mode = 2
@@ -103,15 +104,23 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("3_14cbf")
 expand_mode = 1
 
-[node name="EasyEntriesContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=840263538]
-layout_mode = 2
-
-[node name="UiScoreboardEntry" parent="VBoxContainer/EasyEntriesContainer" unique_id=529901829 instance=ExtResource("3_mv7kc")]
-layout_mode = 2
-
-[node name="Error" type="CenterContainer" parent="VBoxContainer" unique_id=2037425839]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer" unique_id=459873717]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="EasyEntriesContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer" unique_id=840263538]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="UiScoreboardEntry" parent="VBoxContainer/ScrollContainer/EasyEntriesContainer" unique_id=529901829 instance=ExtResource("3_mv7kc")]
+layout_mode = 2
+
+[node name="Error" type="CenterContainer" parent="VBoxContainer" unique_id=2037425839 node_paths=PackedStringArray("_messageLabel")]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("6_4q17y")
+_messageLabel = NodePath("ErrorLabel")
 
 [node name="ErrorLabel" type="Label" parent="VBoxContainer/Error" unique_id=1618364561]
 layout_mode = 2

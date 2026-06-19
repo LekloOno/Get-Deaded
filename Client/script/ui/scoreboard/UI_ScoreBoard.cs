@@ -17,7 +17,7 @@ public partial class UI_ScoreBoard : Control
     [Export] private AudioStreamPlayer _entryClick = null!;
 
     [Export] private UI_Loading? _loading;
-    [Export] private Label? _errorMessage;
+    [Export] private UI_Error? _errorMessage;
 
     private List<UI_ScoreBoardEntry> _entries = [];
 
@@ -56,11 +56,8 @@ public partial class UI_ScoreBoard : Control
         if (result.Success && result.Data != null)
             CreateEntries(result.Data, optScoreId);
 
-        else if (_errorMessage != null)
-        {
-            _errorMessage.Show();
-            _errorMessage.Text = result.ErrorMessage;
-        }
+        else
+            _errorMessage?.ShowError(result.ErrorMessage ?? result.StatusCode.ToString() ?? "ERROR");
         
         _loading?.StopLoading();
     }
