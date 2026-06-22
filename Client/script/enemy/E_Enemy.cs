@@ -31,12 +31,12 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 
 	public bool Enabled {get; private set;} = false;
 	private SceneTreeTimer _hideTimer;
-	public EnemyHealthEventHandler Died {get; set;}
+	public event EnemyHealthEventHandler? Died;
 	private void PropagDie(GC_Health sender) =>
 		Died?.Invoke(this, sender);
 
-	public EnemyDisableEventHandler Disabled {get; set;}
-	public EnemyHealthEventHandler<DamageEventArgs> Damaged {get; set;}
+	public event EnemyDisableEventHandler? Disabled;
+	public event EnemyHealthEventHandler<DamageEventArgs> Damaged;
 	private void PropagDamage(GC_Health sender, DamageEventArgs damage) =>
 		Damaged?.Invoke(this, sender, damage);
 
