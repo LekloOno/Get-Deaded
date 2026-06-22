@@ -15,13 +15,14 @@
 [ext_resource type="Script" uid="uid://bbc8us8vvouq0" path="res://script/global/combat/health/GC_HealthManager.cs" id="7_4ajc7"]
 [ext_resource type="Script" uid="uid://cd3q2iuwnu31g" path="res://script/global/body/GB_CharacterBody.cs" id="7_vrf01"]
 [ext_resource type="Script" uid="uid://ce82euclamj77" path="res://script/global/combat/hit/hurt/GC_HurtBox.cs" id="8_vrf01"]
+[ext_resource type="PackedScene" uid="uid://dvogrhetro621" path="res://prefabs/ui/combat/health/ui_entity_health.tscn" id="9_rnh0c"]
 [ext_resource type="Script" uid="uid://dj7suop0bm7h0" path="res://script/enemy/E_TargetAcquirer.cs" id="14_4ajc7"]
 [ext_resource type="Material" uid="uid://c0boa35qtrcpj" path="res://assets/shaders/blood_material.tres" id="15_4ajc7"]
 [ext_resource type="Material" uid="uid://p3eec2qq26pg" path="res://assets/shaders/packed/enemy_outlines.tres" id="15_54fv7"]
 
 [sub_resource type="Resource" id="Resource_54fv7"]
 script = ExtResource("2_1dpop")
-MaxHealth = 500.0
+MaxHealth = 400.0
 metadata/_custom_type_script = "uid://123gwhhdyr3d"
 
 [sub_resource type="Resource" id="Resource_dqu05"]
@@ -32,6 +33,9 @@ metadata/_custom_type_script = "uid://b200ugj5gpudf"
 [sub_resource type="Resource" id="Resource_rnh0c"]
 script = ExtResource("4_3hhk1")
 metadata/_custom_type_script = "uid://capdedgfmsu4o"
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_pabms"]
+viewport_path = NodePath("CharacterBody3D/Sprite3D/SubViewport")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_54fv7"]
 
@@ -134,6 +138,19 @@ CharacterBody = NodePath("../CharacterBody3D")
 [node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=229332197]
 motion_mode = 1
 script = ExtResource("7_vrf01")
+
+[node name="Sprite3D" type="Sprite3D" parent="CharacterBody3D" unique_id=2111639244]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0.7015, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_pabms")
+
+[node name="SubViewport" type="SubViewport" parent="CharacterBody3D/Sprite3D" unique_id=1214643207]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="UI_EntityHealth" parent="CharacterBody3D/Sprite3D/SubViewport" unique_id=1520827243 node_paths=PackedStringArray("_healthManager") instance=ExtResource("9_rnh0c")]
+_healthManager = NodePath("../../../GC_HealthManager")
 
 [node name="GC_HealthManager" type="Node3D" parent="CharacterBody3D" unique_id=221815618 node_paths=PackedStringArray("_body", "_hurtBoxes")]
 script = ExtResource("7_4ajc7")
