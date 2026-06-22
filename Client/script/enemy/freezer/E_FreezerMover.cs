@@ -1,8 +1,16 @@
 using System;
 using Godot;
 
-public partial class E_FreezerMover : Node
+public partial class E_FreezerMover : Node, E_IEnemyComponent
 {
+    public E_IEnemy? Enemy {get; set;}
+    private NodePath _enemyPath = null!;
+    [Export] public NodePath EnemyPath
+    {
+        get => _enemyPath;
+        set => this.SetEnemy(this, ref _enemyPath, value);
+    }
+
     [Export] private DATA_FreezerMover  _data = null!;
     [Export] private CharacterBody3D    _body = null!;
     [Export] private RayCast3D          _groundCast = null!;
@@ -10,6 +18,7 @@ public partial class E_FreezerMover : Node
     public override void _Ready()
     {
         _body.MotionMode = CharacterBody3D.MotionModeEnum.Floating;
+        (this as E_IEnemyComponent).ResolveEnemy(this);
     }
 
     private double _elapsedStraffe = 0f;
@@ -20,17 +29,33 @@ public partial class E_FreezerMover : Node
     {
         SetStraffe(delta);
         SetFloat(delta);
-
-        Vector3 velocity = _body.GetRealVelocity();
         
+        Vector3 velocity = _body.GetRealVelocity();
+
         velocity.X /= 1f + _data.Drag;
         velocity.Z /= 1f + _data.Drag;
 
-        velocity = Accelerate(velocity);
+        if (Enemy is not null &&
+            Enemy.Target is not null &&
+            !IsCloseEnough(Enemy.Target))
+        {
+            _body.Velocity = ApproachMovement(velocity, Enemy.Target);
+        }
+        else
+            _body.Velocity = CombatMovement(velocity);
 
-        _body.Velocity = velocity;
         _body.MoveAndSlide();
     }
+
+    private Vector3 ApproachMovement(Vector3 velocity, GE_ICombatEntity target) =>
+        ApproachAccelerate(velocity, target);
+
+    private Vector3 CombatMovement(Vector3 velocity) =>
+        HorizontalAccelerate(velocity) +
+        VerticalAccelerate(velocity);
+
+    private bool IsCloseEnough(GE_ICombatEntity target) =>
+        _body.GlobalPosition.DistanceTo(target.Body.GlobalTransform.Origin) < _data.FocusDistance;
 
     private readonly Random _rng = new();
     private void SetStraffe(double delta)
@@ -72,9 +97,22 @@ public partial class E_FreezerMover : Node
 
     private Vector3 GetStraffeDir() => _left ? _body.GlobalTransform.Basis.X : -_body.GlobalTransform.Basis.X;
     private Vector3 GetFloatDir()   => _up   ? Vector3.Up   : Vector3.Down;
-    private Vector3 Accelerate(Vector3 velocity) =>
-        HorizontalAccelerate(velocity) +
-        VerticalAccelerate(velocity);
+
+    private Vector3 ApproachAccelerate(Vector3 velocity, GE_ICombatEntity target)
+    {
+        velocity.Y = 0;
+
+        Vector3 dir = target.Body.GlobalTransform.Origin - _body.GlobalPosition;
+        
+        Vector3 acceleration = dir * _data.Acceleration;
+        velocity += acceleration;
+
+        Vector3 vertAccel = GetStraffeDir() * _data.Acceleration;
+        velocity += vertAccel;
+
+        float speed = Mathf.Min(velocity.Length(), _data.MaxSpeed);
+        return velocity.Normalized() * speed;
+    }
 
     private Vector3 HorizontalAccelerate(Vector3 velocity)
     {

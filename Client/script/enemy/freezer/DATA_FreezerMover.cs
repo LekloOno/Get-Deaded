@@ -3,6 +3,7 @@ using Godot;
 [GlobalClass]
 public partial class DATA_FreezerMover : Resource
 {
+    [Export] public float FocusDistance     { get; private set; }
     [Export] public float Drag              { get; private set; }
     [Export] public float Acceleration      { get; private set; }
     [Export] public float MaxSpeed          { get; private set; }
