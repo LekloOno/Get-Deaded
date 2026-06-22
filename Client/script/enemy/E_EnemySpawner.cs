@@ -54,7 +54,11 @@ public partial class E_EnemySpawner : Node3D
         E_IEnemy enemy;
 
         if (!_pool.TryPop(out enemy!))
+        {
             enemy = CreateEnemy();
+            if (enemy is Node node)
+                AddChild(node);
+        }
 
         enemy.Body.Teleport(GlobalPosition);
         enemy.Spawn();
