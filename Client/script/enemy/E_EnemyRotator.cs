@@ -22,6 +22,9 @@ public partial class E_EnemyRotator : Node, E_IEnemyComponent
 		}
 	}
 
+    [Export] public bool _pitch;
+    [Export] public Node3D? _pitchNode;
+
     private void UpdateTurnSpeed() => _turnSpeedRad = Mathf.DegToRad(_turnSpeed);
 
 	private float _turnSpeed = 400f;
@@ -60,15 +63,16 @@ public partial class E_EnemyRotator : Node, E_IEnemyComponent
 	public void LookAtTarget(E_IEnemy owner, Vector3 target, double delta)
 	{
         Vector3 dir = target - owner.Body.GlobalTransform.Origin;
-        dir.Y = 0;
+        Vector3 yawDir = dir;
+        yawDir.Y = 0;
 
         if (dir.LengthSquared() < 0.0001f)
             return;
 
         Vector3 selfDir = - owner.Body.GlobalTransform.Basis.Z;
-		float hitAngle = MATH_Vector3Ext.FlatAngle(selfDir, dir);
+		float hitAngle = MATH_Vector3Ext.FlatAngle(selfDir, yawDir);
         
-        Vector3 yawDir = -dir.Normalized();
+        yawDir = -yawDir.Normalized();
         float targetYaw = Mathf.Atan2(yawDir.X, yawDir.Z);
 
 		_isBehind = Mathf.RadToDeg(hitAngle) > 120;
@@ -94,6 +98,18 @@ public partial class E_EnemyRotator : Node, E_IEnemyComponent
             Mathf.LerpAngle(owner.Body.Rotation.Y, targetYaw, _turnSpeedRad * (float) delta),
             owner.Body.Rotation.Z
         ));
+
+        if (!_pitch || _pitchNode is null)
+            return;
+
+        Vector3 pitchDir = dir.Normalized();
+        float targetPitch = Mathf.Asin(pitchDir.Y);
+
+        _pitchNode.Rotation = new Vector3(
+            Mathf.LerpAngle(_pitchNode.Rotation.X, targetPitch, _turnSpeedRad * (float) delta),
+            _pitchNode.Rotation.Y,
+            _pitchNode.Rotation.Z
+        );
 	}
 
     public override void _PhysicsProcess(double delta)

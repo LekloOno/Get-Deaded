@@ -35,6 +35,25 @@ metadata/_custom_type_script = "uid://capdedgfmsu4o"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_54fv7"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dqu05"]
+next_pass = ExtResource("15_54fv7")
+transparency = 3
+alpha_hash_scale = 2.0
+alpha_antialiasing_mode = 0
+albedo_color = Color(0.19215687, 0, 0.19607843, 1)
+metallic = 1.0
+roughness = 0.34
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rnh0c"]
+render_priority = -1
+next_pass = SubResource("StandardMaterial3D_dqu05")
+shader = ExtResource("4_hulsd")
+
+[sub_resource type="SphereMesh" id="SphereMesh_pabms"]
+material = SubResource("ShaderMaterial_rnh0c")
+radius = 0.25
+height = 0.7
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_54fv7"]
 radius = 0.2
 height = 0.6626465
@@ -65,25 +84,6 @@ shader = ExtResource("4_hulsd")
 
 [sub_resource type="SphereMesh" id="SphereMesh_u2eeu"]
 material = SubResource("ShaderMaterial_x7wwr")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dqu05"]
-next_pass = ExtResource("15_54fv7")
-transparency = 3
-alpha_hash_scale = 2.0
-alpha_antialiasing_mode = 0
-albedo_color = Color(0.19215687, 0, 0.19607843, 1)
-metallic = 1.0
-roughness = 0.34
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rnh0c"]
-render_priority = -1
-next_pass = SubResource("StandardMaterial3D_dqu05")
-shader = ExtResource("4_hulsd")
-
-[sub_resource type="SphereMesh" id="SphereMesh_pabms"]
-material = SubResource("ShaderMaterial_rnh0c")
-radius = 0.25
-height = 0.7
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_1xrhh"]
 radius = 35.0
@@ -119,7 +119,7 @@ _acquirer = NodePath("CharacterBody3D/Area3D")
 [node name="Material" type="Node" parent="." unique_id=1646177962 node_paths=PackedStringArray("_surfaceMesh", "_headMesh")]
 script = ExtResource("5_dqu05")
 _surfaceMesh = NodePath("../CharacterBody3D/CollisionShape3D/Body")
-_headMesh = NodePath("../CharacterBody3D/CollisionShape3D/Head")
+_headMesh = NodePath("../CharacterBody3D/GC_HealthManager/Head/Head")
 _hideDelay = 2.0
 EnemyPath = NodePath("..")
 
@@ -138,7 +138,7 @@ script = ExtResource("7_vrf01")
 [node name="GC_HealthManager" type="Node3D" parent="CharacterBody3D" unique_id=221815618 node_paths=PackedStringArray("_body", "_hurtBoxes")]
 script = ExtResource("7_4ajc7")
 _body = NodePath("../../BodyManager")
-_hurtBoxes = [NodePath("GC_HurtBox"), NodePath("GC_HurtBox2")]
+_hurtBoxes = [NodePath("GC_HurtBox"), NodePath("Head")]
 metadata/_custom_type_script = "uid://bbc8us8vvouq0"
 
 [node name="GC_HurtBox" type="Area3D" parent="CharacterBody3D/GC_HealthManager" unique_id=1665634624 node_paths=PackedStringArray("DamageSplatter", "Entity")]
@@ -151,21 +151,29 @@ metadata/_custom_type_script = "uid://ce82euclamj77"
 shape = SubResource("SphereShape3D_54fv7")
 debug_color = Color(0, 0.57254905, 0.05490196, 1)
 
-[node name="GC_HurtBox2" type="Area3D" parent="CharacterBody3D/GC_HealthManager" unique_id=1361309910 node_paths=PackedStringArray("DamageSplatter", "Entity")]
+[node name="Head" type="Area3D" parent="CharacterBody3D/GC_HealthManager" unique_id=1361309910 node_paths=PackedStringArray("DamageSplatter", "Entity")]
 script = ExtResource("8_vrf01")
 BodyPart = 0
 DamageSplatter = NodePath("../../../GPUParticles3D")
 Entity = NodePath("../../../CombatWrapper")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/GC_HealthManager/GC_HurtBox2" unique_id=1799049667]
+[node name="Head" type="MeshInstance3D" parent="CharacterBody3D/GC_HealthManager/Head" unique_id=2020368643]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.3)
+extra_cull_margin = 15.0
+mesh = SubResource("SphereMesh_pabms")
+skeleton = NodePath("../../../CollisionShape3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/GC_HealthManager/Head" unique_id=1799049667]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0019774735, -0.4)
 shape = SubResource("CapsuleShape3D_54fv7")
 debug_color = Color(0.99999994, 0.010823451, 0.102517, 1)
 
-[node name="Rotator" type="Node" parent="CharacterBody3D" unique_id=78077604]
+[node name="Rotator" type="Node" parent="CharacterBody3D" unique_id=78077604 node_paths=PackedStringArray("_pitchNode")]
 script = ExtResource("6_vrf01")
 EnemyPath = NodePath("../..")
+_pitch = true
+_pitchNode = NodePath("../GC_HealthManager/Head")
 
 [node name="Mover" type="Node" parent="CharacterBody3D" unique_id=239557658 node_paths=PackedStringArray("_body", "_groundCast")]
 script = ExtResource("1_rvrwt")
@@ -178,11 +186,8 @@ _groundCast = NodePath("../RayCast3D")
 shape = SubResource("SphereShape3D_fk84l")
 
 [node name="Body" type="MeshInstance3D" parent="CharacterBody3D/CollisionShape3D" unique_id=783810428]
+extra_cull_margin = 15.0
 mesh = SubResource("SphereMesh_u2eeu")
-
-[node name="Head" type="MeshInstance3D" parent="CharacterBody3D/CollisionShape3D" unique_id=2020368643]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.3)
-mesh = SubResource("SphereMesh_pabms")
 
 [node name="RayCast3D" type="RayCast3D" parent="CharacterBody3D" unique_id=1886053818]
 target_position = Vector3(0, -6, 0)
