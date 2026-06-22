@@ -56,8 +56,6 @@ public partial class SC_GameManager : Node
 
 		Score.Value = 0;
 
-		player.WeaponsHandler.DisableFire();
-
 		EmitSignal(SignalName.Initialize, this);
 		EmitSignal(SignalName.Initialized);
 		Input.MouseMode = Input.MouseModeEnum.Captured;
@@ -117,7 +115,6 @@ public partial class SC_GameManager : Node
 		if (_player.HealthManager.TopHealthLayer is GC_Shield shield)
 			_shield = shield;
 
-		_player.WeaponsHandler.EnableFire();
 		_initial.Start(_player);
 		SC_EntitiesManager.EnablePickups();
 	}
