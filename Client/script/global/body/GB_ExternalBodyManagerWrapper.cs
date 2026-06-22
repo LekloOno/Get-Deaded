@@ -14,9 +14,13 @@ public abstract partial class GB_ExternalBodyManagerWrapper : Node, GB_IExternal
 
     public Vector3 Velocity() => Body.Velocity();
 
+    public void SetRotation(Vector3 rotation) => Body.SetRotation(rotation);
 
     public Vector3 PrevVelocity => Body.PrevVelocity;
 
     public Transform3D GlobalTransform => Body.GlobalTransform;
     public Transform3D PrevGlobalTransform => Body.GlobalTransform;
+
+    public Vector3 Rotation => Body.Rotation;
+
 }

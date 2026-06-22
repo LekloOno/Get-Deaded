@@ -8,4 +8,6 @@ public interface GB_IExternalBodyManager
     Vector3 PrevVelocity {get;}
     Transform3D GlobalTransform {get;}
     Transform3D PrevGlobalTransform {get;}
+    Vector3 Rotation {get;}
+    void SetRotation(Vector3 rotation);
 }

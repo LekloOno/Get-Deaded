@@ -1,8 +1,14 @@
 using Godot;
 
-public partial class E_EnemyRotator : Node
+public partial class E_EnemyRotator : Node, E_IEnemyComponent
 {
-    [Export] private E_Enemy? _owner;
+    public E_IEnemy? Enemy {get; set;}
+    private NodePath _enemyPath = null!;
+    [Export] public NodePath EnemyPath
+    {
+        get => _enemyPath;
+        set => this.SetEnemy(this, ref _enemyPath, value);
+    }
     [Export] private float TurnSpeed
 	{
 		get => _turnSpeed;
@@ -16,7 +22,7 @@ public partial class E_EnemyRotator : Node
 		}
 	}
 
-	private void UpdateTurnSpeed() => _turnSpeedRad = Mathf.DegToRad(_turnSpeed);
+    private void UpdateTurnSpeed() => _turnSpeedRad = Mathf.DegToRad(_turnSpeed);
 
 	private float _turnSpeed = 400f;
 	private float _turnSpeedRad;
@@ -26,13 +32,15 @@ public partial class E_EnemyRotator : Node
 
     public override void _Ready()
     {
+        (this as E_IEnemyComponent).ResolveEnemy(this);
+        
         UpdateTurnSpeed();
-        if (_owner == null)
+        if (Enemy == null)
             return;
 
-        _owner.Died += OnDied;
-        _owner.Disabled += OnDisabled;
-        _owner.Spawned += Enable;
+        Enemy.Died += OnDied;
+        Enemy.Disabled += OnDisabled;
+        Enemy.Spawned += Enable;
     }
 
     private void OnDisabled(E_IEnemy enemy) => Disable();
@@ -50,15 +58,15 @@ public partial class E_EnemyRotator : Node
 
     private bool _turningAround;
     private bool _isBehind;
-	public void LookAtTarget(Node3D owner, Vector3 target, double delta)
+	public void LookAtTarget(E_IEnemy owner, Vector3 target, double delta)
 	{
-        Vector3 dir = target - owner.GlobalPosition;
+        Vector3 dir = target - owner.Body.GlobalTransform.Origin;
         dir.Y = 0;
 
         if (dir.LengthSquared() < 0.0001f)
             return;
 
-        Vector3 selfDir = - owner.GlobalTransform.Basis.Z;
+        Vector3 selfDir = - owner.Body.GlobalTransform.Basis.Z;
 		float hitAngle = MATH_Vector3Ext.FlatAngle(selfDir, dir);
         
         Vector3 yawDir = -dir.Normalized();
@@ -82,21 +90,21 @@ public partial class E_EnemyRotator : Node
         }
 
 
-        owner.Rotation = new Vector3(
-            owner.Rotation.X,
-            Mathf.LerpAngle(owner.Rotation.Y, targetYaw, _turnSpeedRad * (float) delta),
-            owner.Rotation.Z
-        );
+        owner.Body.SetRotation(new Vector3(
+            owner.Body.Rotation.X,
+            Mathf.LerpAngle(owner.Body.Rotation.Y, targetYaw, _turnSpeedRad * (float) delta),
+            owner.Body.Rotation.Z
+        ));
 	}
 
     public override void _PhysicsProcess(double delta)
     {
-        if (_owner == null)
+        if (Enemy == null)
             return;
 
-        if (_owner.Target == null)
+        if (Enemy.Target == null)
             return;
 
-        LookAtTarget(_owner, _owner.Target.Body.GlobalTransform.Origin, delta);
+        LookAtTarget(Enemy, Enemy.Target.Body.GlobalTransform.Origin, delta);
     }
 }
