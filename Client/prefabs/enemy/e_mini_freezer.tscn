@@ -1,0 +1,221 @@
+[gd_scene format=3 uid="uid://dc15v3hd28hha"]
+
+[ext_resource type="Script" uid="uid://bx5uyl4lefjay" path="res://script/enemy/freezer/E_Freezer.cs" id="1_rs4se"]
+[ext_resource type="Script" uid="uid://123gwhhdyr3d" path="res://script/global/combat/health/data/GCD_Health.cs" id="2_yhr55"]
+[ext_resource type="Script" uid="uid://b200ugj5gpudf" path="res://script/enemy/freezer/E_FreezerSettings.cs" id="3_dedpn"]
+[ext_resource type="Script" uid="uid://capdedgfmsu4o" path="res://script/player/camera/annimation/trauma/causers/PCT_SimpleTraumaData.cs" id="4_44p5a"]
+[ext_resource type="Script" uid="uid://dcob2hbn5vpxb" path="res://script/enemy/freezer/E_FreezerMaterial.cs" id="5_rhly3"]
+[ext_resource type="Script" uid="uid://bxrn72jqwox10" path="res://script/enemy/freezer/E_FreezerCombatWrapper.cs" id="6_l8bnb"]
+[ext_resource type="Script" uid="uid://bkjpdyqkuawm1" path="res://script/global/body/GB_CharacterBodyManager.cs" id="7_cdxma"]
+[ext_resource type="Script" uid="uid://cd3q2iuwnu31g" path="res://script/global/body/GB_CharacterBody.cs" id="8_5httk"]
+[ext_resource type="PackedScene" uid="uid://dvogrhetro621" path="res://prefabs/ui/combat/health/ui_entity_health.tscn" id="9_of3np"]
+[ext_resource type="Script" uid="uid://bbc8us8vvouq0" path="res://script/global/combat/health/GC_HealthManager.cs" id="10_kauk2"]
+[ext_resource type="Script" uid="uid://ce82euclamj77" path="res://script/global/combat/hit/hurt/GC_HurtBox.cs" id="11_73w3b"]
+[ext_resource type="Material" uid="uid://p3eec2qq26pg" path="res://assets/shaders/packed/enemy_outlines.tres" id="12_8ksjh"]
+[ext_resource type="Shader" uid="uid://c1hspea12w7tc" path="res://assets/shaders/stencil_raw_writer.gdshader" id="13_h8aot"]
+[ext_resource type="Script" uid="uid://cccery8l80stc" path="res://script/enemy/E_EnemyRotator.cs" id="14_87stj"]
+[ext_resource type="Script" uid="uid://dxw0bd5218l6s" path="res://script/enemy/freezer/E_FreezerMover.cs" id="15_hp8wm"]
+[ext_resource type="Script" uid="uid://dsuc5a4uwd6e0" path="res://script/enemy/freezer/DATA_FreezerMover.cs" id="16_upnhf"]
+[ext_resource type="Material" uid="uid://b3tgge30w7af5" path="res://assets/shaders/packed/base_enemy_joints.tres" id="17_ncw0l"]
+[ext_resource type="Material" uid="uid://c0boa35qtrcpj" path="res://assets/shaders/blood_material.tres" id="18_b24p0"]
+
+[sub_resource type="Resource" id="Resource_g7skk"]
+script = ExtResource("2_yhr55")
+MaxHealth = 100.0
+metadata/_custom_type_script = "uid://123gwhhdyr3d"
+
+[sub_resource type="Resource" id="Resource_8kbn0"]
+script = ExtResource("3_dedpn")
+Health = SubResource("Resource_g7skk")
+metadata/_custom_type_script = "uid://b200ugj5gpudf"
+
+[sub_resource type="Resource" id="Resource_rnh0c"]
+script = ExtResource("4_44p5a")
+metadata/_custom_type_script = "uid://capdedgfmsu4o"
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_dh8dy"]
+viewport_path = NodePath("CharacterBody3D/Sprite3D/SubViewport")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ng0kj"]
+radius = 0.25
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dqu05"]
+next_pass = ExtResource("12_8ksjh")
+transparency = 3
+alpha_hash_scale = 2.0
+alpha_antialiasing_mode = 0
+albedo_color = Color(0.19215687, 0, 0.19607843, 1)
+metallic = 1.0
+roughness = 0.34
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rnh0c"]
+render_priority = -1
+next_pass = SubResource("StandardMaterial3D_dqu05")
+shader = ExtResource("13_h8aot")
+
+[sub_resource type="SphereMesh" id="SphereMesh_cq7jc"]
+material = SubResource("ShaderMaterial_rnh0c")
+radius = 0.1
+height = 0.3
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i5mu4"]
+radius = 0.085
+height = 0.2826294
+
+[sub_resource type="Resource" id="Resource_wt32h"]
+script = ExtResource("16_upnhf")
+FocusMinDistance = 20.0
+FocusMaxDistance = 25.0
+FollowAcceleration = 0.2
+FollowMaxSpeed = 8.0
+Drag = 0.05
+Acceleration = 0.2
+MaxSpeed = 0.5
+MinStraffe = 2.5
+MaxStraffe = 4.0
+FloatAcceleration = 0.2
+FloatMaxSpeed = 0.2
+MinFloat = 2.0
+MaxFloat = 3.0
+metadata/_custom_type_script = "uid://dsuc5a4uwd6e0"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_whp71"]
+radius = 0.25
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x7wwr"]
+render_priority = -1
+next_pass = ExtResource("17_ncw0l")
+shader = ExtResource("13_h8aot")
+
+[sub_resource type="SphereMesh" id="SphereMesh_4mm0n"]
+material = SubResource("ShaderMaterial_x7wwr")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="Curve" id="Curve_vrf01"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.199883), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_mxe6x"]
+curve = SubResource("Curve_vrf01")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_54fv7"]
+spread = 60.0
+initial_velocity_min = 3.0
+initial_velocity_max = 6.0
+linear_accel_min = 2.0
+linear_accel_max = 4.0
+scale_min = 0.5
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_mxe6x")
+
+[sub_resource type="QuadMesh" id="QuadMesh_dqu05"]
+
+[node name="Child1" type="Node3D" unique_id=450089253 node_paths=PackedStringArray("_mat", "_body", "HealthManager", "_acquirer")]
+script = ExtResource("1_rs4se")
+Settings = SubResource("Resource_8kbn0")
+_mat = NodePath("Material")
+_body = NodePath("BodyManager")
+KillTraumaData = SubResource("Resource_rnh0c")
+HealthManager = NodePath("CharacterBody3D/GC_HealthManager")
+_acquirer = NodePath("")
+
+[node name="Material" type="Node" parent="." unique_id=1050772261 node_paths=PackedStringArray("_surfaceMesh", "_headMesh")]
+script = ExtResource("5_rhly3")
+_surfaceMesh = NodePath("../CharacterBody3D/CollisionShape3D/Body")
+_headMesh = NodePath("../CharacterBody3D/GC_HealthManager/Head/Head")
+_hideDelay = 2.0
+EnemyPath = NodePath("..")
+
+[node name="CombatWrapper" type="Node" parent="." unique_id=1670875332 node_paths=PackedStringArray("_freezer")]
+script = ExtResource("6_l8bnb")
+_freezer = NodePath("..")
+
+[node name="BodyManager" type="Node" parent="." unique_id=1844278222 node_paths=PackedStringArray("CharacterBody")]
+script = ExtResource("7_cdxma")
+CharacterBody = NodePath("../CharacterBody3D")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=281207213]
+motion_mode = 1
+script = ExtResource("8_5httk")
+
+[node name="Sprite3D" type="Sprite3D" parent="CharacterBody3D" unique_id=920277695]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0.7015, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_dh8dy")
+
+[node name="SubViewport" type="SubViewport" parent="CharacterBody3D/Sprite3D" unique_id=525762203]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="UI_EntityHealth" parent="CharacterBody3D/Sprite3D/SubViewport" unique_id=633793249 node_paths=PackedStringArray("_healthManager") instance=ExtResource("9_of3np")]
+_healthManager = NodePath("../../../GC_HealthManager")
+
+[node name="GC_HealthManager" type="Node3D" parent="CharacterBody3D" unique_id=1098739982 node_paths=PackedStringArray("_body", "_hurtBoxes")]
+script = ExtResource("10_kauk2")
+_body = NodePath("../../BodyManager")
+_hurtBoxes = [NodePath("GC_HurtBox"), NodePath("Head")]
+metadata/_custom_type_script = "uid://bbc8us8vvouq0"
+
+[node name="GC_HurtBox" type="Area3D" parent="CharacterBody3D/GC_HealthManager" unique_id=1307835297 node_paths=PackedStringArray("DamageSplatter", "Entity")]
+script = ExtResource("11_73w3b")
+DamageSplatter = NodePath("../../../GPUParticles3D")
+Entity = NodePath("../../../CombatWrapper")
+metadata/_custom_type_script = "uid://ce82euclamj77"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/GC_HealthManager/GC_HurtBox" unique_id=478449138]
+shape = SubResource("SphereShape3D_ng0kj")
+debug_color = Color(0, 0.57254905, 0.05490196, 1)
+
+[node name="Head" type="Area3D" parent="CharacterBody3D/GC_HealthManager" unique_id=59541965 node_paths=PackedStringArray("DamageSplatter", "Entity")]
+script = ExtResource("11_73w3b")
+BodyPart = 0
+DamageSplatter = NodePath("../../../GPUParticles3D")
+Entity = NodePath("../../../CombatWrapper")
+metadata/_custom_type_script = "uid://ce82euclamj77"
+
+[node name="Head" type="MeshInstance3D" parent="CharacterBody3D/GC_HealthManager/Head" unique_id=219563249]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.17912433)
+extra_cull_margin = 15.0
+mesh = SubResource("SphereMesh_cq7jc")
+skeleton = NodePath("../../../CollisionShape3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/GC_HealthManager/Head" unique_id=443314277]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0007750839, -0.22799522)
+shape = SubResource("CapsuleShape3D_i5mu4")
+debug_color = Color(0.99999994, 0.010823451, 0.102517, 1)
+
+[node name="Rotator" type="Node" parent="CharacterBody3D" unique_id=2076291007 node_paths=PackedStringArray("_pitchNode")]
+script = ExtResource("14_87stj")
+EnemyPath = NodePath("../..")
+_pitch = true
+_pitchNode = NodePath("../GC_HealthManager/Head")
+
+[node name="Mover" type="Node" parent="CharacterBody3D" unique_id=1847239479 node_paths=PackedStringArray("_body", "_groundCast")]
+script = ExtResource("15_hp8wm")
+EnemyPath = NodePath("../..")
+_data = SubResource("Resource_wt32h")
+_body = NodePath("..")
+_groundCast = NodePath("../RayCast3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=1007004679]
+shape = SubResource("SphereShape3D_whp71")
+
+[node name="Body" type="MeshInstance3D" parent="CharacterBody3D/CollisionShape3D" unique_id=753319670]
+extra_cull_margin = 15.0
+mesh = SubResource("SphereMesh_4mm0n")
+
+[node name="RayCast3D" type="RayCast3D" parent="CharacterBody3D" unique_id=29575886]
+target_position = Vector3(0, -6, 0)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1315578208]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29184, 0)
+top_level = true
+material_override = ExtResource("18_b24p0")
+emitting = false
+amount = 10
+lifetime = 0.2
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_54fv7")
+draw_pass_1 = SubResource("QuadMesh_dqu05")

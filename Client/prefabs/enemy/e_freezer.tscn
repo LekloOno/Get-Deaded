@@ -118,7 +118,7 @@ _mat = NodePath("Material")
 _body = NodePath("BodyManager")
 KillTraumaData = SubResource("Resource_rnh0c")
 HealthManager = NodePath("CharacterBody3D/GC_HealthManager")
-_acquirer = NodePath("CharacterBody3D/Area3D")
+_acquirer = NodePath("CharacterBody3D/TargetAcquirer")
 
 [node name="Material" type="Node" parent="." unique_id=1646177962 node_paths=PackedStringArray("_surfaceMesh", "_headMesh")]
 script = ExtResource("5_dqu05")
@@ -209,12 +209,12 @@ mesh = SubResource("SphereMesh_u2eeu")
 [node name="RayCast3D" type="RayCast3D" parent="CharacterBody3D" unique_id=1886053818]
 target_position = Vector3(0, -6, 0)
 
-[node name="Area3D" type="Area3D" parent="CharacterBody3D" unique_id=1354518952]
+[node name="TargetAcquirer" type="Area3D" parent="CharacterBody3D" unique_id=1354518952]
 collision_layer = 0
 monitorable = false
 script = ExtResource("14_4ajc7")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/Area3D" unique_id=1171007626]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/TargetAcquirer" unique_id=1171007626]
 shape = SubResource("SphereShape3D_1xrhh")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1923927150]

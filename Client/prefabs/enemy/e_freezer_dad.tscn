@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://ci2bcdgfj1wqj"]
+
+[ext_resource type="Script" uid="uid://bv4yskgac7j6j" path="res://script/enemy/freezer/E_FreezerDad.cs" id="1_us4oj"]
+[ext_resource type="PackedScene" uid="uid://cw86qrqfdjy6u" path="res://prefabs/enemy/e_freezer.tscn" id="2_58ciw"]
+[ext_resource type="Script" uid="uid://bc5dhu4j0urk1" path="res://script/enemy/freezer/data/DATA_FreezerDadSettings.cs" id="2_but5u"]
+[ext_resource type="PackedScene" uid="uid://dc15v3hd28hha" path="res://prefabs/enemy/e_mini_freezer.tscn" id="5_7ir5p"]
+[ext_resource type="Script" uid="uid://capdedgfmsu4o" path="res://script/player/camera/annimation/trauma/causers/PCT_SimpleTraumaData.cs" id="6_wafaf"]
+
+[sub_resource type="Resource" id="Resource_xmpv5"]
+script = ExtResource("2_but5u")
+ChildSpawnMinRadius = 3.0
+ChildSpawnMaxRadius = 6.0
+metadata/_custom_type_script = "uid://bc5dhu4j0urk1"
+
+[sub_resource type="Resource" id="Resource_wafaf"]
+script = ExtResource("6_wafaf")
+metadata/_custom_type_script = "uid://capdedgfmsu4o"
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_2ibxh"]
+viewport_path = NodePath("CharacterBody3D/Sprite3D/SubViewport")
+
+[node name="E_FreezerDad" type="Node3D" unique_id=464356016 node_paths=PackedStringArray("_base", "_children", "_acquirer")]
+script = ExtResource("1_us4oj")
+_base = NodePath("Base")
+_children = [NodePath("Child1"), NodePath("Child2"), NodePath("Child3")]
+_settings = SubResource("Resource_xmpv5")
+_acquirer = NodePath("Base/CharacterBody3D/TargetAcquirer")
+KillTraumaData = SubResource("Resource_wafaf")
+
+[node name="Base" parent="." unique_id=1624354823 instance=ExtResource("2_58ciw")]
+
+[node name="Sprite3D" parent="Base/CharacterBody3D" parent_id_path=PackedInt32Array(1624354823, 229332197) index="0" unique_id=2111639244]
+texture = SubResource("ViewportTexture_2ibxh")
+
+[node name="Child1" parent="." unique_id=450089253 node_paths=PackedStringArray("_acquirer") instance=ExtResource("5_7ir5p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+_acquirer = NodePath("../Base/CharacterBody3D/TargetAcquirer")
+
+[node name="Child2" parent="." unique_id=2080557571 node_paths=PackedStringArray("_acquirer") instance=ExtResource("5_7ir5p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+_acquirer = NodePath("../Base/CharacterBody3D/TargetAcquirer")
+
+[node name="Child3" parent="." unique_id=1691594081 node_paths=PackedStringArray("_acquirer") instance=ExtResource("5_7ir5p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+_acquirer = NodePath("../Base/CharacterBody3D/TargetAcquirer")
+
+[editable path="Base"]
