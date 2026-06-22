@@ -78,7 +78,19 @@ public partial class PM_LedgeClimb : PM_Action
     }
 
     public bool CanLedgeClimb() => CheckPhysics() && !_isClimbing;
-    private bool CheckPhysics() => PHX_Checks.CanLedgeClimb(_controller, _bodyScale.Collider, _pivot, _minSpace, _minHeight, _ledgeCast.GlobalPosition, out _lastCollision);
+    private bool CheckPhysics()
+    {
+        Vector3 initSize = _bodyScale.Collider.Size;
+        _bodyScale.Collider.Size = new(0.3f, initSize.Y, 0.3f);
+
+        bool canClimb = PHX_Checks.CanLedgeClimb(
+            _controller, _bodyScale.Collider, _pivot,
+            _minSpace, _minHeight, _ledgeCast,
+            out _lastCollision);
+
+        _bodyScale.Collider.Size = initSize;
+        return canClimb;
+    }
 
     public void DoLedgeClimb()
     {

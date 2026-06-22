@@ -73,9 +73,9 @@ public static class PHX_Checks
         Node3D pivot,
         float distance,
         float minHeight,
-        Vector3 headPosition,
+        ShapeCast3D headCast,
         out KinematicCollision3D result,
-        float headCastDistance = 0.5f)
+        float headCastDistance = 0.15f)
     {
         bool canMoveForward = CanMoveForward(current, shape, pivot, distance, out result, minHeight, CONF_Collision.Layers.Environment);
 
@@ -89,17 +89,9 @@ public static class PHX_Checks
             return false;
 
         direction = direction.Normalized();
+        headCast.TargetPosition = direction * headCastDistance;
 
-        Vector3 origin = headPosition;
-        Vector3 target = origin + direction * headCastDistance;
-
-        var spaceState = current.GetWorld3D().DirectSpaceState;
-
-        var query = PhysicsRayQueryParameters3D.Create(origin, target);
-        query.Exclude = [current.GetRid()];
-
-        var headResult = spaceState.IntersectRay(query);
-
-        return headResult.Count == 0;
+        headCast.ForceShapecastUpdate();
+        return !headCast.IsColliding();
     }
 }
