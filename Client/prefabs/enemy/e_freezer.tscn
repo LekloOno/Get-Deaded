@@ -55,12 +55,12 @@ shader = ExtResource("4_hulsd")
 
 [sub_resource type="SphereMesh" id="SphereMesh_pabms"]
 material = SubResource("ShaderMaterial_rnh0c")
-radius = 0.25
-height = 0.7
+radius = 0.2
+height = 0.6
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_54fv7"]
-radius = 0.2
-height = 0.6626465
+radius = 0.17041016
+height = 0.5630859
 
 [sub_resource type="Resource" id="Resource_bts5g"]
 script = ExtResource("2_vmvuw")
@@ -176,13 +176,13 @@ Entity = NodePath("../../../CombatWrapper")
 metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="Head" type="MeshInstance3D" parent="CharacterBody3D/GC_HealthManager/Head" unique_id=2020368643]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.34196284)
 extra_cull_margin = 15.0
 mesh = SubResource("SphereMesh_pabms")
 skeleton = NodePath("../../../CollisionShape3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/GC_HealthManager/Head" unique_id=1799049667]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0019774735, -0.4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0006592572, -0.39083374)
 shape = SubResource("CapsuleShape3D_54fv7")
 debug_color = Color(0.99999994, 0.010823451, 0.102517, 1)
 
