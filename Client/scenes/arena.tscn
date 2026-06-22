@@ -7213,11 +7213,9 @@ script = ExtResource("84_h3ydh")
 [node name="E_EnemySpawner" type="Node3D" parent="Debug" unique_id=1339288180]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.6, 3, 47)
 script = ExtResource("86_lju4b")
-EnemyPath = NodePath("E_Freezer")
+_enemy = ExtResource("85_27x07")
 _respawnDelay = 2.0
 metadata/_custom_type_script = "uid://8thrj88gtdf"
-
-[node name="E_Freezer" parent="Debug/E_EnemySpawner" unique_id=1624354823 instance=ExtResource("85_27x07")]
 
 [connection signal="EarnScore" from="entities/AimArena/SC_GameManager" to="CanvasLayer/UI_ScoreMarkManager" method="OnEarnScore"]
 [connection signal="EarnScore" from="entities/AimArena/SC_GameManager" to="CanvasLayer/ScoreTracker/BoxContainer/HBoxContainer/Score" method="OnEarnScore"]
