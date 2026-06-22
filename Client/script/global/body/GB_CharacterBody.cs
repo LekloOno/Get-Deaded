@@ -26,4 +26,11 @@ public partial class GB_CharacterBody : CharacterBody3D, GB_IExternalBodyManager
     }
 
     protected virtual void PhysicsProcessSpec(double delta) {}
+
+    public void Teleport(Vector3 position)
+    {
+        GlobalPosition = position;
+        ResetPhysicsInterpolation();
+    }
+
 }

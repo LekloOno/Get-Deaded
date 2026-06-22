@@ -3,18 +3,14 @@ using Godot;
 
 public interface E_IEnemyComponent
 {
-    public NodePath EnemyPath   {get; set;}
-    public E_IEnemy? Enemy      {get; set;}
+    NodePath EnemyPath   {get; set;}
+    E_IEnemy? Enemy      {get; set;}
 
-    public void SetEnemy(Node owner, ref NodePath pathProperty, NodePath value)
-    {
-        if (pathProperty == value)
-            return;
-
-        pathProperty = value;
-        ResolveEnemy(owner);
-        owner.UpdateConfigurationWarnings();
-    }
+    void OnDied(E_IEnemy enemy, GC_Health senderLayer);
+    void OnPooled(E_IEnemy enemy);
+    void OnSpawned();
+    void OnDisabled(E_IEnemy enemy);
+    void OnEnemyChanged(E_IEnemy? prev, E_IEnemy? next);
 
     public bool ResolveEnemy(Node node)
     {
@@ -27,10 +23,29 @@ public interface E_IEnemyComponent
         if (enemyNode is not E_IEnemy validEnemy)
             return false;
 
+        if (Enemy == validEnemy)
+            return true;
+
+        if (Enemy != null)
+        {
+            Enemy.Died      -= OnDied;
+            Enemy.Disabled  -= OnDisabled;
+            Enemy.Spawned   -= OnSpawned;
+            Enemy.Pooled    -= OnPooled;
+            
+        }
+
+        E_IEnemy? prev = Enemy;
         Enemy = validEnemy;
+        Enemy.Died      += OnDied;
+        Enemy.Disabled  += OnDisabled;
+        Enemy.Spawned   += OnSpawned;
+        Enemy.Pooled    += OnPooled;
+
+        OnEnemyChanged(prev, Enemy);
         return true;
     }
-    
+
     public string[] GetConfigurationWarnings(Node baseNode)
     {
         var warnings = new List<string>();

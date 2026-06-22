@@ -10,4 +10,5 @@ public interface GB_IExternalBodyManager
     Transform3D PrevGlobalTransform {get;}
     Vector3 Rotation {get;}
     void SetRotation(Vector3 rotation);
+    void Teleport(Vector3 position);
 }

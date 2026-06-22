@@ -79,6 +79,7 @@
 [ext_resource type="Script" uid="uid://ba04qst68odml" path="res://script/engine_tools/MISC_TimeScaler.cs" id="82_3cr31"]
 [ext_resource type="Script" uid="uid://brqloiivy6jcu" path="res://script/debug/GcPressure.cs" id="84_h3ydh"]
 [ext_resource type="PackedScene" uid="uid://cw86qrqfdjy6u" path="res://prefabs/enemy/e_freezer.tscn" id="85_27x07"]
+[ext_resource type="Script" uid="uid://8thrj88gtdf" path="res://script/enemy/E_EnemySpawner.cs" id="86_lju4b"]
 [ext_resource type="LightmapGIData" uid="uid://d3cc8iupunnf1" path="res://scenes/arena.lmbake" id="112_hskjd"]
 [ext_resource type="PackedScene" uid="uid://bioysx8g5kih7" path="res://prefabs/mapping/lights/lightray2.tscn" id="113_ie87n"]
 [ext_resource type="Shader" uid="uid://db85ge55ambmc" path="res://assets/shaders/light_flare.gdshader" id="114_xy3ri"]
@@ -7209,8 +7210,14 @@ metadata/_custom_type_script = "uid://ba04qst68odml"
 process_mode = 4
 script = ExtResource("84_h3ydh")
 
-[node name="E_Freezer" parent="Debug" unique_id=1624354823 instance=ExtResource("85_27x07")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 3.6000001, 41)
+[node name="E_EnemySpawner" type="Node3D" parent="Debug" unique_id=1339288180]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.6, 3, 47)
+script = ExtResource("86_lju4b")
+EnemyPath = NodePath("E_Freezer")
+_respawnDelay = 2.0
+metadata/_custom_type_script = "uid://8thrj88gtdf"
+
+[node name="E_Freezer" parent="Debug/E_EnemySpawner" unique_id=1624354823 instance=ExtResource("85_27x07")]
 
 [connection signal="EarnScore" from="entities/AimArena/SC_GameManager" to="CanvasLayer/UI_ScoreMarkManager" method="OnEarnScore"]
 [connection signal="EarnScore" from="entities/AimArena/SC_GameManager" to="CanvasLayer/ScoreTracker/BoxContainer/HBoxContainer/Score" method="OnEarnScore"]

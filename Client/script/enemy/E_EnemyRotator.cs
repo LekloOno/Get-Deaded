@@ -37,14 +37,13 @@ public partial class E_EnemyRotator : Node, E_IEnemyComponent
         UpdateTurnSpeed();
         if (Enemy == null)
             return;
-
-        Enemy.Died += OnDied;
-        Enemy.Disabled += OnDisabled;
-        Enemy.Spawned += Enable;
     }
 
-    private void OnDisabled(E_IEnemy enemy) => Disable();
-    private void OnDied(E_IEnemy enemy, GC_Health senderLayer) => Disable();
+    public void OnDisabled(E_IEnemy enemy) => Disable();
+    public void OnDied(E_IEnemy enemy, GC_Health senderLayer) => Disable();
+    public void OnPooled(E_IEnemy enemy) {}
+    public void OnSpawned() => Enable();
+    public void OnEnemyChanged(E_IEnemy? prev, E_IEnemy? next) {}
 
     private void Disable()
     {

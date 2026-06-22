@@ -28,20 +28,25 @@ public partial class E_FreezerMover : Node, E_IEnemyComponent
     private bool _following;
     public override void _PhysicsProcess(double delta)
     {
-        SetStraffe(delta);
-        SetFloat(delta);
-        
-        Vector3 velocity = _body.GetRealVelocity();
+        if (!_dead)
+        {
+            SetStraffe(delta);
+            SetFloat(delta);
+        }
 
+        Vector3 velocity = _body.GetRealVelocity();
         velocity.X /= 1f + _data.Drag;
         velocity.Z /= 1f + _data.Drag;
 
-        _body.Velocity = GetVelocity(velocity);
+        _body.Velocity = GetVelocity(velocity, delta);
         _body.MoveAndSlide();
     }
 
-    private Vector3 GetVelocity(Vector3 velocity)
+    private Vector3 GetVelocity(Vector3 velocity, double delta)
     {
+        if (_dead)
+            return DeadMovement(velocity, delta);
+
         if (Enemy is null ||
             Enemy.Target is null)
             return CombatMovement(velocity);
@@ -151,5 +156,62 @@ public partial class E_FreezerMover : Node, E_IEnemyComponent
 
         float speed = Mathf.Min(Mathf.Abs(velocity.Y), _data.FloatMaxSpeed);
         return velocity.Normalized() * speed;
+    }
+
+    private bool _dead;
+    public void OnDied(E_IEnemy enemy, GC_Health senderLayer) =>
+        _dead = true;
+
+    private Vector3 DeadMovement(Vector3 velocity, double delta)
+    {
+        if (_angularVelocity.LengthSquared() > 0.0001f)
+        {
+            float angle = _angularVelocity.Length() * (float)delta;
+            Vector3 axis = _angularVelocity.Normalized();
+
+            _body.GlobalBasis =
+                new Basis(axis, angle) * _body.GlobalBasis;
+
+            _angularVelocity *= 0.99f;
+        }
+
+        return velocity + _body.GetGravity() * (float) delta;
+    }
+
+    public void OnPooled(E_IEnemy enemy) {}
+
+    public void OnSpawned()
+    {
+        _body.GlobalBasis = Basis.Identity;
+        SetPhysicsProcess(true);
+        _dead = false;
+    }
+
+    public void OnDisabled(E_IEnemy enemy) => SetPhysicsProcess(false);
+
+    public void OnEnemyChanged(E_IEnemy? prev, E_IEnemy? next)
+    {
+        if (prev != null)
+            prev.HealthManager.HitReceived -= OnHitReceived;
+
+        if (next != null)
+            next.HealthManager.HitReceived += OnHitReceived;
+    }
+
+    private Vector3 _angularVelocity = Vector3.Zero;
+    //[Export] private CharacterBody3D    _body = null!;
+    private void OnHitReceived(Vector3 from, Vector3 to, HitEventArgs args)
+    {
+        // add some torque to the body, according to the from - to direction
+        // That is, for example, if such direction points at the center of the body, it should not add any torque, but if it is parallel to the body center, it should add a lot
+
+        Vector3 forceDirection = (to - from).Normalized();
+        Vector3 center = _body.GlobalPosition;
+        Vector3 r = to - center;
+        Vector3 torque = r.Cross(forceDirection);
+
+        float torqueStrength = 100.0f;
+
+        _angularVelocity = torque * torqueStrength;
     }
 }

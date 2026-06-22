@@ -10,6 +10,7 @@
 [ext_resource type="Shader" uid="uid://c1hspea12w7tc" path="res://assets/shaders/stencil_raw_writer.gdshader" id="4_hulsd"]
 [ext_resource type="Script" uid="uid://bxrn72jqwox10" path="res://script/enemy/freezer/E_FreezerCombatWrapper.cs" id="5_3hhk1"]
 [ext_resource type="Script" uid="uid://bkjpdyqkuawm1" path="res://script/global/body/GB_CharacterBodyManager.cs" id="5_4ajc7"]
+[ext_resource type="Script" uid="uid://dcob2hbn5vpxb" path="res://script/enemy/freezer/E_FreezerMaterial.cs" id="5_dqu05"]
 [ext_resource type="Script" uid="uid://cccery8l80stc" path="res://script/enemy/E_EnemyRotator.cs" id="6_vrf01"]
 [ext_resource type="Script" uid="uid://bbc8us8vvouq0" path="res://script/global/combat/health/GC_HealthManager.cs" id="7_4ajc7"]
 [ext_resource type="Script" uid="uid://cd3q2iuwnu31g" path="res://script/global/body/GB_CharacterBody.cs" id="7_vrf01"]
@@ -20,7 +21,7 @@
 
 [sub_resource type="Resource" id="Resource_54fv7"]
 script = ExtResource("2_1dpop")
-MaxHealth = 10000.0
+MaxHealth = 500.0
 metadata/_custom_type_script = "uid://123gwhhdyr3d"
 
 [sub_resource type="Resource" id="Resource_dqu05"]
@@ -67,7 +68,10 @@ material = SubResource("ShaderMaterial_x7wwr")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dqu05"]
 next_pass = ExtResource("15_54fv7")
-albedo_color = Color(0.19102699, 2.8842353e-05, 0.19507176, 1)
+transparency = 3
+alpha_hash_scale = 2.0
+alpha_antialiasing_mode = 0
+albedo_color = Color(0.19215687, 0, 0.19607843, 1)
 metallic = 1.0
 roughness = 0.34
 
@@ -103,13 +107,21 @@ scale_curve = SubResource("CurveTexture_mxe6x")
 
 [sub_resource type="QuadMesh" id="QuadMesh_dqu05"]
 
-[node name="E_Freezer" type="Node3D" unique_id=1624354823 node_paths=PackedStringArray("_body", "HealthManager", "_acquirer")]
+[node name="E_Freezer" type="Node3D" unique_id=1624354823 node_paths=PackedStringArray("_mat", "_body", "HealthManager", "_acquirer")]
 script = ExtResource("1_u2eeu")
 Settings = SubResource("Resource_dqu05")
+_mat = NodePath("Material")
 _body = NodePath("BodyManager")
 KillTraumaData = SubResource("Resource_rnh0c")
 HealthManager = NodePath("CharacterBody3D/GC_HealthManager")
 _acquirer = NodePath("CharacterBody3D/Area3D")
+
+[node name="Material" type="Node" parent="." unique_id=1646177962 node_paths=PackedStringArray("_surfaceMesh", "_headMesh")]
+script = ExtResource("5_dqu05")
+_surfaceMesh = NodePath("../CharacterBody3D/CollisionShape3D/Body")
+_headMesh = NodePath("../CharacterBody3D/CollisionShape3D/Head")
+_hideDelay = 2.0
+EnemyPath = NodePath("..")
 
 [node name="CombatWrapper" type="Node" parent="." unique_id=415995557 node_paths=PackedStringArray("_freezer")]
 script = ExtResource("5_3hhk1")
@@ -165,10 +177,10 @@ _groundCast = NodePath("../RayCast3D")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=1310928925]
 shape = SubResource("SphereShape3D_fk84l")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/CollisionShape3D" unique_id=783810428]
+[node name="Body" type="MeshInstance3D" parent="CharacterBody3D/CollisionShape3D" unique_id=783810428]
 mesh = SubResource("SphereMesh_u2eeu")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="CharacterBody3D/CollisionShape3D" unique_id=2020368643]
+[node name="Head" type="MeshInstance3D" parent="CharacterBody3D/CollisionShape3D" unique_id=2020368643]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.3)
 mesh = SubResource("SphereMesh_pabms")
 
