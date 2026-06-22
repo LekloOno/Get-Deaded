@@ -301,6 +301,9 @@ public partial class PW_WeaponsHandler : WeaponSystem
     {
         if (_bufferedPrimary)
             ResetPrimaryBuffer();
+
+        if (ActiveWeaponHalted() || !_activeWeapon.Reloader.IsReady)
+            return;
         
         _activeWeapon?.PrimaryRelease();
     }
