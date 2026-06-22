@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://cw86qrqfdjy6u"]
+
+[ext_resource type="Script" uid="uid://dxw0bd5218l6s" path="res://script/enemy/freezer/E_FreezerMover.cs" id="1_rvrwt"]
+[ext_resource type="Script" uid="uid://dsuc5a4uwd6e0" path="res://script/enemy/freezer/DATA_FreezerMover.cs" id="2_vmvuw"]
+[ext_resource type="Material" uid="uid://b3tgge30w7af5" path="res://assets/shaders/packed/base_enemy_joints.tres" id="3_1xrhh"]
+[ext_resource type="Shader" uid="uid://c1hspea12w7tc" path="res://assets/shaders/stencil_raw_writer.gdshader" id="4_hulsd"]
+
+[sub_resource type="Resource" id="Resource_bts5g"]
+script = ExtResource("2_vmvuw")
+Acceleration = 0.1
+MaxSpeed = 8.0
+MinStraffe = 1.8
+MaxStraffe = 3.0
+FloatFactor = 0.35
+MinFloat = 1.0
+MaxFloat = 2.0
+metadata/_custom_type_script = "uid://dsuc5a4uwd6e0"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fk84l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x7wwr"]
+render_priority = -1
+next_pass = ExtResource("3_1xrhh")
+shader = ExtResource("4_hulsd")
+
+[sub_resource type="SphereMesh" id="SphereMesh_u2eeu"]
+material = SubResource("ShaderMaterial_x7wwr")
+
+[node name="E_Freezer" type="Node3D" unique_id=1624354823]
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=229332197]
+motion_mode = 1
+
+[node name="Mover" type="Node" parent="CharacterBody3D" unique_id=239557658 node_paths=PackedStringArray("_body", "_groundCast")]
+script = ExtResource("1_rvrwt")
+_data = SubResource("Resource_bts5g")
+_body = NodePath("..")
+_groundCast = NodePath("../RayCast3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=1310928925]
+shape = SubResource("SphereShape3D_fk84l")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/CollisionShape3D" unique_id=783810428]
+mesh = SubResource("SphereMesh_u2eeu")
+
+[node name="RayCast3D" type="RayCast3D" parent="CharacterBody3D" unique_id=1886053818]
+target_position = Vector3(0, -10, 0)

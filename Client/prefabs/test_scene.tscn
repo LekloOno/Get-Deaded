@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cng4slndsmghw"]
+
+[ext_resource type="PackedScene" uid="uid://cw86qrqfdjy6u" path="res://prefabs/enemy/e_freezer.tscn" id="1_ti7q4"]
+
+[node name="Node3D" type="Node3D" unique_id=1036739074]
+
+[node name="E_Freezer" parent="." unique_id=1624354823 instance=ExtResource("1_ti7q4")]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=966149849]
+transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 0.5, 2.8000002)
