@@ -34,6 +34,10 @@ metadata/_custom_type_script = "uid://capdedgfmsu4o"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_54fv7"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_54fv7"]
+radius = 0.2
+height = 0.6626465
+
 [sub_resource type="Resource" id="Resource_bts5g"]
 script = ExtResource("2_vmvuw")
 Drag = 0.05
@@ -59,6 +63,9 @@ material = SubResource("ShaderMaterial_x7wwr")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dqu05"]
 next_pass = ExtResource("15_54fv7")
+albedo_color = Color(0.19102699, 2.8842353e-05, 0.19507176, 1)
+metallic = 1.0
+roughness = 0.34
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rnh0c"]
 render_priority = -1
@@ -115,7 +122,7 @@ script = ExtResource("7_vrf01")
 [node name="GC_HealthManager" type="Node3D" parent="CharacterBody3D" unique_id=221815618 node_paths=PackedStringArray("_body", "_hurtBoxes")]
 script = ExtResource("7_4ajc7")
 _body = NodePath("../../BodyManager")
-_hurtBoxes = [NodePath("GC_HurtBox")]
+_hurtBoxes = [NodePath("GC_HurtBox"), NodePath("GC_HurtBox2")]
 metadata/_custom_type_script = "uid://bbc8us8vvouq0"
 
 [node name="GC_HurtBox" type="Area3D" parent="CharacterBody3D/GC_HealthManager" unique_id=1665634624 node_paths=PackedStringArray("DamageSplatter", "Entity")]
@@ -126,6 +133,19 @@ metadata/_custom_type_script = "uid://ce82euclamj77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/GC_HealthManager/GC_HurtBox" unique_id=1965454194]
 shape = SubResource("SphereShape3D_54fv7")
+debug_color = Color(0, 0.57254905, 0.05490196, 1)
+
+[node name="GC_HurtBox2" type="Area3D" parent="CharacterBody3D/GC_HealthManager" unique_id=1361309910 node_paths=PackedStringArray("DamageSplatter", "Entity")]
+script = ExtResource("8_vrf01")
+BodyPart = 0
+DamageSplatter = NodePath("../../../GPUParticles3D")
+Entity = NodePath("../../../CombatWrapper")
+metadata/_custom_type_script = "uid://ce82euclamj77"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/GC_HealthManager/GC_HurtBox2" unique_id=1799049667]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0019774735, -0.4)
+shape = SubResource("CapsuleShape3D_54fv7")
+debug_color = Color(0.99999994, 0.010823451, 0.102517, 1)
 
 [node name="Rotator" type="Node" parent="CharacterBody3D" unique_id=78077604]
 script = ExtResource("6_vrf01")
@@ -148,7 +168,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.3)
 mesh = SubResource("SphereMesh_pabms")
 
 [node name="RayCast3D" type="RayCast3D" parent="CharacterBody3D" unique_id=1886053818]
-target_position = Vector3(0, -10, 0)
+target_position = Vector3(0, -6, 0)
 
 [node name="Area3D" type="Area3D" parent="CharacterBody3D" unique_id=1354518952]
 collision_layer = 0
