@@ -25,6 +25,7 @@ public partial class E_FreezerMover : Node, E_IEnemyComponent
     private double _elapsedFloat = 0f;
     private bool _left;
     private bool _up;
+    private bool _following;
     public override void _PhysicsProcess(double delta)
     {
         SetStraffe(delta);
@@ -35,27 +36,44 @@ public partial class E_FreezerMover : Node, E_IEnemyComponent
         velocity.X /= 1f + _data.Drag;
         velocity.Z /= 1f + _data.Drag;
 
-        if (Enemy is not null &&
-            Enemy.Target is not null &&
-            !IsCloseEnough(Enemy.Target))
-        {
-            _body.Velocity = ApproachMovement(velocity, Enemy.Target);
-        }
-        else
-            _body.Velocity = CombatMovement(velocity);
-
+        _body.Velocity = GetVelocity(velocity);
         _body.MoveAndSlide();
     }
 
-    private Vector3 ApproachMovement(Vector3 velocity, GE_ICombatEntity target) =>
-        ApproachAccelerate(velocity, target);
+    private Vector3 GetVelocity(Vector3 velocity)
+    {
+        if (Enemy is null ||
+            Enemy.Target is null)
+            return CombatMovement(velocity);
+
+        if (_following)
+            return ApproachMovement(velocity, Enemy.Target);
+        
+        if (IsCloseEnough(Enemy.Target))
+            return CombatMovement(velocity);
+        
+        _following = true;
+        return ApproachAccelerate(velocity, Enemy.Target);
+    }
+
+    private Vector3 ApproachMovement(Vector3 velocity, GE_ICombatEntity target)
+    {
+        if (!FinishedApproach(target))
+            return ApproachAccelerate(velocity, target);
+            
+        _following = false;
+        return CombatMovement(velocity);
+    }
 
     private Vector3 CombatMovement(Vector3 velocity) =>
         HorizontalAccelerate(velocity) +
         VerticalAccelerate(velocity);
 
     private bool IsCloseEnough(GE_ICombatEntity target) =>
-        _body.GlobalPosition.DistanceTo(target.Body.GlobalTransform.Origin) < _data.FocusDistance;
+        _body.GlobalPosition.DistanceTo(target.Body.GlobalTransform.Origin) < _data.FocusMaxDistance;
+
+    private bool FinishedApproach(GE_ICombatEntity target) =>
+        _body.GlobalPosition.DistanceTo(target.Body.GlobalTransform.Origin) < _data.FocusMinDistance;
 
     private readonly Random _rng = new();
     private void SetStraffe(double delta)
@@ -100,17 +118,16 @@ public partial class E_FreezerMover : Node, E_IEnemyComponent
 
     private Vector3 ApproachAccelerate(Vector3 velocity, GE_ICombatEntity target)
     {
-        velocity.Y = 0;
-
+        //velocity.Y = 0;
         Vector3 dir = target.Body.GlobalTransform.Origin - _body.GlobalPosition;
-        
-        Vector3 acceleration = dir * _data.Acceleration;
-        velocity += acceleration;
+        float dirDst = dir.Length() - _data.FocusMinDistance;
+        dir = dir.Normalized() * dirDst;
+        dir += GetStraffeDir() * _data.Acceleration;
+        dir += GetFloatDir() * _data.FloatAcceleration;
 
-        Vector3 vertAccel = GetStraffeDir() * _data.Acceleration;
-        velocity += vertAccel;
+        velocity += dir * _data.FollowAcceleration;
 
-        float speed = Mathf.Min(velocity.Length(), _data.MaxSpeed);
+        float speed = Mathf.Min(velocity.Length(), _data.FollowMaxSpeed);
         return velocity.Normalized() * speed;
     }
 

@@ -40,7 +40,10 @@ height = 0.6626465
 
 [sub_resource type="Resource" id="Resource_bts5g"]
 script = ExtResource("2_vmvuw")
-FocusDistance = 10.0
+FocusMinDistance = 8.0
+FocusMaxDistance = 15.0
+FollowAcceleration = 0.2
+FollowMaxSpeed = 10.0
 Drag = 0.05
 Acceleration = 0.2
 MaxSpeed = 8.0
