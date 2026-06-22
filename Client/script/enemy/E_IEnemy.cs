@@ -11,5 +11,5 @@ public interface E_IEnemy : GE_IActiveCombatEntity, PHX_ListenPoolObject<E_IEnem
     public event EnemyHealthEventHandler? Died;
     public event EnemyDisableEventHandler? Disabled; // After death, allow some delay to do animations or else.
     public event EnemyHealthEventHandler<DamageEventArgs>? Damaged;
-    public GE_ICombatEntity Target {get; set;}
+    public GE_ICombatEntity? Target {get; set;}
 }

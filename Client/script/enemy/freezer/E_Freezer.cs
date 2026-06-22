@@ -9,9 +9,15 @@ public partial class E_Freezer : Node3D, E_IEnemy
     [Export] private GB_CharacterBodyManager    _body = null!;
     [Export] public  PCT_SimpleTraumaData       KillTraumaData  { get; private set; } = null!;
 	[Export] public  GC_HealthManager           HealthManager   { get; private set; } = null!;
+    [Export] private E_TargetAcquirer           _acquirer = null!;
     public uint Score => Settings.Score;
 
-    public GE_ICombatEntity Target { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public GE_ICombatEntity? Target
+    {
+        get => _acquirer.Target;
+        set {}
+    }
+    
     public PW_WeaponsHandler WeaponsHandler => null!;
     public GB_IExternalBodyManager Body => _body;
 

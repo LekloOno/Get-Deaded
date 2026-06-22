@@ -44,7 +44,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 	private Color _initialColor;
 	private Color _initialJointColor;
 	private SceneTreeTimer _hitResetTimer;
-	private GE_ICombatEntity _target;
+	private GE_ICombatEntity? _target;
 	private Node3D _targetNode;
 
 	public event Action Spawned;
@@ -58,7 +58,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 
 	public GB_IExternalBodyManager Body => this;
 
-	public GE_ICombatEntity Target
+	public GE_ICombatEntity? Target
 	{
 		get => _target;
 		set {

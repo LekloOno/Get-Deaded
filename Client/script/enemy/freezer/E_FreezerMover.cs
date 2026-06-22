@@ -22,10 +22,13 @@ public partial class E_FreezerMover : Node
         SetFloat(delta);
 
         Vector3 velocity = _body.GetRealVelocity();
-        velocity += MotionDir() * _data.Acceleration;
+        
+        velocity.X /= 1f + _data.Drag;
+        velocity.Z /= 1f + _data.Drag;
 
-        float speed = Mathf.Min(velocity.Length(), _data.MaxSpeed);
-        _body.Velocity = velocity.Normalized() * speed;
+        velocity = Accelerate(velocity);
+
+        _body.Velocity = velocity;
         _body.MoveAndSlide();
     }
 
@@ -67,12 +70,31 @@ public partial class E_FreezerMover : Node
         return _groundCast.GlobalPosition.DistanceTo(pos);
     }
 
-    private Vector3 GetStraffeDir() => _left ? Vector3.Left : Vector3.Right;
+    private Vector3 GetStraffeDir() => _left ? _body.GlobalTransform.Basis.X : -_body.GlobalTransform.Basis.X;
     private Vector3 GetFloatDir()   => _up   ? Vector3.Up   : Vector3.Down;
-    private Vector3 MotionDir()
+    private Vector3 Accelerate(Vector3 velocity) =>
+        HorizontalAccelerate(velocity) +
+        VerticalAccelerate(velocity);
+
+    private Vector3 HorizontalAccelerate(Vector3 velocity)
     {
-        Vector3 dir = GetStraffeDir();
-        dir += GetFloatDir() * _data.FloatFactor;
-        return dir.Normalized();
+        velocity.Y = 0;
+
+        Vector3 acceleration = GetStraffeDir() * _data.Acceleration;
+        velocity += acceleration;
+
+        float speed = Mathf.Min(velocity.Length(), _data.MaxSpeed);
+        return velocity.Normalized() * speed;
+    }
+
+    private Vector3 VerticalAccelerate(Vector3 velocity)
+    {
+        velocity.X = velocity.Z = 0;
+
+        Vector3 acceleration = GetFloatDir() * _data.FloatAcceleration;
+        velocity += acceleration;
+
+        float speed = Mathf.Min(Mathf.Abs(velocity.Y), _data.FloatMaxSpeed);
+        return velocity.Normalized() * speed;
     }
 }

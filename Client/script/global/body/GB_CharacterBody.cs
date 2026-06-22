@@ -1,6 +1,6 @@
 using Godot;
 
-public abstract partial class GB_CharacterBody : CharacterBody3D, GB_IExternalBodyManager
+public partial class GB_CharacterBody : CharacterBody3D, GB_IExternalBodyManager
 {
     public void HandleKnockBack(Vector3 force)
     {
@@ -25,5 +25,5 @@ public abstract partial class GB_CharacterBody : CharacterBody3D, GB_IExternalBo
         PhysicsProcessSpec(delta);
     }
 
-    protected abstract void PhysicsProcessSpec(double delta);
+    protected virtual void PhysicsProcessSpec(double delta) {}
 }

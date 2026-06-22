@@ -33,7 +33,7 @@ public partial class E_EnemyRotator : Node, E_IEnemyComponent
     public override void _Ready()
     {
         (this as E_IEnemyComponent).ResolveEnemy(this);
-        
+
         UpdateTurnSpeed();
         if (Enemy == null)
             return;
