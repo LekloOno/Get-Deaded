@@ -1,6 +1,17 @@
 using System;
 using Godot;
 
+/// <summary>
+/// WARNING
+/// 
+/// This script performs many physics check at frame time.
+/// 
+/// This could be a significant GC pressure ? We should cache as many things as possible to avoid allocations.
+/// Not fixing it for now, since this script isn't used anymore at this point.
+/// 
+/// If we ever pick it back up, please fix GC.
+/// </summary>
+
 [GlobalClass]
 public partial class UI_Crosshair : Control
 {

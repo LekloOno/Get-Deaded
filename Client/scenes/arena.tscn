@@ -77,6 +77,7 @@
 [ext_resource type="Script" uid="uid://njp2nejpe1bw" path="res://script/ui/scoreboard/UI_GameEndScoreBoardBind.cs" id="76_b76a6"]
 [ext_resource type="AudioStream" uid="uid://p4ky8rajcruj" path="res://assets/sounds/wind/background_wind.mp3" id="81_83tba"]
 [ext_resource type="Script" uid="uid://ba04qst68odml" path="res://script/engine_tools/MISC_TimeScaler.cs" id="82_3cr31"]
+[ext_resource type="Script" uid="uid://brqloiivy6jcu" path="res://script/debug/GcPressure.cs" id="84_h3ydh"]
 [ext_resource type="LightmapGIData" uid="uid://d3cc8iupunnf1" path="res://scenes/arena.lmbake" id="112_hskjd"]
 [ext_resource type="PackedScene" uid="uid://bioysx8g5kih7" path="res://prefabs/mapping/lights/lightray2.tscn" id="113_ie87n"]
 [ext_resource type="Shader" uid="uid://db85ge55ambmc" path="res://assets/shaders/light_flare.gdshader" id="114_xy3ri"]
@@ -3455,13 +3456,13 @@ shader_parameter/fluctuation_strength = 0.6
 shader_parameter/fluctuation_sharpness = 1.0
 shader_parameter/fluctuation_speed = 0.4
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_h82kt"]
-
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_h3ydh"]
-
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_27x07"]
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_lju4b"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_wl1om"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_caedn"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_80xvo"]
 size = Vector3(0.2, 0.2, 0.6)
@@ -3767,9 +3768,9 @@ viewport_path = NodePath("entities/Pickups/ClickAmos2/Sprite3D/SubViewport")
 [sub_resource type="ViewportTexture" id="ViewportTexture_6b7ou"]
 viewport_path = NodePath("entities/Pickups/WildcardAmo2/Sprite3D/SubViewport")
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_wl1om"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_xplsa"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_caedn"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_2ktue"]
 allow_unpress = true
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_4g8la"]
@@ -5561,7 +5562,7 @@ spot_angle_attenuation = 0.15932
 [node name="VFX_GodsRay" parent="arena/Lights/Projector" unique_id=605019919 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.27160624, -0.9330127, 0.23604527, 0.017453581, 0.25000003, 0.9680885, -0.9622502, -0.2588191, 0.0841859, -22.38988, 5.6927605, 5.072876)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_h82kt")
+mesh = SubResource("ImmediateMesh_27x07")
 skeleton = NodePath("../../..")
 BaseRadius = 0.38
 InitialRotation = 45.0
@@ -5569,7 +5570,7 @@ InitialRotation = 45.0
 [node name="VFX_GodsRay3" parent="arena/Lights/Projector/VFX_GodsRay" unique_id=802324590 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.9999999, -1.4901161e-08, 7.450581e-09, -1.4901161e-08, 0.9999999, -3.1664968e-08, 0, 1.8626451e-09, 0.99999994, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_h3ydh")
+mesh = SubResource("ImmediateMesh_lju4b")
 skeleton = NodePath("../../../..")
 BaseRadius = 0.14
 InitialRotation = 45.0
@@ -5578,7 +5579,7 @@ FlareAngle = 6.0
 [node name="VFX_GodsRay2" parent="arena/Lights/Projector" unique_id=164366595 instance=ExtResource("113_ie87n")]
 transform = Transform3D(0.05200698, -0.25727454, -0.9649379, 0.9678007, 0.25127998, -0.0148357125, 0.24628639, -0.933096, 0.2620588, -25.830011, 7.2676578, 9.14106)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_27x07")
+mesh = SubResource("ImmediateMesh_wl1om")
 skeleton = NodePath("../../..")
 BaseRadius = 0.36
 InitialRotation = 45.0
@@ -5586,7 +5587,7 @@ InitialRotation = 45.0
 [node name="VFX_GodsRay3" parent="arena/Lights/Projector/VFX_GodsRay2" unique_id=294127740 instance=ExtResource("113_ie87n")]
 transform = Transform3D(1, 1.4901161e-08, 0, 1.4901161e-08, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_6p37o")
-mesh = SubResource("ImmediateMesh_lju4b")
+mesh = SubResource("ImmediateMesh_caedn")
 skeleton = NodePath("../../../..")
 BaseRadius = 0.14
 InitialRotation = 45.0
@@ -7010,19 +7011,19 @@ color = Color(0, 0, 0, 0)
 _pauseGame = false
 
 [node name="ToggleButton" parent="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/SprintMode/SprintModeOptions" parent_id_path=PackedInt32Array(620824296, 1093197233) index="0" unique_id=1111186385]
-button_group = SubResource("ButtonGroup_wl1om")
+button_group = SubResource("ButtonGroup_xplsa")
 
 [node name="HoldButton" parent="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/SprintMode/SprintModeOptions" parent_id_path=PackedInt32Array(620824296, 1093197233) index="1" unique_id=942347926]
-button_group = SubResource("ButtonGroup_wl1om")
+button_group = SubResource("ButtonGroup_xplsa")
 
 [node name="AutoButton" parent="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SprintSettings/SprintMode/SprintModeOptions" parent_id_path=PackedInt32Array(620824296, 1093197233) index="2" unique_id=1516286433]
-button_group = SubResource("ButtonGroup_wl1om")
+button_group = SubResource("ButtonGroup_xplsa")
 
 [node name="CrouchButton" parent="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SlamSettings/SlamMode/SlamModeOptions2" parent_id_path=PackedInt32Array(620824296, 1388370610) index="1" unique_id=1170561654]
-button_group = SubResource("ButtonGroup_caedn")
+button_group = SubResource("ButtonGroup_2ktue")
 
 [node name="DashButton" parent="CanvasLayer/Menu/Settings/VBoxContainer/TabContainer/CONTROLS_TAB/CONTROLS_TAB/CONTROLS_GENERAL_TAB/VBoxContainer/SlamSettings/SlamMode/SlamModeOptions2" parent_id_path=PackedInt32Array(620824296, 1388370610) index="2" unique_id=342133101]
-button_group = SubResource("ButtonGroup_caedn")
+button_group = SubResource("ButtonGroup_2ktue")
 
 [node name="PI_Stats" type="Node" parent="CanvasLayer" unique_id=1532279642]
 script = ExtResource("47_6ubnd")
@@ -7196,10 +7197,16 @@ volume_db = -8.0
 autoplay = true
 bus = &"Environment Sfx"
 
-[node name="MISC_TimeScaler" type="Node" parent="." unique_id=1294685502]
+[node name="Debug" type="Node" parent="." unique_id=740682913]
+
+[node name="MISC_TimeScaler" type="Node" parent="Debug" unique_id=1294685502]
 process_mode = 4
 script = ExtResource("82_3cr31")
 metadata/_custom_type_script = "uid://ba04qst68odml"
+
+[node name="GcPressure" type="Node" parent="Debug" unique_id=366028975]
+process_mode = 4
+script = ExtResource("84_h3ydh")
 
 [connection signal="EarnScore" from="entities/AimArena/SC_GameManager" to="CanvasLayer/UI_ScoreMarkManager" method="OnEarnScore"]
 [connection signal="EarnScore" from="entities/AimArena/SC_GameManager" to="CanvasLayer/ScoreTracker/BoxContainer/HBoxContainer/Score" method="OnEarnScore"]
