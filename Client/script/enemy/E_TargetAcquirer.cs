@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class E_TargetAcquirer : Area3D
@@ -7,6 +8,7 @@ public partial class E_TargetAcquirer : Area3D
     private const uint TicksMask = 63;
 
     public GE_ICombatEntity? Target { get; private set; }
+    private GE_CombatEntity? _entity;
 
     public override void _Ready()
     {
@@ -30,9 +32,26 @@ public partial class E_TargetAcquirer : Area3D
             if (node is not GC_HurtBox hurtBox)
                 continue;
             
-            return hurtBox.Entity;
+            GE_CombatEntity entity = hurtBox.Entity;
+            
+            if (entity == _entity)
+                return entity;
+
+            if (_entity != null)
+                _entity.TreeExiting -= ResetTarget;
+
+            _entity = entity;
+            if (_entity != null)
+                _entity.TreeExited += ResetTarget;
+
+            return entity;
         }
 
         return null;
+    }
+
+    private void ResetTarget()
+    {
+        Target = null;
     }
 }
