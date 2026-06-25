@@ -9,4 +9,5 @@ public partial class E_FreezerCombatWrapper : GE_ActiveCombatEntity
     public override GB_IExternalBodyManager Body => _freezer.Body;
     public override PW_WeaponsHandler WeaponsHandler => _freezer.WeaponsHandler;
     public override PCT_SimpleTraumaData KillTraumaData => _freezer.KillTraumaData;
+    public override bool Alive => _freezer.Alive;
 }

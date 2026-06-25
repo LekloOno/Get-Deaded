@@ -31,7 +31,7 @@ public partial class E_Freezer : Node3D, E_IEnemy
     public event Action<E_IEnemy>? Pooled;
     public event Action? Spawned;
 
-    public bool Enabled {get; private set;} = false;
+    public bool Alive {get; private set;} = false;
     public override void _Ready()
 	{
 		UpdateSettings();
@@ -51,10 +51,10 @@ public partial class E_Freezer : Node3D, E_IEnemy
 
     public void Spawn()
     {
-        if (Enabled)
+        if (Alive)
 			return;
 
-		Enabled = true;
+		Alive = true;
 		_body.CharacterBody.CollisionLayer = CONF_Collision.Layers.EnvironmentEntity;
 
 		Show();
@@ -93,14 +93,14 @@ public partial class E_Freezer : Node3D, E_IEnemy
 
     private void DisableActions()
 	{
-		if (!Enabled)
+		if (!Alive)
 			return;
 
 		SetProcess(false);
 		
 		_body.Body.ResetVelocity(Vector3.Zero);
 
-		Enabled = false;
+		Alive = false;
 		_body.CharacterBody.CollisionLayer = 0;
 		HealthManager.DisableHurt();
 	}
@@ -110,6 +110,7 @@ public partial class E_Freezer : Node3D, E_IEnemy
 		Hide();
 		SetPhysicsProcess(false);
 		ProcessMode = ProcessModeEnum.Disabled;
+		Disabled?.Invoke(this);
 	}
 
     public void PlayDeath(E_IEnemy _, GC_Health health) => DeathDisableAsync();
@@ -117,8 +118,16 @@ public partial class E_Freezer : Node3D, E_IEnemy
     public async Task DeathDisableAsync()
 	{
 		DisableActions();
-		await _mat.SmoothDisable();
-		DisableBase();
-		Disabled?.Invoke(this);
+		if (_mat.AnimatingDisable)
+			return;
+		
+		_mat.DisableCompleted += OnDisableCompleted;
+		_mat.SmoothDisable();
 	}
+
+    private void OnDisableCompleted()
+    {
+        _mat.DisableCompleted -= OnDisableCompleted;
+		DisableBase();
+    }
 }

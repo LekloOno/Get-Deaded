@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="GCD_Barrier" format=3 uid="uid://480kodoyxudp"]
+
+[ext_resource type="Script" uid="uid://123gwhhdyr3d" path="res://script/global/combat/health/data/GCD_Health.cs" id="1_rw3gk"]
+[ext_resource type="Script" uid="uid://b06fsn7kd2vba" path="res://script/global/combat/health/data/GCD_Barrier.cs" id="2_pjbcv"]
+
+[sub_resource type="Resource" id="Resource_rw3gk"]
+script = ExtResource("1_rw3gk")
+MaxHealth = 100.0
+metadata/_custom_type_script = "uid://123gwhhdyr3d"
+
+[resource]
+script = ExtResource("2_pjbcv")
+_resistance = 0.8
+_coolDown = 300
+MaxHealth = 100.0
+Child = SubResource("Resource_rw3gk")
+metadata/_custom_type_script = "uid://b06fsn7kd2vba"

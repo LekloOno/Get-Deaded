@@ -29,7 +29,8 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 	[Export] public double ReactionTime = 0.2f;
 
 
-	public bool Enabled {get; private set;} = false;
+	public bool Alive {get; private set;} = false;
+	private bool _inPool = true;
 	private SceneTreeTimer _hideTimer;
 	public event EnemyHealthEventHandler? Died;
 	private void PropagDie(GC_Health sender) =>
@@ -120,19 +121,27 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 			Mover.Data = Settings.MoverData;
 	}
 
-	public async void PlayDeath(E_IEnemy _, GC_Health health)
+	public void PlayDeath(E_IEnemy _, GC_Health health)
 	{
 		_lootDropper.Drop();
 		_ragdolSimulator?.PhysicalBonesStartSimulation();
-		await DeathDisable();
+		DeathDisable();
 	}
 
-	public async Task DeathDisable()
+	public void DeathDisable()
 	{
 		DisableActions();
-		await _mat.SmoothDisable();
+		if (_mat.AnimatingDisable)
+			return;
+		
+		_mat.DisableCompleted += OnDisableCompleted;
+		_mat.SmoothDisable();
+	}
+
+	private void OnDisableCompleted()
+	{
+		_mat.DisableCompleted -= OnDisableCompleted;
 		DisableBase();
-		Disabled?.Invoke(this);
 	}
 
 	private void DisableBase()
@@ -145,27 +154,34 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 		_ragdolSimulator.ProcessMode = ProcessModeEnum.Disabled;
 		_skeleton.ProcessMode = ProcessModeEnum.Disabled;
 		ProcessMode = ProcessModeEnum.Disabled;
+		Disabled?.Invoke(this);
 	}
 
 	private void DisableActions()
 	{
 		Fire?.Disable();
 
-		if (!Enabled)
+		if (!Alive)
 			return;
 
 		SetProcess(false);
 		
 		Velocity = Vector3.Zero;
 
-		Enabled = false;
+		Alive = false;
 		CollisionLayer = 0;
 		_healthManager.DisableHurt();
 	}
 
 	public void Pool()
 	{
-		DisableActions();
+		if (_inPool)
+			return;
+
+		if (Alive)
+			DisableActions();
+
+		_inPool = true;
 		DisableBase();
 		Pooled?.Invoke(this);
 		//_hideTimer = GetTree().CreateTimer(_hideDelay);
@@ -174,7 +190,10 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 
 	public void Spawn()
 	{
-		if (Enabled)
+		if (!_inPool)
+			return;
+
+		if (Alive)
 			return;
 
 		Fire?.Enable();
@@ -182,7 +201,8 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 		if (Mover != null)
 			SetProcess(true);
 
-		Enabled = true;
+		Alive = true;
+		_inPool = false;
 		CollisionLayer = CONF_Collision.Layers.EnvironmentEntity;
 
 		//_mat.Oui();
@@ -204,7 +224,7 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 
 	protected override void PhysicsProcessSpec(double delta)
 	{
-		if (!Enabled)
+		if (!Alive)
 			return;
 
 		Vector3 velocity = Velocity;

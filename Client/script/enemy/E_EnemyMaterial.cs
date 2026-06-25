@@ -49,7 +49,19 @@ public abstract partial class E_EnemyMaterial : Node
         ReadySpec();
     }
 
-    public abstract Task SmoothDisable(); 
+    public async void SmoothDisable()
+    {
+        if (AnimatingDisable)
+            return;
+            
+        AnimatingDisable = true;
+        await SmoothDisableSpec();
+        AnimatingDisable = false;
+        DisableCompleted?.Invoke();
+    }
+    public abstract Task SmoothDisableSpec();
+    public event Action? DisableCompleted;
+    public bool AnimatingDisable;
 
     protected virtual void ReadySpec() {}
 

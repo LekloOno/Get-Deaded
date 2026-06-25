@@ -20,7 +20,7 @@ public partial class EnemyPoolServer : Node
             Instance._pools.Add(builder, pool);
         }
             
-        for (int i = 0; i < count; i++)
+        for (int i = pool.Count; i < count; i++)
             Create(builder, pool).Pool();
     }
 
@@ -36,8 +36,10 @@ public partial class EnemyPoolServer : Node
         
         else if (!pool.TryPop(out enemy!))
             enemy = Create(builder, pool);
-
+        
         enemy.Spawn();
+
+        
         return enemy;
     }
 
@@ -48,6 +50,24 @@ public partial class EnemyPoolServer : Node
             Instance.AddChild(node);
 
         enemy.Pooled += pool.Push;
+        //_alocated ++;
+        //DebugPool();
         return enemy;
+    }
+
+    private static int _alocated = 0;
+    private static void DebugPool()
+    {
+        GD.Print("===============");
+        int tot = 0;
+        foreach (Stack<E_IEnemy> pool in Instance._pools.Values)
+        {
+            tot += pool.Count;
+            GD.Print($"pool count : {pool.Count}");
+        }
+
+        GD.Print($"Pooled Total: {tot}");
+        GD.Print($"Alocated Total: {_alocated}");
+        GD.Print("===============");
     }
 }

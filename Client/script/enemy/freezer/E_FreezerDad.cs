@@ -24,6 +24,7 @@ public partial class E_FreezerDad : Node3D, E_IEnemy
     public PW_WeaponsHandler WeaponsHandler => null!;
     public GC_HealthManager HealthManager => null!;
     public GB_IExternalBodyManager Body => _base.Body;
+    public bool Alive {get; private set;}
 
     public event EnemyHealthEventHandler? Died;
     public event EnemyDisableEventHandler? Disabled;
@@ -146,7 +147,10 @@ public partial class E_FreezerDad : Node3D, E_IEnemy
         _deadChildren.Push(child);
 
         if (_liveChildren.Count == 0)
+        {
+            Alive = false;
             Died?.Invoke(this, null!);
+        }
     }
 
     private void ChildrenDisabled(E_IEnemy enemy)
@@ -171,6 +175,7 @@ public partial class E_FreezerDad : Node3D, E_IEnemy
 
     public void Spawn()
     {
+        Alive = true;
         _base.Spawn();
     }
 }

@@ -52,6 +52,9 @@ public partial class PM_Controller : CharacterBody3D, GB_IExternalBodyManager, G
     public GB_IExternalBodyManager Body => this;
     Transform3D GB_IExternalBodyManager.GlobalTransform => _exposedBody.GlobalTransform;
 
+    public bool Alive {get; private set;} = true;
+
+
     public void InitRotation(Vector3 rotation)
     {
         _cameraControl.InitRotation(rotation);
@@ -75,6 +78,7 @@ public partial class PM_Controller : CharacterBody3D, GB_IExternalBodyManager, G
 
     public void Revive()
     {
+        Alive = true;
         _healthManager.Init(true);
         _omniCharge.Current = _omniCharge.Max;
         WeaponsHandler.EnableFire();
@@ -129,6 +133,7 @@ public partial class PM_Controller : CharacterBody3D, GB_IExternalBodyManager, G
         _onPhysicsProcess -= DeadBehavior;
         _onPhysicsProcess += DeadBehavior;
         WeaponsHandler.DisableFire();
+        Alive = false;
         OnDie?.Invoke(this, EventArgs.Empty);
     }
 

@@ -9,4 +9,5 @@ public partial class GE_EnemyCombatWrapper : GE_ActiveCombatEntity
     public override GB_IExternalBodyManager Body => _enemy.Body;
     public override PW_WeaponsHandler WeaponsHandler => _enemy.WeaponsHandler;
     public override PCT_SimpleTraumaData KillTraumaData => _enemy.KillTraumaData;
+    public override bool Alive => _enemy.Alive;
 }

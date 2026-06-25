@@ -1,11 +1,12 @@
+using System;
 using System.Threading.Tasks;
 using Godot;
 
 [GlobalClass]
 public partial class E_BasicEnemyMaterial : E_EnemyMaterial
 {
-	[Export] private MeshInstance3D _surfaceMesh;
-	[Export] private MeshInstance3D _jointMesh;
+	[Export] private MeshInstance3D _surfaceMesh = null!;
+	[Export] private MeshInstance3D _jointMesh = null!;
     [Export] private float _hideDelay = 0.8f;
     [Export] private float _outlinesHideDelay = 0.1f;
     [Export] private float _showDelay = 0.3f;
@@ -14,10 +15,10 @@ public partial class E_BasicEnemyMaterial : E_EnemyMaterial
     private ShaderMaterial? _outlines;
     private ShaderMaterial? _xRay;
 
-    private Tween _surfaceFadeInTween;
-    private Tween _surfaceFadeOutTween;
-    private Tween _outlinesFadeInTween;
-    private Tween _outlinesFadeOutTween;
+    private Tween? _surfaceFadeInTween;
+    private Tween? _surfaceFadeOutTween;
+    private Tween? _outlinesFadeInTween;
+    private Tween? _outlinesFadeOutTween;
 
     private float _alpha = 1f;
     public float Alpha
@@ -81,7 +82,7 @@ public partial class E_BasicEnemyMaterial : E_EnemyMaterial
 
     }
 
-    public override async Task SmoothDisable()
+    public override async Task SmoothDisableSpec()
     {
         if (_surfaceFadeOutTween == null || !_surfaceFadeOutTween.IsRunning())
             OnDied(null, null);

@@ -81,7 +81,7 @@ public partial class E_FreezerMaterial : E_EnemyMaterial
 
     }
 
-    public override async Task SmoothDisable()
+    public override async Task SmoothDisableSpec()
     {
         if (_surfaceFadeOutTween == null || !_surfaceFadeOutTween.IsRunning())
             OnDied(null, null);

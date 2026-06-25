@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://123gwhhdyr3d" path="res://script/global/combat/health/data/GCD_Health.cs" id="1_gs02p"]
 [ext_resource type="Script" uid="uid://c26wx4mlc8qxy" path="res://script/global/combat/health/data/GCD_Armor.cs" id="2_v01kq"]
 
-[sub_resource type="Resource" id="Resource_vfx8u"]
+[sub_resource type="Resource" id="Resource_gs02p"]
 script = ExtResource("1_gs02p")
 MaxHealth = 50.0
 metadata/_custom_type_script = "uid://123gwhhdyr3d"
@@ -13,5 +13,5 @@ script = ExtResource("2_v01kq")
 _resistance = 0.8
 _maxReduction = 18.0
 MaxHealth = 70.0
-Child = SubResource("Resource_vfx8u")
+Child = SubResource("Resource_gs02p")
 metadata/_custom_type_script = "uid://c26wx4mlc8qxy"

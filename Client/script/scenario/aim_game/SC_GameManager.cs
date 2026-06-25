@@ -1,5 +1,4 @@
 using System;
-using Client.Api;
 using Client.Api.Auth;
 using Client.Api.Godot;
 using Client.Api.Score;
@@ -9,7 +8,7 @@ using Shared.Scores;
 [GlobalClass]
 public partial class SC_GameManager : Node
 {
-	[Export] private SC_SpawnerScript _initial;
+	[Export] private SC_GenericSpawnerScript _initial = null!;
 	[Export] public float CountDown {get; private set;} = 2f;
 	[Export] private float _killRegen = 10f;
 	[Signal] public delegate void InitializeEventHandler(SC_GameManager manager);
@@ -28,7 +27,7 @@ public partial class SC_GameManager : Node
 	/// <summary>
 	/// An "unexpected" stop, like the player manually stopping, or dying.
 	/// </summary>
-	public Action Interrupt;
+	public event Action? Interrupt;
 
 	public Action<Guid, int> ScoreSubmitted;
 

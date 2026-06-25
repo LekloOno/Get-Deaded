@@ -9,10 +9,8 @@ public class GE_Environment : GE_IActiveCombatEntity
 
     // Maybe later improve with null object for the members too.
     public GC_HealthManager HealthManager => null;
-
     public PW_WeaponsHandler WeaponsHandler => null;
-
     public GB_IExternalBodyManager Body => null;
-
     public PCT_SimpleTraumaData KillTraumaData => null;
+    public bool Alive => true;
 }
