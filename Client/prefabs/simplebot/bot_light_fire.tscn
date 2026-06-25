@@ -26,7 +26,7 @@ metadata/_custom_type_script = "uid://sujdlokcwnd6"
 
 [sub_resource type="Resource" id="Resource_4u24w"]
 script = ExtResource("4_5cf3p")
-Damage = 0.5
+Damage = 2.0
 _inspectorModifiers = Array[Object]([SubResource("Resource_xwgbs")])
 metadata/_custom_type_script = "uid://cjmiash71uc7b"
 
