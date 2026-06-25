@@ -115,7 +115,7 @@ public partial class E_EnemyAimer : Node
 
 	private void Aim(E_Enemy owner)
 	{
-		float spread = SpreadFromTarget(owner) * owner.Settings.SpreadFactor;
+		float spread = Mathf.Lerp(owner.Settings.MinSpread, owner.Settings.SpreadFactor, SpreadFromTarget(owner));
 		LookAtWithSpread(owner.Fire, owner.Target.Body.GlobalTransform.Origin, spread);
 	}
 

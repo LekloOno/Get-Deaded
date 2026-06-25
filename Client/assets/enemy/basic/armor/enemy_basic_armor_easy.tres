@@ -10,6 +10,6 @@ script = ExtResource("5_p41v2")
 Fire = ExtResource("1_7c86l")
 Health = ExtResource("2_vthm2")
 MoverData = ExtResource("3_7c86l")
-SpreadFactor = 20.0
+SpreadFactor = 12.0
 ReactionTime = 0.5
 metadata/_custom_type_script = "uid://bglhbt23nx4m7"

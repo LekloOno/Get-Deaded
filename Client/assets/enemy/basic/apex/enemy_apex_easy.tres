@@ -11,5 +11,6 @@ Fire = ExtResource("1_6jhwb")
 Health = ExtResource("2_qo4id")
 MoverData = ExtResource("3_42p6e")
 Score = 125
+SpreadFactor = 12.0
 ReactionTime = 0.5
 metadata/_custom_type_script = "uid://bglhbt23nx4m7"
