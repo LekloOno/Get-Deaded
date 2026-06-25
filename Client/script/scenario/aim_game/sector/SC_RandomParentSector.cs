@@ -35,7 +35,7 @@ public partial class SC_RandomParentSector : SC_ParentSector
 
     protected override void StartSpec(GE_IActiveCombatEntity starter)
     {
-        _subSectorIndex = 0;
+        _subSectorIndex = _rng.Next(_subSectors.Count);
         _elapsedCount = 0;
         SC_SpawnSector sector = _subSectors[_subSectorIndex];
         sector.Start(Starter);
