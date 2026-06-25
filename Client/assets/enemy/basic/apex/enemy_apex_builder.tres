@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="E_EnemyBuilder" format=3 uid="uid://baun1o7oy354s"]
 
-[ext_resource type="PackedScene" uid="uid://bqyefwwoasotl" path="res://prefabs/simplebot/bot_builder_template_norm.tscn" id="1_oifrh"]
+[ext_resource type="PackedScene" uid="uid://25ag5tb0w1i3" path="res://prefabs/simplebot/bot_builder_template_norm_apex.tscn" id="1_vmm5g"]
 [ext_resource type="Script" uid="uid://bglhbt23nx4m7" path="res://script/enemy/E_EnemySettings.cs" id="2_pcpte"]
 [ext_resource type="Resource" uid="uid://cvqgwutaovwdy" path="res://assets/enemy/basic/apex/enemy_apex_easy.tres" id="3_vmm5g"]
 [ext_resource type="Resource" uid="uid://dq7qidlclihq5" path="res://assets/enemy/basic/apex/enemy_apex_normal.tres" id="4_qkfsa"]
@@ -14,5 +14,5 @@ _settingsByDifficulty = Dictionary[int, ExtResource("2_pcpte")]({
 1: ExtResource("4_qkfsa"),
 2: ExtResource("5_a3423")
 })
-_enemyBase = ExtResource("1_oifrh")
+_enemyBase = ExtResource("1_vmm5g")
 metadata/_custom_type_script = "uid://6shwimir3xjv"

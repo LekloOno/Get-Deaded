@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="E_EnemyBuilder" format=3 uid="uid://d2dxmfgxxjn1u"]
 
-[ext_resource type="PackedScene" uid="uid://bqyefwwoasotl" path="res://prefabs/simplebot/bot_builder_template_norm.tscn" id="1_1rlxk"]
+[ext_resource type="PackedScene" uid="uid://diy5bod45b504" path="res://prefabs/simplebot/bot_builder_template_norm_light.tscn" id="1_1rlxk"]
 [ext_resource type="Script" uid="uid://bglhbt23nx4m7" path="res://script/enemy/E_EnemySettings.cs" id="2_m6wlt"]
 [ext_resource type="Resource" uid="uid://dwu6r2s3l2r7w" path="res://assets/enemy/basic/light/enemy_basic_light_easy.tres" id="3_yo5h5"]
 [ext_resource type="Resource" uid="uid://bsa2lcp4fy354" path="res://assets/enemy/basic/light/enemy_basic_light_normal.tres" id="4_ag1vf"]
