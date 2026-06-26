@@ -67,6 +67,12 @@ Besides, hits transform in a propulsing uppercut if you have vertical momentum w
 - **Ledge climbing**, that can connect into a **ledge vault** by pressing crouch in a few milliseconds before completing the climb, to preserve and build up momentum.
 - A fine-tuned source-like **air straffing**, that allows you to build up momentum in air, and get much more air control, if you master it.
 
+*Move with (omni version, some abilities that cost a charge)*
+- **Dash**, that makes you cross a few meters quickly, but also redirects your momentum, and passes through enemies (eh, do you smell that connection with the backstab mechanic ?)
+- **Propeller**, that provides a kind of double jump, but slightly slows you down.
+- **Slam**, that allows you to quickly redirect your momentum downward, like a fast fall.
+- **Lurch**, that is essentially a cheap dash, that only redirects your momentum without providing an actual dash.
+
 There's many more subtleties, interconnections, and resulting movement techs to that system, that I might detail in a little movement guide for true sweats and nerds.
 
 **Pickups**
