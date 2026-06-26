@@ -65,10 +65,10 @@ Besides, hits transform in a propulsing uppercut if you have vertical momentum w
 - **Crouched**, **running**, and **sprinting** movements, that all benefit from the **quake/source like** physics, allowing you to performs movements techs such as circle jumps.
 - A **slide**, that can be performed by crouching with enough speed, and provides a speed boost.
 - **Wall bouncing**, performed in a similar fashion to apex.
-- **Wall climbing**, performed by holding space bar while moving towards a wall, which force scales with your entering momentum.
-- **Ledge climbing**, that can connect into a **ledge vault** by pressing crouch in a few milliseconds before completing the climb, to preserve and build up momentum.
+- **Wall climbing**, performed by your jump input while moving towards a wall. Its strength scales with your entering momentum, like a parkour wall pass.
+- **Ledge climbing**, that can connect into a **ledge vault** by pressing crouch a few milliseconds before completing the climb, to preserve and build up momentum.
 - A fine-tuned source-like **air straffing**, that allows you to build up momentum in air, and get much more air control, if you master it.
-- **Bunny hopping**, to preserve momentum, and even build it up paired with **air straffing**, that is made easier with a gentle jump buffer and friction window. (since being forced to use scroll wheel as the jump input is not a very interesting game design choice eh)
+- **Bunny hopping**, by timing jumps as you land to preserve momentum, and even build it up paired with **air straffing**.
 
 *Move with (omni version, some abilities that cost a charge)*
 - **Dash**, that makes you cross a few meters quickly, but also redirects your momentum, and passes through enemies (eh, do you smell that connection with the backstab mechanic ?)
