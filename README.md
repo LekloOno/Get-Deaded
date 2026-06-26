@@ -2,6 +2,8 @@
   - [v0.2.3](#v023)
     - [IMPORTANT Note](#important-note)
     - [Brief](#brief)
+    - [Goals](#goals)
+    - [Feedback Guidelines](#feedback-guidelines)
   - [v0.3](#v03)
 - [Gameplay Pitch](#gameplay-pitch)
   - [The love for multiplayer FPS](#the-love-for-multiplayer-fps)
@@ -66,6 +68,7 @@ Besides, hits transform in a propulsing uppercut if you have vertical momentum w
 - **Wall climbing**, performed by holding space bar while moving towards a wall, which force scales with your entering momentum.
 - **Ledge climbing**, that can connect into a **ledge vault** by pressing crouch in a few milliseconds before completing the climb, to preserve and build up momentum.
 - A fine-tuned source-like **air straffing**, that allows you to build up momentum in air, and get much more air control, if you master it.
+- **Bunny hopping**, to preserve momentum, and even build it up paired with **air straffing**, that is made easier with a gentle jump buffer and friction window. (since being forced to use scroll wheel as the jump input is not a very interesting game design choice eh)
 
 *Move with (omni version, some abilities that cost a charge)*
 - **Dash**, that makes you cross a few meters quickly, but also redirects your momentum, and passes through enemies (eh, do you smell that connection with the backstab mechanic ?)
@@ -102,6 +105,79 @@ Can try to beat your score !
 You can indeed register an account, and play under it to register your scores, improve them, and try to take over the leaderboard.
 
 In the leaderboard, you'll find detailed description of how each player reached his score, which weapons he used, accuracy, etc.
+
+### Goals
+
+This version is focused at the very core elements of the game. It is not particularly fun, but it was not yet the goal.
+
+The goal was to tackle every aspect of "fundamental mechanics of the FPS genre", in a very minimal way.
+
+**Aim**
+
+*Simplified*
+Here, it is tackled by providing an environment where the #1 factor of improvement is - how much you pew pew the headz.
+
+Besides, bots can have pretty eratic movements (in hard mode), typicall of actual players, that require a strong mouse control and movement reading. Something you don't usually find in solo FPS.
+
+Finally, armor and barrier healths encourage you to use different weapons that comes with different underlying aiming techniques. Being good at dynamic clicking requires very different skills from being good at tracking.
+
+*True depth*  
+1. Through much more various movemement of enemies, floating, smooth, evasive, precise, target-switching.
+2. Through making them "think" about their movements, have human-like predictable patterns. Make their active movement decisions depend on the environment, on the situation and risks (a wounded enemy would tend to try to get back to cover, but if he's good, he will do so while keeping his movement unpredictable.. if he panicks, he won't), to emulate the true feeling of aiming in high aim-demanding mutliplayer fast fps.
+
+**Movement (passive)**
+
+*Simplified*  
+During the run, some special power ups spawn in the map, a quad and a slow-mo.
+
+You can reach them in various ways, and the more you develop your mastery of movement, the more of these ways you have access to, allowing you to chose the best way for every situation.
+
+For example, the fastest way to get the quad is to sprint, slide, and double dash.
+
+It is an easy way, but also expensive as it consumes your whole omni-charge. A way that is almost as fast, but much more efficient, is to wall bounce on the right pillar, then on the left pillar.
+
+You have many other options, safer, easier, less exposed...
+
+*True depth*  
+There isn't much more depth to achieve here actually, or at least, it will only come with map design.
+
+**Movement (active)**
+
+*Simplified*
+Enemies have varrying accuracy, depending on how fast you move relative to their vision.
+
+This enforces you to always stay in motion, but also highly rewards the players that are able to quickly build up momentum and maintain it.
+
+*True depth*  
+Build a more organic aiming AI for the enemies, that will push the player to stay unpredictable, that is move more or less eratically, use as various moves as possible, and best fitting to each situation, but also push the player to understand the aiming tendencies of different enemies -
+
+Are they very smooth but not very reactive ? Do they struggle to keep up at close range ? Do they tend to mostly rely on prediction ? etc.
+
+**Micro-decisions**  
+
+*Simplified*
+There's always multiple enemies in the pit, so you must take advantage of angles, break them to always be in the least disfavoring situation. "Slice the pie", a common micro-positionning technique in FPS.
+
+*True depth*
+This will come with general gameplay depth, and enemies AI depth. Micro-decisions like this are very diverse, it can be for example, baiting your enemies shots while you're fully commited to your movements, then only "take your turn" once they are out of amo and thus vulnerable.
+
+It will also come from diversity of enemies, to leverage target acquisition and priorization, that are very basic micro-decisions.
+
+### Feedback Guidelines
+
+Any feedback is welcome, but for now, the most important is feedback related to the already present core mechanics.
+
+A few feedback that have already been collected :
+- **Wall bounce** is unintuitive.
+  - **Response 1** - It should be hard to master. We need feedback from more experienced players, typically apex movement players.
+  - **Response 2** - However, we could implement a new movement tech to lower the skill floor without lowering the skill ceil - a wall jump, that is easier to perform, but less versatile and powerfull.
+- The smg has **too little amos**.
+  - **Response** - It is intended, this is the "hard to master" weapon. The highest burst potential, but requires to be very accurate. This will be later adressed by allowing the player to chose among various weapons for each category.
+- **Round end** is unintuitive and frustrating, enemies can dispawn in front of you
+  - **Response** - This is a super early sandbox, this little game mode will probably not remain, so investing time in developping clear cues of round end isn't very worth for now.
+- **Managing amos** is frustrating
+  - **Response** - Tackled with visual and audio cues, a overhaul of the reload system with various subtle mechanics that makes it smoother.
+  - **Question** - How is it feeling now ? Still collecting feedback. Making amo management really not frustrating will probably require a lot of GD work anyway.
 
 ## v0.3
 
