@@ -179,6 +179,12 @@ A few feedback that have already been collected :
   - **Response** - Tackled with visual and audio cues, a overhaul of the reload system with various subtle mechanics that makes it smoother.
   - **Question** - How is it feeling now ? Still collecting feedback. Making amo management really not frustrating will probably require a lot of GD work anyway.
 
+What is already about to be changed :
+- **Lurch** - It isn't very interesting as is. The goal was to provide a very niche, hard to master, skillfull but powerfull way to redirect momentum. An equivalent of tap-straffe in apex. It will probably be dumped for something else, deeper, more subtle.
+- **Wall interactions** - I plan to rework the whole wall-interractions (bounce, climb, derivatives techs..) in a more cohesive system, provide subtle cues of what is possible to do at any instant, and make the whole system slightly deeper. Feedback is still absolutely welcome and relevant.
+- **Step climber** - The current character controller does not include a step climber - a way to climb over very small ledges, typically stairs. This can notably lead in very specific places and scenarios where the character controller is slightly stuck on a seemingly invisible ledge. This mostly happens on slope connections. So if you ever encounter this and think it is a bug, don't worry, the step climber will fix it.
+- **Balance** - Easy mode is actually already hard for some people, and hard mode for 80 seconds straight can be exhausting and not that fun, even for veterans. This will eventually be tackled.
+
 ## v0.3
 
 v0.3 is currently in development, release coming soon !
