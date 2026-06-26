@@ -1,0 +1,212 @@
+<p>(You can read that description with&nbsp;navigable table of content in the <a href="https://github.com/LekloOno/Get-Deaded/blob/main/README.md">github's README</a>)</p>
+<ul>
+<li>Versions - notes and descriptions<ul>
+<li>v0.2.3<ul>
+<li>IMPORTANT Note</li>
+<li>Brief</li>
+<li>Goals</li>
+<li>Feedback Guidelines</li>
+</ul>
+</li>
+<li>v0.3</li>
+</ul>
+</li>
+<li>Gameplay Pitch<ul>
+<li>The love for multiplayer FPS</li>
+<li>The frustration of mutliplayer FPS</li>
+<li>So what if an entire game was built around creating those moments ?</li>
+<li>The promise</li>
+</ul>
+</li>
+<li>Artistic Direction (snippets)<ul>
+<li>Visuals</li>
+<li>Music</li>
+<li>Background</li>
+</ul>
+</li>
+</ul>
+<p><strong>Versions</strong> briefly presents the available versions that you can play.<br><strong>Gameplay Pitch</strong> presents the intention, the pitch of the game, from a pure gameplay perspective.<br><strong>Artistic Direction</strong> presents snippets of ambience/world building/AD related development.</p>
+<h1 id="versions-notes-and-descriptions">Versions - notes and descriptions</h1>
+<h2 id="v0-2-3">v0.2.3</h2>
+<p>Currently, only v0.2.3 is available. It is a very early prototype of the very fundamental aspects.</p>
+<h3 id="important-note">IMPORTANT Note</h3>
+<p>Please, be gentle on the server, and don't share this project to anyone. This is an extremely early PoC, so the server holding scores is completely home made, on a poor retired rack thinkpad.</p>
+<p>No domain-specific security has been developped, so it is absolutely not cheat proof.
+It's also not going through any specific VPS, so it won't filter much trafic, it only handles base privacy and exchange security through <a href="https://caddyserver.com/">caddy</a>.</p>
+<p>Please don't DDOS :D<br>...  </p>
+<p>Please D:</p>
+<h3 id="brief">Brief</h3>
+<p>You have 80 seconds to score as much as possible in a little arena sand pit.  </p>
+<p>Use covers and stay in movement to mitigate the damages you take.<br>Use the right weapons, depending on your own skills and on the enemies.<br>Manage your amunitions, and try to take advantage of the power ups.</p>
+<p><strong>You</strong></p>
+<p><em>Survive with</em></p>
+<ul>
+<li><strong>Shield</strong> (blue) that regenerates after a short time without taking damage</li>
+<li><strong>Flesh</strong> (white) that will never regenerate, so be carefull !</li>
+</ul>
+<p>You lower the accuracy of the enemies by moving fast (relative to their vision, run straight to them and they'll cook you like a chef).  </p>
+<p>If your flesh reaches 0, game over.</p>
+<p><em>Fight with</em></p>
+<ul>
+<li>The <strong>P3-W</strong>, a revolver-like gun of 8 shells, with no ADS, that goes pew.</li>
+<li>The <strong>G0Z-BRT</strong>, an smg-like gun with an ADS, a small loaded capacity, but very high DPS, that goes brrt. </li>
+<li>Your <strong>Fists</strong>, that allows you to move slightly faster, can't headshot but do critical damage in <strong>backstab</strong>, can be held down to deal heavier hits.
+Besides, hits transform in a propulsing uppercut if you have vertical momentum when hitting your target (for example, by uncrouching and jumping !)</li>
+</ul>
+<p><em>Move with</em></p>
+<ul>
+<li><strong>Crouched</strong>, <strong>running</strong>, and <strong>sprinting</strong> movements, that all benefit from the <strong>quake/source like</strong> physics, allowing you to performs movements techs such as circle jumps.</li>
+<li>A <strong>slide</strong>, that can be performed by crouching with enough speed, and provides a speed boost.</li>
+<li><strong>Wall bouncing</strong>, performed in a similar fashion to apex.</li>
+<li><strong>Wall climbing</strong>, performed by your jump input while moving towards a wall. Its strength scales with your entering momentum, like a parkour wall pass.</li>
+<li><strong>Ledge climbing</strong>, that can connect into a <strong>ledge vault</strong> by pressing crouch a few milliseconds before completing the climb, to preserve and build up momentum.</li>
+<li>A fine-tuned source-like <strong>air straffing</strong>, that allows you to build up momentum in air, and get much more air control, if you master it.</li>
+<li><strong>Bunny hopping</strong>, by timing jumps as you land to preserve momentum, and even build it up paired with <strong>air straffing</strong>.</li></ul>
+<p>There's many more subtleties, interconnections, and resulting movement techs to that system, that I might detail in a little movement guide for true sweats and nerds.</p>
+<p><strong>Pickups</strong></p>
+<p>You can find amunitions pickups to refill</p>
+<ul>
+<li>your <strong>burst weapon</strong> (P3-W) amunitions (orange)</li>
+<li>your <strong>continuous weapon</strong> (g0Z-BRT) amunitions (purple)</li>
+<li>the weapon you're currently holding (blue)</li>
+</ul>
+<p>Two special power ups also spawns during the run</p>
+<ul>
+<li>The holy quake 3 <strong>quad-damage</strong>, that, uh, triples damage (a lost relic of quake 1 & 2)</li>
+<li>The <strong>lime juice</strong>, that slows time for a bit</li>
+</ul>
+<p><strong>Enemies</strong></p>
+<p>Some have</p>
+<ul>
+<li><strong>Armor</strong> (orange) weak to burst damage</li>
+<li><strong>Barrier</strong> (purple) weak to continuous damage</li>
+<li><strong>Flesh</strong> (white) which is simple health.</li>
+</ul>
+<p>As well as more or less erratic movements, and different health pool.</p>
+<p><strong>Others</strong></p>
+<p>Can try to beat your score !</p>
+<p>You can indeed register an account, and play under it to register your scores, improve them, and try to take over the leaderboard.</p>
+<p>In the leaderboard, you'll find detailed description of how each player reached his score, which weapons he used, accuracy, etc.</p>
+<h3 id="goals">Goals</h3>
+<p>This version is focused at the very core elements of the game. It is not particularly fun, but it was not yet the goal.</p>
+<p>The goal was to tackle every aspect of &quot;fundamental mechanics of the FPS genre&quot;, in a very minimal way.</p>
+<p><strong>Aim</strong></p>
+<p><em>Simplified</em>
+Here, it is tackled by providing an environment where the #1 factor of improvement is - how much you pew pew the headz.</p>
+<p>Besides, bots can have pretty eratic movements (in hard mode), typicall of actual players, that require a strong mouse control and movement reading. Something you don&#39;t usually find in solo FPS.</p>
+<p>Finally, armor and barrier healths encourage you to use different weapons that comes with different underlying aiming techniques. Being good at dynamic clicking requires very different skills from being good at tracking.</p>
+<p><em>True depth</em>  </p>
+<ol>
+<li>Through much more various movemement of enemies, floating, smooth, evasive, precise, target-switching.</li>
+<li>Through making them &quot;think&quot; about their movements, have human-like predictable patterns. Make their active movement decisions depend on the environment, on the situation and risks (a wounded enemy would tend to try to get back to cover, but if he&#39;s good, he will do so while keeping his movement unpredictable.. if he panicks, he won&#39;t), to emulate the true feeling of aiming in high aim-demanding mutliplayer fast fps.</li>
+</ol>
+<p><strong>Movement (passive)</strong></p>
+<p><em>Simplified</em><br>During the run, some special power ups spawn in the map, a quad and a slow-mo.</p>
+<p>You can reach them in various ways, and the more you develop your mastery of movement, the more of these ways you have access to, allowing you to chose the best way for every situation.</p>
+<p>For example, the fastest way to get the quad is to sprint, slide, and double dash.</p>
+<p>It is an easy way, but also expensive as it consumes your whole omni-charge. A way that is almost as fast, but much more efficient, is to wall bounce on the right pillar, then on the left pillar.</p>
+<p>You have many other options, safer, easier, less exposed...</p>
+<p><em>True depth</em><br>There isn&#39;t much more depth to achieve here actually, or at least, it will only come with map design.</p>
+<p><strong>Movement (active)</strong></p>
+<p><em>Simplified</em>
+Enemies have varrying accuracy, depending on how fast you move relative to their vision.</p>
+<p>This enforces you to always stay in motion, but also highly rewards the players that are able to quickly build up momentum and maintain it.</p>
+<p><em>True depth</em><br>Build a more organic aiming AI for the enemies, that will push the player to stay unpredictable, that is move more or less eratically, use as various moves as possible, and best fitting to each situation, but also push the player to understand the aiming tendencies of different enemies -</p>
+<p>Are they very smooth but not very reactive ? Do they struggle to keep up at close range ? Do they tend to mostly rely on prediction ? etc.</p>
+<p><strong>Micro-decisions</strong>  </p>
+<p><em>Simplified</em>
+There&#39;s always multiple enemies in the pit, so you must take advantage of angles, break them to always be in the least disfavoring situation. &quot;Slice the pie&quot;, a common micro-positionning technique in FPS.</p>
+<p><em>True depth</em>
+This will come with general gameplay depth, and enemies AI depth. Micro-decisions like this are very diverse, it can be for example, baiting your enemies shots while you&#39;re fully commited to your movements, then only &quot;take your turn&quot; once they are out of amo and thus vulnerable.</p>
+<p>It will also come from diversity of enemies, to leverage target acquisition and priorization, that are very basic micro-decisions.</p>
+<h3 id="feedback-guidelines">Feedback Guidelines</h3>
+<p>Any feedback is welcome, but for now, the most important is feedback related to the already present core mechanics.</p>
+<p>A few feedback that have already been collected :</p>
+<ul>
+<li><strong>Wall bounce</strong> is unintuitive.<ul>
+<li><strong>Response 1</strong> - It should be hard to master. We need feedback from more experienced players, typically apex movement players.</li>
+<li><strong>Response 2</strong> - However, we could implement a new movement tech to lower the skill floor without lowering the skill ceil - a wall jump, that is easier to perform, but less versatile and powerfull.</li>
+</ul>
+</li>
+<li>The smg has <strong>too little amos</strong>.<ul>
+<li><strong>Response</strong> - It is intended, this is the &quot;hard to master&quot; weapon. The highest burst potential, but requires to be very accurate. This will be later adressed by allowing the player to chose among various weapons for each category.</li>
+</ul>
+</li>
+<li><strong>Round end</strong> is unintuitive and frustrating, enemies can dispawn in front of you<ul>
+<li><strong>Response</strong> - This is a super early sandbox, this little game mode will probably not remain, so investing time in developping clear cues of round end isn&#39;t very worth for now.</li>
+</ul>
+</li>
+<li><strong>Managing amos</strong> is frustrating<ul>
+<li><strong>Response</strong> - Tackled with visual and audio cues, a overhaul of the reload system with various subtle mechanics that makes it smoother.</li>
+<li><strong>Question</strong> - How is it feeling now ? Still collecting feedback. Making amo management really not frustrating will probably require a lot of GD work anyway.</li>
+</ul>
+</li>
+</ul>
+
+<p>What is already about to be changed :</p>
+<ul>
+<li><strong>Lurch</strong> - It isn&#39;t very interesting as is. The goal was to provide a very niche, hard to master, skillfull but powerfull way to redirect momentum. An equivalent of tap-straffe in apex. It will probably be dumped for something else, deeper, more subtle.</li>
+<li><strong>Wall interactions</strong> - I plan to rework the whole wall-interractions (bounce, climb, derivatives techs..) in a more cohesive system, provide subtle cues of what is possible to do at any instant, and make the whole system slightly deeper. Feedback is still absolutely welcome and relevant.</li>
+<li><strong>Step climber</strong> - The current character controller does not include a step climber - a way to climb over very small ledges, typically stairs. This can notably lead in very specific places and scenarios where the character controller is slightly stuck on a seemingly invisible ledge. This mostly happens on slope connections. So if you ever encounter this and think it is a bug, don&#39;t worry, the step climber will fix it.</li>
+<li><strong>Balance</strong> - Easy mode is actually already hard for some people, and hard mode for 80 seconds straight can be exhausting and not that fun, even for veterans. This will eventually be tackled.</li>
+</ul>
+
+<h2 id="v0-3">v0.3</h2>
+<p>v0.3 is currently in development, release coming soon !</p>
+<p>It will try to explore a bit map design, and provide the very first bare sense of rythm, by pushing the player to perform rotations, in a very rudimentary way, notably to expose the movement system to a more realistic environment than the simple arena pit.</p>
+<h1 id="gameplay-pitch">Gameplay Pitch</h1>
+<p>Thirst for Lime is, first of all, not really a boomer/movement shooter, but much more specific.</p>
+<p>As a one liner - It is the skatepark of the FPS genre. A skill sport disguised as a shooter.</p>
+<h2 id="the-love-for-multiplayer-fps">The love for multiplayer FPS</h2>
+<p>Multiplayer FPS are the playground for the most legendary moments of mechanical expression.</p>
+<p>This game where everything clicks: your aim is locked in, every movement is intentional, you pull off crazy movement techs, for the right situations, breaking your opponents ankles. You know their every moves, and even when threats are appearing faster than you can consciously process them, your subconscious handle them effortlessly.</p>
+<h2 id="the-frustration-of-mutliplayer-fps">The frustration of mutliplayer FPS</h2>
+<p>In multiplayer games, these moments are accidental, overshadowed by strategy, teamwork and balance (should i say, bALaNCe <em>cough</em>). You keep clicking that play button, hoping for the 1 in 100 game that is chaotic enough, on the right map, with the right enemies and the right team mates.</p>
+<p>Aim trainers isolate a part of the experience in a stimulating, mechanically dense and super competitive environment. But fps fundamental mechanics are much richer than just aim, it is also about movements, target acquisition, positioning, tempo, and other split-second decision making.</p>
+<p>Finally, fast paced single-player shooters offers a great environment, but they usually develop their fun through very game-specific systems, so specific than fundamentals usually don't matter much anymore. You don't get good at ultrakill by being the god of FPS, you get good at ultrakill by being good at ultrakill, specifically.</p>
+<h2 id="so-what-if-an-entire-game-was-built-around-creating-those-moments-">So what if an entire game was built around creating those moments ?</h2>
+<p>A solo competitive shooter built around the infinite pursuit of mechanical mastery. A game that gets inspiration from the conventions, juice, intensity and complexity that makes multiplayer fast fps so satisfying, and pushes it to the next level by leveraging the game design freedom we get from leaving the multiplayer constraints.</p>
+<p>A game for players who love spending hours practicing, almost rewiring their brains with automatisms.</p>
+<h2 id="the-promise">The promise</h2>
+<p>Think of skateboarding, juggling, bouldering, calisthenics, but it's an FPS .. This sensation of developping something, not out of knowledge, but out of your brain and hands, to start to feel the things.</p>
+<p>And when it comes to games, think of rocket league, apex if it was an arena shooter for its crazy movement depth, but also rythm and racing games in general.</p>
+<p>You don’t finish it, you practice, you improve, and you express your mastery.</p>
+<p>That’s the game.</p>
+<p>The self-improvement incentivised, mechanically focused environment of aim trainers, but not isolated to aim.</p>
+<p>The rich mechanical expression, intensity, complexity and gameplay depth of multiplayer FPS, but with a saner competitive environment, and without the constraints of balance and teamwork.</p>
+<p>The fun, gamified, design freedom of solo FPS, without overshadowing the fundamental mechanics.</p>
+<h1 id="artistic-direction-snippets-">Artistic Direction (snippets)</h1>
+<p>The game could seem very gameplay oriented from the prior description, and it is.</p>
+<p>It would not especially benefit from a dense background and universe. Yet, it’d be even more interesting if it wasn’t just a shoot and run thing. Let’s take the opportunity to have fun writing, dreaming and expressing something a little more meaningful.</p>
+<p>So in this section, I'll discuss the bare snippets of the artistic direction I started to explore.</p>
+<p>The game takes place in a pseudo-utopian, absurd, punky/scrappy future.</p>
+<h2 id="visuals-">Visuals</h2>
+<p>The artistic direction should tend towards something very bright and colorful, quite absurd. </p>
+<p>A little reference bank is forming, and it finds its biggest influence in diverse forms of street art, but also a bit of 70s retro-futurism, 90s and 2000s.</p>
+<p>For games, it typically find its reference in games like bomb rush cyberfunk, borderlands, etc.</p>
+<p>This little draft of an artwork from a totally artistically incompetent person that is me already encapsulates some ideas. Representing "inter-spatial highways" as litteral highways separated by pool lane lines, with modified 2000s cars cruising in.<br></p>
+<p><img src="https://img.itch.zone/aW1nLzI4MTA5MzExLnBuZw==/original/mKjjfN.png"><br></p>
+<p>Quite absurd, but I like the idea of building a super futuristic universe with the more carefree, imperfect, scrappy and intimate mood of the 90-2000s. Not only I like it and want to explore it, but it wonderfully serves the message and background of the game, discussed below.<br></p>
+<p>Below is a very brief little ""moodboard"", that will probably be later updated to a better fitting one !</p>
+<p><img src="https://img.itch.zone/aW1nLzI4MTA5MzE0LnBuZw==/original/HKjbNH.png"><br></p>
+<h2 id="music">Music</h2>
+<p>When it comes to music, the dominant reference is oldschool boom bap.</p>
+<p>Think about Pitch 92, Unreasonable Doubt from Jay-Z, It Was Written from Nas, The awakening from lord finesse, Unlocked from Denzel curry, MF Doom of course, to only cite a few.</p>
+<p>The other major influence is jungle, other related oldschool DnB derivatives, as well as somehow related house genres like your typical “rally house”.</p>
+<p>But truly, the influences are very diverse since the general intention is to capture this 90-2000s feel.</p>
+<p>It extends to some jazz, funk, house, neurofunk, and even pop references.</p>
+<p>Yet, boom bap would be the dominant influence, the one that best serves the purpose and philosophy of the characters we will mainly follow - carefree goofy rebels tryna find fun and purpose in their sluggish life.</p>
+<p>Another reason why it is a great influence, is that it is the opportunity to build the background in a more organic way. The idea of writing fictional rap that directly tells us about the mentality of the living generation of this world. It makes it more believable, more lively. Plus, it is quite a fun writing exercise, that I already did spend a bit of time on.</p>
+<p>The music won’t have a strong gameplay-related purpose, but it is still quite important as it is a major piece for building this atmosphere.</p>
+<h2 id="background-">Background</h2>
+<p>Here, spatial exploration has reached new bounds, extending to a significant part of the galaxy, and optimists even dream about reaching other ones in the near future.</p>
+<p>This opened us to abundant resources. Technology, science and health has skyrocketed, to an extent where a gunshot wound is as bad as a crooked nose, and where working has become secondary. </p>
+<p>The system has been unified in the past years, and everyone is entitled for a universal basic income. Some still work, sometimes because that basic income is minimal, enough to live a decent life, but not if you have more ambitions or greater dreams, sometimes to give a purpose to their life, some others simply out of nostalgia of the old world, because they just can’t get used to this new one. This builds into a stable balance where there’s just enough workforce for the system to prosper.</p>
+<p>But, behind the scenes, a sense of unease pervades a large portion of the population. This brutal change of paradigm has left many lost, questioning the meaning of their existence in this paradoxical system. What initially was a sense of relief, turned for some into a general lethargy.</p>
+<p>Besides, since work has become much less necessary, it also became much rarer. And those who, despite this lethargy feeling, retained a sense of effort and ambition, struggle to find the opportunities, particularly in some remote systems, and must resign themselves to what sounds like a life that has been chosen for them.</p>
+<p>In a world where billions of ships travel through the inter-spatial highways everyday, crossing countless worlds and planets, where seeing the true face of the universe has never been more accessible, it is especially frustrating to feel trapped, condemned to slowly grow old and die in the very place you were born, bound to the same routine for a lifetime.</p>
+<p>The dream of a brighter future, one of freedom and possibilities, seems to have faded behind this veil of security and simplicity. Happiness does not arise from fulfilled needs, but from the pursuit of identity and meaning. Many feel that both have been taken from them.</p>
+<p>It is a quiet, underlying malaise, yet in truth most people live through this age without such troubling thoughts. Though few would describe themselves as truly happy, many have simply accepted that this is the world they inhabit&mdash;that they lack the power to change it, that they have no legitimate claim to do so, or sometimes that attempting to reshape everything once again would be far too dangerous. The cost, they believe, would be too great. After all, everyone can live comfortably; why concern oneself with anything more?</p>
+<p>What is certain, however, is that those afflicted by this unease never find answers among those who have accepted the world as it is. Instead, they are left with the growing conviction that they are misunderstood, and later, that the others have simply chosen to forget&mdash;to ignore the sickness, to keep their eyes fixed upon the shadows on the wall of the cave.</p>
+<p>And so, some begin to rise.</p>
+<p>So behind the facade utopia, it seems there’s a dystopia, but that’s not really what is being buildt here. All this uneasy climate is at the very deep bottom, the world really is more of a utopia than a dystopia. People are pretty free, the global ambience shall remain bright, and not so serious. It is just interesting to discuss and explore something about what meaning truly is, and contemporary social malaises our generation feel and exchange, reframing them in a more optimistic and carefree universe. </p>
