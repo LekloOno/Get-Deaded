@@ -1,4 +1,9 @@
-- [Gameplay](#gameplay)
+- [Versions - notes and descriptions](#versions---notes-and-descriptions)
+  - [v0.2.3](#v023)
+    - [IMPORTANT Note](#important-note)
+    - [Brief](#brief)
+  - [v0.3](#v03)
+- [Gameplay Pitch](#gameplay-pitch)
   - [The love for multiplayer FPS](#the-love-for-multiplayer-fps)
   - [The frustration of mutliplayer FPS](#the-frustration-of-mutliplayer-fps)
   - [So what if an entire game was built around creating those moments ?](#so-what-if-an-entire-game-was-built-around-creating-those-moments-)
@@ -8,7 +13,97 @@
   - [Music](#music)
   - [Background​](#background)
 
-# Gameplay
+**Versions** briefly presents the available versions that you can play.  
+**Gameplay Pitch** presents the intention, the pitch of the game, from a pure gameplay perspective.  
+**Artistic Direction** presents snippets of ambience/world building/AD related development.
+
+# Versions - notes and descriptions
+
+## v0.2.3
+
+Currently, only v0.2.3 is available. It is a very early prototype of the very fundamental aspects.
+
+### IMPORTANT Note
+
+Please, be gentle on the server, and don't share this project to anyone. This is an extremely early PoC, so the server holding scores is completely home made, on a poor retired rack thinkpad.
+
+No domain-specific security has been developped, so it is absolutely not cheat proof.
+It's also not going through any specific VPS, so it won't filter much trafic, it only handles base privacy and exchange security through [caddy](https://caddyserver.com/).
+
+Please don't DDOS :D  
+...  
+
+Please D:
+
+### Brief
+
+You have 80 seconds to score as much as possible in a little arena sand pit.  
+
+Use covers and stay in movement to mitigate the damages you take.  
+Use the right weapons, depending on your own skills and on the enemies.  
+Manage your amunitions, and try to take advantage of the power ups.
+
+**You**
+
+*Survive with*
+- **Shield** (blue) that regenerates after a short time without taking damage
+- **Flesh** (white) that will never regenerate, so be carefull !
+
+You lower the accuracy of the enemies by moving fast (relative to their vision, run straight to them and they'll cook you like a chef).  
+
+If your flesh reaches 0, game over.
+
+*Fight with*
+- The **P3-W**, a revolver-like gun of 8 shells, with no ADS, that goes pew.
+- The **G0Z-BRT**, an smg-like gun with an ADS, a small loaded capacity, but very high DPS, that goes brrt. 
+- Your **Fists**, that allows you to move slightly faster, can't headshot but do critical damage in **backstab**, can be held down to deal heavier hits.
+Besides, hits transform in a propulsing uppercut if you have vertical momentum when hitting your target (for example, by uncrouching and jumping !)
+
+*Move with*
+- **Crouched**, **running**, and **sprinting** movements, that all benefit from the **quake/source like** physics, allowing you to performs movements techs such as circle jumps.
+- A **slide**, that can be performed by crouching with enough speed, and provides a speed boost.
+- **Wall bouncing**, performed in a similar fashion to apex.
+- **Wall climbing**, performed by holding space bar while moving towards a wall, which force scales with your entering momentum.
+- **Ledge climbing**, that can connect into a **ledge vault** by pressing crouch in a few milliseconds before completing the climb, to preserve and build up momentum.
+- A fine-tuned source-like **air straffing**, that allows you to build up momentum in air, and get much more air control, if you master it.
+
+There's many more subtleties, interconnections, and resulting movement techs to that system, that I might detail in a little movement guide for true sweats and nerds.
+
+**Pickups**
+
+You can find amunitions pickups to refill
+- your **burst weapon** (P3-W) amunitions (orange)
+- your **continuous weapon** (g0Z-BRT) amunitions (purple)
+- the weapon you're currently holding (blue)
+
+Two special power ups also spawns during the run
+- The holy quake 3 **quad-damage**, that, uh, triples damage (a lost relic of quake 1 & 2)
+- The **lime juice**, that slows time for a bit
+
+**Enemies**
+
+Some have
+- **Armor** (orange) weak to burst damage
+- **Barrier** (purple) weak to continuous damage
+- **Flesh** (white) which is simple health.
+
+As well as more or less erratic movements, and different health pool.
+
+**Others**
+
+Can try to beat your score !
+
+You can indeed register an account, and play under it to register your scores, improve them, and try to take over the leaderboard.
+
+In the leaderboard, you'll find detailed description of how each player reached his score, which weapons he used, accuracy, etc.
+
+## v0.3
+
+v0.3 is currently in development, release coming soon !
+
+It will try to explore a bit map design, and provide the very first bare sense of rythm, by pushing the player to perform rotations, in a very rudimentary way, notably to expose the movement system to a more realistic environment than the simple arena pit.
+
+# Gameplay Pitch
 
 Thirst for Lime is, first of all, not really a boomer/movement shooter, but much more specific.
 
