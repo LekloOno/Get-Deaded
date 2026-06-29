@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://cweke4snpsbon"]
+
+[ext_resource type="Script" uid="uid://dpsrelwawyisv" path="res://script/entity/items/PickableSpawner.cs" id="1_i7r1k"]
+[ext_resource type="PackedScene" uid="uid://bpaeqgg3f1ur3" path="res://prefabs/AmmoDrop.tscn" id="2_i7ffk"]
+[ext_resource type="Script" uid="uid://c3akiwtfovofa" path="res://script/engine_tools/physics/bodies/objects/PHX_RepulsionField3DData.cs" id="3_0d2aq"]
+[ext_resource type="Script" uid="uid://c5lwejv15n0lf" path="res://script/global/loot/pickable/data/GL_AmmoData.cs" id="4_iett6"]
+[ext_resource type="Material" uid="uid://cmw5q7hnthw0u" path="res://assets/textures/grid/texture_01.tres" id="5_aimi4"]
+[ext_resource type="Texture2D" uid="uid://dsma1lip7bvch" path="res://assets/sprites/dash/dash_cd_mid_shadow.png" id="6_4yfbi"]
+[ext_resource type="Material" uid="uid://dju00rdgqmf51" path="res://assets/textures/flat/grey_teal.tres" id="6_i7ffk"]
+[ext_resource type="Texture2D" uid="uid://cbh1opskekaqn" path="res://assets/sprites/dash/dash_cd_mid_fill.png" id="7_2qpc6"]
+[ext_resource type="Script" uid="uid://b6wuemumhi18m" path="res://script/ui/game/UI_PickupCooldown.cs" id="8_y7eq8"]
+
+[sub_resource type="Curve" id="Curve_q2sf5"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.713287, 0.328551), 1.58362, 1.58362, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5os12"]
+radius = 1.0
+
+[sub_resource type="Resource" id="Resource_ywx5l"]
+script = ExtResource("3_0d2aq")
+RepulsingStrength = 50.0
+RepulsingCurve = SubResource("Curve_q2sf5")
+SphereShape = SubResource("SphereShape3D_5os12")
+CollisionMask = 1
+metadata/_custom_type_script = "uid://c3akiwtfovofa"
+
+[sub_resource type="Resource" id="Resource_7jf4w"]
+script = ExtResource("4_iett6")
+WeaponIndex = -1
+Amount = 5
+Model = ExtResource("2_i7ffk")
+_repulsionData = SubResource("Resource_ywx5l")
+metadata/_custom_type_script = "uid://c5lwejv15n0lf"
+
+[sub_resource type="BoxMesh" id="BoxMesh_6ubnd"]
+size = Vector3(0.35, 0.1, 0.35)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0d2aq"]
+size = Vector3(0.75, 0.1, 0.75)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_i7r1k"]
+viewport_path = NodePath("Sprite3D/SubViewport")
+
+[node name="WildcardAmo" type="Node3D" unique_id=754919283]
+script = ExtResource("1_i7r1k")
+_pickableData = SubResource("Resource_7jf4w")
+_startSpawned = true
+RespawnDelay = 10.0
+metadata/_custom_type_script = "uid://dpsrelwawyisv"
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1206866047]
+light_color = Color(0.41568628, 0.7764706, 0.80784315, 1)
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+omni_range = 0.6
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1810775091]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+material_override = ExtResource("5_aimi4")
+mesh = SubResource("BoxMesh_6ubnd")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=649253399]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+material_override = ExtResource("6_i7ffk")
+mesh = SubResource("BoxMesh_0d2aq")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=317872293]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.099999905, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_i7r1k")
+
+[node name="SubViewport" type="SubViewport" parent="Sprite3D" unique_id=1299453453]
+transparent_bg = true
+size = Vector2i(64, 64)
+
+[node name="UI_PickupCooldown" type="TextureProgressBar" parent="Sprite3D/SubViewport" unique_id=1245746305 node_paths=PackedStringArray("_pickupSpawner")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+step = 0.1
+value = 14.3
+fill_mode = 4
+texture_under = ExtResource("6_4yfbi")
+texture_progress = ExtResource("7_2qpc6")
+tint_under = Color(1, 1, 1, 0.47058824)
+tint_progress = Color(0.8388973, 0.83889693, 0.8388971, 0.8117647)
+script = ExtResource("8_y7eq8")
+_pickupSpawner = NodePath("../../..")
+metadata/_custom_type_script = "uid://b6wuemumhi18m"
