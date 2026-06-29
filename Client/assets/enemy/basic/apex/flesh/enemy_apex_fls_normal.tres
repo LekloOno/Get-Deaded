@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="E_EnemySettings" format=3 uid="uid://cafnclluyi6r1"]
+
+[ext_resource type="PackedScene" uid="uid://dpo37xs2mukfh" path="res://prefabs/simplebot/bot_base_fire.tscn" id="1_r1q58"]
+[ext_resource type="Resource" uid="uid://dhk5j3qok2qed" path="res://assets/enemy/basic/apex/flesh/enemy_health_apex_fls.tres" id="2_yicpp"]
+[ext_resource type="Resource" uid="uid://tklm45px8s1y" path="res://assets/enemy/movement/basic/enemy_movement_basic_normal.tres" id="3_sf2xy"]
+[ext_resource type="Script" uid="uid://bglhbt23nx4m7" path="res://script/enemy/E_EnemySettings.cs" id="4_hsc4u"]
+
+[resource]
+script = ExtResource("4_hsc4u")
+Fire = ExtResource("1_r1q58")
+Health = ExtResource("2_yicpp")
+MoverData = ExtResource("3_sf2xy")
+Score = 125
+SpreadFactor = 12.0
+ReactionTime = 0.3
+metadata/_custom_type_script = "uid://bglhbt23nx4m7"

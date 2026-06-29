@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="GCD_Health" format=3 uid="uid://dhk5j3qok2qed"]
+
+[ext_resource type="Script" uid="uid://123gwhhdyr3d" path="res://script/global/combat/health/data/GCD_Health.cs" id="1_2krvs"]
+
+[resource]
+script = ExtResource("1_2krvs")
+MaxHealth = 250.0
+metadata/_custom_type_script = "uid://123gwhhdyr3d"
