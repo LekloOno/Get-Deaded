@@ -16,10 +16,10 @@ New features, systems, fixes, changes, balancing etc.
       - [Target acquisition AI improvment](#target-acquisition-ai-improvment)
     - [Movement](#movement)
       - [Ledge Vault](#ledge-vault)
+    - [Balance](#balance)
   - [Backend](#backend)
     - [Priority](#priority)
     - [Quality of life](#quality-of-life)
-    - [Balance](#balance)
 - [General](#general)
   - [News](#news-1)
     - [View models](#view-models)
@@ -84,6 +84,12 @@ This will start to open to a real state-machine like system. In short-term futur
 
 To play test to confirm, but we might want ledge vault to be fully (or more) directed by the ledge direction. Currently, no matter the ledge, if the player goes very fast, and ledge climb, the normal of the ledge has very low impact on the direction of the vault, the prior velocity is prevalent. This feels odd in some situation - to play test to confirm.
 
+### Balance
+
+Easy mode in 0.2.3 was already hard for some people, and hard mode for 80 seconds straight can be exhausting and not that fun, even for veterans.
+
+For v0.3, we will try to achieve a better balance.
+
 ## Backend
 
 ### Priority
@@ -105,12 +111,6 @@ For example, register enemy killed types, for sector mode - add which sector whe
 
 **Time tracked score**  
 Track score evolution over time, and eventually associate this to some meta-data, for example, how much time spent on X sector.
-
-### Balance
-
-Easy mode in 0.2.3 was already hard for some people, and hard mode for 80 seconds straight can be exhausting and not that fun, even for veterans.
-
-For v0.3, we will try to achieve a better balance.
 
 # General
 
