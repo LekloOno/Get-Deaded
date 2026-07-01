@@ -1,9 +1,9 @@
 - [Versions - notes and descriptions](#versions---notes-and-descriptions)
+  - [Feedback Guidelines](#feedback-guidelines)
   - [v0.2.3](#v023)
     - [IMPORTANT Note](#important-note)
     - [Brief](#brief)
     - [Goals](#goals)
-    - [Feedback Guidelines](#feedback-guidelines)
   - [v0.3](#v03)
 - [Gameplay Pitch](#gameplay-pitch)
   - [The love for multiplayer FPS](#the-love-for-multiplayer-fps)
@@ -20,6 +20,24 @@
 **Artistic Direction** presents snippets of ambience/world building/AD related development.
 
 # Versions - notes and descriptions
+
+## Feedback Guidelines
+
+Any feedback is welcome, but for now, the most important is feedback related to the already present core mechanics.
+
+You can find features, changes and reworks already planned to come in [coming_up](https://github.com/LekloOno/Get-Deaded/blob/main/description/coming_up.md).
+
+A few feedback that have already been collected :
+- **Wall bounce** is unintuitive.
+  - **Response 1** - It should be hard to master. We need feedback from more experienced players, typically apex movement players.
+  - **Response 2** - However, we could implement a new movement tech to lower the skill floor without lowering the skill ceil - a wall jump, that is easier to perform, but less versatile and powerfull.
+- The smg has **too little amos**.
+  - **Response** - It is intended, this is the "hard to master" weapon. The highest burst potential, but requires to be very accurate. This will be later adressed by allowing the player to chose among various weapons for each category.
+- **Round end** is unintuitive and frustrating, enemies can dispawn in front of you
+  - **Response** - This is a super early sandbox, this little game mode will probably not remain, so investing time in developping clear cues of round end isn't very worth for now.
+- **Managing amos** is frustrating
+  - **Response** - Tackled with visual and audio cues, a overhaul of the reload system with various subtle mechanics that makes it smoother.
+  - **Question** - How is it feeling now ? Still collecting feedback. Making amo management really not frustrating will probably require a lot of GD work anyway.
 
 ## v0.2.3
 
@@ -162,28 +180,6 @@ There's always multiple enemies in the pit, so you must take advantage of angles
 This will come with general gameplay depth, and enemies AI depth. Micro-decisions like this are very diverse, it can be for example, baiting your enemies shots while you're fully commited to your movements, then only "take your turn" once they are out of amo and thus vulnerable.
 
 It will also come from diversity of enemies, to leverage target acquisition and priorization, that are very basic micro-decisions.
-
-### Feedback Guidelines
-
-Any feedback is welcome, but for now, the most important is feedback related to the already present core mechanics.
-
-A few feedback that have already been collected :
-- **Wall bounce** is unintuitive.
-  - **Response 1** - It should be hard to master. We need feedback from more experienced players, typically apex movement players.
-  - **Response 2** - However, we could implement a new movement tech to lower the skill floor without lowering the skill ceil - a wall jump, that is easier to perform, but less versatile and powerfull.
-- The smg has **too little amos**.
-  - **Response** - It is intended, this is the "hard to master" weapon. The highest burst potential, but requires to be very accurate. This will be later adressed by allowing the player to chose among various weapons for each category.
-- **Round end** is unintuitive and frustrating, enemies can dispawn in front of you
-  - **Response** - This is a super early sandbox, this little game mode will probably not remain, so investing time in developping clear cues of round end isn't very worth for now.
-- **Managing amos** is frustrating
-  - **Response** - Tackled with visual and audio cues, a overhaul of the reload system with various subtle mechanics that makes it smoother.
-  - **Question** - How is it feeling now ? Still collecting feedback. Making amo management really not frustrating will probably require a lot of GD work anyway.
-
-What is already about to be changed :
-- **Lurch** - It isn't very interesting as is. The goal was to provide a very niche, hard to master, skillfull but powerfull way to redirect momentum. An equivalent of tap-straffe in apex. It will probably be dumped for something else, deeper, more subtle.
-- **Wall interactions** - I plan to rework the whole wall-interractions (bounce, climb, derivatives techs..) in a more cohesive system, provide subtle cues of what is possible to do at any instant, and make the whole system slightly deeper. Feedback is still absolutely welcome and relevant.
-- **Step climber** - The current character controller does not include a step climber - a way to climb over very small ledges, typically stairs. This can notably lead in very specific places and scenarios where the character controller is slightly stuck on a seemingly invisible ledge. This mostly happens on slope connections. So if you ever encounter this and think it is a bug, don't worry, the step climber will fix it.
-- **Balance** - Easy mode is actually already hard for some people, and hard mode for 80 seconds straight can be exhausting and not that fun, even for veterans. This will eventually be tackled.
 
 ## v0.3
 

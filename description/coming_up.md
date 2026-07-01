@@ -19,6 +19,7 @@ New features, systems, fixes, changes, balancing etc.
   - [Backend](#backend)
     - [Priority](#priority)
     - [Quality of life](#quality-of-life)
+    - [Balance](#balance)
 - [General](#general)
   - [News](#news-1)
     - [View models](#view-models)
@@ -104,6 +105,12 @@ For example, register enemy killed types, for sector mode - add which sector whe
 
 **Time tracked score**  
 Track score evolution over time, and eventually associate this to some meta-data, for example, how much time spent on X sector.
+
+### Balance
+
+Easy mode in 0.2.3 was already hard for some people, and hard mode for 80 seconds straight can be exhausting and not that fun, even for veterans.
+
+For v0.3, we will try to achieve a better balance.
 
 # General
 
