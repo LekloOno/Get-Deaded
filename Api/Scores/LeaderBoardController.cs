@@ -1,3 +1,4 @@
+using Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Shared.Scores;
@@ -66,6 +67,23 @@ public partial class ScoresController : ControllerBase
         });
 
         return Ok(result);
+    }
+
+    public LeaderboardRowDto<T> GetLeaderboard<T>(Score score, int rank, WeaponStat bestWeapon, T modeDetails)
+    {
+        return new LeaderboardRowDto<T>(
+            rank,
+            score.Id,
+            score.Player.Username,
+            score.PlayerId,
+            score.TimeMs,
+            score.Value,
+            score.WeaponStats.Sum(w => w.Kills),
+            score.WeaponStats.Sum(w => w.Damage),
+            bestWeapon?.Weapon.WeaponKey ?? "Unknown",
+            bestWeapon?.Accuracy,
+            modeDetails
+        );
     }
 
     [HttpGet("leaderboard/unique/around-score")]
@@ -217,6 +235,8 @@ public partial class ScoresController : ControllerBase
             score.Id,
             score.Player.Username,
             score.Map.MapKey,
+            score.Mode.ModeKey,
+            _session.Version.VersionKey,
             score.Difficulty,
             score.Value,
             score.TimeMs,

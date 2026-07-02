@@ -6,6 +6,7 @@ using Data.Entities;
 using Shared.Scores;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
+using Api.Context;
 
 namespace Api.Scores;
 
@@ -14,15 +15,17 @@ namespace Api.Scores;
 public partial class ScoresController : ControllerBase
 {
     private readonly GameDbContext _db;
+    private readonly GameSession _session;
 
-    public ScoresController(GameDbContext db)
+    public ScoresController(GameDbContext db, GameSession session)
     {
         _db = db;
+        _session = session;
     }
 
     [Authorize]
     [HttpPost]
-    public async Task<IActionResult> Submit(SubmitScoreRequest req)
+    public async Task<IActionResult> Submit<T>(SubmitScoreRequest<T> req)
     {
         var sub = User.FindFirstValue(JwtRegisteredClaimNames.Sub);
 
@@ -42,6 +45,7 @@ public partial class ScoresController : ControllerBase
         {
             PlayerId = player.Id,
             MapKey = req.MapKey,
+            ClientVersionKey = _session.Version.VersionKey,
             Difficulty = req.Difficulty,
             TimeMs = req.TimeMs,
             Value = req.Score,
@@ -70,34 +74,5 @@ public partial class ScoresController : ControllerBase
             score.Id,
             rank
         ));
-    }
-
-    [HttpGet("map/{mapKey}")]
-    public async Task<ActionResult<List<ScoreDto>>> GetForMap(string mapKey)
-    {
-        var scores = await _db.Scores
-            .Include(x => x.Player)
-            .Include(x => x.Map)
-            .Include(x => x.WeaponStats)
-                .ThenInclude(ws => ws.Weapon)
-            .Where(x => x.Map.MapKey == mapKey)
-            .OrderByDescending(x => x.Value)
-            .ToListAsync();
-
-        return scores.Select(s => new ScoreDto(
-            s.Id,
-            s.Player.Username,
-            s.Map.MapKey,
-            s.Difficulty,
-            s.Value,
-            s.TimeMs,
-            [.. s.WeaponStats.Select(ws => new WeaponStatDto(
-                ws.Weapon.WeaponKey,
-                ws.Damage,
-                ws.Kills,
-                ws.Accuracy,
-                ws.CriticalAccuracy
-            ))]
-        )).ToList();
     }
 }

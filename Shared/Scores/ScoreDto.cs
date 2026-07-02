@@ -1,24 +1,28 @@
 namespace Shared.Scores;
 
-public record SubmitScoreRequest(
+public record SubmitScoreRequest<T>(
     string MapKey,
     int Difficulty,
     int TimeMs,
     int Score,
-    List<WeaponStatDto> WeaponStats
+    List<WeaponStatDto> WeaponStats,
+    T ModeDetails
 );
 
-public record ScoreDto(
+public record ScoreDto<T>(
     Guid Id,
     string Player,
     string Map,
+    string ModeKey,
+    string VersionKey,
     int Difficulty,
     int TotalScore,
     int TimeSpentMs,
-    List<WeaponStatDto> WeaponStats
+    List<WeaponStatDto> WeaponStats,
+    T ModeDetails
 );
 
-public record LeaderboardRowDto(
+public record LeaderboardRowDto<T>(
     int Rank,
     Guid ScoreId,
     string Player,
@@ -28,13 +32,14 @@ public record LeaderboardRowDto(
     int Kills,
     float Damage,
     string BestWeaponKey,
-    float? BestWeaponAccuracy
+    float? BestWeaponAccuracy,
+    T ModeDetails
 );
 
-public record LeaderboardPageDto(
+public record LeaderboardPageDto<T>(
     int StartRank,
     int EndRank,
-    List<LeaderboardRowDto> Entries
+    List<LeaderboardRowDto<T>> Entries
 );
 
 public record SubmitScoreResponse(

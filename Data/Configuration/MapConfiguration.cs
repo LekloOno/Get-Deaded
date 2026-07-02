@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Data.Entities;
 
+namespace Data.Configuration;
+
 public class MapConfiguration : IEntityTypeConfiguration<Map>
 {
     public void Configure(EntityTypeBuilder<Map> builder)

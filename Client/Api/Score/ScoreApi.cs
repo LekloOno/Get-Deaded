@@ -37,6 +37,8 @@ public partial class ScoreApi : ApiClient
             request.Headers.Authorization =
                 new AuthenticationHeaderValue("Bearer", Session.Token);
 
+            request.Headers.Add("X-Client-Version", Session.Version);
+
             var response = await Http.SendAsync(request);
 
             if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)

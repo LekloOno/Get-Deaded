@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Api.Auth;
+using Api.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,11 +43,14 @@ builder.Services
     });
 
 builder.Services.AddAuthorization();
+builder.Services.AddScoped<GameSession>();
 
 var app = builder.Build();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseMiddleware<GameSessionMiddleware>();
 
 app.MapControllers();
 
