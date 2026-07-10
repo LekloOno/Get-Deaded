@@ -44,7 +44,7 @@ public partial class ScoresController : ControllerBase
             MapKey = req.MapKey,
             Difficulty = req.Difficulty,
             TimeMs = req.TimeMs,
-            Value = req.Score,
+            Value = req.Value,
 
             WeaponStats = [.. req.WeaponStats.Select(ws => new WeaponStat
             {
@@ -63,7 +63,7 @@ public partial class ScoresController : ControllerBase
             .Where(x =>
                 x.MapKey == req.MapKey &&
                 x.Difficulty == req.Difficulty &&
-                x.Value > req.Score)
+                x.Value > req.Value)
             .CountAsync() + 1;
 
         return Ok(new SubmitScoreResponse(
