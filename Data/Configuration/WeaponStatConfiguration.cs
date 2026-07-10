@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Data.Entities;
 
+namespace Data.Configuration;
+
 public class WeaponStatConfiguration : IEntityTypeConfiguration<WeaponStat>
 {
     public void Configure(EntityTypeBuilder<WeaponStat> builder)

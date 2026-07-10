@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Data.Entities;
 
-namespace Data.Configurations;
+namespace Data.Configuration;
 
 public class PlayerConfiguration : IEntityTypeConfiguration<Player>
 {
