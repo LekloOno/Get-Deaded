@@ -6,7 +6,7 @@ using Shared.Scores;
 public partial class STAT_ArenaGame: IDisposable
 {
     public readonly DATA_Map MapData;
-    public E_EnemyDifficulty Difficulty {get; private set;}
+    public Difficulty Difficulty {get; private set;}
     public STAT_Combat CombatStat {get; private set;}
     public uint Score {get; private set;}
     public ulong Time {get; private set;}
@@ -35,7 +35,7 @@ public partial class STAT_ArenaGame: IDisposable
     private void StopTimer() =>
         Time = PHX_Time.ScaledTicksMsec - _startTime;
 
-    public void SetDifficulty(E_EnemyDifficulty difficulty) =>
+    public void SetDifficulty(Difficulty difficulty) =>
         Difficulty = difficulty;
 
     private void UpdateScore(uint score) =>
@@ -60,7 +60,7 @@ public partial class STAT_ArenaGame: IDisposable
     {
         return new SubmitScoreRequest(
             MapData.Id,
-            (int)Difficulty,
+            Difficulty,
             (int)Time,
             (int)Score,
             [

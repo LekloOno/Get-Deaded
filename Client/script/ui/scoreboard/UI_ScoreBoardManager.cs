@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using Shared.Scores;
 
 [GlobalClass]
 public partial class UI_ScoreBoardManager : TabContainer
@@ -24,7 +25,7 @@ public partial class UI_ScoreBoardManager : TabContainer
 		_normalBoard.Clean();
 		_hardBoard.Clean();
 
-		E_EnemyDifficulty difficulty = E_DifficultyServer.Difficulty;
+		Difficulty difficulty = E_DifficultyServer.Difficulty;
 		UI_ScoreBoard initBoard = GetBoard(difficulty);
 
 		int tab = (int) difficulty;
@@ -39,20 +40,20 @@ public partial class UI_ScoreBoardManager : TabContainer
 		initBoard.InitializeAsync(difficulty, guid, rank);
 	}
 
-	private UI_ScoreBoard GetBoard(E_EnemyDifficulty difficulty)
+	private UI_ScoreBoard GetBoard(Difficulty difficulty)
 	{
 		return difficulty switch
 		{
-			E_EnemyDifficulty.EASY => _easyBoard,
-			E_EnemyDifficulty.NORMAL => _normalBoard,
-			E_EnemyDifficulty.HARD => _hardBoard,
+			Difficulty.EASY => _easyBoard,
+			Difficulty.NORMAL => _normalBoard,
+			Difficulty.HARD => _hardBoard,
 			_ => _hardBoard,
 		};
 	}
 
 	private void OnTabChanged(long tab)
 	{
-		E_EnemyDifficulty difficulty = (E_EnemyDifficulty)tab;
+		Difficulty difficulty = (Difficulty)tab;
 
 		GetBoard(difficulty).InitializeAsync(difficulty);
 	}

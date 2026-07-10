@@ -1,9 +1,10 @@
 using System.Collections.Generic;
+using Shared.Scores;
 
 public static class E_DifficultyServer
 {
-    private static E_EnemyDifficulty _difficulty;
-    public static E_EnemyDifficulty Difficulty
+    private static Difficulty _difficulty;
+    public static Difficulty Difficulty
     {
         get => _difficulty;
         set

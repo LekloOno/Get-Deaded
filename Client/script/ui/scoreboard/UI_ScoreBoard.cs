@@ -30,7 +30,7 @@ public partial class UI_ScoreBoard : Control
         _entryTemplate.SetProcess(false);
     }
 
-    public async Task InitializeAsync(E_EnemyDifficulty difficulty, Guid? optScoreId = null, int Rank = 1)
+    public async Task InitializeAsync(Difficulty difficulty, Guid? optScoreId = null, int Rank = 1)
     {
         if (Initialized)
             return;

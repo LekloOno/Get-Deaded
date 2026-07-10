@@ -217,7 +217,7 @@ public partial class ScoresController : ControllerBase
             score.Id,
             score.Player.Username,
             score.Map.MapKey,
-            score.Difficulty,
+            (Difficulty) score.Difficulty,
             score.Value,
             score.TimeMs,
             score.WeaponStats.Select(ws => new WeaponStatDto(
