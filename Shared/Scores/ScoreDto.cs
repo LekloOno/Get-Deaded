@@ -4,7 +4,7 @@ public record SubmitScoreRequest(
     string MapKey,
     int Difficulty,
     int TimeMs,
-    int Score,
+    int Value,
     List<WeaponStatDto> WeaponStats
 );
 
@@ -13,8 +13,8 @@ public record ScoreDto(
     string Player,
     string Map,
     int Difficulty,
-    int TotalScore,
-    int TimeSpentMs,
+    int Value,
+    int TimeMs,
     List<WeaponStatDto> WeaponStats
 );
 
