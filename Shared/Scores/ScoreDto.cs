@@ -2,7 +2,7 @@ namespace Shared.Scores;
 
 public record SubmitScoreRequest(
     string MapKey,
-    int Difficulty,
+    Difficulty Difficulty,
     int TimeMs,
     int Value,
     List<WeaponStatDto> WeaponStats
@@ -12,7 +12,7 @@ public record ScoreDto(
     Guid Id,
     string Player,
     string Map,
-    int Difficulty,
+    Difficulty Difficulty,
     int Value,
     int TimeMs,
     List<WeaponStatDto> WeaponStats

@@ -1,6 +1,7 @@
 using System;
 using Godot;
 using Godot.Collections;
+using Shared.Scores;
 
 [GlobalClass]
 public partial class E_EnemyBuilder : Resource
@@ -11,20 +12,20 @@ public partial class E_EnemyBuilder : Resource
     }
 
     [Export]
-    private Dictionary<E_EnemyDifficulty, E_EnemySettings> _settingsByDifficulty
+    private Dictionary<Difficulty, E_EnemySettings> _settingsByDifficulty
         = CreateDefaultSettings();
         
     [Export] private PackedScene _enemyBase;
 
     private E_EnemySettings _sharedSettings;
-    private E_EnemyDifficulty _currentDifficulty;
+    private Difficulty _currentDifficulty;
 
     public E_Enemy Build()
     {
         if (_sharedSettings == null)
         {
             _sharedSettings = new();
-            ForceDifficulty(E_EnemyDifficulty.EASY);
+            ForceDifficulty(Difficulty.EASY);
         }
 
         E_Enemy enemy = _enemyBase.Instantiate<E_Enemy>();
@@ -33,7 +34,7 @@ public partial class E_EnemyBuilder : Resource
         return enemy;
     }
 
-    public void SetDifficulty(E_EnemyDifficulty difficulty)
+    public void SetDifficulty(Difficulty difficulty)
     {
         if (difficulty == _currentDifficulty)
             return;
@@ -41,7 +42,7 @@ public partial class E_EnemyBuilder : Resource
         ForceDifficulty(difficulty);
     }
 
-    private void ForceDifficulty(E_EnemyDifficulty difficulty)
+    private void ForceDifficulty(Difficulty difficulty)
     {
         if (!_settingsByDifficulty.TryGetValue(difficulty, out E_EnemySettings settings))
             return;
@@ -50,11 +51,11 @@ public partial class E_EnemyBuilder : Resource
         _sharedSettings.UpdateFrom(settings);
     }
 
-    private static Dictionary<E_EnemyDifficulty, E_EnemySettings> CreateDefaultSettings()
+    private static Dictionary<Difficulty, E_EnemySettings> CreateDefaultSettings()
     {
-        var dict = new Dictionary<E_EnemyDifficulty, E_EnemySettings>();
+        var dict = new Dictionary<Difficulty, E_EnemySettings>();
 
-        foreach (E_EnemyDifficulty difficulty in Enum.GetValues<E_EnemyDifficulty>())
+        foreach (Difficulty difficulty in Enum.GetValues<Difficulty>())
         {
             dict[difficulty] = null;
         }

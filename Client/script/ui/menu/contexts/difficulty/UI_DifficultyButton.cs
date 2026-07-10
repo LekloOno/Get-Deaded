@@ -1,9 +1,9 @@
-using System;
 using Godot;
+using Shared.Scores;
 
 public partial class UI_DifficultyButton : Button
 {
-	[Export] private E_EnemyDifficulty _difficulty;
+	[Export] private Difficulty _difficulty;
 
 	public override void _Ready()
 	{

@@ -42,7 +42,7 @@ public partial class ScoresController : ControllerBase
         {
             PlayerId = player.Id,
             MapKey = req.MapKey,
-            Difficulty = req.Difficulty,
+            Difficulty = (int) req.Difficulty,
             TimeMs = req.TimeMs,
             Value = req.Value,
 
@@ -62,7 +62,7 @@ public partial class ScoresController : ControllerBase
         var rank = await _db.Scores
             .Where(x =>
                 x.MapKey == req.MapKey &&
-                x.Difficulty == req.Difficulty &&
+                x.Difficulty == (int) req.Difficulty &&
                 x.Value > req.Value)
             .CountAsync() + 1;
 
@@ -88,7 +88,7 @@ public partial class ScoresController : ControllerBase
             s.Id,
             s.Player.Username,
             s.Map.MapKey,
-            s.Difficulty,
+            (Difficulty) s.Difficulty,
             s.Value,
             s.TimeMs,
             [.. s.WeaponStats.Select(ws => new WeaponStatDto(
