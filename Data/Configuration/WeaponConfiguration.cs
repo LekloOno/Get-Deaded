@@ -8,6 +8,8 @@ public class WeaponConfiguration : IEntityTypeConfiguration<Weapon>
 {
     public void Configure(EntityTypeBuilder<Weapon> builder)
     {
+        builder.ToTable("weapons");
+
         builder.HasKey(x => x.WeaponKey);
 
         builder.Property(x => x.WeaponKey)
