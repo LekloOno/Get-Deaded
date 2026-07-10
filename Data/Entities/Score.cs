@@ -4,6 +4,8 @@ public class Score
 {
     public Guid Id { get; set; }
 
+    public DateTime CreatedAt { get; set; }
+
     public Guid PlayerId { get; set; }
     public Player Player { get; set; } = null!;
 
