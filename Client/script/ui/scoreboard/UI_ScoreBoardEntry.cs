@@ -60,7 +60,7 @@ public partial class UI_ScoreBoardEntry : Control
         _scoreId = scoreRow.ScoreId;
 
         _ranking.Text = scoreRow.Rank.ToString();
-        _userName.Text = scoreRow.Player;
+        _userName.Text = scoreRow.PlayerDisplayName;
         _score.Text = scoreRow.Score.ToString();
         _time.Text = Mathf.RoundToInt((float) scoreRow.TimeMs / 1000).ToString();
         _kills.Text = scoreRow.Kills.ToString();

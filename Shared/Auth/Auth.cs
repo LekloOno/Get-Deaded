@@ -8,7 +8,8 @@ public record LoginRequest(
 public record AuthResponse(
     string Token,
     Guid UserId,
-    string Username
+    string Username,
+    string DisplayName
 );
 
 public record RegisterRequest(

@@ -54,7 +54,7 @@ public partial class ScoresController : ControllerBase
             return new LeaderboardRowDto(
                     x.Rank,
                     x.Score.Id,
-                    x.Score.Player.Username,
+                    x.Score.Player.DisplayName,
                     x.Score.PlayerId,
                     x.Score.TimeMs,
                     x.Score.Value,

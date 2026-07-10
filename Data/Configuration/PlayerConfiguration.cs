@@ -19,6 +19,10 @@ public class PlayerConfiguration : IEntityTypeConfiguration<Player>
         builder.HasIndex(x => x.Username)
             .IsUnique();
 
+        builder.Property(x => x.DisplayName)
+            .IsRequired()
+            .HasMaxLength(32);
+
         builder.Property(x => x.PasswordHash)
             .IsRequired();
     }
