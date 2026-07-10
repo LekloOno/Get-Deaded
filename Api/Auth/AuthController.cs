@@ -37,7 +37,7 @@ public class AuthController : ControllerBase
 
         var token = _jwt.CreateToken(player);
 
-        return new AuthResponse(token, player.Id, player.Username);
+        return new AuthResponse(token, player.Id, player.Username, player.DisplayName);
     }
 
     [HttpPost("register")]
@@ -49,7 +49,8 @@ public class AuthController : ControllerBase
         if (string.IsNullOrWhiteSpace(req.Password))
             return BadRequest("Password is required.");
 
-        var normalizedUsername = req.Username.Trim().ToLowerInvariant();
+        var displayName = req.Username.Trim();
+        var normalizedUsername = displayName.ToLowerInvariant();
 
         var usernameExists = await _db.Players
             .AnyAsync(x => x.Username == normalizedUsername);
@@ -63,6 +64,7 @@ public class AuthController : ControllerBase
         {
             Id = Guid.NewGuid(),
             Username = normalizedUsername,
+            DisplayName = displayName,
             PasswordHash = passwordHash
         };
 
@@ -75,7 +77,8 @@ public class AuthController : ControllerBase
         return Ok(new AuthResponse(
             token,
             player.Id,
-            player.Username
+            player.Username,
+            player.DisplayName
         ));
     }
 }

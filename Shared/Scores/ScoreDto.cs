@@ -21,7 +21,7 @@ public record ScoreDto(
 public record LeaderboardRowDto(
     int Rank,
     Guid ScoreId,
-    string Player,
+    string PlayerDisplayName,
     Guid PlayerId,
     int TimeMs,
     int Score,
