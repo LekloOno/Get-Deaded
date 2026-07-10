@@ -12,6 +12,9 @@ public class ScoreConfiguration : IEntityTypeConfiguration<Score>
 
         builder.HasKey(x => x.Id);
 
+        builder.Property(s => s.CreatedAt)
+            .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
         builder.HasOne(x => x.Player)
             .WithMany(x => x.Scores)
             .HasForeignKey(x => x.PlayerId);
