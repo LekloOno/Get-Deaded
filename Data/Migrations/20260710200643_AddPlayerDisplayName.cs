@@ -38,12 +38,12 @@ namespace Data.Migrations
 
             migrationBuilder.Sql("""
                 UPDATE Players
-                SET DisplayName = Username
+                SET "DisplayName" = "Username"
                 """);
 
             migrationBuilder.AlterColumn<string>(
                 name: "DisplayName",
-                table: "Players",
+                table: "players",
                 nullable: false,
                 oldClrType: typeof(string),
                 oldNullable: true);
