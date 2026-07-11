@@ -3,7 +3,7 @@ using Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Shared.Auth;
 
-namespace Api.Auth;
+namespace Api.Auth.Services;
 
 public class AuthService : IAuthService
 {
