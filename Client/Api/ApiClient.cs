@@ -68,6 +68,7 @@ public abstract class ApiClient
         {
             401 => ApiErrorType.Unauthorized,
             409 => ApiErrorType.Conflict,
+            429 => ApiErrorType.RateLimited,
             400 or 422 => ApiErrorType.InvalidRequest,
             >= 500 => ApiErrorType.ServerError,
             _ => ApiErrorType.Unknown

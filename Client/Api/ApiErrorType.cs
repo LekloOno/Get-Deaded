@@ -6,6 +6,7 @@ public enum ApiErrorType
     Unauthorized,
     InvalidRequest,
     Conflict,
+    RateLimited,
     ServerError,
     NetworkError,
     Timeout,
