@@ -8,8 +8,6 @@ public class WeaponStatConfiguration : IEntityTypeConfiguration<WeaponStat>
 {
     public void Configure(EntityTypeBuilder<WeaponStat> builder)
     {
-        builder.ToTable("weapon_stats");
-
         builder.HasKey(x => x.Id);
 
         builder.HasOne(x => x.Score)

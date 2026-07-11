@@ -8,8 +8,6 @@ public class PlayerConfiguration : IEntityTypeConfiguration<Player>
 {
     public void Configure(EntityTypeBuilder<Player> builder)
     {
-        builder.ToTable("players");
-
         builder.HasKey(x => x.Id);
 
         builder.Property(x => x.Username)
