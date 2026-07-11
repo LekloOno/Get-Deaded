@@ -16,15 +16,20 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<GameDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Default")).UseSnakeCaseNamingConvention());
 
-var jwtKey = builder.Configuration["Jwt:Key"]!;
-var jwtIssuer = builder.Configuration["Jwt:Issuer"]!;
-var jwtAudience = builder.Configuration["Jwt:Audience"]!;
+builder.Services
+    .AddOptions<JwtSettings>()
+    .Bind(builder.Configuration.GetSection("Jwt"))
+    .ValidateDataAnnotations()
+    .ValidateOnStart();
 
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ILeaderboardService, LeaderboardService>();
 builder.Services.AddScoped<IScoreService, ScoreService>();
 builder.Services.AddScoped<LeaderboardQueries>();
+
+var jwtSettings = builder.Configuration.GetSection("Jwt").Get<JwtSettings>()
+    ?? throw new InvalidOperationException("Missing 'Jwt' configuration section.");
 
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -37,11 +42,11 @@ builder.Services
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
 
-            ValidIssuer = jwtIssuer,
-            ValidAudience = jwtAudience,
+            ValidIssuer = jwtSettings.Issuer,
+            ValidAudience = jwtSettings.Audience,
 
             IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(jwtKey)
+                Encoding.UTF8.GetBytes(jwtSettings.Key)
             )
         };
         options.MapInboundClaims = false;
