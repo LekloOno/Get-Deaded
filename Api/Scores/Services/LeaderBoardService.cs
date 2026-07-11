@@ -21,11 +21,15 @@ public class LeaderboardService : ILeaderboardService
         _queries.GetRankAsync(scope.MapKey, scope.Difficulty, playerId, value, ct);
 
     public async Task<List<LeaderboardRowDto>> GetWindowAsync(
-        LeaderboardScope scope, int centerRank, int take, CancellationToken ct)
+        LeaderboardScope scope, int centerRank, int take, CancellationToken ct) =>
+        await BuildWindowAsync(scope, centerRank, take, highlightScoreId: null, ct);
+
+    private async Task<List<LeaderboardRowDto>> BuildWindowAsync(
+        LeaderboardScope scope, int centerRank, int take, Guid? highlightScoreId, CancellationToken ct)
     {
         var (topRank, botRank) = ComputeWindow(centerRank, take);
         var rows = await _queries.GetRankedWindowAsync(scope.MapKey, scope.Difficulty, topRank, botRank, ct);
-        return await HydrateAsync(rows, ct);
+        return await HydrateAsync(rows, highlightScoreId, ct);
     }
 
     public async Task<List<LeaderboardRowDto>> GetAroundScoreAsync(Guid scoreId, int take, CancellationToken ct)
@@ -39,12 +43,12 @@ public class LeaderboardService : ILeaderboardService
 
         var scope = new LeaderboardScope(target.MapKey, (Difficulty) target.Difficulty);
         var rank = await GetRankAsync(scope, target.PlayerId, target.Value, ct);
-        var window = await GetWindowAsync(scope, rank, take, ct);
+        var window = await BuildWindowAsync(scope, rank, take, highlightScoreId: scoreId, ct);
 
         if (window.Any(r => r.ScoreId == scoreId))
             return window;
 
-        var submitted = await BuildRowAsync(scoreId, rank, true, false, ct);
+        var submitted = await BuildRowAsync(scoreId, rank, submitted: true, isPersonalBest: false, ct);
         return [.. window.Append(submitted).OrderBy(r => r.Rank)];
     }
 
@@ -61,7 +65,7 @@ public class LeaderboardService : ILeaderboardService
         return (topRank, botRank);
     }
 
-    private static LeaderboardRowDto ToDto(Score s, int rank, bool submitted, bool pb)
+    private static LeaderboardRowDto ToDto(Score s, int rank, bool submitted, bool isPersonalBest)
     {
         var bestWeapon = s.WeaponStats.OrderByDescending(w => w.Damage).FirstOrDefault();
         return new LeaderboardRowDto(
@@ -70,10 +74,11 @@ public class LeaderboardService : ILeaderboardService
             s.WeaponStats.Sum(w => w.Damage),
             bestWeapon?.Weapon.WeaponKey ?? "Unknown",
             bestWeapon?.Accuracy,
-            submitted, pb);
+            submitted, isPersonalBest);
     }
 
-    private async Task<List<LeaderboardRowDto>> HydrateAsync(List<RankedScoreRow> rows, CancellationToken ct)
+    private async Task<List<LeaderboardRowDto>> HydrateAsync(
+        List<RankedScoreRow> rows, Guid? highlightScoreId, CancellationToken ct)
     {
         if (rows.Count == 0) return [];
 
@@ -85,10 +90,13 @@ public class LeaderboardService : ILeaderboardService
             .Where(s => ids.Contains(s.Id))
             .ToDictionaryAsync(s => s.Id, ct);
 
-        return [.. rows.Select(r => ToDto(scores[r.Id], r.Rank, false, true))];
+        return [.. rows.Select(r => ToDto(
+            scores[r.Id], r.Rank,
+            submitted: r.Id == highlightScoreId,
+            isPersonalBest: true))];
     }
 
-    private async Task<LeaderboardRowDto> BuildRowAsync(Guid scoreId, int rank, bool submitted, bool pb, CancellationToken ct)
+    private async Task<LeaderboardRowDto> BuildRowAsync(Guid scoreId, int rank, bool submitted, bool isPersonalBest, CancellationToken ct)
     {
         var s = await _db.Scores
             .AsNoTracking()
@@ -96,6 +104,6 @@ public class LeaderboardService : ILeaderboardService
             .Include(x => x.WeaponStats).ThenInclude(ws => ws.Weapon)
             .FirstAsync(x => x.Id == scoreId, ct);
 
-        return ToDto(s, rank, submitted, pb);
+        return ToDto(s, rank, submitted, isPersonalBest);
     }
 }
