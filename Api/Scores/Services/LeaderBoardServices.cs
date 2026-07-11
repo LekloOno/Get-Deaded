@@ -1,5 +1,6 @@
 using Api.Scores.Queries;
 using Data.Db;
+using Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Shared.Scores;
 
@@ -38,7 +39,13 @@ public class LeaderboardService : ILeaderboardService
 
         var scope = new LeaderboardScope(target.MapKey, (Difficulty) target.Difficulty);
         var rank = await GetRankAsync(scope, target.PlayerId, target.Value, ct);
-        return await GetWindowAsync(scope, rank, take, ct);
+        var window = await GetWindowAsync(scope, rank, take, ct);
+
+        if (window.Any(r => r.ScoreId == scoreId))
+            return window;
+
+        var submitted = await BuildRowAsync(scoreId, rank, true, ct);
+        return [.. window.Append(submitted).OrderBy(r => r.Rank)];
     }
 
     private static (int TopRank, int BotRank) ComputeWindow(int centerRank, int take)
@@ -54,12 +61,23 @@ public class LeaderboardService : ILeaderboardService
         return (topRank, botRank);
     }
 
+    private static LeaderboardRowDto ToDto(Score s, int rank, bool submitted)
+    {
+        var bestWeapon = s.WeaponStats.OrderByDescending(w => w.Damage).FirstOrDefault();
+        return new LeaderboardRowDto(
+            rank, s.Id, s.Player.DisplayName, s.PlayerId, s.TimeMs, s.Value,
+            s.WeaponStats.Sum(w => w.Kills),
+            s.WeaponStats.Sum(w => w.Damage),
+            bestWeapon?.Weapon.WeaponKey ?? "Unknown",
+            bestWeapon?.Accuracy,
+            submitted);
+    }
+
     private async Task<List<LeaderboardRowDto>> HydrateAsync(List<RankedScoreRow> rows, CancellationToken ct)
     {
         if (rows.Count == 0) return [];
 
         var ids = rows.Select(r => r.Id).ToList();
-
         var scores = await _db.Scores
             .AsNoTracking()
             .Include(s => s.Player)
@@ -67,17 +85,17 @@ public class LeaderboardService : ILeaderboardService
             .Where(s => ids.Contains(s.Id))
             .ToDictionaryAsync(s => s.Id, ct);
 
-        return [.. rows.Select(r =>
-        {
-            var s = scores[r.Id];
-            var bestWeapon = s.WeaponStats.OrderByDescending(w => w.Damage).FirstOrDefault();
+        return [.. rows.Select(r => ToDto(scores[r.Id], r.Rank, false))];
+    }
 
-            return new LeaderboardRowDto(
-                r.Rank, s.Id, s.Player.DisplayName, s.PlayerId, s.TimeMs, s.Value,
-                s.WeaponStats.Sum(w => w.Kills),
-                s.WeaponStats.Sum(w => w.Damage),
-                bestWeapon?.Weapon.WeaponKey ?? "Unknown",
-                bestWeapon?.Accuracy);
-        })];
+    private async Task<LeaderboardRowDto> BuildRowAsync(Guid scoreId, int rank, bool submitted, CancellationToken ct)
+    {
+        var s = await _db.Scores
+            .AsNoTracking()
+            .Include(x => x.Player)
+            .Include(x => x.WeaponStats).ThenInclude(ws => ws.Weapon)
+            .FirstAsync(x => x.Id == scoreId, ct);
+
+        return ToDto(s, rank, submitted);
     }
 }
