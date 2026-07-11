@@ -45,8 +45,7 @@ public class LeaderboardQueries
                 SELECT *, ROW_NUMBER() OVER (ORDER BY value DESC, id) AS rank
                 FROM best_per_player
             )
-            SELECT id AS ""Id"", player_id AS ""PlayerId"", rank AS ""Rank"",
-                   value AS ""Value"", time_ms AS ""TimeMs""
+            SELECT id, player_id, rank, value, time_ms
             FROM ranked
             WHERE rank > {2} AND rank <= {3}
             ORDER BY rank
