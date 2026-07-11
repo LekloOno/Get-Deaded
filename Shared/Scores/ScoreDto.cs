@@ -28,7 +28,8 @@ public record LeaderboardRowDto(
     int Kills,
     float Damage,
     string BestWeaponKey,
-    float? BestWeaponAccuracy
+    float? BestWeaponAccuracy,
+    bool IsSubmittedRun = false
 );
 
 public record LeaderboardPageDto(

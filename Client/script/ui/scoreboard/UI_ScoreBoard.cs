@@ -54,7 +54,7 @@ public partial class UI_ScoreBoard : Control
             );
         
         if (result.Success && result.Data != null)
-            CreateEntries(result.Data, optScoreId);
+            CreateEntries(result.Data);
 
         else
             _errorMessage?.ShowError(result.ErrorMessage ?? result.StatusCode.ToString() ?? "ERROR");
@@ -62,22 +62,22 @@ public partial class UI_ScoreBoard : Control
         _loading?.StopLoading();
     }
 
-    private void CreateEntries(List<LeaderboardRowDto> rows, Guid? scoreId)
+    private void CreateEntries(List<LeaderboardRowDto> rows)
     {
         bool foundPB = false;
 
         foreach (LeaderboardRowDto row in rows)
         {
             UI_ScoreBoardEntry entry = (UI_ScoreBoardEntry) _entryTemplate.Duplicate();
-            if (!foundPB && row.PlayerId == Session.PlayerId)
+            if (!foundPB && row.IsSubmittedRun)
             {
                 foundPB = true;
-                if (row.ScoreId == scoreId)
+                if (row.IsSubmittedRun)
                     entry.ThemeTypeVariation = "PanelNewPB";
                 else
                     entry.ThemeTypeVariation = "PanelPB";
             }
-            else if (row.ScoreId == scoreId)
+            else if (row.IsSubmittedRun)
                 entry.ThemeTypeVariation = "PanelNewEntry";
             else
                 entry.ThemeTypeVariation = "PanelEntry";
