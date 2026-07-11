@@ -9,9 +9,11 @@ namespace Client.Api.Godot;
 
 public partial class ApiGodotGlue : Node
 {
-    public static ApiGodotGlue Instance {get; private set;} = null!;
-    public AuthApi AuthApi {get; private set;} = new();
-    public ScoreApi ScoreApi {get; private set;} = new();
+    public static ApiGodotGlue Instance { get; private set; } = null!;
+    
+    public AuthApi AuthApi { get; private set; } = new();
+    public ScoreApi ScoreApi { get; private set; } = new();
+    public LeaderboardApi LeaderboardApi { get; private set; } = new(); 
 
     [Signal]
     public delegate void LoginFinishedEventHandler(Dictionary result);
@@ -47,9 +49,7 @@ public partial class ApiGodotGlue : Node
 
     public async Task<ScoreResult> SubmitScore(SubmitScoreRequest score)
     {
-        
-        var a = await ScoreApi.SubmitScoreAsync(score);
-        GD.Print(a.Message);
+        var a = await ScoreApi.SubmitAsync(score);
         return a;
     }
 }

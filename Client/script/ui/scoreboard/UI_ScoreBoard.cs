@@ -41,16 +41,16 @@ public partial class UI_ScoreBoard : Control
 
         ApiResult<List<LeaderboardRowDto>> result;
         if (optScoreId is Guid scoreId)
-            result = await ApiGodotGlue.Instance.ScoreApi.GetLeaderboardNewScoreAsync(
-                "dust_pit",
-                (int)difficulty,
-                scoreId
+            result = await ApiGodotGlue.Instance.LeaderboardApi.GetAroundScoreAsync(
+                scoreId,
+                20
             );
         else
-            result = await ApiGodotGlue.Instance.ScoreApi.GetLeaderboardAsync(
+            result = await ApiGodotGlue.Instance.LeaderboardApi.GetWindowAsync(
                 "dust_pit",
                 (int)difficulty,
-                Rank
+                Rank,
+                20
             );
         
         if (result.Success && result.Data != null)
