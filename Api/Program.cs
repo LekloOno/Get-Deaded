@@ -69,8 +69,8 @@ builder.Services.AddRateLimiter(options =>
             partitionKey: context.Connection.RemoteIpAddress?.ToString() ?? "unknown",
             factory: _ => new SlidingWindowRateLimiterOptions
             {
-                PermitLimit = 5,
-                Window = TimeSpan.FromMinutes(1),
+                PermitLimit = 4,
+                Window = TimeSpan.FromSeconds(20),
                 SegmentsPerWindow = 4,
                 QueueLimit = 0
             }));
@@ -82,8 +82,8 @@ builder.Services.AddRateLimiter(options =>
                 ?? "anonymous",
             factory: _ => new SlidingWindowRateLimiterOptions
             {
-                PermitLimit = 20,
-                Window = TimeSpan.FromMinutes(1),
+                PermitLimit = 8,
+                Window = TimeSpan.FromSeconds(20),
                 SegmentsPerWindow = 4,
                 QueueLimit = 0
             }));
@@ -95,8 +95,8 @@ builder.Services.AddRateLimiter(options =>
                 ?? "anonymous",
             factory: _ => new SlidingWindowRateLimiterOptions
             {
-                PermitLimit = 240,
-                Window = TimeSpan.FromMinutes(1),
+                PermitLimit = 100,
+                Window = TimeSpan.FromSeconds(20),
                 SegmentsPerWindow = 4,
                 QueueLimit = 0
             }));
@@ -108,8 +108,8 @@ builder.Services.AddRateLimiter(options =>
                 ?? "anonymous",
             factory: _ => new SlidingWindowRateLimiterOptions
             {
-                PermitLimit = 240,
-                Window = TimeSpan.FromMinutes(1),
+                PermitLimit = 100,
+                Window = TimeSpan.FromSeconds(20),
                 SegmentsPerWindow = 4,
                 QueueLimit = 0
             }));
