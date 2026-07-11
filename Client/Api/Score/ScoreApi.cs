@@ -6,109 +6,20 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System;
+using System.Threading;
 
 namespace Client.Api.Score;
 
-public partial class ScoreApi : ApiClient
+public class ScoreApi : ApiClient
 {
-    private static readonly JsonSerializerOptions JsonOptions =
-        new()
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-        };
-
-    public async Task<ScoreResult> SubmitScoreAsync(
-        SubmitScoreRequest score)
+    public async Task<ScoreResult> SubmitAsync(SubmitScoreRequest request, CancellationToken ct = default)
     {
-        try
-        {
-            var json = JsonSerializer.Serialize(
-                score,
-                JsonOptions);
-
-            var request = new HttpRequestMessage(HttpMethod.Post, "api/scores")
-            {
-                Content = new StringContent(
-                    json,
-                    Encoding.UTF8,
-                    "application/json")
-            };
-
-            request.Headers.Authorization =
-                new AuthenticationHeaderValue("Bearer", Session.Token);
-
-            var response = await Http.SendAsync(request);
-
-            if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
-            {
-                return new ScoreResult
-                {
-                    Success = false,
-                    Error = ScoreErrorType.Unauthorized,
-                    Message = "You are not authorized."
-                };
-            }
-
-            if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
-            {
-                return new ScoreResult
-                {
-                    Success = false,
-                    Error = ScoreErrorType.InvalidRequest,
-                    Message = "Invalid score submission."
-                };
-            }
-
-            if (!response.IsSuccessStatusCode)
-            {
-                return new ScoreResult
-                {
-                    Success = false,
-                    Error = ScoreErrorType.Unknown,
-                    Message = await response.Content.ReadAsStringAsync()
-                };
-            }
-
-            var responseJson = await response.Content.ReadAsStringAsync();
-
-            var result = JsonSerializer.Deserialize<SubmitScoreResponse>(
-                responseJson,
-                JsonOptions);
-
-            return new ScoreResult
-            {
-                Success = true,
-                Error = ScoreErrorType.None,
-                ScoreId = result?.ScoreId,
-                Rank = result?.Rank
-            };
-        }
-        catch (TaskCanceledException)
-        {
-            return new ScoreResult
-            {
-                Success = false,
-                Error = ScoreErrorType.Timeout,
-                Message = "Request timed out."
-            };
-        }
-        catch (HttpRequestException)
-        {
-            return new ScoreResult
-            {
-                Success = false,
-                Error = ScoreErrorType.NetworkError,
-                Message = "Cannot reach server."
-            };
-        }
-        catch (Exception ex)
-        {
-            return new ScoreResult
-            {
-                Success = false,
-                Error = ScoreErrorType.Unknown,
-                Message = ex.Message
-            };
-        }
+        var result = await SendAsync<SubmitScoreResponse>(HttpMethod.Post, "api/scores", request, ct);
+        return result.Success
+            ? new ScoreResult { Success = true, ScoreId = result.Data!.ScoreId, Rank = result.Data.Rank }
+            : new ScoreResult { Success = false, Error = (ScoreErrorType)MapError(result), Message = result.ErrorMessage };
     }
+
+    public async Task<ApiResult<ScoreDto>> GetDetailAsync(Guid scoreId, CancellationToken ct = default) =>
+        await SendAsync<ScoreDto>(HttpMethod.Get, $"api/scores/{scoreId}", ct: ct);
 }

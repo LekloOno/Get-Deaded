@@ -40,7 +40,7 @@ public partial class UI_ScoreBoardEntry : Control
             return;
         }
 
-        ApiResult<ScoreDto> result = await ApiGodotGlue.Instance.ScoreApi.GetScoreDetailAsync(_scoreId);
+        ApiResult<ScoreDto> result = await ApiGodotGlue.Instance.ScoreApi.GetDetailAsync(_scoreId);
 
         if (result == null)
             return;
