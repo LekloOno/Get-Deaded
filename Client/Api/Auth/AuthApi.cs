@@ -24,11 +24,24 @@ public class AuthApi : ApiClient
     private static AuthResult ToResult(ApiResult<AuthResponse> result)
     {
         if (!result.Success)
-            return new AuthResult { Success = false, Error = (AuthErrorType)MapError(result), Message = result.ErrorMessage };
+        {
+            var error = MapError(result);
+            return new AuthResult { Success = false, Error = error, Message = ToMessage(error) };
+        }
 
         Session.Token.Value = result.Data!.Token;
         Session.PlayerId = result.Data.UserId;
-
         return new AuthResult { Success = true, Token = result.Data.Token };
     }
+
+    private static string ToMessage(ApiErrorType error) => error switch
+    {
+        ApiErrorType.Unauthorized => "Invalid username or password.",
+        ApiErrorType.Conflict => "This username is already taken.",
+        ApiErrorType.InvalidRequest => "Invalid request.",
+        ApiErrorType.NetworkError => "Could not reach the server.",
+        ApiErrorType.Timeout => "The request timed out.",
+        ApiErrorType.ServerError => "Something went wrong on our end.",
+        _ => "An unknown error occurred."
+    };
 }
