@@ -44,7 +44,7 @@ public class LeaderboardService : ILeaderboardService
         if (window.Any(r => r.ScoreId == scoreId))
             return window;
 
-        var submitted = await BuildRowAsync(scoreId, rank, true, ct);
+        var submitted = await BuildRowAsync(scoreId, rank, true, false, ct);
         return [.. window.Append(submitted).OrderBy(r => r.Rank)];
     }
 
@@ -61,7 +61,7 @@ public class LeaderboardService : ILeaderboardService
         return (topRank, botRank);
     }
 
-    private static LeaderboardRowDto ToDto(Score s, int rank, bool submitted)
+    private static LeaderboardRowDto ToDto(Score s, int rank, bool submitted, bool pb)
     {
         var bestWeapon = s.WeaponStats.OrderByDescending(w => w.Damage).FirstOrDefault();
         return new LeaderboardRowDto(
@@ -70,7 +70,7 @@ public class LeaderboardService : ILeaderboardService
             s.WeaponStats.Sum(w => w.Damage),
             bestWeapon?.Weapon.WeaponKey ?? "Unknown",
             bestWeapon?.Accuracy,
-            submitted);
+            submitted, pb);
     }
 
     private async Task<List<LeaderboardRowDto>> HydrateAsync(List<RankedScoreRow> rows, CancellationToken ct)
@@ -85,10 +85,10 @@ public class LeaderboardService : ILeaderboardService
             .Where(s => ids.Contains(s.Id))
             .ToDictionaryAsync(s => s.Id, ct);
 
-        return [.. rows.Select(r => ToDto(scores[r.Id], r.Rank, false))];
+        return [.. rows.Select(r => ToDto(scores[r.Id], r.Rank, false, true))];
     }
 
-    private async Task<LeaderboardRowDto> BuildRowAsync(Guid scoreId, int rank, bool submitted, CancellationToken ct)
+    private async Task<LeaderboardRowDto> BuildRowAsync(Guid scoreId, int rank, bool submitted, bool pb, CancellationToken ct)
     {
         var s = await _db.Scores
             .AsNoTracking()
@@ -96,6 +96,6 @@ public class LeaderboardService : ILeaderboardService
             .Include(x => x.WeaponStats).ThenInclude(ws => ws.Weapon)
             .FirstAsync(x => x.Id == scoreId, ct);
 
-        return ToDto(s, rank, submitted);
+        return ToDto(s, rank, submitted, pb);
     }
 }

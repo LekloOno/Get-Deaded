@@ -64,14 +64,11 @@ public partial class UI_ScoreBoard : Control
 
     private void CreateEntries(List<LeaderboardRowDto> rows)
     {
-        bool foundPB = false;
-
         foreach (LeaderboardRowDto row in rows)
         {
             UI_ScoreBoardEntry entry = (UI_ScoreBoardEntry) _entryTemplate.Duplicate();
-            if (!foundPB && row.IsSubmittedRun)
+            if (row.IsPbRun && row.PlayerId == Session.PlayerId)
             {
-                foundPB = true;
                 if (row.IsSubmittedRun)
                     entry.ThemeTypeVariation = "PanelNewPB";
                 else
