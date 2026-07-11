@@ -23,7 +23,7 @@ public partial class ScoreApi : ApiClient
         try
         {
             var url =
-                $"api/scores/leaderboard/unique?mapKey={mapKey}&difficulty={difficulty}&centerRank={centerRank}&take={take}";
+                $"api/leaderboard?mapKey={mapKey}&difficulty={difficulty}&centerRank={centerRank}&take={take}";
 
             var request = new HttpRequestMessage(HttpMethod.Get, url);
             request.Headers.Authorization =
@@ -82,7 +82,7 @@ public partial class ScoreApi : ApiClient
         try
         {
             var url =
-                $"api/scores/leaderboard/unique/around-score?mapKey={mapKey}&difficulty={difficulty}&scoreId={scoreId}&take={take}";
+                $"api/leaderboard/around/{scoreId}/?take={take}";
 
             var request = new HttpRequestMessage(HttpMethod.Get, url);
             request.Headers.Authorization =
