@@ -29,7 +29,8 @@ public record LeaderboardRowDto(
     float Damage,
     string BestWeaponKey,
     float? BestWeaponAccuracy,
-    bool IsSubmittedRun = false
+    bool IsSubmittedRun = false,
+    bool IsPbRun = true             // If it is the submitted run, it might not be the actual pb - specified here explicitly
 );
 
 public record LeaderboardPageDto(
