@@ -1,8 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Data.Db;
-using Microsoft.EntityFrameworkCore;
 using Shared.Auth;
-using Data.Entities;
 
 namespace Api.Auth;
 
@@ -10,75 +7,30 @@ namespace Api.Auth;
 [Route("api/auth")]
 public class AuthController : ControllerBase
 {
-    private readonly GameDbContext _db;
-    private readonly JwtTokenService _jwt;
+    private readonly IAuthService _auth;
+    public AuthController(IAuthService auth) => _auth = auth;
 
-    public AuthController(GameDbContext db, JwtTokenService jwt)
+    [HttpPost("register")]
+    public async Task<ActionResult<AuthResponse>> Register(RegisterRequest request, CancellationToken ct)
     {
-        _db = db;
-        _jwt = jwt;
+        var outcome = await _auth.RegisterAsync(request, ct);
+        return outcome.Status switch
+        {
+            AuthOutcomeStatus.UsernameTaken => Conflict("Username already exists."),
+            AuthOutcomeStatus.Success => Ok(outcome.Response),
+            _ => StatusCode(500)
+        };
     }
 
     [HttpPost("login")]
-    public async Task<ActionResult<AuthResponse>> Login(LoginRequest req)
+    public async Task<ActionResult<AuthResponse>> Login(LoginRequest request, CancellationToken ct)
     {
-        var normalizedUsername = req.Username.Trim().ToLowerInvariant();
-
-        var player = await _db.Players
-            .FirstOrDefaultAsync(x => x.Username == normalizedUsername);
-
-        if (player == null)
-            return Unauthorized();
-
-        var valid = BCrypt.Net.BCrypt.Verify(req.Password, player.PasswordHash);
-
-        if (!valid)
-            return Unauthorized();
-
-        var token = _jwt.CreateToken(player);
-
-        return new AuthResponse(token, player.Id, player.Username, player.DisplayName);
-    }
-
-    [HttpPost("register")]
-    public async Task<ActionResult<AuthResponse>> Register(RegisterRequest req)
-    {
-        if (string.IsNullOrWhiteSpace(req.Username))
-            return BadRequest("Username is required.");
-
-        if (string.IsNullOrWhiteSpace(req.Password))
-            return BadRequest("Password is required.");
-
-        var displayName = req.Username.Trim();
-        var normalizedUsername = displayName.ToLowerInvariant();
-
-        var usernameExists = await _db.Players
-            .AnyAsync(x => x.Username == normalizedUsername);
-
-        if (usernameExists)
-            return Conflict("Username already exists.");
-
-        var passwordHash = BCrypt.Net.BCrypt.HashPassword(req.Password);
-
-        var player = new Player
+        var outcome = await _auth.LoginAsync(request, ct);
+        return outcome.Status switch
         {
-            Id = Guid.NewGuid(),
-            Username = normalizedUsername,
-            DisplayName = displayName,
-            PasswordHash = passwordHash
+            AuthOutcomeStatus.InvalidCredentials => Unauthorized(),
+            AuthOutcomeStatus.Success => Ok(outcome.Response),
+            _ => StatusCode(500)
         };
-
-        _db.Players.Add(player);
-
-        await _db.SaveChangesAsync();
-
-        var token = _jwt.CreateToken(player);
-
-        return Ok(new AuthResponse(
-            token,
-            player.Id,
-            player.Username,
-            player.DisplayName
-        ));
     }
 }

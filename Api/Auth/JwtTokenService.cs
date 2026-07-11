@@ -6,7 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Api.Auth;
 
-public class JwtTokenService
+public class JwtTokenService : IJwtTokenService
 {
     private readonly IConfiguration _config;
 
