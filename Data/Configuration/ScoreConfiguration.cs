@@ -8,8 +8,6 @@ public class ScoreConfiguration : IEntityTypeConfiguration<Score>
 {
     public void Configure(EntityTypeBuilder<Score> builder)
     {
-        builder.ToTable("scores");
-
         builder.HasKey(x => x.Id);
 
         builder.Property(s => s.CreatedAt)

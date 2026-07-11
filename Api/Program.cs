@@ -14,7 +14,7 @@ builder.WebHost.UseUrls("http://0.0.0.0:8080");
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<GameDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("Default")).UseSnakeCaseNamingConvention());
 
 var jwtKey = builder.Configuration["Jwt:Key"]!;
 var jwtIssuer = builder.Configuration["Jwt:Issuer"]!;
