@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Api.Auth.Services;
 using Api.Scores.Services;
+using Api.Scores.Queries;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,7 @@ builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ILeaderboardService, LeaderboardService>();
 builder.Services.AddScoped<IScoreService, ScoreService>();
+builder.Services.AddScoped<LeaderboardQueries>();
 
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
