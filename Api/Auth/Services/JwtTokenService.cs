@@ -4,7 +4,7 @@ using System.Text;
 using Data.Entities;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Api.Auth;
+namespace Api.Auth.Services;
 
 public class JwtTokenService : IJwtTokenService
 {

@@ -1,6 +1,6 @@
 using Data.Entities;
 
-namespace Api.Auth;
+namespace Api.Auth.Services;
 
 public interface IJwtTokenService
 {
