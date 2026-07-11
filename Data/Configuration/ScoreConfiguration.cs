@@ -28,5 +28,9 @@ public class ScoreConfiguration : IEntityTypeConfiguration<Score>
 
         builder.Property(x => x.TimeMs)
             .IsRequired();
+
+        builder.HasIndex(x => new { x.MapKey, x.Difficulty, x.PlayerId, x.Value })
+            .IsDescending(false, false, false, true)
+            .HasDatabaseName("ix_scores_leaderboard_lookup");
     }
 }
