@@ -3,6 +3,7 @@ using System.Security.Claims;
 using Api.Scores.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using Shared.Scores;
 
 namespace Api.Scores.Controllers;
@@ -16,6 +17,7 @@ public class ScoresController : ControllerBase
 
     [Authorize]
     [HttpPost]
+    [EnableRateLimiting("submit-score")]
     public async Task<ActionResult<SubmitScoreResponse>> Submit(SubmitScoreRequest request, CancellationToken ct)
     {
         var playerId = Guid.Parse(User.FindFirstValue(JwtRegisteredClaimNames.Sub)!);
@@ -23,6 +25,7 @@ public class ScoresController : ControllerBase
     }
 
     [HttpGet("{id:guid}")]
+    [EnableRateLimiting("score-detail")]
     public async Task<ActionResult<ScoreDto>> GetDetail(Guid id, CancellationToken ct)
     {
         var score = await _scores.GetDetailAsync(id, ct);

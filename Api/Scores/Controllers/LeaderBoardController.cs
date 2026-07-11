@@ -1,5 +1,6 @@
 using Api.Scores.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using Shared.Scores;
 
 namespace Api.Scores.Controllers;
@@ -12,6 +13,7 @@ public class LeaderboardController : ControllerBase
     public LeaderboardController(ILeaderboardService leaderboard) => _leaderboard = leaderboard;
 
     [HttpGet]
+    [EnableRateLimiting("leaderboard")]
     public async Task<ActionResult<List<LeaderboardRowDto>>> Get(
         string mapKey, Difficulty difficulty, int centerRank, int take, CancellationToken ct)
     {
@@ -20,6 +22,7 @@ public class LeaderboardController : ControllerBase
     }
 
     [HttpGet("around/{scoreId:guid}")]
+    [EnableRateLimiting("leaderboard")]
     public async Task<ActionResult<List<LeaderboardRowDto>>> GetAroundScore(Guid scoreId, int take, CancellationToken ct)
     {
         take = Math.Clamp(take, 1, 100);

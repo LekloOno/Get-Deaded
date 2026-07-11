@@ -35,6 +35,7 @@ public class ScoreApi : ApiClient
         ApiErrorType.NetworkError => "Could not reach the server.",
         ApiErrorType.Timeout => "The request timed out.",
         ApiErrorType.ServerError => "Something went wrong on our end.",
+        ApiErrorType.RateLimited => "Too many attempts. Please wait a moment before trying again.",
         _ => "An unknown error occurred."
     };
 }
