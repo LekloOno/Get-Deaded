@@ -1,6 +1,6 @@
 - [Versions - notes and descriptions](#versions---notes-and-descriptions)
   - [Feedback Guidelines](#feedback-guidelines)
-  - [v0.2.3](#v023)
+  - [v0.2.4](#v024)
     - [IMPORTANT Note](#important-note)
     - [Brief](#brief)
     - [Goals](#goals)
@@ -39,9 +39,12 @@ A few feedback that have already been collected :
   - **Response** - Tackled with visual and audio cues, a overhaul of the reload system with various subtle mechanics that makes it smoother.
   - **Question** - How is it feeling now ? Still collecting feedback. Making amo management really not frustrating will probably require a lot of GD work anyway.
 
-## v0.2.3
+## v0.2.4
 
-Currently, only v0.2.3 is available. It is a very early prototype of the very fundamental aspects.
+Currently, only v0.2.4 is available. It is a very early prototype of the very fundamental aspects.
+
+> **0.2.3 to 0.2.4** : Last update on 0.2 was a simple infrastructure/API rework. The game is still the same, but score got reseted since they were already mixed with older scores from very different earlier versions.
+> Scores in this version will now remain, even if there's further v0.2 maintenance, as the new structure allows to keep multiple versions alive, and grouped or separated. 
 
 ### IMPORTANT Note
 
