@@ -9,7 +9,14 @@ namespace Client.Api;
 
 public abstract class ApiClient
 {
-    private static readonly HttpClient _http = new(new AuthHeaderHandler { InnerHandler = new HttpClientHandler() })
+    private static readonly HttpClient _http =
+        new(new AuthHeaderHandler
+        {
+            InnerHandler = new GameVersionHeaderHandler
+            {
+                InnerHandler = new HttpClientHandler()
+            }
+        })
     {
         BaseAddress = new Uri(ApiConfig.BaseUrl)
     };
