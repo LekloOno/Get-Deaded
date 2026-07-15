@@ -2,7 +2,7 @@ using Shared.Scores;
 
 namespace Api.Scores.Services;
 
-public record LeaderboardScope(string MapKey, Difficulty Difficulty);
+public record LeaderboardScope(string MapKey, string ModeKey, Difficulty Difficulty);
 
 public interface ILeaderboardService
 {

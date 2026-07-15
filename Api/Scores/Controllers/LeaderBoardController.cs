@@ -15,10 +15,10 @@ public class LeaderboardController : ControllerBase
     [HttpGet]
     [EnableRateLimiting("leaderboard")]
     public async Task<ActionResult<List<LeaderboardRowDto>>> Get(
-        string mapKey, Difficulty difficulty, int centerRank, int take, CancellationToken ct)
+        string mapKey, string modeKey, Difficulty difficulty, int centerRank, int take, CancellationToken ct)
     {
         take = Math.Clamp(take, 1, 100);
-        return Ok(await _leaderboard.GetWindowAsync(new LeaderboardScope(mapKey, difficulty), centerRank, take, ct));
+        return Ok(await _leaderboard.GetWindowAsync(new LeaderboardScope(mapKey, modeKey, difficulty), centerRank, take, ct));
     }
 
     [HttpGet("around/{scoreId:guid}")]
