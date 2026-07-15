@@ -6,7 +6,7 @@ public class Score
 
     public DateTime CreatedAt { get; set; }
     
-    public string VersionString { get; set; } = null!;
+    public string VersionKey { get; set; } = null!;
     public GameVersion GameVersion { get; set; } = null!;
 
     public Guid PlayerId { get; set; }

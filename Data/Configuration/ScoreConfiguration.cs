@@ -15,7 +15,7 @@ public class ScoreConfiguration : IEntityTypeConfiguration<Score>
 
         builder.HasOne(x => x.GameVersion)
             .WithMany(x => x.Scores)
-            .HasForeignKey(x => x.VersionString);
+            .HasForeignKey(x => x.VersionKey);
 
         builder.HasOne(x => x.Player)
             .WithMany(x => x.Scores)

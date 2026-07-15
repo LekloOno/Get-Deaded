@@ -31,7 +31,7 @@ public class ScoreService : IScoreService
             MapKey = request.MapKey,
             ModeKey = request.ModeKey,
             Difficulty = (int) request.Difficulty,
-            VersionString = _versionContext.Version!.VersionString,
+            VersionKey = _versionContext.Version!.VersionKey,
             TimeMs = request.TimeMs,
             Value = request.Value,
             WeaponStats = [.. request.WeaponStats.Select(ws => new WeaponStat

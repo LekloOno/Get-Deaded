@@ -13,19 +13,19 @@ public class GameVersionResolver : IGameVersionResolver
         _db = db;
     }
 
-    public Task<GameVersion?> ResolveAsync(string versionString)
+    public Task<GameVersion?> ResolveAsync(string versionKey)
     {
         return _db.GameVersions
             .AsNoTracking()
             .FirstOrDefaultAsync(
-                v => v.VersionString == versionString);
+                v => v.VersionKey == versionKey);
     }
 
-    public async Task<ScoreCompatibilityGroup?> ResolveCompatibilityGroupAsync(string versionString)
+    public async Task<ScoreCompatibilityGroup?> ResolveCompatibilityGroupAsync(string versionKey)
     {
         return await _db.GameVersions
             .AsNoTracking()
-            .Where(v => v.VersionString == versionString)
+            .Where(v => v.VersionKey == versionKey)
             .Select(v => v.Group)
             .FirstOrDefaultAsync();
     }
