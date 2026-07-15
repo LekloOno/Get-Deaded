@@ -86,7 +86,7 @@ public class LeaderboardQueries
             )
             SELECT id, player_id, rank, value, time_ms
             FROM ranked
-            WHERE rank > {2} AND rank <= {3}
+            WHERE rank > {4} AND rank <= {5}
             ORDER BY rank
         ", mapKey, modeKey, (int)difficulty, version.GroupKey, topRank, botRank)
         .ToListAsync(ct);
