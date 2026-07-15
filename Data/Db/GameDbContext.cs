@@ -43,11 +43,11 @@ public class GameDbContext : DbContext
         );
 
         modelBuilder.Entity<GameVersion>().HasData(
-            new GameVersion { VersionString = "0.2.4", GroupKey = "pre-0.3", ReleasedAt = new DateTime(2026, 7, 17, 0, 0, 0, DateTimeKind.Utc) }
+            new GameVersion { VersionKey = "0.2.4", GroupKey = "pre-0.3", ReleasedAt = new DateTime(2026, 7, 17, 0, 0, 0, DateTimeKind.Utc) }
         );
 
         modelBuilder.Entity<GameVersion>().HasData(
-            new GameVersion { VersionString = "0.3.0", GroupKey = "0.3_sectors", ReleasedAt = new DateTime(2026, 7, 17, 0, 0, 0, DateTimeKind.Utc) }
+            new GameVersion { VersionKey = "0.3.0", GroupKey = "0.3_sectors", ReleasedAt = new DateTime(2026, 7, 17, 0, 0, 0, DateTimeKind.Utc) }
         );
     }
 }

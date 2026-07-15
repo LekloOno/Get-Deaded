@@ -8,7 +8,7 @@ public class GameVersionConfiguration : IEntityTypeConfiguration<GameVersion>
 {
     public void Configure(EntityTypeBuilder<GameVersion> builder)
     {
-        builder.HasKey(x => x.VersionString);
+        builder.HasKey(x => x.VersionKey);
 
         builder.HasOne(x => x.Group)
             .WithMany(x => x.Versions)
