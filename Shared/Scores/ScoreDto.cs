@@ -2,6 +2,7 @@ namespace Shared.Scores;
 
 public record SubmitScoreRequest(
     string MapKey,
+    string ModeKey,
     Difficulty Difficulty,
     int TimeMs,
     int Value,
@@ -12,6 +13,7 @@ public record ScoreDto(
     Guid Id,
     string Player,
     string Map,
+    string ModeKey,
     Difficulty Difficulty,
     int Value,
     int TimeMs,
