@@ -8,6 +8,7 @@ using Api.Scores.Services;
 using Api.Scores.Queries;
 using System.Threading.RateLimiting;
 using System.IdentityModel.Tokens.Jwt;
+using Api.Version;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +30,9 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ILeaderboardService, LeaderboardService>();
 builder.Services.AddScoped<IScoreService, ScoreService>();
 builder.Services.AddScoped<LeaderboardQueries>();
+
+builder.Services.AddScoped<IGameVersionResolver, GameVersionResolver>();
+builder.Services.AddScoped<GameVersionContext>();
 
 var jwtSettings = builder.Configuration.GetSection("Jwt").Get<JwtSettings>()
     ?? throw new InvalidOperationException("Missing 'Jwt' configuration section.");
@@ -118,6 +122,7 @@ builder.Services.AddRateLimiter(options =>
 var app = builder.Build();
 
 app.UseAuthentication();
+app.UseMiddleware<GameVersionMiddleware>();
 app.UseAuthorization();
 app.UseRateLimiter();
 
