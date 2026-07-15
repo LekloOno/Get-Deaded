@@ -1,3 +1,4 @@
+using Api.Version;
 using Data.Db;
 using Data.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -8,11 +9,13 @@ namespace Api.Scores.Services;
 public class ScoreService : IScoreService
 {
     private readonly GameDbContext _db;
+    private readonly GameVersionContext _versionContext;
     private readonly ILeaderboardService _leaderboard;
 
-    public ScoreService(GameDbContext db, ILeaderboardService leaderboard)
+    public ScoreService(GameDbContext db, GameVersionContext versionContext, ILeaderboardService leaderboard)
     {
         _db = db;
+        _versionContext = versionContext;
         _leaderboard = leaderboard;
     }
 
@@ -27,6 +30,7 @@ public class ScoreService : IScoreService
             PlayerId = playerId,
             MapKey = request.MapKey,
             Difficulty = (int) request.Difficulty,
+            VersionString = _versionContext.Version!.VersionString,
             TimeMs = request.TimeMs,
             Value = request.Value,
             WeaponStats = [.. request.WeaponStats.Select(ws => new WeaponStat
@@ -43,7 +47,7 @@ public class ScoreService : IScoreService
         _db.Scores.Add(score);
         await _db.SaveChangesAsync(ct);
 
-        var scope = new LeaderboardScope(request.MapKey, request.Difficulty);
+        var scope = new LeaderboardScope(request.MapKey, request.ModeKey, request.Difficulty);
         var rank = await _leaderboard.GetRankAsync(scope, playerId, request.Value, ct);
 
         return new SubmitScoreResponse(score.Id, rank);
@@ -60,7 +64,8 @@ public class ScoreService : IScoreService
         if (score is null) return null;
 
         return new ScoreDto(
-            score.Id, score.Player.DisplayName, score.MapKey, (Difficulty) score.Difficulty,
+            score.Id, score.Player.DisplayName,
+            score.MapKey, score.ModeKey, (Difficulty) score.Difficulty,
             score.Value, score.TimeMs,
             [.. score.WeaponStats.Select(ws => new WeaponStatDto(
                 ws.WeaponKey, ws.Damage, ws.Kills, ws.Accuracy, ws.CriticalAccuracy))]);
