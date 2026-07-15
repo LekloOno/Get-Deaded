@@ -29,6 +29,7 @@ public class ScoreService : IScoreService
             Id = Guid.NewGuid(),
             PlayerId = playerId,
             MapKey = request.MapKey,
+            ModeKey = request.ModeKey,
             Difficulty = (int) request.Difficulty,
             VersionString = _versionContext.Version!.VersionString,
             TimeMs = request.TimeMs,
