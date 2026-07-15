@@ -72,9 +72,9 @@ public class LeaderboardQueries
                 AND
                     s.difficulty = {2}
                 AND
-                    s.version_id IN
+                    s.version_key IN
                     (
-                        SELECT id
+                        SELECT version_key
                         FROM game_versions
                         WHERE group_key = {3}
                     )
