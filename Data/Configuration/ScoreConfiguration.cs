@@ -13,6 +13,10 @@ public class ScoreConfiguration : IEntityTypeConfiguration<Score>
         builder.Property(s => s.CreatedAt)
             .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
+        builder.HasOne(x => x.GameVersion)
+            .WithMany(x => x.Scores)
+            .HasForeignKey(x => x.VersionString);
+
         builder.HasOne(x => x.Player)
             .WithMany(x => x.Scores)
             .HasForeignKey(x => x.PlayerId);
@@ -21,14 +25,18 @@ public class ScoreConfiguration : IEntityTypeConfiguration<Score>
             .WithMany(x => x.Scores)
             .HasForeignKey(x => x.MapKey);
 
+        builder.HasOne(x => x.Mode)
+            .WithMany(x => x.Scores)
+            .HasForeignKey(x => x.ModeKey);
+
         builder.Property(x => x.Difficulty)
             .IsRequired();
 
         builder.Property(x => x.TimeMs)
             .IsRequired();
 
-        builder.HasIndex(x => new { x.MapKey, x.Difficulty, x.PlayerId, x.Value })
-            .IsDescending(false, false, false, true)
+        builder.HasIndex(x => new { x.MapKey, x.ModeKey, x.Difficulty, x.PlayerId, x.Value })
+            .IsDescending(false, false, false, false, true)
             .HasDatabaseName("ix_scores_leaderboard_lookup");
     }
 }
