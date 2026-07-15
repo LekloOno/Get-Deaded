@@ -48,6 +48,7 @@ public partial class UI_ScoreBoard : Control
         else
             result = await ApiGodotGlue.Instance.LeaderboardApi.GetWindowAsync(
                 "dust_pit",
+                "test",
                 (int)difficulty,
                 Rank,
                 20

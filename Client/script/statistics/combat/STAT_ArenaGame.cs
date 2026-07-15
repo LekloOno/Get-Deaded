@@ -60,6 +60,7 @@ public partial class STAT_ArenaGame: IDisposable
     {
         return new SubmitScoreRequest(
             MapData.Id,
+            "test",
             Difficulty,
             (int)Time,
             (int)Score,
