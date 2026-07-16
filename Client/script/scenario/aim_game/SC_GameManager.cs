@@ -22,7 +22,7 @@ public partial class SC_GameManager : Node
 	public STAT_ArenaGame GameStats {get; private set;}
 	public Observable<uint> Score {get; private set;} = new();
 	public SceneTreeTimer CountDownTimer;
-	private GE_IActiveCombatEntity _player;
+	public GE_IActiveCombatEntity? Player {get; private set;}
 	private GC_Shield _shield;
 	/// <summary>
 	/// An "unexpected" stop, like the player manually stopping, or dying.
@@ -48,7 +48,7 @@ public partial class SC_GameManager : Node
 
 		_active = true;
 
-		if (_player != player)
+		if (Player != player)
 			InitNewPlayer(player);
 		else
 			GameStats.Reset();
@@ -59,21 +59,23 @@ public partial class SC_GameManager : Node
 		EmitSignal(SignalName.Initialized);
 		Input.MouseMode = Input.MouseModeEnum.Captured;
 
+		_initial.Init();
+
 		CountDownTimer = GetTree().CreateTimer(CountDown, false, true);
 		CountDownTimer.Timeout += Start;
 	}
 
 	private void InitNewPlayer(GE_IActiveCombatEntity player)
 	{
-		if (_player != null)
-			_player.HealthManager.OnDie -= SendInterrupt;
+		if (Player != null)
+			Player.HealthManager.OnDie -= SendInterrupt;
 
 		_uiCombatStats.Clear();
 		GameStats = new(this, new(player));
 		_uiCombatStats.AddStat(GameStats.CombatStat, Score);
 					
 		player.HealthManager.OnDie += SendInterrupt;
-		_player = player;
+		Player = player;
 	}
 
 	private void SendInterrupt(GC_Health _)
@@ -111,10 +113,10 @@ public partial class SC_GameManager : Node
 
 		_statsInput.EnableAction();
 		
-		if (_player.HealthManager.TopHealthLayer is GC_Shield shield)
+		if (Player.HealthManager.TopHealthLayer is GC_Shield shield)
 			_shield = shield;
 
-		_initial.Start(_player);
+		_initial.Start(Player);
 		SC_EntitiesManager.EnablePickups();
 	}
 
@@ -129,13 +131,13 @@ public partial class SC_GameManager : Node
 
 	public void EndGame()
 	{
-		_player.HealthManager.Heal(99999);
+		Player.HealthManager.Heal(99999);
 		Reset();
 	}
 
 	private void Reset(bool save = true)
 	{
-		_player.WeaponsHandler.ClearDamageMultiplier();
+		Player.WeaponsHandler.ClearDamageMultiplier();
 		_statsInput.DisableAction();
 		SC_EntitiesManager.DisablePickups();
 		

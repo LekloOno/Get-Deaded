@@ -10,18 +10,20 @@ public partial class SC_RandomParentSector : SC_ParentSector
 
     private int _elapsedCount;
 
-    protected override void OnSectorHandleNext(SC_GenericSpawnerScript prev)
+    protected override bool OnSectorHandleNextSpec(SC_GenericSpawnerScript prev)
     {
         _elapsedCount ++;
         if (_elapsedCount >= _count)
         {
             DoStop();
-            return;
+            return false;
         }
 
         _subSectorIndex = GetRandomIndex();
-        SC_SpawnSector sector = _subSectors[_subSectorIndex];
-        sector.Start(prev.Starter);
+        ActiveSector = _subSectors[_subSectorIndex];
+        ActiveSector.Start(prev.Starter);
+
+        return true;
     }
 
     /// <summary>
@@ -35,14 +37,19 @@ public partial class SC_RandomParentSector : SC_ParentSector
 
     protected override void StartSpec(GE_IActiveCombatEntity starter)
     {
-        _subSectorIndex = _rng.Next(_subSectors.Count);
         _elapsedCount = 0;
-        SC_SpawnSector sector = _subSectors[_subSectorIndex];
-        sector.Start(Starter);
+        ActiveSector = _subSectors[_subSectorIndex];
+        ActiveSector.Start(Starter);
     }
 
     protected override void StopSpec()
     {
-        _subSectors[_subSectorIndex].Interrupt();
+        ActiveSector?.Interrupt();
+    }
+
+    protected override void ParentInitSpec()
+    {
+        _subSectorIndex = _rng.Next(_subSectors.Count);
+        ActiveSector = _subSectors[_subSectorIndex];
     }
 }

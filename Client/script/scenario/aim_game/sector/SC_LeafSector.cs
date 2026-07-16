@@ -15,5 +15,7 @@ public abstract partial class SC_LeafSector : SC_SpawnSector
         LeafReadySpec();
     }
 
+    public override SC_LeafSector? ActiveLeafSector() => this;
+
     protected abstract void LeafReadySpec();
 }

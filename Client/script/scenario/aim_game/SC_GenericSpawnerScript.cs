@@ -6,6 +6,7 @@ using Godot;
 public abstract partial class SC_GenericSpawnerScript : Node3D
 {
     [Export] protected SC_GameManager _gameManager = null!;
+    [Signal] public delegate void InitializedEventHandler();
     [Signal] public delegate void StopEventHandler();   // Called at the end of this scene script
     [Signal] public delegate void HandleNextEventHandler(SC_GenericSpawnerScript prev);
     public GE_IActiveCombatEntity Starter {get; private set;} = null!;
@@ -13,6 +14,14 @@ public abstract partial class SC_GenericSpawnerScript : Node3D
     protected readonly List<E_IEnemy> SpawnedEnemies = [];
 
     protected bool _running;
+
+    public void Init()
+    {
+        InitSpec(); 
+        EmitSignal(SignalName.Initialized);
+    }
+
+    protected abstract void InitSpec();
 
     public void Start(GE_IActiveCombatEntity starter)
     {

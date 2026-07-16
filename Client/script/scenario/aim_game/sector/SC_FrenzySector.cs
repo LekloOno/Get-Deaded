@@ -101,4 +101,6 @@ public partial class SC_FrenzySector : SC_LeafSector
             _reservedFlushFrame = frame;
         }
     }
+
+    protected override void InitSpec() {}
 }
