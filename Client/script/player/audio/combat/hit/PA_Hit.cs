@@ -4,13 +4,14 @@ using Godot;
 [GlobalClass]
 public partial class PA_Hit : Node
 {
-    [Export] private PW_WeaponsHandler _weaponsHandler;
-    [Export] private AUD_Sound _criticalHit;
-    [Export] private AUD_Sound _criticalDing;
-    [Export] private AUD_Sound _kill;
-    [Export] private AUD_Sound _meatHit;
-    [Export] private AUD_Sound _barrierHit;
-    [Export] private AUD_Sound _armorHit;
+    [Export] private PW_WeaponsHandler _weaponsHandler = null!;
+    [Export] private AUD_Sound _criticalHit = null!;
+    [Export] private AUD_Sound _criticalDing = null!;
+    [Export] private AUD_Sound _kill = null!;
+    [Export] private AUD_Sound _criticalKill = null!;
+    [Export] private AUD_Sound _meatHit = null!;
+    [Export] private AUD_Sound _barrierHit = null!;
+    [Export] private AUD_Sound _armorHit = null!;
     [Export] private ulong _minimumDelay = 45;
     [Export] private ulong _criticalMinimumDelay = 100;
     [Export] private bool _volumeDamageScale = true;
@@ -40,7 +41,12 @@ public partial class PA_Hit : Node
             return;
 
         if (hit.Killed)
+        {
+            if (hit.Critical)
+                _criticalKill.Play();
+                
             PlayKill();
+        }
 
         if (!hit.OverrideBodyPart && hit.HurtBox.BodyPart == GC_BodyPart.Head)
         {
