@@ -31,7 +31,7 @@ public partial class UI_ActiveSector : Control
         Hide();
         SetProcess(false);
 
-        _baseSector.SectorChanged += OnSectorChanged;
+        _baseSector.SectorChangedTo += OnSectorChanged;
         _baseSector.Initialized += OnInitialized;
         _gameManager.ResetGame += OnStop;
     }

@@ -8,7 +8,8 @@ public abstract partial class SC_ParentSector : SC_SpawnSector
     protected readonly List<SC_SpawnSector> _subSectors = [];
     public SC_SpawnSector? ActiveSector {get; protected set;}
 
-    public event Action<SC_LeafSector>? SectorChanged;
+    [Signal] public delegate void SectorChangedToEventHandler(SC_LeafSector sector);
+    [Signal] public delegate void SectorChangedEventHandler();
 
     protected override sealed void ReadySpec()
     {
@@ -19,10 +20,16 @@ public abstract partial class SC_ParentSector : SC_SpawnSector
                 _subSectors.Add(sector);
                 sector.HandleNext += OnSectorHandleNext;
                 if (sector is SC_ParentSector parent)
-                    parent.SectorChanged += (s) => SectorChanged?.Invoke(s);
+                    parent.SectorChangedTo += EmitSectorChanged;
             }
 
         ParentReadySpec();
+    }
+
+    private void EmitSectorChanged(SC_LeafSector sector)
+    {
+        EmitSignal(SignalName.SectorChangedTo, sector);
+        EmitSignal(SignalName.SectorChanged);
     }
 
     protected override void InitSpec()
@@ -38,7 +45,7 @@ public abstract partial class SC_ParentSector : SC_SpawnSector
     protected void OnSectorHandleNext(SC_GenericSpawnerScript prev)
     {
         if (OnSectorHandleNextSpec(prev))
-            SectorChanged?.Invoke(ActiveLeafSector()!);
+            EmitSectorChanged(ActiveLeafSector()!);
     }
 
     protected abstract void ParentInitSpec();
