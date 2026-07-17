@@ -14,7 +14,10 @@ public partial class UI_ActiveSector : Control
     [Export] private float _minDistance = 6f;
     [Export] private float _maxDistance = 60f;
 
-    private Vector3 _position;
+    [Export] private ANIM_TweenSetting _positionTweenSetting = null!;
+    private Tween? _positionTween;
+
+    public Vector3 WorldPosition = new();
     private Vector2 _dir;
     private Vector2 _halfSize;
     private bool _onScreen;
@@ -41,14 +44,16 @@ public partial class UI_ActiveSector : Control
         if (leaf == null)
             return;
 
-        _position = leaf.GlobalPosition;
+        WorldPosition = leaf.GlobalPosition;
         SetProcess(true);
         Show();
     }
 
     private void OnSectorChanged(SC_LeafSector sector)
     {
-        _position = sector.GlobalPosition;
+        _positionTween?.Kill();
+        _positionTween = CreateTween();
+        _positionTweenSetting.TweenProperty(_positionTween, this, sector.GlobalPosition, "WorldPosition");
     }
 
     public override void _Process(double delta)
@@ -89,8 +94,8 @@ public partial class UI_ActiveSector : Control
         Vector2 viewportSize = GetViewport().GetVisibleRect().Size;
         Vector2 screenCenter = viewportSize / 2f;
 
-        bool behind = camera.IsPositionBehind(_position);
-        Vector2 screenPos = camera.UnprojectPosition(_position);
+        bool behind = camera.IsPositionBehind(WorldPosition);
+        Vector2 screenPos = camera.UnprojectPosition(WorldPosition);
 
         if (behind)
             screenPos = screenCenter + (screenCenter - screenPos);
@@ -104,7 +109,7 @@ public partial class UI_ActiveSector : Control
 
         if (_onScreen)
         {
-            Position = screenPos - Size / 2f;
+            base.Position = screenPos - Size / 2f;
             return;
         }
 
@@ -115,7 +120,7 @@ public partial class UI_ActiveSector : Control
         float scaleY = _dir.Y != 0f ? _halfSize.Y / Mathf.Abs(_dir.Y) : float.PositiveInfinity;
         float scale = Mathf.Min(scaleX, scaleY);
 
-        Position = screenCenter + _dir * scale - Size / 2f;
+        base.Position = screenCenter + _dir * scale - Size / 2f;
     }
 
     private float DistanceFadeRatio()
@@ -123,7 +128,7 @@ public partial class UI_ActiveSector : Control
         if (_gameManager.Player == null)
             return 0f;
 
-        float distance = _gameManager.Player.Body.GlobalTransform.Origin.DistanceTo(_position);
+        float distance = _gameManager.Player.Body.GlobalTransform.Origin.DistanceTo(WorldPosition);
         
         if (distance <= _minDistance)
             return 0f;
