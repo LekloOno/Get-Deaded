@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" uid="uid://b6mcyevg8fydi" path="res://script/player/audio/combat/hit/PA_Hit.cs" id="1_qvta0"]
 [ext_resource type="Script" uid="uid://m0h486csofx4" path="res://addons/GaudioProcessTree/nodes/modules/AUD_Parallelizer.cs" id="2_vmlij"]
+[ext_resource type="AudioStream" uid="uid://bltn2567o8vqs" path="res://assets/sounds/combat/hit/critical_kill.wav" id="3_c4gya"]
 [ext_resource type="Script" uid="uid://dbtsyp0hru7g" path="res://addons/GaudioProcessTree/nodes/stream_players/AUD_StreamPlayer1D.cs" id="4_b2os4"]
 [ext_resource type="AudioStream" uid="uid://dvoayn0v6xicf" path="res://assets/sounds/combat/hit/Base/headcrunch.wav" id="4_c4gya"]
 [ext_resource type="AudioStream" uid="uid://bgfg8ob5yms40" path="res://assets/sounds/combat/hit/Base/headshot_ding.wav" id="6_m4kuu"]
 [ext_resource type="Script" uid="uid://dwg5mwrq18ow2" path="res://addons/GaudioProcessTree/nodes/modules/AUD_Layerer.cs" id="6_ran1i"]
-[ext_resource type="AudioStream" uid="uid://bdtqubdvoxymw" path="res://assets/sounds/combat/hit/Base/headshot_ding2.wav" id="7_c4gya"]
 [ext_resource type="AudioStream" uid="uid://rsg5px5vq270" path="res://assets/sounds/combat/hit/Base/layer hit 1.wav" id="8_ag5nt"]
-[ext_resource type="AudioStream" uid="uid://cyp2l7uj3yo3b" path="res://assets/sounds/combat/hit/kill4.wav" id="8_c4gya"]
+[ext_resource type="AudioStream" uid="uid://mbg4cw688vka" path="res://assets/sounds/combat/hit/kill5.wav" id="8_c4gya"]
 [ext_resource type="AudioStream" uid="uid://dax3gdltkhfwg" path="res://assets/sounds/combat/hit/Base/layer hit 2.wav" id="9_c4gya"]
 [ext_resource type="AudioStream" uid="uid://cygbfsypwtaaf" path="res://assets/sounds/combat/hit/Base/layer hit 3.wav" id="10_gegbc"]
 [ext_resource type="AudioStream" uid="uid://b3lw2060q0hb0" path="res://assets/sounds/combat/hit/Base/basehit.wav" id="11_m4kuu"]
@@ -49,9 +49,10 @@ script = ExtResource("2_vmlij")
 PolyphonicStream = SubResource("AudioStreamPolyphonic_ran1i")
 MaxPolyphony = 3
 UseTimeScale = true
-Sounds = [ExtResource("7_c4gya")]
-BaseVolumeDb = -2.0
-BasePitchScale = 0.82
+Sounds = [ExtResource("3_c4gya")]
+MinPitch = 0.99
+MaxPitch = 1.01
+BaseVolumeDb = -10.0
 
 [node name="player" type="Node" parent="critical_hit/critical_kill" unique_id=1987021111 node_paths=PackedStringArray("Player")]
 script = ExtResource("4_b2os4")
@@ -60,7 +61,7 @@ BaseVolumeDb = 12.0
 
 [node name="ding" type="AudioStreamPlayer" parent="critical_hit/critical_kill/player" unique_id=1011371407]
 stream = SubResource("AudioStreamPolyphonic_ran1i")
-volume_db = 10.0
+volume_db = 2.0
 bus = &"Hit"
 
 [node name="critical_hit" type="Node" parent="critical_hit" unique_id=1067778445]

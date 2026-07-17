@@ -7,6 +7,7 @@
 resource_name = "Compressor"
 ratio = 2.0
 gain = 3.0
+release_ms = 180.0
 
 [resource]
 bus/0/volume_db = -0.13049698
