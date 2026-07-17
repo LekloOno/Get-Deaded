@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class UI_ActiveSector : Control
@@ -16,6 +17,9 @@ public partial class UI_ActiveSector : Control
 
     [Export] private ANIM_TweenSetting _positionTweenSetting = null!;
     private Tween? _positionTween;
+    [Export] private ANIM_TweenSetting _blinkTweenSetting = null!;
+    [Export] private int _blinks = 4;
+    private Tween? _blinkTween;
 
     public Vector3 WorldPosition = new();
     private Vector2 _dir;
@@ -47,6 +51,7 @@ public partial class UI_ActiveSector : Control
         WorldPosition = leaf.GlobalPosition;
         SetProcess(true);
         Show();
+        StartBlinking();
     }
 
     private void OnSectorChanged(SC_LeafSector sector)
@@ -54,6 +59,33 @@ public partial class UI_ActiveSector : Control
         _positionTween?.Kill();
         _positionTween = CreateTween();
         _positionTweenSetting.TweenProperty(_positionTween, this, sector.GlobalPosition, "WorldPosition");
+
+        StartBlinking();
+    }
+
+    private bool _blinking = false;
+    private void StartBlinking()
+    {
+        _blinking = true;
+        Color baseMod = EnemyColorSetting.Color;
+        baseMod.A = _maxOpacity;
+
+        bool baseIsWhitish = baseMod.R + baseMod.G + baseMod.B > 2.55f;
+        Color blinkMod = baseIsWhitish ? Colors.Black : Colors.White;
+        
+        _blinkTween?.Kill();
+        _blinkTween = CreateTween();
+        
+        _blinkTween.SetLoops(_blinks);
+        _blinkTweenSetting.TweenProperty(_blinkTween, this, blinkMod, "modulate");
+        _blinkTweenSetting.TweenProperty(_blinkTween, this, baseMod, "modulate");
+        _blinkTween.Finished += StopBlink;
+    }
+
+    private void StopBlink()
+    {
+        _blinkTween?.Kill();
+        _blinking = false;
     }
 
     public override void _Process(double delta)
@@ -65,7 +97,9 @@ public partial class UI_ActiveSector : Control
             ? Mathf.Clamp(Mathf.Max(Mathf.Abs(_dir.X) / _halfSize.X, Mathf.Abs(_dir.Y) / _halfSize.Y), 0f, 1f)
             : 1f;
 
-        UpdateOpacity(distanceRatio, edgeRatio);
+        if (!_blinking)
+            UpdateOpacity(distanceRatio, edgeRatio);
+
         UpdateScale(distanceRatio, edgeRatio);
     }
 
