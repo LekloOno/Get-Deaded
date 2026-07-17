@@ -8,6 +8,7 @@ public partial class PA_Hit : Node
     [Export] private AUD_Sound _criticalHit = null!;
     [Export] private AUD_Sound _criticalDing = null!;
     [Export] private AUD_Sound _kill = null!;
+    [Export] private AUD_Sound _killSnapped = null!;
     [Export] private AUD_Sound _criticalKill = null!;
     [Export] private AUD_Sound _meatHit = null!;
     [Export] private AUD_Sound _barrierHit = null!;
@@ -44,8 +45,7 @@ public partial class PA_Hit : Node
         {
             if (hit.Critical)
                 _criticalKill.Play();
-                
-            PlayKill();
+            PlayKill(hit.Critical);
         }
 
         if (!hit.OverrideBodyPart && hit.HurtBox.BodyPart == GC_BodyPart.Head)
@@ -64,7 +64,7 @@ public partial class PA_Hit : Node
             PlayHit(_meatHit, ref _lastMeat, _minimumDelay, hit.TotalDamage);
     }
 
-    private void PlayKill()
+    private void PlayKill(bool snapped = false)
     {
         ulong now = PHX_Time.ScaledTicksMsec;
         if (now - _lastKill > UI_KillSkullManager.FadeTime * 1000f)
@@ -76,8 +76,9 @@ public partial class PA_Hit : Node
 
         float pitch = Mathf.Pow(1f + _pitchPerKill, _chain);
         
-        _kill.RelativePitchScale = pitch;
-        _kill.Play();
+        AUD_Sound player = snapped ? _killSnapped : _kill;
+        player.RelativePitchScale = pitch;
+        player.Play();
     }
 
     private void PitchDing(float damage)

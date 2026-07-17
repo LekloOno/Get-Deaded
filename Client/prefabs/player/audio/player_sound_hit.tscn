@@ -2,14 +2,15 @@
 
 [ext_resource type="Script" uid="uid://b6mcyevg8fydi" path="res://script/player/audio/combat/hit/PA_Hit.cs" id="1_qvta0"]
 [ext_resource type="Script" uid="uid://m0h486csofx4" path="res://addons/GaudioProcessTree/nodes/modules/AUD_Parallelizer.cs" id="2_vmlij"]
-[ext_resource type="AudioStream" uid="uid://bltn2567o8vqs" path="res://assets/sounds/combat/hit/critical_kill.wav" id="3_c4gya"]
 [ext_resource type="Script" uid="uid://dbtsyp0hru7g" path="res://addons/GaudioProcessTree/nodes/stream_players/AUD_StreamPlayer1D.cs" id="4_b2os4"]
 [ext_resource type="AudioStream" uid="uid://dvoayn0v6xicf" path="res://assets/sounds/combat/hit/Base/headcrunch.wav" id="4_c4gya"]
 [ext_resource type="AudioStream" uid="uid://bgfg8ob5yms40" path="res://assets/sounds/combat/hit/Base/headshot_ding.wav" id="6_m4kuu"]
 [ext_resource type="Script" uid="uid://dwg5mwrq18ow2" path="res://addons/GaudioProcessTree/nodes/modules/AUD_Layerer.cs" id="6_ran1i"]
+[ext_resource type="AudioStream" uid="uid://dt7h78oahjayv" path="res://assets/sounds/combat/hit/critical_kill_snapped.wav" id="7_gegbc"]
 [ext_resource type="AudioStream" uid="uid://rsg5px5vq270" path="res://assets/sounds/combat/hit/Base/layer hit 1.wav" id="8_ag5nt"]
 [ext_resource type="AudioStream" uid="uid://mbg4cw688vka" path="res://assets/sounds/combat/hit/kill5.wav" id="8_c4gya"]
 [ext_resource type="AudioStream" uid="uid://dax3gdltkhfwg" path="res://assets/sounds/combat/hit/Base/layer hit 2.wav" id="9_c4gya"]
+[ext_resource type="AudioStream" uid="uid://bexywkm8xyx4m" path="res://assets/sounds/combat/hit/kill5_snapped.wav" id="9_nyqsu"]
 [ext_resource type="AudioStream" uid="uid://cygbfsypwtaaf" path="res://assets/sounds/combat/hit/Base/layer hit 3.wav" id="10_gegbc"]
 [ext_resource type="AudioStream" uid="uid://b3lw2060q0hb0" path="res://assets/sounds/combat/hit/Base/basehit.wav" id="11_m4kuu"]
 [ext_resource type="AudioStream" uid="uid://vkujnkvqpx8w" path="res://assets/sounds/combat/hit/Base/layer hit 4.wav" id="11_nyqsu"]
@@ -23,17 +24,19 @@
 [sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_ran1i"]
 polyphony = 20
 
-[node name="PA_Hit" type="Node" unique_id=1408950828 node_paths=PackedStringArray("_criticalHit", "_criticalDing", "_kill", "_criticalKill", "_meatHit", "_barrierHit", "_armorHit")]
+[node name="PA_Hit" type="Node" unique_id=1408950828 node_paths=PackedStringArray("_criticalHit", "_criticalDing", "_kill", "_killSnapped", "_criticalKill", "_meatHit", "_barrierHit", "_armorHit")]
 script = ExtResource("1_qvta0")
 _criticalHit = NodePath("critical_hit/critical_hit")
 _criticalDing = NodePath("critical_hit/critical_hit/ding")
 _kill = NodePath("kill/kill")
-_criticalKill = NodePath("critical_hit/critical_kill")
+_killSnapped = NodePath("kill_snapped/kill_snapped")
+_criticalKill = NodePath("critical_kill")
 _meatHit = NodePath("hit/hit")
 _barrierHit = NodePath("barrier")
 _armorHit = NodePath("armor")
 _criticalMinimumDelay = 45
 _minimumVolume = -10.0
+_maximumVolume = -3.0
 _damageDispersion = 75.0
 _minimumDingPitch = 0.3
 _pitchPerKill = 0.07
@@ -42,26 +45,6 @@ metadata/_custom_type_script = "uid://b6mcyevg8fydi"
 [node name="critical_hit" type="AudioStreamPlayer" parent="." unique_id=104486539]
 stream = SubResource("AudioStreamPolyphonic_ran1i")
 volume_db = 10.0
-bus = &"Hit"
-
-[node name="critical_kill" type="Node" parent="critical_hit" unique_id=77418054]
-script = ExtResource("2_vmlij")
-PolyphonicStream = SubResource("AudioStreamPolyphonic_ran1i")
-MaxPolyphony = 3
-UseTimeScale = true
-Sounds = [ExtResource("3_c4gya")]
-MinPitch = 0.99
-MaxPitch = 1.01
-BaseVolumeDb = -10.0
-
-[node name="player" type="Node" parent="critical_hit/critical_kill" unique_id=1987021111 node_paths=PackedStringArray("Player")]
-script = ExtResource("4_b2os4")
-Player = NodePath("ding")
-BaseVolumeDb = 12.0
-
-[node name="ding" type="AudioStreamPlayer" parent="critical_hit/critical_kill/player" unique_id=1011371407]
-stream = SubResource("AudioStreamPolyphonic_ran1i")
-volume_db = 2.0
 bus = &"Hit"
 
 [node name="critical_hit" type="Node" parent="critical_hit" unique_id=1067778445]
@@ -88,8 +71,8 @@ script = ExtResource("2_vmlij")
 PolyphonicStream = SubResource("AudioStreamPolyphonic_ran1i")
 MaxPolyphony = 2
 Sounds = Array[AudioStream]([ExtResource("6_m4kuu")])
-BaseVolumeDb = 1.5
-BasePitchScale = 1.3
+BaseVolumeDb = 0.8
+BasePitchScale = 1.52
 
 [node name="player" type="Node" parent="critical_hit/critical_hit/ding" unique_id=1573361308 node_paths=PackedStringArray("Player")]
 script = ExtResource("4_b2os4")
@@ -98,12 +81,32 @@ BaseVolumeDb = 12.0
 
 [node name="ding" type="AudioStreamPlayer" parent="critical_hit/critical_hit/ding/player" unique_id=725618592]
 stream = SubResource("AudioStreamPolyphonic_ran1i")
-volume_db = 13.5
+volume_db = 12.8
+bus = &"Hit"
+
+[node name="critical_kill" type="Node" parent="." unique_id=77418054]
+script = ExtResource("2_vmlij")
+PolyphonicStream = SubResource("AudioStreamPolyphonic_ran1i")
+MaxPolyphony = 3
+UseTimeScale = true
+Sounds = [ExtResource("7_gegbc")]
+MinPitch = 0.985
+MaxPitch = 1.015
+BaseVolumeDb = -7.0
+BasePitchScale = 1.02
+
+[node name="player" type="Node" parent="critical_kill" unique_id=1987021111 node_paths=PackedStringArray("Player")]
+script = ExtResource("4_b2os4")
+Player = NodePath("ding")
+BaseVolumeDb = 12.0
+
+[node name="ding" type="AudioStreamPlayer" parent="critical_kill/player" unique_id=1011371407]
+stream = SubResource("AudioStreamPolyphonic_ran1i")
+volume_db = 5.0
 bus = &"Hit"
 
 [node name="kill" type="AudioStreamPlayer" parent="." unique_id=303335293]
 stream = SubResource("AudioStreamPolyphonic_ran1i")
-volume_db = 3.0
 bus = &"Hit"
 
 [node name="kill" type="Node" parent="kill" unique_id=892713588]
@@ -112,9 +115,26 @@ PolyphonicStream = SubResource("AudioStreamPolyphonic_ran1i")
 MaxPolyphony = 2
 UseTimeScale = false
 Sounds = Array[AudioStream]([ExtResource("8_c4gya")])
-BaseVolumeDb = 3.0
 
 [node name="player" type="Node" parent="kill/kill" unique_id=612080637 node_paths=PackedStringArray("Player")]
+script = ExtResource("4_b2os4")
+Player = NodePath("../..")
+UseTimeScale = false
+
+[node name="kill_snapped" type="AudioStreamPlayer" parent="." unique_id=844671004]
+stream = SubResource("AudioStreamPolyphonic_ran1i")
+volume_db = 4.0
+bus = &"Hit"
+
+[node name="kill_snapped" type="Node" parent="kill_snapped" unique_id=81398559]
+script = ExtResource("2_vmlij")
+PolyphonicStream = SubResource("AudioStreamPolyphonic_ran1i")
+MaxPolyphony = 2
+UseTimeScale = false
+Sounds = [ExtResource("9_nyqsu")]
+BaseVolumeDb = 4.0
+
+[node name="player" type="Node" parent="kill_snapped/kill_snapped" unique_id=254245688 node_paths=PackedStringArray("Player")]
 script = ExtResource("4_b2os4")
 Player = NodePath("../..")
 UseTimeScale = false
