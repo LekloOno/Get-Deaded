@@ -5,3 +5,4 @@ DIFFICULTY_EASY_BUTTON,EASY,PLOT
 DIFFICULTY_NORMAL_BUTTON,NORMAL,NORMAL
 DIFFICULTY_HARD_BUTTON,HARD,DIFFICILE
 DIFFICULTY_DESCRIPTION_TEXT,"Difficulty influences enemies movements, accuracy, as well as the damages they inflict.","La difficulté modifie les mouvements des enemis, leur précision, aisni que les dommages qu'ils infligent."
+SECTOR_CHANGED_LABEL,NEW SECTOR,NOUVEAU SECTEUR
