@@ -8,21 +8,27 @@ public partial class PM_LedgeClimb : PM_Action
     [ExportCategory("Settings")]
     [Export(PropertyHint.Range, "0.0, 2.0")] private float _maxClimbTime = 0.5f;
     [Export(PropertyHint.Range, "1.0,20.0")] private float _climbSpeed = 4f;
-    [Export(PropertyHint.Range, "  0,1000")] private ulong _superGlideWindow = 80;
-    [Export(PropertyHint.Range, "0.0,10.0")] private float _superGlideYStrength = 4f;
-    [Export(PropertyHint.Range, "0.0,10.0")] private float _superGlideXStrength = 8f;
+    
+    [ExportCategory("Physics")]
     [Export] private float _minSpace = 0.2f;    // The minimum space considered as a valid platform to climb to.
     [Export] private float _minHeight = 0.25f;  // Obstacles lower than this can't be ledgeclimbed.
+
+    [ExportCategory("Vault")]
+    [Export(PropertyHint.Range, "  0,1000")] private ulong _vaultWindow = 80;
+    [Export] private Vector2 _vaultMinStrength = new(3.5f, 8f);
+    [Export] private float _vaultBoost       = 4f;
+    [Export(PropertyHint.Range, "0.0,1.0")] private float _vaultYmomentum = 0f;
+    
     
     [ExportCategory("Setup")]
-    [Export] private PI_Jump _jumpInput;
-    [Export] private PI_CrouchDispatcher _crouchInput;
-    [Export] private PI_Walk _walkInput;
-    [Export] private PM_Controller _controller;
-    [Export] private PM_Dash _dash;
-    [Export] private PM_Jump _jump;
-    [Export] private PHX_BodyScale _bodyScale;
-    [Export] private Node3D _pivot;
+    [Export] private PI_Jump _jumpInput = null!;
+    [Export] private PI_CrouchDispatcher _crouchInput = null!;
+    [Export] private PI_Walk _walkInput = null!;
+    [Export] private PM_Controller _controller = null!;
+    [Export] private PM_Dash _dash = null!;
+    [Export] private PM_Jump _jump = null!;
+    [Export] private PHX_BodyScale _bodyScale = null!;
+    [Export] private Node3D _pivot = null!;
     
     [Export] private ShapeCast3D _ledgeCast; 
     // The direction of the cast is computed for each try. This determines the size and origin of the cast only.
@@ -127,29 +133,43 @@ public partial class PM_LedgeClimb : PM_Action
         _startTime = 0;
         _controller.TakeOverForces.RemovePersistent(_force);
 
-        Vector3 minOut = new(_directionFlat.X, 1f, _directionFlat.Z);
-
-        Vector3 outVelocity;
-        
-        if (PHX_Time.ScaledTicksMsec - _crouchInput.LastCrouchDown < _superGlideWindow)
-        {
-            outVelocity = _prevVelocity;
-            outVelocity.Y = Mathf.Max(0f, outVelocity.Y);
-            
-            if(minOut.Length() > outVelocity.Length())
-                outVelocity = minOut;
-                
-            outVelocity += _direction * _superGlideXStrength;
-            outVelocity.Y = _superGlideYStrength;
-            LastSuperGlide = PHX_Time.ScaledTicksMsec;
-            SuperGlideStarted?.Invoke();
-        } else
-            outVelocity = minOut;
+        Vector3 outVelocity = GetOutVelocity();
 
         _controller.Velocity = outVelocity;
         _controller.RealVelocity = outVelocity;
         _jumpInput.ResetLastJumped();
         SetPhysicsProcess(false);
         _isClimbing = false;
+    }
+
+    private Vector3 GetOutVelocity()
+    {
+        if (PHX_Time.ScaledTicksMsec - _crouchInput.LastCrouchDown < _vaultWindow)
+        {
+            Vector3 momentum = _prevVelocity;
+            momentum.Y *= _vaultYmomentum;
+
+            float speed = momentum.Length();
+            speed += _vaultBoost;
+            speed = Mathf.Max(_vaultMinStrength.X, speed);
+
+            Vector3 dir = GetVaultDirection();
+
+            Vector3 outVelocity = dir * speed;
+            outVelocity.Y = _vaultMinStrength.Y;
+ 
+            LastSuperGlide = PHX_Time.ScaledTicksMsec;
+            SuperGlideStarted?.Invoke();
+            return outVelocity;
+        } else
+            return new(_directionFlat.X, 1f, _directionFlat.Z);
+    }
+
+    public Vector3 GetVaultDirection()
+    {
+        if (_walkInput.WalkAxis != Vector2.Zero)
+            return _walkInput.WishDir;
+        
+        return _walkInput.FlatDir;
     }
 }
