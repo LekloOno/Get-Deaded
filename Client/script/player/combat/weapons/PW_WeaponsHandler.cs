@@ -166,13 +166,16 @@ public partial class PW_WeaponsHandler : WeaponSystem
         _targetWeapon = _activeWeapon;
 
         _surfaceControl.SpeedModifiers.Add(_activeWeapon.MoveSpeedModifier);
-        
+
         foreach (PW_Weapon weapon in Weapons)
 			weapon.InitializeAmmos();
 
         int nextIndex = (_weaponIndex + 1) % _weapons.Count;
         SwitchStarted?.Invoke(_activeWeapon, Melee, nextIndex, _weapons);
         SwitchEnded?.Invoke(this, _activeWeapon);
+        
+        Melee.Enable();
+        _targetWeapon.Enable();
     }
 
     private void ForwardReloadStarted(PW_ReloadStep prev, PW_ReloadStep current, float time)
