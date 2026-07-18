@@ -4209,7 +4209,7 @@ _doubleJumpInput = NodePath("../../../../Connectors/CNT_DoubleJumpInput")
 
 [node name="PM_LedgeClimb" type="Node" parent="Movement/Actions/Jump" unique_id=275240731 node_paths=PackedStringArray("_jumpInput", "_crouchInput", "_walkInput", "_controller", "_dash", "_jump", "_bodyScale", "_pivot", "_ledgeCast")]
 script = ExtResource("27_shnri")
-_vaultMinStrength = Vector2(8, 3.5)
+_vaultMinStrength = Vector2(9, 3.5)
 _jumpInput = NodePath("../../../../PIM_Arena/PI_Jump")
 _crouchInput = NodePath("../../../../PIM_Arena/PI_CrouchDispatcher")
 _walkInput = NodePath("../../../../PIM_Arena/PI_Walk")
@@ -4761,14 +4761,14 @@ mouse_filter = 2
 [node name="Wide" parent="CombatUI/VaultWind/SpeedVfx" index="0" unique_id=1031012456]
 material = SubResource("ShaderMaterial_31xtv")
 instance_shader_parameters/manual_frequency = 0.06
-instance_shader_parameters/phase = 666.6098
+instance_shader_parameters/phase = 830.93726
 _speed = 5.5
 _frequency = 0.06
 
 [node name="Tight" parent="CombatUI/VaultWind/SpeedVfx" index="1" unique_id=1194191449]
 material = SubResource("ShaderMaterial_e6mop")
 instance_shader_parameters/manual_frequency = 0.1
-instance_shader_parameters/phase = 1313.0194
+instance_shader_parameters/phase = 1636.6948
 _speed = 6.5
 _frequency = 0.1
 

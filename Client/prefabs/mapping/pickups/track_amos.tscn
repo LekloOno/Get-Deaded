@@ -37,7 +37,7 @@ metadata/_custom_type_script = "uid://c5lwejv15n0lf"
 size = Vector3(0.35, 0.1, 0.35)
 
 [sub_resource type="BoxMesh" id="BoxMesh_s2jiu"]
-size = Vector3(0.75, 0.1, 0.75)
+size = Vector3(0.75, 0.3, 0.75)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_jsmia"]
 viewport_path = NodePath("Sprite3D/SubViewport")
@@ -51,23 +51,24 @@ _recenterRadius = 3.0
 metadata/_custom_type_script = "uid://dpsrelwawyisv"
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1810756650]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 light_color = Color(0.41568628, 0.043137256, 0.90588236, 1)
 distance_fade_enabled = true
 distance_fade_begin = 20.0
 omni_range = 0.6
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1740239905]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
 material_override = ExtResource("5_g8imo")
 mesh = SubResource("BoxMesh_6ubnd")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=330403028]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, 0)
 material_override = ExtResource("6_882c5")
 mesh = SubResource("BoxMesh_s2jiu")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=298556669]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.099999905, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.049999904, 0)
 billboard = 1
 texture = SubResource("ViewportTexture_jsmia")
 

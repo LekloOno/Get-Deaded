@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Godot;
 
 [GlobalClass]
@@ -19,6 +20,7 @@ public partial class PHX_RepulsionField3D : ShapeCast3D
             _bounceBody = body;
             Shape = _data.SphereShape;
             CollisionMask = _data.CollisionMask;
+            TargetPosition = Vector3.Zero;
         }
         else
             SetPhysicsProcess(false);
@@ -29,12 +31,21 @@ public partial class PHX_RepulsionField3D : ShapeCast3D
         if (!IsColliding())
             return;
         
+        Vector3 force = Vector3.Zero;
         for (int i = 0; i < GetCollisionCount(); i++)
         {
-            Vector3 direction = GlobalPosition - GetCollisionPoint(i);
-            float forceRatio = (_data.SphereShape.Radius - direction.Length()) / _data.SphereShape.Radius;
-            float force = _data.RepulsingCurve.Sample(forceRatio);
-            _bounceBody.ApplyForce(force * direction.Normalized() * _data.RepulsingStrength);
+            Vector3 point  = GetCollisionPoint(i);
+            Vector3 normal = GetCollisionNormal(i);
+
+            float depth = _data.SphereShape.Radius - (GlobalPosition - point).Dot(normal);
+            depth = Mathf.Max(depth, 0f);
+
+            float forceRatio = depth / _data.SphereShape.Radius;
+            float strength = _data.RepulsingCurve.Sample(forceRatio);
+
+            force += strength * normal * _data.RepulsingStrength;
         }
+
+        _bounceBody.ApplyForce(force);
     }
 }
