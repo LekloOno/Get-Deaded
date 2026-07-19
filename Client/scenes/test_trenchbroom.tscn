@@ -39,8 +39,8 @@
 [ext_resource type="LightmapGIData" uid="uid://dhnsp4bc4ri02" path="res://scenes/test_trenchbroom.lmbake" id="27_vqbvp"]
 [ext_resource type="PackedScene" uid="uid://cg6805jlx25is" path="res://prefabs/simplebot/simplebot_aim_arena.tscn" id="27_xqord"]
 [ext_resource type="Shader" uid="uid://cgvs2rofqr7fc" path="res://assets/shaders/toon_post_process.gdshader" id="34_f60qe"]
-[ext_resource type="Script" uid="uid://bwxdr2xchhkya" path="res://script/scenario/aim_game/SC_GameManager.cs" id="35_0iwb2"]
-[ext_resource type="Script" uid="uid://b361d5nxjt30o" path="res://script/scenario/aim_game/spawners/SC_TestSpawner.cs" id="36_r601x"]
+[ext_resource type="Script" uid="uid://bwxdr2xchhkya" path="res://script/scenario/aim_game/SC_GameMode.cs" id="35_0iwb2"]
+[ext_resource type="Script" path="res://script/scenario/aim_game/spawners/SC_TestSpawner.cs" id="36_r601x"]
 [ext_resource type="Script" uid="uid://cls16hfdj0snl" path="res://script/engine_tools/audio/AudioBusReloader.gd" id="56_kxgdn"]
 [ext_resource type="Script" uid="uid://ba04qst68odml" path="res://script/engine_tools/MISC_TimeScaler.cs" id="57_hxugp"]
 

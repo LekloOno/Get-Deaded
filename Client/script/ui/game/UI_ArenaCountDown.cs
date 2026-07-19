@@ -3,7 +3,8 @@ using Godot;
 [GlobalClass]
 public partial class UI_ArenaCountDown : Node
 {
-    [Export] private Label _num;
+    [Export] private SC_CountDown _countDown = null!;
+    [Export] private Label _num = null!;
     [Export] private Tween.TransitionType _scaleTrans;
     [Export] private float _maxScale;
     [Export] private float _scaleTime;
@@ -11,37 +12,29 @@ public partial class UI_ArenaCountDown : Node
     [Export] private float _opacityTime;
     private bool _subbed = false;
 
-    private Tween _scaleTween;
+    private Tween? _scaleTween;
     
-    private Tween _opacityTween;
+    private Tween? _opacityTween;
     private int _secondsLeft = 0;
 
-    public Timer CountDownTimer;
+    private Timer _countDownTimer = null!;
 
     public override void _Ready()
     {
         _num.Visible = false;
+
+        _countDown.Started += StartCountDown;
+        _countDown.Interrupted += CancelAnim;
         
-        CountDownTimer = new()
+        _countDownTimer = new()
         {
             ProcessMode = ProcessModeEnum.Pausable,
             ProcessCallback = Timer.TimerProcessCallback.Physics,
         };
         
-        AddChild(CountDownTimer);
+        AddChild(_countDownTimer);
 
-        CountDownTimer.Timeout += AnimNextSecond;
-    }
-
-    public void OnGameInit(SC_GameManager manager)
-    {
-        if (!_subbed)
-        {
-            manager.Interrupt += CancelAnim;
-            _subbed = true;
-        }
-
-        StartCountDown(manager.CountDown);
+        _countDownTimer.Timeout += AnimNextSecond;
     }
 
     private void StartCountDown(float countDown)
@@ -50,14 +43,14 @@ public partial class UI_ArenaCountDown : Node
         _secondsLeft = Mathf.FloorToInt(countDown);
         float partSeconds = countDown % 1f;
         if (partSeconds != 0)
-            CountDownTimer.Start(partSeconds);
+            _countDownTimer.Start(partSeconds);
         else
             AnimNextSecond();
     }
 
     private void CancelAnim()
     {
-        CountDownTimer.Stop();
+        _countDownTimer.Stop();
         _num.Visible = false;
     }
 
@@ -83,7 +76,7 @@ public partial class UI_ArenaCountDown : Node
             .SetTrans(_opacityTrans);
 
         if (_secondsLeft >= 0f)
-            CountDownTimer.Start(1f);
+            _countDownTimer.Start(1f);
         else
             _num.Visible = false;
     }

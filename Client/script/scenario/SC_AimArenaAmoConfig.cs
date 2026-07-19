@@ -5,7 +5,7 @@ using Godot;
 public partial class SC_AimArenaAmoConfig : Area3D
 {
     [Export] private SC_AimArenaSpawner _game;
-    [Export] private SC_GameManager _gameManager;
+    [Export] private SC_GameMode _gameManager;
     [Export] private bool _infAmos;
     bool _infActive = false;
     public override void _UnhandledKeyInput(InputEvent @event)

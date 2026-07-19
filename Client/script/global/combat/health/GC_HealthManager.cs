@@ -104,7 +104,7 @@ public partial class GC_HealthManager : Node3D
 
 
 
-	public HealthEventHandler OnDie;
+	public event HealthEventHandler? OnDie;
 	public HealthEventHandler<DamageEventArgs> OnDamage;
 	private void PropagDamage(GC_Health sender, DamageEventArgs damage) =>
 		OnDamage?.Invoke(sender, damage);

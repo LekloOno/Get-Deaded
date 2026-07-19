@@ -3,7 +3,7 @@ using Godot;
 
 public partial class UI_SectorChangedNotif : Control
 {
-    [Export] private SC_GameManager _gameManager = null!;
+    [Export] private SC_GameMode _gameManager = null!;
     [Export] private SC_ParentSector _baseSector = null!;
     [Export] private Vector2 _spawnOffset = new (0f, -400f);
     [Export] private Vector2 _initialScale = new (.65f, .65f);
@@ -41,7 +41,7 @@ public partial class UI_SectorChangedNotif : Control
         SetProcess(false);
 
         _baseSector.SectorChangedTo += OnSectorChanged;
-        _gameManager.ResetGame += OnStop;
+        _gameManager.Reseted += OnStop;
     }
 
     private void OnColorChanged(GodotObject @object, Color color)

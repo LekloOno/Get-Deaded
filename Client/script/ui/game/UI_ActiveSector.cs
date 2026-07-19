@@ -3,7 +3,7 @@ using Godot;
 
 public partial class UI_ActiveSector : Control
 {
-    [Export] private SC_GameManager _gameManager = null!;
+    [Export] private SC_GameMode _gameManager = null!;
     [Export] private SC_ParentSector _baseSector = null!;
     [Export] private float _edgeMargin = 30f;
     [Export] private float _maxScale = 2.5f;
@@ -33,7 +33,7 @@ public partial class UI_ActiveSector : Control
 
         _baseSector.SectorChangedTo += OnSectorChanged;
         _baseSector.Initialized += OnInitialized;
-        _gameManager.ResetGame += OnStop;
+        _gameManager.Reseted += OnStop;
     }
 
     private void OnStop()

@@ -7,7 +7,7 @@ public partial class SC_ArenaGameStarter : Node
     [Export] private Node3D _spawnPoint;
     [Export] private PackedScene _playerPrefab;
     [Export] private Camera3D _menuCamera;
-    [Export] private SC_GameManager _gameManager;
+    [Export] private SC_GameMode _gameManager;
     private PM_Controller _player;
 
     [Signal]
@@ -25,7 +25,7 @@ public partial class SC_ArenaGameStarter : Node
     public override void _Ready()
     {
         _player = _playerPrefab.Instantiate<PM_Controller>();
-        _gameManager.ResetGame += Reset;
+        _gameManager.Reseted += Reset;
         AddChild(_player);
         RemoveChild(_player);
         Input.MouseMode = Input.MouseModeEnum.Visible;

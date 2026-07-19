@@ -40,8 +40,8 @@
 [ext_resource type="Texture2D" uid="uid://hq7k3p7jfrlm" path="res://assets/sprites/particles/smoke_particle.png" id="115_13yth"]
 [ext_resource type="Texture2D" uid="uid://bios2r24in8oi" path="res://assets/textures/factory/factory_wall_grey.png" id="116_7py7c"]
 [ext_resource type="Script" uid="uid://c1b6fea15qlys" path="res://script/scenario/SC_AimArenaAmoConfig.cs" id="117_n15bx"]
-[ext_resource type="Script" uid="uid://bwxdr2xchhkya" path="res://script/scenario/aim_game/SC_GameManager.cs" id="118_tkrox"]
-[ext_resource type="Script" uid="uid://b361d5nxjt30o" path="res://script/scenario/aim_game/spawners/SC_TestSpawner.cs" id="119_6p37o"]
+[ext_resource type="Script" uid="uid://bwxdr2xchhkya" path="res://script/scenario/aim_game/SC_GameMode.cs" id="118_tkrox"]
+[ext_resource type="Script" path="res://script/scenario/aim_game/spawners/SC_TestSpawner.cs" id="119_6p37o"]
 [ext_resource type="PackedScene" uid="uid://cg6805jlx25is" path="res://prefabs/simplebot/simplebot_aim_arena.tscn" id="120_1fq7f"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6e0wu"]
