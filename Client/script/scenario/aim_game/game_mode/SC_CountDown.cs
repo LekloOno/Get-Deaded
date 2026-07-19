@@ -5,7 +5,7 @@ using Godot;
 public partial class SC_CountDown : Node, SC_IGameModeComponent
 {
     public SC_IGameMode GameMode {get; private set;} = null!;
-	[Export] public float _countDown = 2f;
+	[Export] private float _countDown = 2f;
 	private SceneTreeTimer? _timer;
 
     /// <summary>
@@ -44,11 +44,8 @@ public partial class SC_CountDown : Node, SC_IGameModeComponent
 
     public bool Start()
     {
-        if (_timer is not null && _timer.TimeLeft > 0f)
+        if (!TryCreateTimer())
             return false;
-
-        _timer = GetTree().CreateTimer(_countDown, false, true);
-        _timer.Timeout += OnTimeout;
 
         Started?.Invoke(_countDown);
 
@@ -57,11 +54,8 @@ public partial class SC_CountDown : Node, SC_IGameModeComponent
 
     public bool Interrupt()
     {
-        if (_timer is null || _timer.TimeLeft <= 0f)
+        if (!ClearTimer())
             return false;
-
-        _timer.Timeout -= OnTimeout;
-        _timer = null;
 
         Interrupted?.Invoke();
 
@@ -73,4 +67,38 @@ public partial class SC_CountDown : Node, SC_IGameModeComponent
 
     public bool Interrupt(GameModeEnd outcome) =>
         Interrupt();
+
+    /// <summary>
+    /// Clears and returns wether the timer was running.
+    /// </summary>
+    /// <returns>Wether it was running.</returns>
+    private bool ClearTimer()
+    {
+        if (_timer is null)
+            return false;
+
+        _timer.Timeout -= OnTimeout;
+        
+        double timeLeft = _timer.TimeLeft;
+        _timer = null;
+
+        if (timeLeft <= 0f)
+            return false;
+
+        return true;
+    }
+
+    /// <summary>
+    /// Tries to create the timer and returns whether it is not already running.
+    /// </summary>
+    /// <returns>Whether it is not already running.</returns>
+    private bool TryCreateTimer()
+    {
+        if (_timer is not null && _timer.TimeLeft > 0f)
+            return false;
+
+        _timer = GetTree().CreateTimer(_countDown, false, true);
+        _timer.Timeout += OnTimeout;
+        return true;
+    }
 }
