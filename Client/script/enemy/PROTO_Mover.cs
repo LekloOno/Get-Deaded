@@ -113,9 +113,9 @@ public partial class PROTO_Mover : Node
 	}
 	
 
-	public Vector3 GetAcceleration(Vector3 velocity, double delta)
+	public bool GetAcceleration(Vector3 velocity, double delta, out Vector3 accel)
 	{
-		Vector3 accel = PHX_MovementPhysics.Acceleration(_speed, Data.Acceleration, velocity, WishDir.Normalized(), (float)delta);
-		return accel;
+		accel = PHX_MovementPhysics.Acceleration(_speed, Data.Acceleration, velocity, WishDir.Normalized(), (float)delta);
+		return (velocity + accel).Length() > _speed;
 	}
 }

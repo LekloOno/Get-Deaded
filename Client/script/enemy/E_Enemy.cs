@@ -232,10 +232,21 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 			velocity += GetGravity() * (float) delta;
 		else
 		{
-			velocity = ApplyDrag(velocity, delta);
-			
-			if (Mover != null)
-				velocity += Mover.GetAcceleration(velocity, delta);
+			if (Mover == null)
+				velocity = ApplyDrag(velocity, delta);
+			else
+			{
+				float prevSpeedSquared = velocity.LengthSquared();
+
+				bool overSpeed = Mover.GetAcceleration(velocity, delta, out Vector3 accel);
+				velocity += accel;
+
+				bool hasWish = Mover?.WishDir.LengthSquared() > 0.0001f;
+				bool decelerating = prevSpeedSquared > velocity.LengthSquared();
+
+				if (!hasWish || overSpeed || decelerating)
+            		velocity = ApplyDrag(velocity, delta);
+			}
 		}
 		
 		Velocity = velocity;
