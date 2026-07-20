@@ -1516,7 +1516,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0451076, 0)
 collision_layer = 0
 script = ExtResource("18_wow6d")
 _vacuumCurve = SubResource("Curve_wow6d")
-_vacuumStrength = 40.0
+_vacuumStrength = 60.0
 metadata/_custom_type_script = "uid://3tjawmkgaiwa"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body/GL_Vacuum" unique_id=1798539332]
@@ -2130,12 +2130,12 @@ shape = SubResource("SphereShape3D_sm6bj")
 debug_color = Color(1, 0, 0, 0.41960785)
 
 [node name="Physical Bone Neck" type="PhysicalBone3D" parent="Body/Ybot/Armature/GeneralSkeleton/PhysicalBoneSimulator3D" unique_id=1169715466]
-transform = Transform3D(-0.9494558, -0.043296658, 0.31090036, -0.17690988, 0.89196897, -0.41604605, -0.25930002, -0.4500187, -0.85454476, -0.082299046, 1.3213859, 0.2571896)
+transform = Transform3D(-0.9494558, -0.04329682, 0.3109007, -0.17691018, 0.89196897, -0.41604596, -0.2593003, -0.4500187, -0.85454476, -0.082299046, 1.3213859, 0.2571896)
 visible = false
 collision_layer = 512
 joint_type = 5
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0039762636, -0.0075293523, 0.046918496)
-body_offset = Transform3D(-0.9999989, -0.0012863651, 0.0009355694, -0.001267463, 0.28910595, -0.95729655, 0.0009610206, -0.9572965, -0.28910714, -0.00402984, 0.047086656, 0.0063604712)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0039762473, -0.007529359, 0.046918504)
+body_offset = Transform3D(-0.9999989, -0.0012865141, 0.00093588233, -0.0012678504, 0.289106, -0.9572964, 0.0009610504, -0.9572964, -0.2891072, -0.00402984, 0.047086656, 0.0063604712)
 bone_name = "Neck"
 joint_constraints/x/linear_limit_enabled = true
 joint_constraints/x/linear_limit_upper = 0.0
@@ -2663,12 +2663,12 @@ shape = SubResource("SphereShape3D_ljg6c")
 debug_color = Color(0, 0.70196074, 0.07677696, 0.41960785)
 
 [node name="Physical Bone LeftUpperArm" type="PhysicalBone3D" parent="Body/Ybot/Armature/GeneralSkeleton/PhysicalBoneSimulator3D" unique_id=116370650]
-transform = Transform3D(-0.076445624, -0.75694555, -0.64899117, 0.97535837, -0.19187547, 0.10890354, -0.20695955, -0.62467366, 0.75296116, 0.2320283, 1.3051647, 0.09760887)
+transform = Transform3D(-0.076445624, -0.7569451, -0.64899176, 0.97535837, -0.19187558, 0.108903386, -0.20695955, -0.6246743, 0.7529606, 0.2320283, 1.3051647, 0.09760887)
 visible = false
 collision_layer = 512
 joint_type = 5
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00840719, 0.00080085767, 0.14562538)
-body_offset = Transform3D(0.99997824, -0.0066054463, -0.000115036964, -5.3867698e-05, 0.009239823, -0.99995744, 0.006606385, 0.9999355, 0.009239167, 0.00842905, 0.14561135, -0.0020907223)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00840719, 0.00080074056, 0.1456254)
+body_offset = Transform3D(0.99997824, -0.0066054314, -0.000115051866, -5.3867698e-05, 0.009240627, -0.99995744, 0.006606385, 0.99993545, 0.009239972, 0.00842905, 0.14561135, -0.0020907223)
 bone_name = "LeftUpperArm"
 joint_constraints/x/linear_limit_enabled = true
 joint_constraints/x/linear_limit_upper = 0.0
@@ -2750,12 +2750,12 @@ shape = SubResource("CapsuleShape3D_aku6t")
 debug_color = Color(0, 0.70196074, 0.07677696, 0.41960785)
 
 [node name="Physical Bone LeftLowerArm" type="PhysicalBone3D" parent="Body/Ybot/Armature/GeneralSkeleton/PhysicalBoneSimulator3D" unique_id=306383142]
-transform = Transform3D(0.64736223, -0.76205504, 0.0139379585, -0.24446703, -0.19028345, 0.95080394, -0.72191274, -0.61892194, -0.30947968, 0.30371863, 1.145468, 0.04879336)
+transform = Transform3D(0.64736223, -0.76205504, 0.013937969, -0.24446703, -0.19028345, 0.95080394, -0.72191274, -0.61892194, -0.30947965, 0.30371806, 1.1454679, 0.04879336)
 visible = false
 collision_layer = 512
 joint_type = 5
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0076697976, -0.003670875, 0.14518183)
-body_offset = Transform3D(-0.010375559, 0.9999442, 0.0019701272, 0.0022172183, 0.00199309, -0.9999957, -0.99994373, -0.010371178, -0.002237916, 0.003464222, 0.14517152, 0.007956199)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.007670134, -0.003671317, 0.14518195)
+body_offset = Transform3D(-0.010375559, 0.9999442, 0.0019701123, 0.0022172183, 0.00199309, -0.9999957, -0.99994373, -0.010371178, -0.0022378862, 0.003464669, 0.14517164, 0.007956527)
 bone_name = "LeftLowerArm"
 joint_constraints/x/linear_limit_enabled = true
 joint_constraints/x/linear_limit_upper = 0.0
@@ -2925,12 +2925,12 @@ shape = SubResource("CapsuleShape3D_ydbpt")
 debug_color = Color(0, 0.70196074, 0.07677696, 0.41960785)
 
 [node name="Physical Bone RightShoulder" type="PhysicalBone3D" parent="Body/Ybot/Armature/GeneralSkeleton/PhysicalBoneSimulator3D" unique_id=1554294799]
-transform = Transform3D(-0.5482868, -0.17359912, 0.818074, 0.61277336, -0.7490935, 0.25172973, 0.5691138, 0.639314, 0.5170949, -0.14821452, 1.2309936, 0.14078951)
+transform = Transform3D(-0.5482868, -0.17359912, 0.818074, 0.61277336, -0.7490935, 0.25172973, 0.5691138, 0.639314, 0.5170949, -0.1482141, 1.2309936, 0.14078976)
 visible = false
 collision_layer = 512
 joint_type = 5
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0063285925, -0.009131032, 0.05553636)
-body_offset = Transform3D(0.09090331, -0.9711476, -0.22047494, 0.0027236193, 0.22163314, -0.97512645, 0.99585617, 0.08804169, 0.02279225, 0.003952086, 0.056195945, 0.0058404803)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0063285152, -0.009131102, 0.055535886)
+body_offset = Transform3D(0.09090331, -0.9711476, -0.22047494, 0.0027236193, 0.22163314, -0.97512645, 0.99585617, 0.08804169, 0.02279225, 0.003951907, 0.056195498, 0.0058404207)
 bone_name = "RightShoulder"
 joint_constraints/x/linear_limit_enabled = true
 joint_constraints/x/linear_limit_upper = 0.0
@@ -3014,12 +3014,12 @@ shape = SubResource("SphereShape3D_ljg6c")
 debug_color = Color(0, 0.70196074, 0.07677696, 0.41960785)
 
 [node name="Physical Bone RightUpperArm" type="PhysicalBone3D" parent="Body/Ybot/Armature/GeneralSkeleton/PhysicalBoneSimulator3D" unique_id=1295974401]
-transform = Transform3D(-0.18774366, -0.9604399, -0.20568787, -0.03039712, -0.20362996, 0.97857594, -0.98174757, 0.18997376, 0.009035627, -0.19632255, 1.0122344, 0.084863)
+transform = Transform3D(-0.18774353, -0.96044, -0.20568773, -0.030397093, -0.2036298, 0.978576, -0.9817476, 0.18997361, 0.009035598, -0.19632255, 1.0122344, 0.084863)
 visible = false
 collision_layer = 512
 joint_type = 5
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.014572302, -0.031811032, 0.19862969)
-body_offset = Transform3D(-0.9999967, -0.002332911, -0.0012529548, 0.0012690611, -0.0069560884, -0.999975, 0.0023241192, -0.9999731, 0.006958914, -0.014397591, 0.19842196, -0.033158552)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.014572297, -0.031811, 0.1986297)
+body_offset = Transform3D(-0.99999666, -0.0023330897, -0.0012529613, 0.0012690648, -0.0069562504, -0.999975, 0.0023242831, -0.9999731, 0.0069590695, -0.014397591, 0.19842196, -0.033158552)
 bone_name = "RightUpperArm"
 joint_constraints/x/linear_limit_enabled = true
 joint_constraints/x/linear_limit_upper = 0.0
@@ -3101,12 +3101,12 @@ shape = SubResource("CapsuleShape3D_aku6t")
 debug_color = Color(0, 0.70196074, 0.07677696, 0.41960785)
 
 [node name="Physical Bone RightLowerArm" type="PhysicalBone3D" parent="Body/Ybot/Armature/GeneralSkeleton/PhysicalBoneSimulator3D" unique_id=109004101]
-transform = Transform3D(0.23183982, -0.96465737, -0.12524545, -0.97275245, -0.2296797, -0.03162195, 0.0017380071, 0.12916404, -0.9916217, -0.12854767, 0.94381875, 0.22686476)
+transform = Transform3D(0.23183982, -0.96465737, -0.12524545, -0.97275245, -0.2296797, -0.031621948, 0.0017380052, 0.12916404, -0.9916217, -0.12854767, 0.94381875, 0.22686505)
 visible = false
 collision_layer = 512
 joint_type = 5
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0060915025, -0.0013158845, 0.13608767)
-body_offset = Transform3D(-0.009775433, 0.9999454, 0.0036861598, 0.0018942073, 0.0037048832, -0.9999915, -0.9999504, -0.009768259, -0.0019302218, 0.0007546246, 0.13610291, -0.0058413744)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.006091502, -0.001315923, 0.13608797)
+body_offset = Transform3D(-0.009775433, 0.9999454, 0.0036861598, 0.0018942055, 0.0037048832, -0.9999915, -0.9999504, -0.009768259, -0.0019302181, 0.00075466186, 0.13610321, -0.0058413744)
 bone_name = "RightLowerArm"
 joint_constraints/x/linear_limit_enabled = true
 joint_constraints/x/linear_limit_upper = 0.0
@@ -3276,12 +3276,12 @@ shape = SubResource("CapsuleShape3D_ydbpt")
 debug_color = Color(0, 0.70196074, 0.07677696, 0.41960785)
 
 [node name="Physical Bone LeftUpperLeg" type="PhysicalBone3D" parent="Body/Ybot/Armature/GeneralSkeleton/PhysicalBoneSimulator3D" unique_id=1113836408]
-transform = Transform3D(-0.995675, -0.013390566, -0.091934435, -0.09057484, 0.3601248, 0.92849684, 0.02067477, 0.93280804, -0.35978013, 0.15277697, 0.599915, 0.08773493)
+transform = Transform3D(-0.995675, -0.013390536, -0.09193444, -0.09057483, 0.3601248, 0.92849684, 0.020674799, 0.93280804, -0.35978013, 0.15277697, 0.599915, 0.08773493)
 visible = false
 collision_layer = 512
 joint_type = 5
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012404173, 0.005852401, 0.22765863)
-body_offset = Transform3D(0.99999595, -0.0027679391, 0.0004331437, 0.0004695668, 0.013166338, -0.99991316, 0.0027620029, 0.9999094, 0.0131675005, -0.012486532, 0.22755599, -0.008883826)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012404168, 0.0058524003, 0.22765863)
+body_offset = Transform3D(0.99999595, -0.0027679633, 0.00043316605, 0.00046957796, 0.013166338, -0.99991316, 0.002762029, 0.9999094, 0.0131675005, -0.012486532, 0.22755599, -0.008883826)
 bone_name = "LeftUpperLeg"
 joint_constraints/x/linear_limit_enabled = true
 joint_constraints/x/linear_limit_upper = 0.0
@@ -3363,12 +3363,12 @@ shape = SubResource("CapsuleShape3D_ar4hj")
 debug_color = Color(0, 0.70196074, 0.07677696, 0.41960785)
 
 [node name="Physical Bone LeftLowerLeg" type="PhysicalBone3D" parent="Body/Ybot/Armature/GeneralSkeleton/PhysicalBoneSimulator3D" unique_id=1761631113]
-transform = Transform3D(-0.99529237, -0.09420572, -0.022769224, 0.096884616, -0.9732927, -0.20812173, -0.002554859, -0.20934796, 0.97783786, 0.17665087, 0.49278536, -0.1125495)
+transform = Transform3D(-0.99529237, -0.094205864, -0.022769246, 0.09688476, -0.97329265, -0.20812201, -0.0025548262, -0.20934826, 0.9778378, 0.17665087, 0.49278536, -0.1125495)
 visible = false
 collision_layer = 512
 joint_type = 5
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0113358665, 0.0007379232, 0.276609)
-body_offset = Transform3D(-0.99999976, 0.00029809214, 0.00010658847, -9.176554e-05, 0.049281865, -0.99878496, -0.0003029671, -0.9987847, -0.049281836, 0.011306159, 0.27623755, 0.014372259)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.011335867, 0.0007378552, 0.27660897)
+body_offset = Transform3D(-0.9999997, 0.00029793504, 0.000106591964, -9.177346e-05, 0.04928215, -0.99878496, -0.00030281313, -0.9987846, -0.04928209, 0.011306159, 0.27623755, 0.014372259)
 bone_name = "LeftLowerLeg"
 joint_constraints/x/linear_limit_enabled = true
 joint_constraints/x/linear_limit_upper = 0.0
@@ -3450,12 +3450,12 @@ shape = SubResource("CapsuleShape3D_1sc55")
 debug_color = Color(0, 0.70196074, 0.07677696, 0.41960785)
 
 [node name="Physical Bone LeftFoot" type="PhysicalBone3D" parent="Body/Ybot/Armature/GeneralSkeleton/PhysicalBoneSimulator3D" unique_id=100806414]
-transform = Transform3D(-0.9398471, -0.1361413, -0.3132939, -0.23027991, -0.4249074, 0.875457, -0.25230676, 0.894941, 0.36799738, 0.20650005, 0.45195973, -0.30245054)
+transform = Transform3D(-0.9398471, -0.1361413, -0.3132939, -0.23027991, -0.4249074, 0.875457, -0.25230676, 0.894941, 0.36799738, 0.20649987, 0.4519592, -0.30245054)
 visible = false
 collision_layer = 512
 joint_type = 5
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.009228699, 0.018586773, 0.092932075)
-body_offset = Transform3D(0.99876463, 0.043835327, 0.023397207, 0.00032456405, 0.46511057, -0.8852524, -0.049687624, 0.8841666, 0.46452183, -0.012206405, 0.07362044, -0.05914423)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0092284, 0.018586539, 0.09293249)
+body_offset = Transform3D(0.99876463, 0.043835327, 0.023397207, 0.00032456405, 0.46511057, -0.8852524, -0.049687624, 0.8841666, 0.46452183, -0.012206107, 0.073620915, -0.05914423)
 bone_name = "LeftFoot"
 joint_constraints/x/linear_limit_enabled = true
 joint_constraints/x/linear_limit_upper = 0.0
@@ -3700,12 +3700,12 @@ shape = SubResource("CapsuleShape3D_ar4hj")
 debug_color = Color(0, 0.70196074, 0.07677696, 0.41960785)
 
 [node name="Physical Bone RightLowerLeg" type="PhysicalBone3D" parent="Body/Ybot/Armature/GeneralSkeleton/PhysicalBoneSimulator3D" unique_id=561198358]
-transform = Transform3D(-0.96372455, -0.20397852, -0.17212743, -0.09278145, -0.34865618, 0.93264705, -0.25025326, 0.9147851, 0.3170831, -0.009733749, 0.24058148, 0.093613945)
+transform = Transform3D(-0.96372455, -0.20397852, -0.17212743, -0.09278145, -0.34865618, 0.93264705, -0.25025326, 0.9147851, 0.3170831, -0.009733708, 0.24058145, 0.09361399)
 visible = false
 collision_layer = 512
 joint_type = 5
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010432434, 0.0066431845, 0.27772897)
-body_offset = Transform3D(-1.0000005, 0.00020955503, 2.476573e-05, -1.4849007e-05, 0.047158808, -0.9988876, -0.0002104789, -0.99888754, -0.047158897, 0.010424169, 0.2771069, 0.019735381)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010432481, 0.006643138, 0.277729)
+body_offset = Transform3D(-1.0000005, 0.00020955503, 2.476573e-05, -1.4849007e-05, 0.047158808, -0.9988876, -0.0002104789, -0.99888754, -0.047158897, 0.010424215, 0.27710694, 0.019735336)
 bone_name = "RightLowerLeg"
 joint_constraints/x/linear_limit_enabled = true
 joint_constraints/x/linear_limit_upper = 0.0
@@ -3787,12 +3787,12 @@ shape = SubResource("CapsuleShape3D_1sc55")
 debug_color = Color(0, 0.70196074, 0.07677696, 0.41960785)
 
 [node name="Physical Bone RightFoot" type="PhysicalBone3D" parent="Body/Ybot/Armature/GeneralSkeleton/PhysicalBoneSimulator3D" unique_id=845752702]
-transform = Transform3D(-0.94785684, -0.09421125, 0.30445322, 0.043131378, 0.90859693, 0.41544124, -0.31576446, 0.4069103, -0.85715634, -0.01094467, 0.072126195, 0.11423985)
+transform = Transform3D(-0.94785684, -0.09421125, 0.30445322, 0.043131378, 0.90859693, 0.4154412, -0.31576446, 0.4069103, -0.8571563, -0.01094467, 0.072126195, 0.11423985)
 visible = false
 collision_layer = 512
 joint_type = 5
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0050714007, 0.002031276, 0.07219399)
-body_offset = Transform3D(0.99891937, -0.04073458, -0.022396713, -0.0023750663, 0.43644595, -0.8997277, 0.046424896, 0.89880824, 0.4358772, -0.0033662692, 0.06408043, -0.03352888)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0050713983, 0.0020312779, 0.07219398)
+body_offset = Transform3D(0.99891937, -0.04073458, -0.022396684, -0.0023750663, 0.43644595, -0.89972776, 0.046424896, 0.89880824, 0.4358772, -0.0033662692, 0.06408043, -0.03352888)
 bone_name = "RightFoot"
 joint_constraints/x/linear_limit_enabled = true
 joint_constraints/x/linear_limit_upper = 0.0
@@ -3874,12 +3874,12 @@ shape = SubResource("CapsuleShape3D_40tuk")
 debug_color = Color(0, 0.70196074, 0.07677696, 0.41960785)
 
 [node name="Physical Bone RightToes" type="PhysicalBone3D" parent="Body/Ybot/Armature/GeneralSkeleton/PhysicalBoneSimulator3D" unique_id=1475810930]
-transform = Transform3D(-0.9531111, 0.0052956454, 0.30257437, -0.003421971, 0.9995944, -0.028274093, -0.30260137, -0.027983751, -0.9527064, -0.044590127, 0.035100807, 0.24840647)
+transform = Transform3D(-0.9531111, 0.0052956557, 0.30257437, -0.0034219618, 0.9995944, -0.028274097, -0.30260137, -0.027983751, -0.9527064, -0.044590127, 0.035100807, 0.24840647)
 visible = false
 collision_layer = 512
 joint_type = 5
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.016332066, 0.001969561, 0.06166617)
-body_offset = Transform3D(-0.99994314, -0.00049372204, -0.010709673, 0.0107007325, 0.015380999, -0.9998249, 0.00065841805, -0.999882, -0.015374679, 0.016992534, 0.06145031, 0.0029066727)
+body_offset = Transform3D(-0.99994314, -0.00049371365, -0.010709673, 0.0107007325, 0.015380997, -0.9998249, 0.00065840874, -0.999882, -0.015374679, 0.016992534, 0.06145031, 0.0029066727)
 bone_name = "RightToes"
 joint_constraints/x/linear_limit_enabled = true
 joint_constraints/x/linear_limit_upper = 0.0
@@ -4761,14 +4761,14 @@ mouse_filter = 2
 [node name="Wide" parent="CombatUI/VaultWind/SpeedVfx" index="0" unique_id=1031012456]
 material = SubResource("ShaderMaterial_31xtv")
 instance_shader_parameters/manual_frequency = 0.06
-instance_shader_parameters/phase = 830.93726
+instance_shader_parameters/phase = 24.507769
 _speed = 5.5
 _frequency = 0.06
 
 [node name="Tight" parent="CombatUI/VaultWind/SpeedVfx" index="1" unique_id=1194191449]
 material = SubResource("ShaderMaterial_e6mop")
 instance_shader_parameters/manual_frequency = 0.1
-instance_shader_parameters/phase = 1636.6948
+instance_shader_parameters/phase = 48.272884
 _speed = 6.5
 _frequency = 0.1
 
