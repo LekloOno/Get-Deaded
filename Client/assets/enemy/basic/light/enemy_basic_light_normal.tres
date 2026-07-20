@@ -1,16 +1,17 @@
-[gd_resource type="Resource" script_class="E_EnemySettings" format=3 uid="uid://bsa2lcp4fy354"]
+[gd_resource type="Resource" script_class="E_EnemySettings" format=3 uid="uid://dwu6r2s3l2r7w"]
 
 [ext_resource type="PackedScene" uid="uid://cidct5xad30oh" path="res://prefabs/simplebot/bot_light_fire.tscn" id="1_uimvy"]
 [ext_resource type="Resource" uid="uid://ceke0jbmda3gm" path="res://assets/enemy/health/enemy_health_light.tres" id="2_fhc6m"]
-[ext_resource type="Resource" uid="uid://bdgssqoxwaby5" path="res://assets/enemy/movement/basic/enemy_movement_basic_easy.tres" id="3_6j5et"]
+[ext_resource type="Resource" uid="uid://cplajvg8g5l7g" path="res://assets/enemy/movement/basic/enemy_movement_slow_normal.tres" id="3_fhc6m"]
 [ext_resource type="Script" uid="uid://bglhbt23nx4m7" path="res://script/enemy/E_EnemySettings.cs" id="4_il8iu"]
 
 [resource]
 script = ExtResource("4_il8iu")
 Fire = ExtResource("1_uimvy")
 Health = ExtResource("2_fhc6m")
-MoverData = ExtResource("3_6j5et")
+MoverData = ExtResource("3_fhc6m")
 Score = 25
-SpreadFactor = 12.0
-ReactionTime = 0.5
+SpreadFactor = 20.0
+MinSpread = 5.0
+ReactionTime = 0.6
 metadata/_custom_type_script = "uid://bglhbt23nx4m7"

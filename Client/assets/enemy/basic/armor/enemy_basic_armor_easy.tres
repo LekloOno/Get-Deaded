@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dpo37xs2mukfh" path="res://prefabs/simplebot/bot_base_fire.tscn" id="1_7c86l"]
 [ext_resource type="Resource" uid="uid://bgy3t44egnoe0" path="res://assets/enemy/health/enemy_health_armor.tres" id="2_vthm2"]
-[ext_resource type="Resource" uid="uid://bdgssqoxwaby5" path="res://assets/enemy/movement/basic/enemy_movement_basic_easy.tres" id="3_7c86l"]
+[ext_resource type="Resource" uid="uid://cxytmloe5cni1" path="res://assets/enemy/movement/basic/enemy_movement_basic_easy.tres" id="3_7c86l"]
 [ext_resource type="Script" uid="uid://bglhbt23nx4m7" path="res://script/enemy/E_EnemySettings.cs" id="5_p41v2"]
 
 [resource]
@@ -10,6 +10,9 @@ script = ExtResource("5_p41v2")
 Fire = ExtResource("1_7c86l")
 Health = ExtResource("2_vthm2")
 MoverData = ExtResource("3_7c86l")
-SpreadFactor = 12.0
-ReactionTime = 0.5
+Score = 75
+SpreadFactor = 25.0
+MinSpread = 10.0
+ReactionTime = 0.7
+DamageMultiplier = -0.5
 metadata/_custom_type_script = "uid://bglhbt23nx4m7"

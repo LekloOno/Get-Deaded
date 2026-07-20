@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PM_SurfaceStateData" load_steps=6 format=3 uid="uid://dn58omqab4s1u"]
+[gd_resource type="Resource" script_class="PM_SurfaceStateData" format=3 uid="uid://dn58omqab4s1u"]
 
 [ext_resource type="Resource" uid="uid://ckn2mamfc6m4" path="res://assets/script/movement/surface_control/ground/ground-crouch.tres" id="1_b5oxn"]
 [ext_resource type="Resource" uid="uid://bld6y2cv0hps1" path="res://assets/script/movement/surface_control/ground/ground-normal.tres" id="1_evbar"]

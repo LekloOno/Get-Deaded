@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="PROTO_MoverData" format=3 uid="uid://cn5niuf8fumfm"]
+
+[ext_resource type="Script" uid="uid://duj8rxwj3bctp" path="res://script/enemy/PROTO_MoverData.cs" id="1_5x553"]
+
+[resource]
+script = ExtResource("1_5x553")
+MinStraffe = 0.08
+Acceleration = 12.0
+SprintSpeed = 5.5
+RunSpeed = 4.0
+WalkSpeed = 2.0
+WalkWeight = 0.05
+RunWeight = 0.7
+SprintWeight = 0.4
+MinHold = 0.1
+MaxHold = 1.2
+metadata/_custom_type_script = "uid://duj8rxwj3bctp"

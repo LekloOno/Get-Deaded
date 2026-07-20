@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dpo37xs2mukfh" path="res://prefabs/simplebot/bot_base_fire.tscn" id="1_dmw02"]
 [ext_resource type="Resource" uid="uid://bgy3t44egnoe0" path="res://assets/enemy/health/enemy_health_armor.tres" id="2_7o5h5"]
-[ext_resource type="Resource" uid="uid://cn5niuf8fumfm" path="res://assets/enemy/movement/basic/enemy_movement_basic_hard.tres" id="3_dthhf"]
+[ext_resource type="Resource" uid="uid://cbmxkvpwu7621" path="res://assets/enemy/movement/basic/enemy_movement_basic_hard.tres" id="3_dthhf"]
 [ext_resource type="Script" uid="uid://bglhbt23nx4m7" path="res://script/enemy/E_EnemySettings.cs" id="5_le6oi"]
 
 [resource]

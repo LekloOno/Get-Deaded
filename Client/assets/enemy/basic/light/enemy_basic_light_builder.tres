@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://diy5bod45b504" path="res://prefabs/simplebot/bot_builder_template_norm_light.tscn" id="1_1rlxk"]
 [ext_resource type="Script" uid="uid://bglhbt23nx4m7" path="res://script/enemy/E_EnemySettings.cs" id="2_m6wlt"]
-[ext_resource type="Resource" uid="uid://dwu6r2s3l2r7w" path="res://assets/enemy/basic/light/enemy_basic_light_easy.tres" id="3_yo5h5"]
-[ext_resource type="Resource" uid="uid://bsa2lcp4fy354" path="res://assets/enemy/basic/light/enemy_basic_light_normal.tres" id="4_ag1vf"]
-[ext_resource type="Resource" uid="uid://d0j8b0pup2pkt" path="res://assets/enemy/basic/light/enemy_basic_light_hard.tres" id="5_puump"]
+[ext_resource type="Resource" uid="uid://dy4kxi7mukshs" path="res://assets/enemy/basic/light/enemy_basic_light_easy.tres" id="3_yo5h5"]
+[ext_resource type="Resource" uid="uid://dwu6r2s3l2r7w" path="res://assets/enemy/basic/light/enemy_basic_light_normal.tres" id="4_ag1vf"]
+[ext_resource type="Resource" uid="uid://c50ipqoa2tmsc" path="res://assets/enemy/basic/light/enemy_basic_light_hard.tres" id="5_puump"]
 [ext_resource type="Script" uid="uid://6shwimir3xjv" path="res://script/enemy/E_EnemyBuilder.cs" id="6_pelge"]
 
 [resource]

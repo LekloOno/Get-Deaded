@@ -92,10 +92,12 @@ public partial class E_Enemy : GB_CharacterBody, E_IEnemy
 	private void UpdateSettings()
 	{
 		PW_FireBis fire = Settings.Fire.Instantiate<PW_FireBis>();
+		Fire?.ClearDamageMultiplier();
 		Fire?.QueueFree();
 		Fire = fire;
-		AimPosition.AddChild(Fire);
-		Fire?.Initialize(this);
+		AimPosition.AddChild(fire);
+		fire.Initialize(this);
+		fire.AddDamageMultiplier(Settings.DamageMultiplier);
 		
 		GC_Health healthTree = Settings.Health.BuildNode();
 		if (HealthManager.TopHealthLayer != null)

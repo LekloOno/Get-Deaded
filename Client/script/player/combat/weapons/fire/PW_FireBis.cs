@@ -31,6 +31,12 @@ public abstract partial class PW_FireBis : WeaponComponent
             shot.DamageMultiplier.Remove(multiplier);        
     }
 
+    public void ClearDamageMultiplier()
+    {
+        foreach (PW_ShotBis shot in _shots)
+            shot.DamageMultiplier.Consume();
+    }
+
     public bool InfiniteAmmo
     {
         get => _ammos.InfiniteAmmo;
