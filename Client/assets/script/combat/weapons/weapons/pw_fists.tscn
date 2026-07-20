@@ -19,12 +19,23 @@
 [ext_resource type="Script" uid="uid://v03t7md2i0v8" path="res://script/player/combat/weapons/shot/PWS_SequenceHit.cs" id="15_2xwjd"]
 [ext_resource type="Script" uid="uid://b88xre8wsrllr" path="res://script/global/combat/hit/hit/GC_SequenceHitBox.cs" id="16_ghv7x"]
 [ext_resource type="Script" uid="uid://cw3m0ga8jfbw7" path="res://script/engine_tools/physics/bodies/objects/hitbox/PHX_ShapeSeqArea3D.cs" id="17_s0i7c"]
+[ext_resource type="Script" uid="uid://b1eofgkrms2sj" path="res://script/player/audio/combat/weapons/PA_FistsFire.cs" id="20_84ceg"]
 [ext_resource type="Texture2D" uid="uid://dsma1lip7bvch" path="res://assets/sprites/dash/dash_cd_mid_shadow.png" id="20_jqbem"]
 [ext_resource type="Texture2D" uid="uid://cbh1opskekaqn" path="res://assets/sprites/dash/dash_cd_mid_fill.png" id="21_b7iem"]
+[ext_resource type="Script" uid="uid://dmowaohx8nd7q" path="res://addons/GaudioProcessTree/nodes/modules/AUD_Randomizer.cs" id="21_grkrc"]
 [ext_resource type="Script" uid="uid://b55wckrquuws6" path="res://script/ui/combat/weapon/weapons/UI_FistsFireCharge.cs" id="22_4t1hw"]
+[ext_resource type="AudioStream" uid="uid://ckvc84c7gpnec" path="res://assets/sounds/combat/weapons/fists/fists_hit_1.wav" id="22_jcfa2"]
 [ext_resource type="Script" uid="uid://2ud817ngo5tn" path="res://script/engine_tools/animation/shakes/tween/ANIM_TweenSetting.cs" id="23_1ityg"]
+[ext_resource type="AudioStream" uid="uid://daegbm8o4bwc8" path="res://assets/sounds/combat/weapons/fists/fists_hit_2.wav" id="23_e8c7n"]
 [ext_resource type="Script" uid="uid://bjbcijbwg0h0v" path="res://script/engine_tools/animation/shakes/tween/ANIM_InOutTweenSetting.cs" id="24_5up5p"]
+[ext_resource type="AudioStream" uid="uid://dpdyjtn2qiti2" path="res://assets/sounds/combat/weapons/fists/fists_hit_3.wav" id="24_l2f8r"]
 [ext_resource type="Script" uid="uid://cmw1ogld2jka3" path="res://script/engine_tools/animation/shakes/tween/value/ANIM_ColorTweenValue.cs" id="25_u5uke"]
+[ext_resource type="AudioStream" uid="uid://0a3px4lqar8w" path="res://assets/sounds/combat/weapons/fists/fists_hit_4.wav" id="25_y8qsj"]
+[ext_resource type="Script" uid="uid://dbtsyp0hru7g" path="res://addons/GaudioProcessTree/nodes/stream_players/AUD_StreamPlayer1D.cs" id="26_u4gab"]
+[ext_resource type="AudioStream" uid="uid://ctad5b6f5bbfc" path="res://assets/sounds/combat/weapons/fists/fists_charge_1.wav" id="27_8d7bq"]
+[ext_resource type="AudioStream" uid="uid://bg72a8i0gtu6x" path="res://assets/sounds/combat/weapons/fists/fists_charge_2.wav" id="28_hop6c"]
+[ext_resource type="AudioStream" uid="uid://bnksaiie1ion7" path="res://assets/sounds/combat/weapons/fists/fists_charge_3.wav" id="29_6g8yq"]
+[ext_resource type="AudioStream" uid="uid://caawss218ubfn" path="res://assets/sounds/combat/weapons/fists/fists_charge_4.wav" id="30_u6eis"]
 
 [sub_resource type="Resource" id="Resource_g68l2"]
 script = ExtResource("3_s0i7c")
@@ -202,6 +213,47 @@ script = ExtResource("12_jqbem")
 _traumaLayer = SubResource("Resource_4osp6")
 _amount = 0.35
 metadata/_custom_type_script = "uid://51kwj2ldm4xq"
+
+[node name="Sound" type="Node" parent="PW_FistsFire" unique_id=875107776 node_paths=PackedStringArray("_shotSound", "_chargeStarted")]
+script = ExtResource("20_84ceg")
+_shotSound = NodePath("shot")
+_chargeStarted = NodePath("charge_started")
+
+[node name="shot" type="Node" parent="PW_FistsFire/Sound" unique_id=1943672429]
+script = ExtResource("21_grkrc")
+Sounds = Array[AudioStream]([ExtResource("22_jcfa2"), ExtResource("23_e8c7n"), ExtResource("24_l2f8r"), ExtResource("25_y8qsj")])
+MinPitch = 0.9
+MaxPitch = 1.1
+UseTimeScale = true
+BaseVolumeDb = 8.0
+metadata/_custom_type_script = "uid://dmowaohx8nd7q"
+
+[node name="shot" type="Node" parent="PW_FistsFire/Sound/shot" unique_id=1768527066 node_paths=PackedStringArray("Player")]
+script = ExtResource("26_u4gab")
+Player = NodePath("shot")
+metadata/_custom_type_script = "uid://dbtsyp0hru7g"
+
+[node name="shot" type="AudioStreamPlayer" parent="PW_FistsFire/Sound/shot/shot" unique_id=651683303]
+volume_db = 8.0
+bus = &"Weapons"
+
+[node name="charge_started" type="Node" parent="PW_FistsFire/Sound" unique_id=892820983]
+script = ExtResource("21_grkrc")
+Sounds = [ExtResource("27_8d7bq"), ExtResource("28_hop6c"), ExtResource("29_6g8yq"), ExtResource("30_u6eis")]
+MinPitch = 0.9
+MaxPitch = 1.1
+UseTimeScale = true
+BaseVolumeDb = 8.0
+metadata/_custom_type_script = "uid://dmowaohx8nd7q"
+
+[node name="charge_started" type="Node" parent="PW_FistsFire/Sound/charge_started" unique_id=618670684 node_paths=PackedStringArray("Player")]
+script = ExtResource("26_u4gab")
+Player = NodePath("charge_started")
+metadata/_custom_type_script = "uid://dbtsyp0hru7g"
+
+[node name="charge_started" type="AudioStreamPlayer" parent="PW_FistsFire/Sound/charge_started/charge_started" unique_id=894390444]
+volume_db = 8.0
+bus = &"Weapons"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=725252627]
 
