@@ -228,14 +228,14 @@ radius = 0.25
 size = Vector3(0.5, 1.8, 0.5)
 
 [sub_resource type="Curve" id="Curve_wow6d"]
-_data = [Vector2(0, 0), 0.0, 2.0, 0, 0, Vector2(1, 1), 0.25, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.45833328, 0.4977712), 2.719493, 2.719493, 0, 0, Vector2(0.9962121, 1), -0.082408905, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_cqits"]
 radius = 2.8
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wow6d"]
-radius = 0.6
+radius = 0.7
 height = 1.9000001
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jlgrh"]
@@ -1516,7 +1516,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0451076, 0)
 collision_layer = 0
 script = ExtResource("18_wow6d")
 _vacuumCurve = SubResource("Curve_wow6d")
-_vacuumStrength = 60.0
+_vacuumStrength = 80.0
 metadata/_custom_type_script = "uid://3tjawmkgaiwa"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body/GL_Vacuum" unique_id=1798539332]
@@ -4761,14 +4761,14 @@ mouse_filter = 2
 [node name="Wide" parent="CombatUI/VaultWind/SpeedVfx" index="0" unique_id=1031012456]
 material = SubResource("ShaderMaterial_31xtv")
 instance_shader_parameters/manual_frequency = 0.06
-instance_shader_parameters/phase = 24.507769
+instance_shader_parameters/phase = 3163.6707
 _speed = 5.5
 _frequency = 0.06
 
 [node name="Tight" parent="CombatUI/VaultWind/SpeedVfx" index="1" unique_id=1194191449]
 material = SubResource("ShaderMaterial_e6mop")
 instance_shader_parameters/manual_frequency = 0.1
-instance_shader_parameters/phase = 48.272884
+instance_shader_parameters/phase = 6231.473
 _speed = 6.5
 _frequency = 0.1
 

@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://87c6rmcbhgqn"]
+
+[ext_resource type="Texture2D" uid="uid://8m8858g8rya2" path="res://assets/textures/factory/trim_04_decal_gloss.png" id="1_n7i3w"]
+
+[resource]
+albedo_texture = ExtResource("1_n7i3w")
+metallic_specular = 0.0
+texture_filter = 2
