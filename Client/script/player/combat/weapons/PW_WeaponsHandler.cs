@@ -196,6 +196,9 @@ public partial class PW_WeaponsHandler : WeaponSystem
         _externalReady = false;
         CancelReload();
         _activeWeapon.Disable();
+        Melee.Disable();
+        _activeWeapon.ResetBuffer();
+        Melee.ResetBuffer();
     }
     
     public void EnableFire()
@@ -220,8 +223,17 @@ public partial class PW_WeaponsHandler : WeaponSystem
             weapon.SetInfiniteMagazine(active);
     }
 
-    private void DirectMeleeStop(object sender, EventArgs e) => Melee.PrimaryRelease();
-    private void DirectMeleeStart(object sender, EventArgs e) => Melee.PrimaryPress();
+    private void DirectMeleeStop(object sender, EventArgs e) {}
+    /// <summary>
+    /// Ad hoc, later make a real quick melee thingy
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void DirectMeleeStart(object sender, EventArgs e)
+    {
+        Melee.PrimaryPress();
+        Melee.PrimaryRelease();
+    }
 
     private void OnMeleeShot()
     {
@@ -246,8 +258,8 @@ public partial class PW_WeaponsHandler : WeaponSystem
     private void EndMeleeRecover()
     {
         _ready = true;
-        SendAvailable();
         _activeWeapon.Enable();
+        SendAvailable();
     }
 
     public void InitData(out PW_Weapon active, out PW_Weapon nextHolster, out int nextIndex, out Array<PW_Weapon> weapons)
