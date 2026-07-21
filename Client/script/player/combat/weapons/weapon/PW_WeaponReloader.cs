@@ -83,7 +83,8 @@ public partial class PW_WeaponReloader : Node
         {
             CurrentStep = PW_ReloadStep.Ready;  // animation skip on recover
             Recovered?.Invoke();
-        }
+        } else if (CurrentStep == PW_ReloadStep.Unload)
+            CurrentStep = PW_ReloadStep.Ready;
         
         ResetCurrent();
 
