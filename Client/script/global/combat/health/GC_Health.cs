@@ -165,7 +165,9 @@ public partial class GC_Health : Node
         if (died)
             return true;
         
-        OnBreak?.Invoke(this, Child);
+        if (damageTaken > 0)
+            OnBreak?.Invoke(this, Child);
+            
         return false;
     }
 
