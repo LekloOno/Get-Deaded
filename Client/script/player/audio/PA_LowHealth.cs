@@ -51,6 +51,7 @@ public partial class PA_LowHealth : Node
         _healthManager.OnDamage += OnDamage;
         _healthManager.OnHeal += OnHeal;
         _healthManager.OnLayerInit += OnInit;
+        _healthManager.OnDie += OnDie;
 
         _filter.CutoffHz = 20500f;
         _reverb.Wet = 0f;
@@ -61,6 +62,9 @@ public partial class PA_LowHealth : Node
     {
         Intensity = Mathf.Lerp(Intensity, TargetIntensity, (float) delta * _smoothSpeed);
     }
+
+    private void OnDie(GC_Health senderLayer) =>
+        TargetIntensity = Intensity = 0f;
 
     private void OnInit(object? sender, HealthInitEventArgs e)
         => SetTarget();
