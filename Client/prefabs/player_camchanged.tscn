@@ -131,6 +131,8 @@
 [ext_resource type="PackedScene" uid="uid://bh2y34rim2pm" path="res://prefabs/ui/combat/ui_speed_vfx.tscn" id="117_1b1ew"]
 [ext_resource type="Script" uid="uid://c6ph42hy4ns3s" path="res://script/vfx/combat/speed/VFX_VaultWind.cs" id="118_1b1ew"]
 [ext_resource type="Shader" uid="uid://dsprymks0rfsy" path="res://assets/shaders/speed_wind_vfx.gdshader" id="119_31xtv"]
+[ext_resource type="Shader" uid="uid://couppe3ggac2g" path="res://assets/shaders/shield_crack.gdshader" id="132_1km1v"]
+[ext_resource type="Script" uid="uid://c7ftvul5gsfjl" path="res://script/vfx/combat/VFX_ShieldBreak.cs" id="133_7s2sp"]
 
 [sub_resource type="Resource" id="Resource_e1wdc"]
 script = ExtResource("3_m3u2w")
@@ -1157,6 +1159,23 @@ shader_parameter/frequency = 0.20000000880148
 shader_parameter/start_radius = 0.4800000228
 shader_parameter/softness = 0.10000000405148
 shader_parameter/trail_length = 0.400000019
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7s2sp"]
+shader = ExtResource("132_1km1v")
+shader_parameter/crack_color = Color(0.20392157, 0.41960785, 1, 0.6313726)
+shader_parameter/impact_uv = Vector2(0.5, 0.5)
+shader_parameter/seed = 0.155
+shader_parameter/grow_time = 0.1
+shader_parameter/fade_time = 1.0
+shader_parameter/effect_time = 0.24
+shader_parameter/cell_density = 4.5
+shader_parameter/line_thickness = 0.015
+shader_parameter/outer_radius = 1.5
+shader_parameter/hole_radius = 0.6400000304
+shader_parameter/edge_softness = 0.01
+shader_parameter/halo_width = 5.00000023098023
+shader_parameter/core_intensity = 1.4
+shader_parameter/halo_intensity = 0.6
 
 [node name="PlayerController" type="CharacterBody3D" unique_id=48788581 node_paths=PackedStringArray("_healthManager", "_walkProcess", "_reviveInput", "_wallJump", "_wallClimb", "_groundState", "_cameraControl", "Camera", "_surfaceControl", "_straffeSnap", "WeaponsHandler", "_exposedBody", "_omniCharge", "Picker", "_cameraSpatialAnimManager")]
 collision_layer = 2
@@ -4761,15 +4780,29 @@ mouse_filter = 2
 [node name="Wide" parent="CombatUI/VaultWind/SpeedVfx" index="0" unique_id=1031012456]
 material = SubResource("ShaderMaterial_31xtv")
 instance_shader_parameters/manual_frequency = 0.06
-instance_shader_parameters/phase = 179.31891
+instance_shader_parameters/phase = 1292.1064
 _speed = 5.5
 _frequency = 0.06
 
 [node name="Tight" parent="CombatUI/VaultWind/SpeedVfx" index="1" unique_id=1194191449]
 material = SubResource("ShaderMaterial_e6mop")
 instance_shader_parameters/manual_frequency = 0.1
-instance_shader_parameters/phase = 353.20395
+instance_shader_parameters/phase = 2545.0586
 _speed = 6.5
 _frequency = 0.1
+
+[node name="ShieldCrack" type="ColorRect" parent="CombatUI" unique_id=2105478259 node_paths=PackedStringArray("_shield")]
+material = SubResource("ShaderMaterial_7s2sp")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("133_7s2sp")
+_shield = NodePath("../../Body/GC_HealthManager/GC_Shield")
+DefaultCrackColor = Color(0, 0.50980395, 0.88235295, 0.39215687)
+DefaultGrowDuration = 0.2
+DefaultFadeDuration = 1.8
 
 [editable path="CombatUI/VaultWind/SpeedVfx"]
