@@ -12,6 +12,6 @@ metadata/_custom_type_script = "uid://123gwhhdyr3d"
 script = ExtResource("2_b48jv")
 _resistance = 0.8
 _coolDown = 300
-MaxHealth = 70.0
+MaxHealth = 75.0
 Child = SubResource("Resource_cb1q0")
 metadata/_custom_type_script = "uid://b06fsn7kd2vba"
