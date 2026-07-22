@@ -109,6 +109,9 @@ public partial class PW_WeaponsHandler : WeaponSystem
     {
         if (_switchingIn || _switchingOut)
             EndSwitch();
+
+        Melee.ResetBuffer();
+        Melee.Disable();
     }
 
     private void ForwardShot() => Shot?.Invoke();
@@ -196,9 +199,7 @@ public partial class PW_WeaponsHandler : WeaponSystem
         _externalReady = false;
         CancelReload();
         _activeWeapon.Disable();
-        Melee.Disable();
         _activeWeapon.ResetBuffer();
-        Melee.ResetBuffer();
     }
     
     public void EnableFire()
