@@ -57,5 +57,5 @@ bus/7/name = &"Locomotion"
 bus/7/solo = false
 bus/7/mute = false
 bus/7/bypass_fx = false
-bus/7/volume_db = -3.1173582
+bus/7/volume_db = -1.9147635
 bus/7/send = &"Environment Sfx"
