@@ -5,8 +5,11 @@ using Godot;
 public partial class SC_RandomParentSector : SC_ParentSector
 {
     [Export] private int _count;
+    [Export] private bool _pickUnique = true;
     private int _subSectorIndex;
     private readonly Random _rng = new();
+
+    private RandomStash<SC_SpawnSector> _remainingSubSectors = null!;
 
     private int _elapsedCount;
 
@@ -19,11 +22,19 @@ public partial class SC_RandomParentSector : SC_ParentSector
             return false;
         }
 
-        _subSectorIndex = GetRandomIndex();
-        ActiveSector = _subSectors[_subSectorIndex];
+        ActiveSector = PickNext();
         ActiveSector.Start();
 
         return true;
+    }
+
+    private SC_SpawnSector PickNext()
+    {
+        if (_pickUnique)
+            return _remainingSubSectors.Draw();
+
+        _subSectorIndex = GetRandomIndex();
+        return _subSectors[_subSectorIndex];
     }
 
     /// <summary>
@@ -33,13 +44,16 @@ public partial class SC_RandomParentSector : SC_ParentSector
     private int GetRandomIndex() =>
         (_rng.Next(_subSectors.Count - 1) + 1 + _subSectorIndex) % _subSectors.Count;
 
-    protected override void ParentReadySpec() {}
+    protected override void ParentReadySpec()
+    {
+        if (_pickUnique)
+            _remainingSubSectors = new(_subSectors, true, _rng);
+    }
 
     protected override bool StartSpec()
     {
         _elapsedCount = 0;
-        ActiveSector = _subSectors[_subSectorIndex];
-        ActiveSector.Start();
+        ActiveSector!.Start();
 
         return true;
     }
@@ -52,7 +66,15 @@ public partial class SC_RandomParentSector : SC_ParentSector
 
     protected override void ParentInitSpec(GE_IActiveCombatEntity starter)
     {
-        _subSectorIndex = _rng.Next(_subSectors.Count);
-        ActiveSector = _subSectors[_subSectorIndex];
+        if (_pickUnique)
+        {
+            _remainingSubSectors.Reset();
+            ActiveSector = _remainingSubSectors.Draw();
+        }
+        else
+        {
+            _subSectorIndex = _rng.Next(_subSectors.Count);
+            ActiveSector = _subSectors[_subSectorIndex];
+        }
     }
 }
