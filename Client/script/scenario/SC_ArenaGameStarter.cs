@@ -12,6 +12,9 @@ public partial class SC_ArenaGameStarter : Node
 
     [Signal]
     public delegate void SceneInitializedEventHandler();
+
+    [Signal]
+    public delegate void GameInitializedEventHandler();
     
     [Signal]
     public delegate void RoamingStartedEventHandler();
@@ -53,6 +56,8 @@ public partial class SC_ArenaGameStarter : Node
             return;
 
         _gameManager.Init(_player);
+
+        EmitSignal(SignalName.GameInitialized);
     }
 
     public void StartRoaming()
