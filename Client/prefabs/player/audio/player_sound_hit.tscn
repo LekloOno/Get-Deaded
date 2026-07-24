@@ -20,11 +20,15 @@
 [ext_resource type="AudioStream" uid="uid://7gwwgxdx2h1y" path="res://assets/sounds/combat/hit/Barrier/hit_barrier1.wav" id="18_7tyjg"]
 [ext_resource type="AudioStream" uid="uid://bsvc5cjiohqv7" path="res://assets/sounds/combat/hit/Barrier/hit_barrier2.wav" id="19_mvblh"]
 [ext_resource type="AudioStream" uid="uid://b3mbk4w5dxgkb" path="res://assets/sounds/combat/hit/Barrier/hit_barrier3.wav" id="20_wbd1u"]
+[ext_resource type="Script" uid="uid://dmowaohx8nd7q" path="res://addons/GaudioProcessTree/nodes/modules/AUD_Randomizer.cs" id="21_dmi2j"]
+[ext_resource type="AudioStream" uid="uid://q08oq0nxyii" path="res://assets/sounds/combat/hit/Break/layer_break_1.wav" id="22_qn4ts"]
+[ext_resource type="AudioStream" uid="uid://2ro4wcev8xhx" path="res://assets/sounds/combat/hit/Break/layer_break_2.wav" id="23_7tyjg"]
+[ext_resource type="AudioStream" uid="uid://bj3qcx37w41sl" path="res://assets/sounds/combat/hit/Break/layer_break_3.wav" id="24_mvblh"]
 
 [sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_ran1i"]
 polyphony = 20
 
-[node name="PA_Hit" type="Node" unique_id=1408950828 node_paths=PackedStringArray("_criticalHit", "_criticalDing", "_kill", "_killSnapped", "_criticalKill", "_meatHit", "_barrierHit", "_armorHit")]
+[node name="PA_Hit" type="Node" unique_id=1408950828 node_paths=PackedStringArray("_criticalHit", "_criticalDing", "_kill", "_killSnapped", "_criticalKill", "_meatHit", "_barrierHit", "_armorHit", "_layerBreak")]
 script = ExtResource("1_qvta0")
 _criticalHit = NodePath("critical_hit/critical_hit")
 _criticalDing = NodePath("critical_hit/critical_hit/ding")
@@ -34,6 +38,7 @@ _criticalKill = NodePath("critical_kill")
 _meatHit = NodePath("hit/hit")
 _barrierHit = NodePath("barrier")
 _armorHit = NodePath("armor")
+_layerBreak = NodePath("layer_break")
 _criticalMinimumDelay = 45
 _minimumVolume = -10.0
 _maximumVolume = -3.0
@@ -219,4 +224,20 @@ metadata/_custom_type_script = "uid://dbtsyp0hru7g"
 
 [node name="barrier" type="AudioStreamPlayer" parent="barrier/player" unique_id=562729495]
 volume_db = 11.0
+bus = &"Hit"
+
+[node name="layer_break" type="Node" parent="." unique_id=1392534070]
+script = ExtResource("21_dmi2j")
+Sounds = Array[AudioStream]([ExtResource("22_qn4ts"), ExtResource("23_7tyjg"), ExtResource("24_mvblh")])
+MinPitch = 0.95
+MaxPitch = 1.05
+UseTimeScale = true
+metadata/_custom_type_script = "uid://dmowaohx8nd7q"
+
+[node name="layer_break" type="Node" parent="layer_break" unique_id=1926112449 node_paths=PackedStringArray("Player")]
+script = ExtResource("4_b2os4")
+Player = NodePath("layer_break")
+metadata/_custom_type_script = "uid://dbtsyp0hru7g"
+
+[node name="layer_break" type="AudioStreamPlayer" parent="layer_break/layer_break" unique_id=866798984]
 bus = &"Hit"

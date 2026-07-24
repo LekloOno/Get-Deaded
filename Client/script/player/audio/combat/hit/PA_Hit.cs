@@ -13,6 +13,8 @@ public partial class PA_Hit : Node
     [Export] private AUD_Sound _meatHit = null!;
     [Export] private AUD_Sound _barrierHit = null!;
     [Export] private AUD_Sound _armorHit = null!;
+    [Export] private AUD_Sound _layerBreak = null!;
+
     [Export] private ulong _minimumDelay = 45;
     [Export] private ulong _criticalMinimumDelay = 100;
     [Export] private bool _volumeDamageScale = true;
@@ -47,6 +49,9 @@ public partial class PA_Hit : Node
                 _criticalKill.Play();
             PlayKill(hit.Critical);
         }
+
+        if (hit.BrokeLayer)
+            _layerBreak.Play();
 
         if (!hit.OverrideBodyPart && hit.HurtBox.BodyPart == GC_BodyPart.Head)
         {
