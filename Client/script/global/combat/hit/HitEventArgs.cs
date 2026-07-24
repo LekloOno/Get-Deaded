@@ -33,6 +33,10 @@ public class HitEventArgs : EventArgs
     /// </summary>
     public float Damage {get;}
     /// <summary>
+    /// The amount of damage that got reduced by the hit target.
+    /// </summary>
+    public float Reduced {get;}
+    /// <summary>
     /// The amount of damage that couldn't be handled by the hit target. <br />
     /// Exemple - target has 20 hps, and receives 30 damage. Overflow = 10.
     /// </summary>
@@ -75,6 +79,7 @@ public class HitEventArgs : EventArgs
         bool kill,
         GC_IHitDealer dealer,
         GE_IActiveCombatEntity author,
+        float reduced = 0,
         float overflow = 0,
         bool overrideBodyPart = false,
         bool backStab = false,
@@ -82,7 +87,7 @@ public class HitEventArgs : EventArgs
         bool env = false,
         float subHitSize = 1f
     ) : this(
-        target, senderLayer, hurtBox, damage, dealer, author, overflow,
+        target, senderLayer, hurtBox, damage, dealer, author, reduced, overflow,
         (kill ? HitFlags.Killed : 0) |
         (backStab ? HitFlags.BackStab : 0) |
         (critical ? HitFlags.Critical : 0) |
@@ -97,6 +102,7 @@ public class HitEventArgs : EventArgs
         float damage,
         GC_IHitDealer dealer,
         GE_IActiveCombatEntity author,
+        float reduced,
         float overflow,
         HitFlags flags,
         float subHitSize = 1f
@@ -108,17 +114,18 @@ public class HitEventArgs : EventArgs
         Damage = damage;
         Dealer = dealer;
         Author = author;
+        Reduced = reduced;
         Overflow = overflow;
         Flags = flags;
         SubHitSize = subHitSize;
     }
 
     public static HitEventArgs Miss(GC_IHitDealer dealer, GE_IActiveCombatEntity author) =>
-        new(null, null, null, 0f, dealer, author, 0f, HitFlags.Missed);
+        new(null, null, null, 0f, dealer, author, 0f, 0f, HitFlags.Missed);
 
     // Maybe replace ENV by a specific type of GC_HealthManager so we can still follow the statistics on environment
     public static HitEventArgs Env(GC_IHitDealer dealer, GE_IActiveCombatEntity author) =>
-        new(null, null, null, 0f, dealer, author, 0f, HitFlags.Environment);
+        new(null, null, null, 0f, dealer, author, 0f, 0f, HitFlags.Environment);
 
     /// <summary>
     /// Mostly for statistics & UI - if true, consider this hit as a normal body hit.
@@ -152,4 +159,5 @@ public class HitEventArgs : EventArgs
     /// Total damage delivered to the target. The sum of handled and overflowing damages.
     /// </summary>
     public float TotalDamage => Damage + Overflow;
+    public float Resistance => Reduced / (Reduced + Damage + Overflow);
 }

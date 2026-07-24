@@ -28,7 +28,7 @@ public partial class UI_DamageIndicatorManager : Control
 
         if (_currentIndicator != null && e.Target == _currentTarget)
         {
-            _currentIndicator.Stack(e.TotalDamage, color, e.Critical);
+            _currentIndicator.Stack(e, color);
             _bufferTimer.Start();
         } else
         {
@@ -39,7 +39,7 @@ public partial class UI_DamageIndicatorManager : Control
             if(indicatorNode is UI_DamageIndicator indicator)
             {
                 _currentIndicator = indicator;
-                _currentIndicator.Initialize(_camera, e.Target.HealthManager, e.TotalDamage, color, e.Critical);
+                _currentIndicator.Initialize(_camera, e, color);
                 AddChild(_currentIndicator);
                 _bufferTimer.Start();
             }

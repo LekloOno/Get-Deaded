@@ -35,6 +35,7 @@ public partial class GC_HurtBox : Area3D
 	public bool Damage(
 		GC_IHitDealer hitDealer,
 		out float takenDamage,
+		out float reduced,
 		out float overflow,
 		out bool backStab,
 		out bool critical,
@@ -52,7 +53,10 @@ public partial class GC_HurtBox : Area3D
 		
 		critical = IsCritical(overrideBodyPart, backStab, dirMultiplier);
 
-		return Entity.HealthManager.Damage(hitDealer, expectedDamage, out takenDamage, out overflow, out deepest);
+		bool killed = Entity.HealthManager.Damage(hitDealer, expectedDamage, out takenDamage, out overflow, out deepest);
+		reduced = expectedDamage - takenDamage - overflow;
+
+		return killed;
 	}
 
 	private bool IsCritical(bool overrideBodyPart, bool backStab, float dirMultiplier) =>
@@ -119,6 +123,7 @@ public partial class GC_HurtBox : Area3D
 		bool killed = Damage(
 			hitDealer,
 			out float takenDamage,
+			out float reduced,
 			out float overflow,
 			out bool backStab,
 			out bool critical,
@@ -146,7 +151,7 @@ public partial class GC_HurtBox : Area3D
 			Entity, deepest, this,           // Target infos
 			takenDamage, killed,                    // Hit infos
 			hitDealer, author,                      // Author infos
-			overflow, overrideBodyPart,             // Optional infos
+			reduced, overflow, overrideBodyPart,	// Optional infos
 			backStab, critical,                     // Optional infos
 			false, subHitSize                       // Optional infos
 		);

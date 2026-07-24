@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://207deu7318em"]
+
+[ext_resource type="Script" uid="uid://dlgmb42vtalph" path="res://script/ui/combat/weapon/hit/UI_HitResistance.cs" id="1_mrdt0"]
+[ext_resource type="Texture2D" uid="uid://cr13r4bi5fktj" path="res://assets/sprites/hit/shield_icon_body.png" id="1_vyxue"]
+[ext_resource type="Script" uid="uid://2ud817ngo5tn" path="res://script/engine_tools/animation/shakes/tween/ANIM_TweenSetting.cs" id="2_erfhq"]
+[ext_resource type="Texture2D" uid="uid://gfnedkm128da" path="res://assets/sprites/hit/shield_icon_details.png" id="2_xy0n2"]
+[ext_resource type="Script" uid="uid://bjbcijbwg0h0v" path="res://script/engine_tools/animation/shakes/tween/ANIM_InOutTweenSetting.cs" id="3_2pk2k"]
+
+[sub_resource type="Resource" id="Resource_o8fkh"]
+script = ExtResource("2_erfhq")
+AnimationTime = 0.2
+TransitionType = 4
+EaseType = 1
+metadata/_custom_type_script = "uid://2ud817ngo5tn"
+
+[sub_resource type="Resource" id="Resource_bw1un"]
+script = ExtResource("2_erfhq")
+AnimationTime = 0.4
+EaseType = 2
+metadata/_custom_type_script = "uid://2ud817ngo5tn"
+
+[sub_resource type="Resource" id="Resource_11tg3"]
+script = ExtResource("3_2pk2k")
+FadeIn = SubResource("Resource_o8fkh")
+FadeOut = SubResource("Resource_bw1un")
+metadata/_custom_type_script = "uid://bjbcijbwg0h0v"
+
+[sub_resource type="Resource" id="Resource_mrdt0"]
+script = ExtResource("2_erfhq")
+AnimationTime = 0.2
+TransitionType = 7
+EaseType = 2
+metadata/_custom_type_script = "uid://2ud817ngo5tn"
+
+[node name="Control" type="Control" unique_id=782095997 node_paths=PackedStringArray("_body", "_halo")]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+script = ExtResource("1_mrdt0")
+_body = NodePath("Body")
+_halo = NodePath("Halo")
+_staleTime = 0.0
+_opacitySettings = SubResource("Resource_11tg3")
+_noResistOpacitySetting = SubResource("Resource_mrdt0")
+
+[node name="Halo" type="TextureRect" parent="." unique_id=320181652]
+modulate = Color(1, 0.6862745, 0, 1)
+self_modulate = Color(1, 1, 1, 0.59607846)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -326.5
+offset_top = -388.5
+offset_right = 326.5
+offset_bottom = 390.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.125, 1)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("1_vyxue")
+
+[node name="Body" type="TextureRect" parent="." unique_id=864748951]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.0
+offset_top = -296.0
+offset_right = 240.0
+offset_bottom = 296.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.125, 1)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("2_xy0n2")

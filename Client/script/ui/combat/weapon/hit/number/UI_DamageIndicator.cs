@@ -2,9 +2,11 @@ using System.Threading.Tasks;
 using Godot;
 
 [GlobalClass]
-public partial class UI_DamageIndicator : Label
+public partial class UI_DamageIndicator : Control
 {
     public float HeightOffset {get; set;} = 0f;
+    [Export] private Label _label = null!;
+    [Export] private UI_HitResistance _hitResistance = null!;
     [Export] private float _maxHeightOffset;
     [Export] private float _fadeTime;
     
@@ -31,18 +33,19 @@ public partial class UI_DamageIndicator : Label
 
     private ulong _lastHit;
     
-    public void Initialize(Camera3D camera, Node3D target, float damage, Color color, bool critical)
+    public void Initialize(Camera3D camera, HitEventArgs e, Color color)
     {
-        Scale = Vector2.Zero;
+        _label.Scale = Vector2.Zero;
         _camera = camera;
-        _target = target;
-        _prevTargetPosition = target.GlobalPosition;
-        _damage = damage;
-        Text = (int)_damage + "";
+        _target = e.Target.HealthManager;
+        _prevTargetPosition = e.Target.HealthManager.GlobalPosition;
+        _damage = e.TotalDamage;
+        _label.Text = (int)_damage + "";
 
-        UpdateColor(color, critical);    
+        UpdateColor(color, e.Critical);
+        _hitResistance.Initialize(e); 
         
-        StartAnim(damage);
+        StartAnim(e.TotalDamage);
     }
 
     public override void _ExitTree()
@@ -52,24 +55,25 @@ public partial class UI_DamageIndicator : Label
 
     private void UpdateColor(Color layerColor, bool critical)
     {
-        LabelSettings.ShadowColor = layerColor;
+        _label.LabelSettings.ShadowColor = layerColor;
         
         if (critical)
-            LabelSettings.FontColor = Colors.Orange;
+            _label.LabelSettings.FontColor = Colors.Orange;
         else
-            LabelSettings.FontColor = Colors.White;
+            _label.LabelSettings.FontColor = Colors.White;
     }
 
-    public void Stack(float damage, Color color, bool critical)
+    public void Stack(HitEventArgs e, Color color)
     {
-        _damage += damage;
-        Text = (int)_damage + "";
+        _damage += e.TotalDamage;
+        _label.Text = (int)_damage + "";
         
-        UpdateColor(color, critical);
+        UpdateColor(color, e.Critical);
+        _hitResistance.PlayHit(e);
 
         _opacityTween?.Kill();
         _offsetTween?.Kill();
-        StartAnim(damage);
+        StartAnim(e.TotalDamage);
     }
 
     public void StartAnim(float damage)
@@ -79,11 +83,11 @@ public partial class UI_DamageIndicator : Label
         _scaleTween?.Kill();
         _scaleTween = CreateTween();
         _scaleTween
-            .TweenProperty(this, "scale", new Vector2(maxScale, maxScale), _maxScaleTime)
+            .TweenProperty(_label, "scale", new Vector2(maxScale, maxScale), _maxScaleTime)
             .SetTrans(_scaleInTrans);
 
         _scaleTween
-            .TweenProperty(this, "scale", new Vector2(minScale, minScale), _normalScaleTime)
+            .TweenProperty(_label, "scale", new Vector2(minScale, minScale), _normalScaleTime)
             .SetTrans(_scaleOutTrans);
 
         _lastTweenTask = Anim();
@@ -91,21 +95,19 @@ public partial class UI_DamageIndicator : Label
 
     public async Task Anim()
     {
-        Color mod = Modulate;
+        Color mod = _label.Modulate;
         mod.A = 1f;
-        Modulate = mod;
+        _label.Modulate = mod;
 
         HeightOffset = 0f;
 
         _opacityTween = CreateTween();
-        _opacityTween.TweenProperty(this, "modulate:a", 0.0f, _fadeTime);
+        _opacityTween.TweenProperty(_label, "modulate:a", 0.0f, _fadeTime);
 
         _offsetTween = CreateTween();
         _offsetTween.TweenProperty(this, "HeightOffset", _maxHeightOffset, _fadeTime);
 
-        await ToSignal(_opacityTween, "finished");
-
-        QueueFree();
+        _opacityTween.Finished += QueueFree;
     }
 
     public override void _Process(double delta)
@@ -114,9 +116,9 @@ public partial class UI_DamageIndicator : Label
 
         if (_target != null && IsInstanceValid(_target) && _target.IsInsideTree())
         {
-            Vector3 targetDisplayPos = _target.GlobalPosition;
+            Vector3 targetDisplayPos = _target.GetGlobalTransformInterpolated().Origin;
 
-            Vector3 horizontalOffset = ((_camera.GlobalPosition - _target.GlobalPosition)
+            Vector3 horizontalOffset = ((_camera.GlobalPosition - targetDisplayPos)
                 * new Vector3(1f, 0f, 1f))
                 .Normalized()
                 .Rotated(Vector3.Up, 0.5f * Mathf.Pi);
@@ -143,7 +145,7 @@ public partial class UI_DamageIndicator : Label
             peakScale = Mathf.Lerp(_maxScale, _minScale, Mathf.Min(_chainedDamage/_maxChainedDamage, 1));
             baseScale = Mathf.Min(_minScale, peakScale - _minScaleDelta);
             int scale = Mathf.RoundToInt(Mathf.Lerp(baseScale, peakScale, 0.5f));
-            Scale = new Vector2(scale, scale);
+            _label.Scale = new Vector2(scale, scale);
         }
         else
         {
