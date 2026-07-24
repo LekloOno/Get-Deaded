@@ -6,6 +6,7 @@ public abstract partial class SC_ParentSector : SC_SpawnSector
 {
     protected readonly List<SC_SpawnSector> _subSectors = [];
     public SC_SpawnSector? ActiveSector {get; protected set;}
+    public SC_SpawnSector? PendingNext { get; protected set; }
 
     [Signal] public delegate void SectorChangedToEventHandler(SC_LeafSector sector);
     [Signal] public delegate void SectorChangedEventHandler();
@@ -17,6 +18,7 @@ public abstract partial class SC_ParentSector : SC_SpawnSector
             if (node is SC_SpawnSector sector)
             {
                 _subSectors.Add(sector);
+                sector.SectorParent = this;
                 sector.HandlingPassed += OnSectorHandleNext;
                 if (sector is SC_ParentSector parent)
                     parent.SectorChangedTo += EmitSectorChanged;

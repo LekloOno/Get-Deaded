@@ -18,14 +18,22 @@ public partial class SC_RandomParentSector : SC_ParentSector
         _elapsedCount ++;
         if (_elapsedCount >= _count)
         {
+            PendingNext = null; // explicit, but should be true anyways
             DoStop();
             return false;
         }
 
-        ActiveSector = PickNext();
+        ActiveSector = PendingNext!;
         ActiveSector.Start();
 
+        PreparePendingNext();
+
         return true;
+    }
+
+    private void PreparePendingNext()
+    {
+        PendingNext = (_elapsedCount + 1 >= _count) ? null : PickNext();
     }
 
     private SC_SpawnSector PickNext()
@@ -55,12 +63,16 @@ public partial class SC_RandomParentSector : SC_ParentSector
         _elapsedCount = 0;
         ActiveSector!.Start();
 
+        if (PendingNext == null)
+            PreparePendingNext();
+
         return true;
     }
 
     protected override bool InterruptSpec(GameModeEnd outcome)
     {
         ActiveSector?.Interrupt(outcome);
+        PendingNext = null;
         return true;
     }
 
@@ -76,5 +88,7 @@ public partial class SC_RandomParentSector : SC_ParentSector
             _subSectorIndex = _rng.Next(_subSectors.Count);
             ActiveSector = _subSectors[_subSectorIndex];
         }
+
+        PreparePendingNext();
     }
 }
