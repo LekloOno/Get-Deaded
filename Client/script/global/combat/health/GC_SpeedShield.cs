@@ -27,7 +27,7 @@ public partial class GC_SpeedShield : GC_Health
         if (diff > 0)
             Regen(diff);
         else
-            base.TakeDamage(diff*-1f, out float _, out float __, out GC_Health ___);
+            base.TakeDamage(diff*-1f, out float _, out _, out _, out _);
     }
 
     private float ComputeHeal()

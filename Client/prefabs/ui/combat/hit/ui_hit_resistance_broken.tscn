@@ -1,0 +1,113 @@
+[gd_scene format=3 uid="uid://tapop3cjrgpa"]
+
+[ext_resource type="Script" uid="uid://df3q0xbmxyr47" path="res://script/ui/combat/weapon/hit/UI_HitResistanceBreak.cs" id="1_ih8g0"]
+[ext_resource type="Script" uid="uid://2ud817ngo5tn" path="res://script/engine_tools/animation/shakes/tween/ANIM_TweenSetting.cs" id="2_ih8g0"]
+[ext_resource type="Script" uid="uid://bjbcijbwg0h0v" path="res://script/engine_tools/animation/shakes/tween/ANIM_InOutTweenSetting.cs" id="3_eyavk"]
+[ext_resource type="Texture2D" uid="uid://cr13r4bi5fktj" path="res://assets/sprites/hit/shield_icon_body.png" id="4_dywm7"]
+[ext_resource type="Script" uid="uid://bwa8h16qqo5c7" path="res://script/engine_tools/animation/shakes/tween/value/ANIM_Vector2TweenValue.cs" id="4_eyavk"]
+[ext_resource type="Texture2D" uid="uid://dywgyh02hnjpl" path="res://assets/sprites/hit/broken_shield_icon.png" id="5_eyavk"]
+[ext_resource type="Texture2D" uid="uid://dx6of1oi2ic54" path="res://assets/sprites/ui_general/x-mark.png" id="6_dywm7"]
+
+[sub_resource type="Resource" id="Resource_ckupp"]
+script = ExtResource("2_ih8g0")
+AnimationTime = 0.2
+TransitionType = 4
+EaseType = 1
+metadata/_custom_type_script = "uid://2ud817ngo5tn"
+
+[sub_resource type="Resource" id="Resource_ub6k4"]
+script = ExtResource("2_ih8g0")
+AnimationTime = 1.0
+EaseType = 2
+metadata/_custom_type_script = "uid://2ud817ngo5tn"
+
+[sub_resource type="Resource" id="Resource_vav1r"]
+script = ExtResource("3_eyavk")
+FadeIn = SubResource("Resource_ckupp")
+FadeOut = SubResource("Resource_ub6k4")
+metadata/_custom_type_script = "uid://bjbcijbwg0h0v"
+
+[sub_resource type="Resource" id="Resource_dywm7"]
+script = ExtResource("4_eyavk")
+_value = Vector2(0.03, 0.03)
+metadata/_custom_type_script = "uid://bwa8h16qqo5c7"
+
+[sub_resource type="Resource" id="Resource_an6hj"]
+script = ExtResource("2_ih8g0")
+AnimationTime = 0.3
+TransitionType = 10
+EaseType = 2
+Value = SubResource("Resource_dywm7")
+metadata/_custom_type_script = "uid://2ud817ngo5tn"
+
+[node name="Control" type="Control" unique_id=782095997 node_paths=PackedStringArray("_halo")]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+script = ExtResource("1_ih8g0")
+_halo = NodePath("Halo")
+_opacitySettings = SubResource("Resource_vav1r")
+_scaleSetting = SubResource("Resource_an6hj")
+
+[node name="Halo" type="TextureRect" parent="." unique_id=320181652]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(1, 1, 1, 0.11764706)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -326.5
+offset_top = -388.5
+offset_right = 326.5
+offset_bottom = 390.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.2, 1.067)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("4_dywm7")
+
+[node name="Body" type="TextureRect" parent="." unique_id=864748951]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.0
+offset_top = -296.0
+offset_right = 240.0
+offset_bottom = 296.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.125, 1)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("5_eyavk")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1048013137]
+modulate = Color(0.8509804, 0, 0, 0.7882353)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -38.615
+offset_top = -6.53
+offset_right = 217.385
+offset_bottom = 249.47
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.4, 1.4)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("6_dywm7")

@@ -7,6 +7,7 @@ public partial class UI_HitResistance : Control
     [Export] private float _staleTime = 1f;
     [Export] private ANIM_InOutTweenSetting _opacitySettings = null!;
     [Export] private ANIM_TweenSetting _noResistOpacitySetting = null!;
+    [Export] private PackedScene _breakIcon = null!;
 
     private Tween? _opacityTween;
 
@@ -21,9 +22,23 @@ public partial class UI_HitResistance : Control
 
     public void PlayHit(HitEventArgs args)
     {   
-        bool resist = args.Resistance > 0.025f;
-        
         _opacityTween?.Kill();
+
+        if (args.BrokeLayer)
+        {
+            UI_HitResistanceBreak breakIcon = _breakIcon.Instantiate<UI_HitResistanceBreak>();
+            GetParent().AddChild(breakIcon);
+            breakIcon.Position = Position;
+            breakIcon.Initialize();
+
+            Color mod = Modulate;
+            mod.A = 0f;
+            Modulate = mod;
+            return;
+        }
+
+        bool resist = args.Resistance > 0.025f;
+
         _opacityTween = CreateTween();
 
         if (!resist)

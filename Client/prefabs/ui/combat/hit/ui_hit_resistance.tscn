@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://2ud817ngo5tn" path="res://script/engine_tools/animation/shakes/tween/ANIM_TweenSetting.cs" id="2_erfhq"]
 [ext_resource type="Texture2D" uid="uid://gfnedkm128da" path="res://assets/sprites/hit/shield_icon_details.png" id="2_xy0n2"]
 [ext_resource type="Script" uid="uid://bjbcijbwg0h0v" path="res://script/engine_tools/animation/shakes/tween/ANIM_InOutTweenSetting.cs" id="3_2pk2k"]
+[ext_resource type="PackedScene" uid="uid://tapop3cjrgpa" path="res://prefabs/ui/combat/hit/ui_hit_resistance_broken.tscn" id="4_erfhq"]
 
 [sub_resource type="Resource" id="Resource_o8fkh"]
 script = ExtResource("2_erfhq")
@@ -49,6 +50,7 @@ _halo = NodePath("Halo")
 _staleTime = 0.0
 _opacitySettings = SubResource("Resource_11tg3")
 _noResistOpacitySetting = SubResource("Resource_mrdt0")
+_breakIcon = ExtResource("4_erfhq")
 
 [node name="Halo" type="TextureRect" parent="." unique_id=320181652]
 modulate = Color(1, 0.6862745, 0, 1)

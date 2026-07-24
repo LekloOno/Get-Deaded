@@ -141,10 +141,11 @@ public partial class GC_Health : Node
 
         return reducedDamage;
     }
-    public virtual bool TakeDamage(float damage, out float takenDamage, out float overflow, out GC_Health deepest)
+    public virtual bool TakeDamage(float damage, out float takenDamage, out float overflow, out GC_Health deepest, out bool broke)
     {
         float damageTaken = ModifiedDamage(damage, out float remainingDamage);
         overflow = 0;
+        broke = false;
         CurrentHealth -= damageTaken;
 
         if (damageTaken > 0)
@@ -158,20 +159,21 @@ public partial class GC_Health : Node
             return false;
         }
 
-        bool died = Propagate(remainingDamage, out float childDamage, out overflow, out deepest);
+        bool died = Propagate(remainingDamage, out float childDamage, out overflow, out deepest, out _);
         takenDamage += childDamage;
         //OnDamage?.Invoke(this, DamageArgs(overflow));
 
         if (died)
             return true;
         
-        if (damageTaken > 0)
+        broke = damageTaken > 0;
+        if (broke)
             OnBreak?.Invoke(this, Child);
             
         return false;
     }
 
-    private bool Propagate(float remainingDamage, out float takenDamage, out float overflow, out GC_Health deepest)
+    private bool Propagate(float remainingDamage, out float takenDamage, out float overflow, out GC_Health deepest, out bool broke)
     {
         if (Child == null)
         {
@@ -179,10 +181,11 @@ public partial class GC_Health : Node
             overflow = remainingDamage;
             deepest = this;
             OnDie?.Invoke(this);
+            broke = false;
             return true;
         }
 
-        return Child.TakeDamage(remainingDamage, out takenDamage, out overflow, out deepest);
+        return Child.TakeDamage(remainingDamage, out takenDamage, out overflow, out deepest, out broke);
     }
 
     public virtual float Heal(float healing, GC_Health parent)

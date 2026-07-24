@@ -52,8 +52,9 @@ public partial class GC_HealthManager : Node3D
 		float expectedDamage,
 		out float takenDamage,
 		out float overflow,
-		out GC_Health deepest
-	) => TopHealthLayer.TakeDamage(expectedDamage, out takenDamage, out overflow, out deepest);
+		out GC_Health deepest,
+		out bool broke
+	) => TopHealthLayer.TakeDamage(expectedDamage, out takenDamage, out overflow, out deepest, out broke);
 
 	public float Heal(float heal) => TopHealthLayer.Heal(heal, null);
 	public override void _Ready()

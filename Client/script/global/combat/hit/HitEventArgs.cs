@@ -11,6 +11,7 @@ public class HitEventArgs : EventArgs
         Environment = 1 << 2,       // 0x04
         BackStab = 1 << 3,          // 0x08
         Critical = 1 << 4,          // 0x10
+        BrokeLayer = 1 << 5,             // 0x20
         OverrideBodyPart = 1 << 7   // 0x80
     }
 
@@ -59,7 +60,7 @@ public class HitEventArgs : EventArgs
     ///  3 - 0x08   : This hit did register as a back stab. <br />
     ///  <br />
     ///  4 - 0x10   : This hit did register as a critical hit. <br />
-    ///  5 - ---    : <br />
+    ///  5 - 0x20   : This hit did break a layer or more. <br />
     ///  6 - ---    : <br />
     ///  7 - 0x80   : Should be considered as a normal body hit by UI, statistics, etc.
     /// </summary>
@@ -84,6 +85,7 @@ public class HitEventArgs : EventArgs
         bool overrideBodyPart = false,
         bool backStab = false,
         bool critical = false,
+        bool broke = false,
         bool env = false,
         float subHitSize = 1f
     ) : this(
@@ -91,6 +93,7 @@ public class HitEventArgs : EventArgs
         (kill ? HitFlags.Killed : 0) |
         (backStab ? HitFlags.BackStab : 0) |
         (critical ? HitFlags.Critical : 0) |
+        (broke ? HitFlags.BrokeLayer : 0) |
         (overrideBodyPart ? HitFlags.OverrideBodyPart : 0) |
         (env ? HitFlags.Environment : 0),
         subHitSize){}
@@ -151,6 +154,10 @@ public class HitEventArgs : EventArgs
     /// True if the hit is critical - that is, it is either an effective backstab or headshot.
     /// </summary>
     public bool Critical => Flags.HasFlag(HitFlags.Critical);
+    /// <summary>
+    /// True if the hit did break one layer or more.
+    /// </summary>
+    public bool BrokeLayer => Flags.HasFlag(HitFlags.BrokeLayer);
     /// <summary>
     /// True if the hit did not miss - it did hit a damageable thing.
     /// </summary>
