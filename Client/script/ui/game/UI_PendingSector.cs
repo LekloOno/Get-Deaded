@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class UI_PendingSector : Control
@@ -25,6 +26,14 @@ public partial class UI_PendingSector : Control
         _baseSector.Initialized += OnInitialized;
         _baseSector.SectorChangedTo += OnSectorChanged;
         _gameManager.Reseted += OnStop;
+
+        Modulate = UnactiveObjectiveMarkerColorSetting.Color;
+        UnactiveObjectiveMarkerColorSetting.ValueChanged += OnValueChanged;
+    }
+
+    private void OnValueChanged(GodotObject @object, Color color)
+    {
+        Modulate = color;
     }
 
     private void OnStop()

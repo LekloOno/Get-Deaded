@@ -10,7 +10,6 @@ public partial class UI_ActiveSector : Control
     [Export] private float _minScale = 1f;
     [Export] private float _edgeMaxScaleBoost = 1.6f;
     [Export] private float _minOpacity = 0.2f;
-    [Export] private float _maxOpacity = 0.8f;
     [Export] private float _centerMaxOpacityFade = 0.5f;
     [Export] private float _minDistance = 6f;
     [Export] private float _maxDistance = 60f;
@@ -25,6 +24,7 @@ public partial class UI_ActiveSector : Control
     private Vector2 _dir;
     private Vector2 _halfSize;
     private bool _onScreen;
+    private float _maxOpacity = 0.9f;
 
     public override void _Ready()
     {
@@ -34,6 +34,14 @@ public partial class UI_ActiveSector : Control
         _baseSector.SectorChangedTo += OnSectorChanged;
         _baseSector.Initialized += OnInitialized;
         _gameManager.Reseted += OnStop;
+
+        _maxOpacity = ObjectiveMarkerOpacitySetting.Opacity;
+        ObjectiveMarkerOpacitySetting.ValueChanged += OnValueChanged;
+    }
+
+    private void OnValueChanged(GodotObject @object, float opacity)
+    {
+        _maxOpacity = opacity;
     }
 
     private void OnStop()
